@@ -1,0 +1,39 @@
+<fieldset class="ib-box-menu__section ib-box-menu__section--full">
+    <legend class="u-hide-accessible">{{'MMB_VC_IB_VACIONES_PAYMENT_PASSENGER_QUESTION'|translate}}</legend>
+    <section class="ib-layout__section">
+        <div class="ib-box-cols">
+            <h3 class="ib-box-cols__title">{{'MMB_VC_IB_VACIONES_PAYMENT_PASSENGER_QUESTION'|translate}}</h3>
+            <p class="ib-text ib-text--color-unfocused">
+                {{'MMB_VC_IB_VACIONES_CONTINUE_WITH_PURCHASE'|translate}}
+            </p>
+        </div>
+        <div class="ib-box-cols u-pt-none u-pb-none">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <div class="ib-select ib-select--width" ng-class="{'ib-select--error': !manageWhatPassengerPaysInfoCtrl.isPayerSelected}">
+                        <ui-select class="ib-select__action"
+                            data-ng-model="manageWhatPassengerPaysInfoCtrl.passengerPays"
+                            ng-required="true"
+                            name="passengerPays"
+                            data-ng-change="manageWhatPassengerPaysInfoCtrl.changePassengerPay($select.selected)"
+                            on-select="select.select()">
+                            <ui-select-match class="ib-select__list-ipt"
+                                placeholder="{{'MMB_VC_IB_VACIONES_CHOOSE_A_PAYER'|translate}}">
+                                <span class="ib-select__txt"
+                                    ng-bind="$select.selected.name.firstName +' '+ $select.selected.name.lastName"></span>
+                            </ui-select-match>
+                            <ui-select-choices class="ib-select__list"
+                                repeat="passenger.flightPNRReferenceRPH as passenger in (manageWhatPassengerPaysInfoCtrl.passangerArray | filter: $select.search)">
+                                <span class="ib-select__list-txt"
+                                    ng-bind ="passenger.name.firstName + ' ' + passenger.name.lastName"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span ng-if="!manageWhatPassengerPaysInfoCtrl.isPayerSelected" class="ib-alert ib-alert--error">
+                            {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</fieldset>

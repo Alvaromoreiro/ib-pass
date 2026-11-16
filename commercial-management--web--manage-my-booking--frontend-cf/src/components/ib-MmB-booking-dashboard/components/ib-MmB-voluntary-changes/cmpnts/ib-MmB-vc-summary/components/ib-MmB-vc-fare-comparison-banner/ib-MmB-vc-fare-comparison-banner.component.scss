@@ -1,0 +1,149 @@
+@import 'src/styles/_settings-tools.scss';
+
+
+.vc-fare-comparison-banner {
+    padding: rem(24) rem(24) rem(0) rem(24);
+    background-color: color(white);
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: rem(24);
+        border: rem(1) solid color(gray-40);
+        border-left: rem(8) solid color(primary);
+        gap: rem(24);
+    }
+
+    &__left {
+        min-width: 0;
+        flex: 1;
+    }
+
+    &__title {
+        margin: 0 0 rem(8);
+        font-family: $font-special;
+        font-size: rem(22);
+        font-weight: 700;
+        line-height: normal;
+        color: color(primary);
+    }
+
+    &__description {
+        margin: 0;
+        font-family: $font-normal;
+        font-size: rem(13);
+        font-weight: 400;
+        line-height: normal;
+        color: color(gray-10);
+    }
+
+    &__right {
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        gap: rem(8);
+    }
+
+    &__route {
+        display: flex;
+        align-items: center;
+        gap: rem(8);
+        white-space: nowrap;
+
+        &:not(:last-child) {
+            padding-bottom: rem(8);
+            border-bottom: rem(1) dashed color(gray-40);
+        }
+    }
+
+    &__route-icon {
+        display: flex;
+        width: rem(24);
+        height: rem(24);
+        align-items: center;
+        justify-content: center;
+        border-radius: rem(16);
+        color: color(white);
+        background-color: color(primary);
+        aspect-ratio: 1/1;
+        gap: rem(8);
+    }
+
+    &__route-code {
+        font-family: $font-normal;
+        font-size: rem(13);
+        font-weight: 400;
+        line-height: normal;
+        color: color(gray-10);
+    }
+
+    &__separator {
+        font-size: rem(14);
+        color: color(gray-10);
+        user-select: none;
+    }
+
+    &__compare-btn {
+        padding: 0;
+        border: none;
+        font-family: $font-normal;
+        font-size: rem(13);
+        text-decoration: underline;
+        color: color(secondary);
+        background: none;
+        cursor: pointer;
+
+        &:hover {
+            color: color(secondary);
+        }
+
+        &:focus-visible {
+            border-radius: rem(2);
+            outline: rem(2) solid color(primary);
+            outline-offset: rem(2);
+        }
+    }
+}
+
+@include media-query('md') {
+    .vc-fare-comparison-banner {
+        padding: 0;
+
+        &__inner {
+            gap: rem(16);
+        }
+
+        &__title {
+            font-size: rem(18);
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .vc-fare-comparison-banner {
+        padding: 0;
+
+        &__inner {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: rem(16);
+        }
+
+        &__left {
+            width: 100%;
+        }
+
+        &__right {
+            width: 100%;
+        }
+
+        &__route {
+            white-space: normal;
+
+            &:not(:last-child) {
+                border-bottom: none;
+            }
+        }
+    }
+}

@@ -1,0 +1,424 @@
+<form action="#" method="post" ng-if="simulatorBookingAvailabilityCtrl.showCalendar">
+
+    <div class="ib-msg-alert--simulator-banner-s u-mt-xmedium">
+        <p class="ib-msg-alert__icon icon-informacion_de_vuelos"></p>
+        <div>
+            <p class="ib-msg-alert__text-cc">{{'MMB_SVC_DISPO_OUTBOUND_BANNER_TEXT' | translate}}
+            </p>
+        </div>
+    </div>
+
+    <!-- Your outbound flights -->
+    <div ng-if="!simulatorBookingAvailabilityCtrl.modeFlightReturn" class="ib-table-flight-cabins">
+        <div class="ib-table-flight-cabins__selected" data-flight-selected-container="outbound">
+            <div class="ib-heading-flight"
+                ng-show="simulatorBookingAvailabilityCtrl.stateFlightEndAnimation || simulatorBookingAvailabilityCtrl.outboundFlightSelected"
+                data-flight-heading>
+                <div class="ib-heading-flight__container">
+                    <span class="ib-heading-flight__title">{{simulatorBookingAvailabilityCtrl.titleOutwardOrigin}} -
+                        {{simulatorBookingAvailabilityCtrl.titleOutwardDestiny}}</span>
+                    <span class="ib-heading-flight__date">{{simulatorBookingAvailabilityCtrl.dateOutbound.day}}
+                        {{simulatorBookingAvailabilityCtrl.dateOutbound.month | translate |
+                        ShortenerFormatFilter:3:true}}. <span
+                            class="hidden-sm hidden-xs">{{simulatorBookingAvailabilityCtrl.dateOutbound.year}}</span></span>
+                    <button class="ib-heading-flight__close"
+                        ng-click="simulatorBookingAvailabilityCtrl.removeStateFlight(simulatorBookingAvailabilityCtrl.typeFlight[0])"
+                        data-flight-selected-close="outbound" type="button">
+                        <span
+                            class="ib-heading-flight__close-text ib-heading-flight__close-text--no-decoration">{{'MMB_VC_SLICE_DETAILS_NEW_BACK_BUTTON'|
+                            translate}}</span>
+                        <span class="ib-heading-flight__close-icon icon-cerrar"></span>
+                    </button>
+                </div>
+            </div>
+            <div data-flight-selected-wrapper>
+                <div class="animate-show"
+                    ng-show="simulatorBookingAvailabilityCtrl.stateFlight || simulatorBookingAvailabilityCtrl.stateFlightEndAnimation || simulatorBookingAvailabilityCtrl.outboundFlightSelected"
+                    data-flight-selected="outbound">
+                    <article class="ib-table-flight-cabins__article ib-table-flight-cabins__article--collapse "
+                        ng-class="{'ib-table-flight-cabins__article--collpase': $index != simulatorBookingAvailabilityCtrl.selectedItem}"
+                        ng-controller="ibCollapseController as collapse">
+                        <a href="#" title="Vuelo Iberia"
+                            class="ib-table-flight-cabins__article-item ib-table-flight-cabins__article-item--center"
+                            ng-click="collapse.clickCollapse($event,true)" data-type="detail" data-flight-button-detail>
+                            <ib-Mmb-simulator-flights-info
+                                model="simulatorBookingAvailabilityCtrl.outboundFlightSelectedInfo.info"></ib-Mmb-simulator-flights-info>
+                        </a>
+                        <div uib-collapse="!collapse.isCollapsed">
+                            <div class="ib-detail-flight ib-detail-flight--cabins ib-detail-flight--cabins-mobile">
+                                <div class="ib-table-flight-cabins__flight-selected-detail">
+                                    <div
+                                        ng-repeat="(index, fligthsTravel) in simulatorBookingAvailabilityCtrl.outboundFlightSelectedInfo.segments">
+                                        <ib-Mmb-simulator-flights-details model="fligthsTravel"
+                                            index="index"></ib-Mmb-simulator-flights-details>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="ib-detail-flight ib-detail-flight--cabins animate-show"
+                                data-flight-option-show='detail' ng-show="simulatorBookingAvailabilityCtrl.showDetail">
+                            </div>
+                            <ib-mmb-simulator-list-fare-item
+                                model="simulatorBookingAvailabilityCtrl.outboundFlightSelectedInfo.cabins"
+                                type-flight="simulatorBookingAvailabilityCtrl.typeFlight[0]"
+                                index="simulatorBookingAvailabilityCtrl.sliceSelectedOutbound"
+                                on-open="simulatorBookingAvailabilityCtrl.open(sliceIndex,cabinIndex,typeFlight)"
+                                cabin-selected="simulatorBookingAvailabilityCtrl.cabinSelectedIndexOutbound"
+                                unified-offer-type="simulatorBookingAvailabilityCtrl.unifiedOfferType"
+                                penalty="simulatorBookingAvailabilityCtrl.penalty"></ib-mmb-simulator-list-fare-item>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <div
+            ng-hide="simulatorBookingAvailabilityCtrl.stateFlight || simulatorBookingAvailabilityCtrl.outboundFlightSelected">
+            <!-- Title -->
+            <div class="ib-heading ib-heading--penalty">
+                <div class="ib-heading--title"
+                    ng-if="!(simulatorBookingAvailabilityCtrl.sisterCitiesOptionChecked && simulatorBookingAvailabilityCtrl.newSisterCities)">
+                    <h1 class="ib-heading ib-heading--type-24">{{simulatorBookingAvailabilityCtrl.titleOutwardOrigin}} -
+                        {{simulatorBookingAvailabilityCtrl.titleOutwardDestiny}}</h1>
+                </div>
+                <div class="ib-heading--title"
+                    ng-if="(simulatorBookingAvailabilityCtrl.sisterCitiesOptionChecked && simulatorBookingAvailabilityCtrl.newSisterCities)">
+                    <h1 class="ib-heading ib-heading--type-24">{{simulatorBookingAvailabilityCtrl.sisterInfo[0].origin}}
+                        -
+                        {{simulatorBookingAvailabilityCtrl.sisterInfo[0].destination}}</h1>
+                </div>
+                <div class="ib-heading ib-heading--penalty">
+                    <p class="ib-heading--icon icon-cambios_y_reembolsos"></p>
+                    <div>
+                        <p class="ib-heading--text" ng-if="simulatorBookingAvailabilityCtrl.model.penalty.outbound">{{'MMB_SVC_CV_PENALTY_TEXT' | translate}}</p>
+                        <p class="ib-heading--text" ng-if="!simulatorBookingAvailabilityCtrl.model.penalty.outbound">{{'MMB_SVC_DISPO_INBOUND_SIDE_TEXT' | translate}}</p>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="(simulatorAvailabilityCtrl.sisterCitiesOptionChecked && simulatorAvailabilityCtrl.newSisterCities)"
+                class="ib-layout__line-spacing">
+                <a href="javascript:void(0)" class="ib-box-cities__link icon-senalizacion_mapas"
+                    ng-click="simulatorBookingAvailabilityCtrl.openSisterCity(0)">
+                    {{'MMB_SISTER_CHECK_SELECTION' | translate}}
+                </a>
+            </div>
+            <!-- Carousel -->
+            <!-- <div class="ib-fc-calendar-slides-loading"></div> -->
+            <div>
+                <!-- Change 0 on flights for actual index of current flight modification -->
+                <ib-Mmb-simulator-calendar-ribbons
+                    calendar-data="simulatorBookingAvailabilityCtrl.flights[0].calendarData"
+                    index="simulatorBookingAvailabilityCtrl.flights[0].index"
+                    selected-carousel="simulatorBookingAvailabilityCtrl.flights[0].initialSlideIndex"
+                    id="'OD1'"></ib-Mmb-simulator-calendar-ribbons>
+            </div>
+
+            <!-- Filters -->
+
+            <!-- Change 0 on selectedSlide for actual index of current flight modification -->
+            <div class="ib-fc-calendar-slides-loading">
+                <!-- <div ng-if="simulatorBookingAvailabilityCtrl.selectedSlide[0].date.state === 'AVAILABLE'"> -->
+                <div ng-if="simulatorBookingAvailabilityCtrl.offersAvailableOutbound">
+                    <ib-Mmb-simulator-flights-filter model="simulatorBookingAvailabilityCtrl.model"
+                        config-filter="simulatorBookingAvailabilityCtrl.modelfilterOutBound"
+                        type-flight="simulatorBookingAvailabilityCtrl.typeFlight[0]"></ib-Mmb-simulator-flights-filter>
+                    <div class="ib-table-flight-cabins" ng-if="simulatorBookingAvailabilityCtrl.model">
+                        <div class="ib-table-flight-cabins__selected"
+                            ng-hide="simulatorBookingAvailabilityCtrl.selectedItem != -1 && $index != simulatorBookingAvailabilityCtrl.selectedItem">
+
+                            <article ng-repeat="flight in simulatorBookingAvailabilityCtrl.slices.flightsOutward"
+                                ng-if="flight.visibility"
+                                class="ib-table-flight-cabins__article ib-table-flight-cabins__article--collapse "
+                                ng-class="{'ib-table-flight-cabins__article--collpase': $index != simulatorBookingAvailabilityCtrl.selectedItem}"
+                                ng-controller="ibCollapseController as collapse">
+                                <a href="#" title="Vuelo Iberia"
+                                    class="ib-table-flight-cabins__article-item ib-table-flight-cabins__article-item--center"
+                                    ng-click="collapse.clickCollapse($event,true)" data-type="detail"
+                                    data-flight-button-detail>
+                                    <ib-Mmb-simulator-flights-info model="flight.info"
+                                        statuscollapse="collapse.isCollapsed"></ib-Mmb-simulator-flights-info>
+                                </a>
+                                <div uib-collapse="!collapse.isCollapsed">
+                                    <div
+                                        class="ib-detail-flight ib-detail-flight--cabins ib-detail-flight--cabins-mobile">
+                                        <div class="ib-table-flight-cabins__flight-selected-detail">
+                                            <div ng-repeat="(index, fligthsTravel) in flight.segments">
+                                                <ib-Mmb-simulator-flights-details model="fligthsTravel" index="index"
+                                                    last="(index === flight.segments.length-1) ? true : false"></ib-Mmb-simulator-flights-details>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ib-table-flight-cabins__article-item">
+                                    <div class="ib-detail-flight ib-detail-flight--cabins animate-show"
+                                        data-flight-option-show='detail'
+                                        ng-show="simulatorBookingAvailabilityCtrl.showDetail"></div>
+                                    <ib-mmb-simulator-list-fare-item model="flight.cabins"
+                                        type-flight="simulatorBookingAvailabilityCtrl.typeFlight[0]" index="$index"
+                                        on-open="simulatorBookingAvailabilityCtrl.open(sliceIndex, cabinIndex, typeFlight)"
+                                        cabin-selected="simulatorBookingAvailabilityCtrl.cabinSelectedIndexOutbound"
+                                        unified-offer-type="simulatorBookingAvailabilityCtrl.unifiedOfferType"
+                                        penalty="simulatorBookingAvailabilityCtrl.penalty">
+                                    </ib-mmb-simulator-list-fare-item>
+                                </div>
+                            </article>
+                            <!-- No Filter Results -->
+                            <div ng-if="simulatorBookingAvailabilityCtrl.noResultsOutbound && simulatorBookingAvailabilityCtrl.offersAvailableOutbound"
+                                class="ib-layout__line-spacing">
+                                <div class="ib-message-filter">
+                                    <div class="ib-message-filter__header">
+                                        <span class="ib-message-filter__header-icon icon-alerta_grave"></span>
+                                        <span class="ib-message-filter__header-title">{{'MMB_VC_AVAILABILITY_NO_RESULTS_TITLE'
+                                            | translate}}</span>
+                                    </div>
+                                    <div class="ib-message-filter__container">
+                                        <p class="ib-message-filter__txt">{{'MMB_VC_AVAILABILITY_NO_RESULTS_BODY' |
+                                            translate}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ib-msg-alert ib-msg-alert--color-normal ib-msg-alert__gdr--left icon-informacion_2 u-position-relative"
+                    filter-error ng-if="!simulatorBookingAvailabilityCtrl.offersAvailableOutbound">
+                    <p class="ib-msg-alert__text ib-msg-alert__text--title-large">
+                        {{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_TITLE' | translate}}</p>
+                    <p class="ib-msg-alert__text--subtitle">{{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_BODY' |
+                        translate}}.</p>
+                </div>
+                <div ng-if="simulatorBookingAvailabilityCtrl.showLoading" class="ib-overlay-fly"
+                    ib-calendar-slides-loading>
+                    <div class="ib-overlay-fly__container">
+                        <div class="ib-overlay-fly__icon">
+                            <div class="circle"></div>
+                            <div class="circle"></div>
+                        </div>
+                        <span class="ib-overlay-fly__text">{{'MMB_VC_AVAILABILITY_SLICK_LOADING'|translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Change 0 on selectedSlide for actual index of current flight modification -->
+            <!-- <div class="ib-msg-alert ib-msg-alert--color-normal ib-msg-alert__gdr--left icon-informacion_2" ng-if="simulatorBookingAvailabilityCtrl.selectedSlide[0].date.state === 'NOT_AVAILABLE'">
+                    <p class="ib-msg-alert__text ib-msg-alert__text--title-large">{{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_TITLE' | translate}}</p>
+                    <p class="ib-msg-alert__text--subtitle">{{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_BODY' | translate}}.</p>
+                </div> -->
+        </div>
+    </div>
+    <!-- Your return flights -->
+    <div ng-if="simulatorBookingAvailabilityCtrl.offertOutboundSelected || simulatorBookingAvailabilityCtrl.modeFlightReturn"
+        class="ib-table-flight-cabins">
+        <div class="ib-table-flight-cabins__selected" data-flight-selected-container="return">
+            <div class="ib-heading-flight"
+                ng-show="simulatorBookingAvailabilityCtrl.stateFlightEndAnimation || simulatorBookingAvailabilityCtrl.returnFlightSelected"
+                data-flight-heading>
+                <div class="ib-heading-flight__container">
+                    <span class="ib-heading-flight__title">{{simulatorBookingAvailabilityCtrl.titleReturnOrigin}} -
+                        {{simulatorBookingAvailabilityCtrl.titleReturnDestiny}}</span>
+                    <span class="ib-heading-flight__date">{{simulatorBookingAvailabilityCtrl.dateReturn.day}}
+                        {{simulatorBookingAvailabilityCtrl.dateReturn.month | translate |
+                        ShortenerFormatFilter:3:true}}. <span
+                            class="hidden-sm hidden-xs">{{simulatorBookingAvailabilityCtrl.dateReturn.year}}</span></span>
+                    <button class="ib-heading-flight__close"
+                        ng-click="simulatorBookingAvailabilityCtrl.removeStateFlight(simulatorBookingAvailabilityCtrl.typeFlight[1])"
+                        data-flight-selected-close="return" type="button">
+                        <span
+                            class="ib-heading-flight__close-text ib-heading-flight__close-text--no-decoration">{{'MMB_VC_SLICE_DETAILS_NEW_BACK_BUTTON'|
+                            translate}}</span>
+                        <span class="ib-heading-flight__close-icon icon-cerrar"></span>
+                    </button>
+                </div>
+            </div>
+            <div data-flight-selected-wrapper>
+                <div class="animate-show"
+                    ng-show="simulatorBookingAvailabilityCtrl.stateFlight || simulatorBookingAvailabilityCtrl.stateFlightEndAnimation || simulatorBookingAvailabilityCtrl.returnFlightSelected"
+                    data-flight-selected="return">
+                    <article class="ib-table-flight-cabins__article ib-table-flight-cabins__article--collapse "
+                        ng-class="{'ib-table-flight-cabins__article--collpase': $index != simulatorBookingAvailabilityCtrl.selectedItem}"
+                        ng-controller="ibCollapseController as collapse">
+                        <a href="#" title="Vuelo Iberia"
+                            class="ib-table-flight-cabins__article-item ib-table-flight-cabins__article-item--center"
+                            ng-click="collapse.clickCollapse($event,true)" data-type="detail" data-flight-button-detail>
+                            <ib-Mmb-simulator-flights-info
+                                model="simulatorBookingAvailabilityCtrl.returnFlightSelectedInfo.info">
+                            </ib-Mmb-simulator-flights-info>
+                        </a>
+                        <div uib-collapse="!collapse.isCollapsed">
+                            <div class="ib-detail-flight ib-detail-flight--cabins ib-detail-flight--cabins-mobile">
+                                <div class="ib-table-flight-cabins__flight-selected-detail">
+                                    <div
+                                        ng-repeat="(index, fligthsTravel) in simulatorBookingAvailabilityCtrl.returnFlightSelectedInfo.segments">
+                                        <ib-Mmb-simulator-flights-details model="fligthsTravel" index="index">
+                                        </ib-Mmb-simulator-flights-details>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="ib-detail-flight ib-detail-flight--cabins animate-show"
+                                data-flight-option-show='detail' ng-show="simulatorBookingAvailabilityCtrl.showDetail">
+                            </div>
+                            <ib-mmb-simulator-list-fare-item
+                                model="simulatorBookingAvailabilityCtrl.returnFlightSelectedInfo.cabins"
+                                type-flight="simulatorBookingAvailabilityCtrl.typeFlight[1]"
+                                index="simulatorBookingAvailabilityCtrl.sliceSelectedReturn"
+                                on-open="simulatorBookingAvailabilityCtrl.open(sliceIndex,cabinIndex,typeFlight)"
+                                cabin-selected="simulatorBookingAvailabilityCtrl.cabinSelectedIndexReturn"
+                                unified-offer-type="simulatorBookingAvailabilityCtrl.unifiedOfferType"
+                                penalty="simulatorBookingAvailabilityCtrl.penalty"></ib-mmb-simulator-list-fare-item>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div
+                ng-hide="simulatorBookingAvailabilityCtrl.stateFlight || simulatorBookingAvailabilityCtrl.returnFlightSelected">
+                <div ng-if="(simulatorBookingAvailabilityCtrl.sisterCitiesOptionChecked && simulatorBookingAvailabilityCtrl.newSisterCities)"
+                    class="ib-layout__line-spacing">
+                    <a href="javascript:void(0)" class="ib-box-cities__link icon-senalizacion_mapas"
+                        ng-click="simulatorBookingAvailabilityCtrl.openSisterCity(1)">
+                        {{'MMB_SISTER_CHECK_SELECTION' | translate}}
+                    </a>
+                </div>
+                <!-- Title -->
+                <div class="ib-heading ib-heading--penalty">
+                    <div class="ib-heading--title"
+                        ng-if="!(simulatorBookingAvailabilityCtrl.sisterCitiesOptionChecked && simulatorBookingAvailabilityCtrl.newSisterCities)">
+                        <h1 class="ib-heading ib-heading--type-24">{{simulatorBookingAvailabilityCtrl.titleReturnOrigin}} -
+                            {{simulatorBookingAvailabilityCtrl.titleReturnDestiny}}</h1>
+                    </div>
+                    <div class="ib-heading--title"
+                        ng-if="(simulatorBookingAvailabilityCtrl.sisterCitiesOptionChecked && simulatorBookingAvailabilityCtrl.newSisterCities)">
+                        <h1 class="ib-heading ib-heading--type-24">{{simulatorBookingAvailabilityCtrl.sisterInfo[0].destination}} -
+                            {{simulatorBookingAvailabilityCtrl.sisterInfo[0].origin}}</h1>
+                    </div>
+                    <div class="ib-heading ib-heading--penalty">
+                        <p class="ib-heading--icon icon-cambios_y_reembolsos"></p>
+                        <div>
+                            <p class="ib-heading--text" ng-if="simulatorBookingAvailabilityCtrl.model.penalty.return">{{'MMB_SVC_CV_PENALTY_TEXT' | translate}}</p>
+                            <p class="ib-heading--text" ng-if="!simulatorBookingAvailabilityCtrl.model.penalty.return">{{'MMB_SVC_DISPO_INBOUND_SIDE_TEXT' | translate}}</p>
+                        </div>
+                    </div>
+                </div>
+        <!-- Carousel -->
+        <div>
+            <!-- Change 0 on flights for actual index of current flight modification -->
+            <ib-Mmb-simulator-calendar-ribbons
+                calendar-data="simulatorBookingAvailabilityCtrl.flights[simulatorBookingAvailabilityCtrl.indexRibbonReturn].calendarData"
+                index="simulatorBookingAvailabilityCtrl.flights[simulatorBookingAvailabilityCtrl.indexRibbonReturn].index"
+                selected-carousel="simulatorBookingAvailabilityCtrl.flights[simulatorBookingAvailabilityCtrl.indexRibbonReturn].initialSlideIndex"
+                id="'OD2'"></ib-Mmb-simulator-calendar-ribbons>
+        </div>
+
+        <div class="ib-fc-calendar-slides-loading">
+            <!-- <div ng-if="simulatorBookingAvailabilityCtrl.selectedSlide[1].date.state === 'AVAILABLE'"> -->
+            <div ng-if="simulatorBookingAvailabilityCtrl.offersAvailableReturn">
+                <ib-Mmb-simulator-flights-filter model="simulatorBookingAvailabilityCtrl.model"
+                    config-filter="simulatorBookingAvailabilityCtrl.modelfilterReturn"
+                    type-flight="simulatorBookingAvailabilityCtrl.typeFlight[1]"></ib-Mmb-simulator-flights-filter>
+                <div class="ib-table-flight-cabins" ng-if="simulatorBookingAvailabilityCtrl.model">
+                    <div class="ib-table-flight-cabins__selected"
+                        ng-hide="simulatorBookingAvailabilityCtrl.selectedItem != -1 && $index != simulatorBookingAvailabilityCtrl.selectedItem">
+                        <!-- Your outward flights -->
+                        <div class="ib-heading-flight"
+                            ng-show="simulatorBookingAvailabilityCtrl.selectedItem != -1" data-flight-heading>
+                            <div class="ib-heading-flight__container">
+                                <span
+                                    class="ib-heading-flight__title">{{simulatorBookingAvailabilityCtrl.titleReturnOrigin}}
+                                    -
+                                    {{simulatorBookingAvailabilityCtrl.titleReturnDestiny}}</span>
+                                <span
+                                    class="ib-heading-flight__date">{{simulatorBookingAvailabilityCtrl.dateReturn.day}}
+                                    {{simulatorBookingAvailabilityCtrl.dateReturn.month | translate |
+                                    ShortenerFormatFilter:3:true}}. <span
+                                        class="hidden-sm hidden-xs">{{simulatorBookingAvailabilityCtrl.dateReturn.year}}</span></span>
+                                <button class="ib-heading-flight__close"
+                                    ng-click="simulatorBookingAvailabilityCtrl.selectedItem=-1"
+                                    data-flight-selected-close="return" type="button">
+                                    <span
+                                        class="ib-heading-flight__close-text ib-heading-flight__close-text--no-decoration">{{'MMB_VC_SLICE_DETAILS_NEW_BACK_BUTTON'|
+                                        translate}}</span>
+                                    <span class="ib-heading-flight__close-icon icon-cerrar"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <article ng-repeat="flight in simulatorBookingAvailabilityCtrl.slices.flightsReturns"
+                            ng-if="flight.visibility"
+                            class="ib-table-flight-cabins__article ib-table-flight-cabins__article--collapse "
+                            ng-class="{'ib-table-flight-cabins__article--collpase': $index != simulatorBookingAvailabilityCtrl.selectedItem}"
+                            ng-controller="ibCollapseController as collapse">
+                            <a href="#" title="Vuelo Iberia"
+                                class="ib-table-flight-cabins__article-item ib-table-flight-cabins__article-item--center"
+                                ng-click="collapse.clickCollapse($event,true)" data-type="detail"
+                                data-flight-button-detail>
+                                <ib-Mmb-simulator-flights-info model="flight.info"></ib-Mmb-simulator-flights-info>
+                            </a>
+                            <div uib-collapse="!collapse.isCollapsed">
+                                <div class="ib-detail-flight ib-detail-flight--cabins ib-detail-flight--cabins-mobile">
+                                    <div class="ib-table-flight-cabins__flight-selected-detail">
+                                        <div ng-repeat="(index, fligthsTravel) in flight.segments">
+                                            <ib-Mmb-simulator-flights-details model="fligthsTravel"
+                                                index="index"></ib-Mmb-simulator-flights-details>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ib-table-flight-cabins__article-item">
+                                <div class="ib-detail-flight ib-detail-flight--cabins animate-show"
+                                    data-flight-option-show='detail'
+                                    ng-show="simulatorBookingAvailabilityCtrl.showDetail">
+                                </div>
+                                <ib-mmb-simulator-list-fare-item model="flight.cabins"
+                                    type-flight="simulatorBookingAvailabilityCtrl.typeFlight[1]" index="$index"
+                                    on-open="simulatorBookingAvailabilityCtrl.open(sliceIndex, cabinIndex, typeFlight)"
+                                    cabin-selected="simulatorBookingAvailabilityCtrl.cabinSelectedIndexReturn"
+                                    unified-offer-type="simulatorBookingAvailabilityCtrl.unifiedOfferType"
+                                    penalty="simulatorBookingAvailabilityCtrl.penalty"></ib-mmb-simulator-list-fare-item>
+                            </div>
+                        </article>
+                        <!-- No Filter Results -->
+                        <div ng-if="simulatorBookingAvailabilityCtrl.noResultsReturn && simulatorBookingAvailabilityCtrl.offersAvailableReturn"
+                            class="ib-layout__line-spacing">
+                            <div class="ib-message-filter">
+                                <div class="ib-message-filter__header">
+                                    <span class="ib-message-filter__header-icon icon-alerta_grave"></span>
+                                    <span class="ib-message-filter__header-title">{{'MMB_VC_AVAILABILITY_NO_RESULTS_TITLE'
+                                        | translate}}</span>
+                                </div>
+                                <div class="ib-message-filter__container">
+                                    <p class="ib-message-filter__txt">{{'MMB_VC_AVAILABILITY_NO_RESULTS_BODY' | translate}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ib-msg-alert ib-msg-alert--color-normal ib-msg-alert__gdr--left icon-informacion_2 u-position-relative"
+                ng-if="!simulatorBookingAvailabilityCtrl.offersAvailableReturn">
+                <p class="ib-msg-alert__text ib-msg-alert__text--title-large">
+                    {{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_TITLE' | translate}}</p>
+                <p class="ib-msg-alert__text--subtitle">{{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_BODY' |
+                    translate}}.</p>
+            </div>
+            <div ng-if="simulatorBookingAvailabilityCtrl.showLoading" class="ib-overlay-fly" ib-calendar-slides-loading>
+                <div class="ib-overlay-fly__container">
+                    <div class="ib-overlay-fly__icon">
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                    </div>
+                    <span class="ib-overlay-fly__text">{{'MMB_VC_AVAILABILITY_SLICK_LOADING'|translate}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="ib-msg-alert ib-msg-alert--color-normal ib-msg-alert__gdr--left icon-informacion_2" ng-if="simulatorBookingAvailabilityCtrl.selectedSlide[1].date.state === 'NOT_AVAILABLE'">
+                    <p class="ib-msg-alert__text ib-msg-alert__text--title-large">{{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_TITLE' | translate}}</p>
+                    <p class="ib-msg-alert__text--subtitle">{{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_BODY' | translate}}.</p>
+                </div> -->
+    </div>
+    </div>
+    </div>
+    <!-- Totals -->
+    <ib-mmb-simulator-total-price ng-if="simulatorBookingAvailabilityCtrl.totalPriceDone"
+        model="simulatorBookingAvailabilityCtrl.modelTotalPrice"
+        on-accept="simulatorBookingAvailabilityCtrl.acceptAvailability(message)"></ib-mmb-simulator-total-price>
+</form>

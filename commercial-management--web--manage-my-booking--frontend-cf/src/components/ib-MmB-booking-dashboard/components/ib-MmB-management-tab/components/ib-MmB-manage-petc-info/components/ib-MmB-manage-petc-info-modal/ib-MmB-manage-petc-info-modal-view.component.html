@@ -1,0 +1,82 @@
+<header class="ib-modals__header">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+        <h2 class="ib-heading ib-heading--type-1">{{'PETC_YOUR_PET_IN_CABIN' | translate}}</h2>
+    </div>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" (click)="closeModal()">
+            <span class="u-hide-accessible">{{'MODAL_CLOSE' | translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body">
+    <div class="ib-layout">
+        <div class="ib-layout__line-spacing">
+            <div class="ib-table-rows ib-table-rows--mobile-blocks"
+                *ngFor="let flight of model.petcInfo; trackBy: trackBySliceId">
+                <div class="ib-table-rows__header">
+                    <h3 class="ib-text ib-text--block ib-text--xbig ib-text--especial ib-journey ib-journey__iatas">
+                        <span class="ib-journey__box ib-journey__box--separator">
+                            <span class="ib-journey__box--city-modal-petc">{{flight.departure.name}} </span>
+                            <span class="ib-journey__box--iata-modal-petc">({{flight.departure.code}})</span>
+                        </span>
+                        <span class="ib-journey__box">
+                            <span class="ib-journey__box--city-modal-petc">{{flight.arrival.name}} </span>
+                            <span class="ib-journey__box--iata-modal-petc">({{flight.arrival.code}})</span>
+                        </span>
+                    </h3>
+                </div>
+                <div class="ib-table-rows__content u-mt-xmedium">
+                    <table class="ib-table-rows__table">
+                        <caption class="u-hide-accessible">{{'PETC_YOUR_PET_IN_CABIN' | translate}}</caption>
+                        <thead class="ib-table-rows__thead">
+                            <tr class="ib-table-rows__trow">
+                                <th class="ib-table-rows__tcell-head">
+                                    <span class="u-hide-accessible">Tipo de mascota</span>
+                                </th>
+                                <th class="ib-table-rows__tcell-head ib-table-rows__tcell-head--right">
+                                    <span class="u-hide-accessible">Pasajero</span>
+                                </th>
+                                <th class="ib-table-rows__tcell-head ib-table-rows__tcell-head--right" *ngIf="isShowPendingPayment(flight)">
+                                    <span class="u-hide-accessible">Status</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="ib-table-rows__tbody">
+                            <tr class="ib-table-rows__trow ib-table-rows__trow--petc"
+                                *ngFor="let pet of flight.pets; trackBy: trackByOrderItemId">
+                                <td class="ib-table-rows__tcell ib-table-rows__tcell--petc" [ngClass]="{'ib-table-rows__tcell--33': isShowPendingPayment(flight)}">
+                                    <span class="ib-table-breakdown__txt ib-table-breakdown__txt--petc">{{pet.animalType}}</span>
+                                </td>
+                                <td class="ib-table-rows__tcell ib-table-rows__tcell--petc" [attr.colspan]="pet.isPendingPayment ? 1 : 2" [ngClass]="isShowPendingPayment(flight) ? 'ib-table-rows__tcell--33' : 'ib-table-rows__tcell--right'">
+                                    <span class="ib-table-breakdown__txt ib-table-breakdown__txt--petc">{{pet.passengerName}}</span>
+                                </td>
+                                <td class="ib-table-rows__tcell ib-table-rows__tcell--petc ib-table-rows__tcell--right" *ngIf="pet.isPendingPayment" [ngClass]="{'ib-table-rows__tcell--33': isShowPendingPayment(flight)}">
+                                    <span class="ib-table-breakdown__txt ib-table-breakdown__txt--petc ib-table-breakdown__txt--pending">{{'MMB_PETS_PENDING_PAYMENT' | translate}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="ib-msg-alert ib-msg-alert--petc-warning-modal icon-huella">
+                <p class="ib-alertbox__head--title-petc">{{'PETC_PASSENGER_WITH_PET' | translate}}</p>
+                <p class="ib-alertbox__content--petc" [innerHtml]="model.messagePets"></p>
+            </div>
+        </div>
+
+    </div>
+</section>
+<footer class="ib-modals__footer">
+    <div class="ib-content-buttons">
+        <div class="ib-content-buttons ib-content-buttons--end ib-content-buttons__no-mt">
+            <button
+                title="{{'MODAL_ACCEPT_PETC' | translate}}"
+                class="ib-button ib-button--w-medium"
+                type="button"
+                (click)="accept()">
+                {{ 'MODAL_ACCEPT_PETC' | translate }}
+            </button>
+        </div>
+    </div>
+</footer>

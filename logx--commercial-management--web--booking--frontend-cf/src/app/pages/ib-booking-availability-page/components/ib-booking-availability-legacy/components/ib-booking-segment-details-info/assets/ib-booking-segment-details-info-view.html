@@ -1,0 +1,49 @@
+<div class="ib-detail-flight ib-detail-flight--cabins ib-detail-flight--cabins-mobile">
+    <div class="ib-table-flight-cabins__flight-selected-detail">
+        <div class="ib-table-flight-detail">
+            <div class="ib-table-flight-detail__item">
+                <span class="ib-text ib-text--big ib-text--color-unfocused">{{::(segmentDetailsInfoCtrl.segmentDetailsInfoModel.departureDateParsed.weekDay
+                    | translate | ShortenerFormatFilter:3:false:true)}}.,
+                    {{::segmentDetailsInfoCtrl.segmentDetailsInfoModel.departureDateParsed.day}} {{::(segmentDetailsInfoCtrl.segmentDetailsInfoModel.departureDateParsed.month | translate |
+                    ShortenerFormatFilter:3:false:true)}}</span>
+            </div>
+            <div class="ib-table-flight-detail__item">
+                <figure class="ib-table-flight-detail__logo">
+                    <img ng-src="{{::$root.routes.icons}}{{segmentDetailsInfoCtrl.segmentDetailsInfoModel.companyURL}}" alt="Logo {{segmentDetailsInfoCtrl.segmentDetailsInfoModel.flight.operationalCarrier.name}}" />
+                </figure>
+            </div>
+            <div class="ib-table-flight-detail__item">
+                <div class="ib-table-flight-detail__hours">
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                        <span class="ib-table-flight-detail__text-title ib-table-flight-detail__text-title--special">{{segmentDetailsInfoCtrl.segmentDetailsInfoModel.departureDateTimeParsed}}</span>
+                        <span class="ib-table-flight-detail__hours-icon icon-vuelos"></span>
+                        <span class="ib-table-flight-detail__text-title ib-table-flight-detail__text-title--special">{{segmentDetailsInfoCtrl.segmentDetailsInfoModel.arrivalDateTimeParsed}}</span>
+                    </div>
+                    <span class="ib-text ib-text--small ib-text--block">
+                        {{segmentDetailsInfoCtrl.segmentDetailsInfoModel.departure.airport.description}} {{'(' + segmentDetailsInfoCtrl.segmentDetailsInfoModel.departure.airport.code + ')'}}
+                        <span ng-if="segmentDetailsInfoCtrl.segmentDetailsInfoModel.departure.terminal!=null">{{('GENERAL_TERMINAL_INFO' | translate) +
+                            segmentDetailsInfoCtrl.segmentDetailsInfoModel.departure.terminal}}</span> - {{segmentDetailsInfoCtrl.segmentDetailsInfoModel.arrival.airport.description}} {{'(' + segmentDetailsInfoCtrl.segmentDetailsInfoModel.arrival.airport.code
+                        + ')'}}
+                        <span ng-if="segmentDetailsInfoCtrl.segmentDetailsInfoModel.arrival.terminal!=null">{{('GENERAL_TERMINAL_INFO' | translate) +
+                            segmentDetailsInfoCtrl.segmentDetailsInfoModel.arrival.terminal}}</span>
+                    </span>
+                    <span class="ib-text ib-text--small ib-text--block ib-text--color-unfocused">{{
+                        segmentDetailsInfoCtrl.segmentDetailsInfoModel.flight.marketingCarrier && segmentDetailsInfoCtrl.segmentDetailsInfoModel.flight.marketingCarrier.code ?
+                        segmentDetailsInfoCtrl.segmentDetailsInfoModel.flight.marketingCarrier.code :
+                        segmentDetailsInfoCtrl.segmentDetailsInfoModel.flight.operationalDisclosure}}{{segmentDetailsInfoCtrl.segmentDetailsInfoModel.flight.marketingFlightNumber}} .
+                        {{segmentDetailsInfoCtrl.segmentDetailsInfoModel.flight.aircraft.description}}</span>
+                    <span class="ib-text ib-text--small ib-text--block ib-text--color-unfocused">{{'AVAILABILITY_SLICE_DETAILS_BODY_DESC_1'|translate}}
+                        {{segmentDetailsInfoCtrl.segmentDetailsInfoModel.flight.operationalCarrier.name}}</span>
+                    <span ng-if="segmentDetailsInfoCtrl.segmentDetailsInfoModel.nightFlight.isOverNight" class="ib-text-icon ib-text-icon--nocturne">
+                        <span class="ib-text-icon__icon icon-luna"></span>
+                        <span class="ib-text-icon__text">{{segmentDetailsInfoCtrl.segmentDetailsInfoModel.nightFlight.message}}</span>
+                    </span>
+                </div>
+            </div>
+            <div class="ib-table-flight-detail__item">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small"><span class="ib-table-flight-detail__text-des">{{segmentDetailsInfoCtrl.segmentDetailsInfoModel.durationParsed}}</span></div>
+            </div>
+            <div class="ib-table-flight-detail__item"></div>
+        </div>
+    </div>
+</div>

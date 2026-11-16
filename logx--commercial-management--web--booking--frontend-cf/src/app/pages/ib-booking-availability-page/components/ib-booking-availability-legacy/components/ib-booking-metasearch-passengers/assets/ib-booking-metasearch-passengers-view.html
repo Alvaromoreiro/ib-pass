@@ -1,0 +1,73 @@
+<div class="u-mt-medium animate-show">
+    <div class="ib-heading-flight animate-show">
+        <div class="ib-heading-flight__container">
+            <span class="ib-heading-flight__title ib-heading-flight__title--pr">{{'AVAILABILITY_METASEARCH_TITLE_PASSENGERS'|translate}}</span>
+            <div class="ib-heading-flight__icon-container" ng-controller="IbPopoverController as popoverCtrl">
+                <a id="bbki-metasearch-passengers-more-info-link" class="ib-heading-flight__icon ib-heading-flight__icon--important icon-informacion_2 ib-popover ib-popover--xs"
+                    title="{{'AVAILABILITY_METASEARCH_MORE_INFO_LINK_ACCESS'|translate}}" uib-popover-template="'web-booking/templates/ib-generic-popover.html'"
+                    popover-placement="auto bottom" ng-click="popoverCtrl.text ='AVAILABILITY_METASEARCH_POP_PASSENGERS_INFO';$event.preventDefault();"
+                    popover-is-open="popoverCtrl.isOpen"></a>
+            </div>
+        </div>
+    </div>
+    <div class="ib-box ib-box--medium">
+        <div ib-room-selector-directive>
+            <div id="searcher-rooms-1" class="ib-searcher-room ib-searcher-room--relative " ng-class="{'ib-searcher-room--extend': ibRoomsSelectorCtrl.extend}">
+                <div class="ib-searcher-room__item ">
+                <div ng-repeat='(index,item) in metasearchPassengersCtrl.items track by index' ng-class="$root.appMarket === 'ES' ? 'ib-searcher-room__column ib-searcher-room__column--metasearcher' : 'ib-searcher-room__column ib-searcher-room__column--metasearcher'">
+                            <div class="ib-form__selectize-multi ib-form__selectize-multi--hide-label">
+                                <span class="ib-input__label" data-ng-class="{'ib-input__label--empty' : item.type !== 'ADULT' && item.value === null }">
+                                    {{index ===0 ? ('AVAILABILITY_METASEARCH_TITLE_ADULT'|translate) : index ===1 ?
+                                    ('AVAILABILITY_METASEARCH_TITLE_KIDS'|translate) : index ===2 ?
+                                    ('AVAILABILITY_METASEARCH_TITLE_BABYS'|translate) : 'other'}}
+                                </span>
+                                <div class="ib-form__selectize-multi__selectors">
+                                    <div class="ib-select" data-ng-class="{'ib-select--empty' : item.type !== 'ADULT' && item.value === null }">
+                                        <ui-select class="ib-select__action" ng-model="item.value" on-select="metasearchPassengersCtrl.passengersSelectors(index,$select.selected)">
+                                            <ui-select-match class="ib-select__list-ipt" placeholder="{{ index === 0 ? ('AVAILABILITY_METASEARCH_TITLE_ADULT'|translate|FirstMayustFilter) : index === 1 ?
+                                                ('AVAILABILITY_METASEARCH_TITLE_KIDS'|translate|FirstMayustFilter) : index === 2 ?
+                                                ('AVAILABILITY_METASEARCH_TITLE_BABYS'|translate|FirstMayustFilter) : 'other'}}">
+                                                <span class="ib-select__txt" ng-bind="$select.selected"></span>
+                                            </ui-select-match>
+                                            <ui-select-choices class="ib-select__list" repeat="option in (item.option | filter: $select.search)">
+                                                <span class="ib-select__list-txt" ng-bind="option"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div ng-repeat='(index,disccount) in metasearchPassengersCtrl.specialDiscounts' ng-class="$root.appMarket === 'ES' ? 'ib-searcher-room__column ib-searcher-room__column--metasearcher' : 'ib-searcher-room__column ib-searcher-room__column--metasearcher'">
+                            <div class="ib-form__selectize-multi ib-form__selectize-multi--hide-label">
+                                <label class="ib-input__label " data-ng-class="metasearchPassengersCtrl.discount[index] ? 'ib-input__label' : 'ib-input__label ib-input__label--empty'">
+                                    {{disccount.type === 'LGF' ? ('AVAILABILITY_METASEARCH_TITLE_LARGE_FAMILY_TYPE'|translate) : disccount.type === 'RES' ?
+                                    ('AVAILABILITY_METASEARCH_TITLE_RESIDENT'|translate): 'other'}}
+                                </label>
+                                <div class="ib-form__selectize-multi__selectors">
+                                    <div class="ib-select" ng-class="metasearchPassengersCtrl.discount[index] ? '': 'ib-select--empty'">
+                                        <ui-select class="ib-select__action" ng-model="metasearchPassengersCtrl.discount[index]"   on-select="metasearchPassengersCtrl.passengersDiscountsSelectors(index,disccount.type,$select.selected)">
+                                            <ui-select-match class="ib-select__list-ipt" placeholder=" {{disccount.type === 'LGF' ? ('AVAILABILITY_METASEARCH_TITLE_LARGE_FAMILY_TYPE'|translate|FirstMayustFilter) : disccount.type ==='RES' ?
+                                            ('AVAILABILITY_METASEARCH_TITLE_RESIDENT'|translate|FirstMayustFilter): 'other'}}">
+                                                <span class="ib-select__txt" ng-bind="$select.selected.name"></span>
+                                            </ui-select-match>
+                                            <ui-select-choices class="ib-select__list" repeat="option in (disccount.option | filter: $select.search)" >
+                                                <span class="ib-select__list-txt" ng-bind="option.name" ></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+            </div>
+            </div>
+        </div>
+        <div data-ng-if="metasearchPassengersCtrl.errorMessage" class="ib-layout__line-spacing">
+            <span class="ib-text ib-text--block ib-text--advice">{{metasearchPassengersCtrl.errorMessage === 1 ?
+                ('AVAILABILITY_METASEARCH_RECALCULATE_MESSAGE_ERROR_1'|translate) :
+                metasearchPassengersCtrl.errorMessage === 2 ?
+                ('AVAILABILITY_METASEARCH_RECALCULATE_MESSAGE_ERROR_2'|translate) :
+                ('AVAILABILITY_METASEARCH_RECALCULATE_MESSAGE_ERROR_3'|translate) }}
+            </span>
+        </div>
+    </div>
+</div>

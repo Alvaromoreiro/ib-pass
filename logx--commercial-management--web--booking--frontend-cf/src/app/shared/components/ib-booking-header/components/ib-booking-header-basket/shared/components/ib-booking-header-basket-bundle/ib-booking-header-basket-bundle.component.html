@@ -1,0 +1,28 @@
+<section *ngIf="model.hasBundle"
+    class="ib-summary-breakdown__section ib-summary-breakdown__section--padding-small ib-summary-breakdown__section--separator u-pb-none">
+    <span class="ib-summary-breakdown__icon icon-bundle-discount"></span>
+    <h4 class="ib-summary-breakdown__section-title ib-summary-breakdown__section-title--sw">{{'BUNDLE_SUMMARY_TITLE'| translate}}</h4>
+    <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--bold ib-summary-breakdown__item-text--gray-10 ib-summary-breakdown__item-text--right ib-summary-breakdown__item-text--bigger">
+        {{model.total.totalFormatted}}
+        <button class="ib-link ib-link--primary ib-link--underline"
+            *ngIf="!deleteFlag && !loadingVoucher"
+            class="ib-link ib-link--primary ib-link--underline"
+            (click)="deleteBundle(model)"
+            title="{{'DELETE_TEXT'|translate}}">
+            <span class="ib-text-icon__icon icon-cerrar icon-cerrar--delete-bundle"></span>
+        </button>
+    </span>
+    <ul class="ib-summary-breakdown__list ib-summary-breakdown__list--padding-small ">
+        <li class="ib-summary-breakdown__item">
+            <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--bold ib-summary-breakdown__item-text--subtitle">{{'BUNDLE_SUMMARY_ALL_TRIPS_AND_PASSENGERS'| translate}}</span>
+        </li>
+    </ul>
+    <ul class="ib-summary-breakdown__list ib-summary-breakdown__list--padding-small"
+        *ngFor="let item of model.info.items">
+        <li class="ib-summary-breakdown__item">
+            <div class="ib-summary-breakdown__item-description">
+                <span class="ib-summary-breakdown__item-text">{{"1 " + item.text  }}</span>
+            </div>
+        </li>
+    </ul>
+</section>

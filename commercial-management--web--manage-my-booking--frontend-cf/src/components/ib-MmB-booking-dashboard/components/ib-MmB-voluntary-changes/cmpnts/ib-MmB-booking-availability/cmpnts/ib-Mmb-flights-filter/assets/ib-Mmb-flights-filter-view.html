@@ -1,0 +1,88 @@
+<div class="ib-table-flight-filters--flex-smxs">
+    <div class="ib-table-flight-filters ib-table-flight-filters--dark ib-table-flight-filters--cabins hidden-xl hidden-lg hidden-md">
+        <div class="ib-table-flight-filters__item">
+            <div class="ib-dropdown-select ib-dropdown-select--type-1" uib-dropdown is-open="status.isopen">
+                <button id="fare" type="button" class="ib-dropdown-select__button" focusin uib-dropdown-toggle>
+                    <span class="ib-dropdown-select__button-text">{{flightsFilterCtrl.selectedListFlightFilterVC.title ? flightsFilterCtrl.selectedListFlightFilterVC.title  : 'ORDER_FILTER_BY' | translate | uppercase}}</span>
+                </button>
+                <button data-ng-if="flightsFilterCtrl.selectedListFlightFilterVC.title" id="mmbcv-trip-info-filter-btn" class="ib-dropdown-select__caret" ng-class="{'ib-dropdown-select__caret--down':flightsFilterCtrl.filterReverse, 'ib-dropdown-select__caret--up':!flightsFilterCtrl.filterReverse}" type="button" data-ng-click="flightsFilterCtrl.emitTypeFilter(flightsFilterCtrl.selectedListFlightFilterVC.filterName, flightsFilterCtrl.selectedListFlightFilterVC.isOpenModal, flightsFilterCtrl.selectedListFlightFilterVC.configModal)" focusin>{{'AVAILABILITY_FILTER'|translate}}</button>
+                <input aria-hidden="true" type="text" class="ib-dropdown-select__input u-hide-accessible" ng-model="flightsFilterCtrl.selectedListFlightFilterVC" readonly
+                    tabindex="-1" />
+                <ul class="ib-dropdown-select__list" uib-dropdown-menu role="menu" aria-labelledby="fare">
+                    <li class="ib-dropdown-select__list-item" ng-repeat="(index, item) in flightsFilterCtrl.listFlightFilterVC">
+                        <a id="mmbcv-trip-info-{{index}}-link" title="{{item.name|translate}}" ng-click="flightsFilterCtrl.emitTypeFilter(item.filterName,item.isOpenModal,item.configModal, item); ">{{item.title | translate}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="ib-table-flight-filters ib-table-flight-filters--dark ib-table-flight-filters--cabins">
+        <div ng-repeat="filter in flightsFilterCtrl.configFilter" class="{{ filter.classParent }}">
+            <a 
+                title="{{ filter.title | translate }}"
+                class="{{ filter.class }}"
+                ng-click="flightsFilterCtrl.emitTypeFilter( filter.filterName, filter.isOpenModal, filter.configModal, filter )"
+                ng-class="{'ib-table-flight-filters__text--up': (flightsFilterCtrl.choosedFilter === filter.filterName && !flightsFilterCtrl.filterReverse), 'ib-table-flight-filters__text--down':(flightsFilterCtrl.choosedFilter === filter.filterName && flightsFilterCtrl.filterReverse) }">{{filter.name | translate}}
+            </a>
+        </div>
+    </div>
+</div>
+<div aria-hidden="false" class="" ng-if="flightsFilterCtrl.filterData.changes">
+    <ul class="ib-tags-filters" data-filters-button>
+        <li class="ib-tags-filters__item animate-repeat" ng-if="flightsFilterCtrl.filterData.company">
+            <div>
+                <span class="ib-tags-filters__txt">{{'MMB_VC_AVAILABILITY_AVIOS_FILTER'| translate}}</span>
+                <button class="ib-tags-filters__close icon-cerrar" ng-click="flightsFilterCtrl.deleteFilter('company')" type="button">
+                    <span class="u-hide-accessible">{{'MMB_VC_AVAILABILITY_DELETE_FILTER'| translate}}</span>
+                </button>
+            </div>
+        </li>
+        <li class="ib-tags-filters__item animate-repeat" ng-if="flightsFilterCtrl.filterData.cabin">
+            <div>
+                <span class="ib-tags-filters__txt">{{'MMB_VC_SUMMARY_CABIN_TITLE'| translate}} {{flightsFilterCtrl.filterData.cabin.name}}</span>
+                <button class="ib-tags-filters__close icon-cerrar" ng-click="flightsFilterCtrl.deleteFilter('cabin')" type="button">
+                    <span class="u-hide-accessible">{{'MMB_VC_AVAILABILITY_DELETE_FILTER'| translate}}</span>
+                </button>
+            </div>
+        </li>
+        <li class="ib-tags-filters__item animate-repeat" ng-if="flightsFilterCtrl.filterData.rangeHoursArrival.active">
+            <div>
+                <span class="ib-tags-filters__txt">{{'MMB_VC_AVAILABILITY_ARRIVAL_FILTER'| translate}} {{flightsFilterCtrl.filterData.rangeHoursArrival.min}}:00 {{'MMB_VC_AVAILABILITY_HOUR_FILTER'| translate}} {{flightsFilterCtrl.filterData.rangeHoursArrival.max}}:00</span>
+                <button class="ib-tags-filters__close icon-cerrar" ng-click="flightsFilterCtrl.deleteFilter('rangeHoursArrival')" type="button">
+                    <span class="u-hide-accessible">{{'MMB_VC_AVAILABILITY_DELETE_FILTER'| translate}}</span>
+                </button>
+            </div>
+        </li>
+        <li class="ib-tags-filters__item animate-repeat" ng-if="flightsFilterCtrl.filterData.rangeHoursDeparture.active">
+            <div>
+                <span class="ib-tags-filters__txt">{{'MMB_VC_AVAILABILITY_DEPARTURE_FILTER'| translate}} {{flightsFilterCtrl.filterData.rangeHoursDeparture.min}}:00 {{'MMB_VC_AVAILABILITY_HOUR_FILTER'| translate}} {{flightsFilterCtrl.filterData.rangeHoursDeparture.max}}:00</span>
+                <button class="ib-tags-filters__close icon-cerrar" ng-click="flightsFilterCtrl.deleteFilter('rangeHoursDeparture')" type="button">
+                    <span class="u-hide-accessible">{{'MMB_VC_AVAILABILITY_DELETE_FILTER'| translate}}</span>
+                </button>
+            </div>
+        </li>
+        <li class="ib-tags-filters__item animate-repeat" ng-if="flightsFilterCtrl.filterData.rangePrice.active">
+            <div>
+                <span class="ib-tags-filters__txt">{{flightsFilterCtrl.filterData.rangePrice.minCurrency}} {{'MMB_VC_AVAILABILITY_PRICE_FILTER'| translate}} {{flightsFilterCtrl.filterData.rangePrice.maxCurrency}}</span>
+                <button class="ib-tags-filters__close icon-cerrar" ng-click="flightsFilterCtrl.deleteFilter('rangePrice')" type="button">
+                    <span class="u-hide-accessible">{{'MMB_VC_AVAILABILITY_DELETE_FILTER'| translate}}</span>
+                </button>
+            </div>
+        </li>
+        <li class="ib-tags-filters__item animate-repeat" ng-if="flightsFilterCtrl.filterData.scale" ng-repeat="filter in flightsFilterCtrl.filterData.scale">
+            <div>
+                <span class="ib-tags-filters__txt" ng-if="filter.numScale == 1">{{filter.numScale}} {{'MMB_VC_AVAILABILITY_STOPSNUMBER_FILTER'| translate}}</span>
+                <span class="ib-tags-filters__txt" ng-if="filter.numScale == 0">{{'MMB_VC_AVAILABILITY_NON_STOPSNUMBER_FILTER'| translate}}</span>
+                <span class="ib-tags-filters__txt" ng-if="filter.numScale > 1">{{'MMB_VC_SOME_AVAILABILITY_STOPSNUMBER_FILTER'| translate}} {{filter.numScale}}</span>
+                <button class="ib-tags-filters__close icon-cerrar" ng-click="flightsFilterCtrl.deleteFilter('scale',$index)" type="button">
+                    <span class="u-hide-accessible">{{'MMB_VC_AVAILABILITY_DELETE_FILTER'| translate}}</span>
+                </button>
+            </div>
+        </li>
+        <li class="ib-tags-filters__item ib-tags-filters__item--link animate-repeat">
+            <button class="ib-tags-filters__close icon-papelera" ng-click="flightsFilterCtrl.cleanFilter(null,false)" type="button">
+                <span class="ib-tags-filters__txt">{{'MMB_VC_AVAILABILITY_DELETE_FILTER'| translate}}</span>
+            </button>
+        </li>
+    </ul>
+</div>

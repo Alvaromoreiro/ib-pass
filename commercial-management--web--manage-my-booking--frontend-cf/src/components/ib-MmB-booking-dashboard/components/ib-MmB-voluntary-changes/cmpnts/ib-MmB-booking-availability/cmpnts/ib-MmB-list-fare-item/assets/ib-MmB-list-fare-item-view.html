@@ -1,0 +1,12 @@
+<div ng-if="lFICtrl.model" class="ib-box-mini-fare ib-box-mini-fare--{{ lFICtrl.lengthText[lFICtrl.model.length - 1] }}{{ lFICtrl.model.length === 1 ? '-box' : '-boxes'}}">
+    <div ng-repeat="item in lFICtrl.model" class="ib-box-mini-fare__content">
+        <ib-mmb-fare-item model="item" type-flight="lFICtrl.typeFlight" selected-fare ='lFICtrl.selectedFare' slice-index="lFICtrl.index" cabin-index="$index" on-select="lFICtrl.selectCabin(cabinIndex, sliceIndex)"></ib-mmb-fare-item>
+        <div ng-if="$index === lFICtrl.cabinSelected && item.fareFamilies && lFICtrl.unifiedOfferType !== 'INVOLUNTARY_CHANGE'" class="ib-table-flight-cabins__article-options animate-show" data-flight-option-show="item.showitem">
+            <div class="row" ng-repeat="fareFamilies in item.fareFamilies" ng-class="{'ib-table-flight-cabins__article-last': $last}">
+                <div class="col-md-12">
+                    <ib-mmb-fare-type model="fareFamilies" type-flight="lFICtrl.typeFlight" selected-fare ='lFICtrl.selectedFare' fare-index="$index" cabin-index="lFICtrl.cabinSelected" slice-index="lFICtrl.index"></ib-mmb-fare-type>
+                </div>
+            </div>
+        </div>
+    </div>       
+</div>

@@ -1,0 +1,433 @@
+<div id="fare-{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}-{{::fareDetailsCtrl.selectedCabin}}-{{::fareDetailsCtrl.selectedSliceIndex}}"
+    data-ng-if="!fareDetailsCtrl.metaSearchInfo && !fareDetailsCtrl.multiCity && !fareDetailsCtrl.redemption">
+    <div class="ib-box-select-simple u-border-top-none" data-ng-class=
+        "{'ib-box-select-simple--fare-type-1 u-mb-none-desktop u-mb-none-md u-mb-xsmall-mobile': fareDetailsCtrl.fareInfo.cabinType==='E',
+        'ib-box-select-simple--fare-alert':fareDetailsCtrl.fareInfo === fareDetailsCtrl.selectedFare,
+        'ib-box-select-simple--fare-type-2 u-mb-none-desktop u-mb-none-md u-mb-xsmall-mobile': (fareDetailsCtrl.fareInfo.cabinType==='T' || fareDetailsCtrl.fareInfo.cabinType==='N'),
+        'ib-box-select-simple--opacity' : !fareDetailsCtrl.fareInfo.isCompatibleFare,
+        'ib-box-select-simple--fare-type-3 u-mb-none-desktop u-mb-none-md u-mb-xsmall-mobile': fareDetailsCtrl.fareInfo.cabinType==='B'}"
+        data-ng-controller="IbBookingCollapseController as collapse" iberia-flights-cabins-detail>
+        <div class="ib-box-select-simple__advise" data-ng-if="!$root.isMobile.general" data-equal="box-discount-container-{{::fareDetailsCtrl.fareInfo.cabinType}}">
+            <div data-ng-if="fareDetailsCtrl.oBUserLogged">
+            <p class="ib-box-select-radio__advise-text" data-ng-if="fareDetailsCtrl.oBDiscountType && fareDetailsCtrl.fareInfo.oBdiscount" data-ng-class="{'icon-descuento': fareDetailsCtrl.fareInfo.oBdiscount}">{{'AVAILABILITY_ON_BUSINESS_OFFER_DISCOUNT_WITHOUT_POINTS' | translate}}</p>
+            </div>
+            <p data-ng-if="!fareDetailsCtrl.fareInfo.oBdiscount && fareDetailsCtrl.fareInfo.includedPriceDiscount"
+                    class="ib-box-select-radio__advise-text icon-descuento">{{'AVAILABILITY_OFFER_DISCOUNT'|translate}}</p>
+            <p class="ib-box-select-radio__advise-text">
+                {{ fareDetailsCtrl.fareInfo.fareText | translate}}
+            </p>
+        </div>
+        <div data-ng-if="!$root.isMobile.general" class="ib-box-select-simple__header ib-box-select-simple__header--cabins">
+            <div class="ib-box-select-simple__radio ib-box-select-simple__radio--mobile-right" data-box-select-radio="check-desktop">
+                <input type="radio"
+                    id="radioFare-{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}-{{::fareDetailsCtrl.selectedCabin}}-{{::fareDetailsCtrl.selectedSliceIndex}}"
+                    ng-value="fareDetailsCtrl.fareInfo" class="ib-box-select-simple__radio-input" ng-model="fareDetailsCtrl.selectedFare"
+                    ng-change="fareDetailsCtrl.isFareSelected()" data-box-select-radio="radio">
+            </div>
+            <div class="ib-box-select-simple__header-wrapper u-position-relative" data-equal="box-title">
+                <div class="ib-box-select-simple__header">
+                    <span class="ib-box-select-simple__title">{{::fareDetailsCtrl.fareInfo.commercialName}}</span>
+                </div>
+            </div>
+        </div>
+        <div data-ng-if="$root.isMobile.general" class="ib-box-select-simple__header-mobile ib-box-select-simple__header-mobile--cabins"
+        data-ng-class= "{'ib-box-select-simple--fare-type-1': fareDetailsCtrl.fareInfo.cabinType==='E',
+        'ib-box-select-simple--fare-type-2': (fareDetailsCtrl.fareInfo.cabinType==='T' || fareDetailsCtrl.fareInfo.cabinType==='N'),
+        'ib-box-select-simple--fare-type-3': fareDetailsCtrl.fareInfo.cabinType==='B'}"
+            data-box-select-radio="check-mobile">
+            <input type="radio" id="radioFare_{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}_{{::fareDetailsCtrl.selectedCabin}}_{{::fareDetailsCtrl.selectedSliceIndex}}_mobile"
+                ng-value="fareDetailsCtrl.fareInfo" class="ib-box-select-simple__radio-input" ng-model="fareDetailsCtrl.selectedFare"
+                ng-change="fareDetailsCtrl.isFareSelected()" data-box-select-radio="radio">
+            <div data-ng-if="$root.isMobile.general" class="ib-box-select-simple__advise u-hide-mobile" data-equal="box-discount-container-{{::fareDetailsCtrl.fareInfo.cabinType}}">
+                <p class="ib-box-select-radio__advise-text" data-ng-if="!fareDetailsCtrl.oBDiscountType && fareDetailsCtrl.getMarketOBPoints"data-ng-class="{'icon-descuento': fareDetailsCtrl.fareInfo.oBdiscount}">{{fareDetailsCtrl.fareInfo.oBdiscount ? 'AVAILABILITY_ON_BUSINESS_OFFER_DISCOUNT_WITHOUT_POINTS':'AVAILABILITY_ON_BUSINESS_OFFER_DISCOUNT_NONE' | translate}}</p>
+                <p class="ib-box-select-radio__advise-text" data-ng-if="!fareDetailsCtrl.oBDiscountType  && !fareDetailsCtrl.getMarketOBPoints"  data-ng-class="{'icon-descuento': fareDetailsCtrl.fareInfo.oBdiscount}">{{fareDetailsCtrl.fareInfo.oBdiscount ? 'AVAILABILITY_ON_BUSINESS_OFFER_DISCOUNT_WITH_POINTS':'AVAILABILITY_ON_BUSINESS_OFFER_DISCOUNT_NONE_WITH_POINTS' | translate}}</p>
+                <p data-ng-if="!fareDetailsCtrl.fareInfo.oBdiscount && fareDetailsCtrl.fareInfo.includedPriceDiscount"
+                        class="ib-box-select-radio__advise-text icon-descuento">{{'AVAILABILITY_OFFER_DISCOUNT'|translate}}</p>
+                <p class="ib-box-select-radio__advise-text">
+                    {{ fareDetailsCtrl.fareInfo.fareText |translate}}
+                </p>
+            </div>
+            <div class="ib-remaining-seats__new-fare" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats && (fareDetailsCtrl.fareInfo.remainingSeats > 0) && (fareDetailsCtrl.fareInfo.remainingSeats < 9)">
+                <p class="ib-remaining-seats__new-fare--text" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats !== 1">{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_8'|translate}}{{::fareDetailsCtrl.fareInfo.remainingSeats}}{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_7'|translate}}</p>
+                <p class="ib-remaining-seats__new-fare--text" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats === 1">{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_5'|translate}}{{::fareDetailsCtrl.fareInfo.remainingSeats}}{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_6'|translate}}</p>
+            </div>
+            <div class="ib-box-select-simple__header-wrapper u-position-relative" data-ng-class="{'ib-box-select-simple__header-wrapper--close' : !collapse.isCollapsed,
+                'ib-box-select-simple__header-wrapper--without-discount' : !fareDetailsCtrl.fareInfo.fareDiscountPriceShown}"
+                data-ng-click="collapse.clickCollapse($event,false);fareDetailsCtrl.resizeFareDetailsBox($element)" data-attr="fare-collapse" data-iberia-flights-fare-details>
+                <div class="ib-box-select-simple__header " data-ng-class="{'ib-box-select-simple__header--long-coins': fareDetailsCtrl.fareInfo.farePriceShown.length > 8}">
+                    <div class="ib-box-select-simple__header-mobile">
+                        <span class="ib-box-select-simple__title" data-ng-class="{'ib-box-select-simple__title--short-coin': fareDetailsCtrl.fareInfo.farePriceShown.length <= 8}">{{fareDetailsCtrl.fareInfo.commercialName}}</span>
+                        <div class="ib-box-select-simple__price-container"  data-ng-if="fareDetailsCtrl.fareInfo.fareDiscountPriceShown
+                        && fareDetailsCtrl.fareInfo.fareDiscountPriceShown !== fareDetailsCtrl.fareInfo.farePriceShown">
+                            <div class="ib-box-select-simple__header" >
+                                <span class="ib-box-select-simple__no-discount" ng-if="fareDetailsCtrl.fareInfo.farePriceShown.length <= 8"> {{::fareDetailsCtrl.fareInfo.fareDiscountPriceShown}}</span>
+                                <span class="ib-box-select-simple__no-discount ib-box-select-simple__no-discount--long-coins" ng-if="fareDetailsCtrl.fareInfo.farePriceShown.length > 8">{{fareDetailsCtrl.fareInfo.fareDiscountPriceShown}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="ib-box-select-simple__btn-container">
+                        <label class="ib-box-select-simple__btn u-hide-desktop u-hide-md" for="radioFare_{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}_{{::fareDetailsCtrl.selectedCabin}}_{{::fareDetailsCtrl.selectedSliceIndex}}_mobile" data-ng-class="{'ib-box-select-simple__btn--active': fareDetailsCtrl.fareInfo === fareDetailsCtrl.selectedFare, 'ib-box-select-simple__btn--price-long': fareDetailsCtrl.expensivePriceShown.length >= 8, 'ib-box-select-simple__btn--price-middle': fareDetailsCtrl.expensivePriceShown.length >= 5 && fareDetailsCtrl.expensivePriceShown.length < 8}">{{fareDetailsCtrl.fareInfo.farePriceShown}}</label>
+                    </div>
+                </div>
+                <span class="ib-box-select-simple__icon icon-flecha_1_abajo" ng-class="collapse.isCollapsed ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+            </div>
+        </div>
+        <div class="ib-box-select-simple__container" uib-collapse="!collapse.isCollapsed">
+            <div ng-if="fareDetailsCtrl.isEuro && fareDetailsCtrl.isLogged && !fareDetailsCtrl.oBUserLogged"
+            id="elite-points-qualification-{{fareDetailsCtrl.removeAccents(fareDetailsCtrl.fareInfo.commercialNameES)}}"
+            data-avios="{{::fareDetailsCtrl.fareInfo.fareOutTax | MultiplyFare: 'classic'}}" 
+            data-elite="{{::fareDetailsCtrl.fareInfo.fareOutTax | EliteQualification: fareDetailsCtrl.fareInfo.commercialNameES : fareDetailsCtrl.flightRatio}}"
+            class="ib-modal-with-footer__avios u-hide-desktop u-display-flex u-p-small ib-flex--flex-center">
+                    <figure class="ib-select__list-icon-small" style="min-width: 1.3rem;"><img src="../iberia-web-content/iconos/avios/avios.png" alt="Avios">
+                    </figure>
+                    <!-- elite points qualification -->
+                    <p
+                    class="ib-text ib-text--color-black">{{'GET_AT_LEAST' | translate}}
+                        <b>{{::fareDetailsCtrl.fareInfo.fareOutTax |
+                            MultiplyFare: 'classic' | aviosFormatter}}
+                            {{fareDetailsCtrl.getMarketOBPoints ? 'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED':'AVIOS_ELITE_TO_EARN_ANOM_2' |
+                            translate}}
+                            {{::fareDetailsCtrl.fareInfo.fareOutTax | EliteQualification: fareDetailsCtrl.fareInfo.commercialNameES :
+                            fareDetailsCtrl.flightRatio | aviosFormatter}} {{'AVIOS_ELITE_TO_EARN_ANOM_3' | translate}} </p>
+
+            </div>
+            <div class="ib-box-select-simple__container-wrapper">
+                <ul class="ib-list-icon-fare ib-list-icon-fare--simple" data-equal="box-select-radio-container-{{::fareDetailsCtrl.fareInfo.cabinType}}" data-ng-class="{'ib-list-icon-fare--fare-type-1': fareDetailsCtrl.fareInfo.cabinType==='E', 'ib-list-icon-fare--fare-type-2': (fareDetailsCtrl.fareInfo.cabinType==='T' || fareDetailsCtrl.fareInfo.cabinType==='N'), 'ib-list-icon-fare--fare-type-3': fareDetailsCtrl.fareInfo.cabinType==='B'}">
+                    <li class="ib-list-icon-fare__item" data-ng-repeat="condition in fareDetailsCtrl.fareInfo.conditions | orderBy: fareDetailsCtrl.fareInfo.conditionsPriority"
+                    id="liFare_{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}_{{::fareDetailsCtrl.selectedCabin}}_{{::fareDetailsCtrl.selectedSliceIndex}}_{{::condition.code}}"
+                        data-ng-if="condition.extendedInfo.conditionStatus && (condition.code !== 'CAMBIO' && condition.code !== 'REEMBOLSO')">
+                        <span class="ib-list-icon-fare__icon" ng-class="fareDetailsCtrl.getFareIcon(condition.code)"></span>
+                        <div class="ib-list-icon-fare__text-container">
+                            <p>
+                                <span class="ib-list-icon-fare__text">{{::condition.extendedInfo.title ? '' + condition.extendedInfo.title + '' : '' + condition.text + ''}}</span>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="ib-list-icon-fare ib-list-icon-fare--simple ib-list-icon-fare--simple-extra" data-equal="box-select-radio-container-extra-{{::fareDetailsCtrl.fareInfo.cabinType}}">
+                    <li data-ng-repeat="condition in fareDetailsCtrl.fareInfo.conditions" class="ib-list-icon-fare__item" ng-class="fareDetailsCtrl.getFareSubCodeClass(condition.extendedInfo.code)"
+                    id="liFare_{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}_{{::fareDetailsCtrl.selectedCabin}}_{{::fareDetailsCtrl.selectedSliceIndex}}_{{::condition.code}}"
+                        data-ng-if="(condition.code === 'CAMBIO' || condition.code === 'REEMBOLSO')">
+                        <span class="ib-list-icon-fare__icon" ng-class="fareDetailsCtrl.getFareIcon(condition.code)"></span>
+                        <div class="ib-list-icon-fare__text-container">
+                            <p>
+                                <span class="ib-list-icon-fare__text">{{::condition.name}}</span>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="ib-layout__line-spacing u-mt u-text-center-mobile u-mt-mobile u-mb-none">
+                    <a class="ib-link ib-link--underline ib-link--primary" href="javascript:void(0)" id="see-new-fares-details" title="{{'AVAILABILITY_FARE_DETAILS_LINK_MODAL'|translate}}" data-ng-click="fareDetailsCtrl.openDetailFareModal()">{{'AVAILABILITY_FARE_DETAILS_LINK_MODAL'|translate}}</a>
+                </div>
+            </div>
+        </div>
+        <div ng-if="fareDetailsCtrl.isEuro" class="ib-modal-with-footer__avios u-hide-mobile u-display-flex u-p-small ib-flex--flex-center">
+            <figure class="ib-select__list-icon-small"><img src="../iberia-web-content/iconos/avios/avios.png" alt="Avios">
+            </figure>
+            <!-- elite points qualification -->
+            <p data-ng-if="false" class="ib-text ib-text--color-black">{{'GET_AT_LEAST' | translate}}
+                <b>{{::fareDetailsCtrl.fareInfo.fareOutTax |
+                    MultiplyFare: 'classic' | aviosFormatter}} {{'AVIOS_TEXT' | translate}}</b></p>
+            
+            <p data-ng-if="true" class="ib-text ib-text--color-black">{{'GET_AT_LEAST' | translate}}
+                <b>{{::fareDetailsCtrl.fareInfo.fareOutTax |
+                    MultiplyFare: 'classic' | aviosFormatter}}
+                    {{fareDetailsCtrl.getMarketOBPoints ? 'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED':'AVIOS_ELITE_TO_EARN_ANOM_2' |
+                    translate}}
+                    {{::fareDetailsCtrl.fareInfo.fareOutTax | EliteQualification: fareDetailsCtrl.fareInfo.commercialNameES :
+                    fareDetailsCtrl.flightRatio | aviosFormatter}} {{'AVIOS_ELITE_TO_EARN_ANOM_3' | translate}} </p>
+        </div>
+        <div class="ib-box-select-simple__footer u-hide-mobile" data-equal="footer-fare-details-price">
+            <div class="ib-box-select-simple__price-container" data-ng-if="fareDetailsCtrl.fareInfo.fareDiscountPriceShown
+            && fareDetailsCtrl.fareInfo.fareDiscountPriceShown !== fareDetailsCtrl.fareInfo.farePriceShown">
+                <div class="ib-box-select-simple__text-long">
+                    <span class="ib-box-select-simple__no-discount" ng-if="fareDetailsCtrl.fareInfo.farePriceShown.length <= 9"> {{::fareDetailsCtrl.fareInfo.fareDiscountPriceShown}}</span>
+                    <span class="ib-box-select-simple__no-discount ib-box-select-simple__no-discount--long-coins" ng-if="fareDetailsCtrl.fareInfo.farePriceShown.length > 9">{{::fareDetailsCtrl.fareInfo.fareDiscountPriceShown}}</span>
+                </div>
+            </div>
+            <div class="ib-box-select-simple__btn-container">
+                <label class="ib-box-select-simple__btn u-hide-mobile" data-ng-class="{'ib-box-select-simple__btn--active': fareDetailsCtrl.fareInfo === fareDetailsCtrl.selectedFare}" for="radioFare-{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}-{{::fareDetailsCtrl.selectedCabin}}-{{::fareDetailsCtrl.selectedSliceIndex}}">{{::fareDetailsCtrl.fareInfo.farePriceShown}}</label>
+            </div>
+            <div class="ib-remaining-seats__new-fare" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats && (fareDetailsCtrl.fareInfo.remainingSeats > 0) && (fareDetailsCtrl.fareInfo.remainingSeats < 9)">
+                <p class="ib-remaining-seats__new-fare--text" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats !== 1">{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_8'|translate}}{{::fareDetailsCtrl.fareInfo.remainingSeats}}{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_7'|translate}}</p>
+                <p class="ib-remaining-seats__new-fare--text" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats === 1">{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_5'|translate}}{{::fareDetailsCtrl.fareInfo.remainingSeats}}{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_6'|translate}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MULTICITY-VIEEW -->
+<div data-ng-if="!fareDetailsCtrl.metaSearchInfo && !fareDetailsCtrl.redemption && fareDetailsCtrl.multiCity">
+    <div class="ib-box-select-radio ib-box-select-radio--no-shadow ib-box-select-radio--two-cols-type-2 ng-scope"
+        ng-controller="ibCollapseController as collapse" data-iberia-flights-cabins-scala-detail>
+        <div class="ib-box-select-radio__header ib-box-select-radio__header--cabins"
+        data-ng-if="(!fareDetailsCtrl.oBDiscountType  && fareDetailsCtrl.getMarketOBPoints) || (!fareDetailsCtrl.fareInfo.oBdiscount && fareDetailsCtrl.fareInfo.includedPriceDiscount)"
+        data-equal="box-fare-name-{{::fareDetailsCtrl.fareInfo.cabinType}}">
+            <div class="ib-box-select-simple__advise" data-equal="box-discount-container-{{::fareDetailsCtrl.fareInfo.cabinType}}">
+                <div data-ng-if="fareDetailsCtrl.oBUserLogged">
+                   <p class="ib-box-select-radio__advise-text" data-ng-if="fareDetailsCtrl.oBDiscountType && fareDetailsCtrl.fareInfo.oBdiscount" data-ng-class="{'icon-descuento': fareDetailsCtrl.fareInfo.oBdiscount}">{{'AVAILABILITY_ON_BUSINESS_OFFER_DISCOUNT_WITHOUT_POINTS' | translate}}</p>
+                </div>
+                <p data-ng-if="!fareDetailsCtrl.fareInfo.oBdiscount && fareDetailsCtrl.fareInfo.includedPriceDiscount"
+                        class="ib-box-select-radio__advise-text icon-descuento">{{'AVAILABILITY_OFFER_DISCOUNT'|translate}}</p>
+            </div>
+            <div class="ib-box-select-radio__radio ib-box-select-radio__radio--mobile-left" data-box-select-radio="check-desktop">
+                <input type="radio" id="radioFare-{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}-{{::fareDetailsCtrl.selectedCabin}}-{{::fareDetailsCtrl.selectedSliceIndex}}"
+                    class="ib-box-select-radio__radio-input" ng-model="fareDetailsCtrl.selectedFare" ng-value="fareDetailsCtrl.fareInfo"
+                    ng-change="fareDetailsCtrl.isFareSelected()" class="ib-box-select-radio__radio-input"
+                    data-box-select-radio="radio">
+                <label for="radioFare-{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}-{{::fareDetailsCtrl.selectedCabin}}-{{::fareDetailsCtrl.selectedSliceIndex}}"
+                    class="ib-box-select-radio__radio-label ib-box-select-radio__radio-label--mobile"></label>
+            </div>
+            <div class="ib-box-select-radio__header-wrapper ib-box-select-radio__header-wrapper--radio-left">
+                <div class="ib-box-select-radio__header-left">
+                    <span class="ib-box-select-radio__title ib-text ib-text--block ib-text--bold ib-text--color-unfocused ib-text--big">
+                        {{::fareDetailsCtrl.fareInfo.commercialName}}
+                        <a id="bbki-fare-details-details-modal-{{::fareDetailsCtrl.selectedCabin}}-{{::fareDetailsCtrl.selectedSliceIndex}}-{{::fareDetailsCtrl.fareIndex}}-link" href="javascript:void(0)" data-ng-click="fareDetailsCtrl.openModalConditions($event)" class="ib-link ib-link--xbig ib-link--unfocused ib-link--decoration-none ib-link--to-middle  ib-link--fare-type-1 icon-informacion_2"></a></span>
+                </div>
+                <div class="ib-box-select-radio__header-right">
+                    <span class="ib-text ib-text--block ib-text--xbig">{{::fareDetailsCtrl.fareInfo.farePriceShown}}</span>
+                </div>
+                <div class="ib-remaining-seats__new-fare" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats && (fareDetailsCtrl.fareInfo.remainingSeats > 0) && (fareDetailsCtrl.fareInfo.remainingSeats < 9)">
+                    <p class="ib-remaining-seats__new-fare--text" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats !== 1">{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_8'|translate}}{{::fareDetailsCtrl.fareInfo.remainingSeats}}{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_7'|translate}}</p>
+                    <p class="ib-remaining-seats__new-fare--text" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats === 1">{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_5'|translate}}{{::fareDetailsCtrl.fareInfo.remainingSeats}}{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_6'|translate}}</p>
+            </div>
+            </div>
+        </div>
+        <div class="ib-box-select-radio__header-mobile ib-box-select-radio__header-mobile--cabins"
+            data-box-select-radio="check-mobile">
+            <input type="radio" id="radioFare_{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}_{{::fareDetailsCtrl.selectedCabin}}_{{::fareDetailsCtrl.selectedSliceIndex}}_mobile"
+                ng-value="fareDetailsCtrl.fareInfo" class="ib-box-select-radio__radio-input" ng-model="fareDetailsCtrl.selectedFare"
+                ng-change="fareDetailsCtrl.isFareSelected()" data-box-select-radio="radio">
+            <label for="radioFare_{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}_{{::fareDetailsCtrl.selectedCabin}}_{{::fareDetailsCtrl.selectedSliceIndex}}_mobile"
+                class="ib-box-select-radio__radio-label ib-box-select-radio__radio-label--full-header"></label>
+            <div class="ib-box-select-radio__header-wrapper ib-box-select-radio__header-wrapper--radio-left" ng-class="{'ib-box-select-radio__header-wrapper--close ib-box-select-radio__header-wrapper--radio-left--close' : !collapse.isCollapsed}"
+                ng-click="collapse.clickCollapse($event,false)">
+                <div class="ib-box-select-radio__header-left">
+                    <span class="ib-box-select-radio__title ib-text ib-text--block ib-text--bold ib-text--xmedium">{{::fareDetailsCtrl.fareInfo.commercialName}}
+                        <a id="bbki-fare-details-details-modal-{{::fareDetailsCtrl.selectedCabin}}-{{::fareDetailsCtrl.selectedSliceIndex}}-{{::fareDetailsCtrl.fareIndex}}-link" href="javascript:void(0)" data-ng-click="fareDetailsCtrl.openModalConditions($event)" class="ib-link ib-link--xbig ib-link--unfocused ib-link--decoration-none ib-link--to-middle  ib-link--fare-type-1 icon-informacion_2"></a></span>
+                </div>
+                <div class="ib-box-select-radio__header-right ib-box-select-radio__price-long">
+                    <span class="ib-text ib-text--block">{{::fareDetailsCtrl.fareInfo.farePriceShown}}</span>
+                </div>
+                <span class="ib-box-select-radio__icon icon-flecha_1_abajo" ng-class="collapse.isCollapsed ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+                <div class="ib-remaining-seats__new-fare" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats && (fareDetailsCtrl.fareInfo.remainingSeats > 0) && (fareDetailsCtrl.fareInfo.remainingSeats < 9)">
+                    <p class="ib-remaining-seats__new-fare--text" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats !== 1">{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_8'|translate}}{{::fareDetailsCtrl.fareInfo.remainingSeats}}{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_7'|translate}}</p>
+                    <p class="ib-remaining-seats__new-fare--text" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats === 1">{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_5'|translate}}{{::fareDetailsCtrl.fareInfo.remainingSeats}}{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_6'|translate}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="ib-box-select-radio__container" uib-collapse="!collapse.isCollapsed">
+            <div class="ib-box-select-radio__container-wrapper">
+                <ul class="ib-list-icon-fare ib-list-icon-fare--inline" data-ng-class="{'ib-list-icon-fare--fare-type-1': fareDetailsCtrl.fareInfo.cabinType==='E',
+                        'ib-list-icon-fare--fare-type-2': (fareDetailsCtrl.fareInfo.cabinType==='T' || fareDetailsCtrl.fareInfo.cabinType==='N'),
+                        'ib-list-icon-fare--fare-type-3': fareDetailsCtrl.fareInfo.cabinType==='B'}">
+                    <li class="ib-list-icon-fare__item" data-ng-repeat="condition in fareDetailsCtrl.fareInfo.conditions"
+                    id="liFare_{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}_{{::fareDetailsCtrl.selectedCabin}}_{{::fareDetailsCtrl.selectedSliceIndex}}_{{::condition.code}}"
+                        data-ng-if="condition.previewStatus && condition.extendedInfo.conditionStatus">
+                        <span class="ib-list-icon-fare__icon" data-ng-class="fareDetailsCtrl.getFareIcon(condition.code)"></span>
+                        <div class="ib-list-icon-fare__text-container">
+                            <p class="ib-list-icon-fare__text">
+                                <span class="ib-list-icon-fare__text">{{::condition.extendedInfo.title}}</span>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- METASEARCH INFO -->
+<div data-ng-repeat="offers in fareDetailsCtrl.fareInfo.offers" data-ng-if="fareDetailsCtrl.metaSearchInfo && offers.offerId === fareDetailsCtrl.recommendedOfferId">
+    <div class="ib-box-select-radio ib-box-select-radio--no-shadow ib-box-select-radio--two-cols-type-2 ng-scope"
+        ng-controller="ibCollapseController as collapse" data-iberia-flights-cabins-scala-detail>
+        <div class="ib-box-select-radio__header ib-box-select-radio__header--cabins" data-equal="box-fare-name-{{::fareDetailsCtrl.fareInfo.cabinType}}">
+            <div class="ib-box-select-simple__advise" data-equal="box-discount-container-{{::fareDetailsCtrl.fareInfo.cabinType}}"
+            data-ng-if="(!fareDetailsCtrl.oBDiscountType  && fareDetailsCtrl.getMarketOBPoints) || (!fareDetailsCtrl.fareInfo.oBdiscount && fareDetailsCtrl.fareInfo.includedPriceDiscount)">
+            <div data-ng-if="fareDetailsCtrl.oBUserLogged">
+                 <p class="ib-box-select-radio__advise-text" data-ng-if="fareDetailsCtrl.oBDiscountType && fareDetailsCtrl.fareInfo.oBdiscount" data-ng-class="{'icon-descuento': fareDetailsCtrl.fareInfo.oBdiscount}">{{'AVAILABILITY_ON_BUSINESS_OFFER_DISCOUNT_WITHOUT_POINTS' | translate}}</p>
+            </div>
+                <p data-ng-if="!fareDetailsCtrl.fareInfo.oBdiscount && fareDetailsCtrl.fareInfo.includedPriceDiscount"
+                        class="ib-box-select-radio__advise-text icon-descuento">{{'AVAILABILITY_OFFER_DISCOUNT'|translate}}</p>
+            </div>
+            <div class="ib-box-select-radio__radio ib-box-select-radio__radio--mobile-left" data-box-select-radio="check-desktop">
+                <input type="radio" id="radioFare-{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}-{{::fareDetailsCtrl.selectedCabin}}-{{::fareDetailsCtrl.selectedSliceIndex}}"
+                    class="ib-box-select-radio__radio-input" ng-model="fareDetailsCtrl.selectedFare[0]" ng-value="fareDetailsCtrl.fareInfo"
+                    class="ib-box-select-radio__radio-input" data-box-select-radio="radio">
+                <label for="radioFare-{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}-{{::fareDetailsCtrl.selectedCabin}}-{{::fareDetailsCtrl.selectedSliceIndex}}"
+                    class="ib-box-select-radio__radio-label ib-box-select-radio__radio-label--mobile"></label>
+            </div>
+            <div class="ib-box-select-radio__header-wrapper ib-box-select-radio__header-wrapper--radio-left">
+                <div class="ib-box-select-radio__header-left">
+                    <span class="ib-box-select-radio__title ib-text ib-text--block ib-text--bold ib-text--color-unfocused ib-text--big">
+                        {{::fareDetailsCtrl.fareInfo.commercialName}}
+                        <a id="bbki-fare-details-details-modal-{{::fareDetailsCtrl.selectedCabin}}-{{::fareDetailsCtrl.selectedSliceIndex}}-{{::fareDetailsCtrl.fareIndex}}-link" href="javascript:void(0)" data-ng-click="fareDetailsCtrl.openModalConditions($event)" class="ib-link ib-link--xbig ib-link--unfocused ib-link--decoration-none ib-link--to-middle  ib-link--fare-type-1 icon-informacion_2"></a></span>
+                </div>
+                <div class="ib-box-select-radio__header-right">
+                    <span class="ib-text ib-text--block ib-text--xbig">{{::fareDetailsCtrl.fareInfo.farePriceShown}}</span>
+                </div>
+                <div class="ib-remaining-seats__new-fare" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats && (fareDetailsCtrl.fareInfo.remainingSeats > 0) && (fareDetailsCtrl.fareInfo.remainingSeats < 9)">
+                    <p class="ib-remaining-seats__new-fare--text" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats !== 1">{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_8'|translate}}{{::fareDetailsCtrl.fareInfo.remainingSeats}}{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_7'|translate}}</p>
+                    <p class="ib-remaining-seats__new-fare--text" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats === 1">{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_5'|translate}}{{::fareDetailsCtrl.fareInfo.remainingSeats}}{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_6'|translate}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="ib-box-select-radio__header-mobile ib-box-select-radio__header-mobile--cabins"
+            data-box-select-radio="check-mobile">
+            <input type="radio" id="radioFare_{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}_{{::fareDetailsCtrl.selectedCabin}}_{{::fareDetailsCtrl.selectedSliceIndex}}_mobile"
+                ng-value="fareDetailsCtrl.fareInfo" class="ib-box-select-radio__radio-input" ng-model="fareDetailsCtrl.selectedFare[0]"
+                data-box-select-radio="radio">
+            <label for="basic" class="ib-box-select-radio__radio-label ib-box-select-radio__radio-label--full-header"></label>
+            <div class="ib-box-select-radio__header-wrapper ib-box-select-radio__header-wrapper--radio-left" ng-class="{'ib-box-select-radio__header-wrapper--close ib-box-select-radio__header-wrapper--radio-left--close' : !collapse.isCollapsed}"
+                ng-click="collapse.clickCollapse($event,false)">
+                <div class="ib-box-select-radio__header-left">
+                    <span class="ib-box-select-radio__title ib-text ib-text--block ib-text--bold ib-text--xmedium">{{::fareDetailsCtrl.fareInfo.commercialName}}
+                        <a id="bbki-fare-details-details-modal-{{::fareDetailsCtrl.selectedCabin}}-{{::fareDetailsCtrl.selectedSliceIndex}}-{{::fareDetailsCtrl.fareIndex}}-link" href="javascript:void(0)" data-ng-click="fareDetailsCtrl.openModalConditions($event)" class="ib-link ib-link--xbig ib-link--unfocused ib-link--decoration-none ib-link--to-middle  ib-link--fare-type-1 icon-informacion_2"></a></span>
+                </div>
+                <div class="ib-box-select-radio__header-right ib-box-select-radio__price-long">
+                    <span class="ib-text ib-text--block">{{::fareDetailsCtrl.fareInfo.farePriceShown}}</span>
+                </div>
+                <div class="ib-remaining-seats__new-fare" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats && (fareDetailsCtrl.fareInfo.remainingSeats > 0) && (fareDetailsCtrl.fareInfo.remainingSeats < 9)">
+                    <p class="ib-remaining-seats__new-fare--text" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats !== 1">{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_8'|translate}}{{::fareDetailsCtrl.fareInfo.remainingSeats}}{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_7'|translate}}</p>
+                    <p class="ib-remaining-seats__new-fare--text" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats === 1">{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_5'|translate}}{{::fareDetailsCtrl.fareInfo.remainingSeats}}{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_6'|translate}}</p>
+                </div>
+                <span class="ib-box-select-radio__icon icon-flecha_1_abajo" ng-class="collapse.isCollapsed ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+            </div>
+        </div>
+        <div class="ib-box-select-radio__container" uib-collapse="!collapse.isCollapsed">
+            <div class="ib-box-select-radio__container-wrapper">
+                <ul class="ib-list-icon-fare ib-list-icon-fare--inline" data-ng-class="{'ib-list-icon-fare--fare-type-1': fareDetailsCtrl.fareInfo.cabinType==='E',
+                'ib-list-icon-fare--fare-type-2': (fareDetailsCtrl.fareInfo.cabinType==='T' || fareDetailsCtrl.fareInfo.cabinType==='N'),
+                'ib-list-icon-fare--fare-type-3': fareDetailsCtrl.fareInfo.cabinType==='B'}">
+                    <li class="ib-list-icon-fare__item" data-ng-repeat="condition in fareDetailsCtrl.fareInfo.conditions"
+                    id="liFare_{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}_{{::fareDetailsCtrl.selectedCabin}}_{{::fareDetailsCtrl.selectedSliceIndex}}_{{::condition.code}}"
+                        data-ng-if="condition.previewStatus && condition.extendedInfo.conditionStatus">
+                        <span class="ib-list-icon-fare__icon" ng-class="fareDetailsCtrl.getFareIcon(condition.code)"></span>
+                        <div class="ib-list-icon-fare__text-container" data-ng-if="fareDetailsCtrl.getFareIcon(condition.code) === 'ASIENTOXL' ||
+                        fareDetailsCtrl.getFareIcon(condition.code) === 'REEMBOLSO' || fareDetailsCtrl.getFareIcon(condition.code) === 'EMBARQUE'">
+                            <p class="ib-list-icon-fare__text">
+                                <span class="ib-list-icon-fare__text">{{::condition.name}}</span>
+                                <span class="ib-list-icon-fare__tag ib-list-icon-fare__tag--fav" ng-if="
+                                    fareDetailsCtrl.fareInfo.cabinType==='E'  && ( (( fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter ) === 'confort') || ( ( fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter ) === 'flexible') ) &&
+                                    ( condition.code === 'TARJEMBANTIC' )"></span>
+                                <span class="ib-list-icon-fare__tag" ng-if="
+                                fareDetailsCtrl.fareInfo.cabinType==='E' && ( fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter ) === 'confort' &&
+                                    (condition.code === 'ASIENTOXL' ||  condition.code === 'REEMBOLSO')
+                                ">
+                                    <span class="ib-list-icon-fare__tag-txt">{{ 'AVAILABILITY_ON_BUSINESS_NEW_CONDITION_TAG' | translate |uppercase}}</span>
+                                </span>
+                                <span class="ib-list-icon-fare__des">{{::condition.text}}</span>
+                            </p>
+                        </div>
+                        <div class="ib-list-icon-fare__text-container" data-ng-if="fareDetailsCtrl.getFareIcon(condition.code) !== 'ASIENTOXL' &&
+                        fareDetailsCtrl.getFareIcon(condition.code) !== 'REEMBOLSO' && fareDetailsCtrl.getFareIcon(condition.code) !== 'EMBARQUE' && fareDetailsCtrl.getFareIcon(condition.code) !== 'TARJEMBANTIC'">
+                            <p class="ib-list-icon-fare__text">
+                                <span class="ib-list-icon-fare__text">{{::condition.name}}</span>
+                                <span class="ib-list-icon-fare__tag ib-list-icon-fare__tag--fav" ng-if="
+                                    fareDetailsCtrl.fareInfo.cabinType==='E'  && ( (( fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter ) === 'confort') || ( ( fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter ) === 'flexible') ) &&
+                                    ( condition.code === 'TARJEMBANTIC' )"></span>
+                                <span class="ib-list-icon-fare__tag" ng-if="
+                                fareDetailsCtrl.fareInfo.cabinType==='E' && ( fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter ) === 'confort' &&
+                                    (condition.code === 'ASIENTOXL' ||  condition.code === 'REEMBOLSO')
+                                ">
+                                    <span class="ib-list-icon-fare__tag-txt">{{ 'AVAILABILITY_ON_BUSINESS_NEW_CONDITION_TAG' | translate |uppercase}}</span>
+                                </span>
+                                <span class="ib-list-icon-fare__des">{{::condition.text}}</span>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- REDEMPTION VIEW -->
+<div data-ng-repeat="offers in fareDetailsCtrl.fareInfo.offers" data-ng-if="fareDetailsCtrl.redemption">
+    <div class="ib-box-select-radio ib-box-select-radio--no-shadow ib-box-select-radio--two-cols-type-2 ng-scope"
+        ng-controller="ibCollapseController as collapse" data-iberia-flights-cabins-scala-detail>
+        <div class="ib-box-select-radio__header ib-box-select-radio__header--cabins" data-equal="box-fare-name-{{::fareDetailsCtrl.fareInfo.cabinType}}">
+            <div class="ib-box-select-radio__radio ib-box-select-radio__radio--mobile-left" data-box-select-radio="check-desktop">
+                <input type="radio" id="radioFare-{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}-{{::fareDetailsCtrl.selectedCabin}}-{{::fareDetailsCtrl.selectedSliceIndex}}"
+                    class="ib-box-select-radio__radio-input" ng-model="fareDetailsCtrl.selectedFare" ng-value="fareDetailsCtrl.fareInfo"
+                    class="ib-box-select-radio__radio-input" data-box-select-radio="radio" ng-change="fareDetailsCtrl.isFareSelected()">
+                <label for="radioFare-{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}-{{::fareDetailsCtrl.selectedCabin}}-{{::fareDetailsCtrl.selectedSliceIndex}}"
+                    class="ib-box-select-radio__radio-label ib-box-select-radio__radio-label--mobile"></label>
+            </div>
+            <div class="ib-box-select-radio__header-wrapper ib-box-select-radio__header-wrapper--radio-left">
+                <div class="ib-box-select-radio__header-left">
+                    <span class="ib-box-select-radio__title ib-text ib-text--block ib-text--bold ib-text--color-unfocused ib-text--big">
+                        <a id="bbki-fare-details-details-modal-{{::fareDetailsCtrl.selectedCabin}}-{{::fareDetailsCtrl.selectedSliceIndex}}-{{::fareDetailsCtrl.fareIndex}}-link" href="javascript:void(0)" data-ng-click="fareDetailsCtrl.openModalConditions($event)" class="ib-link ib-link--xbig ib-link--unfocused ib-link--decoration-none ib-link--to-middle">
+
+                        {{::fareDetailsCtrl.fareInfo.commercialName}}
+                        <span title="{{'AVAILABILITY_FARE_DETAILS_TITLE'|translate}}" aria-label="{{'AVAILABILITY_FARE_DETAILS_TITLE_ACCESSIBLE'|translate}}"
+                                class="ib-link ib-link--xbig ib-link--unfocused ib-link--decoration-none ib-link--to-middle ib-link--fare-type-1 icon-informacion_2">
+                            </span>
+                        </a>
+                    </span>
+                </div>
+                <div class="ib-box-select-radio__header-right" ng-if="offers.adultPrice.formatPrice">
+                    <span class="ib-text ib-text--block ib-text--xbig">{{::offers.adultPrice.formatPrice}}  {{'IBPURC_PAYMENTS_DISCOUNTS_AVIOS'|translate}}</span>
+                </div>
+                <div class="ib-remaining-seats__new-fare" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats && (fareDetailsCtrl.fareInfo.remainingSeats > 0) && (fareDetailsCtrl.fareInfo.remainingSeats < 9)">
+                    <p class="ib-remaining-seats__new-fare--text" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats !== 1">{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_8'|translate}}{{::fareDetailsCtrl.fareInfo.remainingSeats}}{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_7'|translate}}</p>
+                    <p class="ib-remaining-seats__new-fare--text" data-ng-if="fareDetailsCtrl.fareInfo.remainingSeats === 1">{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_5'|translate}}{{::fareDetailsCtrl.fareInfo.remainingSeats}}{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_6'|translate}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="ib-box-select-radio__header-mobile ib-box-select-radio__header-mobile--cabins"
+            data-box-select-radio="check-mobile">
+            <input type="radio" id="radioFare_{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}_{{::fareDetailsCtrl.selectedCabin}}_{{::fareDetailsCtrl.selectedSliceIndex}}_mobile"
+                ng-value="fareDetailsCtrl.fareInfo" class="ib-box-select-radio__radio-input" ng-model="fareDetailsCtrl.selectedFare"
+                data-box-select-radio="radio" ng-change="fareDetailsCtrl.isFareSelected()">
+            <label for="radioFare_{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}_{{::fareDetailsCtrl.selectedCabin}}_{{::fareDetailsCtrl.selectedSliceIndex}}_mobile" class="ib-box-select-radio__radio-label ib-box-select-radio__radio-label--full-header"></label>
+            <div class="ib-box-select-radio__header-wrapper ib-box-select-radio__header-wrapper--radio-left" ng-class="{'ib-box-select-radio__header-wrapper--close ib-box-select-radio__header-wrapper--radio-left--close' : !collapse.isCollapsed}"
+                ng-click="collapse.clickCollapse($event,false)">
+                <div class="ib-box-select-radio__header-left">
+                    <span class="ib-box-select-radio__title ib-text ib-text--block ib-text--bold ib-text--xmedium">
+                        <a id="bbki-fare-details-details-modal-{{::fareDetailsCtrl.selectedCabin}}-{{::fareDetailsCtrl.selectedSliceIndex}}-{{::fareDetailsCtrl.fareIndex}}-link" href="javascript:void(0)" data-ng-click="fareDetailsCtrl.openModalConditions($event)" class="ib-box-select-radio__title ib-text ib-text--block ib-text--bold ib-text--color-unfocused ib-text--big">
+                            {{::fareDetailsCtrl.fareInfo.commercialName}}
+                            <span title="{{'AVAILABILITY_FARE_DETAILS_TITLE'|translate}}" aria-label="{{'AVAILABILITY_FARE_DETAILS_TITLE_ACCESSIBLE'|translate}}"
+                                class="ib-link ib-link--xbig ib-link--unfocused ib-link--decoration-none ib-link--to-middle ib-link--fare-type-1 icon-informacion_2">
+                            </span>
+                        </a>
+                    </span>
+                    <span class="ib-text ib-text--block ib-text--small ib-text--color-unfocused" data-ng-if="offers.remainingSeats < 5">{{'AVAILABILITY_FARE_DETAILS_BODY_DESC_8'|translate}}
+                        {{::offers.remainingSeats}}
+                        {{'AVAILABILITY_FARE_DETAILS_BODY_DESC_7'|translate}}</span>
+                </div>
+                <div class="ib-box-select-radio__header-right ib-box-select-radio__price-long" ng-if="offers.adultPrice.formatPrice">
+                    <span class="ib-text ib-text--block">{{::offers.adultPrice.formatPrice}}  {{'IBPURC_PAYMENTS_DISCOUNTS_AVIOS'|translate}}</span>
+                </div>
+                <span class="ib-box-select-radio__icon icon-flecha_1_abajo" ng-class="collapse.isCollapsed ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+            </div>
+        </div>
+        <div class="ib-box-select-radio__container" uib-collapse="!collapse.isCollapsed">
+            <div class="ib-box-select-radio__container-wrapper">
+                <ul class="ib-list-icon-fare ib-list-icon-fare--inline" data-ng-class="{'ib-list-icon-fare--fare-type-1': fareDetailsCtrl.fareInfo.cabinType==='E',
+                    'ib-list-icon-fare--fare-type-2': (fareDetailsCtrl.fareInfo.cabinType==='T' || fareDetailsCtrl.fareInfo.cabinType==='N'),
+                    'ib-list-icon-fare--fare-type-3': fareDetailsCtrl.fareInfo.cabinType==='B'}">
+                    <li class="ib-list-icon-fare__item" data-ng-repeat="condition in fareDetailsCtrl.fareInfo.conditions" ng-if="condition.code !== 'CAMBIO'"
+                        id="liFare_{{::fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter}}_{{::fareDetailsCtrl.selectedCabin}}_{{::fareDetailsCtrl.selectedSliceIndex}}_{{::condition.code}}">
+                        <!-- data-ng-if="condition.previewStatus && condition.extendedInfo.conditionStatus" -->
+                        <span class="ib-list-icon-fare__icon" ng-class="fareDetailsCtrl.getFareIcon(condition.code)"></span>
+                        <div class="ib-list-icon-fare__text-container">
+                            <p class="ib-list-icon-fare__text">
+                                <span class="ib-list-icon-fare__text">{{::condition.code === 'REEMBOLSO' ? ('AVAILABILITY_REDEMPTION_FARE_CHANGES'|translate) : condition.name}}</span>
+                                <span class="ib-list-icon-fare__tag ib-list-icon-fare__tag--fav" ng-if="
+                                    fareDetailsCtrl.fareInfo.cabinType==='E'  && ( (( fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter ) === 'confort') || ( ( fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter ) === 'flexible') ) &&
+                                    ( condition.code === 'TARJEMBANTIC'  )"></span>
+                                <span class="ib-list-icon-fare__tag" ng-if="
+                                fareDetailsCtrl.fareInfo.cabinType==='E' && ( fareDetailsCtrl.fareInfo.commercialNameES | EliminateAccentFilter ) === 'confort' &&
+                                    (condition.code === 'ASIENTOXL' ||  condition.code === 'REEMBOLSO')
+                                ">
+                                    <span class="ib-list-icon-fare__tag-txt">{{ 'AVAILABILITY_ON_BUSINESS_NEW_CONDITION_TAG' | translate |uppercase}}</span>
+                                </span>
+                                <span class="ib-list-icon-fare__des" ng-if="condition.code !== 'REEMBOLSO'">{{::condition.text}}</span>
+                                <a href="javascript:void(0)" ng-if="condition.code === 'REEMBOLSO'" data-ng-click="fareDetailsCtrl.openModalConditions($event)" class="ib-list-icon-fare__des ib-heading-flight__close-text ib-heading-flight__close-text--block">{{'AVAILABILITY_REDEMPTION_FARE_SHOW_CONDITIONS'|translate}}</a>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

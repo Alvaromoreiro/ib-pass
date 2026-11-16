@@ -1,0 +1,89 @@
+<div class="ib-summary-breakdown__section ib-summary-breakdown__section--padding-small ib-summary-breakdown__section--separator u-pb-none"
+    *ngFor="let model of model">
+    <div *ngFor="let segment of model.segments; let segmentIndex = index;">
+        <header class="ib-summary-breakdown__section-header">
+            <span class="ib-summary-breakdown__icon icon-avion_ida" [ngClass]="{'ib-summary-breakdown__icon--rotate' : (segmentIndex === 1 && model.segments.length <= 2)}"></span>
+            <h4 class="ib-summary-breakdown__section-title">{{model.segments.length > 2 ? ('OUTBOUND_FLIGHT_TEXT'|translate) : segmentIndex === 0 ? ('OUTBOUND_FLIGHT_TEXT'|translate) : ('RETURN_FLIGHT_TEXT'|translate) }}</h4>
+        </header>
+        <ul class="ib-summary-breakdown__list ib-summary-breakdown__list--padding-none"
+            *ngIf="!model.scales">
+            <li class="ib-summary-breakdown__item ib-summary-breakdown__item--bottom-small">
+                <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--bold ib-summary-breakdown__item-text--subtitle">
+                    {{segment.origin.description}}
+                    ({{segment.origin.code}}) -
+                    {{segment.destination.description}}
+                    ({{segment.destination.code}})</span>
+                <span class="ib-summary-breakdown__item-text" *ngIf="segment.date">{{segment.date}}</span>
+            </li>
+        </ul>
+        <ul class="ib-summary-breakdown__list ib-summary-breakdown__list--padding-none"
+            *ngIf="model.scales">
+            <li class="ib-summary-breakdown__item ib-summary-breakdown__item--bottom-small"
+                *ngFor="let segment of segment.segments">
+                <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--bold ib-summary-breakdown__item-text--subtitle">
+                    {{segment.origin.description}}
+                    ({{segment.origin.code}}) -
+                    {{segment.destination.description}}
+                    ({{segment.destination.code}})</span>
+                <span class="ib-summary-breakdown__item-text"
+                    *ngIf="segment.date">
+                    {{segment.date}}
+                </span>
+            </li>
+        </ul>
+    </div>
+    <section *ngIf="model?.passengers">
+        <ng-container *ngFor="let passenger of model.passengers">
+            <header class="ib-summary-breakdown__item-header"
+                [ngClass]="{'ib-summary-breakdown__section--separator u-mb-small': passenger?.namesList?.length > 0}">
+                <span class="ib-summary-breakdown__icon"
+                    [ngClass]="{'icon-persona' : passenger.type !== 'CHILD' && passenger.type !== 'INFANT', 'icon-iberia_ninos' : passenger.type === 'CHILD', 'icon-bebe' : passenger.type==='INFANT'}"></span>
+                <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--bold ib-summary-breakdown__item-text--icon">
+                    {{passenger.quantity}}
+                    {{passenger.description}}
+                </span>
+                <ul class="ib-summary-breakdown__list ib-summary-breakdown__list--padding-none u-mt-xxsmall" *ngIf=" passenger?.namesList">
+                    <li class="ib-summary-breakdown__item u-mt-xxsmall"
+                        *ngFor="let passengerName of passenger?.namesList">
+                        <span class="ib-summary-breakdown__item-text u-mb-none">{{passengerName}}</span>
+                    </li>
+                </ul>
+            </header>
+
+            <ul class="ib-summary-breakdown__list ib-summary-breakdown__list--padding-none">
+                <li class="ib-summary-breakdown__item">
+                    <div class="ib-summary-breakdown__item-content">
+                        <span class="ib-summary-breakdown__item-text">{{'RATE_TEXT'|translate}}</span>
+                        <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--text-right">
+                            {{passenger.perPassengerPrice}}
+                        </span>
+                    </div>
+                </li>
+                <li class="ib-summary-breakdown__item">
+                    <div class="ib-summary-breakdown__item-content">
+                        <span class="ib-summary-breakdown__item-text">{{'SUMMARY_FEES'|translate}}</span>
+                        <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--text-right">
+                            {{passenger.taxes}}
+                        </span>
+                    </div>
+                </li>
+                <li class="ib-summary-breakdown__item"
+                    *ngIf="passenger.parsedAviosFare">
+                    <div class="ib-summary-breakdown__item-content">
+                        <span class="ib-summary-breakdown__item-text">
+                            {{isONB ? ('AVAILABILITY_ON_BUSINESS_POINTS_NEEDED'|translate) : ('IBPURC_PAYMENTS_DISCOUNTS_AVIOS' |translate)}}
+                        </span>
+                        <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--text-right">
+                            {{passenger.parsedAviosFare}}
+                            {{isONB ? ('AVAILABILITY_ON_BUSINESS_POINTS_NEEDED'|translate) : ('IBPURC_PAYMENTS_DISCOUNTS_AVIOS' |translate)}}
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </ng-container>
+    </section>
+</div>
+<div class="ib-summary-breakdown__subtotal ib-summary-breakdown__subtotal--separator">
+    <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--black ib-summary-breakdown__item-text--text-left">{{'HEADER_BASKET_FLIGHTS_AMOUNT'|translate|uppercase}}</span>
+    <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--bold ib-summary-breakdown__item-text--black ib-summary-breakdown__item-text--wrap ib-summary-breakdown__item-text--text-right">{{totalTrips.formatted}}</span>
+</div>

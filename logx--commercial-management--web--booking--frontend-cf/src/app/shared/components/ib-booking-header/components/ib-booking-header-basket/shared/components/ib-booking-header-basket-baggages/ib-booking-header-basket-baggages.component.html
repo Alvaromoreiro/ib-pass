@@ -1,0 +1,38 @@
+<section *ngIf="model.hasBaggage"
+    class="ib-summary-breakdown__section ib-summary-breakdown__section--padding-small ib-summary-breakdown__section--separator u-pb-none">
+    <header class="ib-summary-breakdown__section-header">
+        <span class="ib-summary-breakdown__icon ib-summary-breakdown__icon--absolute icon-e_equipaje"></span>
+        <h4 class="ib-summary-breakdown__section-title ib-summary-breakdown__section-title--with-icon">{{'BAGGAGE_TEXT'|translate}}</h4>
+    </header>
+    <ul class="ib-summary-breakdown__list ib-summary-breakdown__list--padding-none">
+        <li *ngFor="let trip of model.segments" class="ib-summary-breakdown__item ib-summary-breakdown__item--bottom-small">
+            <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--bold ib-summary-breakdown__item-text--subtitle">
+                {{trip.origin.description}}
+                ({{trip.origin.code}}) - {{trip.destination.description}}
+                ({{trip.destination.code}})
+            </span>
+            <ul class="ib-summary-breakdown__list ib-summary-breakdown__list--padding-none">
+                <li *ngFor="let baggage of trip.baggages" class="ib-summary-breakdown__item">
+                    <div class="ib-summary-breakdown__item-content">
+                        <span class="ib-summary-breakdown__item-text">{{baggage.quanty}}
+                            {{(baggage.quanty > 1 ? 'BAGGAGE_PLURAL_TEXT' : 'BAGGAGE_SINGULAR_TEXT') | translate}}
+                            {{baggage.description}}
+                        </span>
+                        <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--wrap ib-summary-breakdown__item-text--text-right">{{baggage.totalFormatted}}
+                            <button class="ib-link ib-link--primary ib-link--underline"
+                                *ngIf="!deleteFlag && !loadingVoucher"
+                                (click)="deleteBaggage(trip, baggage.type)"
+                                title="{{'DELETE_TEXT'|translate}}">
+                                <span class="ib-text-icon__icon icon-cerrar"></span>
+                            </button>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<div *ngIf="model.hasBaggage" class="ib-summary-breakdown__subtotal ib-summary-breakdown__subtotal--separator">
+    <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--black ib-summary-breakdown__item-text--text-left">{{'HEADER_BASKET_BAGGAGE_AMOUNT'|translate|uppercase}}</span>
+    <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--bold ib-summary-breakdown__item-text--black ib-summary-breakdown__item-text--wrap ib-summary-breakdown__item-text--text-right">{{model.total.totalFormatted}}</span>
+</div>

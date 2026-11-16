@@ -1,0 +1,45 @@
+<div class="ib-table-flight-detail ib-table-flight-detail--warning" ng-if="flightsDetailsCtrl.model.waitingTime">
+    <div class="ib-table-flight-detail__item"></div>
+    <span class="ib-table-flight-detail__item">
+    <span class="ib-text ib-text--block ib-text--xsmall ib-text--color-unfocused">{{'MMB_VC_AVAILABILITY_SCALE_IN' | translate}} {{ flightsDetailsCtrl.model.departurePlace }} : {{flightsDetailsCtrl.model.waitingTime}}</span>
+</div>
+<div class="ib-table-flight-detail">
+    <div class="ib-table-flight-detail__item ib-table-flight-detail__item--row-tablet">
+        <span class="ib-text ib-text--big ib-text--color-unfocused" ng-if="flightsDetailsCtrl.index == 0">{{ flightsDetailsCtrl.model.dateDeparture | date: 'EEE, d MMM' }}</span>
+    </div>
+    <div class="ib-table-flight-detail__item">
+        <figure class="ib-table-flight-detail__logo">
+            <img data-ng-src="{{flightsDetailsCtrl.model.iconCompany.companyURL}}" alt="Company logo" />
+        </figure>
+    </div>
+    <div class="ib-table-flight-detail__item">
+        <div class="ib-table-flight-detail__hours">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                <span class="ib-table-flight-detail__text-title ib-table-flight-detail__text-title--special">{{ flightsDetailsCtrl.model.departureTime }}</span>
+                <span class="ib-table-flight-detail__hours-icon icon-vuelos"></span>
+                <span class="ib-table-flight-detail__text-title ib-table-flight-detail__text-title--special">{{ flightsDetailsCtrl.model.arrivalTime }}</span>
+            </div>
+            <span class="ib-text ib-text--small ib-text--block">{{ flightsDetailsCtrl.model.departurePlace }} - {{ flightsDetailsCtrl.model.arrivalPlace }}</span>
+            <span class="ib-text ib-text--small ib-text--block ib-text--color-unfocused">
+                <div title="Más información" class="ib-biometric__module--content">
+                    <span class="ib-link-icon__icon icon-informacion_2"></span>
+                    <span class="ib-link-icon--no-decoration">{{ flightsDetailsCtrl.model.line }}</span>
+                </div> . {{ flightsDetailsCtrl.model.airplane }}
+            </span>
+            <span class="ib-text ib-text--small ib-text--block ib-text--color-unfocused">{{ 'MMB_VC_INFO_OPERATED_BY' | translate }} {{ flightsDetailsCtrl.model.opered }}</span>
+            <span class="ib-text ib-text--small ib-text--block ib-text--color-unfocused">{{ flightsDetailsCtrl.model.information }}</span>
+        </div>
+    </div>
+    <div class="ib-table-flight-detail__item">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+            <span class="ib-table-flight-detail__text-des">{{ flightsDetailsCtrl.model.flight.passedTime }}</span>
+        </div>
+        <ul class="ib-list-icon-fare ib-list-icon-fare--unfocused-small">
+            <li ng-repeat="info in flightsDetailsCtrl.model.infoExtra" class="ib-list-icon-fare__item ib-list-icon-fare__item--disabled">
+                <span class="{{ info.icon }}"></span>
+                <p class="ib-list-icon-fare__text">{{ info.name }}</p>
+            </li>
+        </ul>
+    </div>
+    <div class="ib-table-flight-detail__item"></div>
+</div>

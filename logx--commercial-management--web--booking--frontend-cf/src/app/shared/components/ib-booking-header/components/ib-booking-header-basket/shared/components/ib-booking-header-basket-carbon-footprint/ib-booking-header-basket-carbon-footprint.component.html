@@ -1,0 +1,25 @@
+<section *ngIf="model.hasCarbonFootprint" class="ib-summary-breakdown__section ib-summary-breakdown__section--padding-small ib-summary-breakdown__section--separator ib-summary-breakdown__section--separator--carbon-footprint u-pb-none">
+    <header class="ib-summary-breakdown__section-header">
+        <span class="ib-summary-breakdown__icon ib-summary-breakdown__icon--absolute ib-summary-breakdown__icon--carbon-footprint  icon-carbon_footprint"></span>
+        <h4 class="ib-summary-breakdown__section-title ib-summary-breakdown__section-title--with-icon ib-summary-breakdown__section-title--carbon-footprint"
+            data-ng-bind-html="'HEADER_BASKET_CO2_FOOTPRINT_AMOUNT'|translate" ></h4>
+    </header>
+    <ul class="ib-summary-breakdown__list ib-summary-breakdown__list--padding-none">
+        <li class="ib-summary-breakdown__item">
+            <div class="ib-summary-breakdown__item-content">
+                <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--sub"
+                    [innerHTML]="'HEADER_BASKET_CO2_FOOTPRINT_KILOS' |translate:{kilosCo2Equivalent: model.info.kilosCo2EquivalentFormatted}">
+                </span>
+                <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--bold ib-summary-breakdown__item-text--black ib-summary-breakdown__item-text--wrap ib-summary-breakdown__item-text--text-right">
+                        {{model.total.totalFormatted}}
+                        <button class="ib-link ib-link--primary ib-link--underline"
+                            (click)="removeCarbonFootprint()"
+                            *ngIf="!deleteFlag && !loadingVoucher"
+                            title="{{'DELETE_TEXT'|translate}}">
+                            <span class="ib-text-icon__icon icon-cerrar"></span>
+                        </button>
+                </span>
+            </div>
+        </li>
+    </ul>
+</section>

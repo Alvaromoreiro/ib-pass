@@ -1,0 +1,128 @@
+<section class="ib-layout__section u-mb-none">
+    <div class="ib-box-cols">
+        <div class="ib-table-breakdown ib-table-breakdown">
+            <div class="ib-box-cols__content">
+                <h3 class="ib-table-breakdown__title">{{'MMB_PRICE_BREAKDOWN_TEXT'|translate}}</h3>
+                <div ng-if="ibMmBVcSummaryBreakdownCtrl.breakdownModel.toPay">
+                    <table class="ib-table-breakdown__table ib-table-breakdown__table--cols-alignement">
+                        <caption class="u-hide-accessible">{{'MMB_PASSENGERS_TITTLE'|translate}}</caption>
+                        <thead class="ib-table-breakdown__head">
+                            <tr class="ib-table-breakdown__row">
+                                <th class="ib-table-breakdown__cell-title">
+                                    <span class="ib-table-breakdown__txt">{{'MMB_PASSENGERS_TITTLE'|translate}}</span>
+                                </th>
+                                <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                    <span class="ib-table-breakdown__txt">{{'MMB_NEW_FLIGHT_DIFFERENCE_TITLE'|translate}}</span>
+                                </th>
+                                <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                    <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT'|translate}}</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="ib-table-breakdown__body">
+                            <tr class="ib-table-breakdown__row" ng-repeat="(index, passengerType) in ibMmBVcSummaryBreakdownCtrl.breakdownModel.toPay.passengersTypes">
+                                <td class="ib-table-breakdown__cell">
+                                    <span class="ib-table-breakdown__txt {{passengerType.icon}}">{{passengerType.number}} {{passengerType.typeLabel}}</span>
+                                </td>
+                                <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive" data-attr="Tasas">
+                                    <span class="ib-table-breakdown__txt"><span ng-if="passengerType.number > 1">{{passengerType.number}} {{'MULTIPLE_X_TEXT'|translate}} </span>{{passengerType.differenceWithNewFlightFormatted}}</span>
+                                </td>
+                                <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs"><span class="ib-table-breakdown__txt">{{passengerType.totalForPassengerTypeFormatted}}</span></td>
+                            </tr>                            
+                        </tbody>
+                    </table>
+                    <div class="ib-table-breakdown__footer">
+                        <span class="ib-table-breakdown__total">{{'MMB_VC_SUMMARY_TOTAL_TO_TOPAY_TITLE'|translate}}: {{ibMmBVcSummaryBreakdownCtrl.breakdownModel.toPay.totalFormatted}}</span>
+                    </div>
+                </div>
+                <div ng-if="ibMmBVcSummaryBreakdownCtrl.breakdownModel.refund">
+                    <table class="ib-table-breakdown__table ib-table-breakdown__table--cols-alignement" 
+                        ng-if="ibMmBVcSummaryBreakdownCtrl.breakdownModel.refund.showRefundTableForPassenger">
+                        <caption class="u-hide-accessible">{{'MMB_PASSENGERS_TITTLE'|translate}}</caption>
+                        <thead class="ib-table-breakdown__head">
+                            <tr class="ib-table-breakdown__row">
+                                <th class="ib-table-breakdown__cell-title">
+                                    <span class="ib-table-breakdown__txt">{{'MMB_PASSENGERS_TITTLE'|translate}}</span>
+                                </th>
+                                <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                    <span class="ib-table-breakdown__txt">{{'MMB_NEW_FLIGHT_DIFFERENCE_TITLE'|translate}}</span>
+                                </th>
+                                <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                    <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT'|translate}}</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="ib-table-breakdown__body">
+                            <tr class="ib-table-breakdown__row" ng-repeat="(index, passengerType) in ibMmBVcSummaryBreakdownCtrl.breakdownModel.refund.passengersTypes">
+                                <td class="ib-table-breakdown__cell">
+                                    <span class="ib-table-breakdown__txt" ng-class="{'icon-persona': passengerType.type === 'ADULT', 'icon-iberia_ninos': passengerType.type === 'CHILD', 'icon-bebe': passengerType.type === 'INFANT'}">{{passengerType.number}} {{passengerType.typeLabel}}</span>
+                                </td>
+                                <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive" data-attr="Tasas">
+                                    <span class="ib-table-breakdown__txt"><span ng-if="passengerType.number > 1">{{passengerType.number}} {{'MULTIPLE_X_TEXT'|translate}} </span>{{passengerType.differenceWithNewFlightFormatted}}</span>
+                                </td>
+                                <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs"><span class="ib-table-breakdown__txt">{{passengerType.totalForPassengerTypeFormatted}}</span></td>
+                            </tr>                        
+                        </tbody>
+                    </table>
+                    <div ng-if="ibMmBVcSummaryBreakdownCtrl.breakdownModel.emds">
+                        <table class="ib-table-breakdown__table ib-table-breakdown__table--cols-alignement" ng-repeat="emd in ibMmBVcSummaryBreakdownCtrl.breakdownModel.emds.types" ng-if="emd.show">
+                            <caption class="u-hide-accessible">{{emd.title}}</caption>
+                            <thead class="ib-table-breakdown__head">
+                                <tr class="ib-table-breakdown__row">
+                                    <th class="ib-table-breakdown__cell-title">
+                                        <span class="ib-table-breakdown__txt">{{emd.title}}</span>
+                                    </th>
+                                    <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                        <span class="ib-table-breakdown__txt">{{'MMB_VC_PRICE'|translate}}</span>
+                                    </th>
+                                    <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                        <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT'|translate}}</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="ib-table-breakdown__body">
+                                <tr class="ib-table-breakdown__row" data-ng-if="!emd.globalItem" ng-repeat="slice in emd.flights">
+                                    <td class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse" >
+                                        <span class="ib-table-breakdown__txt">
+                                            <span class="ib-journey__box ib-journey__box--separator">
+                                                <span class="ib-journey__box--city">{{slice.departureCity}}</span>
+                                                <span class="ib-journey__box--iata ib-iata-text">{{slice.departureCode}}</span>
+                                            </span>
+                                            <span class="ib-journey__box">
+                                                <span class="ib-journey__box--city">{{slice.arrivalCity}}</span>
+                                                <span class="ib-journey__box--iata ib-iata-text">{{slice.arrivalCode}}</span>
+                                            </span>
+                                        </span>
+                                    </td>
+                                    <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                        <span class="ib-table-breakdown__txt" ng-repeat="ticket in slice.tickets">{{ticket.quantity}} {{'MULTIPLE_X_TEXT'|translate}} {{ticket.unitPriceFormatted}}</span>
+                                    </td>
+                                    <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                        <span class="ib-table-breakdown__txt" ng-repeat="ticket in slice.tickets">{{ticket.totalPriceFormatted}}</span>
+                                    </td>
+                                </tr>    
+                                <!-- Ancillaries for all booking --> 
+                                <tr class="ib-table-breakdown__row" data-ng-if="emd.globalItem">
+                                    <td class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse" >
+                                        <span class="ib-table-breakdown__txt">
+                                            {{'MMB_ANCILLARIES_FLEXIBILITY_PARCIAL_REFUND_TEXT_TITLE'|translate}}
+                                        </span>
+                                    </td>
+                                    <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                        <span class="ib-table-breakdown__txt">{{emd.quantity}} {{'MULTIPLE_X_TEXT'|translate}} {{emd.unitPriceFormatted}}</span>
+                                    </td>
+                                    <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                        <span class="ib-table-breakdown__txt">{{emd.totalPriceFormatted}}</span>
+                                    </td>
+                                </tr>                              
+                            </tbody>
+                        </table>
+                    </div>    
+                    <div class="ib-table-breakdown__footer">
+                        <span class="ib-table-breakdown__total">{{'MMB_VC_SUMMARY_TOTAL_TO_REFUND_TITLE'|translate}}: {{ibMmBVcSummaryBreakdownCtrl.breakdownModel.refund.totalFormatted}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

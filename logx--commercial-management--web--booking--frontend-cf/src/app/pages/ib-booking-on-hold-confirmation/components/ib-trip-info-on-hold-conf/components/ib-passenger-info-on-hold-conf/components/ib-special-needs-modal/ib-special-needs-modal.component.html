@@ -1,0 +1,77 @@
+<header class="header-container">
+    <h2 class="header-title">{{'PASSENGER_INFO_SPECIAL_NEEDS'|translate}}</h2>
+    <div class="header-button-container">
+      <button type="button" class="header-button icon-cerrar" (click)="close()">
+        <span class="u-hide-accessible">{{ 'GENERIC_MODAL_ACCESSIBLE_CLOSE' | translate }}</span>
+      </button>
+    </div>
+  </header>
+  <section class="body-container">
+    <div class="body-spacing" *ngFor="let slice of model" >
+        <ng-container *ngIf="slice.showSpecialNeed">
+            <p class="body-airports">
+              {{ slice.departureCity.name | translate }} - {{ slice.arrivalCity.name | translate }}
+            </p>
+            <div class="body-spacing"></div>
+            <div class="body-table">
+              <table class="body-table__container">
+                <caption class="u-hide-accessible">{{ 'PASSENGER_INFO_SPECIAL_NEEDS_TABLE_DESCRIPTION' | translate }}</caption>
+                <thead class="body-table__head">
+                  <tr class="body-table__row">
+                    <th class="body-table__column">{{'PASSENGER_INFO_SPECIAL_NEEDS_TYPE'|translate}}</th>
+                    <th class="body-table__column">{{'PASSENGER_INFO_SPECIAL_NEEDS_STATUS'|translate}}</th>
+                  </tr>
+                </thead>
+                <tbody class="body-table__body" *ngFor="let specialNeed of slice.specialNeeds">
+                  <tr class="body-table__row">
+                    <td class="body-table__column">
+                      <span
+                        class="body-table__icon"
+                        [ngClass]="{
+                          'icon-vision': specialNeed.serviceCode === 'BLND',
+                          'icon-mascotas_domesticas': specialNeed.serviceCode === 'SVAN' || specialNeed.text === 'GUIDE DOG',
+                          'icon-discapacitados': specialNeed.serviceCode === 'WCHR' || specialNeed.serviceCode === 'WCHS' || specialNeed.serviceCode === 'WCHC',
+                          'icon-audicion': specialNeed.serviceCode === 'DEAF' || specialNeed.serviceCode === 'WCHC',
+                          'icon-informacion': specialNeed.serviceCode === 'DPNA'
+                        }"
+                      ></span>
+                      <ng-container [ngSwitch]="specialNeed.serviceCode">
+                        <span *ngSwitchCase="'BLND'" class="body-table__text">
+                          {{ 'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_VISION_TEXT' | translate }}
+                        </span>
+                        <span *ngSwitchCase="'DPNA'" class="body-table__text">
+                          {{ specialNeed.description ? specialNeed.description : ('IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_INTELLECTUAL_DISABILITY_TEXT' | translate) }}
+                        </span>
+                        <span *ngSwitchCase="'DEAF'" class="body-table__text">
+                            {{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_HEARING_PROBLEM_TEXT'|translate}}
+                        </span>
+                        <span *ngSwitchCase="'WCHR'" class="body-table__text">
+                          {{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_CHAIR_TEXT'|translate}}
+                        </span>
+                        <span *ngSwitchCase="'WCHS'" class="body-table__text">
+                          {{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_CHAIR_TEXT'|translate}}
+                        </span>
+                        <span *ngSwitchCase="'WCHC'" class="body-table__text">
+                          {{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_CHAIR_TEXT'|translate}}
+                        </span>
+                        <span *ngSwitchCase="'SVAN'" class="body-table__text">
+                          {{ 'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_VISION_DOG_TEXT' | translate }}
+                        </span>
+                      </ng-container>
+                    </td>
+                    <td class="body-table__column">{{ specialNeed.status.description }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="body-spacing"></div>
+        </ng-container>
+    </div>
+  </section>
+  <footer class="footer-container">
+    <div class="footer-button-container">
+      <button class="footer-button" type="button" (click)="close()">
+        {{ 'MODAL_PAYMENT_TAXES_ACCEPT_BUTTON' | translate }}
+      </button>
+    </div>
+  </footer>

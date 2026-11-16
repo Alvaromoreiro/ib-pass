@@ -1,0 +1,57 @@
+<section class="ib-summary-breakdown__section ib-summary-breakdown__section--padding-small ib-summary-breakdown__section--separator u-pb-none"
+    *ngIf="model.hasSeats">
+    <header class="ib-summary-breakdown__section-header">
+        <span class="ib-summary-breakdown__icon ib-summary-breakdown__icon--absolute icon-asiento"></span>
+        <h4 class="ib-summary-breakdown__section-title ib-summary-breakdown__section-title--with-icon">{{'SEATS_TEXT'|translate}}</h4>
+    </header>
+    <div *ngFor="let segment of model.segments">
+        <ul class="ib-summary-breakdown__list ib-summary-breakdown__list--padding-none">
+            <li class="ib-summary-breakdown__item ib-summary-breakdown__item--bottom-small">
+                <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--bold ib-summary-breakdown__item-text--subtitle">
+                    {{segment.origin.description}}
+                    ({{segment.origin.code}}) -
+                    {{segment.destination.description}}
+                    ({{segment.destination.code}})
+                </span>
+                <ul class="ib-summary-breakdown__list ib-summary-breakdown__list--padding-none">
+                    <li class="ib-summary-breakdown__item"
+                        *ngFor="let seat of segment.seats">
+                        <div class="ib-summary-breakdown__item-content"
+                            *ngIf="seat.freePassenger.length > 0">
+                            <span class="ib-summary-breakdown__item-text">
+                                {{seat.freePassenger.length}}
+                                {{(seat.freePassenger.length === 0 || seat.freePassenger.length > 1) ? ('SEATS_MIN_TEXT'|translate) : ('SEAT_MIN_TEXT'|translate) }}
+                                {{seat.description}}
+                            </span>
+                            <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--wrap ib-summary-breakdown__item-text--text-right">
+                                {{seat.totalAmountFreePassenger}}
+                            </span>
+                        </div>
+                        <div class="ib-summary-breakdown__item-content"
+                            *ngIf="seat.paymentPassenger.length > 0">
+                            <span class="ib-summary-breakdown__item-text">
+                                {{seat.paymentPassenger.length}}
+                                {{(seat.paymentPassenger.length === 0 || seat.paymentPassenger.length > 1 ) ? ('SEATS_MIN_TEXT'|translate) : ('SEAT_MIN_TEXT'|translate) }}
+                                {{seat.description}}
+                            </span>
+                            <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--wrap ib-summary-breakdown__item-text--text-right">
+                                {{seat.totalFormatted}}
+                                <button class="ib-link ib-link--primary ib-link--underline"
+                                    *ngIf="(!segment.isEarly && seat.amount > 0 && !deleteFlag && !loadingVoucher)"
+                                    (click)="deleteSeat(segment.segmentId, seat)"
+                                    title="{{'DELETE_TEXT'|translate}}">
+                                    <span class="ib-text-icon__icon icon-cerrar"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</section>
+<div class="ib-summary-breakdown__subtotal ib-summary-breakdown__subtotal--separator"
+    *ngIf="model.hasSeats">
+    <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--black ib-summary-breakdown__item-text--text-left">{{'HEADER_BASKET_SEATS_AMOUNT'|translate|uppercase}}</span>
+    <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--bold ib-summary-breakdown__item-text--black ib-summary-breakdown__item-text--wrap ib-summary-breakdown__item-text--text-right">{{model.total.totalFormatted}}</span>
+</div>

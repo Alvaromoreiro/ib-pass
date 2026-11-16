@@ -1,0 +1,36 @@
+<div class="ib-date-carousel ib-date-carousel--bordered">
+    <div class="ib-date-carousel__list u-pl-none u-pr-none">
+        <ib-slick-carousel class="ib-date-carousel__slick"
+            carousel-index="calendarRibbonCtrl.index"
+            carousel-slides="calendarRibbonCtrl.calendarData.currentSlides"
+            carousel-options="calendarRibbonCtrl.carouselOptions">
+            <div 
+                ng-repeat="slide in calendarRibbonCtrl.calendarData.currentSlides"
+                class="ib-date-carousel__item"
+                ng-class="{'ib-date-carousel__item--active' : calendarRibbonCtrl.calendarData.selectedSlide === slide.slidePosition, 'ib-date-carousel__item--empty':(slide.state === 'NOT_AVAILABLE' || slide.state === 'LOADING' || slide.state === 'DISABLED')}">
+                <input
+                    class="ib-date-carousel__input"
+                    type="radio"
+                    id="{{::calendarRibbonCtrl.index}}_{{::slide.slidePosition}}"
+                    name="availability_day_{{::calendarRibbonCtrl.index}}_{{::slide.slidePosition}}"
+                    ng-click="calendarRibbonCtrl.searchSlideAvailability(slide)"
+                    ng-disabled="(slide.state === 'DISABLED')"
+                />
+                <label class="ib-date-carousel__date ib-date-carousel__date--auto" ng-class="{'ib-date-carousel__date--one-line': slide.price === null && slide.state !== 'DISABLED' && slide.state !== 'NOT_AVAILABLE' && slide.state !== 'LOADING'}" for="{{::calendarRibbonCtrl.index}}_{{::slide.slidePosition}}">
+                    <span class="ib-date-carousel__date-week" data-shortcut="{{slide.date.weekDay | translate}}"><span>{{slide.date.weekDay | translate}}</span></span>
+                    <span class="ib-date-carousel__date-day"> {{slide.date.day}}</span>
+                    <!-- <span class="ib-date-carousel__date-month">{{slide.date.month| translate | ShortenerFormatFilter:3}}</span> -->
+                    <!-- <span class="ib-date-carousel__price" ng-if="slide.state === 'NOT_AVAILABLE'">{{ 'MMB_AVAILABILITY_SLICK_NOT_FLIGHTS' | translate}}</span>
+                    <span class="ib-date-carousel__price" ng-if="slide.state === 'DISABLED'">{{ 'MMB_AVAILABILITY_SLICK_NOT_AVAILABLE' | translate}}</span>
+                    <span class="ib-date-carousel__price" ng-if="slide.state === 'AVAILABLE'">{{::slide.formattedPrice > 0 ? slide.formattedPrice : ''}} {{$root.isRedemptionFlow && slide.formattedPrice > 0 ? ('IBPURC_PAYMENTS_DISCOUNTS_AVIOS'|translate) : ''}}</span>
+                    <div class="ib-date-carousel__price-loading" ng-if="slide.state === 'LOADING'">
+                        <div class="ib-date-carousel__price-loading--content">
+                            <div class="ib-date-carousel__price-loading--spinner"><div></div><div></div></div>
+                            <span class="ib-date-carousel__price-loading--text">{{ 'MMB_AVAILABILITY_SLICK_LOADING' | translate}}</span>
+                        </div>
+                    </div> -->
+                </label>
+            </div>
+        </ib-slick-carousel>
+    </div>
+</div>

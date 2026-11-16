@@ -1,0 +1,18 @@
+<section class="ib-summary-breakdown__section ib-summary-breakdown__section--padding-small ib-summary-breakdown__section--separator u-pb-none">
+    <header class="ib-summary-breakdown__section-header">
+        <h4 class="ib-summary-breakdown__section-title ib-summary-breakdown__section-title--without-icon">{{'PAYMENTS_SUMMARY_DISCOUNT'|translate}}</h4>
+    </header>
+    <ul class="ib-summary-breakdown__list ib-summary-breakdown__list--padding-none"  *ngFor="let discount of model.discounts | entriesArray">
+        <li class="ib-summary-breakdown__item ib-summary-breakdown__item--bottom-small">
+            <div class="ib-summary-breakdown__item-content">
+                <span class="ib-summary-breakdown__item-text" *ngIf="discount?.description">{{discount.description}}</span>
+                <span class="ib-summary-breakdown__item-text" *ngIf="!discount?.description">{{discount.type}}</span>
+                <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--text-right">-{{discount.discountFormatted}}</span>
+            </div>
+        </li>
+    </ul>
+</section>
+<div class="ib-summary-breakdown__subtotal ib-summary-breakdown__subtotal--separator">
+    <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--black ib-summary-breakdown__item-text--text-left">{{'DISCCOUNTS_AMMOUNT'|translate|uppercase}}</span>
+    <span class="ib-summary-breakdown__item-text ib-summary-breakdown__item-text--lh-normal ib-summary-breakdown__item-text--bold ib-summary-breakdown__item-text--black ib-summary-breakdown__item-text--wrap ib-summary-breakdown__item-text--text-right">{{model.totalFormated}}</span>
+</div>

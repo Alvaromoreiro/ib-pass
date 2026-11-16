@@ -1,0 +1,25 @@
+<button class="button-date"
+    *ngIf="!showLimit"
+    (click)="onChangeDay()"
+    [ngClass]="{'selected': selected}"
+    [disabled]="!availableFlights"
+    title="{{currentDay.date.weekDay|translate}}, {{currentDay.date.day}} {{currentDay.date.month|translate}}">
+    <span class="date">
+        <span class="week-day">{{currentDay.date.weekDay|translate|slice:0:3}}, </span>
+        <span class="month-day">{{currentDay.date.day}}</span>
+        <span class="month" *ngIf="selected"> {{currentDay.date.month|translate}}</span>
+    </span>
+    <span class="price"
+        [ngClass]="{'noFlights':!availableFlights, 'loading': isLoading}">{{priceText}}</span>
+</button>
+<div class="open-seeker"
+    *ngIf="showLimit">
+    <span class="open-seeker-text">
+        {{ this.currentDay.state === 'UPPER_END_RIBBON_WARN' ? ( 'RIBBON_UPPERLIMIT_MSG' | translate: { date : this.currentDay.serviceDate | date: 'dd/MM' } ) : ('RIBBON_LOWERLIMIT_MSG' | translate: { date: this.currentDay.serviceDate | date: 'dd/MM' } ) }}
+    </span>
+    <button class="open-seeker-button"
+        title="{{'RIBBON_SEARCH_AGAIN' | translate}}"
+        (click)="onOpenSeeker((this.currentDay.state === 'UPPER_END_RIBBON_WARN') ? 'RETURN' : 'GO')">
+            {{'RIBBON_SEARCH_AGAIN' | translate}}
+    </button>
+</div>

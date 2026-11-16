@@ -1,0 +1,84 @@
+<div class="container">
+    <!-- FLIGHTS DETAILS -->
+    <div class="row">
+        <div class="col-xs-12">
+            <section class="ib-layout__section u-mt-medium">
+                <h1
+                    class="ib-text ib-text--especial ib-text__spacing ib-text--spacing-medium ib-text--lh-xnormal u-font-large u-mb-xmedium">
+                    {{'MMB_MENU_SUMMARY_OPTION_TEXT' | translate}}
+                </h1>
+                <div class="u-display-block" ng-if="ibMmbVcSummaryMainCtrl.showLabelFlightsIncludeInOutbound">
+                    <h2
+                        class="ib-text ib-text--xlarge-responsive ib-text--especial ib-text__spacing ib-text--spacing-medium ib-text--lh-xnormal">
+                        {{'MMB_DISRUPTION_LABEL_REMEMBER' | translate }}
+                    </h2>
+                    <p class="ib-text u-display-block u-mb-xmedium">
+                        {{'MMB_DISRUPTION_LABEL_OTHER_SLICE_OK' | translate}}
+                    </p>
+                </div>
+                <ib-ui-flight-card flight-info="ibMmbVcSummaryMainCtrl.summaryModel.fligthsModel.outboundFlight"
+                    separator="ibMmbVcSummaryMainCtrl.modeFlight === 'twice'"></ib-ui-flight-card>
+                <div class="u-mb-medium"
+                    data-ng-if="ibMmbVcSummaryMainCtrl.showRememberLabel && ibMmbVcSummaryMainCtrl.summaryModel.fligthsModel.returnFlight">
+                    <h3 class="ib-text ib-text--xlarge-responsive ib-text--especial ib-text__spacing ib-text--spacing-medium ib-text--lh-xnormal"
+                        ng-if="ibMmbVcSummaryMainCtrl.showLabelFlightsIncludeInOutbound">
+                        {{'MMB_DISRUPTION_LABEL_REMEMBER' | translate }}
+                    </h3>
+                    <h2 class="ib-text ib-text--xlarge-responsive ib-text--especial ib-text__spacing ib-text--spacing-medium ib-text--lh-xnormal"
+                        ng-if="!ibMmbVcSummaryMainCtrl.showLabelFlightsIncludeInOutbound">
+                        {{'MMB_DISRUPTION_LABEL_REMEMBER' | translate }}
+                    </h2>
+                    <p class="ib-text u-display-block">
+                        {{'MMB_DISRUPTION_LABEL_OTHER_SLICE_OK' | translate}}
+                    </p>
+                </div>
+                <ib-ui-flight-card ng-if="ibMmbVcSummaryMainCtrl.summaryModel.fligthsModel.returnFlight"
+                    flight-info="ibMmbVcSummaryMainCtrl.summaryModel.fligthsModel.returnFlight"></ib-ui-flight-card>
+            </section>
+        </div>
+    </div>
+
+    <!-- BREAKDOWN INFO -->
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- FARE COMPARISON BANNER -->
+            <div class="row" ng-if="false">
+                <div class="col-xs-12 u-mt-medium">
+                    <ib-mmb-vc-fare-comparison-banner
+                        [fare-comparison-model]="ibMmbVcSummaryMainCtrl.summaryModel.fareComparisonModel">
+                    </ib-mmb-vc-fare-comparison-banner>
+                </div>
+            </div>
+            <div class="ib-box ib-box--big-alert ib-box--separator u-mb-none"
+                ng-if="ibMmbVcSummaryMainCtrl.summaryModel.breakdownModel.refund && ibMmbVcSummaryMainCtrl.summaryModel.breakdownModel.refund.total">
+                <ib-ui-warnings title-txt="ibMmbVcSummaryMainCtrl.summaryModel.totalPriceModel.warning.titleTxt"
+                    text="ibMmbVcSummaryMainCtrl.summaryModel.totalPriceModel.warning.text"
+                    modifier="ibMmbVcSummaryMainCtrl.summaryModel.totalPriceModel.warning.modifier"
+                    title-modifier="ibMmbVcSummaryMainCtrl.summaryModel.totalPriceModel.warning.titleModifier"
+                    icon="ibMmbVcSummaryMainCtrl.summaryModel.totalPriceModel.warning.icon"></ib-ui-warnings>
+            </div>
+            <ib-mmb-vc-summary-breakdown
+                breakdown-model="ibMmbVcSummaryMainCtrl.summaryModel.breakdownModel"></ib-mmb-vc-summary-breakdown>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="u-mb-big">
+                <form ib-form-scroll-to-error name="ibMmbVcSummaryMainCtrl.paymentsForm" id="paymentsForm" novalidate>
+                    <div class="u-mt-medium animate-show">
+                        <div class="ib-box ib-box--big-alert ib-box--separator u-mb-none">
+                            <ib-ui-checkbox-accept container-form="ibMmbVcSummaryMainCtrl.paymentsForm"
+                                conditions-text="ibMmbVcSummaryMainCtrl.summaryModel.totalPriceModel.relatedContent.termsAndConditions"></ib-ui-checkbox-accept>
+                        </div>
+                        <ib-ui-total-price label="ibMmbVcSummaryMainCtrl.summaryModel.totalPriceModel.label"
+                            price="ibMmbVcSummaryMainCtrl.summaryModel.totalPriceModel.priceFormatted"
+                            conditions="ibMmbVcSummaryMainCtrl.summaryModel.totalPriceModel.relatedContent.totalPriceText"
+                            label-button="ibMmbVcSummaryMainCtrl.summaryModel.totalPriceModel.labelButton"
+                            on-accept="ibMmbVcSummaryMainCtrl.goToPay()"></ib-ui-total-price>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

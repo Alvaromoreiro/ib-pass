@@ -1,0 +1,69 @@
+<div
+  *ngIf="!(currentOriginDestinationIndex === 1 && !selectedSliceInfoFamily)"
+  role="region"
+  aria-labelledby="availability-trip-title"
+>
+  <div
+    class="ib-content-heading ib-content-heading--type-1 u-mt-small u-mb-small"
+    [ngClass]="{
+      'ib-content-heading--pets': isPetsFlow,
+    }"
+  >
+    <h1
+      *ngIf="!showAdaptativeMobileFlow"
+      id="availability-trip-title"
+      [attr.aria-describedby]="isPetsFlow ? 'pets-flow-subtitle' : null"
+      class="ib-heading-icon"
+      [ngClass]="{
+        'u-mt-normal':
+          currentOriginDestinationIndex !== 0 ||
+          selectedSlicesLength > 0 ||
+          !showBanner,
+      }"
+    >
+      <span
+        class="ib-heading-icon__icon ib-heading-icon__icon--simple icon-vuelos"
+        aria-hidden="true"
+        [ngClass]="{
+          'ib-heading-icon__icon--rotate-left':
+            currentOriginDestinationIndex === 0,
+          'ib-heading-icon__icon--rotate-right':
+            currentOriginDestinationIndex === 1,
+        }"
+      >
+      </span>
+
+      <span class="ib-heading-icon__text ib-heading-icon--dark">
+        <span class="ib-heading-icon__title">
+          {{ "AVAILABILITY_TRIP_TITLE" | translate }}
+          {{ originDestinationTitle | translate }}
+        </span>
+        <span
+          *ngIf="isPetsFlow"
+          class="ib-subtitle-pets-flow"
+          id="pets-flow-subtitle"
+        >
+          {{ "AVAILABILITY_PETS_FLOW_SUBTITLE" | translate }}
+        </span>
+      </span>
+    </h1>
+    <h2
+      *ngIf="relatedContent?.['SPECIAL_DISCOUNTS']"
+      class="ib-heading ib-heading--subtitle"
+    >
+      {{ relatedContent["SPECIAL_DISCOUNTS"] }}
+    </h2>
+  </div>
+
+  <div>
+    <ib-booking-trip-info
+      id="bbki-availability-trip-info"
+      [tripInfoModel]="tripModel"
+      [currentOriginDestinationIndex]="currentOriginDestinationIndex"
+      [animationRun]="animationRun"
+      [currencies]="currencies"
+      [selectedSlicesLength]="selectedSlicesLength"
+      [showAdaptativeMobileFlow]="showAdaptativeMobileFlow"
+    ></ib-booking-trip-info>
+  </div>
+</div>
