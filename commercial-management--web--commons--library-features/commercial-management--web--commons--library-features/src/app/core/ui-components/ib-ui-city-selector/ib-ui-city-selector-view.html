@@ -1,0 +1,200 @@
+<script type="text/ng-template" id="ib-pop-up-template.html">
+  <div class="dropdown-menu ib-autocomplete ib-autocomplete--cities" ng-style="{top: (position.top || position().top)+'px', left: (position.left || position().left)+'px'}" ng-show="isOpen() && !moveInProgress" aria-hidden="{{!isOpen()}}">
+      <ul class="ib-autocomplete__list" role="listbox" >
+          <li class="ib-autocomplete__list-items uib-typeahead-match" ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }"
+              ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
+              <a href="javascript:void(0)" class="ib-autocomplete__item" title="{{match.model.description + ' (' + match.model.country + ')'}}" ng-click="$event.preventDefault()">
+                  <span class="ib-autocomplete__item-name" ng-bind-html="match.model.description  | uibTypeaheadHighlight:query"></span>
+                  <span class="ib-autocomplete__item-detail" ng-bind-html="match.model.country | uibTypeaheadHighlight:query"></span>
+              </a>
+          </li>
+      </ul>
+  </div>
+</script>
+<div uib-dropdown auto-close="outsideClick" is-open="cityContr.isOpen">
+  <div
+    class="ib-input ib-input--button ib-input--cities"
+    data-ng-class="{'ib-input--error': cityContr.containerForm.$submitted && cityContr.containerForm['selector_city_' + cityContr.index].$invalid, 'ib-input--disabled' : cityContr.disabledInput}"
+  >
+    <label
+      class="ib-input__label"
+      for="SELECTOR_CITY_{{::cityContr.index}}"
+      ng-class="{'ib-input__label--focus' : cityContr.focused || (cityContr.containerForm['selector_city_' + cityContr.index].$viewValue !=null && cityContr.containerForm['selector_city_' + cityContr.index].$viewValue !=='')}"
+      >{{cityContr.text|translate}}</label
+    >
+    <input
+      data-ng-disabled="cityContr.disabledInput"
+      ng-if="!cityContr.showCodeOnInput"
+      class="ib-input__input"
+      ng-blur="cityContr.validatorInput();cityContr.disableFocus()"
+      onClick="this.select()"
+      required
+      type="text"
+      id="SELECTOR_CITY_{{::cityContr.index}}"
+      name="selector_city_{{::cityContr.index}}"
+      data-input
+      ng-focus="cityContr.enableFocus()"
+      ng-model="cityContr.citySelected"
+      typeahead-min-length="3"
+      uib-typeahead="city as city.description|translate for city in cityContr.modelCities.listCities | CitySearchComponentFilter:cityContr.filterValue = $viewValue:cityContr.checkSpecialCharacters"
+      typeahead-popup-template-url="ib-pop-up-template.html"
+      typeahead-select-on-blur="true"
+      typeahead-select-on-exact="true"
+      typeahead-on-select="cityContr.onSelect()"
+      autocomplete="off"
+      ng-keyup="cityContr.onChange()"
+    />
+    <input
+      ng-if="cityContr.showCodeOnInput"
+      class="ib-input__input"
+      ng-blur="cityContr.validatorInput();cityContr.disableFocus()"
+      onClick="this.select()"
+      required
+      type="text"
+      id="SELECTOR_CITY_{{::cityContr.index}}"
+      name="selector_city_{{::cityContr.index}}"
+      data-input
+      ng-focus="cityContr.enableFocus()"
+      ng-model="cityContr.citySelected"
+      typeahead-min-length="3"
+      uib-typeahead="city as city.description + ' ('+ city.code +')' for city in cityContr.modelCities.listCities | CitySearchComponentFilter:cityContr.filterValue = $viewValue:cityContr.checkSpecialCharacters"
+      typeahead-popup-template-url="ib-pop-up-template.html"
+      typeahead-select-on-blur="true"
+      typeahead-select-on-exact="true"
+      typeahead-on-select="cityContr.onSelect()"
+      autocomplete="off"
+      ng-keyup="cityContr.onChange()"
+    />
+    <button
+      ng-if="!cityContr.simpleSelector && !cityContr.isCollapse"
+      type="button"
+      id="BUTTON_SELECTOR_CITY_{{::cityContr.index}}"
+      class="ib-input__icon icon-senalizacion_mapas"
+      uib-dropdown-toggle
+      ng-click="cityContr.openCollapse()"
+      aria-describedby="{{'HEADER_CITY_SELECTOR_DEPLOY_LIST_TEXT'|translate}}"
+      focusin
+    ></button>
+  </div>
+  <div
+    ng-messages="cityContr.containerForm['selector_city_' + cityContr.index].$submitted && cityContr.containerForm['selector_city_' + cityContr.index].$error"
+    ng-if="!cityContr.hideWarning"
+  >
+    <span class="ib-alert ib-alert--error" ng-message="required"
+      >{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</span
+    >
+    <span class="ib-alert ib-alert--error" ng-message="invalid"
+      >{{'GENERAL_INPUT_PATTERN_ERROR_CITY_SELECTOR'|translate}}</span
+    >
+  </div>
+  <section
+    ng-if="!cityContr.simpleSelector && !cityContr.isCollapse"
+    uib-dropdown-menu
+    data-ng-class="{'ib-dropdown--left ib-dropdown--left-lg': cityContr.isOrigin,'ib-dropdown--center ib-dropdown--center-lg': !cityContr.isOrigin && !cityContr.isOverflow,'ib-dropdown--right ib-dropdown--right-lg': !cityContr.isOrigin && cityContr.isOverflow}"
+    class="ib-dropdown ib-dropdown--type-1"
+  >
+    <div class="ib-choose-city">
+      <div class="ib-choose-city__body">
+        <div class="ib-choose-city__menu">
+          <nav>
+            <ul class="ib-choose-city__menu-list">
+              <li
+                class="ib-choose-city__menu-item"
+                data-ng-repeat="group in cityContr.modelCities.listGroups"
+              >
+                <a
+                  focusin
+                  id="change-group-{{group}}-{{::cityContr.index}}-link"
+                  href="javascript:void(0)"
+                  class="ib-choose-city__menu-select"
+                  title="{{'HEADER_CITY_SELECTOR_DESTINY_TITLE'|translate}} {{group}}"
+                  ng-click="cityContr.changeGroup($event,group)"
+                  ng-class="{'ib-choose-city__menu-select--selected':cityContr.group === '{{group}}'}"
+                  >{{group}}</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="ib-choose-city__container">
+          <nav>
+            <div class="ib-choose-city__letters">
+              <ul class="ib-choose-city__letters-list">
+                <li class="ib-choose-city__letters-item">
+                  <a
+                    id="change-letter-all-{{::cityContr.index}}-link"
+                    href="javascript:void(0)"
+                    class="ib-choose-city__letters-select"
+                    title="{{'HEADER_CITY_SELECTOR_VIEW_ALL_TITLE'|translate}}"
+                    ng-click="cityContr.changeLetter('all');$event.preventDefault();"
+                    ng-class="{'ib-choose-city__letters-select--active' : cityContr.letterSelected === 'all'}"
+                    focusin
+                    >{{'HEADER_CITY_SELECTOR_CHOOSE_OPTION_ALL'|translate}}</a
+                  >
+                </li>
+                <li
+                  class="ib-choose-city__letters-item"
+                  ng-repeat="letter in cityContr.alphabet"
+                >
+                  <a
+                    id="change-letter-{{::cityContr.index}}-link"
+                    href="javascript:void(0)"
+                    class="ib-choose-city__letters-select"
+                    title="{{'HEADER_CITY_SELECTOR_VIEW_COUNTRIES_BEGIN_WITH_TITLE'|translate}} {{letter.name}}"
+                    ng-click="cityContr.changeLetter(letter.name);$event.preventDefault();"
+                    ng-bind="letter.name"
+                    ng-class="{'ib-choose-city__letters-select--active' : cityContr.letterSelected === letter.name}"
+                    focusin
+                  ></a>
+                </li>
+            </ul>
+            <ib-ui-ioslist
+                id="{{cityContr.index}}-ios-list"
+                class="ib-ios-list-container"
+                ng-if="cityContr.loadingFilter"
+                [cities]="cityContr.modelCities.listCities"
+                [group]="cityContr.group"
+            ></ib-ui-ioslist>
+        </div>
+      </div>
+    </div>
+    <div class="ib-choose-city-mobile">
+      <ul class="ib-choose-city-mobile__groups">
+        <li class="ib-choose-city-mobile__group-item">
+          <a
+            id="change-country-all-{{::cityContr.index}}-link"
+            href="javascript:void(0)"
+            class="ib-choose-city-mobile__group-select"
+            title="{{'HEADER_CITY_SELECTOR_VIEW_ALL_TITLE'|translate}}"
+            ng-click="cityContr.changeCountry('', $event)"
+            ng-class="{'ib-choose-city__menu-select--selected':cityContr.group}"
+            focusin
+            >{{'HEADER_CITY_SELECTOR_CHOOSE_OPTION_ALL'|translate}}</a
+          >
+        </li>
+        <li
+          class="ib-choose-city-mobile__group-item"
+          ng-repeat="group in cityContr.modelCities.listGroups"
+        >
+          <a
+            id="change-country-{{::cityContr.index}}-link"
+            href="javascript:void(0)"
+            class="ib-choose-city-mobile__group-select"
+            title="{{'HEADER_CITY_SELECTOR_DESTINY_TITLE'|translate}} {{group}}"
+            ng-click="cityContr.changeCountry(group, $event)"
+            ng-class="{'ib-choose-city__menu-select--selected':cityContr.group === '{{group}}'}"
+            focusin
+            >{{group}}</a
+          >
+        </li>
+      </ul>
+      <ib-ui-ios-list-component
+        id="{{cityContr.index}}-ios-list"
+        class="ib-ios-list-container"
+        ng-if="cityContr.loadingFilter"
+        cities="cityContr.modelCities.listCities"
+        group="cityContr.group"
+      ></ib-ui-ios-list-component>
+    </div>
+  </section>
+</div>

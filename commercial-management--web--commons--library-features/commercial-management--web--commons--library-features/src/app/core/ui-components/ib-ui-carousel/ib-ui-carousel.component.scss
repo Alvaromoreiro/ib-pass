@@ -1,0 +1,168 @@
+@import "../../../../../node_modules/ib-style-modules/styles/scss/settings/settings__config";
+@import "../../../../../node_modules/ib-style-modules/styles/scss/settings/settings__responsive";
+@import "../../../../../node_modules/ib-style-modules/styles/scss/tools/tools__pixel-to-rem";
+@import "../../../../../node_modules/ib-style-modules/styles/scss/tools/tools__responsive";
+
+:host ::ng-deep {
+  // For proper scoping, do not include the .css file suffix here
+  @import "../../../../../node_modules/bootstrap/scss/functions";
+  @import "../../../../../node_modules/bootstrap/scss/variables";
+  @import "../../../../../node_modules/bootstrap/scss/mixins";
+  @import "../../../../../node_modules/bootstrap/scss/helpers";
+  @import "../../../../../node_modules/bootstrap/scss/carousel";
+  @import "../../../../../node_modules/ib-style-modules/styles/scss/tools/tools__colors";
+  @import "../../../../../node_modules/ib-style-modules/styles/scss/settings/settings__colors";
+
+  //@import '../../../../../node_modules/bootstrap/scss/bootstrap';slick-next slick-arrow
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    position: absolute;
+    z-index: 9999;
+    top: 50%;
+    display: inline-block;
+    width: rem(30);
+    height: rem(60);
+    background: color(red-50);
+    opacity: 1;
+    transform: translateY(-50%);
+
+    &::before {
+      position: absolute;
+      font-family: $font-icons;
+      font-size: rem(30);
+      color: color(white);
+      transform: translate(-50%, -50%);
+    }
+
+    &:active,
+    &:hover {
+      color: color(white);
+      background: color(secondary);
+
+      &::before {
+        color: color(white);
+      }
+    }
+
+    &:focus {
+      color: color(white);
+      background: color(secondary);
+      outline: none;
+    }
+
+    &.focus {
+      color: color(white);
+      background: color(primary);
+      outline: none;
+
+      &::before {
+        color: color(white);
+      }
+    }
+  }
+
+  .carousel-control-prev {
+    left: 0;
+    border-bottom-right-radius: rem(90);
+    border-top-right-radius: rem(90);
+  }
+
+  .carousel-control-next {
+    right: 0;
+    border-bottom-left-radius: rem(90);
+    border-top-left-radius: rem(90);
+  }
+
+  .carousel-control-prev::before {
+    content: "\e974";
+    transform: translate(-60%, -50%);
+  }
+
+  .carousel-control-next::before {
+    content: "\e973";
+    transform: translate(-40%, -50%);
+  }
+
+  .carousel-control-next-icon,
+  .carousel-control-prev-icon {
+    display: none;
+    background-image: none;
+  }
+
+  @include media-query("xl") {
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: rem(50);
+      height: rem(100);
+
+      &::before {
+        font-size: rem(45);
+      }
+    }
+  }
+
+  @include media-query("sm") {
+    .carousel-control-prev {
+      width: rem(16);
+      height: rem(32);
+
+      &::before {
+        font-size: rem(16);
+        transform: translate(-60%, -50%);
+      }
+    }
+
+    .carousel-control-next {
+      width: rem(16);
+      height: rem(32);
+
+      &::before {
+        font-size: rem(16);
+        transform: translate(-40%, -50%);
+      }
+    }
+  }
+
+  @include media-query("xs") {
+    .carousel-control-prev {
+      top: 25%;
+      width: rem(12);
+      height: rem(24);
+      transform: none;
+
+      &::before {
+        font-size: rem(12);
+        transform: translate(-60%, -50%);
+      }
+    }
+
+    .carousel-control-next {
+      top: 25%;
+      width: rem(12);
+      height: rem(24);
+      transform: none;
+
+      &::before {
+        font-size: rem(12);
+        transform: translate(-40%, -50%);
+      }
+    }
+  }
+}
+
+/* -------------------------------------------------------------
+    #CAROUSEL
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}ui-carousel {
+  &__cover {
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__slick-menu {
+    width: 100%;
+    height: 100%;
+  }
+}

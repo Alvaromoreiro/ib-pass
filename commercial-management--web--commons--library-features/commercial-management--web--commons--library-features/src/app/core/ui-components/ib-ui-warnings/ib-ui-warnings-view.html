@@ -1,0 +1,222 @@
+<div class="ib-message-box {{uiWarnCtrl.modifier}}" ng-switch="uiWarnCtrl.type">
+  <!-- CASE LEFT -->
+  <div
+    class="ib-message-box__content ib-message-box__content--left"
+    ng-switch-when="left"
+  >
+    <span
+      data-ng-if="uiWarnCtrl.icon"
+      class="ib-message-box__icon {{uiWarnCtrl.icon}}"
+    ></span>
+    <span
+      data-ng-if="!uiWarnCtrl.icon"
+      class="ib-message-box__icon icon-informacion_2"
+    ></span>
+    <div class="ib-message-box__content__info">
+      <h3 class="ib-message-box__title {{uiWarnCtrl.titleModifier}}">
+        {{uiWarnCtrl.titleTxt|translate}}
+      </h3>
+      <p
+        class="ib-message-box__text"
+        data-ng-if="uiWarnCtrl.text"
+        data-ng-repeat="text in uiWarnCtrl.text"
+      >
+        {{text|translate}}
+      </p>
+    </div>
+  </div>
+  <!-- CASE FORM-HELP -->
+  <div
+    class="ib-message-box__content ib-message-box__content--form-help"
+    data-ng-switch-when="form-help"
+  >
+    <span
+      data-ng-if="uiWarnCtrl.icon"
+      class="ib-message-box__icon {{uiWarnCtrl.icon}}"
+    ></span>
+    <h3 class="ib-message-box__text" data-ng-if="!uiWarnCtrl.text">
+      {{uiWarnCtrl.titleTxt|translate}}
+    </h3>
+    <h3 class="ib-message-box__text" data-ng-if="uiWarnCtrl.text">
+      <span
+        data-ng-repeat="text in uiWarnCtrl.text"
+        data-ng-class="{'ib-message-box__text--bold': text.type === 'bold'}"
+        >{{text.text|translate}}
+      </span>
+    </h3>
+  </div>
+  <!-- CASE SIMPLE-GRAY-50 -->
+  <div
+    class="ib-message-box__content ib-message-box__content--simple-gray-50"
+    data-ng-switch-when="simple-gray-50"
+  >
+    <span
+      data-ng-if="uiWarnCtrl.icon"
+      class="ib-message-box__icon {{uiWarnCtrl.icon}}"
+    ></span>
+    <h3 class="ib-message-box__text" data-ng-if="uiWarnCtrl.text">
+      <span
+        data-ng-repeat="text in uiWarnCtrl.text"
+        data-ng-class="{'ib-message-box__text--bold': text.type === 'bold'}"
+        >{{text.text|translate}}
+      </span>
+    </h3>
+  </div>
+  <!-- CASE SIMPLE -->
+  <div
+    class="ib-message-box__content ib-message-box__content--simple"
+    data-ng-switch-when="simple"
+  >
+    <span
+      data-ng-if="uiWarnCtrl.icon"
+      class="ib-message-box__icon {{uiWarnCtrl.icon}}"
+    ></span>
+    <h3 class="ib-message-box__text" data-ng-if="!uiWarnCtrl.fragments">
+      {{uiWarnCtrl.titleTxt|translate}}
+    </h3>
+    <h3 class="ib-message-box__text" data-ng-if="uiWarnCtrl.fragments">
+      <span
+        data-ng-repeat="fragment in uiWarnCtrl.fragments"
+        data-ng-class="{'ib-message-box__text--bold': fragment.type === 'bold'}"
+        >{{fragment.text|translate}}
+      </span>
+    </h3>
+  </div>
+  <!-- CASE FORM-WRONG -->
+  <div
+    class="ib-message-box__content ib-message-box__content--form-wrong"
+    data-ng-switch-when="form-wrong"
+  >
+    <span
+      data-ng-if="uiWarnCtrl.icon"
+      class="ib-message-box__icon {{uiWarnCtrl.icon}}"
+    ></span>
+    <h3 class="ib-message-box__text" data-ng-if="!uiWarnCtrl.fragments">
+      {{uiWarnCtrl.titleTxt|translate}}
+    </h3>
+    <h3 class="ib-message-box__text" data-ng-if="uiWarnCtrl.fragments">
+      <span
+        data-ng-repeat="fragment in uiWarnCtrl.fragments"
+        data-ng-class="{'ib-message-box__text--bold': fragment.type === 'bold'}"
+        >{{fragment.text|translate}}
+      </span>
+    </h3>
+  </div>
+  <!-- CASE BOXED -->
+  <div
+    class="ib-message-box__content ib-message-box__content--boxed"
+    data-ng-switch-when="boxed"
+  >
+    <span
+      data-ng-if="uiWarnCtrl.icon"
+      class="ib-message-box__icon {{uiWarnCtrl.icon}}"
+    ></span>
+    <div class="ib-message-box__content__info">
+      <h3 class="ib-message-box__title">{{uiWarnCtrl.titleTxt|translate}}</h3>
+      <p class="ib-message-box__text" data-ng-if="!uiWarnCtrl.fragments">
+        {{uiWarnCtrl.text|translate}}
+      </p>
+      <p class="ib-message-box__text" data-ng-if="uiWarnCtrl.fragments">
+        <span
+          data-ng-repeat="fragment in uiWarnCtrl.fragments"
+          data-ng-class="{'ib-message-box__text--bold': fragment.type === 'bold'}"
+          >{{fragment.text|translate}}
+        </span>
+      </p>
+    </div>
+  </div>
+  <!-- CASE WITH BUTTON -->
+  <div class="ib-ui-banners__content--alert" data-ng-switch-when="with-button">
+    <div class="ib-ui-banners__alert-title-box">
+      <span
+        data-ng-if="uiWarnCtrl.icon"
+        class="ib-ui-banners__icon ib-ui-banners__icon--small {{uiWarnCtrl.icon}}"
+      ></span>
+      <h2 class="ib-ui-banners__alert-title">
+        {{uiWarnCtrl.titleTxt|translate}}
+      </h2>
+    </div>
+    <p class="ib-ui-banners__alert-text">{{uiWarnCtrl.text|translate}}</p>
+    <button
+      class="ib-button ib-ui-banners__alert-button"
+      ng-click="uiWarnCtrl.actionButton()"
+      ng-if="uiWarnCtrl.buttonText"
+    >
+      {{uiWarnCtrl.buttonText|translate}}
+    </button>
+    <p
+      class="ib-ui-banners__alert-text-after-button"
+      ng-if="uiWarnCtrl.textBeforeLink && uiWarnCtrl.textLink"
+    >
+      {{uiWarnCtrl.textBeforeLink|translate}}
+      <a
+        class="ib-ui-banners__alert-text-link"
+        ng-click="uiWarnCtrl.actionAccess()"
+        >{{uiWarnCtrl.textLink|translate}}</a
+      >
+    </p>
+  </div>
+  <!-- CASE SIMPLE-COLOR -->
+  <div class="ib-message-box__content {{uiWarnCtrl.classSimpleColor}}" data-ng-switch-when="simple-color">
+      <span data-ng-if="uiWarnCtrl.icon" class="ib-message-box__icon {{uiWarnCtrl.icon}}"></span>
+      <h3 class="ib-message-box__text" data-ng-if="uiWarnCtrl.text">
+          <span data-ng-repeat="text in uiWarnCtrl.text" data-ng-class="{'ib-message-box__text--bold': text.type === 'bold'}">{{text.text|translate}} </span>
+      </h3>
+  </div>
+    <!-- CASE WITH LINK -->
+  <div
+    class="ib-message-box__content {{uiWarnCtrl.modClass}}"
+    data-ng-switch-when="with-link"
+  >
+    <span
+      data-ng-if="uiWarnCtrl.icon"
+      class="ib-message-box__icon {{uiWarnCtrl.icon}}"
+    ></span>
+    <span
+      data-ng-if="!uiWarnCtrl.icon"
+      class="ib-message-box__icon icon-informacion_2"
+    ></span>
+    <h3 class="ib-message-box__title {{uiWarnCtrl.titleModifier}}">
+      {{uiWarnCtrl.titleTxt|translate}}
+    </h3>
+    <p
+      class="ib-message-box__text {{text.textModifier}}"
+      data-ng-if="uiWarnCtrl.text"
+      data-ng-repeat="text in uiWarnCtrl.text"
+      data-ng-class="{'ib-message-box__text--bold': text.type === 'bold'}"
+    >
+      {{text|translate}}
+    </p>
+    <a
+      class="ib-message-box__link"
+      href="{{uiWarnCtrl.urlLink}}"
+      title="{{uiWarnCtrl.linkText|translate}}"
+      target="_blank"
+      >{{uiWarnCtrl.linkText|translate}}</a
+    >
+  </div>
+  <!-- CASE DEFAULT -->
+  <div
+    class="ib-message-box__content {{uiWarnCtrl.modClass}}"
+    ng-switch-default
+  >
+    <span
+      data-ng-if="uiWarnCtrl.icon"
+      class="ib-message-box__icon {{uiWarnCtrl.icon}}"
+    ></span>
+    <span
+      data-ng-if="!uiWarnCtrl.icon"
+      class="ib-message-box__icon icon-informacion_2"
+    ></span>
+    <h3 class="ib-message-box__title {{uiWarnCtrl.titleModifier}}">
+      {{uiWarnCtrl.titleTxt|translate}}
+    </h3>
+    <p
+      class="ib-message-box__text {{uiWarnCtrl.textModifier}}"
+      data-ng-if="uiWarnCtrl.text"
+      data-ng-repeat="text in uiWarnCtrl.text"
+    >
+      {{text|translate}}
+    </p>
+  </div>
+</div>

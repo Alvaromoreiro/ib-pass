@@ -1,0 +1,54 @@
+<header class="ib-modals__header">
+  <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+    <h2 class="ib-heading ib-heading--type-1">
+      {{modalCtrl.model.info.modalTitle}}
+    </h2>
+  </div>
+  <h3
+    class="ib-heading ib-heading--type-5 ib-heading--unfocused"
+    data-ng-if="modalCtrl.model.info.subTitle"
+  >
+    {{modalCtrl.model.info.subtitle|translate}}
+  </h3>
+  <div class="ib-modals__header-settings">
+    <button
+      id="bbki-generic-external-close-btn"
+      type="button"
+      class="ib-modals__button-action icon-cerrar"
+      title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}"
+      ng-click="modalCtrl.close()"
+    >
+      <span class="u-hide-accessible"
+        >{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span
+      >
+    </button>
+  </div>
+</header>
+<section class="ib-modals__body">
+  <div
+    class="ib-layout__line-spacing ib-layout__line-spacing--small"
+    data-ng-repeat="(index,element) in modalCtrl.model.info.elements"
+  >
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+      <div class="ib-layout__line-spacing" data-ng-if="element.description">
+        <span ng-bind-html="element.description"></span>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="ib-modals__footer">
+  <div class="ib-content-buttons">
+    <div class="ib-modals__footer u-text-right">
+      <button
+        id="bbki-generic-external-accept-btn"
+        class="ib-button ib-button--w-medium"
+        type="button"
+        title="{{modalCtrl.model.accept|translate}}"
+        data-ng-click="modalCtrl.accept()"
+      >
+        {{modalCtrl.model.accept ? modalCtrl.model.accept :
+        'MODAL_GENERAL_BUTTON_ACCEPT' |translate}}
+      </button>
+    </div>
+  </div>
+</footer>

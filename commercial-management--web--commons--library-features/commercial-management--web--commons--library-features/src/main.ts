@@ -1,0 +1,25 @@
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
+
+import './decorators';
+import 'ib-web-commons/constants';
+import './app/core/ib-content-parser';
+import './app/core/ib-datalayer';
+import './app/core/proxies';
+import 'ib-web-commons/proxies';
+import './app/core/ib-modal';
+import './app/core/directives';
+import './app/core/filters';
+import './app/core/utils';
+import 'ib-web-commons/utils';
+import './app/core/http-services';
+import 'ib-web-commons/http-services';
+export * from './app/core/interceptor';
+import './app/core/ib-keep-alive';
+export * from './app/core/ib-login';
+import './app/core/ib-monetate';
+import './app/core/preconditions';
+import './app/core/ui-components';
+import './app/core/models';
+import 'ib-web-commons/security';

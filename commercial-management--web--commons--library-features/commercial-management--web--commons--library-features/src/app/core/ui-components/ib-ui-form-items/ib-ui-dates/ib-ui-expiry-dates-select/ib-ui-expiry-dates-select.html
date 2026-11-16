@@ -1,0 +1,102 @@
+<div
+  class="ib-select-date"
+  id="EXPIRY_DATE"
+  data-ng-class="{
+    'ib-select-date--error': ((uiExpDateCtrl.isPaymentForm && uiExpDateCtrl.submittedTab) || (!uiExpDateCtrl.isPaymentForm && uiExpDateCtrl.containerForm.$submitted)) && 
+    (uiExpDateCtrl.containerForm.expiryDateDay_{{::uiExpDateCtrl.formId}}.$invalid || uiExpDateCtrl.containerForm.expiryDateMonth_{{::uiExpDateCtrl.formId}}.$invalid || uiExpDateCtrl.containerForm.expiryDateYear_{{::uiExpDateCtrl.formId}}.$invalid), 
+    'ib-select-date--disabled': !uiExpDateCtrl.editionMode && (!uiExpDateCtrl.day && !uiExpDateCtrl.month && !uiExpDateCtrl.year), 
+    'ib-select--edition-disabled': !uiExpDateCtrl.editionMode && (uiExpDateCtrl.day && uiExpDateCtrl.month && uiExpDateCtrl.year), 
+    'ib-select-date--label': uiExpDateCtrl.day && uiExpDateCtrl.month && uiExpDateCtrl.year,
+    'u-width-full': uiExpDateCtrl.fullContent}"
+>
+  <span class="ib-select-date__label ib-input__label--uppercase"
+    >{{'EXPIRY_DATE_FIELD_TITLE'|translate}}</span
+  >
+  <ui-select
+    custom-ui-select
+    ng-if="uiExpDateCtrl.showDay"
+    class="ib-select-date__action ib-select-date__action--day"
+    data-ng-model="uiExpDateCtrl['day']"
+    data-ng-change="uiExpDateCtrl.daysSelected()"
+    required
+    name="expiryDateDay_{{::uiExpDateCtrl.formId}}"
+    skip-focusser="true"
+    data-input-type="number"
+  >
+    <ui-select-match
+      class="ib-select-date__list-ipt"
+      placeholder="{{'EXPIRY_DATE_FIELD_DAY_PLACEHOLDER'|translate}}"
+    >
+      <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+    </ui-select-match>
+    <ui-select-choices
+      class="ib-select-date__list"
+      repeat="item in (uiExpDateCtrl.availableDays | filter: $select.search)"
+    >
+      <span class="ib-select-date__list-txt" ng-bind="item"></span>
+    </ui-select-choices>
+  </ui-select>
+  <ui-select
+    custom-ui-select
+    class="ib-select-date__action ib-select-date__action--month"
+    data-ng-model="uiExpDateCtrl['month']"
+    data-ng-change="uiExpDateCtrl.updateMonthExpiration()"
+    required
+    name="expiryDateMonth_{{::uiExpDateCtrl.formId}}"
+    data-ng-class="{'ib-select-date__action--month-first' : !uiExpDateCtrl.showDay}"
+    skip-focusser="true"
+    data-input-type="number"
+  >
+    <ui-select-match
+      class="ib-select-date__list-ipt"
+      placeholder="{{'EXPIRY_DATE_FIELD_MONTH_PLACEHOLDER'|translate}}"
+    >
+      <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+    </ui-select-match>
+    <ui-select-choices
+      repeat="item in (uiExpDateCtrl.availableMonths | filter: $select.search)"
+    >
+      <span class="ib-select-date__list-txt" data-ng-bind="item"></span>
+    </ui-select-choices>
+  </ui-select>
+  <ui-select
+    custom-ui-select
+    class="ib-select-date__action ib-select-date__action--year"
+    ng-class="{'ib-select-date__action--day': uiExpDateCtrl.showDay,'ib-select-date__action--year':!uiExpDateCtrl.showDay}"
+    data-ng-model="uiExpDateCtrl['year']"
+    data-ng-change="uiExpDateCtrl.updateYearExpiration()"
+    required
+    name="expiryDateYear_{{::uiExpDateCtrl.formId}}"
+    skip-focusser="true"
+    data-input-type="number"
+  >
+    <ui-select-match
+      class="ib-select-date__list-ipt"
+      placeholder="{{uiExpDateCtrl.showDay ? ('EXPIRY_DATE_FIELD_YEAR_PLACEHOLDER'|translate) : ('EXPIRY_DATE_FIELD_LIGHT_YEAR_PLACEHOLDER'|translate)}}"
+    >
+      <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+    </ui-select-match>
+    <ui-select-choices
+      repeat="item in (uiExpDateCtrl.availableYears | filter: $select.search)"
+    >
+      <span class="ib-select-date__list-txt" data-ng-bind="item"></span>
+    </ui-select-choices>
+  </ui-select>
+</div>
+<div
+  data-ng-if="((uiExpDateCtrl.isPaymentForm && uiExpDateCtrl.submittedTab) || (!uiExpDateCtrl.isPaymentForm && uiExpDateCtrl.containerForm.$submitted))  && 
+    (uiExpDateCtrl.containerForm['expiryDateDay_' + uiExpDateCtrl.formId].$invalid || uiExpDateCtrl.containerForm['expiryDateMonth_' + uiExpDateCtrl.formId].$invalid || uiExpDateCtrl.containerForm['expiryDateYear_' + uiExpDateCtrl.formId].$invalid)"
+>
+  <div
+    class="ib-alert ib-alert--error"
+    data-ng-if="(uiExpDateCtrl.showDay && uiExpDateCtrl.day) || !uiExpDateCtrl.month || !uiExpDateCtrl.year"
+  >
+    {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+  </div>
+  <div
+    class="ib-alert ib-alert--error"
+    data-ng-if="!((uiExpDateCtrl.showDay && uiExpDateCtrl.day) || !uiExpDateCtrl.month || !uiExpDateCtrl.year)"
+  >
+    {{'GENERAL_INPUT_UNDERAGE_ERROR'|translate}}
+  </div>
+</div>

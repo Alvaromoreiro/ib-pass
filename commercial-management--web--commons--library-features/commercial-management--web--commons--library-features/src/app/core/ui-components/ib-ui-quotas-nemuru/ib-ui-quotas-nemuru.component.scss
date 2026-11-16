@@ -1,0 +1,114 @@
+@import "../../../../../node_modules/ib-style-modules/styles/scss/settings/settings__config";
+@import "../../../../../node_modules/ib-style-modules/styles/scss/settings/settings__responsive";
+@import "../../../../../node_modules/ib-style-modules/styles/scss/settings/settings__colors";
+@import "../../../../../node_modules/ib-style-modules/styles/scss/tools/tools__pixel-to-rem";
+@import "../../../../../node_modules/ib-style-modules/styles/scss/tools/tools__responsive";
+@import "../../../../../node_modules/ib-style-modules/styles/scss/tools/tools__colors";
+
+$block: "ib-ui-quotas-nemuru";
+$dashed: dashed;
+
+.#{$block} {
+  display: flex;
+  align-items: center;
+  font-size: rem(13);
+
+  strong {
+    font-weight: bold;
+  }
+
+  &__icon {
+    width: auto;
+    height: rem(24);
+    margin-right: rem(10);
+  }
+
+  &__dropdown {
+    position: relative;
+    display: inline-block;
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      display: none;
+    }
+
+    & > span {
+      position: relative;
+      display: inline-block;
+      width: 2.5em;
+      padding-right: rem(15);
+      margin: 0 rem(3);
+      cursor: pointer;
+
+      &::before {
+        content: "";
+        position: absolute;
+        right: rem(15);
+        bottom: 0;
+        left: 0;
+        border-bottom: rem(1) $dashed color(gray-40);
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        display: block;
+        width: 0;
+        height: 0;
+        border-width: rem(5) rem(5) 0;
+        border-style: solid;
+        border-color: color(gray-20) transparent transparent;
+        transform: translateY(-50%);
+      }
+    }
+
+    &.prop-unfolded {
+      ul {
+        display: inline-block;
+      }
+    }
+
+    ul {
+      position: absolute;
+      z-index: 1;
+      top: 1.7em;
+      left: rem(-5);
+      display: none;
+      min-width: 4em;
+      border: rem(1) solid color(gray-25);
+      border-radius: 0 0 rem(3) rem(2);
+      background: color(white);
+      box-shadow: 0 rem(1) rem(2) rgba(0, 0, 0, 0.1);
+
+      label {
+        display: block;
+        padding: rem(5) rem(10);
+        cursor: pointer;
+      }
+
+      input[type="checkbox"]:checked + & {
+        display: inline-block;
+      }
+
+      label:hover,
+      input[type="radio"]:checked + label {
+        background-color: color(gray-50);
+      }
+    }
+  }
+}
+
+.#{$block}.prop-payment {
+  padding: rem(27);
+  border-top: rem(1) solid color(gray-40);
+
+  .#{$block}__icon {
+    height: rem(32);
+  }
+
+  .#{$block}__intro {
+    display: none;
+  }
+}

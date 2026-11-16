@@ -1,0 +1,61 @@
+<div class="ib-box ib-box--medium ib-box--separator u-mb-none u-pb-big" id="total">
+    <span class="ib-text ib-text--block ib-text--color-unfocused">{{ibUiTotalPriceCtrl.label}}</span>
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-9">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                <span class="ib-text ib-text--especial ib-text--price-xbig"
+                    ng-class="{'ib-text--price-long':ibUiTotalPriceCtrl.price.length > 9}">{{ibUiTotalPriceCtrl.price}}</span>
+                <p ng-if="ibUiTotalPriceCtrl.points"
+                    class="ib-text ib-text--block ib-text--color-unfocused u-pt-xsmall">
+                    {{ibUiTotalPriceCtrl.labelPoints}}
+                    <span class="ib-text ib-text--bold">{{ibUiTotalPriceCtrl.points}}</span>
+                </p>
+                <p class="ib-text ib-text--block ib-text--color-unfocused ib-text--spacing-large"
+                    ng-if="ibUiTotalPriceCtrl.isUserLogged && ibUiTotalPriceCtrl.avios && ibUiTotalPriceCtrl.avios.avios !== 0 && ibUiTotalPriceCtrl.avios.elite !== 0 && !ibUiTotalPriceCtrl.calculatedPoints.resident && !ibUiTotalPriceCtrl.isIbZero && !ibUiTotalPriceCtrl.isOnb">
+                    {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                    <span class="ib-text ib-text--bold">
+                        {{ ibUiTotalPriceCtrl.avios.avios | aviosFormatter}}
+                        {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+                        {{ ibUiTotalPriceCtrl.avios.elite | aviosFormatter}}
+                        {{'AVIOS_ELITE_TO_EARN_USER_3'| translate}}
+                    </span>
+                </p>
+                <!-- ib zero // anonymous -->
+                <p class="ib-text ib-text--block ib-text--color-unfocused ib-text--spacing-large"
+                ng-if="(!ibUiTotalPriceCtrl.isUserLogged || ibUiTotalPriceCtrl.isIbZero) && ibUiTotalPriceCtrl.avios && ibUiTotalPriceCtrl.avios.avios !== 0 && ibUiTotalPriceCtrl.avios.elite !== 0 && !ibUiTotalPriceCtrl.calculatedPoints.resident">
+                {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                <span class="ib-text ib-text--bold">
+                    {{ ibUiTotalPriceCtrl.avios.avios | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+                    {{ ibUiTotalPriceCtrl.avios.elite | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_ANOM_3'| translate}}
+                </span>
+                {{'AVIOS_ELITE_TO_EARN_ANOM_4'| translate}}
+                </p>
+                <!-- resident -->
+                <p class="ib-text ib-text--block ib-text--color-unfocused ib-text--spacing-large"
+                    ng-if="ibUiTotalPriceCtrl.avios && ibUiTotalPriceCtrl.avios.avios !== 0 && ibUiTotalPriceCtrl.avios.elite !== 0 && ibUiTotalPriceCtrl.calculatedPoints.resident">
+                    {{'GET_AT_LEAST'| translate}}
+                    <span class="ib-text ib-text--bold">
+                        {{ ibUiTotalPriceCtrl.avios.avios | aviosFormatter}}
+                        {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+                        {{ ibUiTotalPriceCtrl.avios.elite | aviosFormatter}}
+                        {{'AVIOS_ELITE_TO_EARN_USER_3'| translate}}
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-5 col-md-3">
+            <div class="ib-layout__line-spacing">
+                <button ng-click="ibUiTotalPriceCtrl.accept()" class="ib-button ib-button--block"
+                    type="button">{{ibUiTotalPriceCtrl.labelButton}}</button>
+            </div>
+        </div>
+    </div>
+    <p class="ib-text ib-text--color-unfocused"
+        ng-if="ibUiTotalPriceCtrl.conditions && ibUiTotalPriceCtrl.conditions !== 'TOTAL_PRICE_TEXT'"
+        ng-bind-html="ibUiTotalPriceCtrl.conditions"></p>
+    <p class="ib-text ib-text--color-unfocused"
+        ng-if="ibUiTotalPriceCtrl.conditions && ibUiTotalPriceCtrl.conditions === 'TOTAL_PRICE_TEXT'">
+        {{ibUiTotalPriceCtrl.conditions|translate}}</p>
+</div>

@@ -1,0 +1,105 @@
+<div
+  class="ib-discount-offer__interactive"
+  data-ng-if="uiDiscountOfferCtrl.availableDiscounts"
+>
+  <div
+    class="ib-discount-offer__interactive-col ib-discount-offer__interactive-col--check"
+    data-ng-if="uiDiscountOfferCtrl.availableResidentDisc"
+    data-ng-class="{'ib-discount-offer__interactive-col--select':uiDiscountOfferCtrl.showSelectResident}"
+  >
+    <div class="ib-check" data-ng-if="!uiDiscountOfferCtrl.showSelectResident">
+      <input
+        id="CHECK_SELECTOR_RESIDENT_DISCOUNT"
+        type="checkbox"
+        name="isResident"
+        class="ib-check__input"
+        data-ng-change="uiDiscountOfferCtrl.discountsChange(null, uiDiscountOfferCtrl.familyDiscounts.selected)"
+        data-ng-model="uiDiscountOfferCtrl.isResident"
+        data-ng-checked="uiDiscountOfferCtrl.isResident"
+        focusin
+      />
+      <label for="CHECK_SELECTOR_RESIDENT_DISCOUNT" class="ib-check__label">
+        <span class="ib-check__text ib-check__text--gray"
+          >{{'OFFER_RESIDENT_DISCOUNT_TITLE'|translate}}</span
+        >
+      </label>
+    </div>
+    <div
+      class="ib-select ib-select--label"
+      data-ng-if="uiDiscountOfferCtrl.showSelectResident"
+    >
+      <label
+        class="ib-select__label text-uppercase"
+        aria-label="{{uiDiscountOfferCtrl.residentDiscounts.title|translate}}"
+        for="resident-select-00"
+        >{{uiDiscountOfferCtrl.residentDiscounts.title|translate}}</label
+      >
+      <ui-select
+        id="BUTTON_SELECTOR_RESIDENT_DISCOUNT"
+        class="ib-select__action"
+        data-ng-model="uiDiscountOfferCtrl.residentDiscounts.selected"
+        on-select="uiDiscountOfferCtrl.residentDiscounts.selected=$select.selected;localDisForm.residentDiscounts.selected=$select.selected;uiDiscountOfferCtrl.discountsChange($select.selected, uiDiscountOfferCtrl.familyDiscounts.selected)"
+        name="residentDiscounts"
+        id="resident-select-00"
+        input-id="resident-select-01"
+        focusin
+      >
+        <ui-select-match
+          class="ib-select__list-ipt"
+          placeholder="{{uiDiscountOfferCtrl.residentDiscounts.title|translate|limitTo:25}}{{uiDiscountOfferCtrl.residentDiscounts.title.length > 25 ? '...' : ''}}"
+        >
+          <span class="ib-select__txt"
+            >{{$select.selected.description|translate}}</span
+          >
+        </ui-select-match>
+        <ui-select-choices
+          class="ib-select__list"
+          repeat="item in (uiDiscountOfferCtrl.residentDiscounts.items | filter: $select.search) track by item.value"
+        >
+          <span class="ib-select__list-txt"
+            >{{item.description|translate}}</span
+          >
+        </ui-select-choices>
+      </ui-select>
+    </div>
+  </div>
+  <div
+    class="ib-discount-offer__interactive-col ib-discount-offer__interactive-col--select"
+  >
+    <div class="ib-select ib-select--label">
+      <label
+        class="ib-select__label text-uppercase"
+        aria-label="{{uiDiscountOfferCtrl.familyDiscounts.title|translate}}"
+        for="large-family-select-00"
+        >{{uiDiscountOfferCtrl.familyDiscounts.title|translate}}</label
+      >
+      <ui-select
+        id="BUTTON_SELECTOR_FAMILY_DISCOUNT"
+        class="ib-select__action"
+        data-ng-model="uiDiscountOfferCtrl.familyDiscounts.selected"
+        on-select="uiDiscountOfferCtrl.familyDiscounts.selected=$select.selected;localDisForm.familyDiscounts.selected=$select.selected;uiDiscountOfferCtrl.discountsChange(uiDiscountOfferCtrl.residentDiscounts.selected, $select.selected)"
+        name="familyDiscounts"
+        id="large-family-select-00"
+        input-id="large-family-select-01"
+        focusin
+      >
+        <ui-select-match
+          class="ib-select__list-ipt"
+          placeholder="{{uiDiscountOfferCtrl.familyDiscounts.title|translate|limitTo:25}}{{uiDiscountOfferCtrl.familyDiscounts.title.length > 25 ? '...' : ''}}"
+        >
+          <span class="ib-select__txt"
+            >{{$select.selected.description|translate}}</span
+          >
+        </ui-select-match>
+        <ui-select-choices
+          class="ib-select__list"
+          repeat="item in (uiDiscountOfferCtrl.familyDiscounts.items | filter: $select.search) track by item.value"
+        >
+          <span class="ib-select__list-txt"
+            >{{item.description|translate}}</span
+          >
+        </ui-select-choices>
+      </ui-select>
+    </div>
+  </div>
+</div>

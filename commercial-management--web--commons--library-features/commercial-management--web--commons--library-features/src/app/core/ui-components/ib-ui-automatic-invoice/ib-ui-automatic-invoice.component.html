@@ -1,0 +1,74 @@
+<ng-container *ngIf="issueOrderResponse.data.relatedContent?.length">
+  <div
+    *ngFor="
+      let itemRelated of issueOrderResponse.data.relatedContent;
+      trackBy: trackByFn
+    "
+  >
+    <div class="ib-layout__line-spacing" [ngSwitch]="itemRelated.key">
+      <div *ngSwitchCase="invoiceCodeOK.SPAIN_CREATED_OK">
+        <div class="ib-box--bordered ng-scope">
+          <div class="ib-msg-alert icon-nota ng-scope">
+            <p class="ib-msg-alert__text--title-box">
+              {{ "CONFIRMATION_RELATED_INVOICE_SPAIN_TITLE" | translate }}
+            </p>
+            <p class="ib-msg-alert__text ib-msg-alert__text--black">
+              {{ itemRelated.value }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="invoiceCodeOK.SPAIN_CREATED_SEVERAL_OK">
+        <div class="ib-box--bordered ng-scope">
+          <div class="ib-msg-alert icon-nota ng-scope">
+            <p class="ib-msg-alert__text--title-box">
+              {{
+                "CONFIRMATION_RELATED_INVOICE_SPAIN_SEVERAL_TITLE" | translate
+              }}
+            </p>
+            <p class="ib-msg-alert__text ib-msg-alert__text--black">
+              {{ itemRelated.value }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="invoiceCodeOK.GUATEMALA_MEXICO_CREATED_OK">
+        <div class="ib-box--bordered ng-scope">
+          <div class="ib-msg-alert icon-nota ng-scope">
+            <p class="ib-msg-alert__text--title-box">
+              {{ "CONFIRMATION_RELATED_INVOICE_GUAT_MEX_TITLE" | translate }}
+            </p>
+            <p
+              class="ib-msg-alert__text ib-msg-alert__text--black"
+              [innerHtml]="itemRelated.value"
+            ></p>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="invoiceCodeOK.EUROPE_LATAM_CREATED_OK">
+        <div class="ib-box--bordered ng-scope">
+          <div class="ib-msg-alert icon-nota ng-scope">
+            <p class="ib-msg-alert__text--title-box">
+              {{ "CONFIRMATION_RELATED_INVOICE_LATAM_TITLE" | translate }}
+            </p>
+            <p class="ib-msg-alert__text ib-msg-alert__text--black">
+              {{ itemRelated.value }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="invoiceCodeOK.SPANISH_CIF_IN_ANOTHER_MARKET_OK">
+        <div class="ib-box--bordered ng-scope">
+          <div class="ib-msg-alert icon-nota ng-scope">
+            <p class="ib-msg-alert__text--title-box">
+              {{ "CONFIRMATION_RELATED_INVOICE_LATAM_TITLE" | translate }}
+            </p>
+            <p class="ib-msg-alert__text ib-msg-alert__text--black">
+              {{ itemRelated.value }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

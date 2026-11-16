@@ -1,0 +1,363 @@
+$otp-timer-color: #d7192d;
+$otp-timer-warning: #d7192d;
+$otp-timer-expired: #d7192d;
+$otp-timer-text: #fafafa;
+$otp-timer-max-attempts-bg: #ddd;
+$otp-timer-max-attempts-text: #666;
+$otp-timer-expired-bg: #a8191a;
+
+$otp-digit-gap: 0.5rem;
+$otp-digit-size: 2.75rem;
+$otp-digit-size-mobile: 1.75rem;
+$otp-digit-border-color: #999;
+$otp-digit-border-active: #d68726;
+$otp-digit-border-filled: #333;
+$otp-digit-border-error: #d7192d;
+$otp-digit-bg: #fff;
+$otp-digit-bg-disabled: #eee;
+$otp-digit-text: #333;
+$otp-digit-text-disabled: #999;
+
+$otp-error-color: #d7192d;
+$otp-expired-color: #666;
+
+$otp-resend-color: #d7192d;
+$otp-resend-disabled: #999;
+$otp-resend-focus: #a8191a;
+
+$otp-overlay-bg: rgb(51 51 51 / 66%);
+$otp-modal-bg: #fff;
+$otp-modal-shadow: 0 8px 32px rgb(0 0 0 / 10%);
+
+$otp-text-color: #333;
+$otp-label-color: #666;
+$otp-label-disabled-color: #ccc;
+
+$otp-modal-border-radius: 8px;
+$otp-digit-border-radius: 3px;
+$otp-footer-padding: 16px 24px 24px;
+$otp-footer-border-color: #eee;
+$otp-border-width: 1px;
+$otp-focus-outline-width: 2px;
+
+$otp-font-family-body: verdana, sans-serif;
+$otp-font-family-heading: "Iberia Headline", sans-serif;
+$otp-font-size-sm: 0.8125rem;
+$otp-font-size-md: 14px;
+$otp-font-size-lg: 1rem;
+$otp-font-size-xl: 1.5rem;
+$otp-font-size-cooldown: 13px;
+
+
+:host {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.ib-modals__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $otp-overlay-bg;
+}
+
+.ib-modals--otp {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    width: 90%;
+    max-width: 29.625rem;
+    border-radius: $otp-modal-border-radius;
+    background-color: $otp-modal-bg;
+    box-shadow: $otp-modal-shadow;
+    transform: translate(-50%, -50%);
+
+    .otp-header {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 2rem 1.5rem;
+        gap: 1rem;
+
+        h2,
+        h3 {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    .ib-modals__body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 2rem 3rem;
+    }
+
+    .ib-modals__footer {
+        padding: $otp-footer-padding;
+        border-top: $otp-border-width solid $otp-footer-border-color;
+    }
+}
+
+.ib-modals__button-action {
+    font-size: $otp-font-size-xl;
+}
+
+.otp-close-container {
+    text-align: end;
+}
+
+.ib-otp-modal__timer-container {
+    display: flex;
+    width: 5rem;
+    height: 5rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0.5rem;
+    color: $otp-timer-text;
+    background: $otp-timer-color;
+    gap: 0.5rem;
+
+    &.ib-otp-modal__timer--max-attempts {
+        color: $otp-timer-max-attempts-text;
+        background: $otp-timer-max-attempts-bg;
+    }
+
+    &.ib-otp-modal__timer--expired {
+        color: $otp-timer-text;
+        background: $otp-timer-expired-bg;
+    }
+}
+
+.ib-otp-modal__timer-icon {
+    width: 1.5rem;
+    font-size: 1.125rem;
+}
+
+.ib-otp-modal__input-section {
+    text-align: center;
+}
+
+.ib-otp-modal__label {
+    display: block;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: $otp-font-size-md;
+    color: $otp-label-color;
+    transition: color 0.2s ease;
+
+    &--disabled {
+        color: $otp-label-disabled-color;
+    }
+}
+
+.ib-otp-modal__digits {
+    display: flex;
+    justify-content: center;
+    gap: $otp-digit-gap;
+}
+
+.ib-otp-modal__digit-input {
+    width: $otp-digit-size;
+    height: $otp-digit-size;
+    border: $otp-border-width solid $otp-digit-border-color;
+    border-radius: $otp-digit-border-radius;
+    font-family: $otp-font-family-heading;
+    font-size: $otp-font-size-lg;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    line-height: 1.125rem;
+    color: $otp-digit-text;
+    background-color: $otp-digit-bg;
+    aspect-ratio: 1/1;
+    caret-color: $otp-digit-border-active;
+    outline: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        margin: 0;
+        -webkit-appearance: none;
+    }
+
+    &:focus-visible {
+        outline: $otp-focus-outline-width solid $otp-digit-border-active;
+        outline-offset: -1px;
+    }
+
+    &--filled {
+        border-color: $otp-digit-border-filled;
+    }
+
+    &--error {
+        border-color: $otp-digit-border-error;
+        animation: otp-shake 0.4s ease;
+
+        &:focus-visible {
+            outline-color: $otp-digit-border-error;
+        }
+    }
+
+    &--disabled {
+        border-color: $otp-digit-bg-disabled;
+        color: $otp-digit-text-disabled;
+        background-color: $otp-digit-bg-disabled;
+        cursor: not-allowed;
+    }
+
+    @media (width <= 480px) {
+        width: $otp-digit-size-mobile;
+        height: $otp-digit-size-mobile;
+        font-size: $otp-font-size-lg;
+    }
+}
+
+.ib-otp-modal__error-container {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.ib-otp-modal__error-text {
+    font-family: $otp-font-family-body;
+    font-size: $otp-font-size-sm;
+    font-weight: 400;
+    font-style: normal;
+    line-height: normal;
+    color: $otp-error-color;
+}
+
+
+.ib-otp-modal__expired-container {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.ib-otp-modal__expired-text {
+    font-size: $otp-font-size-md;
+    line-height: 1.5;
+    color: $otp-expired-color;
+}
+
+
+.ib-otp-modal__footer-content {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 0 2rem 2rem;
+    gap: 1rem;
+
+    @media (width >= 480px) {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.otp-email {
+    font-family: $otp-font-family-body;
+    font-size: $otp-font-size-sm;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    line-height: 1.25rem;
+    color: $otp-text-color;
+    font-feature-settings: 'liga' off, 'clig' off;
+}
+
+.ib-otp-modal__resend-section {
+    display: flex;
+    width: 100%;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1.5rem;
+    border-top: $otp-border-width solid $otp-digit-bg-disabled;
+    gap: 0.25rem;
+}
+
+.ib-otp-modal__resend-label {
+    font-family: $otp-font-family-body;
+    font-size: $otp-font-size-sm;
+    font-weight: 400;
+    font-style: normal;
+    line-height: normal;
+    color: $otp-text-color;
+}
+
+.otp-advice {
+    margin-top: 1rem;
+    font-family: $otp-font-family-body;
+    font-size: $otp-font-size-sm;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+    line-height: normal;
+    color: $otp-text-color;
+    font-feature-settings: 'liga' off, 'clig' off;
+}
+
+.otp-advice-expired {
+    margin-top: 1rem;
+    font-family: $otp-font-family-body;
+    font-size: $otp-font-size-sm;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+    line-height: normal;
+    color: $otp-timer-expired-bg;
+    font-feature-settings: 'liga' off, 'clig' off;
+}
+
+.ib-otp-modal__resend-link {
+    padding: 0;
+    border: none;
+    font-family: $otp-font-family-body;
+    font-size: $otp-font-size-sm;
+    font-weight: 400;
+    font-style: normal;
+    text-decoration: underline;
+    line-height: normal;
+    color: $otp-resend-color;
+    background: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover:not(&--disabled) {
+        opacity: 0.85;
+    }
+
+    &--disabled {
+        text-decoration: none;
+        color: $otp-resend-disabled;
+        cursor: not-allowed;
+    }
+
+    &:focus-visible {
+        color: $otp-resend-focus;
+    }
+}
+
+.ib-otp-modal__resend-cooldown {
+    font-size: $otp-font-size-cooldown;
+    color: $otp-resend-disabled;
+}
+
+
+@keyframes otp-shake {
+    0%,
+    100% { transform: translateX(0); }
+    20% { transform: translateX(-4px); }
+    40% { transform: translateX(4px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+}

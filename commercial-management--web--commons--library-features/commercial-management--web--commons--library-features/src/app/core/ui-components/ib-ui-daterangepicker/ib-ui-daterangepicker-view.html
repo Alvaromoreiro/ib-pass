@@ -1,0 +1,289 @@
+<div
+  ng-if="ibUiDaterangepickerCtrl.textLoading"
+  class="ib-input-range-date ib-input-range-date--type-1"
+>
+  <div class="ib-input-range-date__start ib-input-range-date__start--bottom">
+    <span class="ib-input-range-date__label ib-input-range-date__label--focus"
+      >{{ibUiDaterangepickerCtrl.textDateGone}}</span
+    >
+    <span class="ib-input-range-date__input"
+      >{{ibUiDaterangepickerCtrl.textLoading}}</span
+    >
+  </div>
+</div>
+
+<div
+  ng-if="!ibUiDaterangepickerCtrl.textLoading && ibUiDaterangepickerCtrl.allDates"
+  class="ib-input-range-date ib-input-range-date--type-1"
+>
+  <div
+    class="ib-input-range-date__start--bottom"
+    ng-click="ibUiDaterangepickerCtrl.clickAllDates()"
+  >
+    <span class="ib-input-range-date__label ib-input-range-date__label--focus"
+      >{{'MENU_BUTTON_DATES_TEXT'|translate}}</span
+    >
+    <span class="ib-input-range-date__input">{{'DATES_ALL'|translate}}</span>
+  </div>
+</div>
+
+<div
+  ng-if="!ibUiDaterangepickerCtrl.textLoading && !ibUiDaterangepickerCtrl.allDates"
+  class="ib-input-range-date ib-input-range-date--type-1"
+  ng-class="{'ib-input-range-date--one-way' : ibUiDaterangepickerCtrl.roundtrip === 1, 'ib-input-range-date--error': (((ibUiDaterangepickerCtrl.containerForm.dateGoneid.$invalid || ibUiDaterangepickerCtrl.containerForm.dateReturnid.$invalid) && ibUiDaterangepickerCtrl.allDates===undefined) || (ibUiDaterangepickerCtrl.containerForm.dateGoneid.$invalid && ibUiDaterangepickerCtrl.allDates!==undefined))}"
+  ng-resize="ibUiDaterangepickerCtrl.setDimensions($event)"
+>
+  <div
+    class="ib-input-range-date__start ib-input-range-date__start--bottom"
+    uib-dropdown
+    auto-close="outsideClick"
+    is-open="ibUiDaterangepickerCtrl.model.isopenDateGone"
+  >
+    <label
+      class="ib-input-range-date__label"
+      for="{{ibUiDaterangepickerCtrl.dateGoneid}}"
+      data-ng-class="{'ib-input-range-date__label--focus' : ibUiDaterangepickerCtrl.model.focusedStart ||  ibUiDaterangepickerCtrl.containerForm.dateGoneid.$viewValue !== '' || ibUiDaterangepickerCtrl.model.isopenDateGone}"
+      >{{ibUiDaterangepickerCtrl.textDateGone}}</label
+    >
+    <input
+      ng-model="ibUiDaterangepickerCtrl.model.inputDateGone"
+      class="ib-input-range-date__input"
+      id="{{ibUiDaterangepickerCtrl.dateGoneid}}"
+      name="{{ibUiDaterangepickerCtrl.dateGoneid}}"
+      type="text"
+      placeholder="{{ibUiDaterangepickerCtrl.model.focusedStart || ibUiDaterangepickerCtrl.model.isopenDateGone ? ibUiDaterangepickerCtrl.model.textFormat: ''}}"
+      autocomplete="off"
+      uib-dropdown-toggle
+      ng-focus="ibUiDaterangepickerCtrl.model.focusedStart=true"
+      ng-blur="ibUiDaterangepickerCtrl.model.focusedStart=false"
+      maxlength="10"
+      required
+      ng-pattern="ibUiDaterangepickerCtrl.model.datePattern"
+    />
+
+    <!-- DateRangePicker -->
+    <section
+      uib-dropdown-menu
+      class="ib-rangepicker__dropdown ib-dropdown ib-dropdown--type-4"
+    >
+      <div
+        class="ib-rangepicker ib-rangepicker--start"
+        ng-mouseover="ibUiDaterangepickerCtrl.mouseOverStart(this, $event)"
+        uidaterangepicker
+      >
+        <header class="ib-rangepicker__header">
+          <div class="ib-rangepicker__header-col">
+            <div
+              class="ib-check"
+              ng-if="ibUiDaterangepickerCtrl.flexDates!==undefined"
+            >
+              <input
+                ng-model="ibUiDaterangepickerCtrl.flexDates"
+                type="checkbox"
+                id="flex_dates_1"
+                name="flex_dates_1"
+                class="ib-check__input"
+              />
+              <label for="flex_dates_1" class="ib-check__label">
+                <span class="ib-check__text ib-check__text--unfocused"
+                  >{{'HEADER_ADVANCED_DATES_FLEXIBLE'|translate}}</span
+                >
+              </label>
+            </div>
+            <div
+              class="ib-check"
+              ng-if="ibUiDaterangepickerCtrl.allDates!==undefined"
+            >
+              <input
+                ng-model="ibUiDaterangepickerCtrl.allDates"
+                type="checkbox"
+                id="all_dates_1"
+                name="all_dates_1"
+                class="ib-check__input"
+              />
+              <label for="all_dates_1" class="ib-check__label">
+                <span class="ib-check__text ib-check__text--unfocused"
+                  >{{'HEADER_ADVANCED_DATES_ALL'|translate}}</span
+                >
+              </label>
+            </div>
+          </div>
+          <div
+            class="ib-rangepicker__header-col ib-rangepicker__header-col--second"
+          >
+            <!-- <span class="ib-text ib-text--color-unfocused">Hoy: 6 de Junio, 2014</span> -->
+            <span class="ib-text ib-text--color-unfocused"
+              >{{'HEADER_ADVANCED_SEARCH_DATEPICKER_TODAY'|translate}}:
+              {{ibUiDaterangepickerCtrl.model.todayDate}}</span
+            >
+          </div>
+        </header>
+        <div class="ib-rangepicker__container">
+          <div
+            ui-date="ibUiDaterangepickerCtrl.model.dateOptionsStart"
+            ng-model="ibUiDaterangepickerCtrl.dateGone"
+          ></div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <span
+    ng-if="ibUiDaterangepickerCtrl.roundtrip === 2"
+    class="ib-input-range-date__icon icon-caret_derecha"
+  ></span>
+  <div
+    ng-if="ibUiDaterangepickerCtrl.roundtrip === 2"
+    class="ib-input-range-date__end ib-input-range-date__end--bottom"
+    uib-dropdown
+    auto-close="outsideClick"
+    is-open="ibUiDaterangepickerCtrl.model.isopenDateReturn"
+  >
+    <label
+      class="ib-input-range-date__label"
+      for="{{ibUiDaterangepickerCtrl.dateReturnid}}"
+      ng-class="{'ib-input-range-date__label--focus' : ibUiDaterangepickerCtrl.model.focusedReturn || ibUiDaterangepickerCtrl.containerForm.dateReturnid.$viewValue !== '' || ibUiDaterangepickerCtrl.model.isopenDateReturn}"
+      >{{ibUiDaterangepickerCtrl.textDateReturn}}</label
+    >
+    <input
+      ng-model="ibUiDaterangepickerCtrl.model.inputDateReturn"
+      class="ib-input-range-date__input"
+      id="{{ibUiDaterangepickerCtrl.dateReturnid}}"
+      name="{{ibUiDaterangepickerCtrl.dateReturnid}}"
+      type="text"
+      placeholder="{{ibUiDaterangepickerCtrl.model.focusedReturn || ibUiDaterangepickerCtrl.model.isopenDateReturn ? ibUiDaterangepickerCtrl.model.textFormat: ''}}"
+      autocomplete="off"
+      uib-dropdown-toggle
+      ng-focus="ibUiDaterangepickerCtrl.model.focusedReturn=true"
+      ng-blur="ibUiDaterangepickerCtrl.model.focusedReturn=false"
+      maxlength="10"
+      required
+      ng-pattern="ibUiDaterangepickerCtrl.model.datePattern"
+    />
+    <!-- DateRangePicker -->
+    <section
+      uib-dropdown-menu
+      class="ib-rangepicker__dropdown ib-dropdown ib-dropdown--type-4"
+    >
+      <div
+        class="ib-rangepicker ib-rangepicker--end"
+        ng-mouseover="ibUiDaterangepickerCtrl.mouseOverEnd(this, $event)"
+        uidaterangepicker
+      >
+        <header class="ib-rangepicker__header">
+          <div class="ib-rangepicker__header-col">
+            <div
+              class="ib-check"
+              ng-if="ibUiDaterangepickerCtrl.flexDates!==undefined"
+            >
+              <input
+                ng-model="ibUiDaterangepickerCtrl.flexDates"
+                type="checkbox"
+                id="flex_dates_2"
+                name="flex_dates_2"
+                class="ib-check__input"
+              />
+              <label for="flex_dates_2" class="ib-check__label">
+                <span class="ib-check__text ib-check__text--unfocused"
+                  >{{'HEADER_ADVANCED_DATES_FLEXIBLE'|translate}}</span
+                >
+              </label>
+            </div>
+            <div
+              class="ib-check"
+              ng-if="ibUiDaterangepickerCtrl.allDates!==undefined"
+            >
+              <input
+                ng-model="ibUiDaterangepickerCtrl.allDates"
+                type="checkbox"
+                id="all_dates_2"
+                name="all_dates_2"
+                class="ib-check__input"
+              />
+              <label for="all_dates_2" class="ib-check__label">
+                <span class="ib-check__text ib-check__text--unfocused"
+                  >{{'HEADER_ADVANCED_DATES_ALL'|translate}}</span
+                >
+              </label>
+            </div>
+          </div>
+          <div
+            class="ib-rangepicker__header-col ib-rangepicker__header-col--second"
+          >
+            <span class="ib-text ib-text--color-unfocused"
+              >{{'HEADER_ADVANCED_SEARCH_DATEPICKER_TODAY'|translate}}:
+              {{ibUiDaterangepickerCtrl.model.todayDate}}</span
+            >
+          </div>
+        </header>
+        <div class="ib-rangepicker__container">
+          <div
+            ui-date="ibUiDaterangepickerCtrl.model.dateOptionsEnd"
+            ng-model="ibUiDaterangepickerCtrl.dateReturn"
+          ></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<div
+  ng-messages="ibUiDaterangepickerCtrl.roundtrip === 1 && ibUiDaterangepickerCtrl.containerForm.dateGoneid.$error"
+  role="alert"
+>
+  <span class="ib-alert ib-alert--error" ng-message="required"
+    >{{'HEADER_ADVANCED_SEARCH_DATEPICKER_OUTBOUND_ERROR'|translate}}</span
+  >
+  <span class="ib-alert ib-alert--error" ng-message="pattern"
+    >{{'HEADER_ADVANCED_SEARCH_DATEPICKER_FORMAT_ERROR'|translate}}</span
+  >
+  <span class="ib-alert ib-alert--error" ng-message="minValid"
+    >{{ibUiDaterangepickerCtrl.model.validation.minValid|translate}}</span
+  >
+  <span class="ib-alert ib-alert--error" ng-message="maxValid"
+    >{{ibUiDaterangepickerCtrl.model.validation.maxValid|translate}}</span
+  >
+  <span class="ib-alert ib-alert--error" ng-message="restrictionValid"
+    >{{ibUiDaterangepickerCtrl.model.validation.restrictionValid|translate}}</span
+  >
+</div>
+<div
+  ng-if="ibUiDaterangepickerCtrl.roundtrip === 2 && ibUiDaterangepickerCtrl.containerForm.dateGoneid.$invalid"
+  ng-messages="ibUiDaterangepickerCtrl.containerForm.dateGoneid.$error"
+  role="alert"
+>
+  <span class="ib-alert ib-alert--error" ng-message="required"
+    >{{ibUiDaterangepickerCtrl.model.validation.required|translate}}</span
+  >
+  <span class="ib-alert ib-alert--error" ng-message="pattern"
+    >{{ibUiDaterangepickerCtrl.model.validation.pattern|translate}}</span
+  >
+  <span class="ib-alert ib-alert--error" ng-message="minValid"
+    >{{ibUiDaterangepickerCtrl.model.validation.minValid|translate}}</span
+  >
+  <span class="ib-alert ib-alert--error" ng-message="maxValid"
+    >{{ibUiDaterangepickerCtrl.model.validation.maxValid|translate}}</span
+  >
+  <span class="ib-alert ib-alert--error" ng-message="restrictionValid"
+    >{{ibUiDaterangepickerCtrl.model.validation.restrictionValid|translate}}</span
+  >
+</div>
+<div
+  ng-if="ibUiDaterangepickerCtrl.roundtrip === 2 && !ibUiDaterangepickerCtrl.containerForm.dateGoneid.$invalid && ibUiDaterangepickerCtrl.containerForm.dateReturnid.$invalid && ibUiDaterangepickerCtrl.allDates===undefined"
+  ng-messages="ibUiDaterangepickerCtrl.containerForm.dateReturnid.$error"
+  role="alert"
+>
+  <span class="ib-alert ib-alert--error" ng-message="required"
+    >{{ibUiDaterangepickerCtrl.model.validation.required|translate}}</span
+  >
+  <span class="ib-alert ib-alert--error" ng-message="pattern"
+    >{{ibUiDaterangepickerCtrl.model.validation.pattern|translate}}</span
+  >
+  <span class="ib-alert ib-alert--error" ng-message="minValid"
+    >{{ibUiDaterangepickerCtrl.model.validation.minValid|translate}}</span
+  >
+  <span class="ib-alert ib-alert--error" ng-message="maxValid"
+    >{{ibUiDaterangepickerCtrl.model.validation.maxValid|translate}}</span
+  >
+  <span class="ib-alert ib-alert--error" ng-message="restrictionValid"
+    >{{ibUiDaterangepickerCtrl.model.validation.restrictionValid|translate}}</span
+  >
+</div>

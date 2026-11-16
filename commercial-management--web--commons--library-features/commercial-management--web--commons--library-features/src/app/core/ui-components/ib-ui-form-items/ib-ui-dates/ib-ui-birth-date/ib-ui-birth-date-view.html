@@ -1,0 +1,85 @@
+<div
+  class="ib-select-date"
+  id="{{ uiBirthDateCtrl.id }}"
+  data-ng-class="{'ib-select-date--error': uiBirthDateCtrl.containerForm.$submitted && (uiBirthDateCtrl.containerForm['birthDateDay_'+uiBirthDateCtrl.index].$invalid || uiBirthDateCtrl.containerForm['birthDateMonth_'+uiBirthDateCtrl.index].$invalid || uiBirthDateCtrl.containerForm['birthDateYear_'+uiBirthDateCtrl.index].$invalid),
+        'ib-select--edition-disabled': uiBirthDateCtrl.haveBirthDate && (uiBirthDateCtrl.day && uiBirthDateCtrl.month && uiBirthDateCtrl.year),
+        'ib-select-date--label': uiBirthDateCtrl.day && uiBirthDateCtrl.month && uiBirthDateCtrl.year}"
+>
+  <span
+    class="ib-select__label ib-select__label--focus"
+    ng-class="{'ib-input__label--uppercase' : uiBirthDateCtrl.day || uiBirthDateCtrl.month || uiBirthDateCtrl.year}"
+    >{{uiBirthDateCtrl.fieldTitle |translate}}
+    {{uiBirthDateCtrl.fieldSubtitle|translate}} {{uiBirthDateCtrl.fieldSubtitle
+    ? uiBirthDateCtrl.index + 1 : ''}}</span
+  >
+  <ui-select
+    class="ib-select-date__action ib-select-date__action--day"
+    data-ng-model="uiBirthDateCtrl.day"
+    data-ng-change="uiBirthDateCtrl.daysSelected()"
+    ng-required="!uiBirthDateCtrl.notRequiredField"
+    name="birthDateDay_{{::uiBirthDateCtrl.index}}"
+  >
+    <ui-select-match
+      class="ib-select-date__list-ipt"
+      placeholder="{{'BIRTH_DATE_FIELD_DAY_PLACEHOLDER'|translate}}"
+    >
+      <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+    </ui-select-match>
+    <ui-select-choices
+      class="ib-select-date__list"
+      repeat="item in (uiBirthDateCtrl.availableDays | filter: $select.search)"
+    >
+      <span class="ib-select-date__list-txt" ng-bind="item"></span>
+    </ui-select-choices>
+  </ui-select>
+  <ui-select
+    class="ib-select-date__action ib-select-date__action--month"
+    data-ng-model="uiBirthDateCtrl.month"
+    data-ng-change="uiBirthDateCtrl.monthsSelected()"
+    ng-required="!uiBirthDateCtrl.notRequiredField"
+    name="birthDateMonth_{{::uiBirthDateCtrl.index}}"
+  >
+    <ui-select-match
+      class="ib-select-date__list-ipt"
+      placeholder="{{'BIRTH_DATE_FIELD_MONTH_PLACEHOLDER'|translate}}"
+    >
+      <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+    </ui-select-match>
+    <ui-select-choices
+      repeat="item in (uiBirthDateCtrl.availableMonths | filter: $select.search)"
+    >
+      <span class="ib-select-date__list-txt" data-ng-bind="item"></span>
+    </ui-select-choices>
+  </ui-select>
+  <ui-select
+    class="ib-select-date__action ib-select-date__action--year"
+    data-ng-model="uiBirthDateCtrl.year"
+    data-ng-change="uiBirthDateCtrl.yearsSelected()"
+    ng-required="!uiBirthDateCtrl.notRequiredField"
+    name="birthDateYear_{{::uiBirthDateCtrl.index}}"
+  >
+    <ui-select-match
+      class="ib-select-date__list-ipt"
+      placeholder="{{'BIRTH_DATE_FIELD_YEAR_PLACEHOLDER'|translate}}"
+    >
+      <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+    </ui-select-match>
+    <ui-select-choices
+      repeat="item in (uiBirthDateCtrl.availableYears | filter: $select.search)"
+    >
+      <span class="ib-select-date__list-txt" data-ng-bind="item"></span>
+    </ui-select-choices>
+  </ui-select>
+</div>
+<div
+  ng-messages="(uiBirthDateCtrl.containerForm.$submitted || uiBirthDateCtrl.underTwoError || uiBirthDateCtrl.underEighteenError  ) && ((uiBirthDateCtrl.containerForm['birthDateDay_'+uiBirthDateCtrl.index].$invalid && uiBirthDateCtrl.containerForm['birthDateDay_'+uiBirthDateCtrl.index].$error) 
+    || (uiBirthDateCtrl.containerForm['birthDateMonth_'+uiBirthDateCtrl.index].$invalid && uiBirthDateCtrl.containerForm['birthDateMonth_'+uiBirthDateCtrl.index].$error)
+    || (uiBirthDateCtrl.containerForm['birthDateYear_'+uiBirthDateCtrl.index].$invalid && uiBirthDateCtrl.containerForm['birthDateYear_'+uiBirthDateCtrl.index].$error))"
+>
+  <div class="ib-alert ib-alert--error" ng-message="required">
+    {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+  </div>
+  <div class="ib-alert ib-alert--error" ng-message="underAgeError">
+    {{'GENERAL_INPUT_UNDERAGE_ERROR'|translate}}
+  </div>
+</div>

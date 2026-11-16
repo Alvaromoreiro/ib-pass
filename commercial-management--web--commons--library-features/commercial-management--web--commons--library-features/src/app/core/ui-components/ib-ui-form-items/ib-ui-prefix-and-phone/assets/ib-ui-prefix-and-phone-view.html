@@ -1,0 +1,80 @@
+<div
+  class="ib-input"
+  data-ng-class="{
+        'ib-input--error': (ibUiPrefixAndPhoneCtrl.containerForm.$submitted || ibUiPrefixAndPhoneCtrl.containerForm.phone.$submitted || ibUiPrefixAndPhoneCtrl.containerForm.phonePrefix.$submitted) && (ibUiPrefixAndPhoneCtrl.containerForm.phone.$invalid || ibUiPrefixAndPhoneCtrl.containerForm.phonePrefix.$invalid),
+        'ib-input--disabled': !ibUiPrefixAndPhoneCtrl.editionMode && !ibUiPrefixAndPhoneCtrl.phoneSelected.prefix && !ibUiPrefixAndPhoneCtrl.phoneSelected.number,
+        'ib-input--edition-disabled': ibUiPrefixAndPhoneCtrl.phoneSelected.prefix.length > 0 && ibUiPrefixAndPhoneCtrl.phoneSelected.number.length > 0  && !ibUiPrefixAndPhoneCtrl.editionMode}"
+>
+  <div
+    class="ib-select-date"
+    data-ng-class="{
+        'ib-select--disabled': !ibUiPrefixAndPhoneCtrl.editionMode,
+        'ib-select-date--edition-disabled': !ibUiPrefixAndPhoneCtrl.editionMode && (ibUiPrefixAndPhoneCtrl.phoneSelected.prefix.length > 0 || ibUiPrefixAndPhoneCtrl.phoneSelected.number.length > 0),
+        'ib-select--label': ibUiPrefixAndPhoneCtrl.prefixSelected,
+        'ib-select-date--error': (ibUiPrefixAndPhoneCtrl.containerForm.$submitted || ibUiPrefixAndPhoneCtrl.containerForm.phone.$submitted) && ibUiPrefixAndPhoneCtrl.containerForm.phone.$invalid}"
+  >
+    <span
+      class="ib-select-date__label ib-input__label--uppercase"
+      aria-label="{{'PERSONAL_PHONE'|translate}"
+      >{{'PERSONAL_PHONE'|translate}}</span
+    >
+    <ui-select
+      ib-select-safari
+      class="ib-select-date__action ib-select-date__action--month ib-select-date__action--month-first"
+      data-ng-model="ibUiPrefixAndPhoneCtrl.phoneSelected.prefix"
+      name="phonePrefix"
+      on-select="ibUiPrefixAndPhoneCtrl.phoneSelected.prefix=$select.selected;containerForm.prefixSelected=$select.selected; ibUiPrefixAndPhoneCtrl.containerForm.phonePrefix.$submitted = true"
+      data-ng-disabled="!ibUiPrefixAndPhoneCtrl.editionMode"
+    >
+      <ui-select-match
+        class="ib-select-date__list-ipt"
+        placeholder="{{'PHONE_PREFIX'|translate}}"
+      >
+        <span class="ib-select-date__txt"
+          >{{$select.selected.name|translate}}</span
+        >
+      </ui-select-match>
+      <ui-select-choices
+        class="ib-select-date__list"
+        repeat="item in (ibUiPrefixAndPhoneCtrl.prefixList | filter: $select.search) track by $index"
+      >
+        <span class="ib-select-date__list-txt">{{item.name|translate}}</span>
+      </ui-select-choices>
+    </ui-select>
+    <label class="u-hide-accessible" for="phone"
+      >{{'PAYMENTS_CONTACT_FORM_PHONE'|translate}}</label
+    >
+    <input
+      class="ib-input__input ib-input__input--phone"
+      type="text"
+      id="phone"
+      name="phone"
+      data-ng-focus="phoneFocused = true"
+      data-ng-blur="phoneFocused = false;"
+      data-ng-model="ibUiPrefixAndPhoneCtrl.phoneSelected.number"
+      data-ng-disabled="!ibUiPrefixAndPhoneCtrl.editionMode"
+      ng-required="true"
+      ng-pattern="::$root.patterns.PHONE_PATTERN"
+      minlength="{{::$root.lengthPatterns.MIN_LENGTH_PHONE}}"
+      maxlength="{{::$root.lengthPatterns.MAX_LENGTH_PHONE}}"
+      ib-validator-cleaner="{{::$root.patterns.PHONE_CLEANER}}"
+    />
+  </div>
+</div>
+<div
+  ng-messages="(ibUiPrefixAndPhoneCtrl.containerForm.$submitted || ibUiPrefixAndPhoneCtrl.containerForm.phone.$submitted || (ibUiPrefixAndPhoneCtrl.containerForm.phonePrefix.$submitted && ibUiPrefixAndPhoneCtrl.containerForm.$submitted)) &&
+(ibUiPrefixAndPhoneCtrl.containerForm.phone.$error || ibUiPrefixAndPhoneCtrl.containerForm.phonePrefix.$error)"
+>
+  <span class="ib-alert ib-alert--error" ng-message="pattern">
+    {{'GENERAL_INPUT_PATTERN_ERROR'|translate}}
+  </span>
+  <span class="ib-alert ib-alert--error" ng-message="minlength">
+    {{'GENERAL_PHONE_MIN_LENGTH_ERROR'|translate}}
+  </span>
+  <span class="ib-alert ib-alert--error" ng-message="maxlength">
+    {{'GENERAL_LENGTH_ERROR_TEXT'|translate}}
+  </span>
+  <span class="ib-alert ib-alert--error" ng-message="required">
+    {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+  </span>
+</div>

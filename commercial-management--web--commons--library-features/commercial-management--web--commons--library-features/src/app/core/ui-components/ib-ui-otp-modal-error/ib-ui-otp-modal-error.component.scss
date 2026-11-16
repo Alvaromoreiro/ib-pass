@@ -1,0 +1,165 @@
+$otp-overlay-bg: rgb(51 51 51 / 66%);
+$otp-modal-bg: #fff;
+$otp-modal-shadow: 0 8px 32px rgb(0 0 0 / 10%);
+$otp-modal-border-radius: 8px;
+
+$otp-error-icon-outer-bg: rgba(168, 25, 26, 0.1);
+$otp-error-icon-inner-bg: #a8191a;
+
+$otp-error-title-color: #333;
+$otp-error-subtitle-color: #333;
+
+$otp-error-divider-color: #eee;
+
+$otp-error-btn-bg: #d7192d;
+$otp-error-btn-bg-hover: #a8191a;
+$otp-error-btn-color: #fff;
+
+$otp-font-family-heading: "Iberia Headline", sans-serif;
+$otp-font-size-xl: 1.5rem;
+
+:host {
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ib-modals__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $otp-overlay-bg;
+}
+
+.ib-modals--otp-error {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  overflow: hidden;
+  width: 90%;
+  max-width: 30rem;
+  background-color: $otp-modal-bg;
+  box-shadow: $otp-modal-shadow;
+  transform: translate(-50%, -50%);
+}
+
+.otp-error-header {
+  padding: 1.25rem 1.25rem 0;
+}
+
+.otp-error-close-container {
+  text-align: end;
+}
+
+.ib-modals__button-action {
+  padding: 0;
+  border: none;
+  font-size: $otp-font-size-xl;
+  line-height: 1;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+}
+
+.otp-error-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem 2.5rem;
+  gap: 0;
+}
+
+.otp-error-icon-outer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4rem;
+  background: $otp-error-icon-outer-bg;
+}
+
+.otp-error-icon-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 3rem;
+  background: $otp-error-icon-inner-bg;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.otp-error-title {
+  margin: 0 0 0.75rem;
+  font-family: $otp-font-family-heading;
+  font-size: 1.875rem;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  line-height: normal;
+  color: $otp-error-title-color;
+  font-feature-settings: 'liga' off, 'clig' off;
+}
+
+.otp-error-subtitle {
+  margin: 0;
+  font-family: $otp-font-family-heading;
+  font-size: 1.125rem;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  line-height: normal;
+  color: $otp-error-subtitle-color;
+  font-feature-settings: 'liga' off, 'clig' off;
+}
+
+.otp-error-divider {
+  display: flex;
+  height: 0.0625rem;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  justify-content: center;
+  margin: 1.5rem 0;
+  border: none;
+  background-color: $otp-error-divider-color;
+}
+
+.otp-error-accept-btn {
+  display: flex;
+  width: 100%;
+  max-height: 4rem;
+  align-items: center;
+  align-self: stretch;
+  justify-content: center;
+  padding: 1rem 2rem;
+  border: none;
+  font-family: $otp-font-family-heading;
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: normal;
+  color: $otp-error-btn-color;
+  background: $otp-error-btn-bg;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background: $otp-error-btn-bg-hover;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $otp-error-btn-bg-hover;
+    outline-offset: 2px;
+  }
+}

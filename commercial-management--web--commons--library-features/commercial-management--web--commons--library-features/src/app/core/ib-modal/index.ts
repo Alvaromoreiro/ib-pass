@@ -1,0 +1,16 @@
+import "./controllers/ib-filters-modal-controller";
+import "./controllers/ib-generic-error-modal-controller";
+import "./controllers/ib-generic-modal-controller";
+import "./controllers/ib-insurance-modal-controller";
+import "./controllers/ib-loading-plane-controller";
+import "./controllers/ib-modal-itravel-warning-controller";
+import "./controllers/ib-modal-terms-conditions-controller";
+import "./controllers/ib-onhold-modal-controller";
+import "./services/ib-modal-service";
+import "./directives/ib-loading-plane-directive";
+import "./components/ib-upgrade-zero-modal-component";
+import "./components/ib-change-status-user-modal-component";
+import "./components/ib-generic-modal-component";
+import "./components/ib-generic-error-modal-component";
+import "./components/ib-expired-modal-component";
+import "./components/ib-back-main-modal-component";

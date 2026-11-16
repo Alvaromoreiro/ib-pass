@@ -1,0 +1,95 @@
+<div
+  ng-if="TCmodalCtrl.serviceError"
+  class="ib-msg-alert ib-msg-alert--danger icon-alerta_grave alert"
+>
+  <p class="ib-msg-alert__text ib-msg-alert__text--bold">
+    {{'ACCEPT_TERMS_CONDITIONS_ERROR'|translate}}
+  </p>
+</div>
+<header class="ib-modals ib-modals__header">
+  <h2 class="ib-heading ib-heading--type-1">
+    {{'ACCEPT_TERMS_CONDITIONS_TITLE'|translate}}
+  </h2>
+  <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+    <p
+      class="ib-text ib-text--block ib-text--bold ib-text--xbig-responsive3 ib-text--especial ib-text--lh-lmedium"
+    >
+      {{'ACCEPT_TERMS_CONDITIONS_SUBTITLE'|translate}}
+    </p>
+  </div>
+</header>
+
+<form
+  id="cki-modal-terms-conditions-form"
+  name="TCmodalCtrl.termsCond"
+  method="post"
+>
+  <div>
+    <section class="u-mb-medium">
+      <div class="ib-layout__line-spacing">
+        <div
+          class="ib-check"
+          ng-class="{'ib-check--error': TCmodalCtrl.submitted && TCmodalCtrl.termsCond.conditions_check.$error}"
+        >
+          <input
+            type="checkbox"
+            id="conditions_check"
+            name="conditions_check"
+            class="ib-check__input"
+            ng-model="conditionsCheck"
+            required
+          />
+          <label for="conditions_check" class="ib-check__label">
+            <span class="ib-check__text"
+              >{{'TERMS_CONDITIONS_CHECK_TEXT_1'|translate}}
+              <a
+                href="{{'IBERIA_PLUS_CONDITIONS_LINK'|LinksFilter}}"
+                target="_blank"
+                title="{{'TERMS_CONDITIONS_CHECK_TEXT_2'|translate}}"
+                class="ib-link ib-link--inline ib-link--primary"
+                >{{'TERMS_CONDITIONS_CHECK_TEXT_2'|translate}}</a
+              >
+              {{'TERMS_CONDITIONS_CHECK_TEXT_4'|translate}}
+              <a
+                href="{{'DATA_PROTECTION_POLICY_LINK'|LinksFilter}}"
+                target="_blank"
+                title="{{'TERMS_CONDITIONS_CHECK_TEXT_4_LINK'|translate}}"
+                class="ib-link ib-link--inline ib-link--primary"
+                >{{'TERMS_CONDITIONS_CHECK_TEXT_4_LINK'|translate}}</a
+              >
+            </span>
+          </label>
+        </div>
+        <div
+          ng-messages="TCmodalCtrl.submitted && TCmodalCtrl.termsCond.conditions_check.$error"
+        >
+          <span ng-message="required" class="ib-alert ib-alert--error">
+            {{'GENERAL_INPUT_REQUIRED_FIELD_ERROR'|translate}}
+          </span>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer class="ib-modals__footer">
+    <div class="ib-content-buttons">
+      <div class="ib-content-buttons__content-left u-mt u-mb">
+        <button
+          id="cki-modal-dangerous-objects-continue-flow-btn"
+          class="ib-button ib-button--w-medium"
+          type="submit"
+          ng-click="TCmodalCtrl.termsConditionsSubmit(TCmodalCtrl.termsCond.conditions_check)"
+        >
+          {{'ACCEPT_AND_CONTINUE_BUTTON'|translate}}
+        </button>
+      </div>
+      <div class="ib-content-buttons__content-right u-mb-none">
+        <a
+          ng-if="TCmodalCtrl.serviceError"
+          ng-click="TCmodalCtrl.reloadNoAccess()"
+          class="ib-link"
+          >{{'CONTINUE_WITHOUT_ACCESS'|translate}}</a
+        >
+      </div>
+    </div>
+  </footer>
+</form>

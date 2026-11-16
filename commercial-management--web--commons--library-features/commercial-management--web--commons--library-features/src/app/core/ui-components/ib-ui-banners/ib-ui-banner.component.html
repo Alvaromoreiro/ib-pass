@@ -1,0 +1,318 @@
+<div [ngSwitch]="type">
+  <!-- TYPE-1 -->
+  <div
+    id="BANNER_SELECT_DESTINATION"
+    class="ib-ui-banners ib-ui-banners--type-1 {{ modifier }}"
+    *ngSwitchCase="'type-1'"
+    (click)="selectDestination(offer)"
+  >
+    <div
+      class="ib-ui-banners ib-ui-banners__figure"
+      [ngStyle]="image && { 'background-image': 'url(' + image.url + ')' }"
+    >
+      <span class="u-hide-accessible" aria-hidden="true">{{
+        image.title
+      }}</span>
+      <img
+        class="u-display-none"
+        [src]="image.url"
+        (error)="returnBannerImage($event, false)"
+      />
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="ib-ui-banners__content {{ modifierContent }}">
+              <div class="ib-ui-banners__content--title-section">
+                <span class="ib-ui-banners__icon {{ icon }}" *ngIf="icon">
+                </span>
+                <span style="display: flex" class="ib-ui-banners__title"
+                  >{{ titleTxt | translate }}
+                  <ib-ui-timer
+                    *ngIf="!timeText && time && !isNext"
+                    [type]=""
+                    [timerClass]="
+                      'ib-ui-banners__timer ib-ui-banners__timer--inline'
+                    "
+                    [endTime]="time"
+                  ></ib-ui-timer>
+                </span>
+              </div>
+              <div class="ib-flex ib-flex--align-end">
+                <p class="ib-ui-banners__text--city" *ngIf="city">
+                  {{ city | translate }}
+                </p>
+                <p class="ib-ui-banners__text--since" *ngIf="since">
+                  <span class="ib-ui-banners__text--since-text">{{
+                    since | translate
+                  }}</span>
+                  <span class="ib-ui-banners__text--price" *ngIf="price">
+                    {{ price | translate }}
+                    <span class="ib-ui-banners__text--currency">
+                      {{ currency | translate }}
+                    </span>
+                  </span>
+                </p>
+              </div>
+              <div class="ib-flex">
+                <p
+                  class="ib-ui-banners__text--seating"
+                  *ngIf="text && !textParam"
+                >
+                  {{ text | translate }}
+                </p>
+                <p
+                  class="ib-ui-banners__text--seating"
+                  *ngIf="text && textParam"
+                >
+                  {{ text | translate: { param: textParam } }}
+                </p>
+              </div>
+              <div class="ib-ui-banners__content--title-section">
+                <p class="ib-ui-banners__box-link" *ngIf="link">
+                  <a class="ib-ui-banners__title--link">{{
+                    link | translate
+                  }}</a>
+                </p>
+                <span
+                  class="ib-ui-banners__icon {{ icon }}"
+                  *ngIf="icon && link"
+                >
+                </span>
+              </div>
+              <div *ngIf="availability && number">
+                <span class="ib-ui-banners__icon icon-persona"> </span>
+                <span class="ib-ui-banners__text ib-ui-banners__text--small">
+                  {{ availability | translate }} {{ number | translate }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- TYPE-2 -->
+  <div class="ib-ui-banners ib-ui-banners--type-2" *ngSwitchCase="'type-2'">
+    <div
+      class="ib-ui-banners ib-ui-banners__figure"
+      [ngStyle]="image && { 'background-image': 'url(' + image.url + ')' }"
+    >
+      <span class="u-hide-accessible" aria-hidden="true">{{
+        image.title
+      }}</span>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="ib-ui-banners__content {{ modifierContent }}">
+              <div class="ib-ui-banners__content--title-section">
+                <span
+                  class="ib-ui-banners__title"
+                  [ngClass]="icon ? icon : ''"
+                  *ngIf="titleTxt"
+                >
+                  {{ titleTxt | translate }}
+                </span>
+                <p class="ib-ui-banners__subtitle" *ngIf="subtitle">
+                  {{ subtitle | translate }}
+                </p>
+                <p class="ib-ui-banners__text" *ngIf="text">
+                  {{ text | translate }}
+                </p>
+                <p class="ib-ui-banners__text" *ngIf="text2">
+                  {{ text2 | translate }}
+                </p>
+                <ul class="ib-ui-banners__list" *ngIf="feature1">
+                  <li class="ib-ui-banners__item">
+                    <p class="ib-ui-banners__text">{{ feature1 }}</p>
+                  </li>
+                  <li class="ib-ui-banners__item" *ngIf="feature2">
+                    <p class="ib-ui-banners__text">{{ feature2 }}</p>
+                  </li>
+                  <li class="ib-ui-banners__item" *ngIf="feature3">
+                    <p class="ib-ui-banners__text">{{ feature3 }}</p>
+                  </li>
+                  <li class="ib-ui-banners__item" *ngIf="feature4">
+                    <p class="ib-ui-banners__text">{{ feature4 }}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- TYPE-3 -->
+  <div class="ib-ui-banners ib-ui-banners--type-3" *ngSwitchCase="'type-3'">
+    <div
+      class="ib-ui-banners ib-ui-banners__figure"
+      [ngStyle]="image && { 'background-image': 'url(' + image.url + ')' }"
+    >
+      <span class="u-hide-accessible" aria-hidden="true">{{
+        image.title | translate
+      }}</span>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="ib-ui-banners__content {{ modifierContent }}">
+              <div class="ib-ui-banners__content--title-section">
+                <span class="ib-ui-banners__icon {{ icon }}" *ngIf="icon">
+                </span>
+                <span class="ib-ui-banners__title"
+                  >{{ titleTxt | translate }}
+                </span>
+              </div>
+              <p
+                class="ib-ui-banners__text ib-ui-banners__text--city"
+                dotdotdot
+              >
+                {{ city | translate }}
+              </p>
+              <p class="ib-ui-banners__text--seating">
+                {{ text | translate }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- TYPE-4 (CAROUSEL BANNER) -->
+  <div
+    id="CAROUSEL_BANNER"
+    class="ib-ui-banners ib-ui-banners--type-4"
+    *ngSwitchCase="'type-4'"
+    (click)="selectDestination(offer)"
+  >
+    <div
+      class="ib-ui-banners ib-ui-banners__figure"
+      [ngStyle]="image && { 'background-image': 'url(' + image.url + ')' }"
+    >
+      <span class="u-hide-accessible" aria-hidden="true">{{
+        image.title | translate
+      }}</span>
+      <img
+        class="u-display-none"
+        loading="lazy"
+        [src]="image.url"
+        (error)="returnBannerImage($event, true)"
+      />
+      <div class="container">
+        <div class="ib-ui-banners__content">
+          <div class="ib-ui-banners__content--title-section">
+            <span class="ib-ui-banners__title" [ngClass]="icon ? icon : ''"
+              >{{ titleTxt | translate }}
+              <ib-ui-timer
+                *ngIf="!timeText && time && !isNext"
+                [type]=""
+                [timerClass]="
+                  'ib-ui-banners__timer ib-ui-banners__timer--inline'
+                "
+                [endTime]="time"
+                >{{ time | translate }}
+              </ib-ui-timer>
+            </span>
+          </div>
+          <div class="ib-ui-banners__content--main-section">
+            <p
+              class="ib-ui-banners__text--city"
+              *ngIf="city"
+              [ngClass]="{ 'ib-ui-banners__text--city-long': city.length > 14 }"
+            >
+              {{ city | translate }}
+              <span
+                class="ib-ui-banners__text--since-text visible-xs"
+                [ngClass]="{ 'hidden-xs': city.length > 14 }"
+                >{{ since | translate }}</span
+              >
+            </p>
+            <p
+              class="ib-ui-banners__text--since"
+              *ngIf="since"
+              [ngClass]="{
+                'ib-ui-banners__text--since-bottom': city.length <= 14
+              }"
+            >
+              <span
+                class="ib-ui-banners__text--since-text"
+                [ngClass]="{ 'hidden-xs': city.length <= 14 }"
+                >{{ since | translate }}</span
+              >
+              <span
+                class="ib-ui-banners__text--price"
+                *ngIf="price"
+                [ngClass]="{
+                  'ib-ui-banners__text--price-long': price.length > 6
+                }"
+              >
+                {{ price | translate }}
+                <span
+                  class="ib-ui-banners__text--currency"
+                  [ngClass]="{
+                    'ib-ui-banners__text--currency-long': price.length > 6
+                  }"
+                >
+                  {{ currency | translate }}
+                </span>
+              </span>
+            </p>
+          </div>
+          <div
+            class="hidden-xs ib-ui-banners__icon ib-ui-banners__icon-text icon-vuelos"
+          >
+            <span
+              class="hidden-sm ib-ui-banners__text ib-ui-banners__text--small"
+            >
+              {{ periodText | translate }} {{ daterangeDeparture }}
+            </span>
+            <span
+              class="visible-sm ib-ui-banners__text ib-ui-banners__text--small"
+            >
+              {{ datesText | translate }}: {{ daterangeDeparture }}
+            </span>
+          </div>
+          <div class="hidden-xs hidden-sm" *ngIf="availability && number">
+            <span class="ib-ui-banners__icon icon-persona"> </span>
+            <span class="ib-ui-banners__text ib-ui-banners__text--small">
+              {{ availability | translate }} {{ number }}
+            </span>
+          </div>
+          <div class="ib-ui-banners__content--button-section" *ngIf="link">
+            <button
+              class="ib-ui-banners__content--button-text"
+              type="button"
+              (click)="selectDestination(offer)"
+              focusin
+            >
+              {{ link | translate | uppercase }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END TYPE-4 -->
+  <!-- DEFAULT -->
+  <div *ngSwitchDefault class="ib-ui-banners ib-ui-banners--type-2">
+    <div
+      *ngIf="image"
+      class="ib-ui-banners ib-ui-banners__figure"
+      [ngStyle]="{ 'background-image': 'url(' + image.url + ')' }"
+    >
+      <span class="u-hide-accessible" aria-hidden="true">{{
+        image.title | translate
+      }}</span>
+      <div class="ib-ui-banners__content {{ modifierContent }}">
+        <div class="ib-ui-banners__content--title-section">
+          <span
+            *ngIf="titleTxt"
+            [ngClass]="{ icon: icon }"
+            class="ib-ui-banners__title"
+            >{{ titleTxt | translate }}
+          </span>
+          <p *ngIf="text" class="ib-ui-banners__text">{{ text | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

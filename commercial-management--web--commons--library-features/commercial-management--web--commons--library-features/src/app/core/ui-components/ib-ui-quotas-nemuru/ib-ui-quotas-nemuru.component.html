@@ -1,0 +1,42 @@
+<div
+  class="ib-ui-quotas-nemuru ib-box ib-box--small {{ modifierClass }}"
+  [style.display]="showComponent ? null : 'none'"
+>
+  <img
+    class="ib-ui-quotas-nemuru__icon"
+    src="/iberia-web-content/imagenes/payment-tabs/NEMURU-icon.svg"
+  />
+  <div>
+    <span class="ib-ui-quotas-nemuru__intro">{{
+      "BANNER_QUOTAS_NEMURU_TEXT_1" | translate
+    }}</span>
+    {{ bannerTextBody1 }}
+    <div
+      [ngClass]="{
+        'ib-ui-quotas-nemuru__dropdown': true,
+        'prop-unfolded': unfolded
+      }"
+    >
+      <span [id]="oneIdentificator">
+        {{ selectedTerm }}
+      </span>
+      <ul>
+        <li *ngFor="let quota of quotasData; index as i">
+          <input
+            type="radio"
+            id="{{ oneIdentificator }}-quota-{{ i }}"
+            name="{{ oneIdentificator }}-quota"
+            (change)="updateIndexSelectedTerm(i)"
+            [value]="i"
+          />
+          <label for="{{ oneIdentificator }}-quota-{{ i }}">{{
+            quota?.term
+          }}</label>
+        </li>
+      </ul>
+    </div>
+    {{ bannerTextBody2 }}
+    <strong>{{ selectedTermAmount }}</strong
+    >{{ bannerTextBody3 }}
+  </div>
+</div>

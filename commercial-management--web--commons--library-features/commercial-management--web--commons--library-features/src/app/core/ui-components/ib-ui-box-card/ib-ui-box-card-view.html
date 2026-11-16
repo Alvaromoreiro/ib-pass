@@ -1,0 +1,444 @@
+<div ng-switch="uiBoxCardCtrl.type">
+  <!-- TYPE-5 -->
+  <div
+    ng-switch-when="type-5"
+    class="ib-box-card"
+    data-ng-class="uiBoxCardCtrl.type ? 'ib-box-card--'+uiBoxCardCtrl.type : ''"
+  >
+    <div
+      ng-if="uiBoxCardCtrl.image"
+      class="ib-box-card__figure ib-box-card__figure--state-{{uiBoxCardCtrl.state | lowercase}}"
+      data-content="{{uiBoxCardCtrl.stateText}}"
+      data-ng-style="{'background-image': 'url(' + uiBoxCardCtrl.image.url + ')'}"
+    >
+      <span class="u-hide-accessible" aria-hidden="true"
+        >{{uiBoxCardCtrl.image.title}}</span
+      >
+      <img
+        class="u-display-none"
+        ng-src="{{uiBoxCardCtrl.image.url}}"
+        onerror="this.onerror=null;angular.element(this).scope().uiBoxCardCtrl.returnBoxCardImage(this)"
+      />
+    </div>
+    <div class="ib-box-card__content">
+      <div
+        data-ng-class="uiBoxCardCtrl.state === 'NEXT' ? '' : 'ib-text ib-text--separator-2'"
+      >
+        <div>
+          <h2
+            class="ib-box-card__title ib-box-card__title--bold"
+            data-ng-if="uiBoxCardCtrl.titleTxt"
+            ng-class="{'ib-box-card__title ib-box-card__title--bold ib-box-card__title--bold-long':uiBoxCardCtrl.titleTxt.length > 13}"
+          >
+            {{uiBoxCardCtrl.titleTxt}}
+          </h2>
+        </div>
+        <div class="ib-box-card__date" data-ng-if="uiBoxCardCtrl.date">
+          <div
+            class="ib-box-card__date-text-section ib-box-card__date-text-section--with-icon ib-box-card__date-text-section--up"
+            data-ng-class="uiBoxCardCtrl.icon ? uiBoxCardCtrl.icon : ''"
+          >
+            {{uiBoxCardCtrl.periodText}}
+            <div
+              class="row ib-box-card__date-text-section--text-left"
+              data-ng-if="(uiBoxCardCtrl.daterangeReturn === undefined || uiBoxCardCtrl.daterangeReturn === null) && uiBoxCardCtrl.daterangeDeparture === uiBoxCardCtrl.daterangeDepartureTo"
+            >
+              {{uiBoxCardCtrl.daterangeDeparture}}
+            </div>
+            <div
+              class="row ib-box-card__date-text-section--text-left"
+              data-ng-if="(uiBoxCardCtrl.daterangeReturn === undefined || uiBoxCardCtrl.daterangeReturn === null) && uiBoxCardCtrl.daterangeDeparture !== uiBoxCardCtrl.daterangeDepartureTo"
+            >
+              {{uiBoxCardCtrl.daterangeDeparture}} -
+              {{uiBoxCardCtrl.daterangeDepartureTo}}
+            </div>
+            <div
+              class="row ib-box-card__date-text-section--text-left"
+              data-ng-if="uiBoxCardCtrl.daterangeReturn !== undefined && uiBoxCardCtrl.daterangeReturn !== null"
+            >
+              {{uiBoxCardCtrl.daterangeDeparture}} -
+              {{uiBoxCardCtrl.daterangeReturn}}
+            </div>
+          </div>
+        </div>
+        <p class="ib-box-card__origin" data-ng-if="uiBoxCardCtrl.origin">
+          {{uiBoxCardCtrl.originText}}{{uiBoxCardCtrl.origin}}
+        </p>
+        <p
+          class="ib-box-card__underline-txt"
+          data-ng-if="uiBoxCardCtrl.active && uiBoxCardCtrl.date"
+        >
+          <span
+            data-ng-class="uiBoxCardCtrl.state === 'EXPIRED' ? 'icon-energia':'icon-energia u-color-primary'"
+          >
+          </span>
+          {{uiBoxCardCtrl.active}}{{uiBoxCardCtrl.date}}
+        </p>
+      </div>
+      <div
+        class="ib-box-card__end-section"
+        data-ng-if="uiBoxCardCtrl.availability || uiBoxCardCtrl.price"
+      >
+        <p class="ib-box-card__availability-seats">
+          {{uiBoxCardCtrl.number}} {{uiBoxCardCtrl.availability}}
+        </p>
+        <p
+          ng-if="uiBoxCardCtrl.case === 1"
+          class="ib-box-card__availability-seats ib-box-card__availability-seats--since"
+        >
+          {{uiBoxCardCtrl.since}}
+          <span
+            class="ib-box-card__price"
+            data-ng-class="{'ib-box-card__price--price-long' : uiBoxCardCtrl.price.length >= 5 }"
+            >{{uiBoxCardCtrl.price}}
+            <span
+              class="ib-box-card__price--crossed-out"
+              data-ng-if="uiBoxCardCtrl.originalPrice"
+              >{{uiBoxCardCtrl.originalPrice}}
+            </span>
+          </span>
+        </p>
+      </div>
+      <div class="ib-box-card__button-section">
+        <div
+          data-ng-repeat="button in uiBoxCardCtrl.actions"
+          class="ib-box-card__button ib-box-card__button--auto ib-box-card__button--padding-none"
+        >
+          <button
+            id="BUTTON_VIEW_DEAL"
+            class="ib-button ib-button--medium ib-button--bold {{uiBoxCardCtrl.buttonModifier}} u-width-full"
+            type="button"
+            ng-click="button.action(uiBoxCardCtrl.offer, uiBoxCardCtrl.CommonsConstants.ORIGIN_COMPONENT.IB_UI_BOX_CARD)"
+            focusin
+          >
+            {{button.title|translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- END TYPE-5 -->
+
+    <!-- TYPE-4 -->
+  </div>
+  <div class="row" ng-switch-when="4">
+    <equal-height data-equal-height-reload="true">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
+        <section class="ib-layout__section">
+          <div
+            tabindex="0"
+            class="ib-box-card ib-box-card--type-4 ib-box-card--auto-height"
+          >
+            <div class="ib-box-card__content" data-equal="box-bids-1">
+              <div class="ib-text ib-box-card__paragraph">
+                <div class="ib-box-card__header">
+                  <h2 class="ib-box-card__title">Vuela en clase superior</h2>
+                  <span class="ib-box-card__subtitle">DESDE 15&euro;</span>
+                </div>
+                <span class="ib-text ib-text--block">
+                  Mejora tu viaje pagando un poco m&aacute;s; haz tu oferta.
+                </span>
+                <span class="ib-text ib-text--block ib-text--color-unfocused">
+                  No has realizado ninguna oferta
+                </span>
+              </div>
+              <div class="ib-box-card__button-section">
+                <div class="ib-box-card__button">
+                  <button
+                    class="ib-button ib-button--block-xs ib-button--w-small ib-button--default-normal"
+                    role="button"
+                  >
+                    Haz tu oferta
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
+        <section class="ib-layout__section">
+          <div
+            tabindex="0"
+            class="ib-box-card ib-box-card--type-4 ib-box-card--auto-height"
+          >
+            <div class="ib-box-card__content" data-equal="box-bids-1">
+              <div
+                class="ib-box-card__checked ib-box-card__checked--without-image icon-confirmacion"
+              >
+                <div class="ib-box-card__shadow">
+                  <span class="u-hide-accessible">Opci&oacute;n escogida</span>
+                </div>
+              </div>
+              <div class="ib-text ib-box-card__paragraph">
+                <div class="ib-box-card__header">
+                  <h2 class="ib-box-card__title">Vuela en clase superior</h2>
+                  <span class="ib-box-card__subtitle"
+                    >HAS HECHO OFERTAS POR 840&euro;</span
+                  >
+                </div>
+                <span class="ib-text ib-text--block ib-text--lh-normal">
+                  Mejora tu viaje pagando un poco m&aacute;s; haz tu oferta.
+                </span>
+                <span
+                  class="ib-text ib-text--block ib-text--color-unfocused ib-text--lh-normal"
+                >
+                  Ya has realizado una oferta
+                </span>
+              </div>
+              <div class="ib-box-card__button-section">
+                <div class="ib-box-card__button">
+                  <button
+                    class="ib-button ib-button--block-xs ib-button--w-small ib-button--inverse ib-button--default-normal"
+                    role="button"
+                  >
+                    Modificar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
+        <section class="ib-layout__section">
+          <div
+            tabindex="0"
+            class="ib-box-card ib-box-card--type-4 ib-box-card--auto-height"
+          >
+            <div class="ib-box-card__content" data-equal="box-bids-1">
+              <div
+                class="ib-box-card__checked ib-box-card__checked--without-image icon-confirmacion"
+              >
+                <div class="ib-box-card__shadow">
+                  <span class="u-hide-accessible">Opci&oacute;n escogida</span>
+                </div>
+              </div>
+              <div class="ib-text ib-box-card__paragraph">
+                <div class="ib-box-card__header">
+                  <h2 class="ib-box-card__title">Vuela en clase superior</h2>
+                  <span class="ib-box-card__subtitle"
+                    >TUS OFERTAS ESTAN RESUELTAS</span
+                  >
+                </div>
+                <span class="ib-text ib-text--block ib-text--lh-normal">
+                  Puedes haber mejorado tu viaje. Compru&eacute;balo.
+                </span>
+              </div>
+              <div class="ib-box-card__button-section">
+                <div class="ib-box-card__button">
+                  <button
+                    class="ib-button ib-button--block-xs ib-button--w-small ib-button--inverse ib-button--default-normal"
+                    role="button"
+                  >
+                    Consultar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </equal-height>
+  </div>
+  <!-- END TYPE-4 -->
+
+  <!-- TYPE-3 -->
+  <div
+    ng-switch-when="3"
+    tabindex="0"
+    class="ib-box-card {{'ib-box-card--type-'+uiBoxCardCtrl.type}} {{uiBoxCardCtrl.modifier}} ib-box-card--full-responsive ib-box-card--auto-height"
+  >
+    <div
+      class="ib-box-card__figure ib-box-card__figure--content-box"
+      style="
+        background-image: url(&quot;../iberia-web-content/imagenes/ancilliaries/upgrade.png&quot;);
+      "
+      data-equal="box-upgrade-1"
+    >
+      <span class="u-hide-accessible" aria-hidden="true">Imagen upgrade</span>
+    </div>
+    <div class="ib-box-card__content" data-equal="box-upgrade-1">
+      <div class="ib-text ib-box-card__paragraph" dotdotdot>
+        <div class="ib-box-card__header">
+          <h2 class="ib-box-card__title">Vuela en clase superior</h2>
+          <span class="ib-box-card__subtitle">DESDE 15&euro;</span>
+        </div>
+        <span class="ib-text ib-text--block">
+          Mejora tu viaje pagando un poco m&aacute;s; haz tu oferta.
+        </span>
+        <span class="ib-text ib-text--block ib-text--color-unfocused">
+          No has realizado ninguna oferta
+        </span>
+      </div>
+      <div class="ib-box-card__button-section">
+        <div class="ib-box-card__button">
+          <button
+            type="button"
+            class="ib-button ib-button--block-xs ib-button--w-small ib-button--default-normal"
+          >
+            Haz tu oferta
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END TYPE-3 -->
+
+  <!-- TYPE-2 -->
+  <div
+    ng-switch-when="2"
+    tabindex="0"
+    class="ib-box-card ib-box-card--full-responsive {{'ib-box-card--type-'+uiBoxCardCtrl.type}} {{uiBoxCardCtrl.modifier}}"
+  >
+    <div
+      class="ib-box-card__figure"
+      style="
+        background-image: url(&quot;../iberia-web-content/imagenes/ancilliaries/upgrade.png&quot;);
+      "
+    >
+      <span class="u-hide-accessible" aria-hidden="true">Imagen upgrade</span>
+    </div>
+    <div class="ib-box-card__content">
+      <div class="ib-text ib-box-card__paragraph" dotdotdot>
+        <div class="ib-box-card__header">
+          <h2 class="ib-box-card__title">Vuela en clase superior</h2>
+          <span class="ib-box-card__subtitle">DESDE 15&euro;</span>
+        </div>
+        <span class="ib-text ib-text--block">
+          Mejora tu viaje pagando un poco m&aacute;s; haz tu oferta.
+        </span>
+        <span class="ib-text ib-text--block ib-text--color-unfocused">
+          No has realizado ninguna oferta
+        </span>
+      </div>
+      <div class="ib-box-card__button-section">
+        <div class="ib-box-card__button">
+          <button
+            type="button"
+            class="ib-button ib-button--block-xs ib-button--w-small ib-button--default-normal"
+          >
+            Haz tu oferta
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END TYPE-2 -->
+
+  <!-- TYPE-1 -->
+  <div
+    ng-switch-when="1"
+    tabindex="0"
+    class="ib-box-card ib-box-card--full-responsive {{'ib-box-card--type-'+uiBoxCardCtrl.type}} {{uiBoxCardCtrl.modifier}}"
+  >
+    <div
+      class="ib-box-card__figure"
+      style="
+        background-image: url(&quot;../iberia-web-content/imagenes/ancilliaries/upgrade.png&quot;);
+      "
+    >
+      <span class="u-hide-accessible" aria-hidden="true">Imagen upgrade</span>
+    </div>
+    <div class="ib-box-card__content">
+      <div class="ib-text ib-box-card__paragraph">
+        <div class="ib-box-card__header">
+          <h2 class="ib-box-card__title">Vuela en clase superior</h2>
+          <span class="ib-box-card__subtitle">DESDE 15&euro;</span>
+        </div>
+        <span class="ib-text ib-text--block">
+          Mejora tu viaje pagando un poco m&aacute;s; haz tu oferta.
+        </span>
+        <span
+          class="ib-text ib-text--block ib-text--color-unfocused ib-text--lh-normal"
+        >
+          No has realizado ninguna oferta
+        </span>
+      </div>
+      <div class="ib-box-card__button-section">
+        <div class="ib-box-card__button">
+          <button
+            type="button"
+            class="ib-button ib-button--block-xs ib-button--w-small ib-button--default-normal"
+          >
+            Haz tu oferta
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END TYPE-1 -->
+
+  <!-- DEFAULT -->
+  <div
+    class="ib-box-card {{'ib-box-card--type-'+uiBoxCardCtrl.type}} {{uiBoxCardCtrl.modifier}}"
+    ng-switch-default
+  >
+    <div
+      class="ib-box-card__figure"
+      style="
+        background-image: url(&quot;../iberia-web-content/imagenes/partners/viator_gastro.jpg&quot;);
+      "
+    >
+      <span class="u-hide-accessible" aria-hidden="true">viator</span>
+    </div>
+    <div class="ib-box-card__content">
+      <div class="ib-text ib-text--separator-2">
+        <div>
+          <h2
+            class="ib-box-card__title ib-box-card__title--bold"
+            data-ng-if="uiBoxCardCtrl.titleTxt"
+            ng-class="{'ib-box-card__title ib-box-card__title--bold ib-box-card__title--bold-long':uiBoxCardCtrl.titleTxt.length > 13}"
+          >
+            {{uiBoxCardCtrl.titleTxt}}
+          </h2>
+        </div>
+        <div class="ib-box-card__date">
+          <div
+            class="ib-box-card__date-text-section ib-box-card__date-text-section--with-icon icon-vuelos ib-box-card__date-text-section--going"
+          >
+            {{uiBoxCardCtrl.daterange}}
+          </div>
+        </div>
+        <div class="ib-box-card__date">
+          <div
+            class="ib-box-card__date-text-section ib-box-card__date-text-section--with-icon icon-vuelos ib-box-card__date-text-section--return"
+          >
+            {{uiBoxCardCtrl.daterange}}
+          </div>
+        </div>
+        <p class="ib-box-card__origin" data-ng-if="uiBoxCardCtrl.origin">
+          {{uiBoxCardCtrl.origin}}
+        </p>
+        <p class="ib-box-card__underline-txt">
+          {{uiBoxCardCtrl.active}}{{uiBoxCardCtrl.date}}
+        </p>
+      </div>
+      <div class="ib-flex ib-flex--align-end">
+        <span class="ib-box-card__availability-seats">
+          {{uiBoxCardCtrl.number}} {{uiBoxCardCtrl.availability}}
+        </span>
+        <p
+          class="ib-box-card__availability-seats ib-box-card__availability-seats--since text-right"
+        >
+          {{uiBoxCardCtrl.since}}
+          <span class="ib-box-card__price">{{uiBoxCardCtrl.price}}</span>
+        </p>
+      </div>
+      <div class="ib-box-card__button-section">
+        <div
+          class="ib-box-card__button ib-box-card__button--auto ib-box-card__button--padding-none"
+        >
+          <button
+            class="ib-button ib-button--medium ib-button--bold ib-button--inverse u-width-full"
+            type="button"
+            focusin
+          >
+            {{button.title|translate}} {{uiBoxCardCtrl.price}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- END DEFAULT -->
+</div>

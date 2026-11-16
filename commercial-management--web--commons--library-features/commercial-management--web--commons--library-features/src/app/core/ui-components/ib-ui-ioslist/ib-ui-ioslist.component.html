@@ -1,0 +1,16 @@
+<div class="ib-choose-city-mobile__container">
+    <ng-container *ngFor="let letter of alphabet">
+        <div class="ib-ioslist__group" *ngIf="(isCityInGroup(letter.name)).length > 0">
+            <div class="ib-ioslist__letter">{{letter.name}}</div>
+            <ul class="ib-choose-city-mobile__list">
+                <li class="ib-choose-city-mobile__item"
+                *ngFor="let city of sortAndGroupedCities(letter.name)">
+                    <button class="ib-ioslist__link ib-ioslist__link--reset-button"
+                        (click)="isSelected($event, city)"
+                        title="{{'HEADER_CITY_SELECTOR_SELECT_DESTINY_TITLE'|translate}} {{city.description|translate}}">{{city.description|translate}}{{'
+                        (' + city.code + ')'}}</button>
+                </li>
+            </ul>
+        </div>
+    </ng-container>
+</div>

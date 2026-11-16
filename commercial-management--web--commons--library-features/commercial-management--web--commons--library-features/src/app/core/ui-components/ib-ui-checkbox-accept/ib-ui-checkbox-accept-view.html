@@ -1,0 +1,36 @@
+<div
+  class="ib-check ib-check--regular"
+  data-ng-class="{'ib-check--error' : ibUiCheckboxAcceptCtrl.containerForm.$submitted && !ibUiCheckboxAcceptCtrl.checkTermsConditions}"
+>
+  <input
+    type="checkbox"
+    id="check_terms_conditions"
+    name="check_terms_conditions"
+    class="ib-check__input"
+    ng-model="ibUiCheckboxAcceptCtrl.checkTermsConditions"
+    required
+  />
+  <label for="check_terms_conditions" class="ib-check__label">
+    <span
+      data-ng-if="ibUiCheckboxAcceptCtrl.conditionsText && ibUiCheckboxAcceptCtrl.conditionsText !== 'TERMS_AND_CONDITIONS'"
+      class="ib-check__text ib-check__text--unfocused"
+      ng-bind-html="ibUiCheckboxAcceptCtrl.conditionsText"
+    ></span>
+    <span
+      data-ng-if="ibUiCheckboxAcceptCtrl.conditionsText && ibUiCheckboxAcceptCtrl.conditionsText === 'TERMS_AND_CONDITIONS'"
+      class="ib-check__text ib-check__text--unfocused"
+      >{{ibUiCheckboxAcceptCtrl.conditionsText|translate}}</span
+    >
+  </label>
+</div>
+<div
+  ng-messages="ibUiCheckboxAcceptCtrl.containerForm.$submitted && ibUiCheckboxAcceptCtrl.containerForm.check_terms_conditions.$error"
+>
+  <div
+    id="ibc-total-price-terms-and-conditions-error-msg"
+    class="ib-alert ib-alert--error"
+    ng-message="required"
+  >
+    {{'TOTAL_PRICE_CHECKBOX_CONDITIONS_REQUIRED_ERROR'|translate}}
+  </div>
+</div>

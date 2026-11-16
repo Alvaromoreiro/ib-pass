@@ -1,0 +1,43 @@
+<div [ngSwitch]="type">
+  <span class="{{ generalClass }}" *ngSwitchCase="'type-1'">
+    <div class="{{ timerClass }}">
+      {{ "DETAIL_SEARCHER_TIME_REST" | translate }}
+      {{ hoursToExpiration + daysToExpiration * 24
+      }}{{ "GENERAL_HOUR_ABR_TEXT" | translate }} {{ minutesToExpiration
+      }}{{ "GENERAL_MINUTES_ABR_TEXT" | translate }}
+    </div>
+  </span>
+  <span class="{{ generalClass }}" *ngSwitchCase="'type-2'">
+    <div class="{{ timerClass }} {{ additionalStyle }}">
+      {{ "DETAIL_SEARCHER_TIME_REST" | translate }}
+      {{
+        hoursToExpiration + daysToExpiration * 24 >= 10
+          ? hoursToExpiration + daysToExpiration * 24
+          : "0" + hoursToExpiration
+      }}:{{
+        minutesToExpiration >= 10
+          ? minutesToExpiration
+          : "0" + minutesToExpiration
+      }}:{{
+        secondsToExpiration >= 10
+          ? secondsToExpiration
+          : "0" + secondsToExpiration
+      }}
+    </div>
+  </span>
+  <span class="{{ generalClass }}" *ngSwitchCase="'type-3'">
+    <div class="{{ timerClass }} {{ additionalStyle }}">
+      {{ "DETAIL_SEARCHER_TIME_REST" | translate }} {{ daysToExpiration
+      }}{{ "DAYS" | translate }} {{ hoursToExpiration
+      }}{{ "HOUR_ABR_TEXT" | translate }} {{ minutesToExpiration
+      }}{{ "MINUTES_ABR_TEXT" | translate }}
+    </div>
+  </span>
+
+  <span class="{{ generalClass }}" *ngSwitchDefault>
+    <div class="{{ timerClass }}">
+      {{ "AVAILABILITY_SINCE" | translate }}
+      {{ daysToExpiration }}
+    </div>
+  </span>
+</div>

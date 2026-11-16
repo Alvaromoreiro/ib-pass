@@ -1,0 +1,68 @@
+<div
+  class="ib-select"
+  data-ng-class="{'ib-select--disabled': !ibUiGenderCtrl.editionMode && !ibUiGenderCtrl.genderSelected, 
+        'ib-select--edition-disabled': !ibUiGenderCtrl.editionMode && ibUiGenderCtrl.genderSelected,
+        'ib-select--error': ibUiGenderCtrl.containerForm.$submitted && ibUiGenderCtrl.containerForm.gender.$invalid}"
+  ng-if="ibUiGenderCtrl.editionMode"
+>
+  <label
+    class="ib-select__label ib-input__label--uppercase"
+    data-ng-class="{'ib-select__label--focus': ibUiGenderCtrl.genderSelected, 'ib-select__label--unfocus': !ibUiGenderCtrl.genderSelected}"
+    aria-label="{{'GENDER_TITLE_CAPS_OFF'|translate}}"
+    for="gender"
+    >{{'GENDER_TITLE_CAPS_OFF'|translate}}</label
+  >
+  <ui-select
+    ib-select-safari
+    class="ib-select__action"
+    data-ng-model="ibUiGenderCtrl.genderSelected"
+    name="gender"
+    on-select="ibUiGenderCtrl.genderSelected=$select.selected"
+    data-ng-disabled="!ibUiGenderCtrl.editionMode"
+    ng-required="true"
+  >
+    <ui-select-match
+      class="ib-select__list-ipt"
+      placeholder="{{'GENDER_TITLE_CAPS_OFF'|translate}}"
+    >
+      <span class="ib-select__txt">{{$select.selected.name|translate}}</span>
+    </ui-select-match>
+    <ui-select-choices
+      class="ib-select__list"
+      repeat="item in (ibUiGenderCtrl.genderList | filter: $select.search) track by item.id"
+    >
+      <span class="ib-select__list-txt">{{item.name|translate}}</span>
+    </ui-select-choices>
+  </ui-select>
+  <div
+    ng-messages="ibUiGenderCtrl.containerForm.$submitted && ibUiGenderCtrl.containerForm.gender.$error"
+  >
+    <span class="ib-alert ib-alert--error" ng-message="required">
+      {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+    </span>
+  </div>
+</div>
+<div
+  class="ib-input ib-input--edition-disabled"
+  ng-if="!ibUiGenderCtrl.genderSelected && !ibUiGenderCtrl.editionMode"
+>
+  <p class="ib-input__label ib-input__label--uppercase ib-input__label--focus">
+    <label> {{'GENDER_TITLE_CAPS_OFF'|translate}}</label>
+  </p>
+
+  <p class="ib-input__input" type="text">
+    {{'TRIP_DOCUMENTS_NOT_PROPORTIONED'|translate}}
+  </p>
+</div>
+<div
+  class="ib-input ib-input--edition-disabled"
+  ng-if="ibUiGenderCtrl.genderSelected.id && ibUiGenderCtrl.genderSelected.id !== '' && ibUiGenderCtrl.genderSelected.name !== '' && !ibUiGenderCtrl.editionMode"
+>
+  <p class="ib-input__label ib-input__label--uppercase ib-input__label--focus">
+    <label> {{'GENDER_TITLE_CAPS_OFF'|translate}}</label>
+  </p>
+
+  <p class="ib-input__input" type="text">
+    {{ibUiGenderCtrl.genderSelected.name|translate}}
+  </p>
+</div>

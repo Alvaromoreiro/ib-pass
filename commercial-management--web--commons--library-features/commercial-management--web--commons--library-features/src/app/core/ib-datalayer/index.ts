@@ -1,0 +1,13 @@
+import "./ib-datalayer-constants";
+import "./model/ib-digital-data-ecommerce-model";
+import "./constants/ib-datalayer-general-constants";
+import "./constants/ib-datalayer-bki-constants";
+import "./constants/ib-datalayer-cki-constants";
+import "./constants/ib-datalayer-mmb-constants";
+import "./constants/ib-datalayer-gifcards-constants";
+import "./constants/ib-datalayer-flash-offers-constants";
+import "./constants/ib-datalayer-unique-key-constants";
+import "./services/ib-datalayer-service";
+import "./services/ib-digital-data-service";
+import "./services/ib-datalayer-utils-service";
+import "./services/ib-datalayer-unique-keys.service";

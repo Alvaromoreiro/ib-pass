@@ -1,0 +1,80 @@
+<header
+  class="ib-modals__header ib-modals__header--inside u-pb-xmedium u-pb-xs QM-modal__error__header"
+  *ngIf="showHeader"
+>
+  <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+    <h2
+      class="ib-heading ib-heading--type-1"
+      [ngClass]="{ 'ib-heading--full': !showCloseButton }"
+      [translate]="modalTitle"
+      [translateParams]="titleTranslateParams"
+    ></h2>
+  </div>
+  <h3
+    class="ib-heading ib-heading--type-5 ib-heading--unfocused"
+    *ngIf="model.subtitle"
+  >
+    {{ model.subtitle | translate }}
+  </h3>
+  <div
+    class="ib-modals__header-settings ib-modals__header-settings--type-2"
+    *ngIf="showCloseButton"
+  >
+    <button
+      focusin
+      type="button"
+      class="ib-modals__button-action icon-cerrar"
+      (click)="close()"
+      title="{{ 'GENERIC_MODAL_ACCESSIBLE_CLOSE' | translate }}"
+    >
+      <span class="u-hide-accessible">{{
+        "GENERIC_MODAL_ACCESSIBLE_CLOSE" | translate
+      }}</span>
+    </button>
+  </div>
+</header>
+<section class="ib-modals__body QM-modal__error__body">
+  <ng-container *ngIf="body">
+    <div
+      class="ib-layout__line-spacing ib-layout__line-spacing--large"
+      *ngFor="let text of body"
+    >
+      <p class="ib-text">
+        {{ text.needsTranslate ? (text.message | translate) : text.message }}
+      </p>
+    </div>
+  </ng-container>
+</section>
+<footer
+  class="ib-modals__footer QM-modal__error__footer"
+  *ngIf="!model.hideFooter"
+>
+  <div
+    class="ib-content-buttons"
+    [ngClass]="{ 'u-flex--flex-end': !showCancelButton }"
+  >
+    <div class="ib-content-buttons__content-left u-width-auto">
+      <button
+        class="ib-button ib-button--w-medium"
+        type="button"
+        (click)="accept()"
+      >
+        {{
+          model.accept
+            ? model.accept
+            : ("MODAL_GENERAL_BUTTON_ACCEPT" | translate)
+        }}
+      </button>
+    </div>
+    <div
+      class="ib-content-buttons__content-right u-width-auto"
+      *ngIf="showCancelButton"
+    >
+      <a title="Cancelar" class="ib-link" (click)="cancel()">{{
+        model.cancel
+          ? model.cancel
+          : ("MODAL_GENERAL_BUTTON_CANCEL" | translate)
+      }}</a>
+    </div>
+  </div>
+</footer>

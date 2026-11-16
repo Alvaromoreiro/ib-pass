@@ -1,0 +1,214 @@
+{
+  "parserOptions": {
+    "requireConfigFile": false
+  },
+  "globals": {
+    "angular": true
+  },
+  "overrides": [
+    {
+      "files": ["**/*.js"],
+      "parser": "@babel/eslint-parser",
+      "rules": {
+        //GENERAL
+        "indent": [
+          "error", 4, {
+            "SwitchCase": 2
+          }],
+        "brace-style": ["error","1tbs",{ "allowSingleLine": true }],
+        "semi": [
+          "error", "always"
+        ],
+        "no-console": ["warn"],
+        "no-debugger": ["error"],
+        "quotes": [
+          "error", "single",
+          {
+            "allowTemplateLiterals": true
+          }
+        ],
+        "no-trailing-spaces":["error"],
+        "array-bracket-spacing": ["error", "never"],
+        "quote-props": ["error", "as-needed"],
+        "no-array-constructor": "error",
+
+        //VARIABLES
+        "no-var": ["error"],
+        "no-const-assign": "error",
+        "prefer-const": "error",
+        "no-eval": "error",
+
+        //COMMA
+        "comma-style": ["error", "last"],
+        "comma-dangle": ["error", "never"],
+        "no-extra-semi": "error",
+
+        //NAMING CONVENTIONS
+        //"camelcase": "error",
+        //"no-underscore-dangle": "error",
+
+        //COMPARISON OPERATORS & EQUALITY
+        "eqeqeq": ["error"],
+        "no-nested-ternary": "error",
+        "no-mixed-operators": ["error", {"allowSamePrecedence": false}],
+        "no-unneeded-ternary": "error",
+
+        // BLOCKS
+
+        //FUNCTIONS
+        "array-callback-return": "error",
+        "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+        "no-loop-func": "error",
+        "no-new-func": "error",
+        "space-before-function-paren": "error",
+        "space-before-blocks": "error",
+        "prefer-arrow-callback": "error",
+        "no-inner-declarations": ["error"],
+
+        //PROPERTIES
+        "dot-notation": "warn"
+      }
+    },
+    {
+      "files": ["**/*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "rules": {
+        //Typescript
+        "@typescript-eslint/no-extra-non-null-assertion": ["error"],
+        "@typescript-eslint/no-non-null-asserted-optional-chain": ["error"],
+        "@typescript-eslint/adjacent-overload-signatures": ["error"],
+        "@typescript-eslint/ban-types": ["error", {
+          "extendDefaults": true,
+          "types": {
+            "Function": {
+              "message":
+              "The `Function` type accepts any function-like value. It provides no type safety when calling the function, which can be a common source of bugs.\n It also accepts things like class declarations, which will throw at runtime as they will not be called with `new`.\n If you are expecting the function to accept certain arguments, you should explicitly define the function shape.\n Avoid the use of generic type: (...args: any[]) => any",
+            },
+            "Object": {
+              "message": "The `Object` type actually means 'any non-nullish value', so it is marginally better than `unknown`. \n- If you want a type meaning 'any object', you probably want `Record<string, unknown>` or '{ [key: string]: unknown }' instead. \n- If you want a type meaning 'any value', you probably want `unknown` instead."
+
+            },
+            "{}": {
+              "message":
+              "`{}` actually means 'any non-nullish value'. \n- If you want a type meaning 'any object', you probably want `Record<string, unknown>` or '{ [key: string]: unknown }' instead. \n- If you want a type meaning 'any value', you probably want `unknown` instead.",
+            }
+          }}
+        ],
+        // Overrides
+        "comma-dangle": "off",
+        "@typescript-eslint/comma-dangle": ["error"],
+        "brace-style": "off",
+        "@typescript-eslint/brace-style": ["error", "1tbs",{ "allowSingleLine": true }],
+        "indent": "off",
+        "@typescript-eslint/indent": [
+          "error", 4, {
+            "SwitchCase": 2
+          }
+        ],
+        "no-array-constructor": "off",
+        "@typescript-eslint/no-array-constructor": ["error"],
+        "no-extra-semi": "off",
+        "@typescript-eslint/no-extra-semi": ["error"],
+        "no-loop-func": "off",
+        "@typescript-eslint/no-loop-func": ["error"],
+        "quotes": "off",
+        "@typescript-eslint/quotes": [
+          "error", "single",
+          {
+            "allowTemplateLiterals": true
+          }
+        ],
+        "space-before-function-paren": "off",
+        "@typescript-eslint/space-before-function-paren": ["error"],
+        "comma-spacing": "off",
+        "@typescript-eslint/comma-spacing": ["error"],
+        "no-loss-of-precision": "off",
+        "@typescript-eslint/no-loss-of-precision": ["error"],
+        "semi": "off",
+        "@typescript-eslint/semi": [ "error", "always" ],
+        "no-duplicate-imports": "off",
+        "@typescript-eslint/no-duplicate-imports": ["error"],
+        "no-console": ["warn"],
+        "no-debugger": ["error"]
+      }
+    },
+    {
+      "files": ["**/*.component.ts", "**/*.service.ts", "**/*.pipe.ts", "**/*.module.ts", "**/*.directive.ts"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "project": [
+          "tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "plugins": ["@typescript-eslint", "@angular-eslint"],
+      "extends": ["plugin:@angular-eslint/recommended"],
+      "rules": {"@typescript-eslint/no-extra-non-null-assertion": ["error"],
+        "@typescript-eslint/no-non-null-asserted-optional-chain": ["error"],
+        "@typescript-eslint/adjacent-overload-signatures": ["error"],
+        "@typescript-eslint/ban-types": ["error", {
+          "extendDefaults": true,
+          "types": {
+            "Function": {
+              "message":
+              "The `Function` type accepts any function-like value. It provides no type safety when calling the function, which can be a common source of bugs.\n It also accepts things like class declarations, which will throw at runtime as they will not be called with `new`.\n If you are expecting the function to accept certain arguments, you should explicitly define the function shape.\n Avoid the use of generic type: (...args: any[]) => any"
+            },
+            "Object": {
+              "message": "The `Object` type actually means 'any non-nullish value', so it is marginally better than `unknown`. \n- If you want a type meaning 'any object', you probably want `Record<string, unknown>` or '{ [key: string]: unknown }' instead. \n- If you want a type meaning 'any value', you probably want `unknown` instead."
+
+            },
+            "{}": {
+              "message":
+              "`{}` actually means 'any non-nullish value'. \n- If you want a type meaning 'any object', you probably want `Record<string, unknown>` or '{ [key: string]: unknown }' instead. \n- If you want a type meaning 'any value', you probably want `unknown` instead."
+            }
+          }}
+        ],
+        // Overrides
+        "comma-dangle": "off",
+        "@typescript-eslint/comma-dangle": ["error"],
+        "brace-style": "off",
+        "@typescript-eslint/brace-style": ["error", "1tbs",{ "allowSingleLine": true }],
+        "indent": "off",
+        "@typescript-eslint/indent": [
+          "error", 4, {
+            "SwitchCase": 2
+          }
+        ],
+        "no-array-constructor": "off",
+        "@typescript-eslint/no-array-constructor": ["error"],
+        "no-extra-semi": "off",
+        "@typescript-eslint/no-extra-semi": ["error"],
+        "no-loop-func": "off",
+        "@typescript-eslint/no-loop-func": ["error"],
+        "quotes": "off",
+        "@typescript-eslint/quotes": [
+          "error", "single",
+          {
+            "allowTemplateLiterals": true
+          }
+        ],
+        "space-before-function-paren": "off",
+        "@typescript-eslint/space-before-function-paren": ["error"],
+        "comma-spacing": "off",
+        "@typescript-eslint/comma-spacing": ["error"],
+        "no-loss-of-precision": "off",
+        "@typescript-eslint/no-loss-of-precision": ["error"],
+        "semi": "off",
+        "@typescript-eslint/semi": [ "error", "always" ],
+        "no-duplicate-imports": "off",
+        "@typescript-eslint/no-duplicate-imports": ["error"],
+        "no-console": ["warn"],
+        "no-debugger": ["error"]
+      }
+    },
+    {
+      "files": ["**/*.component.html"],
+      "parser": "@angular-eslint/template-parser",
+      "plugins": ["@angular-eslint/template"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {}
+    }]
+}

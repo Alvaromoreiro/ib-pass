@@ -1,0 +1,42 @@
+<div
+  class="ib-select"
+  ng-class="{'ib-select--label' : ibUiPrefixCityCtrl.prefixLabel !== undefined, 'ib-select--error': ibUiPrefixCityCtrl.containerForm.$submitted && ibUiPrefixCityCtrl.containerForm['NAME_' + ibUiPrefixCityCtrl.prefixId].$invalid}"
+>
+  <label
+    ng-if="ibUiPrefixCityCtrl.prefixLabel !== undefined"
+    class="ib-select__label"
+    for="{{ibUiPrefixCityCtrl.prefixId}}"
+    >{{ibUiPrefixCityCtrl.prefixLabel}}</label
+  >
+  <ui-select
+    id="{{ibUiPrefixCityCtrl.prefixId}}"
+    class="ib-select__action"
+    ng-model="ibUiPrefixCityCtrl.prefixModel"
+    on-select="select.select()"
+    ng-required="ibUiPrefixCityCtrl.isRequired"
+    name="{{'NAME_' + ibUiPrefixCityCtrl.prefixId}}"
+  >
+    <ui-select-match
+      class="ib-select__list-ipt"
+      placeholder="{{ibUiPrefixCityCtrl.prefixPlaceholder}}"
+    >
+      <span
+        class="ib-select__txt"
+        ng-bind="$select.selected.description"
+      ></span>
+    </ui-select-match>
+    <ui-select-choices
+      class="ib-select__list"
+      repeat="prefix.code as prefix in ibUiPrefixCityCtrl.prefixList | prefixCheckSpecialCharactersFilter: $select.search"
+    >
+      <span class="ib-select__list-txt" ng-bind="::prefix.description"></span>
+    </ui-select-choices>
+  </ui-select>
+  <div
+    ng-messages="ibUiPrefixCityCtrl.containerForm.$submitted && ibUiPrefixCityCtrl.containerForm['NAME_' + ibUiPrefixCityCtrl.prefixId].$error"
+  >
+    <p class="ibe_form__msg-info" ng-message="uiSelectRequired">
+      {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+    </p>
+  </div>
+</div>

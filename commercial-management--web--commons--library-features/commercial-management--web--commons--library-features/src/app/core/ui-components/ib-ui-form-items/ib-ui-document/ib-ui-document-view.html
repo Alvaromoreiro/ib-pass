@@ -1,0 +1,68 @@
+<div
+  class="ib-select"
+  data-ng-class="{'ib-select--disabled': !ibUiDocumentCtrl.editionMode && !ibUiDocumentCtrl.documentSelected, 
+        'ib-select--edition-disabled': !ibUiDocumentCtrl.editionMode && ibUiDocumentCtrl.documentSelected,
+        'ib-select--error': ibUiDocumentCtrl.containerForm.$submitted && ibUiDocumentCtrl.containerForm.documentType.$invalid}"
+  ng-if="ibUiDocumentCtrl.editionMode"
+>
+  <label
+    class="ib-select__label ib-input__label--uppercase"
+    data-ng-class="{'ib-select__label--focus': ibUiDocumentCtrl.documentSelected, 'ib-select__label--unfocus': !ibUiDocumentCtrl.documentSelected}"
+    aria-label="{{'DOCUMENT_TYPE_LABEL'|translate}}"
+    for="documentType"
+    >{{'DOCUMENT_TYPE_LABEL'|translate}}</label
+  >
+  <ui-select
+    ib-select-safari
+    class="ib-select__action"
+    data-ng-model="ibUiDocumentCtrl.documentSelected"
+    name="documentType"
+    on-select="ibUiDocumentCtrl.documentSelected=$select.selected"
+    data-ng-disabled="!ibUiDocumentCtrl.editionMode"
+    ng-required="ibUiDocumentCtrl.required"
+  >
+    <ui-select-match
+      class="ib-select__list-ipt"
+      placeholder="{{'DOCUMENT_TYPE_LABEL'|translate}}"
+    >
+      <span class="ib-select__txt">{{$select.selected.name|translate}}</span>
+    </ui-select-match>
+    <ui-select-choices
+      class="ib-select__list"
+      repeat="item in (ibUiDocumentCtrl.documentTypeList | filter: $select.search) track by item.id"
+    >
+      <span class="ib-select__list-txt">{{item.name|translate}}</span>
+    </ui-select-choices>
+  </ui-select>
+  <div
+    ng-messages="ibUiDocumentCtrl.containerForm.$submitted && ibUiDocumentCtrl.containerForm.documentType.$error"
+  >
+    <span class="ib-alert ib-alert--error" ng-message="required">
+      {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+    </span>
+  </div>
+</div>
+<div
+  class="ib-input ib-input--edition-disabled"
+  ng-if="!ibUiDocumentCtrl.documentSelected && !ibUiDocumentCtrl.editionMode"
+>
+  <p class="ib-input__label ib-input__label--uppercase ib-input__label--focus">
+    <label>{{'DOCUMENT_TYPE_LABEL'|translate}}</label>
+  </p>
+
+  <p class="ib-input__input" type="text">
+    {{'TRIP_DOCUMENTS_NOT_PROPORTIONED'|translate}}
+  </p>
+</div>
+<div
+  class="ib-input ib-input--edition-disabled"
+  ng-if="ibUiDocumentCtrl.documentSelected.id && ibUiDocumentCtrl.documentSelected.id !== '' && ibUiDocumentCtrl.documentSelected.name !== '' && !ibUiDocumentCtrl.editionMode"
+>
+  <p class="ib-input__label ib-input__label--uppercase ib-input__label--focus">
+    <label>{{'DOCUMENT_TYPE_LABEL'|translate}}</label>
+  </p>
+
+  <p class="ib-input__input" type="text">
+    {{ibUiDocumentCtrl.documentSelected.name|translate}}
+  </p>
+</div>

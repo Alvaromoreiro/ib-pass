@@ -1,0 +1,96 @@
+<!-- BONOS -->
+<div
+  data-ng-if="ibUiBondsSummaryCtrl.bondsInfo.vouchersInfo.length > 0"
+  class="ib-bond ib-bond--margin"
+>
+  <div class="ib-bond__discount icon-reembolsos-old">
+    <h1 class="ib-bond__title">
+      {{'COMMONS_VOUCHER_REFUND_TITLE' | translate}}
+    </h1>
+    <p class="ib-bond__description">
+      {{'COMMONS_VOUCHER_REFUND_DESCRIPTION' | translate}}
+    </p>
+  </div>
+  <div class="ib-bond__table">
+    <table class="ib-table-bond ib-table-bond--medium ib-table-bond--margin">
+      <thead>
+        <tr>
+          <th class="ib-table-bond__th">
+            {{'COMMONS_VOUCHER_REFUND_DISCOUNT_CODE' | translate}}
+          </th>
+          <th class="ib-table-bond__th">
+            {{'COMMONS_VOUCHER_REFUND_CLIENT_NAME' | translate}}
+          </th>
+          <th class="ib-table-bond__th">
+            {{'COMMONS_VOUCHER_REFUND_PRICE_REFUND' | translate}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          data-ng-repeat="vouchersInfo in ibUiBondsSummaryCtrl.bondsInfo.vouchersInfo"
+        >
+          <td data-th="Codigo descuento" class="ib-table-bond__td">
+            <span class="ib-table-bond__code">{{vouchersInfo.code}}</span>
+          </td>
+          <td data-th="Nombre" class="ib-table-bond__td">
+            <span class="ib-table-bond__name"
+              >{{vouchersInfo.completeName}}</span
+            >
+          </td>
+          <td data-th="Importe" class="ib-table-bond__td">
+            <span class="ib-table-bond__amount"
+              >{{vouchersInfo.formatPriceBond}}</span
+            >
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="ib-table-bond__total" colspan="3">
+            <span class="ib-table-bond__total-text"
+              >{{'COMMONS_VOUCHER_REFUND_TOTAL_PRICE_REFUND' | translate}}</span
+            >
+            <span class="ib-table-bond__amount"
+              >{{ibUiBondsSummaryCtrl.bondsInfo.total.formatTotalPrice}}</span
+            >
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <p class="ib-bond__text">
+    {{'COMMONS_VOUCHER_REFUND_APOLOGIZE' | translate}}
+  </p>
+</div>
+<!-- END BONOS -->
+<!-- INFO ABOUT BONOS -->
+<div
+  data-ng-if="ibUiBondsSummaryCtrl.showExtraInfo"
+  class="ib-refund-bonds ib-refund-bonds--type-01 u-mt-medium"
+>
+  <div class="ib-refund-bonds__head ib-refund-bonds__head--left">
+    <h3 class="ib-refund-bonds__title ib-refund-bonds__title--special">
+      {{'COMMONS_VOUCHER_REFUND_EXTRA_INFO_TITLE' | translate}}
+    </h3>
+    <p class="ib-refund-bonds__subtitle">
+      <a
+        href="{{'VOUCHER_KNOW_MORE'|LinksFilter}}"
+        class="ib-link"
+        title="{{'COMMONS_VOUCHER_REFUND_EXTRA_INFO_HOW_USE' | translate}}"
+        focusin
+        >{{'COMMONS_VOUCHER_REFUND_EXTRA_INFO_HOW_USE' | translate}}</a
+      >
+    </p>
+    <p class="ib-refund-bonds__subtitle">
+      <a
+        class="ib-link"
+        ng-click="ibUiBondsSummaryCtrl.openModalTermsConditions()"
+        title="{{'COMMONS_VOUCHER_REFUND_GENERAL_CONDITIONS' | translate}}"
+        focusin
+        >{{'COMMONS_VOUCHER_REFUND_GENERAL_CONDITIONS' | translate}}</a
+      >
+    </p>
+  </div>
+</div>
+<!-- END INFO ABOUT BONOS -->

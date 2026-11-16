@@ -1,0 +1,12 @@
+import './ib-capital-letter-filter';
+import './ib-commons-date-format';
+import './ib-commons-duration-format-filter';
+import './ib-commons-format-moment-date-by-language-filter';
+import './ib-currency-filter';
+import './ib-eliminate-accent-filter';
+import './ib-eliminate-hyphen-filter';
+import './ib-links-filter-filter';
+import './ib-links-filter';
+import './ib-literal-formatter-filter';
+import './ib-prefix-filter';
+import './ib-sanitize-amp-filter';

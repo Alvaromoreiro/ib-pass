@@ -1,0 +1,42 @@
+<header class="ib-modals__header">
+  <h2 class="ib-text ib-text--large ib-text--bold">
+    {{modalCtrl.model.title ? (modalCtrl.model.title.needsTranslate ?
+    (modalCtrl.model.title.message|translate) : modalCtrl.model.title) :
+    'MOD_INFO_TITLE'|translate}}
+  </h2>
+  <div class="ib-modals__header-settings">
+    <button
+      id="MODAL_INFO_CLOSE_BUTTON"
+      type="button"
+      class="ib-modals__button-action icon-cerrar"
+      data-ng-click="modalCtrl.close()"
+      title="{{'ACCES_MOD_CERRAR'|translate}}"
+    >
+      <span class="u-hide-accessible">{{'MODAL_CLOSE_ACCESS'|translate}}</span>
+    </button>
+  </div>
+</header>
+<section class="ib-modals__body">
+  <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+    <p class="ib-text">
+      {{modalCtrl.model.needsTranslate || modalCtrl.model.message ?
+      (modalCtrl.model.message|translate) : modalCtrl.model.message}}
+    </p>
+    <p class="ib-text" data-ng-if="modalCtrl.model.info">
+      {{modalCtrl.model.info}}
+    </p>
+  </div>
+</section>
+<footer
+  class="ib-modals__footer u-text-right"
+  data-ng-if="!modalCtrl.model.hideFooter"
+>
+  <button
+    id="MODAL_INFO_ACCEPT_BUTTON"
+    title="{{'MODAL_ACCEPT'|translate}}"
+    class="ib-button ib-button--w-medium"
+    data-ng-click="modalCtrl.accept()"
+  >
+    {{'MODAL_GENERAL_BUTTON_ACCEPT'|translate}}
+  </button>
+</footer>

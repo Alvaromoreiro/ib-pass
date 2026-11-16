@@ -1,0 +1,52 @@
+<div
+  class="ib-select"
+  ng-if="!ibUiProvinceCtrl.showRegion"
+  data-ng-class="{
+        'ib-select--error': ibUiProvinceCtrl.containerForm.$submitted && ibUiProvinceCtrl.containerForm.communityCode.$invalid,
+        'ib-select--disabled': !ibUiProvinceCtrl.editionMode && !ibUiProvinceCtrl.provinceSelected, 
+        'ib-select--edition-disabled': !ibUiProvinceCtrl.editionMode && ibUiProvinceCtrl.provinceList.length > 0}"
+>
+  <ib-loading-select
+    ng-show="!ibUiProvinceCtrl.provinceList.length > 0"
+    text="{{'STATES_DATA_LOADING'|translate}}"
+    caret="'icon-caret_abajo'"
+  ></ib-loading-select>
+  <label
+    class="ib-select__label ib-input__label--uppercase"
+    data-ng-class="{'ib-select__label--focus': comFormPersDataCtrl.form.formData.numChilds.selected, 'ib-select__label--unfocus': !comFormPersDataCtrl.form.formData.numChilds.selected}"
+    aria-label="{{'PROVINCE_FIELD'|translate}}"
+    for="communities"
+    >{{'PROVINCE_FIELD'|translate}}</label
+  >
+  <ui-select
+    ib-select-safari
+    class="ib-select__action"
+    data-ng-model="ibUiProvinceCtrl.provinceSelected"
+    name="communities"
+    on-select="ibUiProvinceCtrl.provinceSelected=$select.selected;containerForm.communityCode.selected=$select.selected"
+    data-ng-disabled="!ibUiProvinceCtrl.editionMode"
+    ng-required="ibUiProvinceCtrl.isRequired"
+  >
+    <ui-select-match
+      class="ib-select__list-ipt"
+      placeholder="{{'PROVINCE_FIELD'|translate}}"
+    >
+      <span class="ib-select__txt"
+        >{{$select.selected.description|translate}}</span
+      >
+    </ui-select-match>
+    <ui-select-choices
+      class="ib-select__list"
+      repeat="item in (ibUiProvinceCtrl.provinceList | prefixCheckSpecialCharactersFilter: $select.search) track by $index"
+    >
+      <span class="ib-select__list-txt">{{item.description|translate}}</span>
+    </ui-select-choices>
+  </ui-select>
+  <div
+    ng-messages="ibUiProvinceCtrl.containerForm.$submitted && ibUiProvinceCtrl.containerForm.communityCode.$error"
+  >
+    <span class="ib-alert ib-alert--error" ng-message="required">
+      {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+    </span>
+  </div>
+</div>

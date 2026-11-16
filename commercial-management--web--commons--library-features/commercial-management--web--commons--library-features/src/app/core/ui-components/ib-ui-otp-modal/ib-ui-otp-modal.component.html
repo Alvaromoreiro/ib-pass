@@ -1,0 +1,124 @@
+<div class="ib-modals__overlay" (click)="close()"></div>
+
+<div class="ib-modals ib-modals--otp" role="dialog" aria-modal="true" aria-labelledby="otp-modal-title">
+
+  <header class="otp-header">
+    <div class="otp-close-container">
+      <button
+        id="otp-modal-close-btn"
+        type="button"
+        class="ib-modals__button-action icon-cerrar"
+        [title]="'GENERIC_MODAL_ACCESSIBLE_CLOSE' | translate"
+        [attr.aria-label]="'GENERIC_MODAL_ACCESSIBLE_CLOSE' | translate"
+        (click)="close()"
+      >
+        <span class="u-hide-accessible">{{ 'GENERIC_MODAL_ACCESSIBLE_CLOSE' | translate }}</span>
+      </button>
+    </div>
+    <div>
+      <h2 id="otp-modal-title" class="ib-heading ib-heading--type-4">
+        {{ 'MODAL_OTP_ENTER_CODE_SENT_TO' | translate }}
+      </h2>
+    </div>
+    <h3 class="otp-email">
+      {{ otpData?.email }}
+    </h3>
+  </header>
+
+  <section class="ib-modals__body">
+
+    <div class="ib-otp-modal__timer-container"
+      role="timer"
+      [attr.aria-label]="'OTP_MODAL_TIMER_ACCESSIBLE' | translate"
+      aria-live="polite"
+      [class.ib-otp-modal__timer--warning]="remainingSeconds <= 60 && !isExpired"
+      [class.ib-otp-modal__timer--expired]="isExpired || errorCode === 'SECURITY_EXPIRED_CODE_ERROR'"
+      [class.ib-otp-modal__timer--max-attempts]="errorCode === 'SECURITY_MAX_ATTEMPTS_ERROR'"
+    >
+      <figure>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+          <path d="M8.60854 7.36351L5.99126 4.75171L4.625 6.11796L7.2368 8.73525L8.60854 10.1015L9.96931 8.73525L11.3685 7.33607L10.0022 5.96982L8.60854 7.36351Z" fill="white"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58299 0 0 3.58299 0 8C0 12.417 3.58299 16 8 16C12.417 16 16 12.417 16 8C16 3.58299 12.417 0 8 0ZM14.7928 8.00014C14.7928 4.25254 11.7475 1.20728 7.9999 1.20728C4.2523 1.20728 1.20703 4.25254 1.20703 8.00014C1.20703 11.7477 4.2523 14.793 7.9999 14.793C11.7475 14.793 14.7928 11.7477 14.7928 8.00014Z" fill="white"/>
+        </svg>
+      </figure>
+      <span *ngIf="!showZeroTimer">{{ formattedTime }}</span>
+      <span *ngIf="showZeroTimer">00:00</span>
+    </div>
+
+    <div *ngIf="!isExpired && !hasError" class="otp-advice">
+      <span>{{ 'MODAL_OTP_TIMER_ADVICE' | translate }}</span>
+    </div>
+
+    <div *ngIf="errorCode === 'SECURITY_INVALID_CODE_ERROR'" class="otp-advice-expired">
+      <span class="ib-text ib-otp-modal__error-text">
+        {{ 'MODAL_OTP_ERROR_INVALID_CODE' | translate }}
+      </span>
+    </div>
+
+    <div *ngIf="isExpired && !hasError || errorCode === 'SECURITY_EXPIRED_CODE_ERROR'" class="otp-advice-expired">
+      <span>{{ 'MODAL_OTP_CODE_EXPIRED' | translate }}</span>
+    </div>
+
+    <div *ngIf="errorCode === 'SECURITY_MAX_ATTEMPTS_ERROR'" class="otp-advice-expired">
+      <span class="ib-text ib-otp-modal__error-text">
+        {{ 'MODAL_OTP_ERROR_MAX_ATTEMPTS' | translate }}
+      </span>
+    </div>
+
+    <div class="ib-otp-modal__input-section">
+      <label
+        class="ib-text ib-otp-modal__label"
+        [class.ib-otp-modal__label--disabled]="isInputDisabled || errorCode === 'SECURITY_MAX_ATTEMPTS_ERROR'"
+      >
+        {{ 'MODAL_OTP_ENTER_SIX_DIGIT_CODE' | translate }}
+      </label>
+
+      <div class="ib-otp-modal__digits" role="group" [attr.aria-label]="'MODAL_OTP_ENTER_SIX_DIGIT_CODE' | translate">
+        <input
+          *ngFor="let digit of digits; let i = index"
+          type="text"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          maxlength="1"
+          autocomplete="one-time-code"
+          class="ib-otp-modal__digit-input"
+          [class.ib-otp-modal__digit-input--filled]="digits[i] !== ''"
+          [class.ib-otp-modal__digit-input--error]="hasError"
+          [class.ib-otp-modal__digit-input--disabled]="isInputDisabled"
+          [value]="digits[i]"
+          [disabled]="isInputDisabled"
+          [attr.data-otp-index]="i"
+          [attr.aria-label]="getDigitAriaLabel(i)"
+          [attr.alt]="getDigitAriaLabel(i)"
+          (keydown)="onKeyDown($event, i)"
+          (paste)="onPaste($event)"
+          (focus)="onFocus($event, i)"
+        />
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <div class="ib-otp-modal__footer-content">
+      <div class="ib-otp-modal__resend-section">
+        <span class="ib-text ib-otp-modal__resend-label">
+          {{ 'MODAL_OTP_NO_CODE_RECEIVED' | translate }}
+        </span>
+        <button
+          id="otp-modal-resend-btn"
+          type="button"
+          class="ib-link ib-otp-modal__resend-link"
+          [class.ib-otp-modal__resend-link--disabled]="!canResend"
+          [disabled]="!canResend"
+          [title]="'OTP_MODAL_RESEND_BUTTON' | translate"
+          [attr.aria-label]="'OTP_MODAL_RESEND_BUTTON' | translate"
+          (click)="requestResend()"
+        >
+          {{ 'MODAL_OTP_GET_NEW_CODE' | translate }}
+        </button>
+      </div>
+    </div>
+  </footer>
+
+</div>

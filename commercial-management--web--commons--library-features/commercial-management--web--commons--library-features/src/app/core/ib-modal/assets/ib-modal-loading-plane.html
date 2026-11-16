@@ -1,0 +1,25 @@
+<div id="bbki-loading-plane-loading-elem" ib-loading-plane-overlay>
+    <div class="ib-background">
+        <figure>
+            <img class="ib-background__img" data-ng-src="{{$root.routes.images}}{{$root.backGroundImage}}">
+        </figure>
+    </div>
+    <div class="ib-loading-container ib-loading-container--white" >
+        <ib-loading-plane id="bbki-loading-plane"></ib-loading-plane>
+        <div class="ib-loading-container__content">
+            <div class="hidden" data-ng-show="modalCtrl.showDestinationCity($root.destinationCity)">
+                <p class="ib-loading-container__txt" ng-if="modalCtrl.isPlaneMessage">{{'WAITING_LOADING_PLANE_SEARCHING'|translate}}</p>
+                <p class="ib-loading-container__txt" ng-if="modalCtrl.isLogguedUser"><span class="ib-text--bold">{{modalCtrl.model.userData.name}}, </span>{{'WAITING_LOADING_PLANE_SEARCHING_WITH_NAME'|translate}}</p>
+                <p class="ib-loading-container__txt ib-loading-container__txt--big">{{modalCtrl.destinationCity}}</p>
+            </div>
+            <p class="ib-loading-container__txt ib-loading-container__txt--waiting hidden" ng-if="!modalCtrl.model.ibv">{{'WAITING_LOADING_PLANE_MESSAGE'|translate}}</p>
+            <p class="ib-loading-container__txt ib-loading-container__txt--separator-top hidden" data-ng-show="modalCtrl.model.userData.isLogged && modalCtrl.model.userData.selectedParner !== null && modalCtrl.model.userData.isAvailability ">{{'WAITING_LOADING_PLANE_MESSAGE_DISCOUNT_PARTNER' | translate: {discountPercent: modalCtrl.model.userData.selectedParner.percentDiscount, productDesc:  modalCtrl.model.userData.selectedParner.productDescription} | sanitizeAmpersandFilter }}</p>
+            <p class="ib-loading-container__txt ib-loading-container__txt--separator-top hidden" data-ng-show="modalCtrl.model.userData.isLogged && modalCtrl.model.userData.isAncillaries && modalCtrl.model.userData.discountMessage ">{{'WAITING_LOADING_PLANE_MESSAGE_DISCOUNT_1'|translate}}<span>{{modalCtrl.model.userData.avios}} {{'IBPURC_PAYMENTS_DISCOUNTS_AVIOS'|translate}} </span> <span data-ng-show="modalCtrl.model.userData.cashAviosPossibilities">{{'WAITING_LOADING_PLANE_MESSAGE_DISCOUNT_2'|translate}} {{modalCtrl.model.userData.cashAviosPossibilities.bestTotalDiscount}} {{'WAITING_LOADING_PLANE_MESSAGE_DISCOUNT_3'|translate}}</span></p>
+            <p class="ib-loading-container__txt ib-loading-container__txt--separator-top hidden" data-ng-show="modalCtrl.model.userData.isLogged && modalCtrl.model.userData.isAncillaries && modalCtrl.model.userData.earnMessage && modalCtrl.model.userData.earnAvios !== null ">{{'WAITING_LOADING_PLANE_MESSAGE_EARN'|translate}} <span>{{modalCtrl.model.userData.earnAvios}} {{'AVIOS_ELITE_TO_EARN_USER_2'|translate}}</span><span data-ng-show="modalCtrl.model.userData.earnElite"> {{modalCtrl.model.userData.earnElite}} {{'AVIOS_ELITE_TO_EARN_USER_3'|translate}}</span></p>
+        </div>
+        <div class="ib-loading-container__content" ng-if="modalCtrl.model.ibv">
+            <p class="ib-loading-container__txt ib-loading-container__txt--waiting hidden" >{{'ALP_TRANSITION_TEXT_1'|translate}}</p>
+            <p class="ib-loading-container__txt ib-loading-container__txt--separator-top hidden">{{'ALP_TRANSITION_TEXT_2'|translate}}</p>
+        </div>
+    </div>
+</div>

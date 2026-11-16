@@ -1,0 +1,61 @@
+<header class="ib-modals__header">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+        <h2 class="ib-heading ib-heading--type-1">{{'MMB_ALERT_IMPORTANT'|translate}}</h2>
+    </div>
+    <div class="ib-modals__header-settings">
+        <button id="cki-flights-des-invoice-modal-deinvoicing-alert-close-btn" type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+        <p class="ib-text ib-text--color-unfocused">{{'MMB_DEINVOICING_FLIGHT_MODAL_BODY'|translate}}</p>
+    </div>
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+        
+        <div class="ib-ticket ib-ticket--summary" data-ng-repeat="segment in modalCtrl.model">
+            <div  class="ib-ticket__details hidden-xs hidden-sm">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                        <div class="ib-ticket__info u-text-left">
+                            <strong class="ib-ticket__terminal ib-text ib-text--block ib-text--color-unfocused ib-text--bold">{{segment.departureTerminal ? 'IBCOAC_MMB_SEGMENT_DETAILS_TERMINAL' : ''|translate}}{{segment.departureTerminal}}</strong>
+                            <span class="ib-text ib-text--block ib-text--color-unfocused">{{segment.departureDateDay + ' ' + (segment.departureDateMonth|translate) + ' ' + segment.departureDateYear}}</span>
+                            <span class="ib-text ib-text--block ib-text--color-unfocused">{{segment.departureDateTime}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6 col-md-offset-4">
+                        <div class="ib-ticket__info u-text-right">
+                            <strong class="ib-ticket__terminal ib-text ib-text--block ib-text--color-unfocused ib-text--bold">{{segment.arrivalTerminal ? 'IBCOAC_MMB_SEGMENT_DETAILS_TERMINAL' : ''|translate}}{{segment.arrivalTerminal}}</strong>
+                            <span class="ib-text ib-text--block ib-text--color-unfocused">{{segment.arrivalDateDay + ' ' + (segment.arrivalDateMonth|translate) + ' ' + segment.arrivalDateYear}}</span>
+                            <span class="ib-text ib-text--block ib-text--color-unfocused">{{segment.arrivalDateTime}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3">
+                        <div class="ib-ticket__details-operated">
+                            <figure class="ib-ticket__details-operated-logo">
+                                <img ng-src="{{::$root.routes.icons}}/iberia/iberia-logo-red.png" alt="{{'CONFIRMATION_INFO_SLICES_FIGURE'|translate}}">
+                            </figure>
+                            <span class="ib-ticket__header-txt">{{segment.flightNumber}}</span>
+                            <span class="ib-text ib-text--block ib-text--small ib-text--color-unfocused">{{'CONFIRMATION_INFO_SLICES_FIGURE'|translate}}
+                                <span class="ib-text ib-text--small">{{segment.operatedBy}}</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<footer class="ib-modals__footer">
+    <div class="ib-content-buttons">
+        <div class="ib-content-buttons__content-left">
+            <button id="cki-flights-des-invoice-modal-deinvoicing-alert-accept-btn" class="ib-button ib-button--w-medium" type="button" ng-click="modalCtrl.accept()">{{'FLIGHT_CONFIRMATION_CONTINUE'|translate}}</button>
+        </div>
+        <div class="ib-content-buttons__content-right">
+            <a id="cki-flights-des-invoice-modal-deinvoicing-alert-close-link" ng-click="modalCtrl.close()" title="Cancelar" class="ib-link">{{'FLIGHT_CONFIRMATION_CANCEL'|translate}}</a>
+        </div>
+    </div>
+</footer>

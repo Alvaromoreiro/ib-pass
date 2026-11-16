@@ -1,0 +1,74 @@
+<header
+  class="ib-modals__header ib-modals__header--inside u-pb-xmedium u-pb-xs"
+  ng-if="modalCtrl.showHeader"
+>
+  <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+    <h2
+      class="ib-heading ib-heading--type-1"
+      ng-class="{'ib-heading--full': !modalCtrl.showCloseButton}"
+      translate="{{modalCtrl.modalTitle}}"
+      translate-values="modalCtrl.titleTranslateParams"
+    ></h2>
+  </div>
+  <h3
+    class="ib-heading ib-heading--type-5 ib-heading--unfocused"
+    ng-if="modalCtrl.resolve.object.subtitle"
+  >
+    {{modalCtrl.resolve.object.subtitle|translate}}
+  </h3>
+  <div
+    class="ib-modals__header-settings ib-modals__header-settings--type-2"
+    ng-if="modalCtrl.showCloseButton"
+  >
+    <button
+      type="button"
+      class="ib-modals__button-action icon-cerrar"
+      ng-click="modalCtrl.close()"
+      title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}"
+    >
+      <span class="u-hide-accessible"
+        >{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span
+      >
+    </button>
+  </div>
+</header>
+<section class="ib-modals__body">
+  <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+    <p class="ib-text ib-text--block">
+      {{modalCtrl.resolve.object.body|translate}}
+    </p>
+  </div>
+  <div
+    class="ib-layout__line-spacing ib-layout__line-spacing--large"
+    ng-if="modalCtrl.resolve.object.extraBody"
+  >
+    <p class="ib-text">{{modalCtrl.resolve.object.extraBody | translate}}</p>
+  </div>
+</section>
+<footer class="ib-modals__footer">
+  <div class="ib-content-buttons">
+    <div class="ib-content-buttons__content-left u-width-auto">
+      <button
+        class="ib-button ib-button--w-medium"
+        type="button"
+        ng-click="modalCtrl.accept()"
+      >
+        {{modalCtrl.resolve.object.accept ? modalCtrl.resolve.object.accept :
+        'MODAL_GENERAL_BUTTON_ACCEPT' |translate}}
+      </button>
+    </div>
+    <div
+      class="ib-content-buttons__content-right u-width-auto"
+      ng-if="modalCtrl.showCancelButton"
+    >
+      <a
+        href="javascript:void(0)"
+        title="Cancelar"
+        class="ib-link"
+        ng-click="modalCtrl.cancel()"
+        >{{modalCtrl.resolve.object.cancel ? modalCtrl.resolve.object.cancel :
+        'MODAL_GENERAL_BUTTON_CANCEL'|translate}}</a
+      >
+    </div>
+  </div>
+</footer>

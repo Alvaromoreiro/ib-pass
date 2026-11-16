@@ -1,0 +1,43 @@
+<div class="ib-ui-carousel" *ngIf="banners && banners.length > 0">
+  <div class="ib-ui-carousel__cover">
+    <ngb-carousel
+      [interval]="settings.autoplaySpeed"
+      [showNavigationArrows]="settings.showNavigationArrows"
+      [showNavigationIndicators]="settings.showNavigationIndicators"
+      class="ib-ui-carousel__slick-menu ib-ui-carousel__slick-menu--dark"
+    >
+      <ng-template ngbSlide *ngFor="let banner of banners">
+        <article class="">
+          <ib-ui-banner-component
+            [type]="banner.type"
+            [image]="banner.image"
+            [icon]="banner.icon"
+            [titleTxt]="banner.titleTxt | translate"
+            [city]="banner.city | translate"
+            [text]="banner.text | translate: { param: banner.textParam }"
+            [modifier]="banner.modifier"
+            [since]="banner.since"
+            [price]="banner.price"
+            [link]="banner.link | translate"
+            [currency]="banner.currency"
+            [timeText]="banner.timeText"
+            [daterangeDeparture]="banner.daterangeDeparture"
+            [daterangeDepartureTo]="banner.daterangeDepartureTo"
+            [daterangeDepartureReturn]="banner.daterangeDepartureReturn"
+            [time]="banner.time"
+            [availability]="banner.availability | translate"
+            [number]="banner.number"
+            [textParam]="banner.textParam"
+            [isNext]="banner.isNext"
+            [offer]="banner.offer"
+            [action]="action"
+            [modifierContent]="banner.modifierContent"
+            [periodText]="banner.periodText | translate"
+            [datesText]="banner.datesText | translate"
+          >
+          </ib-ui-banner-component>
+        </article>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+</div>

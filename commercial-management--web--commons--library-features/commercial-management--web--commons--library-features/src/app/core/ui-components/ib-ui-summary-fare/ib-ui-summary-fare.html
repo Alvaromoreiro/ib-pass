@@ -1,0 +1,52 @@
+<div class="ib-summary__section ib-summary__section--last">
+  <span class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold"
+    >{{'SUMMARY_RATE'|translate}} {{uiSummaryFareCtrl.name}}</span
+  >
+  <div
+    uib-accordion-group
+    class="ib-show-more ib-show-more--icon"
+    is-open="status.isOpenFare"
+  >
+    <uib-accordion-heading class="ib-text ib-text--block ib-text--to-right">
+      <span class="ib-show-more__button">
+        <span
+          class="ib-show-more__button-txt"
+          data-text-accordion-close="{{'SUMMARY_FARE_DETAILS_OPENED_2'|translate}}"
+        >
+          {{status.isOpenFare ? ('SUMMARY_FARE_DETAILS_OPENED_2'|translate) :
+          ('SUMMARY_FARE_DETAILS_CLOSED'|translate)}}
+        </span>
+        <span
+          class="ib-show-more__button-icon"
+          ng-class="status.isOpenFare ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"
+        ></span>
+      </span>
+    </uib-accordion-heading>
+    <div class="ib-show-more__collapse">
+      <ul class="ib-list-passengers">
+        <li
+          class="ib-list-passengers__item"
+          id="{{uiSummaryFareCtrl.name}}_{{fareIndex}}"
+          data-ng-repeat="(fareIndex,fare) in uiSummaryFareCtrl.fares"
+        >
+          <span
+            class="ib-list-passengers__item-icon"
+            data-ng-class="uiSummaryFareCtrl.getFareIcon(fareIndex)"
+          ></span>
+          <span
+            class="ib-text ib-text--color-unfocused ib-text--bold ib-list-passengers__item-title"
+            >{{::fare.name}}</span
+          >
+          <div class="ib-list-passengers__item-description">
+            <div class="ib-list-passengers__item-description__title">
+              <span
+                class="ib-text ib-text--color-unfocused"
+                data-ng-bind-html="fare.message"
+              ></span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

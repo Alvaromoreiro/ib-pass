@@ -1,0 +1,50 @@
+<div class="ib-attendance-voucher--header">        
+    <span data-ng-class="{'ib-attendance-voucher--header-icon-restaurant icon-c_restaurante' : uiAttendanceVoucherCardCtrl.attendanceVoucher.typeVoucher === 'RESTAURANT', 'ib-attendance-voucher--header-icon-hotel icon-reserva_de_hoteles' : uiAttendanceVoucherCardCtrl.attendanceVoucher.typeVoucher === 'ACCOMODATION'}">
+        {{uiAttendanceVoucherCardCtrl.attendanceVoucher.titleVoucher}}
+    </span>          
+    <h3 class="ib-box-cols__title-section ib-box-cols__title-section--with-txt">
+        <a ng-controller="IbPopoverController as popoverCtrl" 
+            data-ng-class="uiAttendanceVoucherCardCtrl.getPopoverClass()"
+            popover-class="ib-attendance-voucher--header-info"
+            href="javascript:void(0)"
+            title="{{'MMB_PASSENGERS_CLICK_FOR_INFORMATION_TEXT'|translate}}" uib-popover-template="::$root.routes.templates +
+            'ib-voucher-popover.html'" popover-placement="top" 
+            ng-click="popoverCtrl.text = isPaymentsVoucher ? uiAttendanceVoucherCardCtrl.attendanceVoucher.infoTextPayments : uiAttendanceVoucherCardCtrl.attendanceVoucher.infoTextMMB; popoverCtrl.title = uiAttendanceVoucherCardCtrl.attendanceVoucher.infoTitle"
+            popover-trigger="'outsideClick'" popover-is-open="popoverCtrl.isOpen" focusin></a>
+    </h3>           
+</div>
+<!--primer div ng-repeat de los textos planos -->
+<div class="ib-attendance-voucher--actions" ng-if="uiAttendanceVoucherCardCtrl.attendanceVoucher.conditionsVoucher.length > 0">
+    <div data-ng-repeat="conditionsVoucher in uiAttendanceVoucherCardCtrl.attendanceVoucher.conditionsVoucher"
+        class="ib-box-cols__link-container ib-box-cols__link-container--icon ib-attendance-voucher--actions__item">
+        <span class="ib-box-cols__title-section ib-box-cols__title-section--with-icon ib-attendance-voucher--conditions__text ib-attendance-voucher--conditions-icon" data-ng-class="{'icon-tarjeta_de_embarque' : conditionsVoucher.typeCondition === 'BOARDING'}">
+            {{conditionsVoucher.textCondition}}
+        </span>
+    </div>
+    <div class="ib-attendance-voucher--link__arrow">      
+        <span class="ib-attendance-voucher--link__text" data-ng-click="uiAttendanceVoucherCardCtrl.openLink(uiAttendanceVoucherCardCtrl.attendanceVoucher.linkUrl)">
+            {{uiAttendanceVoucherCardCtrl.attendanceVoucher.linkName}}
+        </span>
+        <span class="icon-flecha_1_derecha ib-attendance-voucher--link__text">
+        </span>    
+    </div>
+</div>
+
+<!--segundo div ng-repeat de las acciones -->
+<div class="ib-attendance-voucher--actions" ng-if="uiAttendanceVoucherCardCtrl.attendanceVoucher.actionsVoucher.length > 0">
+    <div data-ng-repeat="actionsVoucher in uiAttendanceVoucherCardCtrl.attendanceVoucher.actionsVoucher"
+        class="ib-box-cols__link-container ib-box-cols__link-container--icon ib-attendance-voucher--actions__item">
+        <span
+            class="ib-box-cols__title-section ib-box-cols__title-section--with-icon"
+            data-ng-class="{'icon-descargar ib-attendance-voucher--actions__icon-download' : actionsVoucher.typeAction === 'DOWNLOAD', 'icon-mensajes ib-attendance-voucher--actions__icon-email' : actionsVoucher.typeAction === 'EMAIL'}">
+                <span class="ib-attendance-voucher--actions__text" data-ng-click="actionsVoucher.typeAction === 'EMAIL' ? uiAttendanceVoucherCardCtrl.sendbyEmail() :  uiAttendanceVoucherCardCtrl.downloadPDF()">{{actionsVoucher.textAction}}</span>
+        </span>
+    </div>
+    <div class="ib-attendance-voucher--link__arrow">
+        <span class="ib-attendance-voucher--link__text" data-ng-click="uiAttendanceVoucherCardCtrl.openLink(uiAttendanceVoucherCardCtrl.attendanceVoucher.linkUrl)">
+            {{uiAttendanceVoucherCardCtrl.attendanceVoucher.linkName}}
+        </span>
+        <span class="icon-flecha_1_derecha ib-attendance-voucher--link__text">
+        </span>
+    </div>
+</div>

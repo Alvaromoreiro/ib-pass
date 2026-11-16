@@ -1,0 +1,85 @@
+<div>
+    <header class="ib-modals__header" data-ng-class="{'ib-modals__header--p-small':modalCtrl.timerActivate}">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+            <h2 class="ib-heading ib-heading--type-1" data-ng-if="modalCtrl.timerActivate">{{'KEEP_ALIVE_TIMER_TITLE'|translate}}</h2>
+            <h2 class="ib-heading ib-heading--type-1" data-ng-if="!modalCtrl.timerActivate && !modalCtrl.expiredFlash">
+                <span class="ib-heading__icon ib-heading__icon--default ib-heading__icon--small icon-reloj"></span>
+                <span class="ib-heading__text">{{'KEEP_ALIVE_END_TIME_TITLE'|translate}}</span>
+            </h2>
+            <h2 class="ib-heading ib-heading--type-1" data-ng-if="modalCtrl.expiredFlash">
+                <span class="ib-heading__text">{{modalCtrl.model.title|translate}}</span>
+            </h2>
+        </div>
+        <div class="ib-modals__header-settings ib-modals__header-settings--mobile">
+            <button data-ng-if="(modalCtrl.isGiftCard || modalCtrl.isSubscriptionModels) && !modalCtrl.isfinishSesion" id="bbki-keep-alive-close-btn" type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" data-ng-click="modalCtrl.reloadFlow()">
+                <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+            </button>
+            <button data-ng-if="(modalCtrl.isGiftCard || modalCtrl.isSubscriptionModels) && modalCtrl.isfinishSesion" id="bbki-keep-alive-close-btn" type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" data-ng-click="modalCtrl.goToEntryPoint(true)">
+                <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+            </button>
+            <button data-ng-if="!modalCtrl.isGiftCard && !modalCtrl.expiredFlash && !modalCtrl.isSubscriptionModels" id="bbki-keep-alive-close-btn" type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" data-ng-click="modalCtrl.buttonClose()">
+                <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+            </button>
+            <button data-ng-if="modalCtrl.expiredFlash" id="bbki-keep-alive-close-btn" type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" data-ng-click="modalCtrl.close()">
+                <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+            </button>
+        </div>
+    </header>
+    <section class="ib-modals__body">
+        <div class="ib-counter ib-counter--mb-40" data-ng-if="modalCtrl.timerActivate">
+            <div class="ib-counter__col ib-counter__col--left">
+                <span class="ib-counter__txt ib-counter__txt--message">{{'KEEP_ALIVE_TIMER_TEXT'|translate}}</span>
+                <p class="ib-counter__icon icon-reloj">
+                    <span class="ib-counter__txt ib-counter__txt--counter">{{modalCtrl.timer.minutes}}{{'GENERAL_MINUTES_ABR_TEXT'|translate}}{{modalCtrl.timer.seconds}}{{'GENERAL_SECONDS_ABR_TEXT'|translate}}</span>
+                </p>
+            </div>
+            <div class="ib-counter__col ib-counter__col--right">
+                <p class="ib-counter__txt">{{'KEEP_ALIVE_TIMER_TEXT_2'|translate}}</p>
+            </div>
+        </div>
+        <div data-ng-if="!modalCtrl.timerActivate && !modalCtrl.expiredFlash">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small" data-ng-if="!modalCtrl.moreInfo.show">
+                <p class="ib-text ib-text--bold">{{'KEEP_ALIVE_END_TIME_TEXT'|translate}}</p>
+            </div>
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--medium" data-ng-if="!modalCtrl.moreInfo.show">
+                <p class="ib-text">{{'KEEP_ALIVE_END_TIME_TEXT_2'|translate}}</p>
+            </div>
+        </div>
+        <div data-ng-if="modalCtrl.expiredFlash">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+                <p class="ib-text">{{modalCtrl.model.body|translate}}</p>
+            </div>
+            <!-- ui-travel-info -->
+            <ib-ui-travel-info class="u-display-block u-mb-largeu-mt-large u-mt-medium-xs" travel-info="modalCtrl.model.moreInfo" is-multi-city="false" is-pa-open="false" data-ng-if="modalCtrl.model.moreInfo.journey[0].trips.length>0 && !modalCtrl.model.hideTripModule"></ib-ui-travel-info>
+            <!-- ui-travel-info end -->
+        </div>
+    </section>
+    <footer class="ib-modals__footer" data-ng-if="modalCtrl.timerActivate">
+        <div class="ib-content-buttons">
+            <div class="ib-content-buttons__content-left">
+                <button id="bbki-keep-alive-accept-btn" class="ib-button ib-button--w-medium" type="button" title="{{'KEEP_ALIVE_BUTTON'|translate}}" data-ng-click="modalCtrl.reloadFlow()">{{'KEEP_ALIVE_BUTTON'|translate}}</button>
+            </div>
+            <div class="ib-content-buttons__content-right">
+                <a id="bbki-keep-alive-close-link" data-ng-click="modalCtrl.goToEntryPoint(true)" title="{{'KEEP_ALIVE_BACK_BUTTON'|translate}}" class="ib-link">{{'KEEP_ALIVE_BACK_BUTTON'|translate}}</a>
+            </div>
+        </div>
+    </footer>
+    <footer class="ib-modals__footer" data-ng-if="!modalCtrl.timerActivate && !modalCtrl.expiredFlash">
+        <div class="ib-content-buttons">
+            <div class="ib-content-buttons__content-left">
+                <button id="bbki-keep-alive-refreshflow" class="ib-button ib-button--w-medium" type="button" title="{{'KEEP_ALIVE_RELOAD_SEARCH'|translate}}" ng-click="modalCtrl.goToEntryPoint(true)">{{'KEEP_ALIVE_RELOAD_SEARCH'|translate}}</button>
+            </div>
+            <div class="ib-content-buttons__content-right"></div>
+        </div>
+    </footer>
+    <footer class="ib-modals__footer" data-ng-if="modalCtrl.expiredFlash">
+        <div class="ib-content-buttons">
+            <div class="ib-content-buttons__content-left">
+                <button id="bbki-keep-alive-refreshflow" class="ib-button ib-button--w-medium" type="button" title="{{modalCtrl.model.rightButton|translate}}" ng-click="modalCtrl.close()">{{modalCtrl.model.rightButton|translate}}</button>
+            </div>
+            <div class="ib-content-buttons__content-right">
+                <a id="bbki-keep-alive-back-btn" class="ib-link" type="button" title="{{modalCtrl.model.leftButton|translate}}" ng-click="modalCtrl.accept()">{{modalCtrl.model.leftButton|translate}}</a>
+            </div>
+        </div>
+    </footer>
+</div>

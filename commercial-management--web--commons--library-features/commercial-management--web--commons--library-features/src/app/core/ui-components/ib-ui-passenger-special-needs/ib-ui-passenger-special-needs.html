@@ -1,0 +1,173 @@
+<div class="ib-layout__line-spacing">
+  <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+    <div
+      class="ib-check--regular"
+      id="bbki-passenger-special-needs-check-{{pasSpeNeedsCtrl.index}}-err-modal"
+      ng-messages="pasSpeNeedsCtrl.containerForm.$submitted && pasSpeNeedsCtrl.containerForm['check_enable_' + pasSpeNeedsCtrl.index].$error"
+    >
+      <div class="ib-alert u-mt-small ib-alert--error" ng-message="specneeds">
+        {{'IB_PASSENGER_SPE_NEEDS_CHECK_MANDATORY'|translate}}
+      </div>
+    </div>
+    <div class="u-pt-xmedium">
+      <div class="ib-layout__line-spacing ib-layout__line-spacing--xmedium">
+        <div class="ib-check ib-check--regular ib-check--tab-lvl1 u-pl-none">
+          <input
+            type="checkbox"
+            id="check_vision_{{pasSpeNeedsCtrl.index}}"
+            name="check_vision_{{pasSpeNeedsCtrl.index}}"
+            class="ib-check__input"
+            ng-model="pasSpeNeedsCtrl.passengersFormData.blind"
+            ng-change="pasSpeNeedsCtrl.containerForm['check_enable_' + pasSpeNeedsCtrl.index].$setValidity('specneeds',pasSpeNeedsCtrl.isSpecNeedsCorrect())"
+          />
+          <label
+            for="check_vision_{{pasSpeNeedsCtrl.index}}"
+            class="ib-check__label"
+          >
+            <span class="ib-check__text"
+              >{{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_VISION_TEXT'|translate}}</span
+            >
+          </label>
+        </div>
+      </div>
+      <div class="ib-layout__line-spacing ib-layout__line-spacing--xmedium">
+        <div class="ib-check ib-check--regular ib-check--tab-lvl1 u-pl-none">
+          <input
+            type="checkbox"
+            id="check_hearing_{{pasSpeNeedsCtrl.index}}"
+            name="check_hearing_{{pasSpeNeedsCtrl.index}}"
+            class="ib-check__input"
+            ng-model="pasSpeNeedsCtrl.passengersFormData.deaf"
+            ng-change="pasSpeNeedsCtrl.containerForm['check_enable_' + pasSpeNeedsCtrl.index].$setValidity('specneeds',pasSpeNeedsCtrl.isSpecNeedsCorrect())"
+          />
+          <label
+            for="check_hearing_{{pasSpeNeedsCtrl.index}}"
+            class="ib-check__label"
+          >
+            <span class="ib-check__text"
+              >{{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_HEARING_PROBLEM_TEXT'|translate}}</span
+            >
+          </label>
+        </div>
+      </div>
+      <div class="ib-layout__line-spacing ib-layout__line-spacing--xmedium">
+        <div class="ib-check ib-check--regular ib-check--tab-lvl1 u-pl-none">
+          <input
+            type="checkbox"
+            id="check_dog_{{pasSpeNeedsCtrl.index}}"
+            name="check_dog_{{pasSpeNeedsCtrl.index}}"
+            class="ib-check__input"
+            ng-model="pasSpeNeedsCtrl.passengersFormData.svan"
+            ng-change="pasSpeNeedsCtrl.containerForm['check_enable_' + pasSpeNeedsCtrl.index].$setValidity('specneeds',pasSpeNeedsCtrl.isSpecNeedsCorrect())"
+          />
+          <label
+            for="check_dog_{{pasSpeNeedsCtrl.index}}"
+            class="ib-check__label"
+          >
+            <span class="ib-check__text"
+              >{{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_GUIDE_DOG'|translate}}</span
+            >
+          </label>
+        </div>
+      </div>
+      <div data-ng-show="pasSpeNeedsCtrl.passengersFormData.svan">
+        <div
+          class="ib-layout__line-spacing ib-layout__line-spacing--small ib-check--tab-lvl1"
+        >
+          <div
+            class="ib-msg-alert ib-msg-alert--warning ib-msg-alert--xsmall icon-informacion_2 alert"
+          >
+            <p
+              class="ib-msg-alert__text"
+              style="line-height: 1.2; font-size: 0.875rem"
+            >
+              <a
+                href="{{'SPECIAL_NEED_DOG_GUIDE_INFO' | LinksFilter}}"
+                class="ib-link"
+                title="{{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_GUIDE_DOG_INFO_MESSAGE_LINK' | translate}}"
+                target="_blank"
+              >
+                {{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_GUIDE_DOG_INFO_MESSAGE_LINK'
+                | translate}}</a
+              >
+              {{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_GUIDE_DOG_INFO_MESSAGE_2'
+              | translate}}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="ib-layout__line-spacing ib-layout__line-spacing--xmedium">
+        <div class="ib-check ib-check--regular ib-check--tab-lvl1 u-pl-none">
+          <input
+            type="checkbox"
+            id="check_chair_{{pasSpeNeedsCtrl.index}}"
+            name="check_chair_{{pasSpeNeedsCtrl.index}}"
+            class="ib-check__input"
+            ng-model="pasSpeNeedsCtrl.passengersFormData.specialWheelchair"
+            ng-change="pasSpeNeedsCtrl.containerForm['check_enable_' + pasSpeNeedsCtrl.index].$setValidity('specneeds', pasSpeNeedsCtrl.isSpecNeedsCorrect()); pasSpeNeedsCtrl.specialWheelchairSelected()"
+          />
+          <label
+            for="check_chair_{{pasSpeNeedsCtrl.index}}"
+            class="ib-check__label"
+          >
+            <span class="ib-check__text"
+              >{{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_CHAIR_TEXT'|translate}}</span
+            >
+          </label>
+        </div>
+      </div>
+      <div ng-show="pasSpeNeedsCtrl.passengersFormData.specialWheelchair">
+        <div
+          ng-repeat="(index, wheelchairInfo) in pasSpeNeedsCtrl.passengersFormData.wheelChair"
+          class="ib-layout__line-spacing ib-layout__line-spacing--xmedium"
+        >
+          <div class="ib-radio ib-radio--tab-lvl2 u-ml-xmedium">
+            <input
+              type="radio"
+              id="wheelchair_{{wheelchairInfo.id}}_{{pasSpeNeedsCtrl.index}}"
+              name="accessible_wheelchair_{{wheelchairInfo[index]}}"
+              value="{{wheelchairInfo.id}}"
+              ng-model="pasSpeNeedsCtrl.passengersFormData.wheelChair.selected"
+              class="ib-radio__input"
+            />
+            <label
+              for="wheelchair_{{wheelchairInfo.id}}_{{pasSpeNeedsCtrl.index}}"
+              class="ib-radio__label"
+            >
+              <span class="ib-radio__text"
+                >{{wheelchairInfo.name|translate}}</span
+              >
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="ib-profile-form__container-text u-pl-mobile">
+        <p class="ib-profile-form__cont-icon ib-text ib-text--color-gray-dark">
+          <span class="ib-profile-form__icon-inf icon-informacion_2"></span
+          >{{'REQUIRE_COMPANION'|translate}}
+        </p>
+        <ul class="ib-profile-form__ul">
+          <li class="ib-profile-form__li">
+            <p class="ib-text ib-text--color-gray-dark">
+              {{'IMPOSIBLE_COMUNICATION'|translate}}
+            </p>
+          </li>
+          <li class="ib-profile-form__li">
+            <p class="ib-text ib-text--color-gray-dark">
+              {{'PASSENGER_NEED_HELP'|translate}}
+            </p>
+          </li>
+          <li class="ib-profile-form__li">
+            <p class="ib-text ib-text--color-gray-dark">
+              {{'PASSENGER_NO_AUTONOMY'|translate}}
+            </p>
+          </li>
+        </ul>
+        <p class="ib-profile-form__cont-icon ib-text ib-text--color-gray-dark">
+          <span class="ib-profile-form__icon-inf icon-informacion_2"></span
+          >{{'MORE_INFO_NUMBER'|translate}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

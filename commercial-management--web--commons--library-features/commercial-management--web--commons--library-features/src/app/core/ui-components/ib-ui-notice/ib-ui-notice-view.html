@@ -1,0 +1,134 @@
+<div ng-switch="noticeCtrl.type">
+  <div
+    class="ib-notice--type-lightbox u-hide-mobile"
+    ng-class="{'ib-notice--hidden': noticeCtrl.viewNoticeHidden}"
+    role="alert"
+    tabindex="0"
+    aria-labelledby="notice-title"
+    aria-describedby="notice-desc"
+    aria-hidden="{{noticeCtrl.viewNoticeHidden ? true : false}}"
+    calculate-position
+    ng-switch-when="lightbox-onhold"
+  >
+    <button
+      title="{{'MODAL_CLOSE'|translate}}"
+      class="ib-notice--type-lightbox-close"
+      ng-click="noticeCtrl.close()"
+      title="{{'HEADER_ADVANCED_SEARCH_PASSENGER_CLOSE_TITLE'|translate}}"
+    >
+      <span class="sr-only">{{'MODAL_CLOSE'|translate}}</span>
+      <span class="icon-cerrar ib-button--icon-close"></span>
+    </button>
+    <h3 class="ib-notice--type-lightbox-title">
+      {{noticeCtrl.model.title | translate}}
+    </h3>
+    <p class="ib-notice--type-lightbox-subtitle">
+      {{noticeCtrl.model.subtitle|translate}}
+    </p>
+    <p class="ib-notice--type-lightbox-text">
+      {{noticeCtrl.model.text | translate}}
+    </p>
+    <div class="ib-notice--type-lightbox-button">
+      <button
+        type="button"
+        class="ib-button ib-button--w-medium-desktop ib-button--medium"
+        title="{{'ONHOLD_OPTION_BUTTON'|translate}}"
+        ng-click="noticeCtrl.acceptBuyOnhold()"
+      >
+        {{'ONHOLD_OPTION_BUTTON'|translate}}
+      </button>
+    </div>
+  </div>
+  <div
+    class="ib-notice--type-lightbox ib-notice--generic"
+    ng-class="{'ib-notice--hidden': noticeCtrl.viewNoticeHidden}"
+    role="alert"
+    tabindex="0"
+    aria-labelledby="notice-title-$id"
+    aria-describedby="notice-desc-$id"
+    aria-hidden="{{noticeCtrl.viewNoticeHidden ? true : false}}"
+    calculate-position
+    ng-switch-when="generic-lightbox"
+  >
+    <button
+      title="{{'MODAL_CLOSE'|translate}}"
+      class="ib-notice--type-lightbox-close"
+      ng-click="noticeCtrl.toggleGenericLightBox(noticeCtrl.model.closeAction)"
+      focusin
+    >
+      <span class="sr-only">{{'MODAL_CLOSE'|translate}}</span>
+      <span class="icon-cerrar ib-button--icon-close"></span>
+    </button>
+    <h3
+      class="ib-notice--type-lightbox-subtitle"
+      id="notice-title-$id"
+      data-ng-if="noticeCtrl.model.title"
+    >
+      {{noticeCtrl.model.title | translate}}
+    </h3>
+    <p class="ib-notice--type-lightbox-text" data-ng-if="noticeCtrl.model.text">
+      {{noticeCtrl.model.text | translate}}
+    </p>
+    <div
+      class="ib-notice--type-lightbox-button"
+      data-ng-if="noticeCtrl.model.action"
+      data-ng-class="noticeCtrl.model.action.modifier"
+    >
+      <button
+        ng-disabled="noticeCtrl.model.actionButtonDisabled"
+        type="button"
+        class="ib-button ib-button--w-medium-desktop ib-button--medium"
+        title="{{noticeCtrl.model.action.title|translate}}"
+        ng-click="noticeCtrl.toggleGenericLightBox(noticeCtrl.model.action.callback)"
+        focusin
+      >
+        {{noticeCtrl.model.action.text|translate}}
+      </button>
+    </div>
+    <div
+      class="ib-notice__out"
+      data-ng-class="noticeCtrl.model.outAction.modifier"
+      data-ng-if="noticeCtrl.model.outAction"
+    >
+      <a
+        class="ib-notice__out-action"
+        href="{{noticeCtrl.model.outAction.url}}"
+        target="noticeCtrl.model.outAction.target"
+        title="{{noticeCtrl.model.outAction.title|translate}}"
+        focusin
+      >
+        <!-- <span class="{{noticeCtrl.model.outAction.icon}}" data-ng-if="noticeCtrl.model.outAction.icon"></span> -->
+        <span class="ib-notice__out-action-text"
+          >{{noticeCtrl.model.outAction.text|translate}}</span
+        >
+      </a>
+    </div>
+  </div>
+  <div
+    class="ib-notice"
+    ib-notice-directive
+    ng-class="{'ib-notice--hidden': noticeCtrl.viewNoticeHidden}"
+    ng-switch-default
+    role="alert"
+    tabindex="0"
+    aria-labelledby="notice-title"
+    aria-describedby="notice-desc"
+    aria-hidden="{{noticeCtrl.viewNoticeHidden ? true : false}}"
+  >
+    <a
+      href="#"
+      title="Cerrar alerta"
+      class="ib-notice-close"
+      ng-click="noticeCtrl.viewNoticeClose($event)"
+      aria-label="Cerrar"
+    >
+      <span class="icon-cerrar"></span>
+    </a>
+    <h3 id="notice-title" class="ib-notice-title">
+      {{noticeCtrl.title | translate}}
+    </h3>
+    <p id="notice-desc" class="ib-notice-text">
+      {{noticeCtrl.text | translate}}
+    </p>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<header class="ib-modals__header QM-modal__error__header">
+  <h2
+    class="ib-heading ib-heading--bold ib-heading--font-normal ib-heading--type-8"
+  >
+    {{modalCtrl.model.title ? modalCtrl.model.title :
+    'MODAL_ERROR_TITLE'|translate}}
+  </h2>
+  <div
+    class="ib-modals__header-settings"
+    data-ng-if="!modalCtrl.model.hideClose"
+  >
+    <button
+      id="bbki-generic-error-close-btn"
+      type="button"
+      class="ib-modals__button-action icon-cerrar"
+      title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}"
+      data-ng-click="modalCtrl.close()"
+    >
+      <span class="u-hide-accessible"
+        >{{GENERIC_MODAL_ACCESSIBLE_CLOSE|translate}}</span
+      >
+    </button>
+  </div>
+</header>
+<section
+  class="ib-modals__body QM-modal__error__body"
+  ng-attr-data-qm-modal-error-status="{{::modalCtrl.model? modalCtrl.model.errorCode: undefined}}"
+  ng-attr-data-qm-modal-error-errorcode="{{::modalCtrl.model && modalCtrl.model.internalErrorCode.length > 0? modalCtrl.model.internalErrorCode: undefined}}"
+  ng-attr-data-qm-modal-error-api="{{::modalCtrl.model && modalCtrl.model.requestURL.length > 0? modalCtrl.model.requestURL: undefined}}"
+>
+  <div
+    class="ib-layout__line-spacing ib-layout__line-spacing--large"
+    ng-if="modalCtrl.model.message"
+  >
+    <p class="ib-text">
+      {{modalCtrl.model.needsTranslate ? (modalCtrl.model.message|translate) :
+      modalCtrl.model.message}}
+    </p>
+    <p class="u-hide-accessible">{{modalCtrl.model.internalErrorCode}}</p>
+  </div>
+  <div
+    ng-if="modalCtrl.model.messageList"
+    class="ib-layout__line-spacing ib-layout__line-spacing--large"
+    ng-repeat="message in modalCtrl.model.messageList"
+  >
+    <p class="ib-text">{{message.message}}</p>
+    <p class="u-hide-accessible">{{message.internalErrorCode}}</p>
+  </div>
+</section>
+<footer
+  class="ib-modals__footer u-text-right QM-modal__error__footer"
+  data-ng-if="!modalCtrl.model.hideFooter"
+>
+  <button
+    id="MOD_ERROR_BOTON_ACEP"
+    ng-attr-title="{{'MODAL_ERROR_ACCEPT'|translate}}"
+    class="ib-button ib-button--w-medium"
+    data-ng-click="modalCtrl.accept()"
+  >
+    {{'MODAL_ERROR_ACCEPT'|translate}}
+  </button>
+</footer>

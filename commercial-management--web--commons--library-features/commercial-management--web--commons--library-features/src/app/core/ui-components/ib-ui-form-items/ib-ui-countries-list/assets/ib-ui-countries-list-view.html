@@ -1,0 +1,42 @@
+<div
+  class="ib-select ib-select--small"
+  ng-class="{'ib-select--error': ibUiCountriesCtrl.error || (ibUiCountriesCtrl.form.$submitted && ibUiCountriesCtrl.form.countriesList.$invalid)}"
+  data-test-id="countrySelector"
+>
+  <label
+    class="ib-select__label"
+    data-ng-class="{'ib-select__label--focus': ibUiCountriesCtrl.countrySelected, 'ib-select__label--unfocus': !ibUiCountriesCtrl.countrySelected}"
+    for="countrySelect"
+    ng-class="ibUiCountriesCtrl.countrySelected ? 'ib-select__label--focus' : 'ib-select__label--unfocus'"
+    >{{ 'COUNTRY' | translate }}</label
+  >
+  <ui-select
+    ib-select-safari
+    class="ib-select__action"
+    ng-model="ibUiCountriesCtrl.countrySelected"
+    on-select="ibUiCountriesCtrl.select(); ibUiCountriesCtrl.changeCountry()"
+    ng-required="ibUiCountriesCtrl.required != false"
+    ng-change=""
+    name="countrySelect"
+  >
+    <ui-select-match
+      class="ib-select__list-ipt"
+      placeholder="{{ 'COUNTRY' | translate }}"
+    >
+      <span class="ib-select__txt" ng-bind="$select.selected.name"></span>
+    </ui-select-match>
+    <ui-select-choices
+      class="ib-select__list"
+      repeat="item in (ibUiCountriesCtrl.countriesList | prefixCheckSpecialCharactersFilter: $select.search) track by $index"
+    >
+      <span class="ib-select__list-txt" ng-bind="item.name"></span>
+    </ui-select-choices>
+  </ui-select>
+</div>
+<div
+  ng-messages="ibUiCountriesCtrl.error || ((ibUiCountriesCtrl.form.$submitted || ibUiCountriesCtrl.form.countrySelect.$submitted)  && ibUiCountriesCtrl.form.countrySelect.$error)"
+>
+  <span class="ib-alert ib-alert--error" ng-message="required">
+    {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+  </span>
+</div>

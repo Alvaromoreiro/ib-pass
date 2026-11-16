@@ -1,0 +1,96 @@
+<div class="ib-ui-search-box">
+  <!-- INPUT ORIGIN -->
+  <div class="ib-ui-search-box__col ib-ui-search-box__col--first">
+    <ib-ui-city-selector-component
+      container-form="uiSearchBoxCtrl.containerForm"
+      model-cities="uiSearchBoxCtrl.originData"
+      is-origin="true"
+      city-selected="uiSearchBoxCtrl.model.origin"
+      index="0"
+      text="'DETAIL_INPUT_ORIGIN'"
+      search="uiSearchBoxCtrl.researchDestination"
+      hide-warning="true"
+    >
+    </ib-ui-city-selector-component>
+  </div>
+  <!-- END INPUT ORIGIN -->
+  <!-- INPUT DESTINATION-->
+  <div class="ib-ui-search-box__col ib-ui-search-box__col--second">
+    <ib-ui-city-selector-component
+      container-form="uiSearchBoxCtrl.containerForm"
+      model-cities="uiSearchBoxCtrl.destinationData"
+      is-origin="false"
+      city-selected="uiSearchBoxCtrl.model.destination"
+      index="1"
+      text="'DETAIL_INPUT_DESTINATION'"
+      search="uiSearchBoxCtrl.researchOrigin"
+      hide-warning="true"
+    >
+    </ib-ui-city-selector-component>
+  </div>
+  <!-- END INPUT DESTINATION-->
+  <!-- DATEPICKER TWO INPUTS-->
+  <div
+    class="ib-ui-search-box__col ib-ui-search-box__col--third"
+    ng-class="{'ib-ui-search-box__col--dates' : !uiSearchBoxCtrl.allDates}"
+  >
+    <ib-ui-daterangepicker
+      class="ib-ui-daterangepicker"
+      ng-if="uiSearchBoxCtrl.dateCalendar"
+      text-date-gone="'HEADER_ADVANCED_SEARCH_START_DATE_OPTION'|translate"
+      text-date-return="'HEADER_ADVANCED_SEARCH_END_DATE_OPTION'|translate"
+      date-goneid="'dateGoneid'"
+      date-returnid="'dateReturnid'"
+      roundtrip="uiSearchBoxCtrl.tripOptionSelected.code"
+      date-gone="uiSearchBoxCtrl.selectedOutbondDate"
+      date-return="uiSearchBoxCtrl.selectedReturnDate"
+      container-form="uiSearchBoxCtrl.containerForm"
+      all-dates="uiSearchBoxCtrl.allDates"
+      date-calendar="uiSearchBoxCtrl.dateCalendar"
+    >
+    </ib-ui-daterangepicker>
+  </div>
+  <!-- END DATEPICKER TWO INPUTS-->
+  <!-- INPUT PRICE -->
+  <div class="ib-ui-search-box__col">
+    <div class="ib-input ib-input--custom-amount" input-loading>
+      <label
+        class="ib-input__label"
+        for="INPUT_FILTER_PRICE"
+        data-ng-class="{'ib-input__label--focus' : uiSearchBoxCtrl.amountEvent.focused || (
+                    uiSearchBoxCtrl.containerForm['customAmount'].$viewValue  && uiSearchBoxCtrl.containerForm['customAmount'].$viewValue !== '')}"
+      >
+        {{'OFFER_IMPORT_FILTER'|translate}}
+      </label>
+      <input
+        class="ib-input__input"
+        type="text"
+        id="INPUT_FILTER_PRICE"
+        ng-pattern="uiSearchBoxCtrl.PRICE_INTEGER"
+        data-ib-validator-cleaner="{{uiSearchBoxCtrl.PHONE_CLEANER}}"
+        name="customAmount"
+        maxlength="{{uiSearchBoxCtrl.MAX_LENGTH}}"
+        minlength="1"
+        data-ng-focus="uiSearchBoxCtrl.amountEvent.focused=true"
+        data-ng-blur="uiSearchBoxCtrl.amountEvent.focused=false"
+        data-ng-model="uiSearchBoxCtrl.amountEvent.dynamicPrice"
+      />
+    </div>
+  </div>
+  <!-- END INPUT PRICE -->
+  <!-- SUBMIT -->
+  <div
+    class="ib-ui-search-box__col ib-ui-search-box__col--right-button"
+    ng-class="{'ib-ui-search-box__col--button' : !uiSearchBoxCtrl.allDates}"
+  >
+    <button
+      id="BUTTON_FILTER_CONFIRMATION"
+      type="button"
+      class="ib-button ib-flash-offers-detail__button2"
+      ng-click="uiSearchBoxCtrl.submit()"
+    >
+      {{'DETAIL_INPUT_BUTTON_FILTER'|translate}}
+    </button>
+  </div>
+  <!-- ENDSUBMIT -->
+</div>
