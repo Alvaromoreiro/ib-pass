@@ -1,0 +1,550 @@
+/* -------------------------------------------------------------
+    #NOTICE
+----------------------------------------------------------------- */
+.#{$wefront__namespace}notice {
+    position: fixed;
+    z-index: 99999;
+    right: rem(100);
+    bottom: rem(0);
+    overflow: hidden;
+    width: rem(420);
+    max-width: 100%;
+    padding: rem(15) rem(25);
+    border-radius: rem(3);
+    background-color: color(primary);
+    -webkit-animation: translationtop 1s ease-out;
+    -moz-animation: translationtop 1s ease-out;
+    -ms-animation: translationtop 1s ease-out;
+    -o-animation: translationtop 1s ease-out;
+    animation: translationTop 1s ease-out;
+    background-image: linear-gradient(to left, #f5515f, color(primary));
+    box-shadow: 0 rem(2) rem(23) 0 color(black, 0.32);
+    opacity: 1;
+
+    &::before {
+        content: "\e98a";
+        position: absolute;
+        bottom: -rem(160);
+        left: -rem(100);
+        font-family: $font-icons !important;
+        font-size: rem(260);
+        color: color(white);
+        background-size: cover;
+        opacity: 0.1;
+    }
+
+    &-container {
+        position: relative;
+        display: block;
+        padding: rem(30) rem(16) rem(15) 0;
+
+        &--center {
+            margin: 0 auto;
+            text-align: center;
+        }
+    }
+
+    &-close {
+        right: 0;
+        margin-right: -rem(18);
+        font-family: $font-special;
+        font-size: rem(24);
+        color: color(white);
+        cursor: pointer;
+        float: right;
+
+        span {
+            display: block;
+            font-size: rem(35);
+
+            &::before {
+                display: block;
+            }
+        }
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: color(black);
+        }
+
+        &:focus {
+            outline: rem(2) solid color(orange-10);
+        }
+    }
+
+    &-title {
+        margin-top: rem(15);
+        font-family: $font-special;
+        font-size: rem(20);
+        text-align: left;
+        color: color(white);
+    }
+
+    &-text {
+        margin-top: rem(4);
+        font-family: $font-normal;
+        font-size: rem(12);
+        font-weight: 100;
+        text-align: left;
+        line-height: 1.75;
+        color: color(white);
+
+        &--big {
+            font-size: rem(24);
+            line-height: rem(27);
+        }
+
+        &--special {
+            font-family: $font-special;
+        }
+
+        &--m-bottom {
+            display: block;
+            margin-bottom: rem(20);
+        }
+
+        &--center {
+            text-align: center;
+        }
+
+        strong {
+            font-weight: 700;
+        }
+    }
+
+    &-btn {
+        padding: rem(8) rem(49);
+        border: rem(1) solid color(white);
+        font-family: $font-special;
+        font-size: rem(24);
+        text-align: center;
+        color: color(white);
+        background: transparent;
+
+        &--center {
+            display: inline-block;
+            margin: 0 auto;
+        }
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: color(white);
+            background: rgb(51 51 51 / 47%);
+        }
+    }
+
+    &:focus {
+        outline: rem(1) solid color(orange-10);
+    }
+
+    &__out {
+        position: absolute;
+        top: 100%;
+        display: flex;
+        width: remcalc(100%, " - ", rem(32));
+        flex-flow: row nowrap;
+        justify-content: flex-end;
+
+        &-action {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: flex-start;
+            padding: rem(5) rem(15);
+            font-family: $font-normal;
+            background-color: color(gray-285);
+            border-bottom-left-radius: rem(5);
+            border-bottom-right-radius: rem(5);
+            box-shadow: 0 rem(4) rem(2) rem(-2) color(gray-40) inset;
+            -webkit-transition: background 1s; /* For Safari 3.0 to 6.0 */
+            transition: background 1s;
+
+            &-text {
+                font-size: rem(13);
+                text-decoration: underline;
+                color: color(gray-10);
+            }
+
+            [class^="icon-"] {
+                font-size: rem(24);
+                color: color(gray-10);
+            }
+
+            &:hover {
+                text-decoration: none;
+                background-color: color(gray-140);
+                // .#{$wefront__namespace}notice {
+                //     &__out{
+                //         &-action{
+                //             &-text{
+                //                 text-decoration: underline;
+                //             }
+                //         }
+                //     }
+                // }
+            }
+        }
+    }
+
+    &--hidden {
+        bottom: rem(-215);
+        display: none;
+        -webkit-animation: translationbottom 1s ease-out;
+        -moz-animation: translationbottom 1s ease-out;
+        -ms-animation: translationbottom 1s ease-out;
+        -o-animation: translationbottom 1s ease-out;
+        animation: translationBottom 1s ease-out;
+        opacity: 0;
+        -webkit-transition: all 1s ease-in-out;
+        -moz-transition: all 1s ease-in-out;
+        -ms-transition: all 1s ease-in-out;
+        -o-transition: all 1s ease-in-out;
+        transition: all 1s ease-in-out, bottom 0.1s ease-in-out 0.3s;
+
+        &.ng-animate {
+            display: block;
+        }
+    }
+
+    // &--type-default {
+    // 	right: rem(100);
+    // }
+
+    &--type-lightbox {
+        position: fixed;
+        z-index: 1039;
+        top: rem(24);
+        right: rem(0);
+        width: rem(448);
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: rem(16) rem(16) rem(24);
+        border-radius: rem(3);
+        color: color(primary);
+        background-color: color(white);
+        // overflow: hidden;
+        -webkit-animation: translationleft 1s ease-out;
+        -moz-animation: translationleft 1s ease-out;
+        -ms-animation: translationleft 1s ease-out;
+        -o-animation: translationleft 1s ease-out;
+        animation: translationLeft 1s ease-out;
+        background-image: none;
+        box-shadow: 0 rem(2) rem(3) 0 color(black, 0.32), 0 rem(-1) rem(4) 0 color(black, 0.11);
+
+        & h3 {
+            padding-bottom: rem(8);
+            line-height: rem(19);
+        }
+
+        &-container {
+            position: relative;
+            display: block;
+            padding: rem(30) rem(16) rem(15) 0;
+
+            &--center {
+                margin: 0 auto;
+                text-align: center;
+            }
+        }
+
+        &-title {
+            font-family: $font-normal;
+            font-size: rem(16);
+            font-weight: bold;
+            color: color(primary);
+
+            strong {
+                font-weight: 700;
+            }
+        }
+
+        &-subtitle {
+            padding-bottom: rem(8);
+            font-family: $font-normal;
+            font-size: rem(13);
+            font-weight: bold;
+            color: color(black);
+
+            strong {
+                font-weight: 700;
+            }
+        }
+
+        &-text {
+            padding-bottom: rem(8);
+            font-family: $font-normal;
+            font-size: rem(13);
+            color: color(black);
+        }
+
+        &-button {
+            padding-top: rem(8);
+            font-family: $font-normal;
+            font-size: rem(13);
+            text-align: right;
+        }
+
+        &-close {
+            position: absolute;
+            top: rem(8);
+            right: rem(8);
+            width: rem(16);
+            height: rem(16);
+            border: none;
+            color: color(black);
+        }
+    }
+
+    &--bg-degraded {
+        background-size: 100% 100%;
+        box-shadow: 0 rem(2) rem(23) 0 color(black, 0.32);
+        .#{$wefront__namespace}notice {
+            &__figure {
+                position: absolute;
+                top: 0;
+                left: 0;
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+            }
+
+            &__img {
+                &--background {
+                    position: absolute;
+                    z-index: 0;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-position: center center;
+                    background-size: cover;
+                }
+            }
+
+            &-close {
+                position: absolute;
+                z-index: 2;
+                right: rem(15);
+                margin: 0;
+            }
+        }
+    }
+
+    &--limit-footer {
+        position: absolute;
+        //bottom: rem(148);	//add to DOM
+        z-index: 9;
+        opacity: 1;
+        &.#{$wefront__namespace}notice--hidden {
+            bottom: 0;
+            display: none;
+            -webkit-animation: translationbottomlimit 1s ease-out;
+            -moz-animation: translationbottomlimit 1s ease-out;
+            -ms-animation: translationbottomlimit 1s ease-out;
+            -o-animation: translationbottomlimit 1s ease-out;
+            animation: translationBottomLimit 1s ease-out;
+            opacity: 0;
+            -webkit-transition: all 1s ease-in-out;
+            -moz-transition: all 1s ease-in-out;
+            -ms-transition: all 1s ease-in-out;
+            -o-transition: all 1s ease-in-out;
+            transition: all 1s ease-in-out, bottom 0.1s ease-in-out 0.3s;
+
+            &.ng-animate {
+                display: block;
+            }
+        }
+    }
+
+    &--generic {
+        right: rem(-500);
+        padding: rem(16) rem(32) rem(24);
+        border-radius: initial;
+        animation-timing-function: ease;
+
+        .ib-notice {
+            &--type-lightbox {
+                &-subtitle {
+                    padding-bottom: initial;
+                    margin-top: rem(8);
+
+                    &:first-child {
+                        margin-top: initial;
+                    }
+                }
+
+                &-text {
+                    padding-bottom: initial;
+                    margin-top: rem(8);
+                }
+
+                &-button {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    align-items: center;
+                    justify-content: flex-start;
+                    padding-top: initial;
+                    margin-top: rem(16);
+                    text-align: initial;
+
+                    &--end {
+                        justify-content: flex-end;
+                    }
+                }
+
+                &-close {
+                    top: 0;
+                    right: 0;
+                    display: flex;
+                    overflow: hidden;
+                    width: rem(24);
+                    height: rem(24);
+                    align-items: center;
+                    justify-content: center;
+                    line-height: rem(24);
+                    background-color: color(gray-90);
+                    -webkit-transition: background 1s; /* For Safari 3.0 to 6.0 */
+                    transition: background 1s;
+
+                    &:hover {
+                        background-color: color(gray-140);
+                    }
+
+                    .ib-button {
+                        &--icon-close {
+                            position: relative;
+                            top: initial;
+                            left: initial;
+                            border: 0 none;
+                            font-size: initial;
+                            background-color: initial;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.ib-notice {
+            &--hidden {
+                display: none;
+                -webkit-animation: translationtoright 1s ease-out;
+                -moz-animation: translationtoright 1s ease-out;
+                -ms-animation: translationtoright 1s ease-out;
+                -o-animation: translationtoright 1s ease-out;
+                animation: translationToRight 1s ease-out;
+                opacity: 0;
+                -webkit-transition: all 1s ease-in-out;
+                -moz-transition: all 1s ease-in-out;
+                -ms-transition: all 1s ease-in-out;
+                -o-transition: all 1s ease-in-out;
+                transition: all 1s ease-in-out, bottom 0.1s ease-in-out 0.3s;
+            }
+        }
+    }
+}
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}notice {
+        right: rem(30);
+
+        &--limit-footer {
+            position: absolute;
+            bottom: rem(150);
+        }
+    }
+}
+
+@include media-query("xs") {
+    .#{$wefront__namespace}notice {
+        bottom: 0;
+        left: 0;
+
+        &--limit-footer {
+            position: absolute;
+            bottom: rem(150);
+        }
+
+        &--type-lightbox {
+            width: remcalc(100%, ' - ', rem(32));
+        }
+    }
+}
+
+//Old Animation - FadeIn/FadeOut
+@keyframes noticeFade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+//New Animation - toTop, toBottom
+//- toTop
+
+@keyframes translationTop {
+    from {
+        bottom: rem(-215);
+    }
+
+    to {
+        bottom: 0;
+    }
+}
+//- toBottom
+
+@keyframes translationBottom {
+    from {
+        bottom: 0;
+    }
+
+    to {
+        bottom: rem(-215);
+    }
+}
+//New Animation - toLeft
+//- toLeft
+@keyframes translationLeft {
+    from {
+        right: rem(-500);
+    }
+
+    to {
+        right: attr(data-rightpos);
+    }
+}
+
+@keyframes translationToRight {
+    from {
+        right: attr(data-rightpos);
+    }
+
+    to {
+        right: rem(-500);
+    }
+}
+
+//New Animation - toTop, toBottom (limit Footer)
+@keyframes translationTopLimit {
+    from {
+        bottom: 0;
+    }
+
+    to {
+        bottom: rem(148);
+    }
+}
+
+@keyframes translationBottomLimit {
+    from {
+        bottom: rem(148);
+    }
+
+    to {
+        bottom: -0;
+    }
+}

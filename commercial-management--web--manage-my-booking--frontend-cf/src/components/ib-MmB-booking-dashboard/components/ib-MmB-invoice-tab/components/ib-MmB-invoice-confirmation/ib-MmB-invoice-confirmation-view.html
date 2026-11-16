@@ -1,0 +1,138 @@
+<div class="ib-layout__line-spacing ib-layout__line-spacing--large u-mt">
+    <!-- Transition -->
+    <!-- Spinner -->
+    <div class="ib-overlay-fly ib-overlay-fly--container-adapted ib-overlay-fly--transparent"
+        data-ng-if="ibMmbInvoiceConfirmationCtrl.showSpinner">
+        <div class="ib-overlay-fly__container">
+            <div class="ib-overlay-fly__icon">
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KO -->
+    <div data-ng-if="ibMmbInvoiceConfirmationCtrl.showErrorConfirmation" class="ib-msg-alert ib-msg-alert--danger icon-informacion ib-msg-alert--smallest alert u-mt u-mb">
+        <p class="ib-msg-alert__text ib-msg-alert__text--bold">{{'MMB_INVOICE_CONFIRMATION_ALERT_TITLE' | translate}}</p>
+        <p class="ib-msg-alert__text">{{'MMB_INVOICE_CONFIRMATION_ALERT_BODY' | translate}}</p>
+    </div>
+
+    <div class="ib-box ib-box--medium ib-box--medium--invoice ib-box--empty-responsive u-pb-none">
+        <div class="ib-flex ib-flex--align-center ib-icons--icon-left">
+            <span
+                class="icon-nota ib-link__icon--big ib-link__icon--primary"
+            ></span>
+            <span class="ib-text ib-text--invoice-responsive">{{'MMB_INVOICE_CONFIRMATION_TITLE' | translate}}</span>
+        </div>
+        <p class="ib-text ib-text--small ib-text--lh-small ib-text--color-gray-dark--mobile">{{'MMB_INVOICE_CONFIRMATION_BODY' | translate}}</p>
+    </div>
+
+    <div class="ib-box ib-box--medium ib-box--medium--invoice u-mt-mobile u-pb-none">
+        <form name="tableForm" novalidate>
+            <legend class="u-hide-accessible">{{'MMB_INVOICES_TITLE' | translate}} form</legend>
+            <table class="ib-table-breakdown__table">
+                <thead class="ib-table-breakdown__head">
+                    <tr class="ib-table-breakdown__row">
+                        <th class="ib-table-breakdown__cell-title--padding-right-8 hidden-sm hidden-xs">
+                            <span class="ib-table-breakdown__txt ib-table-breakdown__txt--bold">{{'MMB_INVOICES_TABLE_COLUMN1_TITLE' | translate}}</span>
+                        </th>
+                        <th class="ib-table-breakdown__cell-title--padding-right-8 hidden-sm hidden-xs">
+                            <span class="ib-table-breakdown__txt ib-table-breakdown__txt--bold">{{'MMB_INVOICES_TABLE_COLUMN2_TITLE' | translate}}</span>
+                        </th>
+                        <th class="ib-table-breakdown__cell-title--padding-right-8 hidden-sm hidden-xs">
+                            <span class="ib-table-breakdown__txt ib-table-breakdown__txt--bold">{{'MMB_INVOICES_TABLE_COLUMN3_TITLE' | translate}}</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="ib-table-breakdown__body ib-table-breakdown__body--responsive--invoice">
+                    <tr class="ib-table-breakdown__row ib-table-breakdown__row--responsive--invoice"
+                        data-ng-repeat="invoice in ibMmbInvoiceConfirmationCtrl.listInvoicesSelected" >
+                        <td class="ib-table-breakdown__cell--padding-right-8 ib-table-breakdown__cell--responsive ib-table-breakdown__cell--responsive--invoice" data-attr="Trayecto">
+                            <span class="ib-table-breakdown__txt ib-table-breakdown__txt--responsive--invoice">{{invoice.route}}</span>
+                        </td>
+                        <td class="ib-table-breakdown__cell--padding-right-8 ib-table-breakdown__cell--responsive ib-table-breakdown__cell--responsive--invoice" data-attr="Concepto">
+                            <span class="ib-table-breakdown__txt ib-table-breakdown__txt--responsive--invoice">{{invoice.concept}}</span>
+                        </td>
+                        <td class="ib-table-breakdown__cell--padding-right-8 ib-table-breakdown__cell--responsive ib-table-breakdown__cell--responsive--invoice" data-attr="Importe">
+                            <span class="ib-table-breakdown__txt ib-table-breakdown__txt--responsive--invoice">{{invoice.price}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="ib-box ib-box--medium ib-box--medium--invoice u-mt-mobile u-pt-none">
+        <div class="ib-box--small">
+            <p class="ib-text ib-text--block ib-text--bold u-mb-xsmall">{{'MMB_INVOICES_MODAL_INVOICE_DATA' | translate}}</p>
+            <div class="ib-flex ib-flex--direction-column" ng-if="!ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.businessName">
+                <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD1' | translate}}:</p>
+                <p class="ib-text ib-text--block ib-text--lh-medium">{{ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.name}}</p>
+            </div>
+            <div class="ib-flex ib-flex--direction-column u-mt-small-desktop" ng-if="!ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.businessName">
+                <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD2' | translate}}:</p>
+                <p class="ib-text ib-text--block ib-text--lh-medium">{{ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.surname}}</p>
+            </div>
+            <div class="ib-flex ib-flex--direction-column u-mt-small-desktop" ng-if="ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.businessName">
+                <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD10' | translate}}:</p>
+                <p class="ib-text ib-text--block ib-text--lh-medium">{{ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.businessName}}</p>
+            </div>
+            <div class="ib-flex ib-flex--direction-column u-mt-small-desktop">
+                <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{(ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.businessName ? 'MMB_INVOICES_MODAL_INVOICE_FIELD11' : 'MMB_INVOICES_MODAL_INVOICE_FIELD3') | translate}}:</p>
+                <p class="ib-text ib-text--block ib-text--lh-medium">{{ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.identityInformation}}</p>
+            </div>
+            <div class="ib-flex ib-flex--direction-column u-mt-small-desktop">
+                <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD4' | translate}}:</p>
+                <p class="ib-text ib-text--block ib-text--lh-medium">{{ibMmbInvoiceConfirmationCtrl.invoiceDetail.shippingData.email}}</p>
+            </div>
+            <div class="ib-flex ib-flex--direction-column u-mt-small-desktop">
+                <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD5' | translate}}:</p>
+                <p class="ib-text ib-text--block ib-text--lh-medium">{{ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.address}}</p>
+            </div>
+            <div class="ib-flex ib-flex--direction-column u-mt-small-desktop">
+                <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD6' | translate}}:</p>
+                <p class="ib-text ib-text--block ib-text--lh-medium">{{ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.floor}}</p>
+            </div>
+            <div class="ib-flex ib-flex--direction-column u-mt-small-desktop">
+                <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD7' | translate}}:</p>
+                <p class="ib-text ib-text--block ib-text--lh-medium">{{ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.city}}</p>
+            </div>
+            <div class="ib-flex ib-flex--direction-column u-mt-small-desktop" data-ng-if="ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.province && ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.province.length > 0">
+                <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD9' | translate}}:</p>
+                <p class="ib-text ib-text--block ib-text--lh-medium">{{ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.province}}</p>
+            </div>
+            <div class="ib-flex ib-flex--direction-column u-mt-small-desktop">
+                <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD8' | translate}}:</p>
+                <p class="ib-text ib-text--block ib-text--lh-medium">{{ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.postalCode}}</p>
+            </div>
+            <div class="ib-flex ib-flex--direction-column u-mt-small-desktop">
+                <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-xmedium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_COUNTRY' | translate}}:</p>
+                <p class="ib-text ib-text--block ib-text--lh-medium">{{ibMmbInvoiceConfirmationCtrl.invoiceDetail.billingData.country}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="ib-layout__line-spacing u-mt-xmedium">
+        <div class="ib-content-buttons">
+            <div class="ib-content-buttons__content-left">
+                <button
+                    class="ib-button ib-button--w-medium"
+                    type="button"
+                    ng-click="ibMmbInvoiceConfirmationCtrl.requestInvoices()"
+                >
+                    {{ibMmbInvoiceConfirmationCtrl.literalRequestInvoice}}
+                </button>
+            </div>
+            <div
+                class="ib-content-buttons__content-right ib-content-buttons__content-right--mb-mobile"
+            >
+                <a
+                    href="javascript:void(0)"
+                    title="Cancelar"
+                    class="ib-link"
+                    ng-click="ibMmbInvoiceConfirmationCtrl.close();"
+                    >{{'MMB_INVOICES_FISCAL_DATA_FORM_ACTION2' | translate}}</a
+                >
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<header class="ib-modals__header">
+  <h2 class="ib-heading ib-heading--type-2">{{modalCtrl.model.title ? (modalCtrl.model.title.needsTranslate ? (modalCtrl.model.title.message|translate) : modalCtrl.model.title) : ('MODAL_ERROR_TITLE'|translate)}}</h2>
+  <div class="ib-modals__header-settings" ng-if="!modalCtrl.model.hideClose">
+    <button type="button" class="ib-modals__button-action icon-cerrar" data-ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible">{{'MODAL_CLOSE_ACCESS'|translate}}</span>
+    </button>
+  </div>
+</header>
+<section class="ib-modals__body">
+  <div class="ib-layout__line-spacing ib-layout__line-spacing--large" ng-if="modalCtrl.model.message">
+    <p class="ib-text">{{modalCtrl.model.message|translate}}</p>
+    <p class="hide-accessible">{{modalCtrl.model.internalErrorCode}}</p>
+  </div>
+  <div ng-if="modalCtrl.model.messageList" class="ib-layout__line-spacing ib-layout__line-spacing--large" ng-repeat="message in modalCtrl.model.messageList">
+    <p class="ib-text">{{message.message}}</p>
+    <p class="hide-accessible">{{message.internalErrorCode}}</p>
+  </div>
+</section>
+<footer class="ib-modals__footer" data-ng-if="!modalCtrl.model.hideFooter">
+  <div class="ib-content-buttons ib-content-buttons--end">
+    <button id="MOD_ERROR_BOTON_ACCEPT" title="{{'MODAL_ACCEPT'|translate}}" class="ib-button ib-button--w-medium" data-ng-click="modalCtrl.accept()">{{'MODAL_ACCEPT'|translate}}</button>
+  </div>
+</footer>

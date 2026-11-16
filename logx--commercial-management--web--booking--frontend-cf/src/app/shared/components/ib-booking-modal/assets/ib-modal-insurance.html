@@ -1,0 +1,134 @@
+<div class="ib-insurance-modal">
+    <header class="ib-modals__header ib-insurance-modal__header">
+        <!-- <figure class="ib-insurance-modal__logo">
+            <img class="ib-insurance__image" src="{{$root.config.routes.images}}/seguro/logo-seguros-alliance.png" alt="Logo Seguro" tabpassengerIndex="-1">
+        </figure> -->
+        <h2 class="ib-heading ib-heading--type-1">{{modalCtrl.model.insurance.name}}</h2>
+        <div class="ib-modals__header-settings ib-modals__header-settings--top">
+            <button id="bbki-insurance-close-btn" type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}"  ng-click="modalCtrl.close()">
+                <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+            </button>
+        </div>
+    </header>
+    <section class="ib-modals__body">
+        <form name="modalCtrl.insuranceForm" method="post" novalidate>
+            <div class="ib-layout">
+                <div class="ib-layout__line-spacing">
+                    <span class="ib-text ib-text--block u-mb-small">{{'ANCILLARIES_INSURANCE_MODAL_DESCRIPTION_TITLE'|translate}}</span>
+                    <ul class="ib-list ib-list--small ib-list--check">
+                        <li class="ib-list__item">
+                            <span class="icon-confirmacion">
+                                <span class="ib-list__item-text ib-text ib-text--color-unfocused">{{'ANCILLARIES_INSURANCE_MODAL_DESCRIPTION_TEXT_1'|translate}}</span>
+                            </span>
+                        </li>
+                        <li class="ib-list__item">
+                            <span class="icon-confirmacion">
+                                <span class="ib-list__item-text ib-text ib-text--color-unfocused">{{'ANCILLARIES_INSURANCE_MODAL_DESCRIPTION_TEXT_2'|translate}}</span>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ib-layout__line-spacing">
+                    <span class="ib-text ib-text--block">{{'ANCILLARIES_CANCELLATION_INSURANCE_COUNTRY_DESCRIPTION_TEXT'|translate}} </span>
+                </div>
+                <div class="ib-insurance-modal__content">
+                    <div class="ib-overlay-fly ib-overlay-fly--type-1 ib-overlay-fly--transparent" ng-if="modalCtrl.model.isModalLoading">
+                        <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+                            <div class="ib-overlay-fly__icon">
+                                <div class="circle"></div>
+                                <div class="circle"></div>
+                            </div>
+                            <span class="ib-overlay-fly__text">{{'ANCILLARIES_INSURANCE_MODAL_LOADING_NEW_POLICY_TEXT'|translate}}</span>
+                        </div>
+                    </div>
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--medium ib-layout__line-spacing--bordered">
+                        <fieldset>
+                            <legend class="u-hide-accessible">{{'ANCILLARIES_INSURANCE_PASSENGER_COUNTRY_ACCESSIBLE_TEXT'|translate}}</legend>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="ib-layout__line-spacing">
+                                            <div class="ib-select">
+                                                <label class="ib-select__label" for="INSURANCE_MODAL_COUNTRY" ng-class="select.focused ? 'ib-select__label--focus' : 'ib-select__label--unfocus'">{{'ANCILLARIES_INSURANCE_MODAL_COUNTRY_SELECT_LABEL_TEXT'|translate}}</label>
+                                                <ui-select class="ib-select__action" data-ng-model="modalCtrl.model.insuranceCountry" ng-required="true" name="insuranceCountry"
+                                                    data-ng-change="modalCtrl.changeInsuranceCountry($select.selected.country)"
+                                                    id="CKIANC_INSURANCE_MODAL_COUNTRY">
+                                                    <ui-select-match class="ib-select__list-ipt" placeholder="{{'ANCILLARIES_INSURANCE_MODAL_COUNTRY_PLACEHOLDER_TEXT'|translate}}">
+                                                        <span class="ib-select__txt" ng-bind="$select.selected.country.description"></span>
+                                                    </ui-select-match>
+                                                    <ui-select-choices class="ib-select__list" repeat="country in (modalCtrl.model.countriesList | prefixCheckSpecialCharactersFilter: $select.search)">
+                                                        <span class="ib-select__list-txt" ng-bind="::country.country.description"></span>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Info RequiredFiles -->
+                                <div ng-if="modalCtrl.model.insuranceCountry.requiredFields.length > 0" ng-repeat="(passengerIndex,passenger) in modalCtrl.model.passengers">
+                                    <div class="row">
+                                        <div class="col-xs-12 u-mb-small">
+                                            <span class="ib-text ib-text--block">{{'ANCILLARIES_INSURANCE_PASSENGER_TEXT'|translate}} {{passenger.name}} {{passenger.surname}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12 col-xs-12">
+                                            <div class="ib-layout__line-spacing">
+                                                <div class="ib-input" ng-if="(modalCtrl.model.insuranceCountry.requiredFields.passengerIndexOf('DOCUMENT_ID') !== -1)">
+                                                    <label class="ib-input__label" for="PASSENGER_RESIDENT_DOCUMENT_{{passengerIndex}}" ng-class="{'ib-input__label--focus' : modalCtrl.documentFocused[passengerIndex] || (modalCtrl.insuranceForm['PASSENGER_RESIDENT_DOCUMENT_' + passengerIndex].$viewValue != null && modalCtrl.insuranceForm['PASSENGER_RESIDENT_DOCUMENT_' + passengerIndex].$viewValue !== '')}">{{'ANCILLARIES_INSURANCE_RESIDENT_REQUIRED_FIELD_TEXT'|translate}}</label>
+                                                    <input class="ib-input__input" ng-if="modalCtrl.model.insuranceCountry.country.description !=='Brasil'" type="text" id="PASSENGER_RESIDENT_DOCUMENT_{{passengerIndex}}"
+                                                        name="PASSENGER_RESIDENT_DOCUMENT_{{passengerIndex}}" ng-focus="modalCtrl.documentFocused[passengerIndex]=true"
+                                                        ng-blur="modalCtrl.documentFocused[passengerIndex]=false" ng-model="passenger.document"
+                                                        ng-pattern="modalCtrl.model.insurancePatterns[modalCtrl.model.insuranceCountry.country.code].pattern"
+                                                        required />
+                                                    <input class="ib-input__input" ng-if="modalCtrl.model.insuranceCountry.country.description ==='Brasil'" type="text" id="PASSENGER_RESIDENT_DOCUMENT_{{passengerIndex}}"
+                                                        name="PASSENGER_RESIDENT_DOCUMENT_{{passengerIndex}}" ng-focus="modalCtrl.documentFocused[passengerIndex]=true"
+                                                        ng-blur="modalCtrl.documentFocused[passengerIndex]=false" ng-model="passenger.document"
+                                                        ib-cpf-validator ib-format-document required />
+                                                </div>
+                                                <div id="bbki-insurance-resident-doc-{{passengerIndex}}-err-modal" ng-messages="modalCtrl.insuranceForm.$submitted && modalCtrl.insuranceForm['PASSENGER_RESIDENT_DOCUMENT_'+ passengerIndex].$error">
+                                                    <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                                    <div class="ib-alert ib-alert--error" ng-message="cpf">{{'ANCILLARIES_INSURANCE_REQUIRED_DOCUMENT_TEXT'|translate}}</div>
+                                                    <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12">
+                                            <div class="ib-layout__line-spacing" ng-if="(modalCtrl.model.insuranceCountry.requiredFields.passengerIndexOf('BIRTH_DATE') !== -1)">
+                                                <ib-passenger-birth-date id="bbki-insurance-passenger-birth-date" years-from="0" day="passenger.birthDate.day" month="passenger.birthDate.month" year="passenger.birthDate.year"
+                                                    container-form="modalCtrl.insuranceForm" index="::passengerIndex" is-required="false"></ib-passenger-birth-date>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <!--   Info next datos -->
+                    <div class="ib-layout__line-spacing">
+                        <div class="ib-insurance-modal__col ib-insurance-modal__col--left u-mb-small">
+                            <span class="ib-text">{{modalCtrl.model.insurance.pricePerPassenger}} x 1 pasajero
+                            </span>
+                        </div>
+                        <div class="ib-insurance-modal__col ib-insurance-modal__col--left u-mb-small">
+                            <span class="ib-text ib-text--price-medium ib-text--especial">{{'ANCILLARIES_INSURANCE_MODAL_TOTAL_PRICE_TEXT'|translate}}{{modalCtrl.model.insurance.totalPrice}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ib-layout__line-spacing">
+                        <div class="ib-content-buttons">
+                            <div class="ib-content-buttons__content-left">
+                                <button id="bbki-insurance-accept-btn" type="submit" class="ib-button ib-button--w-medium u-float-right" title="{{'MODAL_GENERAL_BUTTON_ACCEPT'|translate}}" ng-click="modalCtrl.completeForm()">{{'MODAL_GENERAL_BUTTON_ACCEPT'|translate}}</button>
+                            </div>
+                            <div class="ib-content-buttons__content-right">
+                                <a id="bbki-insurance-cancel-link" href="javascript:void(0)" title="{{'ANCILLARIES_INSURANCE_MODAL_BUTTON_CANCEL_BUTTON_TEXT'|translate}}" class="ib-link"
+                                    ng-click="modalCtrl.close()">{{'MODAL_GENERAL_BUTTON_CANCEL'|translate}}</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </section>
+</div>

@@ -1,0 +1,39 @@
+<form class="ib-form" data-ng-submit="loginAccessCtrl.doLogin(loginForm,$event)" name="loginForm" method="POST" action="{{::loginAccessCtrl.loginParams.loginURL}}" novalidate>
+    <fieldset class="ib-form__fieldset">
+        <div class="ib-layout__line-spacing">
+            <div class="ib-input">
+                <label class="ib-input__label" for="user" ng-class="{'ib-input__label--focus' : loginAccessCtrl.userFocused || (loginForm.user.$viewValue != null && loginForm.user.$viewValue !== '')}">{{'LOGIN_FORM_EMAIL_OR_IB_PLUS_NUMBER'|translate}}</label>
+                <input class="ib-input__input" id="user" name="user" maxlength="{{$root.MmBPatterns.EMAIL_MAX_LENGTH}}"
+                    ng-model="loginAccessCtrl.user" data-ng-focus="loginAccessCtrl.userFocused=true" data-ng-blur="loginAccessCtrl.userFocused=false"
+                     required/>
+            </div>
+            <div ng-messages="loginForm.$submitted && loginForm.user.$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+            </div>
+        </div>
+        <div class="ib-layout__line-spacing--xsmall ">
+            <div class="ib-input ">
+                <label class="ib-input__label" for="password" ng-class="{ 'ib-input__label--focus' : loginAccessCtrl.passFocused || (loginForm.pin.$viewValue !=null && loginForm.pin.$viewValue !=='' )}">{{'LOGIN_FORM_PASSWORD'|translate}}</label>
+                <input class="ib-input__input" type="password" id="password" name="pin" ng-model="loginAccessCtrl.password" data-ng-focus="loginAccessCtrl.passFocused=true"
+                    data-ng-blur="loginAccessCtrl.passFocused=false" maxlength="{{$root.MmBPatterns.MAX_LENGTH_PIN}}" required/>
+            </div>
+            <div ng-messages="loginForm.$submitted && loginForm.pin.$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+            </div>
+        </div>
+        <input type="hidden" name="referralURL" data-ng-value="::loginAccessCtrl.loginParams.returnURL" />
+        <input type="hidden" name="language" data-ng-value="::loginAccessCtrl.loginParams.language" />
+        <input type="hidden" name="country" data-ng-value="::loginAccessCtrl.loginParams.market" />
+        <p class="ib-text--block ib-text--to-center ">
+            <a id="LOGIN_FORGOT_PIN_LINK" rel="noopener noreferrer" ng-href="{{'IB_RECOVER_PASSWORD_LINK'|LinksFilter}}" target="_blank" title="{{'LOGIN_FORM_RECOVER_PASSWORD'|translate}}"
+                class="ib-link ib-link--important
+                    ib-link--underline ">{{'LOGIN_FORM_RECOVER_PASSWORD'|translate}}</a>
+        </p>
+        <button id="LOGIN_BUTTON" type="submit" class="ib-button ib-button--red ib-button--big ib-button--block" data-ng-click="loginForm.$submitted=true">{{'LOGIN_MODULE_USER_ACCESS'|translate}}</button>
+        <p class="ib-text ib-text--block ib-text__border-top ib-text--to-center ">
+            <span class="ib-text">{{'LOGIN_MODULE_NOT_IBPLUS'|translate}}</span>
+            <a id="LOGIN_REGISTER_LINK" ng-href="{{'IBCOSE_REGISTER_LINK'|LinksFilter}}" title="{{'LOGIN_MODULE_REGISTER'|translate}}"
+                class="ib-link ib-link--important ib-link--underline ">{{'LOGIN_MODULE_REGISTER'|translate}}</a>
+        </p>
+    </fieldset>
+</form>

@@ -1,0 +1,154 @@
+@import 'src/styles/component-tools';
+@import '../../../../../styles/tools/tools.scss';
+
+.pmt-container {
+    position: relative;
+    display: grid;
+    width: 100%;
+    margin-top: rem(32);
+    gap: rem(32);
+    grid-template-areas:
+        "top top"
+        "main side";
+    grid-template-columns: auto rem(352);
+}
+
+.pmt-loading {
+    z-index: 1000;
+}
+
+.pmt-top {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: rem(32);
+    grid-area: top;
+}
+
+.pmt-main {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: rem(32);
+    grid-area: main;
+}
+
+.pmt-side {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: rem(32);
+    grid-area: side;
+}
+
+.page-title {
+    font-family: var(--font-headline);
+    font-size: rem(38);
+    line-height: rem(38);
+    word-break: break-word;
+}
+
+.pmt-onhold {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: rem(16);
+}
+
+.pmt-onhold-info {
+    display: grid;
+    align-items: stretch;
+    gap: rem(32);
+    grid-template-columns: repeat(3, 1fr);
+}
+
+pwc-terms-conditions {
+    padding: rem(8);
+    border-bottom: rem(1) solid var(--ib-color-grey-200-ee);
+}
+
+pwc-pay-button {
+    flex-grow: 1;
+}
+
+@include media-query-range("mq-lg") {
+    .page-title {
+        font-size: rem(30);
+    }
+
+
+    .pmt-container {
+        grid-template-areas:
+            "top top"
+           "main side";
+        grid-template-columns: auto rem(288);
+    }
+
+}
+
+@include media-query-range("mq-md") {
+    .page-title {
+        font-size: rem(30);
+    }
+
+    .pmt-container {
+        grid-template-areas:
+            "top"
+            "side"
+            "main";
+        grid-template-columns: 1fr;
+    }
+
+
+    .pmt-onhold-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pmt-voucher {
+        order: 1;
+    }
+}
+
+@include media-query-range("mq-mobile") {
+    .pmt-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .pmt-top {
+        order: 1;
+    }
+
+    .pmt-side {
+        display: contents;
+    }
+
+    .pmt-main {
+        display: contents;
+    }
+
+    .pmt-voucher {
+        order: 2;
+    }
+
+    .pmt-main > *:not(ib-pmt-pay-block, ib-booking-total-onhold-free) {
+        order: 3;
+    }
+
+    .pmt-summary {
+        order: 4;
+    }
+
+    ib-pmt-pay-block,
+    ib-booking-total-onhold-free {
+        order: 5;
+    }
+
+    .pmt-onhold-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@include media-query-range("mq-xs") {
+    .page-title {
+        font-size: rem(32);
+    }
+
+}

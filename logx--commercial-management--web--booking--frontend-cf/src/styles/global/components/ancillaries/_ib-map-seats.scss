@@ -1,0 +1,2163 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ib-map-seats
+//    Desripcion: Estilos para la modal de mapa de equipajes
+//******************************************************************************/
+.#{$wefront__namespace}map-seats {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100%;
+    padding: 0;
+    border: 0;
+
+    /* Contenedor para ajustar el diseño */
+    &__container {
+        position: relative;
+        width: 100%;
+        max-width: rem(750);
+        padding: rem(10) 0;
+        margin: 0 auto;
+
+        &--border {
+            display: inline-block;
+            padding-bottom: rem(16);
+            border-bottom: rem(1) solid color(gray-70);
+        }
+    }
+
+    /* Cabecera del mapa de asientos */
+    &__header {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        width: 100%;
+        background: color(white);
+
+        .modal-header {
+            padding: rem(15) rem(15) rem(22);
+            border-bottom: rem(1) solid color(gray-40);
+
+            &--right {
+                padding: rem(14) rem(6) rem(4) rem(32);
+            }
+        }
+
+        /* Seccion de titutlos */
+        .#{$wefront__namespace}base__page-titles {
+            .title {
+                display: inline-block;
+            }
+        }
+
+        /* Boton cerrar modal */
+        .#{$wefront__namespace}upgrade__button-close {
+            right: rem(10);
+            min-height: rem(32);
+
+            &:focus {
+                &::after {
+                    box-shadow: 0 0 rem(2) rem(1) color(primary);
+                }
+            }
+
+            &--position {
+                top: rem(10);
+                right: rem(-14);
+            }
+        }
+    }
+
+    /* Informacion del vuelo (textos) */
+    &__info-fly {
+        max-width: rem(500);
+        padding: rem(17) rem(70) 0 0;
+        text-align: right;
+        float: right;
+
+        &__primary {
+            display: block;
+            font-size: rem(12);
+            font-weight: bold;
+            color: color(gray-30);
+
+            &--show-sm {
+                display: none;
+            }
+
+            &--hidden-sm {
+                display: block;
+            }
+        }
+
+        &__secondary {
+            display: block;
+            margin-top: rem(3);
+            font-size: rem(12);
+            color: color(gray-30);
+        }
+
+        &--bottom {
+            max-width: 50%;
+            padding: rem(20) rem(45) 0 0;
+        }
+    }
+
+    /* Body del modal */
+    .modal-body {
+        position: absolute;
+        z-index: 1;
+        //top: rem(194);
+        top: rem(242);
+        overflow: auto scroll;
+        width: 100%;
+        max-width: 100%;
+        height: calc(100% - 310px);
+        background: color(gray-50);
+        clear: both;
+        //Scroll Animate
+        &--animate {
+            -moz-transition: 0.3s;
+            -ms-transition: 0.3s;
+            -o-transition: 0.3s;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+        }
+    }
+
+    &__footer {
+        position: absolute;
+        z-index: 2;
+        bottom: 0;
+        overflow: hidden;
+        width: 100%;
+        font-size: 0;
+        background-color: color(white);
+        clear: both;
+
+        &-wrap-text {
+            max-width: 70%;
+            float: right;
+        }
+        .#{$wefront__namespace}base__group-foot {
+            padding: rem(10) 0;
+
+            &--three-column {
+                padding: rem(8) rem(32);
+                .#{$wefront__namespace}button {
+                    max-width: 50%;
+                }
+                .#{$wefront__namespace}link {
+                    max-width: 30%;
+                }
+                .#{$wefront__namespace}text {
+                    &--especial {
+                        max-width: 50%;
+                        padding-right: rem(8);
+                        margin-top: rem(14);
+                        word-wrap: break-word;
+                    }
+
+                    &--price-smedium {
+                        max-width: 50%;
+                        padding-right: rem(25);
+                        margin-top: rem(20);
+                    }
+                }
+            }
+        }
+        .#{$wefront__namespace}map-seats__container {
+            padding: 0;
+        }
+
+        &--padding {
+            padding: rem(8) rem(32) 0;
+        }
+
+        &--padding-small {
+            padding: rem(8) rem(16) 0;
+        }
+
+        &--new {
+            box-shadow: 0 rem(-4) rem(4) rgb(0 0 0 / 10%);
+        }
+    }
+
+    /* Datos del pasajero (carrousel) */
+    &__passenger {
+        overflow: hidden;
+        min-height: rem(82);
+        text-align: center;
+        clear: both;
+
+        .title {
+            padding: 0;
+        }
+
+        &-name {
+            // padding-top: rem(13);
+            font-family: $font-special;
+            font-size: rem(18);
+        }
+
+        &-baby {
+            margin: rem(3) 0;
+            font-family: $font-special;
+            font-size: rem(13);
+
+            &::before {
+                font-size: rem(16);
+                color: color(gray-20);
+                vertical-align: bottom;
+            }
+        }
+
+        &-button {
+            line-height: rem(63);
+            float: right;
+
+            &--next {
+                float: right;
+
+                &::before {
+                    content: "\e973";
+                }
+            }
+
+            &--back {
+                float: left;
+
+                &::before {
+                    content: "\e974";
+                }
+            }
+
+            &::before {
+                font-family: $font-icons;
+                font-size: rem(20);
+                color: color(gray-40);
+            }
+
+            &:hover,
+            &:focus {
+                &::before {
+                    color: color(primary);
+                }
+            }
+
+            &:focus {
+                box-shadow: 0 0 rem(2) rem(1) color(primary);
+                outline: none;
+            }
+        }
+
+        &-seat {
+            font-size: rem(13);
+            color: color(gray-30);
+        }
+    }
+
+    /* Seccion numero de asientos en columnas */
+    &__container-columns {
+        margin: 0 auto;
+
+        &--type-1 {
+            width: 60%;
+            .#{$wefront__namespace}map-seats__seat-column__list {
+                left: 0;
+                width: 71%;
+                padding: 0 2.5%;
+
+                &-item {
+                    width: 16%;
+                    margin: 0;
+
+                    &--separator {
+                        margin-right: 34%;
+                    }
+                }
+            }
+        }
+        // Configuration 3-3
+        &--type-2 {
+            width: 54.66%;
+            .#{$wefront__namespace}map-seats__seat-column__list {
+                left: 0;
+                //width: 70.39%;
+                width: 100%;
+                padding: 0 3%;
+
+                &-item {
+                    width: 12.4%;
+                    margin: 0;
+
+                    &--separator {
+                        margin-right: 25.6%;
+                    }
+                }
+            }
+        }
+        // Configuration 2-4-2
+        &--type-3 {
+            //width: 70.39%;
+            width: 71.45%;
+            .#{$wefront__namespace}map-seats__seat-column__list {
+                left: 0;
+                width: 100%;
+                padding: 0 3%;
+
+                &-item {
+                    width: 10%;
+                    margin: 0;
+
+                    &--separator {
+                        margin-right: 10%;
+                    }
+                }
+            }
+        }
+        // Configuration 3-3-3
+        &--type-4 {
+            width: 71.45%;
+            margin: 0 auto;
+            .#{$wefront__namespace}__column {
+                position: relative;
+                display: inline-block;
+                width: 8.5%;
+                padding-bottom: 9%;
+                margin: 0 0.25%;
+            }
+            .#{$wefront__namespace}map-seats__seat-column__list {
+                left: 0;
+                width: 100%;
+                padding: 0 3%;
+                text-align: left;
+
+                &-item {
+                    width: 8.5%;
+                    margin: 0 0.25%;
+
+                    &--separator {
+                        margin-right: 9.25%;
+                    }
+                }
+            }
+        }
+        // Configuration 3-4-3
+        &--type-5 {
+            width: 71.45%;
+            margin: 0 auto;
+            .#{$wefront__namespace}map-seats__column {
+                position: relative;
+                display: inline-block;
+                width: 7.8%;
+                padding-bottom: 9%;
+                margin: 0 0.25%;
+            }
+            .#{$wefront__namespace}map-seats__seat-column__list {
+                left: 0;
+                width: 100%;
+                padding: 0 3%;
+                text-align: left;
+
+                &-item {
+                    width: 7.8%;
+                    margin: 0 0.25%;
+
+                    &--separator {
+                        margin-right: 8.3%;
+                    }
+                }
+            }
+        }
+        // Configuration 2-3-2
+        &--type-6 {
+            width: 68%;
+            .#{$wefront__namespace}map-seats__seat-column__list {
+                left: 0;
+                width: 100%;
+                padding: 0 3%;
+
+                &-item {
+                    width: 10%;
+                    margin: 0;
+
+                    &--separator {
+                        margin-right: 10%;
+                    }
+                }
+            }
+        }
+    }
+
+    &__seat-column {
+        overflow: hidden;
+        min-height: rem(36);
+        background: color(gray-50);
+        box-shadow: 0 rem(2) rem(3) 0 color(black, 0.32);
+        clear: both;
+        overflow-y: scroll;
+
+        &__list {
+            position: relative;
+            left: rem(-8);
+            width: 100%;
+            padding: 0 2.5%;
+            margin: 0 auto;
+            font-size: 0;
+            text-align: center;
+
+            &-item {
+                display: inline-block;
+                width: 12%;
+                height: rem(32);
+                padding: 0;
+                margin: 0;
+                font-size: rem(13);
+                text-align: center;
+                line-height: rem(32);
+                color: color(gray-30);
+                vertical-align: middle;
+
+                &--separator {
+                    margin-right: 28%;
+                }
+            }
+
+            &--type-1 {
+                width: 73%;
+            }
+
+            &--type-3 {
+                width: 66%;
+            }
+
+            &--center {
+                text-align: center !important;
+            }
+        }
+
+        &--narrow {
+            //overflow-y: auto;
+            min-height: rem(34);
+            padding-top: rem(3);
+        }
+        // Comentado para comprobar si es necesario
+
+        // &:after{
+        // 	content: "";
+        // 	position:absolute;
+        // 	right: 0;
+        // 	bottom: 0;
+        // 	width: rem(20);
+        // 	height: rem(56);
+        // 	background: color(gray-50);
+        // }
+    }
+
+    /* Leyenda asientos pasajeros */
+    &__leyend {
+        position: absolute;
+        z-index: 2;
+        bottom: 0;
+        width: 100%;
+        //margin-bottom: rem(68);
+
+        .collapsing {
+            overflow: hidden;
+        }
+
+        &-button {
+            position: absolute;
+            top: rem(-38.4);
+            left: 0;
+            padding: rem(13) rem(18) rem(13) rem(38);
+            border-top: rem(1) solid color(gray-40);
+            border-right: rem(1) solid color(gray-40);
+            border-bottom: 0;
+            border-left: rem(1) solid color(gray-40);
+            font-size: rem(13);
+            background: color(gray-50);
+            border-top-left-radius: rem(8);
+            border-top-right-radius: rem(8);
+            box-shadow: rem(1) rem(-1) rem(2) rem(-1) color(black, 0.29);
+
+            &:focus {
+                box-shadow: 0 0 rem(2) rem(1) color(primary);
+                outline: none;
+            }
+
+            &::before {
+                position: absolute;
+                top: rem(6);
+                left: rem(9);
+                font-size: rem(28);
+            }
+
+            &.openCollapse {
+                &::before {
+                    content: "\e971";
+                    top: rem(12);
+                    left: rem(15);
+                    font-size: rem(20);
+                }
+            }
+
+            &--left {
+                left: rem(30);
+            }
+        }
+
+        &-collapse {
+            background: color(gray-50);
+            -webkit-box-shadow: 0 rem(-2) rem(3) 0 color(black, 0.32);
+            box-shadow: 0 rem(-2) rem(3) 0 color(black, 0.32);
+        }
+
+        &-block {
+            padding: rem(46) 0;
+
+            &--center {
+                padding-left: rem(78);
+            }
+
+            &--column-independent {
+                display: flex;
+                flex-direction: row;
+            }
+
+            &--p-xxsmall {
+                padding: rem(7) 0 rem(12) rem(78);
+            }
+
+            &--p-small {
+                padding: rem(12) 0 0 rem(78);
+                .#{$wefront__namespace}map-seats__leyend-list__item {
+                    &::before {
+                        top: 0;
+                    }
+                }
+            }
+
+            &--p-xsmall {
+                padding: rem(8) 0 0 rem(130);
+                .#{$wefront__namespace}map-seats__leyend-list__item {
+                    &::before {
+                        top: 0;
+                    }
+                }
+            }
+        }
+
+        &-title {
+            font-size: rem(13);
+            font-weight: bold;
+        }
+
+        &-list {
+            padding-top: rem(8);
+
+            &__item {
+                position: relative;
+                padding: rem(7) 0 rem(7) rem(24);
+                border-left: rem(2) solid transparent;
+                font-size: rem(13);
+                color: color(gray-30);
+
+                &-txt-color {
+                    font-family: $font-normal;
+                    font-weight: bold;
+                    color: color(pink-40);
+                }
+            }
+
+            &--icons {
+                .#{$wefront__namespace}map-seats__leyend-list__item {
+                    padding: rem(7) 0 rem(7) rem(40);
+
+                    &::before {
+                        position: absolute;
+                        top: rem(6);
+                        left: 0;
+                        width: rem(26);
+                        height: rem(24);
+                    }
+
+                    &--icon-type-1 {
+                        &::before {
+                            content: url($wefront__icon-path + "/mapa_asientos/icon-seats-standard.png");
+                        }
+                    }
+
+                    &--icon-type-2 {
+                        &::before {
+                            content: url($wefront__icon-path + "/mapa_asientos/icon-seats-xl.png");
+                        }
+                    }
+
+                    &--icon-type-3 {
+                        &::before {
+                            content: url($wefront__icon-path + "/mapa_asientos/icon-seats-not-available.png");
+                        }
+                    }
+
+                    &--icon-type-4 {
+                        &::before {
+                            content: url($wefront__icon-path + "/mapa_asientos/icon-seats-your-selection.png");
+                        }
+                    }
+
+                    &--icon-type-5 {
+                        &::before {
+                            content: url($wefront__icon-path + "/mapa_asientos/icon-seats-blocked.png");
+                        }
+                    }
+
+                    &--icon-type-6 {
+                        &::before {
+                            content: url($wefront__icon-path + "/mapa_asientos/icon-seats-unselectable.png");
+                        }
+                    }
+
+                    &--icon-type-7 {
+                        &::before {
+                            content: url($wefront__icon-path + "/mapa_asientos/asiento_infant.png");
+                        }
+                    }
+
+                    &--icon-type-8 {
+                        &::before {
+                            content: url($wefront__icon-path + "/mapa_asientos/asiento_handicap.png");
+                        }
+                    }
+
+                    &--icon-type-9 {
+                        &::before {
+                            content: url($wefront__icon-path + "/mapa_asientos/icon-seats-comfort.png");
+                        }
+                    }
+
+                    &--icon-type-10 {
+                        &::before {
+                            content: url($wefront__icon-path + "/mapa_asientos/icon-seats-promo.png");
+                        }
+                    }
+
+                    &--icon-type-11 {
+                        &::before {
+                            content: url($wefront__icon-path + "/mapa_asientos/icon-seats-upfront.png");
+                        }
+                    }
+                    // &--icon-type-12 {
+                    // 	&:before {
+                    // 		content: url($wefront__icon-path + "/mapa_asientos/icon-seats-duo.png");
+                    // 	}
+                    // }
+                }
+            }
+
+            &--normal {
+                .#{$wefront__namespace}map-seats__leyend-list__item {
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: rem(12);
+                        left: rem(4);
+                        width: rem(5);
+                        height: rem(5);
+                        background: color(gray-30);
+                    }
+                }
+            }
+
+            &--two-cols {
+                padding-top: 0;
+                font-size: 0;
+                .#{$wefront__namespace}map-seats__leyend-list__item {
+                    display: inline-block;
+                    width: 50%;
+                    box-sizing: border-box;
+                    vertical-align: top;
+
+                    &:nth-child(2n + 1) {
+                        width: remcalc(50%, " - ", rem(15));
+                        margin-right: rem(15);
+                    }
+
+                    &::before {
+                        left: rem(8);
+                    }
+
+                    &--new {
+                        left: rem(-8);
+                        width: calc(48% - 21px);
+                        font-size: rem(12);
+
+                        &:nth-child(2n + 1) {
+                            width: 52%;
+                            margin-right: rem(21);
+                        }
+                    }
+                }
+            }
+
+            &--half-cols {
+                display: flex;
+                width: rem(303);
+                flex-direction: column;
+                margin-right: rem(3);
+                .#{$wefront__namespace}map-seats__leyend-list__item {
+                    padding: rem(6) 0 rem(6) rem(40);
+                    font-size: rem(12);
+
+                    &::before {
+                        top: rem(4);
+                        left: rem(6);
+                    }
+                }
+            }
+        }
+
+        &-list-hover {
+            &--standard,
+            &--emergency,
+            &--promo,
+            &--comfort,
+            &--upfront,
+            &--duo {
+                &:hover {
+                    color: color(gray-10);
+                    cursor: pointer;
+                }
+            }
+
+            &--standard {
+                border-left: rem(2) solid color(gray-30);
+                background-color: color(gray-150);
+            }
+
+            &--emergency {
+                border-left: rem(2) solid color(yellow-10);
+                background-color: color(yellow-30);
+            }
+
+            &--comfort {
+                border-left: rem(2) solid color(pink-40);
+                background-color: color(pink-60);
+            }
+
+            &--promo {
+                border-left: rem(2) solid color(orange-30);
+                background-color: color(orange-40);
+            }
+
+            &--upfront {
+                border-left: rem(2) solid color(purple-10);
+                background-color: color(purple-30);
+            }
+
+            &--duo {
+                border-left: rem(2) solid color(gray-200);
+                background-color: color(gray-190);
+            }
+        }
+
+        &--mb-small {
+            margin-bottom: rem(65);
+        }
+        //__leyend-list
+    }
+    // Modifier new
+    &--new {
+        .#{$wefront__namespace}map-seats {
+            &__container-columns {
+                .#{$wefront__namespace}map-seats__seat-column__list {
+                    padding: 0 5%;
+                }
+
+                &--type-1 {
+                    .#{$wefront__namespace}map-seats__seat-column__list {
+                        padding: 0 2.5%;
+                    }
+                }
+            }
+        }
+        .#{$wefront__namespace}map {
+            &__background {
+                &--head {
+                    bottom: rem(-20);
+                }
+            }
+        }
+
+        .modal-header {
+            padding: rem(12) rem(32) 0;
+            border-bottom: none;
+        }
+
+        .modal-body {
+            top: rem(220);
+            height: calc(100% - 18.125rem);
+        }
+        .#{$wefront__namespace}heading {
+            max-width: 50%;
+            padding: rem(18) 0 0 0;
+        }
+    }
+}
+
+
+/* Modal map seats aviso importante */
+.#{$wefront__namespace}map-seats-warning {
+    .#{$wefront__namespace}modal-body {
+        padding-top: rem(10);
+    }
+    .#{$wefront__namespace}base__group-foot {
+        padding-top: 0;
+    }
+}
+
+/* Estilos para el mapa de asientos */
+.#{$wefront__namespace}map {
+    position: relative;
+    width: 100%;
+
+    /* Fondo del avion */
+    &__background {
+        position: relative;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+
+        &--head {
+            bottom: rem(-6);
+            min-height: rem(483);
+        }
+
+        &--tail {
+            bottom: rem(5);
+        }
+    }
+
+    /* Contenedor de cabinas */
+    &__cabins-container {
+        position: relative;
+        z-index: 1;
+        width: 71.45%;
+        margin: 0 auto;
+        background: color(white);
+
+        &--wider {
+            width: 77.5%;
+        }
+    }
+
+    /* Filas y columnas */
+    &__row {
+        position: relative;
+        padding: 2% 3%;
+        border-right: rem(4) solid transparent;
+        border-left: rem(4) solid transparent;
+        font-size: 0;
+
+        &::before,
+        &::after {
+            content: attr(data-row);
+            position: absolute;
+            z-index: 1;
+            top: remcalc(50%, " - ", rem(6));
+            font-family: $font-normal;
+            font-size: rem(18);
+            color: color(gray-30);
+            -ms-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+        }
+
+        &::before {
+            left: rem(-49);
+            width: rem(30);
+            text-align: center;
+        }
+
+        &::after {
+            right: rem(-49);
+            width: rem(30);
+            text-align: center;
+        }
+    }
+
+    /* Cabinas */
+    &__cabins {
+        position: relative;
+        width: 100%;
+        margin-bottom: rem(120);
+        background: transparent;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Modificadroes .#{$wefront__namespace}map__cabins */
+        &--not-available {
+            width: 100%;
+            padding-bottom: 100%;
+            background: color(white);
+        }
+    }
+
+    &__column {
+        &:focus {
+            box-shadow: 0 0 rem(2) rem(1) color(primary);
+            outline: none;
+        }
+
+        &--unfocused {
+            pointer-events: none;
+        }
+
+        &--wing {
+            position: absolute;
+            top: 0;
+            width: rem(50);
+            height: rem(61);
+            border: 0;
+            background: color(white);
+        }
+
+        &--wing-left {
+            left: rem(-60);
+            -webkit-transform: inherit;
+            -moz-transform: inherit;
+            -ms-transform: inherit;
+            -o-transform: inherit;
+            transform: inherit;
+        }
+
+        &--wing-right {
+            right: rem(-60);
+            -webkit-transform: inherit;
+            -moz-transform: inherit;
+            -ms-transform: inherit;
+            -o-transform: inherit;
+            transform: inherit;
+        }
+
+        &--exit {
+            content: "";
+            position: absolute;
+            top: -20%;
+            width: 40%;
+            height: 140%;
+            background-image: url($wefront__icon-path + "/mapa_asientos/sign_exit.svg");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            cursor: default;
+            outline: none;
+        }
+
+        &--exit-left {
+            left: -52%;
+        }
+
+        &--exit-right {
+            right: -52%;
+        }
+
+        &--exit-extra-left {
+            left: -65%;
+        }
+
+        &--exit-extra-right {
+            right: -65%;
+        }
+
+        /* Modificadores */
+        &--gap {
+            .#{$wefront__namespace}map__column-label {
+                padding-top: 20%;
+                font-family: $font-normal;
+                font-size: rem(18);
+                text-align: center;
+                color: color(gray-30);
+                cursor: auto;
+            }
+        }
+
+        &--emergency {
+            .#{$wefront__namespace}map__column-label {
+                background-image: url($wefront__icon-path + "/mapa_asientos/seat_emergencia.svg");
+                // &:after{
+                // 	content: "";
+                // 	display: block;
+                // 	width: calc(100% - 7px);
+                // 	position: absolute;
+                // 	left: rem(4);
+                // 	top: rem(5);
+                // 	height: calc(100% - 23px);
+                // 	border-bottom: rem(1) solid color(yellow-20);
+                // 	border-top: rem(2) solid color(yellow-20);
+                // 	border-left: rem(2) solid color(yellow-20);
+                // 	border-right: rem(2) solid color(yellow-20);
+                // 	background: color(yellow-10);
+                // }
+                // &:before{
+                // 	content: "";
+                // 	width: calc(100% - rem(3));
+                // 	height: calc(100% - 2.1875rem);
+                // 	position: absolute;
+                // 	left: rem(2);
+                // 	top: rem(26);
+                // 	background: color(yellow-10);
+                // 	border-bottom: rem(2) solid color(yellow-20);
+                // 	border-left: rem(2) solid color(yellow-20);
+                // 	border-right: rem(2) solid color(yellow-20);
+                // }
+            }
+        }
+
+        &--free {
+            .#{$wefront__namespace}map__column-label {
+                background-image: url($wefront__icon-path + "/mapa_asientos/seat_vacio.svg");
+                // &:after{
+                // 	content: "";
+                // 	display: block;
+                // 	width: calc(100% - 7px);
+                // 	position: absolute;
+                // 	left: rem(4);
+                // 	top: rem(5);
+                // 	height: calc(100% - 23px);
+                // 	border-bottom: rem(1) solid color(gray-100);
+                // 	border-top: rem(2) solid color(gray-30);
+                // 	border-left: rem(2) solid color(gray-30);
+                // 	border-right: rem(2) solid color(gray-30);
+                // 	background: color(gray-50);
+                // }
+                // &:before{
+                // 	content: "";
+                // 	width: calc(100% - rem(3));
+                // 	height: calc(100% - 2.1875rem);
+                // 	position: absolute;
+                // 	left: rem(2);
+                // 	top: rem(26);
+                // 	background: color(gray-50);
+                // 	border-bottom: rem(2) solid color(gray-30);
+                // 	border-left: rem(2) solid color(gray-30);
+                // 	border-right: rem(2) solid color(gray-30);
+                // }
+            }
+        }
+
+        &--occupied {
+            .#{$wefront__namespace}map__column-label {
+                background-image: url($wefront__icon-path + "/mapa_asientos/seat_ocupado.svg");
+                cursor: not-allowed;
+            }
+        }
+
+        &--blocked {
+            .#{$wefront__namespace}map__column-label {
+                background-image: url($wefront__icon-path + "/mapa_asientos/seat_bloqueado.svg");
+                cursor: not-allowed;
+            }
+        }
+
+        &--selection {
+            .#{$wefront__namespace}map__column-label {
+                background-image: url($wefront__icon-path + "/mapa_asientos/seat_tu_seleccion.svg");
+                // &:after{
+                // 	content: "";
+                // 	display: block;
+                // 	width: calc(100% - 7px);
+                // 	position: absolute;
+                // 	left: rem(4);
+                // 	top: rem(5);
+                // 	height: calc(100% - 23px);
+                // 	border-bottom: rem(1) solid color(secondary);
+                // 	border-top: rem(2) solid color(secondary);
+                // 	border-left: rem(2) solid color(secondary);
+                // 	border-right: rem(2) solid color(secondary);
+                // 	background: color(primary);
+                // }
+                // &:before{
+                // 	content: "";
+                // 	width: calc(100% - rem(3));
+                // 	height: calc(100% - 2.1875rem);
+                // 	position: absolute;
+                // 	left: rem(2);
+                // 	top: rem(26);
+                // 	background: color(primary);
+                // 	border-bottom: rem(2) solid color(secondary);
+                // 	border-left: rem(2) solid color(secondary);
+                // 	border-right: rem(2) solid color(secondary);
+                // }
+            }
+        }
+
+        &--infant {
+            .#{$wefront__namespace}map__column-label {
+                background-image: url($wefront__icon-path + "/mapa_asientos/asiento_infant.svg");
+            }
+        }
+
+        &--handicap {
+            .#{$wefront__namespace}map__column-label {
+                background-image: url($wefront__icon-path + "/mapa_asientos/asiento_handicap.svg");
+            }
+        }
+
+        &--selected-other-passenger {
+            .#{$wefront__namespace}map__column-label {
+                background-image: url($wefront__icon-path + "/mapa_asientos/seat_seleccionado.svg");
+            }
+        }
+
+        &--promo {
+            .#{$wefront__namespace}map__column-label {
+                background-image: url($wefront__icon-path + "/mapa_asientos/seat_promo.svg");
+                // &:after{
+                // 	content: "";
+                // 	display: block;
+                // 	width: calc(100% - 7px);
+                // 	position: absolute;
+                // 	left: rem(4);
+                // 	top: rem(5);
+                // 	height: calc(100% - 23px);
+                // 	border-bottom: rem(1) solid color(yellow-40);
+                // 	border-top: rem(2) solid color(yellow-40);
+                // 	border-left: rem(2) solid color(yellow-40);
+                // 	border-right: rem(2) solid color(yellow-40);
+                // 	background: color(yellow-20);
+                // }
+                // &:before{
+                // 	content: "";
+                // 	width: calc(100% - rem(3));
+                // 	height: calc(100% - 2.1875rem);
+                // 	position: absolute;
+                // 	left: rem(2);
+                // 	top: rem(26);
+                // 	background: color(yellow-20);
+                // 	border-bottom: rem(2) solid color(yellow-40);
+                // 	border-left: rem(2) solid color(yellow-40);
+                // 	border-right: rem(2) solid color(yellow-40);
+                // }
+            }
+        }
+
+        &--comfort {
+            .#{$wefront__namespace}map__column-label {
+                background-image: url($wefront__icon-path + "/mapa_asientos/seat_comfort.svg");
+                // &:after{
+                // 	content: "";
+                // 	display: block;
+                // 	width: calc(100% - 7px);
+                // 	position: absolute;
+                // 	left: rem(4);
+                // 	top: rem(5);
+                // 	height: calc(100% - 23px);
+                // 	border-bottom: rem(1) solid color(pink-50);
+                // 	border-top: rem(2) solid color(pink-50);
+                // 	border-left: rem(2) solid color(pink-50);
+                // 	border-right: rem(2) solid color(pink-50);
+                // 	background: color(pink-40);
+                // }
+                // &:before{
+                // 	content: "";
+                // 	width: calc(100% - rem(3));
+                // 	height: calc(100% - 2.1875rem);
+                // 	position: absolute;
+                // 	left: rem(2);
+                // 	top: rem(26);
+                // 	background: color(pink-40);
+                // 	border-bottom: rem(2) solid color(pink-50);
+                // 	border-left: rem(2) solid color(pink-50);
+                // 	border-right: rem(2) solid color(pink-50);
+                // }
+            }
+        }
+
+        &--upfront {
+            .#{$wefront__namespace}map__column-label {
+                background-image: url($wefront__icon-path + "mapa_asientos/seat_upfront.svg");
+            }
+        }
+        // &--duo {
+        // 	.#{$wefront__namespace}map__column-label {
+        // 		background-image: url($wefront__icon-path + "mapa_asientos/seat_duo.svg");
+        // 	}
+        // }
+    }
+
+    &__row-hover {
+        &--standard,
+        &--emergency,
+        &--promo,
+        &--comfort {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        &--standard {
+            border-right: rem(4) solid color(gray-30);
+            border-left: rem(4) solid color(gray-30);
+            background-color: color(gray-150) !important;
+        }
+
+        &--emergency {
+            border-right: rem(4) solid color(yellow-10);
+            border-left: rem(4) solid color(yellow-10);
+            background-color: color(yellow-30) !important;
+        }
+
+        &--comfort {
+            border-right: rem(4) solid color(pink-40);
+            border-left: rem(4) solid color(pink-40);
+            background-color: color(pink-60) !important;
+        }
+
+        &--promo {
+            border-right: rem(4) solid color(orange-30);
+            border-left: rem(4) solid color(orange-30);
+            background-color: color(orange-40) !important;
+        }
+
+        &--upfront {
+            border-right: rem(4) solid color(purple-10);
+            border-left: rem(4) solid color(purple-10);
+            background-color: color(purple-30) !important;
+        }
+
+        &--duo {
+            border-right: rem(4) solid color(gray-200);
+            border-left: rem(4) solid color(gray-200);
+            background-color: color(gray-190) !important;
+        }
+    }
+
+    &__box-message {
+        position: absolute;
+        top: 42%;
+        display: block;
+        width: 100%;
+    }
+
+    &__box-message-text {
+        width: 35%;
+        padding: 1%;
+        margin: 0 auto;
+        font-family: $font-special;
+        font-size: rem(14);
+        font-weight: bold;
+        text-align: center;
+        background: color(white);
+    }
+
+    /* Tipos de avión */
+    &--columns-type-1 {
+        width: 60%;
+        margin: 0 auto;
+        .#{$wefront__namespace}map {
+            &__column {
+                position: relative;
+                display: inline-block;
+                width: 14.6%;
+                padding-bottom: 14.6%;
+                margin: 0 1%;
+                //vertical-align: top;
+                .#{$wefront__namespace}map__column-label {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-repeat: no-repeat;
+                    background-size: 100%;
+                    cursor: pointer;
+
+                    input {
+                        position: absolute;
+                        right: 999rem;
+                    }
+                }
+            }
+
+            /* Zonas (comidas, baños etc) */
+            &__signs {
+                position: absolute;
+                width: 100%;
+            }
+        }
+
+        .ib-map__background--head {
+            bottom: -3.3rem;
+        }
+    }
+
+    &--columns-type-2 {
+        width: 76.5%;
+        margin: 0 auto;
+        .#{$wefront__namespace}map {
+            &__column {
+                position: relative;
+                display: inline-block;
+                width: 10.5%;
+                padding-bottom: 12%;
+                margin: 0 1%;
+                //vertical-align: top;
+                .#{$wefront__namespace}map__column-label {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-repeat: no-repeat;
+                    background-size: 100%;
+                    cursor: pointer;
+
+                    input {
+                        position: absolute;
+                        right: 999rem;
+                    }
+                }
+            }
+
+            /* Zonas (comidas, baños etc) */
+            &__signs {
+                position: absolute;
+                width: 100%;
+            }
+        }
+    }
+
+    &--columns-type-3 {
+        width: 100%;
+        margin: 0 auto;
+        .#{$wefront__namespace}map {
+            &__column {
+                position: relative;
+                display: inline-block;
+                width: 9%;
+                padding-bottom: 9%;
+                margin: 0 0.5%;
+                //vertical-align: top;
+                .#{$wefront__namespace}map__column-label {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-repeat: no-repeat;
+                    background-size: 100% 100%;
+                    cursor: pointer;
+
+                    input {
+                        position: absolute;
+                        right: 999rem;
+                    }
+                }
+            }
+
+            /* Zonas (comidas, baños etc) */
+            &__signs {
+                position: absolute;
+                width: 100%;
+            }
+        }
+    }
+    // Configuration 3-3-3
+    &--columns-type-4 {
+        width: 100%;
+        margin: 0 auto;
+        .#{$wefront__namespace}map {
+            &__column {
+                position: relative;
+                display: inline-block;
+                width: 8.5%;
+                padding-bottom: 9%;
+                margin: 0 0.25%;
+                //vertical-align: top;
+                .#{$wefront__namespace}map__column-label {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-repeat: no-repeat;
+                    background-size: 100% 100%;
+                    cursor: pointer;
+
+                    input {
+                        position: absolute;
+                        right: 999rem;
+                    }
+                }
+            }
+
+            /* Zonas (comidas, baños etc) */
+            &__signs {
+                position: absolute;
+                width: 100%;
+            }
+        }
+    }
+    // Configuration 3-4-3
+    &--columns-type-5 {
+        width: 100%;
+        margin: 0 auto;
+        .#{$wefront__namespace}map {
+            &__column {
+                position: relative;
+                display: inline-block;
+                width: 7.8%;
+                padding-bottom: 9%;
+                margin: 0 0.25%;
+                //vertical-align: top;
+                .#{$wefront__namespace}map__column-label {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-repeat: no-repeat;
+                    background-size: 100% 100%;
+                    cursor: pointer;
+
+                    input {
+                        position: absolute;
+                        right: 999rem;
+                    }
+                }
+            }
+
+            /* Zonas (comidas, baños etc) */
+            &__signs {
+                position: absolute;
+                width: 100%;
+            }
+        }
+    }
+    // Configuration 2-3-2
+    &--columns-type-6 {
+        width: 87%;
+        margin: 0 auto;
+        .#{$wefront__namespace}map {
+            &__column {
+                position: relative;
+                display: inline-block;
+                width: 10.6%;
+                padding-bottom: 9%;
+                margin: 0 0.25%;
+                //vertical-align: top;
+                .#{$wefront__namespace}map__column-label {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-repeat: no-repeat;
+                    background-size: 100% 100%;
+                    cursor: pointer;
+
+                    input {
+                        position: absolute;
+                        right: 999rem;
+                    }
+                }
+            }
+
+            /* Zonas (comidas, baños etc) */
+            &__signs {
+                position: absolute;
+                width: 100%;
+            }
+        }
+    }
+}
+
+/* Responsive */
+
+/* X-LARGE RESOLUTION STYLES */
+@include media-query('xl') {
+    .#{$wefront__namespace}map-seats {
+        &__seat-column {
+            &::after {
+                height: rem(52);
+            }
+        }
+    }
+}
+
+/* LARGE RESOLUTION STYLES */
+@include media-query('lg') {
+    .#{$wefront__namespace}map-seats {
+        &__container {
+            max-width: rem(720);
+            padding: rem(12) 0;
+        }
+
+        &__container-columns {
+            &--type-1 {
+                .#{$wefront__namespace}map-seats__seat-column__list {
+                    width: 77%;
+
+                    &-item {
+                        width: 14%;
+
+                        &--separator {
+                            margin-right: 32%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .modal-body {
+            top: rem(230);
+            height: calc(100% - 280px);
+        }
+
+        &--new {
+            .modal-body {
+                top: rem(170);
+                height: calc(100% - 280px);
+            }
+        }
+    }
+    .#{$wefront__namespace}map {
+        &__background {
+            &--head {
+                min-height: rem(463);
+            }
+        }
+    }
+}
+
+/* MEDIUM RESOLUTION STYLES */
+@include media-query('md') {
+    .#{$wefront__namespace}map-seats {
+        &__container {
+            max-width: rem(720);
+            padding: rem(12) 0;
+        }
+
+        &__container-columns {
+            &--type-1 {
+                .#{$wefront__namespace}map-seats__seat-column__list {
+                    width: 77%;
+
+                    &-item {
+                        width: 14%;
+
+                        &--separator {
+                            margin-right: 32%;
+                        }
+                    }
+                }
+            }
+
+            &--type-2 {
+                width: 57.1%;
+            }
+        }
+
+        .modal-body {
+            top: rem(250);
+            height: calc(100% - 20rem);
+        }
+
+        &--new {
+            .modal-header {
+                padding: rem(15) rem(30) 0 !important;
+            }
+
+            .modal-body {
+                top: rem(220);
+                height: calc(100% - 17.5rem);
+            }
+        }
+    }
+    .#{$wefront__namespace}map-seats__header {
+        .modal-header {
+            padding: rem(15) rem(15) rem(18);
+
+            .title {
+                padding-bottom: 0;
+            }
+        }
+        .#{$wefront__namespace}upgrade__button-close {
+            right: 0;
+        }
+        .#{$wefront__namespace}base__page-titles {
+            .#{$wefront__namespace}map-seats__info-fly {
+                padding: rem(17) rem(60) 0 0;
+            }
+        }
+    }
+
+    /* Estilos para el mapa de asientos */
+    .#{$wefront__namespace}map {
+        &__row {
+            &::before,
+            &::after {
+                top: remcalc(50%, " - ", rem(6));
+            }
+        }
+
+        /* Tipos de avión */
+        &--columns-type-1 {
+            width: 60%;
+        }
+
+        &--columns-type-2 {
+            width: 80%;
+        }
+
+        &--columns-type-3 {
+            width: 100%;
+        }
+        // Configuration 3-3-3
+        &--columns-type-4 {
+            width: 100%;
+        }
+        // Configuration 3-4-3
+        &--columns-type-5 {
+            width: 100%;
+        }
+
+        &__background {
+            &--head {
+                min-height: rem(485);
+            }
+        }
+    }
+}
+
+/* SMALL RESOLUTION STYLES */
+@include media-query('mobile') {
+    .#{$wefront__namespace}map-seats {
+        padding: 0;
+
+        &__container {
+            max-width: 100%;
+            padding: rem(8) rem(16);
+
+            &--responsive {
+                padding: 0 rem(8);
+            }
+
+            &--responsive-zero {
+                padding: 0;
+            }
+
+            &--border {
+                padding: rem(8) rem(8) rem(13) rem(8);
+            }
+        }
+
+        &__passenger {
+            &--small {
+                min-height: rem(65);
+            }
+        }
+
+        &__footer {
+            .#{$wefront__namespace}map-seats__container {
+                padding: 0 rem(16);
+            }
+
+            &-wrap-text {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+        .#{$wefront__namespace}base__page-titles {
+            padding-bottom: 0;
+        }
+
+        .modal-header {
+            padding: rem(15) rem(15) rem(7);
+        }
+
+        .modal-body {
+            position: absolute;
+            z-index: 1;
+            top: rem(188);
+            width: 100%;
+            max-width: 100%;
+            height: calc(100% - 258px);
+            padding-right: 0;
+            padding-left: 0;
+            background: color(gray-50);
+            clear: both;
+        }
+
+        /* Boton cerrar modal */
+        .#{$wefront__namespace}upgrade__button-close {
+            top: rem(3);
+            right: rem(11);
+
+            &::after {
+                font-size: rem(26) !important;
+            }
+
+            &--position {
+                top: rem(12);
+                right: rem(6);
+
+                &::after {
+                    font-size: rem(42) !important;
+                }
+            }
+        }
+
+        &__info-fly {
+            padding: rem(5) rem(35) 0 0;
+
+            &__primary {
+                &--show-sm {
+                    display: block;
+                }
+
+                &--hidden-sm {
+                    display: none;
+                }
+            }
+
+            &__secondary {
+                display: none;
+            }
+
+            &--bottom {
+                padding: rem(11) rem(55) 0 0;
+            }
+        }
+
+        &__seat-column {
+            min-height: rem(32);
+
+            &::after {
+                height: rem(48);
+            }
+
+            &--narrow {
+                padding-top: 0;
+            }
+        }
+
+        &__leyend-list {
+            &__item {
+                font-size: rem(12);
+            }
+
+            &--two-cols {
+                .#{$wefront__namespace}map-seats__leyend-list__item {
+                    display: block;
+                    width: 100%;
+
+                    &:nth-child(2n + 1) {
+                        width: 100%;
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+
+        &__leyend {
+            &-button {
+                &--left {
+                    left: 0;
+                }
+
+                &__txt {
+                    display: none;
+                }
+        
+                &.openCollapse {
+                    padding: rem(9) rem(13);
+                }
+        
+                &.closeCollapse {
+                    padding: rem(6) rem(9);
+                }
+        
+                &::before {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                }
+            }
+        
+             /* Leyenda asientos pasajeros */
+            &-block {
+                max-width: rem(230);
+                padding: rem(21) 0;
+                margin: 0 auto;
+
+                &--p-xsmall {
+                    max-width: 100%;
+                    padding: rem(16) 0 rem(5) 0;
+                }
+
+                &--center {
+                    padding-left: 0;
+                }
+            }
+        }
+
+        &--new {
+            .modal-body {
+                top: rem(170);
+                height: calc(100% - 227px);
+            }
+
+            .modal-header {
+                padding: rem(5) 0 0 0;
+            }
+            .#{$wefront__namespace}heading {
+                &--type-1 {
+                    padding: 0 0 0 rem(7);
+                    font-size: rem(22);
+                }
+            }
+            .#{$wefront__namespace}map-seats {
+                &__footer-wrap-text {
+                    .#{$wefront__namespace}text {
+                        &--especial {
+                            padding-left: rem(8);
+                            margin-top: rem(16);
+                        }
+                    }
+                }
+
+                &__leyend {
+                    &-block {
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+
+    /* Seccion numero de asientos en columnas */
+
+    .#{$wefront__namespace}map-seats__container-columns {
+        &--type-1 {
+            .#{$wefront__namespace}map-seats__seat-column__list {
+                width: 84.9%;
+            }
+        }
+
+        &--type-2 {
+            width: 57%;
+        }
+    }
+
+    /* Estilos para el mapa de asientos */
+    .#{$wefront__namespace}map {
+        &__row {
+            &::before,
+            &::after {
+                top: remcalc(50%, " - ", rem(6));
+            }
+        }
+
+        &__column--wing {
+            width: rem(50);
+            height: 100%;
+        }
+
+        &__box-message-text {
+            width: 60%;
+        }
+
+        /* Tipos de avión */
+        &--columns-type-1 {
+            width: 75%;
+        }
+
+        &--columns-type-2 {
+            width: 80%;
+        }
+
+        &--columns-type-3 {
+            width: 100%;
+        }
+        // Configuration 3-3-3
+        &--columns-type-4 {
+            width: 100%;
+        }
+        // Configuration 3-4-3
+        &--columns-type-5 {
+            width: 100%;
+        }
+
+        &__background {
+            &--head {
+                min-height: rem(270);
+            }
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}map-seats {
+        &__seat-column {
+            .#{$wefront__namespace}map-seats__container {
+                width: 100%;
+                box-sizing: border-box;
+                padding: rem(10) rem(16);
+                margin: 0;
+
+                &--border {
+                    padding-bottom: rem(13);
+                }
+            }
+        }
+
+        &__container {
+            &--padding-resp {
+                padding-right: 0;
+                padding-left: 0;
+            }
+        }
+
+        &__container-columns {
+            &--type-1 {
+                .#{$wefront__namespace}map-seats__seat-column__list {
+                    width: 100%;
+
+                    &-item {
+                        width: 14%;
+
+                        &--separator {
+                            margin-right: 32%;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__leyend-block {
+            &--column-independent {
+                width: 100%;
+                max-width: 100%;
+                flex-direction: column;
+            }
+
+            &--p-xxsmall {
+                padding: 0 0 0 4.875rem;
+            }
+        }
+
+        &__footer {
+            &--padding-small {
+                padding: rem(8) rem(16) 0;
+            }
+        }
+
+        &__leyend {
+            &--long-price {
+                //margin-bottom: rem(105);
+            }
+        }
+    }
+}
+
+/* X-SMALL RESOLUTION STYLES */
+@include media-query('xs') {
+    .#{$wefront__namespace}map-seats {
+        &__footer {
+            .#{$wefront__namespace}map-seats__container {
+                padding: 0 rem(8);
+            }
+        }
+
+        &__container {
+            padding: rem(8);
+
+            &--responsive {
+                padding: 0 rem(8);
+            }
+
+            &--padding-resp {
+                padding-right: 0;
+                padding-left: 0;
+            }
+
+            &--responsive-zero {
+                padding: 0;
+            }
+
+            &--border {
+                padding-bottom: rem(13);
+            }
+        }
+        .#{$wefront__namespace}map-seats__leyend-button {
+            border-left: 0;
+            border-top-left-radius: 0;
+        }
+        .#{$wefront__namespace}map-seats__leyend-block {
+            &--p-small {
+                max-width: 100%;
+                padding: rem(12) 0 0;
+                margin: 0;
+            }
+
+            &--p-xsmall {
+                max-width: 100%;
+                padding: rem(16) 0 rem(5) 0;
+            }
+
+            &--column-independent {
+                max-width: 100%;
+                flex-direction: column;
+            }
+
+            &--p-xxsmall {
+                padding-top: 0;
+            }
+        }
+
+        &__leyend {
+            &--long-price {
+                //margin-bottom: rem(100);
+            }
+        }
+    }
+
+    /* Seccion numero de asientos en columnas */
+
+    .#{$wefront__namespace}map-seats__container-columns {
+        &--type-1 {
+            width: 100%;
+            .#{$wefront__namespace}map-seats__seat-column__list {
+                width: 79%;
+
+                &-item {
+                    width: 15%;
+
+                    &--separator {
+                        margin-right: 31%;
+                    }
+                }
+            }
+        }
+
+        &--type-2 {
+            width: 71.5%;
+        }
+
+        &--type-3 {
+            width: 71.5%;
+        }
+        // Configuration 3-3-3
+        &--type-4 {
+            width: 71.5%;
+        }
+        // Configuration 3-4-3
+        &--type-5 {
+            width: 71.45%;
+            .#{$wefront__namespace}map-seats__seat-column__list-item {
+                margin: 0 0.3%;
+
+                &--separator {
+                    margin-right: 8.3%;
+                }
+            }
+        }
+    }
+
+    /* Estilos para el mapa de asientos */
+    .#{$wefront__namespace}map {
+        &__cabins {
+            margin-bottom: rem(64);
+        }
+
+        &__row {
+            &::before,
+            &::after {
+                top: remcalc(50%, " - ", rem(4));
+                width: rem(25);
+                font-size: rem(14);
+            }
+
+            &::before {
+                left: rem(-34);
+            }
+
+            &::after {
+                right: rem(-34);
+            }
+            .#{$wefront__namespace}map__column {
+                &:first-child {
+                    .#{$wefront__namespace}map-tooltip-touch {
+                        left: 200%;
+                        width: 808%;
+                        pointer-events: none;
+
+                        &__arrow {
+                            left: 31%;
+                        }
+
+                        &__container {
+                            width: rem(175);
+                            pointer-events: all;
+                        }
+                    }
+                }
+
+                &:last-child {
+                    .#{$wefront__namespace}map-tooltip-touch {
+                        left: -100%;
+                        width: 808%;
+                        pointer-events: none;
+
+                        &__arrow {
+                            left: 69%;
+                        }
+
+                        &__container {
+                            width: rem(175);
+                            float: right;
+                            pointer-events: all;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__column--wing {
+            width: rem(25);
+            height: 100%;
+        }
+
+        &__column--wing-left {
+            left: rem(-34);
+        }
+
+        &__column--wing-right {
+            right: rem(-34);
+        }
+
+        &__box-message-text {
+            width: 85%;
+        }
+
+        /* Tipos de avión */
+        &--columns-type-1 {
+            width: 100%;
+        }
+
+        &--columns-type-2 {
+            width: 100%;
+        }
+
+        &--columns-type-3 {
+            width: 100%;
+        }
+
+        &--columns-type-4 {
+            width: 100%;
+        }
+
+        &--columns-type-5 {
+            width: 100%;
+        }
+
+        &__background {
+            &--head {
+                min-height: rem(217);
+            }
+        }
+    }
+}

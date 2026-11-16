@@ -1,0 +1,26 @@
+<article class="ib-reserves-list ib-reserves-list--type-2">
+    <figure class="ib-reserves-list__box-img">
+        <img data-ng-src="{{::$root.routes.images}}{{::itemCtrl.bookingItemModel.cityURL}}" alt="{{'IBCOSE2_LIST_ITEM_CITY_IMAGE_ALT'|translate}} {{::itemCtrl.bookingItemModel.arrival.description}}"
+            class="ib-reserves-list__img" />
+    </figure>
+    <div class="ib-reserves-list__info">
+        <header class="ib-reserves-list__header">
+            <h2 class="ib-reserves-list__title">{{::itemCtrl.bookingItemModel.arrival.description}}</h2>
+            <p class="ib-reserves-list__code">{{'IBCOSE2_LIST_ITEM_LOCATOR'|translate}}: <span class="ib-reserves-list__code--number">{{::itemCtrl.bookingItemModel.locator}}</span></p>
+        </header>
+        <footer class="ib-reserves-list__journey">
+            <p class="ib-reserves-list__planning">
+                <span class="ib-reserves-list__planning--bold">{{::itemCtrl.bookingItemModel.departure.code}} - {{::itemCtrl.bookingItemModel.arrival.code}}</span>                /
+                <time ng-if="::itemCtrl.bookingItemModel.departureDate" datetime="::itemCtrl.bookingItemModel.departureDate">{{::itemCtrl.bookingItemModel.filterDate.day}} {{itemCtrl.bookingItemModel.filterDate.month|translate |ShortenerFormatFilter:3:true}}.
+                    {{::itemCtrl.bookingItemModel.filterDate.year}} / {{::itemCtrl.bookingItemModel.filterDate.dateTime}}</time>
+                <span ng-if="::!itemCtrl.bookingItemModel.departureDate">{{'OPEN'|translate}}</span>
+            </p>
+            <div class="ib-reserves-list__group-link">
+                <p class="ib-reserves-list__link">
+                    <a class="ib-link ib-link--arrow ib-link--black" href="javascript:void(0)" title="{{'IBCOSE2_LIST_ITEM_MANAGE_LINK_TITLE'|translate}}"
+                        ng-click="itemCtrl.manageBooking()">{{'IBCOSE2_LIST_ITEM_MANAGE_LINK'|translate}}</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+</article>

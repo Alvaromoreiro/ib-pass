@@ -1,0 +1,158 @@
+<!-- Transition -->
+<!-- Loading -->
+<div class="ib-overlay-fly ib-overlay-fly--type-3 ib-overlay-fly--transparent"
+    data-ng-if="modalCtrl.model.submitted && !modalCtrl.model.showError && !modalCtrl.model.showOk">
+    <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+        <div class="ib-overlay-fly__icon">
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+        <span class="ib-overlay-fly__text">{{'MMB_PASSENGERS_PERSONAL_DATA_MODAL_CORRECTING' | translate}}</span>
+    </div>
+</div>
+<!-- KO Generic-->
+<div class="ib-overlay-fly ib-overlay-fly--type-3 ib-overlay-fly--transparent"
+    data-ng-if="modalCtrl.model.showError && modalCtrl.model.errorCode !== 412">
+    <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+        <div id="iconLoading" class="ib-overlay-fly__border">
+            <div id="initLoading" class="ib-overlay-fly__border-loading"></div>
+            <div id="error" class="ib-overlay-fly__border-error icon-alertas_3"></div>
+        </div>
+        <span id="text" class="ib-overlay-fly__text">{{'MMB_PASSENGERS_PERSONAL_DATA_MODAL_SORRY_NOT_CORRECT'|translate}}</span>
+    </div>
+</div>
+
+<!-- KO ESPECIFIC-->
+<div class="ib-overlay-fly ib-overlay-fly--type-3 ib-overlay-fly--transparent"
+    data-ng-if="modalCtrl.model.showError && modalCtrl.model.errorCode === 412">
+    <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+        <div id="iconLoading" class="ib-overlay-fly__border">
+            <div id="initLoading" class="ib-overlay-fly__border-loading"></div>
+            <div id="error" class="ib-overlay-fly__border-error icon-cancelar"></div>
+        </div>
+        <span id="text" class="ib-overlay-fly__text">{{'MMB_PASSENGERS_PERSONAL_DATA_MODAL_NOT_CORRECTING'|translate}}</span>
+    </div>
+</div>
+<!-- OK -->
+<div class="ib-overlay-fly ib-overlay-fly--type-3 ib-overlay-fly--transparent"
+    data-ng-if="modalCtrl.model.showOk && !modalCtrl.model.showError">
+    <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+        <div id="iconLoading" class="ib-overlay-fly__border">
+            <div id="initLoading" class="ib-overlay-fly__border-loading"></div>
+            <div id="valid" class="ib-overlay-fly__border-valid icon-confirmacion"></div>
+        </div>
+        <span class="ib-overlay-fly__text">{{'MMB_PASSENGERS_PERSONAL_DATA_MODAL_CORRECTED_AND_SAVED'|translate}}</span>
+    </div>
+</div>
+
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{modalCtrl.model.title|translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.close(modalCtrl.model.type, null)">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+
+<div class="ib-layout__line-spacing"
+    data-ng-if="modalCtrl.model.showErrorForm">
+    <div class="ib-msg-alert ib-msg-alert--danger icon-mas_2 alert">
+        <p class="ib-msg-alert__text ib-msg-alert__text--bold">{{ modalCtrl.model.errorTitle }}</p>
+        <p class="ib-msg-alert__text">{{ modalCtrl.model.errorMsg }}</p>
+    </div>
+</div>
+
+<section class="ib-modals__body ib-modals__body--cols-simple">
+    <form name="modalCtrl.modalContactForm" ib-form-scroll-to-error modal="true" novalidate>
+        <div class="ib-layout">
+            <div class="ib-layout__line-spacing" data-ng-if="modalCtrl.model.subtitle">
+                <span class="ib-text ib-text--block">{{modalCtrl.model.subtitle|translate}}</span>
+            </div>
+            <div class="ib-layout__line-spacing">
+                <!-- <p class="ib-text ib-text--block">Siempre que cambie hasta 3 letras o modifique su nombre por su nombre completo el cambio será gratuito.
+                    Datos de Pasajero</p> -->
+                <p class="ib-text ib-text--block">{{'MMB_PASSENGERS_PERSONAL_DATA_MODAL_BODY'|translate}}</p>
+                <ul class="ib-list ib-list--square ib-list--inside u-mt">
+                    <li class="ib-list__item u-mb">{{'MMB_PASSENGERS_PERSONAL_DATA_MODAL_BULLET_1'|translate}}</li>
+                    <!-- <li class="ib-list__item u-mb">{{'MMB_PASSENGERS_PERSONAL_DATA_MODAL_BULLET_2'|translate}}</li>
+                    <li class="ib-list__item u-mb">{{'MMB_PASSENGERS_PERSONAL_DATA_MODAL_BULLET_3'|translate}}</li>
+                    <li class="ib-list__item u-mb">{{'MMB_PASSENGERS_PERSONAL_DATA_MODAL_BULLET_4'|translate}}</li>
+                    <li class="ib-list__item u-mb">{{'MMB_PASSENGERS_PERSONAL_DATA_MODAL_BULLET_5'|translate}}</li> -->
+                </ul>
+            </div>
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--medium ib-layout__line-spacing--bordered">
+                <fieldset>
+                    <legend class="u-hide-accessible">{{modalCtrl.model.title|translate}}</legend>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="ib-layout__line-spacing">
+                                    <div class="ib-input">
+                                        <label class="ib-input__label" for="name" ng-class="{'ib-input__label--focus' : modalCtrl.nameFocused || (modalCtrl.modalContactForm.name.$viewValue != null && modalCtrl.modalContactForm.name.$viewValue != '')}">{{'PASSENGER_INFO_NAME'|translate}}</label>
+                                        <input class="ib-input__input" type="text" id="name" name="name" data-ng-focus="modalCtrl.nameFocused=true"
+                                            ng-blur="modalCtrl.nameFocused=false" ng-model="modalCtrl.model.personalInfoEdit.name"
+                                            ng-change="modalCtrl.checkPersonalInfoChanges()" maxlength="{{::$root.MmBPatterns.MAX_LENGTH_NAME}}"
+                                            ng-pattern="::$root.MmBPatterns.NAME_SURNAME_PATTERN"
+                                            data-ib-validator-cleaner="{{::$root.MmBPatterns.NAME_SURNAME_CLEANER}}"
+                                            required />
+                                    </div>
+                                    <div ng-messages="modalCtrl.modalContactForm.$submitted && modalCtrl.modalContactForm.name.$error">
+                                        <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                        <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_EMAIL_PATTERN_ERROR'|translate}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="ib-layout__line-spacing">
+                                    <div class="ib-input">
+                                        <label class="ib-input__label" for="surname" ng-class="{'ib-input__label--focus' : modalCtrl.surnameFocused || (modalCtrl.modalContactForm.surname.$viewValue != null && modalCtrl.modalContactForm.surname.$viewValue != '')}">{{(modalCtrl.model.market.code === 'ES') ? ('MMB_PASSENGERS_SURNAMES_TEXT'|translate) : ('MMB_PASSENGERS_SURNAME_TEXT'|translate)}}</label>
+                                        <input class="ib-input__input" type="text" id="surname" name="surname" data-ng-focus="modalCtrl.surnameFocused=true"
+                                            ng-blur="modalCtrl.surnameFocused=false" ng-model="modalCtrl.model.personalInfoEdit.surname"
+                                            ng-change="modalCtrl.checkPersonalInfoChanges()" maxlength="{{::$root.MmBPatterns.MAX_LENGTH_NAME}}"
+                                            ng-pattern="::$root.MmBPatterns.NAME_SURNAME_PATTERN"
+                                            data-ib-validator-cleaner="{{::$root.MmBPatterns.NAME_SURNAME_CLEANER}}"
+                                            required />
+                                    </div>
+                                    <div ng-messages="modalCtrl.modalContactForm.$submitted && modalCtrl.modalContactForm.surname.$error">
+                                        <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                        <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_EMAIL_PATTERN_ERROR'|translate}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" data-ng-if="modalCtrl.model.market.code === 'ES' && !modalCtrl.model.desactiveLastSurname">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="ib-layout__line-spacing">
+                                    <div class="ib-input">
+                                        <label class="ib-input__label" for="lastSurname" ng-class="{'ib-input__label--focus' : modalCtrl.lastSurnameFocused || (modalCtrl.modalContactForm.lastSurname.$viewValue != null && modalCtrl.modalContactForm.lastSurname.$viewValue != '')}">{{'MMB_PASSENGERS_SURNAME_SECOND_TEXT'|translate}}</label>
+                                        <input class="ib-input__input" type="text" id="lastSurname" name="lastSurname" data-ng-focus="modalCtrl.lastSurnameFocused=true"
+                                            ng-blur="modalCtrl.lastSurnameFocused=false" ng-model="modalCtrl.model.lastSurnameEdit"
+                                            ng-change="modalCtrl.hasEquals = true" maxlength="{{::$root.MmBPatterns.MAX_LENGTH_NAME}}"
+                                            ng-pattern="::$root.MmBPatterns.NAME_SURNAME_PATTERN"
+                                            data-ib-validator-cleaner="{{::$root.MmBPatterns.NAME_SURNAME_CLEANER}}"
+                                            required />
+                                    </div>
+                                    <div ng-messages="modalCtrl.modalContactForm.$submitted && modalCtrl.modalContactForm.lastSurname.$error">
+                                        <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                        <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_EMAIL_PATTERN_ERROR'|translate}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </fieldset>
+        </div>
+        <div class="ib-modals__footer">
+            <div class="ib-content-buttons">
+                <div class="ib-content-buttons__content-left">
+                    <button class="ib-button ib-button--w-medium" type="submit" ng-click="modalCtrl.updatePersonalInfo(modalCtrl.modalContactForm, null, modalCtrl.model.type)" ng-disabled="modalCtrl.disableUpdatePersonaInfoAction" ng-class="{ 'ib-button--disabled' : modalCtrl.disableUpdatePersonaInfoAction }">{{'MODAL_ACCEPT'|translate}}</button>
+                </div>
+                <div class="ib-content-buttons__content-right ib-content-buttons__content-right--mb-mobile">
+                    <a href="javascript:void(0)" title="{{'MODAL_CANCEL'|translate}}" class="ib-link" ng-click="modalCtrl.close(modalCtrl.model.type, null)">{{'MODAL_CANCEL'|translate}}</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,15 @@
+import './ib-MmB-simulator-booking-availability-module';
+import './ib-MmM-simulator-booking-availability-constants';
+import './transformer/ib-MmB-simulator-booking-availability-transformer';
+import './transformer/ib-Mmb-simulator-booking-availability-transformer-filter';
+import './directives/ib-simulator-calendar-slices-loading-directive';
+import './ib-MmB-simulator-booking-availability-component';
+import './animations/ib-MmB-simulator-booking-availability-animation';
+import './cmpnts/ib-MmB-simulator-fare-item';
+import './cmpnts/ib-MmB-simulator-fare-type';
+import './cmpnts/ib-MmB-simulator-list-fare-item';
+import './cmpnts/ib-MmB-simulator-total-price';
+import './cmpnts/ib-Mmb-simulator-calendar-ribbons';
+import './cmpnts/ib-Mmb-simulator-flights-details';
+import './cmpnts/ib-Mmb-simulator-flights-filter';
+import './cmpnts/ib-Mmb-simulator-flights-info';

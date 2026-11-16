@@ -1,0 +1,27 @@
+<header class="modal-header">
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M17.2949 31.2748H22.6143V17.9922H17.2949V31.2748ZM20.0007 0.5C8.95376 0.5 0 9.45192 0 20.4931C0 31.5481 8.95376 40.5 20.0007 40.5C31.0435 40.5 40 31.5481 40 20.4931C40 9.45192 31.0435 0.5 20.0007 0.5ZM20.0014 35.5706C11.691 35.5706 4.93555 28.8048 4.93555 20.4893C4.93555 12.1877 11.691 5.42188 20.0014 5.42188C28.3063 5.42188 35.0673 12.1877 35.0673 20.4893C35.0673 28.8048 28.3063 35.5706 20.0014 35.5706ZM19.856 15.0396H20.0524C21.4303 15.0396 23.0448 14.6799 23.0448 12.4661V12.3554C23.0448 10.1278 21.4303 9.72656 20.0524 9.72656H19.856C18.4766 9.72656 16.8594 10.1278 16.8594 12.3554V12.4661C16.8594 14.6799 18.4766 15.0396 19.856 15.0396Z" fill="#A8191A"/>
+    </svg>
+    <h2 class="modal-title" *ngIf="!newSearch">{{'MODAL_STEPS_CONTROL_TITLE_GO_BACK'|translate}}</h2>
+    <h2 class="modal-title" *ngIf="newSearch">{{'MODAL_STEPS_CONTROL_TITLE_NEW_SEARCH'|translate}}</h2>
+    <div class="ib-modals__header-settings ib-modals__header-settings--mobile">
+        <button type="button" class="button-close" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" (click)="dismiss()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M22.5 3.21714L21.2826 2L12 11.2832L2.71738 2L1.5 3.21714L10.7826 12.5004L1.5 21.7829L2.71738 23L12 13.7175L21.2826 23L22.5 21.7829L13.2167 12.5004L22.5 3.21714Z" fill="#666666"/>
+            </svg>
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="modals-body">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+        <p class="modal-text" *ngIf="extrasLost && !newSearch">{{'MODAL_STEPS_CONTROL_BODY_EXTRAS_LOST'|translate}}</p>
+        <p class="modal-text" *ngIf="newSearch">{{'MODAL_STEPS_CONTROL_BODY_NEW_SEARCH'|translate}}</p>
+        <p class="modal-text" *ngIf="!extrasLost && !newSearch">{{'MODAL_STEPS_CONTROL_BODY_GO_BACK'|translate}}</p>
+    </div>
+</section>
+<footer class="footer">
+    <button class="footer-button footer-button-primary footer-button-main" type="button" title="{{'MODAL_STEPS_CONTROL_BUTTON_GO_BACK'|translate}}" (click)="close()" *ngIf="!newSearch">{{'MODAL_STEPS_CONTROL_BUTTON_GO_BACK'|translate}}</button>
+    <button class="footer-button footer-button-primary footer-button-main" type="button" title="{{'MODAL_STEPS_CONTROL_BUTTON_NEW_SEARCH'|translate}}" (click)="close()" *ngIf="newSearch">{{'MODAL_STEPS_CONTROL_BUTTON_NEW_SEARCH'|translate}}</button>
+    <button class="footer-button footer-button-secondary" type="button" title="{{'MODAL_STEPS_CONTROL_BUTTON_KEEP_IN'|translate}}" (click)="dismiss()">{{'MODAL_STEPS_CONTROL_BUTTON_KEEP_IN'|translate}}</button>
+</footer>

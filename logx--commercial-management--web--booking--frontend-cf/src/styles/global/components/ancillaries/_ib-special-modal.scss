@@ -1,0 +1,274 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ib-map-seats
+//    Desripcion: Estilos para la modal de mapa de equipajes
+//******************************************************************************/
+.#{$wefront__namespace}special-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100%;
+    padding: 0;
+    border: 0;
+
+    &--padded {
+        padding: rem(32);
+    }
+
+    &__layer {
+        height: calc(100% - 4.0625rem);
+        overflow-y: auto;
+        // padding-bottom: rem(65);
+    }
+
+    &__header {
+        overflow: hidden;
+
+        &--top {
+            position: relative;
+            padding: rem(25) rem(32) rem(13);
+
+            &-info {
+                /* FLEX */
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+            }
+        }
+
+        &-info {
+            max-width: 60%;
+            padding: rem(0) rem(45) 0 0;
+            text-align: right;
+
+            &--top {
+                display: block;
+                .#{$wefront__namespace}text {
+                    font-size: rem(12);
+                    font-weight: bold;
+                    color: color(gray-30);
+                }
+            }
+
+            &--bottom {
+                display: block;
+                .#{$wefront__namespace}text {
+                    margin-top: rem(3);
+                    font-size: rem(12);
+                    color: color(gray-30);
+                }
+            }
+        }
+
+        &-title {
+            max-width: 40%;
+        }
+
+        .#{$wefront__namespace}modals__button-action {
+            position: absolute;
+            top: rem(8);
+            right: rem(8);
+        }
+    }
+
+    &__content {
+        padding: rem(24) rem(0) 0 rem(0);
+
+        &--grey {
+            padding-bottom: rem(24);
+            background-color: color(gray-60);
+        }
+
+        &--separator {
+            padding: rem(24) 0 0;
+            margin: rem(24) 0 0;
+            border-top: rem(2) solid color(gray-70);
+        }
+    }
+
+    &__container {
+        padding: rem(14) rem(48) rem(32);
+
+        &--full-height {
+            height: calc(100% - 7.75rem);
+            .#{$wefront__namespace}special-modal__content--grey , .#{$wefront__namespace}layout {
+                height: 100%;
+            }
+        }
+    }
+
+    &__footer {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: rem(8) rem(32);
+        background: color(white);
+
+        &--content {
+            padding: rem(8) rem(32);
+        }
+    }
+
+    .#{$wefront__namespace}radio {
+        &--block {
+            margin-top: rem(16);
+
+            &:first-child {
+                margin-top: rem(0);
+            }
+        }
+    }
+    .#{$wefront__namespace}base {
+        &__page {
+            &-titles {
+                padding-bottom: rem(0);
+            }
+        }
+    }
+    .#{$wefront__namespace}scroll-list {
+        position: relative;
+        padding: rem(18) rem(32);
+
+        &__passenger-wrap {
+            vertical-align: top;
+        }
+
+        &__passenger-display {
+            width: 100%;
+            padding: 0;
+        }
+
+        &__passenger-container {
+            width: 100%;
+            vertical-align: top;
+        }
+
+        &__passenger-button {
+            position: absolute;
+            z-index: 9999;
+            // padding: 0;
+            top: remcalcdivider(100%, ' - ', rem(64), 2);
+            background-color: color(white);
+
+            &--back {
+                left: rem(-7);
+            }
+
+            &--next {
+                right: rem(-7);
+            }
+        }
+    }
+}
+
+
+/* Responsive */
+
+/* MEDIUM RESOLUTION STYLES */
+@include media-query('md') {
+    .#{$wefront__namespace}upgrade__button-close {
+        right: 0;
+    }
+}
+
+/* SMALL RESOLUTION STYLES */
+@include media-query('mobile') {
+    .#{$wefront__namespace}special-modal {
+        padding: 0;
+
+        &__layer {
+            height: 100%;
+            padding-bottom: rem(32);
+            overflow-y: scroll;
+        }
+
+        &__header {
+            overflow: initial;
+
+            &--top {
+                padding: 0;
+
+                &-info {
+                    /* FLEX */
+                    align-items: center;
+                    padding: rem(20) rem(60) rem(24) rem(16);
+                }
+            }
+
+            &-info {
+                max-width: 40%;
+                padding-right: rem(0);
+            }
+
+            &-title {
+                max-width: 60%;
+            }
+        }
+
+        &__container {
+            padding-top: rem(32);
+
+            &--full-height {
+                height: auto;
+
+                .#{$wefront__namespace}special-modal__content--grey {
+                    padding-bottom: rem(70);
+                }
+                .#{$wefront__namespace}special-modal__content--grey,
+                .#{$wefront__namespace}layout {
+                    height: 100%;
+                }
+            }
+        }
+
+        &__container,
+        &__footer {
+            padding-right: rem(16);
+            padding-left: rem(16);
+        }
+
+        &__content {
+            &--separator {
+                margin-top: rem(0);
+            }
+        }
+
+        &__footer {
+            position: relative;
+            padding-right: rem(0);
+            padding-left: rem(0);
+            margin-top: rem(32);
+        }
+        .#{$wefront__namespace}heading--type-1 {
+            margin-bottom: rem(0);
+            font-size: rem(22);
+        }
+
+        .#{$wefront__namespace}modals__button-action {
+            top: rem(20);
+        }
+
+        .#{$wefront__namespace}radio {
+            &--block {
+                margin-top: rem(0);
+                margin-bottom: rem(16);
+            }
+        }
+
+        .#{$wefront__namespace}scroll-list {
+            box-shadow: 0 rem(3) rem(10) color(gray-70);
+
+            &__passenger-button {
+                &--back {
+                    left: rem(5);
+                }
+
+                &--next {
+                    right: rem(5);
+                }
+            }
+        }
+    }
+}

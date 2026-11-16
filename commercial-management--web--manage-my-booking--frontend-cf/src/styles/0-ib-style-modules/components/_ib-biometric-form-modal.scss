@@ -1,0 +1,259 @@
+/* -------------------------------------------------------------
+    #BIOMETRIC FORM MODAL
+----------------------------------------------------------------- */
+.#{$wefront__namespace}biometric-form-modal {
+    display: block;
+
+    &__check-wrapper {
+        margin-top: rem(16);
+        margin-bottom: rem(32);
+    }
+
+    &__buttons{
+        display: flex;
+        gap: 2rem;
+    }
+
+    .#{$wefront__namespace}biometric-form-modal__buttons {
+        .#{$wefront__namespace}button {
+            font-size: rem(14);
+        }
+    }
+
+    .#{$wefront__namespace}modals {
+        &__header {
+            display: flex;
+            align-items: center;
+            margin-bottom: rem(35);
+
+            &-icon {
+                position: relative;
+                display: inline;
+                color: color(gray-30);
+            }
+
+            [class^="icon-"] {
+                &::before {
+                    position: absolute;
+                    bottom: rem(-22);
+                    left: rem(-18);
+                    font-size: rem(50);
+                }
+            }
+            .#{$wefront__namespace}heading {
+                padding-left: rem(33);
+            }
+        }
+    }
+
+    .#{$wefront__namespace}link {
+        color: color(black);
+    }
+
+    .#{$wefront__namespace}content-buttons {
+        padding-top: rem(32);
+    }
+
+    &--active {
+        .#{$wefront__namespace}modals__header-settings {
+            z-index: 1001;
+        }
+
+        .#{$wefront__namespace}biometric-form-modal {
+            &__overlay {
+                position: absolute;
+                z-index: 1000;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: color(white, 0.8);
+
+                &-wrapper {
+                    position: absolute;
+                    top: 31%;
+                    display: flex;
+                    width: 100%;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                }
+
+                &-icon {
+                    font-size: rem(55);
+                    color: color(primary);
+                }
+
+                &-text {
+                    max-width: rem(483);
+                    margin-top: rem(12);
+                    font-size: rem(16);
+                    font-weight: bold;
+                    line-height: rem(26);
+                    color: color(gray-30);
+                }
+
+                &-description {
+                    max-width: rem(483);
+                    font-size: rem(16);
+                    line-height: rem(26);
+                    color: color(gray-30);
+                }
+
+                &-form-active {
+                    background-color: color(white);
+                }
+            }
+        }
+    }
+
+    &--not-active {
+        .#{$wefront__namespace}modals__header-settings {
+            z-index: 1001;
+        }
+
+        .#{$wefront__namespace}biometric-form-modal {
+            &__overlay {
+                position: absolute;
+                z-index: 1000;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: color(white, 0.8);
+
+                &-wrapper {
+                    position: absolute;
+                    top: 31%;
+                    display: flex;
+                    width: 100%;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                }
+
+                &-icon {
+                    font-size: rem(55);
+                    color: color(red-50);
+                }
+
+                &-text {
+                    max-width: rem(483);
+                    margin-top: rem(12);
+                    font-size: rem(16);
+                    font-weight: bold;
+                    line-height: rem(26);
+                    color: color(gray-30);
+                }
+
+                &-description {
+                    max-width: rem(483);
+                    font-size: rem(16);
+                    line-height: rem(26);
+                    color: color(gray-30);
+                }
+
+                &-error {
+                    background-color: color(white);
+                }
+            }
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}biometric-form-modal {
+        &__check-wrapper {
+            margin-bottom: rem(24);
+        }
+
+        .#{$wefront__namespace}content-buttons {
+            margin-top: 0;
+
+            .#{$wefront__namespace}content-buttons__content-left {
+                .#{$wefront__namespace}button {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+
+    .#{$wefront__namespace}biometric-form-modal {
+        &__check-wrapper {
+            margin-top: rem(0);
+            margin-bottom: rem(32);
+        }
+
+        &__buttons{
+            flex-direction: column;
+        }
+
+        .#{$wefront__namespace}modals {
+            &__header {
+                padding-bottom: rem(24);
+                margin-bottom: rem(25);
+
+                [class^="icon-"] {
+                    &::before {
+                        bottom: rem(-18);
+                        font-size: rem(46);
+                    }
+                }
+                .#{$wefront__namespace}heading {
+                    padding-left: rem(19);
+                    font-size: rem(20);
+                }
+            }
+        }
+
+        form {
+            >.#{$wefront__namespace}layout {
+                >.#{$wefront__namespace}layout__line-spacing {
+                    &:first-child {
+                        margin-bottom: rem(16);
+                    }
+                }
+            }
+        }
+
+        .#{$wefront__namespace}check__text {
+            line-height: rem(16);
+        }
+        .#{$wefront__namespace}content-buttons {
+            padding-top: 0;
+            margin-top: 0;
+            border-top: none;
+
+            &__content-right {
+                .ib-link {
+                    margin-top: rem(20) !important;
+                }
+            }
+        }
+
+        &--active,
+        &--not-active {
+            .#{$wefront__namespace}biometric-form-modal {
+                &__overlay {
+                    &-wrapper {
+                        top: 18%;
+                    }
+
+                    &-text {
+                        max-width: rem(288);
+                        margin-top: rem(9);
+                    }
+
+                    &-description {
+                        max-width: rem(288);
+                    }
+                }
+            }
+        }
+    }
+}

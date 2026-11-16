@@ -1,0 +1,46 @@
+<div class="ib-refund-bonds ib-refund-bonds--type-01" ng-if="cashRefundCtrl.flags.showCashRefundOnline">
+    <div class="ib-refund-bonds__head">
+        <h2 class="title__h4 bold">{{'MMB_REFUNDS_VOUCHER_CASH_TITLE'|translate}}</h2>
+        <p class="ib-text ib-text--xbig ib-text--especial u-mt-small">
+            {{'MMB_REFUNDS_VOUCHER_CASH_SUBTITLE'|translate}}
+        </p>
+
+        <div class="ib-refund-bonds__body ib-refund-bonds__body--boxed">
+            <div ng-class="cashRefundCtrl.cashPriceInfo ? 'ib-refund-bonds__body-block' : 'ib-refund-bonds__body-block ib-text--spacing-medium'">                                   
+                <span ng-if="cashRefundCtrl.cashPriceInfo" class="ib-refund-bonds__value">{{cashRefundCtrl.cashPriceInfo[0].formattedPrice}}</span>
+                <!-- In case formattedPrice is empty, it is because there was an error in the cash/calculate service, so we show an error message instead of the price -->
+                <span ng-if="!cashRefundCtrl.cashPriceInfo" class="ib-text--bold">{{'ERROR_MMB_001'| translate : {phoneCallCenter : cashRefundCtrl.phoneListOjbject.phoneLiteral} }}</span>
+            </div>
+            <div class="ib-refund-bonds__body-block">  
+                <button class="ib-button ib-button--block-xs ib-button--w-normal-fullmobile" ng-disabled="!cashRefundCtrl.cashPriceInfo" ng-click="cashRefundCtrl.openSummary()">{{'MMB_CUSTOMIZE_FLIGHTS_SELECT'|translate}}</button>
+            </div>
+        </div>
+
+        <div class="ib-box--bordered-pairs ib-flex__row--nowrap">
+            <span class="ib-text--color-important ib-text--xmassive icon-reloj u-mr-xxsmall"></span>
+            <p class="ib-text ib-text--big ib-text--especial">
+                <span class="ib-text--bold">
+                    {{'MMB_REFUNDS_VOUCHER_CASH_INFORMATION_BOX_TEXT_1'|translate}}
+                </span>
+                {{'MMB_REFUNDS_VOUCHER_CASH_INFORMATION_BOX_TEXT_2'|translate}}
+            </p>
+        </div>
+
+
+        <div ng-if="cashRefundCtrl.voucherPriceInfo.percentagePrice !== 0 && false" class="ib-refund-bonds__body ib-refund-bonds__body--boxed" style="background-color: white;">
+            <div class="ib-refund-bonds__body-block">                                   
+                <span class="ib-refund-bonds__value ng-binding">{{cashRefundCtrl.cashPriceInfo[0].formattedPrice}}</span>
+            </div>
+            <div class="ib-refund-bonds__body-block">  
+                <button class="ib-button ib-button--block-xs ib-button--w-normal-fullmobile ib-button--inverse ng-binding" ng-click="cashRefundCtrl.openSummary()">{{'MMB_CUSTOMIZE_FLIGHTS_SELECT'|translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ib-refund-bonds ib-refund-bonds--type-01" ng-if="!cashRefundCtrl.flags.showCashRefundOnline">
+    <div class="ib-refund-bonds__head">
+        <h2 class="title__h4 bold">{{'MMB_REFUNDS_VOUCHER_CASH_TITLE'|translate}}</h2>
+        <p class="ib-text ib-text--xbig ib-text--especial u-mt-small">{{cashRefundCtrl.textRefundByCashNotAvailable}}</p>        
+    </div>
+</div>

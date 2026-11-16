@@ -1,0 +1,96 @@
+<div class="ib-layout__line-spacing--medium u-text-center hidden-xl hidden-lg">
+    <h2 class="ib-heading ib-heading--title-box">{{'MMB_INVOICES_TITLE' | translate}}</h2>
+</div>
+<div ng-if="invoiceTabCtrl.errorInvoiceList===false" class="ib-layout__line-spacing--xsmall hidden-xs hidden-sm hidden-md">
+    <h2 class="ib-heading ib-heading--title-box">{{'MMB_INVOICES_TITLE' | translate}}</h2>
+</div>
+<div ng-if="!invoiceTabCtrl.checkRequestInvoice && invoiceTabCtrl.errorInvoiceList===false" class="ib-layout__line-spacing u-mt-small">
+    <p class="ib-text ib-text--xxbig-responsive ib-text--especial ib-text--center-responsive">{{'MMB_INVOICES_BODY' | translate}}</p>
+</div>
+
+<!-- KO Confirmation -->
+<div data-ng-if="invoiceTabCtrl.showErrorConfirmation" class="ib-msg-alert ib-msg-alert--danger icon-informacion ib-msg-alert--smallest alert u-mt u-mb">
+    <p class="ib-msg-alert__text ib-msg-alert__text--bold">{{'MMB_INVOICE_CONFIRMATION_ALERT_TITLE' | translate}}</p>
+    <p class="ib-msg-alert__text">{{'MMB_INVOICE_CONFIRMATION_ALERT_BODY' | translate}}</p>
+</div>
+
+<!-- KO PARTIAL CONFIRMATION -->
+<div data-ng-if="invoiceTabCtrl.showPartialErrorConfirmation" class="ib-msg-alert ib-msg-alert--danger icon-informacion ib-msg-alert--smallest alert u-mt u-mb">
+    <p class="ib-msg-alert__text ib-msg-alert__text--bold">{{'MMB_INVOICE_CONFIRMATION_ALERT2_TITLE' | translate}}</p>
+    <p class="ib-msg-alert__text">{{'MMB_INVOICE_CONFIRMATION_ALERT2_BODY' | translate}}</p>
+</div>
+
+<!-- OK Confirmation -->
+<div data-ng-if="invoiceTabCtrl.showOkConfirmation && !invoiceTabCtrl.showErrorConfirmation" class="ib-msg-alert ib-msg-alert--success-normal icon-confirmacion ib-msg-alert--color-success ib-msg-alert--smallest alert u-mt u-mb">
+    <p class="ib-msg-alert__text ib-msg-alert__text--bold">{{'MMB_INVOICE_CONFIRMATION_OK_TITLE' | translate}}</p>
+    <p class="ib-msg-alert__text">{{'MMB_INVOICE_CONFIRMATION_OK_BODY' | translate}}</p>
+</div>
+
+<ib-MmB-invoice-list
+    ng-if="!invoiceTabCtrl.showInvoiceData && !invoiceTabCtrl.showConfirmation && invoiceTabCtrl.errorInvoiceList===false"
+    visible-form="invoiceTabCtrl.visibleForm"
+    selectable-list="invoiceTabCtrl.selectableList"
+    no-items-request-invoice="invoiceTabCtrl.noItemsRequestInvoice"
+    list-invoices="invoiceTabCtrl.listInvoices"
+    list-invoices-selected="invoiceTabCtrl.listInvoicesSelected"
+    check-request-invoice = "invoiceTabCtrl.checkRequestInvoice"
+    show-invoice-data = "invoiceTabCtrl.showInvoiceData"
+    show-ok-confirmation="invoiceTabCtrl.showOkConfirmation"
+    show-partial-error-confirmation="invoiceTabCtrl.showPartialErrorConfirmation"
+    get-invoice-data="invoiceTabCtrl.getInvoiceData"
+></ib-MmB-invoice-list>
+
+<ib-MmB-invoice-information
+    ng-if="invoiceTabCtrl.visibleForm && !invoiceTabCtrl.showConfirmation"
+    visible-form="invoiceTabCtrl.visibleForm"
+    show-invoice-data = "invoiceTabCtrl.showInvoiceData"
+    selectable-list="invoiceTabCtrl.selectableList"
+    check-request-invoice = "invoiceTabCtrl.checkRequestInvoice"
+    show-confirmation="invoiceTabCtrl.showConfirmation"
+    invoice-detail = "invoiceTabCtrl.invoiceDetail"
+    list-invoices-selected="invoiceTabCtrl.listInvoicesSelected"
+    get-invoice-data="invoiceTabCtrl.getInvoiceData"
+    list-invoices="invoiceTabCtrl.listInvoices"
+></ib-MmB-invoice-information>
+
+<ib-MmB-invoice-confirmation
+    ng-if="invoiceTabCtrl.showConfirmation"
+    visible-form="invoiceTabCtrl.visibleForm"
+    invoice-detail = "invoiceTabCtrl.invoiceDetail"
+    list-invoices-selected="invoiceTabCtrl.listInvoicesSelected"
+    check-request-invoice = "invoiceTabCtrl.checkRequestInvoice"
+    show-confirmation="invoiceTabCtrl.showConfirmation"
+    show-invoice-data = "invoiceTabCtrl.showInvoiceData"
+    selectable-list="invoiceTabCtrl.selectableList"
+    show-ok-confirmation="invoiceTabCtrl.showOkConfirmation"
+    show-partial-error-confirmation="invoiceTabCtrl.showPartialErrorConfirmation"
+    get-invoice-data="invoiceTabCtrl.getInvoiceData"
+    list-invoices="invoiceTabCtrl.listInvoices"
+></ib-MmB-invoice-confirmation>
+
+<!-- Error Message - Call Center -->
+<div ng-if="invoiceTabCtrl.errorInvoiceList">
+    <div class="ib-msg-alert ib-msg-alert--transparent ib-msg-alert__gdr--unallow icon-informacion_2"> <!--ib-msg-alert__gdr--sized-->
+        <p class="ib-msg-alert__text ib-msg-alert__text--title-large">
+            <span>{{'MMB_ERROR_INVOICE_LIST_TITTLE'|translate}}</span>
+        </p>
+        <p class="ib-msg-alert__text--subtitle">{{'MMB_ERROR_INVOICE_LIST_SUBTITTLE'|translate}}
+        </p>
+    </div>
+</div>
+
+<!-- WARNING INFO INVOICES -->
+<div ng-if="!invoiceTabCtrl.checkRequestInvoice && !invoiceTabCtrl.showConfirmation"
+    class="ib-msg-alert ib-msg-alert--bond icon-informacion_2 alert u-mb-smedium u-mt">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-border-left-none">
+        <h3 class="ib-msg-alert__text">{{'MMB_INVOICES_ALERT_TITLE' | translate}}</h3>
+        <p class="ib-msg-alert__description u-mt-small">{{'MMB_INVOICES_ALERT_BODY' | translate}}</p>
+        <a
+            data-ng-click="invoiceTabCtrl.moreInfo()"
+            class="ib-box-cols__link"
+            href="javascript:void(0)"
+            title="{{'MMB_INVOICES_MORE_INFO_LINK'|translate}}">
+            {{'MMB_INVOICES_MORE_INFO_LINK' | translate}}
+        </a>
+    </div>
+</div>

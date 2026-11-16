@@ -1,0 +1,46 @@
+/* ------------------------------------------------------------------------
+    #TEXTS
+------------------------------------------------------------------------- */
+$formats: capitalize uppercase lowercase none;
+
+.u-text-transform-none {
+    text-transform: none !important;
+}
+
+.u-reset-ellipsis {
+    overflow: initial !important;
+    text-overflow: initial !important;
+    white-space: initial !important;
+}
+
+.u-text-wrap-balance {
+    text-wrap: balance;
+}
+
+@each $format in $formats {
+    .text-#{$format} {
+        text-transform: #{$format} !important;
+
+        @each $breakpoint, $query in $breakpoints {
+            @include media-query($breakpoint) {
+                &--#{$breakpoint} {
+                    text-transform: #{$format} !important;
+                }
+            }
+        }
+    }
+}
+
+@each $format in $formats {
+    .u-text-transform-#{$format} {
+        text-transform: #{$format} !important;
+
+        @each $breakpoint, $query in $breakpoints {
+            @include media-query($breakpoint) {
+                &--#{$breakpoint} {
+                    text-transform: #{$format} !important;
+                }
+            }
+        }
+    }
+}

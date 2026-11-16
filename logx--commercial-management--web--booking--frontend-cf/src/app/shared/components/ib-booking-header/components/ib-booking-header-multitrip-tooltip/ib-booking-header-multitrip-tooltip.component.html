@@ -1,0 +1,21 @@
+<div class="multitrip-tooltip"
+    ibBookingCollapse
+    [collapsed]="true"
+    collapseTrigger="multitripTrigger"
+    collapseContainer="multitripContainer">
+    <button class="ib-header-common__link-items" title="{{'CLICK_FOR_MORE_INFORMATION_TEXT'|translate}}" aria-controls="multitripContainer" multitripTrigger focusin>
+        +{{model.length - numberTrips}}
+    </button>
+    <div id="multitripContainer" class="collapse-container" multitripContainer>
+        <div class="ib-flights-message">
+            <ul class="ib-flights-message__list">
+                <li class="ib-flights-message__list-item">
+                    <div *ngFor="let trip of model|limitTo:numberTrips:model.length;let i = index" class="ib-flex__column" [ngClass]="{'u-mt-xsmall': i > 0}">
+                        <span class="ib-flights-message__item-text ib-flights-message__item-text--bold">{{trip.originCode}} - {{trip.destinyCode}}:</span>
+                        <span class="ib-flights-message__item-text ib-flights-message__item-text--small ib-flights-message__item-text--gray">{{trip.dateFlight | shortDateFormat}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,227 @@
+/* -----------------------------------------------------------------
+    #MMB DASHBOARD ITEM
+----------------------------------------------------------------- */
+.#{$wefront__namespace}mmb-dashboard {
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    &__advisory {
+        font-family: $font-special;
+        font-size: rem(13);
+        font-weight: 400;
+        line-height: rem(20);
+
+        &--bold {
+            font-weight: 700;
+        }
+
+        &--1 {
+            margin-bottom: rem(8);
+            font-size: rem(18);
+        }
+
+        &--subtitle {
+            margin-bottom: rem(10);
+        }
+    }
+
+    &__advisory-hf {
+        font-family: $font-normal;
+        font-size: rem(13);
+        line-height: rem(20);
+
+        &--bold {
+            font-weight: 700;
+        }
+
+        &--1 {
+            font-size: rem(18);
+        }
+    }
+
+    &__advisory-last {
+        margin-bottom: rem(13);
+    }
+
+    &__title {
+        display: flex;
+        min-height: rem(45);
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        padding-left: rem(45);
+
+        &--text {
+            margin-bottom: 0;
+            line-height: rem(45);
+        }
+    }
+
+    &__row {
+        // margin-top: rem(32);     //FIX BUG DIB-2842
+        display: flex;
+        width: 100%;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    &__actions {
+        .#{$wefront__namespace}mmb-dashboard {
+            &__column {
+                margin-top: 0;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+            > .#{$wefront__namespace}mmb-dashboard {
+                &__column {
+                    margin-top: rem(32);
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    &__column {
+        width: remcalcdivider('100%', ' - ', rem(32), 2);
+
+        &--full {
+            width: 100%;
+            margin-top: rem(32);
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            ib-mmb-dash-item {
+                margin-top: 0;
+            }
+        }
+
+        ib-mmb-dash-item {
+            display: block;
+            margin-top: rem(32);
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+@include media-query("lg") {
+    .#{$wefront__namespace}mmb-dashboard {
+        &__column {
+            width: remcalcdivider('100%', ' - ', rem(24), 2);
+
+            &--full {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@include media-query("md") {
+    .#{$wefront__namespace}mmb-dashboard {
+        &__advisory {
+            text-align: center;
+
+        }
+
+        &__advisory-hf {
+            text-align: center;
+
+        }
+    }
+}
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}mmb-dashboard {
+        &__title {
+            display: flex;
+            min-height: rem(45);
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: center;
+            padding-right: rem(5);
+            padding-left: rem(50);
+
+            &--text {
+                margin-bottom: 0;
+                line-height: rem(45);
+            }
+        }
+
+        &__advisory {
+            text-align: center;
+        }
+
+        &__advisory-hf {
+            text-align: center;
+
+            &--1 {
+                font-size: rem(16);
+            }
+        }
+
+        &__row,
+        &__column {
+            width: 100%;
+        }
+
+        &__actions {
+            .#{$wefront__namespace}mmb-dashboard {
+                &__column {
+                    margin-top: rem(32);
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query("xs") {
+    .#{$wefront__namespace}mmb-dashboard {
+        &__title {
+            border: rem(1) solid color(gray-40);
+            background-color: color(white);
+            box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+
+            &--text {
+                margin-bottom: 0;
+                line-height: rem(43);
+            }
+        }
+
+        &__actions {
+            .#{$wefront__namespace}mmb-dashboard {
+                &__column {
+                    margin-top: rem(32);
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+
+        &__advisory--1 {
+            margin-bottom: rem(8);
+            font-size: rem(16);
+        }
+    }
+}

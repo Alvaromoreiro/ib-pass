@@ -1,0 +1,301 @@
+/* stylelint-disable */
+@import 'src/styles/component-tools';
+
+
+
+li {
+    margin: rem(15) 0;
+    font-size: rem(13);
+}
+
+.ib-partners-panel {
+
+    &__container{
+        position: relative;
+        background-color: color(gray-25);
+        border-bottom: 0.0625rem solid color(gray-270);
+        z-index: 101;
+    }
+
+    &__logo {
+        height: 100%;
+        margin-right: rem(15);
+        display: flex;
+        align-items: center;
+        border-right: rem(1) solid color(gray-270);
+    }
+
+    &__icon {
+        position: relative;
+        width: rem(41);
+        height: rem(30);
+    }
+
+    &__text {
+        font-weight: 700;
+        margin-right: rem(15);
+        margin-left: rem(15);
+    }
+    &__main {
+        padding-bottom: rem(15);
+        padding-top: rem(15);
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        border: none;
+        background: none;
+        &:focus {
+            outline: revert;
+        }
+        
+    }
+
+    &__subtitle {
+        color: color(gray-10);
+        font-size: rem(13);
+    }
+
+    &__dropdown {
+        display: flex;
+        margin-left: auto;
+        font-size: rem(13);
+        padding: 0 rem(5);
+        &:focus {
+            outline: revert;
+        }
+    }
+
+    &__arrow-icon {
+        height: rem(7);
+        width: rem(7);
+        position: relative;
+        top: rem(4);
+        margin-left: rem(10);
+        border-color: color(gray-30);
+    }
+
+    &__details {
+        position: absolute;
+        z-index: 101;
+        width: 100%;
+        display: block;
+        background-color: color(gray-25);
+        transition: transform 400ms ease-out;
+        transform-origin: top left;
+        >* {
+            filter: opacity(0);
+            transition: filter 250ms 150ms ease-in;
+        }
+        &_open {
+            transform: scale(1,1);
+            >* {
+                filter: opacity(1);
+            }
+        };
+        &_close {
+            transform: scale(1,0);
+            >* {
+                transition: filter 250ms ease-out;
+                filter: opacity(0);
+            }
+        };
+        &--wrapper {
+            position: relative;
+            margin-top: rem(40);
+        }
+
+        &--title {
+            font-family: iberiaheadline;
+            font-size: rem(30);
+            color: color(gray-10);
+            line-height: normal;
+        }
+
+        &--list-wrapper {
+            margin-top: rem(20);
+            font-size: rem(13);
+        }
+
+        &--list {
+            padding: 0 0 0 rem(15);
+            list-style-type: square;
+            margin-bottom: rem(10);
+        }
+
+        &--link {
+            font-family: Verdana;
+            font-size: rem(13);
+            text-decoration: underline;
+            color: color(gray-10);
+        }
+
+        &--image-wrapper {
+            position: relative;
+            padding-top: rem(52);
+            padding-bottom: rem(52);
+            z-index: 1;
+        }
+
+        &--image {
+            position: relative;
+            left: 35%;
+            height: auto;
+            width: rem(180);
+        }
+
+        &--button {
+            font-size: rem(14);
+            position: absolute;
+            top: rem(282);
+            width: rem(238);
+            height: auto;
+            left: rem(15);
+            z-index: 2;
+            line-height: rem(35);
+        }
+    }
+
+    &__background{
+        display: block;
+        height: 100%;
+        width: 100%;
+        background-color: black;
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        opacity: 0.5;
+    }
+}
+
+@include media-query("lg") {
+    .ib-partners-panel{
+
+        &__icon {
+            width: rem(25);
+            height: rem(21);
+        }
+
+        &__text {
+            font-size: rem(12);
+        }
+        &__details{
+            &--title {
+                font-size: rem(25);
+            }
+
+            &--image {
+                left: 17%;
+                width: rem(168);
+            }
+        }
+    }
+}
+
+@include media-query("md") {
+    .ib-partners-panel{
+
+        &__icon {
+            width: rem(25);
+            height: rem(21);
+        }
+
+        &__text {
+            font-size: rem(12);
+        }
+
+        &__details{
+            &--title {
+                font-size: rem(25);
+            }
+
+            &--image {
+                left: -9%;
+                width: rem(168);
+            }
+        }
+    }
+}
+@include media-query("mobile") {
+    li {
+        margin: rem(15) 0 0rem;
+    }
+
+    .ib-partners-panel{
+
+        &__logo {
+            border: none;
+            margin-right: 0;
+        }
+
+        &__subtitle {
+            display: none;
+        }
+
+        &__icon {
+            width: rem(25);
+            height: rem(21);
+        }
+
+        &__text {
+            font-size: rem(12);
+        }
+
+        &__dropdown {
+            height: rem(20);
+            width: rem(30);
+
+            &--moreinfo {
+                display: none;
+            }
+        }
+
+        &__details {
+
+            &--wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: rem(16);
+                padding-bottom: rem(15);
+            }
+
+            &--title {
+                font-size: rem(20);
+            }
+
+            &--list-wrapper {
+                margin-top: rem(16);
+            }
+
+            &--image-wrapper {
+                width: 100%;
+                position: relative;
+                padding-top: rem(38);
+                padding-bottom: rem(40);
+            }
+
+            &--image {
+                left: 40%;
+                width: rem(87);
+            }
+
+            &--button {
+                position: static;
+                margin-top: auto;
+                font-size: rem(14);
+                width: rem(288);
+            }
+        }
+    }
+}
+
+@include media-query("xs") {
+    .ib-partners-panel{
+        &__details {
+            &--image {
+                left: 33%;
+                width: rem(91);
+            }
+        }
+    }
+}

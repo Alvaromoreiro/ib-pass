@@ -1,0 +1,191 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false,
+    "cache": {
+      "enabled": true
+    }
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "web-booking": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "customWebpackConfig": {
+              "path": "./config/angular/extra-webpack.config.ts"
+            },
+            "indexTransform": "./config/angular/index-transform.ts",
+            "preserveSymlinks": true,
+            "outputPath": "dist",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "progress": true,
+            "assets": [],
+            "styles": [
+              {
+                "input": "src/styles.scss",
+                "bundleName": "web-booking-styles"
+              }
+            ],
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "angular",
+              "angular-aria",
+              "angular-cookies",
+              "angular-local-storage",
+              "angular-messages",
+              "angular-route",
+              "angular-sanitize",
+              "angular-ui-bootstrap",
+              "ng-device-detector",
+              "ui-select",
+              "angular-animate",
+              "angular-credit-cards",
+              "angular-daterangepicker",
+              "angular-recaptcha",
+              "angular-scroll",
+              "angular-ui-date",
+              "malihu-custom-scrollbar-plugin",
+              "jquery",
+              "bootstrap/dist/js/bootstrap.js",
+              "dayjs/plugin/localizedFormat",
+              "dayjs/plugin/duration",
+              "dayjs/plugin/isSameOrAfter"
+            ],
+            "webWorkerTsConfig": "tsconfig.worker.json"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "config/angular-environments/environment.ts",
+                  "with": "config/angular-environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "none",
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                },
+                "fonts": true
+              },
+              "namedChunks": true,
+              "vendorChunk": true,
+              "sourceMap": false,
+              "extractLicenses": true
+            },
+            "development": {
+              "scripts": [
+                "./config/features/personal-features.js"
+              ],
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
+            "noMinification": {
+              "buildOptimizer": false,
+              "optimization": false
+            },
+            "integration": {
+              "sourceMap": true
+            },
+            "hidden": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "15mb",
+                  "maximumError": "25mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "20kb",
+                  "maximumError": "25kb"
+                }
+              ],
+              "sourceMap": {
+                "hidden": true,
+                "scripts": true,
+                "styles": false
+              }
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "port": 9007,
+            "proxyConfig": "config/angular/proxy.conf.js"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "web-booking:build:production"
+            },
+            "development": {
+              "browserTarget": "web-booking:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular-builders/custom-webpack:karma",
+          "options": {
+            "customWebpackConfig": {
+              "path": "./config/angular/extra-webpack.config.ts"
+            },
+            "main": "test/unit/test.ts",
+            "polyfills": "test/unit/testing-polyfils.ts",
+            "tsConfig": "tsconfig.test.json",
+            "include": [
+              "**/*.spec.ts",
+              "../test/unit/**/*.spec.ts",
+              "../test/unit/**/*-test.js",
+              "**/*.spec.js"
+            ],
+            "karmaConfig": "config/karma/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [],
+            "styles": [],
+            "scripts": [],
+            "codeCoverage": true,
+            "sourceMap": true,
+            "webWorkerTsConfig": "tsconfig.worker.json"
+          },
+          "configurations": {
+            "a11y": {
+              "main": "test/unit/test-a11y-only.ts",
+              "include": [
+                "**/*.a11y.spec.ts",
+                "../test/unit/**/*.a11y.spec.ts"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "web-booking"
+}

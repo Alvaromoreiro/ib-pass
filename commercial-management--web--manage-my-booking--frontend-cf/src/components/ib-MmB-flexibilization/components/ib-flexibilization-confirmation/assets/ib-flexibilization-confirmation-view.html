@@ -1,0 +1,167 @@
+<div class="container">
+    <div class="row" ng-if="!ibFlexibilizationConfirmationCtrl.model.hasPartialError">
+        <div class="col-xs-12">
+            <div class="ib-layout__header u-mt-big u-mb-small u-mt-medium-xs">
+                <h1 class="ib-heading ib-heading--type-1 ib-heading--block ib-heading--to-center">
+                    <span class="ib-heading__icon ib-heading-icon__icon--grey ib-heading__icon--mobile-block icon-confirmacion hidden-xs">
+                        <span class="hide-accessible">{{'MMB_FLEXIBILIZATION_CONFIRMATION_ICON_ALT' | translate}}</span>
+                    </span>
+                    <span class="ib-heading__text">{{'MMB_FLEXIBILIZATION_CONFIRMATION_OK_MESSAGE' | translate}}</span>    
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="ib-layout__header u-mt-big u-mb-small u-pl-small-mobile u-pr-small-mobile u-mt-small-mobile" ng-if="ibFlexibilizationConfirmationCtrl.model.hasPartialError">
+        <h1 class="ib-heading ib-heading--type-1 ib-heading--block ib-heading--to-center">
+            <span class="ib-heading__icon ib-heading-icon__icon--grey ib-heading__icon--mobile-block icon-informacion_2 hidden-sm hidden-xs">
+                <span class="hide-accessible">{{'MMB_FLEXIBILIZATION_CONFIRMATION_ICON_ALERT_ALT' | translate}}</span>
+            </span>
+            <span class="ib-heading__text">{{'MMB_FLEXIBILIZATION_CONFIRMATION_PARTIAL_ERROR_TITLE' | translate}}</span>    
+        </h1>
+    </div>
+    <div class="ib-layout__header u-mt-small u-pl-small-mobile u-pr-small-mobile" ng-if="ibFlexibilizationConfirmationCtrl.model.hasPartialError">
+        <h2 class="ib-heading ib-heading--type-2 ib-heading--block ib-heading--to-center u-mb-medium u-mt-xsmall-md">
+            <span class="ib-heading__text">{{'MMB_FLEXIBILIZATION_CONFIRMATION_PARTIAL_ERROR_SUBTITLE' | translate}}</span>    
+        </h2>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="ib-layout__section">
+                <div class="ib-box ib-box--medium ib-box--empty ib-box--bordered">
+                    <div class="ib-box__wrapper ib-box__wrapper--large">
+                        <!-- CODE BOX -->
+                        <div class="ib-layout__line-spacing">
+                            <span class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused">{{'CONFIRM_CODE' | translate}}</span>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                                <span class="ib-text ib-text--block ib-text--to-center ib-text--code-big ib-text--color-unfocused">{{ibFlexibilizationConfirmationCtrl.model.confirmationCode}}</span>
+                            </div>
+                            <p class="ib-text ib-text--to-center ib-text--color-unfocused">{{'CONFIRM_TICKET_CONFIRM' | translate}} {{ibFlexibilizationConfirmationCtrl.model.email}}</p>
+                        </div>
+                        <!-- INFO BOX -->
+                        <div class="ib-alertbox ib-alertbox--darkgrey u-mb-none" aria-label="{{'MMB_FLEXIBILIZATION_CONFIRMATION_INFO_MESSAGE_ALT' | translate}}">
+                            <div class="ib-alertbox__head">
+                                <span class="ib-alertbox__head--icon icon-alertas_2"><span class="hide-accessible">{{'MMB_FLEXIBILIZATION_CONFIRMATION_ICON_ALERT_ALT' | translate}}</span></span>
+                                <h3 class="ib-alertbox__head--title">{{'MMB_FLEXIBILIZATION_CONFIRMATION_INFO_NEW_ORDER' | translate}}</h3>
+                            </div>
+                            <div class="ib-alertbox__content ib-alertbox__content--indented u-mt-none">
+                                <p class="ib-alertbox__content--text">{{ibFlexibilizationConfirmationCtrl.model.infoBoxMsg | translate}}</p>
+                            </div>
+                        </div>
+                        <!-- RESIDENT DISCOUNT -->
+                        <div class="u-mt-small ib-layout__line-spacing ib-layout__line-spacing--small"
+                                data-ng-if="ibFlexibilizationConfirmationCtrl.model.residentInfo.isActive && ((!ibFlexibilizationConfirmationCtrl.model.residentInfo.errors.haveSomeError && !ibFlexibilizationConfirmationCtrl.model.residentInfo.errors.allHaveError) || (ibFlexibilizationConfirmationCtrl.model.residentInfo.errors.haveSomeError && ibFlexibilizationConfirmationCtrl.model.residentInfo.errors.allHaveError))">
+                                <div class="ib-box ib-box--small ib-box--empty ib-box--bordered">
+                                    <div class="ib-msg-alert ib-msg-alert--unfocused ib-msg-alert--confirmation"
+                                        data-ng-class="{'icon-informacion_2':!ibFlexibilizationConfirmationCtrl.model.residentInfo.errors.haveSomeError && !ibFlexibilizationConfirmationCtrl.model.residentInfo.errors.allHaveError,'icon-alerta_grave':ibFlexibilizationConfirmationCtrl.model.residentInfo.errors.haveSomeError && ibFlexibilizationConfirmationCtrl.model.residentInfo.errors.allHaveError}">
+                                        <div
+                                            data-ng-if="!ibFlexibilizationConfirmationCtrl.model.residentInfo.errors.haveSomeError && !ibFlexibilizationConfirmationCtrl.model.residentInfo.errors.allHaveError">
+                                            <span
+                                                class="ib-text ib-text--bold ib-text--color-unfocused">{{'IBBKCF_RESIDENT_DISCOUNT_DESTINY_TEXT'|translate}}
+                                                {{ibFlexibilizationConfirmationCtrl.model.residentInfo.city
+                                                |translate}}
+                                            </span>
+                                            <p class="ib-text ib-text--block ib-text--color-unfocused">
+                                                {{'IBBKCF_RESIDENT_STATUS_ALL_OK'|translate}}</p>
+                                        </div>
+                                        <div
+                                            data-ng-if="ibFlexibilizationConfirmationCtrl.model.residentInfo.errors.haveSomeError && ibFlexibilizationConfirmationCtrl.model.residentInfo.errors.allHaveError">
+                                            <span
+                                                class="ib-text ib-text--bold ib-text--color-unfocused">{{'IBBKCF_RESIDENT_DISCOUNT_DESTINY_TEXT'|translate}}
+                                                {{ibFlexibilizationConfirmationCtrl.model.residentInfo.city
+                                                | translate}}</span>
+                                            <p class="ib-text ib-text--block ib-text--color-unfocused">
+                                                {{'IBBKCF_RESIDENT_STATUS_ALL_FAIL'|translate}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt-small"
+                                data-ng-if="ibFlexibilizationConfirmationCtrl.model.residentInfo.isActive && ibFlexibilizationConfirmationCtrl.model.residentInfo.errors.haveSomeError && !ibFlexibilizationConfirmationCtrl.model.residentInfo.errors.allHaveError">
+                                <div class="ib-box ib-box--small ib-box--empty ib-box--bordered">
+                                    <div class="ib-layout__line-spacing ib-layout__line-spacing--smedium">
+                                        <span
+                                            class="ib-text ib-text--bold ib-text--color-unfocused">{{'IBBKCF_RESIDENT_DISCOUNT_DESTINY_TEXT'|translate}}
+                                            {{ibFlexibilizationConfirmationCtrl.model.residentInfo.city
+                                            |translate}}
+                                        </span>
+                                    </div>
+                                    <div class="ib-msg-alert ib-msg-alert--unfocused ib-msg-alert--confirmation"
+                                        ng-repeat="pas in ibFlexibilizationConfirmationCtrl.model.residentInfo.passengers"
+                                        ng-class="{'icon-informacion_2': pas.isVerified ,'icon-alerta_grave':!pas.isVerified}">
+                                        <span class="ib-text ib-text--bold ib-text--color-unfocused">{{pas.name}}
+                                            {{pas.surname}}</span>
+                                        <p class="ib-text ib-text--block ib-text--color-unfocused">{{pas.isVerified ?
+                                            ('IBBKCF_RESIDENT_CAN_FLY_TEXT'|translate) :
+                                            ('IBBKCF_RESIDENT_NOT_CAN_FLY_TEXT'|translate)}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <section class="ib-layout__section" ng-repeat="flight in ibFlexibilizationConfirmationCtrl.model.slices">
+                <div class="ib-ticket-flights ib-ticket-flights__flex ib-ticket-flights__flex--no-seats">
+                    <div class="ib-ticket-flights__header">
+                        <div class="ib-ticket-flights__header-title" data-ng-class="{'ib-ticket-flights__header-title--flex' : ibFlexibilizationConfirmationCtrl.model.hasPartialError}">
+                            <h2 class="ib-ticket-flights__header-title__text">{{flight.title}}</h2>
+                            <span class="ib-notification-box ib-notification-box--success" ng-if="flight.status === 'OK' && ibFlexibilizationConfirmationCtrl.model.hasPartialError" aria-label="{{'MMB_FLEXIBILIZATION_CONFIRMATION_PARTIAL_SLICE_OK' | translate }}">
+                                <span class="icon-confirmacion"><span class="hide-accessible">Icono ok</span></span>
+                                <span class="ib-notification-box__text">{{'MMB_FLEXIBILIZATION_CONFIRMATION_PARTIAL_SLICE_OK' | translate }}</span>
+                            </span>
+                            <span class="ib-notification-box ib-notification-box--error" ng-if="flight.status === 'ERROR' && ibFlexibilizationConfirmationCtrl.model.hasPartialError" aria-label="{{'MMB_FLEXIBILIZATION_CONFIRMATION_PARTIAL_SLICE_WITH_ERROR' | translate }}">
+                                <span class="icon-error"><span class="hide-accessible">Icono Error</span></span>
+                                <span class="ib-notification-box__text">{{'MMB_FLEXIBILIZATION_CONFIRMATION_PARTIAL_SLICE_WITH_ERROR' | translate }}</span>
+                            </span>
+                        </div>                        
+                    </div>
+
+                    <div class="ib-ticket-flights__ticket" ng-repeat="segment in flight.segments">
+                        <header class="ib-ticket-flights__ticket-header">
+                            <div class="ib-ticket-flights__journey">
+                                <div class="ib-ticket-flights__journey-departure">
+                                    <span class="ib-ticket-flights__journey-city">{{segment.departureCity}}</span>
+                                    <span class="ib-ticket-flights__journey-iata">{{segment.departureCode}}</span>
+                                    <span class="ib-ticket-flights__journey-airport">{{segment.departureAirport}}</span>
+                                </div>
+                                <div class="ib-ticket-flights__ticket-icon">
+                                    <span class="icon-vuelos"></span>
+                                </div>
+                                <div class="ib-ticket-flights__journey-arrival">
+                                    <span class="ib-ticket-flights__journey-city">{{segment.arrivalCity}}</span>
+                                    <span class="ib-ticket-flights__journey-airport">{{segment.arrivalAirport}}</span>
+                                    <span class="ib-ticket-flights__journey-iata">{{segment.arrivalCode}}</span>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="ib-ticket-flights__ticket-body ib-ticket-flights__info">
+                            <div class="ib-ticket-flights__info-departure">
+                                <span class="ib-text ib-text--block ib-text--color-unfocused ib-text--bold" ng-if="segment.departureTerminal!=null">{{('ON_HOLD_TERMINAL_INFO' | translate) + segment.departureTerminal}}</span>
+                                <span class="ib-text ib-text--block ib-text--color-unfocused">{{segment.departureDateParsed}}</span>
+                                <span class="ib-text ib-text--block ib-text--color-unfocused">{{segment.departureDateTimeParsed}}</span>
+                            </div>
+                            <div class="ib-ticket-flights__info-operator">
+                                <figure class="ib-ticket-flights__ticket-logo">
+                                    <img class="ib-ticket-collapse__logo--img"
+                                        ng-src="{{::$root.routes.icons}}{{segment.companyURL}}"
+                                        alt="{{'CONFIRMATION_INFO_SLICES_ALT_LOGO'|translate}} {{segment.operatedBy}}" />
+                                </figure>
+                                <span class="ib-text ib-text--block ib-text--xmedium">{{segment.flightCode}}</span>
+                                <span class="ib-text ib-text--block ib-text--color-unfocused">{{'SUMMARY_SEGMENT_DETAILS_OPERATED' | translate}} {{segment.operatedBy}}</span>
+                            </div>
+                            <div class="ib-ticket-flights__info-arrival">
+                                <span class="ib-text ib-text--block ib-text--color-unfocused ib-text--bold" ng-if="segment.arrivalTerminal!=null">{{('ON_HOLD_TERMINAL_INFO' | translate) + segment.arrivalTerminal}}</span>
+                                <span class="ib-text ib-text--block ib-text--color-unfocused">{{segment.arrivalDateParsed}}</span>
+                                <span class="ib-text ib-text--block ib-text--color-unfocused">{{segment.arrivalDateTimeParsed}}</span>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </section>            
+        </div>
+    </div>
+</div>

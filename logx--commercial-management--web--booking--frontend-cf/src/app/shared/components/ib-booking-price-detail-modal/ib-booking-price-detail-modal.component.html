@@ -1,0 +1,309 @@
+<header>
+    <h1 class="heading-main" id="modal-title">{{"SUMMARY_FEES" | translate}}</h1>
+</header>
+<div class="ib-modals__header-settings ib-modals__header-settings--mobile">
+    <button id="bbki-keep-alive-close-btn" type="button" class="ib-modals__button-action icon-cerrar close-icon"
+        title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" (click)="close()">
+        <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+    </button>
+</div>
+<hr class="modal-separator" aria-hidden="true" />
+<div *ngIf="priceDetails">
+    <ng-container *ngFor="let pax of paxTypeItems">
+        <ib-booking-accordion aria-expanded="false" [title]="'x' + pax.qty + ' ' + pax.titles[1]"
+            class="accordion--price-breakdown" [ngSwitch]="pax.paxType">
+                <svg *ngSwitchCase="'CHILD'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" slot="icon">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.27795 1.79686C5.10755 1.31654 4.75148 1.03125 4.08638 1.03125C3.43613 1.03125 3.07921 1.30456 2.90499 1.76692C2.0254 1.27676 1.38998 1.55092 1 2.58984C1.64686 3.27718 2.23862 3.23612 2.77697 2.47308C2.77231 2.54536 2.76722 2.61764 2.76722 2.69634C2.76722 3.7066 3.07582 4.36143 4.08638 4.36143C5.09907 4.36143 5.40682 3.7066 5.40682 2.69634C5.40682 2.58214 5.40046 2.47479 5.39325 2.37042C5.94856 3.23099 6.56321 3.30626 7.2372 2.58984C6.83959 1.52911 6.18636 1.26607 5.27795 1.79686Z" fill="#333333"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.79619 5.20836L5.78813 5.19895C5.52956 5.02829 4.92593 4.89014 4.18623 4.89014L4.01752 4.89228C3.21424 4.89228 2.44275 5.20707 2.44275 5.20707C2.44275 5.20707 1.50001 6.84693 1.40039 9.27207L2.1723 9.87515L1.8849 11.1155H2.72803C2.83528 12.3987 3.02561 13.6818 3.14175 14.965H5.09761C5.21376 13.6818 5.40324 12.3987 5.51133 11.1155H6.47654L6.17049 9.79388L6.83855 9.27207C6.73978 6.84693 5.79619 5.20836 5.79619 5.20836Z" fill="#333333"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2622 4.32465C13.263 4.32465 13.5691 3.67837 13.5691 2.67752C13.5691 1.67753 13.263 1.03125 12.2622 1.03125C11.2618 1.03125 10.957 1.67753 10.957 2.67752C10.957 3.67837 11.2618 4.32465 12.2622 4.32465Z" fill="#333333"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.957 5.20836L13.949 5.19895C13.6904 5.02829 13.0863 4.89014 12.3471 4.89014L12.1775 4.89228C11.3755 4.89228 10.604 5.20707 10.604 5.20707C10.604 5.20707 9.66084 6.84693 9.5625 9.27207L10.8266 10.3542C10.8978 11.74 11.1589 13.6818 11.303 14.965H13.2589C13.4026 13.6818 13.6624 11.74 13.7345 10.3542L14.9985 9.31912C14.9002 6.89398 13.957 5.20836 13.957 5.20836Z" fill="#333333"/>
+                </svg>
+                <svg *ngSwitchCase="'INFANT'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" slot="icon">
+                    <path d="M7.22451 13.2659L7.81914 12.4351C7.48598 11.7182 6.71845 11.1911 6.14491 11.2079C6.14491 11.2079 5.38161 12.3128 5.36052 12.3719C5.0358 12.8358 5.25087 13.2364 5.41113 13.4051L6.84918 15.3829C7.04739 15.5896 7.52393 15.5052 7.75166 15.21C7.89926 15.0203 7.97939 14.8431 7.81914 14.4594L7.22451 13.2659Z" fill="#333333"/>
+                    <path d="M9.83503 11.2079C9.26149 11.1911 8.49397 11.7182 8.16081 12.4351L8.75965 13.2701L8.16081 14.4636C8.00056 14.8474 8.08068 15.0245 8.22828 15.2143C8.45601 15.5052 8.93255 15.5938 9.13076 15.3872L10.5688 13.4093C10.7291 13.2406 10.9484 12.8442 10.6194 12.3803C10.5983 12.3128 9.83503 11.2079 9.83503 11.2079Z" fill="#333333"/>
+                    <path d="M12.1676 8.72825C12.1676 8.72825 10.0421 6.26542 9.60351 6.17264C9.18601 6.08408 6.99729 6.08408 6.49966 6.16421C6.03156 6.24433 3.83441 8.72825 3.83441 8.72825C3.52655 9.03611 3.52655 9.53795 3.83441 9.84581C4.14226 10.1537 4.63989 10.1537 4.95196 9.84581L6.03577 8.76199C6.02734 8.91803 6.02734 9.06141 6.02734 9.19214C6.02734 9.86267 6.08216 10.1916 6.08216 10.1916C6.08216 10.1916 6.96777 10.335 8.0052 10.335C9.04262 10.335 9.9198 10.1916 9.9198 10.1916C9.98727 9.58856 9.93667 8.88429 9.93667 8.88429L9.92823 8.7156L11.0542 9.84581C11.3621 10.1537 11.8639 10.1537 12.1718 9.84581C12.4754 9.53795 12.4754 9.04033 12.1676 8.72825Z" fill="#333333"/>
+                    <path d="M7.91222 5.32077C9.28702 5.32077 9.70874 4.57011 9.70874 3.41038C9.70874 2.25066 9.28702 1.5 7.91222 1.5C6.53742 1.5 6.1157 2.25066 6.1157 3.41038C6.1157 4.57011 6.5332 5.32077 7.91222 5.32077Z" fill="#333333"/>
+                </svg>
+                <svg *ngSwitchDefault aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" slot="icon">
+                    <path d="M9.82575 4.59297C9.82575 4.59297 10.8628 6.37374 10.9728 9.01347L9.58482 10.0872C9.50626 11.5956 9.21819 13.6068 9.06106 15H6.91366C6.75654 13.6068 6.46847 11.5956 6.38991 10.0872L5.00195 9.01347C5.11194 6.37374 6.14898 4.59297 6.14898 4.59297C6.14898 4.59297 6.99746 4.24729 7.87737 4.24729H8.06069C8.87251 4.24729 9.53768 4.39918 9.82051 4.58249L9.82575 4.59297Z" fill="#333333" />
+                    <path d="M7.99219 3.62926C7.18561 3.62926 6.93944 3.11074 6.93944 2.31463C6.93944 1.51328 7.18561 1 7.99219 1C8.79878 1 9.04494 1.51852 9.04494 2.31463C9.05018 3.11074 8.80401 3.62926 7.99219 3.62926Z" fill="#333333" />
+                </svg>
+            <div class="modal-section__content">
+                <section>
+                    <table class="body-table">
+                        <caption class="u-hide-accessible">
+                            {{
+                            "MODAL_PAYMENT_TAXES_ACCESSIBLE_TABLE_DESCRIPTION" | translate
+                            }}
+                        </caption>
+                        <thead class="body-table__head">
+                            <tr class="body-table__row">
+                                <th class="body-table__column" scope="col">
+                                    <span
+                                        class="body-table__highlight">x{{pax.qty}}</span>{{"GENERAL_FARE_TITLE"
+                                    | translate}}
+                                </th>
+                                <th class="body-table__column" scope="col">{{"MODAL_PAYMENT_TAXES_TABLE_TITLE_2" |
+                                    translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="body-table__body">
+                            <tr class="body-table__row" scope="row">
+                                <td class="body-table__column">{{pax.titles[0]}}</td>
+                                <td class="body-table__column">{{pax.price.formattedPrices.fareFormatted}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="section__prices">
+                        <hgroup>
+                            <p>{{"PRICE_PER_" + pax.paxType | translate}}</p>
+                            <p>{{pax.price.formattedPrices.fareFormatted}}</p>
+                        </hgroup>
+                        <hgroup class="total">
+                            <p>{{"TOTAL_PRICE_COMPONENT_TITLE" | translate}}</p>
+                            <p>{{pax.price.formattedTotals.allPassengersFareFormatted}}</p>
+                        </hgroup>
+                    </div>
+                </section>
+                <section>
+                    <table class="body-table">
+                        <thead class="body-table__head">
+                            <tr class="body-table__row">
+                                <th class="body-table__column" scope="col">
+                                    <span
+                                        class="body-table__highlight">x{{pax.qty}}</span>{{"SUMMARY_FEES"|translate}}
+                                </th>
+                                <th class="body-table__column" scope="col">{{"MODAL_PAYMENT_TAXES_TABLE_TITLE_2" |
+                                    translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="body-table__body">
+                            <ng-container *ngIf="pax.taxes">
+                                <ng-container *ngFor="let tax of pax.taxes">
+                                    <tr class="body-table__row" scope="row">
+                                        <td class="body-table__column">{{tax.description}}</td>
+                                        <td class="body-table__column">{{tax.totalFormatted}}</td>
+                                    </tr>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="pax.taxes.length === 0">
+                                    <tr class="body-table__row" scope="row">
+                                        <td class="body-table__column">{{"IBPURC_PAYMENTS_SUMMARY_TOTAL" | translate}}</td>
+                                        <td class="body-table__column">{{pax.price.formattedPrices.taxFormatted}}</td>
+                                    </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+
+                    <div class="section__prices last">
+                        <hgroup>
+                            <p>{{"PRICE_PER_" + pax.paxType | translate}}</p>
+                            <p>{{pax.price.formattedPrices.taxFormatted}}</p>
+                        </hgroup>
+                        <hgroup class="total">
+                            <p>{{"TOTAL_PRICE_COMPONENT_TITLE" | translate}}</p>
+                            <p>{{pax.price.formattedTotals.allPassengersTaxFormatted}}</p>
+                        </hgroup>
+                    </div>
+                </section>
+            </div>
+
+        </ib-booking-accordion>
+        <hr class="modal-separator--dotted" aria-hidden="true" />
+    </ng-container>
+    <ng-container *ngIf="ancillaries?.rows.length > 0">
+        <ib-booking-accordion aria-expanded="false" [title]="'TRAVEL_EXTRAS'"
+            class="accordion--price-breakdown">
+            <div class="modal-section__content">
+                <table class="body-table">
+                    <caption class="u-hide-accessible">
+                        {{"MODAL_PAYMENT_TAXES_ACCESSIBLE_TABLE_DESCRIPTION" | translate}}
+                    </caption>
+                    <thead class="body-table__head">
+                        <tr class="body-table__row">
+                            <th class="body-table__column" scope="col">{{"TRAVEL_EXTRAS" | translate}}</th>
+                            <th class="body-table__column" scope="col">
+                                {{"MODAL_PAYMENT_TAXES_TABLE_TITLE_2" | translate}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="body-table__body">
+                        <ng-container *ngFor="let item of ancillaries.rows">
+                            <tr class="body-table__row" scope="row">
+                                <td class="body-table__column"><span class="body-table__highlight">x{{item.quantity}}</span>{{item.category}}</td>
+                                <td class="body-table__column">{{item.total}}</td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <div class="section__prices last">
+                    <hgroup class="total">
+                        <p>{{"GENERAL_TOTAL_PRICE_TEXT" | translate}}</p>
+                        <p>{{ancillaries.totalFormatted}}</p>
+                    </hgroup>
+                </div>
+            </div>
+        </ib-booking-accordion>
+        <hr class="modal-separator--dotted" aria-hidden="true" />
+    </ng-container>
+    <ng-container *ngIf="discounts?.items?.length > 0">
+        <ib-booking-accordion aria-expanded="false" [title]="'GENERAL_DISCOUNT' | translate"
+            class="accordion--price-breakdown">
+            <div class="modal-section__content">
+                <table class="body-table">
+                    <thead class="body-table__head">
+                        <tr class="body-table__row">
+                            <th class="body-table__column" scope="col">
+                                {{"PASSENGER_INFO_TYPE" | translate}}
+                            </th>
+                            <th class="body-table__column" scope="col">
+                                {{"MODAL_PAYMENT_TAXES_TABLE_TITLE_2" | translate}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="body-table__body">
+                        <tr class="body-table__row" *ngFor="let item of discounts.items" scope="row">
+                            <td class="body-table__column">{{item.description}}</td>
+                            <td class="body-table__column">-{{item.totalFormatted}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="section__prices last">
+                    <hgroup class="total">
+                        <p>{{"GENERAL_DISCOUNT" | translate}} {{"IBPURC_PAYMENTS_SUMMARY_TOTAL"| translate}}</p>
+                        <p>{{discounts.totalFormatted}}</p>
+                    </hgroup>
+                </div>
+            </div>
+        </ib-booking-accordion>
+        <hr class="modal-separator--dotted" aria-hidden="true" />
+
+    </ng-container>
+    <ib-booking-accordion aria-expanded="false" [title]="'TAXES_AND_FEES'"
+        class="accordion--price-breakdown">
+        <div class="modal-section__content">
+            <p class="charges">
+                {{"TAXES_AND_FEES_TEXT_PART_1" | translate}}
+                <br /><br />
+                {{"TAXES_AND_FEES_TEXT_PART_2" | translate}}
+                <br /><br />
+                {{"TAXES_AND_FEES_TEXT_PART_3" | translate}}
+            </p>
+        </div>
+    </ib-booking-accordion>
+    <hr class="modal-separator--dotted last" aria-hidden="true" />
+    <section class="price__summary">
+        <h2 class="price__summary__title">{{"PRICE_SUMMARY" | translate}}</h2>
+        <table class="body-table">
+            <caption class="u-hide-accessible">
+                {{
+                "MODAL_PAYMENT_TAXES_ACCESSIBLE_TABLE_DESCRIPTION" | translate
+                }}
+            </caption>
+            <thead class="body-table__head">
+                <tr class="body-table__row">
+                    <th class="body-table__column" scope="row">{{"FARE_PRICE" | translate}}</th>
+                    <th class="body-table__column" scope="row">{{totals.fares.totalFormatted}}</th>
+                </tr>
+            </thead>
+            <tbody class="body-table__body">
+                <ng-container *ngFor="let pax of paxTypeItems">
+                    <tr class="body-table__row" scope="row">
+                        <td class="body-table__column"><span class="body-table__highlight">x{{pax.qty}}</span>{{pax.titles[0]}}</td>
+                        <td class="body-table__column">{{pax.price.formattedTotals.allPassengersFareFormatted}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <table class="body-table">
+            <thead class="body-table__head">
+                <tr class="body-table__row" scope="row">
+                    <th class="body-table__column">{{"SUMMARY_FEES"| translate}}
+                    </th>
+                    <th class="body-table__column">{{totals.taxes.totalFormatted}}</th>
+                </tr>
+            </thead>
+            <tbody class="body-table__body">
+                <ng-container *ngFor="let pax of paxTypeItems">
+                    <tr class="body-table__row" scope="row">
+                        <td class="body-table__column"><span class="body-table__highlight">x{{pax.qty}}</span> {{pax.titles[0]}}</td>
+                        <td class="body-table__column">{{pax.price.formattedTotals.allPassengersTaxFormatted}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <ng-container *ngIf="ancillaries.rows.length > 0">
+            <table class="body-table">
+                <thead class="body-table__head">
+                    <tr class="body-table__row" scope="row">
+                        <th class="body-table__column">{{"TRAVEL_EXTRAS" | translate}}</th>
+                        <th class="body-table__column">{{ancillaries.totalFormatted}}</th>
+                    </tr>
+                </thead>
+                <tbody class="body-table__body">
+                    <ng-container *ngFor="let item of ancillaries.rows">
+                        <tr class="body-table__row" scope="row">
+                            <td class="body-table__column"> 
+                                <span class="body-table__highlight">x{{item.quantity}}</span>{{item.category}}
+                            </td>
+                            <td class="body-table__column">{{item.total}}</td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </ng-container>
+        <ng-container *ngIf="discounts">
+            <table class="body-table">
+                <thead class="body-table__head">
+                    <tr class="body-table__row" scope="row">
+                        <th class="body-table__column">{{"IBPURC_PAYMENTS_SUMMARY_DISCOUNT"|translate}}
+                        </th>
+                        <th class="body-table__column">{{discounts.totalFormatted}}</th>
+                    </tr>
+                </thead>
+                <tbody class="body-table__body">
+                    <ng-container *ngFor="let item of discounts.items">
+                        <tr class="body-table__row" scope="row">
+                            <td class="body-table__column">{{item.description}}</td>
+                            <td class="body-table__column">-{{item.totalFormatted}}</td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </ng-container>
+        
+        <ng-container *ngIf="otherCharges">
+            <table class="body-table">
+            <thead class="body-table__head">
+                <tr class="body-table__row" scope="row">
+                    <th class="body-table__column">{{"SUMMARY_OTHER_FEES"| translate}}
+                    </th>
+                    <th class="body-table__column">{{otherCharges.totalFormatted}}</th>
+                </tr>
+            </thead>
+            <tbody class="body-table__body">
+                <ng-container *ngFor="let charge of otherCharges.items">
+                    <tr class="body-table__row" scope="row">
+                        <td class="body-table__column"><span class="body-table__highlight">x1</span> {{charge.description | translate}}</td>
+                        <td class="body-table__column">{{charge.totalFormatted}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        </ng-container>
+    </section>
+    <section class="price__total">
+        <h1 class="price__total__title">{{"IBPURC_PAYMENTS_SUMMARY_TOTAL"| translate}}</h1>
+        <h1 class="price__total__title">{{totalPrice}}</h1>
+    </section>
+</div>
+
+<div *ngIf="!priceDetails" class="modal-unavailable">
+    <h3>
+        There is no information to display currently available.
+    </h3>
+</div>
+<hr class="modal-separator--bottom" aria-hidden="true" />
+<button class="modal-window__button" aria-label="GENERIC_MODAL_ACCESSIBLE_CLOSE"
+    (click)="close()">{{"AVAILABILITY_SLICE_DETAILS_BACK_BUTTON" |translate}}</button>

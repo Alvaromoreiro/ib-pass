@@ -1,0 +1,1 @@
+angular.module('ib-box-module-link-module', []);

@@ -1,0 +1,51 @@
+<div class="upselling-fare-banner" *ngIf="showUpselling">
+    <div class="upselling-fare-banner__sections">
+        <div class="upselling-fare-banner__section upselling-fare-banner__section-left" [style]="styleImgBackground">
+            <div class="upselling-fare-banner__title-left">
+                <mark class="upselling-fare-banner__mark">
+                    <span class="upselling-fare-banner__mark-span">{{mark1 |translate}}</span><br />
+                    <span class="upselling-fare-banner__mark-span">{{mark2 |translate}}</span><br />
+                    <span class="upselling-fare-banner__mark-span" *ngIf="mark3">{{mark3 | translate}}</span>
+                </mark>
+            </div>
+        </div>
+        <div class="upselling-fare-banner__section upselling-fare-banner__section-right">
+            <div class="upselling-fare-banner__title-right">
+                <span>{{'UPSELLING_FARE_SELECT_FARE_1'|translate : { fareName : upsellFare.commercialName, price : diffPrice } }} <span class="upselling-fare-banner__extra-text">{{'UPSELLING_FARE_SELECT_FARE_2'|translate : { fareName : upsellFare.commercialName, price : diffPrice } }}</span></span>
+            </div>
+            <div class="upselling-fare-banner__extras" [ngClass]="{'upselling-fare-banner__extras--three-items': fareExtrasToShow.length === 3}">
+                <div *ngFor="let extra of fareExtrasToShow ?? [];let i = index" class="upselling-fare-banner__extra upselling-fare-banner__extra-bag">
+                    <img title='tick' class="upselling-fare-banner__extra-ribbon" src="/iberia-web-content/iconos/upselling/1951057.png" />
+                    <div *ngIf="i === 0 || (i === 1 && extra.icon)" class="upselling-fare-banner__extra_icon_container">
+                        <img alt="" class="upselling-fare-banner__extra-icon" src="{{extra.icon}}" />
+                    </div>
+                    <div *ngIf="i === 0 || (i === 1 && extra.icon)" class="upselling-fare-banner__extra-text">
+                        <div class="upselling-fare-banner__extra-caption">
+                            {{extra.description |translate}}
+                        </div>
+                    </div>
+                    <div *ngIf="(i === 2 && extra.icon1) || (i === 1 && extra.icon2)" class="upselling-fare-banner__extra_icon_container upselling-fare-banner__extra_icon_container--two-icons">
+                        <img alt="" class="upselling-fare-banner__extra-icon" src="{{extra.icon1}}" />
+                        <img alt="" class="upselling-fare-banner__extra-icon" src="{{extra.icon2}}" />
+                    </div>
+                    <div *ngIf="i === 2 && extra.icon" class="upselling-fare-banner__extra_icon_container">
+                        <img alt="" class="upselling-fare-banner__extra-icon" src="{{extra.icon}}" />
+                    </div>
+                    <div *ngIf="i === 2 && extra.icon || (i === 2 && extra.icon1) || (i === 1 && extra.icon2)" class="upselling-fare-banner__extra-text">
+                        <div class="upselling-fare-banner__extra-caption">
+                            {{extra.description |translate}}
+                        </div>
+                        <div class="upselling-fare-banner__extra-sub-caption">
+                            {{extra.subdescription |translate}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="upselling-fare-banner__button">
+                <input id="upselling-fare-radio" type="radio" class="upselling-fare-banner__button-radio" (click)="selectUpsellFare()"  [ngModel]="upsellRadio"/>
+                <label class="upselling-fare-banner__button-label" for="upselling-fare-radio">
+                    {{'UPSELLING_FARE_YES_WANT'|translate: { fareName: upsellFare.commercialName } }}</label>
+            </div>
+        </div>
+    </div>
+</div>

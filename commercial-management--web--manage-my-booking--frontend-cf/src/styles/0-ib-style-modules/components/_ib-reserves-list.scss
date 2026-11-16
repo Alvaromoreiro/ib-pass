@@ -1,0 +1,327 @@
+/* -------------------------------------------------------------
+    #RESERVES
+----------------------------------------------------------------- */
+.#{$wefront__namespace}reserves-list {
+    position: relative;
+    // BLOCK
+    display: block;
+    overflow: hidden;
+    margin-bottom: rem(32);
+    box-shadow: 0 rem(2) 0 0 color(black, 0.1);
+
+    &:hover {
+        text-decoration: none;
+        outline: none;
+    }
+
+    &:focus {
+        text-decoration: none;
+        box-shadow: 0 0 rem(4) 0 color(red-10);
+        outline: none;
+    }
+
+    &__info {
+        position: relative;
+        z-index: 20;
+        min-height: rem(232);
+        padding: rem(28) rem(32);
+        margin-left: rem(280);
+        background-color: color(white);
+    }
+
+    &__title {
+        margin-bottom: rem(18);
+        font-family: $font-special;
+        font-size: rem(26);
+        color: color(gray-10);
+
+        &--small {
+            position: relative;
+            display: block;
+            margin-bottom: rem(12);
+            font-family: $font-normal;
+            font-size: rem(13);
+            color: color(gray-30);
+
+            &::before {
+                position: absolute;
+                top: rem(-1);
+                right: 0;
+                font-size: rem(16);
+                color: color(red-10);
+            }
+        }
+    }
+
+    &__journey {
+        padding-top: rem(19);
+        padding-bottom: rem(24);
+        border-top: rem(1) solid color(gray-50);
+    }
+
+    &__planning {
+        margin-bottom: rem(8);
+        font-family: $font-normal;
+        font-size: rem(13);
+        color: color(gray-30);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &--bold {
+            font-family: $font-normal;
+            font-weight: bold;
+        }
+    }
+
+    &__footer {
+        @extend %clearfix;
+    }
+
+    &__more-fly {
+        font-family: $font-normal;
+        font-size: rem(13);
+        color: color(gray-10);
+        float: left;
+    }
+
+    &__code {
+        font-family: $font-normal;
+        font-size: rem(13);
+        color: color(gray-30);
+        float: right;
+
+        &--bold {
+            font-family: $font-normal;
+        }
+    }
+
+    &__box-img {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        width: rem(280);
+        height: 100%;
+    }
+
+    &__img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: block;
+        width: auto;
+        transform: translate(-50%, -50%);
+    }
+
+    &--type-2 {
+        margin-bottom: rem(30);
+        .#{$wefront__namespace}reserves-list {
+            &__info {
+                min-height: rem(50);
+                padding: rem(10) rem(20);
+                margin-left: rem(100);
+            }
+
+            &__title {
+                display: inline-block;
+                margin-bottom: rem(8);
+                font-size: rem(22);
+                line-height: 120%;
+                vertical-align: middle;
+            }
+
+            &__journey {
+                @extend %clearfix;
+
+                padding: rem(10) 0 rem(2);
+            }
+
+            &__code {
+                margin-top: rem(6);
+
+                &--bold {
+                    color: color(gray-10);
+                }
+            }
+
+            &__box-img {
+                width: rem(100);
+            }
+
+            &__img {
+                width: 300%;
+            }
+
+            &__planning {
+                width: 65%;
+                float: left;
+            }
+
+            &__group-link {
+                width: 35%;
+                text-align: right;
+                float: right;
+            }
+        }
+    }
+}
+
+
+
+@include media-query("lg") {
+    .#{$wefront__namespace}reserves-list {
+        &__info {
+            margin-left: rem(200);
+        }
+
+        &__box-img {
+            width: rem(200);
+        }
+    }
+}
+
+@include media-query("md") {
+    .#{$wefront__namespace}reserves-list {
+        &__info {
+            margin-left: rem(280);
+        }
+    }
+}
+
+@include media-query("sm") {
+    .#{$wefront__namespace}reserves-list {
+        padding-top: rem(56);
+
+        &__info {
+            min-height: rem(200);
+            padding: rem(19) rem(24) rem(28);
+            margin-left: 0;
+        }
+
+        &__title {
+            font-size: rem(22);
+        }
+
+        &__box-img {
+            left: 0;
+            width: 100%;
+            height: rem(56);
+        }
+
+        &__img {
+            width: 100%;
+        }
+
+        &--type-2 {
+            padding-top: rem(50);
+            .#{$wefront__namespace}reserves-list {
+                &__info {
+                    margin-left: 0;
+                }
+
+                &__box-img {
+                    width: 100%;
+                    height: rem(50);
+                }
+
+                &__img {
+                    width: 100%;
+                }
+
+                &__code {
+                    width: 100%;
+                    margin-top: rem(10);
+                }
+
+                &__journey {
+                    padding-top: rem(35);
+                }
+
+                &__planning {
+                    width: 100%;
+                }
+
+                &__group-link {
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        }
+    }
+}
+
+@include media-query("xs") {
+    .#{$wefront__namespace}reserves-list {
+        padding-top: rem(56);
+
+        &__info {
+            min-height: rem(216);
+            padding: rem(19) rem(24) rem(21);
+            margin-left: 0;
+        }
+
+        &__title {
+            margin-bottom: rem(11);
+            font-size: rem(22);
+        }
+
+        &__journey {
+            padding-bottom: rem(8);
+        }
+
+        &__more-fly {
+            display: block;
+            margin-bottom: rem(16);
+            float: none;
+        }
+
+        &__box-img {
+            left: 0;
+            width: 100%;
+            height: rem(56);
+        }
+
+        &__img {
+            width: 100%;
+        }
+
+        &--type-2 {
+            padding-top: rem(50);
+            .#{$wefront__namespace}reserves-list {
+                &__info {
+                    margin-left: 0;
+                }
+
+                &__box-img {
+                    width: 100%;
+                    height: rem(50);
+                }
+
+                &__img {
+                    width: 100%;
+                }
+
+                &__code {
+                    width: 100%;
+                    margin-top: rem(10);
+                }
+
+                &__journey {
+                    padding-top: rem(35);
+                }
+
+                &__planning {
+                    width: 100%;
+                }
+
+                &__group-link {
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,324 @@
+/* -------------------------------------------------------------
+    #TABLE
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}table {
+    width: 100%;
+
+    &__subtable {
+        width: 100%;
+        margin-bottom: rem(20);
+    }
+
+    &__header {
+        &--gray {
+            background: color(gray-50);
+        }
+    }
+
+    &__tbody {
+        & > .#{$wefront__namespace}table__tbody-tr {
+            &:nth-child(even) {
+                background-color: color(gray-60);
+            }
+
+            &:nth-child(odd) {
+                background-color: color(white);
+            }
+        }
+    }
+
+    &__cell-title {
+        padding: rem(3) rem(18);
+
+        &--left {
+            text-align: left;
+        }
+
+        &--right {
+            text-align: right;
+        }
+    }
+
+    &__cell {
+        padding: rem(8) rem(18);
+        font-size: 0;
+
+        &--left {
+            text-align: left;
+        }
+
+        &--right {
+            text-align: right;
+        }
+
+        &--center {
+            text-align: center;
+        }
+    }
+
+    &__cell-group {
+        width: 100%;
+        border-bottom: rem(1) solid color(gray-70);
+        .#{$wefront__namespace}table__subtable-tbody:nth-child(2n + 1) {
+            .#{$wefront__namespace}table__cell {
+                background: color(gray-65);
+            }
+        }
+    }
+
+    &__txt-icon {
+        font-family: $font-normal;
+        font-size: rem(20);
+        color: color(gray-30);
+
+        &--plane {
+            display: inline-block;
+            padding: 0 rem(5);
+            color: color(gray-20);
+            -ms-transform: rotate(90deg);
+
+            /* IE 9 */
+            -webkit-transform: rotate(90deg);
+
+            /* Chrome, Safari, Opera */
+            transform: rotate(90deg);
+            vertical-align: top;
+        }
+    }
+
+    &__txt {
+        display: inline-block;
+        font-family: $font-normal;
+        font-size: rem(13);
+        line-height: 1.77;
+        color: color(gray-30);
+        vertical-align: top;
+
+        &--inline {
+            display: inline-block;
+            width: 33.3%;
+            box-sizing: border-box;
+            vertical-align: top;
+
+            &:nth-child(1) {
+                text-align: left;
+            }
+
+            &:nth-child(2) {
+                text-align: center;
+            }
+
+            &:nth-child(3) {
+                text-align: right;
+            }
+        }
+
+        &--black {
+            color: color(gray-10);
+        }
+
+        &--highlighted {
+            font-weight: bold;
+        }
+
+        &--header {
+            font-family: $font-special;
+            font-size: rem(20);
+            color: color(gray-10);
+        }
+
+        &--footer {
+            display: inline-block;
+            width: 50%;
+            font-family: $font-special;
+            font-size: rem(23);
+            color: color(gray-10);
+            vertical-align: top;
+        }
+
+        &--footer-left {
+            text-align: left;
+        }
+
+        &--footer-right {
+            text-align: right;
+        }
+    }
+
+    &--bordered {
+        // border: rem(1) solid black;
+        > .#{$wefront__namespace}table__header {
+            > .#{$wefront__namespace}table__thead-tr {
+                > .#{$wefront__namespace}table__thead-th {
+                    padding: rem(10);
+                    border-top: rem(1) solid color(gray-70);
+                    border-right: rem(1) solid color(gray-70);
+                    border-bottom: rem(1) solid color(gray-70);
+                    font-size: rem(13);
+                    font-weight: bold;
+                    text-align: center;
+                    color: color(gray-30);
+
+                    &:first-child {
+                        border-left: rem(1) solid color(gray-70);
+                    }
+                }
+            }
+        }
+        > .#{$wefront__namespace}table__tbody {
+            > .#{$wefront__namespace}table__tbody-tr {
+                > .#{$wefront__namespace}table__cell {
+                    border-right: rem(1) solid color(gray-70);
+                    border-bottom: rem(1) solid color(gray-70);
+
+                    &:first-child {
+                        border-left: rem(1) solid color(gray-70);
+                    }
+                }
+            }
+        }
+    }
+
+    &--scroll-x {
+        max-width: 100%;
+        padding-bottom: rem(32);
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
+    &--scroll-x-auto {
+        max-width: 100%;
+        padding-bottom: rem(32);
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}table {
+        display: block;
+        width: 100%;
+        float: left;
+
+        &__header {
+            display: block;
+            width: 100%;
+            float: left;
+        }
+
+        &__subtable {
+            display: block;
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        &__subtable-tbody {
+            display: block;
+            width: 100%;
+            border-bottom: rem(1) solid color(gray-70);
+            float: left;
+
+            &:last-child {
+                border-bottom: none;
+            }
+            .#{$wefront__namespace}table__row {
+                border-bottom: rem(1) solid color(gray-70);
+            }
+            .#{$wefront__namespace}table__row:last-child {
+                border-bottom: none;
+            }
+        }
+
+        &__body {
+            display: block;
+            width: 100%;
+            float: left;
+        }
+
+        &__footer {
+            display: block;
+            width: 100%;
+            float: left;
+        }
+
+        &__row {
+            display: block;
+            width: 100%;
+            float: left;
+
+            &:first-child {
+                border-top: rem(1) solid color(gray-70);
+            }
+        }
+
+        &__cell,
+        &__cell-title {
+            display: block;
+            width: 100%;
+            padding: rem(9) rem(10);
+            font-size: 0;
+            float: left;
+
+            &--with-mobile-data {
+                padding: rem(2) rem(10);
+                .#{$wefront__namespace}table__txt {
+                    display: inline-block;
+                    width: 70%;
+                    vertical-align: top;
+                }
+
+                &::before {
+                    content: attr(data-text);
+                    display: inline-block;
+                    width: 30%;
+                    font-family: $font-normal;
+                    font-size: rem(13);
+                    text-align: left;
+                    line-height: 1.77;
+                    color: color(gray-30);
+                    vertical-align: top;
+                }
+            }
+        }
+
+        &__cell-group {
+            display: block;
+            width: 100%;
+        }
+
+        &__txt {
+            &--header {
+                font-size: rem(16);
+            }
+
+            &--highlighted {
+                font-size: rem(12);
+            }
+
+            &--footer {
+                font-size: rem(20);
+            }
+        }
+
+        &__wrapper {
+            &--scroll {
+                overflow-x: auto;
+                white-space: nowrap;
+                .#{$wefront__namespace}table {
+                    float: none;
+
+                    &__header {
+                        display: table-header-group;
+                        float: none;
+                    }
+
+                    &__cell {
+                        display: table-cell;
+                        float: none;
+                    }
+                }
+            }
+        }
+    }
+}

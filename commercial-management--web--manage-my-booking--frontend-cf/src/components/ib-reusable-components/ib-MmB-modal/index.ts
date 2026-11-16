@@ -1,0 +1,13 @@
+import './ib-MmB-modal-module';
+import './services/ib-MmB-modal-service';
+import './controllers/ib-Mmb-refund-continue-modal-controller';
+import './controllers/ib-delete-basket-modal-controller';
+import './controllers/ib-flight-reminder-modal-controller';
+import './controllers/ib-full-modal-controller';
+import './controllers/ib-generic-error-modal-controller';
+import './controllers/ib-generic-modal-controller';
+import './controllers/ib-passenger-modal-controller';
+import './controllers/ib-widget-modal-controller';
+import './controllers/ib-transfer-widget-modal-controller';
+import './controllers/ib-MmB-modal-invoice-request-controller';
+import './controllers/ib-modal-assistance-voucher-email-controller';

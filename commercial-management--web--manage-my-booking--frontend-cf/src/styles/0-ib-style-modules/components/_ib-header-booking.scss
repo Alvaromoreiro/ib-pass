@@ -1,0 +1,868 @@
+/* -------------------------------------------------------------
+    #HEADER BOOKING
+----------------------------------------------------------------- */
+
+$sizeTool: rem(56);
+$sizeToolPx: rem(56);
+.#{$wefront__namespace}header-booking {
+    position: relative;
+    height: $sizeTool;
+    font-size: 0;
+    background: color(primary);
+    // Logo
+    &__logo {
+        display: inline-block;
+        width: $sizeTool;
+        height: $sizeTool;
+        margin-left: rem(-10);
+        vertical-align: top;
+    }
+
+    &__logo-fig {
+        display: block;
+        width: 100%;
+        padding: rem(14) rem(12);
+    }
+
+    &__row {
+        position: relative;
+        display: block;
+        font-size: 0;
+    }
+
+    &__column {
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+
+        &--left {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 rem(15);
+            text-align: left;
+        }
+
+        &--right {
+            width: rem(50);
+            text-align: right;
+        }
+    }
+    // Button back
+    &__back {
+        position: relative;
+        display: inline-block;
+        width: $sizeTool;
+        height: $sizeTool;
+        border-right: rem(1) solid color(red-50);
+        border-left: rem(1) solid color(red-50);
+        vertical-align: top;
+    }
+
+    &__back-icon {
+        display: block;
+        height: $sizeTool;
+        font-size: rem(23);
+        text-align: center;
+        line-height: $sizeToolPx;
+        color: color(white);
+
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: none;
+            color: color(white);
+        }
+    }
+    // Fly
+    &__fly {
+        display: inline-block;
+        max-width: rem(384);
+        height: $sizeTool;
+        padding: 0 rem(13);
+        line-height: $sizeToolPx;
+        vertical-align: top;
+
+        &--vertical-borders {
+            border-right: rem(1) solid color(red-50);
+            border-left: rem(1) solid color(red-50);
+        }
+
+        &--right {
+            text-align: right;
+        }
+    }
+
+    &__fly-link {
+        display: inline-block;
+        font-size: rem(16);
+        color: color(white);
+        vertical-align: top;
+
+        &--small {
+            font-size: rem(13);
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: underline;
+            color: color(white);
+        }
+    }
+
+    &__fly-text {
+        display: inline-block;
+        font-size: rem(16);
+        color: color(white);
+        vertical-align: top;
+
+        &--mobile {
+            display: none;
+            font-size: rem(16);
+            color: color(white);
+            vertical-align: middle;
+        }
+
+        &--small {
+            font-size: rem(13);
+        }
+
+        &--responsive {
+            display: inline-block;
+            .#{$wefront__namespace}header-booking__fly-text {
+                display: inline-block;
+            }
+
+            &::before {
+                content: attr(data-content);
+                display: none;
+                font-size: rem(13);
+            }
+        }
+
+        &--right {
+            text-align: right;
+        }
+    }
+
+    &__fly-info {
+        display: inline-block;
+        font-size: rem(24);
+        color: color(white);
+        vertical-align: middle;
+
+        &--outbound {
+            padding: 0 rem(2);
+            font-size: rem(14);
+        }
+    }
+    //Icon Toolitp
+    &__icon-tooltip {
+        display: inline-block;
+        font-size: rem(24);
+        color: color(white);
+        cursor: pointer;
+        vertical-align: middle;
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: color(white);
+        }
+    }
+    // Login
+    &__login {
+        position: relative;
+        display: none;
+        text-align: right;
+        // Modifiers
+        &--logued {
+            .#{$wefront__namespace}header-booking {
+                &__login-button {
+                    padding: rem(15) rem(5);
+
+                    &:hover,
+                    &:focus {
+                        color: color(white);
+                        .#{$wefront__namespace}header-booking {
+                            &__login-text {
+                                text-decoration: none;
+                            }
+
+                            &__login-name {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+
+                &__login-icon {
+                    &::before {
+                        font-size: rem(26);
+                    }
+                }
+            }
+        }
+    }
+
+    &__login-collapse {
+        position: absolute;
+        z-index: 1039;
+        top: 100%;
+        right: 0;
+        width: rem(298);
+        padding: rem(26) rem(24);
+        margin-top: rem(-1);
+        text-align: left;
+        background-color: color(white);
+        box-shadow: 0 rem(2) rem(44) 0 color(black, 0.14);
+
+        &--arrow {
+            &::before {
+                content: "";
+                position: absolute;
+                top: rem(-5);
+                right: rem(60);
+                border-right: rem(6) solid transparent;
+                border-bottom: rem(6) solid color(white);
+                border-left: rem(6) solid transparent;
+            }
+        }
+        .#{$wefront__namespace}modals {
+            &__header {
+                &-settings {
+                    display: none;
+                }
+            }
+        }
+        .#{$wefront__namespace}layout {
+            &__line-spacing {
+                margin-bottom: rem(16);
+            }
+        }
+        .#{$wefront__namespace}input {
+            &__label {
+                left: rem(15);
+            }
+
+            &__input {
+                padding-left: rem(15);
+            }
+
+            &__input-button {
+                position: absolute;
+                z-index: 5;
+                top: 50%;
+                right: 0;
+                display: flex;
+                width: rem(60);
+                height: 100%;
+                align-items: center;
+                justify-content: center;
+                border: 0;
+                color: color(gray-15);
+                background: 0 0;
+                -ms-transform: translate(0, -50%);
+                transform: translate(0, -50%);
+                .#{$wefront__namespace}link {
+                    border: none;
+                    text-decoration: none;
+
+                    &:hover,
+                    &:focus {
+                        color: inherit;
+                    }
+                }
+            }
+        }
+        .#{$wefront__namespace}text {
+            &--to-right {
+                padding: rem(3) rem(8) rem(11) 0;
+            }
+
+            &__border-top {
+                padding-top: rem(20);
+                border-top: rem(1) solid color(gray-95);
+            }
+        }
+        .#{$wefront__namespace}button {
+            &--big {
+                min-height: rem(48);
+                line-height: normal;
+            }
+        }
+
+        .paragraph.paragraph__regular {
+            &.paragraph--modal {
+                position: relative;
+                margin-top: rem(7);
+                margin-bottom: rem(7);
+                color: color(gray-30);
+
+                &::before,
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    width: 45%;
+                    height: 0.0625rem;
+                    border-bottom: rem(1) solid color(gray-95);
+                }
+
+                &::before {
+                    left: 0;
+                }
+
+                &::after {
+                    right: 0;
+                }
+            }
+        }
+
+        .ib-button--facebook,
+        .ib-button--linkedin {
+            padding-left: rem(8);
+        }
+    }
+
+    &__login-button {
+        display: inline-block;
+        width: 100%;
+        min-width: rem(146);
+        padding: rem(17) rem(5);
+        border-left: rem(1) solid color(red-50);
+        font-size: rem(12);
+        text-align: center;
+        color: color(white);
+
+        &:hover,
+        &:focus {
+            color: color(white);
+            .#{$wefront__namespace}header-booking__login-text {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__login-icon {
+        display: inline-block;
+        vertical-align: middle;
+
+        &::before {
+            display: inline-block;
+            margin-right: rem(5);
+            font-size: rem(22);
+            vertical-align: middle;
+        }
+    }
+
+    &__login-text {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    &__login-name {
+        position: relative;
+        display: block;
+        padding-right: rem(10);
+        font-size: rem(12);
+        text-align: left;
+        line-height: rem(15);
+
+        &::before {
+            position: absolute;
+            top: 60%;
+            right: 0;
+            font-size: rem(10);
+            line-height: 1em;
+            -webkit-transform: translate(0, -50%);
+            -moz-transform: translate(0, -50%);
+            -ms-transform: translate(0, -50%);
+            -o-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+        }
+    }
+
+    &__login-info {
+        display: block;
+        font-size: rem(9);
+        line-height: rem(11);
+        opacity: 0.6;
+    }
+    // Items
+    &__items {
+        display: inline-block;
+        height: rem(34);
+        padding-right: rem(5);
+        border-right: rem(1) solid color(gray-110);
+        font-size: 0;
+        line-height: rem(34);
+        vertical-align: top;
+
+        &--no-border {
+            border-right: 0;
+        }
+    }
+
+    &__items-item {
+        display: inline-block;
+        vertical-align: top;
+
+        &__link {
+            display: block;
+
+            &:hover,
+            &:focus,
+            &:active {
+                text-decoration: none;
+            }
+
+            &:focus {
+                outline: rem(2) solid color(red-10);
+            }
+        }
+
+        &__icon {
+            display: inline-block;
+            font-size: rem(28);
+            color: color(gray-10);
+            vertical-align: middle;
+        }
+
+        &__text {
+            display: inline-block;
+            padding: 0 rem(8);
+            border-right: rem(1) solid color(gray-110);
+            font-size: rem(12);
+            line-height: normal;
+            color: color(gray-30);
+            vertical-align: middle;
+        }
+
+        &:last-child {
+            .#{$wefront__namespace}header-booking__items-item__text {
+                border-right: 0;
+            }
+        }
+    }
+    // Exit
+    &__exit {
+        display: inline-block;
+        min-height: rem(34);
+        margin-left: rem(5);
+        line-height: rem(34);
+        vertical-align: top;
+    }
+
+    &__exit-link {
+        display: block;
+        font-size: 0;
+
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: none;
+            outline: 0;
+        }
+    }
+
+    &__exit-icon {
+        display: inline-block;
+        margin-right: rem(5);
+        font-size: rem(20);
+        color: color(gray-10);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+        vertical-align: middle;
+    }
+
+    &__exit-text {
+        display: inline-block;
+        font-size: rem(12);
+        line-height: normal;
+        color: color(gray-30);
+        vertical-align: middle;
+    }
+    // Title Modal
+    &__title {
+        display: block;
+        padding: 0 rem(10);
+        font-family: $font-special;
+        font-size: rem(24);
+        line-height: rem(24);
+        color: color(black);
+
+        &--center {
+            text-align: center;
+        }
+    }
+
+    &__subtitle {
+        display: block;
+        padding: 0 rem(10);
+        font-family: $font-normal;
+        font-size: rem(13);
+        line-height: rem(18);
+        color: color(black);
+
+        &--center {
+            text-align: center;
+        }
+    }
+    // Modifiers header-booking
+    &--main {
+        height: rem(34);
+        text-align: right;
+        background-color: color(gray-50);
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}header-booking {
+        &__fly-text {
+            &--responsive {
+                display: inline-block;
+                .#{$wefront__namespace}header-booking__fly-text {
+                    display: none;
+                }
+
+                &::before {
+                    content: attr(data-content);
+                    display: inline-block;
+                    font-size: rem(13);
+                    vertical-align: top;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}header-booking {
+        &__fly-text {
+            &--responsive {
+                display: inline-block;
+                .#{$wefront__namespace}header-booking__fly-text {
+                    display: none;
+                }
+
+                &::before {
+                    content: attr(data-content);
+                    display: inline-block;
+                    font-size: rem(13);
+                    vertical-align: top;
+                }
+            }
+
+            &--mobile {
+                display: inline-block;
+            }
+        }
+
+        &__fly {
+            &--border-right-md {
+                border-right: rem(1) solid color(red-50);
+            }
+
+            &--pagination {
+                width: auto;
+                float: right;
+            }
+        }
+
+        &__login {
+            display: block;
+
+            &-collapse {
+                position: fixed;
+                top: rem(40);
+                left: 50%;
+                overflow: auto;
+                width: rem(320);
+                max-height: 100vh;
+                padding-top: rem(54);
+                padding-right: rem(34);
+                padding-left: rem(36);
+                transform: translate(-50%, 0);
+
+                &::before {
+                    display: none;
+                }
+                .#{$wefront__namespace}modals {
+                    &__header {
+                        &-settings {
+                            top: rem(5);
+                            right: rem(7);
+                            display: block;
+                        }
+                    }
+                }
+                .#{$wefront__namespace}layout {
+                    &__line-spacing {
+                        margin-bottom: rem(16);
+                    }
+                }
+                .#{$wefront__namespace}input {
+                    &__label {
+                        left: rem(15);
+                    }
+
+                    &__input {
+                        padding-left: rem(15);
+                    }
+                }
+                .#{$wefront__namespace}text {
+                    &--to-right {
+                        padding: rem(5) rem(8) rem(5) 0;
+                    }
+                }
+                .#{$wefront__namespace}button {
+                    &--big {
+                        min-height: rem(48);
+                        line-height: normal;
+                    }
+                }
+            }
+
+            &.openCollapse {
+                &::after {
+                    content: "";
+                    position: fixed;
+                    z-index: 1030;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: color(black, 0.6);
+                }
+            }
+
+            &--logued {
+                .#{$wefront__namespace}header-booking {
+                    &__login-button {
+                        padding: rem(15) rem(12);
+                    }
+                }
+            }
+
+            &--width-fixed {
+                margin: 0;
+            }
+        }
+
+        &__login-button {
+            min-width: rem(50);
+        }
+
+        &__column {
+            &--left {
+                width: calc(100% - 3.125rem);
+            }
+        }
+    }
+}
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}header-booking {
+        &__column {
+            position: relative;
+            display: inline-block;
+            vertical-align: top;
+
+            &--left {
+                width: calc(100% - 3.125rem);
+                text-align: left;
+            }
+
+            &--right {
+                width: rem(50);
+                text-align: right;
+            }
+        }
+
+        &__fly {
+            padding: 0 rem(5);
+
+            &--pagination {
+                width: auto;
+                float: right;
+            }
+        }
+
+        &__fly-text {
+            display: none;
+            font-size: rem(12);
+
+            &--mobile {
+                display: inline-block;
+            }
+
+            &--responsive {
+                display: inline-block;
+                .#{$wefront__namespace}header-booking__fly-text {
+                    display: none;
+                }
+
+                &::before {
+                    content: attr(data-content);
+                    display: inline-block;
+                    font-size: rem(13);
+                    vertical-align: top;
+                }
+            }
+        }
+
+        &__login {
+            display: block;
+            //margin: auto rem(-16);
+            &-collapse {
+                position: fixed;
+                top: rem(40);
+                left: 50%;
+                overflow: auto;
+                width: rem(320);
+                max-height: 100vh;
+                padding-top: rem(54);
+                padding-right: rem(34);
+                padding-left: rem(36);
+                transform: translate(-50%, 0);
+
+                &::before {
+                    display: none;
+                }
+                .#{$wefront__namespace}modals {
+                    &__header {
+                        &-settings {
+                            top: rem(5);
+                            right: rem(7);
+                            display: block;
+                        }
+                    }
+                }
+                .#{$wefront__namespace}layout {
+                    &__line-spacing {
+                        margin-bottom: rem(16);
+                    }
+                }
+                .#{$wefront__namespace}input {
+                    &__label {
+                        left: rem(15);
+                    }
+
+                    &__input {
+                        padding-left: rem(15);
+                    }
+                }
+                .#{$wefront__namespace}text {
+                    &--to-center {
+                        padding: rem(5) rem(8) rem(5) 0;
+                    }
+                }
+                .#{$wefront__namespace}button {
+                    &--big {
+                        min-height: rem(48);
+                        line-height: normal;
+                    }
+                }
+            }
+
+            &.openCollapse {
+                &::after {
+                    content: "";
+                    position: fixed;
+                    z-index: 1030;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: color(black, 0.6);
+                }
+            }
+
+            &--width-fixed {
+                margin: 0;
+            }
+
+            &--logued {
+                .#{$wefront__namespace}header-booking {
+                    &__login-button {
+                        padding: rem(15) rem(12);
+                    }
+                }
+            }
+        }
+
+        &__login-button {
+            min-width: inherit;
+            padding: rem(17) rem(14);
+
+            &:focus {
+                outline: rem(2) solid color(red-10);
+                outline-offset: rem(-3);
+            }
+        }
+
+        &__login-icon {
+            &::before {
+                margin: 0;
+            }
+        }
+
+        &__login-text {
+            display: none;
+        }
+        // Modifiers header-booking
+        &--main {
+            overflow: hidden;
+            height: 0;
+        }
+    }
+}
+
+@include media-query("xs") {
+    .#{$wefront__namespace}header-booking {
+        &__login-button {
+            padding: rem(17) rem(14);
+        }
+
+        &__fly {
+            padding: 0 0 0 rem(10);
+
+            &--vertical-borders {
+                border-right: 0;
+            }
+        }
+
+        &__fly-text {
+            display: inline-block;
+
+            &--responsive {
+                .#{$wefront__namespace}header-booking__fly-text {
+                    display: none;
+                }
+
+                &::before {
+                    content: attr(data-content);
+                    display: inline-block;
+                    vertical-align: top;
+                }
+            }
+        }
+
+        &__login-collapse {
+            &.#{$wefront__namespace}header-booking__login-collapse--arrow {
+                top: 0;
+                left: 0;
+                width: 100%;
+                transform: none;
+                .#{$wefront__namespace} {
+                    &__border-top {
+                        padding-top: rem(16);
+                        border-color: color(gray-390);
+                    }
+                }
+            }
+        }
+    }
+}

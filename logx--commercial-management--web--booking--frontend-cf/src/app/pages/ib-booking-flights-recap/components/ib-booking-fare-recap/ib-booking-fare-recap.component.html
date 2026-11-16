@@ -1,0 +1,26 @@
+<button class="header-action" (click)="toggleOpen()" [attr.aria-expanded]="isOpen">
+    <p>{{this.collapseTitle}}</p>
+    <svg  class="collapse-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 17" fill="none"
+        [ngStyle]="{
+            transform: isOpen ? 'rotate(0deg)': 'rotate(180deg)'
+        }">
+    >
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 6.84285L12.954 11.9127C13.0677 12.0291 13.2521 12.0291 13.3657 11.9127L13.9147 11.351C13.9693 11.2951 14 11.2193 14 11.1403C14 11.0613 13.9693 10.9855 13.9147 10.9296L8.20585 5.08726C8.09215 4.97091 7.90781 4.97091 7.79415 5.08726L2.08528 10.9296C2.03067 10.9854 2 11.0612 2 11.1403C2 11.2193 2.03067 11.2951 2.08528 11.3509L2.63427 11.9127C2.74797 12.029 2.93231 12.029 3.04597 11.9127L8 6.84285Z" fill="#333333"/>
+    </svg>
+</button>
+<div class="collapse-container"
+ [ngClass]="{'collapse-open': isOpen,'collapse-closed':!isOpen}"
+>
+    <div class="fare-summary" [ngClass]="{'hidden': !showColapseContent}">
+
+        <ib-booking-fare-summary
+            *ngFor="let fareFamily of orderedFareFamilies;  let i = index" 
+            [planeType]="(slicesInfo.length>1 && orderedFareFamilies.length ===1) ? 'RETURN' : 'GOING'"
+            [renderConditionsSet]= "renderConditionsSet"
+            [sliceInfo]="slicesInfo[i] ?? slicesInfo[0]"
+            [fareFamily]="fareFamily"
+        ></ib-booking-fare-summary>
+    </div>
+</div>
+
+

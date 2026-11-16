@@ -1,0 +1,67 @@
+<main class="ib-layout ib-layout--bck-1">
+    <header class="ib-header-steps">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="ib-header-steps__content">
+                        <div class="ib-header-steps__block--left">
+                            <a href="javascript:void(0)" title="{{'MMB_VOUCHER_MODAL_LOGO_HOVER_TEXT' | translate}}" class="ib-header-steps__logo"
+                            (click)="checkStep()" focusin>
+                                <figure class="ib-header-steps__fig">
+                                    <img alt="Logo Iberia" [src]="imgUrl">
+                                </figure>
+                            </a>
+                            <div class="ib-header-steps__content--bordered">
+                                <span class="ib-header-steps__txt">{{'MMB_CASH_REFUND_MODAL_BREAKDOWN_TITLE' | translate}}</span>
+                                <span class="ib-header-steps__txt--short visible-sm-inline-block visible-xs-inline-block">{{currentStep + 1}}/{{totalSteps}}</span>
+                            </div>
+                        </div>
+                        <div *ngIf="steps[currentStep] !== 'MMB_CASH_REFUND_MODAL_STEP_3_TITLE'" class="ib-header-steps__block--right">
+                            <a href="javascript:void(0)" class="ib-header-steps__link icon-cerrar"
+                            (click)="checkStep()" focusin>{{'MMB_VC_BACK_TO_BOOKING_MANAGEMENT' | translate}}</a>
+                        </div>
+                        <div *ngIf="steps[currentStep] === 'MMB_CASH_REFUND_MODAL_STEP_3_TITLE'" class="ib-header-steps__block--right">
+                            <a href="javascript:void(0)" class="ib-header-steps__link icon-cerrar"
+                            (click)="checkStep()" focusin>{{'MMB_VOUCHER_REFUND_HEADER_CONFIRMATION_STEP_TITLE' | translate}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ib-main-steps ib-main-steps--flex hidden-sm hidden-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 ib-main-steps__scroll">
+                        <ul class="ib-main-steps__list--flex" steps-scroll="">
+                            <li class="ib-main-steps__item--flex" *ngFor="let item of steps; index as i;">
+                                <span class="ib-main-steps__txt--flex"
+                                [ngClass]="{'ib-main-steps__txt--active': currentStep === i}">{{i+1}}. {{item | translate}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SUMMARY PAGE -->
+    <ib-mmb-voluntary-refunds-summary [currentStep]="currentStep" [steps]="steps" (getNewCurrentStep)="currentStep=$event" (getConfirmationData)="confirmationResponse=$event" *ngIf="steps[currentStep] === 'MMB_CASH_REFUND_MODAL_STEP_1_TITLE'" [dataModelSummary]="dataModelRefund"></ib-mmb-voluntary-refunds-summary>
+    <!-- END SUMMARY PAGE -->
+
+    <!-- PAYMENT PAGE -->
+    <div *ngIf="steps[currentStep] === 'MMB_CASH_REFUND_MODAL_STEP_2_TITLE'">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">Página de pagos Aqui</div>
+            </div>
+        </div>
+    </div>
+    <!-- END PAYMENT PAGE -->
+
+    <!-- CONFIRMATION PAGE -->
+    <ib-mmb-voluntary-refunds-confirmation [currentStep]="currentStep" [confirmationData]="confirmationResponse" *ngIf="steps[currentStep] === 'MMB_CASH_REFUND_MODAL_STEP_3_TITLE'" [dataModelConfirmation]="dataModelRefund"></ib-mmb-voluntary-refunds-confirmation>
+    <!-- END CONFIRMATION PAGE -->
+
+    <ib-main-footer-legacy ng-show="showHeaders"></ib-main-footer-legacy>
+
+</main>

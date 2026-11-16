@@ -1,0 +1,132 @@
+<fieldset class="ib-box-menu__section ib-box-menu__section--full">
+    <legend class="u-hide-accessible">{{'MMB_SEATS_TITLE'|translate}}</legend>
+    <div>
+        <section class="ib-layout__section">
+            <div class="ib-box-cols">
+                <div class="ib-box-cols__header">
+                    <h3 class="ib-box-cols__title">{{'MMB_SEATS_TITLE'|translate}}</h3>
+                </div>
+                <!-- Involuntary seats change message -->
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt-xsmall"
+                    ng-if="manageSeatInfoCtrl.seatConditions.message.showInPageDetailTrip">
+                    <div
+                        class="ib-msg-alert ib-msg-alert--info ib-msg-alert--info__seats-change icon-informacion_2 alert fade in">
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                            <p class="ib-msg-alert__text ib-msg-alert__text--bold">
+                                {{'SEATS_CHANGE_INV_WARNING_TITLE'|translate}}</p>
+                            <p class="ib-msg-alert__text">
+                                {{'SEATS_CHANGE_INV_WARNING_TEXT_AUX'|translate}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Disrupted seats message -->
+                <div ng-if="manageSeatInfoCtrl.canceledSeatsFlag">
+                    <ib-box-info-alert (click-action)="manageSeatInfoCtrl.openDisruptedSeatsModal($event)"
+                        [box-info-model]="manageSeatInfoCtrl.disruptedSeatsInfoModel">
+                    </ib-box-info-alert>
+                </div>
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt-xsmall"
+                    ng-if="manageSeatInfoCtrl.headerModel.shoppingBasket.total.original">
+                    <div
+                        class="ib-msg-alert ib-msg-alert--info ib-msg-alert--info__seats-change icon-informacion_2 alert fade in">
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                            <p class="ib-msg-alert__text ib-msg-alert__text--left ib-msg-alert__text--bold">
+                                {{'SEATS_CHANGE_WARNING_TEXT'|translate}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="ib-box-cols__content u-width-full" ng-if="manageSeatInfoCtrl.model.isSkeletonView"
+                        ng-repeat="slices in manageSeatInfoCtrl.allSegments">
+                    
+                        <div class="mmb-skeleton-seats">
+                            <ng-react class="mmb-skeleton-seats" [component]="manageSeatInfoCtrl.skeletonComponent"
+                                [props]="manageSeatInfoCtrl.skeletonMainTextProps">
+                            </ng-react>
+                            <ng-react [component]="manageSeatInfoCtrl.skeletonComponent" [props]="manageSeatInfoCtrl.skeletonIconProps">
+                            </ng-react>
+                        </div>
+                        <div class="mmb-skeleton-seats">
+                            <ng-react [component]="manageSeatInfoCtrl.skeletonComponent" [props]="manageSeatInfoCtrl.skeletonIconProps">
+                            </ng-react>
+                            <ng-react class="mmb-skeleton-seats" [component]="manageSeatInfoCtrl.skeletonComponent"
+                                [props]="manageSeatInfoCtrl.skeletonStatusTextProps">
+                            </ng-react>
+                        </div>
+                    </div>
+
+                    <div class="ib-box-cols__content"
+                        ng-if="!manageSeatInfoCtrl.model.isSkeletonView"
+                        data-ng-repeat="(index, flight) in manageSeatInfoCtrl.model.flights">
+                        <a class="ib-box-cols__link-container ib-box-cols__link-container--icon-caret"
+                            href="javascript:void(0)"
+                            data-ng-click="manageSeatInfoCtrl.openModalConditions($event, flight)"
+                            title="{{'MMB_SEATS_TOOLTIP_MORE_INFO'|translate}}" ng-if="flight.seats.length > 0" focusin>
+                            <span
+                                class="ib-box-cols__title-section u-mb-small">{{flight.departureCity.city.description}}
+                                ({{flight.departureCity.code}}) - {{flight.arrivalCity.city.description}}
+                                ({{flight.arrivalCity.code}})</span>
+                            <span class="ib-text u-mb-small ib-text--block icon-asiento">
+                                <span data-ng-repeat="(index, seat) in flight.seats">
+                                    <span ng-if="index > 0">, </span>{{seat.code}}
+                                </span>
+                                <span>{{ 'MMB_SEATS_ASSIGNED' | translate }}</span>
+                            </span>
+                            <span ng-if="flight.updatedSeats.length > 0"
+                                class="ib-text u-mb-small ib-text--block icon-asiento ib-box-cols__link-container--pending-payment ">
+                                <span data-ng-repeat="(index, updatedSeat) in flight.updatedSeats">
+                                    <span ng-if="index >0">, </span> {{updatedSeat.code}}
+                                </span>
+                                <span>{{'MMB_VC_IB_VACIONES_OUTSTANDING'|translate}}</span>
+                            </span>
+                        </a>
+                        <a class="ib-box-cols__link-container ib-box-cols__link-container--icon-caret"
+                            href="javascript:void(0)"
+                            data-ng-click="manageSeatInfoCtrl.openModalConditions($event, flight)"
+                            title="{{'MMB_SEATS_TOOLTIP_MORE_INFO'|translate}}"
+                            ng-if="flight.seats.length === 0 && flight.status.code !=='HL' && flight.status.code !=='SA' && flight.activeLink && !flight.thirdPartyCompanies"
+                            focusin>
+                            <span
+                                class="ib-box-cols__title-section u-mb-small">{{flight.departureCity.city.description}}
+                                ({{flight.departureCity.code}}) - {{flight.arrivalCity.city.description}}
+                                ({{flight.arrivalCity.code}})</span>
+                            <span class="ib-text u-mb-small ib-text--block icon-asiento">
+                                {{'MMB_SEATS_EMPTY'|translate}}
+                            </span>
+                            <span ng-if="flight.updatedSeats.length > 0"
+                                class="ib-text u-mb-small ib-text--block icon-asiento ib-box-cols__link-container--pending-payment ">
+                                <span data-ng-repeat="(index, updatedSeat) in flight.updatedSeats">
+                                    <span ng-if="index > 0">, </span>{{updatedSeat.code}}
+                                </span>
+                                <span>{{'MMB_VC_IB_VACIONES_OUTSTANDING'|translate}}</span>
+                            </span>
+                        </a>
+                        <a class="ib-box-cols__link-container ib-box-cols__link-container--cursor"
+                            href="javascript:void(0)" title="{{'MMB_SEATS_TOOLTIP_MORE_INFO'|translate}}"
+                            ng-if="flight.seats.length === 0 && (flight.status.code ==='HL' || flight.status.code ==='SA' || !flight.activeLink || flight.thirdPartyCompanies)"
+                            focusin>
+                            <span 
+                                class="ib-box-cols__title-section u-mb-small">{{flight.departureCity.city.description}}
+                                ({{flight.departureCity.code}}) - {{flight.arrivalCity.city.description}}
+                                ({{flight.arrivalCity.code}})</span>
+                            <span class="ib-text u-mb-small ib-text--block icon-asiento">
+                                {{'SEAT_NOT_AVAILABLE_TEXT'|translate}}
+                            </span>
+                        </a>
+                    </div>
+
+                    <a class="ib-box-cols__link-container ib-box-cols__link-container--icon-caret"
+                        href="javascript:void(0)" data-ng-click="manageSeatInfoCtrl.emitGoToPaymentPage()"
+                        ng-if="manageSeatInfoCtrl.headerModel.shoppingBasket.total.original" focusin>
+                        <span class="ib-text u-mb-small ib-text--block ib-box-cols__link-container--pay">
+                            {{'MMB_GO_TO_PAYMENT_BUTTON'|translate}}
+                        </span>
+
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+</fieldset>

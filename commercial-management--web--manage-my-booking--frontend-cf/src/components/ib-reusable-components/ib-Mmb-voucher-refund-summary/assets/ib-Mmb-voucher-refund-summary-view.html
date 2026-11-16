@@ -1,0 +1,401 @@
+<div class="col-xs-12 col-lg-9 col-xl-8">
+    <div class="ib-alertbox ib-alertbox--darkgrey" aria-label="{{MMB_FLEXIBILIZATION_CONFIRMATION_INFO_MESSAGE_ALT|translate}}">
+        <div ng-if="voucherRefundSummaryCtrl.voucherFlow" class="ib-alertbox__head">
+            <span class="ib-alertbox__head--icon icon-informacion_2"><span class="hide-accessible">{{'MMB_WARNING_MESSAGE_TITLE'|translate}}</span></span>
+            <p style="display: block;">
+                <span class="ib-alertbox__head--title" ng-if="voucherRefundSummaryCtrl.model.isPartialRefund" style="display: block;">{{'MMB_CASH_PARTIAL_REFUND_INFO_MODULE_TXT'|translate}}</span>
+                <span class="ib-alertbox__head--title">{{'MMB_VOUCHER_REFUND_EMAIL_TO'|translate}} {{::voucherRefundSummaryCtrl.contactInfo}}</span>
+            </p>
+        </div>
+        <div ng-if="voucherRefundSummaryCtrl.cashFlow" class="ib-alertbox__head">
+            <span class="ib-alertbox__head--icon icon-informacion_2"><span class="hide-accessible">{{'MMB_WARNING_MESSAGE_TITLE'|translate}}</span></span>
+            <p style="display: block;">
+                <span class="ib-alertbox__head--title" ng-if="voucherRefundSummaryCtrl.model.isPartialRefund" style="display: block;">{{'MMB_CASH_PARTIAL_REFUND_INFO_MODULE_TXT'|translate}}</span>
+                <span class="ib-alertbox__head--title" style="display: block;">{{'MMB_CASH_REFUND_MODAL_BREAKDOWN_WARNING_MESSAGE'|translate}}</span>
+            </p>
+        </div>
+    </div>
+    <section class="ib-layout__section">
+        <div class="ib-box-cols">
+            <div class="ib-table-breakdown ib-table-breakdown">
+                <div class="ib-box-cols__content">
+                    <h3 class="ib-table-breakdown__title hidden-sm hidden-xs">{{ voucherRefundSummaryCtrl.voucherFlow ? 'MMB_VOUCHER_REFUND_BREAKDOWN_INFORMATION_VOUCHER_TITLE': 'MMB_CASH_REFUND_MODAL_STEP_1_TITLE'|translate}}</h3>
+                    <h3 class="ib-table-breakdown__title hidden-md hidden-lg hidden-xl">{{'MMB_PRICE_BREAKDOWN_TEXT'|translate}}</h3>
+                     <div>
+                       <table class="ib-table-breakdown__table ib-table-breakdown__table--cols-alignement" ng-if="voucherRefundSummaryCtrl.model.passengersInfo">
+                            <caption class="u-hide-accessible">{{'GENERAL_PASSENGER_TEXT'|translate}}</caption>
+                            <thead class="ib-table-breakdown__head">
+                                <tr class="ib-table-breakdown__row">
+                                    <th class="ib-table-breakdown__cell-title">
+                                        <span class="ib-table-breakdown__txt">{{'GENERAL_PASSENGER_TEXT'|translate}}</span>
+                                    </th>
+                                    <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                        <span class="ib-table-breakdown__txt">{{'PRICE_BREAKDOWN_FARE'|translate}}</span>
+                                    </th>
+                                    <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                        <span class="ib-table-breakdown__txt">{{'PRICE_BREAKDOWN_TAX'|translate}}*</span>
+                                    </th>
+                                    <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs" ng-if="voucherRefundSummaryCtrl.model.ticketingFee">
+                                        <span class="ib-table-breakdown__txt">{{'MMB_ADMINISTRATION_FEE_TEXT'|translate}}</span>
+                                    </th>
+                                    <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                        <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT'|translate}}</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="ib-table-breakdown__body">
+                                <tr ng-repeat="passenger in voucherRefundSummaryCtrl.model.passengersInfo" class="ib-table-breakdown__row">
+                                    <!--<td class="ib-table-breakdown__cell"><span ng-class="{'icon-persona': passenger.type !== 'CHILD' && passenger.type !== 'INFANT','icon-iberia_ninos':passenger.type === 'CHILD', 'icon-bebe':passenger.type === 'INFANT'}" class="ib-table-breakdown__txt"> {{passenger.partialSlice ? (passenger.partialSlice.sliceOrigin.code + '-' + passenger.partialSlice.sliceDestination.code + ': ') : angular.noop}} {{passenger.amount}} x {{(passenger.amount <= 1 ? passenger.type : passenger.typePlural) | translate}}</span></td>-->
+                                    <td class="ib-table-breakdown__cell"><span ng-class="{'icon-persona': passenger.type !== 'CHILD' && passenger.type !== 'INFANT','icon-iberia_ninos':passenger.type === 'CHILD', 'icon-bebe':passenger.type === 'INFANT'}" class="ib-table-breakdown__txt">{{passenger.amount}} x {{(passenger.amount <= 1 ? passenger.type : passenger.typePlural) | translate}}</span></td>
+                                    <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive" data-attr="{{'PRICE_BREAKDOWN_FARE'|translate}}"><span class="ib-table-breakdown__txt">{{passenger.amount}} x {{passenger.farePriceFormatted}}</span></td>
+                                    <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive" data-attr="{{'PRICE_BREAKDOWN_TAX'|translate}}*"><span class="ib-table-breakdown__txt">{{passenger.amount}} x {{passenger.taxPriceFormatted}}</span></td>
+                                    <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive" data-attr="{{'MMB_ADMINISTRATION_FEE_TEXT'|translate}}" ng-if="voucherRefundSummaryCtrl.model.ticketingFee"><span class="ib-table-breakdown__txt">{{passenger.amount}} x {{passenger.ticketingFeePriceFormatted}}</span></td>
+                                    <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs"><span class="ib-table-breakdown__txt">{{passenger.totalPriceFormatted}}</span></td>
+                                </tr>
+                              </tbody>
+                        </table>
+                    </div> 
+                    <div>
+                    <!-- SEATS TABLE -->
+                        <table class="ib-table-breakdown__table ib-table-breakdown__table--cols-alignement" ng-if="voucherRefundSummaryCtrl.model.hasSeat">
+                            <caption class="u-hide-accessible">{{'MMB_BOOKING_SEATS_TITLE'|translate}}</caption>
+                            <thead class="ib-table-breakdown__head">
+                                <tr class="ib-table-breakdown__row">
+                                    <th class="ib-table-breakdown__cell-title">
+                                        <span class="ib-table-breakdown__txt">{{'MMB_BOOKING_SEATS_TITLE'|translate}}</span>
+                                    </th>
+                                    <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                        <span class="ib-table-breakdown__txt">{{'MMB_VC_PRICE'|translate}}</span>
+                                    </th>
+                                    <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                        <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT'|translate}}</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="ib-table-breakdown__body" ng-repeat="slice in voucherRefundSummaryCtrl.model.slicesInfo">
+                                <tr class="ib-table-breakdown__row" ng-repeat="segment in slice.segments" ng-if="segment.hasSeat">
+                                    <td class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse">
+                                        <span class="ib-table-breakdown__txt">
+                                            <span class="ib-journey__box ib-journey__box--separator">
+                                                <span class="ib-journey__box--city">{{::segment.origin.description}}</span>
+                                                <span class="ib-journey__box--iata ib-iata-text">{{::segment.origin.code}}</span>
+                                            </span>
+                                            <span class="ib-journey__box">
+                                                <span class="ib-journey__box--city">{{::segment.destination.description}}</span>
+                                                <span class="ib-journey__box--iata ib-iata-text">{{::segment.destination.code}}</span>
+                                            </span>
+                                        </span>
+                                    </td>
+                                    <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                        <span ng-repeat="ancillarie in slice.ancillaries" ng-if="ancillarie.type === 'seat' && segment.id === ancillarie.segmentId" class="ib-table-breakdown__txt"> {{ancillarie.amount }} x {{ancillarie.priceFormatted}}</span ng-repeat="ancillarie in slice.ancillaries" ng-if="ancillarie.type === 'seat'">
+                                    </td>
+                                    <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                        <span ng-repeat="ancillarie in slice.ancillaries" ng-if="ancillarie.type === 'seat' && segment.id === ancillarie.segmentId" class="ib-table-breakdown__txt">{{ancillarie.priceTotalFormatted}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <!-- BAGGAGES TABLE -->
+                        <table class="ib-table-breakdown__table ib-table-breakdown__table--cols-alignement" ng-if="voucherRefundSummaryCtrl.model.hasBaggage">
+                            <caption class="u-hide-accessible">{{'MMB_BOOKING_BAGGAGE_TITLE'|translate}}</caption>
+                            <thead class="ib-table-breakdown__head">
+                                <tr class="ib-table-breakdown__row">
+                                    <th class="ib-table-breakdown__cell-title">
+                                        <span class="ib-table-breakdown__txt">{{'MMB_BOOKING_BAGGAGE_TITLE'|translate}}</span>
+                                    </th>
+                                    <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                        <span class="ib-table-breakdown__txt">{{'MMB_VC_PRICE'|translate}}</span>
+                                    </th>
+                                    <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                        <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT'|translate}}</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="ib-table-breakdown__body" ng-repeat="slice in voucherRefundSummaryCtrl.model.slicesInfo" >
+                                <tr class="ib-table-breakdown__row" ng-if="slice.hasBaggage">
+                                    <td class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse">
+                                        <span class="ib-table-breakdown__txt">
+                                            <span class="ib-journey__box ib-journey__box--separator">
+                                                <span class="ib-journey__box--city">{{::slice.sliceOrigin.description}}</span>
+                                                <span class="ib-journey__box--iata ib-iata-text">{{::slice.sliceOrigin.description}}</span>
+                                            </span>
+                                            <span class="ib-journey__box">
+                                                <span class="ib-journey__box--city">{{::slice.sliceDestination.description}}</span>
+                                                <span class="ib-journey__box--iata ib-iata-text">{{::slice.sliceDestination.description}}</span>
+                                            </span>
+                                        </span>
+                                    </td>
+                                    <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                        <span ng-repeat="ancillarie in slice.ancillaries" ng-if="ancillarie.type === 'baggage'" class="ib-table-breakdown__txt"> {{ancillarie.amount }} x {{ancillarie.priceFormatted}}</span>
+                                    </td>
+                                    <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                        <span ng-repeat="ancillarie in slice.ancillaries" ng-if="ancillarie.type === 'baggage'" class="ib-table-breakdown__txt">{{ancillarie.priceTotalFormatted}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <!-- SPEQS TABLE -->
+                            <table class="ib-table-breakdown__table ib-table-breakdown__table--cols-alignement" ng-if="voucherRefundSummaryCtrl.model.hasSpeqs">
+                                <caption class="u-hide-accessible">{{'MMB_VOLUNTARY_CHANGE_REASON_INFO_KEEP_CONDITION_3'|translate}}</caption>
+                                <thead class="ib-table-breakdown__head">
+                                    <tr class="ib-table-breakdown__row">
+                                        <th class="ib-table-breakdown__cell-title">
+                                            <span class="ib-table-breakdown__txt">{{'MMB_VOLUNTARY_CHANGE_REASON_INFO_KEEP_CONDITION_3'|translate}}</span>
+                                        </th>
+                                        <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                            <span class="ib-table-breakdown__txt">{{'MMB_VC_PRICE'|translate}}</span>
+                                        </th>
+                                        <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                            <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT'|translate}}</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="ib-table-breakdown__body" ng-repeat="slice in voucherRefundSummaryCtrl.model.slicesInfo" >
+                                    <tr class="ib-table-breakdown__row" ng-if="slice.hasSpeqs">
+                                        <td class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse">
+                                            <span class="ib-table-breakdown__txt">
+                                                <span class="ib-journey__box ib-journey__box--separator">
+                                                    <span class="ib-journey__box--city">{{::slice.sliceOrigin.description}}</span>
+                                                    <span class="ib-journey__box--iata ib-iata-text">{{::slice.sliceOrigin.description}}</span>
+                                                </span>
+                                                <span class="ib-journey__box">
+                                                    <span class="ib-journey__box--city">{{::slice.sliceDestination.description}}</span>
+                                                    <span class="ib-journey__box--iata ib-iata-text">{{::slice.sliceDestination.description}}</span>
+                                                </span>
+                                            </span>
+                                        </td>
+                                        <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                            <span ng-repeat="ancillarie in slice.ancillaries" ng-if="ancillarie.type === 'specialEquipment'" class="ib-table-breakdown__txt"> {{ancillarie.amount }} x {{ancillarie.priceFormatted}}</span>
+                                        </td>
+                                        <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                            <span ng-repeat="ancillarie in slice.ancillaries" ng-if="ancillarie.type === 'specialEquipment'" class="ib-table-breakdown__txt">{{ancillarie.priceTotalFormatted}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- PRIORITY TABLE -->
+                        <table class="ib-table-breakdown__table ib-table-breakdown__table--cols-alignement" ng-if="voucherRefundSummaryCtrl.model.hasPriorityBoarding">
+                            <caption class="u-hide-accessible">{{'PRIORITY_BOARDING_TITLE'|translate}}</caption>
+                            <thead class="ib-table-breakdown__head">
+                                <tr class="ib-table-breakdown__row">
+                                    <th class="ib-table-breakdown__cell-title">
+                                        <span class="ib-table-breakdown__txt">{{'PRIORITY_BOARDING_TITLE'|translate}}</span>
+                                    </th>
+                                    <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                        <span class="ib-table-breakdown__txt">{{'MMB_VC_PRICE'|translate}}</span>
+                                    </th>
+                                    <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                        <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT'|translate}}</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="ib-table-breakdown__body" ng-repeat="slice in voucherRefundSummaryCtrl.model.slicesInfo" >
+                                <tr class="ib-table-breakdown__row" ng-if="slice.hasPriorityBoarding">
+                                    <td class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse">
+                                        <span class="ib-table-breakdown__txt">
+                                            <span class="ib-journey__box ib-journey__box--separator">
+                                                <span class="ib-journey__box--city">{{::slice.sliceOrigin.description}}</span>
+                                                <span class="ib-journey__box--iata ib-iata-text">{{::slice.sliceOrigin.description}}</span>
+                                            </span>
+                                            <span class="ib-journey__box">
+                                                <span class="ib-journey__box--city">{{::slice.sliceDestination.description}}</span>
+                                                <span class="ib-journey__box--iata ib-iata-text">{{::slice.sliceDestination.description}}</span>
+                                            </span>
+                                        </span>
+                                    </td>
+                                    <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                        <span ng-repeat="ancillarie in slice.ancillaries" ng-if="ancillarie.type === 'priorityBoarding'" class="ib-table-breakdown__txt"> {{ancillarie.amount }} x {{ancillarie.priceFormatted}}</span>
+                                    </td>
+                                    <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                        <span ng-repeat="ancillarie in slice.ancillaries" ng-if="ancillarie.type === 'priorityBoarding'" class="ib-table-breakdown__txt">{{ancillarie.priceTotalFormatted}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                            <!-- FLEXIBILIZATION TABLE -->
+                            <table class="ib-table-breakdown__table ib-table-breakdown__table--cols-alignement" ng-if="voucherRefundSummaryCtrl.model.hasFlex">
+                                <caption class="u-hide-accessible">{{'ANCILLARIES_FLEXIBILITY_TITLE' | translate}}</caption>
+                                <thead class="ib-table-breakdown__head">
+                                    <tr class="ib-table-breakdown__row">
+                                        <th class="ib-table-breakdown__cell-title">
+                                            <span class="ib-table-breakdown__txt">{{'ANCILLARIES_FLEXIBILITY_TITLE' | translate}}</span>
+                                        </th>
+                                        <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                            <span class="ib-table-breakdown__txt">{{'MMB_VC_PRICE'|translate}}</span>
+                                        </th>
+                                        <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                            <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT'|translate}}</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="ib-table-breakdown__body">
+                                    <tr class="ib-table-breakdown__row">
+                                        <td class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse">
+                                            <span ng-if="voucherRefundSummaryCtrl.model.flexibilization.subtype === 'FLIGHT_CHANGE'"
+                                                class="ib-table-breakdown__txt">
+                                                1 {{'MMB_ANCILLARIES_FLEXIBILITY_CHANGE_FLIGHT_TEXT' | translate}}
+                                            </span>
+                                            <span ng-if="voucherRefundSummaryCtrl.model.flexibilization.subtype === 'VOUCHER_REFUND' && voucherRefundSummaryCtrl.percentage < 100" 
+                                                class="ib-table-breakdown__txt">
+                                                {{'MMB_ANCILLARIES_FLEXIBILITY_PARCIAL_REFUND_TEXT_V2' | translate : {percentage: voucherRefundSummaryCtrl.percentage} }}
+                                            </span>
+                                            <span ng-if="voucherRefundSummaryCtrl.model.flexibilization.subtype === 'VOUCHER_REFUND' && voucherRefundSummaryCtrl.percentage >= 100" 
+                                                class="ib-table-breakdown__txt">
+                                                {{'MMB_VOUCHER_REFUND_MODAL_TITLE' | translate }} ({{voucherRefundSummaryCtrl.percentage}}%)
+                                            </span>
+                                            <span ng-if="voucherRefundSummaryCtrl.model.flexibilization.subtype === 'FLEXIBILITY_PACK'" 
+                                                class="ib-table-breakdown__txt">
+                                                {{'ANCILLARIES_FLEXIBILITY_PACK_FLEXIBILITY' | translate }}
+                                            </span>
+                                        </td>
+                                        <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                            <span class="ib-table-breakdown__txt"> {{voucherRefundSummaryCtrl.model.flexibilization.units}} x {{voucherRefundSummaryCtrl.model.flexibilization.price.priceFormmated}}</span>
+                                        </td>
+                                        <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                            <span class="ib-table-breakdown__txt">{{voucherRefundSummaryCtrl.model.flexibilization.price.totalPriceFormmated}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <table class="ib-table-bond ib-table-bond--medium ib-table-bond--margin" ng-if="voucherRefundSummaryCtrl.voucherPriceInfo.percentagePrice !== 0 && voucherRefundSummaryCtrl.voucherFlow">
+                            <tfoot>
+                                <tr>
+                                    <td class="ib-table-bond__total" colspan="3">
+                                        <span class="ib-table-bond__total-text">{{'MMB_VOUCHER_REFUND_EXTRA_PERCENTAGE_SUMMARY_TOTAL'|translate}}: </span>
+                                        <span class="ib-table-bond__amount">{{voucherRefundSummaryCtrl.voucherPriceInfo.priceWOPercentageFormatted}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ib-table-bond__total" colspan="3">
+                                        <span class="ib-table-bond__total-text">{{'MMB_VOUCHER_REFUND_EXTRA_PERCENTAGE_SUMMARY_BONIFICATION_ZH'|translate}} {{voucherRefundSummaryCtrl.voucherPriceInfo.percentage}} {{'MMB_VOUCHER_REFUND_EXTRA_PERCENTAGE_SUMMARY_BONIFICATION'|translate}} </span>
+                                        <span class="ib-table-bond__amount">{{voucherRefundSummaryCtrl.voucherPriceInfo.percentagePriceFormatted}}</span>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    
+                    <div ng-show="voucherRefundSummaryCtrl.flags.refundVoucherSection80 && voucherRefundSummaryCtrl.percentage < 100">
+                        <!-- TOTAL RESERVATION TABLE -->
+                        <table class="ib-table-breakdown__table ib-table-breakdown__table--cols-alignement" >
+                            <caption class="u-hide-accessible">
+                                {{'MMB_VOUCHER_REFUND_EXTRA_PERCENTAGE_SUMMARY_TOTAL' | translate}}
+                            </caption>
+                            <thead class="ib-table-breakdown__head">
+                            <tr class="ib-table-breakdown__row">
+                                <th class="ib-table-breakdown__cell-title u-hide-accessible">
+                                    <span class="ib-table-breakdown__txt">
+                                        {{'MMB_VOUCHER_REFUND_EXTRA_PERCENTAGE_SUMMARY_TOTAL' | translate}}
+                                    </span>
+                                </th>
+                                <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right u-hide-accessible hidden-sm hidden-xs">
+                                    <span class="ib-table-breakdown__txt"></span>
+                                </th>
+                                <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right u-hide-accessible hidden-sm hidden-xs">
+                                    <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT'|translate}}</span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="ib-table-breakdown__body">
+                            <tr class="ib-table-breakdown__row">
+                                <td colspan="2" class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                    <span class="ib-table-breakdown__txt ib-table-breakdown__txt--bold">
+                                        {{'MMB_VOUCHER_REFUND_EXTRA_PERCENTAGE_SUMMARY_TOTAL' | translate}}
+                                    </span> 
+                                </td>
+                                <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                    <span class="ib-table-breakdown__txt ib-table-breakdown__txt--bold">{{voucherRefundSummaryCtrl.voucherPriceInfo.totalPriceTotalFormatted}}</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-show="voucherRefundSummaryCtrl.flags.refundVoucherSection80 && voucherRefundSummaryCtrl.percentage < 100">
+                        <!-- PARTIAL PRICE TABLE -->
+                        <table class="ib-table-breakdown__table ib-table-breakdown__table--cols-alignement" >
+                            <caption class="u-hide-accessible">{{'MMB_ANCILLARIES_FLEXIBILITY_PARCIAL_REFUND_TEXT_TITLE'|translate}}</caption>
+                            <thead class="ib-table-breakdown__head">
+                            <tr class="ib-table-breakdown__row">
+                                <th class="ib-table-breakdown__cell-title">
+                                    <span class="ib-table-breakdown__txt">
+                                        {{'MMB_ANCILLARIES_FLEXIBILITY_PARCIAL_REFUND_TEXT_TITLE' | translate}}
+                                    </span>
+                                </th>
+                                <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                    <span class="ib-table-breakdown__txt"></span>
+                                </th>
+                                <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                    <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT'|translate}}</span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="ib-table-breakdown__body">
+                            <tr class="ib-table-breakdown__row">
+                                <td class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse">
+                                        <span class="ib-table-breakdown__txt">
+                                            {{'MMB_REFUNDS_80_TABLE_TITLE_V2' | translate : {percentage: voucherRefundSummaryCtrl.percentage} }}
+                                        </span>
+                                </td>
+                                <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                    <span class="ib-table-breakdown__txt"> </span>
+                                </td>
+                                <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                    <span class="ib-table-breakdown__txt">{{voucherRefundSummaryCtrl.voucherPriceInfo.formattedPrice}}</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="ib-table-breakdown__footer">
+                        <span class="ib-table-breakdown__total">{{ voucherRefundSummaryCtrl.voucherFlow ? 'MMB_VOUCHER_REFUND_BREAKDOWN_INFORMATION_VOUCHER_TOTAL_AMOUNT_TITLE' : 'MMB_CASH_REFUND_MODAL_BREAKDOWN_TOTAL_PRICE_TITLE' |translate}} {{voucherRefundSummaryCtrl.voucherFlow ? voucherRefundSummaryCtrl.voucherPriceInfo.formattedPrice : voucherRefundSummaryCtrl.cashPriceInfo[0].formattedPrice}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="ib-refund-bonds ib-refund-bonds__voucher-box ib-refund-bonds--type-01" ng-if="voucherRefundSummaryCtrl.model.totalPassengers > 1 && voucherRefundSummaryCtrl.voucherFlow">
+        <div>
+            <h2 class="title__h4">{{'MMB_REFUNDS_VOUCHER_AMOUNT_OF_VOUCHERS_MODULE_TITLE'|translate}}</h2>
+            <ul class="ib-box-cities__list">
+                <li class="ib-box-cities__list-item">
+                    <div class="ib-radio">
+                        <input type="radio" class="ib-radio__input" id="vouches_amount_1" value="MULTIPLE" name="vouches_amount" ng-model="voucherRefundSummaryCtrl.multipleVoucherAmount" checked/>
+                        <label for="vouches_amount_1" class="ib-radio__label">
+                            <span class="ib-radio__text">{{'MMB_REFUNDS_VOUCHER_AMOUNT_OF_VOUCHERS_MODULE_OPTION_1'|translate}}</span>
+                        </label>
+                    </div>
+                </li>
+                <li class="ib-box-cities__list-item">
+                    <div class="ib-radio">
+                        <input type="radio" class="ib-radio__input" id="vouches_amount_2" value="ONE" name="vouches_amount" ng-model="voucherRefundSummaryCtrl.multipleVoucherAmount"/>
+                        <label for="vouches_amount_2" class="ib-radio__label">
+                            <span class="ib-radio__text">{{'MMB_REFUNDS_VOUCHER_AMOUNT_OF_VOUCHERS_MODULE_OPTION_2'|translate}}</span>
+                        </label>
+                    </div>
+                </li>
+            </ul>      
+        </div>
+    </div>
+
+    <div class="ib-navegation ib-navegation--mt-big">
+        <div class="ib-navegation__item">
+            <a ng-click="voucherRefundSummaryCtrl.closeFullModal()" class="ib-navegation__link" title="{{'MODAL_CANCEL'|translate}}" focusin>
+                <span class="ib-navegation__link--text">{{'MODAL_CANCEL'|translate}}</span>
+            </a>
+        </div>
+        <div class="ib-navegation__item">
+            <button class="ib-button ib-button--w-xlarge" ng-click="voucherRefundSummaryCtrl.openContinueModal()">{{'MODAL_CONTINUE'|translate}}</button>
+        </div>
+    </div>
+
+    <div class="ib-navegation ib-navegation--mt-medium ib-navegation--mb-xxsmall">
+        <div class="ib-navegation__item">
+            <span class="ib-refund-bonds__note">{{'MMB_REFUNDS_TAXES_INFORMATION'|translate}}</span>
+        </div>
+    </div>
+</div>

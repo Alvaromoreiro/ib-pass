@@ -1,0 +1,350 @@
+<fieldset class="ib-box-menu__section ib-box-menu__section--full">
+    <legend class="u-hide-accessible">{{'MMB_YOUR_FLIGHTS_OUTBOUND_FLIGHT_LENGEND'|translate}}</legend>
+    <div>
+        <div class="ib-layout__section">
+            <div class="ib-ticket-block ib-ticket-block--gdr"
+                ng-class="{'ib-ticket-block__message': flightCardCtrl.isChange || flightCardCtrl.isCancel || flightCardCtrl.hasInvoluntaryChange, 'ib-ticket-block--without-laterals': flightCardCtrl.documents}">
+                <div class="ib-ticket-block__col-first">
+                    <!-- HEADER -->
+                    <div class="ib-ticket-block__header ib-ticket-block__header--responsive">
+                        <h2 class="ib-ticket-block__header-title"
+                            ng-class="{'ib-ticket-block__header-title--with-message': flightCardCtrl.isChange || flightCardCtrl.isCancel, 'ib-ticket-block__header-title--big-xs': flightCardCtrl.documents}">
+                            <span
+                                class="ib-ticket-block__icon-tooltip ib-ticket-block__icon-tooltip--default icon-alertas"
+                                ng-if="flightCardCtrl.isChange || flightCardCtrl.isCancel"></span>
+                            {{'MMB_YOUR_FLIGHTS_OUTBOUND_FLIGHT_TO_TEXT'|translate}}
+                            {{flightCardCtrl.model.arrivalCity.city.description}}
+                        </h2>
+                        <span class="ib-ticket-block__header-txt"
+                            ng-if="flightCardCtrl.timeRemaining.show">{{flightCardCtrl.timeRemaining.text | translate: {
+                            numberDays: flightCardCtrl.timeRemaining.value } }}</span>
+                        <span class="ib-ticket-block__header-txt"
+                            ng-if="flightCardCtrl.showLabelChangeTime()">{{'MMB_YOUR_FLIGHTS_LABEL_CHANGE_TIME'|translate}}</span>
+                        <span class="ib-ticket-block__header-txt"
+                            ng-if="flightCardCtrl.showLabelCancel()">{{'MMB_YOUR_FLIGHTS_LABEL_CANCEL'|translate}}</span>
+                        <span ng-if="flightCardCtrl.documents"
+                            class="ib-ticket-block__header-txt ib-ticket-block__header-txt--grey ib-text--bold hidden-xs">{{flightCardCtrl.passengerText}}</span>
+                    </div>
+                    <div class="ib-ticket-block__container"
+                        ng-class="{'ib-ticket-block__container--border hidden-xs': flightCardCtrl.documents}">
+                        <div class="ib-ticket-block__wrapper">
+                            <!--ng-class="flightCardCtrl.classDates()"-->
+                            <div class="ib-ticket-block__wrapper-left">
+                                <span class="ib-ticket-block__date"
+                                    ng-if="!flightCardCtrl.isCancel && !flightCardCtrl.isChange">
+                                    {{flightCardCtrl.model.departureDateParsed.formatedDate}}
+                                    <span class="hidden-md hidden-sm hidden-xs">-</span>
+                                    {{flightCardCtrl.model.departureDateParsed.dateTime}}
+                                </span>
+                                <span class="ib-ticket-block__date ib-ticket-block__date--old"
+                                    ng-if="flightCardCtrl.isCancel">
+                                    {{flightCardCtrl.model.departureDateParsed.formatedDate}}
+                                    <span class="hidden-md hidden-sm hidden-xs">-</span>
+                                    {{flightCardCtrl.model.departureDateParsed.dateTime}}
+                                </span>
+                                <span class="ib-ticket-block__date ib-ticket-block__date--red"
+                                    ng-if="flightCardCtrl.isChange">
+                                    {{flightCardCtrl.model.departureDateParsed.formatedDate}}
+                                    <span class="hidden-md hidden-sm hidden-xs">-</span>
+                                    {{flightCardCtrl.model.departureDateParsed.dateTime}}
+                                </span>
+                                <span class="ib-ticket-block__title">{{flightCardCtrl.model.departureCity.code}}</span>
+                                <span
+                                    class="ib-ticket-block__subtitle hidden-sm hidden-xs">{{flightCardCtrl.model.departureCity.name}}</span>
+                            </div>
+                            <div class="ib-ticket-block__wrapper-floating"
+                                ng-if="flightCardCtrl.model.stopsNumber === 0 && flightCardCtrl.model.segments && flightCardCtrl.model.segments[0] && !flightCardCtrl.model.segments[0].stop">
+                                <span
+                                    class="ib-ticket-block__txt">{{flightCardCtrl.model.segments[0].flight.marketingCarrier.code}}{{flightCardCtrl.model.segments[0].flight.marketingFlightNumber}}</span>
+
+                                <span
+                                    class="ib-ticket-block__txt ib-ticket-block__txt--small ib-ticket-block__txt--unfocused">{{'MMB_YOUR_FLIGHTS_DIRECT_TEXT'|translate}}</span>
+                                <span
+                                    class="ib-ticket-block__txt ib-ticket-block__txt--small ib-ticket-block__txt--unfocused">{{flightCardCtrl.model.durationParsed}}</span>
+                            </div>
+                            <div class="ib-ticket-block__wrapper-floating"
+                                ng-if="flightCardCtrl.model.stopsNumber === 0 && flightCardCtrl.model.segments && flightCardCtrl.model.segments[0] && flightCardCtrl.model.segments[0].stop">
+                                <span class="ib-ticket-block__txt ib-ticket-block__txt--small ib-ticket-block__txt--unfocused">
+                                    {{'1' + (('MMB_YOUR_FLIGHTS_STOP_SIMPLE_TEXT'|translate) | uppercase)}}</span>
+                                <span
+                                    class="ib-ticket-block__txt ib-ticket-block__txt--small ib-ticket-block__txt--unfocused">{{flightCardCtrl.model.durationParsed}}</span>
+                            </div>
+                            <div class="ib-ticket-block__wrapper-floating  u-pt-small"
+                                ng-if="flightCardCtrl.model.stopsNumber > 0">
+                                <span
+                                    class="ib-ticket-block__txt ib-ticket-block__txt--small ib-ticket-block__txt--unfocused">{{flightCardCtrl.model.stopsNumber
+                                    >1 ? flightCardCtrl.model.stopsNumber + ' ' +
+                                    ('MMB_YOUR_FLIGHTS_SCALE_PLURAL_TEXT'|translate)
+                                    : flightCardCtrl.model.stopsNumber + ' ' +
+                                    ('MMB_YOUR_FLIGHTS_SCALE_SIMPLE_TEXT'|translate)}}</span>
+                                <span
+                                    class="ib-ticket-block__txt ib-ticket-block__txt--small ib-ticket-block__txt--unfocused">{{flightCardCtrl.model.durationParsed}}</span>
+                            </div>
+                            <div class="ib-ticket-block__wrapper-right">
+                                <span class="ib-ticket-block__date"
+                                    ng-if="!flightCardCtrl.isCancel && !flightCardCtrl.isChange">
+                                    {{flightCardCtrl.model.arrivalDateParsed.formatedDate}}
+                                    <span class="hidden-md hidden-sm hidden-xs">-</span>
+                                    {{flightCardCtrl.model.arrivalDateParsed.dateTime}}
+                                </span>
+                                <span class="ib-ticket-block__date ib-ticket-block__date--old"
+                                    ng-if="flightCardCtrl.isCancel">
+                                    {{flightCardCtrl.model.arrivalDateParsed.formatedDate}}
+                                    <span class="hidden-md hidden-sm hidden-xs">-</span>
+                                    {{flightCardCtrl.model.arrivalDateParsed.dateTime}}
+                                </span>
+                                <span class="ib-ticket-block__date ib-ticket-block__date--red"
+                                    ng-if="flightCardCtrl.isChange">
+                                    {{flightCardCtrl.model.arrivalDateParsed.formatedDate}}
+                                    <span class="hidden-md hidden-sm hidden-xs">-</span>
+                                    {{flightCardCtrl.model.arrivalDateParsed.dateTime}}
+                                </span>
+                                <span class="ib-ticket-block__title">{{flightCardCtrl.model.arrivalCity.code}}</span>
+                                <span
+                                    class="ib-ticket-block__subtitle hidden-sm hidden-xs">{{flightCardCtrl.model.arrivalCity.name}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ib-ticket-block__container-xs visible-xs" aria-hidden="true" ng-if="flightCardCtrl.documents">
+                        <p class="ib-box-cols__title-section ib-box-cols__title-section--with-icon ib-box-cols__title-section--xs icon-avion_ida">
+                            {{flightCardCtrl.model.departureCity.city.description}} ({{flightCardCtrl.model.departureCity.city.code}}) - {{flightCardCtrl.model.arrivalCity.city.description}} ({{flightCardCtrl.model.arrivalCity.city.code}})
+                        </p>
+                        <p class="ib-text ib-text--block">{{flightCardCtrl.model.departureDateParsed.formatedDate}} - {{flightCardCtrl.model.departureDateParsed.dateTime}}
+                        </p>
+                    </div>
+                    <!-- MORE DETAILS COLLAPSE -->
+                    <div ng-if="!flightCardCtrl.documents"
+                        class="ib-ticket-collapse ib-ticket-collapse__gdr ib-ticket-collapse--responsive"
+                        ng-controller="ibCollapseController as collapse">
+                        <figure
+                            class="ib-ticket-collapse__logo ib-ticket-collapse__logo--gdr hidden-xl hidden-lg hidden-md">
+                            <img class="ib-ticket-collapse__logo--img"
+                                ng-src="{{::$root.routes.icons}}{{flightCardCtrl.model.segments[0].companyURL}}"
+                                alt="{{'CONFIRMATION_INFO_SLICES_ALT_LOGO'|translate}} {{flightCardCtrl.model.segments[0].flight.operationalCarrier.name}}" />
+                        </figure>
+                        <button
+                            class="ib-ticket-collapse__btn ib-ticket-collapse__btn--right hidden-xl hidden-lg hidden-md"
+                            ng-click="collapse.clickCollapse($event,false)" type="button">
+                            {{'MMB_YOUR_FLIGHTS_DETAILS_TEXT'|translate}}
+                            <span class="hidden-xs">{{'MMB_YOUR_FLIGHTS_FLIGHT_AND_RATE_TEXT'|translate}}</span>
+                            <span class="ib-ticket-scollapse__btn-icon"
+                                ng-class="collapse.isCollapsed ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+                        </button>
+                        <div uib-collapse="!collapse.isCollapsed">
+                            <div class="ib-table-flight-info ib-table-flight-info--gdr">
+                                <div class="ib-table-flight-info__container">
+                                    <div class="ib-table-flight-info__header">
+                                        <h2 class="ib-table-flight-info__title ib-table-flight-info__title--with-link">
+                                            {{'MMB_YOUR_FLIGHTS_FLIGHT_DETAILS_TITTLE'|translate}}</h2>
+                                    </div>
+                                    <div class="ib-flight-info-gdr ib-flight-info-gdr--no-conectivity"
+                                        ng-repeat="(index, segment) in flightCardCtrl.model.segments">
+                                        <div class="row"
+                                            ng-if="flightCardCtrl.model.segments[1] !== undefined && (segment.waitingTimeParsed > 0 || segment.waitingTimeParsed.length > 0 || segment.hasMissconnection)">
+                                            <div
+                                                class="col-xl-offset-2 col-xl-10 col-lg-offset-0 col-lg-12 col-md-offset-2 col-md-10  col-xs-offset-0 col-xs-12 u-mb-small">
+                                                <div class="ib-notice-box"
+                                                    ng-if="(flightCardCtrl.shortScale || segment.isWarnings) && !segment.missconnection"
+                                                    ng-class="flightCardCtrl.shortScale && !flightCardCtrl.model.segments[index].isWarnings ? 'ib-notice-box__flights--info' : 'ib-notice-box__flights--warning'">
+                                                    <h3 class="sr-only">
+                                                        {{'MMB_FLIGHTS_SCALE_INFO' | translate}}
+                                                    </h3>
+                                                    <div
+                                                        ng-repeat="(index, segmentWarnings) in flightCardCtrl.arrSegmentWarnings">
+                                                        <div ng-if="segmentWarnings.segmentId === segment.segmentId">
+                                                            <p ng-if="!segmentWarnings.isError"
+                                                                class="ib-notice-box__text ib-notice-box__text--normal">
+                                                                {{segmentWarnings.msg}}
+                                                            </p>
+                                                            <p ng-if="segmentWarnings.isError"
+                                                                class="ib-notice-box__text ib-notice-box__text--error">
+                                                                {{segmentWarnings.msg}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div ng-repeat="warning in segment.warnings"
+                                                    ng-if="warning.code === 'SSE_ORM_20014'"
+                                                    class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+                                                    <div
+                                                        class="ib-msg-alert ib-msg-alert--smallest ib-msg-alert--danger icon-informacion">
+                                                        <p class="ib-msg-alert__text ib-msg-alert__text--small">{{
+                                                            warning.description }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <table class="ib-flight-info-gdr__table u-mb-small"
+                                                    ng-class="{'ib-flight-info-gdr__table--operator': flightCardCtrl.model.segments[1] !== undefined && segment.waitingTimeParsed > 0 || segment.waitingTimeParsed.length > 0}">
+                                                    <caption class="ib-flight-info-gdr--caption sr-only">
+                                                        {{'MMB_INFO_FLIGHT' | translate}}</caption>
+                                                    <thead class="sr-only">
+                                                        <th class="ib-flight-info-gdr--th">{{'MMB_COMPANY' | translate}}
+                                                        </th>
+                                                        <th class="ib-flight-info-gdr--th">{{'MMB_TRANSIT' | translate}}
+                                                        </th>
+                                                        <th class="ib-flight-info-gdr--th">
+                                                            {{'MMB_FLIGHT_DATA' | translate}}</th>
+                                                    </thead>
+                                                    <tbody class="ib-flight-info-gdr__table--body">
+                                                        <tr class="ib-flight-info-gdr__table--row">
+                                                            <td class="ib-flight-info-gdr__table--cel">
+                                                                <figure class="ib-table-flight-detail__logo">
+                                                                    <img ng-src="{{::$root.routes.icons}}{{segment.companyURL}}"
+                                                                        alt="Logo {{segment.flight.operationalCarrier.name}}" />
+                                                                </figure>
+                                                            </td>
+                                                            <td class="ib-flight-info-gdr__table--cel">
+                                                                <div class="ib-table-flight-detail__hours">
+                                                                    <p
+                                                                        class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                                                                        <span
+                                                                            class="ib-table-flight-detail__text-title ib-table-flight-detail__text-title--special">{{segment.departureDateParsed.dateTime}}</span>
+                                                                        <span
+                                                                            class="ib-table-flight-detail__hours-icon icon-vuelos"></span>
+                                                                        <span
+                                                                            class="ib-table-flight-detail__text-title ib-table-flight-detail__text-title--special">{{segment.arrivalDateParsed.dateTime}}</span>
+                                                                    </p>
+                                                                    <p class="ib-flight-info-gdr__table--code">
+
+                                                                        <span class="ib-link__text"
+                                                                            ng-if="segment && segment.operatorLocator && segment.operatorLocator.showExternalOperator">{{'MMB_YOUR_FLIGHTS_CODE_TEXT'
+                                                                            | translate}}
+                                                                            {{segment.operatorLocator.locator}}</span>
+
+                                                                    </p>
+                                                                    <p class="ib-text ib-text--small ib-text--block">
+                                                                        {{segment.departureCity.name}}
+                                                                        ({{segment.departureCity.code}})
+                                                                        <span
+                                                                            ng-if="segment.departureCity.terminal!=null">{{('ON_HOLD_TERMINAL_INFO'
+                                                                            | translate) +
+                                                                            segment.departureCity.terminal}}</span>
+                                                                        - {{segment.arrivalCity.name}}
+                                                                        ({{segment.arrivalCity.code}})
+                                                                        <span
+                                                                            ng-if="segment.arrivalCity.terminal!=null">{{('ON_HOLD_TERMINAL_INFO'
+                                                                            | translate) +
+                                                                            segment.arrivalCity.terminal}}</span>
+                                                                    <p>
+                                                                    <p
+                                                                        class="ib-text ib-text--small ib-text--block ib-text--color-unfocused">
+                                                                        <span
+                                                                            class="ib-link-icon__icon icon-informacion_2"></span>
+                                                                        <span
+                                                                            class="ib-link-icon__text">{{segment.flight.marketingCarrier.name}}
+                                                                            {{segment.flight.marketingCarrier.code}}{{segment.flight.marketingFlightNumber}}
+                                                                        </span>.
+                                                                        {{segment.flight.aircraft.description}}
+                                                                    </p>
+                                                                    <p class="ib-text ib-text--small ib-text--block ib-text--color-unfocused"
+                                                                        ng-if="segment.flight.operationalCarrier.code !== 'EB' && 
+                                                                        segment.flight.operationalCarrier.code !== 'E9' && 
+                                                                        segment.flight.operationalCarrier.code !== 'LL' &&
+                                                                        segment.flight.operationalCarrier.code !== 'P6' &&
+                                                                        segment.flight.operationalCarrier.code !== '3L'">
+                                                                        {{'MMB_INFO_OPERATED_BY' | translate}}
+                                                                        {{segment.flight.operationalCarrier.name}}
+                                                                    </p>
+                                                                    <p class="ib-text ib-text--small ib-text--block ib-text--color-unfocused"
+                                                                        ng-if="segment.flight.operationalCarrier.code === 'EB' || 
+                                                                        segment.flight.operationalCarrier.code === 'E9' ||
+                                                                        segment.flight.operationalCarrier.code === 'LL' ||
+                                                                        segment.flight.operationalCarrier.code === 'P6' ||
+                                                                        segment.flight.operationalCarrier.code === '3L'">
+                                                                        {{segment.flight.operationalCarrier.name}}
+                                                                    </p>
+                                                                    <span class="ib-text-icon ib-text-icon--nocturne"
+                                                                        ng-if="segment.overnight">
+                                                                        <span
+                                                                            class="ib-text-icon__icon icon-luna"></span>
+                                                                        <span class="ib-text-icon__text"
+                                                                            ng-repeat="warning in segment.warnings"
+                                                                            ng-if="warning.code === 'SSE_ORM_20003'">
+                                                                            {{warning.description}}
+                                                                        </span>
+                                                                    </span>
+
+                                                                </div>
+                                                            </td>
+                                                            <td class="ib-flight-info-gdr__table--cel">
+                                                                <p
+                                                                    class="ib-layout__line-spacing ib-layout__line-spacing--small ib-table-flight-detail__code--pair">
+                                                                    <span
+                                                                        class="ib-table-flight-detail__text-des">{{segment.durationParsed}}</span>
+                                                                </p>
+
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+
+                                            <div ng-if="flightCardCtrl.model.segments[0].stop"
+                                                class="col-xl-offset-2 col-xl-10 col-lg-offset-0 col-lg-12 col-md-offset-2 col-md-10  col-xs-offset-0 col-xs-12">
+                                                <div class="ib-notice-box ib-notice-box__flights--info">
+                                                    <h3 class="sr-only">{{'MMB_FLIGHTS_SCALE_INFO' | translate}}</h3>
+                                                    <p class="ib-notice-box__text ib-notice-box__text--normal">
+                                                        {{'AVAILABILITY_TEC_STOP_IN' | translate}}
+                                                        {{flightCardCtrl.model.segments[0].stop.city.description}}
+                                                        ({{flightCardCtrl.model.segments[0].stop.city.code}}) -
+                                                        {{flightCardCtrl.getDurationScale(flightCardCtrl.model.segments[0].stop.duration)}}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <ib-mmb-fare-family-conditions ng-if="flightCardCtrl.model.segments[0].fareFamilyConditions && flightCardCtrl.model.segments[0].fareFamilyConditions.length > 0" [segment]="flightCardCtrl.model.segments[0]"></ib-mmb-fare-family-conditions>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END MORE DETAILS COLLAPSE -->
+
+                    <!-- SECTION YOUR DOCUMENTS -->
+                    <div ng-if="flightCardCtrl.documents" ng-repeat="(index, segment) in flightCardCtrl.model.segments">
+                        <div ng-if="!segment.showWarning" ng-repeat="(index, passenger) in segment.passengers"
+                            class="ib-box-selects ib-box-selects--type-2">
+                            <header class="ib-box-selects__header">
+                                <span class="ib-icon-passenger ib-icon-passenger--flex">
+                                    <span class="ib-icon-passenger__icon" ng-class="flightCardCtrl.iconTypePass(passenger.id)"></span>
+                                    <span class="ib-icon-passenger__text">{{passenger.name}}</span>
+                                </span>
+                                <span class="ib-icon-passenger" data-ng-if="passenger.infant !== null">
+                                    <span class="ib-icon-passenger__icon icon-bebe"></span>
+                                    <span class="ib-icon-passenger__text">{{passenger.infant.name}}</span>
+                                </span>
+                            </header>
+                            <div class="ib-box-selects__container">
+                                <div class="ib-box-selects__box">
+                                    <p class="ib-box-selects__text" ng-class="passenger.document.icon ? passenger.document.icon : 'icon-validar'">
+                                        {{passenger.document.title}}</p>
+                                    <p ng-if="!passenger.document.showLink" class="ib-box-selects__description">
+                                        {{passenger.document.description}}</p>
+                                    <a ng-if="passenger.document.showLink"
+                                        class="ib-link ib-link--underline ib-link--black ib-link--arrow ib-link__icon--arrow-right"
+                                        title="{{passenger.document.description}}" href="{{passenger.url}}"
+                                        ng-click="flightCardCtrl.updateDatalayer($event)"
+                                        target="_blank">{{passenger.document.description}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="segment.showWarning && segment.warning !== null"
+                            class="ib-layout__line-spacing ib-layout__line-spacing--mdmedium">
+                            <!-- WARNING IMPORTANT -->
+                            <ib-ui-warnings type="segment.warning.type" icon="segment.warning.icon"
+                                title-txt="segment.warning.titleTxt" text="segment.warning.text"
+                                modifier="segment.warning.modifier" title-modifier="segment.warning.titleModifier"
+                                url-link="segment.warning.urlLink" link-text="segment.warning.linkText"></ib-ui-warnings>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,249 @@
+<div class="ib-layout__line-spacing ib-layout__line-spacing--type-1 " ng-if="tripInfoCtrl.tripInfoModel.calendarSlides.slides.length > 0 && !tripInfoCtrl.animationRun">
+    <ib-booking-flights-dates id="bbki-redemption-trip-info-flights-dates" currencies="::tripInfoCtrl.currencies" calendar-data="tripInfoCtrl.tripInfoModel.calendarSlides"
+        index="::tripInfoCtrl.tripInfoModel.originDestinationId" selected-carousel="tripInfoCtrl.currentOriginDestinationIndex" initial-slide-index="tripInfoCtrl.initialSlideIndex"></ib-booking-flights-dates>
+</div>
+<!-- No Availability Results -->
+<div ng-if="(tripInfoCtrl.tripInfoModel.slices.length === 0)" class="ib-layout__line-spacing">
+    <div class="ib-message-filter u-position-relative">
+        <div class="ib-message-filter__header">
+            <span class="ib-message-filter__header-icon icon-alerta_grave"></span>
+            <span class="ib-message-filter__header-title">{{'AVAILABILITY_REDEMPTION_NO_RESULTS_TITLE' | translate}}</span>
+        </div>
+        <div class="ib-message-filter__container">
+            <p class="ib-message-filter__txt">{{'AVAILABILITY_REDEMPTION_NO_RESULTS_BODY' | translate}}</p>
+        </div>   
+    </div>
+</div>
+<div class="ib-fc-calendar-slides-loading" ng-if="(tripInfoCtrl.tripInfoModel.slices.length > 0)">
+    <div ng-if="tripInfoCtrl.tripInfoModel.provider !== 'AWS' && !$root.isPointsOBFlow">
+        <div class="ib-table-flight-filters ib-table-flight-filters--dark ib-table-flight-filters--cabins">
+            <div class="ib-table-flight-filters__item">
+                <a id="bbki-redemption-trip-info-time-filter-link" href="javascript:void(0)" aria-label="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_1'|translate}}" title="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_1'|translate}}"
+                    ng-click="tripInfoCtrl.activateRedemptionFilter('departureDateTime', 'MN')" class="ib-table-flight-filters__text hidden-sm hidden-xs"
+                    ng-class="{'ib-table-flight-filters__text--up': (tripInfoCtrl.choosedFilter.MN === 'departureDateTime' && !tripInfoCtrl.filterReverse.MN), 'ib-table-flight-filters__text--down':(tripInfoCtrl.choosedFilter.MN === 'departureDateTime' && tripInfoCtrl.filterReverse.MN) }">
+                    {{'AVAILABILITY_TRIP_INFO_BODY_A_DESC_1'|translate}}</a>
+                <div class="ib-dropdown-select ib-dropdown-select--type-1 hidden-xl hidden-lg hidden-md" uib-dropdown
+                    is-open="status.isopen" ng-controller="BookingDropdownSelectController as select">
+                    <button id="fare" type="button" class="ib-dropdown-select__button" uib-dropdown-toggle>
+                        <span class="ib-dropdown-select__button-text">{{tripInfoCtrl.selectedListFlightFilter.name| translate |
+                            uppercase}}</span>
+                    </button>
+                    <button id="bbki-redemption-trip-info-filter-btn" class="ib-dropdown-select__caret" ng-class="{'ib-dropdown-select__caret--up':!tripInfoCtrl.filterReverse.MN, 'ib-dropdown-select__caret--down':tripInfoCtrl.filterReverse.MN}"
+                        type="button" data-ng-click="tripInfoCtrl.activateRedemptionFilter(tripInfoCtrl.selectedListFlightFilter.filter, 'MN')">{{'AVAILABILITY_FILTER'|translate}}</button>
+                    <input aria-hidden="true" type="text" class="ib-dropdown-select__input u-hide-accessible" ng-model="tripInfoCtrl.selectedListFlightFilter"
+                        readonly tabindex="-1" />
+                    <ul class="ib-dropdown-select__list" uib-dropdown-menu role="menu" aria-labelledby="fare">
+                        <li class="ib-dropdown-select__list-item" ng-repeat="(index, item) in tripInfoCtrl.listFlightFilter">
+                            <a id="bbki-redemption-trip-info-{{index}}-link" title="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_2'|translate}} {{item.name}}" ng-click="tripInfoCtrl.selectedListFlightFilter = item;tripInfoCtrl.activateRedemptionFilter(tripInfoCtrl.selectedListFlightFilter.filter, 'MN')">{{item.name
+                                | translate}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ib-table-flight-filters__item hidden-sm hidden-xs">
+                <a id="bbki-redemption-trip-info-duration-filter-link" href="javascript:void(0)" aria-label="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_3'|translate}}" title="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_3'|translate}}"
+                    ng-click="tripInfoCtrl.activateRedemptionFilter('duration', 'MN')" class="ib-table-flight-filters__text" ng-class="{'ib-table-flight-filters__text--up':(tripInfoCtrl.choosedFilter.MN === 'duration' && !tripInfoCtrl.filterReverse.MN), 'ib-table-flight-filters__text--down':(tripInfoCtrl.choosedFilter.MN === 'duration' && tripInfoCtrl.filterReverse.MN) }">
+                    {{'AVAILABILITY_TRIP_INFO_BODY_A_DESC_3'|translate}}</a>
+            </div>
+            <div class="ib-table-flight-filters__item hidden-sm hidden-xs">
+                <a id="bbki-redemption-trip-info-cabin-price-filter-link" href="javascript:void(0)" aria-label="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_4'|translate}}" title="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_4'|translate}}"
+                    ng-click="tripInfoCtrl.activateRedemptionFilter('slicePrice', 'MN')" class="ib-table-flight-filters__text" ng-class="{'ib-table-flight-filters__text--up':(tripInfoCtrl.choosedFilter.MN === 'slicePrice' && !tripInfoCtrl.filterReverse.MN), 'ib-table-flight-filters__text--down':(tripInfoCtrl.choosedFilter.MN === 'slicePrice' && tripInfoCtrl.filterReverse.MN) }">
+                    {{'AVAILABILITY_TRIP_INFO_BODY_A_DESC_4'|translate}}</a>
+            </div>
+            <div class="ib-table-flight-filters__item">
+                <a id="bbki-redemption-trip-info-general-filter-link" href="javascript:void(0)" aria-label="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_5'|translate}}" title="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_5'|translate}}"
+                    data-ng-click="tripInfoCtrl.openModal('ib-modal-filters-redemption-flights', 'ib-modals ib-modals--right fade' , $event , 'MN')"
+                    class="ib-table-flight-filters__text ib-table-flight-filters__text--underline break-word-full">
+                    {{'AVAILABILITY_TRIP_INFO_BODY_A_DESC_5'|translate}}</a>
+            </div>
+        </div>
+        <div data-ng-show="!tripInfoCtrl.animationRun">
+            <ul class="ib-tags-filters" ng-if="tripInfoCtrl.tripInfoModel.selectedFilters.MN">
+                <li class="ib-tags-filters__item animate-repeat" ng-repeat="(filterType, info) in tripInfoCtrl.tripInfoModel.selectedFilters.MN"
+                    ng-if="info.enable" ng-switch on="filterType">
+                    <span class="ib-tags-filters__txt" ng-switch-when="cabinType" ng-bind="info.description"></span>
+                    <span class="ib-tags-filters__txt" ng-switch-default ng-bind="(filterType === 'departureHours' ? ('AVAILABILITY_DEPARTURE_FILTER'|translate) :  ('AVAILABILITY_ARRIVAL_FILTER'|translate)) + ' ' + (info.description.min) + ' ' + ('AVAILABILITY_HOUR_FILTER'|translate) + ' ' + (info.description.max)"></span>
+                    <button id="bbki-redemption-trip-info-delete-filter-btn" class="ib-tags-filters__close icon-cerrar" type="button" data-ng-click="tripInfoCtrl.deleteFilters(filterType,false, 'MN')">
+                        <span class="u-hide-accessible">{{'AVAILABILITY_DELETE_FILTER'|translate}}</span>
+                    </button>
+                </li>
+                <li class="ib-tags-filters__item ib-tags-filters__item--link animate-repeat" ng-if="tripInfoCtrl.showDeleteAllMN">
+                    <button id="bbki-redemption-trip-info-delete-all-filter-btn" class="ib-tags-filters__close icon-papelera" type="button" data-ng-click="tripInfoCtrl.deleteFilters('',true, 'MN')">
+                        <span class="ib-tags-filters__txt">{{'AVAILABILITY_DELETE_FILTER'|translate}}</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div data-ng-repeat="(sliceIndex,slice) in filteredSlices = (tripInfoCtrl.tripInfoModel.slices | filter: {provider: 'MN'} |filter:tripInfoCtrl.availabilityFilterMn | orderBy :tripInfoCtrl.choosedFilter.MN : tripInfoCtrl.filterReverse.MN)">
+            <ib-booking-slice-info id="bbki-redemption-trip-info-slice-info" ng-if="::(slice.slicePrice !== 0)" slice-info-model="slice" origin="{{::tripInfoCtrl.tripInfoModel.origin}}"
+                destination="{{::tripInfoCtrl.tripInfoModel.destination}}" origin-destination-id="{{::tripInfoCtrl.tripInfoModel.originDestinationId}}"
+                currencies="::tripInfoCtrl.currencies" current-origin-destination-index="tripInfoCtrl.currentOriginDestinationIndex"
+                animation-run="tripInfoCtrl.animationRun" show-fares-selected="tripInfoCtrl.tripInfoModel.showFaresSelected"
+                selected-slice-index="sliceIndex" selected-slices-length="tripInfoCtrl.selectedSlicesLength"
+                redemption="tripInfoCtrl.redemption"></ib-booking-slice-info>
+        </div>
+        <!-- No Filter Results -->
+        <div ng-if="filteredSlices.length === 0" class="ib-layout__line-spacing">
+            <div class="ib-message-filter">
+                <div class="ib-message-filter__header">
+                    <span class="ib-message-filter__header-icon icon-alerta_grave"></span>
+                    <span class="ib-message-filter__header-title">{{'AVAILABILITY_NO_RESULTS_TITLE' | translate}}</span>
+                </div>
+                <div class="ib-message-filter__container">
+                    <p class="ib-message-filter__txt">{{'AVAILABILITY_NO_RESULTS_BODY' | translate}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="tripInfoCtrl.tripInfoModel.provider !== 'MN'" 
+        class="ib-layout__section u-mt">
+        <div ng-class="{'ib-layout__section u-mt-medium': tripInfoCtrl.tripInfoModel.provider !== 'AWS'}" ib-append-accordion-wrapper show-accordion="tripInfoCtrl.tripInfoModel.provider !== 'AWS' && !$root.isPointsOBFlow" >
+            <div class="u-mt-none">
+                        <div class="ib-table-flight-filters ib-table-flight-filters--dark ib-table-flight-filters--cabins">
+                            <div class="ib-table-flight-filters__item">
+                                <a id="bbki-redemption-trip-info-time-filter-link" href="javascript:void(0)" aria-label="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_1'|translate}}" title="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_1'|translate}}"
+                                    ng-click="tripInfoCtrl.activateRedemptionFilter('departureDateTime', 'AWS')" class="ib-table-flight-filters__text hidden-sm hidden-xs"
+                                    ng-class="{'ib-table-flight-filters__text--up': (tripInfoCtrl.choosedFilter.AWS === 'departureDateTime' && !tripInfoCtrl.filterReverse.AWS), 'ib-table-flight-filters__text--down':(tripInfoCtrl.choosedFilter.AWS === 'departureDateTime' && tripInfoCtrl.filterReverse.AWS) }">
+                                    {{'AVAILABILITY_TRIP_INFO_BODY_A_DESC_1'|translate}}</a>
+                                <div class="ib-dropdown-select ib-dropdown-select--type-1 hidden-xl hidden-lg hidden-md" uib-dropdown
+                                    is-open="status.isopen" ng-controller="BookingDropdownSelectController as select">
+                                    <button id="fare" type="button" class="ib-dropdown-select__button" uib-dropdown-toggle>
+                                        <span class="ib-dropdown-select__button-text">{{tripInfoCtrl.selectedAwsListFlightFilter.name| translate |
+                                            uppercase}}</span>
+                                    </button>
+                                    <button id="bbki-redemption-trip-info-filter-btn" class="ib-dropdown-select__caret" ng-class="{'ib-dropdown-select__caret--up':!tripInfoCtrl.filterReverse.AWS, 'ib-dropdown-select__caret--down':tripInfoCtrl.filterReverse.AWS}"
+                                        type="button" data-ng-click="tripInfoCtrl.activateRedemptionFilter(tripInfoCtrl.choosedFilter.AWS, 'AWS')">{{'AVAILABILITY_FILTER'|translate}}</button>
+                                    <input aria-hidden="true" type="text" class="ib-dropdown-select__input u-hide-accessible" ng-model="tripInfoCtrl.choosedFilter.AWS"
+                                        readonly tabindex="-1" />
+                                    <ul class="ib-dropdown-select__list" uib-dropdown-menu role="menu" aria-labelledby="fare">
+                                        <li class="ib-dropdown-select__list-item" ng-repeat="(index, item) in tripInfoCtrl.AwsListFlightFilter">
+                                            <a id="bbki-redemption-trip-info-{{index}}-link" title="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_2'|translate}} {{item.name}}" ng-click="tripInfoCtrl.selectedAwsListFlightFilter = item;tripInfoCtrl.activateRedemptionFilter(tripInfoCtrl.selectedAwsListFlightFilter.filter, 'AWS')">{{item.name
+                                                | translate}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ib-table-flight-filters__item hidden-sm hidden-xs">
+                                <a id="bbki-redemption-trip-info-duration-filter-link" href="javascript:void(0)" aria-label="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_3'|translate}}" title="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_3'|translate}}"
+                                    ng-click="tripInfoCtrl.activateRedemptionFilter('duration', 'AWS')" class="ib-table-flight-filters__text" ng-class="{'ib-table-flight-filters__text--up':(tripInfoCtrl.choosedFilter.AWS === 'duration' && !tripInfoCtrl.filterReverse.AWS), 'ib-table-flight-filters__text--down':(tripInfoCtrl.choosedFilter.AWS === 'duration' && tripInfoCtrl.filterReverse.AWS) }">
+                                    {{'AVAILABILITY_TRIP_INFO_BODY_A_DESC_3'|translate}}</a>
+                            </div>
+                            <div class="ib-table-flight-filters__item hidden-sm hidden-xs">
+                            </div>
+                            <div class="ib-table-flight-filters__item">
+                                <a id="bbki-redemption-trip-info-general-filter-link" href="javascript:void(0)" aria-label="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_5'|translate}}" title="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_5'|translate}}"
+                                    data-ng-click="tripInfoCtrl.openModal('ib-modal-filters-redemption-flights', 'ib-modals ib-modals--right fade' , $event , 'AWS')"
+                                    class="ib-table-flight-filters__text ib-table-flight-filters__text--underline break-word-full">
+                                    {{'AVAILABILITY_TRIP_INFO_BODY_A_DESC_5'|translate}}</a>
+                            </div>
+                        </div>
+                        <div data-ng-show="!tripInfoCtrl.animationRun">
+                            <ul class="ib-tags-filters" ng-if="tripInfoCtrl.tripInfoModel.selectedFilters.AWS">
+                                <li class="ib-tags-filters__item animate-repeat" ng-repeat="(filterType, info) in tripInfoCtrl.tripInfoModel.selectedFilters.AWS"
+                                    ng-if="info.enable" ng-switch on="filterType">
+                                    <span class="ib-tags-filters__txt" ng-switch-when="stopsNumber1|stopsNumber2|stopsNumber3"
+                                        ng-switch-when-separator="|" ng-bind="info.value === 0 ? ('AVAILABILITY_NON_STOPSNUMBER_FILTER'|translate) : (info.value + ' ' + ('AVAILABILITY_STOPSNUMBER_FILTER' | WordNumberFormatFilter: info.value | translate))"></span>
+                                    <span class="ib-tags-filters__txt" ng-switch-when="cabinType" ng-bind="info.description"></span>
+                                    <span class="ib-tags-filters__txt" ng-switch-default ng-bind="(filterType === 'departureHours' ? ('AVAILABILITY_DEPARTURE_FILTER'|translate) :  ('AVAILABILITY_ARRIVAL_FILTER'|translate)) + ' ' + (info.description.min) + ' ' + ('AVAILABILITY_HOUR_FILTER'|translate) + ' ' + (info.description.max)"></span>
+                                    <button id="bbki-redemption-trip-info-delete-filter-btn" class="ib-tags-filters__close icon-cerrar" type="button" data-ng-click="tripInfoCtrl.deleteFilters(filterType,false, 'AWS')">
+                                        <span class="u-hide-accessible">{{'AVAILABILITY_DELETE_FILTER'|translate}}</span>
+                                    </button>
+                                </li>
+                                <li class="ib-tags-filters__item ib-tags-filters__item--link animate-repeat" ng-if="tripInfoCtrl.showDeleteAllAWS">
+                                    <button id="bbki-redemption-trip-info-delete-all-filter-btn" class="ib-tags-filters__close icon-papelera" type="button" data-ng-click="tripInfoCtrl.deleteFilters('',true, 'AWS')">
+                                        <span class="ib-tags-filters__txt">{{'AVAILABILITY_DELETE_FILTER'|translate}}</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div ng-repeat="(sliceIndex,slice) in filteredSlices = (tripInfoCtrl.tripInfoModel.slices | filter: {provider: 'AWS'} | filter:tripInfoCtrl.availabilityFilterAws | orderBy :tripInfoCtrl.choosedFilter.AWS : tripInfoCtrl.filterReverse.AWS )"
+                            data-ng-switch="slice.stopsNumber">
+                            <div data-ng-switch-when="0">
+                                <ib-booking-slice-info id="bbki-redemption-trip-info-slice-info" ng-if="::(slice.slicePrice !== 0)" slice-info-model="slice"
+                                    origin="{{::tripInfoCtrl.tripInfoModel.origin}}" destination="{{::tripInfoCtrl.tripInfoModel.destination}}"
+                                    origin-destination-id="{{::tripInfoCtrl.tripInfoModel.originDestinationId}}"
+                                    currencies="::tripInfoCtrl.currencies" current-origin-destination-index="tripInfoCtrl.currentOriginDestinationIndex"
+                                    animation-run="tripInfoCtrl.animationRun" show-fares-selected="tripInfoCtrl.tripInfoModel.showFaresSelected"
+                                    selected-slice-index="sliceIndex" selected-slices-length="tripInfoCtrl.selectedSlicesLength" redemption="tripInfoCtrl.redemption"></ib-booking-slice-info>
+                            </div>
+                            <article data-ng-switch-default class="ib-table-flight-cabins__article ib-table-flight-cabins__article--collapse ib-table-flight-cabins__article--scala ib-table-flight-cabins__article--full"
+                                data-ng-class="{'ib-table-flight-cabins__article--selected': tripInfoCtrl.tripInfoModel.showFaresSelected, 'ib-table-flight-cabins__article--shadow': !tripInfoCtrl.animationRun}"
+                                ng-controller="IbBookingCollapseController as collapse">
+                                <div class="ib-table-flight-cabins__article-item ib-table-flight-cabins__article-item--scala ib-table-flight-cabins__article-item--center"
+                                    data-type="detail" data-flight-button-detail>
+                                    <div class="ib-info-journey ib-info-journey--full" ng-click="collapse.clickCollapse($event,true)">
+                                        <div class="ib-info-journey__body">
+                                            <div class="ib-info-journey__body-content u-pb-medium">
+                                                <div class="ib-info-journey__content-time ib-info-journey__content-time--left">
+                                                    <span class="ib-info-journey__airport">
+                                                        <span class="hidden-xs">{{::slice.originCity.description}}</span>
+                                                        <span class="hidden-xl hidden-lg hidden-md hidden-sm">{{::slice.originCity.code}}</span>
+                                                    </span>
+                                                    <span class="ib-info-journey__time">{{::slice.departureDateTimeParsed}}</span>
+                                                </div>
+                                                <div class="ib-info-journey__content-detail">
+                                                    <span class="hidden-md ib-info-journey__detail">{{(slice.stopsNumber
+                                                        + ' ' + ('AVAILABILITY_STOPSNUMBER_FILTER' |
+                                                        WordNumberFormatFilter: slice.stopsNumber |
+                                                        translate).toUpperCase() + ': ')}}
+                                                        <span data-ng-repeat="(index, city) in slice.stopOverCities">{{slice.stopsNumber
+                                                            > 1 ? index === slice.stopsNumber -1 ?
+                                                            city.description.toUpperCase() :
+                                                            city.description.toUpperCase() + ', ' :
+                                                            city.description.toUpperCase()}}
+                                                        </span>
+                                                    </span>
+                                                    <span class="hidden-xl hidden-lg hidden-sm hidden-xs ib-info-journey__detail">{{(slice.stopsNumber
+                                                        + ' ' + ('AVAILABILITY_STOPSNUMBER_FILTER' |
+                                                        WordNumberFormatFilter: slice.stopsNumber |
+                                                        translate).toUpperCase() + ' ')}}
+                                                    </span>
+                                                    <a id="bbki-redemption-trip-info-popover-stopover-{{index}}-link" class="hidden-xl hidden-lg hidden-sm hidden-xs ib-popover-tooltip ib-link-icon" ng-controller="IbPopoverController as popover" href="javascript:void(0)" ng-attr-title="{{tripInfoCtrl.showPopoverStopover(slice.stopOverCities, slice.stopsNumber)}}"
+                                                        popover-class="ib-popover ib-popover--logued" uib-popover="{{tripInfoCtrl.showPopoverStopover(slice.stopOverCities, slice.stopsNumber)}}"
+                                                        popover-placement="left" ng-click="$event.preventDefault()"
+                                                        popover-trigger="'mouseenter'" popover-is-open="popover.isOpen"
+                                                        popover-is-focus-in>
+                                                        <span class="ib-info-icon ib-info-icon__info ib-info-icon__info--type-2 icon-informacion_2 u-show">
+                                                            <span class="u-hide-accessible"></span>
+                                                        </span>
+                                                    </a>
+                                                    <span class="ib-info-journey__detail">{{::slice.durationParsed}}</span>
+                                                </div>
+                                                <div class="ib-info-journey__content-time ib-info-journey__content-time--right">
+                                                    <span class="ib-info-journey__airport">
+                                                        <span class="hidden-xs">{{::slice.destinationCity.description}}</span>
+                                                        <span class="hidden-xl hidden-lg hidden-md hidden-sm">{{::slice.destinationCity.code}}</span>
+                                                    </span>
+                                                    <span class="ib-info-journey__time" data-day="{{slice.daysOfTravel != 0 ? (('AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate) + slice.daysOfTravel + ('AVAILABILITY_SLICE_INFO_DAY' | WordNumberFormatFilter: slice.daysOfTravel | translate)) : ''}}">{{::slice.arrivalDateTimeParsed}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ib-table-flight-cabins__scalas ib-table-flight-cabins__scalas--without-ml" data-ng-repeat="(segmentIndex,segment) in slice.segments">
+                                    <ib-booking-segment-info id="bbki-redemption-trip-info-segment-info" segment-info-model="segment" slice-info-model="slice"
+                                        origin="{{::tripInfoCtrl.tripInfoModel.origin}}" destination="{{::tripInfoCtrl.tripInfoModel.destination}}"
+                                        origin-destination-id="{{::tripInfoCtrl.tripInfoModel.originDestinationId}}"
+                                        currencies="::tripInfoCtrl.currencies" current-origin-destination-index="::tripInfoCtrl.currentOriginDestinationIndex"
+                                        animation-run="tripInfoCtrl.animationRun" show-fares-selected="tripInfoCtrl.tripInfoModel.showFaresSelected"
+                                        segment-index="segmentIndex" slice-index="sliceIndex" selected-slice-index="::tripInfoCtrl.currentOriginDestinationIndex"
+                                        selected-slices-length="tripInfoCtrl.selectedSlicesLength" redemption="tripInfoCtrl.redemption"></ib-booking-segment-info>
+                                </div>
+                            </article>
+                        </div>
+                        <div ng-if="filteredSlices.length === 0" class="ib-layout__line-spacing">
+                            <div class="ib-message-filter">
+                                <div class="ib-message-filter__header">
+                                    <span class="ib-message-filter__header-icon icon-alerta_grave"></span>
+                                    <span class="ib-message-filter__header-title">{{'AVAILABILITY_NO_RESULTS_TITLE' | translate}}</span>
+                                </div>
+                                <div class="ib-message-filter__container">
+                                    <p class="ib-message-filter__txt">{{'AVAILABILITY_NO_RESULTS_BODY' | translate}}</p>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+        </div>
+        <!-- No Filter Results -->
+    </div>
+</div>

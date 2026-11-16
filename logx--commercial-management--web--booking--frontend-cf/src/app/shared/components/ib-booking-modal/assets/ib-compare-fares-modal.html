@@ -1,0 +1,147 @@
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{'COMPARE_FARES_MODAL_TITLE'|translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button id="bbki-compare-fares-close-btn" type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" data-ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body">
+    <div class="ib-layout__line-spacing">
+        <h3 class="ib-heading ib-heading--type-2">{{'COMPARE_FARES_MODAL_SUBTITLE'|translate}}</h3>
+    </div>
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+        <div class="ib-table-modal ib-table-modal__gdr ib-table-modal--left-head">
+            <table class="ib-table-modal__table">
+                <caption class="hide-accessible">{{'COMPARE_FARES_MODAL_ACCESSIBLE'|translate}}</caption>
+                <tbody class="ib-table-modal__body">
+                    <tr class="ib-table-modal__row ib-table-modal__row--gray">
+                        <th class="ib-table-modal__column ib-table-modal__column--head u-text-center">
+                            <span class="ib-table-modal__column-icon">{{'COMPARE_FARES_MODAL_FARE_TEXT'|translate}}</span>
+                            <span class="ib-table-modal__column-description u-display-block">{{'COMPARE_FARES_MODAL_FARE_SUBTEXT'|translate}}</span>
+                        </th>
+                        <td class="ib-table-modal__column" >
+                            <div class="ib-select ib-select--big">
+
+                                <ui-select id="condition_combo_first" class="ib-select__action" data-ng-model="modalCtrl.model.comboFirst"
+                                        on-select="select.select()" name="condition_combo_first">
+                                    <ui-select-match class="ib-select__list-ipt" placeholder="Selecciona una tarifa">
+                                        <span class="ib-select__txt" ng-bind="$select.selected.commercialName  | EliminateWordsFilter:$select.selected.cabinDescription"></span>
+                                    </ui-select-match>
+                                    <ui-select-choices group-by="'cabinDescription'" class="ib-select__list"
+                                                    repeat="condition in (modalCtrl.model.fareFamilyConditions.faresInfo | filter: $select.search)">
+                                        <span class="ib-select__list-txt" ng-bind="::condition.commercialName | EliminateWordsFilter: condition.cabinDescription"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+
+                            </div>
+                            <!--<p class="ib-table-modal__column-description ib-table-modal__column-description--bold hidden-sm hidden-xs">Paga solo por lo que necesitas. Si solo viajas con equipaje de mano, esta es tu tarifa.</p>-->
+                        </td>
+                        <td class="ib-table-modal__column hidden-sm hidden-xs">
+                            <div class="ib-select ib-select--big">
+
+                                <ui-select id="condition_combo_second" class="ib-select__action" data-ng-model="modalCtrl.model.comboSecond"
+                                        on-select="select.select()" name="condition_combo_second">
+                                    <ui-select-match class="ib-select__list-ipt" placeholder="Selecciona una tarifa">
+                                        <span class="ib-select__txt" ng-bind="$select.selected.commercialName  | EliminateWordsFilter:$select.selected.cabinDescription"></span>
+                                    </ui-select-match>
+                                    <ui-select-choices group-by="'cabinDescription'" class="ib-select__list" repeat="condition in (modalCtrl.model.fareFamilyConditions.faresInfo | filter: $select.search)">
+                                        <span class="ib-select__list-txt" ng-bind="::condition.commercialName | EliminateWordsFilter: condition.cabinDescription"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+
+                            </div>
+                            <!--<p class="ib-table-modal__column-description ib-table-modal__column-description--bold hidden-sm hidden-xs">Para ti que llevas maleta y quieres elegir tu asiento. </p>-->
+                        </td>
+                        <td class="ib-table-modal__column" >
+                            <div class="ib-select ib-select--big">
+
+                                <ui-select id="condition_combo_third" class="ib-select__action" data-ng-model="modalCtrl.model.comboThird"
+                                        on-select="select.select()" name="condition_combo_third">
+                                    <ui-select-match class="ib-select__list-ipt" placeholder="Selecciona una tarifa">
+                                        <span class="ib-select__txt" ng-bind="$select.selected.commercialName | EliminateWordsFilter:$select.selected.cabinDescription "></span>
+                                    </ui-select-match>
+                                    <ui-select-choices group-by="'cabinDescription'" class="ib-select__list" repeat="condition in (modalCtrl.model.fareFamilyConditions.faresInfo | filter: $select.search)">
+                                        <span class="ib-select__list-txt" ng-bind="::condition.commercialName | EliminateWordsFilter: condition.cabinDescription "></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                                
+                            </div>
+                            <!--<p class="ib-table-modal__column-description ib-table-modal__column-description--bold hidden-sm hidden-xs">¿Necesitas flexibilidad para cambiar tu reserva? Además, incluye maleta y elección de asiento.</p>-->
+                        </td>
+
+                        <!--<td class="ib-table-modal__column" ng-repeat="fareFamilyConditions in modalCtrl.model.fareFamilyConditions.faresInfo">
+                            <p class="ib-table-modal__column-title">{{fareFamilyConditions.commercialName}}</p>
+                        </td>-->
+                    </tr>
+                    <tr class="ib-table-modal__row" ng-repeat="(index,condition) in modalCtrl.model.fareFamilyConditions.conditions">
+                        
+                        <th class="ib-table-modal__column ib-table-modal__column--head">
+
+                            <span class="ib-table-modal__column-icon {{condition.info.icon}}">{{condition.info.name}}</span>
+
+                        </th>
+
+                        <td class="ib-table-modal__column hidden-sm hidden-xs" id="{{condition.info.code}}_{{modalCtrl.model.comboFirst.commercialName}}" 
+                        ng-if="fareCondition.code === condition.info.code" 
+                        data-ng-repeat="fareCondition in modalCtrl.model.comboFirst.conditions">
+                        
+                            <span data-ng-bind-html="fareCondition.extendedInfo.message + (fareCondition.extendedInfo && fareCondition.extendedInfo.observationCode
+                            ? ' (' + fareCondition.extendedInfo.observationCode + ')' : '')"></span>
+
+                        </td>
+
+                        <td class="ib-table-modal__column hidden-md hidden-lg hidden-xl" id="{{condition.info.code}}_{{modalCtrl.model.comboFirst.commercialName}}" ng-if="fareCondition.code === condition.info.code" data-ng-repeat="fareCondition in modalCtrl.model.comboFirst.conditions">
+
+                            <span class="ib-table-modal__column-txt ib-table-modal__column-txt--left">{{modalCtrl.model.comboFirst.commercialNameES}}</span>
+                            <span class="ib-table-modal__column-txt ib-table-modal__column-txt--right">
+                                
+                                <span data-ng-bind-html="fareCondition.extendedInfo.message + (fareCondition.extendedInfo && fareCondition.extendedInfo.observationCode
+                                ? ' (' + fareCondition.extendedInfo.observationCode + ')' : '')"></span>
+                        </td>
+
+                        <td class="ib-table-modal__column hidden-sm hidden-xs" id="{{condition.info.code}}_{{modalCtrl.model.comboSecond.commercialName}}" ng-if="fareCondition.code === condition.info.code" data-ng-repeat="fareCondition in modalCtrl.model.comboSecond.conditions">
+                            
+                            <span data-ng-bind-html="fareCondition.extendedInfo.message + (fareCondition.extendedInfo && fareCondition.extendedInfo.observationCode
+                            ? ' (' + fareCondition.extendedInfo.observationCode + ')' : '')"></span>
+
+                        </td>
+
+                        <td class="ib-table-modal__column hidden-sm hidden-xs" id="{{condition.info.code}}_{{modalCtrl.model.comboThird.commercialName}}" ng-if="fareCondition.code === condition.info.code" data-ng-repeat="fareCondition in modalCtrl.model.comboThird.conditions">
+                           
+                            <span data-ng-bind-html="fareCondition.extendedInfo.message + (fareCondition.extendedInfo && fareCondition.extendedInfo.observationCode
+                            ? ' (' + fareCondition.extendedInfo.observationCode + ')' : '')"></span>
+
+                        </td>
+                        
+                        <td class="ib-table-modal__column hidden-md hidden-lg hidden-xl" id="{{condition.info.code}}_{{modalCtrl.model.comboThird.commercialName}}" ng-if="fareCondition.code === condition.info.code" data-ng-repeat="fareCondition in modalCtrl.model.comboThird.conditions">
+                            <span class="ib-table-modal__column-txt ib-table-modal__column-txt--left">{{modalCtrl.model.comboThird.commercialNameES}}</span>
+                            <span class="ib-table-modal__column-txt ib-table-modal__column-txt--right">
+                                
+                                <span data-ng-bind-html="fareCondition.extendedInfo.message + (fareCondition.extendedInfo && fareCondition.extendedInfo.observationCode
+                            ? ' (' + fareCondition.extendedInfo.observationCode + ')' : '')"></span>
+                            
+                        </td>
+                        <!--<td class="ib-table-modal__column" ng-if="condition.items" data-ng-repeat="fareCondition in condition.items">
+                            {{fareCondition.text
+                            + (fareCondition.extendedInfo && fareCondition.extendedInfo.observationCode
+                            ? ' (' + fareCondition.extendedInfo.observationCode + ')' : '')}}aaa
+                        </td>
+                        <td class="ib-table-modal__column" ng-if="condition.extendedInfo && !condition.items">
+                            {{condition.text
+                                    + (condition.extendedInfo && condition.extendedInfo.observationCode
+                                    ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}bbb</td>-->
+                    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+        <p class="ib-text ib-text--block ib-text--lh-medium" data-ng-repeat="observation in modalCtrl.model.fareFamilyConditions.faresInfo[0].observations"
+            data-ng-bind-html="'(' + observation.observationCode + ') ' + observation.observationText"></p>
+            <div class="u-mt-xmedium">
+                <p data-ng-if="modalCtrl.model.fareFamilyConditions.relatedContent" class="ib-text ib-text--block ib-text--lh-medium" data-ng-bind-html="modalCtrl.model.fareFamilyConditions.relatedContent"></p>
+            </div>
+    </div>
+</section>

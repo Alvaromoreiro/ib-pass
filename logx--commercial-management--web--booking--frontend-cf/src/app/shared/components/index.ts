@@ -1,0 +1,24 @@
+import './ib-accordion';
+import './ib-booking-bridge/ib-booking-bridge.module';
+import './ib-banner';
+import './ib-booking-availability-cabins';
+import './ib-booking-calendar';
+import './ib-booking-collapse';
+import './ib-booking-dropdown-select';
+import './ib-booking-header';
+import './ib-booking-modal';
+import './ib-booking-total-price';
+import './ib-booking-on-hold-components';
+import './ib-booking-popover';
+import './ib-booking-summary';
+import './ib-collapse';
+import './ib-focusin';
+import './ib-loading-plane';
+import './ib-price-matrix-calendar';
+import './ib-price-matrix-calendar-outbound';
+import './ib-scroll';
+import './ib-slick-carousel';
+import './ib-reusable-components-module';
+import './ib-booking-common-total-price';
+import './ib-booking-crossed-prices';
+

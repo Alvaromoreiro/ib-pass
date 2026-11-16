@@ -1,0 +1,53 @@
+<fieldset class="ib-box-menu__section ib-box-menu__section--full">
+    <legend class="u-hide-accessible">{{'MMB_PASSENGERS_COMMON_DATA_TEXT'|translate}}</legend>
+    <div>
+        <div class="ib-layout__section">
+            <div class="ib-box-cols ib-box-cols__gdr">
+                <div class="ib-box-cols__header ib-box-cols__header--icon">
+                    <h2 class="ib-box-cols__title icon-menu_web">{{'MMB_PASSENGERS_COMMON_DATA_TEXT'|translate}}</h2>
+                    <h3 data-ng-if="contactInfoCtrl.onBusinessInfo" class="ib-box-cols__subtitle">{{'MMB_PASSENGERS_COMMON_DATA_TEXT_SUBTITLE'|translate}} {{contactInfoCtrl.onBusinessInfo}}</h3>
+                </div>
+                <div class="ib-box-cols__content">
+                    <div class="ib-box-cols__subheader">
+                        <h3 class="ib-box-cols__title-section">{{'MMB_PASSENGERS_CONTACT_DATA_TEXT'|translate}}</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                            <span class="ib-box-cols__txt ib-box-cols__txt--lvl-1">{{'MMB_PASSENGERS_EMAIL_TEXT'|translate}}</span>
+                            <span class="ib-box-cols__txt ib-box-cols__txt--lvl-2 u-ellipsis-inline">{{contactInfoCtrl.model.data.contactData.primaryContactInfo.email}}</span>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <span class="ib-box-cols__txt ib-box-cols__txt--lvl-1">{{'MMB_PASSENGERS_PREFIX_AND_PHONE_TEXT'|translate}}</span>
+                            <span class="ib-box-cols__txt ib-box-cols__txt--lvl-2 u-ellipsis-inline">{{contactInfoCtrl.model.data.contactData.primaryContactInfo.phoneDetails.countryCode}}{{contactInfoCtrl.model.data.contactData.primaryContactInfo.phoneDetails.number}}</span>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="contactInfoCtrl.model.data.showEditContactData">
+                        <div class="col-md-12">
+                            <a class="ib-box-cols__link icon-modificar" data-ng-click="contactInfoCtrl.changeContactData(false)" href="javascript:void(0)" title="{{'MMB_PASSENGERS_EDIT_TEXT'|translate}}">{{'MMB_PASSENGERS_EDIT_TEXT'|translate}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ib-box-cols__content">
+                    <div class="ib-box-cols__subheader">
+                        <h3 class="ib-box-cols__title-section">{{'MMB_PASSENGERS_EMERGENCY_CONTACT_DATA_TEXT'|translate}}</h3>
+                    </div>
+                    <div class="row" data-ng-if="contactInfoCtrl.emergencyName && contactInfoCtrl.emergencyPhone">
+                        <div class="col-sm-6 col-xs-12">
+                            <span class="ib-box-cols__txt ib-box-cols__txt--lvl-1">{{'MMB_PASSENGERS_NAME_TEXT'|translate}}</span>
+                            <span class="ib-box-cols__txt ib-box-cols__txt--lvl-2 break-word-full">{{contactInfoCtrl.emergencyName}}</span>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <span class="ib-box-cols__txt ib-box-cols__txt--lvl-1">{{'MMB_PASSENGERS_PREFIX_AND_PHONE_TEXT'|translate}}</span>
+                            <span class="ib-box-cols__txt ib-box-cols__txt--lvl-2 u-ellipsis-inline">{{contactInfoCtrl.emergencyCode}}{{contactInfoCtrl.emergencyPhone}}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a data-ng-click="contactInfoCtrl.changeContactData(true)" class="ib-box-cols__link icon-modificar" href="javascript:void(0)" title="{{!contactInfoCtrl.model.data.passengers[0].emergencyContactInfo.name && !contactInfoCtrl.model.data.passengers[0].emergencyContactInfo.phone ? ('MMB_PASSENGERS_ADD_TEXT'|translate) : ('MMB_PASSENGERS_EDIT_TEXT'|translate)}}">{{!contactInfoCtrl.model.data.passengers[0].emergencyContactInfo.name && !contactInfoCtrl.model.data.passengers[0].emergencyContactInfo.phone ? ('MMB_PASSENGERS_ADD_TEXT'|translate) : ('MMB_PASSENGERS_EDIT_TEXT'|translate)}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

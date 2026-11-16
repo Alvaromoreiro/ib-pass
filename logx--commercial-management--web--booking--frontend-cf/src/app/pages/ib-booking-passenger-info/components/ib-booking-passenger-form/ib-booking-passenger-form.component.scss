@@ -1,0 +1,259 @@
+@import "src/styles/component-tools";
+
+:host ::ng-deep {
+    .p-autocomplete {
+        width: 100%;
+        height: rem(56);
+        border-radius: rem(0);
+        font-family: var(--font-headline);
+    }
+
+    .ib-select-passenger-form {
+        .mandatoryDoc-custom-padding,
+        .personInCharge-custom-padding {
+            .p-inputtext {
+                &:not(:placeholder-shown) {
+                    padding: rem(27) rem(5) rem(9) rem(21)!important;
+                }
+            }
+        }
+
+        .p-autocomplete-dropdown {
+            position: relative;
+            padding-right: rem(20);
+            font-size: rem(12);
+
+            .p-icon-wrapper {
+                display: none !important;
+            }
+
+            &::before {
+                content: "\e92d";
+                position: absolute;
+                top: 50%;
+                right: rem(16);
+                font-family: $font-icons;
+                font-size: 1.1rem;
+                transform: translate(0, -50%);
+            }
+        }
+    
+
+        .p-autocomplete-dropdown.rotate::before  {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+
+        .p-component {
+            width: 100%;
+            font-size: rem(16);
+            font-weight: inherit;
+        }
+
+        .p-inputtext {
+            padding-left: rem(16);
+            border: rem(1) solid var(--ib-color-grey-400-cc);
+            border-right: 0 ;
+            font-family: var(--font-headline);
+            font-size: rem(16);
+            text-align: left;
+            appearance: none;
+            background: color(white);
+            cursor: pointer;
+
+            &:focus {
+                border-color: color(orange-10);
+                outline: none;
+
+                + .p-button {
+                border-color: color(orange-10);
+                border-right: rem(1) solid color(orange-10);
+                }
+            }
+        }
+
+        .p-button {
+            border : rem(1) solid var(--ib-color-grey-400-cc);
+            border-left: 0;
+            font-size: rem(1);
+            background: color(white);
+
+            &:focus {
+                box-shadow: none;
+                outline: none;
+            }
+        }
+
+        .p-button,
+        .p-inputtext {
+            &:disabled {
+                background-color: var(--ib-color-grey-200-ee);
+                cursor: not-allowed;
+            }
+        }
+
+        .p-button.p-button-icon-only {
+            display: flex;
+            width: 40%;
+            align-items: center;
+            padding: rem(12) rem(8);
+            
+        }
+
+        .p-button .p-button-icon {
+            margin-right: rem(16);
+        }
+
+        .p-autocomplete-item {
+            padding: rem(7) rem(22);
+            font-family: $font-normal;
+            font-size: rem(13);
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: rem(18);
+            color: color(gray-10);
+
+            &:hover,&.p-highlight {
+                background: color(gray-50);
+            }
+        }
+
+        .p-autocomplete-loader {
+            display: none;
+        }
+
+        .p-autocomplete-panel {
+            border: 0 none;
+            border-radius: rem(0);
+            color: color(gray-10);
+            background: color(white);
+            box-shadow: 0 rem(6) rem(12) rgb(0 0 0 / 17.5%);
+        }
+
+        .p-autocomplete-items.p-autocomplete-virtualscroll {
+            padding: 0;
+        }
+   
+        .p-autocomplete-panel .p-autocomplete-items.p-autocomplete-virtualscroll .cdk-virtual-scroll-content-wrapper {
+            padding: rem(12) 0;
+        }
+
+        .p-overlay.p-component{
+            top: rem(56) !important;
+            left: rem(0) !important;
+        }
+    
+    }
+
+}
+
+:host ::ng-deep .autocomplete-custom-padding .p-inputtext {
+    padding: rem(27) rem(3) rem(9) rem(21) !important;
+}
+
+
+:host ::ng-deep .ib-input{
+    &__input{
+        &:focus{
+            padding-top: rem(26);
+            padding-bottom: rem(10);
+
+            ~ .ib-input__info {
+                border-color: color(orange-10);
+            }
+        }
+
+        &:not(:placeholder-shown),
+        &:focus {
+            padding: rem(26) rem(16) rem(10);
+        }
+
+        &:disabled{
+            background-color: var(--ib-color-grey-200-ee);
+            cursor: not-allowed;
+        }
+
+        &:focus + .ib-input__label,
+        &:not(:placeholder-shown) + .ib-input__label {
+            top: rem(11);
+            font-family: var(--font-families-verdana);
+            font-size: rem(11);
+            color: var(--cabin-economy);
+            text-transform: uppercase;
+            transform: translate(0);
+        }
+    }
+    
+}
+
+.spacing{
+    &-top{
+        margin-top: rem(16);
+    }
+
+    &-bottom{
+        margin-bottom: rem(16);
+    }
+}
+
+.uploaded-info{
+    &__box{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: rem(16) rem(16);
+        background: var(--ib-color-white);
+        box-shadow: 0 0 rem(15) 0 rgb(102 102 102 / 20%);
+        gap: rem(8);
+    }
+
+    &__text{
+        font-family: var(--font-families-verdana);
+        font-size: rem(14);
+        color: var(--ib-color-grey-800-33);
+    }
+
+    &__button{
+        border: 0;
+        background: none;
+    }
+}
+
+
+
+.municipalityCode-label-container {
+    .ib-select {
+        &__label {
+            position: absolute;
+            top: unset;
+            top: 50%;
+            padding: 0;
+            font-family: var(--font-headline);
+            font-size: rem(16);
+            line-height: 1.2;
+            transform: translateY(-50%);
+            white-space: normal;
+        }
+    }
+}
+
+
+
+
+@include media-query-range("mf-xs") {
+    :host ::ng-deep {
+        .autocomplete-custom-padding .p-inputtext {
+            padding-right: unset !important;
+        }
+    }
+
+    .municipalityCode-label-container {
+        .ib-select {
+            &__label {
+                max-width: rem(150);
+            }
+        }
+
+    }
+}

@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="ib-layout__line-spacing">
+            <div class="ib-input" data-ng-class="{'ib-input--error' :apisDestinationInfoCtrl.containerForm.$submitted && apisDestinationInfoCtrl.containerForm.dest_address.$invalid}">
+                <label class="ib-input__label" data-ng-class="{'ib-input__label--focus' : apisDestinationInfoCtrl.destinationAddrFocused || apisDestinationInfoCtrl.containerForm.dest_address.$viewValue != null || apisDestinationInfoCtrl.isInfant}"
+                    for="APIS_DESTINATION_ADDRESS">{{ 'APIS_ADDRESS_FIELD_LABEL'|translate}}</label>
+                <input class="ib-input__input" type="text" id="APIS_DESTINATION_ADDRESS" name="dest_address"
+                    ng-model="apisDestinationInfoCtrl.destinationData.address"
+                    maxlength="{{::$root.MmBPatterns.ADDRESS_MAX_LENGTH}}" ng-required="::(apisDestinationInfoCtrl.requiredFields.indexOf('DESTINATION_ADDRESS') !== -1)"
+                    ng-focus="apisDestinationInfoCtrl.destinationAddrFocused=true" ng-blur="apisDestinationInfoCtrl.destinationAddrFocused=false"
+                    ng-disabled="apisDestinationInfoCtrl.isInfant"
+                />
+            </div>
+            <div ng-messages="apisDestinationInfoCtrl.containerForm.$submitted && apisDestinationInfoCtrl.containerForm.dest_address.$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'APIS_ADDRESS_REQUIRED_ERROR'|translate}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="ib-layout__line-spacing">
+            <div class="ib-input" data-ng-class="{'ib-input--error' : apisDestinationInfoCtrl.containerForm.$submitted && apisDestinationInfoCtrl.containerForm.dest_zipCode.$invalid}">
+                <label class="ib-input__label" for="APIS_ZIP_CODE" ng-class="{'ib-input__label--focus' : apisDestinationInfoCtrl.zipCodeFocused || apisDestinationInfoCtrl.containerForm.dest_zipCode.$viewValue || apisDestinationInfoCtrl.isInfant}">
+                    {{'APIS_POSTAL_CODE_FIELD_LABEL'|translate}}</label>
+                <input class="ib-input__input" type="text" id="APIS_ZIP_CODE" name="dest_zipCode"
+                    ng-model="apisDestinationInfoCtrl.destinationData.zipCode"
+                    ng-required="::(apisDestinationInfoCtrl.requiredFields.indexOf('DESTINATION_ZIP') !== -1)"
+                    ng-focus="apisDestinationInfoCtrl.zipCodeFocused=true" ng-blur="apisDestinationInfoCtrl.zipCodeFocused=false" ng-disabled="apisDestinationInfoCtrl.isInfant"
+                />
+            </div>
+            <div ng-messages="apisDestinationInfoCtrl.containerForm.$submitted && apisDestinationInfoCtrl.containerForm.dest_zipCode.$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'APIS_POSTAL_CODE_REQUIRED_ERROR'|translate}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-if="!apisDestinationInfoCtrl.isInfant" class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="ib-layout__line-spacing">
+            <div class="ib-input" data-ng-class="{'ib-input--error' : apisDestinationInfoCtrl.containerForm.$submitted && apisDestinationInfoCtrl.containerForm.dest_city.$invalid}">
+                <label data-ng-class="{'ib-input__label--focus' : apisDestinationInfoCtrl.destCityFocused || apisDestinationInfoCtrl.containerForm.dest_city.$viewValue || apisDestinationInfoCtrl.isInfant}"
+                    class="ib-input__label" for="APIS_DESTINATION_CITY">{{'APIS_CITY_FIELD_LABEL'|translate}}</label>
+                <input class="ib-input__input" type="text" id="APIS_DESTINATION_CITY" name="dest_city" ng-focus="apisDestinationInfoCtrl.destCityFocused=true"
+                    ng-blur="apisDestinationInfoCtrl.destCityFocused=false" ng-model="apisDestinationInfoCtrl.destinationData.city"
+                    maxlength="{{::$root.MmBPatterns.NAME_SURNAME}}" ng-pattern="::$root.MmBPatterns.NAME_SURNAME_PATTERN" ng-disabled="apisDestinationInfoCtrl.isInfant"
+                    data-ib-validator-cleaner="{{::$root.MmBPatterns.NAME_SURNAME_CLEANER}}" ng-required="::(apisDestinationInfoCtrl.requiredFields.indexOf('DESTINATION_CITY') !== -1)"
+                />
+            </div>
+            <div ng-messages="apisDestinationInfoCtrl.containerForm.$submitted && apisDestinationInfoCtrl.containerForm.dest_city.$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'APIS_CITY_REQUIRED_ERROR'|translate}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="ib-layout__line-spacing">
+            <div class="ib-select" ng-class="{'ib-select--error':apisDestinationInfoCtrl.containerForm.$submitted && apisDestinationInfoCtrl.containerForm.dest_state.$invalid}">
+                <label class="ib-select__label" for="APIS_DESTINATION_STATE" data-ng-class="apisDestinationInfoCtrl.destinationData.state ? 'ib-select__label--focus' : 'ib-select__label--unfocus'">{{'APIS_STATE_FIELD_LABEL'|translate}}</label>
+                <ui-select class="ib-select__action" id="APIS_DESTINATION_STATE" name="dest_state" ng-model="apisDestinationInfoCtrl.destinationData.state"
+                    ng-disabled="apisDestinationInfoCtrl.isInfant"
+                    ng-required="::(apisDestinationInfoCtrl.requiredFields.indexOf('DESTINATION_STATE') !== -1)">
+                    <ui-select-match class="ib-select__list-ipt" placeholder="{{'APIS_STATE_FIELD_LABEL'|translate}}">
+                        <span class="ib-select__txt" ng-bind="$select.selected.description"></span>
+                    </ui-select-match>
+                    <ui-select-choices class="ib-select__list" repeat="state.code as state in apisDestinationInfoCtrl.states | filter: $select.search">
+                        <span class="ib-select__list-txt" ng-bind="::state.description"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div ng-messages="apisDestinationInfoCtrl.containerForm.$submitted && apisDestinationInfoCtrl.containerForm.dest_state.$error">
+                <p class="ib-alert ib-alert--error" ng-message="required">{{'APIS_STATE_REQUIRED_ERROR'|translate}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+

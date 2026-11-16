@@ -1,0 +1,39 @@
+<div class="info-tooltip"
+    ibBookingCollapse
+    [collapsed]="true"
+    collapseTrigger="flightInfoTrigger"
+    collapseContainer="flightInfoContainer">
+    <button class="ib-header-common__fly-icon ib-header-common__fly-icon--tooltip icon-informacion_2 hidden-lg hidden-xl" title="{{'CLICK_FOR_MORE_INFORMATION_TEXT'|translate}}" aria-controls="flightInfoContainer" flightInfoTrigger focusin></button>
+    <div id="flightInfoContainer" class="collapse-container" flightInfoContainer>
+        <div class="ib-flights-message">
+            <ul class="ib-flights-message__list">
+                <span [ngSwitch]="flightType">
+                    <li *ngSwitchCase="'multiCityFlight'" class="ib-flights-message__list-item">
+                        <span *ngFor="let trip of trips; let i = index" class="ib-flex__column" [ngClass]="{'u-mt-xsmall': i > 0}">
+                            <span class="ib-flights-message__item-text ib-flights-message__item-text--bold">{{trip.originCode}} - {{trip.destinyCode}}:</span>
+                            <span class="ib-flights-message__item-text ib-flights-message__item-text--small ib-flights-message__item-text--gray">{{trip.dateFlight | shortDateFormat}}</span>
+                        </span>
+                    </li>
+                    <li *ngSwitchDefault class="ib-flights-message__list-item">
+                        <span class="ib-flights-message__item-text">{{'POP_OVER_MAIN_HEADER_OUTBOUND_FLIGHT'|translate | uppercase}}</span>
+                        <span class="ib-flights-message__item-text ib-flights-message__item-text--bold">{{trips[0].originCity}} - {{trips[0].destinyCity}}</span>
+                        <span class="ib-flights-message__item-text ib-flights-message__item-text--small ib-flights-message__item-text--gray" *ngIf="trips[0].dateFlight">{{trips[0].dateFlight}}</span>
+                        <span class="ib-flights-message__item-text u-mt-xsmall" *ngIf="trips[0].tripType === '2'">{{'POP_OVER_MAIN_HEADER_RETURN_FLIGHT'|translate | uppercase}}</span>
+                        <span class="ib-flights-message__item-text ib-flights-message__item-text--bold" *ngIf="trips[0].tripType === '2'">{{trips[0].destinyCity}} - {{trips[0].originCity}}</span>
+                        <span class="ib-flights-message__item-text ib-flights-message__item-text--small ib-flights-message__item-text--gray" *ngIf="trips[0].returnFlight">{{trips[0].returnFlight}}</span>
+                    </li>
+                </span>
+                <li class="ib-flights-message__list-item">
+                    <span class="ib-flights-message__item-text ib-flights-message__item-text--big ib-flights-message__item-text--inline-block icon-persona"></span>
+                    <span class="ib-flights-message__item-text ib-flights-message__item-text--inline-block">x {{trips[0].passengers}}</span></li>
+                <li class="ib-flights-message__list-item hidden-lg hidden-xl" *ngIf="advancedSearch">
+                    <button class="ib-flights-message__link"
+                       (click)="isMultiFlight && !isHMad ? backToMultiFlightSearch(false) : openAdvancedSearch()"
+                       title="{{'POP_OVER_MAIN_HEADER_MODIFY_SEARCH_LINK_TITLE'|translate}}"
+                       focusin>{{'POP_OVER_MAIN_HEADER_MODIFY_SEARCH_LINK'|translate}}
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

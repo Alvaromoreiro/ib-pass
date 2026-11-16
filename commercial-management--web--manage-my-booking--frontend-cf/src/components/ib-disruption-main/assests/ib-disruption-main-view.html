@@ -1,0 +1,375 @@
+<main class="ib-layout ib-layout__gdr">
+    <div class="ib-background-banner ib-background-banner--gray ">
+        <div class="ib-background-banner__figure ib-background-banner__figure--height-full"></div>
+            <div class="container">
+                <!-- HEADER TITLE PAGE -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h1 class="hidden">{{'MMB_DISRUPTION_LABEL_CHANGE_TIME' | translate }}</h1>
+                        <div tabindex="0" class="ib-layout__line-spacing ib-layout__line-spacing--medium ib-layout__line-spacing--top-xxlarge-responsive" focusin>
+                            <span ng-if="!disruptionCtrl.model.isGenericDisruption.isMajorDisruption" class="ib-text ib-text--extra-xlargest-responsive ib-text--especial ib-text--lh-large-responsive ib-text--block" data-ng-bind-html="disruptionCtrl.model.common.title"></span>
+                            <span ng-if="disruptionCtrl.model.isGenericDisruption.isMajorDisruption" class="ib-text ib-text--extra-xlargest-responsive ib-text--especial ib-text--lh-large-responsive ib-text--block">{{'MMB_DISRUPTION_LABEL_MAJOR_DISRUPTION' | translate }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-if="disruptionCtrl.model.common.generalTitleDescription && !disruptionCtrl.model.notIberiaTicket && disruptionCtrl.model.showChangeFlightSection && disruptionCtrl.model.hasTickets">
+                    <div class="col-xs-12 col-lg-9 col-xl-8 u-mt-small">
+                        <div tabindex="0" class="ib-layout ib-layout__line-spacing--large" focusin>
+                            <span class="ib-text ib-text--xbig-responsive ib-text--especial ib-text--lh-normal ib-text--block" data-ng-bind-html="disruptionCtrl.model.common.generalTitleDescription"></span>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="disruptionCtrl.model.hasFreeTickets" class="row">
+                    <div class="col-xs-12 col-lg-9 col-xl-8">
+                        <!-- ALERT -->
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--top-medium-responsive ib-layout__line-spacing--medium 
+                            u-mb-medium ib-msg-alert ib-msg-alert--danger ib-msg-alert--free-tickets icon-alertas"
+                            role="alert"
+                            aria-live="assertive"
+                            aria-atomic="true"
+                            aria-labelledby="disruption-employee-alert-title"
+                            aria-describedby="disruption-employee-alert-description">
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-border-left-none">
+                                <p id="disruption-employee-alert-title" class="ib-msg-alert__text ib-msg-alert__text--title-free">
+                                    {{'MMB_YOUR_FLIGHTS_FREE_TICKET_ALERT_TITLE'|translate}}</p>
+                                <p id="disruption-employee-alert-description" class="ib-msg-alert__text">
+                                    {{'MMB_YOUR_FLIGHTS_FREE_TICKET_ALERT_TEXT'|translate}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-3 col-xl-4">
+                        <div class="ib-box-info--flex u-mt-none">
+                            <div class="ib-box-info ib-box-info--type-bond" ng-if="disruptionCtrl.model.flagPassengerRights">
+                                <ib-disruption-passenger-rights on-show-passenger-rights="disruptionCtrl.showPassengerRights()"></ib-disruption-passenger-rights>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="disruptionCtrl.model.notIberiaTicket || !disruptionCtrl.model.hasTickets" class="row">
+                    <div class="col-xs-12 col-lg-9 col-xl-8">
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--top-medium-responsive ib-layout__line-spacing--medium u-mb-medium">
+                            <div class="ib-msg-alert--smedium ib-msg-alert__alert-box ib-msg-alert--danger icon-alertas">
+                                <p ng-if="disruptionCtrl.model.notIberiaTicket && disruptionCtrl.model.hasTickets" class="ib-msg-alert__alert-box ib-msg-alert__alert-box--text">
+                                    <b>{{'MMB_YOUR_FLIGHTS_FLIGHT_NO_IBERIA_ALERT_TITTLE_NEW'|translate}}</b>
+                                </p>
+                                <p class="ib-msg-alert__alert-box ib-msg-alert__alert-box--text" ng-class="disruptionCtrl.model.hasTickets ? 'u-mt-small' : ''">{{(disruptionCtrl.model.hasTickets ? 'MMB_YOUR_FLIGHTS_FLIGHT_NO_IBERIA_ALERT_TEXT_NEW' : 'MMB_DISRUPTION_NO_TICKETS_TITLE')|translate}}</p>
+                                <p ng-if="!disruptionCtrl.model.hasTickets && !disruptionCtrl.model.isExternalChannel" class="ib-msg-alert__alert-box ib-msg-alert__alert-box--text u-mt-small">{{'MMB_DISRUPTION_NO_TICKETS_SUBTITLE_IBCOM' | translate : {phone: disruptionCtrl.model.contactPhone} }}</p>
+                                <p ng-if="!disruptionCtrl.model.hasTickets && disruptionCtrl.model.isExternalChannel" class="ib-msg-alert__alert-box ib-msg-alert__alert-box--text u-mt-small">{{'MMB_DISRUPTION_NO_TICKETS_SUBTITLE_EXTERNAL' | translate}}</p>
+                                <a ng-if="disruptionCtrl.model.notIberiaTicket && disruptionCtrl.model.hasTickets" ng-href="{{::disruptionCtrl.logoUri}}" class="ib-msg-alert__alert-box ib-msg-alert__alert-box--text ib-link ib-link--hightlight u-mt-small">{{'MMB_VOUCHER_REFUND_HEADER_CONFIRMATION_STEP_TITLE'|translate}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END HEADER TITLE PAGE -->
+                <div class="row">
+                    <div class="col-xs-12 col-lg-9 col-xl-8">
+                        <!-- Header Cards Info -->
+                        <div tabindex="0" class="ib-layout__line-spacing" focusin ng-if="disruptionCtrl.model.headerCard.textEnabled && disruptionCtrl.model.headerCard.list.length > 0">
+                            <span class="ib-text ib-text--xlarge-responsive ib-text--especial ib-text--spacing-medium">
+                                <span ng-if="disruptionCtrl.model.headerCard.numberEnabled">
+                                    {{disruptionCtrl.model.headerCard.number}}.
+                                </span>
+                                {{disruptionCtrl.model.headerCard.title | translate}}
+                            </span>
+                            <span class="ib-text ib-text--block">
+                                {{disruptionCtrl.model.headerCard.desc | translate}}
+                            </span>
+                        </div>
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmallest" ng-repeat="disrupted in disruptionCtrl.model.headerCard.list">
+                            <div class="ib-ticket-block ib-ticket-block__message ib-ticket-block--disruption" ng-class="{'u-mb-big': $last && !disruptionCtrl.model.showUpdateTime, 'u-mb': disruptionCtrl.model.showUpdateTime}">
+                                <ib-disruption-flight-card-component channel="disruptionCtrl.model.flagChannelOthers" data="disrupted"></ib-disruption-flight-card-component>
+                                <div class="ib-layout__line-spacing ib-layout__line-spacing--top-xmedium ib-layout__line-spacing--xsmall u-pb-smedium-sm u-pb-smedium-xs" ng-if="$last && disruptionCtrl.model.headerCard.acceptEnabled">
+                                    <div class="ib-content-buttons ib-content-buttons__gdr">
+                                        <div class="ib-content-buttons__content-left">
+                                            <button type="button" class="ib-button ib-button--w-medium ib-button--big-special" ng-click="disruptionCtrl.model.acceptChanges()">
+                                                {{'MMB_DISRUPTION_CHANGE_ACCEPT_BUTTON' | translate}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Middle Cards Info -->
+                        <div tabindex="0" class="ib-layout__line-spacing" focusin ng-if="disruptionCtrl.model.middleCard.textEnabled && disruptionCtrl.model.middleCard.list.length > 0">
+                            <span class="ib-text ib-text--xlarge-responsive ib-text--especial ib-text--spacing-medium">
+                                <span ng-if="disruptionCtrl.model.middleCard.numberEnabled">
+                                    {{disruptionCtrl.model.middleCard.number}}.
+                                </span>
+                                {{disruptionCtrl.model.middleCard.title | translate}}
+                            </span>
+                            <span class="ib-text ib-text--block">
+                                {{disruptionCtrl.model.middleCard.desc | translate}}
+                            </span>
+                        </div>
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmallest" ng-repeat="disrupted in disruptionCtrl.model.middleCard.list">
+                            <div class="ib-ticket-block ib-ticket-block__message ib-ticket-block--disruption" ng-class="{'u-mb': $last}">
+                                <ib-disruption-flight-card-component channel="disruptionCtrl.model.flagChannelOthers" data="disrupted"></ib-disruption-flight-card-component>
+                                <div class="ib-layout__line-spacing ib-layout__line-spacing--top-xmedium ib-layout__line-spacing--xsmall u-pb-smedium-sm u-pb-smedium-xs" ng-if="$last && disruptionCtrl.model.middleCard.acceptEnabled">
+                                    <div class="ib-content-buttons ib-content-buttons__gdr">
+                                        <div class="ib-content-buttons__content-left">
+                                            <button type="button" class="ib-button ib-button--w-medium ib-button--big-special" ng-click="disruptionCtrl.model.acceptChanges()">
+                                                {{'MMB_DISRUPTION_CHANGE_ACCEPT_BUTTON' | translate}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Alternative Title -->
+                        <div class="row" ng-if="!(disruptionCtrl.model.hasPets && !disruptionCtrl.model.bottomCard.textEnabled) && disruptionCtrl.model.common.showAlternative && (disruptionCtrl.model.showChangeFlightSection || disruptionCtrl.model.flagShowRefundArea || disruptionCtrl.model.bottomCard.acceptEnabled) && !disruptionCtrl.model.specialOrderStatus && disruptionCtrl.model.hasTickets">
+                            <div class="col-xs-12">
+                                <div tabindex="0" class="ib-layout__line-spacing" focusin>
+                                    <div class="ib-layout__line-spacing ib-layout__line-spacing--small ib-layout__line-spacing--top">
+                                        <p class="ib-text ib-text--biggest-disruption ib-text--biggest-responsive ib-text--especial ib-text__spacing ib-text--spacing-medium ib-text--block ib-text--lh-large-responsive" data-ng-bind-html="disruptionCtrl.model.common.subTitle"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Cards Info -->
+                        <div tabindex="0" class="ib-layout__line-spacing" focusin ng-if="disruptionCtrl.model.bottomCard.textEnabled && disruptionCtrl.model.bottomCard.list.length > 0">
+                            <span ng-if="!disruptionCtrl.model.notIberiaTicket && disruptionCtrl.model.hasTickets" class="ib-text ib-text--xlarge-responsive ib-text--especial ib-text--spacing-medium">
+                                <span ng-if="disruptionCtrl.model.bottomCard.numberEnabled">
+                                    {{'MMB_DISRUPTION_OPTION_TITLE'| translate}} {{disruptionCtrl.model.bottomCard.number}}:
+                                </span>
+                                {{disruptionCtrl.model.bottomCard.title | translate}}
+                            </span>
+                            <span class="ib-text ib-text--block" data-ng-bind-html="disruptionCtrl.model.bottomCard.desc"></span>
+                        </div>
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmallest" ng-repeat="disrupted in disruptionCtrl.model.bottomCard.list">
+                            <div class="ib-ticket-block ib-ticket-block__message ib-ticket-block--disruption" ng-class="{'u-mb-medium': $last}">
+                                <ib-disruption-flight-card-component channel="disruptionCtrl.model.flagChannelOthers" data="disrupted"></ib-disruption-flight-card-component>
+                                <div class="ib-layout__line-spacing ib-layout__line-spacing--top-xmedium ib-layout__line-spacing--xsmall u-pb-smedium-sm u-pb-smedium-xs" ng-if="$last && disruptionCtrl.model.bottomCard.acceptEnabled">
+                                    <div class="ib-content-buttons ib-content-buttons__gdr">
+                                        <div class="ib-content-buttons__content-left">
+                                            <button type="button" class="ib-button ib-button--w-medium ib-button--big-special" ng-click="disruptionCtrl.model.acceptChanges()">
+                                                {{'MMB_DISRUPTION_CHANGE_ACCEPT_BUTTON' | translate}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span data-ng-if="$last && disruptionCtrl.model.bottomCard.acceptEnabled" class="ib-text ib-text--block u-mb-smedium">
+                                {{'MMB_DISRUPTION_REMEMBER_YOUR_RIGHTS' | translate}}
+                            </span>
+                        </div>
+
+                        <span class="ib-text ib-text--block u-mb-smedium" ng-if="disruptionCtrl.model.hasPets">
+                            {{'MMB_DISRUPTION_PET_INFO_MSG' | translate}} {{'MMB_DISRUPTION_CALLCENTER_CONTACT_MSG' | translate}} {{disruptionCtrl.model.contactPhone}}
+                        </span>
+
+                        <!-- Conditions information -->
+                        <div class="ib-msg-alert ib-msg-alert--bond icon-informacion_2 alert u-mb-medium" 
+                            ng-if="(disruptionCtrl.model.bottomCard.acceptEnabled || disruptionCtrl.model.headerCard.acceptEnabled) && (!disruptionCtrl.model.showChangeFlightSection || disruptionCtrl.model.hasPets || disruptionCtrl.model.reshopConditions.callcenterInfo.enabled)">
+                            <p class="ib-msg-alert__description">
+                                <span ng-if="disruptionCtrl.model.isGenericDisruption && !disruptionCtrl.model.unifiedNotIberiaOP"
+                                    class="ib-text ib-text--bold">{{'MMB_FLEXIBILIZATION_REASON_INFO_KEEP_SUBTITLE' | translate}}*:</span>
+                                <span ng-if="!disruptionCtrl.model.isGenericDisruption || (disruptionCtrl.model.isGenericDisruption && disruptionCtrl.model.unifiedNotIberiaOP)"
+                                    class="ib-text ib-text--bold">{{'MMB_FLEXIBILIZATION_REASON_INFO_KEEP_SUBTITLE' | translate}}:</span>
+                            </p>
+                            <ul class="ib-list u-mt-small">
+                                <li class="ib-list__item ib-list__item--mt-14"
+                                    data-ng-repeat="condition in disruptionCtrl.model.changeConditions.keepConditions">
+                                    <span class="ib-text">{{condition.message | translate}}</span>
+                                </li>
+                            </ul>
+                            <p class="ib-msg-alert__description u-mt-small">
+                                <span class="ib-text ib-text--bold">{{'MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_SUBTITLE' | translate}}:</span>
+                            </p>
+                            <ul class="ib-list u-mt-small">
+                                <li class="ib-list__item ib-list__item--mt-14"
+                                    data-ng-repeat="condition in disruptionCtrl.model.changeConditions.notKeepConditions">
+                                    <span class="ib-text">{{condition.message | translate : {days: disruptionCtrl.model.isGenericDisruption.flightDateRange} }}</span>
+                                </li>
+                            </ul>
+                        </div>
+       
+                        <div ng-if="!disruptionCtrl.model.notIberiaTicket && !disruptionCtrl.model.specialOrderStatus && disruptionCtrl.model.hasTickets && !disruptionCtrl.model.hasPets">
+                            <!-- Change date flights -->
+                            <div ng-if="disruptionCtrl.model.showChangeFlightSection">
+                                <ib-disruption-flight-change-date ng-if="disruptionCtrl.model.reshopConditions.involuntaryChanges.enabled"
+                                model="disruptionCtrl.model.selectorFlights" quadrigam="disruptionCtrl.model.selectorFlights.quadrigam" 
+                                raw-slices-info="disruptionCtrl.model.rawSlicesInfo" date-selector-number="disruptionCtrl.model.dateSelectorNumber" 
+                                black-out-periods-data="disruptionCtrl.model.blackOutPeriodsData" black-out-periods-text="disruptionCtrl.model.textBlackoutPeriods"
+                                allowed-periods="disruptionCtrl.model.textAllowedPeriods" sister-cities-data="disruptionCtrl.model.sisterCitiesData" 
+                                generic-disruption="disruptionCtrl.model.isGenericDisruption"></ib-disruption-flight-change-date>
+                                <div class="ib-box ib-box--medium ib-box ib-box--border-narrow u-mb-medium"
+                                    ng-if="disruptionCtrl.model.reshopConditions.callcenterInfo.enabled">
+                                    <h2 class="ib-text ib-text--especial ib-text--xlarge-responsive ib-text__spacing--medium">
+                                        {{'MMB_DISRUPTION_OPTION_TITLE'| translate}} {{disruptionCtrl.model.dateSelectorNumber}}: {{'MMB_DISRUPTION_INFO_CHANGE_FLIGHT_TITLE' | translate}}
+                                    </h2>
+                                    <span ng-if ="!disruptionCtrl.model.operationalTimeMessage" class="ib-text ib-text--block ib-text--lh-normal">
+                                        {{disruptionCtrl.model.common.labelContact | translate}}
+                                        <span ng-if="disruptionCtrl.model.common.contactPhone">{{disruptionCtrl.model.contactPhone}}</span>
+                                    </span>
+                                    <span ng-if ="disruptionCtrl.model.operationalTimeMessage" class="ib-text ib-text--block ib-text--lh-normal">
+                                        {{disruptionCtrl.model.channelDowngradeMessage | translate}}
+                                    </span>
+                                </div>
+                                <!------COMMENT: Scenario 3 of unintentionally disrupted flights commented by unused message until a definition of usage -->
+                                <!-- <div class="ib-box ib-box--medium ib-box--border-narrow ib-box--no-shadow u-mb-medium"
+                                    ng-if="disruptionCtrl.model.flagRebookDisable">
+                                    <h2 class="ib-text ib-text--especial ib-text--xlarge-responsive ib-text__spacing--medium">
+                                        {{'MMB_DISRUPTION_OPTION_TITLE'| translate}} {{disruptionCtrl.model.dateSelectorNumber}}: {{'MMB_DISRUPTION_INFO_CHANGE_FLIGHT_TITLE' | translate}}
+                                    </h2>
+                                    <span class="ib-text ib-text--block ib-text--lh-normal">
+                                        <p><b>{{'MMB_DISRUPTION_REBOOK_ERROR_TITLE_1007' | translate}}. {{'MMB_DISRUPTION_REBOOK_ERROR_SUB_TITLE_1007' | translate}}. </b></p>
+                                        <p>{{'MMB_DISRUPTION_REBOOK_ERROR_MESSAGE_1007' | translate}}</p>
+                                        <span ng-if="disruptionCtrl.model.common.contactPhone">{{disruptionCtrl.model.contactPhone}}</span>
+                                    </span>
+
+                                    </span>
+                                </div> -->
+                            </div>
+
+                            <!--Refund bond component-->
+                            <!-- REFUND VOUCHER -->
+                            <div class="ib-layout__line-spacing u-mt" ng-if="disruptionCtrl.model.refundFlags.flagShowRefundArea && disruptionCtrl.model.refundFlags.refundSimple" focusin>
+                                <p class="ib-text ib-text--xlarge-responsive ib-text--especial ib-text--spacing-medium">
+                                    {{'MMB_DISRUPTION_OPTION_TITLE' | translate}} {{disruptionCtrl.model.refundNumber}}: {{disruptionCtrl.model.refundLabel.title | translate }}
+                                </p>
+                            </div>
+                            <section class="ib-layout__section" ng-if="disruptionCtrl.model.refundFlags.flagShowRefundArea && disruptionCtrl.model.refundFlags.refundSimple">
+                                <div class="ib-box ib-box--medium">
+                                    <div class="ib-box--flex">
+                                        <p class="ib-msg-alert__text--title" ng-if="disruptionCtrl.model.refundLabel.showMixedText">
+                                            <span>
+                                                {{'MMB_REFUNDS_NEW_AREA_TEXT_1' | translate}}
+                                            </span>
+                                            <span class="ib-text--bold">
+                                                {{'MMB_REFUNDS_NEW_AREA_TEXT_1_BOLD' | translate}}
+                                            </span>
+                                            <span>
+                                                {{'MMB_REFUNDS_NEW_AREA_TEXT_2' | translate}}
+                                            </span>
+                                            <span class="ib-text--bold">
+                                                {{'MMB_REFUNDS_NEW_AREA_TEXT_2_BOLD' | translate}}
+                                            </span>
+                                            <span>
+                                                {{'MMB_REFUNDS_NEW_AREA_TEXT_3' | translate}}
+                                            </span>
+                                            <span class="ib-text--bold">
+                                                {{'MMB_REFUNDS_NEW_AREA_TEXT_3_BOLD' | translate}}
+                                            </span>
+                                            <span>
+                                                {{'MMB_REFUNDS_NEW_AREA_TEXT_4' | translate}}
+                                            </span>
+                                            <span class="ib-text--bold">
+                                                {{'MMB_REFUNDS_NEW_AREA_TEXT_4_BOLD' | translate}}
+                                            </span>
+                                            <span>
+                                                {{'MMB_REFUNDS_NEW_AREA_TEXT_5' | translate}}
+                                            </span>
+                                            <span class="ib-text--bold">
+                                                {{'MMB_REFUNDS_NEW_AREA_TEXT_5_BOLD' | translate}}
+                                            </span>
+                                        </p>
+                                        <p class="ib-msg-alert__text--title" ng-if="disruptionCtrl.model.refundLabel.showOnlyVoucherText">
+                                            <span>
+                                                {{'MMB_REFUNDS_ONLY_VOUCHER_NEW_AREA_TEXT_1' | translate}}
+                                            </span>
+                                            <span class="link link__regular--underline" ng-href="#" ng-click="disruptionCtrl.goHome()">
+                                                {{'MMB_REFUNDS_ONLY_VOUCHER_NEW_AREA_TEXT_1_LINK' | translate}}
+                                            </span>
+                                            <span>
+                                                {{'MMB_REFUNDS_ONLY_VOUCHER_NEW_AREA_TEXT_2' | translate}}
+                                            </span>
+                                            <span class="link link__regular--underline" ng-href="#" ng-click="disruptionCtrl.goHome()">
+                                                {{'MMB_REFUNDS_ONLY_VOUCHER_NEW_AREA_TEXT_2_LINK' | translate}}
+                                            </span>
+                                            <span>
+                                                {{'MMB_REFUNDS_ONLY_VOUCHER_NEW_AREA_TEXT_3' | translate}}
+                                            </span>
+                                            <span class="link link__regular--underline" ng-href="#" ng-click="disruptionCtrl.goHome()">
+                                                {{'MMB_REFUNDS_ONLY_VOUCHER_NEW_AREA_TEXT_3_LINK' | translate}}
+                                            </span>
+                                        </p>
+                                        <p class="ib-msg-alert__text--title" ng-if="disruptionCtrl.model.refundLabel.showOnlyCashText">
+                                            {{'MMB_REFUNDS_ONLY_CASH_NEW_AREA_TEXT' | translate}}
+                                        </p>
+                                        <button class="ib-button ib-button--w-medium-desktop u-mt-mobile"
+                                                ng-click="disruptionCtrl.goToRefund()"
+                                                type="submit">{{'MMB_DISRUPTION_REFUND_AREA_TEXT' | translate }}</button>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <div class="ib-box ib-box--medium ib-box--border-narrow  ib-box--no-shadow u-mb-medium" ng-if="disruptionCtrl.model.refundFlags.flagShowRefundArea && !disruptionCtrl.model.refundFlags.refundSimple">
+                                <!-- Options activated-->
+
+                                <!-- REFUND VOUCHER AND CALLCENTER -->
+                                <h2 data-ng-if="disruptionCtrl.model.refundFlags.mixedOption" class="ib-text ib-text--especial ib-text--xlarge-responsive ib-text__spacing--medium">
+                                    {{'MMB_DISRUPTION_OPTION_TITLE' | translate}} {{disruptionCtrl.model.refundNumber}}: {{disruptionCtrl.model.refundLabel.title | translate }}
+                                </h2>
+                                <ul class="ib-list u-mt-small" ng-if="disruptionCtrl.model.refundFlags.mixedOption">
+                                    <li class="ib-list__item ib-list__item--mt-14">
+                                        <span class="ib-text ib-text--bold ng-binding">{{'MMB_VOUCHER_REFUND_MODAL_TITLE' | translate}}</span>
+                                        <br>
+                                        <span class="ib-text ib-text--block ib-text--lh-normal">
+                                            {{disruptionCtrl.model.refundLabel.callCenterMsg | translate}} {{disruptionCtrl.model.contactPhone}}
+                                        </span>
+                                        <!-- <span data-ng-if="disruptionCtrl.model.operationalTime" class="ib-text ib-text--block ib-text--lh-normal">
+                                            {{'MMB_DISRUPTION_ALTERNATIVES_DOWNGRADE_OPERATIONAL_TIME' | translate}}
+                                        </span> -->
+                                    </li>
+                                    <li class="ib-list__item ib-list__item--mt-14">
+                                        <span class="ib-text ib-text--bold ng-binding">{{'MMB_CASH_REFUND_MODAL_BREAKDOWN_TITLE' | translate}}</span>
+                                        <br>
+                                        <span class="ib-text ib-text--block ib-text--lh-normal">
+                                            {{'MMB_REFUNDS_CASH_DISCOUNT_SUBTITLE' | translate}}
+                                            <a ng-href="javascript:void(0)" title="{{'MMB_REFUNDS_ASK_FOR_REFUND' | translate }}" class="ib-link link link__regular link__regular--underline" ng-click="disruptionCtrl.goToRefund()">
+                                                {{'MMB_DISRUPTION_REFUND_AREA_TEXT' | translate }}
+                                            </a>
+                                        </span>
+                                    </li>
+                                </ul>
+                                <!-- REFUND VOUCHER CALLCENTER -->
+                                <h2 data-ng-if="disruptionCtrl.model.refundFlags.callCenterSimple" class="ib-text ib-text--especial ib-text--xlarge-responsive ib-text__spacing--medium">
+                                    {{'MMB_DISRUPTION_OPTION_TITLE' | translate}} {{disruptionCtrl.model.refundNumber}}: {{disruptionCtrl.model.refundLabel.title | translate }}
+                                </h2>
+                                <span data-ng-if="disruptionCtrl.model.refundFlags.callCenterSimple" class="ib-text ib-text--block ib-text--lh-normal u-mt">
+                                    {{disruptionCtrl.model.refundLabel.callCenterMsg | translate}} {{disruptionCtrl.model.contactPhone}}
+                                </span>
+                                <!-- <span data-ng-if="disruptionCtrl.model.refundFlags.callCenterSimple && disruptionCtrl.model.operationalTime" class="ib-text ib-text--block ib-text--lh-normal u-mt">
+                                    {{'MMB_DISRUPTION_ALTERNATIVES_DOWNGRADE_OPERATIONAL_TIME' | translate}}
+                                </span> -->
+                            </div>
+
+                            <div class="ib-text--spacing-xl" data-ng-if="disruptionCtrl.model.warningDowngradeSameFlightAndTime || disruptionCtrl.model.warningDowngradeDiffFlightOrTime">
+                                <span class="ib-text ib-text--block" data-ng-bind-html="disruptionCtrl.model.channelDowngradeMessage"></span>
+                            </div>
+                        </div>
+
+                        <div class="ib-box ib-box--medium ib-box ib-box--border-narrow u-mb-medium"
+                                 ng-if="disruptionCtrl.model.specialOrderStatus && !disruptionCtrl.model.notIberiaTicket && disruptionCtrl.model.hasTickets">
+                                <span class="ib-text ib-text--block ib-text--lh-normal">
+                                    {{disruptionCtrl.model.common.labelContact | translate}}
+                                    <span ng-if="disruptionCtrl.model.common.contactPhone && !disruptionCtrl.model.isExternalChannel">{{disruptionCtrl.model.contactPhone}}</span>
+                                </span>
+
+                                </span>
+                            </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-3 col-xl-4">
+                        <div class="ib-box-info--flex ib-box-info--bond-margin u-mt-none">
+                            <div class="ib-box-info ib-box-info--type-bond" ng-if="disruptionCtrl.model.common.flagContactCenter">
+                                <div class="ib-box-info__wrapper">
+                                    <h2 class="ib-box-info__title">{{'MMB_DISRUPTION_CALLCENTER_DOUBTS'|translate}}</h2>
+                                    <div class="ib-box-info__container">
+                                        <p class="ib-box-info__text">
+                                            {{disruptionCtrl.model.common.labelContact | translate}}
+                                            <span ng-if="disruptionCtrl.model.common.contactPhone">{{disruptionCtrl.model.contactPhone}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="!disruptionCtrl.model.hasFreeTickets && disruptionCtrl.model.flagPassengerRights" class="ib-box-info ib-box-info--type-bond">
+                                <ib-disruption-passenger-rights on-show-passenger-rights="disruptionCtrl.showPassengerRights()"></ib-disruption-passenger-rights>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</main>

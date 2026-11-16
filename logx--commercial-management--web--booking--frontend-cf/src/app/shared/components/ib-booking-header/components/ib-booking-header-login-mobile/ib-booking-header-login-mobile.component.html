@@ -1,0 +1,36 @@
+<div class="login-mobile ib-header-common__login"
+    [ngClass]="{'hidden': model?.isLogged || !model?.show }"
+    ibBookingCollapse
+    [collapsed]="true"
+    [blockScrollMobile]="true"
+    collapseTrigger="loginMobileTrigger"
+    collapseContainer="loginMobileContainer"
+    [avoidClickOutside]="true">
+    <button focusin class="ib-header-common__login-button ib-header-common__login-button--new" title="{{'HEADER_LOGIN_OPEN'|translate}}"
+        id="menus-header-red-bar-login-link"
+        [ngClass]="{'login-header-mobile': headerMobile }"
+        (click)="toggle()"
+        aria-controls="loginMobileContainer"
+        loginMobileTrigger>
+        <span class="ib-header-common__login-icon icon-perfil_login">
+            <span class="u-hide-accessible">{{'MENU_BAR_LOGIN'|translate}}</span>
+        </span>
+    </button>
+    <div id="loginMobileContainer" class="collapse-container" loginMobileContainer>
+        <div class="ib-header-common__login-content">
+            <div class="ib-modals__header-settings">
+                <button type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" (click)="toggle()" loginMobileTrigger>
+                    <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+                </button>
+            </div>
+            <div class="iframe-container">
+                <ib-ui-login-iframe-component
+                    *ngIf="model?.login && isMobile"
+                    [onLogged]="model.login.onLogin"
+                    [afterLogin]="afterLogin"
+                    [onError]="model.login.onError"></ib-ui-login-iframe-component>
+            </div>
+        </div>
+        <!-- <div id="login-backdrop" (click)="toggle()" *ngIf="open"></div> -->
+    </div>
+</div>

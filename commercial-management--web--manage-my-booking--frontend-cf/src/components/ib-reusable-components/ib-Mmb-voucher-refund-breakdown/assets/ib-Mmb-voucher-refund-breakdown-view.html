@@ -1,0 +1,35 @@
+<div class="container">
+    <!-- HEADER TITLE PAGE -->
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="hidden">{{'MMB_VOUCHER_REFUND_BREAKDOWN_INFORMATION_VOUCHER_TITLE' | translate}}</h1>
+            <div tabindex="0" class="ib-layout__line-spacing ib-layout__line-spacing--top-xxlarge-responsive ib-layout__line-spacing--medium" focusin>
+                <span class="ib-text ib-text--extra-xlargest-responsive ib-text--especial ib-text--lh-large-responsive">{{'MMB_VOUCHER_REFUND_MODAL_TITLE' | translate}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div tabindex="0" class="ib-layout__line-spacing" focusin>
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+                    <h2 class="hidden">Importes</h2>
+                    <p class="ib-text ib-text--xlarge-responsive ib-text--especial ib-text__spacing ib-text--spacing-medium ib-text--lh-xnormal" ng-if="voucherRefundBreakdownCtrl.voucherPriceInfo.percentagePrice !== 0">{{'MMB_VOUCHER_REFUND_CONFIRMATION_VOUCHER_AMOUNT' | translate}} {{voucherRefundBreakdownCtrl.voucherPriceInfo.priceWOPercentageFormatted}} + {{voucherRefundBreakdownCtrl.voucherPriceInfo.percentage}} {{'MMB_VOUCHER_REFUND_EXTRA_PERCENTAGE_SUMMARY_SUBTITLE' | translate}} = {{voucherRefundBreakdownCtrl.voucherPriceInfo.formattedPrice}}</p>
+                    <p class="ib-text ib-text--xlarge-responsive ib-text--especial ib-text__spacing ib-text--spacing-medium ib-text--lh-xnormal" ng-if="voucherRefundBreakdownCtrl.voucherPriceInfo.percentagePrice === 0">{{'MMB_VOUCHER_REFUND_CONFIRMATION_VOUCHER_AMOUNT' | translate}} {{voucherRefundBreakdownCtrl.voucherPriceInfo.formattedPrice}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END HEADER TITLE PAGE -->
+    <div class="row">
+        
+        <!-- EMAIL, SUMMARY AND CONTINUE/CANCEL BUTTON COMPONENT -->
+        <ib-MmB-voucher-refund-summary model="voucherRefundBreakdownCtrl.model" contact-info="voucherRefundBreakdownCtrl.contactInfo"
+                                       voucher-price-info="voucherRefundBreakdownCtrl.voucherPriceInfo"
+                                       is-disruption="voucherRefundBreakdownCtrl.isDisruption" cash-price-info="voucherRefundBreakdownCtrl.cashPriceInfo"
+                                       flags="voucherRefundBreakdownCtrl.flags"
+        ></ib-MmB-voucher-refund-summary>
+
+        <!-- VERTICAL DOUBTS AND RIGHTS COMPONENT -->
+        <ib-MmB-doubts-and-rights-vert phone="voucherRefundBreakdownCtrl.phoneList" is-voucher="true"> </ib-MmB-doubts-and-rights-vert>
+    </div>
+</div>

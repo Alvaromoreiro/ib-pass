@@ -1,0 +1,85 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ib-add-bag-tooltip-max
+//    Desripcion: Estilos para el tooltip de la modal de add bags
+//******************************************************************************/
+.#{$wefront__namespace}add-bag-tooltip-max {
+    position: absolute;
+    z-index: 2;
+    top: rem(64);
+    left: rem(38);
+    display: none;
+    width: rem(200);
+    padding: 0 rem(10);
+    pointer-events: none;
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+
+    &__container {
+        position: relative;
+        width: 100%;
+        padding: rem(8);
+        border-radius: rem(3);
+        line-height: rem(16);
+        color: color(white);
+        background-color: color(primary);
+        box-shadow: 0 rem(2) rem(3) 0 color(black, 0.32), 0 rem(-1) rem(4) 0 color(black, 0.11);
+    }
+
+    &__title {
+        display: inline-block;
+        font-size: rem(13);
+        font-weight: bold;
+        text-align: left;
+        line-height: rem(16);
+    }
+
+    &__subtitle {
+        display: inline-block;
+        font-size: rem(13);
+        text-align: left;
+        line-height: rem(16);
+    }
+
+    &__arrow {
+        content: " ";
+        position: absolute;
+        top: rem(-15);
+        right: rem(35);
+        width: 0;
+        height: 0;
+        margin-left: rem(-8);
+        border: solid transparent;
+        border-width: rem(8);
+        border-color: rgb(136 183 213 / 0%);
+        border-bottom-color: color(primary);
+    }
+
+    &__close {
+        position: absolute;
+        top: 0;
+        right: rem(5);
+        display: block;
+        padding: rem(5);
+        font-size: rem(24);
+        text-decoration: none;
+        color: color(white);
+        pointer-events: auto;
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: color(white);
+        }
+    }
+}
+
+.ib-add-bags__button--add.ib-add-bags__button--disabled:hover + .ib-add-bag-tooltip-max {
+    display: block !important;
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}add-bag-tooltip-max {
+        left: rem(32);
+    }
+}

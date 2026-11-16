@@ -1,0 +1,236 @@
+/* -------------------------------------------------------------
+    #CLAIM ACTION
+----------------------------------------------------------------- */
+.#{$wefront__namespace}local-discounts-selector {
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: rem(16) rem(24) rem(16) rem(16);
+    border-left: rem(8) solid color(primary);
+    background: color(white);
+    box-shadow: 0 rem(2) rem(24) 0 color(black, 0.04);
+
+    &__info {
+        width: auto;
+        max-width: remcalc('50%', ' - ', rem(8));
+    }
+
+    &__interactive {
+        display: flex;
+        width: auto;
+        min-width: remcalc('50%', ' - ', rem(8));
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+
+        &-col {
+            display: flex;
+            width: remcalc('50%', ' - ', rem(8));
+            justify-content: flex-end;
+            + .#{$wefront__namespace}local-discounts-selector__interactive {
+                &-col {
+                    margin-left: rem(16);
+                }
+            }
+
+            &--select {
+                min-width: rem(240);
+            }
+        }
+
+        &-full {
+            display: flex;
+            width: 100%;
+            justify-content: flex-end;
+        }
+        .#{$wefront__namespace}select {
+            width: 100%;
+
+            &__label {
+                overflow: hidden;
+                max-width: remcalc('100%', ' - ', rem(42));
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            &__txt,
+            .ui-select-bootstrap .ui-select-match-text span {
+                overflow: hidden;
+                width: 100%;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .ui-select-search {
+                width: 100% !important;
+            }
+        }
+    }
+
+    &__title {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: stretch;
+        justify-content: flex-start;
+        margin-bottom: rem(4);
+        line-height: normal;
+
+        &-text {
+            font-family: $font-special;
+            font-size: rem(22);
+            line-height: normal;
+            color: color(gray-15);
+        }
+    }
+
+    &__subtitle {
+        display: block;
+        font-family: $font-normal;
+        font-size: rem(13);
+        line-height: 1.69;
+        color: color(gray-15);
+    }
+    .#{$wefront__namespace}popover {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        border: 0 none;
+        background: none;
+
+        + .popover {
+            min-width: rem(256);
+            max-width: rem(256);
+
+            .popover-content {
+                padding: rem(16);
+                .#{$wefront__namespace}text {
+                    font-size: rem(12);
+                }
+            }
+        }
+    }
+}
+// mixin
+
+// Responsive
+
+@include media-query('lg') {
+    .#{$wefront__namespace}local-discounts-selector {
+        &__interactive {
+            &-col {
+                &--select {
+                    min-width: rem(240);
+                }
+            }
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}local-discounts-selector {
+        padding-right: rem(16);
+        padding-left: rem(12);
+        border-left-width: rem(4);
+
+        &__interactive {
+            &-col {
+                width: remcalc('50%', ' - ', rem(4));
+                + .#{$wefront__namespace}local-discounts-selector__interactive {
+                    &-col {
+                        margin-left: rem(8);
+                    }
+                }
+
+                &--select {
+                    min-width: rem(200);
+                }
+            }
+        }
+
+        &__title {
+            &-text {
+                font-size: rem(20);
+            }
+        }
+
+        &__subtitle {
+            font-size: rem(12);
+        }
+        .#{$wefront__namespace}popover {
+            + .popover {
+                .popover-content {
+                    padding-right: rem(32);
+                }
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}local-discounts-selector {
+        padding-right: rem(16);
+        padding-left: rem(12);
+        border-left-width: rem(4);
+
+        &__info {
+            position: absolute;
+            left: -99999rem;
+        }
+
+        &__interactive {
+            width: 100%;
+
+            &-col {
+                width: remcalc('50%', ' - ', rem(4));
+                justify-content: flex-start;
+                + .#{$wefront__namespace}local-discounts-selector__interactive {
+                    &-col {
+                        margin-left: rem(8);
+                    }
+                }
+
+                &--select {
+                    min-width: initial;
+                }
+            }
+        }
+        .#{$wefront__namespace}popover {
+            + .popover {
+                .popover-content {
+                    padding-right: rem(32);
+                }
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}local-discounts-selector {
+        &__interactive {
+            width: 100%;
+            flex-flow: column nowrap;
+
+            &-col {
+                width: 100%;
+                justify-content: flex-start;
+                + .#{$wefront__namespace}local-discounts-selector__interactive {
+                    &-col {
+                        margin-top: rem(16);
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+        .#{$wefront__namespace}check {
+            &__label {
+                &::before {
+                    top: rem(12);
+                }
+            }
+        }
+    }
+}

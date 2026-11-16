@@ -1,0 +1,37 @@
+<main class="ib-layout ib-layout--bck-1">
+    <section class="container">
+        <div class="row">
+            <div class="ib-checkin__container">
+                <div class="col-xl-12">
+                    <div class="ib-layout__section ib-layout__section--big">
+                        <form action="#" method="post">
+                            <div class="ib-table-flight-cabins ib-table-flight-cabins--focusable">
+                                <ib-shuttle-fare-detail model="shuttleCtrl.model.fareShuttleModel">
+                                </ib-shuttle-fare-detail>
+                                <ib-shuttle-without-points ng-if="shuttleCtrl.showWithoutPoints()"></ib-shuttle-without-points>
+                                <ib-shuttle-redemption-coupons ng-if="shuttleCtrl.model.fareData.coupons"
+                                    fare-rate="shuttleCtrl.model.fareData.fareRate"
+                                    coupons="shuttleCtrl.model.fareData.coupons" customer-data="$root.customerData"
+                                    total-price="shuttleCtrl.model.fareData.totalPrice" model="shuttleCtrl.model.fareShuttleModel"></ib-shuttle-redemption-coupons>
+                                <ib-shuttle-avios-and-money
+                                    ng-if="shuttleCtrl.showAviosAndMoney()"
+                                    fare-rate="shuttleCtrl.model.fareData.fareRate"
+                                    customer-data="$root.customerData"
+                                    total-price="shuttleCtrl.model.fareData.totalPrice"
+                                    without-avios-money='shuttleCtrl.model.fareData.withoutAviosMoney'
+                                ></ib-shuttle-avios-and-money>
+                                <ib-shuttle-total-price-detail
+                                    ng-if="shuttleCtrl.showTotalPrice()" redemption-price = "shuttleCtrl.model.fareData.totalPrice"
+                                    model="shuttleCtrl.model.fareShuttleModel">
+                                </ib-shuttle-total-price-detail>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <ib-main-footer id="footer" data-ng-if="shuttleCtrl && shuttleCtrl.model"
+        footer-model="{'phoneInfo' : {'prefix' : $root.phonesList['RESERVAS'].prefix, 'phoneNumber': $root.phonesList['RESERVAS'].telephone, 'text': $root.phonesList['RESERVAS'].text }}"
+        is-full-width="::false"></ib-main-footer>
+</main>

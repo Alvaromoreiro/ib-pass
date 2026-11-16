@@ -1,0 +1,87 @@
+<!-- Transition -->
+<!-- Loading -->
+<div class="ib-overlay-fly ib-overlay-fly--type-3 ib-overlay-fly--transparent"
+    data-ng-if="modalCtrl.model.submitted && !modalCtrl.model.showError && !modalCtrl.model.showOk && modalCtrl.model.shouldLoad">
+    <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+        <div class="ib-overlay-fly__icon">
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+        <span class="ib-overlay-fly__text">{{'AVAILABILITY_MULTI_TRIP_LOADING_MODAL' | translate}}</span>
+    </div>
+</div>
+<!-- KO -->
+<div class="ib-overlay-fly ib-overlay-fly--type-3 ib-overlay-fly--transparent"
+    data-ng-if="modalCtrl.model.showError">
+    <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+        <div id="iconLoading" class="ib-overlay-fly__border">
+            <div id="initLoading" class="ib-overlay-fly__border-loading"></div>
+            <div id="error" class="ib-overlay-fly__border-error icon-alertas_3"></div>
+        </div>
+        <span id="text" class="ib-overlay-fly__text">{{'MMB_PASSENGER_MODAL_TRANSITIONS_TITLE_ERROR'|translate}}</span>
+    </div>
+</div>
+<!-- OK -->
+<div class="ib-overlay-fly ib-overlay-fly--type-3 ib-overlay-fly--transparent"
+    data-ng-if="modalCtrl.model.showOk && !modalCtrl.model.showError">
+    <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+        <div id="iconLoading" class="ib-overlay-fly__border">
+            <div id="initLoading" class="ib-overlay-fly__border-loading"></div>
+            <div id="valid" class="ib-overlay-fly__border-valid icon-confirmacion"></div>
+        </div>
+        <span class="ib-overlay-fly__text">{{'MMB_PASSENGER_MODAL_TRANSITIONS_TITLE_OK'|translate}}</span>
+    </div>
+</div>
+
+<!-- MODAL BODY -->
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{'APIS_ENTRANCE_TO_COUNTRY_FORM_TITLE'|translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+
+<section class="ib-modals__body ib-modals__body--cols-simple">
+
+    <div class="ib-msg-alert ib-msg-alert--wait icon-alertas_2 alert"
+        ng-if="modalCtrl.model.passengerApisInfo.infantInfo || modalCtrl.model.passengerApisInfo.infData">
+        <p class="ib-msg-alert__text ib-msg-alert__text--bold">
+            {{'FLIGHT_CONFIRMATION_POSIBLE_DELETE_SEGMENTS_MODAL_TITLE' |translate}}</p>
+        <p class="ib-msg-alert__text">
+            {{'MM_ALERT_BABY' | translate}}
+        </p>
+    </div>
+    <form name="modalCtrl.modalContainerForm" ib-form-scroll-to-error modal="true" novalidate>
+        <ib-apis-form passengers="modalCtrl.model.passengers" passengers-data="modalCtrl.model.passengerApisInfo"
+            container-form="modalCtrl.modalContainerForm" countries="modalCtrl.model.countriesList"
+            companies="modalCtrl.model.companiesList" states="modalCtrl.model.statesList"
+            ng-if="modalCtrl.model.indexFormApis === 0" submitForm="modalCtrl.model.submitted"></ib-apis-form>
+        <ib-apis-form passengers="modalCtrl.model.passengers" adult-passengers-data="modalCtrl.model.passengerApisInfo"
+            passengers-data="modalCtrl.model.passengerApisInfo.infData" container-form="modalCtrl.modalContainerForm"
+            countries="modalCtrl.model.countriesList" companies="modalCtrl.model.companiesList"
+            states="modalCtrl.model.statesList" ng-if="modalCtrl.model.indexFormApis > 0"
+            submitForm="modalCtrl.model.submitted"></ib-apis-form>
+        <div class="ib-layout__line-spacing">
+            <div class="ib-content-buttons">
+                <div class="ib-content-buttons__content-left">
+                    <button data-ib-auto-scroll-top="modal"  class="ib-button ib-button--w-medium" type="button"
+                        ng-click="modalCtrl.nextStep(modalCtrl.modalContainerForm,1)"
+                        ng-if="modalCtrl.model.indexFormApis === 0 && modalCtrl.model.passengerApisInfo.infData">{{'MODAL_CONTINUE'|translate}}</button>
+                    <button data-ib-auto-scroll-top="modal"  class="ib-button ib-button--w-medium" type="submit"
+                        ng-click="modalCtrl.updatePassengerData(modalCtrl.modalContainerForm, modalCtrl.model.passIndex, 'APIS')"
+                        ng-if="(modalCtrl.model.indexFormApis >= 0 && !modalCtrl.model.passengerApisInfo.infData) || (modalCtrl.model.indexFormApis > 0 && modalCtrl.model.passengerApisInfo.infData)">{{'MODAL_ACCEPT'|translate}}</button>
+                </div>
+                <div class="ib-content-buttons__content-right ib-content-buttons__content-right--mb-mobile">
+                    <a href="javascript:void(0)" title="{{'MODAL_CANCEL'|translate}}" class="ib-link"
+                        ng-click="modalCtrl.close()"
+                        ng-if="modalCtrl.model.indexFormApis === 0">{{'MODAL_CANCEL'|translate}}</a>
+                    <a href="javascript:void(0)" title="{{'MODAL_BACK'|translate}}" class="ib-link"
+                        ng-click="modalCtrl.backStep(modalCtrl.modalContainerForm,0)"
+                        ng-if="modalCtrl.model.indexFormApis > 0">{{'MODAL_BACK'|translate}}</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>

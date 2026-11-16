@@ -1,0 +1,130 @@
+/* -------------------------------------------------------------
+    #BOX-SEARCH
+----------------------------------------------------------------- */
+.#{$wefront__namespace}box-search {
+    width: 100%;
+    padding: rem(24);
+    background-color: color(white);
+    box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+
+    &__row {
+        font-size: 0;
+    }
+
+    &__col {
+        display: inline-block;
+        vertical-align: middle;
+
+        // Modifiers
+
+        &--type-1 {
+            width: 16.55555%;
+        }
+
+        &--type-2 {
+            width: 25%;
+        }
+
+        &--type-3 {
+            width: 33.33333%;
+        }
+
+        .ib-input__input {
+            height: rem(57.5);
+        }
+    }
+
+    &__button {
+        position: relative;
+        display: none;
+        width: 100%;
+        height: rem(56);
+        margin-bottom: rem(16);
+        border: rem(1) solid color(gray-70);
+        font-size: rem(14);
+        text-align: center;
+        color: color(gray-30);
+        background-color: color(gray-70);
+
+        &::before {
+            content: "\e935";
+            position: absolute;
+            top: 50%;
+            right: rem(15);
+            font-family: $font-icons;
+            font-size: rem(22);
+            -ms-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+        }
+
+        &.closeCollapse {
+            background-color: color(white);
+            box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+
+            &::before {
+                content: "\e91d";
+                right: 0;
+                width: rem(52);
+                height: 100%;
+                line-height: rem(54);
+                color: color(white);
+                background-color: color(primary);
+            }
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            outline: 0;
+        }
+    }
+}
+
+// Responsive
+@include media-query('xl') {
+    .#{$wefront__namespace}box-search {
+        &__collapse {
+            display: block !important;
+            height: auto !important;
+        }
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}box-search {
+        &__collapse {
+            display: block !important;
+            height: auto !important;
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}box-search {
+        padding: 0;
+        background-color: transparent;
+        box-shadow: none;
+
+        &__button {
+            display: block;
+        }
+
+        &__col {
+            width: 100%;
+            margin-bottom: rem(16);
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}box-search {
+        &__button {
+            display: block;
+        }
+
+        &__col {
+            width: 100%;
+            margin-bottom: rem(16);
+        }
+    }
+}

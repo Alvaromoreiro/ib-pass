@@ -1,0 +1,60 @@
+<form name="localDisForm">
+    <fieldset>
+        <legend class="u-hide-accessible">{{'LOCAL_DISCOUNTS_TITLE'|translate}}</legend>
+        <div class="ib-local-discounts-selector">
+            <div class="ib-local-discounts-selector__info">
+                <p class="ib-local-discounts-selector__title">
+                    <span class="ib-local-discounts-selector__title-text">{{'LOCAL_DISCOUNTS_TITLE'|translate}}</span>
+                    <span class="ib-tooltip" data-ng-if="ibBookingLocalDiscountSelectorCtrl.showTooltip" ng-controller="IbPopoverController as popoverCtrl">
+                        <button class="ib-heading-flight__icon u-color-gray-15 icon-informacion_2 ib-popover" data-ng-attr-title="{{popoverCtrl.triggerTitle|translate}}" uib-popover-template="'web-booking/templates/ib-popover-hover-large.html'" popover-placement="auto bottom" popover-is-open="popoverCtrl.isOpen" popover-trigger="'outsideClick'" data-ng-click="popoverCtrl.hoverLargeView($event, 'LOCAL_DISCOUNTS_TOOLTIP');" data-ng-focus="popoverCtrl.hoverLargeView($event, 'LOCAL_DISCOUNTS_TOOLTIP');" data-ng-mouseenter="popoverCtrl.hoverLargeView($event, 'LOCAL_DISCOUNTS_TOOLTIP');" data-ng-mouseleave="popoverCtrl.hoverLargeView($event, 'LOCAL_DISCOUNTS_TOOLTIP');" focusin>
+                            <span class="sr-only">{{popoverCtrl.triggerTitle|translate}}</span>
+                        </button>
+                    </span>
+                </p>
+                <p class="ib-local-discounts-selector__subtitle">{{'LOCAL_DISCOUNTS_SUBTITLE'|translate}}</p>
+            </div>
+            <div class="ib-local-discounts-selector__interactive">
+                <div class="ib-local-discounts-selector__interactive-col" data-ng-class="{'ib-local-discounts-selector__interactive-col--select':ibBookingLocalDiscountSelectorCtrl.showSelectResident}">
+                    <div class="ib-check" data-ng-if="!ibBookingLocalDiscountSelectorCtrl.showSelectResident && ibBookingLocalDiscountSelectorCtrl.availableResidentDisc">
+                        <input type="checkbox" id="resident-01" name="isResident" class="ib-check__input" data-ng-change="ibBookingLocalDiscountSelectorCtrl.residentDiscountsChange(ibBookingLocalDiscountSelectorCtrl.isResident)" data-ng-model="ibBookingLocalDiscountSelectorCtrl.isResident" data-ng-checked="ibBookingLocalDiscountSelectorCtrl.isResident" focusin/>
+                        <label for="resident-01" class="ib-check__label">
+                            <span class="ib-check__text">{{ibBookingLocalDiscountSelectorCtrl.residentDiscounts.title|translate}}</span>
+                        </label>
+                    </div>
+                    <div class="ib-select ib-select--label" data-ng-if="ibBookingLocalDiscountSelectorCtrl.showSelectResident && ibBookingLocalDiscountSelectorCtrl.availableResidentDisc">
+                        <label class="ib-select__label text-uppercase"
+                            aria-label="{{ibBookingLocalDiscountSelectorCtrl.residentDiscounts.title|translate}}"
+                            for="resident-select-00">{{ibBookingLocalDiscountSelectorCtrl.residentDiscounts.title|translate}}</label>
+                        <ui-select class="ib-select__action" data-ng-model="ibBookingLocalDiscountSelectorCtrl.residentDiscounts.selected"
+                            on-select="ibBookingLocalDiscountSelectorCtrl.residentDiscounts.selected=$select.selected;localDisForm.residentDiscounts.selected=$select.selected;ibBookingLocalDiscountSelectorCtrl.residentDiscountsChange($select.selected.value)" name="residentDiscounts" id="resident-select-00" input-id="resident-select-01" focusin>
+                            <ui-select-match class="ib-select__list-ipt"
+                                placeholder="{{ibBookingLocalDiscountSelectorCtrl.residentDiscounts.title|translate|limitTo:25}}{{ibBookingLocalDiscountSelectorCtrl.residentDiscounts.title.length > 25 ? '...' : ''}}">
+                                <span class="ib-select__txt">{{$select.selected.description|translate}}</span>
+                            </ui-select-match>
+                            <ui-select-choices class="ib-select__list" repeat="item in (ibBookingLocalDiscountSelectorCtrl.residentDiscounts.items | filter: $select.search) track by item.value">
+                                <span class="ib-select__list-txt">{{item.description|translate}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="ib-local-discounts-selector__interactive-col ib-local-discounts-selector__interactive-col--select">
+                    <div class="ib-select ib-select--label">
+                        <label class="ib-select__label text-uppercase"
+                            aria-label="{{ibBookingLocalDiscountSelectorCtrl.familyDiscounts.title|translate}}"
+                            for="large-family-select-00">{{ibBookingLocalDiscountSelectorCtrl.familyDiscounts.title|translate}}</label>
+                        <ui-select class="ib-select__action" data-ng-model="ibBookingLocalDiscountSelectorCtrl.familyDiscounts.selected"
+                            on-select="ibBookingLocalDiscountSelectorCtrl.familyDiscounts.selected=$select.selected;localDisForm.familyDiscounts.selected=$select.selected;ibBookingLocalDiscountSelectorCtrl.familyDiscountsChange($select.selected.value)" name="familyDiscounts" id="large-family-select-00" input-id="large-family-select-01" focusin>
+                            <ui-select-match class="ib-select__list-ipt"
+                                placeholder="{{ibBookingLocalDiscountSelectorCtrl.familyDiscounts.title|translate|limitTo:25}}{{ibBookingLocalDiscountSelectorCtrl.familyDiscounts.title.length > 25 ? '...' : ''}}">
+                                <span class="ib-select__txt">{{$select.selected.description|translate}}</span>
+                            </ui-select-match>
+                            <ui-select-choices class="ib-select__list" repeat="item in (ibBookingLocalDiscountSelectorCtrl.familyDiscounts.items | filter: $select.search) track by item.value">
+                                <span class="ib-select__list-txt">{{item.description|translate}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>

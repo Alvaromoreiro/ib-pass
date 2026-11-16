@@ -1,0 +1,348 @@
+/* -------------------------------------------------------------
+    #TRIP SUMMARY
+----------------------------------------------------------------- */
+.#{$wefront__namespace}trip-summary {
+    position: relative;
+    width: 100%;
+    padding: rem(22) rem(32) 0;
+    margin-top: rem(24);
+    background-color: color(white);
+
+    &__title {
+        padding-bottom: rem(18);
+        font-family: $font-special;
+        font-size: rem(30);
+        line-height: rem(32);
+    }
+    //&__body{}
+
+    &__flight {
+        position: relative;
+        display: flex;
+        width: 100%;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: flex-start;
+        border-top: rem(1) solid color(gray-70);
+
+        &--column {
+            display: flex;
+            flex: 1 1;
+            align-items: center;
+            padding: rem(28) rem(8) rem(24) 0;
+            border-left: rem(1) solid color(gray-70);
+
+            &:first-child {
+                border: 0;
+            }
+        }
+
+        &--data {
+            position: relative;
+            padding-left: rem(22);
+            font-size: 0;
+
+            &::before {
+                position: absolute;
+                left: 0;
+                font-size: rem(20);
+                color: color(gray-15);
+            }
+
+            &-way {
+                display: inline-block;
+                font-family: $font-special;
+                font-size: rem(20);
+                color: color(gray-10);
+            }
+
+            &-info {
+                display: inline-block;
+                padding-left: rem(8);
+                margin-left: rem(8);
+                border-left: rem(1) solid color(gray-70);
+                font-family: $font-special;
+                font-size: rem(20);
+                color: color(gray-10);
+            }
+        }
+
+        &--around {
+            .#{$wefront__namespace}trip-summary {
+                &__flight {
+                    &--data {
+                        position: relative;
+                        padding-right: rem(2);
+                        padding-left: rem(22);
+                        font-size: 0;
+
+                        &::before {
+                            transform: rotate(180deg);
+                        }
+                    }
+                }
+            }
+        }
+
+        &--fare {
+            position: relative;
+            width: 100%;
+            padding-left: rem(64);
+
+            &-title {
+                font-family: $font-normal;
+                font-size: rem(13);
+                color: color(gray-30);
+            }
+
+            &-info {
+                font-family: $font-special;
+                font-size: rem(28);
+                color: color(gray-10);
+            }
+        }
+    }
+
+    &__icon {
+        &::before {
+            position: absolute;
+            top: rem(-4);
+            left: rem(26);
+            font-family: $font-icons;
+            font-size: rem(35);
+            color: color(primary);
+        }
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}trip-summary {
+        &__flight {
+            &--data {
+                &-way {
+                    font-size: rem(18);
+                }
+
+                &-info {
+                    font-size: rem(18);
+                }
+            }
+
+            &--fare {
+                &-title {
+                    font-size: rem(13);
+                }
+
+                &-info {
+                    font-size: rem(24);
+                }
+            }
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}trip-summary {
+        padding: rem(16) rem(16) rem(5) rem(16);
+
+        &__title {
+            padding-bottom: rem(12);
+            font-size: rem(24);
+        }
+
+        &__flight {
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+
+            &--column {
+                width: 100%;
+                padding: rem(16) rem(0);
+                border-top: rem(1) solid color(gray-70);
+                border-left: 0;
+
+                &:first-child {
+                    border-top: 0;
+                }
+            }
+
+            &--data {
+                padding-top: rem(8);
+
+                &::before {
+                    top: rem(7);
+                }
+
+                &-way {
+                    font-size: rem(18);
+                }
+
+                &-info {
+                    font-size: rem(18);
+                }
+            }
+
+            &--fare {
+                padding-left: rem(32);
+
+                &:first-child {
+                    border-top: 0;
+                }
+
+                &-title {
+                    font-size: rem(13);
+                }
+
+                &-info {
+                    font-size: rem(24);
+                }
+            }
+        }
+
+        &__icon {
+            &::before {
+                top: rem(-7);
+                left: rem(-5);
+            }
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}trip-summary {
+        &__title {
+            padding-bottom: rem(12);
+            font-size: rem(24);
+        }
+
+        &__flight {
+            &--column {
+                padding-top: rem(16);
+            }
+
+            &--data {
+                font-size: 0;
+
+                &-way {
+                    font-size: rem(18);
+                }
+
+                &-info {
+                    font-size: rem(18);
+                }
+            }
+
+            &--fare {
+                &-title {
+                    font-size: rem(13);
+                }
+
+                &-info {
+                    font-size: rem(24);
+                }
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}trip-summary {
+        padding: rem(16) rem(16) 0;
+
+        &__title {
+            padding-bottom: rem(12);
+        }
+
+        &__flight {
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            border-top: 0;
+
+            &::before {
+                content: " ";
+                position: absolute;
+                top: 0;
+                left: -1rem;
+                display: block;
+                width: calc(100% + 32px);
+                border-bottom: rem(1) solid color(gray-70);
+            }
+
+            &--column {
+                width: 100%;
+                padding: rem(16) rem(0);
+                border-top: rem(1) solid color(gray-70);
+                border-left: 0;
+            }
+
+            &--data {
+                padding-top: rem(8);
+
+                &::before {
+                    top: rem(7);
+                }
+            }
+
+            &--fare {
+                padding-left: rem(32);
+
+                &:first-child {
+                    border-top: 0;
+                }
+            }
+        }
+
+        &__icon {
+            &::before {
+                top: rem(-7);
+                left: rem(-5);
+            }
+        }
+    }
+}
+
+
+@include media-query('xs') {
+    .#{$wefront__namespace}trip-summary {
+        &__title {
+            padding-bottom: rem(8);
+            font-size: rem(22);
+        }
+
+        &__flight {
+            &--column {
+                padding-top: rem(16);
+                line-height: 1.23;
+            }
+
+            &--data {
+                padding-top: 0;
+                line-height: 1.5;
+
+                &::before {
+                    top: 0;
+                }
+
+                &-way {
+                    font-size: rem(18);
+                }
+
+                &-info {
+                    padding: 0;
+                    margin: 0;
+                    border-left: 0;
+                    font-family: $font-normal;
+                    font-size: rem(13);
+                    color: color(gray-10);
+                }
+            }
+
+            &--fare {
+                &-info {
+                    font-size: rem(18);
+                }
+            }
+        }
+    }
+}

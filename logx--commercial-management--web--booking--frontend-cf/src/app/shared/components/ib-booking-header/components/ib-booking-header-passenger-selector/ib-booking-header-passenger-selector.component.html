@@ -1,0 +1,257 @@
+<div
+  class="ib-passenger--selector ib-filter ib-filter__menu-item ib-filter__menu-item--full"
+  [ngClass]="{ 'ib-filter--right-detail': modifier }"
+>
+
+  <button
+    id="BUTTON_SELECTOR_PASSENGERS"
+    type="button"
+    class="ib-filter__box ib-filter__box--p-none selected passenger-selector-trigger"
+    aria-haspopup="dialog"
+    [attr.aria-expanded]="isOpen"
+    [ngClass]="{ active: isOpen }"
+    [attr.aria-label]="ariaText | translate"
+    (click)="toggle()"
+    (keydown)="controlCollapse($event)"
+  >
+    <div class="ib-select ib-select--label">
+      <label
+        *ngIf="!noInputLabel"
+        class="ib-select__label text-uppercase"
+        [attr.aria-label]="'GENERAL_PASSENGER_TEXT' | translate"
+        for="passengers-select-00"
+      >
+        {{ "GENERAL_PASSENGER_TEXT" | translate }}
+      </label>
+
+      <span
+        class="ib-filter__icon ib-filter__icon--arrow ib-filter__icon--passenger"
+        [ngClass]="{
+          'icon-caret_arriba': isOpen,
+          'icon-caret_abajo': !isOpen,
+        }"
+      ></span>
+
+      <span
+        class="ib-filter__box-content ib-filter__box-content--border"
+        [ngClass]="{
+          'ib-input--error ib-input--button':
+            specialPassengerHasError || numPassengerHasError,
+          'ib-filter__box-content--padding': !noInputLabel,
+        }"
+      >
+        <span
+          class="ib-select__txt ib-text--especial ib-text--line-height-18"
+          [ngClass]="{ 'ib-filter__line': noInputLabel }"
+        >
+          {{ totalPassengers }}
+          {{
+            totalPassengers > 1 || passengersCount === 0
+              ? ("HEADER_ADVANCED_SEARCH_PASSENGER_TITLE" | translate)
+              : onlyTeenager
+                ? ("YOUNG" | translate)
+                : ("HEADER_ADVANCED_SEARCH_PASSENGERS_ADULT" | translate)
+          }}
+        </span>
+      </span>
+    </div>
+  </button>
+
+  <div *ngIf="specialPassengerHasError">
+    <span class="ib-alert ib-alert--error">
+      {{ "INVALID_SELECTION_PASSENGER_TYPE" | translate }}
+    </span>
+  </div>
+
+  <div *ngIf="numPassengerHasError">
+    <span class="ib-alert ib-alert--error">
+      {{ "INVALID_NUMBER_PASSENGER" | translate }}
+    </span>
+  </div>
+
+  <div
+    *ngIf="isOpen"
+    class="ib-filter__dialog ib-filter__dialog--passengers ib-filter__dialog--select-passenger"
+    role="dialog"
+    [attr.aria-hidden]="!isOpen"
+    [attr.aria-label]="ariaText | translate"
+    [ngClass]="{ 'ib-filter__dialog--open': isOpen }"
+  >
+    <div
+      class="ib-popover ib-popover--menu u-pt-none u-pb-none u-pl-none u-pr-none"
+    >
+      <div class="ib-popover--menu__container">
+        <div class="ib-filter__passengers">
+          <ng-container *ngFor="let passenger of passengersTypes">
+            <div class="ib-filter__passengers-item" *ngIf="!passenger.isHidden">
+              <div
+                class="ib-filter__passengers__number"
+                [ngClass]="{ active: passenger.isActive }"
+              >
+                {{ passenger.count }}
+              </div>
+
+              <div class="ib-filter__passengers__info">
+                <span class="ib-heading ib-heading--type-5 u-mb-none">
+                  {{ passenger.passengerType | translate }}
+                </span>
+                <span
+                  class="ib-text ib-text--color-unfocused ib-text--block"
+                  *ngIf="!passenger.showMessage"
+                >
+                  {{ passenger.infoAge | translate }}
+                </span>
+              </div>
+
+              <div class="ib-filter__passengers__increase">
+                <button
+                  [id]="
+                    'BUTTON_SELECTOR_PASSENGER_LESS_' + passenger.passengerType
+                  "
+                  type="button"
+                  class="ib-filter__passengers__less passenger-counter-btn passenger-counter-btn--less"
+                  data-people-counter-button="less"
+                  [attr.aria-label]="
+                    ('DELETE_TEXT' | translate) +
+                    ' + ' +
+                    (passenger.passengerType | translate)
+                  "
+                  [ngClass]="{
+                    active:
+                      passenger.isActive &&
+                      passenger.count > passenger.minPassenger,
+                  }"
+                  [disabled]="
+                    passenger.count === passenger.minPassenger ||
+                    !passenger.isActive
+                  "
+                  (click)="removePassenger(passenger)"
+                  (keydown)="controlCollapse($event)"
+                  (focusin)="onFocusIn()"
+                >
+                  <span class="icon-menos_3"></span>
+                </button>
+
+                <div class="ib-filter__passengers__more-wrap">
+                  <button
+                    [id]="
+                      'BUTTON_SELECTOR_PASSENGER_MORE_' +
+                      passenger.passengerType
+                    "
+                    type="button"
+                    class="ib-filter__passengers__more passenger-counter-btn passenger-counter-btn--more"
+                    data-people-counter-button="more"
+                    [attr.aria-label]="
+                      ('BUTTON_ADD_TEXT' | translate) +
+                      ' + ' +
+                      (passenger.passengerType | translate)
+                    "
+                    [ngClass]="{
+                      active:
+                        passenger.isActive &&
+                        ((passenger.passengerType === 'INFANT' &&
+                          passenger.count < maxInfants &&
+                          passenger.count < maxTotalPassengers) ||
+                          (passenger.passengerType === 'CHILD' &&
+                            passenger.count < maxChilds &&
+                            passengersCount < maxTotalPassengers) ||
+                          (passenger.passengerType !== 'INFANT' &&
+                            passenger.passengerType !== 'CHILD' &&
+                            passengersCount < maxTotalPassengers)),
+                    }"
+                    [disabled]="
+                      !passenger.isActive ||
+                      (passenger.passengerType === 'INFANT' &&
+                        (passenger.count >= maxInfants ||
+                          passenger.count >= maxTotalPassengers)) ||
+                        (passenger.passengerType === 'CHILD' &&
+                          (passenger.count >= maxChilds ||
+                            passengersCount >= maxTotalPassengers)) ||
+                        (passenger.passengerType !== 'INFANT' &&
+                          passenger.passengerType !== 'CHILD' &&
+                          passengersCount >= maxTotalPassengers)
+                    "
+                    (click)="addPassenger(passenger)"
+                    (keydown)="controlCollapse($event)"
+                    (focusin)="onFocusIn()"
+                  >
+                    <span class="ib-filter__icon-plus icon-mas_3"></span>
+                  </button>
+                </div>
+
+                <div
+                  class="ib-filter__tooltip"
+                  ib-filter-tooltip
+                  role="alert"
+                  aria-hidden="true"
+                  *ngIf="
+                    passengersCount === maxTotalPassengers ||
+                    (passenger.passengerType === 'INFANT' &&
+                      passenger.count === passengersCount)
+                  "
+                >
+                  <div class="ib-filter__tooltip__arrow--up"></div>
+
+                  <button
+                    type="button"
+                    class="ib-filter__tooltip__close"
+                    [attr.aria-label]="
+                      'HEADER_ADVANCED_SEARCH_PASSENGER_CLOSE_TITLE' | translate
+                    "
+                  >
+                    <span class="icon-cerrar"></span>
+                  </button>
+
+                  <div
+                    class="ib-filter__tooltip__text"
+                    *ngIf="passengersCount === maxTotalPassengers"
+                  >
+                    {{ "HEADER_ADVANCED_SEARCH_PASSENGER_LIMIT" | translate }}
+                  </div>
+
+                  <div
+                    class="ib-filter__tooltip__text"
+                    *ngIf="
+                      passenger.passengerType === 'INFANT' &&
+                      passenger.count === passengersCount
+                    "
+                  >
+                    {{
+                      "HEADER_ADVANCED_SEARCH_PASSENGER_MAX_INFANTS" | translate
+                    }}
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="ib-filter__message"
+                *ngIf="
+                  passenger.passengerType === 'YOUNG' && !passenger.showMessage
+                "
+              >
+                <p class="ib-filter__message-text">
+                  {{ "GENERAL_MANDATORY_ACCOMPANYING_ADULT" | translate }}
+                </p>
+              </div>
+
+              <div class="ib-filter__message" *ngIf="passenger.showMessage">
+                <p class="ib-filter__message-text">
+                  {{
+                    "HEADER_ADVANCED_SEARCH_PASSENGER_AVAILABLE_TYPE_ROUTE"
+                      | translate
+                  }}
+                </p>
+              </div>
+            </div>
+          </ng-container>
+          <ib-booking-header-pets
+            [enabled]="isPetsSelected"
+            [disabledByTime]="petsDisabledByTime"
+            (petsChange)="petsChange.emit($event)"
+          >
+          </ib-booking-header-pets>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

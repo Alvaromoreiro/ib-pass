@@ -1,0 +1,36 @@
+<header class="ib-modals-full__header" ib-auto-scroll-top>
+    <div class="container">
+        <div class="ib-modals-full__header-container">
+            <div class="ib-modals-full__header-section">
+                <h2 class="ib-heading ib-heading--type-2">{{'CALDIT_CHOOSE_DATES_FLIGTHS'|translate}}</h2>
+            </div>
+            <div class="ib-modals-full__header-actions">
+                <button id="CALDIT_CLOSE_BUTTON" type="button" class="ib-modals-full__button-action icon-cerrar" ng-click="priceMatrixCtrl.goFlightsSearching()">
+                    <span class="u-hide-accessible">{{'CALDIT_ACCESS_CLOSE_MODAL'|translate}}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="ib-modals-full__body ib-modals-full--footer-fixed">
+    <div class="container" data-ng-if="priceMatrixCtrl.model.priceMatrixData.ribbon">
+        <ib-price-matrix-calendar-outbound id="bbki-price-matrix-calendar-outbound" price-matrix-data="priceMatrixCtrl.model.priceMatrixData"></ib-price-matrix-calendar-outbound>
+    </div>
+    <div class="container" data-ng-if="priceMatrixCtrl.model.priceMatrixData && !priceMatrixCtrl.model.priceMatrixData.ribbon">
+        <ib-price-matrix-calendar id="bbki-price-matrix-calendar" price-matrix-data="priceMatrixCtrl.model.priceMatrixData"></ib-price-matrix-calendar>
+    </div>
+</section>
+<footer class="ib-modals-full__footer ib-modals-full--footer-fixed">
+    <div class="container">
+        <div class="ib-modals-full__footer-col-left">
+            <span class="ib-modals-full__footer-price-resume">
+                <span class="ib-modals-full__footer-price-resume-title">{{'CALDIT_TOTAL_PRICE'|translate}}</span>
+            <span class="ib-modals-full__footer-price-resume-detail">{{priceMatrixCtrl.formatPrice(priceMatrixCtrl.model.selectedCell.price)}}</span>
+            </span>
+        </div>
+        <div class="ib-modals-full__footer-col-right">
+            <button id="CALDIT_NEXT_BUTTON" class="ib-button" data-ng-class="{'ib-button--block': priceMatrixCtrl.model.selectedCell.price, 'ib-button--block ib-button--off' : !priceMatrixCtrl.model.selectedCell.price}"
+                ng-click="priceMatrixCtrl.doNewSearchingAvailability()" ng-disabled="!priceMatrixCtrl.model.selectedCell.price">{{'CALDIT_BUTTON_NEXT'|translate}}</button>
+        </div>
+    </div>
+</footer>

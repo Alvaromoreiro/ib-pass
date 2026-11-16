@@ -1,0 +1,25 @@
+<div class="user-tooltip ib-header-common__fly-login hidden-xl hidden-lg hidden-md"
+    *ngIf="model.isLogged"
+    ibBookingCollapse
+    [collapsed]="true"
+    collapseTrigger="userTooltipTrigger"
+    collapseContainer="userTooltipContainer">
+    <button focusin class="ib-header-common__logged ib-popover-tooltip" aria-controls="userTooltipContainer" title="{{'OPEN_MORE_DETAILS'|translate}}"
+        [ngClass]="{'login-header-mobile': headerMobile }"
+        userTooltipTrigger>
+        <span class="ib-header-common__fly-icon ib-header-common__fly-icon--login icon-editar_perfil">
+            <span class="u-hide-accessible">{{'OPEN_MORE_DETAILS'|translate}}</span>
+        </span>
+    </button>
+    <div id="userTooltipContainer" class="collapse-container" userTooltipContainer>
+        <div class="ib-flights-message">
+            <ul class="ib-flights-message__list">
+                <li class="ib-flights-message__list-item">
+                    <span class="ib-flights-message__item-text ib-flights-message__item-text--bold">{{'HELLO_TEXT'|translate}} {{model.loggedData.name}} {{model.loggedData.surname}}</span>
+                    <span *ngIf="isIbPlus()" class="ib-flights-message__item-text">{{'MODAL_USER_LOGGED_TEXT_1'|translate}} {{model.loggedData.avios}} {{'AVIOS_TEXT'|translate}}</span>
+                    <span *ngIf="model.flowONB" class="ib-flights-message__item-text">{{'MODAL_USER_LOGGED_TEXT_1'|translate}} {{model.loggedData.points}} {{'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED'|translate}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

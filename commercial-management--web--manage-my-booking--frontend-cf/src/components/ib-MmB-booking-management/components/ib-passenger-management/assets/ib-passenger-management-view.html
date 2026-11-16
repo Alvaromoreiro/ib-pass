@@ -1,0 +1,46 @@
+<section class="ib-layout__section">
+    <div ng-if="::pasMngCtrl.savedSuccess" class="ib-ticket-flights__alert ib-ticket-flights__alert--valid alert fade in icon-confirmacion">
+        <p class="ib-ticket-flights__alert-text">{{'IBCOAC_MMB_SEGMENT_DETAILS_SAVED_SUCCESS'|translate}}</p>
+        <a href="javascript:void(0)" class="ib-ticket-flights__alert-close icon-cerrar" data-dismiss="alert" aria-label="close"
+            title="{{'IBCOAC_MMB_SEGMENT_DETAILS_SAVED_SUCCESS_CLOSE_TITLE'|translate}}" id="SEGMENT_DETAILS_SAVED_SUCCESS_CLOSE">
+            <span class="u-hide-accessible">{{'IBCOAC_MMB_SEGMENT_DETAILS_SAVED_SUCCESS_CLOSE'|translate}}</span>
+        </a>
+    </div>
+    <div class="ib-box ib-box--extra">
+        <div class="ib-heading-accordion">
+            <span class="ib-heading ib-heading--type-3 ib-heading-accordion__title ib-heading-accordion__title--icon icon-informacion_2">{{'IBCOAC_MMB_PASSENGER_HEAD'|translate}}</span>
+        </div>
+    </div>
+    <div class="ib-accordion-content">
+        <div class="ib-box ib-box--extra ib-box--unfocused ib-box--no-shadow">
+            <section class="ib-tab-scrollable ib-tab-scrollable--empty ib-tab-scrollable--accordion">
+                <div class="ib-tab-scrollable__header" ng-scrollbars ng-scrollbars-config="pasMngCtrl.configScroll">
+                    <ul class="ib-tab-scrollable__header-list" role="tablist">
+                        <li class="ib-tab-scrollable__header-item" role="presentation" ng-repeat="(index,pas) in pasMngCtrl.pasMngModel">
+                            <a class="ib-tab-scrollable__header-lnk ib-tab-scrollable__header-lnk--static" href="javascript:void(0)"
+                                title="{{'IBCOAC_MMB_PASENGER_HEADER_LINK_TITLE'|translate}} {{::(pas.personalInfo.name + ' ' + pas.personalInfo.surname)}}"
+                                ng-click="pasMngCtrl.modifyPassengerInfo(pas,index)" id="IBCOAC_MMB_MODIFY_PASENGER_LINK_{{::pas.passengerId}}"
+                                ng-class="{'ib-tab-scrollable__header-lnk--success' : pas.status ==='COMPLETE', 'ib-tab-scrollable__header-lnk--disabled' :(!pas.optionalInformation.contactData && !pas.optionalInformation.ffInfo)}">
+                                <div class="ib-tab-scrollable__header-item-content">
+                                    <span class="ib-tab-scrollable__header-icon" ng-class="{'icon-perfil_login': pas.passengerType !== 'CHILD' && pas.passengerType !== 'INFANT','icon-iberia_ninos' : pas.passengerType === 'CHILD', 'icon-bebe' : pas.passengerType === 'INFANT'}"></span>
+                                    <span class="ib-tab-scrollable__header-txt">{{::(pas.personalInfo.name + ' ' +
+                                        pas.personalInfo.surname)}}</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="ib-tab-scrollable__header-item" role="presentation" ng-if="pasMngCtrl.showSpecialNeeds && pasMngCtrl.optInfoModel">
+                            <a class="ib-tab-scrollable__header-lnk ib-tab-scrollable__header-lnk--static" href="javascript:void(0)"
+                                title="{{'IBCOAC_MMB_DATA_CONTACT_HEADER_LINK_TITLE'|translate}}" ng-click="pasMngCtrl.modifyPassengerInfo(null,pasMngCtrl.dataContact)"
+                                id="IBCOAC_MMB_MODIFY_PASENGER_LINK_CONTACT_DATA" ng-class="{'ib-tab-scrollable__header-lnk--success' : pasMngCtrl.dataContact.status ==='COMPLETE'}">
+                                <div class="ib-tab-scrollable__header-item-content">
+                                    <span class="ib-tab-scrollable__header-icon icon-click_to_call"></span>
+                                    <span class="ib-tab-scrollable__header-txt">{{'IBCOAC_MMB_PASSENGER_DATA_CONTACT_SPAN_TEXT'|translate}}</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>

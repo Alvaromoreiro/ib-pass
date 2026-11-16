@@ -1,0 +1,80 @@
+<div id="{{ibShuttleTotalPriceDetailCtrl.moduleId}}" class="ib-box ib-box--medium ib-box--separator u-pt-big u-mt-xmedium">
+    <div ng-if="ibShuttleTotalPriceDetailCtrl.redemptionPrice.couponApplied || ibShuttleTotalPriceDetailCtrl.redemptionPrice.promotionApplied"
+        class="ib-flag-info">
+        <div class="ib-flag-info__container">
+            <i class="ib-flag-info__icon icon-descuento"></i>
+            <p ng-if="!ibShuttleTotalPriceDetailCtrl.redemptionPrice.couponApplied && ibShuttleTotalPriceDetailCtrl.redemptionPrice.promotionApplied"
+                class="ib-flag-info__txt">
+                {{'AVAILABILITY_REDEMPTION_FLIGHT_WITH_DISCOUNT'|translate}}
+            </p>
+            <p ng-if="ibShuttleTotalPriceDetailCtrl.redemptionPrice.couponApplied" class="ib-flag-info__txt">{{'VOUCHER'|translate}}</p>
+        </div>
+    </div>
+    <span ng-if = "ibShuttleTotalPriceDetailCtrl.redemptionPrice.couponApplied || ibShuttleTotalPriceDetailCtrl.redemptionPrice.promotionApplied" class="ib-text ib-text--xbig ib-text--especial ib-text--line-through">
+            {{ibShuttleTotalPriceDetailCtrl.model.priceInfo.oldTotalAvios}} {{'IBPURC_PAYMENTS_DISCOUNTS_AVIOS' | translate}}{{'AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate }} {{ibShuttleTotalPriceDetailCtrl.model.priceInfo.oldTotalCash}}</span>
+    <span class="ib-text ib-text--block ib-text--color-unfocused">{{'TOTAL_PRICE_COMPONENT_TITLE' | translate}}</span>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-7">
+            <!-- REDEMPTION FLOW -->
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--null" ng-if="$root.isRedemptionFlow">
+                <span
+                    class="ib-text ib-text--especial ib-text--price-big u-pb">{{ibShuttleTotalPriceDetailCtrl.model.priceInfo.totalAvios}}
+                    {{(ibShuttleTotalPriceDetailCtrl.model.priceInfo.currency | lowercase) === 'points' ? ('AVAILABILITY_ON_BUSINESS_POINTS' | translate) : 'Avios'}} +</span>
+                <span class="ib-text ib-text--especial ib-text--price-xmedium u-pb">
+                    {{ibShuttleTotalPriceDetailCtrl.model.priceInfo.totalCash}}</span>
+            </div>
+            <!-- Normal Flow -->
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--null" ng-if="!$root.isRedemptionFlow">
+                <span
+                    class="ib-text ib-text--especial ib-text--price-big ib-text--price-responsive u-pb">{{ibShuttleTotalPriceDetailCtrl.model.priceInfo.totalCurrency}}</span>
+                <p class="ib-text ib-text--block ib-text--color-unfocused ib-text--spacing-large ng-scope"
+                    data-ng-if="$root.isLogged && ibShuttleTotalPriceDetailCtrl.model.priceInfo.aviosToEarn && ibShuttleTotalPriceDetailCtrl.model.priceInfo.elitePointsToEarn">
+                    {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                    <span class="ib-text ib-text--bold">
+                        {{ibShuttleTotalPriceDetailCtrl.model.priceInfo.aviosToEarn | aviosFormatter}}
+                        {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+                        {{ibShuttleTotalPriceDetailCtrl.model.priceInfo.elitePointsToEarn | aviosFormatter}}
+                        {{'AVIOS_ELITE_TO_EARN_USER_3'| translate}}
+                    </span>
+                </p>
+                <p class="ib-text ib-text--block ib-text--color-unfocused ib-text--spacing-large ng-scope"
+                    data-ng-if="!$root.isLogged && ibShuttleTotalPriceDetailCtrl.model.priceInfo.aviosToEarn && ibShuttleTotalPriceDetailCtrl.model.priceInfo.elitePointsToEarn">
+                    {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                    <span class="ib-text ib-text--bold">
+                        {{ibShuttleTotalPriceDetailCtrl.model.priceInfo.aviosToEarn | aviosFormatter}}
+                        {{'AVIOS_ELITE_TO_EARN_ANOM_2'| translate}}
+                        {{ibShuttleTotalPriceDetailCtrl.model.priceInfo.elitePointsToEarn | aviosFormatter}}
+                        {{'AVIOS_ELITE_TO_EARN_ANOM_3'| translate}}
+                    </span>
+                </p>
+            </div>
+            <button data-ng-click="ibShuttleTotalPriceDetailCtrl.openPriceDetailModal($event)" class="price-detail" data-ng-if="ibShuttleTotalPriceDetailCtrl.shouldShowPriceDetailCTA" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M7.94745 6.0906H8.0162C8.49848 6.0906 9.06355 5.96473 9.06355 5.19012V5.15139C9.06355 4.37195 8.49848 4.23156 8.0162 4.23156H7.94745C7.46469 4.23156 6.89865 4.37195 6.89865 5.15139V5.19012C6.89865 5.96473 7.46469 6.0906 7.94745 6.0906Z" fill="#333333"/>
+                    <path d="M7.05117 11.7694H8.91296V7.12178H7.05117V11.7694Z" fill="#333333"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99829 1.00244C4.13186 1.00244 0.998047 4.13473 0.998047 7.99805C0.998047 11.8662 4.13186 14.9985 7.99829 14.9985C11.8633 14.9985 14.998 11.8662 14.998 7.99805C14.998 4.13473 11.8633 1.00244 7.99829 1.00244ZM2.72523 7.99805C2.72523 10.9076 5.08963 13.275 7.99829 13.275C10.905 13.275 13.2713 10.9076 13.2713 7.99805C13.2713 5.0933 10.905 2.72593 7.99829 2.72593C5.08963 2.72593 2.72523 5.0933 2.72523 7.99805Z" fill="#333333"/>
+                </svg>
+                <p>{{'SUMMARY_FEES' | translate}}</p>
+            </button>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-5 u-text-right">
+            <div class="ib-layout__line-spacing">
+                <button id="SHUTTLE_TOTAL_PRICE_DETAIL_BTN" focusin class="ib-button ib-button--w-medium ib-button--block-sm"
+                    type="button"
+                    ng-click="ibShuttleTotalPriceDetailCtrl.goNextPage($event)">{{ibShuttleTotalPriceDetailCtrl.continueText | translate}}</button>
+            </div>
+        </div>
+    </div>
+    <p class="ib-text ib-text--color-unfocused" ng-bind-html="ibShuttleTotalPriceDetailCtrl.model.priceInfo.text"></p>
+</div>
+<div class="ib-box ib-box--medium">
+    <div class="row">
+        <div class="col-sm-4 col-md-6 visible-lg visible-md visible-sm hidden-xs">
+            <div class="u-text-right">
+                <figure class="ib-logo ib-logo--medium ib-logo--responsive">
+                    <img src="{{::$root.routes.images}}/otros/globalSign.png" alt="Logo global Sign" />
+                </figure>
+            </div>
+        </div>
+    </div>
+</div>

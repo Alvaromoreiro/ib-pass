@@ -1,0 +1,252 @@
+/* -------------------------------------------------------------
+    #ITINERARY-MODAL
+----------------------------------------------------------------- */
+.#{$wefront__namespace}itinerary-modal {
+    position: relative;
+    display: block;
+
+    &__header {
+        margin-bottom: rem(32);
+        .#{$wefront__namespace}heading--type-1 {
+            line-height: rem(48);
+        }
+    }
+
+    &__body {
+        .#{$wefront__namespace}text--xbig {
+            font-family: $font-special;
+            line-height: rem(24);
+        }
+        .#{$wefront__namespace}text--medium {
+            line-height: rem(22);
+        }
+        .#{$wefront__namespace}check__label--top {
+            &::before {
+                top: rem(4);
+            }
+        }
+        .#{$wefront__namespace}check__label {
+            &::before {
+                width: rem(24);
+                height: rem(24);
+            }
+        }
+        .#{$wefront__namespace}check__text {
+            line-height: rem(20);
+        }
+    }
+
+    &__footer {
+        padding-top: rem(32);
+        border-top: rem(1) solid color(gray-70);
+        .#{$wefront__namespace}button {
+            line-height: 2;
+        }
+    }
+
+    &__input {
+        display: flex;
+        margin-bottom: rem(24);
+        .#{$wefront__namespace}input {
+            display: flex;
+            width: rem(304);
+            flex-direction: row;
+            margin-right: rem(16);
+        }
+        .#{$wefront__namespace}link {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border: none;
+            background: transparent;
+
+            &.icon-cerrar {
+                &::before {
+                    display: none;
+                }
+            }
+        }
+        .#{$wefront__namespace}input__label {
+            &--focus {
+                text-transform: uppercase;
+            }
+        }
+    }
+    // &__button {
+    //     position: absolute;
+    //     top: 50%;
+    //     right: rem(16);
+    //     transform: translate(0, -50%);
+    // }
+    .#{$wefront__namespace}link-icon {
+        .#{$wefront__namespace}link-icon__text {
+            text-decoration: none;
+        }
+
+        &:focus,
+        &:hover {
+            .#{$wefront__namespace}link-icon__text {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__row {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        margin-bottom: rem(24);
+    }
+
+    &__column {
+        &--input {
+            display: flex;
+            width: 50%;
+            flex-flow: column wrap;
+            padding-right: rem(16);
+        }
+
+        &--button {
+            position: relative;
+            display: inline-flex;
+            max-width: 50%;
+            .#{$wefront__namespace}link {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                border: none;
+                background: transparent;
+
+                &.icon-cerrar {
+                    &::before {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsive
+
+@include media-query('sm') {
+    .#{$wefront__namespace}itinerary-modal {
+        &__column {
+            &--input {
+                width: 70%;
+            }
+        }
+    }
+}//sm
+
+@include media-query('xs') {
+    .#{$wefront__namespace}itinerary-modal {
+        &__header {
+            padding-bottom: rem(19);
+            margin: 0 rem(-16) rem(24);
+            .#{$wefront__namespace}heading--type-1 {
+                max-width: rem(240);
+                padding: rem(0) rem(16);
+                font-size: rem(22);
+                line-height: rem(24);
+            }
+            // &__button{
+            //     right: rem(-16);
+        }
+
+        .#{$wefront__namespace}layout__section-title {
+            margin-bottom: rem(16);
+        }
+
+        &__input {
+            .#{$wefront__namespace}input {
+                width: rem(256);
+                margin-right: rem(16);
+            }
+            .#{$wefront__namespace}link {
+                display: inline-block;
+                text-indent: rem(-99999);
+
+                &.icon-cerrar {
+                    &::before {
+                        position: absolute;
+                        top: 50%;
+                        right: rem(5);
+                        display: inline-block;
+                        font-size: rem(26);
+                        text-indent: 0;
+                        line-height: rem(18);
+                        -webkit-transform: translate(100%, -50%);
+                        -moz-transform: translate(100%, -50%);
+                        -ms-transform: translate(100%, -50%);
+                        -o-transform: translate(100%, -50%);
+                        transform: translate(100%, -50%);
+                    }
+                }
+            }
+        }
+
+        &__footer {
+            padding-top: 0;
+            border: none;
+        }
+
+        &__row {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+        }
+
+        &__column {
+            display: inline-flex;
+
+            &--input {
+                width: 100%;
+                max-width: calc(100% - 2.1875rem);
+                padding-right: 0;
+            }
+
+            &--button {
+                position: relative;
+                display: flex;
+                width: 20%;
+                max-width: rem(35);
+                flex-flow: column nowrap;
+                align-items: flex-end;
+                .#{$wefront__namespace}link {
+                    position: relative;
+                    display: inline;
+                    width: rem(22);
+                    height: rem(22);
+                    text-decoration: none;
+                    text-indent: inherit;
+                    -webkit-transform: inherit;
+                    -moz-transform: inherit;
+                    -ms-transform: inherit;
+                    -o-transform: inherit;
+                    transform: inherit;
+
+                    &.icon-cerrar {
+                        &::before {
+                            position: relative;
+                            top: inherit;
+                            right: inherit;
+                            display: block;
+                            width: rem(22);
+                            height: rem(22);
+                            font-size: rem(26);
+                            text-indent: 0;
+                            text-indent: inherit;
+                            float: left;
+                            -webkit-transform: inherit;
+                            -moz-transform: inherit;
+                            -ms-transform: inherit;
+                            -o-transform: inherit;
+                            transform: inherit;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

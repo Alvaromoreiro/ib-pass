@@ -1,0 +1,2398 @@
+/* -------------------------------------------------------------
+    #MODALS
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}modals {
+    .modal-content {
+        min-height: 100%;
+        padding: rem(40) rem(48) rem(48);
+        border: 0;
+        border-radius: 0;
+        box-shadow: inherit;
+
+        &--auto {
+            min-height: auto;
+        }
+    }
+
+    &__header {
+        padding-bottom: rem(16);
+        margin-bottom: rem(24);
+        border-bottom: rem(1) solid color(gray-70);
+
+        .#{$wefront__namespace}heading {
+            max-width: calc(100% - 2.1875rem);
+            margin-bottom: 0;
+            line-height: normal;
+
+            &--full {
+                width: 100%;
+                max-width: initial;
+            }
+        }
+
+        &--p-small {
+            padding-bottom: rem(25);
+        }
+
+        &--inside {
+            padding-top: rem(9);
+            padding-bottom: rem(8);
+            margin-bottom: rem(23);
+        }
+
+        &--with-icon {
+            .#{$wefront__namespace}heading {
+                max-width: calc(100% - 3.4375rem);
+            }
+        }
+
+        &--p-medium {
+            padding-bottom: rem(25);
+        }
+
+        &--with-image {
+            width: remcalc(100%, " + ", rem(64));
+            padding-bottom: 0;
+            margin-top: rem(-32);
+            margin-bottom: rem(8);
+            margin-left: rem(-32);
+            border-bottom: none;
+
+            .#{$wefront__namespace}heading {
+                position: relative;
+                display: flex;
+                width: 100%;
+                max-width: 100%;
+                height: 100%;
+                flex: 1;
+                flex-flow: column wrap;
+                align-items: center;
+                margin: 0 auto;
+                font-family: $font-normal;
+                font-size: rem(16);
+                font-weight: bold;
+                color: color(white);
+                place-content: center flex-end;
+            }
+
+            .#{$wefront__namespace}modals__button-action {
+                color: color(white);
+            }
+        }
+    }
+
+    &__header-settings {
+        position: absolute;
+        top: rem(16);
+        right: rem(16);
+        font-family: $font-icons;
+
+        //Modifiers
+        &--top {
+            top: rem(-20);
+            right: 0;
+        }
+
+        &--type-1 {
+            top: rem(14);
+            right: rem(18);
+        }
+
+        &--type-2 {
+            top: rem(22);
+            right: rem(22);
+        }
+    }
+
+    &__button-action {
+        border: 0;
+        font-size: rem(38);
+        color: color(gray-30);
+        background: transparent;
+        box-shadow: none;
+
+        &:focus {
+            outline: rem(2) solid color(orange-10);
+        }
+
+        &--small {
+            font-size: rem(22);
+        }
+    }
+
+    &__body {
+        position: relative;
+        display: block;
+        min-height: rem(94);
+
+        &--background-grey {
+            border-color: color(gray-40);
+            background-color: color(gray-60);
+        }
+
+        &--cols-simple {
+            .row {
+                margin-right: rem(-16);
+                margin-left: rem(-16);
+            }
+        }
+
+        &--with-footer {
+            position: absolute;
+            overflow: auto;
+            width: calc(100% - rem(85));
+            height: calc(100% - rem(210));
+        }
+
+        &--auto {
+            min-height: auto !important;
+        }
+
+        .#{$wefront__namespace}text {
+            line-height: rem(22);
+            word-break: break-word;
+        }
+
+        &--fieldset-figure {
+            width: rem(68);
+            margin-right: rem(32);
+
+            &-img {
+                width: rem(68);
+            }
+        }
+
+        &--fieldset-text {
+            &--mobile {
+                background-color: color(gray-60);
+            }
+
+            p {
+                padding-bottom: rem(12);
+            }
+        }
+    }
+
+    &__body--special {
+        margin-right: -1rem;
+        margin-left: -1rem;
+
+        .ib-layout__line-spacing {
+            display: flex;
+            flex-direction: column;
+            margin-right: rem(24);
+            margin-bottom: 0;
+            margin-left: rem(24);
+        }
+    }
+
+    &__footer {
+        display: inline-block;
+        width: 100%;
+
+        .#{$wefront__namespace}button {
+            padding-right: rem(32);
+            padding-left: rem(32);
+        }
+    }
+
+    &__footer-fixed {
+        position: absolute;
+        z-index: 2;
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+        width: 100%;
+        padding: 0 rem(32) 0.75rem;
+        font-size: 0;
+        background-color: color(white);
+        box-shadow: 0 rem(-2) rem(3) 0 color(black, 0.03);
+        clear: both;
+    }
+
+    &__content-image {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        height: rem(189);
+        padding-bottom: rem(12);
+    }
+
+    &__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+    }
+
+    &__backdrop {
+        z-index: 1040 !important;
+        opacity: 0.5 !important;
+    }
+
+    // Modifiers
+    &--loading {
+        .modal-dialog {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            max-width: rem(255);
+            margin: 0;
+            -webkit-transform: translate(-50%, -50%) !important;
+            -moz-transform: translate(-50%, -50%) !important;
+            -ms-transform: translate(-50%, -50%) !important;
+            -o-transform: translate(-50%, -50%) !important;
+            transform: translate(-50%, -50%) !important;
+        }
+
+        .modal-content {
+            padding: rem(45) rem(20);
+        }
+    }
+
+    &--mt-small {
+        margin-top: rem(18) !important;
+    }
+
+    &--loading-full {
+        .modal-dialog {
+            width: 100%;
+            margin: 0;
+
+            .ib-overlay-fly {
+                position: relative;
+                background: transparent;
+
+                &__container {
+                    background: transparent;
+                }
+            }
+        }
+
+        .modal-content {
+            padding: 0;
+            background: transparent;
+        }
+
+        +.modal-backdrop {
+            background-color: rgb(19 27 37 / 45%);
+            background-image: linear-gradient(to bottom, #131b25 11%, rgb(19 27 37 / 0%));
+            opacity: 1;
+        }
+    }
+
+    &--transparent {
+        +.modal-backdrop {
+            background: transparent;
+        }
+
+        .modal-dialog {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            max-width: rem(350);
+            margin: 0;
+            -webkit-transform: translate(-50%, -20%) !important;
+            -moz-transform: translate(-50%, -20%) !important;
+            -ms-transform: translate(-50%, -20%) !important;
+            -o-transform: translate(-50%, -20%) !important;
+            transform: translate(-50%, -20%) !important;
+        }
+
+        .#{$wefront__namespace}modals__dialog {
+            top: 0;
+            left: 0;
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            padding-top: rem(32);
+            margin: 0;
+            background-color: color(black);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            -webkit-transform: translate(0, 0) !important;
+            -moz-transform: translate(0, 0) !important;
+            -ms-transform: translate(0, 0) !important;
+            -o-transform: translate(0, 0) !important;
+            transform: translate(0, 0) !important;
+        }
+
+        .modal-content {
+            padding: 0;
+            background-color: transparent;
+        }
+    }
+
+    // Modal user logued
+    &--logued {
+        .modal-dialog {
+            overflow: visible !important;
+            max-width: rem(460) !important;
+            max-width: calc(100% - 2.5rem) !important;
+            box-shadow: 0 rem(2) rem(34) 0 color(black, 0.48);
+        }
+
+        .modal-content {
+            background-color: color(gray-50);
+        }
+
+        .#{$wefront__namespace}modals__header-settings {
+            z-index: -1;
+            top: 0;
+            left: rem(-60);
+            width: rem(60);
+            height: rem(60);
+            color: color(white);
+            background-color: color(primary);
+        }
+
+        .#{$wefront__namespace}modals__button-action {
+            width: 100%;
+            height: 100%;
+            color: color(white);
+
+            &:hover,
+            &:focus,
+            &:active {
+                outline: none;
+            }
+
+            &.icon-cerrar {
+                &::before,
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: rem(42);
+                    height: rem(1);
+                    margin-top: rem(-1);
+                    margin-left: rem(-21);
+                    background: color(white);
+                }
+
+                &::before {
+                    transform: rotateZ(45deg);
+                    transform-origin: center center 0;
+                }
+
+                &::after {
+                    transform: rotateZ(-45deg);
+                    transform-origin: center center 0;
+                }
+            }
+        }
+
+        &.#{$wefront__namespace}modals--right {
+            .modal-content {
+                overflow: inherit;
+            }
+        }
+    }
+
+    // Add "left" or "right" in modal parent div, after class="modal".
+    &--left,
+    &--right {
+        div.modal-dialog {
+            position: fixed;
+            height: 100%;
+            margin: auto;
+            overflow-y: auto;
+            -webkit-transform: translate3d(0%, 0, 0);
+            -ms-transform: translate3d(0%, 0, 0);
+            -o-transform: translate3d(0%, 0, 0);
+            transform: translate3d(0%, 0, 0);
+        }
+    }
+
+    /* Left */
+    &--left {
+        &.fade .modal-dialog {
+            left: rem(-736);
+            -webkit-transform: translate(0, 0);
+            -moz-transform: translate(0, 0);
+            -ms-transform: translate(0, 0);
+            -o-transform: translate(0, 0);
+            transform: translate(0, 0);
+            -webkit-transition: opacity 0.3s linear, left 0.5s ease-out;
+            -moz-transition: opacity 0.3s linear, left 0.5s ease-out;
+            -o-transition: opacity 0.3s linear, left 0.5s ease-out;
+            transition: opacity 0.3s linear, left 0.5s ease-out;
+        }
+
+        &.fade.in .modal-dialog {
+            left: 0;
+        }
+    }
+
+    /* Right */
+    &--right {
+        &.fade .modal-dialog {
+            right: rem(-736);
+            -webkit-transform: translate(0, 0);
+            -moz-transform: translate(0, 0);
+            -ms-transform: translate(0, 0);
+            -o-transform: translate(0, 0);
+            transform: translate(0, 0);
+            -webkit-transition: opacity 0.3s linear, right 0.5s ease-out;
+            -moz-transition: opacity 0.3s linear, right 0.5s ease-out;
+            -o-transition: opacity 0.3s linear, right 0.5s ease-out;
+            transition: opacity 0.3s linear, right 0.5s ease-out;
+        }
+
+        &.fade.in .modal-dialog {
+            right: 0;
+        }
+
+        .#{$wefront__namespace}modals__header-settings--top {
+            top: rem(-18);
+            right: rem(-30);
+        }
+
+        .modal-content {
+            overflow-x: hidden;
+        }
+    }
+
+    &--content-text {
+        font-family: $font-normal;
+        font-size: rem(13);
+        line-height: rem(20);
+        color: color(gray-15);
+    }
+
+    &--content-title {
+        margin-bottom: rem(32);
+        font-family: $font-special;
+        font-size: rem(19);
+        font-weight: 400;
+        text-align: center;
+        line-height: rem(22);
+        color: color(gray-10);
+        letter-spacing: 0;
+    }
+
+    &--desktop {
+        div.modal-dialog {
+            width: rem(1112);
+            max-width: 100%;
+        }
+
+        .modal-content {
+            padding: rem(37) rem(24) rem(32);
+        }
+    }
+
+    &--adyen {
+        div.modal-dialog {
+            width: auto;
+            max-width: fit-content;
+
+            .#{$wefront__namespace}modals__body {
+                margin-top: rem(16);
+            }
+        }
+
+        .modal-content {
+            padding: rem(37) rem(24) rem(32) rem(32);
+        }
+    }
+
+    &--reset {
+        .modal-content {
+            padding: rem(35) rem(48) rem(48) rem(48);
+        }
+    }
+
+    &--lg {
+        .modal-dialog {
+            width: rem(1430);
+            max-width: 100%;
+            padding: 0 rem(32);
+        }
+
+        &.#{$wefront__namespace}modals--inside {
+            .modal-dialog {
+                right: auto !important;
+            }
+        }
+    }
+
+    &--large {
+        .modal-dialog {
+            width: rem(928) !important;
+            max-width: 100%;
+            padding: 0;
+        }
+
+        .modal-content {
+            padding: rem(40) rem(24) rem(48);
+        }
+    }
+
+    &--md {
+        .modal-dialog {
+            max-width: inherit; // FIX for Bootstrap v5
+        }
+    }
+
+    &--mmd {
+        .modal-dialog {
+            width: rem(544);
+            max-width: rem(544);
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 100%;
+            //padding: rem(48) rem(58) rem(48) rem(67);
+            padding: rem(45) rem(64);
+        }
+    }
+
+    &--sm {
+        .modal-dialog {
+            width: rem(436);
+            max-width: rem(436);
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 100%;
+            //padding: rem(48) rem(58) rem(48) rem(67);
+            padding: rem(32) rem(32);
+        }
+
+        .#{$wefront__namespace}modals__header-settings {
+            top: rem(10);
+            right: rem(10);
+        }
+    }
+
+    &--xs-medium {
+        .modal-dialog {
+            width: rem(370);
+            max-width: rem(370);
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 100%;
+            padding: rem(32) rem(36) rem(20);
+        }
+
+        .#{$wefront__namespace}modals__header-settings {
+            top: rem(10);
+            right: rem(10);
+        }
+    }
+
+    &--xs-small {
+        .modal-dialog {
+            width: rem(296);
+            max-width: rem(296);
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 100%;
+            padding: rem(32) rem(36) rem(20);
+        }
+
+        .#{$wefront__namespace}modals__header-settings {
+            top: rem(10);
+            right: rem(10);
+        }
+    }
+
+    &--xs {
+        .modal-dialog {
+            width: rem(320);
+            max-width: rem(320);
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 100%;
+            padding: rem(32) rem(36) rem(20);
+        }
+
+        .#{$wefront__namespace}modals__header-settings {
+            top: rem(10);
+            right: rem(10);
+        }
+    }
+
+    &--fit-content {
+        .modal-dialog {
+            width: fit-content !important;
+            max-width: fit-content !important;
+        }
+    }
+
+    // Top - Example Modal Login Top
+    &--top {
+        &.#{$wefront__namespace}modals {
+            .modal-dialog {
+                top: rem(230);
+                margin-top: 0;
+            }
+        }
+    }
+
+    &--over-center {
+        &.#{$wefront__namespace}modals {
+            .modal-dialog {
+                top: rem(300);
+                margin-top: 0;
+            }
+        }
+    }
+
+    &--top-steps {
+        &.#{$wefront__namespace}modals {
+            .modal-dialog {
+                top: rem(145);
+                margin-top: 0;
+            }
+        }
+    }
+
+    &--outside {
+        z-index: 1055 !important;
+        overflow: hidden;
+
+        .modal-content {
+            &::before {
+                content: "";
+                position: absolute;
+                z-index: 1040;
+                background-color: color(gray-10);
+                inset: 0;
+                opacity: 0.5;
+            }
+        }
+    }
+
+    &--inside {
+        .modal-content {
+            &::before {
+                display: none;
+            }
+        }
+
+        .modal-dialog {
+            top: rem(200);
+            right: rem(145) !important;
+            width: auto !important;
+            height: auto !important;
+        }
+
+        &--md {
+            .modal-dialog {
+                right: rem(72) !important;
+                left: rem(72) !important;
+            }
+        }
+    }
+
+    &--avios-inside {
+        .modal-dialog {
+            top: 45%;
+            max-width: rem(600);
+            margin-right: rem(70);
+            transform: translate(0%, -50%) !important;
+        }
+    }
+
+    &--inside-scroll {
+        .modal-content {
+            overflow: hidden;
+            max-height: calc(100vh - rem(64));
+
+            &::before {
+                display: none;
+            }
+        }
+
+        .modal-dialog {
+            top: 50%;
+            transform: translateY(-50%) !important;
+        }
+
+        .#{$wefront__namespace}modals__body {
+            max-height: calc(100vh - rem(225));
+            overflow-y: auto;
+        }
+    }
+
+    &--small-separation {
+        .modal-content {
+            padding-right: rem(32);
+            padding-left: rem(32);
+        }
+    }
+
+    &--no-padding {
+        >.modal-dialog {
+            >.modal-content {
+                padding: 0;
+            }
+        }
+    }
+
+    &--p-small-responsive {
+        .modal-content {
+            padding: rem(35) rem(48) rem(26);
+        }
+    }
+
+    &--grey {
+        .modal-content {
+            background: url($wefront__img-path + '/background/google-pixel-modal.jpg') no-repeat 0 rem(-50) color(gray-240);
+        }
+    }
+
+    &--light-gray {
+        .modal-content {
+            background: color(gray-295);
+        }
+    }
+
+    &--centered {
+        .modal-dialog {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -59%) !important;
+        }
+    }
+
+    // Keep Alive Modal
+    &--max-prio {
+        z-index: 1302 !important;
+
+        & + .modal-backdrop {
+            & + .modal-backdrop, & ~ .modal-backdrop {
+                z-index: 1301 !important;
+            }
+        }
+    }
+
+    &__content-left {
+        width: rem(400);
+        max-width: 100%;
+    }
+
+    &__buttons {
+        display: flex;
+
+        .ib-link {
+            font-size: rem(14);
+            text-align: left;
+            line-height: rem(20);
+
+            +.ib-link {
+                margin-left: rem(16);
+            }
+        }
+    }
+
+    .#{$wefront__namespace}content-buttons {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+        font-size: rem(16);
+
+        &--end {
+            justify-content: flex-end;
+        }
+
+        &--center {
+            justify-content: center;
+        }
+
+        &__reverse {
+            flex-direction: row-reverse;
+        }
+
+        &__content {
+            &-left {
+                left: initial;
+                order: 1;
+            }
+
+            &-right {
+                right: initial;
+                order: 0;
+                margin-top: initial;
+                margin-bottom: initial;
+            }
+        }
+
+        &--options {
+            .#{$wefront__namespace}content-buttons {
+                &__content {
+                    &-left {
+                        width: auto;
+
+                        .#{$wefront__namespace}button {
+                            &--inverse {
+                                margin-right: rem(20);
+                            }
+                        }
+                    }
+
+                    &-right {
+                        width: auto;
+                    }
+                }
+            }
+        }
+    }
+
+    &--pdd {
+        .#{$wefront__namespace}flex--flex-end {
+            justify-content: flex-end;
+        }
+    }
+
+    &__bg {
+        padding: rem(24);
+        margin-top: rem(8);
+        text-align: center;
+        background-color: color(gray-60);
+    }
+
+    &__content {
+        &--border {
+            padding-top: rem(24);
+            margin-top: rem(24);
+            border-top: rem(1) solid color(gray-25);
+        }
+    }
+
+    &--middle {
+        &.modal .modal-dialog {
+            top: 50%;
+            margin-top: 0;
+            margin-bottom: 0;
+            transform: translate(0, -50%);
+        }
+    }
+}
+
+.#{$wefront__namespace}modals--price-details {
+    .modal-dialog {
+            width: clamp(rem(288), calc(100vw - rem(32)), rem(343));
+            min-width: rem(288);
+            padding: rem(56) rem(16) rem(24) rem(16);
+            margin: 0 auto;
+            background-color: var(--ib-color-white);
+            background-clip: padding-box;
+
+        .modal-content {
+            padding: 0;
+            border: none;
+            box-shadow: none;
+            outline: none;
+        }
+    }
+}
+.#{$wefront__namespace}price--scroll {
+    overflow-y: auto;
+}
+
+.#{$wefront__namespace}modals--new-seats-modal {
+    .modal-dialog {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: fit-content !important;
+        transform: translate(-29.5%, -62%) !important;
+
+        .modal-content {
+            padding: 0;
+        }
+    }
+}
+
+.#{$wefront__namespace}modals--new-seats-emergency-modal {
+    .modal-dialog {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: fit-content !important;
+        transform: translate(-34.5%, -57%) !important;
+
+        .modal-content {
+            padding: 0;
+        }
+    }
+}
+
+.#{$wefront__namespace}modals--new-seats-big {
+    .modal-dialog {
+        right: 0;
+        left: calc(((100% - rem(1152)) / 2) + rem(620));
+        width: rem(466);
+        max-width: rem(466);
+
+        .modal-content {
+            width: rem(436);
+            height: rem(295);
+            padding: 3rem 4rem 2rem;
+
+            .ib-flex__column.ib-flex--align-center {
+                button {
+                    width: rem(200);
+                    height: rem(40);
+                }
+            }
+        }
+    }
+}
+
+.modal-open {
+    .ib-modals--loading-page {
+        overflow: hidden;
+    }
+}
+
+
+.#{$wefront__namespace}tools__login-collapse {
+    .#{$wefront__namespace}modals__header-settings {
+        display: none;
+    }
+}
+
+
+.#{$wefront__namespace}modals__bob-error {
+    &--section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &--title {
+        margin-bottom: rem(8);
+        font-size: rem(38);
+        font-weight: 400;
+        font-style: normal;
+        line-height: normal;
+        color: var(--grey-80033, #333);
+
+        &::before {
+            content: "\e98a";
+            position: relative;
+            top: rem(10);
+            font-size: rem(50);
+            color: color(primary);
+        }
+    }
+
+    &--img {
+        display: flex;
+        width: 100%;
+        height: rem(138);
+        justify-content: center;
+        margin-top: rem(16);
+        margin-bottom: rem(48);
+    }
+
+    &--text {
+        margin-top: rem(20);
+        margin-bottom: rem(16);
+    }
+
+}
+
+
+@include media-query('lg') {
+    .#{$wefront__namespace}modals {
+        &--desktop {
+            .modal-dialog {
+                width: calc(100% - 6.25rem);
+                max-width: 100%;
+                padding: 0 rem(50);
+            }
+        }
+
+        &--adyen {
+            .modal-dialog {
+                width: auto;
+                max-width: fit-content;
+                padding: 0 rem(50);
+
+                .#{$wefront__namespace}modals__body {
+                    margin-top: rem(16);
+                }
+            }
+        }
+
+        &--mmd {
+            .modal-dialog {
+                width: rem(448);
+                max-width: rem(448);
+            }
+
+            .modal-content {
+                width: 100%;
+                max-width: 100%;
+                padding: rem(36) rem(48);
+            }
+        }
+
+        &--xs {
+            .modal-dialog {
+                width: rem(320);
+                max-width: rem(320);
+            }
+
+            .modal-content {
+                width: 100%;
+                max-width: 100%;
+                padding: rem(32) rem(36) rem(20);
+            }
+        }
+
+        // Add "left" or "right" in modal parent div, after class="modal".
+        &--left,
+        &--right {
+            div.modal-dialog {
+                width: rem(736);
+            }
+        }
+
+        /* Left */
+        &--left {
+            &.fade .modal-dialog {
+                left: rem(-736);
+            }
+        }
+
+        /* Right */
+        &--right {
+            &.fade .modal-dialog {
+                right: rem(-736);
+            }
+        }
+
+        // Top - Example Modal Login Top
+        &--top {
+            &.#{$wefront__namespace}modals {
+                .modal-dialog {
+                    top: rem(230);
+                    margin-top: 0;
+                }
+            }
+        }
+
+        &--no-padding {
+            >.modal-dialog {
+                >.modal-content {
+                    padding: 0;
+                }
+            }
+        }
+
+        &--reset {
+            .modal-content {
+                padding: rem(35) rem(40) rem(48) rem(40);
+            }
+        }
+    }
+
+    .#{$wefront__namespace}modals--new-seats-modal {
+        .modal-dialog {
+            left: 69%;
+        }
+    }
+
+    .#{$wefront__namespace}modals--new-seats-emergency-modal {
+        .modal-dialog {
+            left: 69.1%;
+        }
+    }
+
+    .#{$wefront__namespace}modals--new-seats-big {
+        .modal-dialog {
+            left: 50%;
+            width: rem(288);
+        }
+    }
+
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}modals {
+        &--full-mobile {
+            .modal-dialog {
+                padding: 0;
+            }
+        }
+
+        &--large {
+            .modal-dialog {
+                width: 100%;
+                max-width: rem(728);
+                margin: rem(30) auto;
+            }
+        }
+
+        &--desktop {
+            .modal-dialog {
+                width: remcalc(100%, " - ", rem(88));
+                max-width: 100%;
+                padding: 0 rem(44);
+            }
+        }
+
+        &--adyen {
+            .modal-dialog {
+                width: auto;
+                max-width: fit-content;
+                padding: 0 rem(44);
+
+                .#{$wefront__namespace}modals__body {
+                    margin-top: rem(16);
+                }
+            }
+        }
+
+        &--mmd {
+            .modal-dialog {
+                width: rem(480);
+                max-width: rem(480);
+            }
+
+            .modal-content {
+                width: 100%;
+                max-width: 100%;
+                padding: rem(31) rem(48);
+            }
+        }
+
+        &--xs {
+            .modal-dialog {
+                width: rem(320);
+                max-width: rem(320);
+            }
+
+            .modal-content {
+                width: 100%;
+                max-width: 100%;
+                padding: rem(32) rem(36) rem(20);
+            }
+        }
+
+        // Add "left" or "right" in modal parent div, after class="modal".
+        &--left,
+        &--right {
+            div.modal-dialog {
+                width: rem(750);
+            }
+        }
+
+        /* Left */
+        &--left {
+            &.fade .modal-dialog {
+                left: rem(-750);
+            }
+        }
+
+        /* Right */
+        &--right {
+            &.fade .modal-dialog {
+                right: rem(-750);
+            }
+        }
+
+        // Top - Example Modal Login Top
+        &--top {
+            &.#{$wefront__namespace}modals {
+                .modal-dialog {
+                    top: rem(230);
+                    margin-top: 0;
+                }
+            }
+        }
+
+        &__header-settings {
+            top: rem(10);
+            right: rem(15);
+        }
+
+        &--no-padding {
+            >.modal-dialog {
+                >.modal-content {
+                    padding: 0;
+                }
+            }
+        }
+
+        //dangerous objects
+        &--flex {
+            display: flex;
+            flex-flow: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            .w40 {
+                width: 100%;
+            }
+
+            .w60 {
+                width: 100%;
+            }
+        }
+
+        &--reset {
+            .modal-content {
+                padding: rem(37) rem(24) rem(32);
+            }
+        }
+    }
+
+    .modal-open {
+        .#{$wefront__namespace}header-booking {
+            &__login {
+                &.openCollapse {
+                    &::after {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .#{$wefront__namespace}modals--new-seats-modal {
+        .modal-dialog {
+            left: 65.3%;
+            ;
+        }
+    }
+
+    .#{$wefront__namespace}modals--new-seats-emergency-modal {
+        .modal-dialog {
+            left: 65.4%;
+        }
+    }
+
+    .#{$wefront__namespace}modals--new-seats-big {
+        .modal-dialog {
+            left: 50%;
+            width: rem(288);
+
+        }
+    }
+}
+
+@include media-query('desktop') {
+    .#{$wefront__namespace}modals {
+        .modal-dialog {
+            width: rem(736);
+            // max-width: rem(736);            //FIX BOOTSTRAP STYLES
+        }
+
+        .#{$wefront__namespace}modals__dialog {
+            width: 100%;
+        }
+
+        &--xs {
+            .modal-dialog {
+                width: rem(320);
+                max-width: rem(320);
+            }
+
+            .modal-content {
+                width: 100%;
+                max-width: 100%;
+                padding: rem(32) rem(36) rem(20);
+            }
+        }
+
+        &--lg {
+            .modal-dialog {
+                width: 100%;
+            }
+        }
+
+        &--loading-full {
+            .modal-dialog {
+                width: 100%;
+
+                &.modal-loading {
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    transform: translate(0, 0) !important;
+                }
+            }
+        }
+
+        &--upgrade {
+            &.#{$wefront__namespace}modals {
+                .modal-dialog {
+                    padding: 0 !important;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}modals {
+        .modal-dialog {
+            width: 100%;
+            max-width: 100%; //FIX BOOTSTRAP STYLES
+            margin: rem(30) rem(8);
+
+            &.modal-loading {
+                padding: rem(30) rem(8);
+                margin: 0;
+            }
+        }
+
+        &__header {
+            &--p-small {
+                padding-bottom: rem(10);
+            }
+
+            &--with-image {
+                width: remcalc(100%, " + ", rem(32));
+                margin-top: rem(-32);
+                margin-bottom: rem(8);
+                margin-left: rem(-16);
+
+                .#{$wefront__namespace}heading {
+                    &--type-1 {
+                        padding-right: 0;
+                        line-height: rem(20);
+                    }
+                }
+
+                .#{$wefront__namespace}modals__body {
+                    .#{$wefront__namespace}text--block {
+                        letter-spacing: rem(-0.1);
+                    }
+                }
+
+                .#{$wefront__namespace}modals__content-image {
+                    padding-bottom: rem(22);
+                }
+
+                img {
+                    height: rem(400);
+                }
+            }
+
+            .#{$wefront__namespace}heading {
+                &--mobile-block {
+                    display: block;
+                    width: 100%;
+                    max-width: 100%;
+                }
+
+                &--type-4 {
+                    font-size: rem(20);
+                }
+
+                &--full {
+                    max-width: remcalc('100%', ' - ', rem(35));
+                }
+            }
+
+            &--responsive {
+                padding-bottom: rem(5);
+                margin-bottom: rem(12);
+            }
+        }
+
+        &--transparent {
+            .modal-dialog {
+                top: 30%;
+                max-width: rem(350);
+                -webkit-transform: translate(-50%, -30%) !important;
+                -moz-transform: translate(-50%, -30%) !important;
+                -ms-transform: translate(-50%, -30%) !important;
+                -o-transform: translate(-50%, -30%) !important;
+                transform: translate(-50%, -30%) !important;
+            }
+
+            .#{$wefront__namespace}modals__dialog {
+                top: 0;
+                max-width: 100%;
+                padding-top: rem(20);
+                margin: 0;
+                -webkit-transform: translate(0, 0) !important;
+                -moz-transform: translate(0, 0) !important;
+                -ms-transform: translate(0, 0) !important;
+                -o-transform: translate(0, 0) !important;
+                transform: translate(0, 0) !important;
+            }
+        }
+
+        &--desktop {
+            .modal-dialog {
+                width: rem(320);
+                max-width: rem(320);
+                padding: 0;
+                margin: rem(30) auto;
+            }
+        }
+
+        &--adyen {
+            .modal-dialog {
+                width: auto;
+                max-width: fit-content;
+                padding: 0;
+                margin: rem(30) auto;
+            }
+        }
+
+        &--xs-medium {
+            .modal-dialog {
+                width: rem(370);
+                max-width: rem(370);
+            }
+
+            .modal-content {
+                width: 100%;
+                max-width: 100%;
+                padding: rem(32) rem(36) rem(20);
+            }
+        }
+
+        &--xs {
+            .modal-dialog {
+                width: rem(320);
+                max-width: 100%;
+                padding: 0;
+                margin: rem(30) auto;
+            }
+
+            .modal-content {
+                width: 100%;
+                max-width: 100%;
+                padding: rem(32) rem(36) rem(20);
+            }
+        }
+
+        &--sm {
+            .modal-dialog {
+                width: rem(436);
+                max-width: rem(436);
+                margin: rem(30) auto;
+            }
+
+            &-no-margin {
+                .modal-dialog {
+                    width: rem(436);
+                    max-width: rem(436);
+                    margin: 0 !important;
+                }
+            }
+
+            .modal-content {
+                width: 100%;
+                max-width: 100%;
+                padding: rem(21) rem(16);
+            }
+        }
+
+        &--full-mobile {
+            .modal-dialog {
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+        }
+
+        &--lg {
+            .modal-dialog {
+                width: 100%;
+            }
+        }
+
+        &--md {
+            .modal-dialog {
+                width: 100%;
+                max-width: rem(448);
+                margin: rem(30) auto;
+            }
+        }
+
+        &--large {
+            .modal-dialog {
+                width: 100%;
+                max-width: rem(448);
+                margin: rem(30) auto;
+            }
+        }
+
+        &--inside {
+            .modal-dialog {
+                right: rem(25) !important;
+            }
+
+            &--md {
+                .modal-dialog {
+                    top: 15% !important;
+                    right: rem(25) !important;
+                    left: rem(25) !important;
+                }
+            }
+        }
+
+        &--fit-content {
+            .modal-dialog {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+
+        &__header-settings {
+            //top: rem(24);
+            right: rem(20);
+
+            /* &--mobile {
+				right: rem(10);
+				.#{$wefront__namespace}modals__button-action {
+					font-size: rem(25);
+				}
+			} */
+            &--top {
+                top: 0;
+                right: 0;
+            }
+        }
+
+        &--right {
+            .#{$wefront__namespace}modals__header-settings--top {
+                right: 0;
+            }
+        }
+
+        &--no-padding {
+            >.modal-dialog {
+                >.modal-content {
+                    padding: 0;
+                }
+            }
+        }
+
+        &--reset {
+            .modal-content {
+                padding: rem(37) rem(24) rem(32);
+            }
+        }
+
+        //dangerous objects
+        &--flex {
+            display: flex;
+            flex-flow: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            .w40 {
+                width: 100%;
+            }
+
+            .w60 {
+                width: 100%;
+            }
+        }
+
+        &--grey {
+            .modal-content {
+                background: color(gray-240);
+            }
+        }
+
+        &--loading-full {
+            .modal-dialog {
+                width: 100%;
+                margin: 0;
+
+                &.modal-loading {
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    transform: translate(0, 0) !important;
+                }
+            }
+        }
+
+        .#{$wefront__namespace}content-buttons {
+            &--options {
+                flex-flow: column wrap;
+
+                .#{$wefront__namespace}content-buttons {
+                    &__content {
+                        &-left {
+                            display: flex;
+                            width: auto;
+                            flex-flow: column wrap;
+                            order: 0;
+
+                            .#{$wefront__namespace}button {
+                                &--inverse {
+                                    margin-right: 0;
+                                    margin-bottom: rem(24);
+                                }
+                            }
+                        }
+
+                        &-right {
+                            display: flex;
+                            width: auto;
+                            flex-flow: column wrap;
+                            order: 1;
+
+                            .#{$wefront__namespace}link {
+                                margin-top: rem(34);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .#{$wefront__namespace}tools__login-collapse {
+        .#{$wefront__namespace}modals__header-settings {
+            display: block;
+        }
+    }
+
+    .modal-open {
+        .#{$wefront__namespace}header-booking {
+            &__login {
+                &.openCollapse {
+                    &::after {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .#{$wefront__namespace}modals--new-seats-big {
+        .modal-dialog {
+            left: 50%;
+            width: rem(283) !important;
+
+            .modal-content {
+                width: rem(284);
+                height: rem(247);
+                padding: 2.5rem 2rem 2rem;
+            }
+        }
+    }
+
+    .#{$wefront__namespace}modals--new-seats-modal {
+        .modal-dialog {
+            left: 38.9%;
+        }
+    }
+
+    .#{$wefront__namespace}modals--new-seats-emergency-modal {
+        .modal-dialog {
+            left: calc(50% - rem(57));
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}modals {
+        .modal-content {
+            padding: rem(24);
+        }
+
+        &--desktop {
+            .modal-dialog {
+                width: rem(440) !important;
+            }
+        }
+
+        &--mt-small {
+            margin-top: rem(25) !important;
+        }
+
+        &--adyen {
+            .modal-dialog {
+                width: auto;
+                max-width: fit-content;
+
+                .#{$wefront__namespace}modals__body {
+                    margin-top: rem(28.8);
+                }
+            }
+        }
+
+        &__header {
+            &--with-icon {
+                .#{$wefront__namespace}heading {
+                    max-width: calc(100% - 7.5rem);
+                }
+            }
+        }
+
+        &__body {
+            &--with-footer {
+                position: absolute;
+                overflow: auto;
+                width: remcalc(100%, " - ", rem(30));
+                height: remcalc(100%, " - ", rem(275));
+            }
+        }
+
+        &__footer {
+            .#{$wefront__namespace}button {
+                width: 100%;
+                padding: rem(14) rem(20);
+            }
+        }
+
+        // &__button-action {
+        // 	font-size: rem(24);
+        // }
+        &--mmd {
+            .modal-dialog {
+                width: rem(370);
+                max-width: rem(370);
+                margin: rem(30) auto;
+            }
+
+            .modal-content {
+                width: 100%;
+                max-width: 100%;
+                padding: rem(28) rem(32);
+            }
+        }
+
+        &--xs {
+            .modal-dialog {
+                width: rem(320);
+                max-width: rem(320);
+            }
+
+            .modal-content {
+                width: 100%;
+                max-width: 100%;
+                padding: rem(32) rem(36) rem(20);
+            }
+        }
+
+        &--sm {
+            .modal-dialog {
+                width: rem(320);
+                max-width: rem(320);
+                margin: rem(30) auto;
+            }
+
+            .modal-content {
+                width: 100%;
+                max-width: 100%;
+                padding: rem(21) rem(16);
+            }
+        }
+
+        &--full-mobile {
+            .modal-dialog {
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            &.#{$wefront__namespace}modals {
+                &--left,
+                &--right {
+                    div.modal-dialog {
+                        width: 100%;
+                        max-width: 100%;
+                        margin: 0 auto;
+                    }
+                }
+            }
+        }
+
+        // Add "left" or "right" in modal parent div, after class="modal".
+        &--left,
+        &--right {
+            div.modal-dialog {
+                width: rem(450);
+                padding: 0;
+            }
+        }
+
+        /* Left */
+        &--left {
+            &.fade .modal-dialog {
+                left: rem(-450);
+            }
+        }
+
+        /* Right */
+        &--right {
+            &.fade .modal-dialog {
+                right: rem(-450);
+            }
+        }
+
+        &--transparent {
+            .modal-content {
+                padding: 0;
+            }
+        }
+
+        &--logued {
+            .modal-dialog {
+                width: rem(439) !important;
+            }
+
+            .#{$wefront__namespace}modals__button-action {
+                font-size: rem(38);
+            }
+        }
+
+        // Top - Example Modal Login Top
+        &--top {
+            &.#{$wefront__namespace}modals {
+                .modal-dialog {
+                    top: rem(230);
+                    margin-top: 0;
+                }
+            }
+        }
+
+        &--with-icon {
+            .#{$wefront__namespace}heading {
+                max-width: calc(100% - 3.4375rem);
+            }
+        }
+
+        &--no-padding {
+            >.modal-dialog {
+                >.modal-content {
+                    padding: 0;
+                }
+            }
+        }
+
+        &--reset {
+            .modal-content {
+                padding: rem(37) rem(24) rem(40) !important;
+            }
+        }
+
+        &--flex {
+            .row {
+                display: flex;
+            }
+        }
+
+        &--p-responsive {
+            .modal-content {
+                padding: rem(32) rem(24);
+            }
+        }
+
+        &--p-small-responsive {
+            .modal-content {
+                padding: rem(33) rem(24) rem(0);
+            }
+        }
+
+        &__footer-fixed {
+            padding: 0 rem(25) rem(15);
+
+            .#{$wefront__namespace}content-buttons {
+                margin-top: 0;
+            }
+        }
+
+        .#{$wefront__namespace}content-buttons {
+            flex-flow: column wrap;
+            margin-top: rem(16);
+
+            &__no-mt {
+                margin-top: rem(0) !important;
+            }
+
+            &__content {
+                &-left,
+                &-right {
+                    width: 100%;
+                }
+
+                &-left {
+                    order: 0;
+                }
+
+                &-right {
+                    order: 1;
+                    margin-top: rem(32);
+                    text-align: center;
+
+                    .ib-link {
+                        // font-size: rem(14);
+                        text-align: center;
+                        line-height: rem(20);
+                        // margin-top: rem(34) !important;
+                    }
+                }
+            }
+
+            &--insurances {
+                flex-flow: row nowrap;
+                margin-top: rem(10);
+
+                .#{$wefront__namespace}button__cancel .#{$wefront__namespace}link {
+                    padding-top: 0;
+                }
+            }
+        }
+
+        &--pdd {
+            .modal-content {
+                padding: rem(28) rem(30);
+            }
+
+            .#{$wefront__namespace}modals {
+                &__header {
+                    &--inside {
+                        padding-top: 0;
+                    }
+
+                    .#{$wefront__namespace}heading {
+                        max-width: calc(100% - rem(15));
+                        line-height: 1;
+                    }
+
+                    &-settings {
+                        top: rem(11);
+                        right: rem(12);
+                    }
+                }
+
+                &__button-action {
+                    font-size: rem(26);
+                }
+            }
+
+            .#{$wefront__namespace}content-buttons {
+                flex-flow: column;
+
+                &__content-left {
+                    order: 0;
+                }
+
+                &__content-right {
+                    order: 1;
+                    margin-top: rem(32) !important;
+                    text-align: center;
+                }
+            }
+        }
+
+        &--upgrade {
+            &.#{$wefront__namespace}modals {
+                .modal-dialog {
+                    padding: 0 !important;
+                }
+            }
+        }
+    }
+
+    .#{$wefront__namespace}modals--new-seats-emergency-modal {
+        .modal-dialog {
+            left: calc(50% - rem(52));
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}modals {
+        .modal-dialog {
+            padding: 0 rem(16);
+        }
+
+        .modal-content {
+            padding: rem(32) rem(24) rem(32);
+        }
+
+        &__header {
+            &--with-icon {
+                .#{$wefront__namespace}heading {
+                    max-width: calc(100% - 5rem);
+                }
+            }
+            .#{$wefront__namespace}heading {
+                max-width: remcalc('100%', ' - ', rem(2));
+                line-height: rem(32);
+            }
+        }
+
+        &__body {
+            min-height: initial;
+
+            &--with-footer {
+                position: absolute;
+                overflow: auto;
+                width: calc(100% - rem(30));
+                height: calc(100% - rem(275));
+            }
+        }
+
+        &--padding-big {
+            .modal-content {
+                padding: rem(24);
+            }
+        }
+
+        &--mmd {
+            .modal-content {
+                width: 100%;
+                max-width: 100%;
+                padding: rem(10) rem(16);
+            }
+        }
+
+        &--xs {
+            .modal-dialog {
+                width: rem(320);
+                max-width: rem(320);
+            }
+
+            .modal-content {
+                width: 100%;
+                max-width: 100%;
+                padding: rem(32) rem(36) rem(20);
+            }
+        }
+
+        &--sm {
+            .modal-dialog {
+                width: rem(320);
+                max-width: rem(320);
+            }
+
+            .modal-content {
+                width: 100%;
+                max-width: 100%;
+                padding: rem(21) rem(16);
+            }
+        }
+
+        &--large {
+            .modal-dialog {
+                width: rem(320);
+                max-width: rem(320);
+                margin: rem(30) auto;
+            }
+
+            .modal-content {
+                width: 100%;
+                max-width: 100%;
+                padding: rem(21) rem(16);
+            }
+        }
+
+        &--full-mobile {
+            .modal-dialog {
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            &.#{$wefront__namespace}modals {
+                &--left,
+                &--right {
+                    div.modal-dialog {
+                        width: 100%;
+                        max-width: 100%;
+                        margin: 0 auto;
+                    }
+                }
+            }
+        }
+
+        // &__button-action {
+        // 	font-size: rem(24);
+        // }
+        // Add "left" or "right" in modal parent div, after class="modal".
+        &--left,
+        &--right {
+            div.modal-dialog {
+                width: rem(300);
+                padding: 0;
+            }
+
+            &.modal-content {
+                width: 100%;
+                padding: rem(16);
+            }
+        }
+
+        /* Left */
+        &--left {
+            &.fade .modal-dialog {
+                left: rem(-300);
+            }
+        }
+
+        /* Right */
+        &--right {
+            &.fade .modal-dialog {
+                right: rem(-300);
+            }
+
+            &.#{$wefront__namespace}modals--full-mobile {
+                .modal-content {
+                    padding: rem(24) rem(16) rem(32);
+                }
+
+                .#{$wefront__namespace}modals__header-settings--top {
+                    top: rem(-8);
+                    right: rem(-7);
+                }
+            }
+        }
+
+        &--transparent {
+            .modal-content {
+                padding: 0;
+            }
+        }
+
+        &--logued {
+            .modal-dialog {
+                width: rem(280) !important;
+            }
+
+            .#{$wefront__namespace}modals__header-settings {
+                left: rem(-40);
+                width: rem(40);
+                height: rem(40);
+            }
+
+            .#{$wefront__namespace}modals__button-action {
+                font-size: rem(38);
+
+                &.icon-cerrar {
+                    &::after,
+                    &::before {
+                        width: rem(30);
+                        margin-left: rem(-15);
+                    }
+                }
+            }
+        }
+
+        // Top - Example Modal Login Top
+        &--top {
+            &.#{$wefront__namespace}modals {
+                .modal-dialog {
+                    top: 0;
+                    margin-top: 0;
+                }
+            }
+        }
+
+        &__header-settings {
+            top: rem(10);
+            right: rem(10);
+
+            &--type-1 {
+                top: rem(24);
+                right: rem(18);
+            }
+
+            &--middle {
+                .#{$wefront__namespace}modals {
+                    &__button-action {
+                        font-size: rem(24);
+                    }
+                }
+            }
+        }
+
+        &--no-padding {
+            >.modal-dialog {
+                >.modal-content {
+                    padding: 0;
+                }
+            }
+        }
+
+        &--responsive-full {
+            div.modal-dialog {
+                width: 100%;
+            }
+        }
+
+        &--p-responsive {
+            .modal-content {
+                padding: rem(32) rem(16);
+            }
+        }
+
+        &--p-small-responsive {
+            .modal-content {
+                padding: rem(33) rem(16) rem(0);
+            }
+        }
+
+        &__buttons {
+            flex-flow: column;
+
+            .ib-link {
+                font-size: rem(14);
+                text-align: center;
+                line-height: rem(20);
+
+                +.ib-link {
+                    margin-top: rem(16);
+                    margin-left: 0;
+                }
+
+                img {
+                    width: auto;
+                    max-width: 100%;
+                }
+            }
+        }
+
+        .#{$wefront__namespace}content-buttons {
+            flex-flow: column wrap;
+            margin-top: rem(16);
+
+            &--insurances {
+                flex-flow: row nowrap;
+                margin-top: rem(10);
+
+                .#{$wefront__namespace}button__cancel .#{$wefront__namespace}link {
+                    padding-top: 0;
+                }
+            }
+
+            div {
+                width: 100%;
+
+                &:first-child {
+                    order: 1;
+                }
+
+                &:nth-child(1) {
+                    order: 0;
+                }
+            }
+
+            &__content {
+                &-left,
+                &-right {
+                    width: 100%;
+                }
+
+                &-left {
+                    order: 0;
+                }
+
+                &-right {
+                    order: 1;
+                    margin-top: rem(32);
+
+                    .ib-link {
+                        // font-size: rem(14);
+                        text-align: center;
+                        line-height: rem(20);
+                        // margin-top: rem(34) !important;
+                    }
+                }
+            }
+        }
+
+        &__footer {
+            .#{$wefront__namespace}button {
+                width: 100%;
+                padding: rem(14) rem(20);
+            }
+        }
+
+        &__button-action {
+            font-size: rem(22);
+        }
+
+        &__footer-fixed {
+            padding: 0 rem(16) rem(12);
+            padding-top: 0 !important;
+
+            .#{$wefront__namespace}content-buttons {
+                margin-top: 0;
+            }
+        }
+
+        .#{$wefront__namespace}heading--type-1 {
+            padding-right: rem(15);
+        }
+
+        &--pdd {
+            .modal-content {
+                padding: rem(28) rem(20) rem(15) rem(23);
+            }
+
+            .#{$wefront__namespace}modals {
+                &__header {
+                    &--inside {
+                        padding-top: 0;
+                    }
+
+                    .#{$wefront__namespace}heading {
+                        line-height: 1;
+                    }
+
+                    &-settings {
+                        top: rem(11);
+                        right: rem(12);
+                    }
+                }
+
+                &__button-action {
+                    font-size: rem(26);
+                }
+            }
+
+            .#{$wefront__namespace}content-buttons {
+                flex-flow: column;
+
+                &__content-left {
+                    order: 0;
+                }
+
+                &__content-right {
+                    order: 1;
+                    margin-top: 0 !important;
+                    text-align: center;
+                }
+            }
+        }
+
+        &--upgrade {
+            &.#{$wefront__namespace}modals {
+                .modal-dialog {
+                    margin: 0 !important;
+                }
+            }
+        }
+    }
+
+    .#{$wefront__namespace}modals--new-seats-modal {
+        .modal-dialog {
+            left: 31.7%;
+        }
+    }
+}

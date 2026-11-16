@@ -1,0 +1,12 @@
+<div class="mmb-form-input" [class.has-error]="showError">
+    <input class="mmb-form-input__input"
+      title="{{props.label}}"
+      placeholder=" "
+      [id]="id"
+      [type]="props.type || 'text'"
+      [formControl]="formControl"
+      [attr.disabled]="formControl?.disabled ? '' : null"
+    />
+      <label [attr.for]="id" class="mmb-form-input__label" *ngIf="props.label">{{ props.label }} <span *ngIf="props.required" class="asterisco">*</span></label>
+</div>
+  <p *ngIf="showError" class="ib-alert ib-alert--error" >{{ getCustomErrorMessage }}</p>

@@ -1,0 +1,1 @@
+import './ib-MmB-manage-assistance-voucher-info.component';

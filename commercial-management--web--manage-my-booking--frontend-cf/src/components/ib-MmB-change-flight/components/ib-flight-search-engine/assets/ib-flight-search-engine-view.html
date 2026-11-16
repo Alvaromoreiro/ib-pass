@@ -1,0 +1,46 @@
+<form name="datepickerForm" novalidate class="ib-form">
+    <legend class="u-hide-accessible">{{'FLIGHT_SEARCH_ENGINE_ACCESSIBLE_TITLE'|translate}}</legend>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-5">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--full-responsive">
+                <div class="ib-input ib-input--icon ib-input--datepicker" ng-class="{'ib-input--datepicker-open' : flightSECtrl.datePickerOpened ,
+                                   'ib-input--datepicker-close' : !flightSECtrl.datePickerOpened,
+                                   'ib-input--error' : datepickerForm.$submitted && datepickerForm.searchDate.$invalid}">
+                    <button class="ib-input__button" ng-class="flightSECtrl.topClass" ng-click="flightSECtrl.datePickerOpened = !flightSECtrl.datePickerOpened"
+                        type="button" id="AVAILABILITY_CALENDAR_BUTTON">
+						<span class="hide-accessible">{{'FLIGHT_SEARCH_ENGINE_ACCESSIBLE_BUTTON_SPAN'|translate}}</span>
+					</button>
+                    <label class="ib-input__label" for="SEARCH_DATE">{{'FLIGHT_SEARCH_ENGINE_DATEPICKER_INPUT_TITLE'|translate}}</label>
+                    <input name="searchDate" class="ib-input__input" type="text" id="SEARCH_DATE" placeholder="{{'FLIGHT_SEARCH_ENGINE_DATEPICKER_INPUT_PLACEHOLDER'|translate}}"
+                        uib-datepicker-popup="dd/MM/yyyy" show-button-bar="false" popup-placement="auto bottom-right" ng-model="flightSECtrl.flightSearchModel.daySelected"
+                        is-open="flightSECtrl.datePickerOpened" datepicker-options="flightSECtrl.dateOptions" ng-change="flightSECtrl.changeDate()" ng-required="true"
+                        datepicker-popup-template-url="web-manage-my-booking/templates/ib-flight-search-engine-datepicker-view.html"
+                        readonly tabindex="-1" />
+                    <span type="button" class="ib-input__icon icon-calendario"></span>
+                </div>
+                <div ng-messages="datepickerForm.$submitted && datepickerForm.searchDate.$error">
+                    <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-5">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--full-responsive">
+                <div class="ib-select-small-md">
+                    <ui-select class="ib-select__action" ng-model="flightSECtrl.flightSearchModel.timeZoneSelected">
+                        <ui-select-match class="ib-select__list-ipt" placeholder="{{'FLIGHT_SEARCH_ENGINE_SELECT_PLACEHOLDER'|translate}}">
+                            <span class="ib-select__txt" ng-bind="$select.selected.id|translate"></span>
+                        </ui-select-match>
+                        <ui-select-choices class="ib-select__list" repeat="timeZone in (flightSECtrl.timeZoneOptions | filter: $select.search : flightSECtrl.timeZoneComparator)">
+                            <span class="ib-select__list-txt" ng-bind="timeZone.id|translate"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-2">
+            <button id="AVAILABILITY_SEARCH_BUTTON" class="ib-button ib-button--block ib-button--equal-inputs" type="submit" data-ng-click="flightSECtrl.sendSearchInfo(datepickerForm)">
+                {{'FLIGHT_SEARCH_ENGINE_INPUT_BUTTON_SEARCH'|translate}}
+            </button>
+        </div>
+    </div>
+</form>

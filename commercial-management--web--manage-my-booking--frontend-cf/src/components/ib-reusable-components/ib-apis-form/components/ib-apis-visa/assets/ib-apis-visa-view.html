@@ -1,0 +1,46 @@
+<div class="row">
+    <div ng-if="apisVisaCtrl.documentNumber" class="col-md-6 col-sm-12 col-xs-12">
+        <div class="ib-layout__line-spacing">
+            <div class="ib-input" data-ng-class="{'ib-input--error' :apisVisaCtrl.containerForm.$submitted && apisVisaCtrl.containerForm.APIS_VISA_DOC.$invalid}">
+                <label data-ng-class="{'ib-input__label--focus' : apisVisaCtrl.docNumber || apisVisaCtrl.containerForm.APIS_VISA_DOC.$viewValue}"
+                    class="ib-input__label" for="APIS_VISA_DOC">{{'APIS_DOCUMENT_NUMBER_FIELD_LABEL'|translate}}</label>
+                <input class="ib-input__input" type="text" id="APIS_VISA_DOC" name="APIS_VISA_DOC" ng-focus="apisVisaCtrl.docNumber=true"
+                    ng-blur="apisVisaCtrl.docNumber=false" data-ng-change="apisVisaCtrl.callVisaExpiryDateCtrl()" ng-model="apisVisaCtrl.pasVisaData.number" maxlength="{{::$root.MmBPatterns.APIS_DOCUMENT_MAX_LENGTH}}"
+                    ng-pattern="::$root.MmBPatterns.DOCS_PATTERN" data-ib-validator-cleaner="{{::$root.MmBPatterns.DOCS_CLEANER}}"/>
+                <!-- ng-required="::apisVisaCtrl.pasVisaData.isMandatory" -->
+            </div>
+            <div ng-messages="apisVisaCtrl.containerForm.$submitted && apisVisaCtrl.containerForm.APIS_VISA_DOC.$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                <div class="ib-alert ib-alert--error" ng-message="pattern">{{'DOC_FORMAT_ERROR'|translate}}</div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="apisVisaCtrl.issueCountry" class="col-md-6 col-sm-12 col-xs-12">
+        <div class="ib-layout__line-spacing">
+            <div class="ib-select" ng-class="{'ib-select--error':apisVisaCtrl.containerForm.$submitted && apisVisaCtrl.containerForm.APIS_VISA_COUNTRY.$invalid}">
+                <label class="ib-select__label" for="APIS_VISA_COUNTRY" data-ng-class="apisVisaCtrl.pasVisaData.issuerCountry ? 'ib-select__label--focus' : 'ib-select__label--unfocus'">{{apisVisaCtrl.pasVisaData.isMandatory ? (('APIS_DOCUMENT_VALID_COUNTRY_FIELD_LABEL'|translate) +''+('GENERAL_MANDATORY_FIELDS_FLAG'|translate))
+                    : ('APIS_DOCUMENT_VALID_COUNTRY_FIELD_LABEL'|translate)}}</label>
+                <ui-select class="ib-select__action" ng-disabled="apisVisaCtrl.isDocCountryDisabled()" id="APIS_VISA_COUNTRY" name="visa_country_{{::apisVisaCtrl.index}}"
+                    ng-model="apisVisaCtrl.pasVisaData.issuerCountry" data-ng-change="apisVisaCtrl.callVisaExpiryDateCtrl()">
+                    <!-- ng-required="::apisVisaCtrl.pasVisaData.isMandatory" -->
+                    <ui-select-match class="ib-select__list-ipt" placeholder="{{'APIS_DOCUMENT_VALID_COUNTRY_FIELD_LABEL'|translate}}">
+                        <span class="ib-select__txt" ng-bind="$select.selected.description"></span>
+                    </ui-select-match>
+                    <ui-select-choices class="ib-select__list" repeat="country.code as country in apisVisaCtrl.countries | prefixCheckSpecialCharactersFilter: $select.search">
+                        <span class="ib-select__list-txt" ng-bind="::country.description"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div ng-messages="apisVisaCtrl.containerForm.$submitted && apisVisaCtrl.containerForm.APIS_VISA_COUNTRY.$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'APIS_DOCUMENT_COUNTRY_REQUIRED_ERROR'|translate}}</div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="apisVisaCtrl.expiryDate" class="col-md-6 col-sm-12 col-xs-12">
+        <div class="ib-layout__line-spacing">
+            <ib-apis-visa-expiry-date show-day="true" year="apisVisaCtrl.pasVisaData.expiryDate.year"
+              month="apisVisaCtrl.pasVisaData.expiryDate.month" day="apisVisaCtrl.pasVisaData.expiryDate.day"
+              visa="apisVisaCtrl.pasVisaData" container-form="apisVisaCtrl.containerForm"></ib-apis-visa-expiry-date>
+        </div>
+    </div>
+</div>

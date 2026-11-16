@@ -1,0 +1,45 @@
+<div class="steps"
+    [ngClass]="{'steps--backdrop': mobileDrawerOpen}">
+    <ng-container *ngIf="isMobile && steps; else desktopSteps">
+        <button class="steps-mobile-btn"
+            [attr.aria-expanded]="mobileDrawerOpen"
+            [attr.aria-controls]="'stepsMobileMenu'"
+            [attr.aria-label]="'STEP_BUTTON_LABEL' | translate : { current: (currentStep.index), total: (steps?.length) }"
+            aria-describedby="steps-nav-description"
+            [disabled]="!mobileEnabled"
+            #openButton
+            (click)="toggleMobileDrawer()">
+            <span [attr.aria-hidden]="true">{{currentStep.index}}/{{steps?.length}}</span>
+        </button>
+        <p class="u-hide-accessible" id="steps-nav-description">{{'STEPS_MOBILE_BUTTON_TITLE'|translate}}</p>
+        <p class="steps-mobile-step-description" *ngIf="currentStep">
+            {{(currentStep.description ?? currentStep.text)|translate}}
+        </p>
+        <div class="steps-mobile-menu"
+            id="stepsMobileMenu"
+            [ngClass]="{'steps-mobile-menu--open': mobileDrawerOpen}"
+            [attr.aria-hidden]="!mobileDrawerOpen"
+            [attr.inert]="!mobileDrawerOpen ? '' : null"
+            #stepsMobileMenu>
+            <div class="steps-mobile-menu-header">
+                <p>{{'STEPS_MOBILE_DRAWER_TITLE'|translate}}</p>
+                <ng-container *ngTemplateOutlet="closeMobileTemplate"></ng-container>
+            </div>
+            <ib-booking-steps-nav  [currentStep]="currentStep" [steps]="steps" (stepClicked)="onStepClicked()" (enableMobileDrawer)="onEnableMobileDrawer( $event )"/>
+        </div>
+    </ng-container>
+</div>
+
+
+
+<ng-template #desktopSteps>
+    <ib-booking-steps-nav class="steps-desktop" [currentStep]="currentStep" [steps]="steps"/>
+</ng-template>
+
+<ng-template #closeMobileTemplate>
+    <button class="steps-mobile-menu-close" #closeButton (click)="closeMobileDrawer()" title="{{'MODAL_CLOSE_BUTTON'|translate}}">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M22.5 2.71714L21.2826 1.5L12 10.7832L2.71738 1.5L1.5 2.71714L10.7826 12.0004L1.5 21.2829L2.71738 22.5L12 13.2175L21.2826 22.5L22.5 21.2829L13.2167 12.0004L22.5 2.71714Z" fill="currentColor"/>
+        </svg>
+    </button>
+</ng-template>

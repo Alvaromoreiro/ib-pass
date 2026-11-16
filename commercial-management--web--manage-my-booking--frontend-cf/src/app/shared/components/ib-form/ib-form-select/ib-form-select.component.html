@@ -1,0 +1,35 @@
+  <div class="mmb-form-select">
+    <mat-form-field appearance="fill" class="mmb-form-select__field">
+      <mat-label class="mmb-form-select__label" [attr.for]="id" *ngIf="props.label">{{ props.label }}</mat-label>
+      <input
+        #miInput
+        type="text"
+        aria-label="Number"
+        matInput
+        [id]="id"
+        [formControl]="formControl"
+        [matAutocomplete]="auto"
+        [formlyAttributes]="field",
+        placeholder="Escribe para buscar..."
+        (focus)="onFocus()"
+        (blur)="onBlur()"/>
+        <span matSuffix 
+            class="mmb-form-select__icon" 
+            [ngClass]="panelAbierto ? 'mmb-form-select__icon--open' : 'mmb-form-select__icon--close'">
+      </span>
+
+      <mat-autocomplete class="mmb-form-select__autocomplete" 
+        #auto="matAutocomplete" 
+        (opened)="alAbrirPanel()"
+        (closed)="alCerrarPanel()"
+        (optionSelected)="optionSelected($event.option.value, miInput)">
+        <mat-option class="mmb-form-select__option" *ngFor="let opt of opcionesFiltradas$ | async" [value]="opt.label">
+          {{ opt.label }}
+        </mat-option>
+      </mat-autocomplete>
+      <!-- <mat-error *ngIf="showError">
+      {{ getCustomErrorMessage() }}
+    </mat-error> -->
+    </mat-form-field>
+  </div>
+  <!-- <p class="ib-alert ib-alert--error" *ngIf="showError">{{ getCustomErrorMessage() }}</p> -->

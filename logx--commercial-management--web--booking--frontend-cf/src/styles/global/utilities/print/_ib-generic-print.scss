@@ -1,0 +1,74 @@
+/* stylelint-disable selector-id-pattern */
+@media print {
+    body[data-print] * {
+        position: absolute;
+        visibility: hidden;
+    }
+
+    body[data-print],
+    body[data-print] > [data-print] * {
+        position: relative;
+        visibility: visible;
+    }
+
+    #printSection,
+    #printSection * {
+        position: relative;
+        visibility: visible;
+    }
+
+    #printSection {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    body[data-print] > :not([data-print]) {
+        visibility: hidden;
+    }
+
+    body[data-print] > [data-print] {
+        position: relative;
+        visibility: visible;
+    }
+
+    body[data-print] {
+        .u-card-text-print {
+            position: absolute !important;
+            top: rem(125) !important;
+            left: rem(20) !important;
+        }
+
+        .u-card-text-white {
+            color: color(white) !important;
+        }
+
+        .u-card-mb-none-print {
+            margin-bottom: 0 !important;
+        }
+
+        .u-display-ib-print {
+            display: inline-block !important;
+        }
+
+        .u-mr-print {
+            margin-right: rem(12) !important;
+        }
+
+        .u-display-print-none {
+            display: none !important;
+        }
+
+        .u-display-print-figure {
+            position: absolute !important;
+            top: rem(40) !important;
+            left: rem(20) !important;
+            visibility: visible;
+        }
+    }
+
+    a[href]::after {
+        content: "";
+        display: none;
+    }
+}

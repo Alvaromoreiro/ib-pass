@@ -1,0 +1,18 @@
+<div class="ib-layout__line-spacing u-text-center hidden-xl hidden-lg">
+    <h2 class="ib-heading ib-heading--title-box">{{'MMB_YOUR_FLIGHTS_FLIGHT_INFORMATION_TITTLE'|translate}}</h2>
+</div>
+<!-- Warning for Case 5, delay in operative window -->
+<ib-disruption-delay-alert 
+    ng-if="flightsTabCtrl.caseFive"
+    [flights]="flightsTabCtrl.delayedFlights">
+</ib-disruption-delay-alert>
+<!-- ALERTA -->
+<div ng-if="flightsTabCtrl.model.noIberiaFlag" class="ib-msg-alert ib-msg-alert__gdr ib-msg-alert--info ib-msg-alert--transparent icon-alertas_2 alert fade in ib-layout__section">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-border-left-none">
+        <p class="ib-msg-alert__text ib-msg-alert__text--title">{{'MMB_YOUR_FLIGHTS_FLIGHT_NO_IBERIA_ALERT_TITTLE'|translate}}</p>
+        <p class="ib-msg-alert__text">{{'MMB_YOUR_FLIGHTS_FLIGHT_NO_IBERIA_ALERT_TEXT'|translate}}</p>
+    </div>
+</div>
+<div ng-repeat="(index, flight) in flightsTabCtrl.model.flights">
+    <ib-MmB-flights-card model="flight" index="index"></ib-MmB-flights-card>
+</div>

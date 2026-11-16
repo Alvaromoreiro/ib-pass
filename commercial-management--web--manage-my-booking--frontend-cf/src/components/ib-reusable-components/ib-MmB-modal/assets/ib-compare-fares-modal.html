@@ -1,0 +1,36 @@
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{'COMPARE_FARES_MODAL_TITLE'|translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}"
+            data-ng-click="modalCtrl.close()">
+            <span class="hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body u-pt-medium">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+        <div class="ib-table-modal ib-table-modal__gdr ib-table-modal--left-head">
+            <table class="ib-table-modal__table">
+                <caption class="hide-accessible">{{'COMPARE_FARES_MODAL_ACCESSIBLE'|translate}}</caption>
+                <tbody class="ib-table-modal__body">
+                    <tr class="ib-table-modal__row">
+                        <th class="ib-table-modal__column ib-table-modal__column--head ib-table-modal__column-ghost">
+                            <span class="ib-table-modal__column-icon hide-accessible">{{'COMPARE_FARES_MODAL_FARE_TEXT'|translate}}</span>
+                        </th>
+                        <td class="ib-table-modal__column">
+                            <p class="ib-table-modal__column-title">{{modalCtrl.model.selectedFareInfo[0].cabin}}</p>
+                        </td>
+                    </tr>
+                    <tr class="ib-table-modal__row" data-ng-repeat="conditions in modalCtrl.model.selectedFareInfo">
+                        <th class="ib-table-modal__column ib-table-modal__column--head">
+
+                            <span class="ib-table-modal__column-icon {{conditions.icon}}">{{conditions.name}}</span>
+
+                        </th>
+                        <td class="ib-table-modal__column" ng-bind-html="modalCtrl.transformAsHTML(conditions.message)"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

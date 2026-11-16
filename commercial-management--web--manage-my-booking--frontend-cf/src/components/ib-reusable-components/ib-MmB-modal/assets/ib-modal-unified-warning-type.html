@@ -1,0 +1,36 @@
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{'MMB_DISRUPTION_UNIFIED_MODAL_TITLE' | translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible">Cerrar ventana modal</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body">
+    <div class="ib-layout__line-spacing">
+        <div class="ib-box-cities ib-box-cities__modal">
+            <section class="ib-modals__body" ng-if="modalCtrl.model.data==='INVOLUNTARY_CHANGE'">
+                <div class="ib-layout__line-spacing--small">
+                    <p class="ib-text">{{'MMB_DISRUPTION_UNIFIED_TO_PAY_BODY'|translate}}</p>
+                </div>
+            </section>
+            <section class="ib-modals__body" ng-if="modalCtrl.model.data==='VOLUNTARY_CHANGE'">
+                <div class="ib-layout__line-spacing--small">
+                    <p class="ib-text">{{'MMB_DISRUPTION_UNIFIED_TO_FREE_BODY'|translate}}</p>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+<footer class="ib-modals__footer">
+    <div class="ib-content-buttons">
+        <div class="ib-content-buttons__content-left">
+            <button class="ib-button ib-button ib-button--w-medium" ng-if="modalCtrl.model.data==='INVOLUNTARY_CHANGE'" type="button" ng-click="modalCtrl.accept()">{{'MMB_DISRUPTION_UNIFIED_TO_PAY_BUTTON_CHANGE' | translate}}</button>
+            <button class="ib-button ib-button ib-button--w-medium" ng-if="modalCtrl.model.data==='VOLUNTARY_CHANGE'" type="button" ng-click="modalCtrl.accept()">{{'MMB_DISRUPTION_UNIFIED_TO_FREE_BUTTON_NO_CHANGE' | translate}}</button>
+        </div>
+        <div class="ib-content-buttons__content-right">
+            <a href="javascript:void(0)" ng-if="modalCtrl.model.data==='INVOLUNTARY_CHANGE'" title="Usarla solo para este vuelo" ng-click="modalCtrl.close()" class="ib-link">{{'MMB_DISRUPTION_UNIFIED_TO_PAY_BUTTON_NO_CHANGE' | translate}}</a>
+            <a href="javascript:void(0)" ng-if="modalCtrl.model.data==='VOLUNTARY_CHANGE'" title="Usarla solo para este vuelo" ng-click="modalCtrl.close()" class="ib-link">{{'MMB_DISRUPTION_UNIFIED_TO_FREE_BUTTON_CHANGE' | translate}}</a>
+        </div>
+    </div>
+</footer>

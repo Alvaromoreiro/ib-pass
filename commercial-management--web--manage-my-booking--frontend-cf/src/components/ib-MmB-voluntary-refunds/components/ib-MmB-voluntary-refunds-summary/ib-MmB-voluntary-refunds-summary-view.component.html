@@ -1,0 +1,273 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="ib-layout__section--null">
+                <!-- HEADER TITLE PAGE -->
+                <div class="ib-voluntary-refunds-summary__title">
+                    <h1 class="ib-voluntary-refunds-summary__title-text">{{'MMB_CASH_REFUND_MODAL_BREAKDOWN_TITLE'
+                        | translate}}</h1>
+                </div>
+
+                <div class="ib-voluntary-refunds-summary__subtitle">
+                    <h2 class="ib-voluntary-refunds-summary__subtitle-text">
+                        {{'MMB_CASH_REFUND_TOTAL_AMOUNT_TITLE' | translate}}
+                        <span class="ib-voluntary-refunds-summary__subtitle-price">
+                            <span *ngIf="showAviosAndMoney">100 Avios + </span>
+                            <span>{{ dataModelSummary.totalRefund }}</span>
+                            <span *ngIf="showCashAndAvios"> + 100 Avios</span>
+                        </span>
+                    </h2>
+                </div>
+                <!-- END HEADER TITLE PAGE -->
+                <div class="row">
+                    <!-- EMAIL, SUMMARY AND CONTINUE/CANCEL BUTTON COMPONENT -->
+                    <div class="col-xs-12 col-lg-9 col-xl-8">
+                        <div *ngIf="showAlert" class="ib-alertbox ib-alertbox--darkgrey ib-alertbox--margin-medium"
+                            attr.aria-label="{{'MMB_FLEXIBILIZATION_CONFIRMATION_INFO_MESSAGE_ALT' | translate}}">
+                            <div class="ib-alertbox__head">
+                                <span class="ib-alertbox__head--icon icon-informacion_2">
+                                    <span class="hide-accessible">{{'MMB_WARNING_MESSAGE_TITLE'|translate}}</span></span>
+                                <p>
+                                    <span class="ib-alertbox__head--title" *ngIf="dataModelSummary.penalty.cash === 0">{{'MMB_VOLUNTARY_REFUNDS_SUMMARY_WARNING_WITHOUT_PENALTY'|translate}}</span>
+                                    <span class="ib-alertbox__head--title" *ngIf="dataModelSummary.penalty.cash !== 0">{{'MMB_VOLUNTARY_REFUNDS_GETTING_GENERAL_BODY'|translate}}</span>
+                                    <!-- FOR PARTIAL REFUND <span class="ib-alertbox__head--title" *ngIf="dataModelSummary.whenRefundPartial">{{'MMB_VOLUNTARY_REFUNDS_SUMMARY_WARNING_WHEN_PARTIAL_REFUND'|translate}}</span>-->
+                                </p>
+                            </div>
+                        </div>
+                        <section class="ib-layout__section--xmedium-responsive">
+                            <div class="ib-table-breakdown ib-table-breakdown--refunds">
+                                <div class="ib-box-cols">
+                                    <div class="ib-box-cols__content">
+                                        <h3 class="ib-table-breakdown__title">
+                                            {{'MMB_CASH_REFUND_MODAL_STEP_1_TITLE' | translate}}</h3>
+                                        <!-- PASSENGERS TABLE -->
+                                        <table
+                                            class="ib-table-breakdown__table ib-table-breakdown__table--cols-alignement"
+                                            *ngIf="dataModelSummary.summaryRefund">
+                                            <caption class="u-hide-accessible">{{'GENERAL_PASSENGER_TEXT'|translate}}
+                                            </caption>
+                                            <thead class="ib-table-breakdown__head">
+                                                <tr class="ib-table-breakdown__row">
+                                                    <th class="ib-table-breakdown__cell-title">
+                                                        <span
+                                                            class="ib-table-breakdown__txt">{{'GENERAL_PASSENGER_TEXT'|translate}}</span>
+                                                    </th>
+                                                    <th *ngIf="showCashAndAvios" class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                        <span class="ib-table-breakdown__txt">Avios</span>
+                                                    </th>
+                                                    <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                        <span *ngIf="!showCashAndAvios" class="ib-table-breakdown__txt">{{'PRICE_BREAKDOWN_FARE'|translate}}</span>
+                                                        <span *ngIf="showCashAndAvios" class="ib-table-breakdown__txt">{{'Cash'|translate}}</span>
+                                                    </th>
+                                                    <th
+                                                        class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                        <span
+                                                            class="ib-table-breakdown__txt">{{'PRICE_BREAKDOWN_TAX'|translate}}*</span>
+                                                    </th>
+                                                    <th
+                                                        class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                        <span
+                                                            class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT'|translate}}</span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="ib-table-breakdown__body">
+                                                <tr *ngFor="let passenger of dataModelSummary.summaryRefund"
+                                                    class="ib-table-breakdown__row">
+                                                    <td class="ib-table-breakdown__cell"><span
+                                                            [ngClass]="{'icon-persona' : passenger.passengerType !== 'CHILD' && passenger.passengerType !== 'INFANT','icon-iberia_ninos' : passenger.passengerType === 'CHILD', 'icon-bebe' : passenger.passengerType === 'INFANT'}"
+                                                            class="ib-table-breakdown__txt">{{passenger.quantityPassenger}} x
+                                                            {{ setQuantityPassengerType(passenger.quantityPassenger, passenger.passengerType) }}</span>
+                                                    </td>
+                                                    <td *ngIf="showCashAndAvios || showAviosAndMoney || showOnlyAvios" class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive"
+                                                        attr.data-attr="{{'Avios'|translate}}"><span
+                                                            class="ib-table-breakdown__txt">{{passenger.quantityPassenger}} x {{passenger.formatCash}}</span></td>
+                                                    <td *ngIf="!showCashAndAvios && !showAviosAndMoney && !showOnlyAvios" class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive"
+                                                        attr.data-attr="{{'PRICE_BREAKDOWN_FARE'|translate}}">
+                                                        <span class="ib-table-breakdown__txt">{{passenger.quantityPassenger}} x {{passenger.formatCash}}</span>
+                                                    </td>
+                                                    <td *ngIf="showCashAndAvios" class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive"
+                                                        attr.data-attr="{{'Cash'|translate}}">
+                                                        <span class="ib-table-breakdown__txt">{{passenger.quantityPassenger}} x {{passenger.formatCash}}</span>
+                                                    </td>
+                                                    <td *ngIf="showAviosAndMoney" class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive"
+                                                        attr.data-attr="{{'Money'|translate}}">
+                                                        <span class="ib-table-breakdown__txt">{{passenger.quantityPassenger}} x {{passenger.formatCash}}</span>
+                                                    </td>
+                                                    <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive"
+                                                        attr.data-attr="{{'PRICE_BREAKDOWN_TAX'|translate}}"><span
+                                                            class="ib-table-breakdown__txt">{{passenger.quantityPassenger}} x {{passenger.formatTax}}</span></td>
+                                                    <td
+                                                        class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                        <span
+                                                            class="ib-table-breakdown__txt">{{passenger.formatTotalCash}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- END PASSENGERS TABLE -->
+
+                                        <!-- GENERIC ANCILLARIES TABLE -->
+                                        <table class="ib-table-breakdown__table ib-table-breakdown__table--cols-alignement"
+                                            *ngFor="let summary of dataModelSummary.summaryAncillariesRefund">
+                                            <caption class="u-hide-accessible">{{ setSummaryTableTitleByAncillarieType(summary.serviceType) }}</caption>
+                                            <thead class="ib-table-breakdown__head">
+                                                <tr class="ib-table-breakdown__row">
+                                                    <th class="ib-table-breakdown__cell-title">
+                                                        <span
+                                                            class="ib-table-breakdown__txt">{{ setSummaryTableTitleByAncillarieType(summary.serviceType) }}</span>
+                                                    </th>
+                                                    <th
+                                                        class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                        <span
+                                                            class="ib-table-breakdown__txt">{{'MMB_VC_PRICE'|translate}}</span>
+                                                    </th>
+                                                    <th
+                                                        class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                        <span
+                                                            class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT'|translate}}</span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="ib-table-breakdown__body"
+                                                *ngFor="let slice of summary.slice; index as indexSlice">
+                                                <tr class="ib-table-breakdown__row"
+                                                    *ngFor="let segment of slice.segment; index as indexSegment">
+                                                    <td
+                                                        class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse">
+                                                        <span class="ib-table-breakdown__txt">
+                                                            <span class="ib-journey__box">
+                                                                <span
+                                                                    class="ib-journey__box--city">{{segment.origin.description}}</span>
+                                                                <span
+                                                                    class="ib-journey__box--iata ib-iata-text">{{segment.origin.code}}</span>
+                                                            </span>
+                                                            <span> - </span>
+                                                            <span class="ib-journey__box">
+                                                                <span
+                                                                    class="ib-journey__box--city">{{segment.destination.description}}</span>
+                                                                <span
+                                                                    class="ib-journey__box--iata ib-iata-text">{{segment.destination.code}}</span>
+                                                            </span>
+                                                        </span>
+                                                    </td>
+                                                    <td
+                                                        class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                                        <span *ngFor="let groupsType of slice.segment[indexSegment].groupsType"
+                                                            class="ib-table-breakdown__txt">{{groupsType.quantity}} x {{groupsType.formatCash}}</span>
+                                                    </td>
+                                                    <td
+                                                        class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                        <span *ngFor="let groupsType of slice.segment[indexSegment].groupsType"
+                                                            class="ib-table-breakdown__txt">{{groupsType.formatTotalCash}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- END GENERIC ANCILLARIES TABLE -->
+
+                                        <p *ngIf="dataModelSummary.penalty.cash !== 0" class="ib-table-breakdown__total-without-penalty">{{'MMB_VOLUNTARY_REFUNDS_BOOKING_PRICE' | translate}}
+                                            <span class="u-display-inline-block-mobile">
+                                                <span *ngIf="!showAviosAndMoney">{{ dataModelSummary.totalRefundWithoutPenalty }}</span>
+                                                <span *ngIf="showAviosAndMoney">100 Avios</span>
+
+                                                <span *ngIf="showAviosAndMoney"> + {{ 0 }}</span>
+                                                <span *ngIf="showCashAndAvios"> + 100 Avios</span>
+                                            </span>
+                                        </p>
+
+                                        <div *ngIf="dataModelSummary.penalty.cash !== 0">
+                                            <table class="ib-table-breakdown__table ib-table-breakdown__table--cols-alignement">
+                                                <caption class="u-hide-accessible">{{'GENERAL_PASSENGER_TEXT'|translate}}
+                                                </caption>
+                                                <thead class="ib-table-breakdown__head">
+                                                    <tr class="ib-table-breakdown__row">
+                                                        <th class="ib-table-breakdown__cell-title">
+                                                            <span
+                                                                class="ib-table-breakdown__txt">{{'SUMMARY_PENALTY'|translate}}</span>
+                                                        </th>
+                                                        <th
+                                                            class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                            <span
+                                                                class="ib-table-breakdown__txt">{{'PRICE_BREAKDOWN_FARE'|translate}}</span>
+                                                        </th>
+                                                        <th
+                                                            class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                            <span
+                                                                class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT'|translate}}</span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="ib-table-breakdown__body">
+                                                    <tr *ngFor="let passenger of dataModelSummary.summaryPenalty.summaryPassengerPenalties"
+                                                        class="ib-table-breakdown__row">
+                                                        <td class="ib-table-breakdown__cell"><span
+                                                                [ngClass]="{'icon-persona' : passenger.passengerType !== 'CHILD' && passenger.passengerType !== 'INFANT','icon-iberia_ninos' : passenger.passengerType === 'CHILD', 'icon-bebe' : passenger.passengerType === 'INFANT'}"
+                                                                class="ib-table-breakdown__txt">{{passenger.quantityPassenger}} x
+                                                                {{ setQuantityPassengerType(passenger.quantityPassenger, passenger.passengerType) }}</span>
+                                                        </td>
+                                                        <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive"
+                                                            attr.data-attr="{{'PRICE_BREAKDOWN_FARE'|translate}}"><span
+                                                                class="ib-table-breakdown__txt">{{passenger.quantityPassenger}} x {{passenger.formatCash}}</span></td>
+                                                        <td
+                                                            class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                            <span
+                                                                class="ib-table-breakdown__txt">-{{passenger.formatTotalCash}}</span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <p class="ib-table-breakdown__total-penalty">{{'MMB_VOLUNTARY_REFUNDS_BREAKDOWN_TOTAL_PENALTY' | translate}}:
+                                                <span class="u-display-inline-block">
+                                                    <span *ngIf="_dataModelSummary.less24Hours" class="ib-table-breakdown__total-penalty--line-through">-{{ dataModelSummary.penalty.formatPenalty }}</span>
+                                                    <span *ngIf="_dataModelSummary.less24Hours"> {{ dataModelSummary.noPenalty }}</span>
+                                                    <span *ngIf="!_dataModelSummary.less24Hours">-{{ dataModelSummary.penalty.formatPenalty }}</span>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ib-table-breakdown__footer" [ngClass]="{'u-pt': dataModelSummary.penalty.cash === 0}">
+                                    <div class="ib-table-breakdown__footer-background">
+                                        <span class="ib-table-breakdown__total" [ngClass]="{'ib-table-breakdown__total--with-avios': showCashAndAvios || showAviosAndMoney}">{{'MMB_CASH_REFUND_MODAL_BREAKDOWN_TOTAL_PRICE_TITLE' | translate}}
+                                            <span class="u-display-inline-block-mobile">
+                                                <span class="ib-table-breakdown__price">{{ dataModelSummary.totalRefund }}</span>
+                                                <span *ngIf="showAviosAndMoney" class="ib-table-breakdown__price">100 Avios</span>
+                                                <span *ngIf="showAviosAndMoney" class="ib-table-breakdown__price ib-table-breakdown__price--sub"> + {{ 0 }}</span>
+                                                <span *ngIf="showCashAndAvios" class="ib-table-breakdown__price ib-table-breakdown__price--sub"> + 100 Avios</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="ib-navegation ib-navegation--refunds">
+                            <div class="ib-navegation__item">
+                                <a (click)="showModalAndClose()" class="ib-navegation__link"
+                                    title="{{'MODAL_CANCEL' | translate}}" focusin>
+                                    <span class="ib-navegation__link--text">{{'MODAL_CANCEL' | translate}}</span>
+                                </a>
+                            </div>
+                            <div class="ib-navegation__item">
+                                <button class="ib-button ib-button--w-xlarge"
+                                    (click)="goConfirmModal({currentStep: currentStep})">{{'MODAL_CONTINUE' | translate}}</button>
+                            </div>
+                        </div>
+
+                        <p class="ib-text">{{'MMB_REFUNDS_TAXES_INFORMATION' |
+                            translate}}</p>
+                    </div>
+
+                    <div class="col-xs-12 col-lg-3 col-xl-4">
+                        <box-any-questions></box-any-questions>
+                    </div>
+
+                    <!-- VERTICAL DOUBTS AND RIGHTS COMPONENT -->
+                    <!-- <ib-MmB-doubts-and-rights-vert phone="fullModalCtrl.model.phoneList" is-voucher="false"> </ib-MmB-doubts-and-rights-vert> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

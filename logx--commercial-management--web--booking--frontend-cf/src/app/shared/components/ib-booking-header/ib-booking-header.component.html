@@ -1,0 +1,39 @@
+<div id="ib-header-component" class="ib-header-sticky" [ngClass]="{'ib-header--navigation-blocked': navigationBlocked}">
+    <div class="ib-header-common--full-container"
+        *ngIf="!this.showHeaderMobile">
+        <div class="ib-header--basket-group">
+            <ib-booking-grey-bar class="ib-header-common ib-header-common--top hidden-sm hidden-xs"
+                [model]="model.greyBarModel"></ib-booking-grey-bar>
+            <ib-booking-header-main
+                [model]="model.headerModel"
+                [login]="model.greyBarModel"
+                [numberTrips]="numberTrips"
+                [advancedSearch]="false"
+                (seekerToggle)="toggleAdvancedSearch( $event )"
+                (backToMulti)="backToMultiFlight( $event )"
+                (mainReturn)="backToMain( $event )"
+                [isHMad]="this.isHMad"></ib-booking-header-main>
+        </div>
+    </div>
+    
+    <ib-booking-header-mobile
+        *ngIf="this.showHeaderMobile"
+        [model]="model.headerModel"
+        [login]="model.greyBarModel"
+        [currentStep]="model.stepsModel?.currentStep"
+        (seekerToggle)="toggleAdvancedSearch( $event )"
+        (backToMulti)="backToMultiFlight( $event )"
+        (mainReturn)="backToMain( $event )"></ib-booking-header-mobile>
+
+    <ib-header-seeker-legacy
+        *ngIf="activeSeeker"
+        [isOnbusiness]="model.greyBarModel.isONB"
+        [redemption]="model.headerModel.redemption"
+        [trips]="model.headerModel.trips"
+        [passengers]="model.headerModel.passengers"
+        [openCalendar]="openCalendar"
+        (closeSeeker)="toggleAdvancedSearch( $event )"
+        (backToMainEvent)="backToMain( $event )"
+        [isHMad]="this.isHMad"></ib-header-seeker-legacy>
+</div>
+<ib-booking-steps *ngIf="model.stepsModel?.steps?.length" [steps]="model.stepsModel?.steps" [currentStep]="model.stepsModel?.currentStep" [ngClass]="{'ib-header--navigation-blocked': navigationBlocked}"></ib-booking-steps>

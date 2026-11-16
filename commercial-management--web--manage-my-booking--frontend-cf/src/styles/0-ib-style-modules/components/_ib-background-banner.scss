@@ -1,0 +1,412 @@
+/* -------------------------------------------------------------
+    #BACKGROUND-BANNER
+----------------------------------------------------------------- */
+.#{$wefront__namespace}background-banner {
+    position: relative;
+    display: block;
+    //Background Image
+    &__figure {
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        width: 100%;
+        height: rem(685);
+        background-size: cover;
+
+        &--height-full {
+            height: 100%;
+        }
+    }
+
+    &__img {
+        position: relative;
+        display: block;
+        width: 100%;
+    }
+    //List Generic
+    &__list {
+        position: relative;
+        display: block;
+        line-height: 0.8;
+    }
+
+    &__item {
+        position: relative;
+        display: inline-block;
+        //border-left: rem(1) solid color(white);
+        padding: rem(0) rem(4) rem(0) rem(13);
+        font-size: rem(13);
+        line-height: rem(16);
+        vertical-align: middle;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: rem(3);
+            left: 0;
+            width: rem(1);
+            height: rem(13);
+            background: color(white);
+        }
+
+        &--skeleton::before {
+            top: rem(7);
+        }
+
+        &:first-child {
+            &::before {
+                display: none;
+            }
+        }
+    }
+    //Texts and Titles Generic
+    &__title {
+        padding-bottom: rem(17);
+        font-family: $font-special;
+        font-size: rem(46);
+        line-height: normal;
+        color: color(white);
+
+        &--medium {
+            font-size: rem(38);
+        }
+    }
+
+    &__subtitle {
+        font-family: $font-special;
+        font-size: rem(30);
+        line-height: normal;
+        color: color(white);
+    }
+
+    &__txt {
+        position: relative;
+        display: inline;
+        font-family: $font-normal;
+        font-size: rem(13);
+        color: color(white);
+        vertical-align: top;
+
+        &--bold {
+            font-weight: bold;
+        }
+
+        &--small {
+            left: rem(-7);
+            font-size: rem(12);
+        }
+
+        &--medium {
+            font-size: rem(22);
+        }
+
+        &--medium-lg {
+            font-size: rem(24);
+        }
+
+        &--large {
+            font-size: rem(26);
+        }
+
+        &--special {
+            font-family: $font-special;
+        }
+    }
+
+    &__icon {
+        position: relative;
+        top: rem(-1);
+        left: rem(-2);
+        display: inline-block;
+        font-family: $font-normal;
+        font-size: rem(20);
+        line-height: 0.4;
+        color: color(white);
+        vertical-align: middle;
+    }
+
+    &__gradient--black {
+        &::before {
+            content: " ";
+            position: relative;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: color(black, 1);
+            background: -moz-linear-gradient(top, color(black, 1) 50%, color(white, 0) 100%);
+            background: -webkit-gradient(left top, left bottom, color-stop(50%, color(black, 1)), color-stop(100%, color(white, 0)));
+            background: -webkit-linear-gradient(top, color(black, 1) 50%, color(white, 0) 100%);
+            background: -o-linear-gradient(top, color(black, 1) 50%, color(white, 0) 100%);
+            background: -ms-linear-gradient(top, color(black, 1) 50%, color(white, 0) 100%);
+            background: linear-gradient(to bottom, color(black, 1) 50%, color(white, 0) 100%);
+            filter: progid:dximagetransform.microsoft.gradient(startColorstr='#000000', endColorstr='#ffffff', GradientType=0);
+            opacity: 0.5;
+        }
+    }
+
+    &__gradient-over--black {
+        &::before {
+            content: " ";
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: color(black, 1);
+            background: -moz-linear-gradient(top, color(black, 1) 50%, color(white, 0) 100%);
+            background: -webkit-gradient(left top, left bottom, color-stop(50%, color(black, 1)), color-stop(100%, color(white, 0)));
+            background: -webkit-linear-gradient(top, color(black, 1) 50%, color(white, 0) 100%);
+            background: -o-linear-gradient(top, color(black, 1) 50%, color(white, 0) 100%);
+            background: -ms-linear-gradient(top, color(black, 1) 50%, color(white, 0) 100%);
+            background: linear-gradient(to bottom, color(black, 1) 50%, color(white, 0) 100%);
+            filter: progid:dximagetransform.microsoft.gradient(startColorstr='#000000', endColorstr='#ffffff', GradientType=0);
+            opacity: 0.5;
+        }
+    }
+
+    &--gray {
+        .#{$wefront__namespace}background-banner__txt,
+        .#{$wefront__namespace}background-banner__title,
+        .#{$wefront__namespace}background-banner__subtitle {
+            color: color(gray-10);
+        }
+    }
+
+    &--medium {
+        padding-bottom: rem(80);
+    }
+}
+
+//Responsive
+@include media-query('xl') {
+    .#{$wefront__namespace}background-banner {
+        &__item {
+            &--visible-xl {
+                display: inline-block;
+            }
+        }
+
+        &__title {
+            &--medium {
+                font-size: rem(38);
+            }
+        }
+    }
+}
+
+@include media-query("lg") {
+    .#{$wefront__namespace}background-banner {
+        &__figure {
+            height: rem(616);
+
+            &--height-full {
+                height: 100%;
+            }
+        }
+
+        &__title {
+            padding-bottom: rem(8);
+            font-size: rem(36);
+
+            &--medium {
+                font-size: rem(38);
+            }
+        }
+
+        &__item {
+            &--visible-xl {
+                display: none;
+            }
+
+            &:nth-child(2) {
+                &::before {
+                    display: none;
+                }
+            }
+
+            &::before {
+                left: rem(3);
+            }
+        }
+    }
+}//lg
+
+@include media-query("md") {
+    .#{$wefront__namespace}background-banner {
+        &__figure {
+            height: rem(608);
+
+            &--height-full {
+                height: 100%;
+            }
+        }
+
+        &__title {
+            padding-bottom: rem(8);
+            font-size: rem(36);
+
+            &--medium {
+                font-size: rem(38);
+            }
+        }
+
+        &__item {
+            &--visible-xl {
+                display: none;
+            }
+
+            &:nth-child(2) {
+                &::before {
+                    display: none;
+                }
+            }
+        }
+
+        &--medium {
+            padding-bottom: rem(50);
+        }
+    }
+}//md
+
+@include media-query("sm") {
+    .#{$wefront__namespace}background-banner {
+        &__figure {
+            height: rem(460);
+
+            &--height-full {
+                height: 100%;
+            }
+        }
+
+        &__title {
+            padding-bottom: rem(6);
+            font-size: rem(30);
+
+            &--medium {
+                font-size: rem(32);
+            }
+        }
+
+        &__subtitle {
+            font-size: rem(18);
+        }
+
+        &__item {
+            display: block;
+            max-width: 100%;
+            padding: 0;
+            margin-right: 0;
+            text-align: center;
+            line-height: 1.85;
+
+            &::before {
+                display: none;
+            }
+
+            &:last-child {
+                top: rem(4);
+            }
+
+            &--visible-xl {
+                display: none;
+            }
+        }
+
+        &__txt {
+            &--medium {
+                font-size: rem(13);
+            }
+
+            &--special {
+                font-family: $font-normal;
+            }
+
+            &--medium-lg {
+                font-size: rem(15);
+            }
+        }
+
+        &__icon {
+            left: 0;
+        }
+    }
+}//mobile
+
+@include media-query("xs") {
+    .#{$wefront__namespace}background-banner {
+        &__figure {
+            height: rem(520);
+
+            &--height-full {
+                height: 100%;
+            }
+        }
+
+        &__title {
+            padding-bottom: rem(8);
+            font-size: rem(30);
+
+            &--medium {
+                font-size: rem(32);
+            }
+        }
+
+        &__subtitle {
+            font-size: rem(18);
+        }
+
+        &__item {
+            display: block;
+            max-width: 100%;
+            padding: 0;
+            margin-right: 0;
+            text-align: center;
+            line-height: 1.85;
+
+            &::before {
+                display: none;
+            }
+
+            &:last-child {
+                top: rem(4);
+            }
+
+            &--visible-xl {
+                display: none;
+            }
+        }
+
+        &__txt {
+            &--medium {
+                font-size: rem(13);
+            }
+
+            &--special {
+                font-family: $font-normal;
+            }
+
+            &--medium-lg {
+                font-size: rem(15);
+            }
+        }
+
+        &__icon {
+            left: 0;
+            font-size: rem(23);
+        }
+
+        &--hidden-xs {
+            .#{$wefront__namespace}background-banner__txt, .#{$wefront__namespace}background-banner__icon, .#{$wefront__namespace}background-banner__title {
+                color: color(gray-30);
+            }
+        }
+
+        &--medium {
+            padding-bottom: rem(50);
+        }
+    }
+}//xs

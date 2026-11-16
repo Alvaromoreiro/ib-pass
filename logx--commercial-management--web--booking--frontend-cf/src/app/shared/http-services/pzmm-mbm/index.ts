@@ -1,0 +1,2 @@
+import './ib-register.service';
+

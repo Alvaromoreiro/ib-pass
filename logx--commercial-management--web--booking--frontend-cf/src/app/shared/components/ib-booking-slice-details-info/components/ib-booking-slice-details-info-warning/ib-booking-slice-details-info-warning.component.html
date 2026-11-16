@@ -1,0 +1,39 @@
+<div class="segment__warning-box">
+    <div class="segment__description segment__description--change"
+        [ngClass]="{'segment__description--change-terminal': warningModel.airportChange.show || warningModel.terminalChange.show}">
+        <ng-container *ngIf="warningModel.airportChange.show || warningModel.terminalChange.show">
+            <p class="segment__warning-box--text">{{warningInfo.title|translate}}</p>
+            <div class="segment__warning-box-description-container">
+                <div class="segment__warning-box-description-container segment__warning-box-description-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path
+                            d="M15.9395 10.6692C15.6753 10.8288 14.8772 10.9444 13.8535 10.8508L6.67667 9.84364C6.07125 9.75558 1.22246 8.08243 1.22246 8.08243C1.22246 8.08243 0.303337 5.259 0.0171422 4.45545L0.9858 4.56002C2.04802 5.49016 2.83506 6.26619 3.75418 7.23485C4.59075 7.33392 5.50437 7.40547 6.42349 7.53206L4.61276 1.66504H5.64747C5.64747 1.66504 6.90232 2.96393 8.20671 4.82971C9.56063 6.76703 10.2981 8.06592 10.4082 8.0384C10.5458 8.07693 13.1986 8.51173 13.7215 8.6218C14.7066 8.83645 15.4496 9.48589 16 10.2729L15.9395 10.6692Z"
+                            fill="#333333" />
+                        <path
+                            d="M7.26527 11.2471C7.22124 10.8949 7.46891 10.5757 7.82115 10.5371C8.17339 10.4931 8.49261 10.7408 8.53113 11.093C8.57516 11.4453 8.32749 11.7645 7.97526 11.803C7.62852 11.847 7.3093 11.5994 7.26527 11.2471Z"
+                            fill="#333333" />
+                        <path
+                            d="M9.10344 11.5058C9.05941 11.1536 9.30707 10.8399 9.65931 10.7958C10.0116 10.7518 10.3308 11.005 10.3693 11.3517C10.4133 11.704 10.1657 12.0177 9.81342 12.0617C9.46668 12.1057 9.14747 11.8526 9.10344 11.5058Z"
+                            fill="#333333" />
+                        <path d="M15.9884 14.3347H0V13.1899H15.9884V14.3347Z" fill="#333333" />
+                    </svg>
+                    <p class="segment__warning-box--text">{{warningInfo.arrivalTitle|translate}}:
+                        {{warningInfo.arrival}}</p>
+                </div>
+                <div class="segment__warning-box-description-container segment__warning-box-description-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path
+                            d="M16 4.78016C15.8522 5.04847 15.2279 5.54128 14.308 5.96291L7.68241 8.64053C7.12389 8.86503 2.15743 9.82876 2.15743 9.82876C2.15743 9.82876 0.0438056 7.11828 0 7.07995L0.717317 6.67475C1.38535 6.91021 2.5681 7.39754 3.8987 7.8575C4.65982 7.53444 5.4757 7.14019 6.32444 6.79522L1.80151 2.45298L2.83094 2.10254C2.83094 2.10254 4.47912 2.66106 6.51061 3.60836C8.62423 4.59398 9.89459 5.34416 9.97673 5.26202C10.1081 5.22917 12.5886 4.28734 13.0924 4.12855C14.0397 3.82739 14.9925 4.01356 15.8522 4.41876L16 4.78016Z"
+                            fill="#333333" />
+                        <path d="M15.9242 13.8972H0.0556126V12.7582H15.9242V13.8972Z" fill="#333333" />
+                    </svg>
+                    <p class="segment__warning-box--text">{{warningInfo.departureTitle|translate}}:
+                        {{warningInfo.departure}}</p>
+                </div>
+            </div>
+        </ng-container>
+        <p *ngIf="warningModel.stop">
+            {{'AVAILABILITY_TECH_STOP_IN'| translate}} {{warningModel.stop.city.description}} ({{warningModel.stop.city.code}}): {{warningModel.stop.durationParsed}}
+        </p>
+    </div>
+</div>

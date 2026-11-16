@@ -1,0 +1,68 @@
+@import 'src/styles/component-tools';
+
+:host {
+    display: block;
+    padding: rem(4) 0;
+    border-bottom: rem(1) solid var(--ib-color-grey-300-dd);
+}
+
+.ribbon-calendar-mobile {
+    position: relative;
+}
+
+.ribbon-days {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 0 rem(48) 0 rem(32);
+    gap: rem(4);
+    mask-image: linear-gradient(90deg, rgb(255 255 255 / 0%) 0%, rgb(255 255 255) 10%, rgb(255 255 255) 90%, rgb(255 255 255 / 0%) 100%);
+   // -ms-overflow-style: none;  /* IE and Edge */
+    overflow-x: scroll;/* Firefox */
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+
+    &--carousel-scroll {
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+
+        & > * {
+            scroll-snap-align: center;
+            /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
+            scroll-snap-stop: always;
+        }
+    
+    }
+
+}
+
+ .ribbon-days::-webkit-scrollbar {
+    display: none;
+  } 
+
+.ribbon-prev, .ribbon-next {
+    position: absolute;
+    top: 0;
+    display: flex;
+    width: rem(45);
+    height: rem(39);
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+}
+
+.ribbon-prev {
+    left: 0;
+}
+
+.ribbon-next {
+    right: 0;
+}
+
+@media (width <= rem(600)) {
+    .ribbon-prev, .ribbon-next {
+        display: none;
+    }
+}

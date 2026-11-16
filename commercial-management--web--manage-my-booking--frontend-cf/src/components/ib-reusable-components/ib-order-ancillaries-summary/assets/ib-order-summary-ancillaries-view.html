@@ -1,0 +1,71 @@
+<div class="ib-summary">
+    <header class="ib-summary__header">
+        <h3 class="ib-heading ib-heading--type-3">Desglose de compra</h3>
+    </header>
+    <div class="ib-summary__body">
+        <div class="ib-summary__section" ng-if="summaryAncCtrl.model.seats.length > 0">
+            <h4 class="ib-heading ib-heading--type-4 ib-summary__section-title">Reserva de asientos</h4>
+            <ul class="ib-list-passengers">
+                <li class="ib-list-passengers__item" ng-repeat="seatTrip in summaryAncCtrl.model.seats">
+                 <!--    <div class="ib-list-passengers__item-description">
+                        <span class="ib-text ib-text--color-unfocused ib-text--bold ib-list-passengers__item-description__title u-pl-none">Madrid - Roma</span>
+                    </div> -->
+                    <div class="ib-list-passengers__item-description" >
+                        <span class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title u-pl-none">{{seatTrip.origin.description}} - {{seatTrip.destination.description}}</span>
+                        <span class="ib-text ib-text--color-normal u-float-right">{{seatTrip.quanty}} x {{seatTrip.totalFormatted}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="ib-summary__section" ng-if="summaryAncCtrl.model.baggages.length > 0">
+            <h4 class="ib-heading ib-heading--type-4 ib-summary__section-title">Equipaje adicional</h4>
+            <ul class="ib-list-passengers">
+                <li class="ib-list-passengers__item">
+                    <div class="ib-list-passengers__item-description" ng-repeat="baggageTrip in summaryAncCtrl.model.baggages">
+                        <span>
+                            <span class="ib-text ib-text--color-unfocused ib-text--bold ib-list-passengers__item-description__title u-pl-none">{{baggageTrip.origin.description}} - {{baggageTrip.destination.description}}</span>
+                            <span class="ib-text ib-text--color-normal u-float-right">{{baggageTrip.amount}} x {{baggageTrip.totalFormatted}}</span>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="ib-summary__section" ng-if="summaryAncCtrl.model.insurance">
+            <h4 class="ib-heading ib-heading--type-4 ib-summary__section-title">Seguros</h4>
+            <ul class="ib-list-passengers">
+                <li class="ib-list-passengers__item">
+                    <div class="ib-list-passengers__item-description">
+                        <span>
+                            <span class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title u-pl-none">{{summaryAncCtrl.model.insurance.type}}</span>
+                            <span class="ib-text ib-text--color-normal u-float-right">{{summaryAncCtrl.model.insurance.totalFormatted}}</span>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    <!--     <div class="ib-summary__section">
+            <h4 class="ib-heading ib-heading--type-4 ib-summary__section-title">Otros cargos</h4>
+            <ul class="ib-list-passengers">
+                <li class="ib-list-passengers__item">
+                    <div class="ib-list-passengers__item-description">
+                        <span>
+                            <span class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title u-pl-none">Cargo con pago con tarjeta</span>
+                            <span class="ib-text ib-text--color-normal u-float-right">3,99&euro;</span>
+                        </span>
+                    </div>
+                    <div class="ib-list-passengers__item-description">
+                        <span>
+                            <span class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title u-pl-none">Gastos de gesti&oacute;n</span>
+                            <span class="ib-text ib-text--color-normal u-float-right">6,59&euro;</span>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div> -->
+    </div>
+    <footer class="ib-summary__footer">
+        <span class="ib-text ib-text--especial ib-summary__footer-price">TOTAL</span>
+        <span class="ib-text ib-text--especial ib-summary__footer-price u-float-right">{{summaryAncCtrl.model.totalFormatted}}</span>
+    </footer>
+</div>

@@ -1,0 +1,35 @@
+<div class="container"> <!-- BKI DESKTOP -->
+	<div class="ib-header-common__row">
+		<ib-user-info-header [isGreyBar]="true" *ngIf="model?.isLogged"></ib-user-info-header>
+		<div [ngClass]="{'hidden': model?.isLogged || !model?.show }" class="ib-header-common__column">
+			<div
+				class="ib-header-common__items ib-header-common__items ib-header-common__items--no-border">
+				<div class="ib-header-common__items-item ib-header-common__items-item"
+                    ibBookingCollapse
+                    [collapsed]="true"
+                    collapseTrigger="loginTrigger"
+                    collapseContainer="loginContainer">
+					<button class="ib-header-common__items-item__link"
+                        title="{{'VIEW_MORE_DETAILS_TEXT'|translate}}"
+						aria-controls="loginContainer"
+                        loginTrigger
+                        focusin>
+						<span class="ib-header-common__items-item__icon icon-perfil_login"></span>
+						<span class="ib-header-common__items-item__text">{{'HEADER_LOGIN_ACCESS_TEXT'|translate}}</span>
+					</button>
+					<div id="loginContainer" class="ib-header-common__login-collapse ib-header-common__login-collapse--arrow collapse-container"
+                        loginContainer>
+						<div class="ib-header-common__login-content">
+                            <ib-ui-login-iframe-component
+                                *ngIf="model?.login && !isMobile"
+                                [onLogged]="model.login.onLogin"
+                                [afterLogin]="afterLogin"
+                                [onError]="model.login.onError">
+                            </ib-ui-login-iframe-component>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

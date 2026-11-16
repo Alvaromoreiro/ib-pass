@@ -1,0 +1,249 @@
+/* -------------------------------------------------------------
+    #HEADER-CHECKIN
+----------------------------------------------------------------- */
+.#{$wefront__namespace}header-checkin {
+    position: relative;
+    font-family: $font-normal;
+    background: color(primary);
+    background: -moz-linear-gradient(top, color(primary) 0%, color(primary) 50%, color(secondary) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, color(primary)), color-stop(50%, color(primary)), color-stop(100%, color(secondary)));
+    background: -webkit-linear-gradient(top, color(primary) 0%, color(primary) 50%, color(secondary) 100%);
+    background: -o-linear-gradient(top, color(primary) 0%, color(primary) 50%, color(secondary) 100%);
+    background: -ms-linear-gradient(top, color(primary) 0%, color(primary) 50%, color(secondary) 100%);
+    background: linear-gradient(to bottom, color(primary) 0%, color(primary) 50%, color(secondary) 100%);
+
+    &__content {
+        display: inline-block;
+        height: rem(88);
+        font-size: 0;
+        line-height: rem(88);
+        vertical-align: top;
+    }
+
+    &__logo {
+        display: inline-block;
+        height: rem(88);
+        padding: rem(25) rem(36) rem(25) rem(10);
+        vertical-align: top;
+    }
+
+    &__reservation {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+        padding: 0 rem(34) 0 rem(20);
+        border-left: rem(1) solid color(white, 0.4);
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: rem(88);
+            height: rem(88);
+            border-right: rem(1) solid color(white, 0.4);
+            border-bottom: rem(1) solid color(white, 0.4);
+            -ms-transform: rotate(-45deg) skew(160deg, 160deg);
+            transform: rotate(-45deg) skew(160deg, 160deg);
+        }
+    }
+
+    &__reservation-name {
+        font-family: $font-special;
+        font-size: rem(20);
+        color: color(white);
+        vertical-align: middle;
+    }
+
+    &__reservation-icon {
+        display: none;
+        margin-left: rem(2);
+        font-size: rem(20);
+        color: color(white);
+        vertical-align: middle;
+
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: none;
+            color: color(white);
+        }
+    }
+
+    // List
+
+    &__list {
+        position: relative;
+        display: inline-block;
+        padding-left: rem(18);
+        font-size: 0;
+        vertical-align: top;
+
+        &--collapsed {
+            &::before {
+                content: "...";
+                position: absolute;
+                top: 50%;
+                right: rem(-30);
+                height: rem(30);
+                font-size: rem(20);
+                line-height: normal;
+                color: color(white);
+                letter-spacing: rem(-1);
+                -ms-transform: translate(0, -50%);
+                transform: translate(0, -50%);
+            }
+        }
+    }
+
+    &__list-item {
+        display: inline-block;
+        padding: 0 rem(17);
+        border-right: rem(1) solid color(white, 0.4);
+        vertical-align: middle;
+
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &:last-child {
+            padding-right: 0;
+            border-right: 0;
+        }
+    }
+
+    &__place {
+        margin-bottom: rem(2);
+        font-size: 0;
+        line-height: normal;
+    }
+
+    &__place-init {
+        display: inline-block;
+        font-family: $font-special;
+        font-size: rem(20);
+        color: color(white);
+        vertical-align: middle;
+    }
+
+    &__place-icon {
+        display: inline-block;
+        margin: 0 rem(4);
+        font-size: rem(15);
+        color: color(white);
+        -ms-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        vertical-align: middle;
+    }
+
+    &__place-end {
+        display: inline-block;
+        font-family: $font-special;
+        font-size: rem(20);
+        color: color(white);
+        vertical-align: middle;
+    }
+
+    &__date {
+        display: block;
+        font-family: $font-special;
+        font-size: rem(16);
+        text-align: center;
+        line-height: normal;
+        color: color(white);
+    }
+}
+
+// Responsive
+
+@include media-query('md') {
+    .#{$wefront__namespace}header-checkin {
+        &__content {
+            height: rem(56);
+            margin-left: rem(-16);
+            line-height: rem(56);
+        }
+
+        &__logo {
+            width: rem(66);
+            height: rem(56);
+            padding: rem(16) rem(18) rem(16) rem(16);
+        }
+
+        &__reservation {
+            padding-right: rem(20);
+
+            &::after {
+                display: none;
+            }
+        }
+
+        &__reservation-name {
+            font-size: rem(17);
+        }
+
+        &__reservation-icon {
+            display: inline-block;
+        }
+
+        &__place-init {
+            font-size: rem(17);
+        }
+
+        &__place-end {
+            font-size: rem(17);
+        }
+
+        &__date {
+            font-size: rem(16);
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}header-checkin {
+        &__content {
+            height: rem(56);
+            margin-left: rem(-16);
+            line-height: rem(56);
+        }
+
+        &__logo {
+            width: rem(66);
+            height: rem(56);
+            padding: rem(16) rem(18) rem(16) rem(16);
+        }
+
+        &__reservation {
+            padding-right: rem(20);
+
+            &::after {
+                display: none;
+            }
+        }
+
+        &__reservation-name {
+            font-size: rem(17);
+        }
+
+        &__reservation-icon {
+            display: inline-block;
+        }
+
+        &__list {
+            display: none;
+        }
+
+        &__place-init {
+            font-size: rem(17);
+        }
+
+        &__place-end {
+            font-size: rem(17);
+        }
+
+        &__date {
+            font-size: rem(16);
+        }
+    }
+}

@@ -1,0 +1,78 @@
+<div class="container">
+    <!--Remove this line if the service always returns a caseNumber-->
+    <div class="row" *ngIf="!hasCaseNumber">
+        <div class="col-xs-12 col-lg-9 col-xl-8">
+            <div class="ib-volrefund ib-volrefund--old">
+                <div class="ib-volrefund__discount icon-reembolsos-old">
+                    <h1 class="ib-volrefund__title" *ngIf="!dataModelConfirmation.onlyRefundAirportTaxes">
+                        {{"MMB_CASH_REFUND_CONFIRMATION_TITLE" | translate}}</h1>
+                    <h1 class="ib-volrefund__title" *ngIf="dataModelConfirmation.onlyRefundAirportTaxes">
+                        {{"MMB_CASH_REFUND_CONFIRMATION_TITLE_ONLY_AIRPORT_TAXES" | translate}}</h1>
+                    <p class="ib-volrefund__description">{{"MMB_CASH_REFUND_CONFIRMATION_SUBTITLE" | translate}}</p>
+                    <p class="ib-volrefund__text">{{"MMB_CASH_REFUND_CONFIRMATION_MESSAGE" | translate}}</p>
+                </div>
+                <h2 class="ib-volrefund__price"
+                    ng-if="!voucherRefundConfirmationCtrl.voucherData.hasMoreThanOneVouchers">
+                    {{"MMB_CASH_REFUND_TOTAL_AMOUNT_TITLE" | translate}}
+                    <span class="ib-volrefund__amount">{{ dataModelConfirmation.totalRefund }}</span>
+                </h2>
+                <p class="ib-volrefund__text ib-volrefund__text--doble-padding">
+                    {{"MMB_CASH_REFUND_CONFIRMATION_APOLOGIZE_MESSAGE" | translate}}</p>
+            </div>
+            <div class="ib-msg-alert ib-msg-alert--volrefund ib-msg-alert--volrefund-margin icon-informacion_2 alert">
+                <p class="ib-msg-alert__text">{{"MMB_VOUCHER_REFUND_CONFIRMATION_REMEMBER_THAT" | translate}}</p>
+                <span class="ib-text">{{"MMB_VOUCHER_REFUND_CONFIRMATION_WARNING_CASH" | translate}} </span>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-3 col-xl-4">
+            <box-any-questions [extraClass]="'ib-box-info--volrefund-margin'"></box-any-questions>
+        </div>
+    </div>
+    <!--end old case number section-->
+
+    <div class="row" *ngIf="hasCaseNumber">
+        <div class="col-xs-12 col-lg-9 col-xl-8">
+            <div class="ib-volrefund">
+                <div class="ib-volrefund__discount icon-reembolsos-old">
+                    <h1 class="ib-volrefund__title" *ngIf="!dataModelConfirmation.onlyRefundAirportTaxes">
+                        {{"MMB_REFUND_CONFIRMATION_TITLE" | translate}}
+                    </h1>
+                    <h1 class="ib-volrefund__title" *ngIf="dataModelConfirmation.onlyRefundAirportTaxes">
+                        {{"MMB_CASH_REFUND_CONFIRMATION_TITLE_ONLY_AIRPORT_TAXES" | translate}}</h1>
+                    <div class="ib-volrefund__data-block">
+                        <span class="ib-volrefund__data-label">{{"MMB_CASH_REFUND_TOTAL_AMOUNT_TITLE" |
+                            translate}}</span>
+                        <span class="ib-volrefund__data-value ib-volrefund__data-value">{{
+                            dataModelConfirmation.totalRefund }}</span>
+                    </div>
+
+                    <div class="ib-volrefund__data-block">
+                        <span class="ib-volrefund__data-label">{{"MMB_REFUND_CONFIRMATION_REQUEST_NUMBER_LABEL" |
+                            translate}}</span>
+                        <span class="ib-volrefund__data-value">{{ confirmationData?.caseNumber }}</span>
+                    </div>
+                </div>
+
+                <div class="ib-volrefund__body-content">
+                    <p class="ib-volrefund__text">
+                        {{"MMB_REFUND_CONFIRMATION_BODY" | translate}}
+                    </p>
+                    <a [href]="generateTrackingRefundUrl()" target="_blank" rel="noopener noreferrer"
+                        class="ib-volrefund__tracking-link">
+                        {{"MMB_REFUND_CONFIRMATION_TRACK_LINK_LABEL" | translate}}
+                    </a>
+                    <p class="ib-volrefund__text ib-volrefund__text--subtle">
+                        {{"MMB_REFUND_CONFIRMATION_THANK_YOU" | translate}}
+                    </p>
+                </div>
+            </div>
+            <div class="ib-msg-alert ib-msg-alert--volrefund ib-msg-alert--volrefund-margin icon-informacion_2 alert">
+                <p class="ib-msg-alert__text">{{"MMB_VOUCHER_REFUND_CONFIRMATION_REMEMBER_THAT" | translate}}</p>
+                <span class="ib-text">{{"MMB_VOUCHER_REFUND_CONFIRMATION_WARNING_CASH" | translate}} </span>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-3 col-xl-4">
+            <box-any-questions [extraClass]="'ib-box-info--volrefund-margin'"></box-any-questions>
+        </div>
+    </div>
+</div>

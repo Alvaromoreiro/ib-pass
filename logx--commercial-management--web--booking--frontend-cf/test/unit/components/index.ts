@@ -1,0 +1,10 @@
+import '@src/app/shared/filters';
+import '@src/app/pages/ib-booking-passenger-info/lazyImports';
+import '@src/app/pages/ib-booking-price-matrix/lazyImports';
+import '@src/app/pages/ib-booking-redirection-market/lazyImports';
+import '@src/app/pages/ib-shuttle/lazyImports';
+import '@src/app/core/routing';
+import 'test/unit/components/ib-reusable-components';
+import 'test/unit/components/ib-reusable-components/ib-booking-header/ib-booking-header.component.test';
+import '@shared/services/ib-datalayer';
+import '@shared/services/ib-monetate';

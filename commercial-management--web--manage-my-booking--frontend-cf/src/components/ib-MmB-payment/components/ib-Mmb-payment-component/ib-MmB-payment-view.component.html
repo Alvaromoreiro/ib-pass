@@ -1,0 +1,31 @@
+<mmb-layout>
+    <div class="pmt-container">
+        <ng-react class="pmt-loading" *ngIf="showLoadingOverlay" [component]="loadingDsComponent.component" [props]="loadingDsComponent.props"></ng-react>
+        <div class="pmt-top">
+            <h1 class="page-title">{{'PAYMENTS_PAGE_TITLE' | translate }}</h1>
+        </div>
+
+        <div class="pmt-main">
+            <section class="ib-layout__section" *ngIf="flowApp === 'MMBBID' && !(totalAviosAmount > 0) && !numberFreeUpgrade">
+                <ng-react [component]="AlertUpgradingBids" [props]="AlertUpgradingBidsProps"></ng-react>
+            </section>
+
+            <section class="ib-layout__section" *ngIf="flowApp === 'MMBBID' && (totalAviosAmount || totalAviosAmount === 0 || numberFreeUpgrade)">
+                <ng-react [component]="AlertUpgradingAvios" [props]="AlertUpgradingAviosProps"></ng-react>
+            </section>
+
+            <div *ngIf="showPmtComponent" [id]="PAYMENT_COMP_BLOCK_ID"></div>
+
+        </div>
+
+        <div class="pmt-side">
+            <section *ngIf="allowedCashAndAviosWithVoucher && flowApp !== 'MMBVC' && flowApp !== 'MMBBID'" class="pmt-voucher">
+                <ib-mmb-voucher [flowId]="flowId" (voucherValidated)="onVoucherValidated($event)">
+                </ib-mmb-voucher>
+            </section>
+            <section class="pmt-summary">
+                <ib-mmb-summary *ngIf="flowApp !== 'MMBBID'"></ib-mmb-summary>
+            </section>
+        </div>
+    </div>
+</mmb-layout>

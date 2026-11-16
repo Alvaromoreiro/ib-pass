@@ -1,0 +1,61 @@
+<div class="ib-box-select-radio ib-box-select-radio--no-shadow ib-box-select-radio--two-cols-type-2"
+    ng-controller="ibCollapseController as collapse" data-iberia-flights-cabins-scala-detail ng-if="fTCtrl.selectedFare !== undefined">
+    <div class="ib-box-select-radio__header ib-box-select-radio__header--cabins">
+        <div class="ib-box-select-radio__radio ib-box-select-radio__radio--mobile-left"
+            data-box-select-radio="check-desktop">
+            <input type="radio" data-flight-button-selected id="radio_{{fTCtrl.typeFlight}}-{{fTCtrl.sliceIndex}}-{{fTCtrl.cabinIndex}}-{{fTCtrl.model.id}}"
+                name="radio_outward_{{fTCtrl.typeFlight}}-{{fTCtrl.sliceIndex}}-{{fTCtrl.cabinIndex}}" class="ib-box-select-radio__radio-input" ng-model="fTCtrl.selectedFare"
+                ng-value="fTCtrl.fareIndex" ng-change="fTCtrl.isFareSelected()" data-box-select-radio="radio">
+            <label for="radio_{{fTCtrl.typeFlight}}-{{fTCtrl.sliceIndex}}-{{fTCtrl.cabinIndex}}-{{fTCtrl.model.id}}"
+                class="ib-box-select-radio__radio-label ib-box-select-radio__radio-label--mobile"></label>
+            <span style="font-size: 12em">{{fTCtrl.fareIndex}} {{fTCtrl.selectedFare}} </span>
+        </div>
+        <div class="ib-box-select-radio__header-wrapper ib-box-select-radio__header-wrapper--radio-left">
+            <div class="ib-box-select-radio__header-left">
+                <a data-ng-click="fTCtrl.openModalConditions($event, fTCtrl.model.originalData)"
+                    class="ib-box-check__button--info" href="javascript:void(0)" title="{{'MMB_SEATS_TOOLTIP_MORE_INFO'|translate}}"
+                    focusin>
+                    <span class="ib-box-select-radio__title ib-text ib-text--block ib-text--bold ib-text--color-unfocused ib-text--big">{{fTCtrl.model.name}}
+                    <span class="ib-link ib-link--xbig ib-link--unfocused ib-link--decoration-none ib-link--to-middle  ib-link--fare-type-1 icon-informacion_2"></span></span>
+                </a>
+                <span
+                    class="ib-text ib-text--block ib-text--small ib-text--color-unfocused">{{'MMB_VC_AVAILABILITY_SEATS_REMAIN' | translate}} {{fTCtrl.model.seats}} {{'MMB_VC_AVAILABILITY_COLUMN_SEAT' | translate | lowercase}}</span>
+            </div>
+            <div class="ib-box-select-radio__header-right">
+                <span class="ib-text ib-text--block ib-text--xbig">{{fTCtrl.model.priceShown}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="ib-box-select-radio__header-mobile ib-box-select-radio__header-mobile--cabins"
+        data-box-select-radio="check-mobile">
+        <input type="radio" data-flight-button-selected id="radio_{{fTCtrl.typeFlight}}-{{fTCtrl.sliceIndex}}-{{fTCtrl.cabinIndex}}-{{fTCtrl.model.id}}-mobile"
+                name="radio_outward_{{fTCtrl.typeFlight}}-{{fTCtrl.sliceIndex}}-{{fTCtrl.cabinIndex}}-mobile" class="ib-box-select-radio__radio-input" ng-model="fTCtrl.selectedFare"
+                ng-value="fTCtrl.fareIndex" ng-change="fTCtrl.isFareSelected()" data-box-select-radio="radio">
+        <label for="radio_{{fTCtrl.typeFlight}}-{{fTCtrl.sliceIndex}}-{{fTCtrl.cabinIndex}}-{{fTCtrl.model.id}}-mobile" class="ib-box-select-radio__radio-label ib-box-select-radio__radio-label--full-header"
+            ng-click="collapse.clickCollapse($event,false)"></label>
+        <div class="ib-box-select-radio__header-wrapper ib-box-select-radio__header-wrapper--radio-left"
+            ng-class="{'ib-box-select-radio__header-wrapper--close ib-box-select-radio__header-wrapper--radio-left--close' : !collapse.isCollapsed}"
+            ng-click="collapse.clickCollapse($event,false)">
+            <div class="ib-box-select-radio__header-left">
+                <span class="ib-box-select-radio__title ib-text ib-text--block ib-text--bold ib-text--xmedium">{{fTCtrl.model.name}}
+                    <a data-ng-click="fTCtrl.openModalConditions($event, fTCtrl.model.originalData)" href="javascript:void(0)" title="{{'MMB_SEATS_TOOLTIP_MORE_INFO'|translate}}" class="ib-link ib-link--xbig ib-link--unfocused ib-link--decoration-none ib-link--to-middle ib-link--fare-type-1 icon-informacion_2"></a></span>
+                <span class="ib-text ib-text--block ib-text--color-unfocused">{{'MMB_VC_AVAILABILITY_SEATS_REMAIN' | translate}} {{fTCtrl.model.seats}} {{'MMB_VC_AVAILABILITY_COLUMN_SEAT' | translate | lowercase}}</span>
+            </div>
+            <div class="ib-box-select-radio__header-right ib-box-select-radio__price-long">
+                <span class="ib-text ib-text--block">{{fTCtrl.model.priceShown}}</span>
+            </div>
+            <span class="ib-box-select-radio__icon icon-flecha_1_abajo"
+                ng-class="collapse.isCollapsed ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+        </div>
+    </div>
+    <div class="ib-box-select-radio__container" uib-collapse="!collapse.isCollapsed">
+        <div class="ib-box-select-radio__container-wrapper">
+            <ul class="ib-list-icon-fare ib-list-icon-fare--inline ib-list-icon-fare--inline-availability">
+                <li class="ib-list-icon-fare__item" ng-repeat="condition in fTCtrl.model.fareFamilyConditions" ng-if="condition.extendedInfo.conditionStatus">
+                    <span class="ib-list-icon-fare__icon" ng-class="fTCtrl.getFareIcon(condition.code)"></span>
+                    <p class="ib-list-icon-fare__text">{{condition.code === 'EQMANO' ? condition.extendedInfo.title : condition.name}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

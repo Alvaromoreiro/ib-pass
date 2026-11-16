@@ -1,0 +1,46 @@
+<header class="ib-modals__header">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+        <h2 class="ib-heading break-word-full ib-heading--type-1">{{modalCtrl.model.info.title ? (modalCtrl.model.info.title|translate) : 'GENERAL_INFORMATION_TITLE'|translate}}</h2>
+    </div>
+    <h3 class="ib-heading  break-word-full ib-heading--type-5 ib-heading--unfocused" data-ng-if="modalCtrl.model.info.subTitle">{{modalCtrl.model.info.subtitle|translate}}</h3>
+    <div class="ib-modals__header-settings">
+        <button id="bbki-generic-external-close-btn" type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--small" data-ng-repeat="(index,element) in modalCtrl.model.info.elements">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small" data-ng-if="element.type === 'accordion'">
+            <span class="ib-heading  break-word-full ib-heading--type-3" data-ng-if="element.title && element.subTitle">{{element.title}}</span>
+            <span class="ib-heading  break-word-full ib-heading--type-4" data-ng-if="element.subTitle">{{element.subTitle}}</span>
+            <div class="ib-layout__line-spacing" data-ng-if="element.description">
+                <p class="ib-text break-word-full">{{element.description}}</p>
+            </div>
+            <div class="ib-layout__line-spacing">
+                <uib-accordion class="ib-accordion ib-accordion--base" close-others="oneAtATime" data-ng-repeat="(index,item) in element.items">
+                    <div uib-accordion-group class="panel-default" is-open="status.open">
+                        <uib-accordion-heading>
+                            <span class="ib-heading break-word-full ib-heading--type-5">{{item.title}}</span>
+                            <span class="ib-accordion__icon" ng-class="{'icon-flecha_1_arriba': status.open, 'icon-flecha_1_abajo': !status.open}"></span>
+                        </uib-accordion-heading>
+                        <div class="ib-layout__line-spacing">
+                            <p class="ib-text break-word-full" data-ng-if="item.description">{{item.description}}</p>
+                        </div>
+                    </div>
+                </uib-accordion>
+            </div>
+        </div>
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small" data-ng-if="element.type === 'TEXT'">
+            <span class="ib-heading  break-word-full ib-heading--type-3" data-ng-if="element.title">{{element.title}}</span>
+            <div class="ib-layout__line-spacing" data-ng-if="element.description">
+                <p class="ib-text  break-word-full">{{element.description}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="ib-modals__footer">
+    <div class="ib-content-buttons ib-content-buttons--end">
+        <button id="bbki-generic-external-accept-btn" class="ib-button ib-button--w-medium" type="button" title="{{modalCtrl.model.accept|translate}}" data-ng-click="modalCtrl.accept()">{{modalCtrl.model.accept ? modalCtrl.model.accept : 'MODAL_GENERAL_BUTTON_ACCEPT' |translate}}</button>
+    </div>
+</footer>

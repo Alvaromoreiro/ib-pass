@@ -1,0 +1,177 @@
+<div
+    data-ng-if="(changeFlightsTabCtrl.reshopConditions.voluntaryChanges.enabled || changeFlightsTabCtrl.reshopConditions.involuntaryChanges.enabled || (changeFlightsTabCtrl.reshopConditions.callcenterInfo.enabled && changeFlightsTabCtrl.reshopConditions.voluntaryChanges.reservationFailedConditions.length==0)) && changeFlightsTabCtrl.isEmptyBasket">
+
+    <div class="ib-layout__line-spacing--medium u-text-center hidden-xl hidden-lg hidden-md hidden-sm">
+        <p class="ib-heading ib-heading--title-box ib-heading--change-flights">
+            {{'MMB_VC_CHANGE_FLIGHTS_TITLE'|translate}}</p>
+    </div>
+    <h2 data-ng-if="changeFlightsTabCtrl.isFlex" class="ib-box-menu__title ib-box-menu__title--font-size-30">
+        {{'MMB_CHANGE_FLIGHTS_TITLE_FLEX'|translate}}</h2>
+    <h2 data-ng-if="changeFlightsTabCtrl.isDigital" class="ib-box-menu__title ib-box-menu__title--font-size-30">
+        {{'MMB_CHANGE_FLIGHTS_TITLE_DIGITAL'|translate}}</h2>
+    <p data-ng-if="changeFlightsTabCtrl.isFlex" class="ib-box-menu__subtitle-flex u-mb-xmedium">
+        {{'MMB_REFUND_ADVISORY_1'|translate}}</p>
+    <p data-ng-if="changeFlightsTabCtrl.isDigital" class="ib-box-menu__subtitle-flex u-mb-xmedium">
+        {{'MMB_CHANGE_FLIGHTS_ADVISORY_1_DIGITAL'|translate}}</p>
+
+    <div class="ib-msg-alert ib-msg-alert--danger  icon-informacion alert"
+        ng-if="changeFlightsTabCtrl.flightsMenssage.length>0">
+        <p class="ib-msg-alert__text ib-msg-alert__text--bold ib-msg-alert__text--middle">
+            {{'FLIGHT_CHANGE_ERROR_TITLE_9'|translate}}</p>
+        <p class="ib-msg-alert__text">{{'FLIGHT_CHANGE_ERROR_SUBTITLE_1' | translate : {phone:
+            changeFlightsTabCtrl.getPhone()} }}</p>
+    </div>
+    <!-- informational message about flexibilization -->
+    <ib-flexibilization-info data-ng-if="changeFlightsTabCtrl.showFlexibilizationInfoSectionFlag"
+        flexibilization-info-dates="changeFlightsTabCtrl.flexibilizationInfoDates" flags="changeFlightsTabCtrl.flags"
+        flexibilization-text-dates-range="changeFlightsTabCtrl.flexibilizationRange"
+        order-items="changeFlightsTabCtrl.orderItems">
+    </ib-flexibilization-info>
+    <h3 data-ng-if="changeFlightsTabCtrl.flightsAvailable.number > 1" class="ib-box-menu__subtitle">
+        {{'MMB_VC_CHOOSE_FLIGHT_TO_CHANGE'|translate}}:</h3>
+        
+    <!-- Alert deinvoicing in change flights -->
+    <div ng-if="changeFlightsTabCtrl.isActiveDeinvoicing"
+        class="ib-alertbox ib-alertbox--darkgrey ib-alertbox--margin-medium mmb-alertbox--change-flights-deinvoicing-warning"
+        attr.aria-label="{{'MMB_FLEXIBILIZATION_CONFIRMATION_INFO_MESSAGE_ALT' | translate}}">
+        <div class="ib-alertbox__head">
+            <span class="ib-alertbox__head--icon icon-alertas_2">
+                <span class="hide-accessible">{{'MMB_VOLUNTARY_CHANGE_DEINVOICING_WARNING'|translate}}</span></span>
+            <p>
+                <span class="mmb-alertbox--change-flights-deinvoicing-warning__title">{{'MMB_VOLUNTARY_CHANGE_DEINVOICING_WARNING'|translate}}</span>
+            </p>
+        </div>
+    </div>
+
+    <div data-ng-repeat="(i,flight) in changeFlightsTabCtrl.flightsInfo.flights"
+        data-ng-if="changeFlightsTabCtrl.reshopConditions.voluntaryChanges.slices[$index].enabled || changeFlightsTabCtrl.reshopConditions.involuntaryChanges.slices[$index].enabled || changeFlightsTabCtrl.flightsMenssage.length>0">
+        
+        <div class="ib-msg-alert ib-msg-alert--smallest ib-msg-alert--danger icon-informacion u-pl-big"
+            ng-if="changeFlightsTabCtrl.checkMessageFlight(flight.segments[0].sliceId)">
+            <div>
+                <p class="ib-msg-alert__text ib-msg-alert__text">
+                    {{changeFlightsTabCtrl.getMessageFlight(flight.segments[0].sliceId) | translate}}</p>
+            </div>
+        </div>
+        <div class="ib-box-check">
+            <div class="ib-box-check__block--dotted">
+                <div class="ib-check">
+                    <fieldset>
+                        <legend class="hide-accessible">{{'MMB_VC_CHOOSE_FLIGHT'|translate}} {{i+1}}</legend>
+                        <input data-ng-if="changeFlightsTabCtrl.flightsAvailable.number > 1"
+                            data-ng-model="flight.checked" ng-change="changeFlightsTabCtrl.changeCheck($index,flight)"
+                            focusin type="checkbox" id="{{'check_'+i}}" name="{{'check_'+i}}" class="ib-check__input" />
+                        <label data-ng-if="changeFlightsTabCtrl.flightsAvailable.number > 1" class="ib-check__label"
+                            for="{{'check_'+i}}">
+                            <p class="ib-check__text ib-check__text--big ib-check__text--special"
+                                data-ng-bind="flight.departureCity.city.description+ ' (' + flight.departureCity.code + ')' + ' - ' + flight.arrivalCity.city.description + '(' + flight.arrivalCity.code + ')'">
+                            </p>
+                        </label>
+                        <p data-ng-if="changeFlightsTabCtrl.flightsAvailable.number === 1 || changeFlightsTabCtrl.flightsMenssage.length >0"
+                            class="ib-check__text--big ib-check__text--special"
+                            data-ng-bind="flight.departureCity.city.description+ ' (' + flight.departureCity.code + ')' + ' - ' + flight.arrivalCity.city.description + '(' + flight.arrivalCity.code + ')'">
+                        </p>
+                    </fieldset>
+                </div>
+                <div class="ib-box-check__block--right">
+                    <p class="ib-text">{{flight.departureDateParsed.formatedDate}} -
+                        {{flight.departureDateParsed.dateTime}}h.</p>
+                </div>
+
+            </div>
+
+            <!-- Info about cabin type Flexibilization -->
+            <p data-ng-if="changeFlightsTabCtrl.flags.showFlexibilizationChangeSection && flight.segments[0].fareFamilyConditions.length > 0"
+                class="ib-text ib-text--bold">{{flight.segments[0].fareFamilyConditions[0].cabin}}</p>
+
+            <!-- Info about cabin type CV-->
+            <div data-ng-if="changeFlightsTabCtrl.flags.showVoluntaryChangeFlightSection && condition.code === 'CAMBIO'  && flight.segments[0].sliceId!=changeFlightsTabCtrl.flightsMenssage[0].sliceId"
+                data-ng-repeat="condition in flight.segments[0].fareFamilyConditions">
+                <div class="ib-box-check__block">
+                    <p class="ib-text ib-text--bold">{{condition.cabin}}</p>
+                    <button
+                        ng-if="!changeFlightsTabCtrl.flags.showVoluntaryFlexibleFlightChange && !changeFlightsTabCtrl.flags.showFlexibilizationChangeSection"
+                        data-ng-click="changeFlightsTabCtrl.openFareModal(flight.segments[0].fareFamilyConditions)"
+                        class="ib-box-check__button--info icon-informacion_2" focusin>
+                        <span class="hide-accessible">{{'MMB_VC_SEATS_TOOLTIP_MORE_INFO'|translate}}</span>
+                    </button>
+                    <p ng-if="!changeFlightsTabCtrl.flags.showVoluntaryFlexibleFlightChange && !changeFlightsTabCtrl.flags.showFlexibilizationChangeSection"
+                        class="ib-text ib-text--block ib-text--icon icon-cambios_y_reembolsos">
+                        {{(changeFlightsTabCtrl.getConditionText(condition))}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Searcher -->
+    <ib-flexibilization-search
+        data-ng-if="changeFlightsTabCtrl.someChecked && changeFlightsTabCtrl.model.blackOutDates && ((changeFlightsTabCtrl.flags.showVoluntaryChangeFlightSection && !changeFlightsTabCtrl.flags.showVoluntaryFlexibleFlightChange) || changeFlightsTabCtrl.reshopConditions.involuntaryChanges.enabled || changeFlightsTabCtrl.reshopConditions.voluntaryChanges.enabled)"
+        flights="changeFlightsTabCtrl.flightsInfo.flights" all-segments="changeFlightsTabCtrl.flightsInfo.allSegments"
+        flags="changeFlightsTabCtrl.flags" black-out-dates="changeFlightsTabCtrl.model.blackOutDates"
+        sister-cities-availability="changeFlightsTabCtrl.sisterCitiesAvailability"></ib-flexibilization-search>
+
+    <h2 class="ib-box-menu__title ib-box-menu__title--font-size-30">{{'MMB_CHANGE_FLIGHTS_TITLE_HEALTH_FORM'|translate}}
+    </h2>
+    <p class="ib-mmb-dashboard__advisory ib-mmb-dashboard__advisory--1 ib-mmb-dashboard__advisory--bold">
+        {{'MMB_REFUND_ADVISORY_2'|translate}}</p>
+    <p class="ib-mmb-dashboard__advisory-hf "><span
+            class="ib-mmb-dashboard__advisory--bold">{{'MMB_CHANGE_FLIGHTS_ADVISORY_PT1'|translate}}</span><span>{{'MMB_CHANGE_FLIGHTS_ADVISORY_PT2'|translate}}</span>
+    </p>
+    <p class="ib-mmb-dashboard__advisory-hf"><span
+            class="ib-mmb-dashboard__advisory--bold">{{'MMB_CHANGE_FLIGHTS_ADVISORY_PT3'|translate}}</span><span>{{'MMB_CHANGE_FLIGHTS_ADVISORY_PT4'|translate}}</span>
+    </p>
+    <p class="ib-mmb-dashboard__advisory-hf ib-mmb-dashboard__advisory-last">
+        {{'MMB_CHANGE_FLIGHTS_ADVISORY_PT5'|translate}}</p>
+    <!-- Health reason (COVID) -->
+    <ib-health-form is-change-flight="true"></ib-health-form>
+</div>
+<!-- when there are items in the basket -->
+<div data-ng-if="!changeFlightsTabCtrl.isEmptyBasket && (changeFlightsTabCtrl.reshopConditions.voluntaryChanges.enabled || changeFlightsTabCtrl.reshopConditions.involuntaryChanges.enabled || (changeFlightsTabCtrl.reshopConditions.callcenterInfo.enabled && changeFlightsTabCtrl.reshopConditions.voluntaryChanges.reservationFailedConditions.length===0))"
+    class="ib-layout__line-spacing ib-layout__line-spacing--large ib-text--to-center">
+    <h2 class="ib-box-menu__title hidden-xl hidden-lg u-font-small-xs">{{'MMB_VC_CHANGE_OF_FLIGHTS'|translate}}</h2>
+    <div
+        class="ib-msg-alert ib-msg-alert--transparent ib-msg-alert__gdr--sized ib-msg-alert__gdr--unallow icon-carrito_compra">
+        <p class="ib-msg-alert__text ib-msg-alert__text--title-large">
+            {{'MMB_EMPTY_BASKET_INFO_MESSAGE_DELETE'|translate}}</p>
+        <p class="ib-msg-alert__text--subtitle"
+            ng-if="changeFlightsTabCtrl.channelDirect && !changeFlightsTabCtrl.isRedemption">
+            {{'MMB_EMPTY_BASKET_INFO_MESSAGE_CONTINUE'|translate}}</p>
+        <button id="MODAL_INFO_ACCEPT_BUTTON" title="{{'MODAL_ACCEPT'|translate}}"
+            class="ib-button ib-button--w-medium u-mt"
+            data-ng-click="changeFlightsTabCtrl.deleteBasket()">{{'MMB_EMPTY_BASKET_INFO_MESSAGE_EMPTY_BUTTON'|translate}}</button>
+    </div>
+</div>
+<!-- Error Message - Call Center -->
+<div
+    data-ng-if="(!changeFlightsTabCtrl.flags.showFlexibilizationChangeSection && !changeFlightsTabCtrl.flags.showVoluntaryChangeFlightSection) && !changeFlightsTabCtrl.reshopConditions.simulatedChanges.enabled && changeFlightsTabCtrl.reshopConditions.voluntaryChanges.reservationFailedConditions.length>0 ">
+    <h2 class="ib-box-menu__title ib-box-menu__title--font-size-20 hidden-xl hidden-lg">
+        {{'MMB_VC_CHANGE_OF_FLIGHTS'|translate}}</h2>
+    <div
+        class="ib-msg-alert ib-msg-alert--transparent ib-msg-alert__gdr--sized ib-msg-alert__gdr--unallow icon-informacion_2">
+        <div data-ng-repeat="i in changeFlightsTabCtrl.flightsMenssage">
+            <p class="ib-msg-alert__text ib-msg-alert__text--title-large">
+                <span data-ng-if="changeFlightsTabCtrl.reshopConditions.voluntaryChanges.slices.length>1">{{i.flight}}:
+                </span>
+                <span ng-if="!changeFlightsTabCtrl.isRedemption"></span>{{i.message | translate}}
+            </p>
+            <span ng-if="changeFlightsTabCtrl.isRedemption">{{i.message}}</span>s
+            </p>
+            <p class="ib-msg-alert__text--subtitle"
+                ng-if="changeFlightsTabCtrl.channelDirect && !changeFlightsTabCtrl.isRedemption && i.code === 'UNNACOMPANIED_MINORS_NOT_ALLOWED' "
+                data-ng-bind-html="i.description"></p>
+            <p class="ib-msg-alert__text--subtitle"
+                ng-if="changeFlightsTabCtrl.channelDirect && !changeFlightsTabCtrl.isRedemption && i.code !== 'UNNACOMPANIED_MINORS_NOT_ALLOWED'">
+                {{i.description | translate : {phone: changeFlightsTabCtrl.getPhone()} }}
+            </p>
+            <p class="ib-msg-alert__text--subtitle"
+                ng-if="!changeFlightsTabCtrl.channelDirect && i.code ==='NO_PAYMENT_INFO_AGENCIES'">{{i.description |
+                translate }}
+            </p>
+            <p class="ib-msg-alert__text--subtitle"
+                ng-if="!changeFlightsTabCtrl.channelDirect && i.code !=='NO_PAYMENT_INFO_AGENCIES'">
+                {{'MMB_FEXIBILIZATION_MONETATE_WARNING_TITLE_FLIGHT_CHANGE_CALLCENTER_EXTERNAL'|translate}}</p>
+
+        </div>
+    </div>
+</div>

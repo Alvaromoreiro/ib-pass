@@ -1,0 +1,80 @@
+<fieldset>
+    <legend class="u-hide-accessible" title="{{'TOTAL_PRICE_COMPONENT_ACCESSIBLE'|translate}}">{{'TOTAL_PRICE_COMPONENT_ACCESSIBLE'|translate}}</legend>
+    <section class="ib-layout__section ib-layout__section--null-spacing-shadow">
+        <div class="ib-box ib-box--medium ib-box--separator" ng-if="totalPriceCtrl.paymentMode && totalPriceCtrl.somethingToPay">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="ib-check" data-ng-class="{'ib-check--error' : totalPriceCtrl.containerForm.$submitted && !totalPriceCtrl.checkTermsConditions}">
+                        <input type="checkbox" id="check_terms_conditions" name="check_terms_conditions" class="ib-check__input" ng-model="totalPriceCtrl.checkTermsConditions"
+                            required/>
+                        <label for="check_terms_conditions" class="ib-check__label">
+                            <span data-ng-if="totalPriceCtrl.conditionsText" class="ib-check__text ib-check__text--unfocused" title="" ng-bind-html="totalPriceCtrl.conditionsText"></span>
+                        </label>
+                    </div>
+                    <div id="bbki-total-price-conditions-err-modal" ng-messages="totalPriceCtrl.containerForm.$submitted && totalPriceCtrl.containerForm.check_terms_conditions.$error">
+                        <div class="ib-alert ib-alert--error" title="{{'TOTAL_PRICE_CHECKBOX_CONDITIONS_REQUIRED_ERROR'|translate}}" ng-message="required">{{'TOTAL_PRICE_CHECKBOX_CONDITIONS_REQUIRED_ERROR'|translate}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ib-box ib-box--medium ib-box--separator">
+            <span data-ng-if="totalPriceCtrl.isChecked" class="ib-text ib-text--block ib-text--color-unfocused">{{'TOTAL_PRICE_COMPONENT_TITLE'|translate}} {{totalPriceCtrl.oldPriceInfo ? ('TOTAL_PRICE_COMPONENT_APLIED_DISCOUNT_TITLE'|translate): ''}}</span>
+            <span data-ng-if="($root.isLogged === totalPriceCtrl.LOGIN_ONB) && !totalPriceCtrl.isChecked" class="ib-text ib-text--block ib-text--color-unfocused">{{'AVAILABILITY_ON_BUSINESS_TOTAL_PRICE_TITLE_DISCOUNT'|translate}}</span>
+            <div class="row">
+                <div class="col-xs-12 col-sm-7 col-md-8">
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                        <span class="ib-text ib-text--price-old" data-ng-if="totalPriceCtrl.oldPriceInfo">{{totalPriceCtrl.oldPriceInfo}}</span>
+                        <span class="ib-text ib-text--especial ib-text--price-big break-word-full" data-ng-class="{'ib-text--price-long': totalPriceCtrl.totalPrice.length > 10}">{{totalPriceCtrl.originalTotalPrice === 0 ? ('GENERAL_FREE_LABEL'|translate) : totalPriceCtrl.totalPrice}}</span>
+                        <span class="ib-text ib-text--especial ib-text--price-small" data-ng-if="totalPriceCtrl.aviosInfo">+ {{totalPriceCtrl.aviosInfo}} {{'IBPURC_PAYMENTS_DISCOUNTS_AVIOS'|translate}}</span>
+                        <span class="ib-text ib-text--color-unfocused" data-ng-if="totalPriceCtrl.onHoldInfo">({{totalPriceCtrl.onHoldInfo.onHoldPricePerPassenger}} {{'TOTAL_PRICE_ON_HOLD_PER_PASSENGER'| translate}})</span>
+                        <p data-ng-if="($root.isLogged === totalPriceCtrl.LOGIN_ONB) && (totalPriceCtrl.isChecked || !totalPriceCtrl.getMarketOBPoints)" class="ib-text ib-text--block ib-text--color-unfocused u-pt-xsmall">{{'AVAILABILITY_ON_BUSINESS_TOTAL_PRICE_LABEL_POINTS'|translate}}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 visible-xs" data-ng-if="totalPriceCtrl.onHoldInfo">
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+                        <span class="ib-text ib-text--color-important">{{'TOTAL_PRICE_ON_HOLD_PRICE_TEXT'| translate}}</span>
+                        <span class="ib-text ib-text--especial ib-text--price-xsmall ib-text--color-important">{{totalPriceCtrl.onHoldInfo.priceAfterOnHold}}</span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-5 col-md-4" ng-if="totalPriceCtrl.paymentMode">
+                    <div class="ib-layout__line-spacing">
+                        <div data-ng-if="totalPriceCtrl.paypalButton && !totalPriceCtrl.showRegularButton" id="paypal-button" ib-paypal-payment-button-dev></div>
+                        <button data-ng-if="totalPriceCtrl.showRegularButton || !totalPriceCtrl.paypalButton" title="{{totalPriceCtrl.onHoldInfo ? ('TOTAL_PRICE_COMPONENT_HOLD_BUTTON'|translate) : totalPriceCtrl.somethingToPay
+                        ? ('TOTAL_PRICE_COMPONENT_PAY_BUTTON'|translate) : ('TOTAL_PRICE_COMPONENT_CONTINUE_BUTTON'|translate)
+                        }}" class="ib-button ib-button--block"
+                            data-ng-click="totalPriceCtrl.sendPayEvent()">{{totalPriceCtrl.onHoldInfo ? ('TOTAL_PRICE_COMPONENT_HOLD_BUTTON'|translate) : totalPriceCtrl.somethingToPay
+                            ? ('TOTAL_PRICE_COMPONENT_PAY_BUTTON'|translate) : ('TOTAL_PRICE_COMPONENT_CONTINUE_BUTTON'|translate)
+                            }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--medium hidden-xs" data-ng-if="totalPriceCtrl.onHoldInfo">
+                <span class="ib-text ib-text--color-important">{{'TOTAL_PRICE_ON_HOLD_PRICE_TEXT'| translate}}</span>
+                <span class="ib-text ib-text--especial ib-text--price-xsmall ib-text--color-important">{{totalPriceCtrl.onHoldInfo.priceAfterOnHold}}</span>
+            </div>
+
+            <p class="ib-text ib-text--block ib-text--color-unfocused ng-scope"
+               data-ng-if="totalPriceCtrl.aviosToEarn">
+               {{'AVIOS_TO_EARN_1'| translate}}
+               <span class="ib-text ib-text--bold ib-text--underline">
+                    {{totalPriceCtrl.aviosToEarn}}{{'AVIOS_TO_EARN_2'| translate}}
+               </span>
+            </p>
+
+            <p class="ib-text ib-text--color-unfocused" data-ng-if="totalPriceCtrl.totalPriceText" ng-bind-html="totalPriceCtrl.totalPriceText"></p>
+        </div>
+        <div class="ib-box ib-box--medium">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="u-text-right u-text-left-sm u-text-left-xs">
+                        <figure class="ib-logo ib-logo--medium">
+                            <img ng-src="{{$root.routes.images}}/otros/globalSign.png" alt="{{'AVAILABILITY_SLICE_INFO_IMG_ALT_1'|translate}} global Sign"
+                            />
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</fieldset>

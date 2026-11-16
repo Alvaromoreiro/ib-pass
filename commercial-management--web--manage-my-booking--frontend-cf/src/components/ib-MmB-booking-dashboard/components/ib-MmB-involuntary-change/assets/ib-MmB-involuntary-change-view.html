@@ -1,0 +1,95 @@
+    
+    <div id = "involuntaryChange" class="ib-background-banner ib-background-banner--gray ">
+        <div class="ib-background-banner__figure ib-background-banner__figure--height-full"></div>
+        <form method="post" action="#">
+            <div class="container">
+                <!-- HEADER TITLE PAGE -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ib-layout__header ib-layout__header--title ib-layout__header--center u-mb-none">
+                            <span class="ib-background-banner__title icon-informacion_2"></span>
+                            <h1 class="ib-background-banner__title ib-background-banner__title--medium u-mb-small" ng-if="mmBInvoluntaryChangeCtrl.isChange">{{'MMB_INVOLUNTARY_CHANGE_ALERT_TTITLE'|translate}}</h1>
+                            <h1 class="ib-background-banner__title ib-background-banner__title--medium u-mb-small" ng-if="mmBInvoluntaryChangeCtrl.isCancel">{{'MMB_INVOLUNTARY_CHANGE_ALERT_CANCEL_TTITLE'|translate}}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-offset-2 col-xl-8 col-xl-offset-2 col-lg-offset-2 col-lg-8 col-lg-offset-2 col-xs-12">
+                        <div class="ib-layout__header ib-layout__header--title ib-layout__header--center u-mt-none">
+                            <div ng-if = "!mmBInvoluntaryChangeCtrl.isPackageProduct" class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                                <h2  class="ib-background-banner__subtitle u-mb-small">{{'MMB_INVOLUNTARY_CHANGE_ALERT_SUBTITLE'|translate}}</h2>
+                            </div>
+                            <div ng-if = "!mmBInvoluntaryChangeCtrl.isPackageProduct" class="ib-layout__line-spacing ib-layout__line-spacing--small" ng-if="mmBInvoluntaryChangeCtrl.showAcceptChange">
+                                <p class="ib-background-banner__txt ib-background-banner__txt--medium ib-background-banner__txt--special">{{'MMB_INVOLUNTARY_CHANGE_ALERT_ACCEPT_MSG'|translate}}</p>
+                            </div>
+                            <div ng-if = "!mmBInvoluntaryChangeCtrl.isPackageProduct" class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                                <p class="ib-background-banner__txt ib-background-banner__txt--medium ib-background-banner__txt--special">{{'MMB_INVOLUNTARY_CHANGE_ALERT_MORE_INFO'|translate}} {{mmBInvoluntaryChangeCtrl.contactPhone}}</p>
+                            </div>
+                            <div ng-if = "mmBInvoluntaryChangeCtrl.isPackageProduct" class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                                <p class="ib-background-banner__txt ib-background-banner__txt--medium ib-background-banner__txt--special">{{'MMB_VC_IB_VACIONES_PLEASE_CALL_US_NEW-SCHEDULE'|translate : {phoneNumber: mmBInvoluntaryChangeCtrl.phoneNumber } }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END HEADER TITLE PAGE -->
+                <div ng-if = "!mmBInvoluntaryChangeCtrl.isPackageProduct" ng-repeat="(index, flight) in mmBInvoluntaryChangeCtrl.model.yourFlightsModel.flights">
+                    <div class="row">
+                        <div class="col-xl-offset-2 col-xl-8 col-xl-offset-2 col-lg-offset-2 col-lg-8 col-lg-offset-2 col-xs-12">
+                            <ib-MmB-flights-card id="mmb-involuntary-change-flights-card" model="flight" index="index"></ib-MmB-flights-card>
+                        </div>
+                    </div>
+                </div>
+                <!-- -->
+                <div class="row">
+                    <div ng-if = "!mmBInvoluntaryChangeCtrl.isPackageProduct" class="col-xl-offset-2 col-xl-8 col-xl-offset-2 col-lg-offset-2 col-lg-8 col-lg-offset-2 col-xs-12">
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+                            <div class="ib-content-buttons ib-content-buttons__gdr">
+                                <div class="ib-content-buttons__content-left">
+                                    <button id="mmb-involuntary-change-accept-change-btn" type="button" class="ib-button ib-button--w-medium" ng-if="mmBInvoluntaryChangeCtrl.showAcceptChange" ng-click="mmBInvoluntaryChangeCtrl.submitChangesAccepted()">{{'MMB_INVOLUNTARY_CHANGE_FOOTER_CHANGE_BUTTON'|translate}}</button>
+                                </div>
+                                <div class="ib-content-buttons__content-right">
+                                    <span class="ib-text">{{'MMB_INVOLUNTARY_CHANGE_FOOTER_MORE_INFO'|translate}}  {{mmBInvoluntaryChangeCtrl.contactPhone}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- -->
+                <div class="row">
+                    <div class="col-xl-offset-2 col-xl-8 col-xl-offset-2 col-lg-offset-2 col-lg-8 col-lg-offset-2 col-xs-12">    
+                        <div class="ib-layout__line-spacing">
+                            <div class="ib-box-flight-summary">
+                                <!--
+                                <h2 class="ib-box-flight-summary__title u-mb">{{'MMB_INVOLUNTARY_CHANGE_AFFECTED_FLIGHTS'|translate}}</h2>
+                                <div class="ib-box-flight-summary__content u-mb" ng-repeat="(index, flight) in mmBInvoluntaryChangeCtrl.flightsAffected">
+                                    <div class="ib-box-flight-summary__content-left">
+                                        <h3 class="ib-box-flight-summary__flights">
+                                            <span class="ib-box-flight-summary__header-txt">
+                                                <span class="hidden-sm hidden-xs">{{flight.departureCity.name}} ({{flight.departureCity.code}})</span>
+                                                <span class="hidden-xl hidden-lg hidden-md">{{flight.departureCity.code}}</span>
+                                            </span>
+                                            <span class="ib-text-icon">
+                                                <span class="ib-text-icon__icon icon-vuelos"></span>
+                                            </span>
+                                            <span class="ib-box-flight-summary__header-txt">
+                                                <span class="hidden-sm hidden-xs">{{flight.arrivalCity.name}} ({{flight.arrivalCity.code}})</span>
+                                                <span class="hidden-xl hidden-lg hidden-md">{{flight.arrivalCity.code}}</span>
+                                            </span>
+                                        </h3>
+                                    </div>
+                                    <div class="ib-box-flight-summary__content-right">
+                                        <span class="ib-box-flight-summary__date">{{flight.departureDateParsed.formatedDate}} - {{flight.departureDateParsed.dateTime}}</span>
+                                    </div>
+                                </div>
+                                -->
+                                <div class="ib-box-flight-summary__text-container" ng-if="mmBInvoluntaryChangeCtrl.showAcceptChange">
+                                    <span class="ib-box-flight-summary__txt">{{'MMB_INVOLUNTARY_CHANGE_INFORMATIVE_NOTES'|translate}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+

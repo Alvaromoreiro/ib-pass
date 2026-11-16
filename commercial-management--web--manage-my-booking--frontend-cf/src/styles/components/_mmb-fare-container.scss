@@ -1,0 +1,198 @@
+@import 'src/styles/_settings-tools';
+
+
+.#{$mmb__namespace}fare-container {
+    display: grid;
+    padding: rem(16);
+    gap: rem(16);
+
+    &--column {
+        padding: rem(16);
+        grid-template-columns: 1fr;
+    }
+
+    &--carousel {
+        grid-auto-columns: calc((70rem - 4rem) / 3);    //[width928px] - [gap&padding64px] / [3items]
+        grid-auto-flow: column;
+        grid-template-columns: none;
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+    }
+
+    &-carousel {
+        $arrow-button-height: rem(48);
+
+        &__arrow {
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            display: flex;
+            width: $arrow-button-height;
+            height: $arrow-button-height;
+            flex-flow: row nowrap;
+            align-items: center;
+            padding: rem(8);
+            border: none;
+            border-radius: rem(40);
+            background: rgb(from (var(--ib-color-primary-red-500) r g b) / 90%);
+            transform: translate(-50%, -50%);
+
+            > * {
+                height: rem(16);
+                color: var(--ib-color-white);
+            }
+
+            &--right {
+                left: 100%;
+                justify-content: flex-start;
+            }
+
+
+            &--left {
+                left: 0;
+                justify-content: flex-end;
+
+                > * {
+                    transform: rotate3d(0, 0, 1, 180deg)
+                }
+
+            }
+
+            &:hover {
+                background: rgb(from (var(--ib-color-primary-red-600) r g b) / 90%);
+            }
+
+            &:disabled {
+                background: rgb(from (var(--ib-color-grey-200-ee) r g b) / 90%);
+
+                > * {
+                    color: var(--ib-color-grey-400-cc);
+                }
+            }
+
+        }
+    }
+    .#{$wefront__namespace}box-select-radio{
+        &__radio--mobile-right {
+            right: rem(32);
+            width: rem(24);
+            height: rem(24);
+        }
+
+        &__header-wrapper{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 rem(32);
+        }
+
+        &__header-right  {
+            position: initial;
+            padding-right: rem(40);
+        }
+
+    }
+}
+
+@include media-query("lg") {
+    .#{$mmb__namespace}fare-container {
+        &--carousel {
+            grid-auto-columns: calc((58rem - 4rem) / 3);    //[width928px] - [gap&padding64px] / [3items]
+        }
+
+        .#{$wefront__namespace}box-select-radio{
+            &__header-left, &__header-right  {
+                width: 50%;
+            }
+
+            &__title {
+                text-align: left;
+            }
+
+            &__header-right {
+                .#{$wefront__namespace}text{
+                    text-align: right;
+                }
+
+            }
+        }
+    }
+ }
+
+@include media-query("md") {
+    .#{$mmb__namespace}fare-container {
+        padding: rem(16) rem(8) rem(24) rem(8);
+        gap: rem(8);
+        grid-template-columns: repeat(3, 1fr);
+
+        &--column {
+            padding: rem(16);
+            grid-template-columns: 1fr;
+        }
+
+        &--carousel {
+            grid-auto-columns: calc((46rem - 2rem) / 3);    //[width736] - [gap&padding32px] / [3items]
+            grid-auto-flow: column;
+            grid-template-columns: none;
+            overflow-x: scroll;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;  /* Firefox */
+            > * {
+                scroll-snap-align: center;
+            }
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            input[type="radio"] {
+                display: none;
+            }
+
+
+
+        }
+
+        .#{$wefront__namespace}box-select-radio{
+            &__header-wrapper{
+                flex-flow: row wrap;
+            }
+        }
+    }
+}
+
+@include media-query("mobile") {
+    .#{$mmb__namespace}fare-container {
+        display: grid;
+        padding: rem(16);
+        background-color: var(--ib-color-grey-300-dd);
+        gap: rem(16);
+        grid-template-columns: 1fr;
+
+        &--carousel {
+            grid-auto-columns: initial;
+            grid-auto-flow: initial;
+            grid-template-columns: initial;
+            overflow-x: initial;
+            scroll-behavior: initial;
+            scroll-snap-type: initial;
+            scrollbar-width: initial;
+        }
+
+        .#{$wefront__namespace}box-select-radio{
+            margin-bottom: 0;
+
+            &__header-left, &__header-right  {
+                width: auto;
+            }
+        }
+    }
+
+}
+
+
+
+

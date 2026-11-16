@@ -1,0 +1,204 @@
+/* -----------------------------------------------------------------
+    #BONUS BOX
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}bonus-box {
+    padding: rem(24) rem(32);
+    border-top: rem(2) solid color(primary);
+    background: color(white);
+
+    &__title {
+        margin-bottom: rem(16);
+        font-family: $font-special;
+        font-size: size(xmedium);
+        line-height: size(medium);
+        color: color(gray-10);
+
+        &.collapsed {
+            margin-bottom: 0;
+        }
+    }
+
+    &__title-responsive {
+        position: absolute;
+        z-index: 1;
+        top: rem(-18);
+        left: 0;
+        max-width: 65%;
+        font-family: $font-special;
+        font-size: rem(24);
+        text-align: left;
+        color: color(gray-10);
+        transform: none;
+    }
+
+    &__button {
+        width: 100%;
+        max-width: 100%;
+
+        &-link {
+            border: 0 none;
+            background: 0 none;
+
+            &:hover,
+            &:focus {
+                .#{$wefront__namespace}card-item-payment__button {
+                    &--text {
+                        color: color(primary);
+                    }
+                }
+            }
+
+            &--text {
+                font-family: $font-normal;
+                font-size: rem(13);
+                text-decoration: underline;
+                line-height: rem(22);
+                color: color(gray-10);
+            }
+        }
+    }
+
+    &__fieldset {
+        margin-top: rem(16);
+    }
+
+    &__actions {
+        margin-top: rem(16);
+
+        &-item {
+            margin-top: rem(16);
+
+            &:first-child {
+                margin-top: rem(8);
+            }
+        }
+    }
+
+    &__disccount {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: rem(17) rem(16) rem(15) rem(8);
+        border: rem(1) solid color(gray-25);
+        box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+
+        &-icon {
+            font-size: size(xlarge);
+            line-height: size(xmedium);
+            color: color(green-10);
+        }
+
+        &-title {
+            font-family: $font-normal;
+            font-size: size(sm);
+            font-weight: bold;
+            line-height: size(xmedium);
+            color: color(gray-15);
+        }
+
+        &-text {
+            margin-top: rem(2);
+            font-family: $font-normal;
+            font-size: size(sm);
+            line-height: size(xmedium);
+            color: color(gray-15);
+        }
+    }
+}
+
+@include media-query("lg") {
+    .#{$wefront__namespace}bonus-box {
+        padding: rem(22) rem(28) rem(24) rem(20);
+
+        &__title-responsive {
+            top: rem(-10);
+            font-size: rem(18);
+        }
+    }
+}
+
+@include media-query("md") {
+    .#{$wefront__namespace}bonus-box {
+        padding: rem(24) rem(32);
+
+        &__title-responsive {
+            font-size: rem(24);
+        }
+
+        &--inline {
+            &-medium {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: stretch;
+                justify-content: space-between;
+                .#{$wefront__namespace}bonus-box {
+                    &__fieldset {
+                        width: remcalc('100%', ' - ', rem(256));
+                    }
+
+                    &__actions-form {
+                        width: rem(240);
+                    }
+
+                    &__button {
+                        min-height: rem(56);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}bonus-box {
+        &__title-responsive {
+            position: relative;
+            top: auto;
+            left: auto;
+            max-width: 100%;
+            padding: 0;
+            font-size: rem(18);
+            line-height: 1;
+        }
+    }
+}
+
+@include media-query("sm") {
+    .#{$wefront__namespace}bonus-box {
+        padding: rem(16) rem(24);
+
+        &__title-responsive {
+            font-size: rem(24);
+        }
+
+        &--inline {
+            &-medium {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: stretch;
+                justify-content: space-between;
+                .#{$wefront__namespace}bonus-box {
+                    &__fieldset {
+                        width: remcalc('100%', ' - ', rem(168));
+                    }
+
+                    &__actions-form {
+                        width: rem(152);
+                    }
+
+                    &__button {
+                        min-height: rem(56);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query("xs") {
+    .#{$wefront__namespace}bonus-box {
+        padding: rem(20) rem(24);
+    }
+}

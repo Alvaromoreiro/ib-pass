@@ -1,0 +1,540 @@
+/* -------------------------------------------------------------
+    #TAB
+----------------------------------------------------------------- */
+.#{$wefront__namespace}tab {
+    position: relative;
+
+    .nav-tabs {
+        overflow: hidden;
+        width: 100%;
+        height: rem(64);
+        border-bottom: 0;
+        font-size: 0;
+
+        &.resize {
+            display: block;
+            overflow: hidden;
+            height: rem(64);
+            font-size: 0;
+        }
+    }
+
+    .nav-tabs > li {
+        display: inline-block;
+        margin: 0;
+        border: 0;
+        border-right: rem(1) solid color(gray-70);
+        background: color(gray-90);
+
+        &.active {
+            background-color: color(white);
+
+            > a {
+                border: 0;
+                border-top: rem(2) solid color(primary);
+
+                &:hover,
+                &:focus,
+                &:active {
+                    background-color: color(white);
+                }
+            }
+        }
+
+        &:last-child {
+            border-right: 0;
+        }
+
+        .dropdown-toggle {
+            .caret {
+                display: none;
+            }
+        }
+    }
+
+    .nav-tabs > li > a {
+        overflow: hidden;
+        height: rem(64);
+        padding: rem(13) rem(15);
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+        border-top: rem(2) solid transparent;
+        font-family: $font-special;
+        font-size: rem(18);
+        text-overflow: ellipsis;
+        text-align: center;
+        line-height: 200%;
+        color: color(gray-10);
+        white-space: nowrap;
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: color(gray-10);
+            background-color: color(gray-40);
+            outline: 0;
+        }
+    }
+
+    .tab-content {
+        background-color: color(white);
+    }
+
+    // Modifiers
+
+    &--bordered {
+        border: solid rem(1) color(gray-90);
+    }
+
+    &--pair {
+        .nav-tabs {
+            display: table;
+            width: 100%;
+
+            &::before,
+            &::after {
+                display: none;
+            }
+
+            > li {
+                display: table-cell;
+                width: 50%;
+                height: 100%;
+                float: none;
+                vertical-align: middle;
+
+                > a {
+                    position: relative;
+                    overflow: inherit;
+                    height: 100%;
+                    min-height: rem(64);
+                    padding: 0;
+                    text-overflow: inherit;
+                    line-height: normal;
+                    white-space: inherit;
+                }
+            }
+
+            &.resize {
+                display: table;
+            }
+        }
+        .#{$wefront__namespace}tab__text-align {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            padding: 0 rem(15);
+            text-align: center;
+            line-height: 1.15;
+            -webkit-transform: translate(0, -50%);
+            -moz-transform: translate(0, -50%);
+            -ms-transform: translate(0, -50%);
+            -o-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+        }
+    }
+
+    &--pair-2 {
+        border: solid rem(1) color(gray-90);
+
+        .nav-tabs {
+            min-height: rem(56);
+
+            > li {
+                > a {
+                    min-height: rem(56);
+
+                    > span {
+                        display: -webkit-box;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        -webkit-box-align: center;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 1;
+                        word-break: break-all;
+                    }
+                }
+            }
+        }
+
+        .nav-link {
+            min-height: rem(56);
+        }
+    }
+
+    &--underline {
+        .nav-tabs {
+            border-bottom: solid rem(1) color(gray-90);
+
+            > li {
+                border: none;
+                background-color: transparent;
+
+                a {
+                    height: rem(63);
+                    padding: rem(16) rem(23);
+                    border: none;
+                    font-family: $font-special;
+                    font-size: rem(15);
+                    background-color: transparent;
+                    letter-spacing: rem(0.3);
+
+                    &:hover {
+                        background: none;
+                    }
+                }
+
+                &.active {
+                    border: none;
+                    background-color: transparent;
+                    box-shadow: 0 rem(-4) 0 rem(-1) color(primary) inset !important;
+
+                    > a {
+                        border: none;
+
+                        &:hover,
+                        &:focus,
+                        &:active {
+                            background-color: transparent;
+                        }
+                    }
+                }
+            }
+        }
+
+        .tab-content {
+            background: transparent;
+        }
+    }
+
+    &--responsive {
+        .nav-tabs > li {
+            display: inline-block;
+        }
+
+        .nav-tabs > li.tabdrop {
+            position: absolute;
+            right: 0;
+            width: auto;
+            min-width: inherit;
+            margin: 0;
+
+            .dropdown-toggle {
+                display: block;
+                overflow: hidden;
+                width: 100%;
+                height: rem(64);
+                padding: rem(13) rem(15);
+                margin: 0;
+                border: 0;
+                border-radius: 0;
+                border-top: rem(2) solid transparent;
+                font-family: $font-special;
+                font-size: rem(18);
+                text-overflow: ellipsis;
+                text-align: center;
+                line-height: 200%;
+                color: color(gray-10);
+                background: none;
+                white-space: nowrap;
+
+                &:hover,
+                &:focus,
+                &:active {
+                    color: color(gray-10);
+                    background-color: color(gray-40);
+                    outline: 0;
+                }
+            }
+
+            > button {
+                border-top: rem(2) solid transparent;
+            }
+
+            &.active {
+                > a,
+                > button {
+                    border-color: color(primary);
+                    background-color: transparent !important;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .nav-tabs .dropdown-menu {
+            padding: 0;
+            border-radius: 0;
+            font-size: rem(13);
+            box-shadow: 0 rem(2) rem(3) 0 color(black, 0.32), 0 rem(-1) rem(4) 0 color(black, 0.11);
+        }
+
+        .nav-tabs .dropdown-menu > li > a {
+            padding: rem(8) rem(20);
+        }
+
+        .dropdown-menu > li > a:hover,
+        .dropdown-menu > li > a:focus {
+            background-color: color(gray-50);
+        }
+
+        .dropdown-menu > .active > a,
+        .dropdown-menu > .active > a:hover,
+        .dropdown-menu > .active > a:focus {
+            color: color(gray-10);
+            background-color: color(gray-50);
+        }
+    }
+
+    &--filter {
+        .nav-tabs {
+            height: rem(56);
+
+            > li {
+                a {
+                    height: rem(55);
+                    padding: rem(23) rem(23) rem(14);
+                    line-height: rem(18);
+
+                    &:hover {
+                        color: color(red-20);
+                    }
+
+                    &:focus {
+                        background: transparent;
+                        outline: rem(1) solid color(orange-10);
+                        outline-offset: rem(-1);
+                    }
+                }
+
+                &.active {
+                    a {
+                        &:hover {
+                            color: color(gray-10);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &--avios-discount {
+        .nav-tabs {
+            display: block;
+            overflow: visible;
+            width: 100%;
+            height: rem(16);
+            background: color(white);
+
+            & > li {
+                display: block;
+                overflow: visible;
+                width: 100%;
+                height: auto;
+                min-height: auto;
+                background: color(white);
+            }
+        }
+
+        .nav-link {
+            min-height: auto;
+        }
+        .#{$wefront__namespace}tab__text-align {
+            position: absolute;
+            z-index: 1;
+            top: rem(26);
+            left: 0;
+            max-width: 65%;
+            padding-left: rem(24);
+            font-size: rem(24);
+            text-align: left;
+            transform: none;
+        }
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}tab {
+        &--avios-discount {
+            .#{$wefront__namespace}tab__text-align {
+                font-size: rem(18);
+            }
+        }
+    }
+}
+
+/* Fix md on Avios Calculator */
+@include media-query('md') {
+    .#{$wefront__namespace}box--filter-md {
+        .#{$wefront__namespace}tab {
+            &--filter {
+                background-color: color(gray-50);
+
+                .nav-tabs {
+                    width: 100%;
+                    max-width: 39rem;
+                    height: rem(44);
+                    padding: 0 rem(16);
+                    margin: 0 auto;
+
+                    > li a {
+                        height: rem(43);
+                        padding: rem(13) rem(23) rem(14);
+                    }
+                }
+
+                .tab-content {
+                    background-color: color(white);
+
+                    .tab-pane {
+                        width: 100%;
+                        max-width: 39rem;
+                        padding: 0 rem(16);
+                        margin: 0 auto;
+                    }
+                    .#{$wefront__namespace}popover--padding {
+                        padding-right: 0;
+                        padding-left: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}tab {
+        &--underline {
+            .nav-tabs {
+                > li {
+                    a {
+                        font-family: $font-normal;
+                        font-size: rem(12);
+                    }
+                }
+            }
+        }
+
+        &--filter {
+            background-color: color(gray-50);
+
+            .nav-tabs {
+                width: 100%;
+                max-width: rem(480);
+                height: rem(44);
+                padding: 0 rem(16);
+                margin: 0 auto;
+
+                > li a {
+                    height: rem(43);
+                    padding: rem(13) rem(23) rem(14);
+                }
+            }
+
+            .tab-content {
+                background-color: color(white);
+
+                .tab-pane {
+                    width: 100%;
+                    max-width: rem(480);
+                    padding: 0 rem(16);
+                    margin: 0 auto;
+                }
+                .#{$wefront__namespace}popover--padding {
+                    padding-right: 0;
+                    padding-left: 0;
+                }
+            }
+        }
+
+        &--pair {
+            .#{$wefront__namespace}tab {
+                &__text-align {
+                    font-size: rem(16);
+                }
+            }
+        }
+
+        &--avios-discount {
+            .#{$wefront__namespace}tab__text-align {
+                position: relative;
+                top: auto;
+                left: auto;
+                max-width: 100%;
+                padding: 0 rem(16);
+                margin-top: rem(20);
+                font-size: rem(18);
+            }
+
+            .nav-tabs {
+                height: rem(40);
+            }
+
+            .u-text-right {
+                text-align: left !important;
+            }
+            .u-text-right .#{$wefront__namespace}text {
+                font-size: rem(13);
+                text-align: left;
+            }
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}tab {
+        &--pair-2 {
+            .#{$wefront__namespace}tab__text-align {
+                padding: 0 rem(13);
+            }
+
+            .nav-tabs {
+                height: rem(56);
+                min-height: rem(56);
+
+                > li {
+                    &:first-child {
+                        width: 72.8%;
+                    }
+
+                    > a {
+                        > span {
+                            -webkit-line-clamp: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}tab {
+        &--pair-2 {
+            .#{$wefront__namespace}tab__text-align {
+                padding: 0 rem(13);
+            }
+
+            .nav-tabs {
+                height: rem(72);
+
+                > li {
+                    &:first-child {
+                        width: 85%;
+                    }
+
+                    > a {
+                        > span {
+                            line-height: rem(24);
+                            -webkit-line-clamp: 2;
+                            word-break: initial;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

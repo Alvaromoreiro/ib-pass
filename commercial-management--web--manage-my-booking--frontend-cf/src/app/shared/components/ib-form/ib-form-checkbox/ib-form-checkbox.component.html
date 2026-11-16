@@ -1,0 +1,15 @@
+<div class="mmb-form-checkbox" [class.has-error]="field?.formControl && showError">
+      <input class="mmb-form-checkbox__input"
+        placeholder="Selecciona"
+        [id]="inputId"
+        [value]="props.value"
+        [type]="'checkbox'" 
+        [formControl]="control" 
+        [formlyAttributes]="field"
+      /> 
+      <label [attr.for]="inputId" class="mmb-form-checkbox__label" *ngIf="props.label">
+        <span class="mmb-form-checkbox__text mmb-form-checkbox__text--normal">{{ props.label }} </span>
+        <span *ngIf="props.required" class="asterisco">*</span>
+      </label>
+    </div>
+    <p *ngIf="field?.formControl && showError" class="ib-alert ib-alert--error" >{{ getCustomErrorMessage }}</p>

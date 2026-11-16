@@ -1,0 +1,42 @@
+<div class="input-container" #prefixPhoneContainer 
+    [ngClass]="{'input--error': submitState && phoneForm.controls.phone.invalid,
+        'input--error-prefix':submitState && phoneForm.controls.prefix.invalid}">
+    <form [formGroup]="phoneForm">
+        <div class="container-prefix">
+            <p-autoComplete 
+                id="contact_prefix"
+                (completeMethod)="filterPrefix($event)"
+                (onFocus)="onFocus()"
+                (onShow)="onShow()"
+                (onHide)="onHide()"
+                (onBlur)="onBlur()"
+                [suggestions]="filteredPrefix" 
+                [dropdown]="true"
+                [appendTo]="prefixPhoneContainer"
+                [forceSelection]="true"
+                formControlName="prefix"
+                field="code"
+                #autoComplete>
+                    <ng-template let-country let-i="index" pTemplate="item">
+                        <div class="item-container">
+                            <div class="item-contry">{{ country.description }}</div>
+                            <div class="item-prefix">{{ country.code }}</div>
+                        </div>
+                    </ng-template>
+            </p-autoComplete>
+            <label class="input-label input-label--prefix" for="contact_prefix">{{'IBAIRP_CONTACT_FORM_PREFIX_PLACEHOLDER'| translate}}</label>
+        </div>
+        <div class="container-phone">
+            <input class="input-text" type="tel" 
+            id="contact_phone_number" placeholder=" " maxlength="16" 
+            formControlName="phone" [ibBookingValidatorCleaner]="PHONE_CLEANER">
+            <label class="input-label" for="contact_phone_number" >{{'IBAIRP_CONTACT_FORM_PHONE' | translate}}</label>
+        </div>
+    </form>
+    <div *ngIf="submitState && (phoneForm.controls.phone.invalid || phoneForm.controls.prefix.invalid)" class="ib-alert ib-alert--error">
+        <span *ngIf="phoneForm.controls.phone.errors?.required || phoneForm.controls.prefix.errors?.required">
+            {{ "GENERAL_INPUT_REQUIRED_ERROR" | translate }}</span>
+        <span *ngIf="phoneForm.controls.phone.errors?.pattern">
+            {{ "GENERAL_PHONE_PATTERN_ERROR" | translate }}</span>
+    </div>
+</div>

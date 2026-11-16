@@ -1,0 +1,70 @@
+/* -------------------------------------------------------------
+    #BUTTONS
+----------------------------------------------------------------- */
+
+@if $include__buttons == true {
+
+
+    $buttons__display        	:	inline-block !default;
+    $buttons__min-height      	:	48 !default;
+    $buttons__border	    	:	1 !default;
+    $buttons__border-bottom	    :	2 !default;
+    $buttons__border-style		:	solid !default;
+    $buttons__border-color		:	color(secondary) !default;
+    $buttons__border-radius		:	3 !default;
+    $buttons__line-height		:	$wefront__base-line-height !default;
+    $buttons__font-family		:	$wefront__base-font-family !default;
+    $buttons__font-size			:	$wefront__base-font-size !default;
+    $buttons__base-padding		:	1 !default;
+    $buttons__base-margin		:	1 !default;
+    $buttons__hover-transition	:	all 0.3s	ease-in !default;
+    $buttons__color 			: 	white !default;
+    $buttons__color--hover		: 	black !default;
+    $buttons__background        :   color(primary) !default;
+    $buttons__background--hover :   color(secondary) !default;
+
+    $btnBorder: $buttons__border + px $buttons__border-style $buttons__border-color;
+    $btnBorderBotton: $buttons__border + px $buttons__border-style $buttons__border-color;
+
+
+    .o-btn,
+    %btn {
+        display: $buttons__display;
+        min-height: rem($buttons__min-height);
+        padding: rem($buttons__base-padding * 5) rem($buttons__base-padding * 10) rem($buttons__base-padding * 5) rem($buttons__base-padding * 10);
+        margin: rem($buttons__base-margin * 5) rem($buttons__base-margin * 5) rem($buttons__base-margin * 2) rem($buttons__base-margin * 0);
+        border: $btnBorder;
+        border-radius: rem($buttons__border-radius);
+        border-bottom: $btnBorderBotton;
+        font-family: $buttons__font-family;
+        font-size: rem($buttons__font-size);
+        text-align: center;
+        line-height: $buttons__line-height * 2;
+        color: color($buttons__color);
+        background-color: $buttons__background;
+        cursor: pointer;
+        transition: $buttons__hover-transition;
+        vertical-align: middle;
+        white-space: nowrap;
+
+        /**
+         * Nadie quiere un botón con texto subrayado cuando
+         * hacemos hover.
+         */
+
+        &:hover {
+            text-decoration: none;
+            color: color($buttons__color--hover);
+        }
+
+        &:active,
+        &:focus {
+            color: color($buttons__color--hover);
+            outline: none;
+        }
+
+        &:visited {
+            color: color($buttons__color--hover);
+        }
+    }
+} // END IF

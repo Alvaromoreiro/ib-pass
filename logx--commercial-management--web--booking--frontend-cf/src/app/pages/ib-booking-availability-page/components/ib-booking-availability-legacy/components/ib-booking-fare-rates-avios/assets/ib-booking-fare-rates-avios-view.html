@@ -1,0 +1,44 @@
+<!-- Avios & Money-->
+<div class="ib-box ib-box--medium">
+    <div class="ib-summary">
+        <header class="ib-summary__header u-mb-small">
+            <h2 class="ib-heading ib-heading--type-1">{{'AVAILABILITY_REDEMPTION_FARE_RATES_AVIOS_TITLE'|translate}}</h2>
+        </header>
+        <p class="ib-text ib-text--color-unfocused">{{'AVAILABILITY_REDEMPTION_FARE_RATES_AVIOS_INFO_DIVISA'|translate}}</p>
+        <div class="ib-box ib-box--unfocused-low ib-box--check-boxed u-mt u-pb-small u-pt-small" ng-class="{'ib-box--check-boxed-responsive':fareRatesAviosCtrl.withoutAviosMoney}">
+            <equal-width data-reload="true">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2" data-ng-repeat="(index,item) in fareRatesAviosCtrl.fareRate">
+                        <div class="ib-check-boxed" ng-class="{'ib-check-boxed--responsive':fareRatesAviosCtrl.withoutAviosMoney}">
+                            <span data-equal-w="boxed" class="ib-check-boxed__label ib-check-boxed__label--simple hidden-sm hidden-xs" ng-if="!item.eligible">
+                                <button focusin type="button" class="ib-button ib-button--block ib-button--reverse" ng-click="fareRatesAviosCtrl.openModalLinks()">{{'AVAILABILITY_REDEMPTION_FARE_RATES_AVIOS_BUTTON'|translate}}</button>
+                                <span class="ib-check-boxed__price">{{item.formatAvios}} {{'IBPURC_PAYMENTS_DISCOUNTS_AVIOS'|translate}}</span>
+                                <span class="ib-check-boxed__price">{{'AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate}}</span>
+                                <span class="ib-check-boxed__price">{{item.formatPrice}}</span>
+                            </span>
+                            <input ng-disabled="!item.eligible" ng-value="true" ng-model="fareRatesAviosCtrl.fareRate[index].selected" ng-click="fareRatesAviosCtrl.selectAviosMoneyOption(item)" class="ib-check-boxed__check" type="radio" name="discount" id="avios&money-{{index}}">
+                            <label data-equal-w="boxed" class="ib-check-boxed__label ib-check-boxed__label--disabled ib-check-boxed__label--top" ng-class="{'hidden-md hidden-lg hidden-xl': !item.eligible}" for="avios&money-{{index}}">
+                                <span ng-if = "item.formatOldAvios && item.formatOldPrice" class="ib-text ib-text--especial ib-text--line-through">{{item.formatOldAvios}} {{'IBPURC_PAYMENTS_DISCOUNTS_AVIOS' | translate}}{{'AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate }} {{item.formatOldPrice}}</span>                            
+                                <span class="ib-check-boxed__price">{{item.formatAvios}} {{'IBPURC_PAYMENTS_DISCOUNTS_AVIOS'|translate}}</span>
+                                <span class="ib-check-boxed__price">{{'AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate}}</span>
+                                <span class="ib-check-boxed__price">{{item.formatPrice}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </equal-width>
+        </div>
+        <div class="hidden-sm hidden-xs u-pt u-mt-normal" ng-if="fareRatesAviosCtrl.withoutAviosMoney">
+            <span class="ib-text ib-text--especial ib-text--xbig">{{'AVAILABILITY_REDEMPTION_FARE_RATES_AVIOS_MESSAGE'|translate}} 
+                <a id="bbki-fare-rates-booking-link" class="ib-link ib-link--especial ib-link--xbig ib-link--inline ib-link--primary" ng-click="fareRatesAviosCtrl.newAvailability()" title="{{'AVAILABILITY_REDEMPTION_FARE_RATES_AVIOS_MESSAGE_LINK_TITLE'|translate}}">{{'AVAILABILITY_REDEMPTION_FARE_RATES_AVIOS_MESSAGE_LINK'|translate}}</a>
+            </span>
+        </div>
+        <div class="u-text-right u-pt-small">
+            <p class="ib-text ib-text--color-unfocused ng-scope">{{'AVAILABILITY_REDEMPTION_FARE_RATES_AVIOS_TAXES_MESSAGE_DIVISA'|translate}}</p>
+        </div>
+    </div>
+</div>
+<!-- Button buy Avios responsive-->
+<div class="u-mt-medium hidden-xl hidden-lg hidden-md" ng-if="fareRatesAviosCtrl.withoutAviosMoney">
+    <button id="bbki-fare-rates-buy-btn" class="ib-button ib-button--block-sm ib-button--block-xs" type="button" ng-click="fareRatesAviosCtrl.newAvailability()">{{'AVAILABILITY_REDEMPTION_FARE_RATES_AVIOS_BTN'|translate}}</button>
+</div>

@@ -1,0 +1,200 @@
+/* -----------------------------------------------------------------
+    #MESSAGE BOX
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}card-item-payment {
+    width: 100%;
+    max-width: rem(736);
+    margin: 0 auto;
+
+    &__card {
+        width: 100%;
+        margin-top: rem(32);
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    &__content {
+        max-width: rem(544);
+        margin: rem(32) auto 0;
+    }
+
+    &__title {
+        font-family: $font-special;
+        font-size: rem(26);
+        line-height: rem(32);
+        color: color(gray-10);
+    }
+
+    &__info {
+        &-item {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+    }
+
+    &__text {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: flex-start;
+
+        &--property,
+        &--value {
+            width: 50%;
+            font-family: $font-normal;
+            font-size: rem(13);
+            text-align: left;
+            line-height: rem(22);
+            color: color(gray-10);
+        }
+
+        &--warning {
+            color: color(red-50);
+        }
+
+        &--property {
+            padding-right: rem(8);
+            font-weight: bold;
+            color: color(gray-30);
+        }
+    }
+
+    &__actions {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: rem(16);
+        margin-top: rem(16);
+        border-top: rem(1) solid color(gray-100);
+
+        &--block {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: flex-start;
+        }
+    }
+
+    &__button {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        margin-left: rem(8);
+        border: 0 none;
+        border-left: rem(1) solid color(gray-10);
+        background: 0 none;
+
+        &:hover,
+        &:focus {
+            .#{$wefront__namespace}card-item-payment__button {
+                &--text {
+                    color: color(primary);
+                }
+            }
+        }
+
+        &:first-child {
+            margin-left: 0;
+            border-left: 0 none;
+
+            [class^="icon-"] {
+                margin-left: 0;
+            }
+        }
+
+        [class^="icon-"] {
+            margin: 0 rem(6);
+            color: color(primary);
+        }
+
+        &--text {
+            font-family: $font-normal;
+            font-size: rem(13);
+            text-decoration: underline;
+            line-height: rem(22);
+            color: color(gray-10);
+        }
+
+        .icon {
+            &-modificar {
+                font-size: rem(12);
+            }
+
+            &-papelera {
+                margin: 0 rem(4);
+                font-size: rem(22);
+            }
+        }
+    }
+}
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}card-item-payment {
+        &__content {
+            margin-top: rem(16);
+        }
+
+        &__card {
+            margin-top: rem(24);
+
+            &--border-mobile {
+                padding-top: rem(24);
+                border-top: rem(1) solid color(gray-100);
+
+                &:first-child {
+                    padding-top: 0;
+                    border-top: 0 none;
+                }
+            }
+        }
+
+        &__actions {
+            flex-flow: column wrap;
+            padding: 0;
+            border: 0 none;
+
+            &--block {
+                width: 100%;
+                justify-content: flex-end;
+                padding: rem(16) 0 0;
+                border-top: rem(1) solid color(gray-100);
+                // border-bottom: rem(1) solid color(gray-100);
+                &:first-child {
+                    justify-content: center;
+                    padding-bottom: rem(16);
+                    border-bottom: 0 none;
+                }
+            }
+
+            &--no-admin {
+                border: 0 none;
+                .#{$wefront__namespace}card-item-payment {
+                    &__actions {
+                        &--block {
+                            &:first-child {
+                                padding: 0;
+                                border: 0 none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &__text {
+            flex-flow: column wrap;
+
+            &--property,
+            &--value {
+                width: 100%;
+            }
+        }
+    }
+}

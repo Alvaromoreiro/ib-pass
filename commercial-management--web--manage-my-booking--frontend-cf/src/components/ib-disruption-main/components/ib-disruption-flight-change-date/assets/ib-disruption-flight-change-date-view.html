@@ -1,0 +1,344 @@
+<div class="ib-layout__line-spacing u-mt" focusin>
+  <p
+    class="ib-text ib-text--xlarge-responsive ib-text--especial ib-text--spacing-medium"
+  >
+    {{'MMB_DISRUPTION_OPTION_TITLE' | translate}}
+    {{flightChangeDateCtrl.dateSelectorNumber}}:
+    {{'MMB_DISRUPTION_INFO_CHANGE_FLIGHT_TITLE' | translate}}
+  </p>
+  <p
+    class="ib-text ib-text--block"
+    ng-if="flightChangeDateCtrl.allowedPeriods && !flightChangeDateCtrl.genericDisruption"
+  >
+    {{'MMB_DISRUPTION_INFO_CHANGE_FLIGHT_TXT_NO_DATES' | translate}}
+    {{flightChangeDateCtrl.allowedMaxDate}}{{'MMB_DISRUPTION_INFO_CHANGE_FLIGHT_TXT_NO_DATES_END' | translate}}
+    {{'MMB_DISRUPTION_GENERAL_DATES_MARGIN_TXT_TOP_SUPPORT' | translate}}
+    <span class="ib-text--bold">{{'MMB_DISRUPTION_GENERAL_DATES_MARGIN_TXT_TOP_SUPPORT_2' | translate}}</span>
+    {{'MMB_DISRUPTION_GENERAL_DATES_MARGIN_TXT_TOP_SUPPORT_3' | translate}}
+  </p>
+  <p
+    class="ib-text ib-text--block"
+    ng-if="flightChangeDateCtrl.genericDisruption && flightChangeDateCtrl.genericDisruption.dateLimitBookingSearch && !flightChangeDateCtrl.genericDisruption.hourLimitBookingSearch"
+  >
+    {{'MMB_DISRUPTION_GENERAL_DATES_MARGIN_TXT_TOP' | translate}}
+    {{flightChangeDateCtrl.genericDisruption.dateLimitBookingSearch}}{{'MMB_DISRUPTION_GENERAL_DATES_MARGIN_TXT_TOP_2' | translate}}
+    {{'MMB_DISRUPTION_GENERAL_DATES_MARGIN_TXT_TOP_SUPPORT' | translate}}
+    <span class="ib-text--bold">{{'MMB_DISRUPTION_GENERAL_DATES_MARGIN_TXT_TOP_SUPPORT_2' | translate}}</span>
+    {{'MMB_DISRUPTION_GENERAL_DATES_MARGIN_TXT_TOP_SUPPORT_3' | translate}}
+  </p>
+  <p
+    class="ib-text ib-text--block"
+    ng-if="flightChangeDateCtrl.genericDisruption && flightChangeDateCtrl.genericDisruption.dateLimitBookingSearch && flightChangeDateCtrl.genericDisruption.hourLimitBookingSearch"
+  >
+    {{flightChangeDateCtrl.flightChangeMsgOperational | translate}}
+    {{'MMB_DISRUPTION_GENERAL_DATES_MARGIN_TXT_TOP_SUPPORT' | translate}}
+    <span class="ib-text--bold">{{'MMB_DISRUPTION_GENERAL_DATES_MARGIN_TXT_TOP_SUPPORT_2' | translate}}</span>
+    {{'MMB_DISRUPTION_GENERAL_DATES_MARGIN_TXT_TOP_SUPPORT_3' | translate}}
+  </p>
+</div>
+<!-- Date picker -->
+<section class="ib-layout__section">
+  <div class="ib-box ib-box--medium">
+    <div class="ib-box--flex">
+      <div class="ib-input__group u-mr-xmedium">
+        <div
+          data-ng-repeat="flight in flightChangeDateCtrl.model.flights"
+          class="ib-input"
+          ng-controller="ibMmbDatepickerController as datepicker"
+          data-ng-if="flight.disrupted || flight.optionalEnabled"
+        >
+          <button
+            class="ib-input__button"
+            ng-click="datepicker.opened = !datepicker.opened"
+            type="button"
+          >
+            <span class="u-hide-accessible"
+              >{{'MMB_VC_FLIGHT_SEARCH_ENGINE_ACCESSIBLE_BUTTON_SPAN'|translate}}</span
+            >
+          </button>
+          <label
+            class="ib-input__label"
+            for="{{'flight-date' + $index}}"
+            ng-class="{'ib-input__label--focus' : focused && (flight.newDateSelected !== null) || flight.newDateSelected}"
+            >{{(flight.index === 0 ?
+            ('MMB_DISRUPTION_FLEX_FLIGHT_GONE_DATE'|translate) :
+            ('MMB_DISRUPTION_FLEX_FLIGHT_RETURN_DATE'|translate) )}}</label
+          >
+          <input
+            data-ng-change="flightChangeDateCtrl.changeDate($index)"
+            class="ib-input__input"
+            type="text"
+            data-ng-focus="datepicker.focusedStart=true"
+            data-ng-blur="datepicker.focusedStart=false"
+            id="{{'flight-date' + $index}}"
+            name="{{'flight-date' + $index}}"
+            placeholder
+            uib-datepicker-popup="dd/MM/yyyy"
+            show-button-bar="false"
+            popup-placement="{{flight.calendarPosition}}"
+            ng-model="flight.newDateSelected"
+            is-open="datepicker.opened"
+            datepicker-options="flight.dateOptions"
+            ng-required="true"
+            alt-input-formats="datepicker.altInputFormats"
+            datepicker-popup-template-url="{{flightChangeDateCtrl.model.routeDatepicker}}"
+            readonly
+            tabindex="-1"
+          />
+        </div>
+      </div>
+      <button
+        ng-disabled="!flightChangeDateCtrl.model.searchAvailable"
+        class="ib-button ib-button--w-medium-desktop u-mt-mobile"
+        ng-class="{'ib-button--disabled' : !flightChangeDateCtrl.model.searchAvailable}"
+        ng-click="flightChangeDateCtrl.searchChangesFlights()"
+        type="submit"
+      >
+        {{'MMB_VC_SEARCH_FLIGHTS'|translate}}
+      </button>
+    </div>
+    <div
+      class="u-mt u-display-inline-block"
+      data-ng-if="flightChangeDateCtrl.model.numberFlights > 1 && flightChangeDateCtrl.model.optional"
+    >
+      <input
+        data-ng-model="flightChangeDateCtrl.model.flights[flightChangeDateCtrl.model.optional].optionalEnabled"
+        data-ng-click="flightChangeDateCtrl.optionalFlightCheck()"
+        focusin
+        type="checkbox"
+        id="optional_check"
+        name="optional_check"
+        class="ib-check__input"
+      />
+      <label class="ib-check__label" for="optional_check">
+        <span class="ib-check__text ib-check__text--normal">
+          {{'MMB_DISRUPTION_FLEX_CHECK_OTHER_FLIGHT_WITHOUT_PARENTHESES' |
+          translate}}
+        </span>
+      </label>
+    </div>
+    <div
+      name="sister-cities-checkbox"
+      class="u-mt u-display-inline-block u-mb-small"
+      ng-if="flightChangeDateCtrl.sisterCitiesData.hasSisterCitiesPossibility"
+    >
+      <input
+        data-ng-model="flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.sisterCitiesOptionChecked"
+        focusin
+        type="checkbox"
+        id="sisterCitiesCheck_check"
+        name="sisterCitiesCheck_check"
+        class="ib-check__input"
+      />
+      <label class="ib-check__label" for="sisterCitiesCheck_check">
+        <span class="ib-check__text ib-check__text--normal">
+          {{'MMB_SISTER_CHECK_SELECTION_WITHOUT_PARENTHESES' | translate}}
+        </span>
+      </label>
+    </div>
+    <div
+      class="ib-box-cities__container ib-box-cities__separation"
+      ng-if="flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.sisterCitiesOptionChecked"
+    >
+      <fieldset class="ib-box-cities__fieldset">
+        <legend class="ib-box-cities__legend">
+          {{'MMB_SISTER_SOURCE_CITY' | translate}}
+        </legend>
+        <!-- Radio button for the case when the country has NO sister cities -->
+        <ul
+          class="ib-box-cities__list"
+          ng-if="!flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel[flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.referenceSliceId].originHasSisterCities"
+        >
+          <li class="ib-box-cities__list-item">
+            <div class="ib-radio ib-radio--double-radio">
+              <input type="radio" class="ib-radio__input" checked />
+              <label class="ib-radio__label">
+                <span class="ib-radio__text">
+                  {{flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel[flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.referenceSliceId].origin.originOrderCities.description}}
+                  ({{flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel[flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.referenceSliceId].origin.originOrderCities.code}})
+                </span>
+              </label>
+            </div>
+          </li>
+        </ul>
+        <!-- Checkbox list for the case when the country HAS sister cities -->
+        <ul
+          class="ib-box-cities__list"
+          ng-if="flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel[flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.referenceSliceId].originHasSisterCities"
+        >
+          <li class="ib-box-cities__list-item ib-check--unfocused">
+            <div class="ib-check ib-check--disabled">
+              <input
+                focusin
+                type="checkbox"
+                class="ib-check__input"
+                disabled
+                checked
+              />
+              <label class="ib-check__label">
+                <span class="ib-check__text">
+                  {{flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel[flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.referenceSliceId].origin.originOrderCities.description}}
+                  ({{flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel[flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.referenceSliceId].origin.originOrderCities.code}})
+                </span>
+              </label>
+            </div>
+          </li>
+          <li
+            class="ib-box-cities__list-item"
+            data-ng-repeat="originSisterCity in flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel[flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.referenceSliceId].origin.originSisterCities"
+          >
+            <div class="ib-check">
+              <input
+                type="checkbox"
+                class="ib-check__input"
+                ng-model="originSisterCity.isSelected"
+                id="{{originSisterCity.code}}_check_0"
+                name="{{originSisterCity.code}}_check_0"
+              />
+              <label
+                class="ib-check__label"
+                for="{{originSisterCity.code}}_check_0"
+              >
+                <span class="ib-check__text">
+                  {{originSisterCity.description}} ({{originSisterCity.code}})
+                </span>
+              </label>
+            </div>
+          </li>
+        </ul>
+      </fieldset>
+      <fieldset class="ib-box-cities__fieldset">
+        <legend class="ib-box-cities__legend">
+          {{'MMB_SISTER_DESTINY_CITY' | translate}}
+        </legend>
+        <!-- Radio button for the case when the country has NO sister cities -->
+        <ul
+          class="ib-box-cities__list"
+          ng-if="!flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel[flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.referenceSliceId].destinationHasSisterCities"
+        >
+          <li class="ib-box-cities__list-item">
+            <div class="ib-radio ib-radio--double-radio">
+              <input type="radio" class="ib-radio__input" checked />
+              <label class="ib-radio__label">
+                <span class="ib-radio__text">
+                  {{flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel[flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.referenceSliceId].destination.destinationOrderCities.description}}
+                  ({{flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel[flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.referenceSliceId].destination.destinationOrderCities.code}})
+                </span>
+              </label>
+            </div>
+          </li>
+        </ul>
+        <!-- Checkbox list for the case when the country HAS sister cities -->
+        <ul
+          class="ib-box-cities__list"
+          ng-if="flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel[flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.referenceSliceId].destinationHasSisterCities"
+        >
+          <li class="ib-box-cities__list-item">
+            <div class="ib-check ib-check--disabled">
+              <input
+                focusin
+                type="checkbox"
+                class="ib-check__input"
+                disabled
+                checked
+              />
+              <label class="ib-check__label">
+                <span class="ib-check__text">
+                  {{flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel[flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.referenceSliceId].destination.destinationOrderCities.description}}
+                  ({{flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel[flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.referenceSliceId].destination.destinationOrderCities.code}})
+                </span>
+              </label>
+            </div>
+          </li>
+          <li
+            class="ib-box-cities__list-item"
+            data-ng-repeat="destinationSisterCity in flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel[flightChangeDateCtrl.sisterCitiesData.newSisterCitiesModel.referenceSliceId].destination.destinationSisterCities"
+          >
+            <input
+              focusin
+              type="checkbox"
+              class="ib-check__input"
+              ng-model="destinationSisterCity.isSelected"
+              id="{{destinationSisterCity.code}}_check_1"
+              name="{{destinationSisterCity.code}}_check_1"
+            />
+            <label
+              class="ib-check__label"
+              for="{{destinationSisterCity.code}}_check_1"
+            >
+              <span class="ib-check__text">
+                {{destinationSisterCity.description}}
+                ({{destinationSisterCity.code}})
+              </span>
+            </label>
+          </li>
+        </ul>
+      </fieldset>
+      <p class="ib-box-cities__text ib-box-cities__separation u-mt-medium">
+        {{'MMB_SISTER_WARNING_1' | translate}}
+        <b>{{'MMB_SISTER_WARNING_ORIGIN_DESTINATION' | translate}}</b
+        >{{'MMB_SISTER_WARNING_2' | translate}}
+      </p>
+    </div>
+  </div>
+</section>
+<div
+  class="ib-layout__line-spacing"
+  ng-if="flightChangeDateCtrl.genericDisruption || flightChangeDateCtrl.conditionDateText"
+>
+  <span class="ib-text ib-text--block">
+    {{'MMB_DISRUPTION_GENERAL_DATES_MARGIN_TXT_1' | translate}}
+    {{flightChangeDateCtrl.conditionDateText ? 2 : flightChangeDateCtrl.genericDisruption.flightDateRange}}
+    {{'MMB_DISRUPTION_GENERAL_DATES_MARGIN_TXT_2' | translate}}
+  </span>
+</div>
+<div
+  class="ib-layout__line-spacing"
+  ng-if="flightChangeDateCtrl.blackOutPeriodsText"
+>
+  <span class="ib-text ib-text--block">
+    {{'MMB_FLEXIBILIZATION_REASON_INFO_TXT_3_NO_DATES' | translate}}
+    {{flightChangeDateCtrl.blackOutPeriodsText}}
+  </span>
+</div>
+<!-- Message information -->
+<div
+  class="ib-msg-alert ib-msg-alert--bond icon-informacion_2 alert u-mb-medium"
+>
+  <p class="ib-msg-alert__description">
+    <span
+      ng-if="flightChangeDateCtrl.genericDisruption && !flightChangeDateCtrl.unifiedNotIberiaOP"
+      class="ib-text ib-text--bold"
+      >{{'MMB_FLEXIBILIZATION_REASON_INFO_KEEP_SUBTITLE' | translate}}*:</span
+    >
+    <span
+      ng-if="!flightChangeDateCtrl.genericDisruption || (flightChangeDateCtrl.genericDisruption && flightChangeDateCtrl.unifiedNotIberiaOP)"
+      class="ib-text ib-text--bold"
+      >{{'MMB_FLEXIBILIZATION_REASON_INFO_KEEP_SUBTITLE' | translate}}:</span
+    >
+  </p>
+  <ul class="ib-list u-mt-small">
+    <li
+      class="ib-list__item ib-list__item--mt-14"
+      data-ng-repeat="condition in flightChangeDateCtrl.model.changeConditions.keepConditions"
+    >
+      <span class="ib-text">{{condition.message | translate}}</span>
+    </li>
+  </ul>
+  <p class="ib-msg-alert__description u-mt-small">
+    <span class="ib-text ib-text--bold"
+      >{{'MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_SUBTITLE' | translate}}:</span
+    >
+  </p>
+  <ul class="ib-list u-mt-small">
+    <li
+      class="ib-list__item ib-list__item--mt-14"
+      data-ng-repeat="condition in flightChangeDateCtrl.model.changeConditions.notKeepConditions"
+    >
+      <span class="ib-text"
+        >{{condition.message | translate : {days:
+        flightChangeDateCtrl.genericDisruption.flightDateRange} }}</span
+      >
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,55 @@
+<div class="ib-trip-summary">
+    <h3 class="ib-trip-summary__title">{{'SHUTTLE_BUY_RESUME' | translate}}</h3>
+    <div class="ib-trip-summary__body">
+        <div class="ib-trip-summary__flight" ng-repeat="slices in ibShuttleFareDetailCtrl.model.slices track by $index" ng-class="{'ib-trip-summary__flight--around': $index === 1}">
+            <div class="ib-trip-summary__flight--column">
+                <p class="ib-trip-summary__flight--data icon-avion_ida">
+                    <span class="ib-trip-summary__flight--data-way">{{ $index === 0 ? ('GENERIC_OUTBOUND_TRIP_TITLE' | translate) : ('GENERIC_RETURN_TRIP_TITLE' | translate)}}:
+                        {{slices.originCity}} -
+                        {{slices.destinationCity}}</span>
+                    <span class="ib-trip-summary__flight--data-info">
+                        <span
+                            ng-if="ibShuttleFareDetailCtrl.model.passengerInfo.adults > 0">{{ibShuttleFareDetailCtrl.model.passengerInfo.adults}}
+                            <span
+                                ng-if="ibShuttleFareDetailCtrl.model.passengerInfo.adults === 1">{{'ADULT' | translate}}</span>
+                            <span
+                                ng-if="ibShuttleFareDetailCtrl.model.passengerInfo.adults > 1">{{'SOME_ADULT' | translate}}
+                            </span>
+                            <span ng-if="ibShuttleFareDetailCtrl.model.passengerInfo.childs > 0">,</span>
+                        </span>
+                        <span
+                            ng-if="ibShuttleFareDetailCtrl.model.passengerInfo.childs > 0">{{ibShuttleFareDetailCtrl.model.passengerInfo.childs}}
+                            <span
+                                ng-if="ibShuttleFareDetailCtrl.model.passengerInfo.childs === 1">{{'CHILD' | translate}}</span>
+                            <span
+                                ng-if="ibShuttleFareDetailCtrl.model.passengerInfo.childs > 1">{{'SOME_CHILD' | translate}}
+                            </span>
+                            
+                            <span ng-if="ibShuttleFareDetailCtrl.model.passengerInfo.infants > 0">,</span>
+
+                        </span>
+                        <span ng-if="ibShuttleFareDetailCtrl.model.passengerInfo.infants > 0">
+                            {{ibShuttleFareDetailCtrl.model.passengerInfo.infants}}
+                            <span
+                                ng-if="ibShuttleFareDetailCtrl.model.passengerInfo.infants === 1">{{'CHILD' | translate}}</span>
+                            <span
+                                ng-if="ibShuttleFareDetailCtrl.model.passengerInfo.infants > 1">{{'SOME_CHILD' | translate}}
+                            </span>
+
+                        </span>
+                    </span>
+                </p>
+            </div>
+            <div class="ib-trip-summary__flight--column">
+                <div class="ib-trip-summary__flight--fare">
+                    <p class="ib-trip-summary__flight--fare-title ib-trip-summary__icon  icon-validar">
+                        {{'AVAILABILITY_MULTI_TRIP_SELECT_FARE' | translate}} </p>
+                    <p class="ib-trip-summary__flight--fare-info">{{'SHUTTLE_BRIDGE_AIR' | translate}} {{slices.cabin}}
+                        <a class="ib-box-mini-fare__icon icon-informacion_2" href="#" ng-click="ibShuttleFareDetailCtrl.openModalFareDetails($event,$index)"
+                            title="{{'IBPURC_CLICK_MORE_INFORMATION_QUOTAS' | translate}}"><span
+                                class="u-hide-accessible">{{'IBPURC_CLICK_MORE_INFORMATION_QUOTAS' | translate}}</span></a></p>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>

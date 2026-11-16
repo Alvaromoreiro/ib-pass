@@ -1,0 +1,206 @@
+<div data-ng-class="ibFlexSlicesCtrl.isConfirmationSlice ? 'ib-layout__line-spacing' : 'ib-layout__line-spacing--bordered-light ib-layout__line-spacing--full-responsive-small'">
+    <div class="ib-ticket-block ib-ticket-block__message ib-ticket-block--disruption ib-ticket-block--radio">
+        <h2 class="hide-accessible">{{'SELECT_BUTTON_TEXT' | translate}}</h2>
+        <div class="ib-ticket-block__col-first">
+            <div class="ib-ticket-block__container">
+                <div class="ib-ticket-block__wrapper ib-ticket-block__wrapper--two-lines">
+                    <div class="ib-ticket-block__wrapper-left ib-ticket-block__wrapper-left--w-large">
+                        <span class="ib-ticket-block__title">{{ibFlexSlicesCtrl.slice.departureTime}}</span>
+                        <span class="ib-ticket-block__subtitle ib-ticket-block__subtitle--responsive ib-ticket-block__subtitle--grey hidden-xs">{{ibFlexSlicesCtrl.slice.origin.description}} <span class="hidden-sm">({{ibFlexSlicesCtrl.slice.origin.code}})</span></span>
+                        <span class="ib-ticket-block__subtitle ib-ticket-block__subtitle--responsive ib-ticket-block__subtitle--grey hidden-xl hidden-lg hidden-md hidden-sm">{{ibFlexSlicesCtrl.slice.origin.code}}</span>
+                    </div>
+                    <div class="ib-ticket-block__wrapper-floating ib-ticket-block__wrapper-floating--two-lines">
+                        <span ng-if="ibFlexSlicesCtrl.slice.stopsNumber === 0 && ibFlexSlicesCtrl.slice.technicalStops && ibFlexSlicesCtrl.slice.technicalStops.techStopsNumber === 0" class="ib-ticket-block__txt ib-ticket-block__txt--small ib-ticket-block__txt--grey">{{ibFlexSlicesCtrl.slice.scale|translate}}</span>
+                        <span ng-if="ibFlexSlicesCtrl.slice.stopsNumber > 0" class="ib-ticket-block__txt ib-ticket-block__txt--small ib-ticket-block__txt--grey">{{ibFlexSlicesCtrl.slice.stopsNumber}} {{ibFlexSlicesCtrl.slice.scale|translate}}</span>
+                        <span ng-if="ibFlexSlicesCtrl.slice.stopsNumber === 0 && ibFlexSlicesCtrl.slice.technicalStops && ibFlexSlicesCtrl.slice.technicalStops.techStopsNumber > 0" class="ib-ticket-block__txt ib-ticket-block__txt--small ib-ticket-block__txt--grey">{{ibFlexSlicesCtrl.slice.technicalStops.techStopsNumber}} {{ibFlexSlicesCtrl.slice.technicalStops.techStopsText|translate}}</span>
+                        <span class="ib-ticket-block__txt ib-ticket-block__txt--small ib-ticket-block__txt--grey">{{ibFlexSlicesCtrl.slice.durationParsed}}</span>
+                        <!-- Radio button -->
+                        <div class="ib-radio ib-radio--ticket-block" data-ng-if="!ibFlexSlicesCtrl.isConfirmationSlice">
+                            <input type="radio" name="option-{{ibFlexSlicesCtrl.listSlicesShow}}" id="option-{{ibFlexSlicesCtrl.listSlicesShow}}-{{ibFlexSlicesCtrl.sliceIndex}}" class="ib-radio__input" 
+                            ng-change="ibFlexSlicesCtrl.optionSelected(ibFlexSlicesCtrl.selectedSlice)" ng-model="ibFlexSlicesCtrl.selectedSlice" ng-value="ibFlexSlicesCtrl.slice">
+                            <label for="option-{{ibFlexSlicesCtrl.listSlicesShow}}-{{ibFlexSlicesCtrl.sliceIndex}}" class="ib-radio__label">
+                                <span class="ib-radio__text hide-accessible">{{'SELECT_BUTTON_TEXT' | translate}}</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ib-ticket-block__wrapper-right ib-ticket-block__wrapper-right--w-large">
+                        <span class="ib-ticket-block__title" data-day="{{ibFlexSlicesCtrl.slice.arrivalDiffDay !== 0 ? ('+' + ibFlexSlicesCtrl.slice.arrivalDiffDay + ((ibFlexSlicesCtrl.slice.arrivalDiffDay === 1 ? 'MMB_YOUR_FLIGHTS_OUTBOUND_DAY_TEXT' : 'MMB_YOUR_FLIGHTS_OUTBOUND_DAYS_TEXT')| translate)) : ''}}">{{ibFlexSlicesCtrl.slice.arrivalTime}}</span>
+                        <span class="ib-ticket-block__subtitle ib-ticket-block__subtitle--responsive ib-ticket-block__subtitle--grey hidden-xs">{{ibFlexSlicesCtrl.slice.destination.description}} <span class="hidden-sm">({{ibFlexSlicesCtrl.slice.destination.code}})</span></span>
+                        <span class="ib-ticket-block__subtitle ib-ticket-block__subtitle--responsive ib-ticket-block__subtitle--grey hidden-xl hidden-lg hidden-md hidden-sm">{{ibFlexSlicesCtrl.slice.destination.code}}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- MORE DETAILS COLLAPSE -->
+            <div class="ib-ticket-collapse ib-ticket-collapse__gdr" data-ng-controller="ibCollapseController as collapse">
+                <figure class="ib-ticket-collapse__logo ib-ticket-collapse__logo--dis" data-scales="{{ibFlexSlicesCtrl.slice.numberOpereds > 1 ? ('+' + (ibFlexSlicesCtrl.slice.numberOpereds - 1)) : ''}}">
+                    <img data-ng-src="{{ibFlexSlicesCtrl.slice.iconCompany.companyURL}}" alt="{{'GENERIC_LOGO_ALT'|translate}} {{ibFlexSlicesCtrl.slice.companyName}}">
+                </figure>
+                <button class="ib-ticket-collapse__btn ib-ticket-collapse__btn--right" data-ng-click="collapse.clickCollapse($event,false)" type="button" data-focusin>
+                    {{'MMB_YOUR_FLIGHTS_DETAILS_TEXT'|translate}} <span class="hidden-xs">{{'MMB_YOUR_FLIGHTS_FLIGHT_AND_RATE_TEXT'|translate}}</span>
+                    <span class="ib-ticket-collapse__btn-icon" data-ng-class="collapse.isCollapsed ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+                </button>
+                <div uib-collapse="!collapse.isCollapsed">
+                    <div class="ib-table-flight-info">
+                        <div class="ib-table-flight-info__container">
+                            <div data-ng-repeat="(segIndex, segment) in ibFlexSlicesCtrl.slice.segments">
+                                <!--<div class="ib-table-flight-detail ib-table-flight-detail--warning"
+                                ng-if="(segment.warnings.terminalChange.show || segment.warnings.airportChange.show || segment.warnings.scaleWaitingTime.show || segment.warnings.shortScale.show) && !segment.warnings.hasShortScale">
+                                    <div class="ib-table-flight-detail__item"></div>
+                                    <div class="ib-table-flight-detail__item">
+                                        <span ng-if="segment.warnings.scaleWaitingTime.show" class="ib-text ib-text--block ib-text--xsmall ib-text--color-important">
+                                            {{'AVAILABILITY_SCALE_IN'|translate}} {{segment.departurePlace}}
+                                            <span ng-if="segment.warnings.scaleWaitingTime.isLong"> - {{'AVAILABILITY_LONG_TIME_SCALE' | translate}}</span>: {{segment.warnings.scaleWaitingTime.waitingTime}}
+                                        </span>
+                                        <span ng-if="segment.warnings.terminalChange.show" class="ib-text ib-text--block ib-text--xsmall ib-text--color-important">
+                                            {{segment.warnings.terminalChange.message}}
+                                            <span ng-if="segment.warnings.terminalChange.hasTerminal">
+                                            : {{segment.warnings.terminalChange.arrival}} {{('GENERAL_TERMINAL_INFO' | translate) +
+                                            segment.warnings.terminalChange.arrival}}
+                                            - {{'AVAILABILITY_DEPARTURE_FROM' | translate}} {{('GENERAL_TERMINAL_INFO' | translate) +
+                                            segment.warnings.terminalChange.departure}}
+                                            </span>
+                                        </span>
+                                        <span ng-if="segment.warnings.airportChange.show" class="ib-text ib-text--block ib-text--xsmall ib-text--color-important">
+                                        {{segment.warnings.airportChange.message}}: {{'AVAILABILITY_ARRIVAL_TO' | translate}} {{segment.warnings.airportChange.arrival}}
+                                            - {{'AVAILABILITY_DEPARTURE_FROM' | translate}} {{segment.warnings.airportChange.departure}}
+                                        </span>
+                                        <span ng-if="segment.warnings.shortScale.show" class="ib-text ib-text--block ib-text--xsmall ib-text--color-unfocused">
+                                            {{'AVAILABILITY_SCALE_IN' | translate}}: {{segment.warnings.shortScale.arrival}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div ng-if="!segment.warnings.terminalChange.show && !segment.warnings.airportChange.show && !segment.warnings.scaleWaitingTime.show && segment.warnings.shortScale.show && segment.warnings.hasShortScale" class="ib-table-flight-detail ib-table-flight-detail--sep-scale">
+                                    <div class="ib-table-flight-detail__item"></div>
+                                    <div class="ib-table-flight-detail__item"></div>
+                                    <div class="ib-table-flight-detail__item">
+                                        <span
+                                            class="ib-text ib-text--xsmall ib-text--color-unfocused">{{'AVAILABILITY_SCALE_IN' | translate}}:
+                                            {{segment.warnings.shortScale.arrival}}</span>
+                                    </div>
+                                    <div class="ib-table-flight-detail__item">
+                                        <span
+                                            class="ib-text ib-text--xsmall ib-text--color-unfocused">{{segment.warnings.shortScale.waitingTime}}</span>
+                                    </div>
+                                    <div class="ib-table-flight-detail__item"></div>
+                                </div> -->
+                                <!-- <div ng-if="ibFlexSlicesCtrl.slice.segments.length > 1 && segment.warnings.scaleWaitingTime.show"
+                                    class="ib-table-flight-detail ib-table-flight-detail--warning">
+                                    <div class="ib-table-flight-detail__item"></div>
+                                    <div class="ib-table-flight-detail__item">
+                                        <span class="ib-text ib-text--block ib-text--xsmall ib-text--color-unfocused">
+                                            {{'AVAILABILITY_SCALE_IN'|translate}} {{segment.departurePlace}}
+                                            <span ng-if="segment.warnings.scaleWaitingTime.isLong"> - {{'AVAILABILITY_LONG_TIME_SCALE' | translate}}</span>: {{segment.warnings.scaleWaitingTime.waitingTime}}
+                                        </span>
+                                        <span ng-if="segment.warnings.terminalChange.show" class="ib-text ib-text--block ib-text--xsmall ib-text--color-important">
+                                                {{segment.warnings.terminalChange.message}}
+                                            <span ng-if="segment.warnings.terminalChange.hasTerminal">
+                                                : {{segment.warnings.terminalChange.arrival}} {{('GENERAL_TERMINAL_INFO' | translate) +
+                                                segment.warnings.terminalChange.arrival}}
+                                                - {{'AVAILABILITY_DEPARTURE_FROM' | translate}} {{('GENERAL_TERMINAL_INFO' | translate) +
+                                                segment.warnings.terminalChange.departure}}
+                                            </span>
+                                        </span>
+                                        <span ng-if="segment.warnings.airportChange.show" class="ib-text ib-text--block ib-text--xsmall ib-text--color-important">
+                                            {{segment.warnings.airportChange.message}}: {{'AVAILABILITY_ARRIVAL_TO' | translate}} {{segment.warnings.airportChange.arrival}}
+                                                - {{'AVAILABILITY_DEPARTURE_FROM' | translate}} {{segment.warnings.airportChange.departure}}
+                                        </span>
+                                    </div>
+                                </div> -->
+                                <!-- Warnings pull, yellow warnings -->
+                                <div class="ib-table-flight-detail ib-table-flight-detail--warning" ng-if="(segment.warnings.terminalChange.show || segment.warnings.airportChange.show || segment.warnings.scaleWaitingTime.show || segment.warnings.shortScale.show) && !segment.warnings.hasOnlyShortScale">
+                                    <div class="ib-table-flight-detail__item"></div>
+                                    <div class="ib-table-flight-detail__item">
+                                        <span ng-if="segment.warnings.scaleWaitingTime.show" class="ib-text ib-text--block ib-text--xsmall ib-text--color-unfocused">
+                                            {{'AVAILABILITY_SCALE_IN'|translate}} {{segment.departurePlace}}
+                                            <span ng-if="segment.warnings.scaleWaitingTime.isLong"> - {{'AVAILABILITY_LONG_TIME_SCALE' | translate}}</span>: {{segment.warnings.scaleWaitingTime.waitingTime}}
+                                        </span>
+                                        <span ng-if="segment.warnings.shortScale.show" class="ib-text ib-text--block ib-text--xsmall ib-text--color-unfocused">
+                                            {{'AVAILABILITY_SCALE_IN' | translate}}: {{segment.warnings.shortScale.city}} {{segment.warnings.shortScale.waitingTime}}
+                                        </span>
+                                        <span ng-if="segment.warnings.terminalChange.show" class="ib-text ib-text--block ib-text--xsmall ib-text--color-important">
+                                            {{segment.warnings.terminalChange.message}}
+                                            <!--<span ng-if="segment.warnings.terminalChange.hasTerminal">
+                                            : {{'FLIGHT_CONFIRMATION_DETAILS_INBOUND' | translate}} {{segment.warnings.terminalChange.arrival}} {{segment.warnings.terminalChange.arrivalCity}}
+                                            - {{'FLIGHT_CONFIRMATION_DETAILS_OUTBOUND' | translate}} {{segment.warnings.terminalChange.departure}} {{segment.warnings.terminalChange.departureCity}}
+                                            </span> -->
+                                        </span>
+                                        <span ng-if="segment.warnings.airportChange.show" class="ib-text ib-text--block ib-text--xsmall ib-text--color-important">
+                                        {{segment.warnings.airportChange.message}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <!-- Only short-scale, grey background warning -->
+                                <div ng-if="!segment.warnings.terminalChange.show && !segment.warnings.airportChange.show && !segment.warnings.scaleWaitingTime.show && segment.warnings.shortScale.show && segment.warnings.hasShortScale" class="ib-table-flight-detail ib-table-flight-detail--sep-scale">
+                                    <div class="ib-table-flight-detail__item"></div>
+                                    <div class="ib-table-flight-detail__item"></div>
+                                    <div class="ib-table-flight-detail__item">
+                                        <span
+                                            class="ib-text ib-text--xsmall ib-text--color-unfocused">{{'AVAILABILITY_SCALE_IN' | translate}}:
+                                            {{segment.warnings.shortScale.city}}</span>
+                                    </div>
+                                    <div class="ib-table-flight-detail__item">
+                                        <span
+                                            class="ib-text ib-text--xsmall ib-text--color-unfocused">{{segment.warnings.shortScale.waitingTime}}</span>
+                                    </div>
+                                    <div class="ib-table-flight-detail__item"></div>
+                                </div>
+                                <div class="ib-layout__line-spacing ib-layout__line-spacing--medium" ng-if="segment.warnings.missconnection">
+                                    <div class="ib-msg-alert ib-msg-alert--smallest ib-msg-alert--danger icon-informacion_2">
+                                        <p class="ib-msg-alert__text ib-msg-alert__text--small">{{ segment.warnings.missconnection.message }}</p>
+                                    </div>
+                                </div>
+                                <div class="ib-table-flight-detail ib-table-flight-detail--bond u-mb-none">
+                                    <div class="ib-table-flight-detail__item ib-table-flight-detail__item--row-tablet">
+                                        <span class="ib-text ib-text--big ib-text--color-unfocused" data-ng-if="segIndex === 0 || segment.warnings.nightFlight.isOverNight">{{ segment.departureDate | date: 'EEE, d MMM' }}</span>
+                                    </div>
+                                    <div class="ib-table-flight-detail__item">
+                                        <figure class="ib-table-flight-detail__logo">
+                                            <img data-ng-src="{{segment.iconCompany.companyURL}}" alt="{{'GENERIC_LOGO_ALT'|translate}} {{segment.opered}}">
+                                        </figure>
+                                    </div>
+                                    <div class="ib-table-flight-detail__item">
+                                        <div class="ib-table-flight-detail__hours">
+                                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small-gdr ib-layout__line-spacing--space-between">
+                                                <div>
+                                                    <span class="ib-table-flight-detail__text-title ib-table-flight-detail__text-title--normal">{{segment.departureTime}}</span>
+                                                    <span class="ib-table-flight-detail__hours-icon icon-vuelos"></span>
+                                                    <span class="ib-table-flight-detail__text-title ib-table-flight-detail__text-title--normal">{{segment.arrivalTime}}</span>
+                                                </div>
+                                                <span class="ib-table-flight-detail__text-des ib-table-flight-detail__text-des--flex-center hidden-xl hidden-lg hidden-md hidden-xs">{{segment.durationParsed}}</span>
+                                            </div>
+                                            <span class="ib-text ib-text--small ib-text--block">{{segment.departurePlace}} - {{segment.arrivalPlace}}</span>
+                                            <span class="ib-text ib-text--small ib-text--block ib-text--color-unfocused">{{segment.line}} . {{segment.airplane}}</span>
+                                            <span class="ib-text ib-text--small ib-text--block ib-text--color-unfocused">{{'MMB_VC_INFO_OPERATED_BY' | translate}} {{segment.opered}}</span>
+                                            <span ng-if="segment.warnings.nightFlight.isOverNight" class="ib-text-icon ib-text-icon--nocturne">
+                                                <span class="ib-text-icon__icon icon-luna"></span>
+                                                <span class="ib-text-icon__text">{{segment.warnings.nightFlight.message | translate}}</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="ib-table-flight-detail__item hidden-sm">
+                                        <span class="ib-table-flight-detail__text-des ib-text ib-text--lh-xmedium">{{segment.durationParsed}}</span>
+                                    </div>
+                                </div>
+                                <div data-ng-if="segment.stop.isStop" class="ib-table-flight-detail ib-table-flight-detail--sep-scale">
+                                    <div class="ib-table-flight-detail__item"></div>
+                                    <div class="ib-table-flight-detail__item"></div>
+                                    <div class="ib-table-flight-detail__item">
+                                        <span
+                                            class="ib-text ib-text--xsmall ib-text--color-unfocused">{{'AVAILABILITY_TEC_STOP_IN'|translate}}
+                                            {{segment.stop.place}}</span>
+                                    </div>
+                                    <div class="ib-table-flight-detail__item">
+                                        <span
+                                            class="ib-text ib-text--xsmall ib-text--color-unfocused">{{segment.stop.time}}</span>
+                                    </div>
+                                    <div class="ib-table-flight-detail__item"></div>
+                                </div>
+                            </div>
+                            <!-- add detail for delay information for br market -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

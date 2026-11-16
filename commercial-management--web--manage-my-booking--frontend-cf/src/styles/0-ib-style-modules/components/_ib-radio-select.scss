@@ -1,0 +1,170 @@
+/* -------------------------------------------------------------------
+    PROYECTO IBERIA
+    Título: .ib-searcher
+    Descripción: Select options with radio-buttons
+-------------------------------------------------------------------- */
+
+.#{$wefront__namespace}radio-select {
+    position: relative;
+    display: block;
+    float: left;
+
+    &__button {
+        display: flex;
+        width: 100%;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+        border: 0;
+        font-family: $font-normal;
+        font-size: rem(13);
+        color: color(black);
+        background: 0 none;
+        .#{$wefront__namespace}filter {
+            &__icon {
+                &--arrow {
+                    position: relative;
+                }
+
+                &--passenger {
+                    top: inherit;
+                    right: inherit;
+
+                    &::before {
+                        top: inherit;
+                        right: inherit;
+                    }
+                }
+            }
+        }
+
+        &--resident {
+            max-width: rem(271);
+            text-align: left;
+        }
+    }
+
+    &__dialog {
+        position: absolute;
+        z-index: 999;
+        min-width: rem(314);
+        min-height: rem(50);
+        border-radius: rem(4);
+        background-color: color(white);
+        box-shadow: 0 rem(2) rem(3) 0 color(black, 0.47), 0 rem(-1) rem(4) 0 color(black, 0.23);
+        opacity: 0;
+        -webkit-overflow-scrolling: touch;
+        overflow-y: visible;
+
+        &--open {
+            opacity: 1;
+        }
+    }
+
+    &__title {
+        padding: rem(16) rem(24);
+        font-size: rem(13);
+        line-height: 1;
+        color: color(black);
+        background-color: color(gray-50);
+    }
+
+    &__group {
+        &--items {
+            padding: rem(0) rem(25) rem(22);
+        }
+    }
+
+    &__match {
+        padding-top: rem(4);
+        padding-bottom: rem(5);
+        border-bottom: rem(2) dotted color(gray-40);
+        font-family: $font-normal;
+        font-size: rem(13);
+        color: color(black);
+    }
+    .#{$wefront__namespace}radio {
+        display: block;
+        margin-top: rem(16);
+
+        &__label {
+            padding-left: rem(35);
+            color: color(gray-30);
+        }
+    }
+}
+
+
+/* Responsive */
+
+
+/* XLARGE RESOLUTION STYLES */
+
+
+/* LARGE RESOLUTION STYLES */
+
+
+/* MEDIUM RESOLUTION STYLES */
+
+@include media-query("md") {
+    .#{$wefront__namespace}radio-select {
+        .#{$wefront__namespace}radio-select {
+            &__button {
+                &--resident {
+                    max-width: max-content;
+                }
+            }
+        }
+    }
+}
+
+/* MOBILE RESOLUTION STYLES */
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}radio-select {
+        .#{$wefront__namespace}radio-select {
+            &__button {
+                justify-content: flex-start;
+
+                &--resident {
+                    max-width: max-content;
+                }
+            }
+        }
+    }
+}
+
+
+/* SMALL RESOLUTION STYLES */
+
+@include media-query("sm") {
+    .#{$wefront__namespace}radio-select {
+        width: 100%;
+        margin-top: rem(10);
+
+        &__dialog {
+            &--passengers {
+                top: 100% !important;
+            }
+        }
+    }
+}
+
+
+/* X-SMALL RESOLUTION STYLES */
+
+@include media-query("xs") {
+    .#{$wefront__namespace}radio-select {
+        width: 100%;
+        margin-top: rem(10);
+
+        &__dialog {
+            width: 100%;
+            min-width: inherit;
+
+            &--passengers {
+                top: 100% !important;
+            }
+        }
+    }
+}

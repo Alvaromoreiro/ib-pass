@@ -1,0 +1,780 @@
+/* -------------------------------------------------------------
+    #TABLE DAILY
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}table-daily {
+    position: relative;
+    padding: rem(56) 0 0 rem(56);
+
+    //Overray
+    .mCSB_container {
+        width: 100% !important;
+    }
+    // Scrollbar
+    &__scrollable {
+        overflow: auto;
+
+        &.mCS_destroyed {
+            overflow: auto !important;
+        }
+    }
+
+    &__row {
+        &--narrow {
+            .#{$wefront__namespace}table-daily__title {
+                height: auto;
+                padding: rem(16) rem(10);
+            }
+        }
+    }
+
+    &__info-scrollable {
+        position: relative;
+        top: 0;
+        left: 0;
+        display: none;
+        width: 100%;
+        height: auto;
+        font-size: rem(13);
+        text-align: left;
+        color: color(white);
+        background-color: color(black);
+        transition: height 0.8s;
+    }
+
+    &__info-scrollable-message {
+        display: block;
+        height: 100%;
+        padding: rem(7) rem(8);
+    }
+
+    // Table
+
+    &__table-content {
+        width: 100%;
+        margin: 0 auto;
+        table-layout: fixed;
+    }
+
+    &__legend {
+        position: absolute;
+        top: rem(10);
+        left: 0;
+        width: 100%;
+        height: rem(35);
+        text-align: center;
+        line-height: 1;
+
+        &--left {
+            position: absolute;
+            top: 53%;
+            left: rem(48);
+            display: block;
+            width: rem(695);
+            text-align: center;
+            line-height: rem(30);
+            -ms-transform: translateX(-53%) translateY(-53%) rotate(-90deg);
+            transform: translateX(-53%) translateY(-53%) rotate(-90deg);
+        }
+    }
+
+    &__legend-txt {
+        display: inline-block;
+        font-family: $font-special;
+        font-size: rem(22);
+        line-height: rem(26);
+        color: color(gray-10);
+        vertical-align: middle;
+    }
+
+    &__legend-description {
+        display: inline-block;
+        overflow: hidden;
+        width: rem(258);
+        text-overflow: ellipsis;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+    &__legend-icon {
+        display: inline-block;
+        padding: 0 rem(25);
+        font-size: rem(30);
+        color: color(gray-20);
+        vertical-align: middle;
+
+        [class^="icon-"] {
+            display: inline-block;
+            -webkit-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+            vertical-align: middle;
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            display: inline-block;
+            width: rem(16);
+            height: rem(2);
+            background: color(gray-20);
+            vertical-align: middle;
+        }
+    }
+
+    &__title {
+        height: rem(88);
+        min-height: rem(88);
+        padding: rem(5) rem(14);
+        border: rem(1) solid color(gray-50);
+        font-family: $font-normal;
+        font-size: rem(13);
+        text-align: center;
+        line-height: 1.69;
+        color: color(gray-10);
+        background-color: color(gray-70);
+        vertical-align: middle;
+
+        &--empty {
+            background-color: color(gray-70);
+        }
+
+        &--hovered {
+            color: color(white);
+            background-color: color(gray-10);
+        }
+    }
+
+    &__col {
+        height: rem(88);
+        min-height: rem(88);
+        border: rem(1) solid color(gray-50);
+        font-family: $font-normal;
+        //position: relative;
+        font-size: rem(15);
+        text-align: center;
+        line-height: 1.07;
+        color: color(gray-10);
+        background-color: color(white);
+        vertical-align: middle;
+
+        &--empty {
+            background-color: color(gray-60);
+            .#{$wefront__namespace}table-daily__action-label {
+                &:hover,
+                &:focus {
+                    color: color(gray-10);
+                    background: transparent;
+                    cursor: auto;
+                    .#{$wefront__namespace}table-daily__day,.#{$wefront__namespace}table-daily__detail {
+                        color: color(gray-30);
+                    }
+                }
+            }
+        }
+
+        &[class*="col-"] {
+            position: relative;
+        }
+    }
+
+    &__currency {
+        display: inline;
+        font-family: $font-normal;
+        font-size: rem(15);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        text-align: center;
+        color: color(gray-10);
+        vertical-align: top;
+    }
+
+    &__detail {
+        display: block;
+        font-family: $font-normal;
+        font-size: rem(13);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        text-align: center;
+        line-height: 1.69;
+        color: color(gray-30);
+
+        &--only {
+            position: absolute !important;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            padding: 0 rem(5);
+            -webkit-transform: translate(0, -50%);
+            -moz-transform: translate(0, -50%);
+            -ms-transform: translate(0, -50%);
+            -o-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+            -ms-word-break: inherit !important;
+            word-break: inherit !important;
+        }
+    }
+
+    &__action-cont {
+        position: relative;
+        height: 100%;
+    }
+
+    &__action-input {
+        position: absolute;
+        z-index: -999;
+        right: 0;
+
+        &:focus {
+            + .#{$wefront__namespace}table-daily__action-label {
+                outline:rem(1) solid color(red-10);
+
+                &::before {
+                    box-shadow: 0 0 0rem(1) color(orange-10);
+                }
+            }
+        }
+
+        &:checked {
+            + .#{$wefront__namespace}table-daily__action-label {
+                color: color(white);
+                background: color(primary);
+                outline: 0;
+                .#{$wefront__namespace}table-daily__detail,.#{$wefront__namespace}table-daily__action-better-price,.#{$wefront__namespace}table-daily__day, .#{$wefront__namespace}table-daily__price, .#{$wefront__namespace}table-daily__currency {
+                    color: color(white);
+                }
+
+                &--unselectable {
+                    color: inherit;
+                    background: color(white);
+                    .#{$wefront__namespace}table-daily__detail, .#{$wefront__namespace}table-daily__price, .#{$wefront__namespace}table-daily__currency {
+                        color: inherit;
+                    }
+                    .#{$wefront__namespace}table-daily__action-better-price {
+                        color: color(primary);
+                    }
+                    .#{$wefront__namespace}table-daily__day {
+                        color: inherit;
+                    }
+                }
+            }
+        }
+
+        &:disabled {
+            + .#{$wefront__namespace}table-daily__action-label {
+                color: color(gray-10);
+                cursor: not-allowed;
+                pointer-events: none;
+                .#{$wefront__namespace}table-daily__detail,.#{$wefront__namespace}table-daily__day {
+                    color: color(gray-30);
+                }
+                .#{$wefront__namespace}table-daily__action-better-price {
+                    color: color(gray-10);
+                }
+            }
+            + .#{$wefront__namespace}table-daily__action-label--active {
+                .#{$wefront__namespace}table-daily__detail,.#{$wefront__namespace}table-daily__day {
+                    color: color(white);
+                }
+                .#{$wefront__namespace}table-daily__action-better-price {
+                    color: color(white);
+                }
+            }
+        }
+    }
+
+    &__action-label {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        padding: rem(14) rem(16);
+        cursor: pointer;
+
+        * {
+            position: relative;
+            z-index: 0;
+            display: block;
+            &.#{$wefront__namespace}table-daily__currency {
+                display: inline;
+            }
+            &.#{$wefront__namespace}table-daily__price {
+                &--responsive {
+                    display: inline;
+                }
+            }
+        }
+
+        &--big {
+            padding: rem(30) rem(16);
+        }
+
+        &:hover,
+        &:focus {
+            color: color(white);
+            background: color(primary);
+            .#{$wefront__namespace}table-daily__detail, .#{$wefront__namespace}table-daily__price, .#{$wefront__namespace}table-daily__currency {
+                color: color(white);
+            }
+            .#{$wefront__namespace}table-daily__action-better-price {
+                color: color(white);
+            }
+            .#{$wefront__namespace}table-daily__day {
+                color: color(white);
+            }
+        }
+
+        &:active,
+        &:visited {
+            color: color(gray-10);
+            background: color(white);
+            .#{$wefront__namespace}table-daily__detail, .#{$wefront__namespace}table-daily__price, .#{$wefront__namespace}table-daily__currency {
+                color: color(gray-10);
+            }
+            .#{$wefront__namespace}table-daily__action-better-price {
+                color: color(gray-10);
+            }
+        }
+
+        &--dark-hover {
+            &:hover,
+            &:focus {
+                background: color(secondary);
+            }
+        }
+
+        &--active {
+            color: color(white);
+            background: color(primary);
+            .#{$wefront__namespace}table-daily__detail, .#{$wefront__namespace}table-daily__price, .#{$wefront__namespace}table-daily__currency {
+                color: color(white);
+            }
+            .#{$wefront__namespace}table-daily__action-better-price {
+                color: color(white);
+            }
+            .#{$wefront__namespace}table-daily__day {
+                color: color(white);
+            }
+        }
+    }
+
+    &__action-better-price {
+        position: absolute;
+        z-index: 2;
+        top: rem(1);
+        left: rem(1);
+        font-size: rem(27);
+        color: color(primary);
+
+        &--bottom-right {
+            inset: auto rem(1) rem(1) auto
+        }
+    }
+
+    &__price {
+        padding-bottom: rem(2);
+        margin: 0 rem(-16);
+
+        &--long {
+            font-size: rem(14);
+        }
+
+        &--responsive {
+            display: inline;
+            margin: 0;
+        }
+    }
+
+    &__day {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: rem(3);
+        font-size: rem(11);
+        color: color(gray-30);
+    }
+
+    &__month {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: rem(3);
+        font-size: rem(11);
+        text-transform: uppercase;
+
+        &--top {
+            top: 0;
+            bottom: auto;
+            overflow: hidden;
+            max-width: calc(100% - rem(10));
+            text-overflow: ellipsis;
+            text-align: left;
+            white-space: nowrap;
+
+            span {
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+
+    &--outbound {
+        padding: rem(56) rem(100) 0;
+        .#{$wefront__namespace}table-daily {
+            &__title {
+                height: auto;
+                min-height: inherit;
+                padding: rem(10) rem(14);
+            }
+
+            &__legend-description {
+                width: rem(400);
+            }
+        }
+    }
+
+    &--simple {
+        padding: 0;
+    }
+}
+
+// Responsive
+
+@include media-query('lg') {
+    .#{$wefront__namespace}table-daily {
+        &__currency {
+            &--responsive {
+                display: block !important;
+                font-size: rem(14);
+            }
+        }
+
+        &--price {
+            &--responsive {
+                display: block;
+                font-size: rem(14);
+            }
+        }
+
+        &--outbound {
+            padding: rem(56) rem(40) 0;
+            .#{$wefront__namespace}table-daily {
+                &__legend-description {
+                    width: rem(370);
+                }
+            }
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}table-daily {
+        &__table-content,
+        .mCSB_container {
+            width: 100% !important;
+        }
+
+        &__action-label {
+            * {
+                word-break: break-all;
+            }
+        }
+
+        &__date-weekday {
+            &::before {
+                content: attr(data-shortcut);
+                display: block;
+            }
+
+            > * {
+                display: none;
+            }
+        }
+
+        &__date-month {
+            &::before {
+                content: attr(data-shortcut);
+            }
+
+            > * {
+                display: none;
+            }
+        }
+
+        &__month {
+            > * {
+                display: none;
+            }
+
+            &::before {
+                content: attr(data-shortcut);
+            }
+        }
+
+        &__currency {
+            &--responsive {
+                display: block !important;
+                font-size: rem(13);
+            }
+        }
+
+        &__price {
+            &--responsive {
+                display: block;
+                font-size: rem(13);
+            }
+        }
+
+        &--outbound {
+            padding: rem(56) rem(40) 0;
+            .#{$wefront__namespace}table-daily {
+                &__legend-description {
+                    width: rem(300);
+                }
+            }
+        }
+
+        &--simple {
+            padding: 0 rem(25);
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}table-daily {
+        &__currency {
+            &--responsive {
+                display: block !important;
+            }
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}table-daily {
+
+        // Scrollbar
+
+        &__content-scrollable {
+            position: relative;
+        }
+
+        &__info-scrollable {
+            z-index: 100;
+            display: block;
+            width: 100%;
+
+            &--hide {
+                height: 0;
+                transition: height 0.5s;
+                .#{$wefront__namespace}table-daily__info-scrollable-message {
+                    display: none;
+                }
+            }
+        }
+        // Table
+
+        &__table-content,
+        .mCSB_container {
+            width: rem(733) !important;
+            min-width: 100%;
+        }
+
+        &__action-label {
+            * {
+                word-break: break-all;
+            }
+        }
+
+        &__legend {
+            left: 0;
+            width: 100%;
+
+            &--left {
+                left: rem(48);
+                width: rem(695);
+            }
+        }
+
+        &__legend-txt {
+            &::before {
+                content: attr(data-cod-country);
+            }
+        }
+
+        &__legend-description {
+            display: none;
+        }
+
+        &__date-weekday {
+            &::before {
+                content: attr(data-shortcut);
+            }
+
+            > * {
+                display: none;
+            }
+        }
+
+        &__date-month {
+            &::before {
+                content: attr(data-shortcut);
+            }
+
+            > * {
+                display: none;
+            }
+        }
+
+        &__month {
+            > * {
+                display: none;
+            }
+
+            &::before {
+                content: attr(data-shortcut);
+            }
+        }
+
+        &--outbound {
+            padding: rem(56) 0 0;
+            .#{$wefront__namespace}table-daily {
+                &__legend-description {
+                    width: rem(370);
+                }
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}table-daily {
+
+        // Scrollbar
+
+        &__content-scrollable {
+            position: relative;
+        }
+
+        &__info-scrollable {
+            z-index: 100;
+            display: block;
+            width: 100%;
+
+            &--hide {
+                height: 0;
+                transition: height 0.5s;
+                .#{$wefront__namespace}table-daily__info-scrollable-message {
+                    display: none;
+                }
+            }
+        }
+
+        // Table
+
+        &__table-content,
+        .mCSB_container {
+            width: rem(630) !important;
+        }
+
+        &__title {
+            padding-right: rem(5);
+            padding-left: rem(5);
+        }
+
+        &__action-label {
+            padding-right: rem(5);
+            padding-left: rem(5);
+
+            * {
+                word-break: break-all;
+            }
+        }
+
+        &__legend {
+            left: 0;
+            width: 100%;
+            text-align: center;
+
+            &--left {
+                left: 0;
+                width: rem(695);
+                padding-left: 0;
+                margin-left: 0;
+                text-align: center;
+            }
+        }
+
+        &__legend-txt {
+            &::before {
+                content: attr(data-cod-country);
+            }
+        }
+
+        &__legend-description {
+            display: none;
+        }
+
+        &__action-better-price {
+            top: 0;
+            left: 0;
+        }
+
+        &__date-weekday {
+            &::before {
+                content: attr(data-shortcut);
+                display: block;
+                font-size: rem(18);
+            }
+
+            > * {
+                display: none;
+            }
+        }
+
+        &__date-day {
+            font-size: rem(18);
+        }
+
+        &__date-month {
+            display: block;
+
+            &::before {
+                content: attr(data-shortcut);
+            }
+
+            > * {
+                display: none;
+            }
+        }
+
+        &__month {
+            > * {
+                display: none;
+            }
+
+            &::before {
+                content: attr(data-shortcut);
+            }
+        }
+
+        &__price {
+            margin: 0 rem(-1);
+
+            &--long {
+                font-size: rem(13);
+            }
+        }
+
+        &--outbound {
+            padding: rem(56) 0 0;
+            .#{$wefront__namespace}table-daily {
+                &__title {
+                    padding: rem(5);
+                }
+            }
+        }
+    }
+}

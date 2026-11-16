@@ -1,0 +1,95 @@
+<div class="ib-layout__line-spacing" ng-if="tripInfoCtrl.tripInfoModel.calendarSlides.slides.length > 0 && !tripInfoCtrl.animationRun && !tripInfoCtrl.showAdaptativeMobileFlow">
+    <ib-booking-flights-dates id="bbki-trip-info-flights-dates" currencies="::tripInfoCtrl.currencies" calendar-data="tripInfoCtrl.tripInfoModel.calendarSlides"
+        index="::tripInfoCtrl.tripInfoModel.originDestinationId" selected-carousel="tripInfoCtrl.currentOriginDestinationIndex"></ib-booking-flights-dates>
+</div>
+<div class="ib-fc-calendar-slides-loading">
+    <div class="ib-table-flight-filters ib-table-flight-filters--dark ib-table-flight-filters--cabins">
+        <div class="ib-table-flight-filters__item">
+            <a id="bbki-trip-info-time-filter-link" focusin href="javascript:void(0)" aria-label="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_1'|translate}}" title="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_1'|translate}}" ng-click="tripInfoCtrl.activateFilter('departureDateTime')"
+                class="ib-table-flight-filters__text hidden-sm hidden-xs" ng-class="{'ib-table-flight-filters__text--up': (tripInfoCtrl.choosedFilter === 'departureDateTime' && !tripInfoCtrl.filterReverse), 'ib-table-flight-filters__text--down':(tripInfoCtrl.choosedFilter === 'departureDateTime' && tripInfoCtrl.filterReverse) }">
+            {{'AVAILABILITY_TRIP_INFO_BODY_A_DESC_1'|translate}}</a>
+            <div class="ib-dropdown-select ib-dropdown-select--type-1 hidden-xl hidden-lg hidden-md" uib-dropdown is-open="status.isopen"
+                ng-controller="BookingDropdownSelectController as select">
+                <button id="fare" type="button" class="ib-dropdown-select__button" focusin uib-dropdown-toggle>
+                    <span class="ib-dropdown-select__button-text">{{select.selectedListFlightFilter.name| translate | uppercase}}</span>
+                </button>
+                <button id="bbki-trip-info-filter-btn" class="ib-dropdown-select__caret" ng-class="{'ib-dropdown-select__caret--up':!tripInfoCtrl.filterReverse, 'ib-dropdown-select__caret--down':tripInfoCtrl.filterReverse}"
+                    focusin type="button" data-ng-click="tripInfoCtrl.activateFilter(tripInfoCtrl.choosedFilter)">{{'AVAILABILITY_FILTER'|translate}}</button>
+                <input aria-hidden="true" type="text" class="ib-dropdown-select__input u-hide-accessible" ng-model="select.selectedListFlightFilter" readonly
+                    tabindex="-1" />
+                <ul class="ib-dropdown-select__list" uib-dropdown-menu role="menu" aria-labelledby="fare">
+                    <li class="ib-dropdown-select__list-item" ng-repeat="(index, item) in select.listFlightFilter">
+                        <a id="bbki-trip-info-{{index}}-link" title="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_2'|translate}} {{item.name}}" ng-click="select.clickListFlightFilter(item,$event);tripInfoCtrl.activateFilter(item.filter)">{{item.name | translate}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="ib-table-flight-filters__item hidden-sm hidden-xs">
+            <a id="bbki-trip-info-duration-filter-link" focusin href="javascript:void(0)" aria-label="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_3'|translate}}" title="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_3'|translate}}" ng-click="tripInfoCtrl.activateFilter('duration')" class="ib-table-flight-filters__text"
+                ng-class="{'ib-table-flight-filters__text--up':(tripInfoCtrl.choosedFilter === 'duration' && !tripInfoCtrl.filterReverse), 'ib-table-flight-filters__text--down':(tripInfoCtrl.choosedFilter === 'duration' && tripInfoCtrl.filterReverse) }">
+            {{'AVAILABILITY_TRIP_INFO_BODY_A_DESC_3'|translate}}</a>
+        </div>
+        <div class="ib-table-flight-filters__item hidden-sm hidden-xs">
+            <a id="bbki-trip-info-cabin-price-filter-link" focusin href="javascript:void(0)" aria-label="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_4'|translate}}" title="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_4'|translate}}" ng-click="tripInfoCtrl.activateFilter('slicePrice')" class="ib-table-flight-filters__text"
+                ng-class="{'ib-table-flight-filters__text--up':(tripInfoCtrl.choosedFilter === 'slicePrice' && !tripInfoCtrl.filterReverse), 'ib-table-flight-filters__text--down':(tripInfoCtrl.choosedFilter === 'slicePrice' && tripInfoCtrl.filterReverse) }">
+            {{'AVAILABILITY_TRIP_INFO_BODY_A_DESC_4'|translate}}</a>
+        </div>
+        <div class="ib-table-flight-filters__item">
+            <a id="bbki-trip-info-general-filter-link" href="javascript:void(0)" aria-label="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_5'|translate}}" title="{{'AVAILABILITY_TRIP_INFO_BODY_A_TITLE_5'|translate}}" data-ng-click="tripInfoCtrl.openModal('ib-modal-filters-flights', 'ib-modals ib-modals--right fade', $event)"
+                focusin class="ib-table-flight-filters__text ib-table-flight-filters__text--underline break-word-full">
+            {{'AVAILABILITY_TRIP_INFO_BODY_A_DESC_5'|translate}}</a>
+        </div>
+    </div>
+    <div data-ng-show="!tripInfoCtrl.animationRun">
+        <ul class="ib-tags-filters" ng-if="tripInfoCtrl.tripInfoModel.selectedFilters">
+            <li class="ib-tags-filters__item animate-repeat" ng-repeat="(filterType, info) in tripInfoCtrl.tripInfoModel.selectedFilters"
+                ng-if="info.enable" ng-switch on="filterType">
+                <span class="ib-tags-filters__txt" ng-switch-when="stopsNumber1|stopsNumber2|stopsNumber3" ng-switch-when-separator="|" ng-bind="info.value === 0 ? ('AVAILABILITY_NON_STOPSNUMBER_FILTER'|translate) : (info.value + ' ' + ('AVAILABILITY_STOPSNUMBER_FILTER' | WordNumberFormatFilter: info.value | translate))"></span>
+                <span class="ib-tags-filters__txt" ng-switch-when="avios" ng-bind="('AVAILABILITY_AVIOS_FILTER'|translate)"></span>
+                <span class="ib-tags-filters__txt" ng-switch-when="cabinType" ng-bind="info.description"></span>
+                <span class="ib-tags-filters__txt" ng-switch-when="price" ng-bind="info.initFormatValue + ' ' + ('AVAILABILITY_PRICE_FILTER'|translate) + ' ' + info.endFormatValue"></span>
+                <span class="ib-tags-filters__txt" ng-switch-default ng-bind="(filterType === 'departureHours' ? ('AVAILABILITY_DEPARTURE_FILTER'|translate) :  ('AVAILABILITY_ARRIVAL_FILTER'|translate)) + ' ' + (info.description.min) + ' ' + ('AVAILABILITY_HOUR_FILTER'|translate) + ' ' + (info.description.max)"></span>
+                <button id="bbki-trip-info-delete-filter-btn" class="ib-tags-filters__close icon-cerrar" type="button" data-ng-click="tripInfoCtrl.deleteFilters(filterType,false)">
+                <span class="u-hide-accessible">{{'AVAILABILITY_DELETE_FILTER'|translate}}</span>
+            </button>
+            </li>
+            <li class="ib-tags-filters__item ib-tags-filters__item--link animate-repeat" ng-if="tripInfoCtrl.showDeleteAll">
+                <button id="bbki-trip-info-delete-all-filter-btn" class="ib-tags-filters__close icon-papelera" type="button" data-ng-click="tripInfoCtrl.deleteFilters('',true)">
+                <span class="ib-tags-filters__txt">{{'AVAILABILITY_DELETE_FILTER'|translate}}</span>
+            </button>
+            </li>
+        </ul>
+    </div>
+    <div ng-repeat="(sliceIndex,slice) in filteredSlices = (tripInfoCtrl.tripInfoModel.slices | filter:tripInfoCtrl.availabilityFilter)">
+        <ib-booking-slice-info id="bbki-trip-info-slice-info" ng-if="(slice.slicePrice !== 0) && !tripInfoCtrl.showAdaptativeMobileFlow" slice-info-model="slice" origin="{{::tripInfoCtrl.tripInfoModel.origin}}"
+            destination="{{::tripInfoCtrl.tripInfoModel.destination}}" origin-destination-id="{{::tripInfoCtrl.tripInfoModel.originDestinationId}}"
+            currencies="::tripInfoCtrl.currencies" current-origin-destination-index="tripInfoCtrl.currentOriginDestinationIndex"
+            animation-run="tripInfoCtrl.animationRun" show-fares-selected="tripInfoCtrl.tripInfoModel.showFaresSelected" selected-slice-index="sliceIndex"
+            selected-slices-length = "tripInfoCtrl.selectedSlicesLength"></ib-booking-slice-info>
+        <ib-booking-mobile-slice-info-downgraded 
+            id="bbki-trip-info-slice-info" ng-if="(slice.slicePrice !== 0) && tripInfoCtrl.showAdaptativeMobileFlow"
+            [slice-info-model]="slice" 
+            [origin]="tripInfoCtrl.tripInfoModel.origin"
+            [destination]="tripInfoCtrl.tripInfoModel.destination"
+            [origin-destination-id]="tripInfoCtrl.tripInfoModel.originDestinationId"
+            [currencies]="tripInfoCtrl.currencies"
+            [selected-slice-index]="sliceIndex"
+            [selected-slices-length] = "tripInfoCtrl.selectedSlicesLength"
+            [show-fares-selected]="tripInfoCtrl.tripInfoModel.showFaresSelected"
+            [current-origin-destination-index]="tripInfoCtrl.currentOriginDestinationIndex"
+            />
+    </div>
+    <!-- No Filter Results -->
+    <div ng-if="filteredSlices.length === 0" class="ib-layout__line-spacing">
+        <div class="ib-message-filter">
+            <div class="ib-message-filter__header">
+                <span class="ib-message-filter__header-icon icon-alerta_grave"></span>
+                <span class="ib-message-filter__header-title">{{'AVAILABILITY_NO_RESULTS_TITLE' | translate}}</span>
+            </div>
+            <div class="ib-message-filter__container">
+                <p class="ib-message-filter__txt">{{'AVAILABILITY_NO_RESULTS_BODY' | translate}}</p>
+            </div>
+        </div>
+    </div>
+    <ib-ui-loading type="tripInfoCtrl.ribbonLoading.type" view-title="tripInfoCtrl.ribbonLoading.viewTitle" identifier="tripInfoCtrl.ribbonLoading.identifier" ng-if="tripInfoCtrl.tripInfoModel.loadingAvailability"></ib-ui-loading>   
+</div>

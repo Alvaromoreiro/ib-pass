@@ -1,0 +1,42 @@
+<fieldset class="ib-box-menu__section ib-box-menu__section--full">
+    <legend class="u-hide-accessible">{{'MMB_FLIGHTS_TITLE'|translate}}</legend>
+    <div>
+        <section class="ib-layout__section">
+            <div class="ib-box-cols">
+                <div class="ib-box-cols__header" ng-controller="IbPopoverController as popoverCtrl">
+                    <h3 class="ib-box-cols__title ib-box-cols__title--with-icon">{{'MMB_FLIGHTS_TITLE'|translate}}</h3>
+                </div>
+                <div>
+                    <div class="ib-box-cols__content" data-ng-repeat="(index, flight) in manageFlightsInfoCtrl.model">
+                        <div class="ib-box-cols__link-container ib-box-cols__link-container--icon">
+                            <span
+                                class="ib-box-cols__title-section ib-box-cols__title-section--with-icon u-mb-small u-ellipsis-2"
+                                ng-class="manageFlightsInfoCtrl.getFlightIcon(flight, index)">
+                                {{flight.departureCity.city.description}} ({{flight.departureCity.code}}) -
+                                {{flight.arrivalCity.city.description}} ({{flight.arrivalCity.code}})
+                            </span>
+                            <span class="ib-text u-mb-small ib-text--block">{{flight.departureDateParsed.formatedDate}}
+                                - {{flight.departureDateParsed.dateTime}} h</span>
+                            <span class="ib-text ib-text--underline u-mb-small"
+                                ng-if="flight.flown">{{'MMB_STATUS_FLIGHT'|translate}}</span>
+                            <ng-react ng-if="flight.isSkeletonView"
+                                [component]="manageFlightsInfoCtrl.skeletonComponent"
+                                [props]="manageFlightsInfoCtrl.skeletonProps"></ng-react>
+                            <span class="ib-text ib-text--underline u-mb-small"
+                                ng-if="!flight.flown && !flight.isSkeletonView">{{flight.segments?flight.segments[0].status.description:flight.status.description}}</span>
+                        </div>
+                        <div class="ib-layout__line-spacing" data-ng-repeat="(index2, segments) in flight.segments">
+                            <div class="ib-alert u-text-center"
+                                ng-if="segments.operatorLocator && segments.operatorLocator.showExternalOperator">
+                                <span class="ib-text u-mb-small">{{'MMB_CODE'|translate}}
+                                    {{segments.operatorLocator.locator}}</span>
+                                <a class="ib-link ib-link--block" ng-href="{{segments.operatorLocator.operatorURL}}"
+                                    target="_blank">{{segments.operatorLocator.operatorLinkText}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</fieldset>

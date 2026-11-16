@@ -1,0 +1,83 @@
+@import "src/styles/component-tools";
+
+.button {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: rem(16) 0;
+    margin: 0;
+    border: 0;
+    border-color: var(--ib-color-grey-300-dd);
+    line-height: rem(28);
+    background: var(--ib-color-white);
+}
+
+.title {
+    &-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: rem(10);
+    }
+
+    &-text {
+        font-family: var(--font-regular);
+        font-size: rem(13);
+    }
+}
+
+.content {
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+    transition: height 0.3s ease, opacity 0.3s ease;
+
+    &-open {
+        height: auto;
+        opacity: 1;
+    }
+}
+
+.arrow {
+    &--rotate {
+        transform: rotate(180deg);
+    }
+
+    path {
+        fill: var(--cabin-economy);
+    }
+}
+
+@include media-query-range('mf-sm') {
+    .container{
+        margin-bottom: rem(8);
+    }
+
+    .button{
+        padding: rem(10) rem(16);
+    }
+
+    .arrow{
+        width: rem(30);
+        height: auto;
+    }
+}
+
+@include media-query-range('mf-md') {
+    .title-text{
+        font-family: var(--font-headline);
+        font-size: rem(18);
+    }
+
+    .button{
+        padding: rem(26) rem(16) rem(19);
+    }
+}
+
+@include media-query-range('mf-xl') {
+    .title-text{
+        font-size: rem(20);
+    }
+
+}

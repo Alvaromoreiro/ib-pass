@@ -1,0 +1,188 @@
+/* -------------------------------------------------------------
+    #GLOBICK COMPONENTS ANCILLARIES
+----------------------------------------------------------------- */
+#globick-transfers-anc {
+    display: none;
+}
+
+#globick-activities-anc {
+    display: none;
+}
+
+#globick-activities-confirmation-banner {
+    display: none;
+}
+
+.#{$wefront__namespace}globick-banner {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    min-height: rem(191);
+    padding: rem(24);
+    font-size: 0;
+    background: color(white);
+
+    &::before {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        right: 0;
+    }
+
+    &__title {
+        display: block;
+        margin-bottom: rem(4);
+        font-family: $font-special;
+        font-size: rem(22);
+        font-weight: 400;
+        line-height: 28px;
+        color: color(gray-10);
+    }
+
+    &__txt {
+        display: block;
+        max-width: rem(460);
+        margin-bottom: rem(4);
+        font-family: $font-normal;
+        font-size: rem(13);
+        font-weight: 400;
+        line-height: 22px;
+        color: color(gray-10);
+    }
+
+    &__content {
+        display: inline-block;
+        width: calc(100% - rem(250));
+        vertical-align: top;
+    }
+
+    &__img-container {
+        z-index: 1;
+        display: inline-block;
+        width: rem(250);
+        vertical-align: top;
+    }
+
+    &__figure {
+        position: absolute;
+        right: rem(35);
+        bottom: rem(25);
+        display: block;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+    }
+
+    &__btn-container {
+        position: relative;
+        display: block;
+        margin-top: rem(22);
+    }
+
+    &--activities {
+        .#{$wefront__namespace}globick-banner__figure {
+            right: rem(32);
+            bottom: rem(23);
+            width: rem(191);
+        }
+
+        &::before {
+            border-top: rem(196) solid transparent;
+            border-right: rem(192) solid color(gray-60);
+            border-bottom: 0 solid color(gray-60);
+            border-left: 0 solid transparent;
+        }
+    }
+
+    &--transfers {
+        .#{$wefront__namespace}globick-banner__figure {
+            right: rem(38);
+            bottom: rem(30);
+            width: rem(184);
+        }
+
+        &::before {
+            border-top: rem(191) solid transparent;
+            border-right: rem(206) solid color(gray-60);
+            border-bottom: 0 solid color(gray-60);
+            border-left: 0 solid transparent;
+        }
+    }
+}
+
+/**********************************************   */
+// RESPONSIVE
+
+/**********************************************   */
+@include media-query("mobile") {
+    .#{$wefront__namespace}globick-banner {
+        display: flex;
+        flex-direction: column-reverse;
+        padding: rem(16) rem(24) rem(24);
+
+        &::before {
+            display: none;
+        }
+
+        &__content, &__img-container {
+            display: block;
+            width: 100% ;
+        }
+
+        &__txt {
+            max-width: 100%;
+        }
+
+        &__img-container {
+            display: block;
+            height: rem(168);
+        }
+
+        &__figure {
+            position: relative;
+        }
+
+        &__btn-container {
+            margin-top: rem(28);
+        }
+
+        &--transfers, &--activities {
+            .#{$wefront__namespace}globick-banner__img-container {
+                &::before {
+                    content: "";
+                    position: absolute;
+                    z-index: 0;
+                    top: rem(5);
+                    left: 0;
+                    border-top: rem(168) solid transparent;
+                    border-right: 0 solid transparent;
+                    border-bottom: 0 solid color(gray-60); 
+                    border-left: rem(207) solid color(gray-60);
+                }
+            }
+            .#{$wefront__namespace}globick-banner__figure {
+                top: rem(10);
+                right: auto;
+                margin: 0 auto;
+            }
+        }
+
+        &--transfers {
+            .#{$wefront__namespace}globick-banner__figure {
+                top: rem(-8);
+                right: rem(8);
+            }
+        }
+
+        &--activities {
+            .#{$wefront__namespace}globick-banner__figure {
+                top: rem(5);
+                right: rem(-8);
+                width: rem(178);
+            }
+        }
+    }
+}

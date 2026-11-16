@@ -1,0 +1,53 @@
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{'PRIORITY_BOARDING_TITLE'|translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" id="FARE_CONDITIONS_MODAL_CLOSE" ng-click="modalCtrl.close()">
+            <span class="hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body">
+    <div class="ib-layout">
+        <div class="ib-layout__line-spacing">
+            <h3 class="ib-text ib-text--block ib-text--xbig ib-text--especial ib-journey ib-journey__iatas">
+                <span class="ib-journey__box ib-journey__box--separator">
+                    <span class="ib-journey__box--city">{{modalCtrl.model.selectedSliceInfo.departureCity.city.description}}</span>
+                    <span class="ib-journey__box--iata ib-iata-text">{{modalCtrl.model.selectedSliceInfo.departureCity.city.code}}</span>
+                </span>
+                <span class="ib-journey__box">
+                    <span class="ib-journey__box--city">{{modalCtrl.model.selectedSliceInfo.arrivalCity.city.description}}</span>
+                    <span class="ib-journey__box--iata ib-iata-text">{{modalCtrl.model.selectedSliceInfo.arrivalCity.city.code}}</span>
+                </span>
+            </h3>
+        </div>
+        <div class="ib-layout__line-spacing" data-ng-repeat="(index, passenger)  in modalCtrl.model.selectedSliceInfo.slicePriority.passBaggages[0].priority">
+            <div class="ib-baggage ib-box ib-box--medium ib-box--border-narrow">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="ib-text ib-text--block ib-text--bold u-mb">{{passenger.name}} {{passenger.surname}}
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="ib-baggage__block col-md-6 col-sm-12 col-xs-12">
+                        <div class="">
+                            <span class="ib-baggage__item ib-text ib-text--block">{{'PRIORITY_BOARDING_TITLE'|translate}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="ib-modals__footer">
+    <div class="ib-content-buttons">
+        <div data-ng-class="{'ib-content-buttons ib-content-buttons--end': !modalCtrl.model.activeLink, 'ib-content-buttons__content-left': modalCtrl.model.activeLink}">
+            <button class="ib-button ib-button--w-medium" title="{{'MODAL_ACCEPT'|translate}}" type="button" ng-click="modalCtrl.close()">{{'MODAL_ACCEPT'|translate}}</button>
+        </div>
+        <div class="ib-content-buttons__content-right" ng-if="modalCtrl.model.activeLink">
+            <a href="javascript:void(0)" title="{{'MMB_ADD_MORE_PRIORITY_BOARDING' | translate}}"
+                class="ib-link"
+                ng-click="modalCtrl.goToCustomize()">{{'MMB_ADD_MORE_PRIORITY_BOARDING' | translate}}</a>
+        </div>
+    </div>
+</footer>

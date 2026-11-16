@@ -1,0 +1,52 @@
+<ng-content *ngIf="customTermsSlot" select="[data-slot-terms]"></ng-content>
+<div class="terms-box" *ngIf="termsAndConditionsText">
+    <div class="ib-check ib-check--small" [ngClass]="{'ib-check--error': termsControl.invalid && (termsControl.dirty || termsControl.touched)}">
+        <input type="checkbox" class="ib-check__input" id="accept_terms-btm-fixed" [formControl]="termsControl" required>
+        <label for="accept_terms-btm-fixed" class="ib-check__label">
+            <span class="ib-check__text ib-check__text--child-links-underline" [innerHtml]="termsAndConditionsText"></span>
+        </label>
+    </div>
+    <div *ngIf="termsControl.invalid && (termsControl.dirty || termsControl.touched)">
+        <div class="ib-alert ib-alert--error" *ngIf="termsControl.errors?.['required']">{{'TOTAL_PRICE_CHECKBOX_CONDITIONS_REQUIRED_ERROR'|translate}}</div>
+    </div>
+</div>
+
+    <button *ngIf="shouldShowPriceDetailCTA" class="price-detail" (click)="openPriceDetailModal($event)"  title="{{'SUMMARY_FEES'| translate}}">
+        <svg role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
+            <path d="M6.94745 6.05642H7.0162C7.49848 6.05642 8.06355 5.93055 8.06355 5.15594V5.11721C8.06355 4.33777 7.49848 4.19738 7.0162 4.19738H6.94745C6.46469 4.19738 5.89865 4.33777 5.89865 5.11721V5.15594C5.89865 5.93055 6.46469 6.05642 6.94745 6.05642Z" fill="#666666"/>
+            <path d="M6.05117 11.7352H7.91296V7.0876H6.05117V11.7352Z" fill="#666666"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.99829 0.968262C3.13186 0.968262 -0.00195312 4.10055 -0.00195312 7.96387C-0.00195312 11.832 3.13186 14.9643 6.99829 14.9643C10.8633 14.9643 13.998 11.832 13.998 7.96387C13.998 4.10055 10.8633 0.968262 6.99829 0.968262ZM1.72523 7.96387C1.72523 10.8735 4.08963 13.2408 6.99829 13.2408C9.90501 13.2408 12.2713 10.8735 12.2713 7.96387C12.2713 5.05912 9.90501 2.69175 6.99829 2.69175C4.08963 2.69175 1.72523 5.05912 1.72523 7.96387Z" fill="#666666"/>
+        </svg>
+        <p>{{"SUMMARY_FEES"| translate}}</p>
+    </button>
+
+<div class="total-price-mobile"  [ngClass]="{'after-passenger':shouldShowPriceDetailCTA}" id="{{moduleId}}">
+    <button class="total-price-mobile-item basket-trigger"
+        title="{{'DEPLOY_SUMMARY_BASKET_TEXT'|translate}}"
+        basketTrigger>
+        <span class="basket-trigger-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="9" fill="none" viewBox="0 0 14 9">
+                <path fill="#999" fill-rule="evenodd" d="M7 2.548 1.22 8.18a.346.346 0 0 1-.48 0L.1 7.557a.327.327 0 0 1 0-.469L6.76.597a.346.346 0 0 1 .48 0l6.66 6.491a.327.327 0 0 1 0 .469l-.64.624a.346.346 0 0 1-.48 0L7 2.548Z" clip-rule="evenodd"/>
+            </svg>
+        </span>
+        <span class="basket-trigger-text">
+            <span class="noprice" *ngIf="!totalPrice">{{'TOTAL_PRICE_MOBILE_EMPTY_BASKET'|translate}}</span>
+            <span class="price" *ngIf=" totalPrice">
+                <span class="price-title">{{customTitle ? (customTitle|translate) : ('TOTAL_PRICE_COMPONENT_TITLE'|translate)}}</span>
+                <span class="price-amount">{{totalPrice}}</span>
+            </span>
+        </span>
+    </button>
+
+
+    <button class="total-price-mobile-item continue-trigger"
+        *ngIf="!customButtonSlot"
+        title="{{(withoutAviosMoney && fareRate.length === 1) ? ('AVAILABILITY_REDEMPTION_FARE_RATES_AVIOS_BUTTON'|translate) : (continueText | translate)}}"
+        (click)="(withoutAviosMoney && fareRate.length === 1) ? openModalLinks() : onContinueEvent()">
+        {{(withoutAviosMoney && fareRate.length === 1) ? ('AVAILABILITY_REDEMPTION_FARE_RATES_AVIOS_BUTTON'|translate) : ( continueText | translate)}}
+    </button>
+        <ng-content
+         *ngIf="customButtonSlot"
+        select="[data-slot-pay]">
+    </ng-content>
+</div>

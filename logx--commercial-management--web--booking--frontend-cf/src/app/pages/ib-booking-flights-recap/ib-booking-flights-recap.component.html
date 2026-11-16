@@ -1,0 +1,53 @@
+<main class="ib-layout ib-layout--bck-1">
+
+    <booking-layout>
+        <div class="view" [ngClass]="{'view-growed': showAdaptativeMobileFlow}">
+
+            <h2 class="recap-title">{{'RECAP_PAGE_TITLE'|translate}}</h2>
+
+            <p class="other-info">
+                <span>{{passengerAccount}}</span>
+            </p>
+
+            <div class="recap-flights">
+                <ng-container *ngFor="let sliceInfo of slicesInfo">
+                    <ib-booking-recap-details
+                        [sliceInfo]="sliceInfo"
+                        [adaptativeFlow]="showAdaptativeMobileFlow">
+                    </ib-booking-recap-details>
+                </ng-container>
+            </div>
+            
+            <ib-booking-fare-recap 
+                [fareFamilies]="fareRecapModel.fareFamilies"
+                [slicesInfo]="slicesInfo"
+                [flightRatio]="fareRecapModel.flightRatio"
+            ></ib-booking-fare-recap>
+
+            <ib-booking-common-total-price
+                *ngIf="!showAdaptativeMobileFlow"
+                [totalPrice]="totalPriceFormatted"
+                [customContinueText]="continueButtonText"
+                [conditionsText]="termsAndConditions.value"
+                (continueEvent)="onContinueFlow()">
+            </ib-booking-common-total-price>
+        </div>
+
+    </booking-layout>
+
+    <ib-main-footer
+        id="footer"
+        [footerModel]="footerModel"
+        [isFullWidth]="false"
+        [isFixed]="false">
+    </ib-main-footer>
+
+    <!-- MOBILE TOTAL PRICE -->
+    <ib-booking-mobile-total-price
+        *ngIf="showAdaptativeMobileFlow"
+        [customContinueText]="continueButtonText"
+        (continueEvent)="onContinueFlow()"
+        [totalPrice]="totalPriceFormatted">
+    </ib-booking-mobile-total-price>
+
+</main>

@@ -1,0 +1,165 @@
+/* -------------------------------------------------------------
+    #BOX BASIC
+----------------------------------------------------------------- */
+.#{$wefront__namespace}box-basic {
+    &__container {
+        position: relative;
+        padding: rem(15) rem(32) rem(32) rem(32);
+        border: rem(2) solid color(gray-70);
+        background-color: transparent;
+        box-shadow: 0 rem(1) 0 0 color(white);
+
+        &--p-extra {
+            padding: rem(32) rem(42);
+        }
+    }
+
+    &__icon {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        height: rem(75);
+        text-align: center;
+
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            height: 100%;
+            font-size: rem(90);
+            color: color(gray-30);
+            transform: translate(-50%, 0);
+        }
+    }
+
+    &__button {
+        position: relative;
+        z-index: 1;
+        display: none;
+        border: 0;
+        background: transparent;
+
+        &:focus {
+            outline: rem(2) solid color(red-10);
+        }
+
+        &--no-focus {
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
+    &__title {
+        font-family: $font-special;
+        color: color(gray-10);
+
+        &--lh-medium {
+            line-height: rem(32);
+        }
+
+        &--mb-small {
+            margin-bottom: rem(10);
+        }
+    }
+
+    &__description {
+        font-family: $font-special;
+        color: color(gray-30);
+    }
+
+    &__arrow {
+        position: absolute;
+        z-index: 0;
+        top: rem(15);
+        right: rem(10);
+        display: none;
+        font-size: rem(14);
+        color: color(gray-30);
+    }
+}
+// mixin
+
+@mixin box-basic-mobile() {
+    .#{$wefront__namespace}box-basic {
+        &__container {
+            padding: 0;
+            margin-bottom: rem(20);
+        }
+
+        &__icon {
+            display: none;
+        }
+
+        &__button-padding {
+            padding-right: rem(40) !important;
+        }
+
+        &__button {
+            display: block;
+            width: 100%;
+            padding: rem(15) rem(35) rem(15) rem(15);
+            text-align: left;
+
+            &--p-extra {
+                padding: rem(10) rem(30);
+                ~ .#{$wefront__namespace}box-basic__arrow {
+                    right: rem(26);
+                }
+            }
+        }
+
+        &__title {
+            font-family: $font-normal;
+            font-size: rem(13);
+            line-height: rem(13);
+
+            &--responsive {
+                display: none;
+            }
+        }
+
+        &__description {
+            padding: rem(5) rem(35) rem(15) rem(15);
+            font-family: $font-normal;
+            font-size: rem(13);
+
+            &--extra {
+                padding-right: rem(32);
+                padding-left: rem(32);
+            }
+        }
+
+        &__arrow {
+            display: block;
+        }
+    }
+}
+
+// Responsive
+
+@include media-query('xl') {
+    .#{$wefront__namespace}box-basic {
+        &__collapse {
+            display: block !important;
+            height: auto !important;
+        }
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}box-basic {
+        &__collapse {
+            display: block !important;
+            height: auto !important;
+        }
+    }
+}
+
+@include media-query('md') {
+    @include box-basic-mobile();
+}
+
+@include media-query('mobile') {
+    @include box-basic-mobile();
+}

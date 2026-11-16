@@ -1,0 +1,17 @@
+<div class="container">
+    <button class="button" (click)="toogleAccordion()">
+        <div class="title-container">
+            <ng-content select="[slot='icon']"></ng-content>
+            <p class="title-text">{{title|translate}}</p>
+        </div>
+        <svg class="arrow" [ngClass]="{'arrow--rotate': opened}"
+            xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+            fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M8 9.65715L3.04597 4.58727C2.93227 4.47091 2.74793 4.47091 2.63427 4.58727L2.08528 5.14905C2.03067 5.2049 2 5.2807 2 5.35971C2 5.43872 2.03067 5.51451 2.08528 5.57037L7.79415 11.4127C7.90785 11.5291 8.09219 11.5291 8.20585 11.4127L13.9147 5.57041C13.9693 5.51455 14 5.43876 14 5.35975C14 5.28074 13.9693 5.20494 13.9147 5.14909L13.3657 4.5873C13.252 4.47095 13.0677 4.47095 12.954 4.5873L8 9.65715Z"/>
+        </svg>
+    </button>
+    <div class="content" [ngClass]="{'content-open': opened}">
+        <ng-content></ng-content>
+    </div>
+</div>

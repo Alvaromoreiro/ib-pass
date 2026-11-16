@@ -1,0 +1,205 @@
+/* -------------------------------------------------------------
+    #LAT-MENU
+----------------------------------------------------------------- */
+.#{$wefront__namespace}lat-menu {
+    margin-bottom: rem(32);
+    background: color(gray-70);
+
+    &__list {
+        padding: rem(15) 0;
+        margin: rem(32) 0 0;
+
+        &--m-none {
+            margin: 0;
+        }
+    }
+
+    &__item {
+        .#{$wefront__namespace}lat-menu__link {
+            display: block;
+            padding: rem(15) rem(42) rem(16) rem(28);
+            font-family: $font-normal;
+            font-size: rem(14);
+            text-decoration: none;
+            color: color(gray-10);
+
+            &:hover,
+            &:focus {
+                background: color(gray-40);
+            }
+        }
+
+        &--active {
+            position: relative;
+            background: color(primary);
+
+            .#{$wefront__namespace}lat-menu__link {
+                position: relative;
+                font-weight: bold;
+                color: color(white);
+
+                &:hover,
+                &:focus {
+                    background: color(primary);
+                }
+
+                &::after {
+                    content: "\e92f";
+                    position: absolute;
+                    top: 50%;
+                    right: rem(12);
+                    font-family: $font-icons;
+                    font-size: rem(20);
+                    color: color(white);
+                    -ms-transform: translate(0, -50%);
+                    transform: translate(0, -50%);
+                }
+            }
+
+            .#{$wefront__namespace}lat-menu__item {
+                background: color(gray-70);
+
+                .#{$wefront__namespace}lat-menu__link {
+                    font-weight: normal;
+                    text-decoration: none;
+                    color: color(gray-10);
+
+                    &:hover {
+                        background: color(gray-40);
+                    }
+                }
+
+                &--active {
+                    position: relative;
+                    background: color(primary);
+
+                    .#{$wefront__namespace}lat-menu__link {
+                        font-weight: bold;
+                        color: color(white);
+
+                        &:hover {
+                            background: color(primary);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &__sublist {
+        .#{$wefront__namespace}lat-menu__link {
+            position: relative;
+            padding-left: 3rem;
+
+            &::after {
+                display: none;
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: rem(26);
+                width: rem(5);
+                height: rem(5);
+                font-family: $font-icons;
+                font-size: rem(20);
+                color: color(primary);
+                background-color: color(primary);
+                -ms-transform: translate(0, -50%);
+                transform: translate(0, -50%);
+            }
+        }
+
+        .#{$wefront__namespace}lat-menu__item--active {
+            .#{$wefront__namespace}lat-menu__link {
+                &::after {
+                    display: none;
+                }
+
+                &::before {
+                    font-weight: normal;
+                    color: color(white);
+                    background-color: color(white);
+                }
+            }
+        }
+    }
+
+    &--m-none {
+        margin: 0;
+    }
+
+    &--light {
+        background: color(white);
+
+        .#{$wefront__namespace}lat-menu {
+            &__list {
+                padding: 0;
+            }
+
+            &__sublist {
+                .#{$wefront__namespace}lat-menu {
+                    &__link {
+                        &::before,
+                        &::after {
+                            color: color(red-50);
+                            background-color: color(red-50);
+                        }
+                    }
+                }
+            }
+
+            &__item {
+                &--active {
+                    background: none;
+                    .#{$wefront__namespace}lat-menu {
+                        &__link {
+                            color: color(red-50);
+
+                            &::after,
+                            &::before {
+                                color: color(red-50);
+                            }
+                        }
+                    }
+                }
+            }
+
+            &__link {
+                font-family: $font-special;
+                font-size: rem(16);
+
+                &:hover,
+                &:focus {
+                    font-weight: bold;
+                    color: color(red-50);
+                    background: none;
+                }
+            }
+        }
+    }
+}
+
+// Mobile
+@include media-query('lg') {
+    .#{$wefront__namespace}lat-menu__item {
+        .#{$wefront__namespace}lat-menu__link {
+            padding: rem(15) rem(36) rem(16) rem(24);
+        }
+
+        .#{$wefront__namespace}lat-menu__item--active {
+            .#{$wefront__namespace}lat-menu__link {
+                &::after {
+                    right: rem(16);
+                }
+            }
+        }
+    }
+
+    .#{$wefront__namespace}lat-menu__sublist {
+        .#{$wefront__namespace}lat-menu__link {
+            padding-left: 2.7rem;
+        }
+    }
+}

@@ -1,0 +1,67 @@
+<div id='b_container' external-bob-iframe-src ></div>
+
+<div ng-click="bobWidgetCtrl.openModal()">
+    <section class="ib-layout__section">
+        <div tabindex="0" class="ib-box-card"
+             data-ng-class="{
+            'ib-box-card--type-2 ib-box-card--full-responsive': bobWidgetCtrl.modules === 1 && $root.flowName !== 'MMB',
+            'ib-box-card--type-3 u-display-block ib-box-card--responsive': bobWidgetCtrl.modules === 2 && $root.flowName !== 'MMB',
+            'ib-box-card--type-4 ib-box-card--full-responsive u-display-block': bobWidgetCtrl.modules === 3 && $root.flowName !== 'MMB' && bobWidgetCtrl.last,
+            'ib-box-card--type-4 u-display-block ib-box-card--responsive': bobWidgetCtrl.modules === 3 && $root.flowName !== 'MMB' && !bobWidgetCtrl.last,
+            'ib-box-card--type-3 ib-box-card--responsive': bobWidgetCtrl.modules === 4 && $root.flowName !== 'MMB',
+            'u-display-block ib-box-card--type-3 ib-box-card--responsive': bobWidgetCtrl.modules === 5 && ((bobWidgetCtrl.index == (bobWidgetCtrl.modules - 2)) || (bobWidgetCtrl.index == (bobWidgetCtrl.modules - 1))) && !bobWidgetCtrl.last && $root.flowName !== 'MMB',
+            'u-display-block ib-box-card--type-4 ib-box-card--responsive': bobWidgetCtrl.modules === 5 && ((bobWidgetCtrl.index != (bobWidgetCtrl.modules - 2)) && (bobWidgetCtrl.index != (bobWidgetCtrl.modules - 1))) && bobWidgetCtrl.last && $root.flowName !== 'MMB',
+            'ib-box-card--type-3 u-display-block ib-box-card--full-responsive': bobWidgetCtrl.modules === 5 && ((bobWidgetCtrl.index == (bobWidgetCtrl.modules - 2)) || (bobWidgetCtrl.index == (bobWidgetCtrl.modules - 1))) && bobWidgetCtrl.last && $root.flowName !== 'MMB',
+            'ib-box-card--type-4 ib-box-card--responsive u-display-block': bobWidgetCtrl.modules === 5 && ((bobWidgetCtrl.index != (bobWidgetCtrl.modules - 2)) && (bobWidgetCtrl.index != (bobWidgetCtrl.modules - 1))) && !bobWidgetCtrl.last && $root.flowName !== 'MMB',
+            'ib-box-card--type-4 ib-box-card--responsive': bobWidgetCtrl.modules === 6 && $root.flowName !== 'MMB',
+            'ib-box-card--responsive ib-box-card--type-4': $root.flowName === 'MMB'
+        }" focusin>
+            <div class="ib-box-card__figure" style="background-image: url('{{::$root.routes.images}}/ancillaries_nuevas/bob.svg')">
+                <span class="u-hide-accessible" aria-hidden="true">{{'BAGGAGE_ARMCHAIR_PICTURE'|translate}}</span>
+            </div>
+            <div class="ib-box-card__content" data-equal="box-card-paragraph">
+                <div class="ib-box-card__checked icon-confirmacion" ng-if="bobWidgetCtrl.quanty && bobWidgetCtrl.quanty > 0">
+                    <div class="ib-box-card__shadow">
+                        <span class="u-hide-accessible">{{'CKIANC_INSURANCE_OPTION_SELECTED'|translate}}</span>
+                    </div>
+                </div>
+                <div class="ib-text ib-box-card__paragraph u-display-block">
+                    <div class="ib-box-card__header">
+                        <h2 class="ib-box-card__title">{{'ANCILLARIES_BOB_BOX_TITLE'|translate}}</h2>
+                        <span class="ib-box-card__subtitle"
+                              ng-if="!bobWidgetCtrl.specialUser"
+                        >{{'ANCILLARIES_BOB_BOX_FROM'|translate :
+                            {price1:bobWidgetCtrl.bobInfo.slices[0].products[0].price + bobWidgetCtrl.bobInfo.slices[0].products[0].currency.symbol,
+                            price2:bobWidgetCtrl.bobInfo.slices[0].products[0].additionalBagsPrice + bobWidgetCtrl.bobInfo.slices[0].products[0].currency.symbol} }}</span> <!-- TODO: check get price from service instead of harcoded-->
+                        <span class="ib-box-card__subtitle" ng-if="bobWidgetCtrl.specialUser">
+                            {{'ANCILLARIES_BOB_BOX_FROM_FREE'|translate}}</span>
+                    </div>
+                    <span class="ib-text ib-text--block ib-text--lh-normal">
+                        <span ng-if="!bobWidgetCtrl.specialUser">
+                            {{'ANCILLARIES_BOB_BOX_BODY'|translate}}
+                        </span>
+                        <span ng-if="bobWidgetCtrl.specialUser">
+                            {{'ANCILLARIES_BOB_BOX_BODY_FREE'|translate}}
+                        </span>
+                    </span>
+                    <span ng-if="bobWidgetCtrl.quanty || bobWidgetCtrl.quanty > 0" class="ib-text ib-text--block ib-text--color-unfocused ib-text--lh-normal">
+                        {{'ANCILLARIES_BOB_BOX_BODY_SUB_BOOKED'|translate}}
+                    </span>
+                </div>
+                <div class="ib-box-card__button-section">
+                    <div class="ib-box-card__button">
+                        <!--<button class="ib-button ib-button&#45;&#45;block-xs ib-button&#45;&#45;w-small ib-button&#45;&#45;default-normal"
+                                ng-click="bobWidgetCtrl.openModal()" role="button">{{'ANCILLARIES_BOB_BOX_BUTTON' | translate}} {{bobWidgetCtrl.available}}</button>-->
+                        <button ng-if="!bobWidgetCtrl.specialUser && (!bobWidgetCtrl.quanty || bobWidgetCtrl.quanty === 0)" class="ib-button ib-button--block-xs ib-button--w-small ib-button--default-normal"
+                                role="button">{{'ANCILLARIES_BOB_BOX_BUTTON' | translate}} {{bobWidgetCtrl.available}}</button>
+                        <button ng-if="bobWidgetCtrl.quanty > 0" class="ib-button ib-button--w-small ib-button--block-xs ib-button--inverse ib-button--default-normal"
+                                role="button">{{'ANCILLARIES_BOB_BOX_BUTTON_BOOKED'|translate}}</button>
+                        <button ng-if="bobWidgetCtrl.specialUser && bobWidgetCtrl.quanty === 0" class="ib-button ib-button--w-small ib-button--block-xs ib-button--inverse ib-button--default-normal"
+                                role="button">{{'ANCILLARIES_BOB_BOX_BUTTON_FREE'|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

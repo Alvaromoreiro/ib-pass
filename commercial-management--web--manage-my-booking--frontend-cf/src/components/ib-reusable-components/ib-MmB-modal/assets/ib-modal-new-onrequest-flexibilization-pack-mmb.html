@@ -1,0 +1,51 @@
+<form method="post" name = "flexForm" action="#">
+    <header class="ib-modals__header">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+            <h2 class="ib-heading ib-heading--type-1">{{'ANCILLARIES_FLEXIBILITY_PACK_FLEXIBILITY' | translate}}</h2>
+        </div>
+        <div class="ib-modals__header-settings">
+            <button type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.close()">
+                <span class="u-hide-accessible">{{'MODAL_HIDDEN_CLOSE_TEXT' | translate}}</span>
+            </button>
+        </div>
+    </header>
+    <section class="ib-modals__body">
+        <div class="ib-layout__line-spacing u-pb">
+            <h3 class="ib-text ib-text--block ib-text--xbig ib-text--especial ib-journey ib-journey__iatas">
+                <span class="ib-journey__box ib-journey__box--separator">
+                    <span class="ib-journey__box--city">{{modalCtrl.model.origin.description}}</span>
+                    <span class="ib-journey__box--iata ib-iata-text">{{modalCtrl.model.origin.code}}</span>
+                </span>
+                <span class="ib-journey__box">
+                    <span class="ib-journey__box--city">{{modalCtrl.model.destination.description}}</span>
+                    <span class="ib-journey__box--iata ib-iata-text">{{modalCtrl.model.destination.code}}</span>
+                </span>
+            </h3>
+            <div class="u-mt-medium">
+                <div class="ib-box ib-box--big ib-box--unfocused ib-box--no-shadow">
+                    
+                        <fieldset>
+                            <legend class="ib-text ib-text--block u-mb">{{modalCtrl.model.message}}</legend>
+                            <div class="ib-radio ib-radio--block u-mb">
+                                <input class="ib-radio__input" type="radio" name="selection" id="selection-1" value="FLIGHT" data-ng-model = "modalCtrl.model.flexSelected"/>
+                                <label class="ib-radio__label" for="selection-1">
+                                    <span class="ib-radio__text">{{"MMB_VC_CHANGE_FLIGHT" | translate}}</span>
+                                </label>
+                            </div>
+                            <div class="ib-radio ib-radio--block">
+                                <input class="ib-radio__input" type="radio" name="selection" id="selection-2" value="REFOUND" data-ng-model = "modalCtrl.model.flexSelected"/>
+                                <label class="ib-radio__label" for="selection-2">
+                                    <span ng-if="modalCtrl.model.textRefound >= 100" class="ib-radio__text">{{"ANCILLARIES_FLEXIBILITY_REFOUND" | translate}}</span>
+                                    <span ng-if="modalCtrl.model.textRefound < 100" class="ib-radio__text">{{"MMB_ANCILLARIES_FLEXIBILITY_PARCIAL_REFUND_CARD_TEXT" | translate}}</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="ib-modals__footer u-text-right">
+        <button class="ib-button ib-button--w-medium" type="button" ng-click="modalCtrl.acceptModalData(modalCtrl.model.flexSelected)">{{'MODAL_ACCEPT_BUTTON' | translate}}</button>
+    </footer>
+</form>

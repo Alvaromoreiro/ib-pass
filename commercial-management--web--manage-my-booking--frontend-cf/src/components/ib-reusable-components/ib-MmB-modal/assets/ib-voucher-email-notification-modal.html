@@ -1,0 +1,77 @@
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{modalCtrl.model.title|translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body ib-modals__body--cols-simple">
+    <form name="modalCtrl.modalContactForm" ib-form-scroll-to-error modal="true" novalidate>
+        <div class="ib-layout">
+            <div class="ib-layout__line-spacing" data-ng-if="modalCtrl.model.subtitle">
+                <span class="ib-text ib-text--block">{{modalCtrl.model.subtitle|translate}}</span>
+            </div>
+            <div class="ib-layout__line-spacing" data-ng-if="modalCtrl.model.body">
+                <span class="ib-text ib-text--block">{{modalCtrl.model.body|translate}}</span>
+            </div>
+            <div class="ib-layout__line-spacing" data-ng-if="modalCtrl.model.note">
+                <span class="ib-text ib-text--bold ib-text--block">{{modalCtrl.model.note|translate}}</span>
+            </div>
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--medium ib-layout__line-spacing--bordered">
+                <fieldset>
+                    <legend class="u-hide-accessible">{{modalCtrl.model.title|translate}}</legend>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="ib-layout__line-spacing">
+                                    <div class="ib-input">
+                                        <label class="ib-input__label" for="email" ng-class="{'ib-input__label--focus' : modalCtrl.emailFocused || (modalCtrl.modalContactForm.email.$viewValue != null && modalCtrl.modalContactForm.email.$viewValue != '')}">{{'MMB_PASSENGERS_EMAIL_TEXT'|translate}}</label>
+                                        <input class="ib-input__input" type="text" id="email" name="email"
+                                            data-ng-focus="modalCtrl.emailFocused=true" ng-blur="modalCtrl.emailFocused=false"
+                                            ng-model="modalCtrl.model.data.email" ng-change="modalCtrl.areEmailsEquals()"
+                                            maxlength="{{::$root.MmBPatterns.EMAIL_MAX_LENGTH}}" ng-pattern="::$root.MmBPatterns.EMAIL_PATTERN"
+                                            required />
+                                    </div>
+                                    <div ng-messages="modalCtrl.modalContactForm.$submitted && modalCtrl.modalContactForm.email.$error">
+                                        <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                        <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_EMAIL_PATTERN_ERROR'|translate}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="ib-layout__line-spacing">
+                                    <div class="ib-input">
+                                        <label class="ib-input__label" for="emailRepeat" ng-class="{'ib-input__label--focus' : modalCtrl.reEmailFocused || (modalCtrl.modalContactForm.emailRepeat.$viewValue != null && modalCtrl.modalContactForm.emailRepeat.$viewValue != '')}">{{'MMB_PASSENGERS_REPEAT_EMAIL_TEXT'|translate}}</label>
+                                        <input class="ib-input__input" type="text" id="emailRepeat" name="emailRepeat"
+                                            ng-focus="modalCtrl.reEmailFocused=true" ng-blur="modalCtrl.reEmailFocused=false"
+                                            ng-model="modalCtrl.model.data.emailRepeat"
+                                            data-ng-paste="$event.preventDefault()" ng-change="modalCtrl.areEmailsEquals()"
+                                            maxlength="{{::$root.MmBPatterns.EMAIL_MAX_LENGTH}}" ng-pattern="::$root.MmBPatterns.EMAIL_PATTERN" 
+                                            required/>
+                                    </div>
+                                    <div ng-messages="modalCtrl.modalContactForm.$submitted && modalCtrl.modalContactForm.emailRepeat.$error">
+                                        <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                        <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_EMAIL_PATTERN_ERROR'|translate}}</div>
+                                        <div class="ib-alert ib-alert--error" ng-message="emailsNotEqual">{{'GENERAL_EMAILS_NOT_EQUALS_ERROR'|translate}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </fieldset>
+        </div>
+        <div class="ib-layout__line-spacing">
+            <div class="ib-content-buttons">
+                <div class="ib-content-buttons__content-left">
+                    <button class="ib-button ib-button--w-medium" type="submit" ng-click="modalCtrl.acceptForm(modalCtrl.modalContactForm)">{{'MMB_VOUCHER_REFUND_BREAKDOWN_MODAL_BUTTON_TEXT'|translate}}</button>
+                </div>
+                <div class="ib-content-buttons__content-right ib-content-buttons__content-right--mb-mobile">
+                    <a href="javascript:void(0)" title="{{'MODAL_CANCEL'|translate}}" class="ib-link" ng-click="modalCtrl.close()">{{'MODAL_CANCEL'|translate}}</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </form>
+</section>

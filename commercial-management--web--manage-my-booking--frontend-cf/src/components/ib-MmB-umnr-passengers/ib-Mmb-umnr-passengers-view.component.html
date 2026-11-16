@@ -1,0 +1,51 @@
+<div class="ib-box-menu__section ib-box-menu__section--full">
+    <div class="ib-layout__section">
+        <div class="ib-box-cols ib-box-cols__gdr">
+            <div class="ib-box-cols__header ib-box-cols__header--icon">
+                <h2 class="ib-box-cols__title icon-menu_web">{{'Servicio de acompañamiento de menores'|translate}}</h2>
+            </div>
+            <div class="ib-box-cols__content u-border-none u-mb-xmedium" *ngIf="!isDataUmnrCompleted"> 
+                <span class="ib-box-cols__txt ib-box-cols__txt--lvl-3">Para garantizar la seguridad del proceso, añade la información del responsable legal del menor, así como los contactos para la entrega y recogida en el aeropuerto. Cuando hayas completado estos datos, podrás descargar e imprimir la Declaración de responsabilidad, y entregarla en el aeropuerto.</span>  
+            </div>
+            <div class="ib-box-cols__content u-border-none u-mb-xmedium"  *ngIf="isDataUmnrCompleted"> 
+                <span class="ib-box-cols__txt ib-box-cols__txt--lvl-3">Descarga e imprime la <strong class="ib-text--bold">Declaración de responsabilidad</strong> de cada uno de los pasajeros para entregarla en aeropuerto. </span>  
+            </div>
+            <div class="ib-box-cols__passengers" *ngIf="isDataUmnrCompleted">
+                <div class="ib-box-cols__content">
+                    <div class="ib-box-cols__subheader">
+                        <h3 class="ib-box-cols__title-section">Antonia Alegre</h3>
+                        <h4 class="ib-box-cols__title-section ib-box-cols__title-section--passenger">Pasajero 1: niño</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" (click)="downloadPDF()" class="ib-button-link ib-box-cols__link icon-descargar" title="{{'Descargar Declaracion de responsabilidad (Todos los trayectos)'|translate}}">{{'Descargar Declaracion de responsabilidad (Todos los trayectos)'|translate}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="ib-box-cols__content">
+                    <div class="ib-box-cols__subheader">
+                        <h3 class="ib-box-cols__title-section">Alberto Alegre</h3>
+                        <h4 class="ib-box-cols__title-section ib-box-cols__title-section--passenger">Pasajero 2: niño</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" (click)="downloadPDF()" class="ib-button-link ib-box-cols__link icon-descargar" title="{{'Descargar Declaracion de responsabilidad (Todos los trayectos)'|translate}}">{{'Descargar Declaracion de responsabilidad (Todos los trayectos)'|translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ib-box-cols__content">
+                <div class="ib-box-cols__subheader">
+                    <h3 class="ib-box-cols__title-section" *ngIf="isDataUmnrCompleted">{{'Modificar Formularios'|translate}}</h3>
+                    <h3 class="ib-box-cols__title-section" *ngIf="!isDataUmnrCompleted">{{'Rellenar Formularios'|translate}}</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button *ngIf="isDataUmnrCompleted" type="button" (click)="openDataModal({})" class="ib-button-link ib-box-cols__link icon-modificar" title="{{'Modificar Formularios de contacto y tutores'|translate}}">{{'Modificar Formularios de contacto y tutores'|translate}}</button>
+                        <button *ngIf="!isDataUmnrCompleted" type="button" (click)="openDataModal({})" class="ib-button-link ib-box-cols__link icon-modificar" title="{{'Completar datos'|translate}}">{{'Completar datos'|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

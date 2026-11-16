@@ -1,0 +1,70 @@
+<ng-template #arrowIcon>
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M14.4857 12L6.8809 19.4311C6.70637 19.6016 6.70637 19.8781 6.8809 20.0486L7.72357 20.8721C7.80735 20.954 7.92104 21 8.03956 21C8.15808 21 8.27177 20.954 8.35555 20.8721L17.1191 12.3088C17.2936 12.1382 17.2936 11.8617 17.1191 11.6912L8.35561 3.12792C8.27183 3.046 8.15814 3 8.03962 3C7.9211 3 7.80741 3.046 7.72363 3.12792L6.88096 3.95141C6.70643 4.12195 6.70643 4.39846 6.88096 4.56895L14.4857 12Z" fill="currentColor"/>
+</svg>
+</ng-template>
+
+
+<ng-container *ngIf="displayType === displayTypesEnum.CAROUSEL && !legacyAnimationRun">
+    <button class="carousel-arrow carousel-arrow--left" 
+        [disabled]="scrollLimitLeft"
+        (click)="arrowScroll('left')">
+        <ng-container *ngTemplateOutlet="arrowIcon"></ng-container>
+    </button>
+    <button  class="carousel-arrow carousel-arrow--right" 
+        [disabled]="scrollLimitRight"
+        (click)="arrowScroll('right')">
+        <ng-container *ngTemplateOutlet="arrowIcon"></ng-container>
+    </button>
+</ng-container>
+
+<div class="fares-container"
+    [ngClass]="{
+        'fares-container--carousel': displayType === displayTypesEnum.CAROUSEL,
+        'fares-container--column': displayType === displayTypesEnum.LIST
+    }"
+>
+    <ng-container *ngFor="let fareInfo of  fareFamilies; let fareIndex = index">
+        <ib-booking-fare-details-legacy
+            *ngIf="!newFare"
+            [id]="itemIdBase + '-' + fareIndex"
+            [fareInfo]="fareInfo"
+            [isSelected]="isSelected"
+            [fareIndex]="fareIndex"
+            [selectedSliceIndex]="selectedSliceIndex"
+            [selectedSegmentIndex]="selectedSegmentIndex" 
+            [originDestinationId]="originDestinationId"
+            [currencies]="currencies"
+            [selectedFare]="selectedFare"
+            [selectedCabin]="selectedCabin"
+            [redemption]="redemption"
+            [multiCity]="multiCity"
+            [metaSearchInfo]="metaSearchInfo"
+            [recommendedOfferId]="recommendedOfferId"
+            [rateHighlighted]="rateHighlighted"
+            [isLastFare]="fareIndex === fareFamilies.length - 1"
+            [flightRatio]="flightRatio"
+            [marketingCarrier]="marketingCarrier"
+        />
+        <ib-booking-fare-details-simple-legacy
+            *ngIf="newFare"
+            [id]="itemIdBase + '-' + fareIndex"
+            [fareInfo]="fareInfo"
+            [isSelected]="isSelected"
+            [fareIndex]="fareIndex"
+            [selectedSliceIndex]="selectedSliceIndex"
+            [selectedSegmentIndex]="selectedSegmentIndex" 
+            [originDestinationId]="originDestinationId"
+            [currencies]="currencies"
+            [selectedFare]="selectedFare"
+            [selectedCabin]="selectedCabin"
+            [redemption]="redemption"
+            [multiCity]="multiCity"
+            [metaSearchInfo]="metaSearchInfo"
+            [recommendedOfferId]="recommendedOfferId"
+            [rateHighlighted]="rateHighlighted"
+            [expensivePriceShown]="expensivePriceShown"
+            [flightRatio]="flightRatio"
+        />
+    </ng-container>
+</div>

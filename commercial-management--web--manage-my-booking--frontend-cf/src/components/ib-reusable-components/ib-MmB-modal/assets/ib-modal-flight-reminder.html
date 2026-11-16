@@ -1,0 +1,56 @@
+<div class="ib-itinerary-modal">
+    <form method="post" name="modalCtrl.emailsForm">
+        <header class="ib-modals__header ib-itinerary-modal__header">
+            <h2 class="ib-heading ib-heading--type-1">{{'MMB_FLIGHT_REMINDER_MODAL_TITLE_2'|translate}}</h2>
+            <div class="ib-modals__header-settings ib-modals__header-settings--top">
+                <button focusin type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.close()">
+                        <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+                </button>
+            </div>
+        </header>
+        <section class="ib-modals__body ib-itinerary-modal__body">
+            <div class="ib-layout">
+                <div class="ib-layout__line-spacing--medium">
+                    <p class="ib-text ib-text--block ib-text--xbig">{{'MMB_FLIGHT_REMINDER_MODAL_TEXT_1'|translate}}</p>
+                </div>
+                <div class="ib-layout__line-spacing--medium u-mb-xmedium">
+                    <p class="ib-text ib-text--block ib-text--xbig"><b>{{modalCtrl.info.email}}</b></p>
+                </div>
+                <div ng-if="modalCtrl.arrEmails.length > 0" class="ib-layout__line-spacing--medium u-mb-small">
+                    <p class="ib-text ib-text--block ib-text--xbig">{{'MMB_FLIGHT_REMINDER_MODAL_TEXT_2'|translate}}</p>
+                </div>
+                <div ng-if="modalCtrl.arrEmails.length > 0" class="ib-layout__line-spacing--medium u-mb-medium u-bg-gray-60">
+                    <fieldset>
+                        <div class="ib-check u-p u-width-full">
+                            <div data-ng-repeat="(index, obj) in modalCtrl.arrEmails">
+                                <input type="checkbox" id="check_{{index}}" name="check_{{index}}" class="ib-check__input" ng-model="obj.checked" ng-change="modalCtrl.changeSelected()">
+                                <label for="check_{{index}}" class="ib-check__label u-mb">
+                                    <span class="ib-check__text ib-check__text--unfocused">{{obj.email}}</span>
+                                </label>
+                            </div>
+                            <div class="u-pt u-border-top-s1-gray-70">
+                                <input type="checkbox" id="check_all" name="check_all" class="ib-check__input" ng-model="modalCtrl.allChecked" ng-change="modalCtrl.changeAllSelected()">
+                                <label for="check_all" class="ib-check__label">
+                                    <span class="ib-check__text ib-check__text--unfocused">{{'MMB_SELECT_ALL'|translate}}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </section>
+        <footer class="ib-modals__footer">
+            <div class="ib-content-buttons">
+                <div class="ib-content-buttons__content-left">
+                    <button class="ib-button ib-button--w-medium" type="button"                         
+                        ng-click="modalCtrl.sendMails();">{{'MODAL_ACCEPT'|translate}}</button>
+                </div>
+                <div class="ib-content-buttons__content-right">                    
+                    <a href="javascript:void(0)" title="{{'MODAL_CANCEL'|translate}}" class="ib-link" ng-click="modalCtrl.close();">{{'MODAL_CANCEL'|translate}}</a>
+                </div>
+            </div>
+        </footer>
+
+    </form>
+</div>
+    

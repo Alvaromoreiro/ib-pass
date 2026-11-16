@@ -1,0 +1,202 @@
+<!-- modal -->
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-22">{{'MMB_INVOICES_MODAL_TITLE' | translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE' | translate}}</span>
+        </button>
+    </div>
+</header>
+
+<div class="ib-layout">
+    <div class="ib-layout__line-spacing">
+        <span class="ib-text ib-text--block">{{'MMB_INVOICES_MODAL_BODY' | translate}}</span>
+    </div>
+</div>
+
+<table class="ib-table-breakdown__table">
+    <thead class="ib-table-breakdown__head">
+        <tr class="ib-table-breakdown__row">
+            <th class="ib-table-breakdown__cell-title--padding-left-16 hidden-sm hidden-xs">
+                <span class="ib-table-breakdown__txt ib-table-breakdown__txt--bold">{{'MMB_INVOICES_MODAL_TABLE_COLUMN1' | translate}}</span>
+            </th>
+            <th class="ib-table-breakdown__cell-title--padding-left-16 hidden-sm hidden-xs">
+                <span class="ib-table-breakdown__txt ib-table-breakdown__txt--bold">{{'MMB_INVOICES_MODAL_TABLE_COLUMN2' | translate}}</span>
+            </th>
+            <th class="ib-table-breakdown__cell-title--padding-right-16 ib-table-breakdown__cell-title--right hidden-sm hidden-xs">
+                <span class="ib-table-breakdown__txt ib-table-breakdown__txt--bold">{{'MMB_INVOICES_MODAL_TABLE_COLUMN3' | translate}}</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="ib-table-breakdown__body ib-table-breakdown__body--responsive--invoice">
+        <tr class="ib-table-breakdown__row ib-table-breakdown__row--responsive--invoice--border-left-right">
+            <td class="ib-table-breakdown__cell--padding-left-16 ib-table-breakdown__cell--responsive ib-table-breakdown__cell--responsive--invoice" data-attr="Trayecto">
+                <span class="ib-table-breakdown__txt ib-table-breakdown__txt--responsive--invoice">{{modalCtrl.model.invoiceDetail.route}}</span>
+            </td>
+            <td class="ib-table-breakdown__cell--padding-left-16 ib-table-breakdown__cell--responsive ib-table-breakdown__cell--responsive--invoice" data-attr="Concepto">
+                <span class="ib-table-breakdown__txt ib-table-breakdown__txt--responsive--invoice">{{modalCtrl.model.invoiceDetail.concept}}</span>
+            </td>
+            <td class="ib-table-breakdown__cell--padding-right-16 ib-table-breakdown__cell--right ib-table-breakdown__cell--left ib-table-breakdown__cell--responsive ib-table-breakdown__cell--responsive--invoice" data-attr="Importe">
+                <span class="ib-table-breakdown__txt ib-table-breakdown__txt--responsive--invoice">{{modalCtrl.model.invoiceDetail.price}}</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="ib-box--small ib-layout__line-spacing--bordered ib-box--border-narrow-responsive"
+    ng-class="modalCtrl.model.invoiceDetail.stateRequested === 'ISSUED' ? 'ib-layout__line-spacing--medium' : 'ib-layout__line-spacing--xmedium'">
+    <p class="ib-text ib-text--block ib-text--bold u-mb-xsmall">{{'MMB_INVOICES_MODAL_INVOICE_DATA' | translate}}</p>
+    <div class="ib-flex ib-flex--direction-column" ng-if="modalCtrl.model.invoiceDetail.billingData.surname">
+        <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD1' | translate}}:</p>
+        <p class="ib-text ib-text--block ib-text--lh-medium">{{modalCtrl.model.invoiceDetail.billingData.name}}</p>
+    </div>
+    <div class="ib-flex ib-flex--direction-column u-mt-small-desktop" ng-if="modalCtrl.model.invoiceDetail.billingData.surname">
+        <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD2' | translate}}:</p>
+        <p class="ib-text ib-text--block ib-text--lh-medium">{{modalCtrl.model.invoiceDetail.billingData.surname}}</p>
+    </div>
+    <div class="ib-flex ib-flex--direction-column u-mt-small-desktop" ng-if="!modalCtrl.model.invoiceDetail.billingData.surname">
+        <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD10' | translate}}:</p>
+        <p class="ib-text ib-text--block ib-text--lh-medium">{{modalCtrl.model.invoiceDetail.billingData.name}}</p>
+    </div>
+    <div class="ib-flex ib-flex--direction-column u-mt-small-desktop">
+        <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{(modalCtrl.model.invoiceDetail.billingData.surname ? 'MMB_INVOICES_MODAL_INVOICE_FIELD3' : 'MMB_INVOICES_MODAL_INVOICE_FIELD11') | translate}}:</p>
+        <p class="ib-text ib-text--block ib-text--lh-medium">{{modalCtrl.model.invoiceDetail.billingData.identityInformation}}</p>
+    </div>
+    <div class="ib-flex ib-flex--direction-column u-mt-small-desktop">
+        <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD4' | translate}}:</p>
+        <p class="ib-text ib-text--block ib-text--lh-medium">{{modalCtrl.model.invoiceDetail.shippingData.email}}</p>
+    </div>
+    <div class="ib-flex ib-flex--direction-column u-mt-small-desktop">
+        <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD5' | translate}}:</p>
+        <p class="ib-text ib-text--block ib-text--lh-medium">{{modalCtrl.model.invoiceDetail.state && modalCtrl.model.invoiceDetail.stateRequested === 'ISSUED' ? modalCtrl.model.invoiceDetail.billingData.address : modalCtrl.model.invoiceDetail.billingData.addressForRequested }}</p>
+    </div>
+    <div class="ib-flex ib-flex--direction-column u-mt-small-desktop" ng-if="modalCtrl.model.invoiceDetail.state && modalCtrl.model.invoiceDetail.stateRequested === 'REQUESTED'">
+        <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD6' | translate}}:</p>
+        <p class="ib-text ib-text--block ib-text--lh-medium">{{modalCtrl.model.invoiceDetail.billingData.floor}}</p>
+    </div>
+    <div class="ib-flex ib-flex--direction-column u-mt-small-desktop">
+        <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD7' | translate}}:</p>
+        <p class="ib-text ib-text--block ib-text--lh-medium">{{modalCtrl.model.invoiceDetail.billingData.city}}</p>
+    </div>
+    <div class="ib-flex ib-flex--direction-column u-mt-small-desktop">
+        <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD8' | translate}}:</p>
+        <p class="ib-text ib-text--block ib-text--lh-medium">{{modalCtrl.model.invoiceDetail.billingData.postalCode}}</p>
+    </div>
+    <div class="ib-flex ib-flex--direction-column u-mt-small-desktop" data-ng-if="modalCtrl.model.invoiceDetail.billingData.province && modalCtrl.model.invoiceDetail.billingData.province.length > 0">
+        <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_FIELD9' | translate}}:</p>
+        <p class="ib-text ib-text--block ib-text--lh-medium">{{modalCtrl.model.invoiceDetail.billingData.province}}</p>
+    </div>
+    <div class="ib-flex ib-flex--direction-column u-mt-small-desktop">
+        <p class="ib-text ib-text--responsive-bold ib-text--block ib-text--lh-medium ib-flex--basis-20">{{'MMB_INVOICES_MODAL_INVOICE_COUNTRY' | translate}}:</p>
+        <p class="ib-text ib-text--block ib-text--lh-medium">{{modalCtrl.model.invoiceDetail.billingData.country}}</p>
+    </div>
+</div>
+
+<!-- resend form -->
+<div ng-if="modalCtrl.model.invoiceDetail.state && modalCtrl.model.invoiceDetail.stateRequested === 'ISSUED'"
+    class="ib-box--bottom-small ib-box--no-lateral-padding ib-layout__line-spacing--bordered ib-layout__line-spacing--no-border-bottom ib-layout__line-spacing--large">
+    <p class="ib-text ib-text--block ib-text--bold">{{'MMB_INVOICES_MODAL_INVOICE_TITULAR_COPY' | translate}}</p>
+
+    <div data-ng-if="modalCtrl.model.showErrorConfirmation" class="ib-msg-alert ib-msg-alert--danger icon-informacion ib-msg-alert--smallest alert u-mt">
+        <p class="ib-msg-alert__text ib-msg-alert__text--bold">{{'MMB_INVOICES_MODAL_INVOICE_SEND_ERROR_TITULAR'|translate}}</p>
+        <p class="ib-msg-alert__text">{{'MMB_INVOICES_MODAL_INVOICE_SEND_ERROR_BODY'|translate}}</p>
+    </div>
+
+    <div data-ng-if="modalCtrl.model.showOkConfirmation && !modalCtrl.model.showErrorConfirmation" class="ib-msg-alert ib-msg-alert--success-normal icon-confirmacion ib-msg-alert--color-success ib-msg-alert--smallest alert u-mt">
+        <p class="ib-msg-alert__text ib-msg-alert__text--bold">{{'MMB_INVOICES_MODAL_INVOICE_SEND_OK_TITULAR'|translate}}</p>
+        <p class="ib-msg-alert__text">{{'MMB_INVOICES_MODAL_INVOICE_SEND_OK_BODY'|translate}}</p>
+    </div>
+
+    <p class="ib-text ib-text--block u-mt">{{'MMB_INVOICES_MODAL_INVOICE_BODY_COPY' | translate}}</p>
+
+    <form method="post" name="modalCtrl.modalInvoiceForm">
+        <div class="ib-layout u-mt">
+            <div class="ib-layout__line-spacing--medium">
+                <fieldset>
+                    <legend class="u-hide-accessible">E-mail emisión</legend>
+                        <div class="ib-flex ib-flex--align-normal ib-flex--direction-column">
+                            <div class="ib-flex--basis-75 ib-flex--basis-75-margin-right ib-flex--basis-100-no-margin-right-mobile">
+                                <div class="ib-input">
+                                    <label
+                                        class="ib-input__label"
+                                        for="email"
+                                        ng-class="{'ib-input__label--focus' : modalCtrl.emailFocused || (modalCtrl.modalInvoiceForm.email.$viewValue != null &amp;&amp; modalCtrl.modalInvoiceForm.email.$viewValue != '')}">
+                                        {{'MMB_INVOICES_MODAL_INVOICE_FORM_FIELD1' | translate}}
+                                    </label>
+                                    <input
+                                        class="ib-input__input"
+                                        type="text"
+                                        id="email"
+                                        name="email"
+                                        data-ng-focus="modalCtrl.emailFocused=true"
+                                        ng-blur="modalCtrl.emailFocused=false"
+                                        maxlength="60"
+                                        ng-pattern="::$root.MmBPatterns.EMAIL_PATTERN"
+                                        ng-model="modalCtrl.model.email"
+                                    >
+                                </div>
+                                <div ng-messages="modalCtrl.validationError && modalCtrl.modalInvoiceForm['email'].$error">
+                                    <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_EMAIL_PATTERN_ERROR'|translate}}</div>
+                                </div>
+                            </div>
+                            <div class="ib-flex--basis-25 ib-flex--basis-25-no-margin ib-flex--basis-100-margin-mobile">
+                                <button
+                                    class="ib-button ib-button--inverse ib-button--h-xmedium-responsive-2 ib-button--w-normal ib-button--only-full-mobile"
+                                    type="button"
+                                    ng-click="modalCtrl.resend();"
+                                    ng-disabled="modalCtrl.model.email === ''">
+                                    {{'MMB_INVOICES_MODAL_INVOICE_ACTION_SEND' | translate}}
+                                </button>
+                            </div>
+                        </div>
+                </fieldset>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="ib-box-card__button">
+    <button
+        class="ib-button ib-button--normal ib-button--only-full-mobile"
+        type="button"
+        ng-click="modalCtrl.close()">
+        {{'MMB_INVOICES_MODAL_INVOICE_CTA' | translate}}
+    </button>
+</div>
+
+<!-- Transition -->
+<!-- Spinner -->
+<div class="ib-overlay-fly ib-overlay-fly--bottom ib-overlay-fly--transparent"
+    data-ng-if="modalCtrl.model.submitted && !modalCtrl.model.showError && !modalCtrl.model.showOk">
+    <div class="ib-overlay-fly__container ib-overlay-fly__container--top-top-3">
+        <div class="ib-overlay-fly__icon">
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+        <span class="ib-overlay-fly__text">{{'MMB_INVOICES_MODAL_INVOICE_SPINNER_TEXT' | translate}}</span>
+    </div>
+</div>
+
+<!-- KO -->
+<div class="ib-overlay-fly ib-overlay-fly--bottom ib-overlay-fly--transparent"
+    data-ng-if="modalCtrl.model.showError">
+    <div class="ib-overlay-fly__container ib-overlay-fly__container--top-top-3">
+        <div id="iconLoading" class="ib-overlay-fly__border">
+            <div id="initLoading" class="ib-overlay-fly__border-loading"></div>
+            <div id="error" class="ib-overlay-fly__border-error icon-alertas_3"></div>
+        </div>
+        <span id="text" class="ib-overlay-fly__text">{{'MMB_INVOICES_MODAL_INVOICE_SEND_ERROR' | translate}}</span>
+    </div>
+</div>
+
+<!-- OK -->
+<div class="ib-overlay-fly ib-overlay-fly--bottom ib-overlay-fly--transparent"
+    data-ng-if="modalCtrl.model.showOk && !modalCtrl.model.showError">
+    <div class="ib-overlay-fly__container ib-overlay-fly__container--top-top-3">
+        <div id="iconLoading" class="ib-overlay-fly__border">
+            <div id="initLoading" class="ib-overlay-fly__border-loading"></div>
+            <div id="valid" class="ib-overlay-fly__border-valid icon-confirmacion"></div>
+        </div>
+        <span class="ib-overlay-fly__text">{{'MMB_INVOICES_MODAL_INVOICE_SEND_OK ' | translate}}</span>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="ib-modals">
+    <header class="ib-modals__header">
+        <h2 class="ib-heading ib-heading--type-1">{{'IBCOAC_MMB_SEGMENT_MODAL_TITLE'| translate}}</h2>
+        <div class="ib-modals__header-settings">
+            <button type="button" class="ib-modals__button-action icon-cerrar" id="FARE_CONDITIONS_MODAL_CLOSE" ng-click="modalCtrl.close()">
+				<span class="hide-accessible">{{'MODAL_CLOSE_ACCESS'|translate}}</span>
+			</button>
+        </div>
+    </header>
+    <section class="ib-modals__body">
+        <table class="ib-table ib-table--type-1">
+            <caption class="hide-accessible">{{'IBCOAC_MMB_SEGMENT_MODAL_HIDE_TABLE_TITLE'|translate}}</caption>
+            <thead class="ib-table__head">
+                <tr class="ib-table__row">
+                    <th class="ib-table__column ib-table__column--head" colspan="2">
+                        <span class="ib-table__text ib-table__text--title">{{'IBCOAC_MMB_SEGMENT_MODAL_TABLE_TITLE'|translate}}</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="ib-table__body">
+                <tr class="ib-table__row">
+                    <td class="ib-table__column" data-column="fareCondition">
+                        <span class="ib-table__text">{{'IBCOAC_MMB_SEGMENT_MODAL_CABIN'|translate}}</span>
+                    </td>
+                    <td class="ib-table__column" data-column="fareDescription">
+                        <span class="ib-table__text">{{modalCtrl.model.cabinDescription}}</span>
+                    </td>
+                </tr>
+                <tr ng-if="conditions.extendedInfo.conditionStatus" class="ib-table__row" ng-repeat="conditions in modalCtrl.model.conditions">
+                    <td class="ib-table__column" data-column="fareCondition">
+                        <span class="ib-table__text">{{conditions.name}}</span>
+                    </td>
+                    <td class="ib-table__column" data-column="fareDescription">
+                        <span class="ib-table__text">{{conditions.text}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <footer class="ib-modals__footer">
+        <div class="ib-content-buttons ib-content-buttons--end">
+            <button  title="{{'MODAL_ACCEPT'|translate}}" id="FARE_CONDITIONS_MODAL_ACCEPT" data-ng-click="modalCtrl.accept()" class="ib-button ib-button--w-medium">{{'MODAL_ACCEPT'|translate}}</button>
+        </div>
+    </footer>
+</div>

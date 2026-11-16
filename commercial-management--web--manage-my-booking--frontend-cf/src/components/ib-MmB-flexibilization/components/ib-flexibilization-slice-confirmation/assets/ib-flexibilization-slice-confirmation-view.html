@@ -1,0 +1,36 @@
+<!-- Totals -->
+<section class="ib-layout__section">
+    <fieldset>
+        <legend class="u-hide-accessible">Formulario de pago</legend>
+        <section class="ib-layout__section">
+            <div class="ib-box ib-box--medium ib-box--separator u-mb-none">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ib-check ib-check--regular" data-ng-class="{'ib-check--error' : !ibFlexSliceConfCtrl.checkTermsConditions && ibFlexSliceConfCtrl.submit}">
+                            <input type="checkbox" id="check_terms_onditions" name="check_terms_onditions" class="ib-check__input" ng-model="ibFlexSliceConfCtrl.checkTermsConditions" />
+                            <label for="check_terms_onditions" class="ib-check__label">
+                                <span class="ib-check__text ib-check__text--unfocused"
+                                    ng-bind-html="ibFlexSliceConfCtrl.relatedContent.termsAndConditions"></span>
+                            </label>
+                        </div>
+                        <div ng-messages="{'required': !ibFlexSliceConfCtrl.checkTermsConditions && ibFlexSliceConfCtrl.submit}">
+                            <div id="pmt-total-price-terms-and-conditions-error-msg" class="ib-alert ib-alert--error" ng-message="required">
+                                {{'TOTAL_PRICE_CHECKBOX_CONDITIONS_REQUIRED_ERROR'|translate}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ib-box ib-box--medium ib-box--separator u-mb-none" ng-if="!ibFlexSliceConfCtrl.sisterCities.sisterCitiesOptionChecked">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-md-push-8">
+                        <button data-ib-auto-scroll-top="modal" class="ib-button ib-button--block" type="submit" data-ng-click="ibFlexSliceConfCtrl.confirm()" ng-disabled="ibFlexSliceConfCtrl.submitClicked">{{'CONFIRM_BUTTON_TEXT' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="ib-box ib-box--medium ib-box--separator u-mb-none ib-flex ib-flex--align-center ib-flex__row--wrap-mobile" ng-if="ibFlexSliceConfCtrl.sisterCities.sisterCitiesOptionChecked">
+                <p class="ib-msg-alert__text--subtitle u-pr-big u-text-left u-pr-none-mobile u-mt-none ng-binding">{{'MMB_SISTER_POP_UP_ALERT' | translate}}</p>
+                <button data-ib-auto-scroll-top="modal" class="ib-button ib-button--block ib-flex--basis-100-margin-mobile ng-binding" type="submit" data-ng-click="ibFlexSliceConfCtrl.confirm()" ng-disabled="ibFlexSliceConfCtrl.submitClicked">{{'CONFIRM_BUTTON_TEXT' | translate}}</button>
+            </div>
+        </section>
+    </fieldset>
+</section>

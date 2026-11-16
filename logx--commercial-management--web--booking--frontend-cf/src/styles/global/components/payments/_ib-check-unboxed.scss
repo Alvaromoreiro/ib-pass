@@ -1,0 +1,139 @@
+/* -------------------------------------------------------------
+    #CHECK-unboxed
+----------------------------------------------------------------- */
+.#{$wefront__namespace}check-unboxed {
+    position: relative;
+
+    &__label {
+        display: block;
+        padding: rem(35) rem(7);
+        margin: rem(10) 0;
+        border: rem(1) solid color(gray-50);
+        text-align: center;
+        background-color: color(white);
+
+        &--title {
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+
+    &__text {
+        display: block;
+        margin: 0 rem(-7);
+        font-size: rem(21);
+        line-height: 16px;
+        color: color(gray-30);
+        white-space: nowrap;
+
+        &--price-long {
+            font-size: rem(15);
+        }
+    }
+
+    &__text-normal {
+        display: block;
+        width: 100%;
+        font-size: rem(15);
+        //word-wrap: break-word;
+        font-weight: 500;
+    }
+
+    &__text-big {
+        display: block;
+        font-size: rem(24);
+    }
+
+    &__detail {
+        display: block;
+        padding-top: rem(9);
+        font-size: rem(13);
+        line-height: 16px;
+        color: color(gray-30);
+    }
+
+    // Modifiers
+
+    &--special {
+        .#{$wefront__namespace}check-unboxed__label {
+            border: 0;
+            text-align: right;
+        }
+    }
+
+    &--type-1 {
+        .#{$wefront__namespace}check-unboxed__check {
+            &:checked {
+                + .#{$wefront__namespace}check-unboxed__label {
+                    border: rem(1) solid color(gray-30);
+                    background-color: color(gray-60);
+
+                    &::before {
+                        content: "\e93e";
+                        font-family: $font-icons;
+                        font-size: rem(24);
+                        line-height: 30px;
+                        background-color: color(gray-60);
+                        box-shadow: 0 0 0 rem(1) color(gray-20);
+                    }
+                    .#{$wefront__namespace}check-unboxed__text {
+                        color: color(gray-10);
+                    }
+                }
+            }
+
+            &:focus,
+            &:active {
+                + .#{$wefront__namespace}check-unboxed__label {
+                    border-color: color(orange-10);
+                }
+            }
+        }
+        .#{$wefront__namespace}check-unboxed__label {
+            padding-top: rem(18);
+            padding-bottom: rem(35);
+            border: rem(1) solid color(gray-50);
+            background-color: transparent;
+
+            &::before {
+                bottom: rem(-12);
+                width: rem(30);
+                height: rem(30);
+                border: 0;
+                background-color: transparent;
+                box-shadow: none;
+            }
+        }
+        .#{$wefront__namespace}check-unboxed__text {
+            font-size: rem(20);
+            font-weight: normal;
+            color: color(gray-30);
+        }
+    }
+}
+
+// Responsive
+
+@include media-query('lg') {
+    .#{$wefront__namespace}check-unboxed {
+        &__text {
+            font-size: rem(16);
+
+            &--price-long {
+                font-size: rem(13);
+            }
+        }
+    }
+}
+
+@include media-query(xs) {
+    .#{$wefront__namespace}check-unboxed {
+        &--special {
+            .#{$wefront__namespace}check-unboxed__label {
+                height: auto !important;
+                padding-bottom: 0;
+                text-align: center;
+            }
+        }
+    }
+}

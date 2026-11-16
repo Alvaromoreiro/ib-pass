@@ -1,0 +1,864 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ib-gmap
+//    Desripcion: Estilos para el mapa de Avios
+//******************************************************************************/
+.#{$wefront__namespace}gmap {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: rem(585);
+
+    &__collapse {
+        position: relative;
+        display: block;
+        padding: rem(20) rem(30);
+        background: color(white);
+
+        &-content {
+            position: relative;
+            display: none;
+            width: 100%;
+            height: 100%;
+            padding: 0 rem(30) rem(20);
+            background: color(white);
+
+            .collapse.in {
+                display: block;
+            }
+        }
+
+        &-txt {
+            display: inline-block;
+            max-width: calc(100% - 1.25rem);
+            padding: 0 rem(10);
+            font-family: $font-normal;
+            font-size: rem(18);
+            color: color(primary);
+            vertical-align: top;
+        }
+
+        &-icon {
+            display: inline-block;
+            font-size: rem(18);
+            color: color(primary);
+            float: right;
+            vertical-align: top;
+        }
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            outline: none;
+        }
+
+        &:focus {
+            border: rem(1) solid color(orange-10);
+        }
+    }
+
+    &__list {
+        position: relative;
+        display: block;
+        font-size: 0;
+        background: color(white);
+    }
+
+    &__item {
+        display: inline-block;
+        width: 25%;
+        box-sizing: border-box;
+        padding: rem(10) rem(10);
+        vertical-align: top;
+    }
+
+    &__link {
+        font-family: $font-normal;
+        font-size: rem(16);
+        color: color(primary);
+
+        &:hover {
+            color: color(red-50);
+        }
+
+        &:focus {
+            border: rem(1) solid color(orange-10);
+            color: color(red-50);
+            outline: none;
+        }
+    }
+
+    &__cluster {
+        position: absolute;
+        overflow: hidden;
+        width: rem(27);
+        height: rem(40);
+        padding-top: rem(7.5);
+        margin-top: rem(-9.5);
+        margin-left: rem(12);
+        font-family: $font-special;
+        font-size: rem(14);
+        text-align: center;
+        color: color(gray-10);
+        cursor: pointer;
+        speak: none;
+
+        &::before {
+            position: absolute;
+            z-index: 100;
+            top: rem(-7);
+            left: rem(-14);
+            display: block;
+            font-size: rem(54);
+            color: color(primary);
+            cursor: pointer;
+        }
+
+        &::after {
+            content: "";
+            position: relative;
+            z-index: -1;
+            bottom: rem(-12);
+            display: block;
+            width: rem(9);
+            height: rem(5.4);
+            margin: 0 auto;
+            border-radius: 50%;
+            background-color: rgb(51 51 51 / 30%);
+        }
+
+        &:hover {
+            &::before {
+                color: color(red-50);
+            }
+        }
+
+        &:focus {
+            outline: rem(2) solid color(orange-10);
+        }
+
+        &--min {
+            width: rem(20);
+            height: rem(34);
+            padding-top: rem(10);
+            margin-top: rem(-3.5);
+            margin-left: rem(11);
+            font-size: rem(10);
+            font-weight: bold;
+
+            &::before {
+                top: 0;
+                margin-left: rem(6);
+                font-size: rem(36);
+                font-weight: normal;
+            }
+
+            &::after {
+                bottom: rem(-7);
+                font-weight: normal;
+            }
+        }
+    }
+
+    // Fix Bug PRO - z-index click infowindow
+    &__overlay {
+        width: auto !important;
+    }
+
+    //Info - InfoWindow Markers
+    &__info {
+        position: relative;
+        display: block;
+
+        &-header {
+            position: relative;
+            display: block;
+            padding: rem(16) rem(16) 0;
+            margin-bottom: rem(8);
+            text-align: center;
+        }
+
+        &-body {
+            position: relative;
+            display: block;
+            text-align: left;
+        }
+
+        &-footer {
+            position: relative;
+            display: block;
+            padding: rem(15) rem(16) rem(15);
+            border-top: rem(1) solid color(gray-50);
+        }
+
+        &-title {
+            position: relative;
+            display: block;
+            padding: 0 rem(25);
+            font-family: $font-special;
+            font-size: rem(20);
+            line-height: rem(20);
+            color: color(gray-10);
+        }
+
+        &-text {
+            display: inline-block;
+            max-width: calc(100% - 1.875rem);
+            font-family: $font-normal;
+            font-size: rem(14);
+            line-height: rem(27);
+            color: color(gray-30);
+            vertical-align: top;
+            // - Modifiers
+            &--big {
+                font-size: rem(18);
+            }
+
+            &--primary {
+                color: color(primary);
+            }
+
+            &--left {
+                width: 40%;
+                padding-right: rem(5);
+                text-align: left;
+            }
+
+            &--right {
+                width: 60%;
+                padding-left: rem(5);
+                text-align: right;
+            }
+        }
+
+        &-icon {
+            display: block;
+            font-family: $font-icons;
+            font-size: rem(14);
+            color: color(primary);
+
+            &::before {
+                display: inline-block;
+                margin-right: rem(7);
+                font-size: rem(20);
+                line-height: rem(27);
+                -ms-transform: rotate(90deg);
+                transform: rotate(90deg);
+                vertical-align: top;
+            }
+            //- Modifiers
+            &--inverse {
+                &::before {
+                    display: inline-block;
+                    margin-right: rem(7);
+                    font-size: rem(20);
+                    line-height: rem(27);
+                    -ms-transform: rotate(270deg);
+                    transform: rotate(270deg);
+                    vertical-align: top;
+                }
+            }
+        }
+
+        &-figure {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            width: 100%;
+            height: rem(144);
+            margin-bottom: rem(12);
+
+            img {
+                height: 100%;
+            }
+        }
+
+        &-flights {
+            position: relative;
+            display: block;
+            padding: 0 rem(16);
+            margin-bottom: rem(12);
+            font-size: 0;
+        }
+
+        &-price {
+            position: relative;
+            display: block;
+            margin-bottom: rem(15);
+            font-size: 0;
+        }
+    }
+
+    //Info hover - InfoWindow Markers Hover and InfoWindows Clusters
+    &__info-hover {
+        position: relative;
+        display: block;
+        padding: 0 !important;
+        -webkit-animation: fadein 0.5s ease-in-out; /* Safari, Chrome and Opera > 12.1 */
+        -moz-animation: fadein 0.5s ease-in-out; /* Firefox < 16 */
+        -ms-animation: fadein 0.5s ease-in-out; /* Internet Explorer */
+        -o-animation: fadein 0.5s ease-in-out; /* Opera < 12.1 */
+        animation: fadein 0.5s ease-in-out;
+        opacity: 1;
+        pointer-events: none;
+
+        &-list {
+            display: inline-block;
+            overflow: visible;
+            width: auto !important;
+            padding: rem(1) rem(10) rem(2);
+            text-align: left;
+            background: color(white);
+            box-shadow: 0 rem(2) rem(3) 0 color(black, 0.32), 0 rem(-1) rem(4) 0 color(black, 0.11);
+            vertical-align: top;
+            word-wrap: break-word;
+        }
+
+        &-content {
+            position: relative;
+            display: block;
+            height: 100%;
+            text-align: left;
+        }
+
+        &-item {
+            display: block;
+            font-family: $font-normal;
+            font-size: rem(14);
+            text-align: left;
+            color: color(gray-10);
+
+            &::before {
+                content: "·";
+                display: inline-block;
+                font-family: $font-normal;
+                font-size: rem(14);
+                text-align: left;
+                vertical-align: top;
+            }
+        }
+
+        &-txt {
+            display: inline-block;
+            overflow: visible;
+            width: auto !important;
+            padding: 0 rem(10);
+            font-family: $font-normal;
+            font-size: rem(14);
+            text-align: left;
+            line-height: rem(25);
+            color: color(gray-10);
+            background: color(white);
+            box-shadow: 0 rem(2) rem(3) 0 color(black, 0.32), 0 rem(-1) rem(4) 0 color(black, 0.11);
+            vertical-align: top;
+            word-wrap: break-word;
+        }
+        // - Modifiers
+        &--only {
+            text-align: center;
+        }
+    }
+
+    // Container - InfoWindow
+    .gm-style-iw-t {
+        display: none !important;
+    }
+
+    &__container-box {
+        position: relative !important;
+        display: block;
+        min-width: auto !important;
+        max-width: rem(266);
+        padding: 0;
+        border-radius: rem(3);
+        -webkit-animation: fadein 0.5s ease-in-out; /* Safari, Chrome and Opera > 12.1 */
+        -moz-animation: fadein 0.5s ease-in-out; /* Firefox < 16 */
+        -ms-animation: fadein 0.5s ease-in-out; /* Internet Explorer */
+        -o-animation: fadein 0.5s ease-in-out; /* Opera < 12.1 */
+        animation: fadein 0.5s ease-in-out;
+        background: color(white);
+        box-shadow: 0 rem(2) rem(3) 0 color(black, 0.32), 0 rem(-1) rem(4) 0 color(black, 0.11);
+        opacity: 1;
+
+        .gm-style-iw {
+            position: relative !important;
+            top: 0 !important;
+            left: 0 !important;
+            display: block;
+            overflow: visible !important;
+            width: 100% !important;
+            max-width: rem(266);
+            padding: 0 !important;
+            background: color(white) !important;
+
+            &::before {
+                content: "";
+                position: absolute;
+                z-index: 3;
+                top: 52%;
+                left: rem(-27);
+                border-top: rem(15) solid transparent;
+                border-right: rem(15) solid color(white);
+                border-bottom: rem(15) solid transparent;
+                border-left: rem(15) solid transparent;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                z-index: 2;
+                top: 52%;
+                left: rem(-29);
+                border-top: rem(15) solid transparent;
+                border-right: rem(15) solid color(gray-10, 0.11);
+                border-bottom: rem(15) solid transparent;
+                border-left: rem(15) solid transparent;
+            }
+
+            & + div {
+                z-index: 20;
+                overflow: visible !important;
+                width: rem(20) !important;
+                height: rem(20) !important;
+                cursor: pointer;
+
+                img {
+                    display: none;
+                }
+            }
+        }
+
+        .gm-style-iw-d {
+            overflow: auto !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+
+            .gmnoprint {
+                &::after {
+                    display: none;
+                }
+            }
+        }
+
+        &.gm-style-iw-t {
+            &::after {
+                display: none !important;
+            }
+        }
+        // - Modifiers
+        &--full-height {
+            height: 100% !important;
+
+            .gm-style-iw {
+                border-radius: rem(4) !important;
+            }
+
+            &.gm-style-iw-t {
+                display: block !important;
+            }
+
+            .gm-ui-hover-effect {
+                top: rem(4) !important;
+                right: rem(4) !important;
+                margin: 0 !important;
+
+                img {
+                    display: none !important;
+                }
+
+                &::after {
+                    content: "\e935";
+                    font-family: $font-icons;
+                    font-size: rem(27);
+                    color: color(primary);
+                }
+            }
+        }
+
+        &--only {
+            position: absolute;
+            width: auto !important;
+            min-width: rem(300) !important;
+            max-width: rem(300);
+            height: auto !important;
+            min-height: rem(25);
+            box-sizing: border-box;
+            margin-top: rem(12) !important;
+            margin-left: rem(100) !important;
+            text-align: left;
+            background: transparent;
+            box-shadow: none;
+
+            &.gm-style-iw-t {
+                display: block !important;
+            }
+
+            .gm-style-iw {
+                width: auto !important;
+                max-width: 100%;
+                background: transparent !important;
+                box-shadow: none !important;
+                .#{$wefront__namespace}gmap__info-hover-content {
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        z-index: 2;
+                        bottom: rem(-13);
+                        left: rem(-1);
+                        width: 0;
+                        height: 0;
+                        border-top: rem(12) solid color(gray-30, 0.3);
+                        border-right: rem(10) solid transparent;
+                    }
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        z-index: 3;
+                        bottom: rem(-9);
+                        left: 0;
+                        width: 0;
+                        height: 0;
+                        border-top: rem(10) solid color(white);
+                        border-right: rem(10) solid transparent;
+                    }
+                }
+
+                div {
+                    overflow: visible !important;
+                    width: 100% !important;
+                }
+            }
+        }
+
+        &--list {
+            position: absolute;
+            width: auto !important;
+            min-width: rem(300) !important;
+            max-width: rem(300);
+            height: auto !important;
+            min-height: rem(25);
+            box-sizing: border-box;
+            margin-top: rem(-20) !important;
+            margin-left: rem(58) !important;
+            text-align: left;
+            background: transparent;
+            box-shadow: none;
+
+            &.gm-style-iw-t {
+                display: block !important;
+            }
+
+            .gm-style-iw {
+                width: auto !important;
+                max-width: 100%;
+                height: auto !important;
+                background: transparent !important;
+                box-shadow: none !important;
+                .#{$wefront__namespace}gmap__info-hover-list {
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        z-index: 2;
+                        bottom: rem(-11);
+                        left: rem(-1);
+                        width: 0;
+                        height: 0;
+                        border-top: rem(12) solid color(gray-30, 0.3);
+                        border-right: rem(10) solid transparent;
+                    }
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        z-index: 3;
+                        bottom: rem(-9);
+                        left: 0;
+                        width: 0;
+                        height: 0;
+                        border-top: rem(10) solid color(white);
+                        border-right: rem(10) solid transparent;
+                    }
+                }
+
+                div {
+                    overflow: visible !important;
+                    width: 100%;
+                }
+            }
+        }
+
+        &--only,
+        &--list {
+            border-radius: 0;
+
+            .gm-ui-hover-effect {
+                display: none !important;
+            }
+
+            .gm-style-iw {
+                overflow: visible;
+                min-height: rem(25);
+
+                &::before,
+                &::after {
+                    display: none;
+                }
+
+                & + div {
+                    &::after {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        &--left {
+            .gm-style-iw {
+                position: relative !important;
+                top: 0 !important;
+                left: 0 !important;
+                display: block;
+                overflow: visible !important;
+                width: 100% !important;
+                max-width: rem(266);
+                padding: 0 !important;
+                background: color(white) !important;
+
+                &::before {
+                    right: rem(-27);
+                    left: auto;
+                    border-right: rem(15) solid transparent;
+                    border-left: rem(15) solid color(white);
+                }
+
+                &::after {
+                    right: rem(-29);
+                    left: auto;
+                    border-right: rem(15) solid transparent;
+                    border-left: rem(15) solid color(gray-10, 0.11);
+                }
+            }
+        }
+    }
+
+    //Markers Canvas
+
+    &__container-markers {
+        canvas {
+            z-index: 1;
+            margin-top: 0;
+            margin-left: 0;
+            cursor: pointer;
+
+            &:hover {
+                &::before {
+                    background: color(red-50);
+                }
+            }
+        }
+    }
+
+    .gmnoprint {
+        overflow: visible !important;
+
+        &::after {
+            content: "";
+            position: relative;
+            z-index: -1;
+            top: remcalc(100%, " - ", rem(5));
+            display: block;
+            width: rem(9);
+            height: rem(5.4);
+            margin: 0 auto;
+            border-radius: 50%;
+            background-color: rgb(51 51 51 / 30%);
+        }
+
+        &.gm-bundled-control,
+        &.gm-style-cc {
+            &::after {
+                display: none;
+            }
+
+            .gmnoprint {
+                &::after {
+                    display: none;
+                }
+            }
+        }
+        //Buttons Zoom
+        &.gm-bundled-control {
+            top: rem(142) !important;
+            left: rem(46) !important;
+            width: rem(40);
+            height: rem(90);
+
+            .gmnoprint {
+                & > div {
+                    width: auto !important;
+                    height: auto !important;
+                    background-color: transparent !important;
+                    box-shadow: none !important;
+                    cursor: not-allowed !important;
+
+                    & > * {
+                        &:nth-child(1) {
+                            width: rem(40) !important;
+                            height: rem(40) !important;
+                            margin-bottom: rem(18) !important;
+                            background: color(white) !important;
+                            box-shadow: 0 rem(2) rem(27) 0 color(black, 0.16) !important;
+                            cursor: pointer !important;
+
+                            img {
+                                display: none;
+                            }
+
+                            &::after {
+                                content: "\ea59";
+                                font-family: $font-icons;
+                                font-size: rem(40);
+                                color: color(gray-30);
+                            }
+
+                            &[disabled] {
+                                cursor: not-allowed !important;
+                                pointer-events: none;
+
+                                &::after {
+                                    color: color(gray-30, 0.5) !important;
+                                }
+                            }
+                        }
+
+                        &:nth-child(2) {
+                            display: none;
+                        }
+
+                        &:nth-child(3) {
+                            width: rem(40) !important;
+                            height: rem(40) !important;
+                            background: color(white) !important;
+                            box-shadow: 0 rem(2) rem(27) 0 color(black, 0.16) !important;
+                            cursor: pointer !important;
+
+                            img {
+                                display: none;
+                            }
+
+                            &::after {
+                                content: "\ea5a";
+                                font-family: $font-icons;
+                                font-size: rem(40);
+                                color: color(gray-30);
+                            }
+
+                            &[disabled] {
+                                cursor: not-allowed !important;
+                                pointer-events: none;
+
+                                &::after {
+                                    color: color(gray-30, 0.5) !important;
+                                }
+                            }
+                        }
+
+                        &:hover {
+                            &:nth-child(1),
+                            &:nth-child(3) {
+                                outline: none;
+
+                                &::after {
+                                    color: color(primary);
+                                }
+                            }
+                        }
+
+                        &:focus {
+                            &:nth-child(1),
+                            &:nth-child(3) {
+                                outline: rem(1) solid color(orange-10) !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .gm-style-pbc {
+        //gestureHandling index
+        z-index: 5 !important;
+        pointer-events: none;
+
+        & + div {
+            div > .gmnoprint {
+                min-height: rem(18);
+                opacity: 1 !important;
+
+                &--maxzoom {
+                    &::after {
+                        top: remcalc(100%, " + ", rem(2));
+                    }
+                }
+
+                &--minzoom {
+                    &::after {
+                        top: remcalc(100%, " - ", rem(12));
+                    }
+                }
+
+                &--regularzoom {
+                    &::after {
+                        top: remcalc(100%, " - ", rem(4));
+                    }
+                }
+            }
+        }
+    }
+
+    .accessibilityKeyboard {
+        &:focus {
+            opacity: 1 !important;
+            outline: rem(2) solid color(orange-10) !important;
+        }
+    }
+}
+
+//Responsive
+
+@include media-query('lg') {
+    .#{$wefront__namespace}gmap {
+        .gmnoprint {
+            &.gm-bundled-control {
+                top: rem(70) !important;
+                left: rem(41) !important;
+            }
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}gmap {
+        .gmnoprint {
+            &.gm-bundled-control {
+                top: rem(76) !important;
+                left: rem(16) !important;
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}gmap {
+        min-height: rem(550);
+
+        .gmnoprint {
+            &.gm-bundled-control {
+                top: rem(50) !important;
+                left: rem(16) !important;
+            }
+        }
+    }
+}

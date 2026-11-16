@@ -1,0 +1,379 @@
+/* -------------------------------------------------------------
+    #TAB SCROLLABLE
+----------------------------------------------------------------- */
+.#{$wefront__namespace}tab-scrollable {
+    &__header {
+        width: 100%;
+    }
+
+    //Overray
+    //.mCSB_container {
+    //max-width: rem(800) !important;
+    //}
+    .mCSB_scrollTools {
+        //bottom: rem(24) !important;
+        bottom: rem(8) !important;
+
+        .mCSB_dragger_bar {
+            display: none;
+        }
+    }
+
+    &__header-list {
+        display: table;
+        width: auto;
+        max-width: 100%;
+        min-height: rem(112);
+        margin: auto auto rem(24);
+        font-size: 0;
+        text-align: center;
+        background-color: color(white);
+        white-space: nowrap;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 1.5rem);
+            background-color: color(white);
+        }
+
+        &--transparent {
+            background: transparent;
+
+            &::before {
+                background: transparent;
+            }
+        }
+    }
+
+    &__header-item {
+        //display: inline-block;
+        display: table-cell;
+        font-size: rem(16);
+        vertical-align: top;
+
+        &:first-child {
+            .#{$wefront__namespace}tab-scrollable__header-lnk {
+                &::before {
+                    display: none;
+                }
+            }
+        }
+
+        &:last-child {
+            .#{$wefront__namespace}tab-scrollable__header-lnk {
+                &::after {
+                    display: none;
+                }
+            }
+        }
+
+        // Modifiers
+
+        &--active {
+            position: relative;
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: rem(-30);
+                left: 50%;
+                width: rem(12);
+                height: rem(12);
+                background-color: color(white);
+                -ms-transform: translate(-50%, 0) rotate(45deg);
+                transform: translate(-50%, 0) rotate(45deg);
+            }
+        }
+    }
+
+    &__header-item-content {
+        width: 100%;
+        height: 100%;
+        padding: rem(15) rem(15) 0 rem(15);
+    }
+
+    &__header-lnk {
+        position: relative;
+        display: inline-block;
+        width: rem(150);
+        height: rem(112);
+        text-align: center;
+
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: none;
+            outline: 0;
+            .#{$wefront__namespace}tab-scrollable__header-txt {
+                text-decoration: underline;
+            }
+        }
+
+        &--success {
+            .#{$wefront__namespace}tab-scrollable__header-icon {
+                border-color: color(gray-30);
+                color: color(gray-30);
+
+                &::after {
+                    content: "\e93e";
+                    position: absolute;
+                    top: rem(-5);
+                    right: rem(-10);
+                    width: rem(22);
+                    height: rem(22);
+                    border-radius: 100%;
+                    font-family: $font-icons;
+                    font-size: rem(16);
+                    line-height: rem(23);
+                    color: color(white);
+                    background-color: color(green-10);
+                }
+            }
+        }
+
+        &--warning {
+            .#{$wefront__namespace}tab-scrollable__header-icon {
+                border-color: color(gray-30);
+                color: color(gray-30);
+
+                &::after {
+                    content: "\ea52";
+                    position: absolute;
+                    top: rem(-5);
+                    right: rem(-10);
+                    width: rem(22);
+                    height: rem(22);
+                    border-radius: 100%;
+                    font-family: $font-icons;
+                    font-size: rem(22);
+                    line-height: rem(23);
+                    color: color(white);
+                    background-color: color(orange-30);
+                }
+            }
+        }
+
+        &--error {
+            .#{$wefront__namespace}tab-scrollable__header-icon {
+                border-color: color(gray-30);
+                color: color(gray-30);
+
+                &::after {
+                    content: "\e92c";
+                    position: absolute;
+                    top: rem(-5);
+                    right: rem(-10);
+                    width: rem(22);
+                    height: rem(22);
+                    border-radius: 100%;
+                    font-family: $font-icons;
+                    font-size: rem(18);
+                    line-height: rem(23);
+                    color: color(white);
+                    background-color: color(orange-30);
+                }
+            }
+        }
+
+        &--static {
+            .#{$wefront__namespace}tab-scrollable__header-icon {
+                border-color: color(gray-30);
+                color: color(gray-30);
+                background-color: color(white);
+            }
+        }
+
+        &--active {
+            .#{$wefront__namespace}tab-scrollable__header-icon {
+                border-color: color(gray-30);
+                color: color(white);
+                background-color: color(gray-30);
+            }
+        }
+
+        &--disabled {
+
+            .#{$wefront__namespace}tab-scrollable__header-icon {
+                border-color: color(gray-40);
+                color: color(gray-40);
+                background-color: color(white);
+            }
+            .#{$wefront__namespace}tab-scrollable__header-txt {
+                color: color(gray-40);
+            }
+
+            &:hover,
+            &:focus {
+                cursor: default;
+                .#{$wefront__namespace}tab-scrollable__header-txt {
+                    text-decoration: none;
+                }
+            }
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            top: 35%;
+            width: 30%;
+            height: rem(1);
+            background-color: color(gray-70);
+        }
+
+        &::after {
+            right: 0;
+        }
+
+        &::before {
+            left: 0;
+        }
+    }
+
+    &__header-icon {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        width: rem(50);
+        height: rem(50);
+        border: rem(2) solid color(gray-40);
+        border-radius: 50%;
+        font-size: rem(35);
+        text-align: center;
+        color: color(gray-40);
+        background-color: color(white);
+
+        &::before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    &__header-txt {
+        display: block;
+        font-size: rem(13);
+        text-align: center;
+        color: color(gray-10);
+        white-space: normal;
+        word-wrap: break-word;
+    }
+
+    &__body {
+        padding: rem(25) 0;
+        background-color: color(white);
+    }
+
+    // Modifiers
+
+    &--empty {
+        .#{$wefront__namespace}tab-scrollable {
+            &__header-list {
+                background-color: transparent;
+            }
+        }
+    }
+
+    &--accordion {
+        border-top: rem(1) solid color(gray-50);
+        border-bottom: rem(1) solid color(gray-50);
+    }
+}
+
+
+.#{$wefront__namespace}accordion-content {
+    .#{$wefront__namespace}tab-scrollable__header:after, .#{$wefront__namespace}tab-scrollable__header:before {
+        display: none;
+    }
+}
+//GDR
+
+.#{$wefront__namespace}tab-scrollable--type-gdr {
+    .mCSB_scrollTools {
+        .mCSB_dragger_bar {
+            display: block;
+        }
+    }
+    .#{$wefront__namespace}tab-scrollable {
+        &__header {
+            &::after,
+            &::before {
+                content: "";
+                position: absolute;
+                z-index: 9;
+                top: 0;
+                left: 0;
+                width: rem(7);
+                height: 100%;
+                background-image: linear-gradient(to left, rgb(238 238 238 / 0%), color(gray-50));
+            }
+
+            &::after {
+                right: 0;
+                left: auto;
+                background-image: linear-gradient(to right, rgb(238 238 238 / 0%), color(gray-50));
+            }
+        }
+
+        &__header-list {
+            display: table;
+            width: auto;
+            max-width: 100%;
+            min-height: rem(112);
+            margin: auto auto rem(24);
+            font-size: 0;
+            text-align: center;
+            background: transparent;
+            white-space: nowrap;
+
+            &::before {
+                background: transparent;
+            }
+        }
+
+        &__header-item {
+            &:only-of-type {
+                .#{$wefront__namespace}tab-scrollable__header-lnk {
+                    width: rem(200);
+                }
+            }
+        }
+
+        &__header-lnk {
+            &--disabled {
+                .#{$wefront__namespace}tab-scrollable__header-txt {
+                    color: color(gray-40);
+                }
+
+                &:hover,
+                &:focus {
+                    cursor: default;
+                }
+            }
+        }
+    }
+}
+
+// Responsive
+@include media-query('mobile') {
+    .#{$wefront__namespace}tab-scrollable {
+        &__header-lnk {
+            width: rem(80);
+
+            &::after,
+            &::before {
+                width: 13%;
+            }
+        }
+
+        &__header-item-content {
+            padding: rem(15) 0 0 0;
+        }
+    }
+}

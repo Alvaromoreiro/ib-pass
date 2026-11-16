@@ -1,0 +1,36 @@
+<main class="ib-layout ib-layout--bck-1">
+    <ib-background [imageUrl]="imageUrl"></ib-background>
+    <ib-booking-header-simple/>
+    <div class="container ib-container-footer" [ngClass]="{'ib-error-amadeus__stopover': stopoverNoFeeError}">
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="bbki-bk-error-amadeus-err-modal" class="ib-error-amadeus">
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--medium QM-modal__error__header">
+                        <h1>
+                            <span class="ib-error-amadeus__title" [ngClass]="{'ib-error-amadeus__title-stopover': isStopOver}">{{ 'IBBKERROR_TEXT_1' | translate }}</span>
+                            <span *ngIf="!isStopOver" class="ib-error-amadeus__title">{{ 'IBBKERROR_TEXT_2' | translate }}</span>
+                            <span *ngIf="stopoverNoFeeError" class="ib-error-amadeus__title ib-error-amadeus__title-stopover">{{ 'IBBKERROR_TEXT_2_STOPOVER_NO_FEE' | translate }}</span>
+                            <span *ngIf="stopoverDispoError" class="ib-error-amadeus__title ib-error-amadeus__title-stopover">{{ 'IBBKERROR_TEXT_2_STOPOVER' | translate }}</span>
+
+                        </h1>
+                    </div>
+                    <h2 class="ib-error-amadeus__description QM-modal__error__body" 
+                        [attr.data-qm-modal-error-status]="errorConfig?.errorCode"
+                        [attr.data-qm-modal-error-errorcode]="errorConfig?.internalErrorCode?.length > 0 ? errorConfig.internalErrorCode : undefined"
+                        [attr.data-qm-modal-error-api]="errorConfig?.requestURL?.length > 0 ? errorConfig.requestURL : undefined">
+                        <span *ngIf="availError && !isStopOver">{{ errorConfig?.message | translate }}</span>
+                        <span *ngIf="!availError && !isStopOver">{{ 'IBBKERROR_TEXT_3' | translate }}</span>
+                        <span *ngIf="stopoverDispoError">{{ 'IBBKERROR_TEXT_3_STOPOVER' | translate }}</span>
+                        <span *ngIf="stopoverNoFeeError" [innerHTML]="'IBBKERROR_TEXT_3_STOPOVER_NO_FEE' | translate"></span>
+                    </h2>
+                </div>
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--text-center">
+                    <a id="bbki-bk-error-return-homepage-link" href="javascript:void(0)" (click)="returnHomePage()" class="ib-button ib-button--big ib-button--block-sm QM-modal__error__footer"
+                        [title]="'IBBKERROR_TEXT_BUTTON_TITLE' | translate">{{ buttonLabel | translate }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <ib-main-footer id="footer" [footerModel]="footerModel" [isFullWidth]="true" [isFixed]="true"></ib-main-footer>
+</main>

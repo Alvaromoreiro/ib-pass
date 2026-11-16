@@ -1,0 +1,219 @@
+/* -------------------------------------------------------------
+    #REFUNDS-BOND
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}refund-bonds {
+    width: 100%;
+    padding: rem(24);
+    margin-bottom: rem(32);
+    background-color: color(white);
+    box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+
+    &__head {
+        &--left {
+            text-align: left;
+            .#{$wefront__namespace}refund-bonds {
+                &__title,
+                &__subtitle {
+                    text-align: left;
+                }
+            }
+        }
+    }
+
+    &__title {
+        font-family: $font-normal;
+        font-size: rem(16);
+        line-height: normal;
+        text-transform: uppercase;
+
+        &--special {
+            font-family: $font-special;
+            font-size: size(medium);
+            text-transform: initial;
+        }
+
+        &--strong {
+            font-weight: bold;
+        }
+
+        &[class*="icon-"] {
+            position: relative;
+            padding-left: rem(40);
+            line-height: rem(39);
+
+            &::before {
+                position: absolute;
+                left: rem(-6);
+                font-size: rem(43);
+                font-weight: normal;
+                color: color(primary);
+            }
+        }
+
+        &.icon-descuento {
+            &::before {
+                left: rem(-16);
+                font-size: rem(64);
+            }
+        }
+    }
+
+    &__subtitle {
+        margin-top: rem(16);
+        font-family: $font-normal;
+        font-size: rem(13);
+        line-height: rem(20);
+        color: color(black);
+
+        &--type-01 {
+            margin-top: rem(10);
+            color: color(gray-30);
+        }
+    }
+
+    &__note {
+        margin-top: rem(16);
+        font-family: $font-normal;
+        font-size: rem(13);
+        line-height: 1.54;
+        color: color(black);
+    }
+
+    &__value {
+        font-family: $font-special;
+        font-size: rem(32);
+        line-height: normal;
+        color: color(gray-10);
+    }
+
+    &__body {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: rem(16);
+
+        &--boxed {
+            padding: rem(24);
+            border: rem(1) solid color(gray-70);
+            background-color: color(gray-60);
+        }
+
+        &--boxed-white {
+            padding: rem(24);
+            border: rem(1) solid color(gray-70);
+            background-color: color(white);
+        }
+    }
+
+    &__voucher-box {
+        padding: rem(16);
+    }
+
+    &--type-01 {
+        border-top: rem(2) solid color(primary);
+    }
+
+    &--type-02 {
+        text-align: left;
+        .#{$wefront__namespace}refund-bonds {
+            &__title {
+                font-size: rem(14);
+                font-weight: bold;
+                text-transform: inherit;
+            }
+        }
+        .#{$wefront__namespace}link {
+            color: color(black);
+        }
+    }
+}
+
+//Responsive
+
+
+@include media-query('md') {
+    .#{$wefront__namespace}refund-bonds {
+        &__voucher-box {
+            padding: rem(16);
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}refund-bonds {
+        &__head {
+            text-align: center;
+
+            &--left {
+                text-align: left;
+                .#{$wefront__namespace}refund-bonds {
+                    &__title,
+                    &__subtitle {
+                        text-align: left;
+                    }
+                }
+            }
+        }
+
+        &__title {
+            text-align: center;
+
+            &[class*="icon-"] {
+                display: inline-block;
+            }
+        }
+
+        &__subtitle {
+            text-align: center;
+        }
+
+        &__note {
+            text-align: center;
+        }
+
+        &__value {
+            display: block;
+        }
+
+        &__body {
+            flex-flow: column wrap;
+
+            &-block {
+                width: 100%;
+                margin-top: rem(24);
+                text-align: center;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+
+            &--boxed {
+                margin-top: rem(24);
+            }
+        }
+
+        &__voucher-box {
+            padding: rem(16);
+        }
+    }
+}
+
+
+@include media-query('sm') {
+    .#{$wefront__namespace}refund-bonds {
+        &__voucher-box {
+            padding: rem(12);
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}refund-bonds {
+        &__voucher-box {
+            padding: rem(10) !important;
+        }
+    }
+}

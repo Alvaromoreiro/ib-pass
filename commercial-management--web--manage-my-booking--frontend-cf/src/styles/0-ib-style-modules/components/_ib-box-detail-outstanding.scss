@@ -1,0 +1,341 @@
+/* -------------------------------------------------------------
+    #BOX-COUPON - DEPRECATED
+----------------------------------------------------------------- */
+
+// TODO:  revisar el impacto de eliminar este fichero en MMB. Actualmente se desacoplo el estilo del unico componente 
+// que consumia esta clase: ib-bids-slider.html Pero se desconoce el impacto en algun otro input-tooltip dado lo generico del nombre.
+
+
+.#{$wefront__namespace}box-detail-outstanding {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: rem(32) rem(32) rem(22);
+    font-size: 0;
+    background: color(white);
+    box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+
+    &__content {
+        display: inline-block;
+        width: calc(100% - 250px);
+        vertical-align: top;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: rem(280);
+            height: 100%;
+            border-right: rem(1) solid color(gray-210);
+        }
+
+        &-detail {
+            position: relative;
+            display: inline-block;
+            width: rem(250);
+            padding: 0 rem(30) 0 rem(40);
+            vertical-align: top;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 35%;
+                left: rem(1);
+                width: rem(1);
+                height: rem(1);
+                border-top: rem(8) solid color(gray-210);
+                border-right: rem(8) solid color(gray-210);
+                border-bottom: rem(8) solid color(gray-210);
+                border-left: rem(8) solid transparent;
+                background: color(white);
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 35%;
+                left: rem(2);
+                width: rem(1);
+                height: rem(1);
+                border-top: rem(8) solid color(white);
+                border-right: rem(8) solid color(white);
+                border-bottom: rem(8) solid color(white);
+                border-left: rem(8) solid transparent;
+            }
+        }
+
+        &--resolved-bids {
+            display: flex;
+        }
+    }
+
+    &__title-container {
+        display: inline-block;
+        width: 60%;
+        vertical-align: top;
+    }
+
+    &__info-container {
+        display: inline-block;
+        width: 40%;
+        align-self: center;
+        padding-right: rem(10);
+        text-wrap: balance;
+        vertical-align: top;
+    }
+
+    &__title {
+        display: block;
+        font-family: $font-special;
+        font-size: rem(34);
+        line-height: 1;
+        color: color(primary);
+    }
+
+    &__subtitle {
+        display: block;
+        font-family: $font-special;
+        font-size: rem(24);
+        line-height: 1;
+        color: color(gray-10);
+    }
+
+    &__link {
+        font-family: $font-special;
+        font-size: rem(18);
+        text-decoration: underline;
+        line-height: 1;
+        color: color(gray-10);
+    }
+
+    &__txt {
+        display: block;
+        font-family: $font-normal;
+        font-size: rem(15);
+        line-height: 1.5;
+        color: color(gray-10);
+
+        &--big {
+            font-size: rem(18);
+            line-height: 1.2;
+        }
+
+        &--medium {
+            font-size: rem(16);
+        }
+
+        &--small {
+            font-size: rem(13);
+            line-height: 1.3;
+        }
+
+        &--primary {
+            color: color(primary);
+        }
+
+        &--special,
+        &--special-responsive {
+            font-family: $font-special;
+        }
+
+        &--details {
+            font-size: rem(11);
+            color: color(gray-30);
+        }
+
+        &--text {
+            width: 85%;
+        }
+    }
+
+    &__price {
+        display: block;
+        font-family: $font-special;
+        font-size: rem(25);
+        line-height: 1.2;
+        color: color(gray-10);
+
+        &--active {
+            font-size: rem(42);
+            line-height: 1;
+            color: color(primary);
+        }
+    }
+
+    &--bids {
+        display: flex;
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}box-detail-outstanding {
+        &__content {
+            width: calc(100% - 240px);
+
+            &-detail {
+                width: rem(240);
+
+                &::before {
+                    left: rem(-9);
+                }
+
+                &::after {
+                    left: rem(-8);
+                }
+            }
+        }
+
+        &__title-container {
+            width: 60%;
+        }
+
+        &__info-container {
+            width: 37%;
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}box-detail-outstanding {
+        &__content {
+            width: calc(100% - 228px);
+
+            &::before {
+                right: rem(251);
+            }
+
+            &-detail {
+                width: rem(228);
+                padding: 0 rem(16) 0 rem(35);
+
+                &::before {
+                    left: rem(8);
+                }
+
+                &::after {
+                    left: rem(9);
+                }
+            }
+        }
+
+        &__title-container {
+            width: 59%;
+        }
+
+        &__info-container {
+            width: 41%;
+            padding: 0 0 0 rem(10);
+        }
+
+        &__subtitle {
+            font-size: rem(22);
+            line-height: 1;
+        }
+
+        &__title {
+            font-size: rem(31);
+            line-height: 1.2;
+        }
+
+        &__link {
+            font-size: rem(16);
+            line-height: 1;
+        }
+
+        &__txt {
+            font-size: rem(13);
+            line-height: 1.5;
+
+            &--big {
+                font-size: rem(16);
+                line-height: 1.2;
+            }
+
+            &--details {
+                font-size: rem(11);
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}box-detail-outstanding {
+        text-align: center;
+
+        &__content {
+            width: 100%;
+            margin-bottom: rem(20);
+
+            &-detail {
+                width: 100%;
+                padding: 0;
+
+                &::before,
+                &::after {
+                    display: none;
+                }
+            }
+
+            &::before {
+                display: none;
+            }
+
+            &--resolved-bids {
+                flex-direction: column;
+            }
+        }
+
+        &__title-container {
+            width: 100%;
+            margin-bottom: rem(20);
+        }
+
+        &__info-container {
+            width: 100%;
+            padding: 0;
+        }
+
+        &__title {
+            font-size: rem(30);
+            line-height: 1.3;
+        }
+
+        &__subtitle {
+            font-size: rem(22);
+            line-height: 0.7;
+        }
+
+        &__txt {
+            &--medium {
+                font-size: rem(13);
+            }
+
+            &--special-responsive {
+                font-family: $font-normal;
+                font-size: rem(15);
+                line-height: 1.5;
+            }
+
+            &--text {
+                width: 100%;
+            }
+
+            &--details {
+                text-wrap: balance;
+            }
+        }
+
+        &--bids {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}box-detail-outstanding {
+        &__content {
+            margin-bottom: rem(10);
+        }
+    }
+}

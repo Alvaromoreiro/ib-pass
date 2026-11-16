@@ -1,0 +1,90 @@
+/* -------------------------------------------------------------
+    #HEADING ICON
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}heading-icon {
+    font-size: 0;
+
+    &__icon {
+        display: inline-block;
+        padding: rem(6);
+        border-radius: 50%;
+        font-size: rem(26);
+        color: color(white);
+        background: color(red-10);
+        vertical-align: middle;
+
+        &--simple {
+            border-radius: 0;
+            font-size: rem(40);
+            color: color(gray-10);
+            background: transparent;
+        }
+
+        &--white {
+            color: color(white);
+        }
+
+        &--rotate-left {
+            transform: rotate(90deg);
+        }
+
+        &--rotate-right {
+            transform: rotate(270deg);
+        }
+
+        &--p-none {
+            padding: 0;
+        }
+
+        &--grey {
+            color: color(gray-15);
+        }
+    }
+
+    &__text {
+        margin-left: rem(15);
+        font-family: $font-special;
+        font-size: rem(38);
+        line-height: rem(38);
+        color: color(white);
+        vertical-align: middle;
+
+        &--special {
+            font-family: $font-normal;
+            font-size: rem(18);
+        }
+    }
+    // Modifiers
+    &--small {
+        .#{$wefront__namespace}heading-icon__text {
+            margin-left: rem(5);
+            font-size: rem(18);
+        }
+    }
+    // Colors
+    &--dark {
+        color: color(gray-10);
+    }
+}
+
+// Mixin
+@mixin heading-icon-mobile() {
+    .#{$wefront__namespace}heading-icon {
+        display: block;
+        text-align: left;
+
+        &__text {
+            font-size: rem(20);
+        }
+    }
+}
+
+// Responsive
+@include media-query('sm') {
+    @include heading-icon-mobile();
+}
+
+@include media-query('xs') {
+    @include heading-icon-mobile();
+}

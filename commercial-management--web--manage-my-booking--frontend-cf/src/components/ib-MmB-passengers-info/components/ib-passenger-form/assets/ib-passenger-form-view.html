@@ -1,0 +1,174 @@
+<form name="pasForm" novalidate>
+    <fieldset>
+        <legend class="u-hide-accessible">{{'IBPAS_MMB_PASSENGER_FORM_TITLE_ACCESS'|translate}} {{pasFormCtrl.passengerModel.name}}</legend>
+        <div class="ib-accordion-content ib-accordion-content--no-shadow" ng-if="pasFormCtrl.passengerModel.passengerType ==='ADULT' || pasFormCtrl.passengerModel.passengerType ==='CHILD'">
+            <div class="ib-box ib-box--extra ib-box--no-shadow">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                    <span class="ib-heading ib-heading--type-4">{{::(pasFormCtrl.passengerModel.personalInfo.name + ' ' + pasFormCtrl.passengerModel.personalInfo.surname)}}</span>
+                </div>
+                <uib-accordion close-others="false" class="ib-accordion">
+                    <div uib-accordion-group class="ib-accordion__panel" is-open="status.open0">
+                        <uib-accordion-heading>
+                            <span class="ib-accordion__title">{{'IBPAS_MMB_PASSENGER_INFORMATION_ACCORDION_TITLE'|translate}}</span>
+                            <span class="ib-accordion__icon" ng-class="{'icon-flecha_1_arriba': status.open0, 'icon-flecha_1_abajo': !status.open0}"></span>
+                        </uib-accordion-heading>
+                        <fieldset>
+                            <legend class="u-hide-accessible">{{'IBPAS_MMB_PASSENGER_FORM_HIDE_INFORMATION_PASSENGER_LEGEND'|translate}}</legend>
+                            <div class="ib-layout__form-center u-mt-xmedium">
+                                <dl class="ib-list-definition" ng-switch on="pasFormCtrl.passengerModel.passengerType">
+                                    <dt class="ib-list-definition__description">{{'IBPAS_MMB_PASSENGER_FORM_INFORMATION_TYPE_PASSENGER'|translate}}</dt>
+                                    <dd class="ib-list-definition__detail" ng-switch-when="ADULT">{{'ADULT'|translate}}</dd>
+                                    <dd class="ib-list-definition__detail" ng-switch-when="CHILD">{{'CHILD'|translate}}</dd>
+                                    <dd class="ib-list-definition__detail" ng-switch-when="INFANT">{{'INFANT'|translate}}</dd>
+                                    <dd class="ib-list-definition__detail" ng-switch-default>{{'ADULT'|translate}}</dd>
+                                </dl>
+                                <dl ng-if="::pasFormCtrl.passengerModel.idInfo" class="ib-list-definition">
+                                    <dt class="ib-list-definition__description">{{'IBPAS_MMB_PASSENGER_FORM_INFORMATION_IDENTIFICATION_PASSENGER'|translate}}</dt>
+                                    <dd class="ib-list-definition__detail">{{::pasFormCtrl.passengerModel.idInfo.value}}</dd>
+                                </dl>
+                                <dl ng-if="::pasFormCtrl.passengerModel.tickets" class="ib-list-definition">
+                                    <dt class="ib-list-definition__description">{{'IBPAS_MMB_PASSENGER_FORM_INFORMATION_TICKET_NUMBER'|translate}}</dt>
+                                    <dd class="ib-list-definition__detail">{{::pasFormCtrl.passengerModel.tickets}}</dd>
+                                </dl>
+                                <dl ng-if="::pasFormCtrl.passengerModel.specialNeed" class="ib-list-definition">
+                                    <dt class="ib-list-definition__description">{{'IBPAS_MMB_PASSENGER_FORM_INFORMATION_SPECIAL_NEEDS'|translate}}</dt>
+                                    <a href="javascript:void(0)" ng-click="pasFormCtrl.goSpecialNeedsPage(pasFormCtrl.passengerModel.passengerId)" title="{{'IBPAS_MMB_PASSENGER_FORM_INFORMATION_SPECIAL_NEEDS_TITLE'|translate}}">
+                                        <dd class="ib-list-definition__detail ib-link">{{::pasFormCtrl.passengerModel.specialNeed.description}}</dd>
+                                    </a>
+                                </dl>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div uib-accordion-group class="ib-accordion__panel" is-open="status.open1" ng-if="pasFormCtrl.passengerModel.passengerType && pasFormCtrl.passengerModel.optionalInformation.ffInfo ">
+                        <uib-accordion-heading>
+                            <span class="ib-accordion__title">{{'IBPAS_MMB_PASSENGER_CARD_ACCORDION_TITLE'|translate}}</span>
+                            <span class="ib-accordion__icon" ng-class="{'icon-flecha_1_arriba': status.open1, 'icon-flecha_1_abajo': !status.open1}"></span>
+                        </uib-accordion-heading>
+                        <fieldset>
+                            <legend class="u-hide-accessible">{{'IBPAS_MMB_PASSENGER_FORM_HIDE_FIDELIZATION_LEGEND'|translate}}</legend>
+                            <div class="ib-layout__form-center u-mt-medium">
+                                <div class="ib-layout__line-spacing">
+                                    <div class="ib-select" ng-class="{'ib-select--error': pasForm.$submitted && pasForm['company_' + pasFormCtrl.index].$invalid}">
+                                        <label class="ib-select__label" for="PASSENGER_FORM_COMPANY_{{::pasFormCtrl.index}}">{{'IBPAS_MMB_PASSENGER_FORM_LABEL_COMPANY'|translate}}</label>
+                                        <ui-select class="ib-select__action" ng-model="pasFormCtrl.passengerModel.frequentFlyerInfo.company" name="company_{{::pasFormCtrl.index}}"
+                                            on-select="pasFormCtrl.clearCodeNumber()" id="PASSENGER_FORM_COMPANY_{{::pasFormCtrl.index}}"
+                                            data-ui-select-required="pasFormCtrl.passengerModel.frequentFlyerInfo.number!=null && pasFormCtrl.passengerModel.frequentFlyerInfo.number !== ''
+                                                                && (!pasFormCtrl.passengerModel.frequentFlyerInfo.company || pasFormCtrl.passengerModel.frequentFlyerInfo.company === 'CKI_COMBO_BLANK')">
+                                            <ui-select-match class="ib-select__list-ipt" placeholder="{{'IBPAS_MMB_PASSENGER_FORM_LABEL_COMPANY_PLACE_HOLDER'|translate}}">
+                                                <span class="ib-select__txt" ng-bind="$select.selected.airlineName.needsTranslate ? ($select.selected.airlineName.description|translate) : $select.selected.airlineName"></span>
+                                            </ui-select-match>
+                                            <ui-select-choices class="ib-select__list" repeat="company.iataCompanyCode as company in (pasFormCtrl.companies | filter: $select.search)">
+                                                <span class="ib-select__list-txt" ng-bind="company.airlineName.needsTranslate ? (company.airlineName.description|translate) : company.airlineName"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                    <div ng-messages="pasForm.$submitted && pasForm['company_' + pasFormCtrl.index].$error">
+                                        <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_CONFIRM_REQUIRED_ERROR'|translate}}</div>
+                                        <div class="ib-alert ib-alert--error" ng-message="uiSelectRequired">{{'GENERAL_CONFIRM_REQUIRED_ERROR'|translate}}</div>
+                                    </div>
+                                </div>
+                                <div class="ib-layout__line-spacing--small">
+                                    <div class="ib-input" ng-class="{'ib-input--error': pasForm.$submitted && pasForm.number_card.$invalid}">
+                                        <label class="ib-input__label" for="number_card" ng-class="{'ib-input__label--focus' : pasFormCtrl.cardFocused || (pasForm.number_card.$viewValue != null && pasForm.number_card.$viewValue !== '')}">{{'IBPAS_MMB_PASSENGER_FORM_NUMBER_CARD'|translate}}</label>
+                                        <input ng-if="pasFormCtrl.passengerModel.frequentFlyerInfo.company === 'IB'" class="ib-input__input" type="text" id="number_card"
+                                            name="number_card" ng-model="pasFormCtrl.passengerModel.frequentFlyerInfo.number"
+                                            maxlength="{{::$root.MmBPatterns.NUMBER_IB_PLUS_MAX_LENGTH}}" ng-pattern="::$root.MmBPatterns.NUMBER_IB_PLUS_PATTERN"
+                                            data-ib-validator-cleaner="{{::$root.MmBPatterns.NUMBER_IB_PLUS_CLEANER}}" ng-focus="pasFormCtrl.cardFocused=true"
+                                            ng-blur="pasFormCtrl.cardFocused=false" data-ng-change="pasForm['company_' + pasFormCtrl.index].$validate()"
+                                            ib-luhn-validator />
+                                        <input ng-if="pasFormCtrl.passengersData.securityInfo.passengerInfo[pasFormCtrl.index].data.freqFlyerInfo.company.iataCompanyCode === 'AA'"
+                                            class="ib-input__input" type="text" id="number_card_{{pasFormCtrl.index}}" name="number_card_{{pasFormCtrl.index}}" required ng-model="pasFormCtrl.passengersData.securityInfo.passengerInfo[pasFormCtrl.index].data.freqFlyerInfo['number']"
+                                            maxlength="{{$root.lengthBookingPatterns.MAX_LENGTH_IBERIA_CARD}}" ng-pattern="::$root.bookingPatterns.AA_CARD_PATTERN"
+                                            data-ib-validator-cleaner="{{::$root.bookingPatterns.AA_CARD_CLEANER}}" data-ng-focus="pasFormCtrl.cardFocused_[pasFormCtrl.index]=true"
+                                            data-ng-blur="pasFormCtrl.cardFocused_[pasFormCtrl.index]=false" ng-disabled="pasFormCtrl.passengersData.securityInfo.passengerInfo[pasFormCtrl.index].options.haveIbPlus && pasFormCtrl.passengersData.securityInfo.passengerInfo[pasFormCtrl.index].data.freqFlyerInfo['number'] || (pasFormCtrl.actualFlowType === pasFormCtrl.flowTypes.redemption && !pasFormCtrl.passengersData.securityInfo.passengerInfo[pasFormCtrl.index].options.haveName)"/>
+                                        <input ng-if="pasFormCtrl.passengerModel.frequentFlyerInfo.company !== 'IB' && pasFormCtrl.passengersData.securityInfo.passengerInfo[pasFormCtrl.index].data.freqFlyerInfo.company.iataCompanyCode !== 'AA'"
+                                            class="ib-input__input" type="text" id="number_card"
+                                            name="number_card" maxlength="{{::$root.MmBPatterns.NUMBER_FF_MAX_LENGTH}}" data-ng-focus="pasFormCtrl.cardFocused=true"
+                                            data-ng-blur="pasFormCtrl.cardFocused=false" ng-model="pasFormCtrl.passengerModel.frequentFlyerInfo.number"
+                                            data-ng-change="pasForm['company_' + pasFormCtrl.index].$validate()" />
+                                    </div>
+                                    <div ng-messages=" pasForm.$submitted && pasForm.number_card.$error ">
+                                        <div class="ib-alert ib-alert--error " ng-message="luhn">{{'IBPAS_PASSENGER_FORM_FREQUENT_FLYER_CARD_LUHN_ERROR'|translate}}</div>
+                                        <div class="ib-alert ib-alert--error " ng-message="pattern ">{{'IBPAS_PASSENGER_FORM_FREQUENT_FLYER_CARD_LUHN_ERROR'|translate}}</div>
+                                    </div>
+                                </div>
+                                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                                    <div class="ib-check" ng-class="{ 'ib-check ib-check--error' : pasForm.$submitted && pasForm.check_text.$invalid}">
+                                        <input type="checkbox" id="check_text" name="check_text" class="ib-check__input" ng-model="pasFormCtrl.confirmInfor" ng-required="pasFormCtrl.passengerModel.frequentFlyerInfo.number && pasFormCtrl.needsConfirm()">
+                                        <label for="check_text" class="ib-check__label">
+                                                <span class="ib-check__text ib-check__text--unfocused ">{{'IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_CHECK_TEXT'|translate}}</span>
+                                        </label>
+                                    </div>
+                                    <div ng-messages="pasForm.$submitted && pasForm.check_text.$error">
+                                        <div class="ib-alert ib-alert--error " ng-message="required ">{{'GENERAL_CONFIRM_REQUIRED_ERROR'|translate}}</div>
+                                    </div>
+                                </div>
+                                <div class="ib-content-buttons">
+                                    <div class="ib-content-buttons__content-left">
+                                        <button type="submit" name="button_next" id="PASSENGER_BUTTON_NEXT" class="ib-button ib-button--w-medium" ng-click="pasFormCtrl.nextFromTabPassenger(pasForm)">{{'IBPAS_MMB_PASSENGER_FORM_BUTTON_NEXT_TEXT'|translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="ib-layout__form-center u-mt-medium">
+                        <div class="ib-content-buttons">
+                            <div class="ib-content-buttons__content-right u-text-left">
+                                <a href="javascript:void(0)" ng-click="pasFormCtrl.backFromTabPassenger()" title="{{'IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_BUTTON_BACK_TEXT_TITLE'|translate}}"
+                                    class="ib-link">{{'IBPAS_MMB_PASSENGER_FORM_BUTTON_BACK_TEXT'|translate}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </uib-accordion>
+            </div>
+        </div>
+        <div class="ib-accordion-content ib-accordion-content--no-shadow " ng-if="pasFormCtrl.passengerModel.passengerType==='INFANT' ">
+            <div class="ib-box ib-box--extra ib-box--no-shadow ">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small ">
+                    <span class="ib-heading ib-heading--type-4 ">{{::(pasFormCtrl.passengerModel.personalInfo.name + ' ' + pasFormCtrl.passengerModel.personalInfo.surname)}}</span>
+                </div>
+                <uib-accordion close-others="false " class="ib-accordion ">
+                    <div uib-accordion-group class="ib-accordion__panel " is-open="status.open0 ">
+                        <uib-accordion-heading>
+                            <span class="ib-accordion__title ">{{'IBPAS_MMB_PASSENGER_INFORMATION_ACCORDION_TITLE'|translate}}</span>
+                            <span class="ib-accordion__icon " ng-class="{ 'icon-flecha_1_arriba': status.open0,
+                                            'icon-flecha_1_abajo': !status.open0} "></span>
+                        </uib-accordion-heading>
+                        <fieldset>
+                            <legend class="u-hide-accessible ">{{'IBPAS_MMB_PASSENGER_FORM_HIDE_INFORMATION_PASSENGER_LEGEND'|translate}}</legend>
+                            <div class="ib-layout__form-center u-mt-xmedium ">
+                                <dl class="ib-list-definition ">
+                                    <dt class="ib-list-definition__description ">{{'IBPAS_MMB_PASSENGER_FORM_INFORMATION_TYPE_PASSENGER'|translate}}</dt>
+                                    <dd class="ib-list-definition__detail ">{{'INFANT'|translate}}</dd>
+                                </dl>
+                                <dl class="ib-list-definition ">
+                                    <dt class="ib-list-definition__description ">{{'IBPAS_MMB_PASSENGER_FORM_INFORMATION_PASSENGER_IN_CHARGE'|translate}}</dt>
+                                    <dd class="ib-list-definition__detail ">{{pasFormCtrl.passengerModel.parent_info.name}}</dd>
+                                </dl>
+                                <dl ng-if="::pasFormCtrl.passengerModel.idInfo " class="ib-list-definition ">
+                                    <dt class="ib-list-definition__description ">{{'IBPAS_MMB_PASSENGER_FORM_INFORMATION_IDENTIFICATION_PASSENGER'|translate}}</dt>
+                                    <dd class="ib-list-definition__detail ">{{::pasFormCtrl.passengerModel.idInfo.value}}</dd>
+                                </dl>
+                                <dl ng-if="::pasFormCtrl.passengerModel.parent_info.tickets " class="ib-list-definition ">
+                                    <dt class="ib-list-definition__description ">{{'IBPAS_MMB_PASSENGER_FORM_INFORMATION_TICKET_NUMBER'|translate}}</dt>
+                                    <dd class="ib-list-definition__detail ">{{::pasFormCtrl.passengerModel.parent_info.tickets}}</dd>
+                                </dl>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="ib-layout__form-center u-mt-medium">
+                        <div class="ib-content-buttons">
+                            <div class="ib-content-buttons__content-left">
+                                <button type="submit" name="button_next" id="PASSENGER_BUTTON_NEXT2" class="ib-button ib-button--w-medium" ng-click="pasFormCtrl.nextFromTabInfant()">{{'IBPAS_MMB_PASSENGER_FORM_BUTTON_NEXT_TEXT'|translate}}</button>
+                            </div>
+                            <div class="ib-content-buttons__content-right u-text-left">
+                                <a href="javascript:void(0)" ng-click="pasFormCtrl.backFromTabPassenger()" title="{{'IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_BUTTON_BACK_TEXT_TITLE'|translate}}"
+                                    class="ib-link">{{'IBPAS_MMB_PASSENGER_FORM_BUTTON_BACK_TEXT'|translate}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </uib-accordion>
+            </div>
+        </div>
+    </fieldset>
+</form>

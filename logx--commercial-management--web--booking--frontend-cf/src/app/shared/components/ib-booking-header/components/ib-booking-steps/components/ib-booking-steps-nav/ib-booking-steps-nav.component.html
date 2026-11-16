@@ -1,0 +1,38 @@
+<ng-template #completedSVG let-index>
+    <span class='u-hide-accessible'>{{index}}</span>
+    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 4.00503L13.9201 2.96387L6.78692 8.0583L2.23002 5.03651L1 6.25685L4.99516 12.1164C5.05327 12.1939 5.11622 12.2665 5.18886 12.3343C6.10412 13.2447 7.66828 13.2883 8.49637 12.3537L15 4.00503Z" fill="white"/>
+    </svg>
+</ng-template>
+
+
+<nav class="steps-nav" tabindex="0">
+    <h3 class="u-hide-accessible">{{ 'STEPS_NAV_MENU_ACCESSIBLE_TITLE' | translate }}</h3>
+    <div class="steps-nav-container">
+        <button *ngFor="let step of steps" 
+            [disabled]="!activeButtons || ( step.index >= currentStep.index) || (currentStep.index === steps.length)"
+            [attr.aria-label]="'STEP_BUTTON_TITLE'|translate :{step: (step.text | translate)}"
+            class="steps-nav-btn"
+            [ngClass]="{
+                'steps-nav-btn-next': step.index > currentStep.index,
+                'steps-nav-btn-current': step.index === currentStep.index,
+                'steps-nav-btn--inactive': !activeButtons
+            }"
+            (click)="stepClick(step)"
+            >
+            <span class="steps-nav-btn-index" [attr.aria-hidden]="true">
+                <ng-container *ngIf="(step.index >= currentStep.index) && (currentStep.index !== steps.length)">{{step.index}}</ng-container>
+                <ng-container *ngIf="(step.index < currentStep.index) || (currentStep.index === steps.length)">
+                    <ng-container *ngTemplateOutlet="completedSVG; context: {$implicit: step.index}"></ng-container>
+                </ng-container>
+            </span>
+            <span class="steps-nav-btn-text">
+                {{step.text|translate}}
+            </span>
+            <span class="u-hide-accessible" *ngIf="step.index === currentStep.index">{{'STEPS_ACCESIBLE_STEP_CURRENT'|translate}}</span>
+        </button>
+    </div>
+</nav>
+
+
+

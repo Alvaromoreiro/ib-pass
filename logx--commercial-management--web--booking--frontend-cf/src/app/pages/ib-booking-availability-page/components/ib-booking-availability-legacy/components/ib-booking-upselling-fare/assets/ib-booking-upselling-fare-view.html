@@ -1,0 +1,53 @@
+<div class="lc-a4-banner">
+    <div class="lc-a4-banner__sections">
+        <div class="lc-a4-banner__section lc-a4-banner__section-left" style="background-image: url({{ibUpsellingFareCtrl.imgToshow}})">
+            <div class="lc-a4-banner__title-left">
+                <mark class="lc-a4-banner__mark">
+                    <span class="lc-a4-banner__mark-span">{{ibUpsellingFareCtrl.mark1 |translate}}</span><br />
+                    <span class="lc-a4-banner__mark-span">{{ibUpsellingFareCtrl.mark2 |translate}}</span><br />
+                    <span class="lc-a4-banner__mark-span" ng-if="ibUpsellingFareCtrl.mark3">{{ibUpsellingFareCtrl.mark3| translate}}</span>
+                </mark>
+            </div>
+        </div>
+        <div class="lc-a4-banner__section lc-a4-banner__section-right">
+            <div class="lc-a4-banner__title-right">
+                <span>{{'UPSELLING_FARE_SELECT_FARE_1'|translate : { fareName : ibUpsellingFareCtrl.nextUpsellFare.commercialName, price : ibUpsellingFareCtrl.diffPrice } }} <span class="lc-a4-banner__extra-text">{{'UPSELLING_FARE_SELECT_FARE_2'|translate : { fareName : ibUpsellingFareCtrl.nextUpsellFare.commercialName, price : ibUpsellingFareCtrl.diffPrice } }}</span></span>
+            </div>
+            <div class="lc-a4-banner__extras" data-ng-class="{'lc-a4-banner__extras--three-items': ibUpsellingFareCtrl.fareExtrasToShow.length === 3}">
+                <div ng-repeat="(index, extra) in ibUpsellingFareCtrl.fareExtrasToShow" class="lc-a4-banner__extra lc-a4-banner__extra-bag">
+                    <img title='tick' class="lc-a4-banner__extra-ribbon" data-ng-src="{{::$root.routes.icons}}/upselling/1951057.png" />
+                    <div ng-if="index === 0 || (index === 1 && extra.icon)" class="lc-a4-banner__extra_icon_container">
+                        <img alt="" class="lc-a4-banner__extra-icon" data-ng-src="{{extra.icon}}" />
+                    </div>
+                    <div ng-if="index === 0 || (index === 1 && extra.icon)" class="lc-a4-banner__extra-text">
+                        <div class="lc-a4-banner__extra-caption">
+                            {{extra.description |translate}}
+                        </div>
+                    </div>
+                    <div ng-if="(index === 2 && extra.icon1) || (index === 1 && extra.icon2)" class="lc-a4-banner__extra_icon_container lc-a4-banner__extra_icon_container--two-icons">
+                        <img alt="" class="lc-a4-banner__extra-icon" data-ng-src="{{extra.icon1}}" />
+                        <img alt="" class="lc-a4-banner__extra-icon" data-ng-src="{{extra.icon2}}" />
+                    </div>
+                    <div ng-if="index === 2 && extra.icon" class="lc-a4-banner__extra_icon_container">
+                        <img alt="" class="lc-a4-banner__extra-icon" data-ng-src="{{extra.icon}}" />
+                    </div>
+                    <div ng-if="index === 2 && extra.icon || (index === 2 && extra.icon1) || (index === 1 && extra.icon2)" class="lc-a4-banner__extra-text">
+                        <div class="lc-a4-banner__extra-caption">
+                            {{extra.description |translate}}
+                        </div>
+                        <div class="lc-a4-banner__extra-sub-caption">
+                            {{extra.subdescription |translate}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="lc-a4-banner__button">
+                <input id="lc-a4-radio" type="radio" class="lc-a4-banner__button-radio"
+                    ng-value="ibUpsellingFareCtrl.nextUpsellFare" ng-model="ibUpsellingFareCtrl.selectedUpsellingFare"
+                    data-box-select-radio="radio" />
+                <label class="lc-a4-banner__button-label" for="lc-a4-radio" ng-click="ibUpsellingFareCtrl.selectUpsellFare()">
+                    {{'UPSELLING_FARE_YES_WANT'|translate: { fareName: ibUpsellingFareCtrl.nextUpsellFare.commercialName } }}</label>
+            </div>
+        </div>
+    </div>
+</div>

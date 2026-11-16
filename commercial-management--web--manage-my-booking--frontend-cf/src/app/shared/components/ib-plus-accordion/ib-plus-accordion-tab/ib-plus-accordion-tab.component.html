@@ -1,0 +1,29 @@
+<section class="ib-ng-accordion__tab panel" [ngClass]="{ 'ib-ng-accordion__tab--active': selected }">
+    <div class="ib-ng-accordion__header" [ngClass]="{ 'ib-ng-accordion__header--active': selected, 'ib-ng-accordion__header--disabled': disabled }">
+        <div role="tab" class="ib-ng-accordion__link"
+           (click)="toggle($event)" (keydown)="onKeydown($event)" [attr.tabindex]="disabled ? null : 0" [attr.id]="id" [attr.aria-controls]="id + '-content'" [attr.aria-expanded]="selected">
+            <span class="ib-ng-accordion__icon" [ngClass]="selected ? accordion.collapseIcon : accordion.expandIcon"></span>
+            <span *ngIf="!headerTemplate" class="ib-ng-accordion__headertext ib-heading icon-informacion_2">
+                {{ translateHeader ?  (header | translate: translateHeader) : header }}
+            </span>
+            <ng-container *ngIf="headerTemplate">
+                <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+            </ng-container>
+        </div>
+    </div>
+    <div
+        [attr.id]="id + '-content'"
+        class="ib-ng-accordion-content__toggle"
+        [@tabContent]="selected ? { value: 'visible', params: { transitionParams: transitionOptions } } : { value: 'hidden', params: { transitionParams: transitionOptions } }"
+        role="tabpanel"
+        [attr.aria-hidden]="!selected"
+        [attr.aria-labelledby]="id"
+    >
+        <div class="ib-ng-accordion__content">
+            <ng-content></ng-content>
+            <ng-container *ngIf="contentTemplate && (cache ? loaded : selected)">
+                <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+            </ng-container>
+        </div>
+    </div>
+</section>

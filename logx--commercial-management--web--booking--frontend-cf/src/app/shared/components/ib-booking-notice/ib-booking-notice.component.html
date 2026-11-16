@@ -1,0 +1,41 @@
+<div [ngSwitch]="type">
+    <div *ngSwitchCase="'lightbox-onhold'" class="ib-notice--type-lightbox u-hide-mobile"
+         [ngClass]="{'ib-notice--hidden': viewNoticeHidden}" role="alert" tabindex="0"
+         aria-labelledby="notice-title" aria-describedby="notice-desc"
+         [attr.aria-hidden]="viewNoticeHidden ? true : false" ibBookingCalculatePosition>
+      <button class="ib-notice--type-lightbox-close" (click)="close()">
+        <span class="icon-cerrar ib-button--icon-close"></span>
+      </button>
+      <h3 class="ib-notice--type-lightbox-title">{{model?.title | translate}}</h3>
+      <p class="ib-notice--type-lightbox-subtitle">{{model?.subtitle | translate}}</p>
+      <p class="ib-notice--type-lightbox-text">{{model?.text | translate}}</p>
+      <div class="ib-notice--type-lightbox-button">
+        <button class="ib-button ib-button--w-medium-desktop ib-button--medium" type="button" (click)="acceptBuyOnhold()">{{'ONHOLD_OPTION_BUTTON' | translate}}</button>
+      </div>
+    </div>
+    <div *ngSwitchCase="'generic-lightbox'" class="ib-notice--type-lightbox ib-notice--generic" [ngClass]="{'ib-notice--hidden': viewNoticeHidden}" role="alert" tabindex="0" aria-labelledby="notice-title-$id" aria-describedby="notice-desc-$id" [attr.aria-hidden]="viewNoticeHidden ? true : false" ibBookingCalculatePosition>
+        <button title="{{'MODAL_CLOSE'|translate}}" class="ib-notice--type-lightbox-close" (click)="toggleGenericLightBox(model.closeAction)" focusin>
+            <span class="sr-only">{{'MODAL_CLOSE'|translate}}</span>
+            <span class="icon-cerrar ib-button--icon-close"></span>
+        </button>
+        <h3 class="ib-notice--type-lightbox-subtitle" id="notice-title-$id" *ngIf="model.title">{{model.title | translate}}</h3>
+        <p class="ib-notice--type-lightbox-text" *ngIf="model.text">{{model.text | translate}}</p>
+        <div class="ib-notice--type-lightbox-button" *ngIf="model.action">
+            <button [disabled]="model.actionButtonDisabled" type="button" class="ib-button ib-button--w-medium-desktop ib-button--medium" title="{{model.action.title|translate}}" (click)="toggleGenericLightBox(model.action.callback)" focusin>{{model.action.text|translate}}</button>
+        </div>
+        <div class="ib-notice__out" *ngIf="model.outAction">
+            <a class="ib-notice__out-action" href="{{model.outAction.url}}" target="model.outAction.target" title="{{model.outAction.title|translate}}" focusin>
+                <span class="ib-notice__out-action-text">{{model.outAction.text|translate}}</span>
+            </a>
+        </div>
+    </div>
+    <div *ngSwitchDefault class="ib-notice" role="alert" tabindex="0"
+         aria-labelledby="notice-title" aria-describedby="notice-desc"
+         [attr.aria-hidden]="viewNoticeHidden ? true : false">
+      <a href="#" class="ib-notice-close" (click)="close()">
+        <span class="icon-cerrar"></span>
+      </a>
+      <h3 id="notice-title" class="ib-notice-title">{{model?.title | translate}}</h3>
+      <p id="notice-desc" class="ib-notice-text">{{model?.text | translate}}</p>
+    </div>
+  </div>

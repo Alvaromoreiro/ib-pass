@@ -1,0 +1,113 @@
+/* -------------------------------------------------------------
+    #ACCORDION CONTENT
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}accordion-content {
+    padding-bottom: rem(32);
+    background: color(white);
+    box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+
+    // Modifiers
+
+    &--no-shadow {
+        box-shadow: none;
+    }
+
+    &--simple {
+        .ib-accordion > .panel-group .panel-title a {
+            padding: rem(10);
+        }
+
+        .ib-box-link__gdr {
+            box-shadow: none;
+
+            &:hover,
+            &:focus {
+                text-decoration: none;
+            }
+        }
+
+        .panel-heading {
+            padding-bottom: 0;
+        }
+
+        .panel-collapse .ib-box {
+            padding-top: 0;
+        }
+
+        .ib-accordion > .panel-group .panel-body {
+            padding: 0 rem(32);
+        }
+    }
+
+    .#{$wefront__namespace}accordion {
+        &--type-gdr {
+            .panel {
+                border-bottom: rem(1) solid color(gray-50);
+                background: transparent;
+            }
+        }
+    }
+
+    &__text {
+        text-align: right;
+    }
+
+    &__body {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: rem(32);
+
+        .#{$wefront__namespace}box {
+            padding-top: 0;
+            padding-bottom: rem(8);
+            margin-left: rem(8);
+        }
+    }
+}
+
+@include media-query("md") {
+    .#{$wefront__namespace}accordion-content {
+        &__body {
+            margin-bottom: rem(24);
+        }
+    }
+}
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}accordion-content {
+        &__text {
+            text-align: center;
+        }
+
+        &__body {
+            margin-bottom: rem(16);
+
+            .#{$wefront__namespace}heading {
+                margin-right: rem(16);
+            }
+
+            .#{$wefront__namespace}images {
+                width: rem(32);
+                min-width: rem(32);
+            }
+
+            .#{$wefront__namespace}box {
+                &--small {
+                    padding-left: 0;
+                }
+            }
+        }
+
+        &--simple {
+            .ib-accordion > .panel-group .panel-title a {
+                padding: rem(10) 0;
+                margin: 0;
+            }
+
+            .ib-accordion > .panel-group .panel-title a > span .ib-heading {
+                margin-right: 0;
+            }
+        }
+    }
+}

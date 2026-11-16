@@ -1,0 +1,75 @@
+@import 'src/styles/component-tools';
+@import 'src/styles/tools/tools.scss';
+
+:host {
+    display: block;
+    background-color: transparent;
+}
+
+.collapse {
+    &-arrow {
+        width: rem(16);
+    }
+    
+    &-container {
+        background-color: var(--neutrals-white);
+
+    }
+}
+
+.header {
+    &-action{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            padding: rem(16);
+            border: none;
+            font-family: var(--font-headline);
+            font-size: rem(18);
+            font-weight: 400;
+            font-style: normal;
+            text-overflow: ellipsis;
+            text-align: left;
+            line-height: normal;
+            background-color: var(--neutrals-white);
+        }
+}
+
+.fare-summary {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    padding: rem(16) rem(16) rem(24) rem(16);
+    background-color: var(--ib-color-grey-300-dd);
+    gap: rem(16);
+}
+
+
+
+@include media-query-range("mf-md") {
+    .header-action {
+        padding: rem(16) rem(32);
+    }
+
+
+    .fare-summary {
+        flex-flow: row wrap;
+        padding: rem(16) rem(32) rem(24) rem(32);
+        background-color: var(--ib-color-grey-300-dd);
+        
+        & > * {
+            display: flex;
+            flex-basis: calc(50% - rem(8));
+            flex-grow: 0
+        }
+    }
+}
+
+@include media-query-range("mf-lg") {
+    .fare-summary{
+        padding: rem(24) rem(32) rem(32) rem(32);
+    }
+}
+
+

@@ -1,0 +1,112 @@
+/* -------------------------------------------------------------
+    #COUPON-CONTAINER
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}coupon-container {
+    &__wrapper {
+        display: flex;
+        margin: rem(-12) rem(-12);
+    }
+
+    &__box {
+        flex: 0 1 100%;
+        margin: rem(12) rem(12) rem(12) rem(12);
+    }
+
+    /**
+     * Modifiers
+     */
+
+    // If the number of items is four
+    &--lenght-4 {
+        .#{$wefront__namespace}coupon-container__wrapper {
+            flex-wrap: wrap;
+        }
+        .#{$wefront__namespace}coupon-container__box {
+            flex: 0 1 calc(100% / 2 - 24px);
+        }
+    }
+    // If the number of items exceeds four
+    &--lenght-5 {
+        .#{$wefront__namespace}coupon-container__wrapper {
+            flex-wrap: wrap;
+        }
+        .#{$wefront__namespace}coupon-container__box {
+            flex: 0 1 calc(100% / 3 - 24px);
+        }
+    }
+}
+
+/**
+ * Media queries
+ */
+@include media-query('md') {
+    .#{$wefront__namespace}coupon-container {
+        /* &__wrapper {
+            margin: rem(-8) rem(-8);
+        }
+        &__box {
+            margin: rem(8) rem(8) rem(8) rem(8);
+        } */
+        &__wrapper {
+            flex-wrap: wrap;
+            margin: rem(-8) rem(-8);
+        }
+
+        &__box {
+            flex: 0 1 100%;
+            margin: rem(8) rem(8) rem(8) rem(8);
+        }
+
+        /**
+         * Modifiers
+         */
+        &--lenght-4 {
+            .#{$wefront__namespace}coupon-container__wrapper {
+                flex-wrap: wrap;
+                margin: rem(-8) rem(-8);
+            }
+            .#{$wefront__namespace}coupon-container__box {
+                flex: 0 1 calc(100% / 4 - 24px);
+                flex: 0 1 100%;
+                margin: rem(8) rem(8) rem(8) rem(8);
+            }
+        }
+        // If the number of items exceeds four
+        &--lenght-5 {
+            .#{$wefront__namespace}coupon-container__wrapper {
+                flex-wrap: wrap;
+                margin: rem(-8) rem(-8);
+            }
+            .#{$wefront__namespace}coupon-container__box {
+                flex: 0 1 calc(100% / 3 - 24px);
+                flex: 0 1 100%;
+                margin: rem(8) rem(8) rem(8) rem(8);
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}coupon-container {
+        &__wrapper {
+            flex-wrap: wrap;
+            margin: rem(-8) rem(-8);
+        }
+
+        &__box {
+            flex: 0 1 100%;
+            margin: rem(8) rem(8) rem(8) rem(8);
+        }
+
+        /**
+         * Modifiers
+         */
+        &--lenght-4,
+        &--lenght-5 {
+            .#{$wefront__namespace}coupon-container__box {
+                flex: 0 1 100%;
+            }
+        }
+    }
+}

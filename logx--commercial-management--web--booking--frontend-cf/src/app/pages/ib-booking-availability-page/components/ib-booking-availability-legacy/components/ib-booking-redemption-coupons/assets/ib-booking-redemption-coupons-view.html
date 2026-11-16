@@ -1,0 +1,73 @@
+<div class="ib-box ib-box--medium u-pt-big">
+    <!-- Banda Superior -->
+    <div ng-if="coupCtrl.totalPrice.couponApplied || coupCtrl.totalPrice.promotionApplied" class="ib-flag-info">
+        <div class="ib-flag-info__container">
+            <i class="ib-flag-info__icon icon-descuento"></i>
+            <p ng-if = "!coupCtrl.totalPrice.couponApplied && coupCtrl.totalPrice.promotionApplied" class="ib-flag-info__txt">{{'AVAILABILITY_REDEMPTION_FLIGHT_WITH_DISCOUNT'|translate}}</p>
+            <p ng-if = "coupCtrl.totalPrice.couponApplied" class="ib-flag-info__txt">{{'VOUCHER'|translate}}</p>
+        </div>
+    </div>
+    <div>
+        <!-- Precio -->
+        <div ng-if="coupCtrl.totalPrice.couponApplied || coupCtrl.totalPrice.promotionApplied">
+            <span class="ib-text ib-text--xbig ib-text--especial ib-text--line-through">{{coupCtrl.totalPrice.oldPriceWithoutDiscount.totalAvios}} {{'IBPURC_PAYMENTS_DISCOUNTS_AVIOS' | translate}}</span>
+            <span class="ib-text ib-text--xbig ib-text--especial ib-text--line-through">{{'AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate }} {{coupCtrl.totalPrice.oldPriceWithoutDiscount.totalCash}}</span>
+        </div>
+        <div>
+            <span class="ib-text">{{'TOTAL_PRICE_COMPONENT_TITLE'|translate }}</span>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__line-spacing">
+                    <span class="ib-text ib-text--especial ib-text--price-big">{{coupCtrl.totalPrice.price.totalAvios}} {{'IBPURC_PAYMENTS_DISCOUNTS_AVIOS' | translate}}</span>
+                    <span class="ib-text ib-text--especial ib-text--price-small hidden-sm hidden-xs">{{'AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate }} {{coupCtrl.totalPrice.price.totalCash}}</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Head Cupones -->
+        <div class="ib-summary u-mb-small">
+            <header class="ib-summary__header u-mb-small">
+                <h2 ng-if="coupCtrl.totalPrice.promotionApplied" class="ib-heading ib-heading--responsive">Puedes mantener la promoción activa o aplicar uno de tus cupones descuento</h2>
+                <h2 ng-if="!coupCtrl.totalPrice.promotionApplied" class="ib-heading ib-heading--responsive">Tus cupones descuento</h2>
+            </header>
+            <!-- Componente cupones -->
+            <div ng-class="{'ib-coupon-container': coupCtrl.coupons.length < 4, 'ib-coupon-container--lenght-4': coupCtrl.coupons.length = 4, 'ib-coupon-container--lenght-5': coupCtrl.coupons.length > 4}">
+                <ul class="ib-coupon-container__wrapper">
+                    <li ng-if="coupCtrl.totalPrice.promotionApplied" class="ib-coupon-container__box ib-box-coupon">
+                        <div class="ib-box-coupon__container">
+                            <label class="ib-box-coupon__label" for="coupon">
+                                <input class="ib-box-coupon__check" type="radio" id="coupon" name="coupons" ng-click = "coupCtrl.setPromotion(coupon)" checked />
+                                <p class="ib-box-coupon__title">Mantener promoción activa</p>
+                            </label>
+                        </div>
+                    </li>
+                    <li ng-if="!coupCtrl.totalPrice.promotionApplied" class="ib-coupon-container__box ib-box-coupon--no-active">
+                        <div class="ib-box-coupon__container">
+                            <label class="ib-box-coupon__label" for="coupon">
+                                <input class="ib-box-coupon__check" type="radio" id="coupon" name="coupons"
+                                    ng-click="coupCtrl.setPromotion(coupon)" checked />
+                                <p class="ib-box-coupon__title">Sin descuento</p>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="ib-coupon-container__box ib-box-coupon" data-ng-repeat="(index, coupon) in coupCtrl.coupons">
+                        <div class="ib-box-coupon__container" ng-if="coupon">
+                            <label class="ib-box-coupon__label" for="coupon-{{index}}">
+                                <input class="ib-box-coupon__check" type="radio" id="coupon-{{index}}" name="coupons" ng-click="coupCtrl.selectCoupon(coupon)" />
+                                <p class="ib-box-coupon__title">{{coupon.discount}}% de descuento en tu reserva con Avios </p>
+                                <p class="ib-box-coupon__terms">
+                                    <div class="ib-box-coupon__terms" ng-if="coupon.endDate">{{coupon.remainQuantity}} usos restantes del {{coupon.startDate | date: 'dd/MM/yyyy'}} al {{coupon.endDate | date: 'dd/MM/yyyy'}}.</div>
+                                    <div class="ib-box-coupon__terms" ng-if="!coupon.endDate">{{coupon.remainQuantity}} usos restantes a partir de {{coupon.startDate | date: 'dd/MM/yyyy'}}.</div>                                    
+                                    <!-- <a class="ib-box-coupon__terms-link" target="blank" ng-click="coupCtrl.seeConditions($event, coupon)" title="{{'SEE_CONDITIONS' | translate}}">{{'SEE_CONDITIONS' | translate}}</a> -->
+                                </p>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p class="ib-text ib-text--color-unfocused">Solo se muestran los cupones activos aplicables a las condiciones
+            del vuelo escogido. Los cupones no serán acumulables a las posibles promociones vigentes</p>
+    </div>
+</div>

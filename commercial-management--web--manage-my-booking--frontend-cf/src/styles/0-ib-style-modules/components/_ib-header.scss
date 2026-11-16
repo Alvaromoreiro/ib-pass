@@ -1,0 +1,845 @@
+/* -------------------------------------------------------------
+    #HEADER
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}header {
+    position: relative;
+    min-height: rem(80);
+    font-family: $font-normal;
+    background: color(red-10);
+    background: -moz-linear-gradient(top, color(red-10) 0%, color(red-10) 50%, color(red-40) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, color(red-10)), color-stop(50%, color(red-10)), color-stop(100%, color(red-40)));
+    background: -webkit-linear-gradient(top, color(red-10) 0%, color(red-10) 50%, color(red-40) 100%);
+    background: -o-linear-gradient(top, color(red-10) 0%, color(red-10) 50%, color(red-40) 100%);
+    background: -ms-linear-gradient(top, color(red-10) 0%, color(red-10) 50%, color(red-40) 100%);
+    background: linear-gradient(to bottom, color(red-10) 0%, color(red-10) 50%, color(red-40) 100%);
+
+    &__logo-img {
+        width: 100%;
+    }
+
+    &__menu {
+        order: 2;
+
+        &-link {
+            padding: rem(10) rem(16);
+            font-size: 0.8125rem;
+            color: color(white);
+        }
+
+        &-button {
+            overflow: hidden;
+            width: 9rem;
+            height: 3rem;
+            border: rem(1) solid color(white);
+            font-size: 0.8125rem;
+            text-overflow: ellipsis;
+            color: color(white);
+            background: transparent;
+            white-space: nowrap;
+        }
+
+
+        > .#{$wefront__namespace}header__menu-container {
+            position: relative;
+            display: inline-block;
+            max-width: rem(690);
+            margin-right: 1rem;
+            vertical-align: top;
+        }
+
+        .logo-oneworld {
+            display: inline-block;
+            padding: 0;
+            margin: rem(20) 0 rem(20) rem(10);
+            vertical-align: middle;
+
+            .logo-oneworld__figure,
+            .logo-oneworld__img {
+                width: rem(40);
+                height: rem(40);
+
+                img {
+                    width: 100%;
+                }
+
+                .logo-oneworld__figure-img {
+                    width: 100%;
+                    border: rem(1) solid color(white);
+                    border-radius: rem(50);
+                }
+            }
+
+            &:focus {
+                outline: rem(1) solid color(orange-10);
+            }
+        }
+    }
+
+    &__container-right {
+        padding: rem(11) 0;
+    }
+
+    &--small {
+        min-height: rem(70);
+
+        .ib-header-booking {
+            &__logo {
+                position: relative;
+                width: rem(45);
+                height: rem(34);
+                margin-left: 0;
+
+                &-fig {
+                    padding: 0;
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: rem(-18);
+                    right: rem(-17);
+                    width: rem(1);
+                    height: rem(70);
+                    background-color: color(red-50);
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
+
+    &--white {
+        display: flex;
+        min-height: rem(87);
+        align-items: center;
+        text-align: right;
+        background: color(white);
+    }
+}
+
+/*
+ * Menu de navegación
+ */
+.navbar {
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: transparent;
+
+    .navbar-header {
+        float: left;
+    }
+}
+
+// RESET BOOTSTRAP-3
+.navbar-header {
+    float: left;
+}
+
+/*
+ * Cabezera Logo principal
+ */
+.navbar-brand {
+    height: auto;
+    padding: rem(27) 0 rem(12);
+    font-size: rem(18);
+    line-height: rem(20);
+    float: left;
+
+    &:focus {
+        outline: rem(1) solid color(orange-10);
+    }
+}
+
+/*
+ * Menu principal
+ */
+
+/*
+ * Menu principal - items
+ */
+
+.#{$wefront__namespace}header__menu-item {
+    position: static;
+    display: table-cell;
+    height: rem(83);
+    border-right: rem(1) solid color(red-110);
+    border-bottom: rem(6) solid transparent;
+    vertical-align: middle;
+    > .#{$wefront__namespace}header__menu-item__container {
+        position: absolute;
+        z-index: 100;
+        top: em(83);
+        left: 0;
+        display: none;
+        width: em(720);
+        min-height: 20.5em;
+        font-size: rem(16);
+        background: color(white);
+        -moz-box-shadow: rem(1) rem(2) rem(2) color(black, 0.2);
+        -webkit-box-shadow: rem(1) rem(2) rem(2) color(black, 0.2);
+        -o-box-shadow: rem(1) rem(2) rem(2) color(black, 0.2);
+        box-shadow: rem(1) rem(2) rem(2) color(black, 0.2);
+    }
+
+    >.special {
+        width: em(814);
+        height: em(403);
+        .#{$wefront__namespace}header__menu-submenu {
+            min-height: em(403);
+        }
+        .#{$wefront__namespace}header__menu-subsubmenu {
+            width: em(322);
+            min-height: em(403);
+        }
+    }
+
+    &:first-child {
+        border-left: rem(1) solid color(red-110);
+    }
+
+    &.xui-header__menu-show {
+        border-bottom: rem(6) solid color(yellow-10);
+        color: color(yellow-10);
+        > .#{$wefront__namespace}header__menu-item__container {
+            display: block;
+            .#{$wefront__namespace}header__menu-submenu {
+                display: block;
+                .#{$wefront__namespace}header__menu-submenu-item {
+                    &.xui-header__menu-show {
+                        > .#{$wefront__namespace}header__menu-submenu-item__title {
+                            font-weight: bold;
+                            color: color(gray-10);
+                            background: color(white);
+                        }
+                        .#{$wefront__namespace}header__menu-subsubmenu {
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+
+        /* > .#{$wefront__namespace}header__menu-item__title{
+            color: color(yellow-10);
+            border-bottom: rem(6) solid color(yellow-10);
+        } */
+    }
+    > .#{$wefront__namespace}header__menu-item__title {
+        position: relative;
+        z-index: 100;
+        display: block;
+        max-width: rem(165);
+        padding: rem(8) rem(10);
+        font-size: rem(14);
+        text-align: center;
+        text-decoration: none;
+        color: color(white);
+        cursor: default;
+    }
+}
+
+/*
+ * Menu desplegable
+ */
+.#{$wefront__namespace}header__menu-submenu {
+    position: absolute;
+    z-index: 900;
+    left: 0;
+    display: none;
+    min-height: 100%;
+    border-top: rem(3) solid color(yellow-10);
+    background: #f0f0f0;
+    .#{$wefront__namespace}header__menu-submenu-item {
+        > .#{$wefront__namespace}header__menu-submenu-item__title {
+            display: block;
+            width: em(227);
+            padding: 0.95em em(18) 0.95em 1em;
+            font-size: em(15);
+            color: color(primary);
+            cursor: default;
+
+            &:hover {
+                font-weight: bold;
+                text-decoration: none;
+                color: color(gray-10);
+                background: color(white);
+            }
+        }
+    }
+}
+
+/*
+ * Submenu estatico lateral derecho (formulario)
+ */
+.iberia-plus-connect {
+    position: absolute;
+    top: em(-3);
+    left: em(533);
+    width: em(283);
+    height: em(403);
+    min-height: em(403);
+    border-top: rem(3) solid color(yellow-10);
+    background: color(red-10);
+
+    .iberia-plus-connect_block {
+        padding: em(10) em(18);
+        border-bottom: rem(1) solid color(red-20);
+
+        &:last-child {
+            border: 0;
+        }
+
+        .iberia-plus-connect_block__form {
+            .iberia-plus-connect_block__form-title {
+                display: block;
+                padding-bottom: 0.5em;
+                font-family: $font-unusual;
+                color: color(yellow-10);
+                clear: both;
+            }
+
+            .form-item {
+                display: block;
+                margin-bottom: rem(10);
+
+                .label-block {
+                    display: inline-block;
+                    width: 6.4em;
+                    padding: 0.5em 0.5em 0 0;
+                    font-family: $font-normal;
+                    font-size: em(13);
+                    text-align: right;
+                    color: color(white);
+                }
+
+                .iberia-plus-connect_block__form-input {
+                    width: em(189);
+                    height: em(37);
+                    padding: em(5);
+                    border: 0;
+                    font-family: $font-normal;
+                    font-size: em(13);
+                    color: color(gray-10);
+                    background: color(gray-60);
+                }
+            }
+
+            .no-pin {
+                display: block;
+                width: auto;
+                padding-right: 0;
+                font-size: em(12);
+                text-decoration: underline;
+                color: color(white);
+                float: right;
+            }
+
+            .btn-register-now {
+                display: inline-block;
+                width: 100%;
+                margin-top: 1em;
+                white-space: normal;
+
+                &:focus {
+                    outline: rem(1) dotted color(white);
+                }
+            }
+        }
+    }
+
+    .iberia-plus-connect_block-title {
+        display: block;
+        padding-bottom: 0.5em;
+        font-family: $font-unusual;
+        color: color(yellow-10);
+        clear: both;
+    }
+
+    .btn-register-now {
+        display: block;
+        width: auto;
+        padding: em(13) em(22);
+        margin: em(20) 0;
+        border: rem(1) solid color(red-30);
+        font-size: rem(16);
+        text-align: center;
+        line-height: 0.7em;
+        color: color(white);
+        background: color(red-50);
+        cursor: pointer;
+        white-space: nowrap;
+
+        &:hover {
+            position: relative;
+            text-decoration: none;
+            color: color(white);
+            background: color(red-50);
+            background: -moz-linear-gradient(top, color(red-50) 0%, color(red-30) 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, color(red-50)), color-stop(100%, color(red-30)));
+            background: -webkit-linear-gradient(top, color(red-50) 0%, color(red-30) 100%);
+            background: -o-linear-gradient(top, color(red-50) 0%, color(red-30) 100%);
+            background: -ms-linear-gradient(top, color(red-50) 0%, color(red-30) 100%);
+            background: linear-gradient(to bottom, color(red-50) 0%, color(red-30) 100%);
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='"+color(red-50) +"', endColorstr='"+color(red-30) +"',GradientType=0 )";
+        }
+    }
+}
+
+/*
+ * Segundo submenu
+ */
+.#{$wefront__namespace}header__menu-subsubmenu {
+    position: absolute;
+    z-index: -1;
+    top: em(-3);
+    left: em(210);
+    display: none;
+    width: em(256);
+    padding: em(10) 0;
+    margin-left: em(1);
+    border-top: rem(3) solid color(yellow-10);
+    border-right: rem(1) solid color(gray-50);
+    border-left: rem(1) solid color(gray-50);
+    background: color(white);
+    .#{$wefront__namespace}header__menu-subsubmenu-item {
+        padding: em(3.5) em(15);
+        > .#{$wefront__namespace}header__menu-subsubmenu-item-link {
+            font-size: em(14);
+            text-decoration: none;
+            color: color(primary);
+
+            &:hover {
+                color: color(gray-10);
+            }
+        }
+    }
+
+    .menu-highlight,
+    .bg-hightlight,
+    .iberia-app {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        padding: 0;
+        .#{$wefront__namespace}header__menu-subsubmenu-item-link {
+            display: block;
+            .#{$wefront__namespace}header__menu-subsubmenu-item-link-figure {
+                max-width: rem(301);
+                .#{$wefront__namespace}header__menu-subsubmenu-item-link-img {
+                    width: 100%;
+                    vertical-align: top;
+                }
+            }
+        }
+    }
+
+    .bg-hightlight {
+        .text-over {
+            position: absolute;
+            top: 3.15em;
+            left: 0.6375em;
+            font-family: $font-unusual;
+            font-size: em(33);
+            line-height: 100%;
+            color: color(gray-10);
+        }
+    }
+
+    .iberia-app {
+        .text-over {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: em(80);
+            font-family: $font-unusual;
+            font-size: em(38);
+            line-height: 100%;
+            color: color(primary);
+        }
+    }
+
+    /*
+     * Ultimo item estático en el lateral derecho - Segundo submenu
+     */
+    .menu-highlight {
+        position: absolute;
+        top: em(-3);
+        left: 100%;
+        width: 100%;
+        min-height: em(328);
+        padding: 0;
+        border-top: rem(3) solid color(yellow-10);
+        background: color(white);
+
+        .text-over {
+            position: absolute;
+            top: 0.675em;
+            left: 0.6875em;
+            padding-right: em(19);
+            font-family: $font-unusual;
+            font-size: em(32);
+            line-height: 100%;
+            color: color(gray-10);
+            background: none;
+            letter-spacing: -0.05em;
+
+            .text-over-title {
+                display: block;
+                font-size: 1.3725em;
+                line-height: 100%;
+                color: color(yellow-10);
+            }
+
+            .text-over-subtitle {
+                display: block;
+                font-size: 0.69em;
+                line-height: 100%;
+                color: color(white);
+            }
+        }
+        .#{$wefront__namespace}header__menu-subsubmenu-item-link {
+            .info-highlight {
+                position: absolute;
+                z-index: 200;
+                bottom: em(10);
+                display: block;
+                width: 90%;
+                height: em(41);
+
+                .arrow-go {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    display: block;
+                    width: 2.6em;
+                    height: 2.6em;
+                    background: url('/iberia-web-content/iconos/cabecera/sp-arrows.png') no-repeat rem(-104) rem(-90);
+
+                    .over {
+                        position: absolute;
+                        display: none;
+                        background: url('/iberia-web-content/iconos/cabecera/sp-arrows.png') no-repeat rem(-137) rem(-53);
+                        inset: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*
+* Estilos en responsive del menu principal
+*/
+
+
+
+/*
+* Boton para mostrar el menu responsive
+*/
+.#{$wefront__namespace}header__menu-responsive {
+    display: none;
+    margin-right: 1em;
+    float: left;
+    .#{$wefront__namespace}header__menu-responsive__action-menu {
+        width: em(35);
+        height: em(60);
+        background-image: url('/iberia-web-content/iconos/cabecera/newhome-sprite.png');
+        background-position: rem(-116) rem(-585);
+        background-size: rem(320);
+        .#{$wefront__namespace}header__menu-responsive__action-menu-title {
+            display: inline-block;
+            text-indent: rem(-9999);
+        }
+
+        &.on {
+            background-position: rem(-115) rem(-638);
+        }
+    }
+}
+
+/*
+* Icono login
+*/
+.#{$wefront__namespace}header__menu-responsive__action-login {
+    float: right;
+    .#{$wefront__namespace}header__menu-responsive__action-login-link {
+        position: relative;
+        display: block;
+        padding-top: rem(38);
+        font-size: rem(14);
+        text-decoration: none;
+        color: color(white);
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: rem(4);
+            left: 1.8rem;
+            width: rem(36);
+            height: rem(36);
+            margin-left: rem(-28);
+            background-image: url('/iberia-web-content/iconos/cabecera/newhome-sprite.png');
+            background-position: rem(-72) rem(-360);
+            background-size: rem(216);
+        }
+    }
+}
+
+/*
+* Menu principal responsive
+*/
+.#{$wefront__namespace}responsive__main-menu {
+    position: fixed;
+    z-index: 3000;
+    top: 0;
+    left: 0;
+    display: none;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: em(60) em(60) 0 0;
+    font-family: $font-unusual;
+
+    &.opened {
+        display: block;
+        > .#{$wefront__namespace}responsive__main-menu-container {
+            left: 0;
+        }
+    }
+    > .#{$wefront__namespace}responsive__main-menu-container {
+        position: absolute;
+        top: 3.36em;
+        bottom: 0;
+        left: -100%;
+        overflow: auto;
+        font-size: rem(18);
+        background: color(white);
+        box-shadow: 0 0 1em 0 color(black, 0.5);
+        .#{$wefront__namespace}responsive__main-menu-container-item {
+            position: relative;
+            display: block;
+            padding: 0.53em 0.3em 0.351em 3.75rem;
+            border-bottom: rem(1) solid color(gray-70);
+            font-family: $font-unusual;
+            font-size: 0.95em;
+            text-decoration: none;
+            color: color(gray-410);
+
+            &.outstand {
+                font-size: 1.05em;
+            }
+
+            &:last-child {
+                border: 0;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0.2125em;
+                width: rem(50);
+                height: rem(40);
+                background-image: url('/iberia-web-content/iconos/cabecera/newhome-sprite.png');
+                background-repeat: no-repeat;
+                background-size: rem(260);
+            }
+
+            &.booking::before {
+                background-position: rem(-40) 0;
+            }
+
+            &.booking-management::before {
+                background-position: rem(-40) rem(-90);
+            }
+
+            &.checkin::before {
+                background-position: rem(-40) rem(-45)
+            }
+
+            &.air-shuttle::before {
+                background-position: rem(-40) rem(-176);
+            }
+
+            &.arrivals-departures::before {
+                background-position: rem(-40) rem(-130);
+            }
+
+            &.app::before {
+                background-position: rem(-40) rem(-263);
+            }
+
+            &.offers::before {
+                background-position: rem(-40) rem(-220);
+            }
+
+            &.baggage::before {
+                background-position: rem(-40) rem(-306);
+            }
+
+            &.language::before {
+                background-position: rem(-40) rem(-348);
+            }
+
+            &.contact::before {
+                background-position: rem(-40) rem(-392);
+            }
+        }
+    }
+}
+
+//Responsive
+@include media-query('xl') {
+    .#{$wefront__namespace}header__menu-responsive,
+    .#{$wefront__namespace}responsive__main-menu,
+    .#{$wefront__namespace}header__menu-responsive__action-login {
+        display: none !important;
+    }
+    .#{$wefront__namespace}header__menu {
+        width: 70%;
+        text-align: right;
+    }
+    .#{$wefront__namespace}header__menu-item {
+        text-align: left;
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}header__menu-responsive,
+    .#{$wefront__namespace}responsive__main-menu,
+    .#{$wefront__namespace}header__menu-responsive__action-login {
+        display: none !important;
+    }
+    .#{$wefront__namespace}header__menu {
+        > .#{$wefront__namespace}header__menu-container {
+            margin-right: 0;
+        }
+    }
+}
+
+
+@include media-query('md') {
+    .#{$wefront__namespace}header {
+        min-height: rem(60);
+
+        .navbar-brand {
+            height: rem(60);
+            padding: rem(20) rem(17) 0 0;
+            .#{$wefront__namespace}header__logo-img {
+                width: auto;
+                height: rem(22);
+            }
+        }
+
+        &__menu {
+            .logo-oneworld {
+                padding: 0;
+                margin: rem(14) 0 rem(14) rem(10);
+
+                .logo-oneworld__figure,
+                .logo-oneworld__img {
+                    width: rem(32);
+                    height: rem(32);
+                }
+            }
+        }
+
+        &--small {
+            min-height: rem(56);
+
+            .ib-button {
+                min-height: rem(40);
+            }
+
+            .ib-header-booking {
+                &__logo {
+                    width: rem(33);
+                    height: rem(25);
+
+                    &::after {
+                        top: rem(-16);
+                        height: rem(56);
+                    }
+                }
+            }
+        }
+
+        &__container-right {
+            padding: rem(8) 0;
+        }
+
+        &--white {
+            min-height: rem(53);
+        }
+    }
+
+
+    .#{$wefront__namespace}header__menu-responsive {
+        display: block !important;
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}header {
+        &--white {
+            min-height: rem(53);
+        }
+
+        .container {
+            max-width: 100%;
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}header {
+        &--white {
+            min-height: rem(51);
+        }
+
+        .container {
+            max-width: 100%;
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}header {
+        min-height: rem(60);
+
+        .navbar-brand {
+            display: inline-block;
+            height: rem(60);
+            padding: 1.1375em 0.375em 0.9375em 0;
+            float: none;
+            vertical-align: middle;
+            .#{$wefront__namespace}header__logo-img {
+                width: auto;
+                height: rem(22);
+            }
+        }
+
+        &--small {
+            min-height: rem(45);
+
+            .container {
+                max-width: 100%;
+            }
+
+            .ib-header-booking {
+                &__logo {
+                    width: rem(29);
+                    height: rem(22);
+
+                    &::after {
+                        top: rem(-12);
+                        height: rem(45);
+                    }
+                }
+            }
+        }
+    }
+}

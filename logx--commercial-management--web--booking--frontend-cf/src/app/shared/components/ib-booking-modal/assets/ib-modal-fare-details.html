@@ -1,0 +1,66 @@
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{'COMPARE_FARES_MODAL_TITLE'|translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}"
+            data-ng-click="modalCtrl.close()">
+            <span class="hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+        <div class="ib-table-modal ib-table-modal__gdr ib-table-modal--left-head">
+            <table class="ib-table-modal__table">
+                <caption class="hide-accessible">{{'COMPARE_FARES_MODAL_ACCESSIBLE'|translate}}</caption>
+                <tbody class="ib-table-modal__body">
+                    <tr class="ib-table-modal__row">
+                        <th class="ib-table-modal__column ib-table-modal__column--head ib-table-modal__column-ghost">
+                            <span class="ib-table-modal__column-icon hide-accessible">{{'COMPARE_FARES_MODAL_FARE_TEXT'|translate}}</span>
+                        </th>
+                        <td class="ib-table-modal__column">
+                            <p class="ib-table-modal__column-title">{{modalCtrl.model.fareFamilyConditions.commercialName}}</p>
+                        </td>
+                    </tr>
+                    <tr class="ib-table-modal__row" ng-repeat="condition in modalCtrl.model.fareFamilyConditions.conditions">
+                        <th class="ib-table-modal__column ib-table-modal__column--head">
+
+                            <span class="ib-table-modal__column-icon icon-e_equipaje" ng-if="condition.code === 'EQMANO'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-e_equipaje" ng-if="condition.code === 'EQMANO10'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-e_equipaje" ng-if="condition.code === 'EQMANO14'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-equipaje-de-mano-mochila" ng-if="condition.code === 'EQPERSONAL'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-e_equipaje_facturado" ng-if="condition.code === 'EQBODEGA'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-asiento" ng-if="condition.code === 'ASIENTO'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-asiento" ng-if="condition.code === 'ASIENTO24H'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-butaca_180g" ng-if="condition.code === 'ASIENTOXL'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-cambios_y_reembolsos" ng-if="condition.code === 'CAMBIO'">{{condition.name}} {{'COMPARE_FARES_MODAL_EXTRA_INFO' | translate}}</span>
+                            <span class="ib-table-modal__column-icon icon-reembolsos" ng-if="condition.code === 'REEMBOLSO'">{{condition.name}} {{'COMPARE_FARES_MODAL_EXTRA_INFO' | translate}}</span>
+                            <span class="ib-table-modal__column-icon icon-check_in" ng-if="condition.code === 'CHECKINDESK'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-sala_vip" ng-if="condition.code === 'SALAVIP'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-fast_track" ng-if="condition.code === 'FASTTRACK'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-tarjeta_de_embarque" ng-if="condition.code === 'EMBARQUE'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-e_facturacion_prioritaria" ng-if="condition.code === 'EQPPRIOR'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-c_comidas_nuevas" ng-if="condition.code === 'COMIDA'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-wifi" ng-if="condition.code === 'WIFI'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-navegador_avion" ng-if="condition.code === 'CABINA'">{{condition.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-avios" ng-if="condition.code === 'AVIO'">{{condition.name}}</span>
+
+                        </th>
+                        <td class="ib-table-modal__column" ng-if="condition.items" data-ng-repeat="fareCondition in condition.items">{{fareCondition.message
+                            + (fareCondition.extendedInfo && fareCondition.extendedInfo.observationCode
+                            ? ' (' + fareCondition.extendedInfo.observationCode + ')' : '')}}</td>
+                        <td class="ib-table-modal__column" ng-if="condition.extendedInfo && !condition.items">{{condition.extendedInfo.message
+                                + (condition.extendedInfo && condition.extendedInfo.observationCode
+                                ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+        <p class="ib-text ib-text--block ib-text--lh-medium" data-ng-repeat="observation in modalCtrl.model.fareFamilyConditions.faresInfo[0].observations"
+            data-ng-bind-html="'(' + observation.observationCode + ') ' + observation.observationText"></p>
+            <div class="u-mt-xmedium">
+                <p data-ng-if="modalCtrl.model.fareFamilyConditions.relatedContent" class="ib-text ib-text--block ib-text--lh-medium" data-ng-bind-html="modalCtrl.model.fareFamilyConditions.relatedContent"></p>
+            </div>
+    </div>
+</section>

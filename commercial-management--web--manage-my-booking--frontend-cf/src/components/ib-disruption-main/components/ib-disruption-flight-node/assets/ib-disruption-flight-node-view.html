@@ -1,0 +1,116 @@
+<!-- NODE DETAIL TEMPLATE -->
+<!-- <div class="ib-table-flight-info__container u-mb" ng-if="nodeCtrl.data.activationFlags.warningAirport || nodeCtrl.data.activationFlags.warningFlightStop || nodeCtrl.data.activationFlags.warningTerminal">
+    <div class="ib-notice-box ib-notice-box__flights--warning ib-notice-box__flights--narrow">
+        <h4 class="sr-only">Informaci&oacute;n de la escala</h4>
+        <p class="ib-notice-box__text ib-notice-box__text--unfocused" ng-if="nodeCtrl.data.activationFlags.warningFlightStop">
+            {{'AVAILABILITY_SCALE_IN' | translate}}: {{nodeCtrl.data.nodeData.departureCity}}
+            <span class="ib-iata-text">{{nodeCtrl.data.nodeData.departureAPort}}</span> - {{'AVAILABILITY_LONG_TIME_SCALE' | translate}} {{nodeCtrl.data.nodeData.waitingTime}}
+        </p>
+        <p class="ib-notice-box__text ib-notice-box__text--error" ng-if="nodeCtrl.data.activationFlags.warningAirport">
+            {{nodeCtrl.data.activationFlags.warningAirportMsg}}
+        </p>
+         <p class="ib-notice-box__text ib-notice-box__text--error" ng-if="nodeCtrl.data.activationFlags.warningTerminal">
+            {{nodeCtrl.data.activationFlags.warningTerminalMsg}}
+        </p> 
+    </div>
+</div> -->
+<!-- Technical Stop module -->
+<!--<div class="ib-table-flight-info__container u-mb" ng-if="nodeCtrl.data.nodeData.technicalStop">
+    <div class="ib-notice-box ib-notice-box__flights--narrow ib-notice-box__flights--info">
+        <h4 class="sr-only">{{'MMB_FLIGHTS_SCALE_INFO' | translate}}</h4>
+        <p class="ib-notice-box__text ib-notice-box__text--unfocused">
+            {{'AVAILABILITY_TEC_STOP_IN' | translate}} {{nodeCtrl.data.nodeData.technicalStop.city.description}}
+            <span class="ib-iata-text">{{nodeCtrl.data.nodeData.technicalStop.city.code}}</span> - {{nodeCtrl.data.nodeData.technicalStop.duration}}
+        </p>
+    </div>
+</div>-->
+
+<div class="ib-table-flight-info__container u-mb" ng-if="nodeCtrl.data.showNode && (nodeCtrl.data.activationFlags.warningAirport || nodeCtrl.data.activationFlags.warningTerminal || nodeCtrl.data.activationFlags.warningFlightStop || (nodeCtrl.data.nodeData.waitingTime && !nodeCtrl.data.activationFlags.warningMissConection))">
+    <div class="ib-notice-box ib-notice-box__flights--narrow" ng-class="nodeCtrl.data.nodeData.waitingTime && !nodeCtrl.data.activationFlags.warningFlightStop && !nodeCtrl.data.activationFlags.warningAirport && !nodeCtrl.data.activationFlags.warningTerminal ? 'ib-notice-box__flights--info' : 'ib-notice-box__flights--warning'">
+        <h4 class="sr-only">{{'MMB_FLIGHTS_SCALE_INFO' | translate}}</h4>
+        <p class="ib-notice-box__text ib-notice-box__text--unfocused" ng-if="nodeCtrl.data.nodeData.waitingTime && !nodeCtrl.data.activationFlags.warningFlightStop && !nodeCtrl.data.activationFlags.warningMissConection">
+            {{'AVAILABILITY_SCALE_IN' | translate}}: {{nodeCtrl.data.nodeData.departureCity}}
+            <span class="ib-iata-text">{{nodeCtrl.data.nodeData.departureAPort}}</span> - {{nodeCtrl.data.nodeData.waitingTime}}
+        </p>
+        <p class="ib-notice-box__text ib-notice-box__text--unfocused" ng-if="nodeCtrl.data.activationFlags.warningFlightStop">
+            {{'AVAILABILITY_SCALE_IN' | translate}}: {{nodeCtrl.data.nodeData.departureCity}}
+            <span class="ib-iata-text">{{nodeCtrl.data.nodeData.departureAPort}}</span> - {{'AVAILABILITY_LONG_TIME_SCALE' | translate}} {{nodeCtrl.data.nodeData.waitingTime}}
+        </p>
+        <p class="ib-notice-box__text ib-notice-box__text--error" ng-if="nodeCtrl.data.activationFlags.warningAirport">
+            {{nodeCtrl.data.activationFlags.warningAirportMsg}}
+        </p>
+         <p class="ib-notice-box__text ib-notice-box__text--error" ng-if="nodeCtrl.data.activationFlags.warningTerminal">
+            {{nodeCtrl.data.activationFlags.warningTerminalMsg}}
+        </p> 
+    </div>
+</div>
+<div class="ib-layout__line-spacing ib-layout__line-spacing--medium" ng-if="nodeCtrl.data.activationFlags.warningMissConection">
+    <div class="ib-msg-alert ib-msg-alert--smallest ib-msg-alert--danger icon-informacion">
+        <p class="ib-msg-alert__text ib-msg-alert__text--small">{{ nodeCtrl.data.nodeData.missconnectionWarningMsg }}</p>
+    </div>
+</div>
+<div class="ib-table-flight-detail ib-table-flight-detail--narrow" ng-if="nodeCtrl.data.showNode">
+    <div class="ib-table-flight-detail__item">
+        <figure class="ib-table-flight-detail__logo">
+            <img ng-src="{{::$root.routes.icons}}{{nodeCtrl.data.nodeData.icon}}" alt="Logo Iberia" src="{{::$root.routes.icons}}{{nodeCtrl.data.nodeData.icon}}">
+        </figure>
+    </div>
+    <div class="ib-table-flight-detail__item">
+        <div class="ib-table-flight-detail__hours">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small-gdr ib-layout__line-spacing--space-between">
+                <div>
+                    <span class="ib-table-flight-detail__text-title ib-table-flight-detail__text-title--normal">
+                        {{nodeCtrl.data.nodeData.departureTime}}
+                    </span>
+                    <span class="ib-table-flight-detail__hours-icon icon-vuelos"></span>
+                    <span class="ib-table-flight-detail__text-title ib-table-flight-detail__text-title--normal">
+                        {{nodeCtrl.data.nodeData.arrivalTime}}
+                    </span>
+                    <span class="ib-table-flight-detail__text-des ib-table-flight-detail__text-des--flex-center hidden-xl hidden-lg hidden-md hidden-xs">
+                        {{nodeCtrl.data.nodeData.flightDuration}}
+                    </span>
+                </div>
+            </div>
+            <span class="ib-text ib-text--small ib-text--block">
+                {{nodeCtrl.data.nodeData.departureCity}} 
+                ({{nodeCtrl.data.nodeData.departureAPort}}) - 
+                {{nodeCtrl.data.nodeData.arrivalCity}} 
+                ({{nodeCtrl.data.nodeData.arrivalAPort}})
+            </span>
+            <span class="ib-text ib-text--small ib-text--block ib-text--color-unfocused">
+                <p class="ib-link-icon">
+                    <span class="ib-link-icon__icon icon-informacion_2"></span>
+            <span class="ib-link-icon__text">
+                        {{nodeCtrl.data.nodeData.flightNumber}}
+                    </span>
+            </p>
+            . {{nodeCtrl.data.nodeData.flightPlane}}
+            </span>
+            <span class="ib-text ib-text--small ib-text--block ib-text--color-unfocused">
+                {{nodeCtrl.data.labels.LABEL_OPERATED_BY | translate}}
+                {{nodeCtrl.data.nodeData.flightOperator}}
+            </span>
+            <span class="ib-text-icon ib-text-icon--nocturne" ng-if="nodeCtrl.data.activationFlags.warningOvernight">
+                <span class="ib-text-icon__icon icon-luna"></span>
+                <span class="ib-text-icon__text">{{'MMB_NIGHT_FLIGHT' | translate}}</span>
+            </span>
+        </div>
+    </div>
+    <div class="ib-table-flight-detail__item hidden-sm">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+            <span class="ib-table-flight-detail__text-des ib-text ib-text--lh-xmedium">
+                {{nodeCtrl.data.nodeData.flightDuration}}
+            </span>
+        </div>
+    </div>
+</div>
+<!-- Technical Stop module -->
+<div class="ib-table-flight-info__container u-mb" ng-if="nodeCtrl.data.nodeData.technicalStop && nodeCtrl.data.showNode">
+    <div class="ib-notice-box ib-notice-box__flights--narrow ib-notice-box__flights--info">
+        <h4 class="sr-only">{{'MMB_FLIGHTS_SCALE_INFO' | translate}}</h4>
+        <p class="ib-notice-box__text ib-notice-box__text--unfocused">
+            {{'AVAILABILITY_TEC_STOP_IN' | translate}} {{nodeCtrl.data.nodeData.technicalStop.city.description}}
+            <span class="ib-iata-text">{{nodeCtrl.data.nodeData.technicalStop.city.code}}</span> - {{nodeCtrl.data.nodeData.technicalStop.duration}}
+        </p>
+    </div>
+</div>

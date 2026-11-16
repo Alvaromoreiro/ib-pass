@@ -1,0 +1,30 @@
+<header class="ib-modals__header">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+        <h2 class="ib-heading ib-heading--type-1">{{modalCtrl.model.title ? (modalCtrl.model.title|translate) : 'MODAL_ERROR_TITLE'|translate}}</h2>
+    </div>
+    <h3 class="ib-heading ib-heading--type-5 ib-heading--unfocused" data-ng-if="modalCtrl.model.subtitle">{{modalCtrl.model.subtitle|translate}}</h3>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" ng-click="modalCtrl.enableWarning()">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+        <p class="ib-text" data-ng-if="!modalCtrl.model.needsHtmlBinding">{{modalCtrl.model.body|translate}}</p>
+        <p class="ib-text" data-ng-if="modalCtrl.model.needsHtmlBinding" data-ng-bind-html="modalCtrl.model.body"></p>
+    </div>
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+        <p class="ib-text" data-ng-if="modalCtrl.model.extraBody">{{modalCtrl.model.extraBody|translate}}</p>
+    </div>
+</section>
+<footer class="ib-modals__footer">
+    <div class="ib-content-buttons">
+        <div class="ib-content-buttons__content-left">
+            <button class="ib-button ib-button--w-medium" type="button" title="{{'GO_TO_HOME'|translate}}" data-ng-click="modalCtrl.return()">{{'GO_TO_HOME' |translate}}</button>
+        </div>
+        <div class="ib-content-buttons__content-right">
+            <a href="javascript:void(0)" ng-attr-title="{{'VALID_BIRTH_DATE'|translate}}" class="ib-link" data-ng-click="modalCtrl.accept()">{{'VALID_BIRTH_DATE'|translate}}</a>
+        </div>
+    </div>
+</footer>

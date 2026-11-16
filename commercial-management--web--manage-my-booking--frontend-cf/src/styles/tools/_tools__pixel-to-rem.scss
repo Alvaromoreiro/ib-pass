@@ -1,0 +1,41 @@
+///*----------------------------------------------------------------
+//    #PIXEL TO REM
+//------------------------------------------------------------------*/
+@use "sass:math";
+
+@function rem($pixels, $context: $wefront__base-font-size) {
+    @return #{ math.div($pixels, $context) + rem };
+}
+
+$separations: (
+    '': rem($base_separation),
+    -xxsmall: rem($base_separation - 12),    /* 4*/
+    -xsmall: rem($base_separation - 8),      /* 8*/
+    -normal: rem($base_separation - 6),      /* 10*/
+    -small: rem($base_separation - 4),       /* 12*/
+    -xsmedium: rem($base_separation + 2),     /* 18*/
+    -smedium: rem($base_separation + 4),     /* 20*/
+    -xmedium: rem($base_separation * 1.5),   /* 24*/
+    -medium: rem($base_separation * 2),      /* 32*/
+    -large: rem($base_separation * 2 + 8),   /* 40*/
+    -big: rem($base_separation * 3),         /* 48,*/
+    -bigger: rem($base_separation * 3 + 8),  /* 56,*/
+    -biggest: rem($base_separation * 4),     /* 64,*/
+    -negative-biggest: -64px,
+    -none: 0
+);
+
+$rules: (
+    /* paddings*/
+    p: padding,
+    pt: padding-top,
+    pb: padding-bottom,
+    pl: padding-left,
+    pr: padding-right,
+    /* margins*/
+    m: margin,
+    mt: margin-top,
+    mb: margin-bottom,
+    ml: margin-left,
+    mr: margin-right
+);

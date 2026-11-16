@@ -1,0 +1,206 @@
+/* -------------------------------------------------------------
+    #SELECT
+----------------------------------------------------------------- */
+.#{$wefront__namespace}select-dashed {
+    position: relative;
+    display: inline-block;
+    width: auto;
+    padding-left: rem(5);
+    margin-left: rem(10);
+    font-family: $font-normal;
+    font-size: rem(14);
+    vertical-align: top;
+
+    &__label {
+        position: absolute;
+        z-index: 2;
+        top: rem(10);
+        left: rem(22);
+        display: inline-block;
+        font-family: $font-normal;
+        font-size: rem(11);
+        line-height: 1.18;
+        color: color(gray-30);
+    }
+
+    &__action {
+        width: 100%;
+        border: rem(1) solid transparent;
+
+        &.open {
+            outline: 0;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                right: 0;
+                font-family: $font-icons;
+                font-size: rem(16);
+                -ms-transform: translate(0, -50%);
+                transform: translate(0, -50%);
+            }
+        }
+    }
+
+    &__list {
+        margin-top: rem(3);
+    }
+
+    &__list-ipt {
+        border: 0;
+        border-bottom: rem(1) dashed color(primary) !important;
+        background: transparent;
+    }
+
+    .btn-default-focus {
+        background-color: transparent;
+        .#{$wefront__namespace}select-dashed__txt {
+            color: color(primary);
+        }
+
+        .ui-select-toggle {
+            &::before {
+                color: color(primary);
+            }
+        }
+    }
+
+    &__txt {
+        display: block;
+        width: 100%;
+        font-family: $font-special;
+        font-size: rem(16);
+        color: color(primary);
+        text-transform: uppercase;
+    }
+
+    .ui-select-toggle {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 0 rem(16) 0 0;
+        line-height: 1;
+        background: transparent;
+
+        &::before {
+            content: "\e92d";
+            position: absolute;
+            top: 50%;
+            right: 0;
+            font-family: $font-icons;
+            font-size: rem(16);
+            color: color(primary);
+            -ms-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+        }
+
+        &:active:focus {
+            background: transparent;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .ui-select-search {
+        display: none;
+        width: 100% !important;
+        height: rem(55);
+        padding: rem(18) rem(35) rem(18) rem(21);
+        font-family: $font-special;
+        font-size: rem(16);
+    }
+
+    .ui-select-match-text {
+        display: inline-block;
+        padding: 0;
+    }
+
+    .ui-select-placeholder {
+        display: inline-block;
+        width: 100%;
+        padding-bottom: rem(2);
+        font-family: $font-special;
+        font-size: rem(16);
+        color: color(primary);
+    }
+
+    .ui-select-choices {
+        position: absolute;
+        z-index: 100;
+        top: 100%;
+        left: -0.4%;
+        width: auto;
+        padding: 0;
+        margin-top: rem(-2);
+        box-shadow: 0 rem(2) rem(3) 0 color(black, 0.32), 0 rem(-1) rem(4) 0 color(black, 0.11);
+        list-style: none;
+    }
+
+    .ui-select-choices-row {
+        padding: 0 rem(22);
+        font-family: $font-normal;
+        font-size: rem(13);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 2.46;
+        color: color(gray-10);
+    }
+
+    .ui-select-choices-group {
+        .dropdown-header {
+            padding: 0 rem(22);
+            font-size: rem(11);
+            line-height: 2.46;
+        }
+
+        &:first-child {
+            margin-top: rem(9);
+        }
+    }
+
+    .ui-select-bootstrap .ui-select-choices-row.active > span {
+        padding: 0;
+    }
+
+    &__list-icon {
+        display: inline-block;
+        width: rem(30);
+        margin-right: rem(6);
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .ui-select-choices-row:hover {
+        background: color(gray-50);
+        cursor: pointer;
+    }
+
+    // Modifiers
+
+    &--error {
+        border: rem(1) solid color(red-20);
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}select-dashed {
+        margin-left: rem(6);
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}select-dashed {
+        .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+    }
+}

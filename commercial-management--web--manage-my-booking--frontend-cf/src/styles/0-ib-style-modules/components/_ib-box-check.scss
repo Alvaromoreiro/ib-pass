@@ -1,0 +1,166 @@
+/* -------------------------------------------------------------
+    #BOX-CHECK
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}box-check {
+    padding: rem(32) rem(24);
+    margin-bottom: rem(24);
+    background-color: color(white);
+    box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+
+    &__block {
+        &--dotted {
+            padding-bottom: rem(23.5);
+            margin-bottom: rem(23.5);
+            border-bottom: dotted rem(1) color(gray-70);
+        }
+
+        &--right {
+            position: relative;
+            top: rem(3);
+            float: right;
+        }
+    }
+
+    &__button {
+        &--info {
+            position: relative;
+            height: rem(25);
+            border: 0;
+            font-size: rem(25);
+            color: color(gray-30);
+            background-color: transparent;
+            vertical-align: top;
+
+            &:hover {
+                color: color(red-10);
+            }
+        }
+
+        &--red{
+            color: color(red-10);
+        }
+    }
+    //Modifiers
+    &--one-way {
+        padding-bottom: rem(40);
+        .#{$wefront__namespace}check__label {
+            &::before {
+                display: none;
+            }
+            .#{$wefront__namespace}check__text {
+                margin-left: 0;
+                line-height: normal;
+            }
+        }
+        .#{$wefront__namespace}box-check__block {
+            &--dotted {
+                padding-bottom: rem(15.5);
+            }
+        }
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}box-check {
+        margin-bottom: rem(16);
+
+        &__button {
+            &--info {
+                left: rem(2);
+            }
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}box-check {
+        margin-bottom: rem(16);
+
+        &__button {
+            &--info {
+                left: rem(2);
+            }
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}box-check {
+        padding: rem(24) rem(16);
+        margin-bottom: rem(16);
+
+        &__block {
+            &--right {
+                top: auto;
+                padding: rem(5) 0 0 rem(34);
+                float: none;
+            }
+
+            &--dotted {
+                padding-bottom: rem(15.5);
+            }
+            .#{$wefront__namespace}text--bold {
+                line-height: rem(16);
+            }
+        }
+
+        &__button {
+            &--info {
+                left: rem(3);
+            }
+        }
+
+        &--one-way {
+            .#{$wefront__namespace}box-check {
+                &__block {
+                    &--right {
+                        padding-left: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}box-check {
+        padding: rem(24) rem(16);
+        margin-bottom: rem(16);
+
+        &__block {
+            &--right {
+                top: auto;
+                padding: rem(6) 0 0 rem(34);
+                float: none;
+            }
+
+            &--dotted {
+                padding-bottom: rem(15.5);
+                margin-bottom: rem(15.5);
+            }
+        }
+
+        &__button {
+            &--info {
+                left: rem(3);
+            }
+        }
+        .#{$wefront__namespace}check__label {
+            &::before {
+                top: 0;
+                transform: none;
+            }
+        }
+
+        &--one-way {
+            .#{$wefront__namespace}box-check {
+                &__block {
+                    &--right {
+                        padding-left: 0;
+                    }
+                }
+            }
+        }
+    }
+}

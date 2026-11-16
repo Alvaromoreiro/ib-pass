@@ -1,0 +1,179 @@
+/* -------------------------------------------------------------
+    #UI-EDITION-FORMS
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}ui-edition-forms {
+    padding: rem(24);
+    border: rem(1) solid color(gray-50);
+    background-color: color(white);
+    box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+
+    &__margin {
+        margin-top: rem(106);
+    }
+
+    &__header {
+        position: relative;
+        display: flex;
+        width: 100%;
+        min-width: 100%;
+        flex-flow: row nowrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        &-title {
+            width: 100%;
+        }
+
+        &--focus {
+            &:focus,
+            &:active {
+                outline: rem(2) solid color(orange-10);
+            }
+        }
+    }
+
+    &__collapse {
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: 0 none;
+        font-size: rem(28);
+        line-height: rem(34);
+        background: 0 none;
+
+        &-icon {
+            line-height: rem(34);
+        }
+    }
+
+    &__content {
+        padding-left: rem(44);
+        margin-top: rem(24);
+
+        &--collapsable {
+            padding: rem(0) rem(0) rem(0) rem(36);
+            margin-top: rem(24);
+        }
+
+        &--collapsable-grey {
+            padding: rem(24) rem(32);
+            margin-top: rem(24);
+            background-color: color(gray-60);
+        }
+
+        &--expanded {
+            padding: 0 rem(44) 0;
+        }
+
+        &--pt-16 {
+            padding-top: rem(16);
+        }
+    }
+
+    &__footer {
+        padding-top: rem(24);
+        margin-top: rem(24);
+        border-top: rem(1) solid color(gray-70);
+
+        &--collapsable {
+            padding: rem(0);
+        }
+    }
+
+    &__extra-info{
+        margin-top: rem(8);
+        margin-left: rem(30);
+        font-size: rem(13);
+    }
+    .#{$wefront__namespace}select {
+        &--label {
+            .#{$wefront__namespace}select__label {
+                font-family: $font-normal;
+                font-size: rem(11);
+            }
+        }
+
+        .ui-select-toggle {
+            padding: rem(18) rem(35) rem(18) rem(16);
+        }
+
+        .ui-select-search {
+            padding: rem(18) rem(35) rem(10) rem(16);
+        }
+
+        &__label {
+            left: rem(16);
+
+            &--focus,
+            &--unfocus {
+                left: rem(16);
+                width: remcalc(100%, ' - ', rem(32));
+            }
+        }
+
+        &__label--focus + .ib-select__action .ui-select-search,
+        &__label--focus + .ib-select__action .ui-select-toggle {
+            padding: rem(27) rem(35) rem(10) rem(16);
+        }
+    }
+    .#{$wefront__namespace}select-date {
+        &__action--day {
+            margin-left: rem(4);
+        }
+    }
+}
+
+.#{$wefront__namespace}profile-form {
+    .#{$wefront__namespace}ui-edition-forms {
+        &__content {
+            padding: 0;
+        }
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}ui-edition-forms {
+        .#{$wefront__namespace}select-date {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: flex-start;
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}ui-edition-forms {
+        .#{$wefront__namespace}ui-buttons-sets {
+            &--column-mobile {
+                flex-flow: column-reverse nowrap;
+
+                &__content {
+                    &:first-child {
+                        order: initial;
+                        margin-top: rem(20);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}ui-edition-forms {
+        padding: rem(16) rem(16) rem(16) rem(12);
+
+        &__content {
+            padding-right: 0;
+            padding-left: rem(28);
+        }
+
+        &__footer {
+            padding: 0;
+        }
+        .#{$wefront__namespace}ui-buttons-sets {
+            margin-bottom: 0;
+        }
+    }
+}

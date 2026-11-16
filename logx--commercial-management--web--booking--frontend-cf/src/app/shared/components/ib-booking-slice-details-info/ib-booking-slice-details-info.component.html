@@ -1,0 +1,174 @@
+<div class="show-details-info" [ngClass]="{'collapse-open':opened}">
+    <div class="ib-modals__header-settings close-modal-icon">
+        <button type="button" class="ib-modals__button-action icon-cerrar"
+            title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" (click)="toggle()">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+    <div class="header-container">
+        <div class="header-row header-row--title">
+            <p class="header-row__datetime">{{sliceDetailsInfoModel.segments[0]?.departureDateTimeParsed}}</p>
+            <p class="header-row__city-code">{{sliceDetailsInfoModel.segments[0].departure.code}}</p>
+            <span class="header-row__icon icon-vuelos"></span>
+            <p class="header-row__datetime">
+                {{sliceDetailsInfoModel.segments[sliceDetailsInfoModel.segments?.length-1]?.arrivalDateTimeParsed}}</p>
+            <p class="header-row__city-code header-row__city-code--warning"
+                *ngIf="sliceDetailsInfoModel.daysOfTravel>0">
+                {{'AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate}}{{sliceDetailsInfoModel.daysOfTravel}}</p>
+            <p class="header-row__city-code">{{sliceDetailsInfoModel.segments[sliceDetailsInfoModel.segments.length -
+                1].arrival.code}}</p>
+        </div>
+        <div class="header-row header-row--subtitle">
+            <p class="header-row__duration-trip">{{sliceDetailsInfoModel.durationParsed}}</p>
+        </div>
+    </div>
+    <ng-container *ngFor="let segment of sliceDetailsInfoModel.segments; index as i; trackBy: trackByFn">
+        <div class="body-date__box"
+            *ngIf="( i>0 && isNotSameDay(segment.departureDateParsed.weekDay, sliceDetailsInfoModel.segments[0].arrivalDateParsed.weekDay)) || i === 0 ">
+            <p class="body-date__text">{{segment.departureDateParsed.weekDay|translate|slice:0:3}},
+                {{segment.departureDateParsed.day}} {{segment.departureDateParsed.month|translate|titlecase|slice:0:3}}
+            </p>
+            <span class="trip__line trip__line--change-day" *ngIf="i>0"
+                [ngClass]="{'trip__line--stopover trip__line--change-day-stopover': sliceDetailsInfoModel.segments[i].departure.code === sliceDetailsInfoModel.segments[0].arrival.code}">
+            </span>
+        </div>
+        <div class="segment-container-departure" [ngClass]="{'segment-container-arrival': i>0}">
+            <div class="column column__city">
+                <p class="segment__city">{{segment.departure.code}}</p>
+                <p class="segment__description">{{segment.departureDateTimeParsed}}</p>
+            </div>
+            <div class="column column__line">
+                <span class="trip__circle" *ngIf="i===0"></span>
+                <span class="trip__circle trip__circle--stopover" *ngIf="i>0"></span>
+                <span class="trip__line"></span>
+            </div>
+            <div class="column column__city-info">
+                <p class="segment__city">{{segment.departure.city.description}}</p>
+                <p class="segment__description segment__description">{{segment.departure.name}}</p>
+                <div class="segment__box-secondary-description">
+                    <p class="segment__secondary-description " *ngIf="segment.departure.terminal">
+                        {{'SUMMARY_TERMINAL'|translate}}: {{segment.departure.terminal}}</p>
+                    <div class="segment__secondary-description">
+                        {{segment.flight.marketingCarrier && segment.flight.marketingCarrier.code ?
+                        segment.flight.marketingCarrier.code :
+                        segment.flight.operationalDisclosure}}{{segment.flight.marketingFlightNumber}} .
+                        {{segment.flight.operationalCarrier.name}}
+                        <img class="segment__logo" src="/iberia-web-content/iconos{{segment.companyURLMin}}"
+                            alt="Logo {{segment.flight.operationalCarrier.name}}"
+                            (error)="handleCompanyLogoError($event)">
+                    </div>
+                    <p class="segment__secondary-description">{{segment.flight.aircraft.description}}</p>
+                    <p class="segment__secondary-description">{{'SUMMARY_SEGMENT_DETAILS_DURATION'|translate}}
+                        {{segment.durationParsed}}</p>
+                    <p class="segment__secondary-description segment__secondary-description--overnight icon-luna"
+                        *ngIf="segment.nightFlight.isOverNight">
+                        {{segment.nightFlight.message}}
+                    </p>
+                    <div *ngIf="segment.delayInformation" class="ib-table-flight-detail u-pt-small">
+                        <div class="ib-table-flight-detail__item delay-info">
+                            <div class="ib-table-flight-detail__hours">
+                                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                                    <span class="ib-text ib-text--small ib-text--block ib-text--color-unfocused">
+                                        <span class="ib-link-icon ib-link-icon--no-hover-color">
+                                            <span class="ib-link-icon__icon icon-informacion_2"></span>
+                                            <span
+                                                class="ib-link-icon__text ib-link-icon__text--no-decoration ib-link-icon__text--small">{{'AVAILABILITY_DELAYED_TITLE1_FROM_BR'|translate}}
+                                                {{segment.delayInformation.code}}
+                                                ({{'AVAILABILITY_DELAYED_TITLE2_FROM_BR'|translate}}
+                                                {{segment.delayInformation.timeInformation}})</span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                                    <ul class="ib-list ib-list--square ib-list--gray u-ml">
+                                        <li class="list__item">
+                                            <span
+                                                class="ib-text ib-text--small ib-text list__item--spacing">{{'AVAILABILITY_DELAYED_CANCELLED_TEXT_BR'|translate}}: 
+                                                <span  class="ib-text ib-text--small ib-text--color-unfocused" *ngIf="segment.delayInformation.percentCancelled !== null">
+                                                    {{segment.delayInformation.percentCancelled}}%</span>
+                                                <span  class="ib-text ib-text--small ib-text--color-unfocused" *ngIf="segment.delayInformation.percentCancelled === null || segment.delayInformation.percentCancelled === undefined">
+                                                     {{"AVAILABILITY_SLICK_NOT_AVAILABLE" | translate}}</span>
+                                            <span
+                                                class="ib-text ib-text--small ib-text--block ib-text--color-unfocused">{{'AVAILABILITY_DELAYED_INFO_PORCENT_BR'|translate}}</span></span>
+                                        </li>
+                                        <li class="list__item">
+                                            <span
+                                                class="ib-text ib-text--small">
+                                                {{'AVAILABILITY_DELAYED_30MIN_TEXT_BR'|translate}}: 
+                                                <span  class="ib-text ib-text--small ib-text--color-unfocused" *ngIf="segment.delayInformation.delayed30 !== null">
+                                                    {{segment.delayInformation.delayed30}}%</span>
+                                                <span  class="ib-text ib-text--small ib-text--color-unfocused" *ngIf="segment.delayInformation.delayed30 === null || segment.delayInformation.delayed30 === undefined">
+                                                     {{"AVAILABILITY_SLICK_NOT_AVAILABLE" | translate}}</span>
+                                                </span>
+                                        </li>
+                                        <li class="list__item">
+                                            <span
+                                                class="ib-text ib-text--small">
+                                                {{'AVAILABILITY_DELAYED_60MIN_TEXT_BR'|translate}}: 
+                                                <span  class="ib-text ib-text--small ib-text--color-unfocused" *ngIf="segment.delayInformation.delayed60 !== null">
+                                                    {{segment.delayInformation.delayed60}}%</span>
+                                                <span  class="ib-text ib-text--small ib-text--color-unfocused" *ngIf="segment.delayInformation.delayed60 === null || segment.delayInformation.delayed60 === undefined">
+                                                     {{"AVAILABILITY_SLICK_NOT_AVAILABLE" | translate}}</span>
+                                                </span>
+                                            <span
+                                                class="ib-text ib-text--small ib-text--block ib-text--color-unfocused">{{'AVAILABILITY_DELAYED_INFO_TEXT_BR'|translate}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ib-booking-slice-details-info-warning
+                        *ngIf="segment.stop"
+                        [warningModel]="segment">
+                    </ib-booking-slice-details-info-warning>
+                </div>
+            </div>
+        </div>
+        <div class="body-date__box"
+            *ngIf="isNotSameDay(segment.departureDateParsed.weekDay, segment.arrivalDateParsed.weekDay)">
+            <p class="body-date__text">{{segment.arrivalDateParsed.weekDay|translate|slice:0:3}},
+                {{segment.arrivalDateParsed.day}} {{segment.arrivalDateParsed.month|translate|titlecase|slice:0:3}}</p>
+            <span class="trip__line trip__line--change-day"></span>
+        </div>
+        <div class="segment-container-arrival">
+            <div class="column column__city">
+                <p class="segment__city">{{segment.arrival.code}}</p>
+                <p class="segment__description">{{segment.arrivalDateTimeParsed}}</p>
+            </div>
+            <div class="column column__line">
+                <span class="trip__circle" *ngIf="i === sliceDetailsInfoModel.segments.length-1"></span>
+                <span class="trip__circle trip__circle--stopover"
+                    *ngIf="i !== sliceDetailsInfoModel.segments.length-1"></span>
+                <span class="trip__line trip__line--stopover"
+                    *ngIf="i !== sliceDetailsInfoModel.segments.length-1"></span>
+            </div>
+            <div class="column column__city-info">
+                <p class="segment__city">{{segment.arrival.city.description}}</p>
+                <p class="segment__description">{{segment.arrival.name}}</p>
+                <p class="segment__secondary-description" *ngIf="segment.arrival.terminal">
+                    {{'SUMMARY_TERMINAL'|translate}}: {{segment.arrival.terminal}}</p>
+                <ng-container
+                    *ngIf="sliceDetailsInfoModel.segments.length > 1 && i !== sliceDetailsInfoModel.segments.length-1 && sliceDetailsInfoModel.segments[i+1].scaleWaitingTime.show">
+                    <p class="segment__secondary-description  segment__secondary-description--warning"
+                        *ngIf="!sliceDetailsInfoModel.segments[i+1].scaleWaitingTime.isLong">
+                        {{'AVAILABILITY_SCALE_IN'|translate}} {{segment.arrival.city.description}}:
+                        {{sliceDetailsInfoModel.segments[i+1].waitingTimeParsed}}</p>
+                    <p class="segment__secondary-description  segment__secondary-description--warning"
+                        *ngIf="sliceDetailsInfoModel.segments[i+1].scaleWaitingTime.isLong">
+                        {{'AVAILABILITY_LONG_TIME_SCALE' | translate}}:
+                        {{sliceDetailsInfoModel.segments[i+1].waitingTimeParsed}}</p>
+                    <ib-booking-slice-details-info-warning
+                        *ngIf="sliceDetailsInfoModel.segments[i+1].terminalChange.show || sliceDetailsInfoModel.segments[i+1].airportChange.show"
+                        [warningModel]="sliceDetailsInfoModel.segments[i+1]">
+                    </ib-booking-slice-details-info-warning>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+    <div class="button-container">
+        <button type="button" class="ib-button ib-button--w-medium"
+            (click)="toggle()">{{'AVAILABILITY_SLICE_DETAILS_BACK_BUTTON'|translate}}</button>
+    </div>
+</div>
+<div *ngIf="opened" (click)="toggle()" class="backdrop"></div>

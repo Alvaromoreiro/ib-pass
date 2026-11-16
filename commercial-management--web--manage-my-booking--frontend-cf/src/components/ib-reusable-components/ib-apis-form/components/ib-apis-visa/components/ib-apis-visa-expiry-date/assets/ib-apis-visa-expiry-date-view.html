@@ -1,0 +1,36 @@
+
+<div class="ib-select-date" id="EXPIRY_DATE" data-ng-class="{'ib-select-date--error': apisVisaExpiryDateCtrl.containerForm.$submitted && (apisVisaExpiryDateCtrl.containerForm.expiryVisaDateDay.$invalid || apisVisaExpiryDateCtrl.containerForm.expiryVisaDateMonth.$invalid || apisVisaExpiryDateCtrl.containerForm.expiryVisaDateYear.$invalid)}">
+    <span class="ib-select-date__label">{{'EXPIRY_DATE_FIELD_TITLE'|translate}}</span>
+    <ui-select ng-if="apisVisaExpiryDateCtrl.showDay" class="ib-select-date__action ib-select-date__action--day" ng-model="apisVisaExpiryDateCtrl['day']"
+        data-ng-change="apisVisaExpiryDateCtrl.daysSelected()" name="expiryVisaDateDay">
+        <ui-select-match class="ib-select-date__list-ipt" placeholder="{{'EXPIRY_DATE_FIELD_DAY_PLACEHOLDER'|translate}}">
+            <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+        </ui-select-match>
+        <ui-select-choices class="ib-select-date__list" repeat="item in (apisVisaExpiryDateCtrl.availableDays | filter: $select.search) track by $index">
+            <span class="ib-select-date__list-txt" ng-bind="item"></span>
+        </ui-select-choices>
+    </ui-select>
+    <ui-select class="ib-select-date__action ib-select-date__action--month" ng-model="apisVisaExpiryDateCtrl['month']" data-ng-change="apisVisaExpiryDateCtrl.updateMonthExpiration()"
+     name="expiryVisaDateMonth"  data-ng-class="{'ib-select-date__action--month-first' : !apisVisaExpiryDateCtrl.showDay}">
+        <ui-select-match class="ib-select-date__list-ipt" placeholder="{{'EXPIRY_DATE_FIELD_MONTH_PLACEHOLDER'|translate}}">
+            <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+        </ui-select-match>
+        <ui-select-choices repeat="item in (apisVisaExpiryDateCtrl.availableMonths | filter: $select.search) track by $index">
+            <span class="ib-select-date__list-txt" data-ng-bind="item"></span>
+        </ui-select-choices>
+    </ui-select>
+    <ui-select class="ib-select-date__action" ng-class="{'ib-select-date__action--year': apisVisaExpiryDateCtrl.showDay,'ib-select-date__action--day':!apisVisaExpiryDateCtrl.showDay}"
+        ng-model="apisVisaExpiryDateCtrl['year']" data-ng-change="apisVisaExpiryDateCtrl.updateYearExpiration()" name="expiryVisaDateYear">
+        <ui-select-match class="ib-select-date__list-ipt" placeholder="{{apisVisaExpiryDateCtrl.showDay ? ('EXPIRY_DATE_FIELD_YEAR_PLACEHOLDER'|translate) : ('EXPIRY_DATE_FIELD_LIGHT_YEAR_PLACEHOLDER'|translate)}}">
+            <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+        </ui-select-match>
+        <ui-select-choices repeat="item in (apisVisaExpiryDateCtrl.availableYears | filter: $select.search) track by $index">
+            <span class="ib-select-date__list-txt" data-ng-bind="item"></span>
+        </ui-select-choices>
+    </ui-select>
+</div>
+<div ng-messages="apisVisaExpiryDateCtrl.containerForm.$submitted && ((apisVisaExpiryDateCtrl.containerForm.expiryVisaDateDay.$invalid && apisVisaExpiryDateCtrl.containerForm.expiryVisaDateDay.$error)
+                || (apisVisaExpiryDateCtrl.containerForm.expiryVisaDateMonth.$invalid && apisVisaExpiryDateCtrl.containerForm.expiryVisaDateMonth.$error)
+                || (apisVisaExpiryDateCtrl.containerForm.expiryVisaDateYear.$invalid && apisVisaExpiryDateCtrl.containerForm.expiryVisaDateYear.$error))">
+    <div class="ib-alert ib-alert--error" ng-message="required">{{'EXPIRY_DATE_REQUIRED_ERROR'|translate}}</div>
+</div>

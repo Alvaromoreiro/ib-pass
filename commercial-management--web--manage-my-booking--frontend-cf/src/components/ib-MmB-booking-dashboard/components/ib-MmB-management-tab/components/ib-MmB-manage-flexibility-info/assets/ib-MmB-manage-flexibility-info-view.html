@@ -1,0 +1,72 @@
+<fieldset class="ib-box-menu__section ib-box-menu__section--full">
+    <legend class="u-hide-accessible">{{'ANCILLARIES_FLEXIBILITY_TITLE'|translate}}</legend>
+    <div>
+        <section class="ib-layout__section">
+            <div class="ib-box-cols">
+                <h3 class="ib-mmb-dash-item__title">{{'ANCILLARIES_FLEXIBILITY_TITLE'|translate}}</h3>
+                <div class="ib-mmb-dash-item__content-bottom">
+                    
+                        <div class="ib-mmb-dash-item__info" data-ng-repeat="(index, segment) in manageFlexibilityInfoCtrl.model[0].segments">
+
+                            <a class="ib-mmb-dash-item__trip ib-mmb-dash-item__trip--caret" href="javascript:void(0)"
+                                ng-if="manageFlexibilityInfoCtrl.flagsViews.showVoluntaryChangeFlightSection && segment.status === 'AVAILABLE' && manageFlexibilityInfoCtrl.model[0].subtype === 'FLIGHT_CHANGE'"
+                                data-ng-click="manageFlexibilityInfoCtrl.openChangeFlightsFlowFromInfo()" focusin></a>
+
+                            <a class="ib-mmb-dash-item__trip ib-mmb-dash-item__trip--caret" href="javascript:void(0)"
+                                ng-if="manageFlexibilityInfoCtrl.flagsViews.refundVoucherSection80 && manageFlexibilityInfoCtrl.clickToCallCenter && !manageFlexibilityInfoCtrl.flagsViews.showModalRefound48hs && manageFlexibilityInfoCtrl.model[0].subtype !== 'FLEXIBILITY_PACK'"
+                                data-ng-click="manageFlexibilityInfoCtrl.openRefundFlowFromInfo()" focusin></a>
+
+                            <a class="ib-mmb-dash-item__trip ib-mmb-dash-item__trip--caret" href="javascript:void(0)"
+                                ng-if="!manageFlexibilityInfoCtrl.tabs.orderCapabilities && manageFlexibilityInfoCtrl.model[0].subtype === 'FLEXIBILITY_PACK' && segment.status === 'AVAILABLE'"
+                                data-ng-click="manageFlexibilityInfoCtrl.openPackFlex(segment, manageFlexibilityInfoCtrl.model[0].percentage, manageFlexibilityInfoCtrl.flagsViews.showModalRefound48hs)" focusin></a>
+
+                            <a class="ib-mmb-dash-item__trip ib-mmb-dash-item__trip--caret" href="javascript:void(0)"
+                                ng-if="manageFlexibilityInfoCtrl.flagsViews.refundVoucherSection80 && manageFlexibilityInfoCtrl.clickToCallCenter && manageFlexibilityInfoCtrl.flagsViews.showModalRefound48hs && manageFlexibilityInfoCtrl.model[0].subtype !== 'FLEXIBILITY_PACK'"
+                                data-ng-click="manageFlexibilityInfoCtrl.openCallCenterModalFlex('refunds')" focusin></a>
+
+                                <span class="ib-mmb-dash-item__trip--departure">
+                                    <span
+                                        class="ib-mmb-dash-item__trip--city">{{segment.origin.description}}</span>
+                                    <span class="ib-mmb-dash-item__trip--code">({{segment.origin.code}})</span>
+                                </span>
+                                <span class="ib-mmb-dash-item__trip--arrival">
+                                    <span
+                                        class="ib-mmb-dash-item__trip--city">{{segment.destination.description}}</span>
+                                    <span class="ib-mmb-dash-item__trip--code">({{segment.destination.code}})</span>
+                                </span>
+                                <p class="ib-mmb-dash-item__concept">
+                                    <span class="ib-mmb-dash-item__concept--icon icon-flexibilidad">
+                                        <span class="ib-mmb-dash-item__concept--item">
+                                            <span class="ib-mmb-dash-item__concept--info">
+                                                <span class="ib-mmb-dash-item__concept--text"
+                                                    ng-if="manageFlexibilityInfoCtrl.model[0].subtype === 'FLIGHT_CHANGE'">
+                                                    1 {{'MMB_ANCILLARIES_FLEXIBILITY_CHANGE_FLIGHT_TEXT' | translate}}
+                                                    <span class="ib-lateral-menu__sublink ib-lateral-menu__sublink--active"
+                                                      ng-if="segment.status === 'EXPIRED' || segment.status === 'REDEEMED'">
+                                                      ({{'MMB_ANCILLARIES_FLEXIBILITY_PARCIAL_REFUND_STATUS_' + segment.status | translate}})</span>
+                                                </span>
+                                                <span class="ib-mmb-dash-item__concept--text"
+                                                    ng-if="manageFlexibilityInfoCtrl.model[0].subtype === 'VOUCHER_REFUND'">
+                                                    {{(manageFlexibilityInfoCtrl.model[0].percentage < 100 ? 'MMB_ANCILLARIES_FLEXIBILITY_PARCIAL_REFUND_CARD_TEXT' : 'ANCILLARIES_VOUCHER_REFUND_MODAL_TITLE')|translate}}
+                                                    <span class="ib-lateral-menu__sublink ib-lateral-menu__sublink--active"
+                                                      ng-if="segment.status === 'EXPIRED' || segment.status === 'REDEEMED'">
+                                                      ({{'MMB_ANCILLARIES_FLEXIBILITY_PARCIAL_REFUND_STATUS_' + segment.status | translate}})</span>
+                                                </span>
+                                                <span class="ib-mmb-dash-item__concept--text"
+                                                    ng-if="manageFlexibilityInfoCtrl.model[0].subtype === 'FLEXIBILITY_PACK'">
+                                                    <span class="u-mb-small ib-text--small ib-text--block icon-flexibilidad-icon"> {{'ANCILLARIES_FLEXIBILITY_PACK_FLEXIBILITY' | translate}}</span>
+                                                    <span class="ib-lateral-menu__sublink ib-lateral-menu__sublink--active"
+                                                      ng-if="segment.status === 'EXPIRED' || segment.status === 'REDEEMED'">
+                                                      ({{'MMB_ANCILLARIES_FLEXIBILITY_PARCIAL_REFUND_STATUS_' + segment.status | translate}})</span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </p>
+                        </div>
+                    
+                </div>
+            </div>
+        </section>
+    </div>
+</fieldset>

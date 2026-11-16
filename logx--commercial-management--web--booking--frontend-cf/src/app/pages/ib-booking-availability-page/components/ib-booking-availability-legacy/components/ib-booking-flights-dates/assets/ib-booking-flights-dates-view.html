@@ -1,0 +1,72 @@
+<div class="ib-date-carousel ib-date-carousel--bordered ib-date-carousel--mb-0" data-ng-class="{'u-overflow-visible' : fDCtrl.index !== 'OD1' && fDCtrl.isNewFare}">
+    <div class="ib-date-carousel__list">
+        <ib-slick-carousel id="bbki-flights-dates-slick-carousel" class="ib-date-carousel__slick" carousel-index="fDCtrl.index" carousel-slides="fDCtrl.currentSlides" options="fDCtrl.carouselOptions">
+            <div ng-repeat="slide in fDCtrl.currentSlides" class="ib-date-carousel__item" ng-class="{'ib-date-carousel__item--active' : fDCtrl.calendarData.selectedSlide === slide.slidePosition,
+                           'ib-date-carousel__item--empty':(slide.state === 'NOT_AVAILABLE' || slide.state === 'LOADING' || slide.state === 'DISABLED'),
+                           'ib-date-carousel__item--page-background':(slide.state==='UPPER_END_RIBBON_DISABLED'|| slide.state==='LOWER_END_RIBBON_DISABLED'),
+                           'ib-date-carousel__item--warn':(slide.state==='UPPER_END_RIBBON_WARN'|| slide.state==='LOWER_END_RIBBON_WARN'),
+                           'ib-date-carousel__item--warn-outbound':(slide.state==='UPPER_END_RIBBON_WARN'),
+                           'ib-date-carousel__item--warn-inbound':(slide.state==='LOWER_END_RIBBON_WARN'),
+                           'ib-date-carousel__item--warn-sibling': fDCtrl.warningVisible  && (slide.state!=='UPPER_END_RIBBON_WARN') && (slide.state!=='LOWER_END_RIBBON_WARN')
+                        }">
+
+                <input data-ng-if="slide.state !== 'UPPER_END_RIBBON_WARN' && slide.state !== 'LOWER_END_RIBBON_WARN' && slide.state !== 'UPPER_END_RIBBON_DISABLED' && slide.state !== 'LOWER_END_RIBBON_DISABLED'"
+                class="ib-date-carousel__input" type="radio" id="{{::fDCtrl.index}}_{{::slide.slidePosition}}" name="availability_day_{{::fDCtrl.index}}_{{::slide.slidePosition}}"
+                    ng-click="fDCtrl.searchSlideAvailability(slide)" ng-disabled="(slide.state === 'NOT_AVAILABLE' || slide.state === 'LOADING' || slide.state === 'DISABLED')"
+                />
+                <label data-ng-if="!fDCtrl.isNewFare && slide.state !== 'UPPER_END_RIBBON_WARN' && slide.state !== 'LOWER_END_RIBBON_WARN' && slide.state !== 'UPPER_END_RIBBON_DISABLED' && slide.state !== 'LOWER_END_RIBBON_DISABLED'"
+                class="ib-date-carousel__date ib-date-carousel__date--auto" ng-class="{'ib-date-carousel__date--one-line': slide.price === null && slide.state !== 'DISABLED' && slide.state !== 'NOT_AVAILABLE' && slide.state !== 'LOADING' && !$root.isPointsOBFlow}" for="{{::fDCtrl.index}}_{{::slide.slidePosition}}">
+                    <span class="ib-date-carousel__date-week" data-shortcut="{{slide.date.weekDay | translate | ShortenerFormatFilter:3}}"><span>{{slide.date.weekDay | translate | ShortenerFormatFilter:3}}</span></span>,
+                    <span class="ib-date-carousel__date-day">{{slide.date.day}}</span>.
+                    <span class="ib-date-carousel__date-month">{{slide.date.month| translate | ShortenerFormatFilter:3}}</span>
+                    <span class="ib-date-carousel__price" ng-if="slide.state === 'NOT_AVAILABLE' && !$root.isPointsOBFlow">{{ 'AVAILABILITY_SLICK_NOT_FLIGHTS' | translate}}</span>
+                    <span class="ib-date-carousel__price" ng-if="slide.state === 'DISABLED' && !$root.isPointsOBFlow">{{ 'AVAILABILITY_SLICK_NOT_AVAILABLE' | translate}}</span>
+                    <span class="ib-date-carousel__price" ng-if="slide.state === 'AVAILABLE' && !$root.isPointsOBFlow">{{($root.isRedemptionFlow && slide.price > 0) ? slide.formattedPrice + ' ' + ('IBPURC_PAYMENTS_DISCOUNTS_AVIOS'|translate) : (slide.price > 0) ? slide.formattedPrice : ''}}</span>
+                    <div id="bbki-flights-dates-loading-elem" class="ib-date-carousel__price-loading" ng-if="slide.state === 'LOADING' && !$root.isPointsOBFlow">
+                        <div class="ib-date-carousel__price-loading--content">
+                            <div class="ib-date-carousel__price-loading--spinner"><div></div><div></div></div>
+                            <span class="ib-date-carousel__price-loading--text">{{ 'AVAILABILITY_SLICK_LOADING' | translate}}</span>
+                        </div>
+                    </div>
+                </label>
+                <label uib-popover="" uib-popover-template="fDCtrl.calendarData.selectedSlide === slide.slidePosition ? '' : 'web-booking/templates/ib-popover-bki-flights-dates.html'" popover-placement="auto bottom" popover-trigger="'mouseenter'" popover-is-open="popover.isOpen"
+                data-ng-if="fDCtrl.index !== 'OD1' && fDCtrl.isNewFare && slide.state !== 'UPPER_END_RIBBON_WARN' && slide.state !== 'LOWER_END_RIBBON_WARN' && slide.state !== 'UPPER_END_RIBBON_DISABLED' && slide.state !== 'LOWER_END_RIBBON_DISABLED'"
+                class="ib-date-carousel__date ib-date-carousel__date--auto" ng-class="{'ib-date-carousel__date--one-line': slide.price === null && slide.state !== 'DISABLED' && slide.state !== 'NOT_AVAILABLE' && slide.state !== 'LOADING' && !$root.isPointsOBFlow}" for="{{::fDCtrl.index}}_{{::slide.slidePosition}}">
+                    <span class="ib-date-carousel__date-week" data-shortcut="{{slide.date.weekDay | translate | ShortenerFormatFilter:3}}"><span>{{slide.date.weekDay | translate | ShortenerFormatFilter:3}}</span></span>,
+                    <span class="ib-date-carousel__date-day">{{slide.date.day}}</span>.
+                    <span class="ib-date-carousel__date-month">{{slide.date.month| translate | ShortenerFormatFilter:3}}</span>
+                    <span class="ib-date-carousel__price" ng-if="slide.state === 'NOT_AVAILABLE' && !$root.isPointsOBFlow">{{ 'AVAILABILITY_SLICK_NOT_FLIGHTS' | translate}}</span>
+                    <span class="ib-date-carousel__price" ng-if="slide.state === 'DISABLED' && !$root.isPointsOBFlow">{{ 'AVAILABILITY_SLICK_NOT_AVAILABLE' | translate}}</span>
+                    <span class="ib-date-carousel__price" ng-if="slide.state === 'AVAILABLE' && !$root.isPointsOBFlow">{{($root.isRedemptionFlow && slide.price > 0) ? slide.formattedPrice + ' ' + ('IBPURC_PAYMENTS_DISCOUNTS_AVIOS'|translate) : (slide.price > 0) ? slide.formattedPrice : ''}}</span>
+                    <div id="bbki-flights-dates-loading-elem" class="ib-date-carousel__price-loading" ng-if="slide.state === 'LOADING' && !$root.isPointsOBFlow">
+                        <div class="ib-date-carousel__price-loading--content">
+                            <div class="ib-date-carousel__price-loading--spinner"><div></div><div></div></div>
+                            <span class="ib-date-carousel__price-loading--text">{{ 'AVAILABILITY_SLICK_LOADING' | translate}}</span>
+                        </div>
+                    </div>
+                </label>
+                <label data-ng-if="fDCtrl.index === 'OD1' && fDCtrl.isNewFare && slide.state !== 'UPPER_END_RIBBON_WARN' && slide.state !== 'LOWER_END_RIBBON_WARN' && slide.state !== 'UPPER_END_RIBBON_DISABLED' && slide.state !== 'LOWER_END_RIBBON_DISABLED'"
+                class="ib-date-carousel__date ib-date-carousel__date--auto" ng-class="{'ib-date-carousel__date--one-line': slide.price === null && slide.state !== 'DISABLED' && slide.state !== 'NOT_AVAILABLE' && slide.state !== 'LOADING' && !$root.isPointsOBFlow}" for="{{::fDCtrl.index}}_{{::slide.slidePosition}}">
+                    <span class="ib-date-carousel__date-week" data-shortcut="{{slide.date.weekDay | translate | ShortenerFormatFilter:3}}"><span>{{slide.date.weekDay | translate | ShortenerFormatFilter:3}}</span></span>,
+                    <span class="ib-date-carousel__date-day">{{slide.date.day}}</span>.
+                    <span class="ib-date-carousel__date-month">{{slide.date.month| translate | ShortenerFormatFilter:3}}</span>
+                    <span class="ib-date-carousel__price" ng-if="slide.state === 'NOT_AVAILABLE' && !$root.isPointsOBFlow">{{ 'AVAILABILITY_SLICK_NOT_FLIGHTS' | translate}}</span>
+                    <span class="ib-date-carousel__price" ng-if="slide.state === 'DISABLED' && !$root.isPointsOBFlow">{{ 'AVAILABILITY_SLICK_NOT_AVAILABLE' | translate}}</span>
+                    <span class="ib-date-carousel__price" ng-if="slide.state === 'AVAILABLE' && !$root.isPointsOBFlow">{{($root.isRedemptionFlow && slide.price > 0) ? slide.formattedPrice + ' ' + ('IBPURC_PAYMENTS_DISCOUNTS_AVIOS'|translate) : (slide.price > 0) ? slide.formattedPrice : ''}}</span>
+                    <div id="bbki-flights-dates-loading-elem" class="ib-date-carousel__price-loading" ng-if="slide.state === 'LOADING' && !$root.isPointsOBFlow">
+                        <div class="ib-date-carousel__price-loading--content">
+                            <div class="ib-date-carousel__price-loading--spinner"><div></div><div></div></div>
+                            <span class="ib-date-carousel__price-loading--text">{{ 'AVAILABILITY_SLICK_LOADING' | translate}}</span>
+                        </div>
+                    </div>
+                </label>
+
+                <div data-ng-if="slide.state === 'UPPER_END_RIBBON_WARN' || slide.state === 'LOWER_END_RIBBON_WARN'" class="ib-date-carousel__date ib-date-carousel__date--warn">
+                    <span class="ib-date-carousel__warn-text"> {{ slide.state === 'UPPER_END_RIBBON_WARN'? ('RIBBON_UPPERLIMIT_MSG'|translate:{date: (slide.serviceDate|date:'dd/MM')}) : ('RIBBON_LOWERLIMIT_MSG'|translate:{date: (slide.serviceDate|date:'dd/MM')})}}</span>
+                    <a href='javascript:void(0)' title="{{'RIBBON_SEARCH_AGAIN' | translate}}" class="ib-link ib-date-carousel__warn-text" data-ng-click="fDCtrl.openSeacher((slide.state === 'UPPER_END_RIBBON_WARN')?'RETURN':'GO')">{{'RIBBON_SEARCH_AGAIN' | translate}}</a>
+                </div>
+
+            </div>
+        </ib-slick-carousel>
+    </div>
+</div>

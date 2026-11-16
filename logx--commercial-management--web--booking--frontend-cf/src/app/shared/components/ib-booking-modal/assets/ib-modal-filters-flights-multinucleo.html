@@ -1,0 +1,51 @@
+<form>
+    <header class="ib-modals__header">
+        <h2 class="ib-heading ib-heading--type-1">{{'AVAILABILITY_MODAL_FILTER_TITLE'|translate}}</h2>
+        <div class="ib-modals__header-settings">
+            <button id="bbki-filters-multicore-close-btn" type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}"  data-ng-click="filterCtrl.close()">
+                <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+            </button>
+        </div>
+    </header>
+    <section class="ib-modals__body">
+        <div class="ib-layout">
+            <fieldset class="ib-layout__form-center">
+                <legend class="u-hide-accessible">{{'AVAILABILITY_MODAL_FILTERS_TITLE_ACCESSIBLE'|translate}}</legend>
+                <div class="ib-layout__line-spacing">
+                    <div class="ib-select">
+                        <ui-select class="ib-select__action" ng-model="filterCtrl.model.filterOptions.cabin" on-select="filterCtrl.updateRangePrices($select.selected.type)">
+                            <ui-select-match class="ib-select__list-ipt" placeholder="{{'AVAILABILITY_MODAL_FILTERS_CABIN_TYPE'|translate}}">
+                                <span class="ib-select__txt" data-ng-bind="$select.selected.value.cabinDescription | translate"></span>
+                            </ui-select-match>
+                            <ui-select-choices class="ib-select__list" repeat="info.value as (type, info) in filterCtrl.model.filterOptions.cabinType | filter: $select.search">
+                                <span class="ib-select__list-txt" data-ng-bind="info.value.cabinDescription | translate"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+                    <div class="ib-rangeslider ib-rangeslider--filter">
+                        <span class="ib-rangeslider__title">{{'AVAILABILITY_MODAL_FILTERS_DEPARTURE_HOUR'|translate}}</span>
+                        <rzslider rz-slider-model="filterCtrl.model.filterOptions.departureHours.minValue" rz-slider-high="filterCtrl.model.filterOptions.departureHours.maxValue"
+                            rz-slider-options="filterCtrl.model.filterOptions.departureHours.options"></rzslider>
+                    </div>
+                </div>
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+                    <div class="ib-rangeslider ib-rangeslider--filter">
+                        <span class="ib-rangeslider__title">{{'AVAILABILITY_MODAL_FILTERS_ARRIVAL_HOUR'|translate}}</span>
+                        <rzslider rz-slider-model="filterCtrl.model.filterOptions.arrivalHours.minValue" rz-slider-high="filterCtrl.model.filterOptions.arrivalHours.maxValue"
+                            rz-slider-options="filterCtrl.model.filterOptions.arrivalHours.options"></rzslider>
+                    </div>
+                </div>
+                <div class="ib-content-buttons">
+                    <div class="ib-content-buttons__content-left ">
+                        <button id="bbki-filters-multicore-accept-btn" type="submit" data-ng-click="filterCtrl.accept()" title="{{'AVAILABILITY_MODAL_FILTERS_APPLY'|translate}}" class="ib-button ib-button--w-medium u-float-right ib-button--block-xs">{{'AVAILABILITY_MODAL_FILTERS_APPLY'|translate}}</button>
+                    </div>
+                    <div class="ib-content-buttons__content-right">
+                        <a id="bbki-filters-multicore-cancel-link" data-ng-click="filterCtrl.close()" title="{{'AVAILABILITY_MODAL_FILTERS_NO_THANKS'|translate}}" class="ib-link">{{'AVAILABILITY_MODAL_FILTERS_CANCEL'|translate}}</a>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </section>
+</form>

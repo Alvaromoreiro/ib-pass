@@ -1,0 +1,850 @@
+/* -------------------------------------------------------------
+    #LIST ICON
+----------------------------------------------------------------- */
+.#{$wefront__namespace}list-icon-fare {
+    &__icon {
+        display: inline-block;
+        font-size: rem(30);
+        line-height: rem(22);
+        color: color(primary);
+        vertical-align: top;
+    }
+
+    &__text-container {
+        position: relative;
+        display: inline-block;
+        width: remcalc(100%, " - ", rem(32));
+        vertical-align: top;
+    }
+
+    &__tag {
+        position: relative;
+        display: inline-block;
+        max-width: rem(55);
+        padding: 0 rem(4) 0 rem(10);
+        margin-top: rem(3);
+        border-radius: rem(2);
+        line-height: 1;
+        background-color: color(primary);
+        vertical-align: top;
+
+        &-txt {
+            display: inline-block;
+            overflow: hidden;
+            font-family: $font-normal;
+            font-size: rem(10);
+            font-weight: bold;
+            text-overflow: ellipsis;
+            color: color(white);
+            white-space: nowrap;
+
+            &::before {
+                content: "";
+                position: absolute;
+                z-index: 1;
+                top: rem(4);
+                left: rem(3);
+                display: inline-block;
+                width: rem(5);
+                height: rem(5);
+                border: rem(1) solid color(white);
+                border-radius: 50%;
+                background: color(white);
+                vertical-align: top;
+            }
+        }
+
+        &--fav {
+            padding: 0;
+            margin-top: rem(3);
+            border-radius: rem(5);
+
+            &::before {
+                content: "\e96b";
+                position: relative;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                display: inline-block;
+                width: rem(16);
+                height: rem(16);
+                border-radius: 50%;
+                font-family: $font-icons;
+                font-size: rem(15);
+                color: color(white);
+                vertical-align: top;
+            }
+        }
+    }
+
+    &__text {
+        display: inline-block;
+        width: auto;
+        padding-left: rem(1);
+        font-size: rem(14);
+        text-align: left;
+        color: color(gray-30);
+
+        &--black {
+            color: color(gray-10);
+        }
+    }
+
+    &__des {
+        display: block;
+        font-size: rem(12);
+        color: color(gray-30);
+    }
+
+    // Modifiers
+
+    &--details {
+        .#{$wefront__namespace}list-icon-fare {
+            &__item {
+                &:nth-child(n+3) {
+                    opacity: 0;
+                    transition: all 0.3s;
+                    visibility: hidden;
+                }
+            }
+
+            &__des {
+                line-height: 0;
+                opacity: 0;
+                transition: all 0.75s;
+                visibility: hidden;
+            }
+        }
+    }
+
+    &--details-show {
+        .#{$wefront__namespace}list-icon-fare {
+            &__item {
+                &:nth-child(n+3) {
+                    opacity: 1;
+                    transition: all 0.8s;
+                    visibility: visible;
+                }
+            }
+
+            &__des {
+                line-height: 1.3;
+                opacity: 1;
+                transition: all 0.2s;
+                visibility: visible;
+            }
+        }
+    }
+
+    &--unfocused-small {
+        .#{$wefront__namespace}list-icon-fare {
+            &__icon {
+                color: color(gray-30);
+            }
+
+            &__text {
+                padding-left: rem(4);
+                font-size: rem(11);
+            }
+        }
+    }
+
+    &--fare-type-1 {
+        .#{$wefront__namespace}list-icon-fare__text {
+            color: color(gray-10);
+        }
+    }
+
+    &--fare-type-2 {
+        .#{$wefront__namespace}list-icon-fare__text {
+            color: color(gray-10);
+        }
+        .#{$wefront__namespace}list-icon-fare__icon {
+            color: color(purple-10);
+        }
+    }
+
+    &--fare-type-3 {
+        .#{$wefront__namespace}list-icon-fare__text {
+            color: color(gray-10);
+        }
+        .#{$wefront__namespace}list-icon-fare__icon {
+            color: color(pink-10);
+        }
+    }
+
+    &--fare-type-4 {
+        display: inline-block;
+        width: 50%;
+        line-height: rem(25);
+        vertical-align: top;
+        .#{$wefront__namespace}list-icon-fare__text {
+            color: color(gray-10);
+
+            &--sub {
+                position: relative;
+                top: rem(-15);
+                left: rem(25);
+                color: color(gray-30);
+            }
+        }
+    }
+
+    &--unfocused {
+        .#{$wefront__namespace}list-icon-fare__icon {
+            color: color(gray-30);
+        }
+    }
+
+    &--inline {
+        display: inline-block;
+        width: 100%;
+        line-height: rem(25);
+
+        &-flex {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: baseline;
+            justify-content: flex-start;
+            .#{$wefront__namespace}list-icon-fare {
+                &__item {
+                    gap: rem(6);
+                }
+
+                &__text {
+                    display: inline;
+                    line-height: 1;
+                    vertical-align: middle;
+                }
+
+                &__tag {
+                    &--fav {
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+        .#{$wefront__namespace}list-icon-fare__text {
+            color: color(gray-10);
+
+            &--sub {
+                position: relative;
+                top: rem(-8);
+                left: rem(25);
+                color: color(gray-30);
+            }
+        }
+        .#{$wefront__namespace}list-icon-fare {
+            &__item {
+                width: 50%;
+                float: left;
+            }
+        }
+
+        &-availability {
+            .#{$wefront__namespace}list-icon-fare {
+                &__item {
+                    &:nth-child(2) {
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    &--three-cols {
+        .#{$wefront__namespace}list-icon-fare__item {
+            display: inline-block;
+            width: 33.3%;
+            vertical-align: top;
+
+            &:first-child {
+                margin-top: rem(10);
+            }
+        }
+    }
+
+    &--three-cols-narrow {
+        display: flex;
+        .#{$wefront__namespace}list-icon-fare {
+            &__item {
+                width: calc(100% / 3);
+                vertical-align: top;
+            }
+
+            &__text {
+                padding-top: 0;
+            }
+        }
+    }
+
+    &--with-icon {
+        max-width: 65%;
+    }
+
+    //- LIST FARE ICON FOR DETAIL FARE SIMPLE
+    &--simple {
+        .#{$wefront__namespace}list-icon-fare {
+            &__item {
+                &--with-penalty,
+                &--cancel,
+                &--tick {
+                    .#{$wefront__namespace}list-icon-fare__icon, .#{$wefront__namespace}list-icon-fare__text {
+                        color: color(gray-15);
+                    }
+                }
+
+                &--tick {
+                    .#{$wefront__namespace}list-icon-fare__text {
+                        &::after {
+                            color: color(gray-10);
+                        }
+                    }
+                }
+
+                &--with-penalty {
+                    .#{$wefront__namespace}list-icon-fare__text {
+                        &::after {
+                            content: "\ea83";
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            font-family: $font-icons;
+                            font-size: rem(23);
+                            color: color(gray-10);
+                        }
+                    }
+                }
+
+                &--cancel {
+                    .#{$wefront__namespace}list-icon-fare__text {
+                        &::after {
+                            content: "\ea87";
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            font-family: $font-icons;
+                            font-size: rem(23);
+                            color: color(gray-10);
+                        }
+                    }
+                }
+            }
+
+            &__subtext {
+                position: relative;
+                display: inline-block;
+                width: rem(95);
+                padding: rem(2);
+                border: rem(1) solid color(gray-15);
+                font-family: $font-normal;
+                font-size: rem(8);
+                text-align: center;
+                color: color(gray-15);
+                vertical-align: middle;
+            }
+
+            &__text {
+                position: relative;
+                display: inline-block;
+                width: 100%;
+                padding-right: rem(24);
+                font-family: $font-normal;
+                font-size: rem(13);
+                line-height: rem(18);
+                color: color(gray-10);
+                vertical-align: middle;
+
+                &::after {
+                    content: "\eaaa";
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    font-family: $font-icons;
+                    font-size: rem(23);
+                    color: color(primary);
+                }
+            }
+
+            &__icon {
+                margin-left: rem(-4);
+                line-height: rem(18);
+            }
+        }
+    }
+
+    &--simple-extra {
+        padding-top: rem(12);
+        margin-top: rem(16);
+        border-top: rem(1) dashed color(gray-95);
+    }
+
+    &__item {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-top: rem(12);
+        font-size: 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &--disabled {
+            .#{$wefront__namespace}list-icon-fare {
+                &__icon {
+                    color: color(gray-30);
+                }
+            }
+        }
+    }
+
+    &__item-highlight {
+        padding: rem(12) rem(32) rem(12) rem(32);
+        margin-right: rem(-32);
+        margin-left: rem(-32);
+        background: color(gray-60);
+    }
+
+    &__flex {
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+        max-height: rem(85);
+        flex-flow: column wrap;
+        align-content: space-between;
+
+        &--item {
+            position: relative;
+            width: 33.3%;
+            max-width: calc(33% - 1rem);
+            padding-left: rem(25);
+            margin-bottom: rem(12);
+
+            .#{$wefront__namespace}list-icon-fare {
+                &__text {
+                    width: 100%;
+                    padding-top: 0;
+                    padding-left: 0;
+                    font-size: rem(13);
+                    line-height: rem(20);
+                    color: color(gray-10);
+                    &.#{$wefront__namespace}list-icon-fare__text {
+                        &--sub {
+                            font-size: rem(12);
+                            color: color(gray-30);
+                        }
+                    }
+                }
+
+                &__icon {
+                    position: absolute;
+                    top: rem(-2);
+                    left: rem(-3);
+                }
+            }
+        }
+    }
+
+    &__info {
+        position: relative;
+        padding-left: rem(25);
+        margin-bottom: rem(12);
+        .#{$wefront__namespace}list-icon-fare {
+            &__text {
+                width: 100%;
+                padding-top: 0;
+                padding-left: 0;
+                font-size: rem(13);
+                line-height: rem(20);
+                color: color(gray-10);
+
+                &.#{$wefront__namespace}list-icon-fare__text {
+                    &--sub {
+                        top: initial;
+                        left: initial;
+                        font-size: rem(12);
+                        color: color(gray-30);
+                    }
+                }
+            }
+
+            &__icon {
+                position: absolute;
+                top: rem(-2);
+                left: rem(-3);
+            }
+        }
+    }
+
+    &__row {
+        display: block;
+        width: auto;
+        margin-right: rem(-16);
+        margin-left: rem(-16);
+
+        .#{$wefront__namespace}list-icon-fare {
+            &__item {
+                padding-right: rem(16);
+                padding-left: rem(16);
+                float: none;
+            }
+        }
+
+        &::before,
+        &::after {
+            content: " ";
+            display: table;
+            box-sizing: inherit;
+        }
+
+        &::after {
+            clear: both;
+        }
+    }
+}
+
+.#{$wefront__namespace}box-fare {
+    &--selected {
+        .#{$wefront__namespace}list-icon-fare {
+            &__icon {
+                color: color(gray-10);
+            }
+        }
+    }
+}
+
+#atq-6681 {
+    padding: rem(28);
+    .#{$wefront__namespace}list-icon-fare__icon-cyr {
+        span {
+            font-size: rem(48);
+            line-height: rem(49.08);
+            color: color(black);
+            vertical-align: top;
+        }
+    }
+    .#{$wefront__namespace}list-icon-fare__icon-flex {
+        padding-top: rem(20);
+
+        span {
+            font-size: rem(80);
+            line-height: rem(49.08);
+            color: color(black);
+            vertical-align: top;
+        }
+    }
+}
+
+#atq-6681--modal {
+    padding: rem(14);
+    padding-right: rem(5);
+    padding-left: rem(5);
+    .#{$wefront__namespace}list-icon-fare__icon-cyr--modal {
+        span {
+            font-size: rem(32);
+            line-height: rem(49.08);
+            color: color(black);
+            vertical-align: top;
+        }
+    }
+    .#{$wefront__namespace}list-icon-fare__icon-flex--modal {
+        padding-top: rem(20);
+
+        span {
+            position: relative;
+            top: rem(20);
+            left: rem(-24);
+            font-size: rem(53);
+            line-height: rem(49.08);
+            color: color(black);
+            vertical-align: top;
+        }
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}list-icon-fare {
+        &__flex {
+            max-height: rem(100);
+
+            &--item {
+                width: 50%;
+                max-width: calc(50% - 1rem);
+                margin-bottom: rem(12);
+            }
+        }
+
+        &--three-cols {
+            .#{$wefront__namespace}list-icon-fare__item {
+                width: 50%;
+            }
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}list-icon-fare {
+        &__text {
+            font-size: rem(12);
+        }
+
+        &--fare-type-4 {
+            width: 100%;
+        }
+
+        &--inline {
+            .#{$wefront__namespace}list-icon-fare {
+                &__item {
+                    width: 100%;
+                    float: none;
+                }
+            }
+
+            &-availability {
+                .#{$wefront__namespace}list-icon-fare {
+                    &__item {
+                        &:nth-child(2) {
+                            margin-top: rem(10);
+                        }
+                    }
+                }
+            }
+        }
+
+        &--three-cols {
+            .#{$wefront__namespace}list-icon-fare__item {
+                display: inline-block;
+                width: 33.3%;
+                vertical-align: top;
+            }
+        }
+
+        &__flex {
+            // max-height: rem(85);
+
+            &--item {
+                width: 33.3%;
+                max-width: calc(33% - 1rem);
+            }
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}list-icon-fare {
+        &--inline {
+            .#{$wefront__namespace}list-icon-fare {
+                &__item {
+                    width: 100%;
+                    float: none;
+                }
+            }
+
+            &-availability {
+                .#{$wefront__namespace}list-icon-fare {
+                    &__item {
+                        &:nth-child(2) {
+                            margin-top: rem(10);
+                        }
+                    }
+                }
+            }
+        }
+
+        &--three-cols {
+            .#{$wefront__namespace}list-icon-fare__item {
+                display: inline-block;
+                width: 100%;
+                vertical-align: top;
+            }
+        }
+
+        &--three-cols-narrow {
+            display: inline-block;
+        }
+
+        &__flex {
+            max-height: initial;
+
+            &--item {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: rem(12);
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}list-icon-fare {
+        &--inline {
+            .#{$wefront__namespace}list-icon-fare {
+                &__item {
+                    width: 100%;
+                    float: none;
+                }
+            }
+
+            &-availability {
+                .#{$wefront__namespace}list-icon-fare {
+                    &__item {
+                        &:nth-child(2) {
+                            margin-top: rem(10);
+                        }
+                    }
+                }
+            }
+        }
+
+        &--three-cols {
+            .#{$wefront__namespace}list-icon-fare__item {
+                display: inline-block;
+                width: 100%;
+                vertical-align: top;
+            }
+        }
+
+        &--three-cols-narrow {
+            display: inline-block;
+        }
+
+        &__flex {
+            max-height: initial;
+
+            &--item {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: rem(12);
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}box-fare {
+        &--selected {
+            .#{$wefront__namespace}list-icon-fare {
+                &--fare-type-4 {
+                    width: 100%;
+                }
+
+                &--inline {
+                    .#{$wefront__namespace}list-icon-fare {
+                        &__item {
+                            width: 100%;
+                            float: none;
+                        }
+                    }
+
+                    &-availability {
+                        .#{$wefront__namespace}list-icon-fare {
+                            &__item {
+                                &:nth-child(2) {
+                                    margin-top: rem(10);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &--three-cols {
+                    .#{$wefront__namespace}list-icon-fare__item {
+                        display: inline-block;
+                        width: 100%;
+                        vertical-align: top;
+                    }
+                }
+            }
+        }
+
+        &__flex {
+            max-height: initial;
+
+            &--item {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: rem(12);
+            }
+        }
+    }
+
+    #atq-6681 {
+        padding: rem(26);
+        .#{$wefront__namespace}list-icon-fare__icon-cyr {
+            span {
+                font-size: rem(48);
+                line-height: rem(49.08);
+                color: color(black);
+                vertical-align: top;
+            }
+        }
+        .#{$wefront__namespace}list-icon-fare__icon-flex {
+            padding-top: 0;
+
+            span {
+                font-size: rem(80);
+                line-height: rem(49.08);
+                color: color(black);
+                vertical-align: top;
+            }
+        }
+    }
+
+    #atq-6681--modal {
+        padding: rem(14);
+        padding-right: rem(5);
+        padding-left: rem(5);
+        .#{$wefront__namespace}list-icon-fare__icon-cyr--modal {
+            span {
+                font-size: rem(32);
+                line-height: rem(49.08);
+                color: color(black);
+                vertical-align: top;
+            }
+        }
+        .#{$wefront__namespace}list-icon-fare__icon-flex--modal {
+            padding-top: rem(20);
+
+            span {
+                position: relative;
+                top: rem(-19);
+                left: rem(-26);
+                font-size: rem(53);
+                line-height: rem(49.08);
+                color: color(black);
+                vertical-align: top;
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    #atq-6681--modal {
+        padding: rem(14);
+        padding-right: rem(5);
+        padding-left: rem(5);
+        .#{$wefront__namespace}list-icon-fare__icon-cyr--modal {
+            span {
+                font-size: rem(32);
+                line-height: rem(49.08);
+                color: color(black);
+                vertical-align: top;
+            }
+        }
+        .#{$wefront__namespace}list-icon-fare__icon-flex--modal {
+            padding-top: rem(20);
+
+            span {
+                position: relative;
+                top: rem(-19);
+                left: 0;
+                font-size: rem(53);
+                line-height: rem(49.08);
+                color: color(black);
+                vertical-align: top;
+            }
+        }
+    }
+}

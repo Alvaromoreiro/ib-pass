@@ -1,0 +1,185 @@
+/* -------------------------------------------------------------
+    #BOX-SLICE
+----------------------------------------------------------------- */
+
+.#{$mmb__namespace}box-slice {
+    padding: rem(24);
+    margin-bottom: rem(24);
+    background-color: color(white);
+    box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: rem(16.5);
+        margin-bottom: rem(16.5);
+        border-bottom: dotted rem(1) color(gray-70);
+        font-family: var(--font-headline);
+        font-size: rem(18);
+
+        &--with-icon {
+            display: block;
+
+            &::before {
+                display: inline-block;
+                margin-right: rem(8);
+                font-size: rem(18);
+                color: color(primary);
+                vertical-align: bottom;
+            }
+        }
+    }
+
+    &__text-additional{
+        padding-right: rem(20);
+    }
+
+    &__content {
+        display: flex;
+        gap: rem(24);
+
+        &-fare {
+            flex-basis: 50%;
+
+            &-title {
+                display: flex;
+                align-items: center;
+                margin-bottom: rem(8);
+                gap: rem(8);
+
+                &-info-button {
+                    position: relative;
+                    height: rem(21);
+                    border: 0;
+                    font-size: rem(21);
+                    color: color(primary);
+                    background-color: transparent;
+                }
+            }
+        }
+
+        &-penalty {
+            display: flex;
+            flex-basis: 50%;
+            padding: rem(16) rem(16) rem(13) rem(16);
+            background-color: color(gray-60);
+
+            &-title {
+                margin-top: rem(2);
+                margin-bottom: rem(8);
+                font-family: var(--font-headline);
+                font-size: rem(16);
+                font-weight: 400;
+                line-height: rem(18);
+            }
+
+            &-icon {
+                display: inline-block;
+                margin-right: rem(8);
+                font-size: rem(32);
+                color: color(red-10);
+            }
+        }
+    }
+
+    &__searcher {
+        display: flex;
+        margin-top: rem(16);
+        gap: rem(24);
+
+        &-input {
+            flex-basis: 50%;
+        }
+    }
+}
+
+// @include media-query('lg') {
+//     .#{$wefront__namespace}box-slice {}
+// }
+
+@include media-query('md') {
+    .#{$mmb__namespace}box-slice {
+        padding: rem(24) rem(16);
+    }
+}
+
+
+@include media-query("sm") {
+    .#{$mmb__namespace}box-slice {
+        padding: rem(16);
+        margin-bottom: 1rem;
+
+        &__header {
+            flex-direction: column;
+            align-items: flex-start;
+            padding-bottom: rem(8.5);
+            margin-bottom: rem(8.5);
+            font-size: rem(16);
+        }
+
+        &__content {
+            flex-direction: column;
+            gap: rem(8);
+
+            &-fare {
+                flex-basis: 100%;
+            }
+
+            &-penalty {
+                flex-basis: 100%;
+                padding: rem(8) rem(16);
+            }
+        }
+
+        &__searcher {
+            flex-direction: column;
+            gap: rem(16);
+
+            &-input {
+                flex-basis: 100%;
+            }
+        }
+    }
+}
+
+@include media-query("xs") {
+    .#{$mmb__namespace}box-slice {
+        padding: rem(16);
+
+        &__header {
+            flex-direction: column;
+            align-items: flex-start;
+            padding-bottom: rem(8.5);
+            margin-bottom: rem(8.5);
+            font-size: rem(16);
+        }
+
+        &__text-additional{
+            padding-right: rem(0);
+        }
+
+        &__content {
+            flex-direction: column;
+            gap: rem(8);
+
+            &-fare {
+                flex-basis: 100%;
+            }
+
+            &-penalty {
+                flex-basis: 100%;
+                padding: rem(8);
+            }
+        }
+
+        &__searcher {
+            flex-direction: column;
+            gap: rem(16);
+
+            &-input {
+                flex-basis: 100%;
+            }
+        }
+    }
+}

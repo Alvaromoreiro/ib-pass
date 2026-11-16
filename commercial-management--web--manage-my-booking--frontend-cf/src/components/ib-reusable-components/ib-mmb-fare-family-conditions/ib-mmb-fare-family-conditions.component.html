@@ -1,0 +1,24 @@
+<div class="ib-table-flight-info__container">
+    <div class="ib-table-flight-info__header">
+        <h2 class="ib-table-flight-info__title">
+            {{'MMB_YOUR_FLIGHTS_RATE_DETAILS_TITTLE'|translate}}</h2>
+    </div>
+    <span class="ib-table-flight-info__subtitle">{{segment.fareFamilyConditions[0].cabin}}
+        {{segment.upgradingBids ? ('UPGRADING_TO_SUMMARY' | translate) + ' '+ (segment.upgradingBids.cabin.type | capitalize):''}}
+        <!-- | capitalize -->
+        <a href="javascript:void(0)" (click)="openModalConditions($event, segment.fareFamilyConditions)"
+            class="ib-table-flight-info__icon icon-informacion_2" title="{{'MMB_SEATS_TOOLTIP_MORE_INFO'|translate}}"
+            focusin></a>
+    </span>
+    <ul
+        class="ib-list-icon-fare ib-list-icon-fare--inline ib-list-icon-fare__row ib-list-icon-fare--three-cols ib-list-icon-fare--unfocused">
+        <li class="ib-list-icon-fare__item" *ngFor="let condition of conditionItems;trackBy: trackByFn">
+            <div>
+                <div class="ib-list-icon-fare__info">
+                    <span class="ib-list-icon-fare__icon" [ngClass]="getFareFamilyIcon(condition.code)"></span>
+                    <p class="ib-list-icon-fare__text">{{condition.title}}</p>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

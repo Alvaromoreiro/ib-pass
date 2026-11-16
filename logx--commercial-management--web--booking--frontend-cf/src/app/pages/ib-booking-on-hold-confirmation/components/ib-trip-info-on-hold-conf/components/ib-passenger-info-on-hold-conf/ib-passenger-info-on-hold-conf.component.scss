@@ -1,0 +1,158 @@
+@import 'src/styles/component-tools';
+
+p {
+    padding: rem(24) 0 rem(10);
+    border-bottom: rem(1) solid var(--ib-color-grey-200-ee);
+}
+
+.box {
+    position: relative;
+    width: 100%;
+    padding: rem(24) 0;
+    border-bottom: rem(1) solid var(--ib-color-grey-200-ee);
+    background: var(--ib-color-white);
+}
+
+table {
+    display: block;
+    width: 100%;
+}
+
+tbody {
+    display: block;
+
+    .row {
+        padding: rem(16) 0;
+        border-bottom: rem(1) dashed color(gray-70);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+thead {
+    display: none;
+}
+
+.row {
+    display: block;
+    margin: 0;
+
+    &-mobile {
+        padding: rem(16) 0;
+    }
+}
+
+.cell {
+    display: flex;
+    min-width: rem(100);
+    flex-direction: column;
+    padding: rem(5) rem(10) rem(5) 0;
+    border-top: none;
+
+    &::before {
+        content: attr(data-content);
+        display: inline-block;
+        min-width: rem(180);
+        padding-right: rem(24);
+        font-family: $font-normal;
+        font-size: rem(13);
+        line-height: rem(18);
+        color: color(black);
+        vertical-align: top;
+    }
+
+    &-mobile {
+        display: flex;
+        flex-direction: column;
+        padding-top: 0;
+    }
+}
+
+.text {
+    display: inline-block;
+    padding: 0;
+    border-bottom: none;
+    font-family: var(--font-regular);
+    font-size: rem(13);
+    line-height: rem(18);
+    color: var(--ib-color-grey-800-33);
+
+    &--unfocused {
+        color: var(--cabin-economy);
+    }
+
+    &--underline {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+
+svg {
+    display: none;
+
+    path {
+        fill: var(--cabin-economy);
+    }
+}
+
+:host ::ng-deep ib-booking-accordion {
+    .button {
+        border-bottom: rem(1) solid var(--ib-color-grey-200-ee);
+    }
+}
+
+@include media-query-range('mf-sm') {
+    :host ::ng-deep ib-booking-accordion {
+        .container {
+            border: rem(1) solid var(--ib-color-grey-200-ee);
+            box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+        }
+    }
+
+    .box {
+        padding: rem(24) rem(24);
+    }
+
+    .cell-mobile {
+        flex-direction: row;
+        padding-top: rem(5);
+    }
+
+    svg {
+        display: block;
+        font-size: rem(22);
+    }
+}
+
+@include media-query-range('mf-lg') {
+    thead {
+        display: block;
+    }
+
+    .cell {
+        display: flex;
+        min-width: rem(85);
+        flex-basis: rem(102);
+        flex-grow: 1;
+        justify-content: flex-start;
+        border-bottom: none;
+
+        &::before {
+            content: none;
+        }
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    tbody {
+        .row {
+            padding: 0;
+            border-bottom: none;
+        }
+    }
+}

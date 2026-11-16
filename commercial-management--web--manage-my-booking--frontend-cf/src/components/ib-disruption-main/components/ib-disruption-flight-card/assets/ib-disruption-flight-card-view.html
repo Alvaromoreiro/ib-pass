@@ -1,0 +1,148 @@
+<!-- GENERIC ASSET-->
+<div class="ib-ticket-block__col-first">
+    <!-- FLIGHT CARD BASIC DETAIL -->
+    <div class="">
+          <!-- DOWNGRADE CABIN INFORMATION -->
+        <div class="ib-ticket-block__flight-info ib-ticket-block__flight-info--mb ib-text--small ib-flex--flex-center" ng-if="flightCtrl.warningDowngradeSameFlightAndTime && flightCtrl.data.activationFlags.previousDate && flightCtrl.data.originalCabinMsg">
+            <span class="ib-ticket-block__icon-tooltip icon-alertas ib-ticket-block__icon-tooltip--black"></span>
+            <span class="ib-text--line-through" data-ng-bind-html="flightCtrl.data.originalCabinMsg"></span>
+        </div>
+        <div class="ib-ticket-block__flight-info ib-text--small" ng-if="flightCtrl.warningDowngradeSameFlightAndTime && flightCtrl.data.activationFlags.previousDate && flightCtrl.data.newCabinMsg" ng-class="flightCtrl.data.cssClass.classFlightCabinContainer">
+            <span data-ng-bind-html="flightCtrl.data.newCabinMsg"></span>
+        </div>
+        <!-- PREVIUS DATE, NOT A VALID DATE -->
+        <div class="ib-ticket-block__flight-info ib-ticket-block__flight-info--old hidden-xs"  ng-if="!flightCtrl.warningDowngradeSameFlightAndTime &&  flightCtrl.data.activationFlags.previousDate && flightCtrl.data.flightData.departureChangeDate">
+            <span class="ib-ticket-block__date ib-ticket-block__date--old ib-ticket-block__date--grey">
+                {{flightCtrl.data.flightData.departureChangeDate}}
+                <span class="hidden-md hidden-sm hidden-xs">-</span>
+                {{flightCtrl.data.flightData.departureChangeTime}}
+            </span>
+            <span class="ib-ticket-block__date ib-ticket-block__date--old ib-ticket-block__date--grey">
+                {{flightCtrl.data.flightData.arrivalChangeDate}}
+                <span class="hidden-md hidden-sm hidden-xs">-</span>
+                {{flightCtrl.data.flightData.arrivalChangeTime}}
+            </span>
+        </div>
+
+        <!-- DOWNGRADE CABIN INFORMATION -->
+        <div class="ib-ticket-block__flight-info ib-ticket-block__flight-info--mb ib-text--small ib-flex--flex-center" ng-if="flightCtrl.warningDowngradeDiffFlightOrTime && flightCtrl.data.activationFlags.currentDate && flightCtrl.data.originalCabinMsg">
+            <span class="ib-ticket-block__icon-tooltip icon-alertas ib-ticket-block__icon-tooltip--black"></span>
+            <span data-ng-bind-html="flightCtrl.data.originalCabinMsg"></span>
+        </div>
+        <div class="ib-ticket-block__flight-info ib-text--small" ng-if="flightCtrl.warningDowngradeDiffFlightOrTime && flightCtrl.data.activationFlags.currentDate && flightCtrl.data.newCabinMsg" ng-class="flightCtrl.data.cssClass.classFlightCabinContainer">
+            <span data-ng-bind-html="flightCtrl.data.newCabinMsg"></span>
+        </div>
+
+        <!-- CURRENT DATE DEPARTURE-ARRIVAL DETAILS -->
+        <div class="ib-ticket-block__flight-info ib-ticket-block__flight-info--mb" ng-class="flightCtrl.data.cssClass.classFlightNormalAreaContainer"
+            ng-if="flightCtrl.data.activationFlags.currentDate">
+            <span class="ib-ticket-block__date hidden-xs" ng-class="flightCtrl.data.cssClass.classFlightNormalAreaDate">
+                {{flightCtrl.data.flightData.departureDate}}
+                <span class="hidden-md hidden-sm hidden-xs">-</span>
+                {{flightCtrl.data.flightData.departureTime}}
+            </span>
+            <span class="ib-ticket-block__change-info ib-text--small">
+                <span class="ib-ticket-block__icon-tooltip icon-alertas ib-ticket-block__icon-tooltip--flight-info" ng-if="flightCtrl.data.activationFlags.warningIcon">
+                </span>
+                {{flightCtrl.data.labels.FLIGHT_INFO_MESSAGE | translate}}
+            </span>
+            <span class="ib-ticket-block__date hidden-xs" ng-class="flightCtrl.data.cssClass.classFlightNormalAreaDate">
+                {{flightCtrl.data.flightData.arrivalDate}}
+                <span class="hidden-md hidden-sm hidden-xs">-</span>
+                {{flightCtrl.data.flightData.arrivalTime}}
+            </span>
+        </div>
+        <!-- CURRENT DATE DEPARTURE-ARRIVAL DETAILS -->
+        <div class="ib-ticket-block__wrapper ib-ticket-block__wrapper--two-lines">
+            <div class="ib-ticket-block__wrapper-left ib-ticket-block__wrapper-left--w-large">
+                <span class="ib-ticket-block__date ib-ticket-block__date--mb-responsive hidden-xl hidden-lg hidden-md hidden-sm"
+                    ng-class="flightCtrl.data.cssClass.classFlightXsAreaContainer" ng-if="flightCtrl.data.activationFlags.currentDate">
+                    {{flightCtrl.data.flightData.departureDate}}
+                    <span class="hidden-md hidden-sm hidden-xs">-</span>
+                    {{flightCtrl.data.flightData.departureTime}}
+                </span>
+                <span class="ib-ticket-block__title ib-ticket-block__title--grey">
+                    {{flightCtrl.data.flightData.departureAPort}}
+                </span>
+                <span class="ib-ticket-block__subtitle ib-ticket-block__subtitle--responsive ib-ticket-block__subtitle--grey hidden-xs">
+                    {{flightCtrl.data.flightData.departureCity}}
+                </span>
+            </div>
+            <div class="ib-ticket-block__wrapper-floating ib-ticket-block__wrapper-floating--two-lines">
+                <span class="ib-ticket-block__txt ib-ticket-block__txt--small ib-ticket-block__txt--grey"
+                    ng-if='flightCtrl.data.flightData.flightScalesNumber > 0'>
+                    {{flightCtrl.data.flightData.flightScalesNumber}}
+                    {{flightCtrl.data.flightData.flightScales | translate}}
+                </span>
+                <span class="ib-ticket-block__txt ib-ticket-block__txt--small ib-ticket-block__txt--grey"
+                    ng-if='flightCtrl.data.flightData.flightScalesNumber === 0 && flightCtrl.data.flightData.technicalStops === 0'>
+                    {{flightCtrl.data.flightData.flightScales | translate}}
+                </span>
+                <span class="ib-ticket-block__txt ib-ticket-block__txt--small ib-ticket-block__txt--grey"
+                    ng-if='flightCtrl.data.flightData.flightScalesNumber === 0 && flightCtrl.data.flightData.technicalStops > 0'>
+                    {{flightCtrl.data.flightData.technicalStops}} {{(flightCtrl.data.flightData.technicalStops === 1 ? 'MMB_YOUR_FLIGHTS_STOP_SIMPLE_TEXT' :'MMB_YOUR_FLIGHTS_STOP_PLURAL_TEXT') | translate}}
+                </span>
+                <span class="ib-ticket-block__txt ib-ticket-block__txt--small ib-ticket-block__txt--grey">
+                    {{flightCtrl.data.flightData.flightDuration}}
+                </span>
+            </div>
+            <div class="ib-ticket-block__wrapper-right ib-ticket-block__wrapper-right--w-large">
+                <span class="ib-ticket-block__date ib-ticket-block__date--mb-responsive hidden-xl hidden-lg hidden-md hidden-sm"
+                    ng-class="flightCtrl.data.cssClass.classFlightXsAreaContainer" ng-if="flightCtrl.data.activationFlags.currentDate">
+                    {{flightCtrl.data.flightData.arrivalDate}}
+                    <span class="hidden-md hidden-sm hidden-xs">-</span>
+                    {{flightCtrl.data.flightData.arrivalTime}}
+                </span>
+                <span class="ib-ticket-block__title ib-ticket-block__title--grey">
+                    {{flightCtrl.data.flightData.arrivalAPort}}
+                </span>
+                <span class="ib-ticket-block__subtitle ib-ticket-block__subtitle--responsive ib-ticket-block__subtitle--grey hidden-xs">
+                    {{flightCtrl.data.flightData.arrivalCity}}
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- MORE DETAILS COLLAPSE -->
+    <div class="ib-ticket-collapse ib-ticket-collapse__gdr" ng-if="flightCtrl.data.activationFlags.moreDetailsArea">
+        <figure class="ib-ticket-collapse__logo ib-ticket-collapse__logo--dis">
+            <img ng-src="{{::$root.routes.icons}}{{flightCtrl.data.flightData.icon}}" alt="Logo Iberia" />
+        </figure>
+        <button class="ib-ticket-collapse__btn ib-ticket-collapse__btn--right" ng-click="flightCtrl.keepCollapseOpen = !flightCtrl.keepCollapseOpen" type="button" focusin>
+            <span class="hidden-xl hidden-lg hidden-md hidden-sm">
+                {{flightCtrl.data.labels.FLIGHT_DETAILS | translate}}
+            </span>
+            <span class="hidden-xs">
+                {{flightCtrl.data.labels.FLIGHT_DETAILS | translate}}
+            </span>
+            <span class="ib-ticket-collapse__btn-icon" ng-class="flightCtrl.keepCollapseOpen ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+        </button>
+        <div uib-collapse="!flightCtrl.keepCollapseOpen">
+            <div class="ib-table-flight-info ib-table-flight-info--no-pb">
+                <div class="ib-table-flight-info__header ib-table-flight-info__header--mb-small">
+                    <h3 class="ib-table-flight-info__title">{{flightCtrl.data.labels.FLIGHT_DETAILS | translate}}</h3>
+                </div>
+                <!-- NODE DETAILS -->
+                <div class="ib-table-flight-info__container" ng-repeat="nodeDetails in flightCtrl.data.flightNodes" ng-if="flightCtrl.data.activationFlags.nodeDetails">
+                    <ib-disruption-flight-node-component data="nodeDetails"></ib-disruption-flight-node-component>
+                </div>
+
+                <!-- FARE DETAILS -->
+                <!-- <div class="ib-table-flight-info__container" ng-if="flightCtrl.data.activationFlags.fareDetails && flightCtrl.data.fareData.length > 0">
+                    <div class="ib-table-flight-info__header">
+                        <h3 class="ib-table-flight-info__title">{{'MMB_DISRUPTION_LABEL_DETAILS_FARE' |translate }}</h3>
+                    </div>
+                    <span class="ib-table-flight-info__subtitle ib-table-flight-info__subtitle--mb-small">{{flightCtrl.data.cabinName}}
+                    </span>
+                    <ul class="ib-list-icon-fare ib-list-icon-fare--inline ib-list-icon-fare--three-cols-narrow ib-list-icon-fare--unfocused">
+                        <li class="ib-list-icon-fare__item" ng-repeat="fareCondition in flightCtrl.data.fareData">
+                            <div>
+                                <span class="ib-list-icon-fare__icon" ng-class="fareCondition.classApp"></span>
+                                <p class="ib-list-icon-fare__text">{{fareCondition.textValue}}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

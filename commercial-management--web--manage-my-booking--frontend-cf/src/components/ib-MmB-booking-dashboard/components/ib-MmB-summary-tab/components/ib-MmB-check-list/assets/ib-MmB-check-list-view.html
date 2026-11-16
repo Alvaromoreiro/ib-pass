@@ -1,0 +1,80 @@
+   <!-- CHECKLIST -->
+   <fieldset class="ib-box-menu__section ib-box-menu__section--full">
+    <legend class="u-hide-accessible">{{'CHECK_LIST_TITLE_TEXT'|translate}}</legend>
+    <div>
+        <div class="ib-layout__section">
+        <div class="ib-accordion-content ib-accordion-content--no-shadow">
+            <uib-accordion close-others="true" class="ib-accordion ib-accordion--icon-top ib-accordion--border-dashed">
+                <div uib-accordion-group class="ib-accordion__panel" is-open="status.open1" template-url="web-manage-my-booking/templates/ib-accordion-heading-template-focusin.html">
+                    <uib-accordion-heading>
+                        <span class="ib-heading ib-heading--title-box">{{'CHECK_LIST_TITLE_TEXT'|translate}}</span>
+                        <div class="ib-accordion__progressbar ib-accordion__progressbar--info-over ib-accordion__progressbar--relative">
+                            <span overflow-control class="ib-text ib-text--color-unfocused u-mb-xsmall">{{chkListCtrl.progressList}} {{'MMB_CHECK_LIST_ELEMENTS_TITLE'|translate}}.</span>
+                            <uib-progressbar class="ib-progressbar ib-progressbar--primary" max="4" value="chkListCtrl.progressList"></uib-progressbar>
+                        </div>
+                        <span class="ib-accordion__icon ib-accordion__icon--big ib-accordion__icon--unfocused" ng-class="{'icon-flecha_1_arriba': status.open1, 'icon-flecha_1_abajo': !status.open1}"></span>
+                    </uib-accordion-heading>
+                    <div class="ib-box ib-box--big ib-box--empty u-mt-small u-pb-none">
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--null">
+                            <div class="ib-check ib-check--round u-mb-small">
+                                <input type="checkbox" id="SEAT_OPTION" name="checkSeat" class="ib-check__input" value="{{chkListCtrl.seat}}" ng-checked="chkListCtrl.seat" disabled>
+                                <label for="SEAT_OPTION" class="ib-check__label ib-check__label--top">
+                                    <span class="ib-check__title">{{'CHECK_LIST_SEAT_SELECTION_TEXT'|translate}}</span>
+                                    <span class="ib-check__text ib-check__text--unfocused ib-check__text--small">
+                                        <a ng-if="!chkListCtrl.seat" class="ib-check__link" href="javascript:void(0)" ng-click="chkListCtrl.openLink('seat')" title="{{'CHECK_LIST_RESERVE_NOW_TEXT'|translate}}">{{'CHECK_LIST_RESERVE_NOW_TEXT'|translate}} </a> 
+                                        <a ng-if="chkListCtrl.seat" class="ib-check__link" href="javascript:void(0)" ng-click="chkListCtrl.openLink('seat')" title="{{'CHECK_LIST_RESERVE_MOD_TEXT'|translate}}">{{'CHECK_LIST_RESERVE_MOD_TEXT'|translate}} </a> 
+                                       {{'CHECK_LIST_YOUR_SEAT_TEXT'|translate}}</span>
+                                </label>
+                            </div>
+                            <div class="ib-check ib-check--round u-mb-small">
+                                <input type="checkbox" id="BOOKING_OPTION" name="checkBooking" class="ib-check__input" value="{{chkListCtrl.booking}}" ng-checked="chkListCtrl.booking" disabled>
+                                <label for="BOOKING_OPTION" class="ib-check__label ib-check__label--top">
+                                    <span class="ib-check__title">{{'CHECK_LIST_PREPARE_LUGGAGE_TEXT'|translate}}</span>
+                                    <span class="ib-check__text ib-check__text--unfocused ib-check__text--small">
+                                        <a class="ib-check__link" href="javascript:void(0)" ng-click="chkListCtrl.openLink('baggages')" title="{{'CHECK_LIST_ADD_EXTRA_BAGGAGE_TEXT'|translate}}">{{'CHECK_LIST_ADD_EXTRA_BAGGAGE_TEXT'|translate}}</a> 
+                                        {{'CHECK_LIST_TO_BOOKING_TEXT'|translate}}</span>
+                                </label>
+                            </div>
+                            <div class="ib-check ib-check--round u-mb-small">
+                                <input type="checkbox" id="INSURANCE_OPTION" name="checkInsurance" class="ib-check__input" value="{{chkListCtrl.insurance}}" ng-checked="chkListCtrl.insurance" disabled>
+                                <label for="INSURANCE_OPTION" class="ib-check__label ib-check__label--top">
+                                    <span class="ib-check__title">{{'CHECK_LIST_SECURE_YOUR_TRIP_TEXT'|translate}}</span>
+                                    <span ng-if="!chkListCtrl.insurance" class="ib-check__text ib-check__text--unfocused ib-check__text--small">
+                                        <a class="ib-check__link" href="javascript:void(0)" ng-click="chkListCtrl.openLink('insurance')" title="{{'CHECK_LIST_ADD_ALLIANZ_INSURANCE_TEXT'|translate}}">{{'CHECK_LIST_ADD_ALLIANZ_INSURANCE_TEXT'|translate}} </a> 
+                                       {{'CHECK_LIST_ADD_ALLIANZ_INSURANCE_TEXT_TWO'|translate}}</span>
+                                    <span ng-if="chkListCtrl.insurance" class="ib-check__text ib-check__text--unfocused ib-check__text--small"></span>
+                                </label>
+                            </div>
+                            <div class="ib-check ib-check--round u-mb-small">
+                                <input type="checkbox" id="DOCUMENT_OPTION" name="checkDocument" class="ib-check__input" value="{{chkListCtrl.document}}" ng-checked="chkListCtrl.document" disabled>
+                                <label for="DOCUMENT_OPTION" class="ib-check__label ib-check__label--top">
+                                    <span class="ib-check__title">{{'CHECK_LIST_DOCUMENTATION_TITLE'|translate}}</span>
+                                    <span class="ib-check__text ib-check__text--unfocused ib-check__text--small">{{'CHECK_LIST_DOCUMENTATION_TEXT'|translate}}</span>
+                                </label>
+                            </div>
+                            <div class="ib-check ib-check--round u-mb-small">
+                                <input type="checkbox" id="BOOKING_OPTION" name="checkBooking" class="ib-check__input" value="{{chkListCtrl.booking}}">
+                                <label for="BOOKING_OPTION" class="ib-check__label ib-check__label--top">
+                                    <span class="ib-check__title">{{'CHECK_LIST_HOTEL_TITLE'|translate}}</span>
+                                    <span class="ib-check__text ib-check__text--unfocused ib-check__text--small">
+                                        <a class="ib-check__link" href="javascript:void(0)" ng-click="chkListCtrl.openLink('hotel')" title="{{'CHECK_LIST_HOTEL_LINK_BOOKING_TEXT_ONE'|translate}}">{{'CHECK_LIST_HOTEL_LINK_BOOKING_TEXT_ONE'|translate}}</a> 
+                                       {{'CHECK_LIST_HOTEL_LINK_BOOKING_TEXT_TWO'|translate}}</span>
+                                </label>
+                            </div>
+                            <div class="ib-check ib-check--round u-mb-small">
+                                <input type="checkbox" id="AVIS_OPTION" name="checkAvis" class="ib-check__input" value="{{chkListCtrl.avis}}">
+                                <label for="checkAvis" class="ib-check__label ib-check__label--top">
+                                    <span class="ib-check__title">{{'CHECK_LIST_RENTAL_CAR_TITLE'|translate}}</span>
+                                    <span class="ib-check__text ib-check__text--unfocused ib-check__text--small">
+                                        <a class="ib-check__link" href="javascript:void(0)" ng-click="chkListCtrl.openLink('avis')" title="{{'CHECK_LIST_RENTAL_CAR_TEXT_ONE'|translate}}">{{'CHECK_LIST_RENTAL_CAR_TEXT_ONE'|translate}} </a> 
+                                      {{'CHECK_LIST_RENTAL_CAR_TEXT_TWO'|translate}}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>       
+                </div>
+                </uib-accordion>
+            </div>
+        </div>
+    </div>
+</fieldset>

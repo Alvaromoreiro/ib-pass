@@ -1,0 +1,144 @@
+/// <reference types="jasmine" />
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CommonsSessionStorageService } from 'ib-web-commons/utils';
+import { TranslatePipeMock } from '@test/unit/utils/pipe-mock.pipe';
+
+import {
+    IbMmBUmnrDataModalComponent,
+    UmnrPayload
+} from '@src/components/ib-MmB-umnr-passengers/components/ib-MmB-umnr-data-modal/ib-MmB-umnr-data-modal.component';
+
+class NgbActiveModalMock {
+    close = jasmine.createSpy('close');
+}
+
+class NgbModalMock {
+    dismissAll = jasmine.createSpy('dismissAll');
+}
+
+class CommonsSessionStorageServiceMock {
+    set = jasmine.createSpy('set');
+}
+
+describe('Component: IbMmBUmnrDataModalComponent', () => {
+    let component: IbMmBUmnrDataModalComponent;
+    let fixture: ComponentFixture<IbMmBUmnrDataModalComponent>;
+
+    let fakeNgbActiveModal: NgbActiveModalMock;
+    let fakeNgbModal: NgbModalMock;
+    let fakeCommonsSessionStorageService: CommonsSessionStorageServiceMock;
+
+    beforeEach(() => {
+        fakeNgbActiveModal = new NgbActiveModalMock();
+        fakeNgbModal = new NgbModalMock();
+        fakeCommonsSessionStorageService = new CommonsSessionStorageServiceMock();
+
+        TestBed.configureTestingModule({
+            declarations: [
+                IbMmBUmnrDataModalComponent,
+                TranslatePipeMock
+            ],
+            providers: [
+                { provide: NgbActiveModal, useValue: fakeNgbActiveModal },
+                { provide: NgbModal, useValue: fakeNgbModal },
+                { provide: CommonsSessionStorageService, useValue: fakeCommonsSessionStorageService }
+            ],
+            schemas: [NO_ERRORS_SCHEMA]
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(IbMmBUmnrDataModalComponent);
+        component = fixture.componentInstance;
+    });
+
+    it('should create the component when init', () => {
+        component.ngOnInit();
+
+        expect(component).toBeTruthy();
+    });
+
+    it('should save data in session storage when saveDataAndCloseModal is called', () => {
+
+        component.saveDataAndCloseModal();
+
+        expect(fakeCommonsSessionStorageService.set).toHaveBeenCalledWith('dataUmnrCompleted', true);
+    });
+
+    it('should emit saveDataUmnr when saveDataAndCloseModal is called with payload', () => {
+        const payload: UmnrPayload = {
+            id: 1,
+            name: 'Test name',
+            type: 'UMNR'
+        };
+
+        let emittedPayload: UmnrPayload | undefined;
+
+        const subscription = component.saveDataUmnr.subscribe((data: UmnrPayload) => {
+            emittedPayload = data;
+        });
+
+        component.saveDataAndCloseModal();
+
+        expect(emittedPayload).toEqual(payload);
+
+        subscription.unsubscribe();
+    });
+
+    it('should dispatch modal saveDataUmnrEvent when saveDataAndCloseModal is called with payload', () => {
+        const payload: UmnrPayload = {
+            id: 1,
+            name: 'Test name',
+            type: 'UMNR'
+        };
+
+        const dispatchEventSpy = spyOn(window, 'dispatchEvent').and.callThrough();
+
+        component.saveDataAndCloseModal();
+
+        expect(dispatchEventSpy).toHaveBeenCalled();
+
+        const dispatchedEvent = dispatchEventSpy.calls.mostRecent().args[0] as CustomEvent<UmnrPayload>;
+
+        expect(dispatchedEvent.type).toBe('modal:saveDataUmnrEvent');
+        expect(dispatchedEvent.bubbles).toBeTrue();
+        expect(dispatchedEvent.composed).toBeTrue();
+        expect(dispatchedEvent.detail).toEqual(payload);
+    });
+
+    it('should close active modal when saveDataAndCloseModal is called with payload', () => {
+        const payload: UmnrPayload = {
+            id: 1,
+            name: 'Test name',
+            type: 'UMNR'
+        };
+
+        component.saveDataAndCloseModal();
+
+        expect(fakeNgbActiveModal.close).toHaveBeenCalled();
+    });
+
+    it('should not emit or dispatch event when saveDataAndCloseModal is called without payload', () => {
+        const emitSpy = spyOn(component.saveDataUmnr, 'emit');
+        const dispatchEventSpy = spyOn(window, 'dispatchEvent').and.callThrough();
+
+        component.saveDataAndCloseModal();
+
+        expect(fakeCommonsSessionStorageService.set).toHaveBeenCalledWith('dataUmnrCompleted', true);
+        expect(emitSpy).not.toHaveBeenCalled();
+        expect(dispatchEventSpy).not.toHaveBeenCalled();
+        expect(fakeNgbActiveModal.close).toHaveBeenCalled();
+    });
+
+    it('should close active modal when closeModal is called', () => {
+        component.closeModal();
+
+        expect(fakeNgbActiveModal.close).toHaveBeenCalled();
+    });
+
+    it('should dismiss all modals when closeAllModal is called', () => {
+        component.closeAllModal();
+
+        expect(fakeNgbModal.dismissAll).toHaveBeenCalled();
+    });
+});

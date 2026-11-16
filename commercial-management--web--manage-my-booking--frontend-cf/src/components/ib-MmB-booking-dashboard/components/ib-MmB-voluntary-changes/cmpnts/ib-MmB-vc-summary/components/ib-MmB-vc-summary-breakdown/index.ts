@@ -1,0 +1,1 @@
+import './ib-MmB-vc-summary-breakdown-component';

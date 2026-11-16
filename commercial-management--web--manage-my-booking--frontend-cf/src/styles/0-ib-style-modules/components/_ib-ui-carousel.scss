@@ -1,0 +1,141 @@
+/* -------------------------------------------------------------
+    #CAROUSEL
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}ui-carousel {
+    &__cover {
+        position: relative;
+        overflow: hidden;
+    }
+
+    &__slick-menu {
+        width: 100%;
+        height: 100%;
+
+        &--dark {
+            & > .slick-prev {
+                width: rem(30);
+                height: rem(60);
+                background-color: color(red-50);
+
+                &::before {
+                    transform: translate(-60%, -50%);
+                }
+            }
+
+            & > .slick-next {
+                width: rem(30);
+                height: rem(60);
+                background-color: color(red-50);
+
+                &::before {
+                    transform: translate(-40%, -50%);
+                }
+            }
+        }
+    }
+
+    &__container {
+        min-height: rem(440);
+    }
+}
+
+//Responsive
+
+@include media-query('xl') {
+    .#{$wefront__namespace}ui-carousel {
+        &__slick-menu {
+            &--dark {
+                & > .slick-prev,
+                & > .slick-next {
+                    width: rem(50);
+                    height: rem(100);
+
+                    &::before {
+                        font-size: rem(45);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}ui-carousel {
+        &__container {
+            min-height: rem(388);
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}ui-carousel {
+        &__container {
+            min-height: rem(320);
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}ui-carousel {
+        &__slick-menu {
+            &--dark {
+                & > .slick-prev {
+                    width: rem(16);
+                    height: rem(32);
+
+                    &::before {
+                        font-size: rem(16);
+                        transform: translate(-60%, -50%);
+                    }
+                }
+
+                & > .slick-next {
+                    width: rem(16);
+                    height: rem(32);
+
+                    &::before {
+                        font-size: rem(16);
+                        transform: translate(-40%, -50%);
+                    }
+                }
+            }
+        }
+
+        &__container {
+            min-height: rem(235);
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}ui-carousel {
+        &__slick-menu {
+            &--dark {
+                & > .slick-prev {
+                    width: rem(12);
+                    height: rem(24);
+
+                    &::before {
+                        font-size: rem(12);
+                        transform: translate(-60%, -50%);
+                    }
+                }
+
+                & > .slick-next {
+                    width: rem(12);
+                    height: rem(24);
+
+                    &::before {
+                        font-size: rem(12);
+                        transform: translate(-40%, -50%);
+                    }
+                }
+            }
+        }
+
+        &__container {
+            min-height: rem(304);
+        }
+    }
+}

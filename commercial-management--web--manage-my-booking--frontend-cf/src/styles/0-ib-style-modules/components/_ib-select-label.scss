@@ -1,0 +1,216 @@
+/* -------------------------------------------------------------
+    #SELECT
+----------------------------------------------------------------- */
+.#{$wefront__namespace}select-label {
+    position: relative;
+    width: 100%;
+    min-height: rem(56);
+    font-family: $font-normal;
+    font-size: rem(14);
+
+    &__label {
+        position: absolute;
+        z-index: 2;
+        top: rem(10);
+        left: rem(15);
+        display: inline-block;
+        overflow: hidden;
+        max-width: calc(100% - 3.4375rem);
+        font-family: $font-normal;
+        font-size: rem(11);
+        text-overflow: ellipsis;
+        line-height: 1.18;
+        color: color(gray-30);
+        white-space: nowrap;
+    }
+
+    &__action {
+        width: 100%;
+        border-radius: rem(3);
+
+        &.open {
+            border: rem(1) solid color(orange-10) !important;
+            outline: none;
+
+            &::before {
+                content: "\e972";
+                position: absolute;
+                top: 50%;
+                right: rem(16);
+                width: rem(16);
+                height: rem(16);
+                margin-top: rem(-3);
+                font-family: $font-icons;
+                font-size: rem(16);
+                color: color(button-secondary);
+                -ms-transform: translate(0, -50%);
+                transform: translate(0, -50%);
+            }
+        }
+    }
+
+    &__list-ipt {
+        width: 100%;
+        min-height: rem(56);
+        border: rem(1) solid color(gray-40);
+        border-radius: rem(3);
+        background: color(white);
+    }
+
+    .btn-default-focus {
+        outline: rem(1) solid color(orange-10);
+    }
+
+    &__txt {
+        display: block;
+        width: 100%;
+        font-family: $font-special;
+        font-size: rem(16);
+    }
+
+    .ui-select-toggle {
+        display: block;
+        width: 100%;
+        height: rem(54);
+        padding: rem(18) rem(35) rem(15) rem(21);
+        border-radius: rem(3);
+        line-height: 1;
+
+        &::before {
+            content: "\e971";
+            position: absolute;
+            top: 50%;
+            right: rem(16);
+            width: rem(16);
+            height: rem(16);
+            font-family: $font-icons;
+            font-size: rem(16);
+            color: color(button-secondary);
+            -ms-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+        }
+
+        &:active:focus {
+            background: transparent;
+        }
+
+        &:focus {
+            border-color: color(orange-10) !important;
+            outline: none;
+        }
+    }
+
+    .ui-select-search {
+        display: block;
+        width: 100% !important;
+        height: rem(54);
+        padding: rem(15) rem(35) rem(15) rem(21);
+        border-radius: rem(3);
+        font-family: $font-normal;
+        font-size: rem(11);
+    }
+
+    .ui-select-match-text {
+        padding: 0;
+    }
+
+    .ui-select-match-text span {
+        display: inline-block;
+        font-family: $font-special;
+        font-size: rem(16);
+        color: color(gray-10);
+    }
+
+    .ui-select-placeholder {
+        display: block;
+        display: inline-block;
+        width: 100%;
+        font-family: $font-normal;
+        font-size: rem(11);
+    }
+
+    .ui-select-choices {
+        position: absolute;
+        z-index: 100;
+        top: 100%;
+        left: -0.4%;
+        width: 100.8%;
+        padding: 0;
+        margin-top: rem(-2);
+        background: color(white);
+        box-shadow: 0 rem(2) rem(3) 0 color(black, 0.32), 0 rem(-1) rem(4) 0 color(black, 0.11);
+        list-style: none;
+    }
+
+    .ui-select-choices-row {
+        padding: 0 rem(22);
+        font-family: $font-normal;
+        font-size: rem(13);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 2.46;
+        color: color(gray-10);
+    }
+
+    .ui-select-choices-group {
+        .dropdown-header {
+            padding: 0 rem(22);
+            font-size: rem(11);
+            line-height: 2.46;
+        }
+
+        &:first-child {
+            margin-top: rem(9);
+        }
+    }
+
+    .ui-select-bootstrap .ui-select-choices-row.active > span {
+        padding: 0;
+    }
+
+    &__list-icon {
+        display: inline-block;
+        width: rem(30);
+        margin-right: rem(6);
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .ui-select-choices-row:hover {
+        background: color(gray-50);
+        cursor: pointer;
+    }
+
+    // Modifiers
+
+    &--selected {
+        .#{$wefront__namespace}select-label__list-ipt {
+            padding-top: rem(10);
+        }
+        .#{$wefront__namespace}select-label__action {
+            &.open {
+                &::before {
+                    top: 58%;
+                }
+            }
+        }
+
+        .ui-select-search {
+            height: rem(44);
+            padding: rem(17) rem(35) rem(15) rem(14);
+            margin-top: rem(10);
+        }
+
+        .ui-select-toggle {
+            height: rem(44);
+            padding: rem(17) rem(35) rem(8) rem(14);
+
+            &::before {
+                top: 58%;
+            }
+        }
+    }
+}

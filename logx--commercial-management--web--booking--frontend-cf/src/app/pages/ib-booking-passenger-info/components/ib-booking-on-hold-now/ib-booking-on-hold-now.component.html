@@ -1,0 +1,52 @@
+<section class="ib-layout__section">
+    <div class="ib-box ib-box--medium ib-box--bordered ib-box--unfocused-low" *ngIf="onHoldInfo" [ngClass]="{'ib-on-hold-grey-box': onHoldIfLoggedInfo}">
+        <div class="ib-info-icon ib-on-hold-grey-box__container">
+            <div class="ib-on-hold-grey-box--left-content">
+                <span class="ib-info-icon__icon icon-circle-check ib-on-hold-grey-box__icon"></span>
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small ib-on-hold-grey-box__title">
+                    <div class="ib-info-icon__title">
+                        <span class="ib-heading ib-heading--type-3 ib-heading--same-size ib-on-hold-grey-box__title--text">{{'ONHOLD_NOW_TITLE'|translate}}</span>
+                    </div>
+                </div>
+                <div class="ib-info-icon__description ib-on-hold-grey-box__description">
+                    <ul>
+                        <li class="ib-list__item">
+                            {{onHoldInfo?.onHoldOptionText}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ib-info-icon__info ib-on-hold-grey-box--right-content">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-4 col-md-4 col-md-offset-8 col-lg-3 col-lg-offset-9 ib-on-hold-grey-box__button" *ngIf="showButton">
+                        <button id="bbki-on-hold-now-book-btn" class="ib-button ib-button--block ib-button--reverse u-float-right ib-button--w-normal" title="{{'ONHOLD_NOW_BUTTON'|translate}}" (click)="holdOrder()">{{'ONHOLD_NOW_BUTTON'|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ib-box ib-box--bordered ib-on-hold-white-box" *ngIf="onHoldIfLoggedInfo && !isUserLogged" [ngClass]="{'ib-on-hold-white-box--border-top': !onHoldInfo}">
+        <div class="ib-on-hold-white-box--left-content">
+            <p class="ib-heading ib-heading--type-3 ib-on-hold-white-box__title--text">
+                 {{onHoldInfo ? onHoldIfLoggedInfo.onHoldOptionTitle: ('ONHOLD_NOW_TITLE'|translate)}}
+            </p>
+            <p class="ib-list__item ib-on-hold-white-box__description">{{onHoldIfLoggedInfo.onHoldOptionDescription}}</p>
+            <ul class="ib-list ib-on-hold-white-box__list">
+                <li class="ib-list__item ib-on-hold-white-box__list-item">
+                    <span class="icon-confirmacion ib-on-hold-white-box__check-icon"></span>
+                    {{'ON_HOLD_FIRST_ITEM'|translate}}
+                </li>
+                <li class="ib-list__item ib-on-hold-white-box__list-item">
+                    <span class="icon-confirmacion ib-on-hold-white-box__check-icon"></span>
+                    {{'ON_HOLD_SECOND_ITEM'|translate}}
+                </li>
+            </ul>
+        </div>
+        <div class="ib-list__item ib-on-hold-white-box--right-content">
+            <button class="ib-on-hold-white-box__logging-button"
+                loginTrigger loginMobileTrigger
+                title="{{'ON_HOLD_LOGIN'|translate}}">{{'ON_HOLD_LOGIN'|translate}}
+            </button>
+        </div>
+    </div>
+</section>

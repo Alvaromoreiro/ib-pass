@@ -1,0 +1,493 @@
+<!-- Spinner -->
+<div class="ib-overlay-fly ib-overlay-fly--type-1 ib-overlay-fly--transparent"
+    data-ng-if="bookingDashCtrl.model.showSpinner">
+    <div class="ib-overlay-fly__container">
+        <div class="ib-overlay-fly__icon">
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+        <span class="ib-overlay-fly__text">{{'MMB_VC_AVAILABILITY_SLICK_LOADING' | translate}}</span>
+    </div>
+</div>
+<main class="ib-layout">
+    <div class="ib-box-menu__closelayer hidden-xl hidden-lg" ng-hide="bookingDashCtrl.hide"
+        ng-click="bookingDashCtrl.hide = true">
+        <span class="sr-only">{{'MMB_MENU_CLOSE_MENU_ACCESIBLE_TEXT'|translate}}
+        </span>
+    </div>
+    <div class="ib-background-banner ib-background-banner--medium ib-background-banner--hidden-xs">
+        <div class="ib-background-banner__figure ib-background-banner__figure--height-full hidden-xs ib-background-banner__gradient--black"
+            style="background-image: url('{{bookingDashCtrl.isSkeleton ? bookingDashCtrl.skeletonBackgroundImageUrl : bookingDashCtrl.model.bookingGeneralInfo.backgroundImageUrl}}')">
+        </div>
+        <form novalidate>
+            <div class="container">
+                <!-- HEADER TITLE PAGE -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div tabindex="0"
+                            class="ib-layout__header ib-layout__gdr ib-layout__header--title ib-layout__header--center"
+                            focusin>
+                            <span ib-auto-scroll-top
+                                class="ib-background-banner__txt ib-background-banner__txt--bold hidden-xl"
+                                ng-if="!bookingDashCtrl.isSkeleton">
+                                {{'MMB_HEADER_TITLE'|translate}}
+                                {{bookingDashCtrl.model.bookingGeneralInfo.bookingCode}}
+                            </span>
+                            <span ib-auto-scroll-top
+                                class="ib-background-banner__txt ib-background-banner__txt--bold hidden-xl"
+                                ng-if="bookingDashCtrl.isSkeleton">
+                                {{'MMB_HEADER_TITLE'|translate}}
+                                {{bookingDashCtrl.bookingInfoLight.order.clientLocator}}
+                            </span>
+                            <h1 class="ib-background-banner__title" ng-if="!bookingDashCtrl.isSkeleton">
+                                {{bookingDashCtrl.model.managementModel.flights.length
+                                > 2 ? ('MMB_TRAVELS_CITY_TITLE' | translate) :
+                                ('MMB_TRAVEL_CITY_TITLE' | translate)+'
+                                '+bookingDashCtrl.model.bookingGeneralInfo.arrivalCity}}
+                            </h1>
+                            <h1 class="ib-background-banner__title" ng-if="bookingDashCtrl.isSkeleton">
+                                {{bookingDashCtrl.bookingInfoLight.order.slices.length > 2
+                                ? ('MMB_TRAVELS_CITY_TITLE' | translate)
+                                : ('MMB_TRAVEL_CITY_TITLE' | translate) + ' ' +
+                                bookingDashCtrl.bookingInfoLight.order.slices[0].segments[0].arrival.city.description}}
+                            </h1>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                                <ul class="ib-background-banner__list">
+                                    <li class="ib-background-banner__item ib-background-banner__item--visible-xl">
+                                        <span
+                                            class="ib-background-banner__txt ib-background-banner__txt--bold">{{'MMB_HEADER_TITLE'|translate}}</span>
+                                        <span class="ib-background-banner__txt">
+                                            {{bookingDashCtrl.isSkeleton ?
+                                            bookingDashCtrl.bookingInfoLight.order.clientLocator :
+                                            bookingDashCtrl.model.bookingGeneralInfo.bookingCode}}
+                                        </span>
+                                    </li>
+                                    <!-- OUTBOUND -->
+                                    <li class="ib-background-banner__item"
+                                        ng-class="{'ib-background-banner__item--skeleton': bookingDashCtrl.isSkeleton}">
+                                        <span class="ib-background-banner__txt">
+                                            <ng-container ng-if="bookingDashCtrl.isSkeleton">
+                                                <ng-react class="mmb-skeleton-dashboard__header--mobile"
+                                                    [component]="bookingDashCtrl.skeletonComponent"
+                                                    [props]="bookingDashCtrl.skeletonHeaderProps"></ng-react>
+                                            </ng-container>
+                                            <ng-container ng-if="!bookingDashCtrl.isSkeleton">
+                                                <span class="ib-background-banner__txt ib-background-banner__txt--bold">
+                                                    <strong>{{'GENERAL_OUTBOUND_TEXT'|translate}}</strong>
+                                                </span>
+                                                <span class="ib-background-banner__txt">
+                                                    {{bookingDashCtrl.model.bookingGeneralInfo.departureInfo.formatedDate}}
+                                                </span>
+                                                <span class="ib-background-banner__txt">
+                                                    {{bookingDashCtrl.model.bookingGeneralInfo.departureInfo.dateTime}}h.
+                                                </span>
+                                            </ng-container>
+                                        </span>
+                                    </li>
+                                    <!-- RETURN -->
+                                    <li class="ib-background-banner__item"
+                                        ng-if="bookingDashCtrl.model.bookingGeneralInfo.returnInfo || (bookingDashCtrl.isSkeleton && bookingDashCtrl.bookingInfoLight.order.slices.length > 1)"
+                                        ng-class="{'ib-background-banner__item--skeleton': bookingDashCtrl.isSkeleton}">
+                                        <span class="ib-background-banner__txt">
+                                            <ng-container ng-if="bookingDashCtrl.isSkeleton">
+                                                <ng-react [component]="bookingDashCtrl.skeletonComponent"
+                                                    [props]="bookingDashCtrl.skeletonHeaderProps"></ng-react>
+                                            </ng-container>
+                                            <ng-container ng-if="!bookingDashCtrl.isSkeleton">
+                                                <span class="ib-background-banner__txt ib-background-banner__txt--bold">
+                                                    <strong>{{'GENERAL_INBOUND_TEXT'|translate}}</strong>
+                                                </span>
+                                                <span class="ib-background-banner__txt">
+                                                    {{bookingDashCtrl.model.bookingGeneralInfo.returnInfo.formatedDate}}
+                                                </span>
+                                                <span class="ib-background-banner__txt">
+                                                    {{bookingDashCtrl.model.bookingGeneralInfo.returnInfo.dateTime}}h.
+                                                </span>
+                                            </ng-container>
+                                        </span>
+                                    </li>
+                                    <li class="ib-background-banner__item">
+                                        <span class="ib-background-banner__icon icon-persona"></span>
+                                        <span class="ib-background-banner__txt ib-background-banner__txt--small"
+                                            aria-label="{{!bookingDashCtrl.isSkeleton ? bookingDashCtrl.model.bookingGeneralInfo.numberPassengers : bookingDashCtrl.bookingInfoLight.passengers.length}} billetes">
+                                            x {{!bookingDashCtrl.isSkeleton ?
+                                            bookingDashCtrl.model.bookingGeneralInfo.numberPassengers :
+                                            bookingDashCtrl.bookingInfoLight.passengers.length}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END HEADER TITLE PAGE -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ib-box-menu ib-box-menu--mask" collapse-menu out-side-click="true">
+                            <div class="ib-box-menu__menu ib-box-menu__mmb"
+                                ng-class="{'ib-box-menu__menu--open-responsive' : !bookingDashCtrl.hide}">
+
+                                <div class="ib-lateral-menu ib-lateral-menu__mmb">
+                                    <div ng-if="bookingDashCtrl.isSkeleton" class="hidden-xl hidden-lg">
+                                        <ng-react [component]="bookingDashCtrl.skeletonComponent"
+                                            [props]="bookingDashCtrl.skeletonHamburgerProps"></ng-react>
+                                    </div>
+                                    <button ng-if="!bookingDashCtrl.isSkeleton" ng-show="bookingDashCtrl.hide"
+                                        class="ib-lateral-menu__open hidden-xl hidden-lg" type="button"
+                                        ng-click="bookingDashCtrl.hide = false;cancel = false">
+                                        <span
+                                            class="u-hide-accessible">{{'MMB_MENU_OPEN_MENU_ACCESIBLE_TEXT'|translate}}</span>
+                                    </button>
+                                    <div class="ib-lateral-menu__wrapper-list" ng-hide="bookingDashCtrl.hide">
+                                        <ul class="ib-lateral-menu__list" data-equal="boxed">
+                                            <li class="ib-lateral-menu__item">
+                                                <!-- Manage your booking tab -->
+                                                <button
+                                                    data-ng-if="!bookingDashCtrl.model.flags.importOrderFromDeepLink"
+                                                    focusin class="ib-lateral-menu__link icon-gestion_de_reservas"
+                                                    ng-click="bookingDashCtrl.model.activeTab = bookingDashCtrl.model.tabs.management;bookingDashCtrl.setTitleDashboard();
+
+                                                    bookingDashCtrl.hide = true;bookingDashCtrl.scrollTop(); bookingDashCtrl.removeCustomizeFlight()"
+                                                    type="button" title="{{'MMB_MENU_MMB_OPTION_TEXT'|translate}}"
+                                                    data-ng-class="{'ib-lateral-menu__link--active': bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.management.name
+
+                                                    || bookingDashCtrl.model.activeTab.isSubtab}">{{'MMB_MENU_MMB_OPTION_TEXT'|translate}}</button>
+                                                <ul class="ib-lateral-menu__sublist mmb-skeleton-dashboard__aside-main"
+                                                    ng-if="bookingDashCtrl.isSkeleton">
+                                                    <li class="ib-lateral-menu__subitem" ng-repeat="i in [1,2,3,4,5]">
+                                                        <ng-react [component]="bookingDashCtrl.skeletonComponent"
+                                                            [props]="bookingDashCtrl.skeletonAsideProps"></ng-react>
+                                                    </li>
+                                                </ul>
+                                                <ul class="ib-lateral-menu__sublist" ng-if="!bookingDashCtrl.isSkeleton"
+                                                    ng-show="bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.management.name || bookingDashCtrl.model.activeTab.isSubtab">
+                                                    <!-- Flights info tab -->
+                                                    <li class="ib-lateral-menu__subitem">
+                                                        <button class="ib-lateral-menu__sublink" ng-click="cancel = true;
+                                                            bookingDashCtrl.model.activeTab = bookingDashCtrl.model.tabs.flights;
+                                                            bookingDashCtrl.hide = true;
+                                                            bookingDashCtrl.scrollTop();" type="button"
+                                                            title="{{'MMB_FLIGHTS_TITLE'|translate}}"
+                                                            data-ng-class="{'ib-lateral-menu__sublink--active': bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.flights.name}">{{'MMB_FLIGHTS_TITLE'|translate}}</button>
+                                                    </li>
+                                                    <!-- Passenger tab -->
+                                                    <li class="ib-lateral-menu__subitem">
+                                                        <button class="ib-lateral-menu__sublink"
+                                                            ng-click="cancel = true;bookingDashCtrl.model.activeTab = bookingDashCtrl.model.tabs.passengers;bookingDashCtrl.hide = true;bookingDashCtrl.scrollTop();"
+                                                            type="button" title="{{'MMB_PASSENGERS_TITTLE'|translate}}"
+                                                            data-ng-class="{'ib-lateral-menu__sublink--active': bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.passengers.name}">{{'MMB_PASSENGERS_TITTLE'|translate}}</button>
+                                                    </li>
+                                                    <!-- Experience tab -->
+                                                    <li class="ib-lateral-menu__subitem"
+                                                        ng-hide="!bookingDashCtrl.model.managementModel.orderItems.experience">
+                                                        <button class="ib-lateral-menu__sublink" ng-click="cancel = true;
+                                                           bookingDashCtrl.model.activeTab = bookingDashCtrl.model.tabs.experience;
+                                                           bookingDashCtrl.hide = true;
+                                                           bookingDashCtrl.scrollTop();" type="button"
+                                                            title="{{'WIDGET_YOUR_EXPERIENCES'|translate}}"
+                                                            data-ng-class="{'ib-lateral-menu__sublink--active':
+                                                           bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.experience.name}">
+                                                            {{'WIDGET_YOUR_EXPERIENCES'|translate}}</button>
+                                                    </li>
+                                                    <!-- transfer tab -->
+                                                    <li class="ib-lateral-menu__subitem"
+                                                        ng-hide="!bookingDashCtrl.model.managementModel.orderItems.transfer">
+                                                        <button class="ib-lateral-menu__sublink" ng-click="cancel = true;
+                                                            bookingDashCtrl.model.activeTab = bookingDashCtrl.model.tabs.transfer;
+                                                            bookingDashCtrl.hide = true;
+                                                            bookingDashCtrl.scrollTop();" type="button"
+                                                            title="{{'WIDGET_YOUR_TRANSFERS'|translate}}"
+                                                            data-ng-class="{'ib-lateral-menu__sublink--active':
+                                                            bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.transfer.name}">
+                                                            {{'WIDGET_YOUR_TRANSFERS'|translate}}</button>
+                                                    </li>
+                                                    <!-- Hotel tab -->
+                                                    <li class="ib-lateral-menu__subitem"
+                                                        ng-hide="!bookingDashCtrl.model.managementModel.orderItems.hotel">
+                                                        <button class="ib-lateral-menu__sublink" type="button" ng-click="cancel = true;
+                                                            bookingDashCtrl.model.activeTab = bookingDashCtrl.model.tabs.hotel;
+                                                            bookingDashCtrl.hide = true;
+                                                            bookingDashCtrl.scrollTop();"
+                                                            title="{{bookingDashCtrl.model.managementModel.orderItems.hotelTitle}}"
+                                                            data-ng-class="{'ib-lateral-menu__sublink--active': bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.hotel.name}">
+                                                            {{bookingDashCtrl.model.managementModel.orderItems.hotelTitle}}</button>
+                                                    </li>
+                                                    <!-- Vehicle tab -->
+                                                    <li class="ib-lateral-menu__subitem"
+                                                        ng-hide="!bookingDashCtrl.model.managementModel.orderItems.vehicle">
+                                                        <button class="ib-lateral-menu__sublink" type="button"
+                                                            ng-click="cancel = true;bookingDashCtrl.model.activeTab = bookingDashCtrl.model.tabs.vehicle;bookingDashCtrl.hide = true;bookingDashCtrl.scrollTop();"
+                                                            title="{{bookingDashCtrl.model.managementModel.orderItems.vehicleTitle}}"
+                                                            data-ng-class="{'ib-lateral-menu__sublink--active': bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.vehicle.name}">{{bookingDashCtrl.model.managementModel.orderItems.vehicleTitle}}</button>
+                                                    </li>
+                                                    <!-- Vacations tab -->
+                                                    <li id="mmb-ibv-cancel" class="ib-lateral-menu__subitem"
+                                                        ng-hide="bookingDashCtrl.model.qualifiers">
+                                                        <button class="ib-lateral-menu__sublink"
+                                                            model="bookingDashCtrl.model.managementModel.orderItems.packagedProduct"
+                                                            type="button"
+                                                            ng-click="cancel = true;bookingDashCtrl.openModalCancelReservation();bookingDashCtrl.hide = true;bookingDashCtrl.scrollTop();"
+                                                            title="{{'MMB_VC_IB_VACIONES_CHANGE_CANCEL'|translate}}"
+                                                            data-ng-class="{'ib-lateral-menu__sublink--active': bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.cancel.name}">{{'MMB_VC_IB_VACIONES_CHANGE_CANCEL'|translate}}</button>
+                                                    </li>
+                                                    <!-- Change flight tab -->
+                                                    <li class="ib-lateral-menu__subitem"
+                                                        ng-show="bookingDashCtrl.reshopConditions.callcenterInfo.enabled && !bookingDashCtrl.reshopConditions.simulatedChanges.enabled || bookingDashCtrl.reshopConditions.voluntaryChanges.enabled || bookingDashCtrl.reshopConditions.involuntaryChanges.enabled || bookingDashCtrl.reshopConditions.flightModifiableVoluntaryChanges || bookingDashCtrl.reshopConditions.flightModifiableOnDemand || (!bookingDashCtrl.reshopConditions.voluntaryChanges.enabled && !bookingDashCtrl.reshopConditions.simulatedChanges.enabled)">
+                                                        <button class="ib-lateral-menu__sublink" type="button" ng-click="cancel = true;
+                                                        bookingDashCtrl.changeActiveTabFromMenu(bookingDashCtrl.model.tabs.changeFlights);
+                                                        bookingDashCtrl.hide = true;bookingDashCtrl.scrollTop();"
+                                                            title="{{'MMB_CHANGE_FLIGHTS_TITLE'|translate}}"
+                                                            data-ng-class="{'ib-lateral-menu__sublink--active':
+                                                        bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.changeFlights.name}">{{'MMB_CHANGE_FLIGHTS_TITLE'|translate}}</button>
+                                                    </li>
+                                                    <!-- Simulator Change flight tab -->
+                                                    <li class="ib-lateral-menu__subitem"
+                                                        ng-show="bookingDashCtrl.reshopConditions.simulatedChanges.enabled && (!bookingDashCtrl.reshopConditions.voluntaryChanges.enabled && !bookingDashCtrl.reshopConditions.involuntaryChanges.enabled && !bookingDashCtrl.reshopConditions.flightModifiableVoluntaryChanges && !bookingDashCtrl.reshopConditions.flightModifiableOnDemand)">
+                                                        <button class="ib-lateral-menu__sublink" type="button" ng-click="cancel = true;
+                                                     bookingDashCtrl.changeActiveTabFromMenu(bookingDashCtrl.model.tabs.simulatorChangeFlights);
+                                                     bookingDashCtrl.hide = true;bookingDashCtrl.scrollTop();"
+                                                            title="{{'MMB_CHANGE_FLIGHTS_TITLE'|translate}}"
+                                                            data-ng-class="{'ib-lateral-menu__sublink--active':
+                                                     bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.simulatorChangeFlights.name}">
+                                                            {{'MMB_CHANGE_FLIGHTS_TITLE'|translate}}</button>
+                                                    </li>
+                                                    <!--refound flow-->
+                                                    <li class="ib-lateral-menu__subitem"
+                                                        data-ng-if="bookingDashCtrl.model.flags && (bookingDashCtrl.model.flags.voucherRefund || bookingDashCtrl.model.flags.cashRefund) && !bookingDashCtrl.model.flags.showModalRefound48hs">
+                                                        <button class="ib-lateral-menu__sublink" type="button"
+                                                            ng-click="$parent.cancel = true;bookingDashCtrl.openRefundFlow();bookingDashCtrl.hide = true;bookingDashCtrl.scrollTop();"
+                                                            title="{{'MMB_REFUNDS_TITLE'|translate}}"
+                                                            data-ng-class="{'ib-lateral-menu__sublink--active': bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.refunds.name}">{{'MMB_REFUNDS_TITLE'|translate}}</button>
+                                                    </li>
+                                                    <!--new refund flow-->
+                                                    <li class="ib-lateral-menu__subitem"
+                                                        data-ng-if="bookingDashCtrl.model.flags && !bookingDashCtrl.model.flags.showVoucherCashRefund">
+                                                        <button class="ib-lateral-menu__sublink" type="button"
+                                                            ng-click="$parent.cancel = true;bookingDashCtrl.openVoluntaryRefundFlow();bookingDashCtrl.hide = true;bookingDashCtrl.scrollTop();"
+                                                            title="{{'MMB_REFUNDS_TITLE'|translate}}"
+                                                            data-ng-class="{'ib-lateral-menu__sublink--active': bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.voluntary_refunds.name}">{{'MMB_REFUNDS_TITLE'|translate}}</button>
+                                                    </li>
+                                                    <!--Modal refunds-->
+                                                    <li class="ib-lateral-menu__subitem"
+                                                        data-ng-if="bookingDashCtrl.model.flags && bookingDashCtrl.model.flags.showRefundVoucherSection && bookingDashCtrl.model.flags.showModalRefound48hs">
+                                                        <button class="ib-lateral-menu__sublink" type="button"
+                                                            ng-click="bookingDashCtrl.openCallCenterModal('refunds');bookingDashCtrl.hide = true;bookingDashCtrl.scrollTop();"
+                                                            title="{{'MMB_REFUNDS_TITLE'|translate}}"
+                                                            data-ng-class="{'ib-lateral-menu__sublink--active': bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.refunds.name}">{{'MMB_REFUNDS_TITLE'|translate}}</button>
+                                                    </li>
+                                                    <!-- Your documents tab -->
+                                                    <li class="ib-lateral-menu__subitem"
+                                                        data-ng-if="bookingDashCtrl.showYourDocuments">
+                                                        <button class="ib-lateral-menu__sublink"
+                                                            ng-click="cancel = true;bookingDashCtrl.model.activeTab = bookingDashCtrl.model.tabs.documents;bookingDashCtrl.hide = true;bookingDashCtrl.scrollTop();"
+                                                            type="button" title="{{'CHECK_DOCUMENTS'|translate}}"
+                                                            data-ng-class="{'ib-lateral-menu__sublink--active': bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.documents.name}">{{'CHECK_DOCUMENTS'|translate}}</button>
+                                                    </li>
+                                                    <!-- Invoices tab -->
+                                                    <li class="ib-lateral-menu__subitem"
+                                                        data-ng-if="bookingDashCtrl.showInvoices">
+                                                        <button type="button"
+                                                            class="ib-lateral-menu__sublink ib-link--button"
+                                                            ng-click="$cancel = true;bookingDashCtrl.model.activeTab = bookingDashCtrl.model.tabs.invoices;bookingDashCtrl.hide = true;bookingDashCtrl.scrollTop();"
+                                                            title="{{'MMB_INVOICES_TITLE'|translate}}"
+                                                            data-ng-class="{'ib-lateral-menu__sublink--active': bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.invoices.name, 'ib-lateral-menu__sublink--disabled': bookingDashCtrl.showInvoicesDisabled}"
+                                                            ng-disabled="bookingDashCtrl.showInvoicesDisabled">{{'MMB_INVOICES_TITLE'|translate}}</button>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- Customize tab -->
+                                            <li class="ib-lateral-menu__item mmb-skeleton-dashboard__aside-tab"
+                                                ng-if="bookingDashCtrl.isSkeleton">
+                                                <ng-react [component]="bookingDashCtrl.skeletonComponent"
+                                                    [props]="bookingDashCtrl.skeletonIconProps"></ng-react>
+                                                <ng-react [component]="bookingDashCtrl.skeletonComponent"
+                                                    [props]="bookingDashCtrl.skeletonAsideProps"></ng-react>
+                                            </li>
+                                            <li class="ib-lateral-menu__item"
+                                                ng-if="!bookingDashCtrl.isSkeleton && bookingDashCtrl.model.showCustomizeTab">
+                                                <button focusin class="ib-lateral-menu__link icon-vuelos"
+                                                    title="{{'MMB_MENU_PERSONALICE_FLIGHT_OPTION'|translate}}"
+                                                    ng-click="bookingDashCtrl.customizeFlight();bookingDashCtrl.closeMenu($parent);bookingDashCtrl.hide = true;bookingDashCtrl.scrollTop();"
+                                                    type="button"
+                                                    data-ng-class="{'ib-lateral-menu__link--active': bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.customize.name}">{{'MMB_MENU_PERSONALICE_FLIGHT_OPTION'|translate}}</button>
+                                            </li>
+                                            <!-- Complete you trip Tab -->
+                                            <li class="ib-lateral-menu__item mmb-skeleton-dashboard__aside-tab"
+                                                ng-if="bookingDashCtrl.isSkeleton">
+                                                <ng-react [component]="bookingDashCtrl.skeletonComponent"
+                                                    [props]="bookingDashCtrl.skeletonIconProps"></ng-react>
+                                                <ng-react [component]="bookingDashCtrl.skeletonComponent"
+                                                    [props]="bookingDashCtrl.skeletonAsideProps"></ng-react>
+                                            </li>
+                                            <li class="ib-lateral-menu__item"
+                                                data-ng-if="!bookingDashCtrl.isSkeleton && !bookingDashCtrl.model.flags.importOrderFromDeepLink && !bookingDashCtrl.model.completeYourTripStopOver">
+                                                <button focusin class="ib-lateral-menu__link icon-editar"
+                                                    ng-click="bookingDashCtrl.model.activeTab = bookingDashCtrl.model.tabs.complete;cancel = true;bookingDashCtrl.hide = true;bookingDashCtrl.scrollTop();  bookingDashCtrl.removeCustomizeFlight()"
+                                                    type="button" title="('MMB_TRAVEL_COMPLETE_TRAVEL'|translate)"
+                                                    data-ng-class="{'ib-lateral-menu__link--active': bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.complete.name}">
+                                                    {{'MMB_TRAVEL_COMPLETE_TRAVEL'|translate}}</button>
+                                            </li>
+
+
+
+
+
+                                            <!--NUEVO TAP PARA STOPOVER-->
+                                            <li id="stopOverTab" class="ib-lateral-menu__item"
+                                                data-ng-if="!bookingDashCtrl.isSkeleton  && !bookingDashCtrl.model.flags.importOrderFromDeepLink && bookingDashCtrl.model.completeYourTripStopOver">
+                                                <button focusin class="ib-lateral-menu__link icon-senalizacion_mapas"
+                                                    ng-click="bookingDashCtrl.clickStopOverTab()" type="button"
+                                                    title="('MMB_COMPLETE_TRIP_STOPOVER'|translate)"
+                                                    data-ng-class="{'ib-lateral-menu__link--active': bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.stopOver.name}">
+                                                    {{'MMB_COMPLETE_TRIP_STOPOVER'|translate}}</button>
+                                            </li>
+
+
+
+
+
+
+                                            <!-- Exclusive Benefits Tab -->
+                                            <li class="ib-lateral-menu__item" ng-if="bookingDashCtrl.showGibeLink">
+                                                <button focusin class="ib-lateral-menu__link"
+                                                    ng-click="bookingDashCtrl.clickExclusiveBenefitsTab(); cancel = true;"
+                                                    type="button" title="{{'MMB_EXCLUSIVE_SERVICES_TITLE'|translate}}"
+                                                    data-ng-class="{'ib-lateral-menu__link--active': bookingDashCtrl.model.activeTab.name === bookingDashCtrl.model.tabs.exclusiveBenefits.name}">
+                                                    <span
+                                                        style="position: absolute; top: 1.7rem; left: 1.3rem; font-size: 1.10rem;"
+                                                        class="icon-avios-benefits"></span>
+                                                    <span
+                                                        style="line-height: 1.2; display: inline-block;">{{'MMB_EXCLUSIVE_SERVICES_TITLE'|translate}}</span>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                        <button class="ib-lateral-menu__close hidden-xl hidden-lg" type="button"
+                                            ng-click="bookingDashCtrl.hide = true">
+                                            <span
+                                                class="u-hide-accessible">{{'MMB_MENU_CLOSE_MENU_ACCESIBLE_TEXT'|translate}}</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ib-box-menu__container ib-box-menu__container--lateral-padding-8"
+                                data-equal="boxed" ng-switch="bookingDashCtrl.model.activeTab.name">
+                                <div class="ib-box-menu__overlay hidden-xl hidden-lg" ng-hide="bookingDashCtrl.hide"
+                                    ng-click="bookingDashCtrl.hide = true"></div>
+                                <!-- SUMMARY -->
+                                <ib-MmB-summary-tab ng-switch-when="summary"
+                                    model="bookingDashCtrl.model.summaryModel"></ib-MmB-summary-tab>
+                                <!-- YOUR MANAGEMENT -->
+                                <ib-MmB-management-tab-component ng-switch-when="management"
+                                    tabs-model="bookingDashCtrl.model"
+                                    your-flights-model="bookingDashCtrl.model.yourFlightsModel"
+                                    model="bookingDashCtrl.model.managementModel"
+                                    apis="bookingDashCtrl.model.bookingGeneralInfo.apis"
+                                    passengers="bookingDashCtrl.model.passengersModel.passengers.length"
+                                    flags="bookingDashCtrl.model.passengersModel.allFlags"
+                                    ancillaries-info="bookingDashCtrl.model.ancillariesInfo"
+                                    flags-views="bookingDashCtrl.model.flags"
+                                    seat-change-conditions="bookingDashCtrl.model.seatChangeConditions"
+                                    is-skeleton="bookingDashCtrl.isSkeleton"
+                                    canceled-seats-flag="bookingDashCtrl.model.canceledSeatsFlag">
+                                </ib-MmB-management-tab-component>
+                                <!-- YOUR FLIGHTS -->
+                                <ib-MmB-your-flights-tab-component ng-switch-when="flights"
+                                    model="bookingDashCtrl.model.yourFlightsModel"></ib-MmB-your-flights-tab-component>
+                                <!-- CHANGE YOUR FLIGHTS -->
+                                <ib-Mmb-change-flights-tab-component ng-switch-when="changeFlights"
+                                    flights-info="bookingDashCtrl.model.changeFlightsModel"
+                                    flags="bookingDashCtrl.model.flags"
+                                    flexibilization-range="bookingDashCtrl.model.flexibilizationTextDatesRange"
+                                    new-sister-cities="bookingDashCtrl.model.newSisterCitiesModel"
+                                    order-items="bookingDashCtrl.model.managementModel.orderItems">
+                                </ib-Mmb-change-flights-tab-component>
+                                <!-- SIMULATOR CHANGE FLIGHTS -->
+                                <ib-Mmb-simulator-change-flights-tab-component ng-switch-when="simulatorChangeFlights"
+                                    flights-info="bookingDashCtrl.model.changeFlightsModel"
+                                    flags="bookingDashCtrl.model.flags"
+                                    flexibilization-range="bookingDashCtrl.model.flexibilizationTextDatesRange"
+                                    new-sister-cities="bookingDashCtrl.model.newSisterCitiesModel"
+                                    order-items="bookingDashCtrl.model.managementModel.orderItems">
+                                </ib-Mmb-simulator-change-flights-tab-component>
+                                <!-- PASSENGERS -->
+                                <ib-MmB-passengers-tab-component ng-switch-when="passengers"
+                                    model="bookingDashCtrl.model.passengersModel"
+                                    apis="bookingDashCtrl.model.bookingGeneralInfo.apis"
+                                    bid="bookingDashCtrl.model.seatBid"></ib-MmB-passengers-tab-component>
+                                <!-- REFUNDS -->
+                                <ib-MmB-refunds-tab flags="bookingDashCtrl.model.flags" model="bookingDashCtrl.model"
+                                    summary-model="bookingDashCtrl.model.voucherSummaryModel"
+                                    voucher-price-info="bookingDashCtrl.model.voucherPriceInfo"
+                                    cash-price-info="bookingDashCtrl.model.cashPriceInfo"
+                                    ng-switch-when="refunds"></ib-MmB-refunds-tab>
+                                <!-- VOLUNTARY REFUNDS -->
+                                <ib-mmb-voluntary-refunds-tab ng-switch-when="voluntary_refunds"
+                                    [model]="bookingDashCtrl.model"></ib-mmb-voluntary-refunds-tab>
+                                <!-- YOUR EXPERIENCES -->
+                                <ib-MmB-your-experience-tab ng-switch-when="experience"
+                                    model="bookingDashCtrl.model.managementModel.orderItems.experience"></ib-MmB-your-experience-tab>
+
+                                <!-- YOUR TRANSFER -->
+                                <ib-MmB-your-transfer-tab ng-switch-when="transfer"
+                                    model="bookingDashCtrl.model.managementModel.orderItems.transfer"></ib-MmB-your-transfer-tab>
+
+                                <!-- YOUR HOTEL HOLIDAYS -->
+                                <ib-MmB-your-hotel-holidays-tab ng-switch-when="hotel"
+                                    model="bookingDashCtrl.model.managementModel.orderItems.hotel"></ib-MmB-your-hotel-holidays-tab>
+
+                                <!-- YOUR CAR  HOLIDAYS -->
+                                <ib-MmB-your-car-holidays-tab ng-switch-when="vehicle"
+                                    model="bookingDashCtrl.model.managementModel.orderItems.vehicle"></ib-MmB-your-car-holidays-tab>
+
+                                <!-- INVOICES -->
+                                <ib-MmB-invoice-tab ng-switch-when="invoices"
+                                    model="bookingDashCtrl.model"></ib-MmB-invoice-tab>
+
+                                <!-- CUSTOMIZE YOUR FLIGHTS -->
+                                <!-- parent -->
+                                <ib-MmB-customize-flight-tab ng-switch-when="customize"
+                                    show-redirection-checkin="bookingDashCtrl.model.showRedirectionCheckin"
+                                    show-redirection="bookingDashCtrl.model.isAncillariesInTime.showRedirection"
+                                    show-special-meals="bookingDashCtrl.model.showSpecialMeals"
+                                    model="bookingDashCtrl.model.ancillariesInfo"
+                                    ancillaries-to-show="bookingDashCtrl.model.isAncillariesInTime.isIntime || bookingDashCtrl.model.isAncillariesInTime.isSpecialMealsInTime"
+                                    bidable-info="bookingDashCtrl.model.bidableInfo"
+                                    seat-change-conditions="bookingDashCtrl.model.seatChangeConditions">
+                                    {{'MMB_CUSTOMIZE_YOUR_FLIGHT'|translate}}
+                                </ib-MmB-customize-flight-tab>
+                                <!-- COMPLETE YOUR TRIP -->
+                                <div ng-switch-when="complete">
+                                    <ib-MmB-complete-trip is-stop-over="!bookingDashCtrl.model.completeYourTripStopOver"
+                                        model="bookingDashCtrl.model"></ib-MmB-complete-trip>
+                                </div>
+
+
+
+
+                                <div id="stopOver" ng-switch-when="stopOver">
+                                    <ib-stop-over></ib-stop-over>
+                                </div>
+
+
+                                <!-- BENEFICIOS EXCLUSIVOS IBERIA PLUS -->
+                                <div ng-switch-when="exclusiveBenefits">
+                                    <div class="ib-layout__line-spacing--medium u-text-center hidden-xl hidden-lg">
+                                        <h2 class="ib-heading ib-heading--title-box u-ellipsis-inline">
+                                            {{'MMB_EXCLUSIVE_SERVICES_TITLE'|translate}}</h2>
+                                    </div>
+                                    <exclusive-benefits-launcher
+                                        ng-attr-notification-available="true"
+                                        ng-attr-exclusive-services-data="{{bookingDashCtrl.gibeData | json}}"
+                                    >
+                                    </exclusive-benefits-launcher>
+                                </div>
+                                <ib-MmB-your-documents-tab ng-switch-when="documents"
+                                    model="bookingDashCtrl.model.yourFlightsModel"></ib-MmB-your-documents-tab>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>

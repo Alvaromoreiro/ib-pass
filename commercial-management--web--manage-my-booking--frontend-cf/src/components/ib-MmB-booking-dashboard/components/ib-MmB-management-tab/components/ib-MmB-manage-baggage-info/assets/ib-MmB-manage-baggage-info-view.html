@@ -1,0 +1,66 @@
+<fieldset class="ib-box-menu__section ib-box-menu__section--full">
+    <legend class="u-hide-accessible">{{'MMB_BAGGAGE_TITLE'|translate}} {{manageBaggageInfoCtrl.model}}</legend>
+    <div>
+        <section class="ib-layout__section">
+            <div class="ib-box-cols">
+                <div class="ib-box-cols__header">
+                    <h3 class="ib-box-cols__title">{{'MMB_BAGGAGE_TITLE'|translate}}</h3>
+                </div>
+                <div>
+                    <div class="ib-box-cols__content u-width-full" ng-if="manageBaggageInfoCtrl.model.isSkeletonView" ng-repeat="i in [1,2]">
+                        <div class="mmb-skeleton-baggage">
+                            <ng-react class="mmb-skeleton-baggage__react" [component]="manageBaggageInfoCtrl.skeletonComponent"
+                                [props]="manageBaggageInfoCtrl.skeletonProps"></ng-react>
+                            <ng-react [component]="manageBaggageInfoCtrl.skeletonComponent"
+                                [props]="manageBaggageInfoCtrl.skeletonIconProps"></ng-react>
+                        </div>
+                        <div class="mmb-skeleton-baggage"> 
+                            <ng-react [component]="manageBaggageInfoCtrl.skeletonComponent"
+                                [props]="manageBaggageInfoCtrl.skeletonIconProps"></ng-react>
+                            <ng-react class="mmb-skeleton-baggage__react" [component]="manageBaggageInfoCtrl.skeletonComponent"
+                                [props]="manageBaggageInfoCtrl.skeletonBaggageProps"></ng-react>
+                        </div>
+                    </div>
+                    <div class="ib-box-cols__content"
+                        data-ng-repeat="(index, baggage) in manageBaggageInfoCtrl.model.baggageInfo">
+                        <a class="ib-box-cols__link-container ib-box-cols__link-container--icon-caret" href="javascript:void(0)"
+                            data-ng-click="manageBaggageInfoCtrl.openModalConditions($event, baggage)"
+                            title="{{'MMB_BAGGAGE_TOOLTIP_MORE_INFO'|translate}}" focusin ng-if="manageBaggageInfoCtrl.isActiveLink(baggage)">
+                            <span class="ib-box-cols__title-section u-mb-small">{{baggage.departureCity.city.description}}
+                                ({{baggage.departureCity.code}}) - {{baggage.arrivalCity.city.description}}
+                                ({{baggage.arrivalCity.code}})</span>
+                            <span ng-if="baggage.segments[0].sliceBaggage.hold ||  baggage.segments[0].sliceBaggage.cabin.totalUnits" class="ib-text u-mb-small ib-text--block icon-e_equipaje_maleta_cabina">
+                                {{baggage.segments[0].sliceBaggage.cabin.totalUnits}}
+                                {{baggage.segments[0].sliceBaggage.cabin.name}}{{baggage.segments[0].sliceBaggage.cabin && baggage.segments[0].sliceBaggage.hold && baggage.segments[0].sliceBaggage.hold.totalglobal > 0 ?', ' : ''}}
+                                <span ng-if="baggage.segments[0].sliceBaggage.hold.totalglobal > 0">
+                                    {{baggage.segments[0].sliceBaggage.hold.totalglobal}}
+                                    {{baggage.segments[0].sliceBaggage.hold.name}}
+                                </span>
+                            </span>
+                            <span ng-if="!(baggage.segments[0].sliceBaggage.hold ||  baggage.segments[0].sliceBaggage.cabin.totalUnits)" class="ib-text u-mb-small ib-text--block icon-e_equipaje_maleta_cabina">
+                                {{'BAGGAGE_NOT_ADDED_TEXT'|translate}}
+                            </span>
+                        </a>
+                        <p class="ib-box-cols__link-container ib-box-cols__link-container"
+                            title="{{'MMB_BAGGAGE_TOOLTIP_MORE_INFO'|translate}}" focusin ng-if="!manageBaggageInfoCtrl.isActiveLink(baggage)">
+                            <span class="ib-box-cols__title-section u-mb-small">{{baggage.departureCity.city.description}}
+                                ({{baggage.departureCity.code}}) - {{baggage.arrivalCity.city.description}}
+                                ({{baggage.arrivalCity.code}})</span>
+                            <span ng-if="baggage.segments[0].sliceBaggage.hold ||  baggage.segments[0].sliceBaggage.cabin.totalUnits" class="ib-text u-mb-small ib-text--block icon-e_equipaje_maleta_cabina">
+                                {{baggage.segments[0].sliceBaggage.cabin.totalUnits}}
+                                {{baggage.segments[0].sliceBaggage.cabin.name}}{{baggage.segments[0].sliceBaggage.cabin && baggage.segments[0].sliceBaggage.hold && baggage.segments[0].sliceBaggage.hold.totalglobal > 0 ?', ' : ''}}
+                                <span ng-if="baggage.segments[0].sliceBaggage.hold.totalglobal > 0">
+                                    {{baggage.segments[0].sliceBaggage.hold.totalglobal}}
+                                    {{baggage.segments[0].sliceBaggage.hold.name}}
+                                </span>
+                            </span>
+                            <span ng-if="!(baggage.segments[0].sliceBaggage.hold ||  baggage.segments[0].sliceBaggage.cabin.totalUnits)" class="ib-text u-mb-small ib-text--block icon-e_equipaje_maleta_cabina">
+                                {{'BAGGAGE_NOT_ADDED_TEXT'|translate}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</fieldset>

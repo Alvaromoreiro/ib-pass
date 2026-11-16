@@ -1,0 +1,73 @@
+<div class="ib-refund-bonds ib-refund-bonds--type-01"  ng-if="voucherRefundCtrl.internalFlags.showVoucherRefundOnline">
+    <div class="ib-refund-bonds__head">
+        <h3 class="title__h4 bold" style="font-size: 24px; text-transform: none;">{{'MMB_VOUCHER_REFUND_MODAL_TITLE'|translate}}</h3>
+        <p class="ib-text ib-text--xbig ib-text--especial u-mt-small">
+            {{(voucherRefundCtrl.flags.refundVoucherSection80 && voucherRefundCtrl.flexibilityPercentage < 100 ? 'MMB_REFUNDS_PARTIAL_VOUCHER_DISCOUNT_SUBTITLE' : 'MMB_REFUNDS_VOUCHER_DISCOUNT_SUBTITLE')|translate}}
+            <span class="ib-text--bold" ng-if="voucherRefundCtrl.voucherPriceInfo.percentagePrice !== 0">
+                ,{{'MMB_VOUCHER_REFUND_EXTRA_PERCENTAGE_1'|translate}} {{voucherRefundCtrl.voucherPriceInfo.percentage}} {{'MMB_VOUCHER_REFUND_EXTRA_PERCENTAGE_2'|translate}}
+            </span>
+        </p>
+    </div>
+    <div class="ib-refund-bonds__body ib-refund-bonds__body--boxed">
+        <div class="ib-refund-bonds__body-block">                                   
+            <span class="ib-refund-bonds__value">{{voucherRefundCtrl.voucherPriceInfo.formattedPrice}}</span>
+            <span class="ib-refund-bonds__value ng-binding" style="font-size: 20px" ng-if="voucherRefundCtrl.voucherPriceInfo.percentagePrice !== 0"> 
+                ({{voucherRefundCtrl.voucherPriceInfo.priceWOPercentageFormatted}} + {{voucherRefundCtrl.voucherPriceInfo.percentagePriceFormatted}})
+            </span>
+        </div>
+        <div class="ib-refund-bonds__body-block">  
+            <button class="ib-button ib-button--block-xs ib-button--w-normal-fullmobile" ng-click="voucherRefundCtrl.openFullScreenModal()">{{'MMB_CUSTOMIZE_FLIGHTS_SELECT'|translate}}</button>
+        </div>
+    </div>
+    <div class="ib-flex__row ib-flex--space-between u-mb-xsmall">
+        <div class="ib-box--bordered-pairs ib-flex__row--nowrap ib-flex--align-center ib-flex--basis-50-spaced ib-flex--basis-100-margin-mobile">
+            <span class="ib-text--color-important ib-text--xmassive icon-reloj u-mr-xxsmall"></span>
+            <span class="ib-text ib-text--big ib-text--especial">
+                <span class="ib-text--bold">{{'MMB_VOUCHER_REFUND_INFO_MODULE_RIGHT_NOW'|translate}}</span> {{'MMB_VOUCHER_REFUND_INFO_MODULE_TODAY'|translate}}
+            </span>
+        </div>
+        <div class="ib-box--bordered-pairs ib-flex__row--nowrap ib-flex--align-center ib-flex--basis-50-spaced ib-flex--basis-100-margin-mobile">
+            <span class="ib-text--color-important ib-text--xmassive icon-tarjeta_de_embarque u-mr-xxsmall"></span>
+            <span class="ib-text ib-text--big ib-text--especial">
+                {{'MMB_VOUCHER_REFUND_INFO_MODULE_VOUCHER_1'|translate}} 
+                <span class="ib-text--bold">{{'MMB_VOUCHER_REFUND_INFO_MODULE_VOUCHER_2'|translate}}</span> 
+                {{'MMB_VOUCHER_REFUND_INFO_MODULE_VOUCHER_3'|translate}}
+            </span>
+        </div>
+        <div class="ib-box--bordered-pairs ib-flex__row--nowrap ib-flex--align-center ib-flex--basis-50-spaced ib-flex--basis-100-margin-mobile" ng-if="voucherRefundCtrl.internalFlags.showDateLimit">
+            <span class="ib-text--color-important ib-text--xmassive icon-gestion_de_reservas u-mr-xxsmall"></span>
+            <span class="ib-text ib-text--big ib-text--especial">
+                <span class="ib-text--bold">{{'MMB_VOUCHER_REFUND_FLIGHT_DATE_LIMIT'|translate}}</span>{{'MMB_VOUCHER_REFUND_FLIGHT_DATE_LIMIT_2'|translate}}<span>{{voucherRefundCtrl.validityText}}</span>{{'MMB_VOUCHER_REFUND_FLIGHT_DATE_LIMIT_2_JA'|translate}}<span class="ib-text--bold">{{'MMB_VOUCHER_REFUND_FLIGHT_DATE_LIMIT_JA'|translate}}</span>
+            </span>
+        </div>
+        <div class="ib-box--bordered-pairs ib-flex__row--nowrap ib-flex--align-center ib-flex--basis-50-spaced ib-flex--basis-100-margin-mobile">
+            <span class="ib-text--color-important ib-text--xmassive icon-vuelos u-mr-xxsmall"></span>
+            <span class="ib-text ib-text--big ib-text--especial">
+                {{'MMB_VOUCHER_REFUND_INFO_MODULE_VALID_FOR_1'|translate}} <span class="ib-text--bold">{{'MMB_VOUCHER_REFUND_INFO_MODULE_VALID_FOR_2'|translate}}</span>
+            </span>
+        </div>
+        <div class="ib-box--bordered-pairs ib-flex__row--nowrap ib-flex--align-center ib-flex--basis-50-spaced ib-flex--basis-100-margin-mobile">
+            <span class="ib-text--color-important ib-text--xmassive icon-calendario u-mr-xxsmall"></span>
+            <span class="ib-text ib-text--big ib-text--especial" ng-if="voucherRefundCtrl.internalFlags.showRefundInfo1">
+                <span class="ib-text--bold">{{'MMB_VOUCHER_REFUND_INFO_MODULE_FLY_UNTIL_1_80_1'|translate}}</span>
+                     {{'MMB_VOUCHER_REFUND_INFO_MODULE_FLY_UNTIL_2'|translate}} 
+                <span id="ib-Mmb-voucher-refund-view-vailidty-date">{{voucherRefundCtrl.flightDateLimit}}.</span>
+            </span>
+            <span class="ib-text ib-text--big ib-text--especial" ng-if="voucherRefundCtrl.internalFlags.showRefundInfo2">
+                <span class="ib-text--bold">{{'MMB_VOUCHER_REFUND_INFO_MODULE_FLY_UNTIL_1'|translate}}</span>
+                {{'MMB_VOUCHER_REFUND_INFO_MODULE_FLY_UNTIL_2_NEW'|translate}}
+                <span id="ib-Mmb-voucher-refund-view-vailidty-date">{{'MMB_VOUCHER_REFUND_INFO_MODULE_FLY_RANGE' | translate}}</span>.
+            </span>
+            <span class="ib-text ib-text--big ib-text--especial" ng-if="voucherRefundCtrl.internalFlags.showRefundInfo3">
+                <span class="ib-text--bold">{{'MMB_VOUCHER_REFUND_INFO_MODULE_FLY_UNTIL_1_80_1'|translate}}</span>
+                {{'MMB_VOUCHER_REFUND_INFO_MODULE_FLY_UNTIL_1_80_2'|translate}}.
+            </span>
+        </div>
+    </div>
+</div>
+<div class="ib-refund-bonds ib-refund-bonds--type-01" ng-if="voucherRefundCtrl.internalFlags.showVoucherRefundCC">
+    <div class="ib-refund-bonds__head">
+        <h2 class="title__h4 bold">{{'MMB_VOUCHER_REFUND_MODAL_TITLE'|translate}}</h2>
+        <p class="ib-text ib-text--xbig ib-text--especial u-mt-small">{{voucherRefundCtrl.textRefundByVoucherNotAvailable}}</p>        
+    </div>
+</div>

@@ -1,0 +1,8 @@
+branch=$(git rev-parse --abbrev-ref HEAD)
+
+if [[ $branch =~ "integration" ]]; then
+echo "Commitlint is not launched"
+else
+echo "Running commitlint"
+npx commitlint --edit $1
+fi

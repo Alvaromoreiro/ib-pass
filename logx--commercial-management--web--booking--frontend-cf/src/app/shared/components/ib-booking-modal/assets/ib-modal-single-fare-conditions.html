@@ -1,0 +1,62 @@
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{'AVAILABILITY_FARE_DETAILS_MODAL_TITLE'|translate}} <span class="ib-heading ib-heading--type-1 ib-heading--bold">{{modalCtrl.model.commercialName}}</span></h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body ib-modals__body--cols-simple">
+    <div class="ib-layout">
+        <div class="ib-layout__line-spacing">
+            <section class="ib-list-fares" data-ng-class="
+            {'ib-list-fares--fare-type-1': modalCtrl.model.cabinType==='E',
+            'ib-list-fares--fare-type-2': modalCtrl.model.cabinType==='T' || modalCtrl.model.cabinType==='N',
+            'ib-list-fares--fare-type-3': modalCtrl.model.cabinType==='B'}">
+                <h3 class="ib-list-fares__title">{{'AVAILABILITY_FARE_DETAILS_MODAL_SUBTITLE'|translate}}</h3>
+                <div class="ib-list-fares__list-container">
+                    <ul class="ib-list-fares__list">
+                        <li class="ib-list-fares__item" data-ng-repeat="condition in modalCtrl.model.conditions"
+                            data-ng-if="(condition.previewStatus && condition.extendedInfo.conditionStatus)
+                            && (condition.code !== 'REEMBOLSO' && condition.code !== 'CAMBIO')"
+                            id="new-fare-families-condition-list-{{condition.code}}">
+                            <p class="ib-list-fares__item-txt">
+                                <span class="ib-list-fares__icon icon-circle-check"></span>
+                                <span class="ib-list-fares__txt" id="new-fare-families-condition-list-{{condition.code}}-text">{{condition.name}}</span>
+                            </p>
+                            <p class="ib-list-fares__subtxt" ng-bind-html="condition.extendedInfo.message" id="new-fare-families-condition-list-{{condition.code}}-subtext"></p>
+                        </li>
+                        <li class="ib-list-fares__item" data-ng-repeat="condition in modalCtrl.model.conditions"
+                            data-ng-if="(condition.code === 'REEMBOLSO' || condition.code === 'CAMBIO')"
+                            id="new-fare-families-condition-list-{{condition.code}}">
+                            <p class="ib-list-fares__item-txt">
+                                <span data-ng-if="condition.code === 'REEMBOLSO'" class="ib-list-fares__icon" ng-class="modalCtrl.getFareSubCodeClassModal(condition.extendedInfo.code)"></span>
+                                <span data-ng-if="condition.code === 'CAMBIO'" class="ib-list-fares__icon" ng-class="modalCtrl.getFareSubCodeClassModal(condition.extendedInfo.code)"></span>
+                                <span class="ib-list-fares__txt" id="new-fare-families-condition-list-{{condition.code}}-text">{{condition.name}}</span>
+                            </p>
+                            <p class="ib-list-fares__subtxt" ng-bind-html="condition.extendedInfo.message" id="new-fare-families-condition-list-{{condition.code}}-subtext"></p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--medium u-mt-big-desktop " data-ng-if="modalCtrl.showUpgradingFare">
+            <section class="ib-fare-notice">
+                <div class="ib-fare-notice__txt-container">
+                    <span class="ib-fare-notice__txt" ng-bind-html="modalCtrl.fareBannerText"></span>
+                </div>
+                <div class="ib-fare-notice__container">
+                    <span class="ib-fare-notice__title">{{'AVAILABILITY_FARE_DETAILS_MODAL_PRICE'|translate}} {{modalCtrl.price}}</span>
+                    <button class="ib-fare-notice__btn" type="button" ng-click="modalCtrl.close(); modalCtrl.clickNextFare();">{{'AVAILABILITY_FARE_DETAILS_MODAL_BUTTON'|translate}} {{modalCtrl.fare}}</button>
+                </div>
+            </section>
+        </div>
+        <div class="ib-layout__line-spacing">
+            <div class="ib-content-buttons">
+                <div class="ib-content-buttons__content-right u-text-left u-mt-small">
+                    <a href="javascript:void(0)" id="open-new-fares-details" title="{{'AVAILABILITY_FARE_DETAILS_MODAL_LINK'|translate}}" class="ib-link ib-link--primary ib-link--hover-primary" ng-click="modalCtrl.close();modalCtrl.openModalConditionsEvent($event);">{{'AVAILABILITY_FARE_DETAILS_MODAL_LINK'|translate}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

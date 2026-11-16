@@ -1,0 +1,45 @@
+      <!-- TIMELINE -->
+      <fieldset class="ib-box-menu__section ib-box-menu__section--full">
+        <legend class="u-hide-accessible">{{'MMB_TIMELINE_TITLE'|translate}}</legend>
+        <div>
+            <section class="ib-layout__section">
+                <div class="ib-box ib-box--accordion u-mb-none ng-scope">
+                    <div class="ib-box-header ib-box-header--border-bottom-light u-pb-xsmall">
+                        <h3 class="ib-heading ib-heading--title-box">{{'MMB_TIMELINE_TITLE'|translate}}</h3>
+                    </div>
+                    <div class="ib-box ib-box--empty">
+                        <div class="ib-timeline">
+                            <ul class="ib-timeline__list">
+                                <li class="ib-timeline__item" ng-repeat="step in timeLineCtrl.listTimeLine" ng-class="{'ib-timeline__item--disabled':step.status === 'PAST','ib-timeline__item--active':step.status === 'ACTIVE'}">
+                                    <span class="ib-timeline__date">{{step.date}}</span>
+                                    <div class="ib-timeline__container ib-timeline__container--only-step" ng-if="!step.isCheckIn">
+                                        <a focusin class="ib-timeline__link" href="javascript:void(0)" title="{{step.step}}">
+                                            <div class="ib-timeline__link-container">
+                                                <span class="ib-timeline__title">{{step.step}}</span>
+                                            </div>
+                                            <ul class="ib-timeline__sublist"ng-if="step.isFlight">
+                                                <li class="ib-timeline__subitem" ng-repeat="item in step.stepInfo">
+                                                    <span class="ib-timeline__txt">{{item}}</span>
+                                                </li>
+                                            </ul>
+                                        </a>
+                                   </div>
+                                    <div class="ib-timeline__container ib-timeline__container--icon icon-checking_online" ng-if="step.isCheckIn">
+                                            <a focusin class="ib-timeline__link" href="javascript:void(0)" title="{{step.step}}">
+                                                <div class="ib-timeline__link-container">
+                                                    <span class="ib-timeline__title u-mb-xsmall">{{'TIME_LINE_STEP_CHECK_IN_ONLINE_TEXT'|translate}}</span>
+                                                    <span class="ib-timeline__txt" ng-repeat="step in step.stepInfo">{{step}}</span>
+                                                </div>  
+                                            </a>
+                                    </div>
+                                </li>
+                         
+                              
+                           
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </fieldset>

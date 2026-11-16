@@ -1,0 +1,12 @@
+import './ib-booking-availability-page';
+//import './ib-booking-alp';
+//import './ib-onb-not-availability';
+//import './ib-booking-payments-page';
+//import './ib-booking-ancillaries';
+//import './ib-booking-passenger-info';
+//import './ib-booking-price-matrix';
+//import './ib-booking-redirection-market';
+//import './ib-loading-redirection';
+//import './ib-not-availability';
+//import './ib-shuttle';
+//import './ib-booking-bk-error';

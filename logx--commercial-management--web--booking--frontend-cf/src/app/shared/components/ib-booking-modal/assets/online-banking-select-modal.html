@@ -1,0 +1,49 @@
+<header class="ib-modals__header">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+        <h2 class="ib-heading ib-heading--type-1">{{modalCtrl.model.title ? (modalCtrl.model.title|translate) : 'MODAL_ERROR_TITLE'|translate}}</h2>
+    </div>
+    <h3 class="ib-heading ib-heading--type-5 ib-heading--unfocused" data-ng-if="modalCtrl.model.subtitle">{{modalCtrl.model.subtitle|translate}}</h3>
+    <div class="ib-modals__header-settings">
+        <button id="bbki-online-banking-close-btn" type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body" id="generalModalBody">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large" data-ng-if="modalCtrl.model.body">
+        <p class="ib-text" data-ng-if="!modalCtrl.model.needsHtmlBinding">{{modalCtrl.model.body|translate}}</p>
+        <p class="ib-text" data-ng-if="modalCtrl.model.needsHtmlBinding" data-ng-bind-html="modalCtrl.model.body"></p>
+    </div>
+    <form name="paymentsForm">
+        <div class="ib-layout__form-center" data-ng-if="modalCtrl.model.banksSelectOptions">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+            </div>
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+                <div class="ib-select" data-ng-class="{'ib-select--error' : paymentsForm.$submitted && paymentsForm.onlineBankingOption.$invalid,'ib-select--label':(paymentsForm.onlineBankingOption.$viewValue != null && paymentsForm.onlineBankingOption.$viewValue !== '')}">
+                    <label class="ib-select__label" data-ng-if="(paymentsForm.onlineBankingOption.$viewValue != null && paymentsForm.onlineBankingOption.$viewValue !== '')">{{'IBPURC_PAYMENTS_ONLINE_BANKING_SELECT_BANK_TEXT'|translate}}</label>
+                    <ui-select class="ib-select__action" data-ng-model="modalCtrl.model.onlineBankingOption" name="onlineBankingOption" ng-required="true">
+                        <ui-select-match class="ib-select__list-ipt" placeholder="{{'IBPURC_PAYMENTS_ONLINE_BANKING_SELECT_BANK_TEXT'|translate}}">
+                            <span class="ib-select__txt" data-ng-bind="$select.selected.bankName"></span>
+                        </ui-select-match>
+                        <ui-select-choices class="ib-select__list" repeat="bank in (modalCtrl.model.banksSelectOptions | filter: $select.search)">
+                            <span class="ib-select__list-txt" ng-bind="::bank.bankName"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div id="bbki-banking-select-err-modal" ng-messages="paymentsForm.$submitted && paymentsForm.onlineBankingOption.$error">
+                    <div id="bbki-online-banking-required-err-modal" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+<footer class="ib-modals__footer">
+    <div class="ib-content-buttons">
+        <div class="ib-content-buttons__content-left">
+            <button id="bbki-online-banking-accept-btn" class="ib-button ib-button--w-medium" type="button" title="{{modalCtrl.model.accept ? modalCtrl.model.accept : 'MODAL_GENERAL_BUTTON_ACCEPT' |translate}}" data-ng-click="modalCtrl.model.onlineBankingOption ? modalCtrl.accept(modalCtrl.model.onlineBankingOption) : paymentsForm.$submitted = true">{{modalCtrl.model.accept ? modalCtrl.model.accept : 'MODAL_GENERAL_BUTTON_ACCEPT' |translate}}</button>
+        </div>
+        <div class="ib-content-buttons__content-right">
+            <a id="bbki-online-banking-cancel-link" href="javascript:void(0)" title="{{'MODAL_GENERAL_BUTTON_CANCEL'|translate}}" class="ib-link" title="{{modalCtrl.model.cancel ? modalCtrl.model.cancel : 'MODAL_GENERAL_BUTTON_CANCEL'|translate}}" data-ng-click="modalCtrl.close()">{{modalCtrl.model.cancel ? modalCtrl.model.cancel : 'MODAL_GENERAL_BUTTON_CANCEL'|translate}}</a>
+        </div>
+    </div>
+</footer>

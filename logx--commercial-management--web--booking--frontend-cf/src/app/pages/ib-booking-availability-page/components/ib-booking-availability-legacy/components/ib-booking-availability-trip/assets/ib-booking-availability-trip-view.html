@@ -1,0 +1,53 @@
+<div data-ng-hide="aTripCtrl.currentOriginDestinationIndex === 1 && (!aTripCtrl.selectedSliceInfoFamily && !aTripCtrl.redemption)">
+    <div data-ng-class="{'u-mt-medium u-mb-none' :aTripCtrl.redemption,'u-mt-small u-mb-small' :!aTripCtrl.redemption}" class="ib-content-heading ib-content-heading--type-1">
+        <h1 data-ng-if="!aTripCtrl.multiCity && !aTripCtrl.showAdaptativeMobileFlow" data-ng-class="{'u-mt-normal':aTripCtrl.currentOriginDestinationIndex !== 0 || aTripCtrl.selectedSlicesLength > 0 || !aTripCtrl.showBanner, 'u-mt-none':aTripCtrl.redemption || $root.isLogged === aTripCtrl.LOGIN_ONB,'ib-heading-icon':!aTripCtrl.redemption || $root.isLogged !== aTripCtrl.LOGIN_ONB}">
+            <span ng-hide="aTripCtrl.redemption || $root.isLogged === aTripCtrl.LOGIN_ONB" class="ib-heading-icon__icon ib-heading-icon__icon--simple icon-vuelos" ng-class="{ 'ib-heading-icon__icon--rotate-left' : aTripCtrl.currentOriginDestinationIndex === 0 ,
+                            'ib-heading-icon__icon--rotate-right' : aTripCtrl.currentOriginDestinationIndex === 1}"></span>
+            <span data-ng-class="{'ib-heading ib-heading--type-1 ib-heading--block u-mb' :aTripCtrl.redemption || $root.isLogged === aTripCtrl.LOGIN_ONB,
+            'ib-heading-icon__text ib-heading-icon--dark' : !aTripCtrl.redemption && $root.isLogged !== aTripCtrl.LOGIN_ONB}">{{'AVAILABILITY_TRIP_TITLE'|translate}}
+                {{aTripCtrl.originDestinationTitle |translate}} {{aTripCtrl.originDestinationIndex}}</span>
+        </h1>
+        <h2 data-ng-if="$root.isLogged === aTripCtrl.LOGIN_ONB && aTripCtrl.isChecked && !$root.isPointsOBFlow" class="ib-heading ib-heading--type-4">{{'AVAILABILITY_ON_BUSINESS_OFFER_GET_POINTS_BANNER'|translate}}</h2>
+        <div class="row u-mb" data-ng-if="aTripCtrl.redemption && !$root.isPointsOBFlow">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" ng-show="aTripCtrl.redemption && aTripCtrl.tripModel.provider !== 'AWS'">
+                <h2 class="ib-heading ib-heading--type-availability">{{'AVAILABILITY_REDEMPTION_DIRECT_FLIGHTS_TITLE'|translate}}</h2>
+            </div>
+            <div class="col-lg-3 col-md-12 hidden-sm hidden-xs" data-ng-class="{'col-lg-offset-9': aTripCtrl.tripModel.provider === 'AWS'}">
+                <a id="bbki-availability-trip-monthly-flights-link" class="ib-link ib-link--icon ib-link--monthly-calendar" href="javascript:void(0)" ng-click="aTripCtrl.openCalendarModal()" title="{{'AVAILABILITY_REDEMPTION_MENSUAL_FLIGHTS_ACCESIBILITY'|translate}}">
+                    <span class="ib-link__icon ib-link__icon--primary ib-link__icon--small icon-calendario"></span>
+                    <span class="ib-link__text">{{'AVAILABILITY_REDEMPTION_MENSUAL_FLIGHTS'|translate}}</span>
+                </a>
+            </div>
+        </div>
+        <h2 data-ng-if="aTripCtrl.relatedContent['SPECIAL_DISCOUNTS']" class="ib-heading ib-heading--subtitle">
+            {{aTripCtrl.relatedContent['SPECIAL_DISCOUNTS']}}
+        </h2>
+        <div data-ng-if="aTripCtrl.multiCity" class="ib-table-flight-cabins__header">
+            <h1 class="ib-table-flight-cabins__title hidden-xs">
+                {{'AVAILABILITY_MULTI_TRIP_TITLE_SLICE'|translate}} {{aTripCtrl.currentOriginDestinationIndex + 1}}
+                {{aTripCtrl.originDestinationIndex}} :
+                {{aTripCtrl.tripModel.originCity.description}} - {{aTripCtrl.tripModel.destinationCity.description}}
+            </h1>
+            <h1 class="ib-table-flight-cabins__title hidden-xl hidden-lg hidden-md hidden-sm">
+                {{'AVAILABILITY_MULTI_TRIP_TITLE_SLICE'|translate}} {{aTripCtrl.currentOriginDestinationIndex + 1}}
+                {{aTripCtrl.originDestinationIndex}} :
+                {{aTripCtrl.tripModel.originCity.code}} - {{aTripCtrl.tripModel.destinationCity.code}}
+            </h1>
+            <span class="ib-table-flight-cabins__subtitle">
+                {{aTripCtrl.tripModel.slices[0].departureDateParsed.day}}
+                {{(aTripCtrl.tripModel.slices[0].departureDateParsed.month
+                | translate | ShortenerFormatFilter:3:false:true)}}.{{aTripCtrl.tripModel.slices[0].departureDateParsed.year}}
+            </span>
+        </div>
+    </div>
+    <div data-ng-if="!aTripCtrl.redemption">
+        <ib-booking-trip-info id="bbki-availability-trip-info" trip-info-model="aTripCtrl.tripModel" current-origin-destination-index="aTripCtrl.currentOriginDestinationIndex"
+        animation-run="aTripCtrl.animationRun" currencies="::aTripCtrl.currencies" selected-slices-length="aTripCtrl.selectedSlicesLength"
+        show-adaptative-mobile-flow="aTripCtrl.showAdaptativeMobileFlow"></ib-booking-trip-info>
+    </div>
+    <div data-ng-if="aTripCtrl.redemption">
+        <ib-booking-trip-info id="bbki-availability-trip-info" trip-info-model="aTripCtrl.tripModel" current-origin-destination-index="aTripCtrl.currentOriginDestinationIndex"
+            animation-run="aTripCtrl.animationRun" currencies="::aTripCtrl.currencies" selected-slices-length="aTripCtrl.selectedSlicesLength" redemption="aTripCtrl.redemption"
+            template="ib-booking-redemption-trip-info-view.html" ></ib-booking-trip-info>
+    </div>
+</div>

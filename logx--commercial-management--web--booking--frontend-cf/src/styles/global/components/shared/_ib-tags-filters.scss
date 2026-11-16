@@ -1,0 +1,99 @@
+/* -------------------------------------------------------------
+    #TAGS FILTERS
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}tags-filters {
+
+    $speed-transition: 0.3s;
+
+    display: block;
+    text-align: right;
+
+    &__item {
+        display: inline-block;
+        width: auto;
+        margin-bottom: rem(16);
+        margin-left: rem(10);
+        font-size: rem(12);
+        text-align: left;
+        color: color(gray-30);
+        background: color(white);
+
+        &--link {
+            .#{$wefront__namespace}tags-filters__close {
+                padding-top: rem(6);
+                padding-bottom: rem(6);
+
+                &::before {
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+            }
+            .#{$wefront__namespace}tags-filters__txt {
+                display: inline-block;
+                padding: 0;
+                font-size: rem(12);
+                text-decoration: none;
+                color: color(gray-30);
+                vertical-align: middle;
+
+                &:hover,
+                &:focus,
+                &:active {
+                    text-decoration: none;
+                    color: color(gray-30);
+                }
+            }
+        }
+    }
+
+    &__txt {
+        display: inline-block;
+        max-width: rem(600);
+        padding: rem(7) 0 rem(7) rem(15);
+        vertical-align: middle;
+    }
+
+    &__close {
+        display: inline-block;
+        padding: rem(7);
+        border: 0;
+        font-size: 1.125rem;
+        background: transparent;
+        vertical-align: middle;
+    }
+
+    .animate-repeat {
+        -webkit-transition: $speed-transition linear all;
+        transition: $speed-transition linear all;
+    }
+
+    .animate-repeat.ng-move,
+    .animate-repeat.ng-enter,
+    .animate-repeat.ng-leave {
+        position: relative;
+        -webkit-transition: all $speed-transition;
+        -moz-transition: all $speed-transition;
+        -ms-transition: all $speed-transition;
+        -o-transition: all $speed-transition;
+        transition: all $speed-transition;
+    }
+
+    .animate-repeat.ng-leave.ng-leave-active,
+    .animate-repeat.ng-move,
+    .animate-repeat.ng-enter {
+        opacity: 0;
+    }
+
+    .animate-repeat.ng-leave,
+    .animate-repeat.ng-move.ng-move-active,
+    .animate-repeat.ng-enter.ng-enter-active {
+        opacity: 1;
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}tags-filters {
+        display: none;
+    }
+}

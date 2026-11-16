@@ -1,0 +1,176 @@
+<div *ngIf="voluntaryRefundNotAllowed">
+    <h3 class="ib-box-menu__title ib-box-menu__title--font-size-20 hidden-xl hidden-lg">{{'MMB_VOLUNTARY_REFUNDS_TITLE' | translate}}</h3>
+    <div class="ib-msg-alert ib-msg-alert--transparent ib-msg-alert__gdr--sized ib-msg-alert__gdr--unallow icon-informacion_2">
+        <p class="ib-msg-alert__text ib-msg-alert__text--title-large">{{'MMB_VOLUNTARY_REFUNDS_REFUND_NOT_AVAILABLE_TITLE' | translate}}</p>
+        <p class="ib-msg-alert__text--subtitle">{{ voluntaryRefundNotAvailableBody }}</p>
+    </div>
+</div>
+
+<div *ngIf="showErrorCalculateRefundService">
+    <h3 class="ib-box-menu__title ib-box-menu__title--font-size-20 hidden-xl hidden-lg">{{'MMB_VOLUNTARY_REFUNDS_TITLE' | translate}}</h3>
+    <div class="ib-msg-alert ib-msg-alert--transparent ib-msg-alert__gdr--sized ib-msg-alert__gdr--unallow icon-informacion_2">
+        <p class="ib-msg-alert__text ib-msg-alert__text--title-large">{{'MMB_VOLUNTARY_REFUNDS_ERROR_CALCULATE_REFUND_TITLE' | translate}}</p>
+        <p class="ib-msg-alert__text--subtitle">{{'MMB_VOLUNTARY_REFUNDS_ERROR_CALCULATE_REFUND_BODY' | translate}}</p>
+    </div>
+</div>
+
+<div *ngIf="isvoluntaryRefundSuccess">
+    <h3 class="ib-box-menu__title hidden-md hidden-sm hidden-xs" *ngIf="!dataModel.onlyRefundAirportTaxes">{{'MMB_VOLUNTARY_REFUNDS_GETTING_GENERAL_TITLE' | translate}}</h3>
+    <h3 class="ib-box-menu__title hidden-xl hidden-lg" *ngIf="!dataModel.onlyRefundAirportTaxes">{{'MMB_REFUNDS_MAIN_TITLE' | translate}}</h3>
+    <h3 class="ib-box-menu__title" *ngIf="dataModel.onlyRefundAirportTaxes">{{'MMB_VOLUNTARY_REFUNDS_GETTING_GENERAL_TITLE_ONLY_AIRPORT_TAXES' | translate}}</h3>
+    <p *ngIf="(refundBookingType === 'GETTING_BOOKING' || refundBookingType === 'MULTI_COIN_BOOKING' || refundBookingType === 'GETTING_QUALITY_BOOKING') && showFightsNotFlown && !dataModel.mixRefundNotRefundFare && !dataModel.onlyRefundAirportTaxes" class="ib-subtitle">{{'MMB_VOLUNTARY_REFUNDS_GETTING_GENERAL_BODY' | translate}} <span *ngIf="!dataModel.less24Hours">{{'MMB_VOLUNTARY_REFUNDS_GETTING_GENERAL_BODY_2' | translate}}</span></p>
+    <p *ngIf="(refundBookingType === 'GETTING_BOOKING' || refundBookingType === 'MULTI_COIN_BOOKING' || refundBookingType === 'GETTING_QUALITY_BOOKING') && showFightsNotFlown && dataModel.mixRefundNotRefundFare && !dataModel.onlyRefundAirportTaxes" class="ib-subtitle">{{'MMB_VOLUNTARY_REFUNDS_GETTING_GENERAL_BODY_MIX_REFUND_NOTREFUND_FARE' | translate}} {{'MMB_VOLUNTARY_REFUNDS_GETTING_GENERAL_BODY_2_MIX_REFUND_NOTREFUND_FARE' | translate}}</p>
+    <p *ngIf="(refundBookingType === 'GETTING_BOOKING' || refundBookingType === 'MULTI_COIN_BOOKING' || refundBookingType === 'GETTING_QUALITY_BOOKING') && showFightsNotFlown && dataModel.onlyRefundAirportTaxes" class="ib-subtitle">{{'MMB_VOLUNTARY_REFUNDS_GETTING_GENERAL_BODY_ONLY_AIRPORT_TAXES' | translate}} {{'MMB_VOLUNTARY_REFUNDS_GETTING_GENERAL_BODY_2_ONLY_AIRPORT_TAXES' | translate}}</p>
+    <p *ngIf="refundBookingType === 'GETTING_CASH_AVIOS_BOOKING'" class="ib-subtitle">{{'MMB_VOLUNTARY_REFUNDS_GETTING_CASH_AVIOS_GENERAL_BODY' | translate}}</p>
+    <p *ngIf="refundBookingType === 'EXEMPTION_AVIOS_BOOKING' || refundBookingType === 'EXEMPTION_AVIOS_MONEY_BOOKING' || refundBookingType === 'EXEMPTION_QUALITY_BOOKING'" class="ib-subtitle">{{'MMB_VOLUNTARY_REFUNDS_EXEMPTION_AVIOS_GENERAL_BODY' | translate}}</p>
+    <p *ngIf="refundBookingType === 'EXEMPTION_PAY_WIP'" class="ib-subtitle">{{'MMB_VOLUNTARY_REFUNDS_EXEMPTION_PAY_WIP_GENERAL_BODY' | translate}}</p>
+    <!-- <p *ngIf="refundBookingType === 'GETTING_BOOKING' && showFightsNotFlown && notFlownFlights.length === 1" class="ib-subtitle">Te reembolsaremos, en el mismo medio de pago con el que lo abonaste, el importe del billete y de los extras añadidos del vuelo que aún tienes pendiente:</p> -->
+    <div class="ib-flex ib-flex--align-center u-mt-xsmall ib-flex--flex-center-md ib-flex--flex-center-responsive">
+        <button data-ng-click="" class="ib-box-check__button--info ib-box-check__button--red icon-informacion_2" focusin>
+            <span class="hide-accessible">{{'MMB_VC_SEATS_TOOLTIP_MORE_INFO'|translate}}</span>
+        </button>
+        <a href="{{linkMoreInfo}}" target="_blank" class="ib-link ib-link--inline ib-link--underline u-pl-xxsmall" title="{{'MMB_VOLUNTARY_REFUNDS_MORE_INFO' | translate}}">{{'MMB_VOLUNTARY_REFUNDS_MORE_INFO' | translate}}</a>
+    </div>
+
+    <ul *ngIf="showFightsNotFlown" class="ib-info-flights-container">
+        <li *ngFor="let flight of notFlownFlights; index as idx" class="ib-info-flights-container__item">
+            <div class="ib-info-flights-container__route">
+                <span class="ib-info-flights-container__route--icon" [ngClass]="{'icon-avion_ida': flight.icon === 'MULTITRIP' || flight.icon === 'DEPARTURE', 'icon-avion_vuelta': flight.icon === 'ARRIVAL'}"></span>
+                <span class="ib-info-flights-container__route--text"><span class="hidden-sm hidden-xs">{{ flight.departureCity }} (</span>{{ flight.departureCityCode }}<span class="hidden-sm hidden-xs">)</span> - <span class="hidden-sm hidden-xs"> {{ flight.arrivalCity }} (</span>{{ flight.arrivalCityCode }}<span class="hidden-sm hidden-xs">)</span>: {{ flight.fareName }} {{ flight.refundableText }}</span>
+            </div>
+            <span class="ib-info-flights-container__date">{{ flight.departureDateTime }} - {{ flight.departureHourTime }}</span>
+        </li>
+    </ul>
+
+    <div class="ib-box ib-box--medium ib-box-link u-mt">
+        <h3 *ngIf="(refundBookingType !== 'GETTING_QUALITY_BOOKING' && refundBookingType !== 'EXEMPTION_QUALITY_BOOKING') || dataModel.penalty.cash === 0" class="ib-box-title">{{'MMB_VOLUNTARY_REFUNDS_GETTING_SPECIFIC_TITLE' | translate}}</h3>
+        <h3 *ngIf="(refundBookingType === 'GETTING_QUALITY_BOOKING' || refundBookingType === 'EXEMPTION_QUALITY_BOOKING') && dataModel.penalty.cash !== 0" class="ib-box-title">{{'MMB_VOLUNTARY_REFUNDS_QUALITY_SPECIFIC_TITLE' | translate}}</h3>
+        <p *ngIf="(refundBookingType === 'GETTING_QUALITY_BOOKING' || refundBookingType === 'EXEMPTION_QUALITY_BOOKING') && dataModel.penalty.cash !== 0" class="ib-box-subtitle u-mb">{{'MMB_VOLUNTARY_REFUNDS_QUALITY_SPECIFIC_BODY' | translate}}</p>
+        <div class="ib-box-prices" [ngClass]="{'ib-box-prices--long' : longCurrencyXlView, 'ib-box-prices--long-lg': longCurrencyLgView && !longCurrencyXlView}">
+            <div [ngClass]="{'ib-box-prices__column-4' : showNoRefundValue, 'ib-box-prices__column-3': !showNoRefundValue}">
+                <span class="ib-box-prices__title">{{'MMB_VOLUNTARY_REFUNDS_BOOKING_TOTAL_PRICE' | translate}}</span>
+                <span *ngIf="refundBookingType === 'GETTING_BOOKING' || refundBookingType === 'GETTING_QUALITY_BOOKING'" class="ib-box-prices__price">{{ dataModel.totalBookingPrice }}</span>
+                <span *ngIf="refundBookingType === 'GETTING_CASH_AVIOS_BOOKING'">1.313,35 € <span>+ 10.000 Avios</span></span>
+                <span *ngIf="refundBookingType === 'EXEMPTION_AVIOS_BOOKING' || refundBookingType === 'EXEMPTION_AVIOS_MONEY_BOOKING' || refundBookingType === 'EXEMPTION_QUALITY_BOOKING'" class="ib-box-prices__price ib-box-prices__price--avios">13.000 Avios<span>+ 802,00 €</span></span>
+                <span *ngIf="refundBookingType === 'MULTI_COIN_BOOKING'" class="ib-box-prices__price ib-box-prices__price--avios">1.190,04 € + 78,00 $</span>
+                <span *ngIf="refundBookingType === 'EXEMPTION_PAY_WIP'" class="ib-box-prices__price ib-box-prices__price--avios">13.000 Avios + 165,00 €</span>
+            </div>
+            <div [ngClass]="{'ib-box-prices__column-4' : showNoRefundValue, 'ib-box-prices__column-3': !showNoRefundValue}" *ngIf="showNoRefundValue">
+                <span class="ib-box-prices__title" [ngClass]="{'ib-box-prices__title--no-flex-grow': showNoRefundValue}">{{'MMB_VOLUNTARY_REFUNDS_BOX_YOUR_REFUND_DOES_NOT_REFUND' | translate}}</span>
+                <span *ngIf="refundBookingType === 'GETTING_BOOKING' || refundBookingType === 'GETTING_QUALITY_BOOKING'" class="ib-box-prices__price">-{{ dataModel.noRefundPrice }}</span>
+            </div>
+            <div [ngClass]="{'ib-box-prices__column-4' : showNoRefundValue, 'ib-box-prices__column-3': !showNoRefundValue}">
+                <span class="ib-box-prices__title" [ngClass]="{'ib-box-prices__title--font-size-15': showNoRefundValue, 'ib-box-prices__title--no-flex-grow': showNoRefundValue}">{{'MMB_VOLUNTARY_REFUNDS_BREAKDOWN_TOTAL_PENALTY' | translate}}</span>
+                <span *ngIf="refundBookingType === 'GETTING_BOOKING'" class="ib-box-prices__price">{{ dataModel.penalty.cash !== 0 ? '-' : '' }}{{ dataModel.penalty.formatPenalty }}</span>
+                <span *ngIf="refundBookingType === 'GETTING_CASH_AVIOS_BOOKING' || refundBookingType === 'EXEMPTION_AVIOS_BOOKING' || refundBookingType === 'EXEMPTION_AVIOS_MONEY_BOOKING' || refundBookingType === 'MULTI_COIN_BOOKING' || refundBookingType === 'EXEMPTION_PAY_WIP'" class="ib-box-prices__price ib-box-prices__price--avios">-165,00 €</span>
+                <span *ngIf="refundBookingType === 'GETTING_QUALITY_BOOKING'" class="ib-box-prices__price" [ngClass]="{'ib-box-prices__price--quality': dataModel.penalty.cash !== 0}">{{ dataModel.penalty.cash !== 0 ? '-' : '' }}{{ dataModel.penalty.formatPenalty }}</span>
+                <span *ngIf="refundBookingType === 'EXEMPTION_QUALITY_BOOKING'" class="ib-box-prices__price ib-box-prices__price--avios" [ngClass]="{'ib-box-prices__price--quality': dataModel.penalty.cash !== 0}">{{ dataModel.penalty.cash !== 0 ? '-' : '' }}{{ dataModel.penalty.formatPenalty }}</span>
+            </div>
+            <div [ngClass]="{'ib-box-prices__column-4' : showNoRefundValue, 'ib-box-prices__column-3': !showNoRefundValue}">
+                <span class="ib-box-prices__title ib-box-prices__title--bold" [ngClass]="{'ib-box-prices__title--min-content': showNoRefundValue}">{{'MMB_VOLUNTARY_REFUNDS_TOTAL_TO_REFUND' | translate}}</span>
+                <span *ngIf="refundBookingType === 'GETTING_BOOKING' || refundBookingType === 'GETTING_QUALITY_BOOKING'" class="ib-box-prices__price ib-box-prices__price--bold">{{ dataModel.totalRefund }}</span>
+                <span *ngIf="refundBookingType === 'GETTING_CASH_AVIOS_BOOKING'" class="ib-box-prices__price ib-box-prices__price--avios">1.148,35 € <span>+ 10.000 Avios</span></span>
+                <span *ngIf="refundBookingType === 'EXEMPTION_AVIOS_BOOKING' || refundBookingType === 'EXEMPTION_AVIOS_MONEY_BOOKING' || refundBookingType === 'EXEMPTION_QUALITY_BOOKING'" class="ib-box-prices__price ib-box-prices__price--avios">13.000 Avios<span>+ 967,00 €</span></span>
+                <span *ngIf="refundBookingType === 'MULTI_COIN_BOOKING'" class="ib-box-prices__price ib-box-prices__price--avios">1.025,04 € + 78,00 $</span>
+                <span *ngIf="refundBookingType === 'EXEMPTION_PAY_WIP'" class="ib-box-prices__price ib-box-prices__price--avios">13.000 Avios</span>
+                <span *ngIf="refundBookingType === 'EXEMPTION_PAY_WIP'" class="ib-box-prices__title ib-box-prices__title--bold-red">{{'MMB_VOLUNTARY_REFUNDS_AMOUNT_TO_BE_PAID' | translate}}</span>
+                <span *ngIf="refundBookingType === 'EXEMPTION_PAY_WIP'" class="ib-box-prices__price ib-box-prices__price--red">47,58 €</span>
+            </div>
+        </div>
+
+        <div class="ib-flex ib-flex--align-strech ib-flex--direction-column ib-flex--gap-xsmedium ib-flex--gap-small-lg ib-flex--gap-small-mobile u-mb-medium u-mb-xmedium-mobile">
+            <div class="ib-box-included">
+                <span class="ib-box-included__title">{{'MMB_VOLUNTARY_REFUNDS_BOX_YOUR_REFUND_INCLUDES' | translate}}</span>
+                <div class="ib-box-included__container">
+                    <div class="ib-box-included__item" *ngIf="allSlicesRefundable || partialSlicesRefundable">
+                        <span class="ib-box-included__item-text ib-box-included__item-icon ib-box-included__item-icon--color-red icon-vuelos">{{'MMB_VOLUNTARY_REFUNDS_BOX_YOUR_REFUND_INCLUDES_FLIGHTS' | translate}}</span>
+                        <div *ngIf="partialSlicesRefundable">
+                            <p class="ib-box-included__item-description ib-box-included__item-icon"  *ngFor="let flight of slicesRefundable">{{flight.departureCityCode}} - {{flight.arrivalCityCode}} {{flight.fareName}}</p>
+                        </div>
+                    </div>
+
+                    <div class="ib-box-included__item" *ngIf="allYQRefundable || partialYQRefundable">
+                        <span class="ib-box-included__item-text ib-box-included__item-icon ib-box-included__item-icon--color-red icon-reembolsos-old">{{'MMB_VOLUNTARY_REFUNDS_BOX_YOUR_REFUND_INCLUDES_OPERATOR_CHARGES_AMOUNT' | translate}}</span>
+                        <div *ngIf="partialYQRefundable">
+                            <p class="ib-box-included__item-description ib-box-included__item-icon" *ngFor="let flight of slicesRefundable">{{flight.departureCityCode}} - {{flight.arrivalCityCode}} {{flight.fareName}}</p>
+                        </div>
+                    </div>
+
+                    <!-- Complete ancillaries refund contracted -->
+                    <div class="ib-box-included__item" *ngFor="let refundItem of refundItemsContracted">
+                        <span class="ib-box-included__item-text ib-box-included__item-icon ib-box-included__item-icon--color-red" [ngClass]="{'icon-asiento-normal' : refundItem.serviceType === 'seat', 'icon-equipaje-bodega-old' : refundItem.serviceType === 'baggage', 'icon-priority-boarding' : refundItem.serviceType === 'priorityBoarding', 'icon-salidas': refundItem.serviceType === 'TAXES'}">{{refundItem.serviceText}}</span>
+                        <p class="ib-box-included__item-description ib-box-included__item-icon" *ngIf="refundItem.serviceType === 'YQ'" [innerHTML]=refundItem.serviceDescription></p>
+                    </div>
+                     <!-- End Complete ancillaries refund contracted -->
+                </div>
+            </div>
+
+            <div class="ib-box-included" *ngIf="notRefundItemsContracted.length > 0 || allSlicesNotRefundable || partialSlicesRefundable">
+                <span class="ib-box-included__title">{{'MMB_VOLUNTARY_REFUNDS_BOX_YOUR_REFUND_DOES_NOT_INCLUDE' | translate}}</span>
+                <div class="ib-box-included__container">
+                    <div class="ib-box-included__item" *ngIf="allSlicesNotRefundable || partialSlicesRefundable">
+                        <span class="ib-box-included__item-text ib-box-included__item-icon icon-vuelos">{{'MMB_VOLUNTARY_REFUNDS_BOX_YOUR_REFUND_INCLUDES_FLIGHTS' | translate}}</span>
+                        <div *ngIf="partialSlicesRefundable">
+                            <p class="ib-box-included__item-description ib-box-included__item-icon"  *ngFor="let flight of slicesNotRefundable">{{flight.departureCityCode}} - {{flight.arrivalCityCode}} {{flight.fareName}}</p>
+                        </div>
+                    </div>
+
+                    <div class="ib-box-included__item" *ngIf="allYQNotRefundable || partialYQRefundable">
+                        <span class="ib-box-included__item-text ib-box-included__item-icon icon-reembolsos-old">{{'MMB_VOLUNTARY_REFUNDS_BOX_YOUR_REFUND_INCLUDES_OPERATOR_CHARGES_AMOUNT' | translate}}</span>
+                        <div *ngIf="partialYQRefundable">
+                            <p class="ib-box-included__item-description ib-box-included__item-icon" *ngFor="let flight of slicesNotRefundable">{{flight.departureCityCode}} - {{flight.arrivalCityCode}} {{flight.fareName}}</p>
+                        </div>
+                    </div>
+
+                    <!-- Complete ancillaries not refund contracted  -->
+                    <div class="ib-box-included__item" *ngFor="let notRefundItem of notRefundItemsContracted">
+                        <span class="ib-box-included__item-text ib-box-included__item-icon" [ngClass]="{
+                            'icon-equipaje-bodega-old' : notRefundItem.serviceType === 'baggage',
+                            'icon-tarjetas' : notRefundItem.serviceType === 'creditCardFee',
+                            'icon-equipaje-mano-old' : notRefundItem.serviceType === 'specialBaggage',
+                            'icon-obj_equipaje_especial' : notRefundItem.serviceType === 'specialEquipment',
+                            'icon-asiento-normal' : notRefundItem.serviceType === 'seat',
+                            'icon-priority-boarding' : notRefundItem.serviceType === 'priorityBoarding'
+                            }">{{notRefundItem.serviceText}}</span>
+                        <p class="ib-box-included__item-description ib-box-included__item-icon" *ngIf="notRefundItem.serviceType !== 'seat' && notRefundItem.serviceType !== 'baggage' && notRefundItem.serviceType !== 'priorityBoarding'" [innerHTML]=notRefundItem.serviceDescription></p>
+                    </div>
+                     <!-- End Complete ancillaries not refund contracted -->
+                </div>
+            </div>
+        </div>
+
+        <div class="ib-content-buttons">
+            <div class="ib-content-buttons__content-left ib-content-buttons__content-left--mb-mobile">
+                <button
+                    title="{{'MMB_VOLUNTARY_REFUNDS_BUTTON' | translate}}"
+                    class="ib-button ib-button--w-medium"
+                    type="button"
+                    (click)="requestRefund()"
+                    >{{'MMB_VOLUNTARY_REFUNDS_BUTTON' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="ib-box ib-box--medium u-mt" *ngIf="notRefundOnlineItemsContracted.length > 0">
+        <div class="ib-box-included ib-box-included--not-included" >
+            <h3 class="ib-box-included__title">{{'MMB_VOLUNTARY_REFUNDS_BOX_EXTRAS_NOT_REFUND_ONLINE' | translate}}</h3>
+            <div class="ib-box-included__container">
+                <!-- Complete ancillaries not refund contracted  -->
+                <div class="ib-box-included__item" *ngFor="let notRefundOnlineItem of notRefundOnlineItemsContracted">
+                    <span class="ib-box-included__item-text ib-box-included__item-icon" [ngClass]="{
+                        'icon-c_comidas_nuevas' : notRefundOnlineItem.serviceType === 'preOrder',
+                        'icon-equipaje-bodega-old' : notRefundOnlineItem.serviceType === 'bob',
+                        'icon-seguros' : notRefundOnlineItem.serviceType === 'insurance' || notRefundOnlineItem.serviceType === 'InsuranceOrderItemWebResponse',
+                        'icon-llegadas' : notRefundOnlineItem.serviceType === 'globickV2' || notRefundOnlineItem.serviceType === 'TRANS' || notRefundOnlineItem.serviceType === 'EXP',
+                        'icon-c_bar_autoservicio' : notRefundOnlineItem.serviceType === 'wineClub',
+                        'icon-descuento' : notRefundOnlineItem.serviceType === 'stopover'
+                        }">{{notRefundOnlineItem.serviceText}}</span>
+                    <p class="ib-box-included__item-description ib-box-included__item-icon" [innerHTML]=notRefundOnlineItem.serviceDescription></p>
+                </div>
+                 <!-- End Complete ancillaries not refund contracted -->
+            </div>
+        </div>
+    </div>
+
+</div>

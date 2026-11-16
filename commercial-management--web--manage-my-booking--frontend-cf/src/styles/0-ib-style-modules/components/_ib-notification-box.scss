@@ -1,0 +1,61 @@
+/* -------------------------------------------------------------
+    #NOTIFICATION-BOX
+----------------------------------------------------------------- */
+.#{$wefront__namespace}notification-box {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    padding: rem(8) rem(12);
+    background-color: color(gray-50);
+
+    &__text {
+        position: relative;
+        font-family: $font-normal;
+        font-size: rem(13);
+        font-weight: bold;
+        line-height: rem(19);
+        color: color(gray-15);
+    }
+
+    [class*="icon"] {
+        margin-right: rem(4);
+        font-size: rem(19);
+    }
+
+    &--error {
+        background-color: color(red-50);
+
+        [class*="icon"] {
+            &::before {
+                color: color(white);
+            }
+        }
+        .#{$wefront__namespace}notification-box {
+            &__text {
+                color: color(white);
+            }
+        }
+    }
+
+    &--success {
+        [class*="icon"] {
+            &::before {
+                color: color(green-10);
+            }
+        }
+    }
+}
+// mixin
+
+// Responsive
+
+@include media-query('xs') {
+    .#{$wefront__namespace}notification-box {
+        justify-content: center;
+
+        &__text {
+            text-align: center;
+        }
+    }
+}

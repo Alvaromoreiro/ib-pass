@@ -1,0 +1,160 @@
+<div class="container">
+    <h2 class="title title-md">{{'REGISTER_FORM_TITLE'|translate}}</h2>
+    <div class="box">
+        <div class="container-title">
+            <h2 class="title">{{'REGISTER_FORM_TITLE'|translate}}</h2>
+            <div class="container-subtitle">
+                <p class="subtitle">{{'REGISTER_FORM_SUBTITLE'|translate}}</p>
+                <ul class="subtitle-items">
+                    <li *ngFor="let item of listItemTitles" class="subtitle subtitle-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path
+                                d="M15 4.00503L13.9201 2.96387L6.78692 8.0583L2.23002 5.03651L1 6.25685L4.99516 12.1164C5.05327 12.1939 5.11622 12.2665 5.18886 12.3343C6.10412 13.2447 7.66828 13.2883 8.49637 12.3537L15 4.00503Z"
+                                fill="#D7192D" />
+                        </svg>
+                        {{item | translate}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <form class="form" name="registerForm" [formGroup]="registerForm" autocomplete="none">
+            <section>
+                <fieldset>
+                    <legend class="u-hide-accessible">{{'SHORT_REGISTER_WANT' | translate}}</legend>
+                    <div class="password-container">
+                        <div class="input-container" [ngClass]="{'input--error': submitState && registerForm.controls.password.invalid}">
+                            <input class="input-text" type="password" id="register_module_password"
+                                formControlName="password" placeholder=" " minlength="8" maxlength="20"
+                                (focus)="showPassRequirements = true" autocomplete="new-password" ibBookingPasswordValidator>
+                            <label class="input-label"
+                                for="register_module_password">{{'LOGIN_FORM_PASSWORD'|translate}}</label>
+                            <button class="eyeIcon" (click)="toogleShowPass($event)">
+                                <svg *ngIf="!showPass" width="16" height="16" viewBox="0 0 16 16"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M15.7963 6.54864L15.4605 5.9915C14.5914 4.8796 13.4862 3.9745 12.2249 3.3415C10.9143 2.6863 9.46875 2.34631 8.00351 2.34864H7.86066C6.72261 2.36229 5.59678 2.58504 4.53928 3.00579L3.76072 3.34864C2.50947 3.98477 1.41244 4.88678 0.546478 5.9915C-0.182159 6.91508 -0.182159 8.2179 0.546478 9.14149C1.41944 10.2478 2.5238 11.1498 3.78215 11.7843C5.09292 12.439 6.53833 12.779 8.00351 12.7772H8.15351C9.24685 12.764 10.3296 12.561 11.3535 12.1772C12.0677 11.8843 12.1606 11.8272 12.2035 11.8058C13.4603 11.1689 14.5623 10.2644 15.432 9.15578C16.0257 8.42078 16.1658 7.41824 15.7963 6.54864ZM5.14641 7.56292C5.14641 9.14087 6.42558 10.4201 8.00351 10.4201C8.76126 10.4201 9.48798 10.119 10.0238 9.58322C10.5596 9.0474 10.8606 8.32068 10.8606 7.56292C10.8606 5.98497 9.58145 4.70578 8.00351 4.70578C6.42558 4.70578 5.14641 5.98497 5.14641 7.56292ZM1.78217 6.95578C1.50328 7.3125 1.50328 7.81335 1.78217 8.17006C2.50561 9.11242 3.43052 9.88116 4.48928 10.4201C4.97424 10.6485 5.48175 10.8257 6.00354 10.9486C4.80375 10.2446 4.06676 8.9576 4.06676 7.56649C4.06676 6.17538 4.80375 4.88839 6.00354 4.18436C5.71069 4.26293 5.41784 4.35578 5.13213 4.46293C5.13213 4.46293 4.56071 4.70578 4.48928 4.74864C3.43445 5.27457 2.50977 6.02848 1.78217 6.95578ZM11.5177 10.3772C12.5743 9.85392 13.4995 9.09957 14.2248 8.17006C14.5037 7.81335 14.5037 7.3125 14.2248 6.95578C13.4995 6.02627 12.5743 5.27192 11.5177 4.74864C11.0312 4.50158 10.5185 4.3099 9.9892 4.17721C11.1924 4.88036 11.9321 6.16929 11.9321 7.56292C11.9321 8.95656 11.1924 10.2455 9.9892 10.9486C10.2538 10.8851 10.5139 10.8039 10.7678 10.7058C10.7678 10.7058 11.4106 10.4343 11.5177 10.3772Z" />
+                                    <path
+                                        d="M8.00351 6.27007C7.2895 6.27007 6.71067 6.8489 6.71067 7.56292C6.71067 8.27694 7.2895 8.85578 8.00351 8.85578C8.71753 8.85578 9.29635 8.27694 9.29635 7.56292C9.29635 7.22003 9.16014 6.89119 8.91769 6.64873C8.67523 6.40628 8.34639 6.27007 8.00351 6.27007Z" />
+                                </svg>
+                                <svg *ngIf="showPass" width="16" height="16" viewBox="0 0 16 16"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M12.9288 11.3324C13.8989 10.7477 14.7552 9.9949 15.4567 9.10998C16.0324 8.38086 16.1611 7.39853 15.7923 6.54785L15.4567 5.99579C14.5877 4.89404 13.4829 3.9972 12.2218 3.36997C10.9115 2.72074 9.46637 2.38386 8.0015 2.38617H7.85868C6.72092 2.39969 5.59537 2.62041 4.53814 3.03732L1.78887 0.291171C1.48125 -0.0137236 0.982497 -0.0137236 0.674878 0.291171C0.367258 0.596065 0.367258 1.0904 0.674878 1.39529L3.07424 3.7734C2.10545 4.35994 1.24951 5.11244 0.546341 5.99579C-0.182114 6.91096 -0.182114 8.20189 0.546341 9.11706C1.41908 10.2133 2.52316 11.1071 3.78119 11.7358C5.09164 12.3845 6.53669 12.7214 8.0015 12.7196H8.15146C9.24453 12.7065 10.327 12.5053 11.3506 12.1251L11.422 12.0897L14.1856 14.8358C14.4943 15.1381 14.9908 15.1381 15.2996 14.8358C15.4478 14.6897 15.5312 14.491 15.5312 14.2838C15.5312 14.0765 15.4478 13.8778 15.2996 13.7317L12.9288 11.3324ZM14.2213 8.15449C14.5001 7.80103 14.5001 7.30475 14.2213 6.95128C13.4961 6.03025 12.5711 5.28278 11.5148 4.76427C11.0284 4.51947 10.5158 4.32954 9.98668 4.19806C10.9174 4.73677 11.5833 5.63149 11.8278 6.67187C12.0723 7.71226 11.8739 8.80653 11.2792 9.69743L11.7791 10.1999C12.7239 9.68817 13.5546 8.99242 14.2213 8.15449ZM5.5548 8.98583C6.06461 9.84685 6.99426 10.3781 8.0015 10.384C8.48367 10.3832 8.9578 10.2614 9.3797 10.0301L8.16574 8.83395H8.0015C7.29325 8.82619 6.72322 8.25491 6.72327 7.55289C6.71942 7.49869 6.71942 7.44429 6.72327 7.3901L5.51645 6.18689C5.03043 7.06132 5.045 8.12481 5.5548 8.98583ZM9.27973 7.55289C9.28327 7.60945 9.28327 7.66618 9.27973 7.72275L10.4866 8.91888C11.0765 7.81978 10.8727 6.46771 9.98454 5.58741C9.09637 4.7071 7.73222 4.50517 6.62329 5.08985L7.83012 6.27182H8.0015C8.70975 6.27958 9.27977 6.85087 9.27973 7.55289ZM1.78173 6.95128C1.5029 7.30475 1.5029 7.80103 1.78173 8.15449C2.50497 9.08825 3.42966 9.84998 4.48815 10.384C4.97755 10.6113 5.48977 10.7868 6.01631 10.9077C5.08562 10.369 4.41974 9.47428 4.17522 8.4339C3.9307 7.39352 4.12911 6.29925 4.7238 5.40834L4.22393 4.91291C3.27766 5.41949 2.44642 6.11328 1.78173 6.95128Z" />
+                                </svg>
+                            </button>
+                            <div class="input-info" *ngIf="showPassRequirements">
+                                <p class="input-info__text">{{'SHORT_REGISTER_REQUIREMENTS_NEW'|translate}}</p>
+                            </div>
+                            <div *ngIf="submitState && registerForm.controls.password.invalid"
+                                class="ib-alert ib-alert--error">
+                                <span *ngIf="registerForm.controls.password.errors?.required">
+                                    {{'GENERAL_INPUT_REQUIRED_ERROR' | translate }}</span>
+                                <span *ngIf="registerForm.controls.password.errors?.minlength">
+                                    {{'REDUCED_REGISTER_BETWEEN_8_AND_20' | translate }}</span>
+                                <span *ngIf="registerForm.controls.password.errors?.pattern">
+                                    {{'SHORT_REGISTER_REQUIREMENTS_NEW' | translate }}</span>
+                            </div>
+                        </div>
+                        <div class="check-container" *ngIf="showPassRequirements">
+                            <div class="check-container-second" [ngClass]="{'check-input--error': submitState && registerForm.controls.check_register.invalid}">
+                                <input class="check-input" type="checkbox" id="register_module_check"
+                                    formControlName="check_register">
+                                <label class="check-label" for="register_module_check">
+                                    <span class="check-text">
+                                        {{'TERMS_CONDITIONS_CHECK_TEXT_1'|translate}}
+                                        <a class="check-text--link" href="{{userTermsLink}}" target="_blank"
+                                            title="{{'REGISTER_REDUCED_CONDITIONS_CHECK_TEXT_2_LINK'|translate}}">{{'REGISTER_REDUCED_CONDITIONS_CHECK_TEXT_2_LINK'|translate}}</a>
+                                        {{'TERMS_CONDITIONS_CHECK_TEXT_4'|translate}}
+                                        <a class="check-text--link" href="{{privacyLink}}" target="_blank"
+                                            title="{{'PRIVACY_POLICY_TITLE_TEXT'|translate}}">{{'PRIVACY_POLICY_TITLE_TEXT'|translate}}</a>
+                                        {{'REGISTER_REDUCED_CONDITIONS_CHECK_TEXT_5'|translate}}
+                                    </span>
+                                </label>
+                            </div>
+                            <div *ngIf="submitState && registerForm.controls.check_register.invalid"
+                                class="ib-alert ib-alert--error">
+                                <span *ngIf="registerForm.controls.check_register.errors?.required">{{
+                                    'GENERAL_INPUT_REQUIRED_ERROR' | translate }}</span>
+                            </div>
+
+                            <div class="check-container-second">
+                                <input class="check-input" type="checkbox" id="register_module_marketing_check"
+                                    formControlName="marketing_check">
+                                <label class="check-label" for="register_module_marketing_check">
+                                    <span class="check-text">{{'REGISTER_FORM_MARKETING_CHECK_TEXT'|translate}}</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="collapsable-container">
+                            <div class="collapsable__closed" [ngClass]="{collapsable__open: openCollapsable}">
+                                <div class="input-container" [ngClass]="{'input--error': submitState && registerForm.controls.name.invalid}">
+                                    <input class="input-text" type="text" id="register_module_name"
+                                        formControlName="name" placeholder=" " maxlength="{{MAX_LENGTH_NAME}}"
+                                        minlength="2" [ibBookingValidatorCleaner]="NAME_SURNAME_CLEANER"
+                                        (blur)="onRegisterNameBlur('name')">
+                                    <label class="input-label"
+                                        for="register_module_name">{{'IBAIRP_PASSENGER_FORM_DATA_NAME'|translate}}
+                                    </label>
+                                    <div *ngIf="submitState && registerForm.controls.name.invalid"
+                                        class="ib-alert ib-alert--error">
+                                        <span *ngIf="registerForm.controls.name.errors?.required">
+                                            {{'GENERAL_INPUT_REQUIRED_ERROR' | translate }}</span>
+                                        <span *ngIf="registerForm.controls.name.errors?.minlength">
+                                            {{'GENERAL_NAME_MIN_LENGTH_ERROR' | translate }}</span>
+                                        <span *ngIf="registerForm.controls.name.errors?.pattern">
+                                            {{'GENERAL_INPUT_PATTERN_ERROR' | translate }}</span>
+                                    </div>
+                                </div>
+                                <div class="input-container" [ngClass]="{'input--error': submitState && registerForm.controls.lastName.invalid}">
+                                    <input class="input-text" type="text" id="register_module_surname"
+                                        formControlName="lastName" placeholder=" " minlength="2"
+                                        maxlength="{{MAX_LENGTH_NAME}}" [ibBookingValidatorCleaner]="NAME_SURNAME_CLEANER"
+                                        (blur)="onRegisterNameBlur('lastName')">
+                                    <label class="input-label"
+                                        for="register_module_surname">{{'IBAIRP_PASSENGER_FORM_DATA_SURNAME'
+                                        |translate}}
+                                    </label>
+                                    <div *ngIf="submitState && registerForm.controls.lastName.invalid"
+                                        class="ib-alert ib-alert--error">
+                                        <span *ngIf="registerForm.controls.lastName.errors?.required">
+                                            {{'GENERAL_INPUT_REQUIRED_ERROR' | translate }}</span>
+                                        <span *ngIf="registerForm.controls.lastName.errors?.minlength">
+                                            {{'GENERAL_NAME_MIN_LENGTH_ERROR' | translate }}</span>
+                                        <span *ngIf="registerForm.controls.lastName.errors?.pattern">
+                                            {{'GENERAL_INPUT_PATTERN_ERROR' | translate }}</span>
+                                    </div>
+                                </div>
+                                <div class="input-container" [ngClass]="{'input--error': submitState && registerForm.controls.email.invalid}">
+                                    <input class="input-text" type="email" id="register_module_email"
+                                        formControlName="email" placeholder=" " maxlength="{{MAX_LENGTH_EMAIL}}"
+                                        [ibBookingValidatorCleaner]="EMAIL_CLEANER">
+                                    <label class="input-label"
+                                        for="register_module_email">{{'IBAIRP_CONTACT_FORM_EMAIL'| translate}}
+                                    </label>
+                                    <div *ngIf="submitState && registerForm.controls.email.invalid"
+                                        class="ib-alert ib-alert--error">
+                                        <span *ngIf="registerForm.controls.email.errors?.required">
+                                            {{'GENERAL_INPUT_REQUIRED_ERROR' | translate }}</span>
+                                        <span *ngIf="registerForm.controls.email.errors?.pattern">
+                                            {{'GENERAL_EMAIL_PATTERN_ERROR' | translate }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="collapsable-button" (click)="toogleVisibility($event)">
+                                <p>{{openCollapsable ? ('REGISTER_FORM_DROPDOWN_CLOSE' | translate) :('REGISTER_FORM_DROPDOWN_OPEN' | translate)}}</p>
+                                <svg class="collapsable-arrow"
+                                    [ngClass]="{'collapsable-arrow--rotate': openCollapsable}"
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                                    fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M8 9.65715L3.04597 4.58727C2.93227 4.47091 2.74793 4.47091 2.63427 4.58727L2.08528 5.14905C2.03067 5.2049 2 5.2807 2 5.35971C2 5.43872 2.03067 5.51451 2.08528 5.57037L7.79415 11.4127C7.90785 11.5291 8.09219 11.5291 8.20585 11.4127L13.9147 5.57041C13.9693 5.51455 14 5.43876 14 5.35975C14 5.28074 13.9693 5.20494 13.9147 5.14909L13.3657 4.5873C13.252 4.47095 13.0677 4.47095 12.954 4.5873L8 9.65715Z"
+                                        fill="#D7192D" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </section>
+        </form>
+    </div>
+</div>

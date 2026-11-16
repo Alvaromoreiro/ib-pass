@@ -1,0 +1,374 @@
+<form action="#" method="post" ng-if="availabilityCtrl.showCalendar">
+    <ib-ui-box-information ng-if="availabilityCtrl.notIberiaSegmentWarn"
+        title="'MMB_FLEXIBILIZATION_CONFIRMATION_INFO_NEW_ORDER' | translate"
+        content="'Tu nueva reserva no mantendra los servicios extra que hayas contratado en tu anterior reserva: equipaje, tipo de asiento, embarque prioritario, etc. Por favor, contacta con la aerolinea de tu reserva original para volver a contratarlos en tu nuevo vuelo, o para gestionar la devolucion.'"
+        icon="'icon-informacion_2'"></ib-ui-box-information>
+
+    <ib-ui-box-information ng-if="availabilityCtrl.model.flowType === 'VOLUNTARY_CHANGE'"
+        title-text="availabilityCtrl.warningVoucher.titleText" icon="availabilityCtrl.warningVoucher.icon"
+        service-text="availabilityCtrl.serviceMsg">
+    </ib-ui-box-information>
+
+    <ib-ui-box-information ng-if="availabilityCtrl.flexPack && availabilityCtrl.isShowLikToRubiQ == false"
+        title="'ANCILLARIES_FLEXIBILITY_WHEN_FLIGHT_CHANGE_NOT_REFOUND' | translate"
+        icon="'icon-informacion_2'"></ib-ui-box-information>
+
+    <!-- Your outbound flights -->
+    <div ng-if="!availabilityCtrl.modeFlightReturn" class="ib-table-flight-cabins">
+        <div class="ib-table-flight-cabins__selected" data-flight-selected-container="outbound">
+            <div class="ib-heading-flight animate-show"
+                ng-show="availabilityCtrl.stateFlightEndAnimation || availabilityCtrl.outboundFlightSelected"
+                data-flight-heading>
+                <div class="ib-heading-flight__container">
+                    <span class="ib-heading-flight__title">{{availabilityCtrl.titleOutwardOrigin}} -
+                        {{availabilityCtrl.titleOutwardDestiny}}</span>
+                    <span class="ib-heading-flight__date">{{availabilityCtrl.dateOutbound.day}}
+                        {{availabilityCtrl.dateOutbound.month | translate | ShortenerFormatFilter:3:true}}. <span
+                            class="hidden-sm hidden-xs">{{availabilityCtrl.dateOutbound.year}}</span></span>
+                    <button class="ib-heading-flight__close"
+                        ng-click="availabilityCtrl.removeStateFlight(availabilityCtrl.typeFlight[0])"
+                        data-flight-selected-close="outbound" type="button">
+                        <span
+                            class="ib-heading-flight__close-text ib-heading-flight__close-text--no-decoration">{{'MMB_VC_SLICE_DETAILS_NEW_BACK_BUTTON'|
+                            translate}}</span>
+                        <span class="ib-heading-flight__close-icon icon-cerrar"></span>
+                    </button>
+                </div>
+            </div>
+            <div data-flight-selected-wrapper>
+                <div class="animate-show"
+                    ng-show="availabilityCtrl.stateFlight || availabilityCtrl.stateFlightEndAnimation || availabilityCtrl.outboundFlightSelected"
+                    data-flight-selected="outbound">
+                    <article class="ib-table-flight-cabins__article ib-table-flight-cabins__article--collapse "
+                        ng-class="{'ib-table-flight-cabins__article--collpase': $index != availabilityCtrl.selectedItem}"
+                        ng-controller="ibCollapseController as collapse">
+                        <a href="#" title="Vuelo Iberia"
+                            class="ib-table-flight-cabins__article-item ib-table-flight-cabins__article-item--center"
+                            ng-click="collapse.clickCollapse($event,true)" data-type="detail" data-flight-button-detail>
+                            <ib-Mmb-flights-info
+                                model="availabilityCtrl.outboundFlightSelectedInfo.info"></ib-Mmb-flights-info>
+                        </a>
+                        <div uib-collapse="!collapse.isCollapsed">
+                            <div class="ib-detail-flight ib-detail-flight--cabins ib-detail-flight--cabins-mobile">
+                                <div class="ib-table-flight-cabins__flight-selected-detail">
+                                    <div
+                                        ng-repeat="(index, fligthsTravel) in availabilityCtrl.outboundFlightSelectedInfo.segments">
+                                        <ib-Mmb-flights-details model="fligthsTravel"
+                                            index="index"></ib-Mmb-flights-details>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="ib-detail-flight ib-detail-flight--cabins animate-show"
+                                data-flight-option-show='detail' ng-show="availabilityCtrl.showDetail"></div>
+                            <ib-mmb-list-fare-item model="availabilityCtrl.outboundFlightSelectedInfo.cabins"
+                                type-flight="availabilityCtrl.typeFlight[0]"
+                                index="availabilityCtrl.sliceSelectedOutbound"
+                                on-open="availabilityCtrl.open(sliceIndex,cabinIndex,typeFlight)"
+                                cabin-selected="availabilityCtrl.cabinSelectedIndexOutbound"
+                                unified-offer-type="availabilityCtrl.unifiedOfferType"></ib-mmb-list-fare-item>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <div class="animate-show" ng-hide="availabilityCtrl.stateFlight || availabilityCtrl.outboundFlightSelected">
+            <!-- Title -->
+            <div class="u-mt-small u-mb"
+                ng-if="!(availabilityCtrl.sisterCitiesOptionChecked && availabilityCtrl.newSisterCities)">
+                <h1 class="ib-heading ib-heading--type-1">{{availabilityCtrl.titleOutwardOrigin}} -
+                    {{availabilityCtrl.titleOutwardDestiny}}</h1>
+            </div>
+            <div class="u-mt-small u-mb"
+                ng-if="(availabilityCtrl.sisterCitiesOptionChecked && availabilityCtrl.newSisterCities)">
+                <h1 class="ib-heading ib-heading--type-1">{{availabilityCtrl.sisterInfo[0].origin}} -
+                    {{availabilityCtrl.sisterInfo[0].destination}}</h1>
+            </div>
+            <div ng-if="(availabilityCtrl.sisterCitiesOptionChecked && availabilityCtrl.newSisterCities)"
+                class="ib-layout__line-spacing">
+                <a href="javascript:void(0)" class="ib-box-cities__link icon-senalizacion_mapas"
+                    ng-click="availabilityCtrl.openSisterCity(0)">
+                    {{'MMB_SISTER_CHECK_SELECTION' | translate}}
+                </a>
+            </div>
+            <!-- Carousel -->
+            <!-- <div class="ib-fc-calendar-slides-loading"></div> -->
+            <div class="ib-layout__line-spacing">
+                <!-- Change 0 on flights for actual index of current flight modification -->
+                <ib-Mmb-calendar-ribbons calendar-data="availabilityCtrl.flights[0].calendarData"
+                    index="availabilityCtrl.flights[0].index"
+                    selected-carousel="availabilityCtrl.flights[0].initialSlideIndex" id="'OD1'"></ib-Mmb-calendar-ribbons>
+            </div>
+
+            <!-- Filters -->
+
+            <!-- Change 0 on selectedSlide for actual index of current flight modification -->
+            <div class="ib-fc-calendar-slides-loading">
+                <!-- <div ng-if="availabilityCtrl.selectedSlide[0].date.state === 'AVAILABLE'"> -->
+                <div ng-if="availabilityCtrl.offersAvailableOutbound">
+                    <ib-Mmb-flights-filter config-filter="availabilityCtrl.modelfilterOutBound"
+                        type-flight="availabilityCtrl.typeFlight[0]"></ib-Mmb-flights-filter>
+                    <div class="ib-table-flight-cabins" ng-if="availabilityCtrl.model">
+                        <div class="ib-table-flight-cabins__selected"
+                            ng-hide="availabilityCtrl.selectedItem != -1 && $index != availabilityCtrl.selectedItem">
+                            <!-- Your outward flights -->
+                            <!-- <div class="ib-heading-flight animate-show" ng-show="availabilityCtrl.selectedItem != -1" data-flight-heading>
+                                <div class="ib-heading-flight__container">
+                                    <span class="ib-heading-flight__title">{{availabilityCtrl.titleOutwardOrigin}} - {{availabilityCtrl.titleOutwardDestiny}}</span>
+                                    <span class="ib-heading-flight__date">{{availabilityCtrl.dateOutbound.day}} {{availabilityCtrl.dateOutbound.month | translate | ShortenerFormatFilter:3:true}}.  <span class="hidden-sm hidden-xs">{{availabilityCtrl.dateOutbound.year}}</span></span>
+                                    <button class="ib-heading-flight__close" ng-click="availabilityCtrl.selectedItem=-1" data-flight-selected-close="outbound" type="button">
+                                        <span class="ib-heading-flight__close-text ib-heading-flight__close-text--no-decoration">{{'MMB_VC_SLICE_DETAILS_NEW_BACK_BUTTON'| translate}}</span>
+                                        <span class="ib-heading-flight__close-icon icon-cerrar"></span>
+                                    </button>
+                                    <button class="ib-dropdown-select__caret ib-dropdown-select__caret--down" type="button">Filtrar</button>
+                                    <input type="text" class="ib-dropdown-select__input u-hide-accessible" ng-model="select.selectedListFlightFilter" readonly tabindex="-1" />
+                                    <ul class="ib-dropdown-select__list" uib-dropdown-menu role="menu" aria-labelledby="fare">
+                                        <li class="ib-dropdown-select__list-item" ng-repeat="item in select.listFlightFilter">
+                                            <a href="#" title="Click para {{item.name}}" ng-click="select.clickListFlightFilter(item,$event)">{{item.name}}</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div> -->
+                            <article ng-repeat="flight in availabilityCtrl.slices.flightsOutward"
+                                ng-if="flight.visibility"
+                                class="ib-table-flight-cabins__article ib-table-flight-cabins__article--collapse "
+                                ng-class="{'ib-table-flight-cabins__article--collpase': $index != availabilityCtrl.selectedItem}"
+                                ng-controller="ibCollapseController as collapse">
+                                <a href="#" title="Vuelo Iberia"
+                                    class="ib-table-flight-cabins__article-item ib-table-flight-cabins__article-item--center"
+                                    ng-click="collapse.clickCollapse($event,true)" data-type="detail"
+                                    data-flight-button-detail>
+                                    <ib-Mmb-flights-info model="flight.info"
+                                        statuscollapse="collapse.isCollapsed"></ib-Mmb-flights-info>
+                                </a>
+                                <div uib-collapse="!collapse.isCollapsed">
+                                    <div
+                                        class="ib-detail-flight ib-detail-flight--cabins ib-detail-flight--cabins-mobile">
+                                        <div class="ib-table-flight-cabins__flight-selected-detail">
+                                            <div ng-repeat="(index, fligthsTravel) in flight.segments">
+                                                <ib-Mmb-flights-details model="fligthsTravel" index="index"
+                                                    last="(index === flight.segments.length-1) ? true : false"></ib-Mmb-flights-details>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ib-table-flight-cabins__article-item">
+                                    <div class="ib-detail-flight ib-detail-flight--cabins animate-show"
+                                        data-flight-option-show='detail' ng-show="availabilityCtrl.showDetail"></div>
+                                    <ib-mmb-list-fare-item model="flight.cabins"
+                                        type-flight="availabilityCtrl.typeFlight[0]" index="$index"
+                                        on-open="availabilityCtrl.open(sliceIndex, cabinIndex, typeFlight)"
+                                        cabin-selected="availabilityCtrl.cabinSelectedIndexOutbound"
+                                        unified-offer-type="availabilityCtrl.unifiedOfferType">
+                                    </ib-mmb-list-fare-item>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="ib-msg-alert ib-msg-alert--color-normal ib-msg-alert__gdr--left icon-informacion_2 u-position-relative"
+                    filter-error ng-if="!availabilityCtrl.offersAvailableOutbound">
+                    <p class="ib-msg-alert__text ib-msg-alert__text--title-large">
+                        {{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_TITLE' | translate}}</p>
+                    <p class="ib-msg-alert__text--subtitle">{{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_BODY' |
+                        translate}}.</p>
+                </div>
+                <div ng-if="availabilityCtrl.showLoading" class="ib-overlay-fly" ib-calendar-slides-loading>
+                    <div class="ib-overlay-fly__container">
+                        <div class="ib-overlay-fly__icon">
+                            <div class="circle"></div>
+                            <div class="circle"></div>
+                        </div>
+                        <span class="ib-overlay-fly__text">{{'MMB_VC_AVAILABILITY_SLICK_LOADING'|translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Change 0 on selectedSlide for actual index of current flight modification -->
+            <!-- <div class="ib-msg-alert ib-msg-alert--color-normal ib-msg-alert__gdr--left icon-informacion_2" ng-if="availabilityCtrl.selectedSlide[0].date.state === 'NOT_AVAILABLE'">
+                <p class="ib-msg-alert__text ib-msg-alert__text--title-large">{{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_TITLE' | translate}}</p>
+                <p class="ib-msg-alert__text--subtitle">{{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_BODY' | translate}}.</p>
+            </div> -->
+        </div>
+    </div>
+    <!-- Your return flights -->
+    <div ng-if="availabilityCtrl.offertOutboundSelected || availabilityCtrl.modeFlightReturn"
+        class="ib-table-flight-cabins">
+        <div class="ib-table-flight-cabins__selected" data-flight-selected-container="return">
+            <div class="ib-heading-flight animate-show"
+                ng-show="availabilityCtrl.stateFlightEndAnimation || availabilityCtrl.returnFlightSelected"
+                data-flight-heading>
+                <div class="ib-heading-flight__container">
+                    <span class="ib-heading-flight__title">{{availabilityCtrl.titleReturnOrigin}} -
+                        {{availabilityCtrl.titleReturnDestiny}}</span>
+                    <span class="ib-heading-flight__date">{{availabilityCtrl.dateReturn.day}}
+                        {{availabilityCtrl.dateReturn.month | translate | ShortenerFormatFilter:3:true}}. <span
+                            class="hidden-sm hidden-xs">{{availabilityCtrl.dateReturn.year}}</span></span>
+                    <button class="ib-heading-flight__close"
+                        ng-click="availabilityCtrl.removeStateFlight(availabilityCtrl.typeFlight[1])"
+                        data-flight-selected-close="return" type="button">
+                        <span
+                            class="ib-heading-flight__close-text ib-heading-flight__close-text--no-decoration">{{'MMB_VC_SLICE_DETAILS_NEW_BACK_BUTTON'|
+                            translate}}</span>
+                        <span class="ib-heading-flight__close-icon icon-cerrar"></span>
+                    </button>
+                </div>
+            </div>
+            <div data-flight-selected-wrapper>
+                <div class="animate-show"
+                    ng-show="availabilityCtrl.stateFlight || availabilityCtrl.stateFlightEndAnimation || availabilityCtrl.returnFlightSelected"
+                    data-flight-selected="return">
+                    <article class="ib-table-flight-cabins__article ib-table-flight-cabins__article--collapse "
+                        ng-class="{'ib-table-flight-cabins__article--collpase': $index != availabilityCtrl.selectedItem}"
+                        ng-controller="ibCollapseController as collapse">
+                        <a href="#" title="Vuelo Iberia"
+                            class="ib-table-flight-cabins__article-item ib-table-flight-cabins__article-item--center"
+                            ng-click="collapse.clickCollapse($event,true)" data-type="detail" data-flight-button-detail>
+                            <ib-Mmb-flights-info model="availabilityCtrl.returnFlightSelectedInfo.info">
+                            </ib-Mmb-flights-info>
+                        </a>
+                        <div uib-collapse="!collapse.isCollapsed">
+                            <div class="ib-detail-flight ib-detail-flight--cabins ib-detail-flight--cabins-mobile">
+                                <div class="ib-table-flight-cabins__flight-selected-detail">
+                                    <div
+                                        ng-repeat="(index, fligthsTravel) in availabilityCtrl.returnFlightSelectedInfo.segments">
+                                        <ib-Mmb-flights-details model="fligthsTravel" index="index">
+                                        </ib-Mmb-flights-details>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="ib-detail-flight ib-detail-flight--cabins animate-show"
+                                data-flight-option-show='detail' ng-show="availabilityCtrl.showDetail"></div>
+                            <ib-mmb-list-fare-item model="availabilityCtrl.returnFlightSelectedInfo.cabins"
+                                type-flight="availabilityCtrl.typeFlight[1]"
+                                index="availabilityCtrl.sliceSelectedReturn"
+                                on-open="availabilityCtrl.open(sliceIndex,cabinIndex,typeFlight)"
+                                cabin-selected="availabilityCtrl.cabinSelectedIndexReturn"
+                                unified-offer-type="availabilityCtrl.unifiedOfferType"></ib-mmb-list-fare-item>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="animate-show" ng-hide="availabilityCtrl.stateFlight || availabilityCtrl.returnFlightSelected">
+                <div ng-if="(availabilityCtrl.sisterCitiesOptionChecked && availabilityCtrl.newSisterCities)"
+                    class="ib-layout__line-spacing">
+                    <a href="javascript:void(0)" class="ib-box-cities__link icon-senalizacion_mapas"
+                        ng-click="availabilityCtrl.openSisterCity(1)">
+                        {{'MMB_SISTER_CHECK_SELECTION' | translate}}
+                    </a>
+                </div>
+                <!-- Title -->
+                <div class="u-mt-small u-mb"
+                    ng-if="!(availabilityCtrl.sisterCitiesOptionChecked && availabilityCtrl.newSisterCities)">
+                    <h1 class="ib-heading ib-heading--type-1">{{availabilityCtrl.titleReturnOrigin}} -
+                        {{availabilityCtrl.titleReturnDestiny}}</h1>
+                </div>
+                <div class="u-mt-small u-mb"
+                    ng-if="(availabilityCtrl.sisterCitiesOptionChecked && availabilityCtrl.newSisterCities)">
+                    <h1 class="ib-heading ib-heading--type-1">{{availabilityCtrl.sisterInfo[0].destination}} -
+                        {{availabilityCtrl.sisterInfo[0].origin}}</h1>
+                </div>
+                <!-- Carousel -->
+                <div class="ib-layout__line-spacing">
+                    <!-- Change 0 on flights for actual index of current flight modification -->
+                    <ib-Mmb-calendar-ribbons
+                        calendar-data="availabilityCtrl.flights[availabilityCtrl.indexRibbonReturn].calendarData"
+                        index="availabilityCtrl.flights[availabilityCtrl.indexRibbonReturn].index"
+                        selected-carousel="availabilityCtrl.flights[availabilityCtrl.indexRibbonReturn].initialSlideIndex" id="'OD2'"></ib-Mmb-calendar-ribbons>
+                </div>
+
+                <div class="ib-fc-calendar-slides-loading">
+                    <!-- <div ng-if="availabilityCtrl.selectedSlide[1].date.state === 'AVAILABLE'"> -->
+                    <div ng-if="availabilityCtrl.offersAvailableReturn">
+                        <ib-Mmb-flights-filter config-filter="availabilityCtrl.modelfilterReturn"
+                            type-flight="availabilityCtrl.typeFlight[1]"></ib-Mmb-flights-filter>
+                        <div class="ib-table-flight-cabins" ng-if="availabilityCtrl.model">
+                            <div class="ib-table-flight-cabins__selected"
+                                ng-hide="availabilityCtrl.selectedItem != -1 && $index != availabilityCtrl.selectedItem">
+                                <!-- Your outward flights -->
+                                <div class="ib-heading-flight animate-show"
+                                    ng-show="availabilityCtrl.selectedItem != -1" data-flight-heading>
+                                    <div class="ib-heading-flight__container">
+                                        <span class="ib-heading-flight__title">{{availabilityCtrl.titleReturnOrigin}} -
+                                            {{availabilityCtrl.titleReturnDestiny}}</span>
+                                        <span class="ib-heading-flight__date">{{availabilityCtrl.dateReturn.day}}
+                                            {{availabilityCtrl.dateReturn.month | translate |
+                                            ShortenerFormatFilter:3:true}}. <span
+                                                class="hidden-sm hidden-xs">{{availabilityCtrl.dateReturn.year}}</span></span>
+                                        <button class="ib-heading-flight__close"
+                                            ng-click="availabilityCtrl.selectedItem=-1"
+                                            data-flight-selected-close="return" type="button">
+                                            <span
+                                                class="ib-heading-flight__close-text ib-heading-flight__close-text--no-decoration">{{'MMB_VC_SLICE_DETAILS_NEW_BACK_BUTTON'|
+                                                translate}}</span>
+                                            <span class="ib-heading-flight__close-icon icon-cerrar"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <article ng-repeat="flight in availabilityCtrl.slices.flightsReturns"
+                                    ng-if="flight.visibility"
+                                    class="ib-table-flight-cabins__article ib-table-flight-cabins__article--collapse "
+                                    ng-class="{'ib-table-flight-cabins__article--collpase': $index != availabilityCtrl.selectedItem}"
+                                    ng-controller="ibCollapseController as collapse">
+                                    <a href="#" title="Vuelo Iberia"
+                                        class="ib-table-flight-cabins__article-item ib-table-flight-cabins__article-item--center"
+                                        ng-click="collapse.clickCollapse($event,true)" data-type="detail"
+                                        data-flight-button-detail>
+                                        <ib-Mmb-flights-info model="flight.info"></ib-Mmb-flights-info>
+                                    </a>
+                                    <div uib-collapse="!collapse.isCollapsed">
+                                        <div
+                                            class="ib-detail-flight ib-detail-flight--cabins ib-detail-flight--cabins-mobile">
+                                            <div class="ib-table-flight-cabins__flight-selected-detail">
+                                                <div ng-repeat="(index, fligthsTravel) in flight.segments">
+                                                    <ib-Mmb-flights-details model="fligthsTravel"
+                                                        index="index"></ib-Mmb-flights-details>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ib-table-flight-cabins__article-item">
+                                        <div class="ib-detail-flight ib-detail-flight--cabins animate-show"
+                                            data-flight-option-show='detail' ng-show="availabilityCtrl.showDetail">
+                                        </div>
+                                        <ib-mmb-list-fare-item model="flight.cabins"
+                                            type-flight="availabilityCtrl.typeFlight[1]" index="$index"
+                                            on-open="availabilityCtrl.open(sliceIndex, cabinIndex, typeFlight)"
+                                            cabin-selected="availabilityCtrl.cabinSelectedIndexReturn"
+                                            unified-offer-type="availabilityCtrl.unifiedOfferType"></ib-mmb-list-fare-item>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ib-msg-alert ib-msg-alert--color-normal ib-msg-alert__gdr--left icon-informacion_2 u-position-relative"
+                        ng-if="!availabilityCtrl.offersAvailableReturn">
+                        <p class="ib-msg-alert__text ib-msg-alert__text--title-large">
+                            {{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_TITLE' | translate}}</p>
+                        <p class="ib-msg-alert__text--subtitle">{{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_BODY' |
+                            translate}}.</p>
+                    </div>
+                    <div ng-if="availabilityCtrl.showLoading" class="ib-overlay-fly" ib-calendar-slides-loading>
+                        <div class="ib-overlay-fly__container">
+                            <div class="ib-overlay-fly__icon">
+                                <div class="circle"></div>
+                                <div class="circle"></div>
+                            </div>
+                            <span class="ib-overlay-fly__text">{{'MMB_VC_AVAILABILITY_SLICK_LOADING'|translate}}</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="ib-msg-alert ib-msg-alert--color-normal ib-msg-alert__gdr--left icon-informacion_2" ng-if="availabilityCtrl.selectedSlide[1].date.state === 'NOT_AVAILABLE'">
+                    <p class="ib-msg-alert__text ib-msg-alert__text--title-large">{{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_TITLE' | translate}}</p>
+                    <p class="ib-msg-alert__text--subtitle">{{'MMB_VC_AVAILABILITY_REDEMPTION_NO_RESULTS_BODY' | translate}}.</p>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- Totals -->
+    <ib-mmb-total-price ng-if="availabilityCtrl.totalPriceDone" model="availabilityCtrl.modelTotalPrice"
+        on-accept="availabilityCtrl.acceptAvailability(message)"></ib-mmb-total-price>
+</form>

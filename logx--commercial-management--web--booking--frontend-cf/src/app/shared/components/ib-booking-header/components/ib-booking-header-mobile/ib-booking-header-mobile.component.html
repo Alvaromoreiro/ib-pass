@@ -1,0 +1,55 @@
+<div class="header-mobile">
+    <button id="header-commons-iberia-logo-home-link" title="{{'GO_TO_HOME_TEXT'|translate}}" class="ib-header-common__logo-fig" (click)="returnToMain( true )" focusin>
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" fill="none" viewBox="0 0 32 33">
+            <path fill="url(#a)" fill-rule="evenodd" d="M6.3 22.704 1 28.054c18.398 0 22.736-4.325 25.267-10.213l2.125-5.542c-6.199.178-15.553 3.832-22.092 10.405Z" clip-rule="evenodd"/>
+            <path fill="url(#b)" fill-rule="evenodd" d="m18.659 10.19-5.964 6.04c5.662-4.067 11.309-6.52 16.934-7.154L31 5.5c-8.327 0-9.461 1.82-12.341 4.69Z" clip-rule="evenodd"/>
+            <defs>
+                <linearGradient id="a" x1="-11.828" x2="1.753" y1="21.755" y2="-1.944" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#A61C22"/>
+                <stop offset=".5" stop-color="#DC1C2E"/>
+                <stop offset="1" stop-color="#DC1C2E"/>
+                </linearGradient>
+                <linearGradient id="b" x1="3.422" x2="12.892" y1="10.455" y2="-5.455" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#ED7417"/>
+                <stop offset=".85" stop-color="#FACD08"/>
+                <stop offset="1" stop-color="#FACD08"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </button>
+    <div class="header-mobile-tools">
+        <div class="header-mobile-tools--left">
+            <div class="header-mobile-tools-trip">
+                <ng-container *ngFor="let trip of model?.trips">
+                    <p class="trip">
+                        <span class="trip-city">{{trip.originCode}}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" fill="none" viewBox="0 0 14 15">
+                            <path fill="#333" d="M5.864 3.508a32.643 32.643 0 0 1 3.707.123h.03v1.222l-.03.004c-.884.09-1.887.136-2.903.136-.262 0-.525-.004-.791-.008h-.013l1.587 2.132H5.877L3.55 4.244l2.327-2.869h1.574L5.864 3.508ZM7.338 11.5c.262 0 .533-.004.8-.008L6.55 13.625h1.574l2.327-2.869-2.327-2.873H6.55l1.586 2.132h-.012c-.267-.004-.53-.008-.792-.008a31.3 31.3 0 0 0-2.902.131l-.03.005v1.222h.03c.884.09 1.887.136 2.907.136Z"/>
+                        </svg>
+                        <span class="trip-city">{{trip.destinyCode}}</span>
+                    </p>
+                </ng-container>
+                <button class="change-search" tabindex="0"
+                    *ngIf="model.hideFlightSearch && currentStep?.page !== 'confirmation'"
+                    title="{{'EDIT_TEXT'|translate}}"
+                    (click)="model.isMultiflight ? multiCityBack( false ) : toggleSeeker( )"
+                    focusin>
+                    {{'EDIT_TEXT'|translate}}
+                </button>
+            </div>
+        </div>
+        <ib-booking-header-login-mobile
+            [model]="login"
+            [headerMobile]="isMobile"
+            [isMobile]="isMobile"></ib-booking-header-login-mobile>
+        <ib-booking-header-user-tooltip
+            [model]="login"
+            [headerMobile]="isMobile"
+            *ngIf="isMobile && login && login?.isLogged"></ib-booking-header-user-tooltip>
+    </div>
+</div>
+<ib-booking-header-basket class="ib-header-common--basket mobile-instance"
+    [model]="model?.shoppingBasket"
+    [showButtonPay]="model?.showButtonPay"
+    [flightType]="model?.flightType"
+    [mobileInstance]="true"></ib-booking-header-basket>

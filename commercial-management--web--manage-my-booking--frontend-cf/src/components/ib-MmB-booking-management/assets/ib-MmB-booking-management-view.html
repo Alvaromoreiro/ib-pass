@@ -1,0 +1,32 @@
+    <!-- directive: ib-comment "{{$root.generateDatalayerDOM()}}" !-->
+    <!-- End wrapper-->
+    <section class="container">
+        <!-- Main content-->
+        <ib-alert-hide>
+            <div ng-if="manageCtrl.model.hasSavedChangesSuccess && alertCtrl.showAlert" class="ib-alert-fix ib-alert-fix--info animate-if">
+                <div class="ib-alert-fix__msg">
+                    <span class="ib-alert-fix__icon icon-confirmacion"></span>
+                    <span class="ib-alert-fix__text">{{'IBCOAC_SAVED_CHANGES_SUCCESS'|translate}}</span>
+                </div>
+            </div>
+        </ib-alert-hide>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__header ib-layout__header--title">
+                    <h1 class="ib-heading ib-heading--type-1">{{'IBCOAC_BOOKING_MANAGEMENT_TITLE'|translate}}</h1>
+                    <h2 class="ib-heading ib-heading--type-7">{{'IBCOAC_BOOKING_CODE'|translate}} <span>{{::manageCtrl.model.bookingCode |uppercase}}</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <form class="ibe_form">
+                    <ib-mmb-segment-details ng-repeat="segment in manageCtrl.model.segments" show-alert="::true" show-details-flight="::false" show-state="::false" show-pre-header="::true " show-body="::true" show-footer="::true"
+                        segment-model="::segment"></ib-mmb-segment-details>
+                    <ib-manage-booking show-special-needs="manageCtrl.model.showSpecialNeeds" have-special-pass="manageCtrl.model.haveSpecialPassenger" show-copy-of-tickets="::manageCtrl.model.showCopyOfTickets"></ib-manage-booking>
+                    <ib-passenger-management pas-mng-model="::manageCtrl.model.passengers" opt-info-model="manageCtrl.model.optionalInformation"></ib-passenger-management>
+                    <ib-travel-addons></ib-travel-addons>
+                </form>
+            </div>
+        </div>
+    </section>

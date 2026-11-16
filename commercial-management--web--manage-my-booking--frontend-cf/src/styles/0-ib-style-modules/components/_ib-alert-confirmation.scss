@@ -1,0 +1,114 @@
+/* -------------------------------------------------------------
+    #ALERT-CONFIRMATION
+----------------------------------------------------------------- */
+.#{$wefront__namespace}alert-confirmation {
+    position: relative;
+    z-index: 9999;
+    display: none;
+    width: 100%;
+    max-width: rem(330);
+    margin: 0 auto;
+    border-radius: rem(4);
+    font-family: $font-normal;
+    font-size: rem(13);
+    background-color: color(white);
+    box-shadow: 0 rem(2) rem(3) 0 color(black, 0.32), 0 rem(-1) rem(4) 0 color(black, 0.11);
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: rem(-15);
+        left: calc(50% - 1rem);
+        width: 0;
+        height: 0;
+        border-width: 0 rem(16) rem(15);
+        border-style: solid;
+        border-color: transparent transparent color(white) transparent;
+    }
+
+    &__icon-close {
+        position: absolute;
+        top: rem(2);
+        right: rem(7);
+        padding: 0;
+        border: 0;
+        font-size: rem(26);
+        color: color(gray-10);
+        background-color: transparent;
+    }
+
+    &__msg {
+        padding: rem(15);
+    }
+
+    &__icon {
+        display: inline-block;
+        font-size: rem(25);
+        line-height: 100%;
+        color: color(green-10);
+        vertical-align: top;
+    }
+
+    &__title {
+        display: inline-block;
+        width: calc(100% - 1.875rem);
+        margin-bottom: rem(5);
+        font-weight: bold;
+    }
+
+    &__popover-title {
+        display: inline-block;
+        margin-top: rem(8);
+        margin-bottom: 0 !important;
+        margin-left: rem(-30);
+        font-weight: bold;
+    }
+
+    &__text {
+        padding-left: rem(30);
+    }
+
+    &.animate-if.ng-enter,
+    &.animate-if.ng-leave {
+        transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+    }
+
+    &.animate-if.ng-enter,
+    &.animate-if.ng-leave.ng-leave-active {
+        opacity: 0;
+    }
+
+    &.animate-if.ng-leave,
+    &.animate-if.ng-enter.ng-enter-active {
+        opacity: 1;
+    }
+}
+
+@include media-query("md") {
+    .#{$wefront__namespace}alert-confirmation {
+        display: block;
+        margin: rem(7) auto;
+
+        &::after {
+            display: none;
+        }
+    }
+}
+
+@include media-query("xs") {
+    .#{$wefront__namespace}alert-confirmation {
+        width: 100%;
+        max-width: rem(288);
+    }
+}
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}alert-confirmation {
+        display: block;
+        margin: rem(7) auto;
+
+        &::after {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,47 @@
+<section class="ib-tab-scrollable ib-tab-scrollable--empty">
+    <div class="ib-tab-scrollable__header" ng-scrollbars ng-scrollbars-config="pasInTabCtrl.configScroll"
+        ng-scrollbars-update="pasInTabCtrl.updateScrollbar">
+        <ul class="ib-tab-scrollable__header-list" role="tablist">
+            <li class="ib-tab-scrollable__header-item" role="presentation" ng-repeat="(pasIndex,passenger) in pasInTabCtrl.passengersTabModel.passengersContactInfo"
+                ng-class="{'ib-tab-scrollable__header-item--active' : pasInTabCtrl.indexTab === pasIndex}" ng-if="passenger.optionalInformation.ffInfo || passenger.optionalInformation.contactData"
+                id="scrollBar-{{pasIndex}}">
+                <a class="ib-tab-scrollable__header-lnk" title="{{'IBPAS_MMB_PASSENGER_INFO_HEADER_TITLE'|translate}} {{::((pasIndex+1) + ' ' + passenger.name)}}"
+                    ng-click="pasInTabCtrl.updateIndexTab($event,pasIndex)" ng-class="{'ib-tab-scrollable__header-lnk--active': pasInTabCtrl.indexTab === pasIndex ,'ib-tab-scrollable__header-lnk--static':pasInTabCtrl.indexTab !== pasIndex , 'ib-tab-scrollable__header-lnk--success' : passenger.status ==='COMPLETE'}">
+                    <div class="ib-tab-scrollable__header-item-content">
+                        <span class="ib-tab-scrollable__header-icon" ng-class="{'icon-perfil_login': passenger.passengerType !== 'CHILD' && passenger.passengerType !== 'INFANT','icon-iberia_ninos' : passenger.passengerType === 'CHILD', 'icon-bebe' : passenger.passengerType === 'INFANT'}"></span>
+                        <span class="ib-tab-scrollable__header-txt">{{::(passenger.personalInfo.name + ' ' +
+                            passenger.personalInfo.surname)}}</span>
+                    </div>
+                </a>
+            </li>
+            <li class="ib-tab-scrollable__header-item" role="presentation" ng-if="pasInTabCtrl.optionalInformation || pasInTabCtrl.passengerInformation"
+                ng-class="{'ib-tab-scrollable__header-item--active' : pasInTabCtrl.indexTab === pasInTabCtrl.passengersTabModel.passengersContactInfo.length,  'ib-tab-scrollable__header-lnk--success' : pasInTabCtrl.passengersTabModel.primaryContactInfo.status ==='COMPLETE'}"
+                id="scrollBar-{{pasInTabCtrl.passengersTabModel.passengersContactInfo.length}}">
+                <a class="ib-tab-scrollable__header-lnk" title="{{'IBPAS_MMB_PASSENGER_DATA_CONTACT_INFO_HEADER_TITLE'|translate}}"
+                    ng-click="pasInTabCtrl.updateIndexTab($event,pasInTabCtrl.passengersTabModel.passengersContactInfo.length)"
+                    ng-class="{'ib-tab-scrollable__header-lnk--active' : pasInTabCtrl.indexTab === pasInTabCtrl.passengersTabModel.passengersContactInfo.length, 'ib-tab-scrollable__header-lnk--static':pasInTabCtrl.indexTab !== pasInTabCtrl.passengersTabModel.passengersContactInfo.length}">
+                    <div class="ib-tab-scrollable__header-item-content">
+                        <span class="ib-tab-scrollable__header-icon icon-click_to_call"></span>
+                        <span class="ib-tab-scrollable__header-txt">{{'IBPAS_MMB_PASSENGER_DATA_CONTACT_SPAN_TEXT'|translate}}</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="ib-box ib-box--big ib-box--separator" ng-model-options="{ allowInvalid: true}">
+        <div class="ib-tab-scrollable__body">
+            <div ng-repeat="(pasIndex,passenger) in pasInTabCtrl.passengersTabModel.passengersContactInfo" ng-if="pasInTabCtrl.indexTab === pasIndex"
+                class="ib-tab-scrollable__content" role="tabpanel" aria-hidden="{{pasInTabCtrl.indexTab !== pasIndex}}"
+                aria-labelledby="data-passenger-{{::pasIndex}}">
+                <ib-passenger-form passenger-model="passenger" companies="pasInTabCtrl.companies" pas-index="pasIndex"></ib-passenger-form>
+            </div>
+            <div ng-if="pasInTabCtrl.indexTab === pasInTabCtrl.passengersTabModel.passengersContactInfo.length" class="ib-tab-scrollable__content"
+                role="tabpanel" aria-hidden="{{pasInTabCtrl.indexTab !==  pasInTabCtrl.passengersTabModel.passengersContactInfo.length}}"
+                aria-labelledby="data-passenger-{{::pasInTabCtrl.passengersTabModel.passengersContactInfo.length}}">
+                <ib-passenger-data-contact-form passengers-model="pasInTabCtrl.passengersTabModel.passengersContactInfo"
+                    contact-form-model="pasInTabCtrl.passengersTabModel.primaryContactInfo" original-data-model="pasInTabCtrl.originalData"
+                    optional-information="pasInTabCtrl.optionalInformation"></ib-passenger-data-contact-form>
+            </div>
+        </div>
+    </div>
+</section>

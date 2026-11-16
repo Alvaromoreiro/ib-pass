@@ -1,0 +1,123 @@
+/* -----------------------------------------------------------------
+    #ACTION BOX
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}title-box {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: rem(24);
+
+    &__title {
+        display: flex;
+        width: auto;
+        max-width: 65%;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        padding-right: rem(24);
+
+        &--text {
+            font-family: $font-special;
+            font-size: rem(24);
+            text-align: center;
+            line-height: rem(32);
+            color: color(gray-10);
+        }
+    }
+
+    &__actions {
+        display: flex;
+        width: 35%;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: flex-end;
+
+        &--button {
+            &-separator {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                justify-content: flex-start;
+
+                &::before {
+                    content: " | ";
+                    margin: 0 rem(3) 0 rem(8);
+                    font-size: rem(16);
+                    line-height: rem(22);
+                    color: color(gray-10);
+                }
+            }
+        }
+    }
+
+    &__button {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        border: 0 none;
+        background: 0 none;
+
+        &:hover,
+        &:focus {
+            .#{$wefront__namespace}title-box {
+                &__button {
+                    &--text {
+                        color: color(primary);
+                    }
+                }
+            }
+        }
+
+        &:first-child {
+            margin-left: 0;
+            border-left: 0 none;
+
+            [class^="icon-"] {
+                margin-left: 0;
+            }
+        }
+
+        [class^="icon-"] {
+            margin: 0 rem(6);
+            font-size: rem(22);
+            line-height: rem(22);
+            color: color(primary);
+        }
+
+        &--text {
+            font-family: $font-normal;
+            font-size: rem(13);
+            text-decoration: underline;
+            line-height: rem(22);
+            color: color(gray-10);
+        }
+    }
+}
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}title-box {
+        flex-flow: column wrap;
+        margin-bottom: rem(14);
+
+        &__title {
+            width: 100%;
+            max-width: initial;
+            justify-content: flex-start;
+            padding-right: 0;
+
+            &--text {
+                font-size: rem(16);
+                line-height: rem(22);
+            }
+        }
+
+        &__actions {
+            width: 100%;
+            justify-content: flex-start;
+            margin-top: rem(24);
+        }
+    }
+}

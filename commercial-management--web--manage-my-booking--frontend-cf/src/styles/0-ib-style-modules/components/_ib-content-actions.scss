@@ -1,0 +1,160 @@
+/* -------------------------------------------------------------
+    #CONTENT-ACTIONS
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}content-actions {
+    position: relative;
+    padding-bottom: rem(25);
+    border-top: rem(1) solid color(gray-40);
+    text-align: right;
+
+    &__item {
+        position: absolute;
+        right: 0;
+        bottom: 100%;
+        padding: rem(8) rem(12);
+        border: 0;
+        border-top: rem(1) solid color(gray-40);
+        border-right: rem(1) solid color(gray-40);
+        border-left: rem(1) solid color(gray-40);
+        font-size: rem(12);
+        text-decoration: underline;
+        color: color(gray-30);
+        background: color(white);
+
+        &:hover {
+            color: color(gray-10);
+        }
+
+        &:focus,
+        &:active {
+            text-decoration: none;
+            color: color(gray-10);
+            outline: none;
+        }
+    }
+
+    &__item-text {
+        display: inline-block;
+        padding: rem(8) rem(12);
+        border: 0;
+        font-size: rem(12);
+        text-decoration: underline;
+        color: color(gray-30);
+        background: color(white);
+
+        &:hover {
+            color: color(gray-10);
+        }
+
+        &:focus,
+        &:active {
+            color: color(gray-10);
+            outline: none;
+        }
+    }
+
+    &--basic {
+        position: absolute;
+        right: rem(60);
+        bottom: rem(32);
+        margin: 0;
+        border: 0;
+        .#{$wefront__namespace}content-actions__item-text {
+            padding: 0;
+        }
+    }
+}
+
+.#{$wefront__namespace}slide-toggle {
+    &__button {
+        &--closed {
+            .#{$wefront__namespace}content-actions__item {
+                padding-right: 0;
+                border: 0;
+            }
+        }
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}content-actions {
+        &--basic {
+            right: rem(32);
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}content-actions {
+        &--basic {
+            right: rem(32);
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}content-actions {
+        margin-top: 0;
+
+        &--basic {
+            right: rem(24);
+            margin: 0;
+        }
+    }
+    .#{$wefront__namespace}slide-toggle {
+        &__button {
+            &--opened {
+                .#{$wefront__namespace}content-actions__item {
+                    right: auto;
+                    left: 0;
+                }
+            }
+
+            &--closed {
+                .#{$wefront__namespace}content-actions__item {
+                    padding-right: rem(12);
+                    padding-left: 0;
+                    inset: 0 auto auto 0;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}content-actions {
+        &__item-text {
+            overflow: hidden;
+            max-width: rem(189);
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        &--basic {
+            line-height: 1.2;
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}content-actions {
+        &__item-text {
+            width: 100%;
+            padding-bottom: 0;
+            padding-left: 0;
+            text-align: left;
+        }
+
+        &__detail {
+            display: inline-block;
+            width: 100%;
+            text-align: left;
+        }
+
+        &--basic {
+            position: static;
+            margin-top: rem(5);
+        }
+    }
+}

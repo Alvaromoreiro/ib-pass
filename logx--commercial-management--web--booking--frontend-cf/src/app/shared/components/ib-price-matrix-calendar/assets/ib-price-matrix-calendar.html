@@ -1,0 +1,67 @@
+<div class="ib-table-daily" ib-flights-calendar-outbound>
+    <div class="ib-table-daily__legend">
+        <span class="ib-table-daily__legend-txt u-text-right" data-cod-country="{{::priceCalendarCtrl.priceMatrixData.outbound.origin}}">
+            <span class="ib-table-daily__legend-description">{{::priceCalendarCtrl.priceMatrixData.outbound.origin}}</span>
+        </span>
+        <span class="ib-table-daily__legend-icon">
+            <span class="icon-vuelos"></span>
+        </span>
+        <span class="ib-table-daily__legend-txt u-text-left" data-cod-country="{{::priceCalendarCtrl.priceMatrixData.outbound.destination}}">
+            <span class="ib-table-daily__legend-description">{{::priceCalendarCtrl.priceMatrixData.outbound.destination}}</span>
+        </span>
+    </div>
+    <div>
+        <div class="ib-table-daily__info-scrollable">
+            <span class="ib-table-daily__info-scrollable-message">{{'CALDIT_SCROLL_MESSAGE'|translate}}</span>
+        </div>
+        <div class="ib-table-daily__scrollable">
+            <table class="ib-table-daily__table-content">
+                <caption class="u-hide-accessible">{{'CALDIT_TABLE_HIDE_ACCESSIBLE'|translate}}</caption>
+                <thead class="ib-table-daily__header">
+                    <tr class="ib-table-daily__row">
+                        <td class="ib-table-daily__title"></td>
+                        <th id="title-{{::indexColumn}}-head" class="ib-table-daily__title" data-ng-repeat="(indexColumn,matrixColumn) in priceCalendarCtrl.priceMatrixData.calendarGrid.columns">
+                            <span class="ib-table-daily__date-weekday" data-shortcut="{{priceCalendarCtrl.formatString(matrixColumn.inboundDate.weekDay|translate,3)}}"><span>{{matrixColumn.inboundDate.weekDay|translate}}</span></span>
+                            <span class="ib-table-daily__date-day">{{::matrixColumn.inboundDate.day}}</span>
+                            <span class="ib-table-daily__date-month" data-shortcut="{{priceCalendarCtrl.formatString(matrixColumn.inboundDate.month|translate,4)}}"><span>{{matrixColumn.inboundDate.month|translate}}</span></span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="ib-table-daily__body">
+                    <tr class="ib-table-daily__row" data-ng-repeat="(indexRow,matrixRow) in priceCalendarCtrl.priceMatrixData.calendarGrid.rows">
+                        <th id="title-{{::indexRow}}-body" class="ib-table-daily__title">
+                            <span class="ib-table-daily__date-weekday" data-shortcut="{{priceCalendarCtrl.formatString(matrixRow.outboundDate.weekDay|translate,3)}}"><span>{{matrixRow.outboundDate.weekDay|translate}}</span></span>
+                            <span class="ib-table-daily__date-day">{{::matrixRow.outboundDate.day}}</span>
+                            <span class="ib-table-daily__date-month" data-shortcut="{{priceCalendarCtrl.formatString(matrixRow.outboundDate.month|translate,4)}}"><span>{{matrixRow.outboundDate.month|translate}}</span></span>
+                        </th>
+                        <td headers="title-{{::indexCell}}-head title-{{::indexRow}}-body" class="ib-table-daily__col" data-ng-repeat="(indexCell,matrixCell) in matrixRow.cells"
+                            data-ng-class="{'ib-table-daily__col--empty': !matrixCell.available, 'ib-table-daily--price' : matrixCell.available}">
+                            <div class="ib-table-daily__action-cont" data-ng-if="::matrixCell.available">
+                                <input type="radio" name="group-radios" id="radio-{{::indexRow}}-{{::indexCell}}" ng-model="matrixCell.selectedCell" class="ib-table-daily__action-input"
+                                    ng-click="priceCalendarCtrl.selectItem(indexCell,matrixRow.outboundDate,matrixCell.totalPrice.total)">
+                                <label for="radio-{{::indexRow}}-{{::indexCell}}" class="ib-table-daily__action-label">
+                                    <span class="ib-table-daily__detail">{{'CALDIT_PRICE_FROM'|translate}}</span>
+                                    <span class="ib-table-daily__currency" ng-if="!priceCalendarCtrl.priceMatrixData.currency.suffixSymbol && priceCalendarCtrl.calculateLength(matrixCell.totalPrice.total) > 5">{{::priceCalendarCtrl.priceMatrixData.currency.currencySymbol}}</span>    
+                                    <span class="ib-table-daily__price">{{::priceCalendarCtrl.formatPrice(matrixCell.totalPrice.total)}}</span>
+                                    <span class="ib-table-daily__currency" ng-if="priceCalendarCtrl.priceMatrixData.currency.suffixSymbol && priceCalendarCtrl.calculateLength(matrixCell.totalPrice.total) > 5" >{{::priceCalendarCtrl.priceMatrixData.currency.currencySymbol}}</span>
+                                    <span data-ng-if="::matrixCell.bestPrice" class="ib-table-daily__action-better-price icon-mejor_precio"></span>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="ib-table-daily__legend ib-table-daily__legend--left">
+        <span class="ib-table-daily__legend-txt u-text-right" data-cod-country="{{::priceCalendarCtrl.priceMatrixData.inbound.origin}}">
+            <span class="ib-table-daily__legend-description">{{::priceCalendarCtrl.priceMatrixData.inbound.origin}}</span>
+        </span>
+        <span class="ib-table-daily__legend-icon">
+            <span class="icon-vuelos"></span>
+        </span>
+        <span class="ib-table-daily__legend-txt u-text-left" data-cod-country="{{::priceCalendarCtrl.priceMatrixData.inbound.destination}}">
+            <span class="ib-table-daily__legend-description">{{::priceCalendarCtrl.priceMatrixData.inbound.destination}}</span>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,193 @@
+/* -------------------------------------------------------------
+    #ACCORDION
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}searcher-flight {
+    padding: rem(32) rem(24) rem(40);
+    margin-bottom: rem(8);
+    background-color: color(white);
+    box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    &__container {
+        padding-bottom: rem(24);
+        margin-top: rem(32);
+        border-bottom: rem(1) solid color(gray-40);
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-of-type {
+            padding-bottom: rem(32);
+            border: none;
+        }
+    }
+
+    &__title {
+        padding-bottom: rem(24);
+        font-family: $font-special;
+        font-size: rem(20);
+        line-height: rem(23);
+        color: color(gray-10);
+    }
+
+    &__input {
+        width: rem(332);
+        margin-right: rem(24);
+    }
+
+    &__gdr {
+        .#{$wefront__namespace}input {
+            &--icon {
+                .#{$wefront__namespace}input {
+                    &__label {
+                        width: calc(100% - 4.5rem);
+                    }
+
+                    &__input {
+                        position: relative;
+                        z-index: 5;
+                        width: 100%;
+                        max-width: calc(100% - 4.5rem);
+                        background: transparent;
+
+                        &--opened {
+                            height: rem(36);
+
+                            &::before {
+                                content: "";
+                                position: absolute;
+                                z-index: -1;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                background: rgb(215 25 45 / 20%);
+                            }
+                        }
+                    }
+                }
+            }
+
+            &--voluntary-changes {
+                .#{$wefront__namespace}input {
+                    &__input {
+                        max-width: initial;
+                    }
+                }
+            }
+        }
+        .#{$wefront__namespace}check {
+            &__label::before {
+                top: 0;
+                transform: none;
+            }
+        }
+    }
+}
+
+// Responsive
+@include media-query('lg') {
+    .#{$wefront__namespace}searcher-flight {
+        padding-bottom: rem(32);
+
+        &__container {
+            &:last-of-type {
+                padding-bottom: rem(24);
+            }
+        }
+
+        &__title {
+            padding-bottom: rem(17);
+            font-size: rem(18);
+            line-height: rem(21);
+        }
+
+        &__input {
+            width: rem(264);
+        }
+        .#{$wefront__namespace}button {
+            min-width: rem(208);
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}searcher-flight {
+        &__input {
+            width: rem(324);
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}searcher-flight {
+        padding: rem(24) rem(16) rem(32);
+
+        &__title {
+            padding-bottom: rem(16);
+            font-size: rem(18);
+            text-align: center;
+            line-height: rem(24);
+
+            &--text {
+                display: block;
+            }
+        }
+
+        &__input {
+            width: 100%;
+        }
+
+        &__container {
+            padding-bottom: rem(24);
+            margin-top: rem(24);
+
+            &:last-of-type {
+                padding-bottom: rem(24);
+            }
+        }
+        .#{$wefront__namespace}button {
+            min-width: 100%;
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}searcher-flight {
+        padding: rem(24) rem(16) rem(32);
+
+        &__title {
+            padding-bottom: rem(16);
+            font-size: rem(18);
+            text-align: center;
+            line-height: rem(24);
+
+            &--text {
+                display: block;
+            }
+        }
+
+        &__input {
+            width: 100%;
+        }
+
+        &__container {
+            padding-bottom: rem(24);
+            margin-top: rem(24);
+
+            &:last-of-type {
+                padding-bottom: rem(24);
+            }
+        }
+        .#{$wefront__namespace}button {
+            min-width: 100%;
+        }
+    }
+}

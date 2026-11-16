@@ -1,0 +1,21 @@
+<div [formGroup]="parentForm">
+
+    <div class="check-container" *ngIf="showMarketingPerm && !showDenyNewsletter">
+        <input type="checkbox" id="mp_check" formControlName="isMarketingAccepted" class="check-input" (click)="marketingClick.emit(parentForm.get('isMarketingAccepted')?.value)">
+        <label for="mp_check" class="check-label">
+            <span class="check-text">
+                {{ 'REGISTER_PERMISSIONS_CHECK_TEXT' | translate }}
+            </span>
+        </label>
+    </div>
+
+    <div class="check-container" *ngIf="showDenyNewsletter">
+        <input type="checkbox" id="contact_check" formControlName="denyNewsLetters" class="check-input">
+        <label for="contact_check" class="check-label">
+            <span class="check-text">
+                {{ 'IBAIRP_CONTACT_FORM_INFO_CHECK_BOX' | translate }}
+            </span>
+        </label>
+    </div>
+
+</div>

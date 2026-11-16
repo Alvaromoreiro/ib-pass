@@ -1,0 +1,1 @@
+import './ib-flexibilization-info.component';

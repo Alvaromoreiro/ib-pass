@@ -1,0 +1,308 @@
+@import 'src/styles/component-tools';
+
+p{
+    padding: rem(24) 0 rem(10);
+    border-bottom: rem(1) solid var(--ib-color-grey-200-ee);
+}
+
+.box{
+    position: relative;
+    width: 100%;
+    padding: rem(24) 0;
+    border-bottom: rem(1) solid var(--ib-color-grey-200-ee);
+    background: var(--ib-color-white);
+}
+
+svg {
+    display: none;
+
+    path{
+        fill: var(--cabin-economy);
+    }
+}
+
+:host ::ng-deep ib-booking-accordion  {
+    .button{
+        border-bottom: rem(1) solid var(--ib-color-grey-200-ee);
+    }
+
+    .title-text{
+        text-align: left;
+    }
+}
+
+.table-flight-info{
+    &__header{
+        position: relative;
+        display: block;
+        margin-bottom: rem(20);
+        border-bottom: rem(1) dashed color(gray-70);
+    }
+
+    &__title{
+        display: inline-block;
+        font-family: var(--font-headline);
+        font-size: rem(18);
+        color: var(--ib-color-grey-800-33);
+        vertical-align: top;
+
+        &--with-link {
+            width: 100%;
+        }
+    }
+
+}
+
+.table-flight-detail{
+        display: table;
+        width: 100%;
+        font-size: rem(16);
+        background-color: var(--ib-color-white);
+
+    &--no-fixed{
+        table-layout: auto;
+    }
+
+    &__item{
+        position: relative;
+        display: table-cell;
+        vertical-align: top;
+
+        &:nth-child(1) {
+            display: none;
+            width: rem(128);
+        }
+
+        &:nth-child(2) {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: rem(8);
+            text-align: left;
+            float: left;
+        }
+
+        &:nth-child(3) {
+            display: inline-block;
+            width: 90%;
+            padding-right: 0;
+            float: left;
+        }
+
+       &:nth-child(4),&.table-flight-detail__item--visible-mobile {
+            display: inline-block;
+            width: 100%;
+            margin-top: rem(15);
+            margin-bottom: rem(8);
+            text-align: left;
+        }
+    }
+
+    &__logo{
+        display: inline-block;
+        width: rem(85);
+        vertical-align: middle;
+
+        img{
+            width: 100%;
+        }
+    }
+
+    &__text-title{
+        font-weight: 700;
+
+        &--special {
+            font-family: $font-special;
+            font-size: rem(22);
+            line-height: rem(22);
+        }
+    }
+
+    &__text-des{
+        display: block;
+        font-size: rem(16);
+        color: color(gray-10);
+    }
+
+    &__hours{
+        .text{
+            margin-bottom: rem(3);
+        }
+    }
+
+    &__hours-icon{
+        display: inline-block;
+        font-size: rem(20);
+        color: color(gray-30);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+
+        &.icon-vuelos {
+            margin: 0 rem(4);
+        }
+    }
+
+}
+
+.text{
+    display: inline-block;
+    font-family: var(--font-normal);
+    line-height: rem(20);
+    color: var(--ib-color-grey-800-33);
+
+    &--big{
+        font-size: rem(16);
+    }
+
+    &--color-unfocused{
+        color: var(--cabin-economy);
+    }
+
+    &--small{
+        font-size: rem(12);
+    }
+
+    &--block{
+        display: block;
+    }
+}
+
+.layout{
+    &__line-spacing {
+        &--small {
+            margin-bottom: rem(5);
+        }
+    }
+}
+
+
+@include media-query-range('mf-sm') {
+    :host ::ng-deep ib-booking-accordion  {
+        .container{
+            border: rem(1) solid var(--ib-color-grey-200-ee);
+            box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+        }
+    }
+
+    .box{
+        padding: rem(24) rem(24);
+    }
+
+    svg{
+        display: block;
+        font-size: rem(22);
+    }
+
+    .table-flight-info__title--with-link {
+        width: 100%;
+    }
+
+    .table-flight-detail{
+        &__item{
+            &:nth-child(2){
+                display: inline-block;
+                width: 100%;
+                margin-bottom: rem(8);
+                text-align: left;
+            }
+
+            &:nth-child(3){
+                display: inline-block;
+                width: 95%;
+                padding-right: 0;
+            }
+        }
+    }
+}
+
+@include media-query-range('mf-md') {
+    .table-flight-info{
+        &__title{
+            &--with-link {
+                width: 70%;
+            }
+        }
+    }
+
+    .table-flight-detail{
+        position: relative;
+        width: 100%;
+        font-size: 0;
+
+        &__item{
+            display: inline-block;
+
+             &:nth-child(1) {
+                display: block;
+                width: 100%;
+            }
+
+            &:nth-child(2){
+                width: 15%;
+            }
+
+            &:nth-child(3){
+                width: 45%;
+                padding-right: rem(10);
+            }
+
+            &--row-tablet {
+                display: block;
+                width: 100%;
+
+                .text {
+                    padding-bottom: rem(20);
+                }
+            }
+
+            &:nth-child(4){
+                width: 35%;
+            }
+
+        }
+    }
+}
+
+
+@include media-query-range('mf-lg') {
+    .table-flight-detail{
+        display: flex;
+        width: 100%;
+        font-size: 1rem;
+        background-color: var(--ib-color-white);
+
+        &__item{
+            position: relative;
+            display: table-cell;
+            vertical-align: top;
+
+            &:nth-child(1){
+                width: rem(125);
+            }
+
+            &:nth-child(2){
+                width: rem(110);
+            }
+
+            &:nth-child(3){
+                width: rem(305);
+                padding-right: rem(20);
+            }
+
+            &:nth-child(4){
+                width: rem(310);
+            }
+        }
+    }
+}
+
+@include media-query-range('mf-xl') {
+    .table-flight-detail{
+        &__item{
+            &:nth-child(1){
+                width: rem(128);
+            }
+
+
+        }
+    }
+}

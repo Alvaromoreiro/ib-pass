@@ -1,0 +1,66 @@
+<div class="ib-table-daily ib-table-daily--outbound" ib-flights-calendar>
+    <div class="ib-table-daily__legend">
+        <span class="ib-table-daily__legend-txt u-text-right" data-cod-country="{{::priceCalendarOutCtrl.priceMatrixData.trip.origin}}">
+    <span class="ib-table-daily__legend-description">{{::priceCalendarOutCtrl.priceMatrixData.trip.origin}}</span>
+        </span>
+        <span class="ib-table-daily__legend-icon">
+    <span class="icon-vuelos"></span>
+        </span>
+        <span class="ib-table-daily__legend-txt u-text-left" data-cod-country="{{::priceCalendarOutCtrl.priceMatrixData.trip.destination}}">
+    <span class="ib-table-daily__legend-description">{{::priceCalendarOutCtrl.priceMatrixData.trip.destination}}</span>
+        </span>
+    </div>
+    <div class="ib-table-daily__content-scrollable">
+        <div class="ib-table-daily__info-scrollable">
+            <span class="ib-table-daily__info-scrollable-message">{{'CALDIT_SCROLL_MESSAGE'|translate}}</span>
+        </div>
+        <div class="ib-table-daily__scrollable">
+            <table class="ib-table-daily__table-content">
+                <caption class="u-hide-accessible">{{'CALDIT_TABLE_HIDE_ACCESSIBLE'|translate}}</caption>
+                <thead class="ib-table-daily__header">
+                    <tr class="ib-table-daily__row">
+                        <th id="title-0-head" class="ib-table-daily__title">
+                            <span class="ib-table-daily__date-weekday" data-shortcut="{{'WEEKDAY_MONDAY'|translate | ShortenerFormatFilter:1}}"><span>{{'WEEKDAY_MONDAY'|translate}}</span></span>
+                        </th>
+                        <th id="title-1-head" class="ib-table-daily__title">
+                            <span class="ib-table-daily__date-weekday" data-shortcut="{{'WEEKDAY_TUESDAY'|translate | ShortenerFormatFilter:1}}"><span>{{'WEEKDAY_TUESDAY'|translate}}</span></span>
+                        </th>
+                        <th id="title-2-head" class="ib-table-daily__title">
+                            <span class="ib-table-daily__date-weekday" data-shortcut="{{'WEEKDAY_WEDNESDAY'|translate | ShortenerFormatFilter:1}}"><span>{{'WEEKDAY_WEDNESDAY'|translate}}</span></span>
+                        </th>
+                        <th id="title-3-head" class="ib-table-daily__title">
+                            <span class="ib-table-daily__date-weekday" data-shortcut="{{'WEEKDAY_THURSDAY'|translate | ShortenerFormatFilter:1}}"><span>{{'WEEKDAY_THURSDAY'|translate}}</span></span>
+                        </th>
+                        <th id="title-4-head" class="ib-table-daily__title">
+                            <span class="ib-table-daily__date-weekday" data-shortcut="{{'WEEKDAY_FRYDAY'|translate | ShortenerFormatFilter:1}}"><span>{{'WEEKDAY_FRYDAY'|translate}}</span></span>
+                        </th>
+                        <th id="title-5-head" class="ib-table-daily__title">
+                            <span class="ib-table-daily__date-weekday" data-shortcut="{{'WEEKDAY_SATURDAY'|translate | ShortenerFormatFilter:1}}"><span>{{'WEEKDAY_SATURDAY'|translate}}</span></span>
+                        </th>
+                        <th id="title-6-head" class="ib-table-daily__title">
+                            <span class="ib-table-daily__date-weekday" data-shortcut="{{'WEEKDAY_SUNDAY'|translate | ShortenerFormatFilter:1}}"><span>{{'WEEKDAY_SUNDAY'|translate}}</span></span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="ib-table-daily__body">
+                    <tr class="ib-table-daily__row" data-ng-repeat="(indexRow,matrixRow) in priceCalendarOutCtrl.priceMatrixData.calendarGrid.rows">
+                        <td headers="title-{{::indexCell}}-head" class="ib-table-daily__col" data-ng-repeat="(indexCell,cell) in matrixRow" data-ng-class="{'ib-table-daily__col--empty': !cell.available}">
+                            <div class="ib-table-daily__action-cont">
+                                <input data-ng-if="!cell.empty" type="radio" name="group-radios" id="radio-{{::indexRow}}-{{::indexCell}}" data-ng-model="cell.selectedCell"
+                                    class="ib-table-daily__action-input" ng-click="priceCalendarOutCtrl.selectItem(indexCell,cell.transformedDate,cell.totalPrice.total)"
+                                    data-ng-disabled="!cell.available">
+                                <label for="radio-{{::indexRow}}-{{::indexCell}}" class="ib-table-daily__action-label">
+                                <span class="ib-table-daily__month" data-ng-if="cell.transformedDate.day === 1" data-shortcut="{{priceCalendarOutCtrl.formatString(cell.transformedDate.month|translate,3)}}"><span>{{cell.transformedDate.month|translate}}</span></span>
+                                <span class="ib-table-daily__day">{{cell.transformedDate.day}}</span>
+                                <span data-ng-if="!cell.empty" class="ib-table-daily__detail" data-ng-class="{'ib-table-daily__detail--only':!cell.empty && !cell.available}">{{cell.available? 'CALDIT_PRICE_FROM': 'AVAILABILITY_SLICK_NOT_AVAILABLE' |translate}}</span>                                
+                                <span data-ng-if="!cell.empty && cell.available" class="ib-table-daily__price">{{::priceCalendarOutCtrl.formatPrice(cell.totalPrice.total)}}</span>
+                                <span data-ng-if="!cell.empty && cell.available && cell.bestPrice" class="ib-table-daily__action-better-price icon-mejor_precio"></span>
+                        </label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

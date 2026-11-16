@@ -1,0 +1,20 @@
+
+@each $size, $size-width in $sizes {
+    @each $rule-classname, $rule in $size-rules {
+        .u-#{$rule-classname}-#{$size} {
+            #{$rule}: $size-width !important;
+        }
+    }
+}
+
+@each $breakpoint, $query in $breakpoints {
+    @include media-query($breakpoint) {
+        @each $size, $size-width in $sizes {
+            @each $rule-classname, $rule in $size-rules {
+                .u-#{$rule-classname}-#{$size}-#{$breakpoint} {
+                    #{$rule}: $size-width !important;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,66 @@
+<header class="ib-modals__header">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+        <h2 class="ib-heading ib-heading--type-1">{{model.title|translate}}</h2>
+    </div>
+    <div class="ib-modals__header-settings">
+        <button id="bbki-partners-selection-close-btn" type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" (click)="saveStoragePartner(false)">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing" *ngIf="model.howToSelect">
+        <p class="ib-text u-display-block">{{model.howToSelect.title|translate}}</p>
+        <ul class="ib-list ib-list--square u-mt-small">
+            <li class="ib-list__item ib-list__item--pl-8" *ngFor="let step of model.howToSelect.steps">{{step|translate}}</li>
+        </ul>
+    </div>
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+        <form action="" name="model.partnerSelection">
+            <div *ngFor="let partner of model.partners; index as partnerIndex">
+                <input type="radio" class="ib-box-select-radio__radio-input" id="radioPartner_{{partner.partnerIdentifier}}_{{partnerIndex}}" name="radioPartners"
+                    [value]="partner.partnerIdentifier" [ngModel]="model.partnerSelected" (change)="changePartnerSelected(partner.partnerIdentifier)">
+                <label class="ib-box-select-radio__radio-label ib-radio-partners__label" for="radioPartner_{{partner.partnerIdentifier}}_{{partnerIndex}}">
+                    <span class="ib-radio-partners__item">
+                        <span class="ib-radio-partners__info">
+                            <span class="ib-radio-partners__info-top">
+                                <figure class="ib-radio-partners__info-logo">
+                                    <img class="ib-radio-partners__info-logo-img" src="/iberia-web-content/iconos/partners/partners-logo-{{partner.partnerIdentifier.toLowerCase()}}.svg" alt="{{partner.productDescription}}">
+                                </figure>
+                                <span class="ib-radio-partners__info-plan">
+                                    <span class="ib-radio-partners__info-plan-title">{{partner.productDescription}}</span>
+                                    <span class="ib-radio-partners__info-plan-bonus" *ngIf = "partner.userTier === undefined || partner.userTier === null || partner.userTier === ''">
+                                        {{'PARTNERS_SELECTION_GET'|translate:{percentDiscount:partner.percentDiscount} }}
+                                    </span>
+                                    <span class="ib-radio-partners__info-plan-bonus" *ngIf = "partner.userTier !== undefined && partner.userTier !== null && partner.userTier.length > 0">
+                                        {{partner.userTier}} -{{partner.percentDiscount}}%
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                </label>
+            </div>
+            <div class="ib-check ib-check--regular u-mt-mobile u-mt-xmedium u-p u-bg-gray-50">
+                <input type="checkbox" class="ib-check__input" id="dont_ask_again" name="dont_ask_again"
+                    [ngModel]="model.dontAskAgain" (change)="changeDontAskAgain()">
+                <label for="dont_ask_again" class="ib-check__label">
+                    <span class="ib-check__text">{{'DONT_ASK_AGAIN'|translate}}</span>
+                </label>
+            </div>
+        </form>
+    </div>
+</section>
+<footer class="ib-modals__footer">
+    <div class="ib-content-buttons u-mb-mobile u-mt-none-mobile">
+        <div class="ib-content-buttons__content-left">
+            <button id="" class="ib-button ib-button--w-medium" type="button"
+            [ngClass]="{'ib-button--disabled-primary': model.partnerSelected.length === 0}" 
+            [disabled]="model.partnerSelected.length === 0" 
+            (click)="saveStoragePartner(true);">{{'PARTNER_PLAN_SELECTION'|translate}}</button>
+        </div>
+        <div class="ib-content-buttons__content-right">
+            <a title="{{'PARTNER_PLAN_UNSELECTED'|translate}}"  href='javascript:void(0)' class="ib-link" (click)="saveStoragePartner(false)">{{'PARTNER_PLAN_UNSELECTED'|translate}}</a>
+        </div>
+    </div>
+</footer>

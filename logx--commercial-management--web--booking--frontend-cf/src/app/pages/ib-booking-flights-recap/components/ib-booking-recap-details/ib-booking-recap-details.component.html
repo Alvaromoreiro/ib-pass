@@ -1,0 +1,53 @@
+<section class="recap-slice">
+    <h3 class="visually-hidden">{{'RECAP_DETAILS_ACCESIBILITY_TITLE'|translate}} {{sliceInfo.destination}}</h3>
+    <div class="flight">
+        <div class="airline">
+            <img *ngIf="showAirlineLogo" 
+                src="/iberia-web-content/iconos{{sliceInfo.info.sliceURLMin}}" 
+                alt="{{sliceInfo.info.allOperatedBy[0]}}" 
+                class="airline-logo"
+                (error)="handleAirlineLogoError()"/>
+            <p class="airline-name">{{sliceInfo.info.allOperatedBy[0]}}</p>
+        </div>
+        <div class="date">
+            <p>{{duration.stops > 0 ? duration.stops + ' ' : null}}{{duration.text|translate|titlecase}}</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2" fill="none">
+                <circle cx="1" cy="1" r="1" fill="#666666"/>
+            </svg>
+            <p>{{sliceInfo.info.departureDateParsed.day}} {{sliceInfo.info.departureDateParsed.month|translate|titlecase|slice:0:3}}.</p>
+        </div>
+    </div>
+    <div class="info" [ngClass]="{'info-nonadaptative': !adaptativeFlow}">
+        <div class="info-cities">
+            <p class="info-travel">
+                <span class="info-city">
+                    <span class="info-city-time">{{sliceInfo.info.departureDateTimeParsed}}</span>
+                    <span class="info-city-iata">{{sliceInfo.origin}}</span>
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                    <path d="M4.51448 15.5002H6.08828C7.56069 13.8491 10.0034 10.0257 10.2545 9.68291C12.2628 9.6105 14.4545 9.39808 14.9855 8.80912V8.50015V8.19119C14.4545 7.60222 12.2628 7.39464 10.2545 7.31739C10.0083 6.97464 7.56552 3.15601 6.08828 1.50015L4.51448 1.50015L6.50828 7.40912C5.50897 7.50567 4.59173 7.64567 3.61655 7.7905C3.54414 7.66015 3.05655 7.20636 1.88828 5.87395H1.01448L1.88828 8.50015L1.01448 11.1264H1.88828C3.05655 9.79395 3.54414 9.34015 3.61655 9.20981C4.5869 9.35464 5.50414 9.49464 6.50828 9.59119L4.51448 15.5002Z" fill="#666666"/>
+                </svg>
+                <span class="info-city">
+                    <span class="info-city-time">{{sliceInfo.info.arrivalDateTimeParsed}}</span>
+                    <span class="info-city-iata">{{sliceInfo.destination}}</span>
+                </span>
+            </p>
+            <div class="info-cabin">
+                <p class="info-cabin-name">
+                    <span class="info-cabin-title">{{'GENERAL_CABIN_TITLE'|translate}}</span>
+                    <span class="info-cabin-desc" [ngClass]="fareClass">{{sliceInfo.info.selectedFareFamily.commercialName}}</span>
+                </p>
+                <p class="info-cabin-fare">
+                    <span class="info-cabin-title">{{'GENERAL_FARE_TITLE'|translate}}</span>
+                    <span class="info-cabin-desc" [ngClass]="fareClass">{{sliceInfo.info.selectedFareFamily.cabinDescription}}</span>
+                </p>
+            </div>
+        </div>
+        <button class="details-action" title="{{'IB_SLICE_SEE_DETAILS'|translate}}" (click)="showDetails()">
+            <span>{{sliceInfo.info.selectedFareFamily.farePriceShown}}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.65735 7.99979L4.58746 12.9538C4.47111 13.0675 4.47111 13.2519 4.58746 13.3655L5.14925 13.9145C5.2051 13.9691 5.28089 13.9998 5.35991 13.9998C5.43892 13.9998 5.51471 13.9691 5.57057 13.9145L11.4129 8.20563C11.5293 8.09194 11.5293 7.9076 11.4129 7.79394L5.57061 2.08507C5.51475 2.03045 5.43896 1.99979 5.35995 1.99979C5.28093 1.99979 5.20514 2.03045 5.14929 2.08507L4.5875 2.63406C4.47115 2.74775 4.47115 2.9321 4.5875 3.04575L9.65735 7.99979Z" fill="#333333"/>
+            </svg>
+        </button>
+    </div>
+</section>

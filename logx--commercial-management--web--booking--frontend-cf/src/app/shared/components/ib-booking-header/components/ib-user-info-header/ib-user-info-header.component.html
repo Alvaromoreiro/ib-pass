@@ -1,0 +1,47 @@
+<div *ngIf="!isUserDataLoading && userData && isLogged">
+    <div *ngIf="isGreyBar" class="ib-header-common__column">
+        <ul class="ib-header-common__items">
+            <li class="ib-header-common__items-item">
+                <div class="ib-header-common__items-item__link">
+                    <span *ngIf="!imageSrc"
+                          class="ib-image-header__spacing ib-header-common__items-item__icon icon-usuario_logado"></span>
+                    <img *ngIf="imageSrc && !isOnb" [src]="imageSrc" class="ib-image-header">
+                    <span class="ib-header-common__items-item__text">{{'HELLO_TEXT'|translate}}
+                        {{name}}</span>
+                </div>
+            </li>
+            <li *ngIf="userData.appUserInfo.userType === 'IB_PLUS' && userData.appUserInfo.avios !== null && userData.appUserInfo.avios !== undefined"
+                class="ib-header-common__items-item">
+                <span class="ib-header-common__items-item__text">{{userData.appUserInfo.avios | aviosFormat}} {{'AVIOS_TEXT'|translate}}</span>
+            </li>
+            <ng-container *ngIf="isOnb && roleOnb?.userInfo.role.description">
+                <li>
+                    <span class="ib-header-common__items-item__text">{{roleOnb?.userInfo.role.description}}</span>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+    <div *ngIf="!isGreyBar" class="ib-tools__logueado">
+        <span *ngIf="!imageSrc"
+              class="ib-image-header__spacing ib-header-common__items-item__icon icon-usuario_logado"></span>
+        <img *ngIf="imageSrc" [src]="imageSrc" class="ib-image-header__spacing">
+        <span class="ib-tools__logueado-txt">{{'MENU_BAR_GREETING'|translate}}
+            <a *ngIf="!isIbZero" id="menus-header-grey-bar-{{userData.personalInfo.name}}-link"
+               href="{{'GREY_HEADER_LINK_NAME'|link}}"
+               title="{{userData.personalInfo.name}}"
+               class="ib-tools__logueado-txt ib-tools__logueado-txt--highlight">{{name}}
+            </a>
+            <p *ngIf="isIbZero" id="menus-header-grey-bar-{{name}}-link"
+               title="{{name}}"
+               class="ib-tools__logueado-txt">{{name}}
+            </p>
+        </span>
+        <a *ngIf="userData.appUserInfo.userType === 'IB_PLUS' && userData.appUserInfo.avios !== null && userData.appUserInfo.avios !== undefined"
+           id="menus-header-grey-bar-avios-link" href="{{'GREY_HEADER_LINK_AVIOS'|link}}"
+           title="{{'MENU_BAR_AVIOS'|translate}}"
+           class="ib-tools__logueado-txt ib-tools__logueado-txt--highlight ib-tools__logueado-txt--separator">
+            {{'MENU_BAR_AVIOS'|translate}}
+            <span class="ib-tools__logueado-txt">{{userData.appUserInfo.avios | aviosFormat}}</span>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,281 @@
+@import "src/styles/component-tools";
+
+form{
+    display: flex;
+}
+
+:host ::ng-deep {
+    .p-autocomplete {
+        width: 100%;
+        height: rem(56);
+        border-radius: rem(0);
+        font-family: var(--font-headline);
+    }
+
+    .p-component {
+        width: 100%;
+        font-size: rem(16);
+        font-weight: normal;
+    }
+
+    .p-inputtext {
+        padding: 0 rem(8);
+        border: rem(1) solid var(--ib-color-grey-400-cc);
+        border-right: 0 ;
+        font-family: var(--font-headline);
+        font-size: rem(16);
+        color: var(--ib-color-grey-800-33);
+        appearance: none;
+        background: color(gray-60);
+        cursor: pointer;
+        // transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+        &:not(:placeholder-shown),
+        &:focus {
+            padding: rem(25) rem(8) rem(11);
+        }
+
+        &:focus {
+            border-color: color(orange-10);
+            outline: none;
+
+            + .p-button {
+            border-color: color(orange-10);
+            border-right: rem(1) solid color(orange-10);
+        }
+        }
+    }
+
+    .p-button {
+        border : rem(1) solid var(--ib-color-grey-400-cc);
+        border-right: 0 ;
+        border-left: 0;
+        font-size: rem(1);
+        background: color(gray-60);
+        // background: color(white);
+        // transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+
+        // &:hover {
+        //     // border: none;
+        //     // background: color(white);
+        // }
+
+        &:focus {
+            box-shadow: none;
+            outline: none;
+        }
+    }
+
+    .p-button.p-button-icon-only {
+        width: rem(32);
+        padding: rem(12) 0;
+    }
+
+    .p-button .p-button-icon {
+        margin-right: rem(16);
+    }
+
+    .p-autocomplete-item {
+        padding: rem(8) rem(16);
+        margin: 0;
+        border: 0 none;
+        border-radius: 0;
+        font-family: var(--font-regular);
+        font-size: rem(13);
+        font-weight: 400;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: rem(18);
+        color: color(gray-10);
+        background: transparent;
+        transition: box-shadow 0.2s;
+
+        &:hover,&.p-highlight {
+            background: color(gray-50);
+        }
+    }
+
+    .p-autocomplete-panel {
+        border: 0 none;
+        border-radius: rem(0);
+        color: color(gray-10);
+        background: color(white);
+        box-shadow: 0 rem(2) rem(3) 0 rgb(0 0 0 / 32%), 0 rem(-1) rem(4) 0 rgb(0 0 0 / 11%);
+    }
+
+    .p-autocomplete-items.p-autocomplete-virtualscroll {
+        padding: 0;
+    }
+
+    .p-autocomplete-panel .p-autocomplete-items.p-autocomplete-virtualscroll .cdk-virtual-scroll-content-wrapper {
+        padding: rem(12) 0;
+    }
+
+    .p-icon-wrapper {
+        position: relative;
+        top: rem(6);
+    }
+
+    .rotate {
+        transform: rotate(180deg);
+    }
+
+    .p-overlay.p-component{
+        top: rem(56) !important;
+        left: rem(0) !important;
+    }
+
+    .input--error-prefix{
+        .p-inputtext{
+            border-color: color(red-20);
+        }
+
+        .p-button{
+            border-color: color(red-20);
+            border-right: rem(1) solid color(red-20);
+        }
+    }
+}
+
+.container{
+    &-prefix{
+        flex: 0 0 38.61%;
+    }
+
+    &-phone{
+        flex: 1;
+    }
+}
+
+.input {
+    &-container {
+        position: relative;
+        width: 100%;
+
+        &:last-child {
+            padding-bottom: rem(16);
+        }
+    }
+
+    &-text {
+        display: flex;
+        width: 100%;
+        height: rem(56);
+        align-items: center;
+        padding: 0 rem(8);
+        border: rem(1) solid var(--ib-color-grey-400-cc);
+        border-left: 0;
+        font-family: var(--font-headline);
+        font-size: rem(16);
+        color: var(--ib-color-grey-800-33);
+        background: var(--ib-color-white);
+
+        &:focus {
+            border-color: var(--ib-color-primary-orange);
+            border-left: rem(1) solid var(--ib-color-primary-orange);
+            outline: none;
+        }
+
+        &:not(:placeholder-shown),
+        &:focus {
+            padding: rem(25) rem(8) rem(11);
+        }
+
+        &:disabled {
+            background-color: var(--ib-color-grey-200-ee);
+        }
+    }
+
+    &-label {
+        position: relative;
+        bottom: rem(10);
+        left: rem(8);
+        overflow: hidden;
+        width: calc(100% - rem(32));
+        margin-top: rem(-19);
+        font-family: var(--font-headline);
+        font-size: rem(16);
+        text-overflow: ellipsis;
+        line-height: normal;
+        color: var(--ib-color-grey-700-66);
+        cursor: text;
+        transform: translateY(-50%);
+        transition: top ease, transform 0.25s;
+        white-space: nowrap;
+
+        &--prefix{
+            bottom: rem(32);
+            font-family: var(--font-families-verdana);
+            font-size: rem(11);
+            color: var(--ib-color-grey-700-66);
+            text-transform: uppercase;
+            transform: translate(0);
+        }
+    }
+
+    &--error{
+        .input-text {
+            border-color: color(red-20);
+            border-left: rem(1) solid color(red-20);
+        }
+    }
+
+    &-text:focus + &-label,
+    &-text:not(:placeholder-shown) + &-label {
+        bottom: rem(32);
+        font-family: var(--font-families-verdana);
+        font-size: rem(11);
+        color: var(--ib-color-grey-700-66);
+        text-transform: uppercase;
+        transform: translate(0);
+    }
+}
+
+.item{
+    &-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: rem(12);
+    }
+
+    &-prefix{
+        font-weight: 700;
+        color: var(--ib-color-grey-800-33);
+    }
+}
+
+.ib-alert {
+    display: flex;
+    flex-direction: column;
+    gap: rem(4);
+}
+
+@include media-query-range("mf-sm") {
+    :host ::ng-deep {
+        .p-inputtext {
+            &:not(:placeholder-shown),
+            &:focus {
+                padding-right: rem(16);
+                padding-left: rem(16);
+            }
+
+        }
+    }
+
+    .input {
+        &-text {
+            padding: 0 rem(16);
+
+            &:not(:placeholder-shown),
+            &:focus {
+                padding-right: rem(16);
+                padding-left: rem(16);
+            }
+        }
+
+        &-label {
+            left: rem(16);
+        }
+    }
+
+}

@@ -1,0 +1,252 @@
+/* -------------------------------------------------------------
+    #CARD DESCRIPTION
+----------------------------------------------------------------- */
+.#{$wefront__namespace}card-description {
+    position: relative;
+    display: block;
+    font-size: 0;
+
+    &__card {
+        position: relative;
+        display: inline-block;
+        width: rem(153);
+        margin-right: rem(32);
+        vertical-align: top;
+
+        &--small {
+            width: rem(124);
+        }
+    }
+
+    &__figure {
+        display: block;
+    }
+
+    &__content {
+        display: inline-block;
+        width: calc(100% - 190px);
+        vertical-align: top;
+    }
+
+    &__container-txt {
+        position: relative;
+        display: block;
+        margin-bottom: rem(15);
+        font-size: 0;
+
+        :nth-child(1) {
+            display: inline-block;
+            min-width: rem(215);
+            max-width: remcalc(50%, " - ", rem(30));
+            padding-right: rem(50);
+            vertical-align: top;
+        }
+
+        :nth-child(2) {
+            display: inline-block;
+            max-width: 50%;
+            vertical-align: top;
+        }
+    }
+
+    &__link-container {
+        position: relative;
+        display: block;
+        text-align: right;
+    }
+
+    &__link {
+        display: inline;
+        font-family: $font-normal;
+        font-size: rem(13);
+        line-height: rem(16);
+        color: color(primary);
+        vertical-align: top;
+
+        &::after {
+            content: "\e92f";
+            font-family: $font-icons;
+            font-size: rem(16);
+            line-height: rem(19);
+            color: color(primary);
+        }
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: color(secondary);
+            outline: none;
+        }
+    }
+
+    &__txt {
+        position: absolute;
+        display: block;
+        overflow: hidden;
+        max-width: rem(95);
+        font-family: $font-special;
+        font-size: rem(11);
+        font-weight: bold;
+        text-overflow: ellipsis;
+        line-height: 1;
+        color: color(white);
+        white-space: nowrap;
+
+        &--name {
+            bottom: rem(23);
+            left: rem(12);
+        }
+
+        &--number {
+            bottom: rem(14);
+            left: rem(12);
+        }
+
+        &--date {
+            bottom: rem(4);
+            left: rem(30);
+        }
+    }
+}
+
+// Responsive
+
+@include media-query('lg') {
+    .#{$wefront__namespace}card-description {
+        &__card {
+            &--small {
+                width: rem(142);
+            }
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}card-description {
+        &__card {
+            &--small {
+                width: rem(168);
+            }
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}card-description {
+        &__card {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: rem(30);
+
+            &--small {
+                width: rem(162);
+                margin: 0 auto;
+            }
+        }
+
+        &__content {
+            width: 100%;
+        }
+
+        &__container-txt {
+            :nth-child(1) {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                padding-right: 0;
+            }
+
+            :nth-child(2) {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        &__link-container {
+            margin-bottom: rem(16);
+            text-align: left;
+        }
+
+        &__txt {
+            max-width: rem(200);
+
+            &--name {
+                bottom: 18%;
+                left: 8%;
+            }
+
+            &--number {
+                bottom: 13%;
+                left: 8%;
+            }
+
+            &--date {
+                bottom: 6.3%;
+                left: 18%;
+                max-width: rem(100);
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}card-description {
+        &__card {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: rem(30);
+
+            &--small {
+                .#{$wefront__namespace}card-description__figure {
+                    width: rem(162);
+                    margin: 0 auto;
+                }
+            }
+        }
+
+        &__content {
+            width: 100%;
+        }
+
+        &__container-txt {
+            :nth-child(1) {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                padding-right: 0;
+            }
+
+            :nth-child(2) {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        &__link-container {
+            margin-bottom: rem(16);
+            text-align: left;
+        }
+
+        &__txt {
+            max-width: rem(150);
+
+            &--name {
+                bottom: 20%;
+                left: 8%;
+            }
+
+            &--number {
+                bottom: 13%;
+                left: 8%;
+            }
+
+            &--date {
+                bottom: 6%;
+                left: 18%;
+                max-width: rem(100);
+            }
+        }
+    }
+}

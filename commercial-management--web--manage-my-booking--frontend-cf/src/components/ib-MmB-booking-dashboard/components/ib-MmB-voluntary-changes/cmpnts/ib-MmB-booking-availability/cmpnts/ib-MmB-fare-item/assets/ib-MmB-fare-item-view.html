@@ -1,0 +1,12 @@
+<button type="button" ng-if="fICtrl.model" ng-click="fICtrl.selectCabin($event)"
+    class="ib-box-mini-fare__box {{'ib-box-mini-fare__box--type-' + fICtrl.model.type}} {{'ib-box-mini-fare__box--' + fICtrl.model.number}} ib-box-mini-fare__box--outstanding ib-box-mini-fare__box--mr"
+    data-type="{{fICtrl.model.showitem}}" data-flight-button-selected="" ng-disabled="fICtrl.model.disabled" style="overflow-wrap: break-word;">
+    <span ng-if="fICtrl.model.cabinLetter === 'T' || fICtrl.model.cabinLetter === 'E'" class="ib-box-mini-fare__box-title" ng-class="fICtrl.model.best ? 'ib-box-mini-fare__box-title' : 'ib-box-mini-fare__box-title--without-icon'" ng-bind="fICtrl.model.title" style="overflow-wrap: break-word;"></span>
+    <span ng-if="fICtrl.model.cabinLetter !== 'T' && fICtrl.model.cabinLetter !== 'E'" class="ib-box-mini-fare__box-title" ng-class="fICtrl.model.best ? 'ib-box-mini-fare__box-title--with-icon' : 'ib-box-mini-fare__box-title'" ng-bind="fICtrl.model.title" style="overflow-wrap: break-word;"></span>
+    <span class="ib-box-mini-fare__box-footer">
+        <span class="ib-box-mini-fare__box-text" ng-if="fICtrl.model.text" ng-bind="fICtrl.model.text"></span>
+        <span class="ib-box-mini-fare__box-price ib-box-mini-fare__box-price--old"
+            ng-if="fICtrl.model.priceold">{{fICtrl.model.priceold}}</span>
+        <span ng-class="{'ib-box-mini-fare__box-price--long':fICtrl.model.long,'ib-box-mini-fare__box-price--bold':fICtrl.model.bold}" class="ib-box-mini-fare__box-price " ng-if="fICtrl.model.price">{{fICtrl.model.price}}</span>
+    </span>
+</button>

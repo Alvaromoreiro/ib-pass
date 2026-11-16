@@ -1,0 +1,24 @@
+@use "sass:math";
+$base-font-size: 	16px;
+$base-line-height: 	1.5;
+
+// this value may vary for each font unitless value relative to 1em
+$cap-height: 		0.64;
+
+@mixin baseline($font-size, $scale: 2) {
+    // rhythm unit
+    $rhythm: $base-line-height * $font-size / $scale;
+    // number of rhythm units that can fit the font-size
+    $lines: math.ceil(($font-size + 0.001px) / $rhythm);
+    // calculate the new line-height
+    $line-height: $rhythm * $lines / $font-size;
+    $baseline-distance: ($line-height - $cap-height) / 2;
+    $padding-top: $baseline-distance + em;
+    $margin-bottom: $base-line-height - $baseline-distance + em;
+
+    padding-top: $padding-top;
+    margin-bottom: $margin-bottom;
+    // use the results
+    font-size: $font-size;
+    line-height: $line-height;
+}

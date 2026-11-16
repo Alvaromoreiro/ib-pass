@@ -1,0 +1,62 @@
+<div class="ib-table-daily ib-table-daily--simple" searcher-flights-calendar>
+        <div class="ib-table-daily__content-scrollable">
+            <div class="ib-table-daily__info-scrollable">
+                <span class="ib-table-daily__info-scrollable-message">{{'CALDIT_SCROLL_MESSAGE' |translate}}</span>
+            </div>
+            <div class="ib-table-daily__scrollable">
+                <table class="ib-table-daily__table-content">
+                    <caption class="u-hide-accessible">{{'CALDIT_TABLE_HIDE_ACCESSIBLE'|translate}}</caption>
+                    <thead class="ib-table-daily__header">
+                        <tr class="ib-table-daily__row ib-table-daily__row--narrow">
+                            <th id="title-0-head" class="ib-table-daily__title" ng-class="{'ib-table-daily__title--hovered':calendarMatrixCtrl.matrixModel.flightDay===1}" >
+                                <span class="ib-table-daily__date-weekday" data-shortcut="{{'WEEKDAY_MONDAY'|translate}}"><span>{{'WEEKDAY_MONDAY'|translate}}</span></span>
+                            </th>
+                            <th id="title-1-head" class="ib-table-daily__title" ng-class="{'ib-table-daily__title--hovered':calendarMatrixCtrl.matrixModel.flightDay===2}">
+                                <span class="ib-table-daily__date-weekday"  data-shortcut="{{'WEEKDAY_TUESDAY'|translate}}"><span>{{'WEEKDAY_TUESDAY'|translate}}</span></span>
+                            </th>
+                            <th id="title-2-head" class="ib-table-daily__title" ng-class="{'ib-table-daily__title--hovered':calendarMatrixCtrl.matrixModel.flightDay===3}">
+                                <span class="ib-table-daily__date-weekday" data-shortcut="{{'WEEKDAY_WEDNESDAY'|translate}}"><span>{{'WEEKDAY_WEDNESDAY'|translate}}</span></span>
+                            </th>
+                            <th id="title-3-head" class="ib-table-daily__title" ng-class="{'ib-table-daily__title--hovered':calendarMatrixCtrl.matrixModel.flightDay===4}">
+                                <span class="ib-table-daily__date-weekday"  data-shortcut="{{'WEEKDAY_THURSDAY'|translate}}"><span>{{'WEEKDAY_THURSDAY'|translate}}</span></span>
+                            </th>
+                            <th id="title-4-head" class="ib-table-daily__title" ng-class="{'ib-table-daily__title--hovered':calendarMatrixCtrl.matrixModel.flightDay===5}">
+                                <span class="ib-table-daily__date-weekday" data-shortcut="{{'WEEKDAY_FRYDAY'|translate}}"><span>{{'WEEKDAY_FRYDAY'|translate}}</span></span>
+                            </th>
+                            <th id="title-5-head" class="ib-table-daily__title" ng-class="{'ib-table-daily__title--hovered':calendarMatrixCtrl.matrixModel.flightDay===6}">
+                                <span class="ib-table-daily__date-weekday" data-shortcut="{{'WEEKDAY_SATURDAY'|translate}}"><span>{{'WEEKDAY_SATURDAY'|translate}}</span></span>
+                            </th>
+                            <th id="title-6-head" class="ib-table-daily__title" ng-class="{'ib-table-daily__title--hovered':calendarMatrixCtrl.matrixModel.flightDay===0}">
+                                <span class="ib-table-daily__date-weekday" data-shortcut="{{'WEEKDAY_SUNDAY'|translate}}"><span>{{'WEEKDAY_SUNDAY'|translate}}</span></span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="ib-table-daily__body">
+                    <tr ng-repeat="(indexWeek, week) in calendarMatrixCtrl.matrixModel" class="ib-table-daily__row">
+                        <td ng-repeat="(indexDay, day) in week" headers="title-{{::indexDay}}-head" class="ib-table-daily__col" ng-class="{'ib-table-daily__col--empty':!day.available}">
+                            <div ng-if="!day.available" class="ib-table-daily__action-cont">
+                                <input disabled="disabled" type="radio" name="groupRadios" id="radio-{{::indexDay}}-{{::indexWeek}}"  class="ib-table-daily__action-input" ng-value="calendarMatrixCtrl.matrixModel[indexWeek][indexDay]" >                                    
+                                <label for="radio-{{::indexDay}}-{{::indexWeek}}" class="ib-table-daily__action-label ib-table-daily__action-label--dark-hover ib-table-daily__action-label--unselectable unselectable ib-table-daily__action-label--big" ng-class="{'ib-table-daily__action-label--active' : day.firstDate}">
+                                    <span ng-if="day.monthName" class="ib-table-daily__month ib-table-daily__month--top" data-shortcut="{{day.monthName | uppercase | ShortenerFormatFilter:3}}"><span>{{day.monthName | uppercase}}</span></span>
+                                    <span class="ib-table-daily__day">{{day.flightDateNumber}}</span>
+                                    <span ng-if="day.price" class="ib-table-daily__detail">{{'CALDIT_PRICE_FROM' |translate}}</span>
+                                    <span ng-if="day.price" class="ib-table-daily__price ib-table-daily__price--responsive">{{day.price}} </span>
+                                    <span ng-if="day.price" class="ib-table-daily__currency ib-table-daily__currency--responsive">{{'IBPURC_PAYMENTS_DISCOUNTS_AVIOS' |translate}}</span>
+                                </label>
+                            </div>
+                            <div ng-if="day.available" class="ib-table-daily__action-cont">
+                                <input type="radio" name="groupRadios" id="radio-{{::indexDay}}-{{::indexWeek}}" ng-model="calendarMatrixCtrl.selectedDay" ng-click="calendarMatrixCtrl.searchCalendarDayAvailability(day)" class="ib-table-daily__action-input" ng-value="calendarMatrixCtrl.matrixModel[indexWeek][indexDay]">
+                                <label for="radio-{{::indexDay}}-{{::indexWeek}}" class="ib-table-daily__action-label ib-table-daily__action-label--dark-hover ib-table-daily__action-label--unselectable ib-table-daily__action-label--big"  ng-class="{'ib-table-daily__action-label--active' : day.firstDate}" >
+                                    <span ng-if="day.monthName" class="ib-table-daily__month ib-table-daily__month--top" data-shortcut="{{day.monthName | uppercase | ShortenerFormatFilter:3}}"><span>{{day.monthName | uppercase}}</span></span>
+                                    <span class="ib-table-daily__day">{{day.flightDateNumber}}</span>
+                                    <span ng-if="day.price" class="ib-table-daily__detail">{{'CALDIT_PRICE_FROM' |translate}}</span>
+                                    <span ng-if="day.price" class="ib-table-daily__price ib-table-daily__price--responsive">{{day.price}} </span>
+                                    <span ng-if="day.price" class="ib-table-daily__currency ib-table-daily__currency--responsive">{{'IBPURC_PAYMENTS_DISCOUNTS_AVIOS' |translate}}</span>
+                                </label>
+                            </div>
+                        </td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

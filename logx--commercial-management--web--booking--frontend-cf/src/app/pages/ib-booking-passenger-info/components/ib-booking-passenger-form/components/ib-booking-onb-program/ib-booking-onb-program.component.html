@@ -1,0 +1,32 @@
+<ng-container [formGroup]="passengerForm">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+        <div class="ib-check ib-check--regular">
+            <input type="checkbox" id="check_obn_{{index}}" name="check_obn_{{index}}" class="ib-check__input"
+                [formControlName]="'check_obn_' + index"
+                (change)="checkOnBFormValues()">
+            <label for="check_obn_{{index}}" class="ib-check__label">
+                <span class="ib-check__text">{{'IBAIRP_PASSENGER_FORM_ON_BUSINESS_CHECK_BOX'|translate}}</span>
+            </label>
+        </div>
+    </div>
+    <div class="u-pt-xmedium" *ngIf="passengerForm.controls['check_obn_' + index].value">
+        <div class="ib-layout__line-spacing">
+            <div class="ib-input" [ngClass]="{'ib-input--error': submitState && passengerForm.controls['ob_number_card_' + index].invalid}">
+                <input class="ib-input__input" placeholder=" "
+                    type="text"
+                    id="ob_number_card_{{index}}"
+                    name="ob_number_card_{{index}}"
+                    [formControlName]="'ob_number_card_' + index"
+                    [maxlength]="maxLength"
+                    [ibValidatorCleanerOnBusiness]="cleaner"/>
+                <label class="ib-input__label" for="ob_number_card_{{index}}">{{'IBAIRP_PASSENGER_FORM_ON_BUSINESS_NUMBER'|translate}}</label>
+            </div>
+            <div id="bbki-passenger-ob-number-{{index}}-err-modal"
+                *ngIf="submitState && passengerForm.controls['ob_number_card_' + index].invalid">
+                <div class="ib-alert ib-alert--error" *ngIf="passengerForm.controls['ob_number_card_' + index].errors?.required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                <div class="ib-alert ib-alert--error" *ngIf="passengerForm.controls['ob_number_card_' + index].errors?.modseven">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+                <div class="ib-alert ib-alert--error" *ngIf="passengerForm.controls['ob_number_card_' + index].errors?.pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+            </div>
+        </div>
+    </div>
+</ng-container>

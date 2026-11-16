@@ -1,0 +1,145 @@
+/* -------------------------------------------------------------
+    #NAVIGATION
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}navegation {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: rem(32);
+
+    &__item {
+        &--self-left {
+            align-self: flex-start;
+        }
+    }
+
+    &__link {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-end;
+        font-family: $wefront__base-font-family;
+        font-size: rem(13);
+        text-decoration: none;
+        line-height: rem(22);
+        color: color(gray-10);
+
+        &--text {
+            text-decoration: underline;
+        }
+
+        &--icon {
+            position: relative;
+            left: rem(-5);
+            font-size: rem(20);
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: none;
+            .#{$wefront__namespace}navegation__link {
+                &--text {
+                    text-decoration: underline;
+                    color: color(primary);
+                }
+
+                &--icon {
+                    text-decoration: none;
+                    color: color(primary);
+                }
+            }
+        }
+    }
+
+    &--mt-big {
+        margin-top: rem(42);
+    }
+
+    &--mt-small {
+        margin-top: rem(8);
+    }
+
+    &--refunds {
+        flex-flow: row nowrap;
+        margin-top: rem(32);
+        .#{$wefront__namespace}navegation {
+            &__item {
+                width: auto;
+            }
+
+            &__link {
+                display: inline-block;
+                font-size: rem(14);
+                line-height: rem(17);
+            }
+
+        }
+    }
+}
+
+//Responsive
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}navegation {
+        flex-flow: column nowrap;
+        text-align: center;
+
+        &__item {
+            width: 100%;
+            margin-top: rem(24);
+
+            &:first-child {
+                width: auto;
+                margin-top: 0;
+            }
+        }
+
+        &--mobile-nowrap {
+            flex-flow: row nowrap;
+            .#{$wefront__namespace}navegation {
+                &__item {
+                    width: auto;
+                    margin-top: rem(32);
+                }
+            }
+        }
+
+        &--refunds {
+            flex-flow: row nowrap;
+            margin-top: rem(16);
+            text-align: left;
+            .#{$wefront__namespace}navegation {
+                &__item {
+                    width: 100%;
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}navegation {
+        &__item {
+            display: block;
+            margin-top: rem(24);
+
+        }
+
+        &--refunds {
+            flex-flow: row wrap;
+            .#{$wefront__namespace}navegation {
+                &__item {
+                    text-align: center;
+
+                    &:first-child {
+                        order: 1;
+                        margin-top: rem(32);
+                    }
+                }
+            }
+        }
+    }
+}

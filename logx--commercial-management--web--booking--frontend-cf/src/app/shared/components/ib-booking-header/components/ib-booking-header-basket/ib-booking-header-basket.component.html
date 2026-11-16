@@ -1,0 +1,119 @@
+<div class="basket ib-header-common__column-coins"
+    ibBookingCollapse
+    [collapsed]="true"
+    [blockScrollMobile]="true"
+    collapseTrigger="basketTrigger"
+    collapseContainer="basketContainer">
+    <button class="basket-trigger"
+        title="{{'DEPLOY_SUMMARY_BASKET_TEXT'|translate}}"
+        (click)="toggle()"
+        [ngClass]="{'mobile-instance': mobileInstance}"
+        aria-controls="basketContainer"
+        basketTrigger focusin>
+        <div class="ib-header-common__row-coins"
+            [ngClass]="{'ib-header-common__row-coins--active' : open}">
+            <span class="ib-header-common__row-coins ib-header-common__row-coins--left">
+                {{'TOTAL_TEXT'|translate}} </span>
+            <div class="ib-header-common__row-coins ib-header-common__row-coins--right ">
+                <span class="ib-header-common__price">
+                    {{model?.total?.totalAvios ? model.total.totalAvios + ' '+ (
+                        isONB ? ( 'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED'|translate ) : ( 'IBPURC_PAYMENTS_DISCOUNTS_AVIOS' |translate ) ) + ' + ' : '' }}
+                    {{model?.total?.formatted}}
+                </span>
+                <span class="ib-header-common__collapse ib-help__collapse-icon" [ngClass]="open ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+            </div>
+        </div>
+    </button>
+    <div id="basketContainer" class="collapse-container" basketContainer>
+        <div class="ib-header-common__box">
+            <div class="ib-layout__form-center">
+                <div class="ib-summary-breakdown">
+                    <header class="ib-summary-breakdown__header">
+                        <h2 class="ib-heading ib-heading--type-4">{{'SUMMARY_BASKET_TEXT'|translate}}</h2>
+                        <button class="ib-summary-breakdown__close icon-cerrar hidden-md hidden-xl hidden-lg"
+                            basketTrigger
+                            (click)="toggle()">
+                            <span class="u-hide-accessible">{{'CLOSE_COLLAPSE_TEXT'|translate}}</span>
+                        </button>
+                    </header>
+                    <div class="ib-summary-breakdown__body no_padding ib-summary-breakdown__body--padding-none">
+                        <!-- TRIPS -->
+                        <ib-booking-header-basket-trips *ngIf="model?.trips" [model]="model?.trips?.trips" [totalTrips]="model?.trips?.total"></ib-booking-header-basket-trips>
+
+                        <!--BUNDELING-->
+                        <ib-booking-header-basket-bundle *ngIf="model?.bundle?.hasBundle" [model]="model?.bundle" [basketFunctions]="commonsBasketFunctions" [deleteFlag]="model?.discountsModel?.hasDiscounts && (model?.discountsModel?.discounts?.DYNAMIC_PRICING?.type !== 'DYNAMIC_PRICING' ? true: false)" [loadingVoucher]="isLoadingVoucher"></ib-booking-header-basket-bundle>
+
+                        <!--Baggages-->
+                        <ib-booking-header-basket-baggages *ngIf="model?.baggages?.hasBaggage" [model]="model?.baggages" [basketFunctions]="commonsBasketFunctions" [deleteFlag]="model?.discountsModel?.hasDiscounts && (model?.discountsModel?.discounts?.DYNAMIC_PRICING?.type !== 'DYNAMIC_PRICING' ? true: false)" [loadingVoucher]="isLoadingVoucher"></ib-booking-header-basket-baggages>
+                        
+                        <!--PETS-->
+                        <ib-booking-header-basket-petc  *ngIf="model?.petc?.hasPetc" [model]="model?.petc" [basketFunctions]="commonsBasketFunctions" [deleteFlag]="model?.discountsModel?.hasDiscounts && (model?.discountsModel?.discounts?.DYNAMIC_PRICING?.type !== 'DYNAMIC_PRICING' ? true: false)" [loadingVoucher]="isLoadingVoucher"></ib-booking-header-basket-petc>
+
+                        <!-- Equipaje Especial-->
+                        <ib-booking-header-basket-speqs *ngIf="model?.speqs?.hasSpeqs" [model]="model?.speqs" [basketFunctions]="commonsBasketFunctions" [deleteFlag]="model?.discountsModel?.hasDiscounts && (model?.discountsModel?.discounts?.DYNAMIC_PRICING?.type !== 'DYNAMIC_PRICING' ? true: false)" [loadingVoucher]="isLoadingVoucher"></ib-booking-header-basket-speqs>
+
+                        <!-- SEATS -->
+                        <ib-booking-header-basket-seats *ngIf="model?.seats?.hasSeats" [model]="model?.seats" [basketFunctions]="commonsBasketFunctions" [deleteFlag]="model?.discountsModel?.hasDiscounts && (model?.discountsModel?.discounts?.DYNAMIC_PRICING?.type !== 'DYNAMIC_PRICING' ? true: false)" [loadingVoucher]="isLoadingVoucher"></ib-booking-header-basket-seats>
+
+                        <!-- FLEXIBILIZATION -->
+                        <ib-booking-header-basket-section *ngIf="model?.flexibilization?.hasFlexibilization" [model]="model?.flexibilization" [basketFunctions]="commonsBasketFunctions" [deleteFlag]="model?.discountsModel?.hasDiscounts && (model?.discountsModel?.discounts?.DYNAMIC_PRICING?.type !== 'DYNAMIC_PRICING' ? true: false)" [loadingVoucher]="isLoadingVoucher"></ib-booking-header-basket-section>
+
+                        <!-- PRIORITY_BOARDING -->
+                        <ib-booking-header-basket-priority *ngIf="model?.priorityBoarding?.hasPriorityBoarding" [model]="model?.priorityBoarding" [basketFunctions]="commonsBasketFunctions" [deleteFlag]="model?.discountsModel?.hasDiscounts && (model?.discountsModel?.discounts?.DYNAMIC_PRICING?.type !== 'DYNAMIC_PRICING' ? true: false)" [loadingVoucher]="isLoadingVoucher"></ib-booking-header-basket-priority>
+
+                        <!-- UPGRADING -->
+                        <ib-booking-header-basket-upgrading *ngIf="model?.upgrading?.hasUpgrading" [model]="model?.upgrading" [basketFunctions]="commonsBasketFunctions"></ib-booking-header-basket-upgrading>
+
+                        <!-- INSURANCES -->
+                        <ib-booking-header-basket-insurances *ngIf="model?.insurance?.hasInsurance" [model]="model?.insurance" [basketFunctions]="commonsBasketFunctions" [deleteFlag]="model?.discountsModel?.hasDiscounts && (model?.discountsModel?.discounts?.DYNAMIC_PRICING?.type !== 'DYNAMIC_PRICING' ? true: false)" [loadingVoucher]="isLoadingVoucher"></ib-booking-header-basket-insurances>
+
+                        <!-- ALLIANZ FUSION INSURANCE -->
+                        <ib-booking-header-basket-insurances-allianz-fusion *ngIf="model?.insuranceAllianzFusionInfo?.hasInsuranceAllianzFusion" [model]="model?.insuranceAllianzFusionInfo" [basketFunctions]="commonsBasketFunctions" [deleteFlag]="model?.discountsModel?.hasDiscounts && (model?.discountsModel?.discounts?.DYNAMIC_PRICING?.type !== 'DYNAMIC_PRICING' ? true: false)" [loadingVoucher]="isLoadingVoucher"></ib-booking-header-basket-insurances-allianz-fusion>
+
+                        <!-- CARBON FOOTPRINT -->
+                        <ib-booking-header-basket-carbon-footprint *ngIf="model?.carbonFootprint?.hasCarbonFootprint" [model]="model?.carbonFootprint" [basketFunctions]="commonsBasketFunctions" [deleteFlag]="model?.discountsModel?.hasDiscounts" [loadingVoucher]="isLoadingVoucher"></ib-booking-header-basket-carbon-footprint>
+
+                        <!-- TRANSFERS GLOBICK -->
+                        <ib-booking-header-basket-transfers-globick *ngIf="model?.globickTransfers?.hasTransfersGlobick" [model]="model?.globickTransfers" [basketFunctions]="commonsBasketFunctions" [deleteFlag]="model?.discountsModel?.hasDiscounts && (model?.discountsModel?.discounts?.DYNAMIC_PRICING?.type !== 'DYNAMIC_PRICING' ? true: false)" [loadingVoucher]="isLoadingVoucher"></ib-booking-header-basket-transfers-globick>
+
+                        <!--ASSIST CARD-->
+                        <ib-booking-header-basket-assist-card  *ngIf="model?.assistCard?.hasAssistCard" [model]="model?.assistCard" [basketFunctions]="commonsBasketFunctions" [deleteFlag]="model?.discountsModel?.hasDiscounts && (model?.discountsModel?.discounts?.DYNAMIC_PRICING?.type !== 'DYNAMIC_PRICING' ? true: false)" [loadingVoucher]="isLoadingVoucher"></ib-booking-header-basket-assist-card>
+
+                        <!-- OTHERS FEES -->
+                        <ib-booking-header-basket-other-fees *ngIf="model?.othersModel?.others.length > 0" [model]="model?.othersModel"></ib-booking-header-basket-other-fees>
+
+                        <!-- Discounts -->
+                        <ib-booking-header-basket-discounts *ngIf="model?.discountsModel?.hasDiscounts" [model]="model?.discountsModel"></ib-booking-header-basket-discounts>
+
+                        <!-- TOTAL -->
+                        <footer class="ib-summary-breakdown-new-header__footer-long">
+                            <span class="ib-summary-breakdown-new-header__footer-long-total">{{'TOTAL_TEXT'|translate}}</span>
+                            <span class="ib-summary-breakdown-new-header__footer-long-price">
+                                {{model?.total?.totalAvios ? model.total.totalAvios + ' '+
+                                ( isONB ? ('AVAILABILITY_ON_BUSINESS_POINTS_NEEDED' | translate) : ('IBPURC_PAYMENTS_DISCOUNTS_AVIOS' |translate) ) + ' + ' : '' }}
+                                {{model?.total?.formatted}}</span>
+                            <button *ngIf="shouldShowPriceDetailCTA" (click)="openPriceDetailModal($event)" class="price-detail--mobile">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M7.94745 6.0906H8.0162C8.49848 6.0906 9.06355 5.96473 9.06355 5.19012V5.15139C9.06355 4.37195 8.49848 4.23156 8.0162 4.23156H7.94745C7.46469 4.23156 6.89865 4.37195 6.89865 5.15139V5.19012C6.89865 5.96473 7.46469 6.0906 7.94745 6.0906Z" fill="#333333"/>
+                                    <path d="M7.05117 11.7694H8.91296V7.12178H7.05117V11.7694Z" fill="#333333"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99829 1.00244C4.13186 1.00244 0.998047 4.13473 0.998047 7.99805C0.998047 11.8662 4.13186 14.9985 7.99829 14.9985C11.8633 14.9985 14.998 11.8662 14.998 7.99805C14.998 4.13473 11.8633 1.00244 7.99829 1.00244ZM2.72523 7.99805C2.72523 10.9076 5.08963 13.275 7.99829 13.275C10.905 13.275 13.2713 10.9076 13.2713 7.99805C13.2713 5.0933 10.905 2.72593 7.99829 2.72593C5.08963 2.72593 2.72523 5.0933 2.72523 7.99805Z" fill="#333333"/>
+                                </svg>
+                                <p>{{'SUMMARY_FEES' | translate}}</p>
+                            </button>
+                        </footer>
+                        <div class="ib-overlay-fly ib-overlay-fly--grey ib-overlay-fly--type-1"
+                            *ngIf="isLoading">
+                            <div class="ib-overlay-fly__container">
+                                <div class="ib-overlay-fly__icon">
+                                    <div class="circle"></div>
+                                    <div class="circle"></div>
+                                </div>
+                                <span class="ib-overlay-fly__text">{{'SHOPPING_BASKET_LOADING_UPDATING_TEXT'|translate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,183 @@
+/* -------------------------------------------------------------
+    #AVIOS-SLIDER
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}avios-slider {
+    position: relative;
+    display: block;
+    padding: rem(32) 0;
+    border: rem(1) solid color(gray-25);
+    font-size: 0;
+    background: color(gray-50);
+
+    &__content {
+        position: relative;
+        display: inline-block;
+        padding: 0 rem(24);
+        vertical-align: top;
+
+        &--slider {
+            width: rem(480);
+            padding: 0 rem(44) 0 rem(24);
+        }
+
+        &--discount {
+            width: calc(100% - 480px);
+            padding: 0 rem(32);
+            text-align: center;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: rem(-32);
+                left: rem(-118);
+                display: block;
+                width: rem(120);
+                height: rem(120);
+                border-top: rem(8) solid color(white);
+                border-right: rem(8) solid color(white);
+                border-bottom: rem(8) solid transparent;
+                border-left: rem(8) solid transparent;
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+            .#{$wefront__namespace}avios-slider__txt {
+                overflow: hidden;
+                max-width: 100%;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+
+    &__txt {
+        display: block;
+        font-family: $font-special;
+        font-size: rem(22);
+        line-height: 25px;
+        color: color(gray-10);
+    }
+
+    &__title {
+        display: block;
+        font-family: $font-normal;
+        font-size: rem(13);
+        font-weight: 700;
+        color: color(primary);
+    }
+
+    .#{$wefront__namespace}input__input {
+        overflow: hidden;
+        max-width: 100%;
+        text-overflow: ellipsis;
+    }
+
+    .rzslider {
+        .rz-bubble {
+            border-radius: rem(5);
+            font-family: $font-special;
+            font-size: rem(16);
+            color: color(white);
+            background: color(primary);
+        }
+
+        .rz-tick {
+            background: transparent;
+
+            &:nth-child(2n) {
+                .rz-tick-value {
+                    -ms-transform: translate(-95%, 0);
+                    transform: translate(-95%, 0);
+                }
+            }
+        }
+
+        .rz-tick-value {
+            font-family: $font-normal;
+            font-size: rem(13);
+            color: color(gray-15);
+        }
+
+        .rz-pointer {
+            top: rem(-8);
+            width: rem(24);
+            height: rem(24);
+            background: color(white);
+            box-shadow: 0 rem(1) rem(5) color(black, 0.2766);
+
+            &::after {
+                top: rem(2);
+                left: rem(2.5);
+                width: rem(19.5);
+                height: rem(19.5);
+                border-radius: 50%;
+                background: color(primary);
+            }
+        }
+
+        .rz-bar {
+            top: rem(10);
+            height: rem(20);
+            border-radius: rem(20);
+            background: color(white);
+        }
+
+        .rz-selection {
+            background: color(primary);
+        }
+    }
+}
+
+//Responsive
+@include media-query('lg') {
+    .#{$wefront__namespace}avios-slider {
+        &__content {
+            &--slider {
+                width: calc(100% - 200px);
+            }
+
+            &--discount {
+                width: rem(200);
+                text-align: center;
+            }
+        }
+
+        &__txt {
+            font-size: rem(18);
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}avios-slider {
+        padding: 0;
+        border: none;
+        font-size: 0;
+        background: transparent;
+
+        &__txt {
+            display: inline-block;
+            font-size: rem(18);
+            vertical-align: top;
+        }
+
+        &__content {
+            padding: rem(12) rem(18);
+            border: rem(1) solid color(gray-25);
+            background: color(gray-50);
+
+            &--slider {
+                width: 100%;
+                padding: rem(24) rem(24) rem(28);
+                margin-bottom: rem(10);
+            }
+
+            &--discount {
+                width: 100%;
+
+                &::before {
+                    display: none;
+                }
+            }
+        }
+    }
+}

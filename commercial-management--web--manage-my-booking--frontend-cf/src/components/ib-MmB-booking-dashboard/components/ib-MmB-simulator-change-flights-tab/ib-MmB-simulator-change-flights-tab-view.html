@@ -1,0 +1,148 @@
+<div
+    data-ng-if="(!simulatorChangeFlightsTabCtrl.reshopConditions.voluntaryChanges.enabled || simulatorChangeFlightsTabCtrl.reshopConditions.involuntaryChanges.enabled || (simulatorChangeFlightsTabCtrl.reshopConditions.callcenterInfo.enabled && simulatorChangeFlightsTabCtrl.reshopConditions.voluntaryChanges.reservationFailedConditions.length==0)) && simulatorChangeFlightsTabCtrl.isEmptyBasket">
+    <h2 data-ng-if="simulatorChangeFlightsTabCtrl.isDigital"
+    class="ib-box-menu__title ib-box-menu__title--font-size-30 hidden-md hidden-sm hidden-xs">{{'MMB_SVC_TITLE' | translate}}</h2>
+
+    <div class="ib-layout__line-spacing--medium u-text-center hidden-xl hidden-lg">
+        <h2 class="ib-heading ib-heading--title-box">{{'MMB_SVC_TITLE' | translate}}</h2>
+    </div>
+</div>
+<div class="ib-msg-alert ib-msg-alert--simulator-main-banner u-mb-xsmedium">
+    <p class="ib-msg-alert__icon icon-informacion_de_vuelos"></p>
+    <div>
+        <p class="ib-msg-alert__text-special">{{'MMB_SVC_CV_BANNER_MAIN_TEXT' | translate}}</p>
+        <p class="ib-msg-alert__text  u-mt-xsmall" data-ng-bind-html="simulatorChangeFlightsTabCtrl.linkManagementFees"></p>
+    </div>
+</div>
+
+<div>
+    <div data-ng-repeat="(i,flight) in simulatorChangeFlightsTabCtrl.flightsInfo.flights"
+        data-ng-if="simulatorChangeFlightsTabCtrl.reshopConditions.simulatedChanges.slices[$index].enabled">
+        <div class="mmb-box-slice">
+            <!-- HEADER -->
+            <div class="mmb-box-slice__header">
+                <div class="ib-check">
+                    <p class="mmb-box-slice__header--with-icon" data-ng-class="{
+                        'icon-avion_ida': $index === 0,
+                        'icon-avion_vuelta': $index === 1
+                    }"
+                        data-ng-bind="flight.departureCity.city.description+ ' (' + flight.departureCity.code + ')' + ' - ' + flight.arrivalCity.city.description + '(' + flight.arrivalCity.code + ')'">
+                    </p>
+                </div>
+                <div class="ib-check">
+                    <p class="ib-text u-ml-xmedium-sm u-ml-xmedium-xs">
+                        {{flight.departureDateParsed.formatedDate}} -
+                        {{flight.departureDateParsed.dateTime}}h.
+                    </p>
+                </div>
+            </div>
+            <!-- END HEADER -->
+
+            <!-- Info about cabin type SCVV-->
+            <div data-ng-if="condition.code === 'CAMBIO' && flight.segments[0].sliceId!=simulatorChangeFlightsTabCtrl.flightsMenssage[0].sliceId"
+                data-ng-repeat="condition in flight.segments[0].fareFamilyConditions">
+                <div class="mmb-box-slice__content">
+                    <div class="mmb-box-slice__content-fare">
+                        <div class="mmb-box-slice__content-fare-title">
+                            <h2 class="ib-text ib-text--xbig-special">
+                                {{condition.cabin}}
+                            </h2>
+                            <button
+                                data-ng-click="simulatorChangeFlightsTabCtrl.openFareModal(flight.segments[0].fareFamilyConditions)"
+                                class="mmb-box-slice__content-fare-title-info-button icon-informacion_2" focusin>
+                                <span class="hide-accessible">{{'MMB_VC_SEATS_TOOLTIP_MORE_INFO'|translate}}</span>
+                            </button>
+                        </div>
+                        <div>
+                            <p
+                                class="ib-text ib-text--bold ib-text__spacing--medium">
+                                {{(simulatorChangeFlightsTabCtrl.getConditionText(condition).main)}}<span ng-if="!simulatorChangeFlightsTabCtrl.flags.showVoluntaryFlexibleFlightChange && !simulatorChangeFlightsTabCtrl.flags.showFlexibilizationChangeSection && condition.units > 0">*</span>
+                            </p>
+                            <p ng-if="!simulatorChangeFlightsTabCtrl.flags.showVoluntaryFlexibleFlightChange && !simulatorChangeFlightsTabCtrl.flags.showFlexibilizationChangeSection && condition.units > 0"
+                                class="ib-text ib-text--xsmall mmb-box-slice__text-additional">
+                                (*) {{simulatorChangeFlightsTabCtrl.getConditionText(condition).additional}}.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mmb-box-slice__content-penalty">
+                        <p class="mmb-box-slice__content-penalty-icon icon-cambios_y_reembolsos"></p>
+                        <div>
+                            <h2 ng-if="!simulatorChangeFlightsTabCtrl.flags.showVoluntaryFlexibleFlightChange && !simulatorChangeFlightsTabCtrl.flags.showFlexibilizationChangeSection && condition.units > 0"
+                                class="mmb-box-slice__content-penalty-title">
+                                {{'MMB_SVC_CHANGE_FROM' | translate}} {{condition.units}}€
+                            </h2>
+                            <h2 ng-if="!simulatorChangeFlightsTabCtrl.flags.showVoluntaryFlexibleFlightChange && !simulatorChangeFlightsTabCtrl.flags.showFlexibilizationChangeSection && (condition.units === 0  || condition.units === null)"
+                                class="mmb-box-slice__content-penalty-title">
+                                {{'MMB_SVC_CHANGE_FROM' | translate}} 0€
+                            </h2>
+                            <p ng-if="condition.units > 0" class="ib-text ib-text--small">
+                                {{'MMB_SVC_CV_PENALTY_TEXT' | translate}}
+                            </p>
+                            <p ng-if="condition.units === 0  || condition.units === null" class="ib-text ib-text--small">
+                                {{'MMB_SVC_CV_NO_PENALTY_TEXT' | translate}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mmb-box-slice__searcher">
+                <!--flight search-->
+                <div class="mmb-box-slice__searcher-input">
+                    <div class="ib-input ib-input--icon ib-input--voluntary-changes notranslate"
+                        ng-controller="ibMmbDatepickerController as datepicker">
+                        <button class="ib-input__button" ng-click="datepicker.opened = !datepicker.opened"
+                            type="button">
+                            <span
+                                class="u-hide-accessible">{{'MMB_VC_FLIGHT_SEARCH_ENGINE_ACCESSIBLE_BUTTON_SPAN'|translate}}</span>
+                        </button>
+                        <label class="ib-input__label" for="{{'flight-date' + $index}}"
+                            ng-class="{'ib-input__label--focus' : focused && (flight.newDateSelected !== null) || flight.newDateSelected}">{{(flight.newDateSelected)
+                            &&
+                            ('MMB_VC_FLIGHT_CONFIRMATION_DETAILS_DATE'|
+                            translate | uppercase) || ('TABLE_COLUMN_DATE'|
+                            translate)}}</label>
+                        <input ng-change="simulatorChangeFlightsTabCtrl.changeDate($index)" class="ib-input__input"
+                            type="text" id="{{'flight-date' + $index}}" name="{{'flight-date' + $index}}"
+                            uib-datepicker-popup="dd/MM/yyyy" show-button-bar="false" popup-placement="bottom-right"
+                            ng-model="flight.newDateSelected" is-open="datepicker.opened"
+                            datepicker-options="flight.dateOptions" ng-required="true"
+                            alt-input-formats="datepicker.altInputFormats"
+                            datepicker-popup-template-url="{{simulatorChangeFlightsTabCtrl.routeDatepicker}}" readonly
+                            tabindex="-1" ng-focus="focused=true" ng-blur="focused=true" />
+                        <span type="button" class="ib-input__icon icon-calendario"></span>
+                    </div>
+                </div>
+                <!--time selector-->
+                <div class="mmb-box-slice__searcher-input">
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                        <div class="ib-select ib-select--label">
+                            <label class="ib-select__label" aria-label="¿Quien Viaja?" for="select-0">Horario
+                                vuelo</label>
+                            <ui-select ib-select-safari class="ib-select__action" ng-model="flight.timeRangeSelected"
+                                ng-change="simulatorChangeFlightsTabCtrl.changeTimeRange($index)">
+                                <ui-select-match class="ib-select__list-ipt">
+                                    <span class="ib-select__txt" ng-bind="$select.selected.name"></span>
+                                </ui-select-match>
+                                <ui-select-choices class="ib-select__list"
+                                    repeat="timeRange in (simulatorChangeFlightsTabCtrl.timeRangeOptions | filter: $select.search : simulatorChangeFlightsTabCtrl.timeZoneComparator)">
+                                    <span class="ib-select__list-txt" ng-bind="timeRange.name"></span>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Button to search flights -->
+    <button flights="simulatorChangeFlightsTabCtrl.flightsInfo.flights"
+        all-segments="simulatorChangeFlightsTabCtrl.flightsInfo.allSegments"
+        ng-click="simulatorChangeFlightsTabCtrl.searchChangesFlights()"
+        class="ib-button ib-button--w-big ib-button--right ib-button ib-button--w-big ib-button--rights ib-button--w-xlg-small ib-button--block-xs ib-button--margin-bottom-desktop" type="submit"
+        ng-disabled="!simulatorChangeFlightsTabCtrl.anyDateSelected()"
+        ng-class="{'ib-button--disabled' : !simulatorChangeFlightsTabCtrl.anyDateSelected()}">
+        {{'MMB_SVC_START_SIMULATION_BUTTON'|translate}}
+    </button>
+</div>

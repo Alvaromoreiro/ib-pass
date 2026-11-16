@@ -1,0 +1,159 @@
+<main class="ib-layout ib-layout--bck-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__header--container ib-layout__header--title">
+                    <h1 class="ib-heading ib-heading--type-1 u-mb-none">{{'IBPURC_TITLE_TEXT'|translate}}</h1>
+                    <p class="ib-heading ib-heading__subtitle ib-heading__subtitle--passengers u-mb-none">{{'IBAIRP_PASSENGER_FORM_DATA_INFO'|translate}}</p>
+                    <div class="ib-layout__header--second-container" data-ng-if="bookingPassengersInfoCtrl.showLargeFamilyText()">
+                        <h2 class="ib-heading ib-heading--type-4 ib-heading--no-margin">{{bookingPassengersInfoCtrl.showLargeFamilyText()|translate}}</h2>
+                        <p class="ib-heading ib-heading__subtitle--fare-family u-mb-none">{{'IBAIRP_PASSENGER_FORM_LARGE_FAMILY_BOX_INFO'|translate}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" data-ng-if="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.warningMessages.status || (bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.isLogged && bookingPassengersInfoCtrl.isIbPlus && !bookingPassengersInfoCtrl.isSoftUser)">
+                <div class="ib-msg-alert ib-msg-alert--info icon-informacion_2 alert u-mb-medium" data-ng-if="bookingPassengersInfoCtrl.showIbPlusUserDataWarning">
+                    <button id="bbki-passenger-info-alert-close-btn" class="ib-msg-alert__close icon-cerrar" type="button" aria-label="close" ng-click="bookingPassengersInfoCtrl.showIbPlusUserDataWarning = false">
+                        <span class="u-hide-accessible">{{'IBPURC_CLOSE_ALERT_MESSAGE'|translate}}</span>
+                    </button>
+                    <p class="ib-msg-alert__text ib-msg-alert__text--bold">{{bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.isLogged === bookingPassengersInfoCtrl.LOGIN_ONB ? ('IBAIRP_PASSENGER_ON_BUSINESS_LOGGED_ALERT_MESSAGE_TITLE'|translate) : ('IBPURC_LOGGED_ALERT_MESSAGE_TITLE'|translate)}}</p>
+                    <p class="ib-msg-alert__text"> {{bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.isLogged === bookingPassengersInfoCtrl.LOGIN_ONB ? ('IBAIRP_PASSENGER_ON_BUSINESS_LOGGED_ALERT_MESSAGE_TEXT'|translate) : ('IBPURC_LOGGED_ALERT_MESSAGE_TEXT' |translate)}}</p>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <fieldset id="bbki-passenger-info-login" data-ng-if="bookingPassengersInfoCtrl.showLoginForm">
+                    <legend class="u-hide-accessible">{{'IB_PLUS_LOGIN_ACCESIBLE_TITLE'|translate}}</legend>
+                    <div class="ib-layout__line-spacing">
+                        <div class="ib-box-accordion">
+                            <uib-accordion class="ib-accordion" close-others="oneAtATime">
+                                <div uib-accordion-group class="panel-default" is-open="true">
+                                    <uib-accordion-heading>
+                                        <span class="ib-box-accordion__title">{{(bookingPassengersInfoCtrl.isSoftUser ? ('IB_PERMANENT_LOGIN_TITLE'|translate) : ('IB_PLUS_LOGIN_TITLE'|translate))}}</span>
+                                        <span class="ib-accordion__icon"
+                                            ng-class="{'icon-flecha_1_arriba': status.open, 'icon-flecha_1_abajo': !status.open}"></span>
+                                        <div class="ib-box-accordion__title-container">
+                                            <span ng-if="bookingPassengersInfoCtrl.isSoftUser && !bookingPassengersInfoCtrl.isIbPlus" class="ib-box-accordion__subtitle">{{'IB_PERMANENT_IB_TEXT'|translate}}</span>
+                                            <span ng-if="bookingPassengersInfoCtrl.isSoftUser && bookingPassengersInfoCtrl.isIbPlus" class="ib-box-accordion__subtitle">{{'IB_PERMANENT_IB_PLUS_TEXT'|translate}}</span>
+                                            <span ng-if="!bookingPassengersInfoCtrl.isSoftUser" class="ib-box-accordion__subtitle">{{'IB_PLUS_TEXT_1'|translate}}
+                                                {{bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.aviosInfo.redemptionAvios}} {{'IB_PLUS_TEXT_2'|translate}}
+                                                {{bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.aviosInfo.cashDiscountWithAvios}}</span>
+                                        </div>
+                                    </uib-accordion-heading>
+                                    <div class="ib-box-accordion__content">
+                                        <ib-ui-login-reusable-iframe-component
+                                            loading="bookingPassengersInfoCtrl.showWaitingModal" flow="BKI">
+                                        </ib-ui-login-reusable-iframe-component>
+                                         <!-- <ib-ui-login-open-component id="bbki-passenger-info-plus-login-open" data-ng-if="!$root.isLogged" avios-info="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.aviosInfo" flow="bki"></ib-ui-login-open-component> -->
+                                    </div>
+                                </div>
+                            </uib-accordion>
+                        </div>
+                    </div>
+                </fieldset>
+                <form name="bookingPassengersInfoCtrl.passInfoForm" novalidate autocomplete="none">
+                    <div data-ng-repeat="(index,pas) in bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.passengerInfo track by index"
+                        class="ib-tab-scrollable__content" aria-labelledby="data-passenger-1">
+                        <ib-booking-passenger-form   
+                            id="bbki-passenger-info-passenger-form-{{index}}"
+                            [passengers-data]="bookingPassengersInfoCtrl.model.passengersFormData"
+                            [index]="index"
+                            [submit-state]="bookingPassengersInfoCtrl.passInfoForm.$submitted"
+                            [suitable-for-partner-discount]="bookingPassengersInfoCtrl.userSuitableForPartnerDiscount" 
+                            [fare-partner]="bookingPassengersInfoCtrl.farePartner"
+                            [local-storage-passengers-data]="bookingPassengersInfoCtrl.setPassengersDataToLocalStorage"
+                            [fill-large-family-checked]="bookingPassengersInfoCtrl.fillLargeFamilyChecked"
+                            [fill-resident-checked]="bookingPassengersInfoCtrl.fillResidentChecked"
+                            (form-validity)="bookingPassengersInfoCtrl.setPassengerFormValid($event)"
+                            (check-itravel-status)="bookingPassengersInfoCtrl.checkItravelStatus($event)"
+                            (reset-person-in-charge)="bookingPassengersInfoCtrl.resetPersonInCharge($event)"
+                            (birth-date-form-valid-changed)="bookingPassengersInfoCtrl.handleBirthDateFormValidChanged($event)"
+                            (fill-resident)="bookingPassengersInfoCtrl.handleFillResidentCheck($event)"
+                            (fill-large-family)="bookingPassengersInfoCtrl.handleFillLargeFamilyCheck($event)"
+                            >
+                        </ib-booking-passenger-form>
+                    </div>
+                    <div class="ib-tab-scrollable__content" aria-labelledby="contact-data">
+                        <ib-booking-contact-form
+                            [prefix-list]="bookingPassengersInfoCtrl.model.passengersFormData.prefixesList"
+                            [selected-prefix]="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.contactData.contactPrefix"   
+                            [phone-prefix-fallback]="bookingPassengersInfoCtrl.model.passengersFormData.phonePrefixFallback"
+                            [gdpr-info]="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.gdprInfo"
+                            [submit-state]="bookingPassengersInfoCtrl.passInfoForm.$submitted"
+                            (form-validity)="bookingPassengersInfoCtrl.setContactFormValid($event)"
+                            (check-email-consent)="bookingPassengersInfoCtrl.checkEmailsConsent($event)"
+                            (emails-invalid)="bookingPassengersInfoCtrl.emailsAreInvalid($event)">
+                        </ib-booking-contact-form>
+                    </div>
+                    <div ng-if="!bookingPassengersInfoCtrl.isUserLogged" class="ib-box u-mb-xmedium u-p-medium u-p-xmedium-sm u-p-xs">
+                        <div class="ib-check ib-check--regular">
+                            <input type="checkbox" id="save_passengers_data" name="save_passengers_data" class="ib-check__input" data-ng-change="" data-ng-model="bookingPassengersInfoCtrl.checkSavePassengersData">
+                            <label for="save_passengers_data" class="ib-check__label ib-check__label--top">
+                                <span id="save_passengers_data_span" class="ib-check__text u-color-gray-15">{{'BKI_PASS_SAVE_DATA'|translate}}</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="" data-ng-if="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.warningMessages.status || (bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.isLogged && bookingPassengersInfoCtrl.isIbPlus && !bookingPassengersInfoCtrl.isSoftUser)">
+                        <div id="warningMessages" data-ng-if="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.warningMessages.status">
+                            <ib-booking-passenger-warning-message id="bbki-passenger-info-warning-message"
+                                [warning-message-info]="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.warningMessages"></ib-booking-passenger-warning-message>
+                        </div>
+                    </div>
+                    <ib-booking-register-form data-ng-if="!bookingPassengersInfoCtrl.isUserLogged"
+                        [submit-state]="bookingPassengersInfoCtrl.passInfoForm.$submitted" (form-validity)="bookingPassengersInfoCtrl.setRegisterFormValid($event)"></ib-booking-register-form>
+                    <fieldset>
+                        <div class="ib-layout__line-spacing">
+                            <ib-booking-simplified-total-price id="bbki-passenger-info-simplified-total-price"
+                                data-ng-if="!bookingPassengersInfoCtrl.adaptativeMobileFlow"
+                                total-price="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.totalPrice"
+                                conditions-text="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.relatedContent['TOTAL_PRICE']" conditions-text-offers="bookingPassengersInfoCtrl.ancOffersTotal" is-checked="bookingPassengersInfoCtrl.oBDiscountType" redemption="$root.isRedemptionFlow"
+                                ob-points="::bookingPassengersInfoCtrl.oBPoints"
+                                show-obpoints="::bookingPassengersInfoCtrl.showOBPoints"
+                                ob-discount="::bookingPassengersInfoCtrl.noDiscountOBPrice"
+                                show-discount="::bookingPassengersInfoCtrl.showNoDiscountOBPrice"
+                                avios-to-earn=" :: (bookingPassengersInfoCtrl.loyaltyEarnInfo ? bookingPassengersInfoCtrl.loyaltyEarnInfo.avios: null)"
+                                elite-points-to-earn=" :: (bookingPassengersInfoCtrl.loyaltyEarnInfo ? bookingPassengersInfoCtrl.loyaltyEarnInfo.elitePoints: null)"></ib-booking-simplified-total-price>
+                        </div>
+                    </fieldset>
+                    <ib-booking-on-hold-now id="bbki-passenger-info-on-hold-now"
+                        data-ng-if="(bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.onHold || bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.onHoldIfIsLogged) && !$root.isRedemptionFlow && bookingPassengersInfoCtrl.showOnHoldButton"
+                        [on-hold-info]="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.onHold"
+                        [on-hold-if-logged-info]="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.onHoldIfIsLogged"
+                        [show-button]="bookingPassengersInfoCtrl.showOnHoldButton"></ib-booking-on-hold-now>
+                </form>
+                <div class="ib-layout__section">
+                    <uib-accordion class="ib-accordion" close-others="oneAtATime">
+                        <div uib-accordion-group class="panel-default" is-open="status.open">
+                            <uib-accordion-heading>
+                                <span class="ib-heading ib-heading--type-5">{{'IBPURC_PAYMENTS_SUMMARY_MOBILE'|translate}}</span>
+                                <span class="ib-accordion__icon" ng-class="{'icon-flecha_1_arriba': status.open, 'icon-flecha_1_abajo': !status.open}"></span>
+                            </uib-accordion-heading>
+                            <div class="ib-box ib-box--medium">
+                                <ib-booking-summary id="bbki-passenger-info-summary" trips="::bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.summaryInfo.trips"
+                                    passengers="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.summaryInfo.passengers"
+                                    other-fees="::bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.summaryInfo.otherFees"
+                                    total-price="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.totalPrice"
+                                    applied-discounts="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.discounts"></ib-booking-summary>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <ib-booking-mobile-conditions-legacy class="ib-layout__section" data-ng-if="bookingPassengersInfoCtrl.adaptativeMobileFlow" 
+                    [conditions-text]="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.relatedContent.TOTAL_PRICE"
+                    [loyalty-program-earn-info]="bookingPassengersInfoCtrl.loyaltyEarnInfo">
+                </ib-booking-mobile-conditions-legacy>
+            </div>
+        </div>
+    </div>
+    <ib-booking-notice ng-if="bookingPassengersInfoCtrl.showLostShoppingCartLightbox"
+        [type]="bookingPassengersInfoCtrl.lostShoppingCartLightbox.type" [model]="bookingPassengersInfoCtrl.lostShoppingCartLightbox"
+        (toggle-gen-box)="bookingPassengersInfoCtrl.handleEventLightBox($event)">
+    </ib-booking-notice>
+    <ib-main-footer id="footer" footer-model="{'phoneInfo' : {'prefix' : $root.phonesList['RESERVAS'].prefix, 'phoneNumber': $root.phonesList['RESERVAS'].telephone, 'text': $root.phonesList['RESERVAS'].text }}"
+        is-full-width="::false"></ib-main-footer>
+</main>
+<!-- MOBILE TOTAL PRICE -->
+<ib-booking-mobile-total-price-legacy
+    data-ng-if="bookingPassengersInfoCtrl.adaptativeMobileFlow"
+    [total-price]="bookingPassengersInfoCtrl.model.passengersFormData.securityInfo.totalPrice"></ib-booking-mobile-total-price-legacy>

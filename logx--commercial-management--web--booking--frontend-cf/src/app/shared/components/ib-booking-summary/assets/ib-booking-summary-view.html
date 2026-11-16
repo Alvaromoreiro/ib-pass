@@ -1,0 +1,284 @@
+<div class="ib-summary">
+    <header class="ib-summary__header hidden-md hidden-sm hidden-xs">
+        <h3 class="ib-heading ib-heading--type-3">{{'IBPURC_PAYMENTS_SUMMARY_TITLE'|translate}}</h3>
+    </header>
+    <div class="ib-summary__body">
+        <uib-accordion ng-repeat="(indexTrip,trip) in summaryCtrl.trips">
+            <div class="ib-summary__section " ng-class="{'u-border-none ib-summary__section--border-responsive': $root.isRedemptionFlow}">
+                <h4 class="ib-heading ib-heading--type-4 ib-summary__section-title">{{(summaryCtrl.trips.length
+                    <=2 && !summaryCtrl.isMulticity && !summaryCtrl.isOpenJaw ? (indexTrip===0 ? 'GENERIC_OUTBOUND_TRIP_TITLE' :
+                        'GENERIC_RETURN_TRIP_TITLE' ) : 'GENERIC_TRIP_TITLE' )|translate}}
+                        {{summaryCtrl.trips.length
+                        <=2 && !summaryCtrl.isMulticity && !summaryCtrl.isOpenJaw ? '' : (indexTrip + 1)}}
+                </h4>
+                <div ng-repeat="(indexSegment, segment) in trip.segments">
+                    <div class="ib-summary__segment" ng-class="{'ib-summary__section ib-summary__section--border-responsive': $root.isRedemptionFlow}">
+                        <span class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold">{{::segment.departure.city.description}}-{{::segment.arrival.city.description}}</span>
+                        <span class="ib-text ib-text--color-unfocused ib-text--block" data-ng-if="segment.departureDate">{{::segment.departureDate.day}}
+                            {{::(segment.departureDate.month | translate | ShortenerFormatFilter:3:true)}}.
+                            {{::segment.departureDate.year}} / {{::segment.departureDate.dateTime}}</span>
+                        <span class="ib-text ib-text--color-unfocused ib-text--block">{{::segment.departure.name}}</span>
+                        <span class="ib-text ib-text--color-unfocused ib-text--block" data-ng-if="segment.departure.terminal !== '' && segment.departure.terminal != null">{{'IBPURC_PAYMENTS_SUMMARY_TERM'|translate}}
+                            {{::segment.departure.terminal}}</span>
+                        <span class="ib-text ib-text--color-unfocused ib-text--block">{{'IBBK_SUMMARY_CABIN_TITLE'|translate}}
+                            {{::segment.cabin}}</span>
+                        <div uib-accordion-group class="ib-show-more ib-show-more--icon" is-open="status.isOpenFly">
+                            <uib-accordion-heading class="ib-text ib-text--block ib-text--to-right">
+                                <span class="ib-show-more__button">
+                                    <span class="ib-show-more__button-txt" data-text-accordion-close="{{'IBPURC_PAYMENTS_SUMMARY_SEGMENT_DETAILS_OPENED'|translate}}">
+                                        {{status.isOpenFly ?
+                                        ('IBPURC_PAYMENTS_SUMMARY_SEGMENT_DETAILS_OPENED'|translate) :
+                                        ('IBPURC_PAYMENTS_SUMMARY_SEGMENT_DETAILS_CLOSED'|translate)}}
+                                    </span>
+                                    <span class="ib-show-more__button-icon" ng-class="status.isOpenFly ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+                                </span>
+                            </uib-accordion-heading>
+                            <div class="ib-show-more__collapse">
+                                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                                    <span class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold">{{'IBPURC_PAYMENTS_SUMMARY_SEGMENT_DETAILS_ARRIVAL'|translate}}
+                                        {{::segment.arrival.city.description}}</span>
+                                    <span class="ib-text ib-text--color-unfocused ib-text--block" data-ng-if="segment.departureDate">{{::ssegment.departureDate.day}}
+                                        {{::(segment.arrivalDate.month | translate | ShortenerFormatFilter:3:true)}}.
+                                        {{::segment.arrivalDate.year}} / {{::segment.arrivalDate.dateTime}}</span>
+                                    <span class="ib-text ib-text--color-unfocused ib-text--block">{{::segment.arrival.name}}</span>
+                                    <span class="ib-text ib-text--color-unfocused ib-text--block" ng-if="segment.arrival.terminal !== '' && segment.arrival.terminal != null">{{'IBPURC_PAYMENTS_SUMMARY_TERM'|translate}}
+                                        {{::segment.arrival.terminal}}</span>
+                                </div>
+                                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                                    <span class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold">{{'IBPURC_PAYMENTS_SUMMARY_SEGMENT_DETAILS_FLIGHT_NUMBER'|translate}}
+                                        {{(segment.marketingCarrier
+                                        && segment.marketingCarrier.code) ? segment.marketingCarrier.code :
+                                        segment.operationalDisclosure}}{{segment.displayMarketingFlightNumber}}</span>
+                                    <span class="ib-text ib-text--color-unfocused ib-text--block">{{'IBPURC_PAYMENTS_SUMMARY_SEGMENT_DETAILS_OPERATED'|translate}}
+                                        {{::segment.operatedBy}}</span>
+                                    <span class="ib-text ib-text--color-unfocused ib-text--block">{{::segment.aircraftType}}</span>
+                                </div>
+                                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                                    <span class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold" ng-if="segment.duration">{{'IBPURC_PAYMENTS_SUMMARY_SEGMENT_DETAILS_DURATION'|translate}}
+                                        {{::segment.duration}}</span>
+                                    <span class="ib-text ib-text--color-unfocused ib-text--block" ng-if="segment.waitingTime !== 0 ">{{::segment.waitingParsedTime}}
+                                        {{'IBPURC_PAYMENTS_SUMMARY_SEGMENT_DETAILS_WAITING_TIME'|translate}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ib-summary__section ib-summary__section--no-border" ng-if="$root.isRedemptionFlow">
+                            <span class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold">{{'IBPURC_PAYMENTS_SUMMARY_RATE'|translate}}
+                                {{trip.fare[indexSegment].name}}</span>
+                            <div uib-accordion-group class="ib-show-more ib-show-more--icon" is-open="status.isOpenFare">
+                                <uib-accordion-heading class="ib-text ib-text--block ib-text--to-right">
+                                    <span class="ib-show-more__button">
+                                        <span class="ib-show-more__button-txt" data-text-accordion-close="{{'IBPURC_PAYMENTS_SUMMARY_FARE_DETAILS_OPENED'|translate}}">
+                                            {{status.isOpenFare ? ('IBPURC_PAYMENTS_SUMMARY_FARE_DETAILS_OPENED'|translate) :
+                                            ('IBPURC_PAYMENTS_SUMMARY_FARE_DETAILS_CLOSED'|translate)}}
+                                        </span>
+                                        <span class="ib-show-more__button-icon" ng-class="status.isOpenFare ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+                                    </span>
+                                </uib-accordion-heading>
+                                <div class="ib-show-more__collapse">
+                                    <ul class="ib-list-passengers">
+                                        <li class="ib-list-passengers__item" data-ng-repeat="(fareIndex,fare) in trip.fare[indexSegment].fareDetails">
+                                            <span class="ib-list-passengers__item-icon" data-ng-class="{'icon-e_equipaje' : fareIndex === 'EQMANO' , 'icon-cambios_y_reembolsos' : fareIndex === 'CAMBIO' ,
+                                                            'icon-e_equipaje_facturado' : fareIndex === 'EQBODEGA','icon-asiento': fareIndex === 'ASIENTO','icon-reembolsos': fareIndex === 'REEMBOLSO','icon-c_comidas_nuevas':fareIndex==='COMIDA'}"></span>
+                                            <span class="ib-text ib-text--color-unfocused ib-text--bold ib-list-passengers__item-title">{{::fare.name}}</span>
+                                            <div class="ib-list-passengers__item-description">
+                                                <div ng-if="::(fareIndex === 'CAMBIO' || fareIndex === 'ASIENTO' || fareIndex === 'REEMBOLSO' || fareIndex === 'COMIDA')"
+                                                    class="ib-list-passengers__item-description__title">
+                                                    <span class="ib-text ib-text--color-unfocused">{{::fare.message}}</span>
+                                                </div>
+                                                <div class="ib-list-passengers__item-description__title">
+                                                    <a data-ng-if="fareIndex === 'CAMBIO' || fareIndex === 'REEMBOLSO' || fareIndex === 'ASIENTO' || fareIndex === 'COMIDA'"
+                                                        href="{{::(fareIndex === 'CAMBIO' || fareIndex === 'REEMBOLSO' ? 'CHANGE_REFUND_CONDITIONS_LINK' : fareIndex === 'ASIENTO' ? 'SEATS_CONDITIONS_LINK' : 'FOOD_LINK'|LinksFilter)}}"
+                                                        title="{{'IBPURC_PAYMENTS_SUMMARY_OTHER_FARE_MORE_TITLE'|translate}}" target="_blank" rel="noopener noreferrer"
+                                                        class="ib-link">{{'IBPURC_PAYMENTS_SUMMARY_OTHER_FARE_MORE_LINK'|translate}}
+                                                    </a>
+                                                    <a data-ng-if="fareIndex === 'EQMANO' || fareIndex === 'EQBODEGA'" data-ng-click="summaryCtrl.modalSelector(fareIndex,trip.fare.fareDetails)"
+                                                        title="{{'IBPURC_PAYMENTS_SUMMARY_BAGGAGE_TITLE'|translate}}" class="ib-link">
+                                                        {{fare.message}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </uib-accordion>
+        <div class="ib-summary__section" data-ng-if="summaryCtrl.isLogged === summaryCtrl.LOGIN_ONB && summaryCtrl.showPassengersName">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                <h5 class="ib-heading ib-heading--type-4 ib-summary__section-title">{{'IBPURC_PAYMENTS_SUMMARY_ON_BUSINESS_LOGGED_DATA'|translate}}</h5>
+                <span class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold">{{summaryCtrl.membershipData.companyInfo.companyName}}</span>
+                <span class="ib-text ib-text--color-unfocused">{{'IBPURC_PAYMENTS_SUMMARY_ON_BUSINESS_LOGGED_DATA_CODE' | translate}} {{summaryCtrl.membershipData.clid}}</span>
+            </div>
+        </div>
+        <div class="ib-summary__section" data-ng-if="summaryCtrl.showPassengersName">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                <h5 class="ib-heading ib-heading--type-4 ib-summary__section-title">{{'IBPURC_PAYMENTS_SUMMARY_PASSENGERS'|translate}}</h5>
+                <div data-ng-repeat="passenger in summaryCtrl.passengers.personalData">
+                    <span class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold">{{passenger.name}}</span>
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--small" data-ng-if="passenger.specialNeeds && passenger.specialNeeds.length > 0">
+                        <span class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold">{{'IB_PASSENGER_SPE_NEEDS_CHECK_TEXT'|translate}}</span>
+                        <ul class="ib-list-passengers--needs">
+                            <li class="ib-list-passengers__item" data-ng-repeat="specialNeed in passenger.specialNeeds">
+                                <span class="ib-list-passengers__item-icon" data-ng-class="{'icon-vision': specialNeed.id === 'BLND', 'icon-mascotas_domesticas': specialNeed.id === 'SVAN', 'icon-discapacitados': specialNeed.id === 'WCHR' || specialNeed.id === 'WCHS' || specialNeed.id === 'WCHC', 'icon-audicion':specialNeed.id === 'DEAF'}"></span>
+                                <span class="ib-text ib-text--color-unfocused">{{specialNeed.description | translate}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ib-summary__section" data-ng-if="summaryCtrl.passengers.generalData">
+            <h5 class="ib-heading ib-heading--type-4 ib-summary__section-title">{{'SUMMARY_PASSENGERS'|translate}}</h5>
+            <ul class="ib-list-passengers" ng-repeat="(type, passengers) in summaryCtrl.controlPassengers(summaryCtrl.passengers.generalData)">
+                <li class="ib-list-passengers__item" ng-repeat="passenger in passengers">
+                    <span class="ib-list-passengers__item-icon" data-ng-class="{'icon-persona' : type !== 'CHILD' && type !== 'INFANT', 'icon-iberia_ninos' : type === 'CHILD', 'icon-bebe' : type==='INFANT'}"></span>
+                    <span class="ib-text ib-text--color-unfocused ib-text--bold ib-list-passengers__item-title">{{::passenger.number}}
+                        {{type | WordNumberFormatFilter: passenger.number | translate }}</span>
+                    <div class="ib-list-passengers__item-description" data-ng-if="passenger.parsedAviosFare">
+                        <span class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{$root.isPointsOBFlow ? 'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED' : 'IBPURC_PAYMENTS_DISCOUNTS_AVIOS' |translate}}</span>
+                        <span class="ib-text ib-text--color-normal u-float-right">{{::passenger.number}} x
+                            {{passenger.parsedAviosFare}} {{$root.isPointsOBFlow ? 'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED' : 'IBPURC_PAYMENTS_DISCOUNTS_AVIOS' |translate}}</span>
+                    </div>
+                    <div class="ib-list-passengers__item-description">
+                        <span class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'IBPURC_PAYMENTS_SUMMARY_RATE'|translate}}</span>
+                        <span class="ib-text ib-text--color-normal u-float-right">{{::passenger.number}} x
+                            {{passenger.parsedFare}}</span>
+                    </div>
+                    <div class="ib-list-passengers__item-description">
+                        <span class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'SUMMARY_FEES'|translate}}</span>
+                        <span class="ib-text ib-text--color-normal ib-text--underline u-float-right" title="{{'SUMMARY_FEES'|translate}}"
+                            ng-click="summaryCtrl.openTaxesModal(passenger.breakdownTaxes )">{{passenger.parsedTotalTax}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- Bundeling -->
+        <div class="ib-summary__section" data-ng-if="summaryCtrl.summaryInfo.ancillaries.bundles.length">
+            <ib-pmt-summary-bundle id="pmt-summary-summary-bundle"
+                [bundles]="summaryCtrl.summaryInfo.ancillaries.bundles">
+            </ib-pmt-summary-bundle>
+        </div>
+        <!-- End Bundeling-->
+        <div class="ib-summary__section" data-ng-if="summaryCtrl.otherFees.length">
+            <h4 class="ib-heading ib-heading--type-4 ib-summary__section-title">{{'SUMMARY_OTHER_FEES'|translate}}</h4>
+            <ul class="ib-list-passengers" data-ng-repeat="(feeIndex, feeInfo) in summaryCtrl.otherFees">
+                <li class="ib-list-passengers__item">
+                    <div class="ib-list-passengers__item-description">
+                        <span>
+                            <span class="ib-text ib-text--color-unfocused ib-text--bold ib-list-passengers__item-description__title u-pl-none">{{feeInfo.description|translate}}</span>
+                            <span class="ib-text ib-text--color-normal u-float-right">{{feeInfo.fee}}</span>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="ib-summary__section" data-ng-if="summaryCtrl.ancillaries && summaryCtrl.ancillaries.generalInfo.showSeats">
+            <div data-ng-if="summaryCtrl.ancillaries.generalInfo.showSeats && summaryCtrl.ancillaries.types['SEAT']">
+                <h4 class="ib-heading ib-heading--type-4 ib-summary__section-title">{{'SUMMARY_ANCILLARIES_SEATS_TITLE'|translate}}</h4>
+                <ul class="ib-list-passengers">
+                    <li class="ib-list-passengers__item" data-ng-repeat="(trip, tripInfo) in summaryCtrl.ancillaries.types['SEAT']">
+                        <div class="ib-list-passengers__item-description" data-ng-if="tripInfo.generalInfo.show">
+                            <span class="ib-text ib-text--color-unfocused ib-text--bold ib-list-passengers__item-description__title u-pl-none">{{tripInfo.generalInfo.segmentsSummary
+                                ? tripInfo.tripInfo.departure.code + ' - ' + tripInfo.tripInfo.arrival.code
+                                : tripInfo.generalInfo.departure.code + ' - ' + tripInfo.generalInfo.arrival.code}}</span>
+                            <span data-ng-class="{'u-display-inline':!tripInfo.generalInfo.segmentsSummary }"
+                                data-ng-repeat="(segmentIndex, segmentInfo) in tripInfo.segments">
+                                <span data-ng-class="{'ib-list-passengers__item-description': !$first || tripInfo.generalInfo.segmentsSummary }"
+                                    data-ng-repeat="(price, seatPriceInfo) in segmentInfo.summarySeats">
+                                    <span data-ng-if="$first && tripInfo.generalInfo.segmentsSummary" class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title ib-list-passengers__item-description__title--psmall">{{segmentInfo.info.departure.code
+                                        + ' - ' + segmentInfo.info.arrival.code}}</span>
+                                    <span class="ib-text ib-text--color-normal u-float-right">{{seatPriceInfo.quantity + '
+                                        x ' + seatPriceInfo.price}}</span>
+                                </span>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="ib-summary__section" data-ng-if="summaryCtrl.ancillaries && summaryCtrl.ancillaries.generalInfo.showBaggages">
+            <div data-ng-if="summaryCtrl.ancillaries.generalInfo.showBaggages && summaryCtrl.ancillaries.types['BAGGAGE']">
+                <h4 class="ib-heading ib-heading--type-4 ib-summary__section-title">{{'SUMMARY_ANCILLARIES_BAGGAGE_TITLE'|translate}}</h4>
+                <ul class="ib-list-passengers">
+                    <li class="ib-list-passengers__item" data-ng-repeat="(trip, tripInfo) in summaryCtrl.ancillaries.types['BAGGAGE']"
+                        data-ng-if="tripInfo.purchased">
+                        <div class="ib-list-passengers__item-description">
+                            <span data-ng-class="{'ib-list-passengers__item-description': !$first}" data-ng-repeat="(baggage, baggageInfo) in tripInfo.purchasedBaggages"
+                                data-ng-if="baggageInfo.quantity > 0">
+                                <span data-ng-if="$first" class="ib-text ib-text--color-unfocused ib-text--bold ib-list-passengers__item-description__title u-pl-none">{{tripInfo.departure.code}}
+                                    - {{tripInfo.arrival.code}}</span>
+                                <span class="ib-text ib-text--color-normal u-float-right">{{baggageInfo.quantity}} x
+                                    {{baggageInfo.priceToShow}}</span>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="ib-summary__section" data-ng-if="summaryCtrl.ancillaries && summaryCtrl.ancillaries.generalInfo.showInsurance">
+            <div data-ng-if="summaryCtrl.ancillaries.generalInfo.showInsurance && summaryCtrl.ancillaries.types['INSURANCE']">
+                <h4 class="ib-heading ib-heading--type-4 ib-summary__section-title">{{'SUMMARY_ANCILLARIES_INSURANCE_TITLE'|translate}}</h4>
+                <ul class="ib-list-passengers">
+                    <li class="ib-list-passengers__item">
+                        <div class="ib-list-passengers__item-description">
+                            <span>
+                                <span class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title ib-list-passengers__item-description__title--psmall">{{summaryCtrl.ancillaries.types['INSURANCE'].name}}</span>
+                                <span class="ib-text ib-text--color-normal u-float-right">{{summaryCtrl.passengers.personalData.length || summaryCtrl.passengersInsurance.length}}
+                                    x {{summaryCtrl.ancillaries.types['INSURANCE'].pricePerPassenger}}</span>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    <div class="ib-summary__section" data-ng-if="!summaryCtrl.isEmptyDiscounts() || (summaryCtrl.oBDiscountInfo.length > 0 && summaryCtrl.showPassengersName)">
+        <h4 class="ib-heading ib-heading--type-4 ib-summary__section-title">{{'IBPURC_PAYMENTS_SUMMARY_DISCOUNT'|translate}}</h4>
+        <ul class="ib-list-passengers" data-ng-repeat="(type, discount) in summaryCtrl.appliedDiscounts">
+            <div class="ib-list-passengers__item-description ib-list-passengers__table">
+                <span class="ib-text ib-text--color-unfocused">{{discount.description}}</span>
+                <span class="ib-text ib-text--color-normal u-float-right">-{{discount.discount}}</span>
+            </div>
+        </ul>
+        <ul class="ib-list-passengers .u-mt-xsmall" data-ng-if="summaryCtrl.oBDiscountInfo.length > 0 && summaryCtrl.showPassengersName" data-ng-repeat="(type, oBDiscountInfo) in summaryCtrl.oBDiscountInfo">
+            <div class="ib-list-passengers__item-description ib-list-passengers__table">
+                <span class="ib-text ib-text--color-unfocused">{{'IBPURC_PAYMENTS_SUMMARY_ON_BUSINESS_DISCOUNT'|translate}} {{oBDiscountInfo.corporateDiscountType}}</span>
+                <span ng-if="oBDiscountInfo.discount" class="ib-text ib-text--color-normal u-float-right">-{{oBDiscountInfo.discount}}</span>
+            </div>
+        </ul>
+    </div>
+    <div class="ib-summary__section" data-ng-if="summaryCtrl.isOnHold && summaryCtrl.onHoldPayment">
+        <ul class="ib-list-passengers">
+            <li class="ib-list-passengers__item">
+                <div class="ib-list-passengers__item-description">
+                    <span>
+                        <span class="ib-text ib-text--color-unfocused ib-text--bold ib-list-passengers__item-description__title u-pl-none">{{summaryCtrl.onHoldType
+                            ? ('ON_HOLD_SUMMARY_TITLE'|translate) + ' '+ summaryCtrl.onHoldType.hours
+                            + ' ' + ('ONHOLD_INFO_TEXT_1_2'|translate) : ('SUMMARY_ON_HOLD_TITLE'|translate)}}</span>
+                        <span class="ib-text ib-text--color-normal u-float-right">- {{summaryCtrl.onHoldPayment}}</span>
+                    </span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="ib-summary__section" data-ng-if="summaryCtrl.paymentType">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+            <h5 class="ib-heading ib-heading--type-4 ib-summary__section-title">{{'SUMMARY_PAYMENT_TEXT'|translate}}</h5>
+            <span class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold">{{summaryCtrl.paymentType}}</span>
+        </div>
+    </div>
+    </div>
+    <footer class="ib-summary__footer">
+    <span class="ib-text ib-text--especial ib-summary__footer-price">{{'IBPURC_PAYMENTS_SUMMARY_TOTAL'|translate}}</span>
+        <span class="ib-text ib-text--especial ib-summary__footer-price u-float-right word-break-full" data-ng-if="summaryCtrl.onHoldInfo && summaryCtrl.onHoldInfo.priceAfterOnHold ||summaryCtrl.totalPrice !=null"
+        data-ng-class="{'ib-summary__footer-price--long': summaryCtrl.totalPrice.length > 10 || summaryCtrl.onHoldInfo.priceAfterOnHold.length > 10}">
+            {{summaryCtrl.onHoldInfo ? summaryCtrl.onHoldInfo.priceAfterOnHold : $root.isRedemptionFlow ? (($root.isPointsOBFlow ? summaryCtrl.totalPrice.price.totalPoints : summaryCtrl.totalPrice.price.totalAvios) + ' ' + (($root.isPointsOBFlow ? 'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED' : 'IBPURC_PAYMENTS_DISCOUNTS_AVIOS') |translate) + ' ' + ('AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate) + ' ' + summaryCtrl.totalPrice.price.totalCash) : summaryCtrl.totalPrice}}
+    </span>
+    <span class="ib-text ib-text--especial ib-summary__footer-price u-float-right" data-ng-if="!summaryCtrl.onHoldInfo && summaryCtrl.totalPrice === null">
+        {{'GENERAL_FREE_LABEL'|translate}}
+    </span>
+    <p class="ib-text ib-text--float" data-ng-if="summaryCtrl.onHoldPayment || summaryCtrl.isOnHold">{{'SUMMARY_ON_HOLD_TOTAL_PRICE'|translate}}</p>
+    </footer>
+</div>

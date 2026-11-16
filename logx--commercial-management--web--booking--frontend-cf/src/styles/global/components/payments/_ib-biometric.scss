@@ -1,0 +1,550 @@
+/* -------------------------------------------------------------
+    #BIOMETRIC BOARDING
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}biometric {
+    margin-bottom: rem(32);
+
+    &__form {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: stretch;
+        justify-content: flex-start;
+
+        &--col {
+            width: 50%;
+            padding: rem(56) rem(48) rem(48);
+            background-color: color(white);
+
+            &-grey {
+                background-color: color(gray-60);
+            }
+
+            &-content {
+                padding: rem(56) rem(80);
+            }
+        }
+
+        &--message {
+            padding: rem(56) rem(80) rem(48);
+        }
+    }
+
+    &__title {
+        margin-bottom: rem(40);
+        font-family: $font-special;
+        font-size: rem(30);
+        line-height: 1.2;
+        color: color(primary);
+    }
+
+    &__module {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-top: rem(24);
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &--img {
+            display: inline-block;
+            overflow: hidden;
+            min-width: rem(160);
+            max-width: rem(160);
+            margin-right: rem(16);
+
+            img {
+                width: rem(260);
+            }
+        }
+
+        &--content {
+            display: inline-block;
+        }
+
+        &--title {
+            font-family: $font-special;
+            font-size: rem(20);
+            line-height: 1.2;
+            color: color(gray-10);
+        }
+
+        &--text {
+            padding-top: rem(8);
+            font-family: $font-normal;
+            font-size: rem(13);
+            line-height: 1.31;
+            color: color(gray-10);
+        }
+    }
+
+    &__box {
+        display: block;
+        width: 100%;
+        padding: rem(20) rem(32);
+        margin-bottom: rem(32);
+        background-color: color(white);
+        box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+
+        &--flex {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &--container {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        &--container-type2 {
+            display: flex;
+            width: 100%;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &--text {
+            font-family: $font-special;
+            font-size: rem(20);
+            line-height: normal;
+            color: color(gray-10);
+
+            &-normal {
+                font-family: $font-normal;
+                font-size: rem(13);
+            }
+
+            &-w-list {
+                font-size: rem(18);
+
+                span {
+                    font-weight: bold;
+                }
+            }
+        }
+
+        &--reverse-items {
+            .#{$wefront__namespace}biometric {
+                &__icon {
+                    order: 1;
+                }
+
+                &__box {
+                    &--text {
+                        order: 0;
+                    }
+                }
+            }
+        }
+
+        &--link {
+            display: flex;
+            align-items: center;
+            color: color(primary);
+        }
+
+        &--w-list {
+            display: flex;
+            align-items: center;
+            padding-top: 0;
+            padding-right: 0;
+            padding-left: 0;   
+            margin-bottom: rem(24);
+            border-bottom: rem(1) solid color(gray-25);
+            box-shadow: none;
+        }
+
+        &--w-app-link {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            margin-bottom: rem(8);
+            box-shadow: none;
+        }
+
+        .#{$wefront__namespace}button {
+            min-width: rem(160);
+        }
+    }
+
+    &__icon {
+        &--red {
+            [class*="icon-"] {
+                &::before {
+                    color: color(primary);
+                }
+            }
+        }
+
+        [class*="icon-"] {
+            display: inline-block;
+            margin-right: rem(8);
+            margin-left: 0;
+
+            &::before {
+                font-size: rem(26);
+            }
+        }
+    }
+
+    &--w-list {
+        padding: rem(24);
+        background-color: color(white);
+
+        .#{$wefront__namespace}biometric-available-banner {
+            padding: rem(32) rem(24) rem(24) rem(24);
+            background: url($wefront__img-path + '/background/google-pixel-banner.png') no-repeat calc(100% + 30%) 2.5rem / 38% color(gray-60);
+            box-shadow: none;
+        }
+        
+        .#{$wefront__namespace}biometric-available-banner__header-title {
+            max-width: 80%;
+            margin-bottom: rem(8);
+            font-size: rem(27);
+            line-height: normal;
+        }
+        .#{$wefront__namespace}biometric-available-banner__body-title {
+            max-width: 80%;
+            font-size: rem(20);
+        }
+
+        // .#{$wefront__namespace}biometric-available-banner__body-col {
+        //     max-width: 35%;
+        // }
+        .#{$wefront__namespace}biometric-available-banner__body-col-title {
+            font-size: rem(18);
+        }
+    }
+
+}
+
+// RESPONSIVE
+
+@include media-query('xl') {
+    .#{$wefront__namespace}biometric {
+        &--w-list {
+            .#{$wefront__namespace}biometric-available-banner__body-col {
+                max-width: 35%;
+            } 
+        }
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}biometric {
+        &__form {
+            &--col {
+                padding: rem(48) rem(40) rem(40);
+            }
+
+            &--message {
+                padding: rem(48) rem(40);
+            }
+        }
+
+        &--w-list {
+            .#{$wefront__namespace}biometric-available-banner {
+                background: url($wefront__img-path + '/background/google-pixel-banner.png') no-repeat calc(100% + 30%) 5.5rem / 38% color(gray-60);
+            }
+            .#{$wefront__namespace}biometric-available-banner__header-title {
+                max-width: none;
+                font-size: rem(24);
+            }
+            .#{$wefront__namespace}biometric-available-banner__body-col {
+                max-width: 35%;
+            }
+            .#{$wefront__namespace}biometric-available-banner__body-col-title {
+                font-size: rem(16);
+            }
+        }
+
+        &__box--text-w-list {
+            font-size: rem(16);
+        }
+
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}biometric {
+        &__form {
+            flex-flow: row wrap;
+
+            &--col {
+                width: 100%;
+                padding: rem(48);
+            }
+        }
+
+        &__title {
+            margin-bottom: rem(32);
+        }
+
+        &--w-list {
+            .#{$wefront__namespace}biometric-available-banner {
+                background: url($wefront__img-path + '/background/google-pixel-banner.png') no-repeat calc(100% + 27%) 2rem / 35% color(gray-60);
+            }
+            .#{$wefront__namespace}biometric-available-banner__header-title {
+                max-width: none;
+            }
+            .#{$wefront__namespace}biometric-available-banner__header-body-title {
+                max-width: none;
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}biometric {
+        &__form {
+            flex-flow: row wrap;
+        }
+
+        &--col {
+            width: 100%;
+        }
+
+        &__box {
+            padding: rem(24);
+
+            &--flex {
+                display: flex;
+                flex-flow: row wrap;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            &--container {
+                align-items: flex-start;
+            }
+            .#{$wefront__namespace}button {
+                width: 100%;
+                min-width: inherit;
+                margin-top: rem(16);
+            }
+
+            &--text-w-list {
+                font-size: rem(14);
+            }
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}biometric {
+        &__form {
+            flex-flow: row wrap;
+
+            &--col {
+                width: 100%;
+                padding: rem(32);
+            }
+        }
+
+        &__box {
+            &--reverse-items {
+                .#{$wefront__namespace}biometric {
+                    &__box {
+                        &--flex {
+                            width: 100%;
+                            max-width: inherit;
+                            padding-top: rem(20);
+                            margin-top: rem(17);
+                        }
+
+                        &--container {
+                            text-align: left;
+                        }
+
+                        &--text {
+                            order: 1;
+                        }
+                    }
+
+                    &__icon {
+                        order: 0;
+
+                        [class*="icon-"] {
+                            margin-right: rem(8);
+                            margin-left: 0;
+                        }
+                    }
+                }
+            }
+
+            &.#{$wefront__namespace}biometric__box--w-list {
+                padding-top: 0;
+                padding-right: 0;
+                padding-left: 0;
+            }
+
+            &--w-app-link, &--w-list {
+                align-items: flex-start;
+            }
+
+            &--w-app-link {
+                padding: 0;
+            }
+        }
+
+        &--w-list {
+            .#{$wefront__namespace}biometric-available-banner {
+                padding: rem(16);
+                background: url($wefront__img-path + '/background/google-pixel-banner.png') no-repeat calc(100% + 50%) 10rem / 50% color(gray-60);
+                
+                &__header-title{
+                    max-width: none;
+                    font-size: rem(24);
+                }
+
+                &__body-title {
+                    max-width: none;
+                }
+
+                &__body-col {
+                    max-width: 90%;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}biometric {
+        &__form {
+            flex-flow: row wrap;
+
+            &--col {
+                width: 100%;
+                padding: rem(24) rem(8);
+            }
+        }
+
+        &__title {
+            margin-bottom: rem(7);
+            font-size: rem(26);
+        }
+
+        &__module {
+            flex-flow: row wrap;
+            margin-top: rem(14);
+
+            &--img {
+                overflow: inherit;
+                width: 100%;
+                min-width: inherit;
+                max-width: inherit;
+                margin-right: 0;
+
+                img {
+                    width: 100%;
+                    max-width: 100%;
+                }
+            }
+
+            &--content {
+                width: 100%;
+                max-width: inherit;
+            }
+        }
+
+        &__box {
+            &--reverse-items {
+                .#{$wefront__namespace}biometric {
+                    &__box {
+                        &--flex {
+                            width: 100%;
+                            max-width: inherit;
+                            padding-top: rem(20);
+                            margin-top: rem(17);
+                        }
+
+                        &--container {
+                            text-align: left;
+                        }
+
+                        &--text {
+                            order: 1;
+                        }
+                    }
+
+                    &__icon {
+                        order: 0;
+
+                        [class*="icon-"] {
+                            margin-right: rem(8);
+                            margin-left: 0;
+                        }
+                    }
+                }
+            }
+
+            &--w-list {
+                align-items: flex-start;
+                padding-right: rem(16);
+                padding-left: rem(16);
+            }
+
+            &--w-app-link {
+                align-items: flex-start;
+                padding: rem(16);
+                margin-bottom: 0;
+            }
+        }
+
+        &--w-list {
+            padding-top: 0;
+            padding-right: 0;
+            padding-left: 0;
+
+            .#{$wefront__namespace}biometric-available-banner {
+                padding: rem(16);
+                background: url($wefront__img-path + '/background/google-pixel-banner.png') no-repeat calc(100% + 15%) 9rem / 7.5rem color(gray-60);
+                
+                &__header-title{
+                    max-width: none;
+                    font-size: rem(20);
+                }
+
+                &__body {
+                    &-title {
+                        max-width: none;
+                        font-size: rem(18);
+                    }
+
+                    &-content {
+                        max-width: none;
+                    }
+
+                    &-col {
+                        max-width: none;
+
+                        &:first-child {
+                            .#{$wefront__namespace}biometric-available-banner__body-col-text {
+                                width: 65%;
+                            }
+                        }
+                    }
+
+                    &-buttons {
+                        width: rem(120);
+                        flex-flow: column;
+                        row-gap: rem(8);
+
+                        .ib-link:first-child {
+                            margin-right: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

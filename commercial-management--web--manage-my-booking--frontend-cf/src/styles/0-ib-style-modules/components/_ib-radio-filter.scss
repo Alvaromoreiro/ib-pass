@@ -1,0 +1,71 @@
+.#{$wefront__namespace}radio-filter {
+    width: 100%;
+    margin-top: rem(10);
+
+    &__item {
+        display: inline-table;
+        height: rem(42);
+        padding: rem(2) 0;
+        margin-right: rem(5);
+        border: none;
+        background: transparent;
+    }
+
+    &__input:not(:checked),
+    &__input:checked {
+        position: absolute;
+        left: rem(-9999);
+    }
+
+    &__input + &__label {
+        position: relative;
+        display: inline-table;
+        padding: rem(8) rem(20) rem(8) rem(25) !important;
+        padding-left: rem(30);
+        margin: rem(8) 0 0;
+        border: rem(1) solid color(gray-70);
+        border-radius: rem(50);
+        font-size: rem(12);
+        color: color(gray-10);
+        background: color(gray-70);
+        cursor: pointer;
+    }
+
+    &__input:checked + &__label {
+        border-color: color(red-50);
+        color: color(white);
+        background: color(red-50);
+    }
+
+    /* radio aspect */
+    &__input:not(:checked) + &__label::after,
+    &__input:checked + &__label::after {
+        content: '\e93e';
+        position: absolute;
+        top: rem(8);
+        left: rem(9);
+        font-family: $font-icons;
+        font-size: rem(12);
+        color: color(gray-70);
+        transition: all 0.2s;
+    }
+
+    /* radio mark aspect changes */
+    &__input:checked + &__label::after {
+        color: color(white);
+    }
+
+    &__input {
+        &:focus {
+            + .#{$wefront__namespace}radio-filter__label {
+                border: rem(1) solid color(orange-10);
+            }
+        }
+    }
+
+    &__label {
+        &:focus {
+            outline: 0;
+        }
+    }
+}

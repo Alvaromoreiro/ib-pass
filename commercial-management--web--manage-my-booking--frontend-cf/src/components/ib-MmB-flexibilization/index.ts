@@ -1,0 +1,14 @@
+import './ib-flexibilization-module';
+import './transformers/ib-flexibilization-transformer';
+import './services/ib-flexibilization-service';
+import './components/ib-flexibilization-availability';
+import './components/ib-flexibilization-availability-trip';
+import './components/ib-flexibilization-calendar';
+import './components/ib-flexibilization-code-confirmation';
+import './components/ib-flexibilization-confirmation';
+import './components/ib-flexibilization-disruption';
+import './components/ib-flexibilization-info';
+import './components/ib-flexibilization-search';
+import './components/ib-flexibilization-slice-confirmation';
+import './components/ib-flexibilization-slices';
+import './components/ib-flexibilization-total';

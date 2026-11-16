@@ -1,0 +1,119 @@
+<fieldset class="ib-box-menu__section ib-box-menu__section--full ib-layout__section">
+    <div class="ib-mmb-dash-item" ng-switch="mmbDashItemCtrl.model.type"
+        ng-class="{'ib-mmb-dash-item--action':mmbDashItemCtrl.model.type === 'action'}">
+        <div class="ib-mmb-dash-item__content" ng-switch-when="travel">
+            <div class="ib-mmb-dash-item__top">
+                <h3 class="ib-mmb-dash-item__title">{{mmbDashItemCtrl.model.title|translate}}</h3>
+                <div class="ib-mmb-dash-item__menu" ng-if="mmbDashItemCtrl.model.showMenu" clickout="flight-dropdown">
+                    <button class="ib-mmb-dash-item__menu-button" type="button" ng-click="mmbDashItemCtrl.flightMenuToggle();" ng-class="{'ib-mmb-dash-item__menu-button--active': mmbDashItemCtrl.flightMenuOpen === true}" focusin>
+                        <span class="icon-menu-points"></span>
+                        <span class="sr-only">{{mmbDashItemCtrl.flightMenuBtnText|translate}}</span>
+                    </button>
+                    <ul class="ib-mmb-dash-item__menu--list" ng-class="{'ib-mmb-dash-item__menu--open': mmbDashItemCtrl.flightMenuOpen === true}" aria-hidden="{{!mmbDashItemCtrl.flightMenuOpen}}" aria-label="{{mmbDashItemCtrl.flightMenuAriaMenu|translate}}">
+                        <li class="ib-mmb-dash-item__menu-item" ng-repeat="menuItem in mmbDashItemCtrl.model.menuItems">
+                            <a href="javascript:void(0)" class="ib-mmb-dash-item__menu-link" tabindex="{{mmbDashItemCtrl.flightMenuFocusValue}}"
+                            ng-click="mmbDashItemCtrl.action(mmbDashItemCtrl.model.category, menuItem, $index);"
+                            title="{{menuItem.text|translate}}" focusin>{{menuItem.text|translate}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ib-mmb-dash-item__content-bottom">
+                <div class="ib-mmb-dash-item__info" ng-repeat="item in mmbDashItemCtrl.model.items">
+                    <a href="javascript:void(0)" class="ib-mmb-dash-item__trip"
+                        ng-click="mmbDashItemCtrl.action(mmbDashItemCtrl.model.category, item, $index);"
+                        title="{{'VIEW_MORE_DETAILS_TEXT'|translate}}" tabindex="0" focusin>
+                        <span class="ib-mmb-dash-item__travel--icon icon-avion_ida"
+                            ng-class="{'ib-mmb-dash-item__travel--icon-rotate': item.category === 'returnFlight'}"></span>
+                        <span class="ib-mmb-dash-item__trip--departure">
+                            <span
+                                class="ib-mmb-dash-item__trip--city">{{item.departure.city|translate|limitTo:15}}{{item.departure.city.length > 15 ? '...' : ''}}</span>
+                            <span class="ib-mmb-dash-item__trip--code">({{item.departure.code|translate|uppercase}})</span>
+                        </span>
+                        <span class="ib-mmb-dash-item__trip--arrival">
+                            <span
+                                class="ib-mmb-dash-item__trip--city">{{item.arrival.city|translate|limitTo:15}}{{item.arrival.city.length > 15 ? '...' : ''}}</span>
+                            <span class="ib-mmb-dash-item__trip--code">({{item.arrival.code|translate|uppercase}})</span>
+                        </span>
+                    </a>
+                    <p class="ib-mmb-dash-item__travel--date">{{item.date}}</p>
+                    <p class="ib-mmb-dash-item__travel--info">{{item.status}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="ib-mmb-dash-item__content" ng-switch-when="passengers">
+            <h3 class="ib-mmb-dash-item__title">{{mmbDashItemCtrl.model.title|translate}}</h3>
+            <div class="ib-mmb-dash-item__content-bottom">
+                <div class="ib-mmb-dash-item__info" ng-repeat="(index, item) in mmbDashItemCtrl.model.items">
+                    <div class="ib-mmb-dash-item__passenger" ng-repeat="passenger in item.concepts">
+                        <a href="javascript:void(0)" class="ib-mmb-dash-item__trip ib-mmb-dash-item__trip--caret"
+                            ng-click="mmbDashItemCtrl.action(mmbDashItemCtrl.model.category, passenger.name, passIndex);"
+                            title="{{passenger.name}}" ng-class="" tabindex="0" focusin>
+                            <span class="ib-mmb-dash-item__passenger--name"
+                                ng-class="{'icon-persona': passenger.type === 'senior' || passenger.type === 'adult', 'icon-iberia_joven': passenger.type === 'young' || passenger.type === 'teenager', 'icon-iberia_ninos': passenger.type === 'child', 'icon-bebe': passenger.type === 'infant', 'icon-discapacitados': passenger.type === 'specialNeeds'}">{{passenger.name}}</span>
+                        </a>
+                        <p class="ib-mmb-dash-item__passenger--info">
+                            <span class="ib-mmb-dash-item__passenger--text">{{passenger.status|translate}} </span>
+                            <a href="javascript:void(0);" class="ib-link" title="{{passenger.actionText}}" focusin
+                                tabindex="0"
+                                ng-click="mmbDashItemCtrl.action(mmbDashItemCtrl.model.category, passenger, passIndex);">{{passenger.actionText}}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ib-mmb-dash-item__action" ng-switch-when="action">
+
+            <a href="javascript:void(0)" class="ib-mmb-dash-item__action--link"
+                ng-click="mmbDashItemCtrl.action(mmbDashItemCtrl.model.category, index);"
+                title="{{mmbDashItemCtrl.model.title|translate}}"
+                ng-class="{'icon-mensajes': mmbDashItemCtrl.model.category === 'reservationMail', 'icon-checking_online': mmbDashItemCtrl.model.category === 'goToCKI'}"
+                tabindex="0" focusin>
+                <span class="ib-mmb-dash-item__action--link-content">
+                    <h3 class="ib-mmb-dash-item__action--link-title">{{mmbDashItemCtrl.model.title|translate}}</h3>
+                    <p class="ib-mmb-dash-item__action--link-text">{{mmbDashItemCtrl.model.text|translate}}</p>
+                </span>
+            </a>
+
+        </div>
+        <div class="ib-mmb-dash-item__content" ng-switch-default>
+            <h3 ng-if="mmbDashItemCtrl.model.category == 'special-baggages'" class="ib-mmb-dash-item__title">{{'ANCILLARIES_SPEQS_TITLE_TEXT' | translate}}</h3>
+            <h3 ng-if="mmbDashItemCtrl.model.category == 'priority'" class="ib-mmb-dash-item__title">{{'PRIORITY_BOARDING_TITLE' | translate}}</h3>
+            <div class="ib-mmb-dash-item__content-bottom">
+                <div class="ib-mmb-dash-item__info" ng-repeat="(index, item) in mmbDashItemCtrl.model.items">
+                    <a href="javascript:void(0)" class="ib-mmb-dash-item__trip"
+                        ng-click="mmbDashItemCtrl.action(mmbDashItemCtrl.model.category, item, $index);"
+                        title="{{'VIEW_MORE_DETAILS_TEXT'|translate}}"
+                        ng-class="{'ib-mmb-dash-item__trip--caret': mmbDashItemCtrl.model.category !== 'travel'}"
+                        tabindex="0" focusin>
+                        <span class="ib-mmb-dash-item__trip--departure">
+                            <span
+                                class="ib-mmb-dash-item__trip--city">{{item.departure.city|translate|limitTo:15}}{{item.departure.city.length > 15 ? '...' : ''}}</span>
+                            <span class="ib-mmb-dash-item__trip--code">({{item.departure.code|translate|uppercase}})</span>
+                        </span>
+                        <span class="ib-mmb-dash-item__trip--arrival">
+                            <span
+                                class="ib-mmb-dash-item__trip--city">{{item.arrival.city|translate|limitTo:15}}{{item.arrival.city.length > 15 ? '...' : ''}}</span>
+                            <span class="ib-mmb-dash-item__trip--code">({{item.arrival.code|translate|uppercase}})</span>
+                        </span>
+                    </a>
+                    <p class="ib-mmb-dash-item__concept">
+                        <span class="ib-mmb-dash-item__concept--icon"
+                            ng-class="{'icon-seguros': mmbDashItemCtrl.model.category === 'insurance', 'icon-c_restaurante': mmbDashItemCtrl.model.category === 'menu', 'icon-asiento': mmbDashItemCtrl.model.category === 'seats', 'icon-e_equipaje': mmbDashItemCtrl.model.category === 'baggages', 'icon-e_trolley': mmbDashItemCtrl.model.category === 'speq', 'icon-flexibilidad': mmbDashItemCtrl.model.category === 'flexibility',  'icon-priority-boarding': mmbDashItemCtrl.model.category === 'priority','icon-obj_equipaje_especial': mmbDashItemCtrl.model.category === 'special-baggages' }"></span>
+                        <span class="ib-mmb-dash-item__concept--item">
+                            <span class="ib-mmb-dash-item__concept--info" ng-repeat="concept in item.concepts">
+                                <span class="ib-mmb-dash-item__concept--quantity"
+                                    ng-class="{'ib-mmb-dash-item__concept--quantity-x': mmbDashItemCtrl.model.category === 'insurance'}"
+                                    ng-if="item.showQuantity">{{concept.quantity}}</span>
+                                <span
+                                    class="ib-mmb-dash-item__concept--text">{{concept.quantity}} {{concept.text|translate}}</span>
+                                <span class="ib-mmb-dash-item__concept--status" ng-if="concept.status !== null">
+                                    ({{concept.status|translate}})</span>
+                            </span>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

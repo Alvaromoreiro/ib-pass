@@ -1,0 +1,300 @@
+/* -------------------------------------------------------------
+    #Progress-file
+----------------------------------------------------------------- */
+.#{$wefront__namespace}progress-file {
+    position: relative;
+    z-index: 1000;
+    width: rem(135);
+    height: rem(135);
+    margin: 0 auto;
+    border-radius: 50%;
+    background-color: transparent;
+    box-shadow: none;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: rem(8) solid transparent;
+        border-radius: 50%;
+    }
+
+    &__number {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+
+    &__svg {
+        position: relative;
+        z-index: 1000;
+        width: rem(135);
+        height: rem(135);
+    }
+
+    &__circle {
+        width: 100%;
+        height: 100%;
+        fill: none;
+        stroke-dasharray: 396;
+        stroke-dashoffset: 396;
+        stroke-linecap: round;
+        stroke-width: rem(8);
+        transition: stroke-dashoffset 3s ease-in-out;
+
+        &--one {
+            stroke: color(white);
+            stroke-dashoffset: 0;
+            transform: translate(rem(5), rem(5));
+        }
+
+        &--two {
+            animation-delay: 10s;
+            animation-duration: 2s;
+            animation-name: progress;
+            animation-timing-function: linear;
+            stroke: color(green-10);
+        }
+    }
+
+    &__value {
+        position: absolute;
+        top: rem(4);
+        left: rem(4);
+        width: rem(127);
+        height: rem(127);
+        border-radius: 50%;
+        font-size: rem(24);
+        text-align: center;
+        line-height: rem(135);
+        color: color(white);
+        background: color(gray-50);
+    }
+
+    &__bar {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border-width: rem(8);
+        border-style: solid;
+        border-color: color(green-10);
+        background: none;
+    }
+
+    &__left {
+        left: 0;
+        .#{$wefront__namespace}progress-file__bar {
+            left: 100%;
+            border-left: 0;
+            animation: none;
+            border-bottom-right-radius: rem(80);
+            border-top-right-radius: rem(80);
+            -webkit-transform-origin: center left;
+            transform-origin: center left;
+        }
+    }
+
+    &__right {
+        right: 0;
+        .#{$wefront__namespace}progress-file__bar {
+            left: -100%;
+            border-right: 0;
+            animation: none;
+            border-bottom-left-radius: rem(80);
+            border-top-left-radius: rem(80);
+            -webkit-transform-origin: center right;
+            transform-origin: center right;
+        }
+    }
+
+    &--25 {
+        .#{$wefront__namespace}progress-file {
+            &__right {
+                .#{$wefront__namespace}progress-file {
+                    &__bar {
+                        animation: loading-2 1.8s linear forwards;
+                    }
+                }
+            }
+
+            &__left {
+                .#{$wefront__namespace}progress-file {
+                    &__bar {
+                        animation: none;
+                    }
+                }
+            }
+        }
+    }
+
+    &--50 {
+        .#{$wefront__namespace}progress-file {
+            &__right {
+                .#{$wefront__namespace}progress-file {
+                    &__bar {
+                        animation: loading-1 1.8s linear forwards;
+                    }
+                }
+            }
+
+            &__left {
+                .#{$wefront__namespace}progress-file {
+                    &__bar {
+                        animation: none;
+                    }
+                }
+            }
+        }
+    }
+
+    &--75 {
+        .#{$wefront__namespace}progress-file {
+            &__right {
+                .#{$wefront__namespace}progress-file {
+                    &__bar {
+                        animation: loading-1 1.8s linear forwards;
+                    }
+                }
+            }
+
+            &__left {
+                .#{$wefront__namespace}progress-file {
+                    &__bar {
+                        animation: loading-2 1.5s linear forwards 1.8s;
+                    }
+                }
+            }
+        }
+    }
+
+    &--100 {
+        .#{$wefront__namespace}progress-file {
+            &__right {
+                .#{$wefront__namespace}progress-file {
+                    &__bar {
+                        animation: loading-1 1.8s linear forwards;
+                    }
+                }
+            }
+
+            &__left {
+                .#{$wefront__namespace}progress-file {
+                    &__bar {
+                        animation: loading-1 1.5s linear forwards 1.8s;
+                    }
+                }
+            }
+        }
+    }
+}
+.#{$wefront__namespace}progress-file > span {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    overflow: hidden;
+    width: 50%;
+    height: 100%;
+}
+
+@keyframes progress {
+    0% { stroke-dashoffset: 396; }
+    50% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 396; }
+}
+
+@keyframes loading-1 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes loading-2 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}progress-file {
+        width: rem(94);
+        height: rem(94);
+        line-height: rem(94);
+
+        &__bar {
+            border-width: rem(6);
+        }
+
+        &__value {
+            width: rem(88);
+            height: rem(88);
+            line-height: rem(88);
+        }
+
+        &::after {
+            border-width: rem(6);
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}progress-file {
+        width: rem(94);
+        height: rem(94);
+        line-height: rem(94);
+
+        &__bar {
+            border-width: rem(6);
+        }
+
+        &__value {
+            width: rem(88);
+            height: rem(88);
+            line-height: rem(88);
+        }
+
+        &::after {
+            border-width: rem(6);
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}progress-file {
+        &__svg {
+            width: rem(94);
+            height: rem(94);
+        }
+
+        &__circle {
+            cx: rem(42);
+            cy: rem(42);
+            r: rem(43);
+
+            &--two {
+                cx: rem(84);
+            }
+        }
+    }
+}

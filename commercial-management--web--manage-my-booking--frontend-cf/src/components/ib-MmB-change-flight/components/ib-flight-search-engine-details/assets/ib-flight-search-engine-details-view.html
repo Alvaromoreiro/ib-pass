@@ -1,0 +1,24 @@
+<section class="ib-layout__section">
+    <div class="ib-box ib-box--extra ib-box--extra-vertical ib-box--extra-top-small">
+        <div class="ib-heading-flights-detail">
+            <div class="ib-heading-flights-detail__content">
+                <span class="ib-heading-flights-detail__title">{{::flightSEDCtrl.flightSearchDetailsModel.origin}} - {{::flightSEDCtrl.flightSearchDetailsModel.destination}}</span>
+                <span class="ib-heading-flights-detail__sub-title">{{'FLIGHT_SEARCH_ENGINE_DETAILS_DESCRIPTION'|translate}}</span>
+            </div>
+            <div class="ib-heading-flights-detail__content">
+                <span class="ib-heading-flights-detail__detail">
+                    {{'FLIGHT_SEARCH_ENGINE_DETAILS_FLIGHTS'|translate}} {{flightSEDCtrl.flightSearchDetailsModel.searchEngineModel.selectedDate|date:'dd/MM/yyyy'}}
+                </span>
+            </div>
+        </div>
+        <div class="ib-content-actions" data-ng-class="{'ib-slide-toggle__button--opened':flightSEDCtrl.slideToggle,'ib-slide-toggle__button--closed':!flightSEDCtrl.slideToggle}">
+            <button ib-slide-toggle id="AVAILABILITY_SEARCH_TOGGLE" type="button" class="ib-content-actions__item" data-slide-toggle="#AVAILABILITY_SLIDE_TOGGLE_OPENED"
+                data-slide-toggle-duration="500" data-ng-click="flightSEDCtrl.slideToggle = !flightSEDCtrl.slideToggle">
+                {{(flightSEDCtrl.slideToggle ? 'FLIGHT_SEARCH_ENGINE_DETAILS_TOGGLE_OPENED' : 'FLIGHT_SEARCH_ENGINE_DETAILS_TOGGLE_CLOSED')|translate}}
+            </button>
+        </div>
+        <fieldset class="ib-slide-toggle" id="AVAILABILITY_SLIDE_TOGGLE_OPENED" data-ng-class="{'ib-slide-toggle--opened':flightSEDCtrl.slideToggle,'ib-slide-toggle--closed':!flightSEDCtrl.slideToggle}">
+            <ib-flight-search-engine flight-search-model="flightSEDCtrl.flightSearchDetailsModel.searchEngineModel" time-zone-options="flightSEDCtrl.timeZoneOptions"></ib-flight-search-engine>
+        </fieldset>
+    </div>
+</section>

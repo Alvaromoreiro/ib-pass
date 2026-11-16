@@ -1,0 +1,591 @@
+<div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+
+    <div class="ib-box ib-box--medium ib-box--medium--invoice ib-box--empty-responsive u-pb-none">
+        <div class="ib-flex ib-flex--align-center ib-icons--icon-left">
+            <span class="icon-nota ib-link__icon--big ib-link__icon--primary"></span>
+            <span class="ib-text ib-text--invoice-responsive">{{'MMB_INVOICES_FISCAL_DATA_FORM_TITLE2' | translate}}</span>
+        </div>
+        <p class="ib-text ib-text--small ib-text--lh-small ib-text--color-gray-dark--mobile">
+            {{'MMB_INVOICES_FISCAL_DATA_FORM_BODY2' | translate}}
+        </p>
+    </div>
+    <div class="ib-box ib-box--medium ib-box--medium--invoice u-mt-mobile">
+        <div class="ib-flex u-mt-xmedium u-mb-xmedium ib-flex__column--mobile u-pl-mobile ib-flex--gap-medium ib-flex--gap-none-mobile u-pr-mobile u-pt-mobile u-mb-mobile u-mt-none">
+            <div class="ib-radio ib-radio--double-radio u-pb-small-mobile u-pr-none">
+                <input
+                    type="radio"
+                    id="particular"
+                    value="PARTICULAR"
+                    name="particular"
+                    class="ib-radio__input"
+                    ng-model="ibMmbInvoiceInformationCtrl.radioSelected" />
+                <label for="particular" class="ib-radio__label">
+                    <span class="ib-radio__text ib-radio__text--gray">{{'MMB_INVOICES_FISCAL_DATA_FORM_RADIO1' | translate}}</span>
+                </label>
+            </div>
+
+            <div class="ib-radio ib-radio--double-radio">
+                <input
+                    type="radio"
+                    id="company"
+                    value="COMPANY"
+                    name="company"
+                    class="ib-radio__input"
+                    ng-model="ibMmbInvoiceInformationCtrl.radioSelected" />
+                <label for="company" class="ib-radio__label">
+                    <span class="ib-radio__text ib-radio__text--gray">{{'MMB_INVOICES_FISCAL_DATA_FORM_RADIO2' | translate}}</span>
+                </label>
+            </div>
+        </div>
+
+        <form
+            method="post"
+            name="ibMmbInvoiceInformationCtrl.invoiceInformationForm"
+        >
+            <div class="ib-layout u-mt">
+                <fieldset>
+                    <legend class="u-hide-accessible">datos facturación</legend>
+                    <div ng-if="ibMmbInvoiceInformationCtrl.radioSelected === 'PARTICULAR'"
+                        class="ib-flex ib-flex--align-normal ib-flex--space-between u-mb-xmedium ib-flex__column--mobile u-mb-mobile"
+                    >   <div class="ib-flex--basis-47-5 u-mb-mobile u-pl-mobile u-pr-mobile">
+                            <div
+                                class="ib-input"
+                            >
+                                <label
+                                    class="ib-input__label"
+                                    for="name"
+                                    ng-class="{'ib-input__label--focus' : ibMmbInvoiceInformationCtrl.nameFocused || (ibMmbInvoiceInformationCtrl.invoiceInformationForm.name.$viewValue != null &amp;&amp; ibMmbInvoiceInformationCtrl.invoiceInformationForm.name.$viewValue != '')}"
+                                >
+                                    {{'MMB_INVOICES_MODAL_INVOICE_FIELD1' |
+                                    translate}}
+                                </label>
+                                <input
+                                    class="ib-input__input"
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    data-ng-focus="ibMmbInvoiceInformationCtrl.nameFocused=true"
+                                    ng-blur="ibMmbInvoiceInformationCtrl.nameFocused=false"
+                                    maxlength="60"
+                                    ng-model="ibMmbInvoiceInformationCtrl.model.billingData.name"
+                                    ng-required="ibMmbInvoiceInformationCtrl.radioSelected === 'PARTICULAR'"
+                                />
+                            </div>
+                            <div
+                                ng-messages="ibMmbInvoiceInformationCtrl.invoiceInformationForm.$submitted && ibMmbInvoiceInformationCtrl.invoiceInformationForm.name.$error"
+                            >
+                                <div
+                                    class="ib-alert ib-alert--error"
+                                    ng-message="required"
+                                >
+                                    {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ib-flex--basis-47-5 u-pl-mobile u-pr-mobile">
+                            <div class="ib-input">
+                                <label
+                                    class="ib-input__label"
+                                    for="surname"
+                                    ng-class="{'ib-input__label--focus' : ibMmbInvoiceInformationCtrl.surnameFocused || (ibMmbInvoiceInformationCtrl.invoiceInformationForm.surname.$viewValue != null &amp;&amp; ibMmbInvoiceInformationCtrl.invoiceInformationForm.surname.$viewValue != '')}"
+                                >
+                                    {{'MMB_INVOICES_MODAL_INVOICE_FIELD2' |
+                                    translate}}
+                                </label>
+                                <input
+                                    class="ib-input__input"
+                                    type="text"
+                                    id="surname"
+                                    name="surname"
+                                    data-ng-focus="ibMmbInvoiceInformationCtrl.surnameFocused=true"
+                                    ng-blur="ibMmbInvoiceInformationCtrl.surnameFocused=false"
+                                    maxlength="60"
+                                    ng-model="ibMmbInvoiceInformationCtrl.model.billingData.surname"
+                                    ng-required="ibMmbInvoiceInformationCtrl.radioSelected === 'PARTICULAR'"
+                                />
+                            </div>
+                            <div
+                                ng-messages="ibMmbInvoiceInformationCtrl.invoiceInformationForm.$submitted && ibMmbInvoiceInformationCtrl.invoiceInformationForm.surname.$error"
+                            >
+                                <div
+                                    class="ib-alert ib-alert--error"
+                                    ng-message="required"
+                                >
+                                    {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-if="ibMmbInvoiceInformationCtrl.radioSelected === 'COMPANY'"
+                        class="u-mb-xmedium ib-flex__column--mobile u-mb-mobile u-pl-mobile u-pr-mobile"
+                    >
+                        <div class="ib-input">
+                            <label
+                                class="ib-input__label"
+                                for="businessName"
+                                ng-class="{'ib-input__label--focus' : ibMmbInvoiceInformationCtrl.businessNameFocused || (ibMmbInvoiceInformationCtrl.invoiceInformationForm.businessName.$viewValue != null &amp;&amp; ibMmbInvoiceInformationCtrl.invoiceInformationForm.businessName.$viewValue != '')}"
+                            >
+                                {{'MMB_INVOICES_MODAL_INVOICE_FIELD10' |
+                                translate}}
+                            </label>
+                            <input
+                                class="ib-input__input"
+                                type="text"
+                                id="businessName"
+                                name="businessName"
+                                data-ng-focus="ibMmbInvoiceInformationCtrl.businessNameFocused=true"
+                                ng-blur="ibMmbInvoiceInformationCtrl.businessNameFocused=false"
+                                maxlength="60"
+                                ng-model="ibMmbInvoiceInformationCtrl.model.billingData.businessName"
+                                ng-required="ibMmbInvoiceInformationCtrl.radioSelected === 'COMPANY'"
+                            />
+                        </div>
+                        <div
+                            ng-messages="ibMmbInvoiceInformationCtrl.invoiceInformationForm.$submitted && ibMmbInvoiceInformationCtrl.invoiceInformationForm.businessName.$error"
+                        >
+                            <div
+                                class="ib-alert ib-alert--error"
+                                ng-message="required"
+                            >
+                                {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="ib-flex ib-flex--align-normal ib-flex--space-between u-mb-xmedium ib-flex__column--mobile u-mb-mobile"
+                    >
+                        <div ng-if="ibMmbInvoiceInformationCtrl.radioSelected === 'PARTICULAR'" class="ib-flex--basis-47-5 u-mb-mobile u-pl-mobile u-pr-mobile">
+                            <div ng-if="ibMmbInvoiceInformationCtrl.issuerCountry === 'ES'"
+                                class="ib-input"
+                                >
+                                <label
+                                    class="ib-input__label"
+                                    for="identityInformation"
+                                    ng-class="{'ib-input__label--focus' : ibMmbInvoiceInformationCtrl.identityInformationFocused || (ibMmbInvoiceInformationCtrl.invoiceInformationForm.identityInformation.$viewValue != null &amp;&amp; ibMmbInvoiceInformationCtrl.invoiceInformationForm.identityInformation.$viewValue != '')}"
+                                >   {{ 'MMB_INVOICES_MODAL_INVOICE_FIELD3' | translate }}
+                                </label>
+                                <input
+                                    class="ib-input__input"
+                                    type="text"
+                                    id="identityInformation"
+                                    name="identityInformation"
+                                    data-ng-focus="ibMmbInvoiceInformationCtrl.identityInformationFocused=true"
+                                    ng-blur="ibMmbInvoiceInformationCtrl.identityInformationFocused=false"
+                                    maxlength="60"
+                                    ng-model="ibMmbInvoiceInformationCtrl.model.billingData.identityInformation"
+                                    ng-required="ibMmbInvoiceInformationCtrl.radioSelected === 'PARTICULAR'"
+                                    ib-dni-nie-validator
+                                />
+                            </div>
+                            <div ng-if="ibMmbInvoiceInformationCtrl.issuerCountry !== 'ES'"
+                                class="ib-input"
+                                >
+                                <label
+                                    class="ib-input__label"
+                                    for="identityInformation"
+                                    ng-class="{'ib-input__label--focus' : ibMmbInvoiceInformationCtrl.identityInformationFocused || (ibMmbInvoiceInformationCtrl.invoiceInformationForm.identityInformation.$viewValue != null &amp;&amp; ibMmbInvoiceInformationCtrl.invoiceInformationForm.identityInformation.$viewValue != '')}"
+                                >   {{ 'MMB_INVOICES_MODAL_INVOICE_FIELD3' | translate }}
+                                </label>
+                                <input
+                                    class="ib-input__input"
+                                    type="text"
+                                    id="identityInformation"
+                                    name="identityInformation"
+                                    data-ng-focus="ibMmbInvoiceInformationCtrl.identityInformationFocused=true"
+                                    ng-blur="ibMmbInvoiceInformationCtrl.identityInformationFocused=false"
+                                    maxlength="60"
+                                    ng-model="ibMmbInvoiceInformationCtrl.model.billingData.identityInformation"
+                                    ng-pattern="::$root.MmBPatterns.DOCS_PATTERN"
+                                    ng-required="ibMmbInvoiceInformationCtrl.radioSelected === 'PARTICULAR'"
+                                />
+                            </div>
+                            <div
+                                ng-messages="ibMmbInvoiceInformationCtrl.validationError && ibMmbInvoiceInformationCtrl.invoiceInformationForm.identityInformation.$error"
+                            >
+                                <div
+                                    class="ib-alert ib-alert--error"
+                                    ng-message="pattern"
+                                >
+                                {{'GENERAL_NIF_PATTERN_ERROR'|translate}}
+                                </div>
+                            </div>
+                            <div
+                                ng-messages="ibMmbInvoiceInformationCtrl.invoiceInformationForm.$submitted && ibMmbInvoiceInformationCtrl.invoiceInformationForm.identityInformation.$error"
+                            >
+                                <div
+                                    class="ib-alert ib-alert--error"
+                                    ng-message="dniNie"
+                                >
+                                {{'GENERAL_NIF_PATTERN_ERROR'|translate}}
+                                </div>
+                            </div>
+                            <div
+                                ng-messages="ibMmbInvoiceInformationCtrl.invoiceInformationForm.$submitted && ibMmbInvoiceInformationCtrl.invoiceInformationForm.identityInformation.$error"
+                            >
+                                <div
+                                    class="ib-alert ib-alert--error"
+                                    ng-message="required"
+                                >
+                                    {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-if="ibMmbInvoiceInformationCtrl.radioSelected === 'COMPANY'" class="ib-flex--basis-47-5 u-mb-mobile u-pl-mobile u-pr-mobile">
+                            <div
+                                class="ib-input"
+                                >
+                                <label
+                                    class="ib-input__label"
+                                    for="identityInformation"
+                                    ng-class="{'ib-input__label--focus' : ibMmbInvoiceInformationCtrl.identityInformationFocused || (ibMmbInvoiceInformationCtrl.invoiceInformationForm.identityInformation.$viewValue != null &amp;&amp; ibMmbInvoiceInformationCtrl.invoiceInformationForm.identityInformation.$viewValue != '')}"
+                                >   {{ 'MMB_INVOICES_MODAL_INVOICE_FIELD11' | translate }}
+                                </label>
+                                <input
+                                    class="ib-input__input"
+                                    type="text"
+                                    id="identityInformation"
+                                    name="identityInformation"
+                                    data-ng-focus="ibMmbInvoiceInformationCtrl.identityInformationFocused=true"
+                                    ng-blur="ibMmbInvoiceInformationCtrl.identityInformationFocused=false"
+                                    maxlength="60"
+                                    ng-model="ibMmbInvoiceInformationCtrl.model.billingData.identityInformation"
+                                    ng-pattern="::$root.MmBPatterns.CIF_DOCUMENT"
+                                    ng-required="ibMmbInvoiceInformationCtrl.radioSelected === 'COMPANY'"
+                                />
+                            </div>
+                            <div
+                                ng-messages="ibMmbInvoiceInformationCtrl.validationError && ibMmbInvoiceInformationCtrl.invoiceInformationForm.identityInformation.$error"
+                            >
+                                <div
+                                    class="ib-alert ib-alert--error"
+                                    ng-message="pattern"
+                                >
+                                    {{'GENERAL_CIF_PATTERN_ERROR'|translate}}
+                                </div>
+                            </div>
+                            <div
+                                ng-messages="ibMmbInvoiceInformationCtrl.invoiceInformationForm.$submitted && ibMmbInvoiceInformationCtrl.invoiceInformationForm.identityInformation.$error"
+                            >
+                                <div
+                                    class="ib-alert ib-alert--error"
+                                    ng-message="required"
+                                >
+                                    {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ib-flex--basis-47-5 u-pl-mobile u-pr-mobile">
+                            <div class="ib-input">
+                                <label
+                                    class="ib-input__label"
+                                    for="email"
+                                    ng-class="{'ib-input__label--focus' : ibMmbInvoiceInformationCtrl.emailFocused || (ibMmbInvoiceInformationCtrl.invoiceInformationForm.email.$viewValue != null &amp;&amp; ibMmbInvoiceInformationCtrl.invoiceInformationForm.email.$viewValue != '')}"
+                                >
+                                    {{'MMB_INVOICES_MODAL_INVOICE_FIELD4' |
+                                    translate}}
+                                </label>
+                                <input
+                                    class="ib-input__input"
+                                    type="text"
+                                    id="email"
+                                    name="email"
+                                    data-ng-focus="ibMmbInvoiceInformationCtrl.emailFocused=true"
+                                    ng-blur="ibMmbInvoiceInformationCtrl.emailFocused=false"
+                                    maxlength="60"
+                                    ng-model="ibMmbInvoiceInformationCtrl.model.shippingData.email"
+                                    ng-pattern="::$root.MmBPatterns.EMAIL_PATTERN"
+                                    required
+                                />
+                            </div>
+                            <div
+                                ng-messages="ibMmbInvoiceInformationCtrl.validationError && ibMmbInvoiceInformationCtrl.invoiceInformationForm.email.$error"
+                            >
+                                <div
+                                    class="ib-alert ib-alert--error"
+                                    ng-message="pattern"
+                                >
+                                    {{'GENERAL_EMAIL_PATTERN_ERROR'|translate}}
+                                </div>
+                            </div>
+                            <div
+                                ng-messages="ibMmbInvoiceInformationCtrl.invoiceInformationForm.$submitted && ibMmbInvoiceInformationCtrl.invoiceInformationForm.email.$error"
+                            >
+                                <div
+                                    class="ib-alert ib-alert--error"
+                                    ng-message="required"
+                                >
+                                    {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="ib-flex ib-flex--align-normal ib-flex--space-between u-mb-xmedium ib-flex__column--mobile u-mb-mobile"
+                    >
+                        <div class="ib-flex--basis-47-5 u-mb-mobile u-pl-mobile u-pr-mobile">
+                            <div
+                                class="ib-input"
+                            >
+                                <label
+                                    class="ib-input__label"
+                                    for="address"
+                                    ng-class="{'ib-input__label--focus' : ibMmbInvoiceInformationCtrl.addressFocused || (ibMmbInvoiceInformationCtrl.invoiceInformationForm.address.$viewValue != null &amp;&amp; ibMmbInvoiceInformationCtrl.invoiceInformationForm.address.$viewValue != '')}"
+                                >
+                                    {{'MMB_INVOICES_MODAL_INVOICE_FIELD5' |
+                                    translate}}
+                                </label>
+                                <input
+                                    class="ib-input__input"
+                                    type="text"
+                                    id="address"
+                                    name="address"
+                                    data-ng-focus="ibMmbInvoiceInformationCtrl.addressFocused=true"
+                                    ng-blur="ibMmbInvoiceInformationCtrl.addressFocused=false"
+                                    maxlength="60"
+                                    ng-model="ibMmbInvoiceInformationCtrl.model.billingData.address"
+                                    required
+                                />
+                            </div>
+                            <div
+                                ng-messages="ibMmbInvoiceInformationCtrl.invoiceInformationForm.$submitted && ibMmbInvoiceInformationCtrl.invoiceInformationForm.address.$error"
+                            >
+                                <div
+                                    class="ib-alert ib-alert--error"
+                                    ng-message="required"
+                                >
+                                    {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ib-flex--basis-47-5 u-pl-mobile u-pr-mobile">
+                            <div class="ib-input">
+                                <label
+                                    class="ib-input__label"
+                                    for="floor"
+                                    ng-class="{'ib-input__label--focus' : ibMmbInvoiceInformationCtrl.floorFocused || (ibMmbInvoiceInformationCtrl.invoiceInformationForm.floor.$viewValue != null &amp;&amp; ibMmbInvoiceInformationCtrl.invoiceInformationForm.floor.$viewValue != '')}"
+                                >
+                                    {{'MMB_INVOICES_MODAL_INVOICE_FIELD6' |
+                                    translate}}
+                                </label>
+                                <input
+                                    class="ib-input__input"
+                                    type="text"
+                                    id="floor"
+                                    name="floor"
+                                    data-ng-focus="ibMmbInvoiceInformationCtrl.floorFocused=true"
+                                    ng-blur="ibMmbInvoiceInformationCtrl.floorFocused=false"
+                                    maxlength="60"
+                                    ng-model="ibMmbInvoiceInformationCtrl.model.billingData.floor"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="ib-flex ib-flex--align-normal ib-flex--space-between u-mb-xmedium ib-flex__column--mobile u-mb-mobile"
+                    >
+                        <div class="ib-flex--basis-47-5 u-mb-mobile u-pl-mobile u-pr-mobile">
+                            <div
+                                class="ib-input"
+                            >
+                                <label
+                                    class="ib-input__label"
+                                    for="city"
+                                    ng-class="{'ib-input__label--focus' : ibMmbInvoiceInformationCtrl.cityFocused || (ibMmbInvoiceInformationCtrl.invoiceInformationForm.city.$viewValue != null &amp;&amp; ibMmbInvoiceInformationCtrl.invoiceInformationForm.city.$viewValue != '')}"
+                                >
+                                    {{'MMB_INVOICES_MODAL_INVOICE_FIELD7' |
+                                    translate}}
+                                </label>
+                                <input
+                                    class="ib-input__input"
+                                    type="text"
+                                    id="city"
+                                    name="city"
+                                    data-ng-focus="ibMmbInvoiceInformationCtrl.cityFocused=true"
+                                    ng-blur="ibMmbInvoiceInformationCtrl.cityFocused=false"
+                                    maxlength="60"
+                                    ng-model="ibMmbInvoiceInformationCtrl.model.billingData.city"
+                                    required
+                                />
+                            </div>
+                            <div
+                                ng-messages="ibMmbInvoiceInformationCtrl.invoiceInformationForm.$submitted && ibMmbInvoiceInformationCtrl.invoiceInformationForm.city.$error"
+                            >
+                                <div
+                                    class="ib-alert ib-alert--error"
+                                    ng-message="required"
+                                >
+                                    {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ib-flex--basis-47-5 u-pl-mobile u-pr-mobile">
+                            <div class="ib-input">
+                                <label
+                                    class="ib-input__label"
+                                    for="postalCode"
+                                    ng-class="{'ib-input__label--focus' : ibMmbInvoiceInformationCtrl.postalCodeFocused || (ibMmbInvoiceInformationCtrl.invoiceInformationForm.postalCode.$viewValue != null && ibMmbInvoiceInformationCtrl.invoiceInformationForm.postalCode.$viewValue != '')}"
+                                >
+                                    {{'MMB_INVOICES_MODAL_INVOICE_FIELD8' |
+                                    translate}}
+                                </label>
+                                <input
+                                    class="ib-input__input"
+                                    type="text"
+                                    id="postalCode"
+                                    name="postalCode"
+                                    data-ng-focus="ibMmbInvoiceInformationCtrl.postalCodeFocused=true"
+                                    ng-blur="ibMmbInvoiceInformationCtrl.postalCodeFocused=false"
+                                    maxlength="60"
+                                    ng-model="ibMmbInvoiceInformationCtrl.model.billingData.postalCode"
+                                    ng-pattern="::$root.MmBPatterns.ONLY_NUMBERS"
+                                    required
+                                />
+                            </div>
+                            <div
+                                ng-messages="ibMmbInvoiceInformationCtrl.invoiceInformationForm.$submitted && ibMmbInvoiceInformationCtrl.invoiceInformationForm.postalCode.$error"
+                            >
+                                <div
+                                    class="ib-alert ib-alert--error"
+                                    ng-message="required"
+                                >
+                                    {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                                </div>
+                            </div>
+                            <div
+                                ng-messages="ibMmbInvoiceInformationCtrl.validationError && ibMmbInvoiceInformationCtrl.invoiceInformationForm.postalCode.$error"
+                            >
+                                <div
+                                    class="ib-alert ib-alert--error"
+                                    ng-message="pattern"
+                                >
+                                    {{'GENERAL_INPUT_PATTERN_ERROR'|translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="ib-flex ib-flex--align-normal ib-flex--space-between ib-flex__column--mobile u-mb-mobile"
+                    >
+                        <div class="ib-flex--basis-47-5 u-mb-mobile u-pl-mobile u-pr-mobile">
+                            <div ng-if="ibMmbInvoiceInformationCtrl.showCountrySelect" class="ib-select ib-select--width">
+                                <label class="ib-select__label" for="select-01" ng-class="select.focused ? 'ib-select__label--focus' : 'ib-select__label--unfocus'">{{'MMB_INVOICES_MODAL_INVOICE_COUNTRY'|translate}}</label>
+                                <ui-select class="ib-select__action"
+                                    ng-model="ibMmbInvoiceInformationCtrl.model.billingData.country"
+                                    ng-required="true"
+                                    name="country"
+                                    data-ng-change='ibMmbInvoiceInformationCtrl.getProvinceByCountry($select.selected.code)'
+                                    >
+                                <ui-select-match class="ib-select__list-ipt"
+                                    placeholder="{{'MMB_INVOICES_MODAL_INVOICE_COUNTRY'|translate}}">
+                                    <span class="ib-select__txt"
+                                        ng-bind="$select.selected.description">
+                                    </span>
+                                    </ui-select-match>
+                                    <ui-select-choices class="ib-select__list"
+                                        repeat="item.description as item in (ibMmbInvoiceInformationCtrl.countryTypes | filter: $select.search)">
+                                        <span class="ib-select__list-txt"
+                                        ng-bind ="item.description"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+
+                            <div ng-messages="ibMmbInvoiceInformationCtrl.invoiceInformationForm.$submitted && ibMmbInvoiceInformationCtrl.invoiceInformationForm.country.$error">
+                                <div class="ib-alert ib-alert--error" ng-message="required">
+                                    {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ib-flex--basis-47-5 u-pl-mobile u-pr-mobile">
+                            <div ng-if="ibMmbInvoiceInformationCtrl.showProvincesSelect" class="ib-select ib-select--width">
+                                <label class="ib-select__label" for="select-02" ng-class="select.focused ? 'ib-select__label--focus' : 'ib-select__label--unfocus'">{{'MMB_INVOICES_MODAL_INVOICE_FIELD9'|translate}}</label>
+                                <ui-select class="ib-select__action"
+                                    ng-model="ibMmbInvoiceInformationCtrl.model.billingData.province"
+                                    ng-required="true"
+                                    name="province"
+                                    >
+                                <ui-select-match class="ib-select__list-ipt"
+                                    placeholder="{{ibMmbInvoiceInformationCtrl.statesLiteral | translate}}">
+                                    <span class="ib-select__txt" ng-bind="$select.selected.description">
+                                    </span>
+                                    </ui-select-match>
+                                    <ui-select-choices class="ib-select__list" repeat="item.description as item in (ibMmbInvoiceInformationCtrl.provinceTypes | filter: $select.search)">
+                                        <span class="ib-select__list-txt" ng-bind ="item.description"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div class="ib-input" ng-if="ibMmbInvoiceInformationCtrl.showProvincesInput">
+                                <label
+                                    class="ib-input__label"
+                                    for="province"
+                                    aria-label="{{ibMmbInvoiceInformationCtrl.statesLiteral | translate}}"
+                                    ng-class="{'ib-input__label--focus' : ibMmbInvoiceInformationCtrl.provinceCodeFocused || (ibMmbInvoiceInformationCtrl.invoiceInformationForm.province.$viewValue !== null && ibMmbInvoiceInformationCtrl.invoiceInformationForm.province.$viewValue !== '')}">
+                                    {{ibMmbInvoiceInformationCtrl.statesLiteral | translate}}
+                                </label>
+                                <input
+                                    class="ib-input__input"
+                                    type="text"
+                                    id="province"
+                                    name="province"
+                                    data-ng-focus="ibMmbInvoiceInformationCtrl.provinceCodeFocused=true"
+                                    ng-blur="ibMmbInvoiceInformationCtrl.provinceCodeFocused=false"
+                                    maxlength="{{::$root.MmBPatterns.CITY_MAX_LENGTH}}"
+                                    ng-pattern="::$root.MmBPatterns.REGION_COUNTRY_PATTERN"
+                                    ng-model="ibMmbInvoiceInformationCtrl.model.billingData.province"
+                                    required
+                                />
+                            </div>
+                            <div ng-messages="ibMmbInvoiceInformationCtrl.invoiceInformationForm.$submitted && ibMmbInvoiceInformationCtrl.invoiceInformationForm.province.$error">
+                                <div class="ib-alert ib-alert--error" ng-message="required">
+                                    {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                                </div>
+                            </div>
+                            <div ng-messages="ibMmbInvoiceInformationCtrl.validationError && ibMmbInvoiceInformationCtrl.invoiceInformationForm.province.$error">
+                                <div class="ib-alert ib-alert--error" ng-message="pattern">
+                                    {{'GENERAL_INPUT_PATTERN_ERROR'|translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="ib-layout__line-spacing">
+    <div class="ib-content-buttons">
+        <div class="ib-content-buttons__content-left">
+            <button
+                class="ib-button ib-button--w-medium"
+                type="button"
+                ng-click="ibMmbInvoiceInformationCtrl.updateInvoiceInfo()"
+                ng-disabled="ibMmbInvoiceInformationCtrl.listInvoicesSelected.length === 0"
+                ng-class="{ 'ib-button--disabled' : ibMmbInvoiceInformationCtrl.listInvoicesSelected.length === 0 }"
+            >
+                {{'MMB_INVOICES_FISCAL_DATA_FORM_ACTION1' | translate}}
+            </button>
+        </div>
+        <div
+            class="ib-content-buttons__content-right ib-content-buttons__content-right--mb-mobile"
+        >
+            <a
+                href="javascript:void(0)"
+                title="Cancelar"
+                class="ib-link"
+                ng-click="ibMmbInvoiceInformationCtrl.close();"
+                >{{'MMB_INVOICES_FISCAL_DATA_FORM_ACTION2' | translate}}</a
+            >
+        </div>
+    </div>
+</div>

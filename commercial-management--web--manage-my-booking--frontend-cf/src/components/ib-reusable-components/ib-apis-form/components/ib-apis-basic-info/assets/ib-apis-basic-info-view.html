@@ -1,0 +1,159 @@
+<div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="ib-layout__line-spacing">
+            <div class="ib-input">
+                <label class="ib-input__label" for="APIS_NAME"
+                    data-ng-class="{'ib-input__label--focus' : apisBasicInfoCtrl.nameFocused || apisBasicInfoCtrl.containerForm.APIS_NAME.$viewValue}"
+                    data-ng-class="{'ib-select--error': apisBasicInfoCtrl.containerForm.$submitted && apisBasicInfoCtrl.containerForm.APIS_NAME.$invalid}">
+                    {{'APIS_NAME_FIELD_LABEL'|translate}}</label>
+                <input class="ib-input__input" type="text" id="APIS_NAME" name="APIS_NAME"
+                    ng-focus="apisBasicInfoCtrl.nameFocused=true" maxlength="{{::$root.MmBPatterns.MAX_LENGTH_NAME}}"
+                    ng-blur="apisBasicInfoCtrl.nameFocused=true"
+                    data-ib-validator-cleaner="{{::$root.MmBPatterns.NAME_SURNAME_CLEANER}}"
+                    ng-model="apisBasicInfoCtrl.pasBasicData.basicInfo.name" ng-required="true" />
+            </div>
+            <div ng-if="apisBasicInfoCtrl.containerForm.$submitted && !apisBasicInfoCtrl.pasBasicData.basicInfo.name">
+                <div class="ib-alert ib-alert--error">{{'APIS_NAME_REQUIRED_ERROR'|translate}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="ib-layout__line-spacing">
+            <div class="ib-input">
+                <label class="ib-input__label" for="APIS_SURNAME"
+                    data-ng-class="{'ib-input__label--focus' : apisBasicInfoCtrl.surnameFocused || apisBasicInfoCtrl.containerForm.APIS_SURNAME.$viewValue, 'ib-select--error': apisBasicInfoCtrl.containerForm.$submitted && apisBasicInfoCtrl.containerForm.APIS_SURNAME.$invalid}">
+                    {{('APIS_SURNAME_FIELD_LABEL'|translate) }}</label>
+                <input class="ib-input__input" type="text" id="APIS_SURNAME" name="APIS_SURNAME"
+                    ng-focus="apisBasicInfoCtrl.surnameFocused=true"
+                    ng-model="apisBasicInfoCtrl.pasBasicData.basicInfo.surname"
+                    ng-blur="apisBasicInfoCtrl.surnameFocused=true"
+                    ng-required="::(apisBasicInfoCtrl.requiredFields.indexOf('APIS_SURNAME') !== -1)"
+                    maxlength="{{::$root.MmBPatterns.MAX_LENGTH_NAME}}"
+                    ng-pattern="::$root.CHECKIN_PATTERNS.NAME_SURNAME_PATTERN"
+                    data-ib-validator-cleaner="{{::$root.MmBPatterns.NAME_SURNAME_CLEANER}}"
+                    data-ib-nationality-validator="{{apisBasicInfoCtrl.pasBasicData.basicInfo.nationality}}"/>
+            </div>
+            <div ng-messages="apisBasicInfoCtrl.containerForm.APIS_SURNAME.$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'APIS_SURNAME_REQUIRED_ERROR'|translate}}</div>
+                <div class="ib-alert ib-alert--error" ng-message="nationality">{{'DNI_VALIDATOR_ERROR'|translate}}</div>
+            </div>
+            <div ng-if="apisBasicInfoCtrl.containerForm.$submitted && !apisBasicInfoCtrl.pasBasicData.basicInfo.surname">
+                <div class="ib-alert ib-alert--error">{{'APIS_SURNAME_REQUIRED_ERROR'|translate}}</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="ib-layout__line-spacing">
+            <ib-mmb-passenger-birth-date years-from="0" day="apisBasicInfoCtrl.pasBasicData.basicInfo.birthDate.day"
+                month="apisBasicInfoCtrl.pasBasicData.basicInfo.birthDate.month"
+                year="apisBasicInfoCtrl.pasBasicData.basicInfo.birthDate.year"
+                container-form="apisBasicInfoCtrl.containerForm" index="{{::apisBasicInfoCtrl.index}}"
+                is-required="(apisBasicInfoCtrl.requiredFields.indexOf('BIRTH_DATE') !== -1)"></ib-mmb-passenger-birth-date>
+        </div>
+    </div>
+    <div ng-if="!apisBasicInfoCtrl.isInfant && !apisBasicInfoCtrl.isRequiredHomeAddress" class="col-md-6 col-sm-12 col-xs-12">
+        <div class="ib-layout__line-spacing">
+            <div class="ib-select"
+                data-ng-class="{'ib-select--error': apisBasicInfoCtrl.containerForm.$submitted && apisBasicInfoCtrl.containerForm.APIS_HOME_COUNTRY.$invalid}">
+                <label class="ib-select__label" for="APIS_HOME_COUNTRY"
+                    data-ng-class="apisBasicInfoCtrl.pasBasicData.basicInfo.homeCountry ? 'ib-select__label--focus' : 'ib-select__label--unfocus'">
+                    {{'APIS_HOME_COUNTRY_FIELD_LABEL'|translate}}</label>
+                <ui-select class="ib-select__action" ng-model="apisBasicInfoCtrl.pasBasicData.basicInfo.homeCountry"
+                    ng-required="true" name="APIS_HOME_COUNTRY" ng-disabled="apisBasicInfoCtrl.isInfant">
+                    <ui-select-match class="ib-select__list-ipt"
+                        placeholder="{{apisBasicInfoCtrl.requiredFields.indexOf('HOME_COUNTRY') !== -1 ? (('APIS_HOME_COUNTRY_FIELD_LABEL'|translate) ) : ('APIS_HOME_COUNTRY_FIELD_LABEL'|translate)}}">
+                        <span class="ib-select__txt" ng-bind="$select.selected.description"></span>
+                    </ui-select-match>
+
+                    <ui-select-choices class="ib-select__list"
+                        repeat="country.code as country in apisBasicInfoCtrl.countries | prefixCheckSpecialCharactersFilter: $select.search">
+                        <span class="ib-select__list-txt" ng-bind="::country.description"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div
+                ng-if="apisBasicInfoCtrl.containerForm.$submitted && apisBasicInfoCtrl.containerForm.APIS_HOME_COUNTRY.$invalid">
+                <div class="ib-alert ib-alert--error">{{'APIS_HOME_COUNTRY_REQUIRED_ERROR'|translate}}</div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="apisBasicInfoCtrl.isInfant" class="col-md-6 col-sm-12 col-xs-12">
+        <div class="ib-layout__line-spacing">
+            <div class="ib-select"
+                data-ng-class="{'ib-select--error': apisBasicInfoCtrl.containerForm.$submitted && apisBasicInfoCtrl.containerForm.APIS_NATIONALITY_COUNTRY.$invalid}">
+                <label class="ib-select__label" for="APIS_NATIONALITY_COUNTRY"
+                    data-ng-class="apisBasicInfoCtrl.pasBasicData.basicInfo.nationality ? 'ib-select__label--focus' : 'ib-select__label--unfocus'">{{'APIS_NATIONALITY_FIELD_LABEL'|translate}}</label>
+                <ui-select class="ib-select__action" ng-model="apisBasicInfoCtrl.pasBasicData.basicInfo.nationality"
+                    name="APIS_NATIONALITY_COUNTRY" ng-required="true">
+                    <ui-select-match class="ib-select__list-ipt"
+                        placeholder="{{apisBasicInfoCtrl.requiredFields.indexOf('NATIONALITY') !== -1 ? (('APIS_NATIONALITY_FIELD_LABEL'|translate)) : ('APIS_NATIONALITY_FIELD_LABEL'|translate)}}">
+                        <span class="ib-select__txt" ng-bind="$select.selected.description"></span>
+                    </ui-select-match>
+                    <ui-select-choices class="ib-select__list"
+                        repeat="country.code as country in apisBasicInfoCtrl.countries | prefixCheckSpecialCharactersFilter: $select.search">
+                        <span class="ib-select__list-txt" ng-bind="::country.description"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div
+                ng-if="apisBasicInfoCtrl.containerForm.$submitted && apisBasicInfoCtrl.containerForm.APIS_NATIONALITY_COUNTRY.$invalid">
+                <div class="ib-alert ib-alert--error">{{'APIS_HOME_COUNTRY_REQUIRED_ERROR'|translate}}</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div ng-if="!apisBasicInfoCtrl.isInfant" class="col-md-6 col-sm-12 col-xs-12">
+        <div class="ib-layout__line-spacing">
+            <div class="ib-select"
+                data-ng-class="{'ib-select--error': apisBasicInfoCtrl.containerForm.$submitted && apisBasicInfoCtrl.containerForm.APIS_NATIONALITY_COUNTRY.$invalid}">
+                <label class="ib-select__label" for="APIS_NATIONALITY_COUNTRY"
+                    data-ng-class="apisBasicInfoCtrl.pasBasicData.basicInfo.nationality ? 'ib-select__label--focus' : 'ib-select__label--unfocus'">{{'APIS_NATIONALITY_FIELD_LABEL'|translate}}</label>
+                <ui-select class="ib-select__action" ng-model="apisBasicInfoCtrl.pasBasicData.basicInfo.nationality"
+                    name="APIS_NATIONALITY_COUNTRY" ng-required="true">
+                    <ui-select-match class="ib-select__list-ipt"
+                        placeholder="{{apisBasicInfoCtrl.requiredFields.indexOf('NATIONALITY') !== -1 ? (('APIS_NATIONALITY_FIELD_LABEL'|translate)) : ('APIS_NATIONALITY_FIELD_LABEL'|translate)}}">
+                        <span class="ib-select__txt" ng-bind="$select.selected.description"></span>
+                    </ui-select-match>
+                    <ui-select-choices class="ib-select__list"
+                        repeat="country.code as country in apisBasicInfoCtrl.countries | prefixCheckSpecialCharactersFilter: $select.search">
+                        <span class="ib-select__list-txt" ng-bind="::country.description"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div
+                ng-if="apisBasicInfoCtrl.containerForm.$submitted && apisBasicInfoCtrl.containerForm.APIS_NATIONALITY_COUNTRY.$invalid">
+                <div class="ib-alert ib-alert--error">{{'APIS_HOME_COUNTRY_REQUIRED_ERROR'|translate}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ib-layout__line-spacing" ng-if="::(apisBasicInfoCtrl.requiredFields.indexOf('GENDER') !== -1)">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+        <span
+            class="ib-text ib-text--xsmall ib-text--block ib-text--color-unfocused">{{'APIS_GENDER_FIELD'|translate}}</span>
+    </div>
+    <div class="ib-radio ib-radio--double-radio"
+        data-ng-class="{'ib-radio--error': apisBasicInfoCtrl.containerForm.$submitted && apisBasicInfoCtrl.containerForm.GENDER.$invalid}">
+        <input type="radio" id="MALE" value="MALE" name="GENDER" class="ib-radio__input"
+            ng-required="::(apisBasicInfoCtrl.requiredFields.indexOf('GENDER') !== -1 && !apisBasicInfoCtrl.pasBasicData.basicInfo.gender)"
+            ng-model="apisBasicInfoCtrl.pasBasicData.basicInfo.gender" />
+        <label for="MALE" class="ib-radio__label">
+            <span class="ib-radio__text ib-radio__text--unfocused">{{'GENDER_MALE'|translate}}</span>
+        </label>
+    </div>
+    <div class="ib-radio"
+        data-ng-class="{'ib-radio--error': apisBasicInfoCtrl.containerForm.$submitted && apisBasicInfoCtrl.containerForm.GENDER.$invalid}">
+        <input type="radio" id="FEMALE" value="FEMALE" name="GENDER" class="ib-radio__input"
+            ng-required="::(apisBasicInfoCtrl.requiredFields.indexOf('GENDER') !== -1 && !apisBasicInfoCtrl.pasBasicData.basicInfo.gender)"
+            ng-model="apisBasicInfoCtrl.pasBasicData.basicInfo.gender" />
+        <label for="FEMALE" class="ib-radio__label">
+            <span class="ib-radio__text ib-radio__text--unfocused">{{'GENDER_FEMALE'|translate}}</span>
+        </label>
+    </div>
+    <div ng-if="apisBasicInfoCtrl.containerForm.$submitted && !apisBasicInfoCtrl.containerForm.GENDER.$valid">
+        <div class="ib-alert ib-alert--error">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate }}</div>
+    </div>
+</div>

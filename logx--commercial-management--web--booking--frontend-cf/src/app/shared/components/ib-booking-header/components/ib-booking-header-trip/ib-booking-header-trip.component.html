@@ -1,0 +1,33 @@
+<div class="ib-header-common__container-top u-text-left">
+    <!-- Ida -->
+    <span class="ib-header-common__city hidden-md hidden-sm hidden-xs ib-header-common__text ib-header-common__text--type-2">
+        {{trip.originCity}}
+    </span>
+    <span class="ib-header-common__city hidden-xl hidden-lg ib-header-common__text ib-header-common__text--type-2">
+        {{trip.originCode}}
+    </span>
+    <!-- Flechas -->
+    <span class="ib-header-common__fly-icon"
+        [ngClass]="{'ib-header-common__fly-icon--one-direction icon-arrow-right': trip.tripType === '1',
+    'ib-header-common__fly-icon--transfer icon-flechas': trip.tripType === '2'}"></span>
+    <!-- Vuelta -->
+    <span class="ib-header-common__city hidden-md hidden-sm hidden-xs ib-header-common__text ib-header-common__text--type-2">
+        {{trip.destinyCity}}
+    </span>
+    <span class="ib-header-common__city hidden-xl hidden-lg ib-header-common__text ib-header-common__text--type-2">
+        {{trip.destinyCode}}
+    </span>
+</div>
+<!-- Fechas de vuelo -->
+<div class="ib-header-common__container-bottom hidden-md hidden-sm hidden-xs" *ngIf="trip.dateFlight && !isShuttleFlow">
+    <div class="ib-header-common__fly-day">
+        <span class="ib-header-common__text ib-header-common__text--type-1">{{(('OUTBOUND_FLIGHT_TEXT'|translate) | uppercase) +' '+ (trip.dateFlight | shortDateFormat) }}</span>
+        <span *ngIf="trip.returnFlight" class="ib-header-common__text ib-header-common__text--type-1 ib-header-common__text--return">{{(('RETURN_FLIGHT_TEXT'|translate) | uppercase) +' '+ (trip.returnFlight | shortDateFormat)}}</span>
+    </div>
+</div>
+<!-- Puente Aereo -->
+<div class="ib-header-common__container-bottom hidden-md hidden-sm hidden-xs" *ngIf="isShuttleFlow">
+    <div class="ib-header-common__fly-day">
+        <span class="ib-header-common__text ib-header-common__text--type-1">{{'SHUTTLE_BRIDGE_AIR_OPEN'|translate}}</span>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<header class="ib-modals__header">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+        <h2 class="ib-heading ib-heading--type-1">{{'IBAIRP_PASSENGER_FORM_RECOVER_FORGOTTEN_USERNAME'|translate}}</h2>
+    </div>
+    <h3 class="ib-heading ib-heading--type-5 ib-heading--unfocused">{{'IBAIRP_PASSENGER_FORM_RECOVER_FORGOTTEN_USERNAME_MODAL_SUBTITLE'|translate}}</h3>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible"></span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--medium col-md-12 col-sm-12 col-xs-12">
+        <p class="ib-text">{{'IBAIRP_PASSENGER_FORM_RECOVER_FORGOTTEN_USERNAME_MODAL_BODY'|translate}}</p>    
+    </div>
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--medium col-md-6 col-sm-6 col-xs-6">
+        <form name="formMail">
+            <div class="ib-input">
+                <input class="ib-input__input" maxlength="60" placeholder="Email" type="text" ng-model="modalCtrl.mail" id="inputMail" name="inputMail" ng-pattern="::$root.bookingPatterns.EMAIL_PATTERN" required />
+            </div>
+            <div ng-if="formMail.inputMail.$invalid && formMail.inputMail.$touched">
+                <div class="ib-alert ib-alert--error">{{'GENERAL_EMAIL_PATTERN_ERROR'|translate}}</div>
+            </div>
+        </form>
+    </div>
+</section>
+<footer class="ib-modals__footer">
+    <div class="ib-content-buttons">
+        <div class="ib-content-buttons__content-left">
+            <button class="ib-button ib-button--w-medium" type="submit" ng-disabled="formMail.inputMail.$invalid" ng-click="modalCtrl.accept(modalCtrl.mail)">{{'IBAIRP_PASSENGER_FORM_RECOVER_FORGOTTEN_USERNAME_MODAL_CLOSE_BUTTON'|translate}}</button>
+        </div>
+        <div class="ib-content-buttons__content-right">
+            <a id="ib-recover-forgotten-username-modal-cancel-link" href="javascript:void(0)" title="{{modalCtrl.model.cancel|translate}}" class="ib-link" data-ng-click="modalCtrl.close()">{{modalCtrl.model.cancel ? modalCtrl.model.cancel : 'MODAL_CANCEL_BUTTON'|translate}}</a>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,56 @@
+<main class="ib-layout ib-layout--bck-1 ng-scope">
+    <ib-header-steps>
+        <header class="ib-header-steps">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ib-header-steps__content">
+                            <div class="ib-header-steps__block--left">
+                                <a focusin="" href="javascript:void(0)" title="Ir a home" class="ib-header-steps__logo"
+                                    ng-click="simulatorAvailabilityCtrl.closeGoHome()">
+                                    <figure class="ib-header-steps__fig">
+                                        <img alt="Logo Iberia"
+                                            data-ng-src="{{::$root.routes.images}}/logos/logo_iberia_red.svg">
+                                    </figure>
+                                </a>
+                                <div class="ib-header-steps__content--bordered">
+                                    <span class="ib-header-steps__txt">{{'MMB_SVC_TITLE' | translate}}</span>
+                                    <span
+                                        class="ib-header-steps__txt--short visible-sm-inline-block visible-xs-inline-block">{{simulatorAvailabilityCtrl.stepPoint}}/{{simulatorAvailabilityCtrl.totalSteps}}</span>
+                                </div>
+                            </div>
+                            <div class="ib-header-steps__block--right">
+                                <a href="javascript:void(0)" class="ib-header-steps__link icon-cerrar"
+                                    ng-click="simulatorAvailabilityCtrl.closeGoHome()">{{'MMB_VC_BACK_TO_BOOKING_MANAGEMENT' | translate}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden-xs hidden-sm">
+                <ib-ui-steps steps="simulatorAvailabilityCtrl.steps" show-numbers="false"></ib-ui-steps>
+            </div>
+        </header>
+    </ib-header-steps>
+    <div class="container" ng-if="simulatorAvailabilityCtrl.actualStep === 'SELECT_FLIGHT'">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__section u-mb-none">
+                    <ib-MmB-simulator-booking-availability model="simulatorAvailabilityCtrl.model"
+                        dates="simulatorAvailabilityCtrl.originalDateFlights"></ib-MmB-simulator-booking-availability>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" ng-if="simulatorAvailabilityCtrl.actualStep === 'SUMMARY'">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__section u-mb-none">
+                    <ib-mmb-simulator-vc-summary-main open-back-modal="simulatorAvailabilityCtrl.closeGoHome"></ib-mmb-simulator-vc-summary-main>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ib-mmb-main-footer ng-show="$root.showHeaders"></ib-mmb-main-footer>
+</main>

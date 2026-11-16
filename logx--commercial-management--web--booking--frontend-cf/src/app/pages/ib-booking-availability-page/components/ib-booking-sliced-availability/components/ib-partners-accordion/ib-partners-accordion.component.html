@@ -1,0 +1,45 @@
+<div class="ib-partners-panel__container">
+	<div class="container">
+		<div class="row">
+			<button class="ib-partners-panel__main col-xs-12" (click)="toggleOpened()">
+				<div class="ib-partners-panel__logo">
+					<figure class="ib-partners-panel__icon">
+						<img src="/iberia-web-content/imagenes/partners/partners-logo-san.png" alt="Santander Partners">
+					</figure>
+					<span class="ib-partners-panel__text">{{model.title | translate}}</span>
+				</div>
+				<div class="ib-partners-panel__subtitle">{{model.subtitle | translate}}</div>
+				<div class="ib-partners-panel__dropdown">
+					<span *ngIf="!opened"class="ib-partners-panel__dropdown--moreinfo">{{model.openAccordion | translate}}</span>
+					<span *ngIf="opened"class="ib-partners-panel__dropdown--moreinfo">{{model.closeAccordion | translate}}</span>
+					<span class="ib-partners-panel__arrow-icon icon-flecha_1_arriba" [ngClass]="{'icon-flecha_1_arriba': opened, 'icon-flecha_1_abajo':!opened}"></span>
+				</div>
+			</button>
+		</div>
+	</div>
+</div>
+<div class="ib-partners-panel__details" [ngClass]="{'ib-partners-panel__details_open': opened, 'ib-partners-panel__details_close': !opened}">
+	<div class="container">
+		<div class="row">
+			<div class="ib-partners-panel__details--wrapper">
+				<div class="col-xl-7 col-lg-8 col-md-8 ib-partners-panel__details--main">
+					<h2 class="ib-partners-panel__details--title" [innerHtml]="model.accordionTitleDeployed | translate"></h2>
+					<div class="ib-partners-panel__details--list-wrapper">
+						{{model.listTitle | translate}}
+						<ul class="ib-partners-panel__details--list">
+							<li>{{model.itemListOne | translate}}</li>
+							<li>{{model.itemListTwo | translate}}</li>
+							<li>{{model.itemListThree | translate}}</li>
+						</ul>
+						<a class="ib-partners-panel__details--link" (click)="redirectToConditions()">{{model.link | translate}}</a>
+					</div>
+				</div>
+				<div class="col-xl-5 col-lg-4 col-md-4 ib-partners-panel__details--image-wrapper">
+					<img class="ib-partners-panel__details--image" src="{{model.imageCardSrc}}" alt="iberia_card">
+				</div>
+				<button class="ib-button ib-button--w-medium ib-partners-panel__details--button" (click)="collapseAccordion()">{{model.button | translate}}</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="ib-partners-panel__background" *ngIf="opened" (click)="collapseAccordion()"></div>

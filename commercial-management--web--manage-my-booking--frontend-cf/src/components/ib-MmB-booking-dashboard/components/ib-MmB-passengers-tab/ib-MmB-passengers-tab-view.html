@@ -1,0 +1,45 @@
+<div class="ib-layout__line-spacing u-text-center hidden-xl hidden-lg">
+    <h2 class="ib-heading ib-heading--title-box">{{'MMB_PASSENGERS_TITTLE'|translate}}</h2>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <!-- ALERTA -->
+        <div ng-if="passTabCtrl.model.esta"
+            class="ib-msg-alert ib-msg-alert__gdr ib-msg-alert--info ib-msg-alert--transparent icon-alertas_2 alert fade in ib-layout__section">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-border-left-none">
+                <p class="ib-msg-alert__text ib-msg-alert__text--title">{{'MMB_WARNING_MESSAGE_TITLE'|translate}}</p>
+                <p class="ib-msg-alert__text" bind-html-compile="passTabCtrl.model.esta.value"></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ib-flex">
+    <ib-box-module-link class="ib-layout__section" data-ng-class="passTabCtrl.emergencyContactData.colSize" model="passTabCtrl.model"
+        link-id="passTabCtrl.emergencyContactData.linkId" box-size="passTabCtrl.emergencyContactData.boxSize"
+        icon="passTabCtrl.emergencyContactData.icon" text="passTabCtrl.emergencyContactData.text"></ib-box-module-link>
+
+    <ib-box-module-link class="ib-layout__section" data-ng-class="passTabCtrl.seatsAuctionData.colSize" model="passTabCtrl.model" bid="passTabCtrl.bid" data-ng-if="passTabCtrl.bid.bidable"
+        link-id="passTabCtrl.seatsAuctionData.linkId" box-size="passTabCtrl.seatsAuctionData.boxSize"
+        icon="passTabCtrl.seatsAuctionData.icon" text="passTabCtrl.seatsAuctionData.text"></ib-box-module-link>
+</div>
+
+
+<div data-ng-if="passTabCtrl.isActiveUmnr">
+    <ib-mmb-umnr-passengers></ib-mmb-umnr-passengers>
+</div>
+
+
+<div ng-if="passTabCtrl.channel !== 'OTHER'" class="row">
+    <div class="col-xs-12">
+        <ib-MmB-booking-contact-info-component model="{data: passTabCtrl.model, hide: !passTabCtrl.hide && passTabCtrl.emergencyContactData.flags === true}"></ib-MmB-booking-contact-info-component>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div data-ng-repeat="(index, passenger) in passTabCtrl.model.passengers">
+            <ib-MmB-passengers-data-component model="passenger" passengers="passTabCtrl.model.passengers.length" flags="{flags:passTabCtrl.model.orders,  allFlags: passTabCtrl.model.allFlags}" index="index" apis="passTabCtrl.apis"></ib-MmB-passengers-data-component>
+        </div>
+    </div>
+</div>

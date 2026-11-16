@@ -1,0 +1,9 @@
+import './ib-MmB-passengers-info-module';
+import './ib-MmB-passengers-info-constants';
+import './view-model/ib-MmB-passengers-info-model';
+import './transformer/ib-MmB-passengers-info-transformer';
+import './services/ib-MmB-passengers-info-service';
+import './controller/ib-MmB-passengers-info-controller';
+import './components/ib-passenger-data-contact-form';
+import './components/ib-passenger-form';
+import './components/ib-passenger-info-tab';

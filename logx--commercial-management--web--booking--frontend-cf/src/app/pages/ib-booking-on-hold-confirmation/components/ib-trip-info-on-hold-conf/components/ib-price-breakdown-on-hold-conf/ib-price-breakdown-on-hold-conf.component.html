@@ -1,0 +1,85 @@
+<ib-booking-accordion [title]="'PRICE_BREAKDOWN_TITLE'"
+    class="ib-accordion ib-accordion--bordered-light ib-accordion--border-bottom ib-accordion--medium">
+    <svg slot="icon" fill="none" height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#777">
+            <path d="m15.9637 2.71517h-15.9285438v-2.71517h15.9285438z" />
+            <path d="m15.9637 9.35418h-15.9285438v-2.71518h15.9285438z" />
+            <path d="m15.9637 16h-15.9285438v-2.7152h15.9285438z" />
+        </g>
+    </svg>
+    <div class="box">
+        <ul class="list--container">
+            <li class="list--item" *ngFor="let passengerType of passengerPrices | keyvalue">
+                <span class="text text--bold text--unfocused text--title mb">
+                    {{ passengerType.value.numberOfPassengers }}
+                    {{ (passengerType.key | ibWordNumberFormat : passengerType.value.numberOfPassengers | translate) }}
+                </span>
+                <div class="list--description--container">
+                    <span class="text text--unfocused mb">{{'PRICE_BREAKDOWN_FARE'|translate}}</span>
+                    <span class="text text--right mb">
+                        {{passengerType.value.numberOfPassengers}}
+                        x {{passengerType.value.formattedFare}}
+                    </span>
+                </div>
+                <div class="list--description--container list--passengers">
+                    <span class="text text--unfocused mb">{{'SUMMARY_FEES'|translate}}</span>
+                    <span class="text text--right text--interactive mb" (click)="openTaxBreakdownModal(passengerType.value.breakdownTaxes)">
+                        {{passengerType.value.numberOfPassengers}}
+                        x {{passengerType.value.formattedInTax}}
+                    </span>
+                </div>
+            </li>
+        </ul>
+            <ul class="list--container">
+                <li class="list--item">
+                    <div class="list--description--container">
+                        <span>
+                            <span class="text text--bold text--unfocused">{{'PRICE_BREAKDOWN_TOTAL'|translate}}</span>
+                            <span class="text text--bold text--right">
+                                {{price.formatted}}
+                            </span>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+            <ul class="list--container" [ngClass]="{'last': !voucherDiscount}">
+                <li class="list--item">
+                    <div class="list--description--container">
+                        <span>
+                            <span class="text text--bold text--unfocused">
+                                {{paidDeposit.price
+                                !== 0 ? ('PRICE_BREAKDOWN_ON_HOLD'|translate) :
+                                ('PRICE_BREAKDOWN_ON_HOLD_24HRS'|translate)}}
+                            </span>
+                            <span class="text text--bold text--right">
+                                {{paidDeposit.priceFormat}}
+                            </span>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+            <ul class="list--container last" *ngIf="voucherDiscount">
+                <li class="list--item">
+                    <div class="list--description--container">
+                        <span>
+                            <span class="text text--bold text--unfocused">
+                                {{voucherDiscount.type === 'DUMBO' ? ('DUMBO' | translate) :
+                                voucherDiscount.description}}
+                            </span>
+                            <span class="text text--bold text--right">
+                                -{{voucherDiscount.formattedAmount}}
+                            </span>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        <div class="summary">
+            <span class="text summary--text">
+                <span class="text text--bold summary--left">{{'PRICE_BREAKDOWN_TOTAL_TO_PAY'|translate}}</span>
+                <span class="text summary--right">
+                    {{originalPrice}}
+                </span>
+            </span>
+        </div>
+    </div>
+</ib-booking-accordion>

@@ -1,0 +1,967 @@
+export const fareData = {
+    'responseId': 'TWFuYWdlTXlCb29raW5nQElCN2YyNjk1OGMxN2QwNGYyNDk3Y2MxYTE0ZTI5NGViMDc%3D',
+    'offers': [
+        {
+            'offerId': 'IBfddde7228470494ca62479662bd89523OP',
+            'compensationInfo': {
+                'totalCompensation': 545.71,
+                'totalCost': -445.71,
+                'currency': 'EUR',
+                'fareChangesCompensation': [],
+                'fareChangesCost': [],
+                'fareChanges': [
+                    {
+                        'totalCost': -445.71,
+                        'compensation': -445.71,
+                        'reIssue': -445.71,
+                        'penalty': 0,
+                        'passengerIds': [
+                            'ADULT_01'
+                        ]
+                    }
+                ],
+                'emds': [
+                    {
+                        'type': 'BAGGAGE',
+                        'tickets': [
+                            {
+                                'emdNumber': '0755569140748',
+                                'total': 50
+                            },
+                            {
+                                'emdNumber': '0755569140748',
+                                'total': 50
+                            },
+                            {
+                                'emdNumber': '0755569140748',
+                                'total': 50
+                            },
+                            {
+                                'emdNumber': '0755569140747',
+                                'total': 10
+                            },
+                            {
+                                'emdNumber': '0755569140747',
+                                'total': 25
+                            },
+                            {
+                                'emdNumber': '0755569140747',
+                                'total': 50
+                            }
+                        ]
+                    },
+                    {
+                        'type': 'SEAT',
+                        'tickets': [
+                            {
+                                'emdNumber': '0755569140748',
+                                'total': 50
+                            },
+                            {
+                                'emdNumber': '0755569140748',
+                                'total': 50
+                            },
+                            {
+                                'emdNumber': '0755569140748',
+                                'total': 50
+                            },
+                            {
+                                'emdNumber': '0755569140747',
+                                'total': 10
+                            },
+                            {
+                                'emdNumber': '0755569140747',
+                                'total': 25
+                            },
+                            {
+                                'emdNumber': '0755569140747',
+                                'total': 50
+                            }
+                        ]
+                    }
+                ]
+            },
+            'price': {
+                'fare': -445.71,
+                'tax': 0,
+                'total': -445.71,
+                'currency': 'EUR',
+                'ticketingFee': 0
+            },
+            'slices': [
+                {
+                    'sliceId': 'MADPMI20201127072000',
+                    'departureDateTime': '2020-11-27 07:20',
+                    'arrivalDateTime': '2020-11-27 08:40',
+                    'duration': 80,
+                    'stopsNumber': 0,
+                    'price': {
+                        'fare': 157.5,
+                        'currency': 'EUR'
+                    },
+                    'detailedPrices': [
+                        {
+                            'fare': 157.5,
+                            'currency': 'EUR',
+                            'passengerIds': [
+                                'ADULT_01'
+                            ],
+                            'segmentPrices': [
+                                {
+                                    'price': {
+                                        'fare': 157.5,
+                                        'currency': 'EUR'
+                                    },
+                                    'originCurrencyPrice': {
+                                        'fare': 74,
+                                        'currency': 'EUR'
+                                    },
+                                    'fareCode': 'NZNNM3',
+                                    'segmentsIds': [
+                                        'IB391820201127'
+                                    ],
+                                    'ticketDesignator': null,
+                                    'endorsement': '21 NOEND/CHG RST/REF NOPER'
+                                }
+                            ],
+                            'commission': null
+                        }
+                    ],
+                    'segments': [
+                        {
+                            'departure': {
+                                'code': 'MAD',
+                                'name': 'Madrid Adolfo Suarez-Barajas',
+                                'terminal': '4',
+                                'city': {
+                                    'code': 'MAD',
+                                    'description': 'Madrid',
+                                    'countryCode': 'ES',
+                                    'country': {
+                                        'code': 'ES',
+                                        'description': 'España'
+                                    }
+                                }
+                            },
+                            'arrival': {
+                                'code': 'PMI',
+                                'name': 'Palma de Mallorca',
+                                'terminal': null,
+                                'city': {
+                                    'code': 'PMI',
+                                    'description': 'Palma de Mallorca',
+                                    'countryCode': 'ES',
+                                    'country': {
+                                        'code': 'ES',
+                                        'description': 'España'
+                                    }
+                                }
+                            },
+                            'flight': {
+                                'marketingCarrier': {
+                                    'code': 'IB',
+                                    'name': 'Iberia'
+                                },
+                                'operationalCarrier': {
+                                    'code': 'I2',
+                                    'name': 'Iberia Express'
+                                },
+                                'marketingFlightNumber': '3918',
+                                'operationalFlightNumber': null,
+                                'operationalDisclosure': 'I2',
+                                'aircraft': {
+                                    'code': '32Q',
+                                    'description': 'Airbus A321neo'
+                                }
+                            },
+                            'cabin': {
+                                'rbd': 'N',
+                                'bookingCode': 'COACH',
+                                'bookingClass': 'ECONOMY',
+                                'remainingSeats': 5,
+                                'fareFamily': 'TCLESES',
+                                'fareBasis': 'NZNNM3',
+                                'seatDisplays': null,
+                                'extendedFareCode': null,
+                                'brandCode': null,
+                                'cabinDescription': 'Turista'
+                            },
+                            'overnight': false,
+                            'id': 'IB391820201127',
+                            'duration': 80,
+                            'waitingTime': 0,
+                            'providerId': null,
+                            'ticketDesignator': '',
+                            'accrualQuote': {
+                                'redemptionPoints': 250,
+                                'qualificationPoints': 50,
+                                'redemptionOffers': [
+
+                                ],
+                                'qualificationOffers': [
+
+                                ]
+                            },
+                            'delayInformation': null,
+                            'stop': null,
+                            'departureDateTime': '2020-11-27 07:20',
+                            'arrivalDateTime': '2020-11-27 08:40'
+                        }
+                    ],
+                    'overnight': false
+                },
+                {
+                    'sliceId': 'PMIMAD20201130133000',
+                    'departureDateTime': '2020-11-30 13:30',
+                    'arrivalDateTime': '2020-11-30 14:55',
+                    'duration': 85,
+                    'stopsNumber': 0,
+                    'price': {
+                        'fare': 157.5,
+                        'currency': 'EUR'
+                    },
+                    'detailedPrices': [
+                        {
+                            'fare': 157.5,
+                            'currency': 'EUR',
+                            'passengerIds': [
+                                'ADULT_01'
+                            ],
+                            'segmentPrices': [
+                                {
+                                    'price': {
+                                        'fare': 157.5,
+                                        'currency': 'EUR'
+                                    },
+                                    'originCurrencyPrice': {
+                                        'fare': 241,
+                                        'currency': 'EUR'
+                                    },
+                                    'fareCode': 'KDNNS2',
+                                    'segmentsIds': [
+                                        'IB391920201130'
+                                    ],
+                                    'ticketDesignator': null,
+                                    'endorsement': 'CHGS AND REF PERMITTED'
+                                }
+                            ],
+                            'commission': null
+                        }
+                    ],
+                    'segments': [
+                        {
+                            'departure': {
+                                'code': 'PMI',
+                                'name': 'Palma de Mallorca',
+                                'terminal': null,
+                                'city': {
+                                    'code': 'PMI',
+                                    'description': 'Palma de Mallorca',
+                                    'countryCode': 'ES',
+                                    'country': {
+                                        'code': 'ES',
+                                        'description': 'España'
+                                    }
+                                }
+                            },
+                            'arrival': {
+                                'code': 'MAD',
+                                'name': 'Madrid Adolfo Suarez-Barajas',
+                                'terminal': '4',
+                                'city': {
+                                    'code': 'MAD',
+                                    'description': 'Madrid',
+                                    'countryCode': 'ES',
+                                    'country': {
+                                        'code': 'ES',
+                                        'description': 'España'
+                                    }
+                                }
+                            },
+                            'flight': {
+                                'marketingCarrier': {
+                                    'code': 'IB',
+                                    'name': 'Iberia'
+                                },
+                                'operationalCarrier': {
+                                    'code': 'I2',
+                                    'name': 'Iberia Express'
+                                },
+                                'marketingFlightNumber': '3919',
+                                'operationalFlightNumber': null,
+                                'operationalDisclosure': 'I2',
+                                'aircraft': {
+                                    'code': '32A',
+                                    'description': 'Airbus Industrie A320 (Sharklets)'
+                                }
+                            },
+                            'cabin': {
+                                'rbd': 'K',
+                                'bookingCode': 'COACH',
+                                'bookingClass': 'ECONOMY',
+                                'remainingSeats': 9,
+                                'fareFamily': 'TFLESEU',
+                                'fareBasis': 'KDNNS2',
+                                'seatDisplays': null,
+                                'extendedFareCode': null,
+                                'brandCode': null,
+                                'cabinDescription': 'Turista'
+                            },
+                            'overnight': false,
+                            'id': 'IB391920201130',
+                            'duration': 85,
+                            'waitingTime': 0,
+                            'providerId': null,
+                            'ticketDesignator': '',
+                            'accrualQuote': {
+                                'redemptionPoints': 250,
+                                'qualificationPoints': 50,
+                                'redemptionOffers': [
+
+                                ],
+                                'qualificationOffers': [
+
+                                ]
+                            },
+                            'delayInformation': null,
+                            'stop': null,
+                            'departureDateTime': '2020-11-30 13:30',
+                            'arrivalDateTime': '2020-11-30 14:55'
+                        }
+                    ],
+                    'overnight': false
+                }
+            ],
+            'offerExpiration': '2020-11-25T12:01:07.155+01:00',
+            'paymentTimeLimit': '2020-11-25T22:59:59.000+00:00',
+            'cashAviosPossibilities': [
+                {
+                    'totalDiscount': 10,
+                    'currency': 'EUR',
+                    'aviosRequired': 1850,
+                    'offerAvailable': false,
+                    'perPassengerDiscounts': [
+                        {
+                            'discount': 10,
+                            'passengerType': 'ADT',
+                            'numberOfPassengers': 1
+                        }
+                    ]
+                },
+                {
+                    'totalDiscount': 94.5,
+                    'currency': 'EUR',
+                    'aviosRequired': 17500,
+                    'offerAvailable': false,
+                    'perPassengerDiscounts': [
+                        {
+                            'discount': 94.5,
+                            'passengerType': 'ADT',
+                            'numberOfPassengers': 1
+                        }
+                    ]
+                },
+                {
+                    'totalDiscount': 157.5,
+                    'currency': 'EUR',
+                    'aviosRequired': 29165,
+                    'offerAvailable': false,
+                    'perPassengerDiscounts': [
+                        {
+                            'discount': 157.5,
+                            'passengerType': 'ADT',
+                            'numberOfPassengers': 1
+                        }
+                    ]
+                },
+                {
+                    'totalDiscount': 252,
+                    'currency': 'EUR',
+                    'aviosRequired': 46665,
+                    'offerAvailable': false,
+                    'perPassengerDiscounts': [
+                        {
+                            'discount': 252,
+                            'passengerType': 'ADT',
+                            'numberOfPassengers': 1
+                        }
+                    ]
+                },
+                {
+                    'totalDiscount': 299.25,
+                    'currency': 'EUR',
+                    'aviosRequired': 55415,
+                    'offerAvailable': false,
+                    'perPassengerDiscounts': [
+                        {
+                            'discount': 299.25,
+                            'passengerType': 'ADT',
+                            'numberOfPassengers': 1
+                        }
+                    ]
+                }
+            ],
+            'carryOnBaggageAllowances': [
+                {
+                    'totalQuantity': 1,
+                    'segmentIds': [
+                        'IB391820201127',
+                        'IB391920201130'
+                    ],
+                    'pieceAllowances': null
+                }
+            ],
+            'checkedBagAllowances': [
+                {
+                    'totalQuantity': 1,
+                    'pieceAllowances': [
+                        {
+                            'totalQuantity': 1,
+                            'commercialName': 'UP TO 23 KG AND 158 LCM',
+                            'descriptions': [
+                                'Up to 50 lb/23 kg',
+                                'Up to 62 li/158 lcm'
+                            ],
+                            'type': 'PIECE'
+                        }
+                    ],
+                    'segmentIds': [
+                        'IB391920201130'
+                    ]
+                },
+                {
+                    'totalQuantity': 1,
+                    'pieceAllowances': [
+                        {
+                            'totalQuantity': 1,
+                            'commercialName': 'UP TO 23 KG AND 158 LCM',
+                            'descriptions': [
+                                'Up to 50 lb/23 kg',
+                                'Up to 62 li/158 lcm'
+                            ],
+                            'type': 'PIECE'
+                        }
+                    ],
+                    'segmentIds': [
+                        'IB391820201127'
+                    ]
+                }
+            ],
+            'availableServices': [
+
+            ],
+            'selectedServices': [
+
+            ],
+            'reshopOfferInformation': {
+                'originalPrice': {
+                    'fare': 760,
+                    'tax': 28.27,
+                    'total': 788.27,
+                    'currency': 'EUR',
+                    'ticketingFee': 0
+                },
+                'penalty': 0,
+                'reshopTicketingInformationWebResponse': [
+                    {
+                        'fareCalculation': 'MAD IB PMI74.00 IB MAD241.00EUR315.00END',
+                        'taxes': [
+                            {
+                                'code': 'QV',
+                                'amount': 5.93,
+                                'currency': 'EUR',
+                                'description': 'QV',
+                                'subcode': '003'
+                            },
+                            {
+                                'code': 'OG',
+                                'amount': 1.18,
+                                'currency': 'EUR',
+                                'description': 'OG',
+                                'subcode': '001'
+                            },
+                            {
+                                'code': 'JD',
+                                'amount': 20.45,
+                                'currency': 'EUR',
+                                'description': 'JD',
+                                'subcode': '003'
+                            }
+                        ],
+                        'originalTaxes': [
+                            {
+                                'code': 'QV',
+                                'amount': 5.66,
+                                'currency': 'EUR',
+                                'description': 'QV',
+                                'subcode': '003'
+                            },
+                            {
+                                'code': 'OG',
+                                'amount': 1.56,
+                                'currency': 'EUR',
+                                'description': 'OG',
+                                'subcode': '001'
+                            },
+                            {
+                                'code': 'JD',
+                                'amount': 21.05,
+                                'currency': 'EUR',
+                                'description': 'JD',
+                                'subcode': '003'
+                            }
+                        ],
+                        'penalty': 0,
+                        'price': {
+                            'fare': 315,
+                            'tax': 27.56,
+                            'total': 342.56,
+                            'currency': 'EUR',
+                            'ticketingFee': 0
+                        },
+                        'reissuePrice': -445.71,
+                        'farebasis': 'NZNNM3',
+                        'passengersIds': [
+                            'ADULT_01'
+                        ]
+                    }
+                ]
+            },
+            'offerItems': [
+                {
+                    'offerItemId': 'IBfddde7228470494ca62479662bd89523OP_01',
+                    'passengerIds': [
+                        'ADULT_01'
+                    ],
+                    'price': {
+                        'fare': -445,
+                        'tax': -0.71,
+                        'total': -445.71,
+                        'currency': 'EUR',
+                        'ticketingFee': 0
+                    },
+                    'detailedTaxes': [
+                        {
+                            'code': 'QV',
+                            'amount': 0.27,
+                            'currency': 'EUR',
+                            'description': 'QV',
+                            'subcode': '003'
+                        },
+                        {
+                            'code': 'OG',
+                            'amount': -0.38,
+                            'currency': 'EUR',
+                            'description': 'OG',
+                            'subcode': '001'
+                        },
+                        {
+                            'code': 'JD',
+                            'amount': -0.6,
+                            'currency': 'EUR',
+                            'description': 'JD',
+                            'subcode': '003'
+                        }
+                    ],
+                    'reshopDetailedTaxes': [
+                        {
+                            'code': 'QV',
+                            'amount': 5.93,
+                            'currency': 'EUR',
+                            'description': null,
+                            'subcode': '003'
+                        },
+                        {
+                            'code': 'OG',
+                            'amount': 1.18,
+                            'currency': 'EUR',
+                            'description': null,
+                            'subcode': '001'
+                        },
+                        {
+                            'code': 'JD',
+                            'amount': 20.45,
+                            'currency': 'EUR',
+                            'description': null,
+                            'subcode': '003'
+                        }
+                    ],
+                    'fareCalculation': 'MAD IB PMI74.00 IB MAD241.00EUR315.00END',
+                    'fareComponents': [
+                        {
+                            'remarks': '  CANCELLATIONS\n    TICKET IS NON-REFUNDABLE IN CASE OF NO-SHOW.\n    BEFORE DEPARTURE\n      TICKET IS NON-REFUNDABLE IN CASE OF CANCEL/REFUND.\n    AFTER DEPARTURE\n      TICKET IS NON-REFUNDABLE IN CASE OF CANCEL/REFUND.\n  CHANGES\n    CHANGES NOT PERMITTED IN CASE OF NO-SHOW.\n    BEFORE DEPARTURE\n      PER TICKET CHARGE EUR 45.00 FOR REISSUE.\n      CHILD/INFANT DISCOUNTS APPLY.\n    AFTER DEPARTURE\n      PER TICKET CHARGE EUR 45.00 FOR REISSUE.\n      CHILD/INFANT DISCOUNTS APPLY.\n         NOTE -\n          FIRST CHANGE FREE FOR TICKETING ON/BEFORE 31DEC20\n          AND TRAVEL ON/BEFORE 30JUN 21\n          IF CHANGE IS DONE 15DAYS BEFORE DEPARTURE OF\n          FIRST SCHEDULE FLIGHT.\n          ------------------------------\n          WAIVED FOR DEATH OF A PASSENGER AND PASSENGERS\n          TRAVELLING COMPANIONS.\n          ------------------------------\n          CHARGE FOR CHANGES APPLIES PER TRANSACTION/TICKET\n          AND PERSON TO ALL PASSENGER TYPES.\n          CHARGE FOR CANCELLATION APPLIES PER DIRECTION TO\n          ALL PASSENGER TYPES.\n          ------------------------------\n          A CHANGE IS A DATE/FLIGHT/ROUTING/BOOKING CODE\n          CHANGE.\n          ------------------------------\n          IN CASE OF RESERVATION CHANGES AND REISSUE AFTER\n          SCHEDULED FLIGHT CHANGES NO PERMITED.\n          OTHERWISE THE TICKET WILL ONLY BE VALID FOR\n          REFUND IF APPLICABLE.\n          ------------------------------\n          WHEN MORE THAN ONE FARE COMPONENT IS CHANGED THE\n          HIGHEST PENALTY OF ALL CHANGED FARE COMPONENTS\n          WITH THE JOURNEY APPLIES.\n          ------------------------------\n          WHEN COMBINING NON-REFUNDABLE FARES WITH A\n          REFUNDABLE FARES\n          1-THE AMOUNT PAID ON EACH REFUNDABLE FARE\n          COMPONENT IS REFUNDED\n          2-THE AMOUNT PAID ON EACH NON-REFUNDABLE FARE\n          COMPONENT WILL NOT BE REFUNDED\n          3-WHEN COMBINING FARES CHARGE THE SUM OF THE\n          CANCELLATION FEES OF ALL CANCELLED FARE COMPONENTS\n          ------------------------------\n          REFOUND OF UNUSED TAXES FEES AND CHARGES PAID TO\n          THIRD PARTIES PERMITTED. ASSOCIATED CARRIER\n          IMPOSED CHARGES WILL NOT BE REFUNDED.\n          ------------------------------\n          REFUND AND CHANGES ARE PERMITTED WITHIN TICKET\n          VALIDITY UNDER FARE CONDITIONS.\n          ------------------------------\n          ANY NON-REFUNDABLE AMOUNT AND/OR CANCELLATION\n          PENALTY FROM A PREVIOUS TICKET REMAINS NON-\n          REFUNDABLE FOLLOWING A CHANGE.\n          ------------------------------\n          TICKET IS NOT TRANSFERABLE TO ANOTHER PERSON.\n          -----------------------------------------------\n          ----REPRICING CONDITIONS ----\n          A.BEFORE DEPARTURE OF JOURNEY WHEN THE FISRT\n          FARE COMPONENT IS CHANGED THE ITINERARY MUST BE\n          RE-PRICED USING CURRENT FARES IN EFFECT ON THE\n          DATE THE TICKET IS REISSUED.\n          B.BEFORE DEPARTURE OF JOURNEY WHEN CHANGES ARE TO\n          BOOKING CODE ONLY IN THE FIRST FARE COMPONENT AND\n          RESULT IN A HIGHER FARE THE ITINERARY MUST BE RE-\n          PRICED USING HISTORICAL FARES IN EFFECT ON THE\n          PREVIOUS TICKETING DATE OR USING CURRENT FARE IN\n          EFFECT ON THE DATE THE TICKET IS REISSUED -\n          WICHEVER IS LOWER.\n          C. BEFORE DEPARTURE OF JOURNEY WHEN THERE ARE NO\n          CHANGES TO THE FIRST FARE COMPONENT BUT OTHER\n          FARE COMPONENTS ARE CHANGED THE ITINERARY MUST BE\n          RE-PRICED USING HISTORICAL FAERS IN EFFECT ON THE\n          PREVIOUS TICKETING DATE OR USING CURRENT FARES IN\n          EFFECT ON THE DATE THE TICKET IS REISSUED -\n          WHICHEVER IS LOWER.\n          D. AFTER DEPARTURE OF JOURNEY THE ITINERARY MUST\n          BE RE-PRICED USING HISTORICAL FARES IN EFFECT ON\n          THE PREVIOUS TICKETING DATE.\n          -----------------------------------------------\n          WHEN THE ITINERARY RESULT IN A HIGHER FARE THE\n          DIFFERENCE WILL BE COLLECTED ANY APPLICABLE\n          CHANGE FEE APPLIES.\n          -----------------------------------------------\n          WHEN THE NEW ITINERARY RESULTS IN A LOWER FARE\n          THE CHANGE FEE APPLIES AND NO CREDIT OF THE\n          RESIDUAL AMOUNT WILL BE MADE.',
+                            'segmentIds': [
+                                'IB391820201127'
+                            ],
+                            'details': [
+                                {
+                                    'type': 'Change',
+                                    'application': 'BEFORE-DEPARTURE',
+                                    'minPrice': {
+                                        'amount': 45,
+                                        'currency': 'EUR'
+                                    },
+                                    'maxPrice': {
+                                        'amount': 45,
+                                        'currency': 'EUR'
+                                    }
+                                },
+                                {
+                                    'type': 'Change',
+                                    'application': 'AFTER-DEPARTURE',
+                                    'minPrice': {
+                                        'amount': 45,
+                                        'currency': 'EUR'
+                                    },
+                                    'maxPrice': {
+                                        'amount': 45,
+                                        'currency': 'EUR'
+                                    }
+                                }
+                            ],
+                            'privateFareInformationWebResponse': [
+                                {
+                                    'segmentReferences': [
+                                        'IB391820201127'
+                                    ],
+                                    'productName': '',
+                                    'subProductName': '',
+                                    'fareCode': '',
+                                    'fareBasisCode': 'NZNNM3',
+                                    'accountCode': '',
+                                    'tourBoxcode': null,
+                                    'fareBoxText': null,
+                                    'accountCodeAmadeus': ''
+                                }
+                            ]
+                        },
+                        {
+                            'remarks': '  CANCELLATIONS\n    TICKET IS NON-REFUNDABLE IN CASE OF NO-SHOW.\n    BEFORE DEPARTURE\n      CHARGE EUR 60.00 FOR CANCEL/REFUND.\n      CHILD/INFANT DISCOUNTS APPLY.\n    AFTER DEPARTURE\n      CHARGE EUR 60.00 FOR CANCEL/REFUND.\n      CHILD/INFANT DISCOUNTS APPLY.\n  CHANGES\n    CHANGES PERMITTED FOR NO-SHOW.\n    BEFORE DEPARTURE\n      CHANGES PERMITTED.\n    AFTER DEPARTURE\n      CHANGES PERMITTED.\n         NOTE -\n          ------------------------------\n          WAIVED FOR DEATH OF A PASSENGER AND PASSENGERS\n          TRAVELLING COMPANIONS.\n          ------------------------------\n          NO SHOW IS WHEN A PASSENGER HAS NOT ADVISED THE\n          AIRLINE THAT THEY WILL NO ABLE TO MAKE THE FLIGHT\n          THEY ARE BOOKED ON.\n          ------------------------------\n          CHARGE FOR CHANGES APPLIES PER TRANSACTION/TICKET\n          AND PERSON TO ALL PASSENGER TYPES.\n          CHARGE FOR CANCELLATION APPLIES PER DIRECTION TO\n          ALL PASSENGER TYPES.\n          ------------------------------\n          A CHANGE IS A DATE/FLIGHT/ROUTING/BOOKING CODE\n          CHANGE.\n          ------------------------------\n          REISSUE MUST BE MADE AT THE SAME TIME AS CHANGE\n          OF RESERVATION BUT NO LATER TAN SCHEDULED\n          DEPARTURE TIME OF FLIGHT BEING CHANGED.\n          ------------------------------\n          IN CASE OF RESERVATION CHANGES AFTER SCHEDULED\n          FLIGHT NO SHOW IS PERMITTED\n          ------------------------------\n          WHEN MORE THAN ONE FARE COMPONENT IS CHANGED THE\n          HIGHEST PENALTY OF ALL CHANGED FARE COMPONENTS\n          WITH THE JOURNEY APPLIES.\n          ------------------------------\n          WHEN COMBINING NON-REFUNDABLE FARES WITH A\n          REFUNDABLE FARES\n          1-THE AMOUNT PAID ON EACH REFUNDABLE FARE\n          COMPONENT IS REFUNDED\n          2-THE AMOUNT PAID ON EACH NON-REFUNDABLE FARE\n          COMPONENT WILL NOT BE REFUNDED\n          3-WHEN COMBINING FARES CHARGE THE SUM OF THE\n          CANCELLATION FEES OF ALL CANCELLED FARE COMPONENTS\n          ------------------------------\n          REFUND OF UNUSED TAXES FEES AND CHARGES PAID TO\n          THIRD PARTIES PERMITTED. ASSOCIATED CARRIER\n          IMPOSED CHARGES WILL NOT BE REFUNDED.\n          ------------------------------\n          REFUND AND CHANGES ARE PERMITTED WITHIN TICKET\n          VALIDITY UNDER FARE CONDITIONS.\n          ------------------------------\n          ANY NON-REFUNDABLE AMOUNT AND/OR CANCELLATION\n          PENALTY FROM A PREVIOUS TICKET REMAINS NON-\n          REFUNDABLE FOLLOWING A CHANGE.\n          ------------------------------\n          TICKET IS NOT TRANSFERABLE TO ANOTHER PERSON.\n          -----------------------------------------------\n          ----REPRICING CONDITIONS ----\n          A.BEFORE DEPARTURE OF JOURNEY WHEN THE FISRT\n          FARE COMPONENT IS CHANGED THE ITINERARY MUST BE\n          RE-PRICED USING CURRENT FARES IN EFFECT ON THE\n          DATE THE TICKET IS REISSUED.\n          B.BEFORE DEPARTURE OF JOURNEY WHEN CHANGES ARE TO\n          BOOKING CODE ONLY IN THE FIRST FARE COMPONENT AND\n          RESULT IN A HIGHER FARE THE ITINERARY MUST BE RE-\n          PRICED USING HISTORICAL FARES IN EFFECT ON THE\n          PREVIOUS TICKETING DATE OR USING CURRENT FARE IN\n          EFFECT ON THE DATE THE TICKET IS REISSUED -\n          WICHEVER IS LOWER.\n          C. BEFORE DEPARTURE OF JOURNEY WHEN THERE ARE NO\n          CHANGES TO THE FIRST FARE COMPONENT BUT OTHER\n          FARE COMPONENTS ARE CHANGED THE ITINERARY MUST BE\n          RE-PRICED USING HISTORICAL FAERS IN EFFECT ON THE\n          PREVIOUS TICKETING DATE OR USING CURRENT FARES IN\n          EFFECT ON THE DATE THE TICKET IS REISSUED -\n          WHICHEVER IS LOWER.\n          D. AFTER DEPARTURE OF JOURNEY THE ITINERARY MUST\n          BE RE-PRICED USING HISTORICAL FARES IN EFFECT ON\n          THE PREVIOUS TICKETING DATE.\n          -----------------------------------------------\n          WHEN THE ITINERARY RESULT IN A HIGHER FARE THE\n          DIFFERENCE WILL BE COLLECTED ANY APPLICABLE\n          CHANGE FEE APPLIES.\n          -----------------------------------------------\n          WHEN THE NEW ITINERARY RESULTS IN A LOWER FARE\n          THE CHANGE FEE APPLIES AND NO CREDIT OF THE\n          RESIDUAL AMOUNT WILL BE MADE.',
+                            'segmentIds': [
+                                'IB391920201130'
+                            ],
+                            'details': [
+                                {
+                                    'type': 'Cancel',
+                                    'application': 'BEFORE-DEPARTURE',
+                                    'minPrice': {
+                                        'amount': 60,
+                                        'currency': 'EUR'
+                                    },
+                                    'maxPrice': {
+                                        'amount': 60,
+                                        'currency': 'EUR'
+                                    }
+                                },
+                                {
+                                    'type': 'Cancel',
+                                    'application': 'AFTER-DEPARTURE',
+                                    'minPrice': {
+                                        'amount': 60,
+                                        'currency': 'EUR'
+                                    },
+                                    'maxPrice': {
+                                        'amount': 60,
+                                        'currency': 'EUR'
+                                    }
+                                }
+                            ],
+                            'privateFareInformationWebResponse': [
+
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    'passengers': [
+        {
+            'passengerId': 'ADULT_01',
+            'passengerType': 'ADULT',
+            'firstName': null,
+            'surname': null,
+            'frequentFlyerInfo': null
+        }
+    ],
+    'contextMetadata': {
+        'language': 'es',
+        'country': 'ES',
+        'currencies': [
+            {
+                'code': 'EUR',
+                'description': 'Euro',
+                'symbol': '€',
+                'alignment': 'R',
+                'groupingSeparator': '.',
+                'decimalSeparator': ',',
+                'decimals': 2,
+                'recommendedDisplay': 'symbol'
+            }
+        ]
+    },
+    'fareFamilyConditions': [
+        {
+            'cabinType': 'E',
+            'cabinDescription': 'Turista',
+            'commercialCode': 'TCLESES',
+            'commercialName': 'Óptima',
+            'commercialNameES': 'Óptima',
+            'priority': 700,
+            'conditions': [
+                {
+                    'code': 'EQMANO',
+                    'name': 'Equipaje de mano',
+                    'text': '1 bulto (56x40x25cm)',
+                    'units': 1,
+                    'extendedInfo': {
+                        'title': '1 bulto en cabina  (56x40x25cm)',
+                        'message': '1 bulto (56x40x25cm)',
+                        'code': 'CA_EQP_MANO_10KG',
+                        'conditionStatus': true,
+                        'observationCode': null
+                    }
+                },
+                {
+                    'code': 'EQBODEGA',
+                    'name': 'Equipaje en bodega',
+                    'text': '1 pieza',
+                    'units': 1,
+                    'extendedInfo': {
+                        'title': '1 equipaje en bodega',
+                        'message': 'Incluido: 1 pieza',
+                        'code': 'CA_1_PIEZAS',
+                        'conditionStatus': true,
+                        'observationCode': null
+                    }
+                },
+                {
+                    'code': 'ASIENTO',
+                    'name': 'Selección de asiento',
+                    'text': 'Gratuita desde 24 horas antes del vuelo. ',
+                    'units': 24,
+                    'extendedInfo': {
+                        'title': 'Gratuita desde 24 horas antes del vuelo. ',
+                        'message': 'Gratuita desde 24 horas antes del vuelo. ',
+                        'code': 'CA_Asiento_Gratis_24_horas',
+                        'conditionStatus': true,
+                        'observationCode': null
+                    }
+                },
+                {
+                    'code': 'CAMBIO',
+                    'name': 'Cambios',
+                    'text': 'Permitidos en cualquier momento con una penalización de 45€, excepto en caso de no presentarse al vuelo (No-Show), que no permite cambio',
+                    'units': 45,
+                    'extendedInfo': {
+                        'title': 'Cambio permitido con coste 45€. No Show no permite cambio',
+                        'message': 'Permitidos en cualquier momento con una penalización de 45€, excepto en caso de no presentarse al vuelo (No-Show), que no permite cambio',
+                        'code': 'CA_CAMBIO CON PENALTY_45EUR_NO_SHOW_NO_PERMITIDO',
+                        'conditionStatus': false,
+                        'observationCode': null
+                    }
+                },
+                {
+                    'code': 'REEMBOLSO',
+                    'name': 'Reembolso (por sentido)',
+                    'text': 'No permitido',
+                    'units': null,
+                    'extendedInfo': {
+                        'title': 'Reembolso no permitido',
+                        'message': 'No permitido.',
+                        'code': 'CA_REEMBOLSO NO PERMITIDO',
+                        'conditionStatus': false,
+                        'observationCode': null
+                    }
+                }
+            ],
+            'observations': [
+
+            ],
+            'conditionsPriority': [
+                'EQMANO',
+                'EQBODEGA',
+                'COMIDA',
+                'ASIENTO',
+                'ASIENTOXL',
+                'EMBARQUE',
+                'TARJEMBANTIC',
+                'CAMBIO',
+                'REEMBOLSO'
+            ]
+        },
+        {
+            'cabinType': 'E',
+            'cabinDescription': 'Turista',
+            'commercialCode': 'TFLESEU',
+            'commercialName': 'Flexible',
+            'commercialNameES': 'Flexible',
+            'priority': 500,
+            'conditions': [
+                {
+                    'code': 'EQMANO',
+                    'name': 'Equipaje de mano',
+                    'text': '1 bulto (56x40x25cm)',
+                    'units': 1,
+                    'extendedInfo': {
+                        'title': '1 bulto en cabina  (56x40x25cm)',
+                        'message': '1 bulto (56x40x25cm)',
+                        'code': 'CA_EQP_MANO_10KG',
+                        'conditionStatus': true,
+                        'observationCode': null
+                    }
+                },
+                {
+                    'code': 'EQBODEGA',
+                    'name': 'Equipaje en bodega',
+                    'text': '1 pieza',
+                    'units': 1,
+                    'extendedInfo': {
+                        'title': '1 equipaje en bodega',
+                        'message': 'Incluido: 1 pieza',
+                        'code': 'CA_1_PIEZAS',
+                        'conditionStatus': true,
+                        'observationCode': null
+                    }
+                },
+                {
+                    'code': 'ASIENTO',
+                    'name': 'Selección de asiento',
+                    'text': 'Incluido',
+                    'units': null,
+                    'extendedInfo': {
+                        'title': 'Con selección de asiento',
+                        'message': 'Incluido',
+                        'code': 'CA_Asiento_Gratuito',
+                        'conditionStatus': true,
+                        'observationCode': null
+                    }
+                },
+                {
+                    'code': 'CAMBIO',
+                    'name': 'Cambios',
+                    'text': 'Permitidos en cualquier momento',
+                    'units': null,
+                    'extendedInfo': {
+                        'title': 'Cambio permitido',
+                        'message': 'Permitidos en cualquier momento',
+                        'code': 'CA_CAMBIO SIEMPRE',
+                        'conditionStatus': true,
+                        'observationCode': null
+                    }
+                },
+                {
+                    'code': 'REEMBOLSO',
+                    'name': 'Reembolso (por sentido)',
+                    'text': 'Permitidos en cualquier momento con una penalización de 60€, excepto en caso de no presentarse al vuelo (No-Show), que no tendrá reembolso',
+                    'units': 60,
+                    'extendedInfo': {
+                        'title': 'Reembolso permitido con coste 60€. No Show no permitido',
+                        'message': 'Permitidos en cualquier momento con una penalización de 60€, excepto en caso de no presentarse al vuelo (No-Show), que no tendrá reembolso',
+                        'code': 'CA_REEMBOLSO CON PENALTY_60EUR_NO_SHOW_NO_PERMITIDO',
+                        'conditionStatus': false,
+                        'observationCode': null
+                    }
+                }
+            ],
+            'observations': [
+
+            ],
+            'conditionsPriority': [
+                'EQMANO',
+                'EQBODEGA',
+                'COMIDA',
+                'ASIENTO',
+                'ASIENTOXL',
+                'EMBARQUE',
+                'TARJEMBANTIC',
+                'CAMBIO',
+                'REEMBOLSO'
+            ]
+        }
+    ],
+    'advices': [
+
+    ],
+    'services': [
+
+    ],
+    'warnings': null,
+    'accountCodes': null,
+    'compensationInfo': {
+        'totalCompensation': 545.71,
+        'totalCost': -445.71,
+        'currency': 'EUR',
+        'fareChanges': [
+            {
+                'totalCost': -445.71,
+                'compensation': -445.71,
+                'reIssue': -445.71,
+                'penalty': 0,
+                'passengerIds': [
+                    'ADULT_01'
+                ]
+            }
+        ],
+        'emds': [
+            {
+                'type': 'BAGGAGE',
+                'tickets': [
+                    {
+                        'emdNumber': '0755569140748',
+                        'total': 50
+                    },
+                    {
+                        'emdNumber': '0755569140748',
+                        'total': 50
+                    },
+                    {
+                        'emdNumber': '0755569140748',
+                        'total': 50
+                    },
+                    {
+                        'emdNumber': '0755569140747',
+                        'total': 10
+                    },
+                    {
+                        'emdNumber': '0755569140747',
+                        'total': 25
+                    },
+                    {
+                        'emdNumber': '0755569140747',
+                        'total': 50
+                    }
+                ]
+            },
+            {
+                'type': 'SEAT',
+                'tickets': [
+                    {
+                        'emdNumber': '0755569140748',
+                        'total': 50
+                    },
+                    {
+                        'emdNumber': '0755569140748',
+                        'total': 50
+                    },
+                    {
+                        'emdNumber': '0755569140748',
+                        'total': 50
+                    },
+                    {
+                        'emdNumber': '0755569140747',
+                        'total': 10
+                    },
+                    {
+                        'emdNumber': '0755569140747',
+                        'total': 25
+                    },
+                    {
+                        'emdNumber': '0755569140747',
+                        'total': 50
+                    }
+                ]
+            }
+        ]
+    }
+};

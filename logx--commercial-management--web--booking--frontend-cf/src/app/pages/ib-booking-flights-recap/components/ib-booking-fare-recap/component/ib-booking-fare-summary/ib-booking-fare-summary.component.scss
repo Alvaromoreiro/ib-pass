@@ -1,0 +1,134 @@
+@import 'src/styles/component-tools';
+@import 'src/styles/tools/tools.scss';
+
+
+:host {
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: var(--neutrals-white);
+}
+
+.header {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: rem(8);
+    font-family: var(--font-headline);
+    font-style: normal;
+    line-height: normal;
+    background-color: var(--ib-color-grey-100-fa);
+    gap: rem(4);
+    
+
+    &-slice {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        font-size: rem(16);
+        font-weight: 400;
+        color: var(--ib-color-grey-800-33);
+        gap: rem(8);
+
+        &-icon {
+            width: rem(16);
+        }
+    }
+
+    &-cabin {
+        font-size: rem(18);
+        font-weight: 700;
+        color: var(--ib-color-primary-red-500);
+
+    }
+}
+
+.condition {
+    &-icon{
+        color: var(--ib-color-primary-red-500);
+    };
+
+    &-list{
+        display: flex;
+        flex-flow: column nowrap;
+        padding: rem(16) rem(8) rem(24) rem(8);
+        gap: rem(8);
+    }
+    
+    &-item {
+        display: flex;
+        flex-flow: row nowrap;
+        gap: rem(6);
+    }
+
+    &-text{
+        display: flex;
+        flex-flow: column nowrap;
+        font-family: var(--font-regular);
+        font-size: rem(13);
+        font-weight: 400;
+        font-style: normal;
+        line-height: rem(16);
+        color: var(--ib-color-grey-800-33);
+        gap: rem(4); 
+    }
+
+    &-title{
+        font-family: var(--font-regular);
+        font-size: rem(13);
+        font-weight: 700;
+        font-style: normal;
+    }
+
+    
+}
+
+.cabin {
+    &-color {
+            &--business {
+                color: var(--cabin-business);
+            }
+
+            &--premium {
+                color: var(--cabin-premium);
+            }
+        }
+    
+   
+}
+
+
+@include media-query-range("mf-md") {
+    .header {
+        padding: rem(8) rem(16);
+
+        &-cabin {
+            line-height: rem(26);
+        }
+
+    }
+
+    .condition {
+        &-list {
+            padding: rem(16) rem(16) rem(24) rem(16);
+        }
+    }
+}
+
+
+@include media-query-range("mf-lg") {
+    .header {
+        flex-flow: row wrap;
+        gap: rem(16);
+
+        &-slice {
+            &::after {
+                content: ''; 
+                display: block;
+                width: rem(1); 
+                height: rem(12); 
+                margin-left: rem(8); 
+                background-color: var(--ib-color-grey-400-cc);
+            }
+        }
+    }
+}
+

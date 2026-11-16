@@ -1,0 +1,85 @@
+<div class="ib-table-flight-cabins__scala ib-table-flight-cabins__article--full" ng-controller="IbBookingCollapseController as collapse">
+        <a id="bbki-segment-info-details-link" title="{{'AVAILABILITY_SLICE_INFO_BODY_A_TITLE_1'|translate}}" class="ib-table-flight-cabins__article-item ib-table-flight-cabins__article-item--center"
+        ng-click="$event.preventDefault()">
+        <div class="ib-info-journey ib-info-journey--scala ib-info-journey--full" ng-click="collapse.clickCollapse($event,true)">
+            <div class="ib-info-journey__body">
+                <div class="ib-info-journey__body-content">
+                    <div class="ib-info-journey__content-time ib-info-journey__content-time--left">
+                        <span class="ib-info-journey__city-scala">{{::segmentInfoCtrl.segmentInfoModel.departure.city.code}}</span>
+                        <span class="ib-info-journey__time">{{::segmentInfoCtrl.segmentInfoModel.departureDateTimeParsed}}</span>
+                    </div>
+                    <div class="ib-info-journey__content-detail">
+                        <span class="ib-info-journey__flight icon-vuelos"></span>
+                        <span class="ib-info-journey__detail ib-info-journey__detail--small">{{::segmentInfoCtrl.segmentInfoModel.durationParsed}}</span>
+                    </div>
+                    <div class="ib-info-journey__content-time ib-info-journey__content-time--right">
+                        <span class="ib-info-journey__city-scala">{{::segmentInfoCtrl.segmentInfoModel.arrival.city.code}}</span>
+                        <!-- <span class="ib-info-journey__time" data-day="{{segmentInfoCtrl.segmentInfoModel.daysOfTravel != 0 ? (('AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate) + segmentInfoCtrl.segmentInfoModel.daysOfTravel + ('AVAILABILITY_SLICE_INFO_DAY' | WordNumberFormatFilter: segmentInfoCtrl.segmentInfoModel.daysOfTravel | translate)) : ''}}">{{::segmentInfoCtrl.segmentInfoModel.arrivalDateTimeParsed}}</span> -->
+                        <span class="ib-info-journey__time">{{::segmentInfoCtrl.segmentInfoModel.arrivalDateTimeParsed}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ib-info-journey__footer">
+                <div class="ib-info-journey__company">
+                    <span aria-label="{{::(('AVAILABILITY_SLICE_INFO_BODY_DESC_1'|translate) + ' ' + segmentInfoCtrl.segmentInfoModel.allOperatedBy[0])}}"
+                        class="ib-info-journey__footer-detail">{{'AVAILABILITY_SLICE_INFO_BODY_DESC_1'|translate}}</span>
+                    <figure class="ib-info-journey__img ib-info-journey__img--scale ib-info-journey__img--major" data-scales="{{::(segmentInfoCtrl.segmentInfoModel.allOperatedBy.length > 1 ? ('+' + (segmentInfoCtrl.segmentInfoModel.allOperatedBy.length - 1)) : '')}}">
+                        <img ng-src="{{::$root.routes.icons}}{{::segmentInfoCtrl.segmentInfoModel.companyURL}}" alt="{{'AVAILABILITY_SLICE_INFO_IMG_ALT_1'|translate}} {{::segmentInfoCtrl.segmentInfoModel.allOperatedBy[0]}}" />
+                    </figure>
+                </div>
+                <div class="ib-info-journey__collapse">
+                    <span class="ib-info-journey__action icon-flecha_1_abajo" ng-class="collapse.isCollapsed ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'">{{'AVAILABILITY_SLICE_INFO_BODY_DESC_2'|translate}}</span>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div uib-collapse="!collapse.isCollapsed">
+            <ib-booking-segment-details-info id="bbki-segment-info-segment-details-info" segment-details-info-model="segmentInfoCtrl.segmentInfoModel" origin-destination-id="{{::segmentInfoCtrl.segmentInfoModel.originDestinationId}}"></ib-booking-segment-details-info>
+        </div>
+    <div class="ib-table-flight-cabins__article-item" id="selectedSliceBackGround-{{segmentInfoCtrl.currentOriginDestinationIndex}}-{{segmentInfoCtrl.segmentIndex}}{{segmentInfoCtrl.selectedSliceMode ? '-selected' : ''}}"
+        data-ng-class="{'ib-table-flight-cabins__article-item--selected': segmentInfoCtrl.showFaresSelected}">
+        <div id="selectedSliceMobile-{{segmentInfoCtrl.currentOriginDestinationIndex}}-{{segmentInfoCtrl.segmentIndex}}{{segmentInfoCtrl.selectedSliceMode ? '-selected' : ''}}"
+            class="ib-box-mini-fare ib-box-mini-fare--full" data-ng-class="{'ib-box-mini-fare--one-box': segmentInfoCtrl.segmentInfoModel.cabinsLength===1,'ib-box-mini-fare--two-boxes': segmentInfoCtrl.segmentInfoModel.cabinsLength===2, 'ib-box-mini-fare--three-boxes': segmentInfoCtrl.segmentInfoModel.cabinsLength===3,'ib-box-mini-fare--four-boxes': segmentInfoCtrl.segmentInfoModel.cabinsLength===4}">
+            <div class="ib-box-mini-fare__content" ng-repeat="(cabin, value) in segmentInfoCtrl.segmentInfoModel.cabins">
+                <button id="bbki-segment-info-segment-cabin-{{cabin}}-btn" class="ib-box-mini-fare__box" data-ng-class="{'ib-box-mini-fare__box--type-1':(cabin === 'E'||cabin === 'Y'),'ib-box-mini-fare__box--type-2':(cabin === 'T'||cabin === 'N'||cabin === 'W'),'ib-box-mini-fare__box--type-3':(cabin === 'B' ||cabin === 'C'), 'ib-box-mini-fare__box--type-4':cabin === 'F','ib-box-mini-fare__box--first': $index === 0, 'ib-box-mini-fare__box--second': $index === 1, 'ib-box-mini-fare__box--third': $index === 2,'ib-box-mini-fare__box--four': $index === 3,'ib-box-mini-fare__box--selected': (segmentInfoCtrl.showFaresSelected && !collapse.isCollapsed && cabin === segmentInfoCtrl.segmentInfoModel.showedCabin),'hidden-sm hidden-xs':!value.cabinAvailable}"
+                    ng-click="segmentInfoCtrl.sendSelectedSegment($event.currentTarget,cabin); collapse.isCollapsed = false"
+                    ng-disabled="!value.cabinAvailable">
+                    <span class="ib-box-mini-fare__box-title" ellipsis-title-info data-ng-class="{'ib-box-mini-fare__box-title--without-icon': segmentInfoCtrl.redemption}">{{::value.cabinDescription}}
+                        <a id="bbki-segment-info-segment-cabin-description-{{cabin}}-btn" ng-controller="IbPopoverController as popover" href="javascript:void(0)" class="ib-popover-tooltip ib-link-icon u-hide" ng-attr-title="{{::value.cabinDescription}}"
+                            popover-class="ib-popover ib-popover--logued" uib-popover="{{::value.cabinDescription}}"
+                            popover-placement="left" ng-click="$event.preventDefault()"
+                            popover-trigger="'mouseenter'" popover-is-open="popover.isOpen"
+                            popover-is-focus-in>
+                            <span class="ib-info-icon ib-info-icon__info ib-info-icon__info--type-2 icon-informacion_2">
+                                <span class="u-hide-accessible"></span>
+                            </span>
+                        </a>
+                    </span>
+                    <span class="ib-box-mini-fare__box-footer">
+                        <span class="ib-box-mini-fare__box-text" data-ng-if="!value.cabinAvailable">{{'AVAILABILITY_SLICE_INFO_BODY_DESC_4'|translate}}</span>
+                        <ib-booking-crossed-prices ngIf="value.cabinAvailable" [price-to-show]="value.bestPriceShown" [price-without-discount]="value.bestPriceDiscountShown" [variant]="'segment'" [is-best-offer]="value.bestCabinsPrice"></ib-booking-crossed-prices>
+                    </span>
+                </button>
+                <div id="selectedSlice-{{cabin}}-{{segmentInfoCtrl.currentOriginDestinationIndex}}-{{segmentInfoCtrl.segmentIndex}}{{segmentInfoCtrl.selectedSliceMode ? '-selected' : ''}}">
+                    <div class="ib-table-flight-cabins__article-options" data-ng-if="(segmentInfoCtrl.segmentInfoModel.showFares && segmentInfoCtrl.segmentInfoModel.showedCabin === cabin)">    
+                        <ib-booking-fare-container-component-legacy
+                                [item-id-base]="'bbki-slice-info-fare-details'"
+                                [new-fare]="segmentInfoCtrl.newFare"
+                                [fare-families]="segmentInfoCtrl.segmentInfoModel.cabins[cabin].fareFamilies"
+                                [selected-slice-index]="segmentInfoCtrl.selectedSliceIndex"
+                                [selected-segment-index]="segmentInfoCtrl.segmentIndex"
+                                [origin-destination-id]="segmentInfoCtrl.originDestinationId"
+                                [currencies]="segmentInfoCtrl.currencies"
+                                [selected-fare]="segmentInfoCtrl.segmentInfoModel.selectedFareFamily"
+                                [selected-cabin]="cabin"
+                                [meta-search-Info]="segmentInfoCtrl.metaSearchInfo"
+                                [recommended-offer-id]="segmentInfoCtrl.recommendedOfferId"
+                                [multi-city]="segmentInfoCtrl.multiCity"
+                                [redemption]="segmentInfoCtrl.redemption"
+                            ></ib-booking-fare-container-component-legacy>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

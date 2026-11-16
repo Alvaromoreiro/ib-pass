@@ -1,0 +1,39 @@
+    <!-- directive: ib-comment "{{$root.generateDatalayerDOM()}}" !-->
+    <!-- End wrapper-->
+    <section class="container">
+        <!-- Main content-->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__header ib-layout__header--title">
+                    <h1 class="ib-heading ib-heading--type-1">{{'FLIGHT_CONFIRMATION_TITLE'|translate}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <ib-mmb-segment-details ng-if="confirmCtrl.model.selectedSegmentDetails" show-state="::false" show-pre-header="::true"
+                    show-details-flight="::true" show-alert="::false" show-body="::false" show-footer="::false"
+                    segment-model="::confirmCtrl.model.selectedSegmentDetails">
+                </ib-mmb-segment-details>
+                <ib-flight-confirmation-details
+                    ng-if="confirmCtrl.model.oldSegmentInfo && confirmCtrl.model.oldSegmentInfo.type !== 'OPEN' && confirmCtrl.model.oldSegmentInfo.cabinClass"
+                    confirm-details-model="::confirmCtrl.model.oldSegmentInfo" title-flight="FLIGHT_CONFIRMATION_DETAILS_OLDER_TITLE">
+                </ib-flight-confirmation-details>
+                <ib-flight-confirmation-details ng-if="confirmCtrl.model.newSegmentInfo && confirmCtrl.model.newSegmentInfo.cabinClass"
+                    confirm-details-model="::confirmCtrl.model.newSegmentInfo" title-flight="FLIGHT_CONFIRMATION_DETAILS_NEW_TITLE">
+                </ib-flight-confirmation-details>
+                <section class="ib-layout__section">
+                    <div class="ib-content-buttons">
+                        <div class="ib-content-buttons__content-left">
+                            <input type="submit" name="button_next" id="FLIGHT_CONFIRMATION_CONTINUE" value="{{'FLIGHT_CONFIRMATION_CONTINUE'|translate}}"
+                                ng-click="confirmCtrl.changeFlightOrder()" class="ib-button ib-button--w-medium">
+                        </div>
+                        <div class="ib-content-buttons__content-right">
+                            <a href="javascript:void(0)" ng-click="confirmCtrl.backAvailability()" title="{{'FLIGHT_CONFIRMATION_CANCEL_TITLE'|translate}}" class="ib-link">{{'FLIGHT_CONFIRMATION_CANCEL'|translate}}</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+ 

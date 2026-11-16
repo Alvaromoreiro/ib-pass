@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-xs-12">
+        <section class="ib-layout__section" message-fixed>
+            <div class="ib-box ib-box--medium ib-box--separator u-pb-big u-pt-big">
+                <span class="ib-text ib-text--block ib-text--color-unfocused">{{'TOTAL_PRICE_COMPONENT_TITLE'|translate}}</span>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-7 col-md-8">
+                        <div class="ib-layout__line-spacing">
+                            <span class="ib-text ib-text--especial ib-text--price-big" data-ng-class="{'ib-text--price-medium-xs': brkdownAnciCtrl.totalPrice.length > 10}">{{brkdownAnciCtrl.totalPrice}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-5 col-md-4">
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+                            <button id="GO_PAYMENTS_CONTINUE_BUTTON" class="ib-button ib-button--w-medium u-mb-medium u-float-right ib-button--block-sm" ng-click="brkdownAnciCtrl.goPayment()" type="submit">{{'BUTTON_CONTINUE_TEXT'|translate}}</button>
+                        </div>
+                    </div>
+                </div>
+                <p class="ib-text ib-text--block ib-text--color-unfocused ng-scope"
+                data-ng-if="$root.isLogged && $root.flowName === 'MMB' && !$root.isRedemptionFlow && brkdownAnciCtrl.aviosToEarn && brkdownAnciCtrl.elitePointsToEarn && brkdownAnciCtrl.flightAviosInfo">
+                {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                  <span class="ib-text ib-text--bold">
+                       {{brkdownAnciCtrl.aviosToEarn | aviosFormatter}}
+                       {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+                       {{brkdownAnciCtrl.elitePointsToEarn | aviosFormatter}}
+                       {{'AVIOS_ELITE_TO_EARN_USER_3'| translate}}
+                  </span>
+                </p>
+                <p class="ib-text ib-text--block ib-text--color-unfocused ng-scope"
+                data-ng-if="!$root.isLogged && $root.flowName === 'MMB' && !$root.isRedemptionFlow && brkdownAnciCtrl.aviosToEarn && brkdownAnciCtrl.elitePointsToEarn && brkdownAnciCtrl.flightAviosInfo">
+                {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                 <span class="ib-text ib-text--bold">
+                     {{brkdownAnciCtrl.aviosToEarn | aviosFormatter}}
+                     {{'AVIOS_ELITE_TO_EARN_ANOM_2'| translate}}
+                     {{brkdownAnciCtrl.elitePointsToEarn | aviosFormatter}}
+                     {{'AVIOS_ELITE_TO_EARN_ANOM_3'| translate}}
+                 </span>
+               </p>
+               <br>
+               <p class="ib-text ib-text--color-unfocused" data-ng-if="$root.flowName === 'MMB' && brkdownAnciCtrl.relatedContent && brkdownAnciCtrl.relatedContent.original.totalPriceText"
+               ng-bind-html="brkdownAnciCtrl.relatedContent.original.totalPriceText"></p>
+
+            </div>
+        </section>
+    </div>
+</div>

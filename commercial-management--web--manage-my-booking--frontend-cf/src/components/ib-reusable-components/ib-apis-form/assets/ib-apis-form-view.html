@@ -1,0 +1,110 @@
+<div class="ib-layout">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="ib-layout__line-spacing">
+                <span class="ib-text ib-text--block ib-text--xlarge ib-text--especial">{{'APIS_WHY_ASK_THIS_INFO_LINK'|translate}}</span>
+            </div>
+            <div class="ib-layout__line-spacing">
+                <span class="ib-text ib-text--block">{{'APIS_WHY_ASK_FOR_INFO_MODAL_MESSAGE'|translate}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--medium ib-layout__line-spacing--bordered">
+        <fieldset>
+            <legend class="u-hide-accessible">{{'APIS_PASSENGER_FORM_TITLE'|translate}}</legend>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="ib-layout__line-spacing">
+                            <span class="ib-text ib-text--block ib-text--xbig ib-text--especial">{{'APIS_PASSENGER_FORM_TITLE'|translate}}</span>
+                        </div>
+                    </div>
+                </div>
+                <ib-apis-basic-info pas-basic-data="apisFormCtrl.passengersData" required-fields="::apisFormCtrl.passengersData.requiredFields"
+                    countries="::apisFormCtrl.countries" is-infant="apisFormCtrl.passengersData.passengerType === 'INFANT'"
+                    related-adult-data="apisFormCtrl.adultPassengersData" container-form="apisFormCtrl.containerForm" is-required-home-address="apisFormCtrl.isRequiredHomeAddress"></ib-apis-basic-info>
+                <div ng-if="::apisFormCtrl.passengersData.mandatoryDocuments.documents.length > 0">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="ib-layout__line-spacing">
+                                <span class="ib-text ib-text--block ib-text--xbig ib-text--especial">{{'APIS_MANDATORY_DOCUMENTS_SECTION_TITLE'|translate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ib-apis-docs pas-docs-data="apisFormCtrl.passengersData.mandatoryDocuments" countries="::apisFormCtrl.countries" container-form="apisFormCtrl.containerForm"
+                        id-document="'REQ'" is-infant="apisFormCtrl.passengersData.passengerType === 'INFANT'"
+                        related-adult-data="apisFormCtrl.adultPassengersData"></ib-apis-docs>
+                </div>
+                <ib-apis-origin-info ng-if="apisFormCtrl.isRequiredHomeAddress" home-address="apisFormCtrl.passengersData.homeAddress" passenger-data="apisFormCtrl.passengersData"
+                        countries="::apisFormCtrl.countries" in-transit="apisFormCtrl.passengersData.inTransit" required-fields="::apisFormCtrl.passengersData.requiredFields"
+                        container-form="apisFormCtrl.containerForm" is-infant="apisFormCtrl.passengersData.passengerType === 'INFANT'"
+                        related-adult-data="apisFormCtrl.adultPassengersData"></ib-apis-origin-info>
+                <div ng-if="apisFormCtrl.passengersData.view.showOptions && !apisFormCtrl.passengersData.basicInfo.isInfant && apisFormCtrl.passengerData.basicInfo.nationality !== 'US'">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="ib-layout__line-spacing">
+                                <span class="ib-text ib-text--block ib-text--xbig ib-text--especial">{{'APIS_DESTINATION_USA_SECTION_TITLE'|translate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ib-apis-destination-info passenger-data="apisFormCtrl.passengersData" destination-data="apisFormCtrl.passengersData.destinationAddress"
+                        states="::apisFormCtrl.states" in-transit="apisFormCtrl.passengersData.inTransit" required-fields="::apisFormCtrl.passengersData.requiredFields"
+                        container-form="apisFormCtrl.containerForm" is-infant="apisFormCtrl.passengersData.passengerType === 'INFANT'"
+                        related-adult-data="apisFormCtrl.adultPassengersData"></ib-apis-destination-info>
+                    <!-- <div class="row" ng-if="apisFormCtrl.passengers > 1">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="ib-layout__line-spacing">
+                                <div class="ib-check">
+                                    <input type="checkbox" id="checkAllPasseng" name="checkAllPasseng" class="ib-check__input" ng-model="apisFormCtrl.passengersData.view.showInTransitForAll">
+                                    <label for="checkAllPasseng" class="ib-check__label ib-check__label--top">
+                                        <span class="ib-check__text ib-check__text--unfocused">{{'IBPAS_MMB_PASSENGER_FORM_CHECK_SAME_INFO_TEXT' | translate}}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div ng-if="apisFormCtrl.passengersData.visaDocument">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="ib-layout__line-spacing">
+                                <span class="ib-text ib-text--block ib-text--xbig ib-text--especial">
+                                    {{apisFormCtrl.passengersData.visaDocument.isMandatory ? (('APIS_REQUIRED_VISA_SECTION_TITLE'|translate)+''+('GENERAL_MANDATORY_FIELDS_FLAG'|translate)):
+                                    ('APIS_OPTIONAL_VISA_SECTION_TITLE'|translate)}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <ib-apis-visa pas-visa-data="::apisFormCtrl.passengersData.visaDocument" countries="::apisFormCtrl.countries" container-form="::apisFormCtrl.containerForm"></ib-apis-visa>
+                </div>
+                <div ng-if="apisFormCtrl.passengersData.optionalDocuments.optDocuments.length > 0">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="ib-layout__line-spacing">
+                                <span class="ib-text ib-text--block ib-text--xbig ib-text--especial">{{'APIS_OTHER_DOCUMENTS_SECTION_TITLE'|translate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ib-apis-docs pas-docs-data="apisFormCtrl.passengersData.optionalDocuments" countries="::apisFormCtrl.countries" container-form="apisFormCtrl.containerForm"
+                        id-document="'OPT'"></ib-apis-docs>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="ib-layout__line-spacing">
+                            <div class="ib-check" ng-class="{'ib-check--error': apisFormCtrl.containerForm.$submitted && !apisFormCtrl.passengersData.allTrueInfo}">
+                                <input type="checkbox" ng-model="apisFormCtrl.passengersData.allTrueInfo" id="APIS_TRUTHFUL_INFO_CHECK" name="check_info"
+                                    class="ib-check__input" required>
+                                <label for="APIS_TRUTHFUL_INFO_CHECK" class="ib-check__label ib-check__label--top">
+                                    <span class="ib-check__text ib-check__text--unfocused">{{'APIS_TRUTHFUL_INFO_FIELD_LABEL'|translate}}</span>
+                                </label>
+                            </div>
+                            <div ng-if="apisFormCtrl.containerForm.$submitted === true && !apisFormCtrl.passengersData.allTrueInfo">
+                                <div class="ib-alert ib-alert--error">{{'MMB_FLIGHT_REMINDER_MODAL_CHECK_AUTHORIZATION_ERROR'|translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>

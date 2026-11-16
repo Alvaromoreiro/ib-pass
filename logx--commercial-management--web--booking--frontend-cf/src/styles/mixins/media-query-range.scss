@@ -1,0 +1,25 @@
+// Mixin para gestionar las media queries
+@mixin media-query-range($mq) {
+    $breakpoint-found: false;
+
+    // Recorre la lista de breakpoints proporcionados
+    @each $breakpoint, $condition in $bki-breakpoints {
+
+        // Si la media query tiene un alias y una condición...
+        @if $mq == $breakpoint and $condition {
+
+            // ...indica que la hemos encontrado...
+            $breakpoint-found: true;
+
+            // ...y genera la media query aquí.
+            @media #{$condition} {
+                @content;
+            }
+        }
+    }
+
+    // Si el alias especificado no existe, muestra una advertencia.
+    @if $breakpoint-found == false {
+        @warn "¡Oops! El breakpoint ‘#{$mq}’ no existe.";
+    }
+}

@@ -1,0 +1,35 @@
+<section class="container">
+    <!-- directive: ib-comment "{{$root.generateDatalayerDOM()}}" !-->
+    <section class="container">
+        <div class="row">
+            <div class="ib-checkin__container">
+                <div class="col-xl-12">
+                    <h2 class="ib-heading ib-heading--type-1 ib-heading__title">{{'IBCOSE_MMB_TITLE'|translate}}</h2>
+                    <span class="ib-heading ib-heading--type-4 ib-heading__subtitle">{{'IBCOSE_MMB_SUBTITLE'|translate}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div ng-class="{'ib-banner__container': searchCtrl.containsAd}">
+                    <div data-ib-box class="ib-box_wrapper ib-flex ib-flex__row--mobile ib-flex--align-strech ib-flex--gap-medium u-pt-small-desktop">
+                        <div class="ib-checkin__container ib-flex--basis-50 ib-flex--basis-100-mobile">
+                            <div class="ib-box-form u-height-full u-mt-none-desktop">
+                                <ib-anonymous-search id="mmb-search-anonymous-login-form" search-title="{{'IBCOSE_ANONYMOUS_FORM_TITLE'|translate}}" button-text="{{'IBCOSE_ANONYMOUS_FORM_BUTTON_TEXT'|translate}}"></ib-anonymous-search>
+                            </div>
+                        </div>
+                        <div class="ib-checkin__container ib-flex--basis-50 ib-flex--basis-100-mobile" ng-if="!searchCtrl.isOnbUserLogged">
+                            <div class="ib-box-form u-height-full u-mt-none-desktop">
+                                <ib-ui-login-reusable-iframe-component
+                                    loading="searchCtrl.showWaitingModal" flow="MMB_CKI">
+                                </ib-ui-login-reusable-iframe-component>
+                                <!-- <ib-ui-login-open-component id="mmb-search-ibplus-login-form" login-title="{{'LOGIN_FORM_TITLE'|translate}}" button-text="{{'LOGIN_FORM_BUTTON_TEXT'|translate}}" flow="mmb"></ib-ui-login-open-component> -->
+                            </div>
+                        </div>
+                    </div>
+                    <ib-banner show-ads="searchCtrl.showAds"></ib-banner>
+                </div>
+            </div>
+        </div>
+
+    </section>

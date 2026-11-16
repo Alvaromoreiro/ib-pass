@@ -1,0 +1,125 @@
+/* -------------------------------------------------------------
+    #INFO-Bag
+----------------------------------------------------------------- */
+.#{$wefront__namespace}info-bag {
+    padding-bottom: rem(30);
+    color: color(gray-30);
+
+    &:last-child {
+        padding-bottom: rem(22);
+    }
+
+    &--border {
+        padding-top: rem(20);
+        border-top: rem(1) solid color(gray-40);
+    }
+
+    &__row {
+        margin-bottom: rem(16);
+    }
+
+    &__txtright {
+        display: block;
+        padding-top: 0;
+        padding-bottom: 0;
+        font-size: rem(13);
+        font-weight: bold;
+        text-align: right;
+    }
+
+    &__item {
+        padding: 0 0 rem(8) 0;
+    }
+
+    &__baggage {
+        position: relative;
+        display: inline-block;
+        padding: 0 rem(5) 0 rem(51);
+        font-size: rem(13);
+
+        &::before {
+            content: "\e958";
+            position: absolute;
+            top: rem(-19);
+            left: rem(5);
+            font-family: $font-icons;
+            font-size: rem(40);
+        }
+        .#{$wefront__namespace}heading--type-6 {
+            margin-bottom: rem(8);
+        }
+
+        &--num {
+            font-size: rem(18);
+        }
+
+        &--inv {
+            &::before {
+                content: "\e956";
+                top: rem(-16);
+                left: 0;
+                font-size: rem(42);
+            }
+        }
+
+        &--kit {
+            padding-left: rem(90);
+
+            &::before {
+                top: rem(-32);
+                left: 0;
+                font-size: rem(74);
+            }
+        }
+    }
+
+    &__text {
+        display: block;
+        margin-bottom: rem(3);
+        font-size: rem(13);
+    }
+}
+
+// Responsive
+
+@include media-query('sm') {
+    .#{$wefront__namespace}info-bag {
+        &__baggage {
+            &--kit {
+                padding-left: rem(88);
+                margin: 0 rem(-16);
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}info-bag {
+        .#{$wefront__namespace}heading--type-6 {
+            padding-bottom: rem(16);
+            line-height: rem(20);
+        }
+
+        &__baggage {
+            &--kit {
+                padding-left: rem(88);
+                margin: rem(8) 0 0;
+                &.#{$wefront__namespace}ib-info-bag__baggage--inv {
+                    margin-top: 0;
+                }
+                .#{$wefront__namespace}heading--type-6 {
+                    padding-bottom: 0;
+                }
+            }
+        }
+
+        &__txtright {
+            padding-bottom: rem(16);
+            text-align: left;
+        }
+
+        .row {
+            margin: 0 rem(-16);
+        }
+    }
+}

@@ -1,0 +1,104 @@
+<form name="datCtForm">
+    <fieldset>
+        <legend class="u-hide-accessible">{{'IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_TITLE_ACCESS'|translate}}</legend>
+        <div ng-if="pasDataContcCtrl.passengersModel.length > 1 && (index===0 || !pasDataContcCtrl.useForAll) && pas.passengerType !=='INFANT' && pas.optionalInformation.contactData"
+            class="ib-layout__form-center" ng-repeat="(index,pas) in pasDataContcCtrl.passengersModel">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                <span class="ib-heading ib-heading--type-4">{{::(pas.personalInfo.name + ' ' + pas.personalInfo.surname)}}</span>
+            </div>
+            <div class="ib-layout__line-spacing">
+                <div class="ib-input" ng-class="{'ib-input--error': datCtForm.$submitted && datCtForm['phone_'+index].$invalid}">
+                    <label class="ib-input__label" for="PAS_NUMBER_PHONE_{{::index}}" ng-class="{'ib-input__label--focus' : pasDataContcCtrl['phoneFocus_'+index] || (datCtForm['phone_'+index].$viewValue != null && datCtForm['phone_'+index].$viewValue !== '')}">
+                        {{'IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_NUMBER_LABEL'|translate}}
+                    </label>
+                    <input class="ib-input__input" type="text" id="PAS_NUMBER_PHONE_{{::index}}" name="phone_{{::index}}" ng-model="pas.contactInfo.phone"
+                        ng-focus="pasDataContcCtrl['phoneFocus_'+index]=true" ng-blur="pasDataContcCtrl['phoneFocus_'+index]=false"
+                        ib-model-undefined ng-pattern="::$root.MmBPatterns.PHONE_PATTERN" data-ib-validator-cleaner="{{::$root.MmBPatterns.PHONE_CLEANER}}"
+                        maxlength="{{::$root.MmBPatterns.PHONE_MAX_LENGTH}}" />
+                </div>
+                <div ng-messages="datCtForm.$submitted && datCtForm['phone_'+index].$error">
+                    <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+                </div>
+            </div>
+            <div class="ib-layout__line-spacing">
+                <div class="ib-input" ng-class="{'ib-input--error': datCtForm.$submitted && datCtForm['email_'+index].$invalid}">
+                    <label class="ib-input__label" for="PAS_EMAIL_{{::index}}" ng-class="{'ib-input__label--focus' : pasDataContcCtrl['emailFocus_'+index] || (datCtForm['email_'+index].$viewValue != null && datCtForm['email_'+index].$viewValue !== '')}">
+                        {{'IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_EMAIL_LABEL'|translate}}
+                    </label>
+                    <input class="ib-input__input" type="text" id="PAS_EMAIL_{{::index}}" name="email_{{::index}}" ng-model="pas.contactInfo.email"
+                        ng-focus="pasDataContcCtrl['emailFocus_'+index]=true" ng-blur="pasDataContcCtrl['emailFocus_'+index]=false"
+                        ib-model-undefined maxlength="{{::$root.MmBPatterns.EMAIL_MAX_LENGTH}}" ng-pattern="::$root.MmBPatterns.EMAIL_PATTERN"
+                    />
+                </div>
+                <div ng-messages="datCtForm.$submitted && datCtForm['email_'+index].$error">
+                    <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+                </div>
+            </div>
+            <div ng-if="::index===0 && pas.passengerType !=='INFANT' && pasDataContcCtrl.optionalInformation" class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                <div class="ib-check">
+                    <input type="checkbox" id="USE_FOR_ALL_CHECK" name="checkUse" class="ib-check__input" data-ng-model="pasDataContcCtrl.useForAll"
+                        data-ng-click="pasDataContcCtrl.copyDataForAll()" />
+                    <label for="USE_FOR_ALL_CHECK" class="ib-check__label">
+                         <span class="ib-check__text ib-check__text--unfocused">{{'IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_USE_FOR_ALL_CHECK'|translate}}</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="ib-layout__form-center" ng-if="!pasDataContcCtrl.useForAll && pasDataContcCtrl.optionalInformation ">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                <span class="ib-heading ib-heading--type-4">{{pasDataContcCtrl.passengersModel.length > 1 ? ('IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_TITLE_HEAD'|translate) : ('IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_ONE_PASSENGER_TITLE_HEAD'|translate)}}</span>
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                    <p class="ib-text ib-text--color-unfocused">{{'IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_TEXT'|translate}}</p>
+                </div>
+                <div class="ib-layout__line-spacing">
+                    <div class="ib-input" ng-class="{'ib-input--error': datCtForm.$submitted && datCtForm.number_phone.$invalid}">
+                        <label class="ib-input__label" for="DATA_CONTACT_FORM_NUMBER_PHONE" ng-class="{'ib-input__label--focus' : pasDataContcCtrl.focused_number || (datCtForm.number_phone.$viewValue != null && datCtForm.number_phone.$viewValue !=='')}">{{'IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_NUMBER_LABEL'|translate}}</label>
+                        <input class="ib-input__input" name="number_phone" type="text" id="DATA_CONTACT_FORM_NUMBER_PHONE" ng-focus="pasDataContcCtrl.focused_number=true"
+                            ng-blur="pasDataContcCtrl.focused_number=false" ng-model="pasDataContcCtrl.contactFormModel.phone"
+                            ng-pattern="::$root.MmBPatterns.PHONE_PATTERN" ib-validator-cleaner="{{::$root.MmBPatterns.PHONE_CLEANER}}"
+                            ib-model-undefined/>
+                    </div>
+                    <div ng-messages="datCtForm.$submitted && datCtForm.number_phone.$error">
+                        <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+                    </div>
+                </div>
+                <div class="ib-layout__line-spacing">
+                    <div class="ib-input" ng-class="{'ib-input--error': datCtForm.$submitted && datCtForm.email.$invalid}">
+                        <label class="ib-input__label" for="DATA_CONTACT_FORM_EMAIL" ng-class="{'ib-input__label--focus' : pasDataContcCtrl.focused_email || (datCtForm.email.$viewValue != null && datCtForm.email.$viewValue !=='')}">{{'IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_EMAIL_LABEL'|translate}}</label>
+                        <input class="ib-input__input" name="email" type="text" id="DATA_CONTACT_FORM_EMAIL" ng-focus="pasDataContcCtrl.focused_email=true"
+                            ng-blur="pasDataContcCtrl.focused_email=false" ng-model="pasDataContcCtrl.contactFormModel.email"
+                            ng-pattern="::$root.MmBPatterns.EMAIL_PATTERN" ib-model-undefined/>
+                    </div>
+                    <div ng-messages="datCtForm.$submitted && datCtForm.email.$error">
+                        <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ib-layout__form-center">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                <div class="ib-check" ng-class="{'ib-check ib-check--error' : datCtForm.$submitted && datCtForm.checkConfirm.$invalid}">
+                    <input type="checkbox" id="CONFIRM_INFO_CHECK" name="checkConfirm" class="ib-check__input" ng-model="pasDataContcCtrl.confirmInformation"
+                        ng-required="pasDataContcCtrl.needsConfirm()" />
+                    <label for="CONFIRM_INFO_CHECK" class="ib-check__label">
+                         <span class="ib-check__text ib-check__text--unfocused">{{'IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_CHECK_TEXT'|translate}}</span>
+                    </label>
+                </div>
+                <div ng-messages="datCtForm.$submitted && datCtForm.checkConfirm.$error">
+                    <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_CONFIRM_REQUIRED_ERROR'|translate}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="ib-layout__form-center u-mt-medium">
+            <div class="ib-content-buttons">
+                <div class="ib-content-buttons__content-left">
+                    <button type="submit" name="button_next" class="ib-button ib-button--w-medium" ng-click="pasDataContcCtrl.nextFormDataContact(datCtForm)">{{'IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_BUTTON_NEXT_TEXT'|translate}}</button>
+                </div>
+                <div class="ib-content-buttons__content-right u-text-left">
+                    <a href="javascript:void(0)" title="{{'IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_BUTTON_BACK_TEXT_TITLE'|translate}}" class="ib-link"
+                        ng-click="pasDataContcCtrl.backFormDataContact()">{{'IBPAS_MMB_PASSENGER_FORM_DATA_CONTACT_BUTTON_BACK_TEXT'|translate}}</a>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>

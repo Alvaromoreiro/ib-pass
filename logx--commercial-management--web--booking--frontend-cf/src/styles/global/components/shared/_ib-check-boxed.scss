@@ -1,0 +1,402 @@
+/* -------------------------------------------------------------
+    #CHECK-BOXED
+----------------------------------------------------------------- */
+.#{$wefront__namespace}check-boxed {
+    position: relative;
+
+    &__check {
+        position: absolute;
+        right: rem(9999);
+
+        &:checked {
+            + .#{$wefront__namespace}check-boxed__label {
+                border: rem(1) solid color(gray-20);
+                background-color: color(gray-65);
+
+                &::before {
+                    background-color: color(red-20);
+                }
+            }
+        }
+
+        &--disabled {
+            + .#{$wefront__namespace}check-boxed__label {
+                pointer-events: none;
+
+                &::before {
+                    border-color: color(gray-50);
+                    background-color: color(gray-50);
+                }
+            }
+
+            &:checked {
+                + .#{$wefront__namespace}check-boxed__label {
+                    &::before {
+                        background-color: color(red-20);
+                    }
+                }
+            }
+        }
+
+        &:focus {
+            + .#{$wefront__namespace}check-boxed__label {
+                border: rem(1) solid color(gray-20);
+                background-color: color(gray-65);
+            }
+        }
+    }
+
+    &__label {
+        display: block;
+        padding: rem(25) rem(10) rem(55) rem(10);
+        margin: rem(10) 0;
+        border: rem(1) solid color(gray-50);
+        text-align: center;
+        background-color: color(white);
+        cursor: pointer;
+
+        &--disabled {
+            &::before {
+                background-color: color(gray-50);
+            }
+        }
+
+        &--simple {
+            padding: rem(10) rem(10) rem(30);
+
+            &::before {
+                display: none;
+            }
+            .#{$wefront__namespace}check-boxed__price, .#{$wefront__namespace}text {
+                &:first-child {
+                    margin-top: rem(14);
+                }
+            }
+            .#{$wefront__namespace}button {
+                margin-bottom: rem(14);
+            }
+        }
+
+        &--top {
+            padding: rem(50) rem(10) rem(30) rem(10);
+
+            &::before {
+                top: rem(15);
+                left: 50%;
+                -ms-transform: translate(-50%, 50%) !important;
+                transform: translate(-50%, 50%) !important;
+            }
+            .#{$wefront__namespace}check-boxed__price, .#{$wefront__namespace}text {
+                &:first-child {
+                    margin-top: rem(14);
+                }
+            }
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: rem(18);
+            left: 50%;
+            width: rem(24);
+            height: rem(24);
+            border: rem(8) solid color(white);
+            border-radius: 50%;
+            background-color: color(white);
+            box-shadow: 0 0 0 rem(1) color(gray-30);
+            -ms-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
+        }
+    }
+
+    &__text {
+        display: block;
+        margin: 0 rem(-10);
+        font-size: rem(21);
+        line-height: rem(16);
+        color: color(gray-30);
+        white-space: nowrap;
+
+        &--price-long {
+            font-size: rem(15);
+            white-space: normal;
+        }
+    }
+
+    &__text-normal {
+        display: block;
+        width: 100%;
+        max-width: rem(120);
+        padding: 0 rem(8);
+        margin: 0 auto;
+        font-size: rem(15);
+        font-weight: 500;
+        line-height: rem(16);
+        word-wrap: break-word;
+
+        &--price-long {
+            font-size: rem(15);
+            white-space: normal;
+        }
+    }
+
+    &__text-big {
+        display: block;
+        font-size: rem(24);
+    }
+
+    &__detail {
+        display: block;
+        padding-top: rem(9);
+        font-size: rem(13);
+        line-height: rem(16);
+        color: color(gray-30);
+    }
+
+    &__icon {
+        display: block;
+        font-size: rem(60);
+        text-align: center;
+        color: color(gray-30);
+    }
+
+    &__price {
+        display: block;
+        font-family: $font-special;
+        font-size: rem(18);
+        color: color(gray-10);
+    }
+
+    &__price-old {
+        display: block;
+        margin: rem(16) 0 rem(12) 0;
+        font-family: $font-special;
+        font-size: rem(14);
+        text-decoration: line-through;
+        color: color(gray-10);
+    }
+    .#{$wefront__namespace}button {
+        min-height: rem(40);
+        padding: 0;
+        font-size: rem(14);
+        line-height: 1.3;
+    }
+
+    // Modifiers
+
+    &--type-1 {
+        .#{$wefront__namespace}check-boxed__check {
+            &:checked {
+                + .#{$wefront__namespace}check-boxed__label {
+                    border: rem(1) solid color(gray-30);
+                    background-color: color(gray-60);
+
+                    &::before {
+                        content: "\e93e";
+                        font-family: $font-icons;
+                        font-size: rem(24);
+                        line-height: rem(30);
+                        background-color: color(gray-60);
+                        box-shadow: 0 0 0 rem(1) color(gray-20);
+                    }
+                    .#{$wefront__namespace}check-boxed__text {
+                        color: color(gray-10);
+                    }
+                }
+            }
+
+            &:focus,
+            &:active {
+                + .#{$wefront__namespace}check-boxed__label {
+                    border-color: color(orange-10);
+                }
+            }
+        }
+        .#{$wefront__namespace}check-boxed__label {
+            padding-top: rem(18);
+            padding-bottom: rem(35);
+            border: rem(1) solid color(gray-50);
+            background-color: transparent;
+
+            &::before {
+                bottom: rem(-12);
+                width: rem(30);
+                height: rem(30);
+                border: 0;
+                background-color: transparent;
+                box-shadow: none;
+            }
+        }
+        .#{$wefront__namespace}check-boxed__text {
+            font-size: rem(20);
+            font-weight: normal;
+            color: color(gray-30);
+        }
+    }
+
+    &--type-2 {
+        .#{$wefront__namespace}check-boxed__check {
+            &:checked {
+                + .#{$wefront__namespace}check-boxed__label {
+                    .#{$wefront__namespace}check-boxed__detail,
+                    .#{$wefront__namespace}check-boxed__icon {
+                        color: color(gray-10);
+                    }
+                }
+            }
+        }
+        .#{$wefront__namespace}check-boxed__detail {
+            font-size: rem(15);
+        }
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}check-boxed {
+        &__text {
+            font-size: rem(16);
+
+            &--price-long {
+                font-size: rem(13);
+            }
+        }
+
+        &__label {
+            &--simple {
+                .#{$wefront__namespace}button {
+                    font-size: rem(13);
+                }
+            }
+        }
+
+        &__price-old {
+            font-size: rem(11);
+        }
+    }
+}
+
+
+@include media-query('sm') {
+    .#{$wefront__namespace}check-boxed {
+        &--responsive {
+            .#{$wefront__namespace}check-boxed {
+                &:nth-child(2n) {
+                    .#{$wefront__namespace}check-boxed {
+                        &__label {
+                            background: color(white);
+                        }
+                    }
+                }
+
+                &__check {
+                    display: none;
+                }
+
+                &__label {
+                    display: block;
+                    width: 100%;
+                    padding: rem(16) 0;
+                    margin: 0;
+                    border: none;
+                    text-align: center;
+                    background: color(gray-50);
+                    pointer-events: none;
+
+                    &::before {
+                        display: none;
+                    }
+                }
+
+                &__price {
+                    display: inline;
+                    font-size: rem(18);
+                    vertical-align: top;
+                }
+            }
+        }
+    }
+}
+
+
+@include media-query('xs') {
+    .#{$wefront__namespace}check-boxed {
+        &__label {
+            &--top {
+                padding: rem(10) rem(10);
+
+                &::before {
+                    top: rem(6);
+                }
+                .#{$wefront__namespace}check-boxed__price, .#{$wefront__namespace}text {
+                    &:first-child {
+                        margin-top: rem(45);
+                    }
+                }
+            }
+        }
+
+        &--responsive {
+            .#{$wefront__namespace}check-boxed {
+                &:nth-child(2n) {
+                    .#{$wefront__namespace}check-boxed {
+                        &__label {
+                            background: color(white);
+                        }
+                    }
+                }
+
+                &__check {
+                    display: none;
+                }
+
+                &__label {
+                    display: block;
+                    width: 100%;
+                    padding: rem(16) rem(16);
+                    margin: 0;
+                    border: none;
+                    text-align: left;
+                    background: color(gray-50);
+                    pointer-events: none;
+
+                    &::before {
+                        display: none;
+                    }
+
+                    &--top {
+                        padding: rem(10) rem(10);
+
+                        &::before {
+                            top: rem(8);
+                        }
+                        .#{$wefront__namespace}check-boxed__price, .#{$wefront__namespace}text {
+                            &:first-child {
+                                margin-top: rem(40);
+                            }
+                        }
+                    }
+
+                    &--top-right {
+                        padding: rem(10) rem(10);
+
+                        &::before {
+                            top: rem(14);
+                            left: rem(14);
+                        }
+                        .#{$wefront__namespace}check-boxed__price, .#{$wefront__namespace}text {
+                            &:first-child {
+                                margin-top: rem(40);
+                            }
+                        }
+                    }
+                }
+
+                &__price {
+                    display: inline;
+                    font-size: rem(18);
+                    vertical-align: top;
+                }
+            }
+        }
+    }
+}

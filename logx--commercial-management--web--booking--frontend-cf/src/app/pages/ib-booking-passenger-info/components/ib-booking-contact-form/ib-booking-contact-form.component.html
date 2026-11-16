@@ -1,0 +1,68 @@
+<fieldset>
+    <legend class="u-hide-accessible">
+        {{ "IBAIRP_CONTACT_FORM_ACCESIBLE" | translate }}
+    </legend>
+    <fieldset>
+        <legend class="u-hide-accessible">Datos de Formulario de Contacto</legend>
+
+        <div class="layout--container">
+            <form class="form" name="contactForm" [formGroup]="contactForm">
+                <div class="heading">
+                    <h2 class="heading--title icon-telefono_1">{{'IBAIRP_CONTACT_FORM' | translate}}</h2>
+                    <p class="heading--text">{{isLogged ? ('IBAIRP_CONTACT_FORM_INFO' | translate) : ('SHORT_REGISTER_USE' | translate )}}</p>
+                </div>
+                <div class="content">
+                    <div class="input-container" [ngClass]="{'input--error': submitState && contactForm.controls.email.invalid}">
+                        <input class="input-text" type="email" id="contact_email" formControlName="email"
+                            placeholder=" " maxlength="{{ MAX_LENGTH_EMAIL }}"
+                            [ibBookingValidatorCleaner]="EMAIL_CLEANER" (blur)="callEmailConsent()" 
+                            (keyup)="setRegisterEmail()"/>
+                        <label class="input-label" for="contact_email">{{ "IBAIRP_CONTACT_FORM_EMAIL" | translate }}
+                        </label>
+                        <div *ngIf="submitState && contactForm.controls.email.invalid"
+                        class="ib-alert ib-alert--error">
+                        <span *ngIf="contactForm.controls.email.errors?.required">
+                            {{'GENERAL_INPUT_REQUIRED_ERROR' | translate }}</span>
+                        <span *ngIf="contactForm.controls.email.errors?.pattern">
+                            {{'GENERAL_EMAIL_PATTERN_ERROR' | translate }}</span>
+                    </div>
+                    </div>
+
+                    <ib-booking-phone-number
+                        [prefixList]="prefixList"
+                        [selectedPrefix]="selectedPrefix"
+                        [fallbackDisabled]="phonePrefixFallback"
+                        [submitState]="submitState"
+                        (phoneFormValidity)="updatePhoneFormValidity($event)">
+                    </ib-booking-phone-number>
+
+                    <div class="contact-collapsable-container">
+                        <button [attr.aria-expanded]="isCollapsableOpen" class="contact-collapsable-button" (click)="toggleVisibility($event)">
+                            <p>{{'GENERAL_DATA_CONDITIONS_TEXT'|translate}}</p>
+                        </button>
+                        <div class="contact-collapsable__closed" [ngClass]="{'contact-collapsable__open': isCollapsableOpen}">
+                            <div class="contact-collapsable__content">
+                                <ng-container *ngFor="let part of gdprInfo?.text">
+                                    <p class="ib-text ib-text--color-unfocused" *ngIf="part.type === 'text'">{{ part.value }}</p>
+                                    <a *ngIf="part.type === 'link'"
+                                        class="gdpr-link"
+                                        ibBookingLinkContentParser
+                                       [attr.contentInfo]="'gdprInfo'"
+                                       [attr.title]="part.attrs['title']"
+                                       [attr.data-contenttype]="part.attrs['data-contenttype']"
+                                       [attr.contentId]="part.attrs['data-contentid']"
+                                       [attr.data-contentorigin]="part.attrs['data-contentorigin']">
+                                      {{ part.value }}
+                                    </a>
+                                </ng-container>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <ib-booking-marketing-check [parentForm]="contactForm" [showMarketingPerm]="showMarketingPerm" (marketingClick)="checkInput($event)"></ib-booking-marketing-check>
+                </div>
+            </form>
+
+        </div>
+    </fieldset>
+</fieldset>

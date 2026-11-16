@@ -1,0 +1,111 @@
+.icon {
+    // Colors
+    &--white {
+        color: color(white);
+    }
+
+    &--red {
+        &::before {
+            color: color(primary) !important;
+        }
+    }
+    // sizes
+    &--small {
+        &::before {
+            font-size: rem(12);
+        }
+    }
+
+    &--medium {
+        &::before {
+            font-size: rem(24);
+        }
+    }
+
+    &--large {
+        &::before {
+            font-size: rem(36);
+        }
+    }
+}
+
+// Cases  show icons:
+//     icon-hidden-desktop --> hide >=1024
+//     icon-hidden-md --> hide 768 - 1023
+//     icon-hidden-mobile --> hide 320 - 767
+//     icon-visible-desktop --> hide <=1024
+//     icon-visible-md --> hide <=767 && >=1024
+//     icon-visible-mobile --> hide >=768
+.icon-hidden::before {
+    display: none;
+}
+
+@include media-query('xl') {
+    .icon-hidden-desktop,
+    .icon-hidden-xl,
+    .icon-visible-mobile,
+    .icon-visible-lg,
+    .icon-visible-md,
+    .icon-visible-sm,
+    .icon-visible-xs {
+        &::before {
+            display: none;
+        }
+    }
+}
+
+@include media-query('lg') {
+    .icon-hidden-desktop,
+    .icon-hidden-lg,
+    .icon-visible-xl,
+    .icon-visible-md,
+    .icon-visible-sm,
+    .icon-visible-xs {
+        &::before {
+            display: none;
+        }
+    }
+}
+
+@include media-query('md') {
+    .icon-hidden-md,
+    .icon-visible-desktop,
+    .icon-visible-mobile,
+    .icon-visible-xl,
+    .icon-visible-sm,
+    .icon-visible-xs {
+        &::before {
+            display: none;
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .icon-hidden-mobile,
+    .icon-visible-desktop,
+    .icon-visible-xl,
+    .icon-visible-lg,
+    .icon-visible-md {
+        &::before {
+            display: none;
+        }
+    }
+}
+
+@include media-query('sm') {
+    .icon-hidden-sm,
+    .icon-visible-xs {
+        &::before {
+            display: none;
+        }
+    }
+}
+
+@include media-query('xs') {
+    .icon-hidden-xs,
+    .icon-visible-sm {
+        &::before {
+            display: none;
+        }
+    }
+}

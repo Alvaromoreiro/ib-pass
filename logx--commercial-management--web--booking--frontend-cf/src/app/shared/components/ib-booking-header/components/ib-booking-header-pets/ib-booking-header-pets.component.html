@@ -1,0 +1,101 @@
+<div class="ib-header-pets-container">
+  <div>
+    <span
+      class="ib-header-pets__title"
+      id="pets-toggle-title"
+    >
+      {{ 'PETC_HEADER_BASKET_ITEM' | translate }}
+    </span>
+
+    <div
+      class="ib-header-pets__subtitle"
+      [class.hidden]="disabledByTime"
+    >
+      <span id="pets-toggle-description-text">
+        {{ 'PETC_MAX_WEIGHT' | translate }}
+      </span>
+
+      <div
+        class="pets-info-container"
+        (mouseenter)="onMouseEnter()"
+        (mouseleave)="onMouseLeave()"
+      >
+        <button
+          type="button"
+          class="pets-info-button pets-focusable"
+          [attr.aria-label]="'IBPURC_BANNER_MORE_INFO' | translate"
+          [attr.aria-expanded]="showTooltip"
+          [attr.aria-describedby]="showTooltip ? 'pets-info-tooltip' : null"
+          aria-controls="pets-info-tooltip"
+          aria-haspopup="dialog"
+          (focus)="onMouseEnter()"
+          (blur)="onMouseLeave()"
+          (click)="onInfoClick($event)"
+        >
+          <span
+            class="ibe-carousel--warnings__icon icon-informacion_2 icon-informacion_pet pets-info"
+            aria-hidden="true"
+          ></span>
+        </button>
+
+        <div
+          id="pets-info-tooltip"
+          class="tooltip-pets"
+          role="tooltip"
+          *ngIf="showTooltip"
+        >
+          <div class="tooltip-pets-header">
+            <h3>
+              {{ 'HEADER_ADVANCED_SEARCH_INFORMATION_TEXT' | translate }}
+            </h3>
+
+            <button
+              type="button"
+              class="close-btn"
+              [attr.aria-label]="'MODAL_HIDDEN_CLOSE_TEXT' | translate"
+              (click)="closeTooltip($event)"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div class="tooltip-pets-content">
+            <p>
+              {{ 'PETC_DID_YOU_KNOW_BODY_LONG' | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <span
+      class="ib-header-pets__subtitle ib-header-pets__subtitle--disabled"
+      [class.hidden]="!disabledByTime"
+    >
+      {{ 'AVAILABILITY_PETS_48H_BEFORE_FLIGHT' | translate }}
+    </span>
+  </div>
+
+  <div *ngIf="!disabledByTime">
+    <label
+      class="ib-switch ib-switch--pets"
+      for="pets-toggle"
+    >
+      <input
+        id="pets-toggle"
+        type="checkbox"
+        [checked]="enabled"
+        (change)="togglePets()"
+        aria-labelledby="pets-toggle-title"
+        aria-describedby="pets-toggle-description-text"
+      />
+
+      <span
+        class="ib-switch__slider"
+        aria-hidden="true"
+        [class.ib-switch__slider--active]="enabled"
+      >
+      </span>
+    </label>
+  </div>
+</div>

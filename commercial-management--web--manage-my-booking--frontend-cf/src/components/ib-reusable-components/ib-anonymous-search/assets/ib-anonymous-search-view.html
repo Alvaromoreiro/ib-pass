@@ -1,0 +1,39 @@
+<form name="formBooking" class="ib_form" novalidate>
+    <fieldset class="ib-box-form__fieldset">
+        <legend class="ib-box-form__title {{::searchCtrl.titleStyle}}" data-equal="log-title">{{searchCtrl.title}}</legend>
+        <div class="ib-box-form__group">
+            <div class="ib-input" ng-class="{'ib-input--error': formBooking.$submitted && formBooking.surname.$invalid}">
+                <label ng-class="{'ib-input__label--focus' : searchCtrl.surnameFocused || (formBooking.surname.$viewValue !=null && formBooking.surname.$viewValue !=='')}"
+                    for="ANONYMOUS_LOGIN_INPUT_SURNAME" class="ib-input__label">{{'IBCOSE_SURNAME'|translate}}</label>
+                <input name="surname" id="ANONYMOUS_LOGIN_INPUT_SURNAME" type="text" class="ib-input__input" required
+                    maxlength="30" data-ng-model="searchCtrl.model.surname" ng-pattern="::$root.MmBPatterns.NAME_SURNAME_PATTERN"
+                    data-ib-validator-cleaner="{{::$root.MmBPatterns.NAME_SURNAME_CLEANER}}" data-ng-focus="searchCtrl.surnameFocused=true"
+                    data-ng-blur="searchCtrl.surnameFocused=false" />
+            </div>
+            <div ng-messages="formBooking.$submitted && formBooking.surname.$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+            </div>
+        </div>
+        <div class="ib-box-form__group">
+            <div class="ib-input" ng-class="{'ib-input--error': formBooking.$submitted && formBooking.pnr.$invalid}">
+                <label ng-class="{'ib-input__label--focus' : searchCtrl.pnrFocused || (formBooking.pnr.$viewValue !=null && formBooking.pnr.$viewValue !=='')}"
+                    for="ANONYMOUS_LOGIN_INPUT_PNR" class="ib-input__label">{{'IBCOSE_PNR'|translate}}</label>
+                <input name="pnr" id="ANONYMOUS_LOGIN_INPUT_PNR" type="text" class="ib-input__input" maxlength="{{searchCtrl.getPNRLength()}}"
+                    ng-pattern="::$root.MmBPatterns.PNR_PATTERN" data-ib-validator-cleaner="{{::$root.MmBPatterns.PNR_CLEANER}}"
+                    required data-ng-model="searchCtrl.model.pnr" data-ng-focus="searchCtrl.pnrFocused=true"
+                    data-ng-blur="searchCtrl.pnrFocused=false" />
+            </div>
+            <div ng-messages="formBooking.$submitted && formBooking.pnr.$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+            </div>
+            <p class="ib-box-form__msg-info">
+                <button type="button" id="ANONYMOUS_LOGIN_LINK_HELP" title="{{'IBCOSE_HELP_PNR_ACCESS'|translate}}"
+                    data-ng-click="searchCtrl.openGenericModal('md','ib-where-is-pnr-modal.html',false)" class="ib-box-form__msg-link ib-link__modal">{{'IBCOSE_HELP_PNR'|translate}}</button>
+            </p>
+        </div>
+    </fieldset>
+    <input name="accept" type="submit" title="{{searchCtrl.buttonText}}" value="{{searchCtrl.buttonText}}" class="ib-button ib-box-form__button ib-button--big {{::searchCtrl.buttonStyle}}"
+        data-ng-click="searchCtrl.initBooking(formBooking);searchCtrl.removeCustomizeFlight()" id="ANONYMOUS_LOGIN_BOTON" />
+</form>

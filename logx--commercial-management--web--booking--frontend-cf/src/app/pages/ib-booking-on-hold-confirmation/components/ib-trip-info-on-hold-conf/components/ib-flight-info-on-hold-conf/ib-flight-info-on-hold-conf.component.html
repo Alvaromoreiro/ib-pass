@@ -1,0 +1,61 @@
+<ib-booking-accordion *ngFor="let info of sortedFlightInfo" [title]="info.value.departureCity.name + ' - ' + info.value.arrivalCity.name">
+    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M4.01386 16H5.81243C7.49515 14.1131 10.2868 9.74345 10.5737 9.35172C12.8688 9.26897 15.3736 9.02621 15.9805 8.3531V8V7.6469C15.3736 6.97379 12.8688 6.73655 10.5737 6.64828C10.2923 6.25655 7.50067 1.89241 5.81243 0L4.01386 0L6.29242 6.7531C5.15038 6.86345 4.10213 7.02345 2.98767 7.18897C2.90492 7.04 2.34769 6.52138 1.01255 4.99862H0.0139513L1.01255 8L0.0139513 11.0014H1.01255C2.34769 9.47862 2.90492 8.96 2.98767 8.81103C4.09661 8.97655 5.14487 9.13655 6.29242 9.2469L4.01386 16Z" fill="grey"/>
+    </svg>
+    <div class="box" *ngFor="let segment of info.value.segments; let segmentIndex = index">
+        <div class="table-flight-info__header" *ngIf="segment.fareFamilyConditions && segment.fareFamilyConditions.length > 0">
+            <h2 class="table-flight-info__title table-flight-info__title--with-link">
+                {{'MMB_YOUR_FLIGHTS_FLIGHT_DETAILS_TITTLE'|translate}}</h2>
+        </div>
+            <div class="table-flight-detail table-flight-detail--no-fixed">
+                <div class="table-flight-detail__item table-flight-detail__item--row-tablet">
+                    <span class="text text--big text--color-unfocused"
+                        *ngIf="segmentIndex === 0|| segment.overnight">{{(segment.departureDateParsed.weekDay |
+                        translate |lowercase | slice:0:3)}}., {{segment.departureDateParsed.day}}
+                        {{(segment.departureDateParsed.month | translate | lowercase | slice:0:3)}}
+                    </span>
+                </div>
+                <div class="table-flight-detail__item">
+                    <figure class="table-flight-detail__logo">
+                        <img [src]="iconsPath + segment.companyURL.logo"
+                             [alt]="'Logo ' + segment.flight.operationalCarrier.name" />
+                    </figure>
+                </div>
+                <div class="table-flight-detail__item u-mb-small">
+                    <div class="table-flight-detail__hours">
+                        <div class="layout__line-spacing layout__line-spacing--small">
+                            <span
+                                class="table-flight-detail__text-title table-flight-detail__text-title--special">{{segment.departureDateTimeParsed}}</span>
+                            <span class="table-flight-detail__hours-icon icon-vuelos"></span>
+                            <span
+                                class="table-flight-detail__text-title table-flight-detail__text-title--special">{{segment.arrivalDateTimeParsed}}</span>
+                        </div>
+                        <span class="text text--small text--block">
+                            {{segment.departure.name}} {{'(' + segment.departure.code + ')'}}
+                            <span *ngIf="segment.departure.terminal !== null">{{('ON_HOLD_TERMINAL_INFO' | translate) +
+                                segment.departure.terminal}}</span> - {{segment.arrival.name}}
+                            {{'(' + segment.arrival.code + ')'}}
+                            <span *ngIf="segment.arrival.terminal !== null">{{('ON_HOLD_TERMINAL_INFO' | translate) +
+                                segment.arrival.terminal}}</span>
+                        </span>
+                        <span class="text text--small text--block text--color-unfocused">{{
+                            segment.flight.marketingCarrier && segment.flight.marketingCarrier.code ?
+                            segment.flight.marketingCarrier.code
+                            : segment.flight.operationalDisclosure}}{{segment.flight.marketingFlightNumber}}
+                            {{segment.flight.aircraft.description}}</span>
+                        <span class="text text--small text--block text--color-unfocused"
+                            *ngIf="segment.flight.operationalCarrier.name !== ''">{{'ON_HOLD_SLICE_DETAILS_BODY_DESC_1'|translate}}
+                            {{segment.flight.operationalCarrier.name}}</span>
+                    </div>
+                </div>
+                <div class="table-flight-detail__item table-flight-detail__item--visible-mobile">
+                    <div class="layout__line-spacing layout__line-spacing--small">
+                        <span class="table-flight-detail__text-des">{{segment.durationParsed}}</span>
+                    </div>
+                </div>
+            </div>
+            <ib-booking-fare-family-conditions *ngIf="segment.fareFamilyConditions && segment.fareFamilyConditions.length > 0" [segment]="segment"></ib-booking-fare-family-conditions>
+    </div>
+
+</ib-booking-accordion>
+

@@ -1,0 +1,65 @@
+<fieldset class="ib-box-menu__section ib-box-menu__section--full">
+    <legend class="u-hide-accessible">{{'GENERAL_PASSENGER_TEXT'|translate}}</legend>
+    <div>
+        <section class="ib-layout__section">
+            <div class="ib-box-cols">
+                <div class="ib-box-cols__header">
+                    <h3 class="ib-box-cols__title">{{'GENERAL_PASSENGER_TEXT'|translate}}</h3>
+                </div>
+                <div>
+                    <div class="ib-flex ib-flex--gap-umnr ib-text u-mb-small ib-text--color-unfocused ib-advise-information"
+                        data-ng-if="!managePassengersInfoCtrl.isSkeletonView && managePassengersInfoCtrl.isActiveUmnr && managePassengersInfoCtrl.isDataUmnrCompleted">
+                        <div class="ib-flex">
+                            <span
+                                class="ib-text-icon__icon ib-text-icon__icon--primary ib-text-icon__icon--umnr icon-iberia_ninos"
+                                aria-hidden="true">
+                            </span>
+                        </div>
+                        <div class="ib-flex ib-flex__column">
+                            <span class="ib-text--color-normal">
+                                {{'Recuerda que puedes modificar hasta 2 horas antes del vuelo los datos de las
+                                personas que entreguen y recojan a los menores de sus respectivos vuelos.'|translate}}
+                            </span>
+                            <button class="ib-link ib-link--inline ib-link--primary ib-link--hover-primary ib-boxes-selection__icons-paragraph" type="button"
+                                data-ng-click="managePassengersInfoCtrl.openDataModal(index, passenger.passengerType)">
+                                {{'Modificar datos'|translate}}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="ib-box-cols__content"
+                        data-ng-repeat="(index, passenger) in managePassengersInfoCtrl.model">
+                        <button
+                            class="ib-button-link u-width-full ib-box-cols__link-container ib-box-cols__link-container--icon ib-box-cols__link-container ib-box-cols__link-container--icon ib-box-cols__link-container--icon-caret"
+                            data-ng-class="{'mmb-skeleton-passengers mmb-skeleton-passengers--remove-icon': passenger.isSkeletonView}"
+                            data-ng-disabled="passenger.isSkeletonView"
+                            title="{{'MMB_PASSENGERS_CLICK_FOR_INFORMATION_TEXT'|translate}}"
+                            data-ng-click="managePassengersInfoCtrl.goToPassengersTab(index)" focusin>
+                            <span class="ib-box-cols__title-section ib-box-cols__title-section--with-icon u-mb"
+                                data-ng-class="{'icon-persona': passenger.passengerType !== 'CHILD' && passenger.passengerType !== 'INFANT','icon-iberia_ninos' : passenger.passengerType === 'CHILD', 'icon-bebe' : passenger.passengerType === 'INFANT'}">{{passenger.personalInfo.name}}
+                                {{passenger.personalInfo.surname}} {{passenger.personalInfo.lastSurname &&
+                                passenger.personalInfo.lastSurname !== null ? passenger.personalInfo.lastSurname : ''}}
+                            </span>
+                            <ng-react ng-if="passenger.isSkeletonView"
+                                [component]="managePassengersInfoCtrl.skeletonComponent"
+                                [props]="managePassengersInfoCtrl.skeletonIconProps"></ng-react>
+                        </button>
+                        <ng-react ng-if="passenger.isSkeletonView"
+                            [component]="managePassengersInfoCtrl.skeletonComponent"
+                            [props]="managePassengersInfoCtrl.skeletonProps"></ng-react>
+                        <div
+                            data-ng-if="managePassengersInfoCtrl.statusApisInfoComplete(passenger.passengerId, managePassengersInfoCtrl.flags[index].passengerId, managePassengersInfoCtrl.model[index].securityInformation.apisStatus) && !managePassengersInfoCtrl.apisFormFilled[passenger.passengerId] && !passenger.isSkeletonView">
+                            <span class="ib-text u-mb-small ib-text--inline ib-text--color-unfocused">
+                                {{'MMB_PASSENGERS_MISSING_DATA_TEXT'|translate}}
+                            </span>
+                            <button class="ib-link ib-link--inline u-mb-small" type="button"
+                                data-ng-click="managePassengersInfoCtrl.changePassData(index, passenger.passengerType)">
+                                {{'MMB_PASSENGERS_FILL_NOW_TEXT'|translate}}.
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</fieldset>

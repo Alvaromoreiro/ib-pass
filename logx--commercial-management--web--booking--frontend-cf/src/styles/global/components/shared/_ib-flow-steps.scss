@@ -1,0 +1,270 @@
+/* -------------------------------------------------------------
+    #FLOW STEPS
+----------------------------------------------------------------- */
+.#{$wefront__namespace}flow-steps {
+    position: relative;
+    margin-top: rem(14);
+    margin-bottom: rem(45);
+
+    &__btn {
+        position: relative;
+        display: none;
+        width: 100%;
+        height: rem(40);
+        padding: rem(10) rem(8);
+        border: 0;
+        font-size: rem(13);
+        text-align: left;
+        color: color(white);
+        background: transparent;
+
+        &--collapse {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 50%;
+            width: calc(100% - 2rem);
+            -ms-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            outline: 0;
+        }
+    }
+
+    &__btn-icon {
+        position: absolute;
+        top: 50%;
+        right: rem(5);
+        font-size: rem(16);
+        -ms-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+    }
+
+    //Container
+
+    &__step {
+        position: relative;
+        display: block;
+        border-top: rem(2) solid color(primary);
+
+        &:hover {
+            text-decoration: none;
+            .#{$wefront__namespace}flow-steps__step-icon {
+                display: block;
+            }
+        }
+
+        &--disabled {
+            border-color: color(white);
+        }
+    }
+
+    &__step-title {
+        display: none;
+        font-size: rem(18);
+        color: color(white);
+
+        &--active {
+            font-weight: bold;
+            color: color(primary);
+        }
+
+        &--empty {
+            display: inline-block;
+            padding-top: rem(10);
+            font-size: rem(13);
+            color: color(white);
+            vertical-align: middle;
+        }
+    }
+
+    &__step-active {
+        display: block;
+        padding-top: rem(10);
+        font-size: rem(30);
+        font-weight: bold;
+        line-height: rem(32);
+        color: color(primary);
+    }
+
+    &__step-btn {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        //text-indent: -999em;
+        background: color(white, 0);
+
+        &--open {
+            &:hover,
+            &:focus {
+                &::before {
+                    content: '\e972';
+                    position: absolute;
+                    top: rem(8);
+                    right: rem(15);
+                    font-family: $font-icons;
+                    font-size: rem(16);
+                    color: color(white);
+                    //text-indent: 0;
+                }
+            }
+        }
+
+        &--collapse {
+            &:hover,
+            &:focus {
+                &::before {
+                    content: '\e971';
+                    position: absolute;
+                    top: rem(8);
+                    right: rem(15);
+                    font-family: $font-icons;
+                    font-size: rem(16);
+                    text-indent: 0;
+                    color: color(white);
+                }
+            }
+        }
+
+        &:focus,
+        &:active {
+            outline: 0;
+            //outline: rem(2) solid color(primary);
+        }
+    }
+
+    //List
+
+    &__list {
+        position: relative;
+        z-index: 0;
+        padding-top: rem(10);
+
+        &--collapse {
+            .#{$wefront__namespace}flow-steps__list-item {
+                &:nth-child(n+4) {
+                    display: none;
+                }
+
+                &:nth-child(3) {
+                    &::after {
+                        content: '...';
+                        display: inline-block;
+                    }
+                }
+            }
+            + .#{$wefront__namespace}flow-steps__link {
+                display: none;
+            }
+        }
+    }
+
+    &__list-item {
+        margin-bottom: rem(4);
+        font-size: rem(13);
+        color: color(white);
+
+        &:first-child {
+            padding-right: rem(35);
+        }
+    }
+
+    &__list-txt {
+        display: inline-block;
+        vertical-align: middle;
+
+        &--journey {
+            min-width: rem(125);
+        }
+    }
+
+    &__list-icon {
+        display: inline-block;
+        font-size: rem(15);
+        vertical-align: middle;
+
+        &--rotate {
+            -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+    }
+
+    &__link {
+        z-index: 20;
+    }
+}
+
+// Responsive
+
+@include media-query('desktop') {
+    .#{$wefront__namespace}flow-steps {
+        &__container {
+            display: block !important;
+            height: auto !important;
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}flow-steps {
+        &__btn {
+            display: block;
+            border-top: rem(2) solid color(primary);
+        }
+
+        &__step {
+            padding-bottom: rem(12);
+            padding-left: rem(8);
+            border-top: 0;
+
+            &:hover {
+                .#{$wefront__namespace}flow-steps__step-icon {
+                    display: none;
+                }
+            }
+        }
+
+        &__step-title {
+            display: block;
+        }
+
+        &__step-active {
+            font-size: rem(18);
+            font-weight: bold;
+            line-height: rem(20);
+        }
+
+        &__step-btn {
+            display: none;
+        }
+
+        &__container {
+            padding-top: rem(10);
+        }
+
+        // List
+
+        &__list {
+            padding-left: rem(20);
+            .#{$wefront__namespace}flow-steps__list-item {
+                &:nth-child(n+4) {
+                    display: block;
+                }
+
+                &:nth-child(3) {
+                    &::after {
+                        content: '';
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,217 @@
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{'COMPARE_FARES_MODAL_TITLE'|translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar"
+            title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" data-ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body hidden-xs hidden-sm">
+    <div class="ib-layout__line-spacing">
+    </div>
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+        <div class="ib-table-modal ib-table-modal--left-head">
+            <table class="ib-table-modal__table">
+                <caption class="hide-accessible">{{'COMPARE_FARES_MODAL_ACCESSIBLE'|translate}}</caption>
+                <tbody class="ib-table-modal__body">
+                    <tr class="ib-table-modal__row">
+                        <th class="ib-table-modal__column ib-table-modal__column--head">
+                            <span
+                                class="ib-table-modal__column-icon">{{'COMPARE_FARES_MODAL_FARE_TEXT'|translate}}</span>
+                        </th>
+                        <td class="ib-table-modal__column"
+                            data-ng-repeat="fareFamily in modalCtrl.model.selectedFareInfo">
+                            <p class="ib-table-modal__column-title">{{fareFamily.cabinDescription}}</p>
+                        </td>
+                    </tr>
+                    <tr class="ib-table-modal__row"
+                        data-ng-repeat="(index, condition) in modalCtrl.model.selectedFareInfo[0]['conditions']" ng-if="condition.extendedInfo.conditionStatus">
+                        <th class="ib-table-modal__column ib-table-modal__column--head">
+                            <span class="ib-table-modal__column-icon {{condition.icon}}">{{condition.name}}</span>
+                        </th>
+                        <td class="ib-table-modal__column"
+                            data-ng-repeat="(index2, fareCondition) in modalCtrl.model.selectedFareInfo">{{fareCondition.conditions[index].text
+                                + (fareCondition.conditions[index].extendedInfo && fareCondition.conditions[index].extendedInfo.observationCode
+                                ? ' (' + fareCondition.conditions[index].extendedInfo.observationCode + ')' : '')}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+        <div data-ng-repeat="fareFamilyCondition in modalCtrl.model.selectedFareInfo">
+            <p class="ib-text ib-text--block ib-text--lh-medium"
+                data-ng-repeat="observation in fareFamilyCondition.observations"
+                data-ng-bind-html="'(' + observation.observationCode + ') ' + observation.observationText"></p>
+            <p data-ng-if="fareFamilyCondition.relatedContent" class="ib-text ib-text--block ib-text--lh-medium"
+                data-ng-bind-html="'(' + (fareFamilyCondition.observations.length + 1) + ') '+ modalCtrl.model.selectedFareInfo.relatedContent">
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="ib-modals__body hidden-md hidden-lg hidden-xl">
+    <div class="ib-layout__line-spacing">
+        <ul class="ib-list-icon-fare" data-ng-class="{'ib-list-icon-fare--fare-type-1': modalCtrl.model.selectedFareInfo[0].cabinType==='E','ib-list-icon-fare--fare-type-2': (modalCtrl.model.selectedFareInfo[0].cabinType==='T' || modalCtrl.model.selectedFareInfo[0].cabinType==='N'),'ib-list-icon-fare--fare-type-3': modalCtrl.model.selectedFareInfo[0].cabinType==='B'}">
+            <li class="ib-list-icon-fare__item"
+                data-ng-repeat="(index, condition) in modalCtrl.model.selectedFareInfo[0]['conditions']"
+                ng-if="condition.extendedInfo.conditionStatus">
+
+                <span class="ib-list-icon-fare__icon icon-e_equipaje" ng-if="condition.code === 'EQMANO'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'EQMANO'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-e_equipaje_facturado" ng-if="condition.code === 'EQBODEGA'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'EQBODEGA'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-canary-plus" ng-if="condition.code === 'AEROPUERTO'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'AEROPUERTO'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-fast_track" ng-if="condition.code === 'FASTLANE'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'FASTLANE'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-asiento" ng-if="condition.code === 'ASIENTO'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'ASIENTO'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-avios" ng-if="condition.code === 'AVIOSPLUS'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'AVIOSPLUS'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-utilizacion_avios" ng-if="condition.code === 'PUNTUALIDAD'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'PUNTUALIDAD'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-butaca_180g" ng-if="condition.code === 'ASIENTOXL'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'ASIENTOXL'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-cambios_y_reembolsos" ng-if="condition.code === 'CAMBIO'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'CAMBIO'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-reembolsos" ng-if="condition.code === 'REEMBOLSO'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'REEMBOLSO'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-check_in" ng-if="condition.code === 'CHECKINDESK'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'CHECKINDESK'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-sala_vip" ng-if="condition.code === 'SALAVIP'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'SALAVIP'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-fast_track" ng-if="condition.code === 'FASTTRACK'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'FASTTRACK'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-tarjeta_de_embarque" ng-if="condition.code === 'EMBARQUE'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'EMBARQUE'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-e_facturacion_prioritaria" ng-if="condition.code === 'EQPPRIOR'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'EQPPRIOR'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-c_comidas_nuevas" ng-if="condition.code === 'COMIDA'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'COMIDA'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-wifi" ng-if="condition.code === 'WIFI'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'WIFI'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-navegador_avion" ng-if="condition.code === 'CABINA'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'CABINA'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+                <span class="ib-list-icon-fare__icon icon-avios" ng-if="condition.code === 'AVIO'"></span>
+                <p class="ib-list-icon-fare__text" ng-if="condition.code === 'AVIO'">
+                    {{condition.name}}
+                    <span class="ib-list-icon-fare__des">{{condition.text
+                            + (condition.extendedInfo && condition.extendedInfo.observationCode
+                            ? ' (' + condition.extendedInfo.observationCode + ')' : '')}}
+                    </span>
+                </p>
+            </li>
+        </ul>
+    </div>
+</section>

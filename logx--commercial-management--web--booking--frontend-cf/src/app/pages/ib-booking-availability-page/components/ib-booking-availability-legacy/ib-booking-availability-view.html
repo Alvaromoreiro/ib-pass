@@ -1,0 +1,427 @@
+<ib-partners-accordion data-ng-if="availabilityCtrl.showPartnerCollapsable"></ib-partners-accordion>
+<div data-flight-heading id="scrollFirstSlice"></div>
+<!--Banner Hello Madrid-->
+<div ng-if="availabilityCtrl.isHelloMadridDiscount" data-ng-controller="IbBookingCollapseController as collapseCtrl">
+    <div class="ib-stopover-disponibility">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="ib-stopover-disponibility__header">
+                        <img src="/iberia-web-content/imagenes/confirmacion/availability.png"
+                            ng-src="/iberia-web-content/imagenes/confirmacion/availability.png" />
+                        <p class="ib-text--medium ib-text--bold u-hide-mobile u-hide-md">{{'STOP_OVER_DISCONT_TITLE'|translate}}
+                        </p>
+                        <p class="ib-text--medium ib-text--bold u-hide-lg u-hide-xl">{{'STOP_OVER_DISCONT_TITLE'|translate}}</p>
+                        <div class="ib-stopover-disponibility__header-divider u-hide-mobile u-hide-md"></div>
+                        <p class="ib-text--medium u-hide-mobile u-hide-md">{{'STOP_OVER_SEARCH_THE_BADGE'|translate}}</p>
+                        <div id="bannerHelloMadrid" data-ng-click="collapseCtrl.toggle();$event.preventDefault()"
+                            data-ng-class="!collapseCtrl.isCollapsed ? 'closeCollapse' : 'openCollapse'"
+                            class="ib-stopover-disponibility__header-right" ib-collapse-details out-side-click="true">
+                            <div class="ib-stopover-disponibility__header-divider u-hide-mobile u-hide-md"></div>
+                            <p class="ib-text--medium u-hide-mobile u-hide-md">{{'SBE_BANNER_ANCILLARIES_MORE_INFO'|translate}}</p>
+                            <span class="icon-flecha_1_abajo" data-flight-icon-detail
+                                ng-class="collapseCtrl.isCollapsed ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div data-ng-if="collapseCtrl.isCollapsed" class="ib-stopover-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-lg-9">
+                    <h1 class="ib-stopover-content--title ib-text--especial">{{'STOP_OVER_TITLE'|translate}}
+                    </h1>
+                    <p class="ib-text--big ib-text--especial">{{'STOP_OVER_DESC'|translate}}</p>
+                </div>
+                <div class="col-xs-12 col-lg-3">
+                    <img src="/iberia-web-content/imagenes/confirmacion/city.png"
+                        ng-src="/iberia-web-content/imagenes/confirmacion/city.png" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="u-position-relative">
+    <div class="container" data-ng-if="!availabilityCtrl.model.isLoading">
+
+        <div data-ng-if="availabilityCtrl.model.availabilityData.metaSearchInfo" class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__header u-mt-medium">
+                    <div class="ib-layout__header ib-layout__header--float-right u-mt-small">
+                        <a ng-click="availabilityCtrl.selectNewFlightFromMetasearch()"
+                            title="{{'AVAILABILITY_METASEARCH_LINK'|translate}}" class="ib-link-icon"
+                            id="bbki-availability-metasearch-link">
+                            <span
+                                class="ib-link-icon__text ib-link-icon__text--no-decoration ib-link-icon__text--responsive">{{'AVAILABILITY_METASEARCH_LINK'|translate}}</span>
+                            <span
+                                class="ib-link-icon__icon ib-link-icon__icon--primary ib-link-icon__icon--responsive icon-flecha_1_derecha"></span>
+                        </a>
+                    </div>
+                    <div class="ib-layout__header ib-layout__header--float-left">
+                        <h1 class="ib-heading ib-heading--type-1 u-mb-none">
+                            {{'AVAILABILITY_METASEARCH_TITLE'|translate}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="bbki-availability-metasearch-loading-elem"
+                    data-ng-if="availabilityCtrl.model.availabilityData.loading && availabilityCtrl.model.availabilityData.metaSearchInfo"
+                    class="ib-overlay-fly ib-overlay-fly--full-special ib-overlay-fly--limit-top">
+                    <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+                        <div class="ib-overlay-fly__icon">
+                            <div class="circle"></div>
+                            <div class="circle"></div>
+                        </div>
+                        <span
+                            class="ib-overlay-fly__text">{{'AVAILABILITY_METASEARCH_LOADING_FLIGTHS'|translate}}</span>
+                    </div>
+                </div>
+                <div id="bbki-availability-multi-trip-loading-elem"
+                    data-ng-if="(availabilityCtrl.model.availabilityData.loading && (availabilityCtrl.model.availabilityData.multiCity || availabilityCtrl.model.availabilityData.redemption)) "
+                    class="ib-overlay-fly ib-overlay-fly--limit-top ib-overlay-fly--fixed ib-overlay-fly--white">
+                    <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+                        <div class="ib-overlay-fly__icon">
+                            <div class="circle"></div>
+                            <div class="circle"></div>
+                        </div>
+                        <span class="ib-overlay-fly__text">{{'AVAILABILITY_MULTI_TRIP_LOADING_MODAL' |
+                            translate}}</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="ib-layout__section ib-layout__section--big">
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--large u-pt u-mt"
+                            data-ng-if="availabilityCtrl.localdiscountModel.display === true">
+                            <ib-booking-local-discount-selector
+                                show-tooltip="availabilityCtrl.localdiscountModel.showTooltip"
+                                origin-city="availabilityCtrl.localdiscountModel.origin"
+                                destination-city="availabilityCtrl.localdiscountModel.destination"
+                                resident-code-selected="availabilityCtrl.localdiscountModel.selectedResident"
+                                family-code-selected="availabilityCtrl.localdiscountModel.selectedFamily">
+                            </ib-booking-local-discount-selector>
+                        </div>
+                        <ib-ui-loading data-ng-if="availabilityCtrl.model.discountsAvailabilityLoading"
+                            view-title="availabilityCtrl.localDiscountLoadingTitle" type="'grey'"
+                            modifier="'ib-overlay-fly--full'">
+                        </ib-ui-loading>
+                        <div class="ib-table-flight-cabins"
+                            data-ng-class="{'ib-table-flight-cabins--redemption': availabilityCtrl.model.availabilityData.redemption}">
+                            <div ng-if="selectedSlice.available" id="selectedSlice-{{::index}}" class="show-animation"
+                                data-ng-repeat="(index,selectedSlice) in availabilityCtrl.model.selectedSlices">
+                                <div class="ib-heading-flight" ng-if="!availabilityCtrl.model.animationRun">
+                                    <div class="ib-heading-flight__container ib-heading-flight__container--title">
+                                        <span
+                                            data-ng-if="!availabilityCtrl.model.availabilityData.metaSearchInfo && !availabilityCtrl.model.availabilityData.multiCity"
+                                            class="ib-heading-flight__title">{{'AVAILABILITY_SLICE_DETAILS_TITLE'|translate}}
+                                            {{availabilityCtrl.model.availabilityData.originDestinations.length
+                                            <=2 ? (index===0 ? ( 'AVAILABILITY_SLICE_DETAILS_TITLE_1' |translate) :
+                                                ( 'AVAILABILITY_SLICE_DETAILS_TITLE_2' |translate)) :
+                                                (( 'AVAILABILITY_SLICE_DETAILS_TITLE_3' |translate) + ' ' + (index +
+                                                1))}} </span>
+                                                <span
+                                                    data-ng-if="availabilityCtrl.model.availabilityData.metaSearchInfo && !availabilityCtrl.model.isOpenJaw"
+                                                    class="ib-heading-flight__title hidden-xs">{{availabilityCtrl.model.availabilityData.originDestinations.length
+                                                    <=2 ? (index===0 ? ( 'AVAILABILITY_METASEARCH_SLICE_DEPARTURE_TITLE'
+                                                        |translate) : ( 'AVAILABILITY_METASEARCH_SLICE_RETURN_TITLE'
+                                                        |translate)) : (( 'AVAILABILITY_SLICE_DETAILS_TITLE_3'
+                                                        |translate) + ' ' + (index + 1))}}:
+                                                        {{availabilityCtrl.model.availabilityData.originDestinations[index].originCity.description}}
+                                                        -
+                                                        {{availabilityCtrl.model.availabilityData.originDestinations[index].destinationCity.description}}
+                                                        </span>
+                                                        <span
+                                                            data-ng-if="availabilityCtrl.model.availabilityData.metaSearchInfo"
+                                                            class="ib-heading-flight__title hidden-xl hidden-lg hidden-md hidden-sm"
+                                                            data-ng-class="{'hidden-xs' : availabilityCtrl.model.isOpenJaw}">
+                                                            {{availabilityCtrl.model.availabilityData.originDestinations.length
+                                                            <=2 ? (index===0 ?
+                                                                ( 'AVAILABILITY_METASEARCH_SLICE_DEPARTURE_TITLE'
+                                                                |translate) :
+                                                                ( 'AVAILABILITY_METASEARCH_SLICE_RETURN_TITLE'
+                                                                |translate)) : (( 'AVAILABILITY_SLICE_DETAILS_TITLE_3'
+                                                                |translate) + ' ' + (index + 1))}}:
+                                                                {{availabilityCtrl.model.availabilityData.originDestinations[index].originCity.code}}
+                                                                -
+                                                                {{availabilityCtrl.model.availabilityData.originDestinations[index].destinationCity.code}}
+                                                                </span>
+                                                                <span class="ib-heading-flight__title hidden-xs"
+                                                                    data-ng-if="availabilityCtrl.model.availabilityData.multiCity || availabilityCtrl.model.isOpenJaw">
+                                                                    {{'AVAILABILITY_MULTI_TRIP_TITLE_SLICE'|translate}}
+                                                                    {{index +
+                                                                    1}} :
+                                                                    {{availabilityCtrl.model.availabilityData.originDestinations[index].originCity.description}}
+                                                                    -
+                                                                    {{availabilityCtrl.model.availabilityData.originDestinations[index].destinationCity.description}}
+                                                                </span>
+                                                                <span
+                                                                    class="ib-heading-flight__title hidden-xl hidden-lg hidden-md hidden-sm"
+                                                                    data-ng-if="(availabilityCtrl.model.availabilityData.multiCity && availabilityCtrl.model.isOpenJaw) ||
+                                    (availabilityCtrl.model.availabilityData.metaSearchInfo && availabilityCtrl.model.isOpenJaw)">
+                                                                    {{'AVAILABILITY_MULTI_TRIP_TITLE_SLICE'|translate}}
+                                                                    {{index +
+                                                                    1}} :
+                                                                    {{availabilityCtrl.model.availabilityData.originDestinations[index].originCity.code}}
+                                                                    -
+                                                                    {{availabilityCtrl.model.availabilityData.originDestinations[index].destinationCity.code}}
+                                                                </span>
+                                                                <span
+                                                                    class="ib-heading-flight__date">{{::selectedSlice.info.departureDateParsed.day}}
+                                                                    {{::(selectedSlice.info.departureDateParsed.month
+                                                                    | translate |
+                                                                    ShortenerFormatFilter:3:false:true)}}.</span>
+                                                                <span
+                                                                    class="hidden-sm hidden-xs">{{::selectedSlice.info.departureDateParsed.year}}</span>
+
+                                                                <button id="bbki-availability-new-back-{{index}}-btn"
+                                                                    data-ng-if="!availabilityCtrl.model.availabilityData.metaSearchInfo"
+                                                                    class="ib-heading-flight__close"
+                                                                    title="{{'AVAILABILITY_SLICE_DETAILS_NEW_BACK_BUTTON'|translate}}"
+                                                                    ng-click="availabilityCtrl.deleteSlices(selectedSlice.originDestinationId,false,index)">
+                                                                    <span
+                                                                        class="ib-heading-flight__close-text ib-heading-flight__close-text--no-decoration">{{'AVAILABILITY_SLICE_DETAILS_NEW_BACK_BUTTON'|translate}}</span>
+                                                                    <span
+                                                                        class="ib-heading-flight__close-icon icon-cerrar"></span>
+                                                                </button>
+                                    </div>
+                                </div>
+                                <ib-booking-slice-info id="bbki-availability-slice-info-{{index}}"
+                                    data-ng-if="!availabilityCtrl.model.availabilityData.redemption || !selectedSlice.selectedSegments"
+                                    slice-info-model="selectedSlice.info" origin="{{selectedSlice.origin}}"
+                                    destination="{{selectedSlice.destination}}"
+                                    origin-destination-id="{{selectedSlice.originDestinationId}}"
+                                    currencies="::availabilityCtrl.model.availabilityData.currencies"
+                                    selected-slice-index="::index"
+                                    show-fares-selected="availabilityCtrl.model.availabilityData.originDestinations[index].showFaresSelected"
+                                    animation-run="availabilityCtrl.model.animationRun"
+                                    current-origin-destination-index="availabilityCtrl.model.availabilityData.metaSearchInfo ? index+1 :  availabilityCtrl.model.currentOriginDestinationIndex"
+                                    selected-slice-mode="true"
+                                    meta-search-info="availabilityCtrl.model.availabilityData.metaSearchInfo"
+                                    recommended-offer-id="availabilityCtrl.model.availabilityData.recommendedOfferId"
+                                    multi-city="availabilityCtrl.model.availabilityData.multiCity"
+                                    redemption="availabilityCtrl.model.availabilityData.redemption"></ib-booking-slice-info>
+                                <div
+                                    data-ng-if="availabilityCtrl.model.availabilityData.redemption && selectedSlice.selectedSegments">
+                                    <article
+                                        class="ib-table-flight-cabins__article ib-table-flight-cabins__article--collapse ib-table-flight-cabins__article--scala"
+                                        data-ng-class="{'ib-table-flight-cabins__article--selected': availabilityCtrl.model.availabilityData.originDestinations[index].showFaresSelected, 'ib-table-flight-cabins__article--shadow': !availabilityCtrl.model.animationRun, 'ib-table-flight-cabins__article--full': availabilityCtrl.model.availabilityData.redemption}"
+                                        ng-controller="IbBookingCollapseController as collapse">
+                                        <div class="ib-table-flight-cabins__article-item ib-table-flight-cabins__article-item--scala ib-table-flight-cabins__article-item--center"
+                                            data-type="detail" data-flight-button-detail>
+                                            <div class="ib-info-journey" ng-click="collapse.clickCollapse($event,true)">
+                                                <div class="ib-info-journey__body">
+                                                    <div class="ib-info-journey__body-content u-pb-medium">
+                                                        <div
+                                                            class="ib-info-journey__content-time ib-info-journey__content-time--left">
+                                                            <span class="ib-info-journey__airport">
+                                                                <span
+                                                                    class="hidden-xs">{{::selectedSlice.info.originCity.description}}</span>
+                                                                <span
+                                                                    class="hidden-xl hidden-lg hidden-md hidden-sm">{{::selectedSlice.info.originCity.code}}</span>
+                                                            </span>
+                                                            <span
+                                                                class="ib-info-journey__time">{{::selectedSlice.info.departureDateTimeParsed}}</span>
+                                                        </div>
+                                                        <div class="ib-info-journey__content-detail">
+                                                            <span
+                                                                class="hidden-md ib-info-journey__detail">{{(selectedSlice.info.stopsNumber
+                                                                + ' ' +
+                                                                ('AVAILABILITY_STOPSNUMBER_FILTER' |
+                                                                WordNumberFormatFilter: selectedSlice.info.stopsNumber |
+                                                                translate).toUpperCase() +
+                                                                ': ')}}
+                                                                <span
+                                                                    data-ng-repeat="(index, city) in selectedSlice.info.stopOverCities">{{selectedSlice.info.stopsNumber
+                                                                    > 1 ? index === selectedSlice.info.stopsNumber -1 ?
+                                                                    city.description.toUpperCase() :
+                                                                    city.description.toUpperCase() +
+                                                                    ', ' : city.description.toUpperCase()}}</span>
+                                                            </span>
+                                                            <span
+                                                                class="hidden-xl hidden-lg hidden-sm hidden-xs ib-info-journey__detail">{{(selectedSlice.info.stopsNumber
+                                                                + ' ' + ('AVAILABILITY_STOPSNUMBER_FILTER' |
+                                                                WordNumberFormatFilter: selectedSlice.info.stopsNumber |
+                                                                translate).toUpperCase() + ' ')}}
+                                                            </span>
+                                                            <a id="bbki-availability-popover-stopover-{{index}}-link"
+                                                                class="hidden-xl hidden-lg hidden-sm hidden-xs ib-popover-tooltip ib-link-icon"
+                                                                ng-controller="IbPopoverController as popover"
+                                                                href="javascript:void(0)"
+                                                                ng-attr-title="{{tripInfoCtrl.showPopoverStopover(slice.stopOverCities, slice.stopsNumber)}}"
+                                                                popover-class="ib-popover ib-popover--logued"
+                                                                uib-popover="{{availabilityCtrl.showPopoverStopover(selectedSlice.info.stopOverCities, selectedSlice.info.stopsNumber)}}"
+                                                                popover-placement="left"
+                                                                ng-click="$event.preventDefault()"
+                                                                popover-trigger="'mouseenter'"
+                                                                popover-is-open="popover.isOpen" popover-is-focus-in>
+                                                                <span
+                                                                    class="ib-info-icon ib-info-icon__info ib-info-icon__info--type-2 icon-informacion_2 u-show">
+                                                                    <span class="u-hide-accessible"></span>
+                                                                </span>
+                                                            </a>
+                                                            <span
+                                                                class="ib-info-journey__detail">{{::selectedSlice.info.durationParsed}}</span>
+                                                        </div>
+                                                        <div
+                                                            class="ib-info-journey__content-time ib-info-journey__content-time--right">
+                                                            <span class="ib-info-journey__airport">
+                                                                <span
+                                                                    class="hidden-xs">{{::selectedSlice.info.destinationCity.description}}</span>
+                                                                <span
+                                                                    class="hidden-xl hidden-lg hidden-md hidden-sm">{{::selectedSlice.info.destinationCity.code}}</span>
+                                                            </span>
+                                                            <span class="ib-info-journey__time"
+                                                                data-day="{{selectedSlice.info.daysOfTravel != 0 ? (('AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate) + selectedSlice.info.daysOfTravel + ('AVAILABILITY_SLICE_INFO_DAY' | WordNumberFormatFilter: selectedSlice.info.daysOfTravel | translate)) : ''}}">{{::selectedSlice.info.arrivalDateTimeParsed}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ib-table-flight-cabins__scalas"
+                                            data-ng-repeat="(segmentIndex,segment) in selectedSlice.info.segments">
+                                            <ib-booking-segment-info
+                                                id="bbki-availability-segment-info-{{index}}-{{segmentIndex}}"
+                                                segment-info-model="segment" slice-info-model="selectedSlice"
+                                                origin="{{::segment.origin}}" destination="{{::segment.destination}}"
+                                                origin-destination-id="{{::segment.originDestinationId}}"
+                                                currencies="::availabilityCtrl.model.availabilityData.currencies"
+                                                current-origin-destination-index="::availabilityCtrl.model.currentOriginDestinationIndex"
+                                                selected-slice-index="::availabilityCtrl.model.currentOriginDestinationIndex"
+                                                animation-run="availabilityCtrl.model.animationRun"
+                                                show-fares-selected="segment.showFaresSelected"
+                                                segment-index="segmentIndex" slice-index="index"
+                                                redemption="availabilityCtrl.model.availabilityData.redemption"></ib-booking-segment-info>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                            <div data-flight-heading id="scrollSlices"></div>
+                            <div data-ng-if="!availabilityCtrl.model.availabilityData.metaSearchInfo && availabilityCtrl.model.availabilityData.originDestinations[indexOd].showOd"
+                                id="originDestination-{{::indexOd}}"
+                                data-ng-repeat="(indexOd,originDestination) in availabilityCtrl.model.availabilityData.originDestinations">
+                                <ib-booking-availability-trip id="bbki-availavility-availability-trip-{{indexOd}}"
+                                    trip-model="originDestination"
+                                    currencies="::availabilityCtrl.model.availabilityData.currencies"
+                                    origin-destination-title="::(availabilityCtrl.model.availabilityData.originDestinations.length <= 2 ? (indexOd === 0 ? 'AVAILABILITY_TRIP_TITLE_1' : 'AVAILABILITY_TRIP_TITLE_2') : 'AVAILABILITY_TRIP_TITLE_3')"
+                                    origin-destination-index="{{::(availabilityCtrl.model.availabilityData.originDestinations.length <= 2 ? '' : (indexOd + 1))}}"
+                                    current-origin-destination-index="availabilityCtrl.model.currentOriginDestinationIndex"
+                                    animation-run="availabilityCtrl.model.animationRun"
+                                    selected-slices-length="availabilityCtrl.model.selectedSlices.length"
+                                    show-banner="false"
+                                    related-content="::availabilityCtrl.model.availabilityData.relatedContent"
+                                    meta-search-info="availabilityCtrl.model.availabilityData.metaSearchInfo"
+                                    is-checked="availabilityCtrl.isChecked"
+                                    multi-city="availabilityCtrl.model.availabilityData.multiCity"
+                                    redemption="availabilityCtrl.model.availabilityData.redemption"
+                                    selected-slice-info-family="availabilityCtrl.model.selectedSlices[0].info.selectedFareFamily"></ib-booking-availability-trip>
+                            </div>
+                        </div>
+                        <!-- Upselling fare-->
+                        <ib-booking-upselling-fare data-ng-if="availabilityCtrl.renderUpsellingComponent" class="u-mt-xmedium"
+                            ng-style="{ 'display' : availabilityCtrl.showUpselling ? 'block' : 'none' }"
+                            selected-info="availabilityCtrl.model.selectedSlices"></ib-booking-upselling-fare>
+                        <div data-ng-if="availabilityCtrl.model.availabilityData.metaSearchInfo">
+                            <ib-booking-metasearch-passengers id="bbki-availability-metasearch-passengers"
+                                error-message="availabilityCtrl.model.availabilityData.errorMessage"
+                                special-discounts="availabilityCtrl.model.specialDiscountsPossibilities"></ib-booking-metasearch-passengers>
+                        </div>
+                        <!--Message-->
+                        <div class="u-mt-medium animate-show" id="noAviosMoney"
+                            data-ng-if="availabilityCtrl.model.availabilityData.withoutAviosMoney && availabilityCtrl.model.availabilityData.fareRate.length > 1">
+                            <div class="ib-box-alert" id="bbki-availability-box-err-modal">
+                                <span
+                                    class="ib-box-alert__title">{{'AVAILABILITY_REDEMPTION_MESSAGE_AVIOS_TITLE'|translate}}</span>
+                                <span
+                                    class="ib-box-alert__txt">{{'AVAILABILITY_REDEMPTION_MESSAGE_AVIOS_TEXT'|translate}}</span>
+                            </div>
+                        </div>
+
+                        <!-- Avios & Coupons & Money-->
+                        <div class="u-mt-xmedium animate-show" id="aviosMoney"
+                            data-ng-if="availabilityCtrl.model.availabilityData.fareRate.length > 1 && availabilityCtrl.model.availabilityData.redemption && availabilityCtrl.model.availabilityData.originDestinations.length === availabilityCtrl.model.selectedSlices.length &&  availabilityCtrl.model.showTotalPrice  && !availabilityCtrl.model.availabilityData.changePassengers && !availabilityCtrl.model.isLoading && availabilityCtrl.model.availabilityData.totalPrice !== 0 && !$root.isPointsOBFlow">
+                            <ib-booking-promotions
+                                ng-if="availabilityCtrl.model.availabilityData.totalPrice.oldPriceWithoutDiscount && !availabilityCtrl.model.availabilityData.coupons"
+                                total-price="availabilityCtrl.model.availabilityData.totalPrice"></ib-booking-promotions>
+                            <ib-booking-redemption-coupons ng-if="availabilityCtrl.model.availabilityData.coupons"
+                                fare-rate="availabilityCtrl.model.availabilityData.fareRate"
+                                coupons="availabilityCtrl.model.availabilityData.coupons"
+                                customer-data="$root.customerData"
+                                total-price="availabilityCtrl.model.availabilityData.totalPrice"></ib-booking-redemption-coupons>
+                            <ib-booking-fare-rates-avios fare-rate="availabilityCtrl.model.availabilityData.fareRate"
+                                customer-data="$root.customerData"
+                                total-price="availabilityCtrl.model.availabilityData.totalPrice"
+                                without-avios-money='availabilityCtrl.model.availabilityData.withoutAviosMoney'></ib-booking-fare-rates-avios>
+                        </div>
+
+                        <!-- Booking Ancillaries Offers -->
+                        <div class="u-mt-xmedium animate-show" id="ancOffers" data-ng-if="availabilityCtrl.showAncOffers.show
+                        && availabilityCtrl.model.availabilityData.originDestinations.length === availabilityCtrl.model.selectedSlices.length &&
+                        (availabilityCtrl.model.availabilityData.flightRatio === 'Medio Radio' || availabilityCtrl.model.availabilityData.flightRatio === 'Corto Radio')
+                        && availabilityCtrl.restDaysDate > 25">
+                            <ib-booking-ancillaries-offers></ib-booking-ancillaries-offers>
+                        </div>
+
+                        <!-- Total Price -->
+                        <div class="u-mt-xmedium animate-show" id="total"
+                            data-ng-if="availabilityCtrl.model.availabilityData.originDestinations.length === availabilityCtrl.model.selectedSlices.length &&  availabilityCtrl.model.showTotalPrice  && !availabilityCtrl.model.availabilityData.changePassengers && !availabilityCtrl.model.isLoading && availabilityCtrl.model.availabilityData.totalPrice !== 0  && availabilityCtrl.model.availabilityData.totalPrice !== '' && (!availabilityCtrl.model.availabilityData.withoutAviosMoney || (availabilityCtrl.model.availabilityData.withoutAviosMoney && availabilityCtrl.model.availabilityData.fareRate.length === 1))">
+                            <ib-booking-simplified-total-price id="bbki-availability-simplified-total-price"
+                                conditions-text-offers="availabilityCtrl.ancOffersTotal"
+                                total-price="availabilityCtrl.model.availabilityData.totalPrice"
+                                conditions-text="availabilityCtrl.model.availabilityData.relatedContent['TOTAL_PRICE']"
+                                explanation-text="availabilityCtrl.model.availabilityData.relatedContent['SPECIAL_DISCOUNTS']"
+                                change-passengers="availabilityCtrl.model.availabilityData.changePassengers"
+                                redemption="availabilityCtrl.model.availabilityData.redemption"
+                                without-avios-money='availabilityCtrl.model.availabilityData.withoutAviosMoney'
+                                fare-rate="availabilityCtrl.model.availabilityData.fareRate"
+                                is-checked="availabilityCtrl.isChecked"
+                                total-points-needed="availabilityCtrl.model.availabilityData.totalPointsNeeded"
+                                ob-points="availabilityCtrl.model.oBPoints"
+                                show-obpoints="availabilityCtrl.model.showOBPoints"
+                                ob-discount="availabilityCtrl.model.noDiscountOBPrice"
+                                show-discount="availabilityCtrl.model.showNoDiscountOBPrice"
+                                show-localdiscount-warn="availabilityCtrl.localdiscountModel.display"
+                                selected-resident-discount="availabilityCtrl.localdiscountModel.selectedResident"
+                                selected-largefam-discount="availabilityCtrl.localdiscountModel.selectedFamily"></ib-booking-simplified-total-price>
+                        </div>
+                        <!-- CHANGE IN PASSENGERS-->
+                        <div data-ng-if="availabilityCtrl.model.availabilityData.changePassengers">
+                            <ib-booking-recalculate-price id="bbki-availabilty-recalculate-price"
+                                conditions-text="availabilityCtrl.model.availabilityData.relatedContent['TOTAL_PRICE']"></ib-booking-recalculate-price>
+                        </div>
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt-medium"
+                            data-ng-show="availabilityCtrl.model.availabilityData.relatedContent['EXPLANATION'] && !availabilityCtrl.model.isLoading">
+                            <div class="ib-msg-alert ib-msg-alert--simple ib-msg-alert--white">
+                                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                                    <h3 class="ib-heading ib-heading--type-5">{{'GENERAL_INFORMATION_TITLE'|translate}}
+                                    </h3>
+                                    <p class="ib-msg-alert__text ib-msg-alert__text--normal"
+                                        data-ng-bind-html="availabilityCtrl.model.availabilityData.relatedContent['EXPLANATION']">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bbki-availability-loading-fares-elem"
+            class="ib-overlay-fly ib-overlay-fly--limit-top ib-overlay-fly--sticky"
+            data-ng-if="availabilityCtrl.model.showLoadingFares || availabilityCtrl.loadingOption">
+            <div class="ib-overlay-fly__container ib-overlay-fly__container--v-center ib-overlay-fly__container--fixed">
+                <div class="ib-overlay-fly__icon">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                </div>
+                <span
+                    class="ib-overlay-fly__text">{{'AVAILABILITY_REDEMPTION_WAITING_LOADING_FARE_MESSAGE'|translate}}</span>
+            </div>
+        </div>
+    </div>
+    <ib-main-footer id="footer" data-ng-if="!availabilityCtrl.model.isLoading && !vm.model.animationRun"
+        footer-model="{'phoneInfo' : {'prefix' : $root.phonesList['RESERVAS'].prefix, 'phoneNumber': $root.phonesList['RESERVAS'].telephone, 'text': $root.phonesList['RESERVAS'].text }}"
+        is-full-width="::false"></ib-main-footer>
+</div>

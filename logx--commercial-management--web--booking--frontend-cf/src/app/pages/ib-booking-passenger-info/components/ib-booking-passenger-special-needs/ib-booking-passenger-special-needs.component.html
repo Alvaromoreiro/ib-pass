@@ -1,0 +1,151 @@
+<form class="form" name="specialNeedsForm"  [formGroup]="specialNeedsForm">
+    <div class="ib-layout__line-spacing" *ngIf="isSomeSpecialNeedAvailable()">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+            <div class="ib-check ib-check--regular">
+                <input type="checkbox" id="check_enable_{{index}}" name="check_enable_{{index}}" class="ib-check__input" formControlName="check_enable_{{index}}"/>
+                <label for="check_enable_{{index}}" class="ib-check__label">
+                    <span class="ib-check__info ib-check__info--flex">
+                        <span class="ib-check__text ib-check__text--margin-right-xs">
+                            {{ 'IB_PASSENGER_SPE_NEEDS_CHECK_TITLE' | translate }}
+                        </span>
+                        <a
+                            [attr.id]="'bbki-passenger-special-' + index + '-needs-popover-open-link'"
+                            class="ib-link ib-link--xsmall ib-popover ib-link--no-underline ib-link--flex-align-center"
+                            href="javascript:void(0)"
+                            [attr.title]="'IB_PASSENGER_SPE_NEEDS_CHECK_TEXT' | translate"
+                            (click)="openPopover($event, overlayPanel)">
+                            <span class="ib-check__text ib-check__text--no-align ib-check__text--underline ib-check__text--margin-right-xxs">
+                            {{ 'SPEQS_KNOW_MORE' | translate }}
+                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <g clip-path="url(#clip0_3998_7480)">
+                                <path d="M5.9601 4.56612H6.01167C6.37337 4.56612 6.79718 4.47171 6.79718 3.89076V3.86171C6.79718 3.27713 6.37337 3.17184 6.01167 3.17184H5.9601C5.59803 3.17184 5.1735 3.27713 5.1735 3.86171V3.89076C5.1735 4.47171 5.59803 4.56612 5.9601 4.56612Z" fill="#333333"/>
+                                <path d="M5.28789 8.82521H6.68423V5.33951H5.28789V8.82521Z" fill="#333333"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.99823 0.75C3.09841 0.75 0.748047 3.09922 0.748047 5.99671C0.748047 8.89783 3.09841 11.247 5.99823 11.247C8.89696 11.247 11.248 8.89783 11.248 5.99671C11.248 3.09922 8.89696 0.75 5.99823 0.75ZM2.04343 5.99671C2.04343 8.1789 3.81674 9.95443 5.99823 9.95443C8.17827 9.95443 9.95302 8.1789 9.95302 5.99671C9.95302 3.81814 8.17827 2.04261 5.99823 2.04261C3.81674 2.04261 2.04343 3.81814 2.04343 5.99671Z" fill="#333333"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_3998_7480">
+                                <rect width="12" height="12" fill="white"/>
+                                </clipPath>
+                            </defs>
+                            </svg>
+                        </a>
+                        <p-overlayPanel #overlayPanel [dismissable]="true" [showCloseIcon]="false" [styleClass]="'ib-overlay popover'">
+                            <p class="ib-text ib-text--color-light">{{ popoverText | translate }}</p>
+                            <button
+                                id="bbki-generic-popover-close-btn"
+                                class="popover-close icon-cerrar"
+                                type="button"
+                                (click)="closePopover(overlayPanel)">
+                                <span class="u-hide-accessible">{{ 'POP_OVER_ACCESSIBILITY_CLOSE' | translate }}</span>
+                            </button>
+                        </p-overlayPanel>
+                    </span>
+                </label>
+            </div>    
+        </div>
+        <div class="ib-check--regular" id="bbki-passenger-special-needs-check-{{index}}-err-modal" *ngIf="specialNeedsForm.hasError('specialNeedRequired') && submitState">
+            <div class="ib-alert u-mt-small ib-alert--error">{{'IB_PASSENGER_SPE_NEEDS_CHECK_MANDATORY'|translate}}</div>
+        </div>
+        <div class="u-pt-xmedium" *ngIf="specialNeedsForm.get('check_enable_' + index)?.value">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--xmedium" *ngIf="isEnabledSpecialNeed('BLND')">
+                <div class="ib-check ib-check--regular ib-check--tab-lvl1">
+                    <input type="checkbox" id="check_vision_{{index}}" name="check_vision_{{index}}" formControlName="check_vision_{{index}}" class="ib-check__input">
+                    <label for="check_vision_{{index}}" class="ib-check__label">
+                        <span class="ib-check__text">{{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_VISION_TEXT'|translate}}</span>
+                    </label>
+                </div>
+            </div>
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--xmedium" *ngIf="isEnabledSpecialNeed('DEAF')">
+                <div class="ib-check ib-check--regular ib-check--tab-lvl1">
+                    <input type="checkbox" id="check_hearing_{{index}}" name="check_hearing_{{index}}" formControlName="check_hearing_{{index}}" class="ib-check__input">
+                    <label for="check_hearing_{{index}}" class="ib-check__label">
+                        <span class="ib-check__text">{{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_HEARING_PROBLEM_TEXT'|translate}}</span>
+                    </label>
+                </div>
+            </div>
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--xmedium" *ngIf="isEnabledSpecialNeed('DPNA')">
+                <div class="ib-check ib-check--regular ib-check--tab-lvl1">
+                    <input type="checkbox" id="check_intellDisability_{{index}}" name="check_intellDisability_{{index}}" formControlName="check_intellDisability_{{index}}" class="ib-check__input"/>
+                    <label for="check_intellDisability_{{index}}" class="ib-check__label">
+                        <span class="ib-check__text">{{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_INTELLECTUAL_DISABILITY_TEXT'|translate}}</span>
+                    </label>
+                </div>
+            </div>
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--xmedium" *ngIf="isEnabledSpecialNeed('SVAN')">
+                <div class="ib-check ib-check--regular ib-check--tab-lvl1">
+                    <input type="checkbox" id="check_guide_dog_{{index}}" name="check_guide_dog_{{index}}" formControlName="check_guide_dog_{{index}}" class="ib-check__input"/>
+                    <label for="check_guide_dog_{{index}}" class="ib-check__label">
+                        <span class="ib-check__text">{{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_GUIDE_DOG_TEXT'|translate}}</span>
+                    </label>
+                </div>
+            </div>
+            <div *ngIf="passengersFormData.specialNeeds.specialGuideDog && isEnabledSpecialNeed('SVAN')">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small ib-check--tab-lvl1">
+                    <div class="ib-msg-alert ib-msg-alert--warning ib-msg-alert--xsmall icon-informacion_2 alert">
+                        <p class="ib-msg-alert__text" style="line-height: 1.2; font-size: 0.875rem;">
+                            {{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_GUIDE_DOG_INFO_MESSAGE' | translate}}
+                            <a href="{{'SPECIAL_NEED_DOG_GUIDE_INFO' | link}}" class="ib-link" title="{{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_GUIDE_DOG_INFO_MESSAGE_LINK' | translate}}" target="_blank">
+                                {{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_GUIDE_DOG_INFO_MESSAGE_LINK' | translate}}</a>
+                            {{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_GUIDE_DOG_INFO_MESSAGE_2' | translate}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--xmedium" *ngIf="(isEnabledSpecialNeed('WCHC') ||   isEnabledSpecialNeed('WCHR') || isEnabledSpecialNeed('WCHS'))">
+                <div class="ib-check ib-check--regular ib-check--tab-lvl1">
+                    <input type="checkbox" id="check_chair_{{index}}" name="check_chair_{{index}}" formControlName="check_chair_{{index}}" class="ib-check__input"/>
+                    <label for="check_chair_{{index}}" class="ib-check__label">
+                        <span class="ib-check__text">{{'IB_PASSENGER_SPE_NEEDS_CHECK_SPECIAL_CHAIR_TEXT'|translate}}</span>
+                    </label>
+                </div>
+                <div class="ib-check--regular ib-check--tab-lvl1" id="bbki-passenger-special-needs-check-{{index}}-err-modal" *ngIf="submitState && specialNeedsForm.hasError('wheelChairValidation') ">
+                    <div class="ib-alert u-mt-small ib-alert--error">{{'IB_PASSENGER_SPE_NEEDS_CHAIR_CHECK_MANDATORY'|translate}}</div>
+                </div>
+            </div>
+            <div *ngIf="specialNeedsForm.get('check_chair_' + index)?.value && passengersFormData.specialNeeds.specialWheelchairInfo?.length> 0">
+                <div *ngFor="let wheelchairInfo of passengersFormData.specialNeeds.specialWheelchairInfo; let i = index" class="ib-layout__line-spacing ib-layout__line-spacing--xmedium">
+                    <div class="ib-radio ib-radio--tab-lvl2">
+                        <input
+                            type="radio"
+                            id="wheelchair_{{wheelchairInfo.code}}_{{index}}"
+                            name="specialWheelchairValue"
+                            [value]="wheelchairInfo.code"
+                            formControlName="specialWheelchairValue"
+                            class="ib-radio__input"
+                        />
+                        <label for="wheelchair_{{wheelchairInfo.code}}_{{index}}" class="ib-radio__label">
+                            <span class="ib-radio__text">{{ wheelchairInfo.description }}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="ib-layout__line-spacing" *ngIf="(isEnabledSpecialNeed('WCHC') || isEnabledSpecialNeed('WCHR') || isEnabledSpecialNeed('WCHS'))">
+                <span
+                    class="ib-text ib-text--color-unfocused u-mb-normal ib-flex icon-informacion_2  icon--medium">{{'IBSPEC_SPECIAL_NEEDS_FORM_SPAN_INFO_TEXT'|translate}}</span>
+                <ul class="ib-notice-box__flight-stats--list">
+                    <li class="ib-notice-box__flight-stats--list-item u-mb-normal">
+                        <p class="ib-notice-box__flight-stats--list-item-text">
+                            {{'IBSPEC_SPECIAL_NEEDS_FORM_SPAN_INFO_TEXT_LI_ONE'|translate}}</p>
+                    </li>
+                    <li class="ib-notice-box__flight-stats--list-item u-mb-normal">
+                        <p class="ib-notice-box__flight-stats--list-item-text">
+                            {{'IBSPEC_SPECIAL_NEEDS_FORM_SPAN_INFO_TEXT_LI_TWO'|translate}}</p>
+                    </li>
+                    <li class="ib-notice-box__flight-stats--list-item u-mb-normal">
+                        <p class="ib-notice-box__flight-stats--list-item-text">
+                            {{'IBSPEC_SPECIAL_NEEDS_FORM_SPAN_INFO_TEXT_LI_THREE'|translate}}</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="ib-layout__line-spacing">
+                <span class="ib-text ib-text--color-unfocused u-mb-normal ib-flex icon-informacion_2  icon--medium">
+                    <a class="ib-link"
+                        href="{{'IBSPEC_SPECIAL_NEEDS_FORM_SPAN_INFO_TEXT_2_LINK_HREF'|translate}}"
+                        rel="noopener noreferrer"
+                        target="_blank">{{'IBSPEC_SPECIAL_NEEDS_FORM_SPAN_INFO_TEXT_3'|translate : { phone: phone} }}</a></span>
+            </div>
+        </div>
+    </div>
+</form>

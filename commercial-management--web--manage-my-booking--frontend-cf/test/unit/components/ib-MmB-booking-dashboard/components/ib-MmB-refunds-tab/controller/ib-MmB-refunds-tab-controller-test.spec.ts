@@ -1,0 +1,261 @@
+describe('RefundsTabController test', function () {
+
+    var controller, $scope, $rootScope, localStorage;
+
+    var fakeMmBAppConstants = {
+        QUADRIGAM: {
+            FLEXIBILIZATION_VOUCHER_REFUND_BEGGINING: 'RVFDBT'
+        }
+    };
+    var fakeDatalayerUtilsService = {
+        updateDatalayerWithQuadrigam: jasmine.createSpy('updateDatalayerWithQuadrigam').and.callFake(angular.noop),
+        sendDatalayerEvent: jasmine.createSpy(),
+        updateDigitalDataWithQuadrigam: jasmine.createSpy(),
+        updateDatalayerViewEvent: jasmine.createSpy(),
+        setProcessAndStep: jasmine.createSpy(),
+        updateDatalayerInfo: jasmine.createSpy()
+    };
+    var fakeDatalayerConstants = {
+        DATALAYER_EVENT_TYPES: {
+            'VIEW': 'VIEW'
+        },
+        DIGITAL_DATA_PROCESS: {
+            RVFDBT: 'test'
+        },
+        DIGITAL_DATA_STEP: {
+            RVFDBT: 'test'
+        }
+    };
+    var fakeMmBUtilService = {
+        'isUserLogged': jasmine.createSpy('isUserLogged').and.callFake(function () {
+            return true;
+        })
+    };
+    var $filterFake = jasmine.createSpy('$filter').and.callFake(function (filter) {
+        var filterFunc = function () {
+            return '';
+        };
+        switch (filter) {
+            case 'LinksFilter':
+                filterFunc = function () {
+                    return 'Linked Text';
+                };
+                break;
+            default:
+                break;
+        }
+
+        return filterFunc;
+    });
+    var fakeRedirectionService = {
+        'externalRedirect': jasmine.createSpy()
+    };
+
+
+    var fakeBookingInfo = {
+        'flowId': 'TWFuYWdlTXlCb29raW5nQElCNmU1NzgyZjg1ODVhNDIzM2EwZDJkOTdiZDkxODFjOTg%3D',
+        'order': {
+            'orderId': 'Qm9va2luZ0BJQmY5M2ZkMzA5ZmQ5ZTRjNTVhMjdiMWQ3YzA4OTgzZjA1T1A%3D',
+            'status': 'ISSUED', 'bookingReferences': [{ 'provider': 'IB', 'reference': 'K5X6T' }],
+            'orderItems': [
+                {
+                    'type': 'flight',
+                    'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_01',
+                    'bookingReferences': [{ 'provider': 'IB', 'reference': 'K5X6T' }],
+                    'price': { 'fare': 114, 'tax': 98.02, 'total': 212.02, 'currency': 'EUR', 'ticketingFee': 0 },
+                    'sliceIds': ['MADFCO20210315090500', 'FCOMAD20210322121500'],
+                    'passengerPrices': [
+                        {
+                            'fareCalculation': 'MAD IB ROM28.29IB MAD40.33NUC68.62END ROE0.830521',
+                            'passengerId': 'ADULT_01',
+                            'price': { 'fare': 57, 'tax': 49.01, 'total': 106.01, 'currency': 'EUR', 'ticketingFee': 0 },
+                            'segmentPrices': [
+                                { 'price': null, 'fareCode': 'ADNNANB4', 'segmentsIds': ['IB323020210315'], 'ticketDesignator': '', 'penalties': [] },
+                                { 'price': null, 'fareCode': 'OWNNANB4', 'segmentsIds': ['IB323120210322'], 'ticketDesignator': '', 'penalties': [] }
+                            ],
+                            'taxes': [
+                                { 'code': 'JD', 'amount': 14.95, 'currency': 'EUR', 'description': 'Cargo por salida' },
+                                { 'code': 'OG', 'amount': 0.62, 'currency': 'EUR', 'description': 'Tasa de seguridad' },
+                                { 'code': 'QV', 'amount': 3.38, 'currency': 'EUR', 'description': 'Seguridad' },
+                                { 'code': 'EX', 'amount': 2.32, 'currency': 'EUR', 'description': 'Cargo por seguridad del equipaje' },
+                                { 'code': 'HB', 'amount': 7.5, 'currency': 'EUR', 'description': 'Tasa municipal' },
+                                { 'code': 'IT', 'amount': 15.99, 'currency': 'EUR', 'description': 'Tasa de embarque' },
+                                { 'code': 'MJ', 'amount': 1.05, 'currency': 'EUR', 'description': 'Cargo por servicio al pasajero' },
+                                { 'code': 'VT', 'amount': 3.2, 'currency': 'EUR', 'description': 'Cargo por seguridad' }
+                            ],
+                            'orderItemPaymentInfos': []
+                        },
+                        {
+                            'fareCalculation': 'MAD IB ROM28.29IB MAD40.33NUC68.62END ROE0.830521',
+                            'passengerId': 'ADULT_02',
+                            'price': { 'fare': 57, 'tax': 49.01, 'total': 106.01, 'currency': 'EUR', 'ticketingFee': 0 },
+                            'segmentPrices': [
+                                { 'price': null, 'fareCode': 'ADNNANB4', 'segmentsIds': ['IB323020210315'], 'ticketDesignator': '', 'penalties': [] },
+                                { 'price': null, 'fareCode': 'OWNNANB4', 'segmentsIds': ['IB323120210322'], 'ticketDesignator': '', 'penalties': [] }
+                            ],
+                            'taxes': [
+                                { 'code': 'JD', 'amount': 14.95, 'currency': 'EUR', 'description': 'Cargo por salida' },
+                                { 'code': 'OG', 'amount': 0.62, 'currency': 'EUR', 'description': 'Tasa de seguridad' },
+                                { 'code': 'QV', 'amount': 3.38, 'currency': 'EUR', 'description': 'Seguridad' },
+                                { 'code': 'EX', 'amount': 2.32, 'currency': 'EUR', 'description': 'Cargo por seguridad del equipaje' },
+                                { 'code': 'HB', 'amount': 7.5, 'currency': 'EUR', 'description': 'Tasa municipal' },
+                                { 'code': 'IT', 'amount': 15.99, 'currency': 'EUR', 'description': 'Tasa de embarque' },
+                                { 'code': 'MJ', 'amount': 1.05, 'currency': 'EUR', 'description': 'Cargo por servicio al pasajero' },
+                                { 'code': 'VT', 'amount': 3.2, 'currency': 'EUR', 'description': 'Cargo por seguridad' }
+                            ],
+                            'orderItemPaymentInfos': []
+                        }
+                    ]
+                },
+                {
+                    'type': 'baggage',
+                    'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_02',
+                    'price': { 'fare': 120, 'tax': 0, 'total': 120, 'currency': 'EUR', 'ticketingFee': 0 },
+                    'sliceId': 'FCOMAD20210322121500',
+                    'passengerId': 'ADULT_02',
+                    'amount': 1,
+                    'emd': '0755569497597',
+                    'orderItemPaymentInfos': [],
+                    'subtype': 'BAGGAGE_32'
+                },
+                {
+                    'type': 'baggage',
+                    'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_03',
+                    'price': { 'fare': 100, 'tax': 0, 'total': 100, 'currency': 'EUR', 'ticketingFee': 0 },
+                    'sliceId': 'FCOMAD20210322121500',
+                    'passengerId': 'ADULT_02',
+                    'amount': 1,
+                    'emd': '0755569497596',
+                    'orderItemPaymentInfos': [],
+                    'subtype': 'BAGGAGE_32'
+                },
+                {
+                    'type': 'baggage',
+                    'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_04',
+                    'price': { 'fare': 30, 'tax': 0, 'total': 30, 'currency': 'EUR', 'ticketingFee': 0 },
+                    'sliceId': 'FCOMAD20210322121500',
+                    'passengerId': 'ADULT_02',
+                    'amount': 1,
+                    'emd': '0755569497595',
+                    'orderItemPaymentInfos': [],
+                    'subtype': 'BAGGAGE_23'
+                }, {
+                    'type': 'baggage', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_05', 'price': { 'fare': 25, 'tax': 0, 'total': 25, 'currency': 'EUR', 'ticketingFee': 0 }, 'sliceId': 'FCOMAD20210322121500', 'passengerId': 'ADULT_02', 'amount': 1, 'emd': '0755569497594', 'orderItemPaymentInfos': [], 'subtype': 'BAGGAGE_23'
+                }, { 'type': 'baggage', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_06', 'price': { 'fare': 120, 'tax': 0, 'total': 120, 'currency': 'EUR', 'ticketingFee': 0 }, 'sliceId': 'MADFCO20210315090500', 'passengerId': 'ADULT_01', 'amount': 1, 'emd': '0755569497593', 'orderItemPaymentInfos': [], 'subtype': 'BAGGAGE_32' }, { 'type': 'baggage', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_07', 'price': { 'fare': 100, 'tax': 0, 'total': 100, 'currency': 'EUR', 'ticketingFee': 0 }, 'sliceId': 'MADFCO20210315090500', 'passengerId': 'ADULT_01', 'amount': 1, 'emd': '0755569497592', 'orderItemPaymentInfos': [], 'subtype': 'BAGGAGE_32' }, { 'type': 'baggage', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_08', 'price': { 'fare': 120, 'tax': 0, 'total': 120, 'currency': 'EUR', 'ticketingFee': 0 }, 'sliceId': 'MADFCO20210315090500', 'passengerId': 'ADULT_02', 'amount': 1, 'emd': '0755569497591', 'orderItemPaymentInfos': [], 'subtype': 'BAGGAGE_32' }, { 'type': 'baggage', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_09', 'price': { 'fare': 100, 'tax': 0, 'total': 100, 'currency': 'EUR', 'ticketingFee': 0 }, 'sliceId': 'MADFCO20210315090500', 'passengerId': 'ADULT_02', 'amount': 1, 'emd': '0755569497590', 'orderItemPaymentInfos': [], 'subtype': 'BAGGAGE_32' }, { 'type': 'baggage', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_10', 'price': { 'fare': 30, 'tax': 0, 'total': 30, 'currency': 'EUR', 'ticketingFee': 0 }, 'sliceId': 'MADFCO20210315090500', 'passengerId': 'ADULT_02', 'amount': 1, 'emd': '0755569497589', 'orderItemPaymentInfos': [], 'subtype': 'BAGGAGE_23' }, { 'type': 'baggage', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_11', 'price': { 'fare': 25, 'tax': 0, 'total': 25, 'currency': 'EUR', 'ticketingFee': 0 }, 'sliceId': 'MADFCO20210315090500', 'passengerId': 'ADULT_02', 'amount': 1, 'emd': '0755569497588', 'orderItemPaymentInfos': [], 'subtype': 'BAGGAGE_23' }],
+            'slices': [
+                {
+                    'sliceId': 'MADFCO20210315090500',
+                    'type': 'REGULAR',
+                    'departureDateTime': '2021-03-15 09:05',
+                    'arrivalDateTime': '2021-03-15 11:35',
+                    'duration': 150,
+                    'stopsNumber': 0,
+                    'detailedPrices': [{ 'fare': 0, 'currency': null, 'passengerIds': ['ADULT_01', 'ADULT_02'], 'segmentPrices': [] }],
+                    'segments': [
+                        {
+                            'type': 'CONFIRMED',
+                            'mmbAllowed': true,
+                            'ckiStatus': { 'code': 'CHECKABLE', 'message': null },
+                            'noShow': false,
+                            'flyNow': false,
+                            'flown': false,
+                            'departure': {
+                                'code': 'MAD',
+                                'name': 'BARAJAS',
+                                'terminal': '4',
+                                'city': { 'code': 'MAD', 'description': 'Madrid', 'countryCode': 'ES', 'country': { 'code': 'ES', 'description': 'España' } }
+                            },
+                            'arrival': {
+                                'code': 'FCO',
+                                'name': 'FIUMICINO',
+                                'terminal': '3',
+                                'city': { 'code': 'ROM', 'description': 'Roma', 'countryCode': 'IT', 'country': { 'code': 'IT', 'description': 'Italia' } }
+                            },
+                            'departureCity': { 'code': 'MAD', 'description': 'Madrid', 'countryCode': 'ES', 'timeZone': 'Europe/Madrid' },
+                            'arrivalCity': { 'code': 'ROM', 'description': 'Roma', 'countryCode': 'IT', 'timeZone': 'Europe/Rome' },
+                            'flight': {
+                                'marketingCarrier': { 'code': 'IB', 'name': 'Iberia' },
+                                'operationalCarrier': { 'code': 'IB', 'name': 'Iberia' },
+                                'marketingFlightNumber': '3230',
+                                'operationalFlightNumber': '3230',
+                                'operationalDisclosure': 'IB',
+                                'aircraft': { 'code': '320', 'description': 'Airbus A320' }
+                            },
+                            'cabin': { 'rbd': 'A', 'description': '', 'remainingSeats': 9, 'fareFamily': 'TBAESEU', 'code': 'R', 'type': 'ECONOMY', 'bookingClass': 'ECONOMY' },
+                            'overnight': false,
+                            'id': 'IB323020210315',
+                            'duration': 150,
+                            'waitingTime': 0,
+                            'operatorLocator': null,
+                            'stop': null,
+                            'departureDateTime': '2021-03-15 09:05',
+                            'departureUtcDateTime': '2021-03-15T08:05:00.000',
+                            'arrivalDateTime': '2021-03-15 11:35',
+                            'arrivalUtcDateTime': '2021-03-15T10:35:00.000',
+                            'status': { 'code': 'HK', 'description': 'Confirmado' }
+                        }], 'overnight': false, 'passengerFlags': [{ 'passengerId': 'ADULT_01', 'flags': [{ 'type': 'FLIGHT_MODIFICATION', 'enabled': true }, { 'type': 'FLIGHT_REFUND', 'enabled': false }, { 'type': 'FREQUENT_FLYER_MODIFICATION', 'enabled': true }, { 'type': 'SPECIAL_NEEDS_MODIFICATION', 'enabled': true }, { 'type': 'CONTACT_DATA_MODIFICATION', 'enabled': true }, { 'type': 'EMERGENCY_CONTACT_MODIFICATION', 'enabled': true }, { 'type': 'PASSENGER_NAME_CORRECTION', 'enabled': false }, { 'type': 'ANCILLARIES', 'enabled': true }, { 'type': 'FLIGHT_DISRUPTION_SEARCH_FLEXIBLE', 'enabled': false }, { 'type': 'FLIGHT_MODIFICATION_FLEXIBLE', 'enabled': false }, { 'type': 'FLIGHT_DISRUPTION_SEARCH', 'enabled': false }, { 'type': 'FLIGHT_MODIFICATION_ON_DEMAND', 'enabled': false }] }, { 'passengerId': 'ADULT_02', 'flags': [{ 'type': 'FLIGHT_MODIFICATION', 'enabled': true }, { 'type': 'FLIGHT_REFUND', 'enabled': false }, { 'type': 'FREQUENT_FLYER_MODIFICATION', 'enabled': true }, { 'type': 'SPECIAL_NEEDS_MODIFICATION', 'enabled': true }, { 'type': 'CONTACT_DATA_MODIFICATION', 'enabled': true }, { 'type': 'EMERGENCY_CONTACT_MODIFICATION', 'enabled': true }, { 'type': 'PASSENGER_NAME_CORRECTION', 'enabled': false }, { 'type': 'ANCILLARIES', 'enabled': true }, { 'type': 'FLIGHT_DISRUPTION_SEARCH_FLEXIBLE', 'enabled': false }, { 'type': 'FLIGHT_MODIFICATION_FLEXIBLE', 'enabled': false }, { 'type': 'FLIGHT_DISRUPTION_SEARCH', 'enabled': false }, { 'type': 'FLIGHT_MODIFICATION_ON_DEMAND', 'enabled': false }] }]
+                }, { 'sliceId': 'FCOMAD20210322121500', 'type': 'REGULAR', 'departureDateTime': '2021-03-22 12:15', 'arrivalDateTime': '2021-03-22 14:55', 'duration': 160, 'stopsNumber': 0, 'detailedPrices': [{ 'fare': 0, 'currency': null, 'passengerIds': ['ADULT_01', 'ADULT_02'], 'segmentPrices': [] }], 'segments': [{ 'type': 'CONFIRMED', 'mmbAllowed': true, 'ckiStatus': { 'code': 'CHECKABLE', 'message': null }, 'noShow': false, 'flyNow': false, 'flown': false, 'departure': { 'code': 'FCO', 'name': 'FIUMICINO', 'terminal': '3', 'city': { 'code': 'ROM', 'description': 'Roma', 'countryCode': 'IT', 'country': { 'code': 'IT', 'description': 'Italia' } } }, 'arrival': { 'code': 'MAD', 'name': 'BARAJAS', 'terminal': '4', 'city': { 'code': 'MAD', 'description': 'Madrid', 'countryCode': 'ES', 'country': { 'code': 'ES', 'description': 'España' } } }, 'departureCity': { 'code': 'ROM', 'description': 'Roma', 'countryCode': 'IT', 'timeZone': 'Europe/Rome' }, 'arrivalCity': { 'code': 'MAD', 'description': 'Madrid', 'countryCode': 'ES', 'timeZone': 'Europe/Madrid' }, 'flight': { 'marketingCarrier': { 'code': 'IB', 'name': 'Iberia' }, 'operationalCarrier': { 'code': 'IB', 'name': 'Iberia' }, 'marketingFlightNumber': '3231', 'operationalFlightNumber': '3231', 'operationalDisclosure': 'IB', 'aircraft': { 'code': '320', 'description': 'Airbus A320' } }, 'cabin': { 'rbd': 'O', 'description': '', 'remainingSeats': 2, 'fareFamily': 'TBAESEU', 'code': 'R', 'type': 'ECONOMY', 'bookingClass': 'ECONOMY' }, 'overnight': false, 'id': 'IB323120210322', 'duration': 160, 'waitingTime': 0, 'operatorLocator': null, 'stop': null, 'departureDateTime': '2021-03-22 12:15', 'departureUtcDateTime': '2021-03-22T11:15:00.000', 'arrivalDateTime': '2021-03-22 14:55', 'arrivalUtcDateTime': '2021-03-22T13:55:00.000', 'status': { 'code': 'HK', 'description': 'Confirmado' } }], 'overnight': false, 'passengerFlags': [{ 'passengerId': 'ADULT_01', 'flags': [{ 'type': 'FLIGHT_MODIFICATION', 'enabled': true }, { 'type': 'FLIGHT_REFUND', 'enabled': false }, { 'type': 'FREQUENT_FLYER_MODIFICATION', 'enabled': true }, { 'type': 'SPECIAL_NEEDS_MODIFICATION', 'enabled': true }, { 'type': 'CONTACT_DATA_MODIFICATION', 'enabled': true }, { 'type': 'EMERGENCY_CONTACT_MODIFICATION', 'enabled': true }, { 'type': 'PASSENGER_NAME_CORRECTION', 'enabled': false }, { 'type': 'ANCILLARIES', 'enabled': true }, { 'type': 'FLIGHT_DISRUPTION_SEARCH_FLEXIBLE', 'enabled': false }, { 'type': 'FLIGHT_MODIFICATION_FLEXIBLE', 'enabled': false }, { 'type': 'FLIGHT_DISRUPTION_SEARCH', 'enabled': false }, { 'type': 'FLIGHT_MODIFICATION_ON_DEMAND', 'enabled': false }] }, { 'passengerId': 'ADULT_02', 'flags': [{ 'type': 'FLIGHT_MODIFICATION', 'enabled': true }, { 'type': 'FLIGHT_REFUND', 'enabled': false }, { 'type': 'FREQUENT_FLYER_MODIFICATION', 'enabled': true }, { 'type': 'SPECIAL_NEEDS_MODIFICATION', 'enabled': true }, { 'type': 'CONTACT_DATA_MODIFICATION', 'enabled': true }, { 'type': 'EMERGENCY_CONTACT_MODIFICATION', 'enabled': true }, { 'type': 'PASSENGER_NAME_CORRECTION', 'enabled': false }, { 'type': 'ANCILLARIES', 'enabled': true }, { 'type': 'FLIGHT_DISRUPTION_SEARCH_FLEXIBLE', 'enabled': false }, { 'type': 'FLIGHT_MODIFICATION_FLEXIBLE', 'enabled': false }, { 'type': 'FLIGHT_DISRUPTION_SEARCH', 'enabled': false }, { 'type': 'FLIGHT_MODIFICATION_ON_DEMAND', 'enabled': false }] }] }], 'price': { 'fare': 884, 'tax': 98.02, 'total': 982.02, 'currency': 'EUR', 'ticketingFee': 0 }, 'primaryContactInfo': { 'phone': '346545643433', 'email': 'MARIALUISA.RAMOS@PANEL.ES', 'phoneType': 'MOBILE', 'confirmationMailOption': null }, 'optionalInformation': [], 'cashAviosPossibilities': [], 'specialDiscounts': [], 'checkedBagAllowances': [{ 'type': 'PIECE', 'segmentIds': ['IB323020210315', 'IB323120210322'], 'totalQuantity': 0 }], 'accrualQuote': { 'redemptionPoints': 418, 'qualificationPoints': 80 }, 'aviosRedeemed': null, 'pointsRedeemed': null
+        }, 'passengers': [{ 'passengerType': 'ADULT', 'personalInfo': { 'name': 'ADULTA', 'surname': 'DOS', 'birthDate': null }, 'passengerId': 'ADULT_01', 'relatedPassengerId': '', 'ckiStatus': null, 'optionalInformation': [], 'residenceAccreditationStatus': null, 'resiberPassengerId': '1' }, { 'passengerType': 'ADULT', 'personalInfo': { 'name': 'ADULTO', 'surname': 'UNO', 'birthDate': null }, 'passengerId': 'ADULT_02', 'contactInfo': { 'phone': '346545643433', 'email': 'marialuisa.ramos@panel.es', 'phoneType': 'MOBILE', 'confirmationMailOption': null }, 'relatedPassengerId': '', 'ckiStatus': null, 'optionalInformation': [], 'residenceAccreditationStatus': null, 'resiberPassengerId': '2' }], 'tickets': [{ 'ticketNumbers': ['0752393604487'], 'type': 'ET', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_01', 'passengerId': 'ADULT_01', 'issueDateTime': '2021-03-01 12:59', 'fareCalculation': 'MAD IB ROM28.29IB MAD40.33NUC68.62END ROE0.830521', 'taxes': [{ 'code': 'JD', 'amount': 14.95, 'currency': 'EUR', 'description': '' }, { 'code': 'OG', 'amount': 0.62, 'currency': 'EUR', 'description': '' }, { 'code': 'QV', 'amount': 3.38, 'currency': 'EUR', 'description': '' }, { 'code': 'EX', 'amount': 2.32, 'currency': 'EUR', 'description': '' }, { 'code': 'HB', 'amount': 7.5, 'currency': 'EUR', 'description': '' }, { 'code': 'IT', 'amount': 15.99, 'currency': 'EUR', 'description': '' }, { 'code': 'MJ', 'amount': 1.05, 'currency': 'EUR', 'description': '' }, { 'code': 'VT', 'amount': 3.2, 'currency': 'EUR', 'description': '' }], 'coupons': [{ 'arrival': 'FCO', 'departure': 'MAD', 'departureDate': '2021-03-15T09:05:00.000', 'status': 'OPEN FOR USE', 'fareBasis': 'ADNNANB4', 'carrier': 'IB', 'flightNumber': '3230', 'flightStatus': 'OK', 'operatingCarrier': null, 'bookingCode': 'A', 'designator': '', 'couponNumber': '1', 'remark': null, 'baggageDetail': { 'freeAllowance': 0, 'quantityCode': 'PC', 'unitQualifier': 'PC' } }, { 'arrival': 'MAD', 'departure': 'FCO', 'departureDate': '2021-03-22T12:15:00.000', 'status': 'OPEN FOR USE', 'fareBasis': 'OWNNANB4', 'carrier': 'IB', 'flightNumber': '3231', 'flightStatus': 'OK', 'operatingCarrier': null, 'bookingCode': 'O', 'designator': '', 'couponNumber': '2', 'remark': null, 'baggageDetail': { 'freeAllowance': 0, 'quantityCode': 'PC', 'unitQualifier': 'PC' } }], 'iataCode': '78496445', 'issueCity': 'MAD', 'passengerType': 'ADULT', 'paymentInfo': { 'type': 'CREDIT_CARD', 'amount': 106.01 }, 'emdsList': [{ 'emdNumber': '0755569497593', 'issueDateTime': '2021-03-01T13:01:00.000', 'description': '1PC', 'emdDefinition': 'EMD-A (Associated)', 'mumberOfBooklets': '1', 'code': 'J', 'tableName': '1001 (Document/ Message Name, coded)', 'couponsInfoEMDsWebResponse': [{ 'couponNumberEMD': '1', 'couponNumberTKT': '1', 'documentNumber': '0752393604487', 'serviceCode': 'C0FM', 'serviceDescription': 'BAGGAGE UP TO 32KGS', 'associated': true, 'status': 'OPEN FOR USE', 'dateOfService': '2021-03-15T09:05:00.000', 'value': { 'fare': 120, 'tax': null, 'total': null, 'currency': 'EUR', 'ticketingFee': 0 } }] }, { 'emdNumber': '0755569497592', 'issueDateTime': '2021-03-01T13:01:00.000', 'description': '1PC', 'emdDefinition': 'EMD-A (Associated)', 'mumberOfBooklets': '1', 'code': 'J', 'tableName': '1001 (Document/ Message Name, coded)', 'couponsInfoEMDsWebResponse': [{ 'couponNumberEMD': '1', 'couponNumberTKT': '1', 'documentNumber': '0752393604487', 'serviceCode': 'C0FM', 'serviceDescription': 'BAGGAGE UP TO 32KGS', 'associated': true, 'status': 'OPEN FOR USE', 'dateOfService': '2021-03-15T09:05:00.000', 'value': { 'fare': 100, 'tax': null, 'total': null, 'currency': 'EUR', 'ticketingFee': 0 } }] }], 'creditCardFeePrice': null, 'taxedPrice': { 'fare': 57, 'tax': 49.01, 'total': 106.01, 'currency': 'EUR', 'ticketingFee': 0 } }, { 'ticketNumbers': ['0752393604486'], 'type': 'ET', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_01', 'passengerId': 'ADULT_02', 'issueDateTime': '2021-03-01 12:59', 'fareCalculation': 'MAD IB ROM28.29IB MAD40.33NUC68.62END ROE0.830521', 'taxes': [{ 'code': 'JD', 'amount': 14.95, 'currency': 'EUR', 'description': '' }, { 'code': 'OG', 'amount': 0.62, 'currency': 'EUR', 'description': '' }, { 'code': 'QV', 'amount': 3.38, 'currency': 'EUR', 'description': '' }, { 'code': 'EX', 'amount': 2.32, 'currency': 'EUR', 'description': '' }, { 'code': 'HB', 'amount': 7.5, 'currency': 'EUR', 'description': '' }, { 'code': 'IT', 'amount': 15.99, 'currency': 'EUR', 'description': '' }, { 'code': 'MJ', 'amount': 1.05, 'currency': 'EUR', 'description': '' }, { 'code': 'VT', 'amount': 3.2, 'currency': 'EUR', 'description': '' }], 'coupons': [{ 'arrival': 'FCO', 'departure': 'MAD', 'departureDate': '2021-03-15T09:05:00.000', 'status': 'OPEN FOR USE', 'fareBasis': 'ADNNANB4', 'carrier': 'IB', 'flightNumber': '3230', 'flightStatus': 'OK', 'operatingCarrier': null, 'bookingCode': 'A', 'designator': '', 'couponNumber': '1', 'remark': null, 'baggageDetail': { 'freeAllowance': 0, 'quantityCode': 'PC', 'unitQualifier': 'PC' } }, { 'arrival': 'MAD', 'departure': 'FCO', 'departureDate': '2021-03-22T12:15:00.000', 'status': 'OPEN FOR USE', 'fareBasis': 'OWNNANB4', 'carrier': 'IB', 'flightNumber': '3231', 'flightStatus': 'OK', 'operatingCarrier': null, 'bookingCode': 'O', 'designator': '', 'couponNumber': '2', 'remark': null, 'baggageDetail': { 'freeAllowance': 0, 'quantityCode': 'PC', 'unitQualifier': 'PC' } }], 'iataCode': '78496445', 'issueCity': 'MAD', 'passengerType': 'ADULT', 'paymentInfo': { 'type': 'CREDIT_CARD', 'amount': 106.01 }, 'emdsList': [{ 'emdNumber': '0755569497591', 'issueDateTime': '2021-03-01T13:01:00.000', 'description': '1PC', 'emdDefinition': 'EMD-A (Associated)', 'mumberOfBooklets': '1', 'code': 'J', 'tableName': '1001 (Document/ Message Name, coded)', 'couponsInfoEMDsWebResponse': [{ 'couponNumberEMD': '1', 'couponNumberTKT': '1', 'documentNumber': '0752393604486', 'serviceCode': 'C0FM', 'serviceDescription': 'BAGGAGE UP TO 32KGS', 'associated': true, 'status': 'OPEN FOR USE', 'dateOfService': '2021-03-15T09:05:00.000', 'value': { 'fare': 120, 'tax': null, 'total': null, 'currency': 'EUR', 'ticketingFee': 0 } }] }, { 'emdNumber': '0755569497590', 'issueDateTime': '2021-03-01T13:01:00.000', 'description': '1PC', 'emdDefinition': 'EMD-A (Associated)', 'mumberOfBooklets': '1', 'code': 'J', 'tableName': '1001 (Document/ Message Name, coded)', 'couponsInfoEMDsWebResponse': [{ 'couponNumberEMD': '1', 'couponNumberTKT': '1', 'documentNumber': '0752393604486', 'serviceCode': 'C0FM', 'serviceDescription': 'BAGGAGE UP TO 32KGS', 'associated': true, 'status': 'OPEN FOR USE', 'dateOfService': '2021-03-15T09:05:00.000', 'value': { 'fare': 100, 'tax': null, 'total': null, 'currency': 'EUR', 'ticketingFee': 0 } }] }, { 'emdNumber': '0755569497589', 'issueDateTime': '2021-03-01T13:01:00.000', 'description': '1PC', 'emdDefinition': 'EMD-A (Associated)', 'mumberOfBooklets': '1', 'code': 'J', 'tableName': '1001 (Document/ Message Name, coded)', 'couponsInfoEMDsWebResponse': [{ 'couponNumberEMD': '1', 'couponNumberTKT': '1', 'documentNumber': '0752393604486', 'serviceCode': 'C0GO', 'serviceDescription': 'EXTRA PIECE', 'associated': true, 'status': 'OPEN FOR USE', 'dateOfService': '2021-03-15T09:05:00.000', 'value': { 'fare': 30, 'tax': null, 'total': null, 'currency': 'EUR', 'ticketingFee': 0 } }] }, { 'emdNumber': '0755569497588', 'issueDateTime': '2021-03-01T13:01:00.000', 'description': '1PC', 'emdDefinition': 'EMD-A (Associated)', 'mumberOfBooklets': '1', 'code': 'J', 'tableName': '1001 (Document/ Message Name, coded)', 'couponsInfoEMDsWebResponse': [{ 'couponNumberEMD': '1', 'couponNumberTKT': '1', 'documentNumber': '0752393604486', 'serviceCode': 'C0GO', 'serviceDescription': 'EXTRA PIECE', 'associated': true, 'status': 'OPEN FOR USE', 'dateOfService': '2021-03-15T09:05:00.000', 'value': { 'fare': 25, 'tax': null, 'total': null, 'currency': 'EUR', 'ticketingFee': 0 } }] }, { 'emdNumber': '0755569497597', 'issueDateTime': '2021-03-01T13:01:00.000', 'description': '1PC', 'emdDefinition': 'EMD-A (Associated)', 'mumberOfBooklets': '1', 'code': 'J', 'tableName': '1001 (Document/ Message Name, coded)', 'couponsInfoEMDsWebResponse': [{ 'couponNumberEMD': '1', 'couponNumberTKT': '2', 'documentNumber': '0752393604486', 'serviceCode': 'C0FM', 'serviceDescription': 'BAGGAGE UP TO 32KGS', 'associated': true, 'status': 'OPEN FOR USE', 'dateOfService': '2021-03-22T12:15:00.000', 'value': { 'fare': 120, 'tax': null, 'total': null, 'currency': 'EUR', 'ticketingFee': 0 } }] }, { 'emdNumber': '0755569497596', 'issueDateTime': '2021-03-01T13:01:00.000', 'description': '1PC', 'emdDefinition': 'EMD-A (Associated)', 'mumberOfBooklets': '1', 'code': 'J', 'tableName': '1001 (Document/ Message Name, coded)', 'couponsInfoEMDsWebResponse': [{ 'couponNumberEMD': '1', 'couponNumberTKT': '2', 'documentNumber': '0752393604486', 'serviceCode': 'C0FM', 'serviceDescription': 'BAGGAGE UP TO 32KGS', 'associated': true, 'status': 'OPEN FOR USE', 'dateOfService': '2021-03-22T12:15:00.000', 'value': { 'fare': 100, 'tax': null, 'total': null, 'currency': 'EUR', 'ticketingFee': 0 } }] }, { 'emdNumber': '0755569497595', 'issueDateTime': '2021-03-01T13:01:00.000', 'description': '1PC', 'emdDefinition': 'EMD-A (Associated)', 'mumberOfBooklets': '1', 'code': 'J', 'tableName': '1001 (Document/ Message Name, coded)', 'couponsInfoEMDsWebResponse': [{ 'couponNumberEMD': '1', 'couponNumberTKT': '2', 'documentNumber': '0752393604486', 'serviceCode': 'C0GO', 'serviceDescription': 'EXTRA PIECE', 'associated': true, 'status': 'OPEN FOR USE', 'dateOfService': '2021-03-22T12:15:00.000', 'value': { 'fare': 30, 'tax': null, 'total': null, 'currency': 'EUR', 'ticketingFee': 0 } }] }, { 'emdNumber': '0755569497594', 'issueDateTime': '2021-03-01T13:01:00.000', 'description': '1PC', 'emdDefinition': 'EMD-A (Associated)', 'mumberOfBooklets': '1', 'code': 'J', 'tableName': '1001 (Document/ Message Name, coded)', 'couponsInfoEMDsWebResponse': [{ 'couponNumberEMD': '1', 'couponNumberTKT': '2', 'documentNumber': '0752393604486', 'serviceCode': 'C0GO', 'serviceDescription': 'EXTRA PIECE', 'associated': true, 'status': 'OPEN FOR USE', 'dateOfService': '2021-03-22T12:15:00.000', 'value': { 'fare': 25, 'tax': null, 'total': null, 'currency': 'EUR', 'ticketingFee': 0 } }] }], 'creditCardFeePrice': null, 'taxedPrice': { 'fare': 57, 'tax': 49.01, 'total': 106.01, 'currency': 'EUR', 'ticketingFee': 0 } }, { 'ticketNumbers': ['0755569497597'], 'type': 'EMD', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_02', 'passengerId': 'ADULT_02', 'issueDateTime': null, 'fareCalculation': null, 'taxes': [], 'coupons': [{ 'arrival': null, 'departure': null, 'departureDate': null, 'status': 'OPEN FOR USE', 'fareBasis': null, 'carrier': null, 'flightNumber': null, 'flightStatus': null, 'operatingCarrier': null, 'bookingCode': null, 'designator': null, 'couponNumber': null, 'remark': null, 'baggageDetail': null }], 'iataCode': null, 'issueCity': null, 'passengerType': null, 'paymentInfo': null, 'emdsList': [], 'creditCardFeePrice': null, 'taxedPrice': null }, { 'ticketNumbers': ['0755569497596'], 'type': 'EMD', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_03', 'passengerId': 'ADULT_02', 'issueDateTime': null, 'fareCalculation': null, 'taxes': [], 'coupons': [{ 'arrival': null, 'departure': null, 'departureDate': null, 'status': 'OPEN FOR USE', 'fareBasis': null, 'carrier': null, 'flightNumber': null, 'flightStatus': null, 'operatingCarrier': null, 'bookingCode': null, 'designator': null, 'couponNumber': null, 'remark': null, 'baggageDetail': null }], 'iataCode': null, 'issueCity': null, 'passengerType': null, 'paymentInfo': null, 'emdsList': [], 'creditCardFeePrice': null, 'taxedPrice': null }, { 'ticketNumbers': ['0755569497595'], 'type': 'EMD', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_04', 'passengerId': 'ADULT_02', 'issueDateTime': null, 'fareCalculation': null, 'taxes': [], 'coupons': [{ 'arrival': null, 'departure': null, 'departureDate': null, 'status': 'OPEN FOR USE', 'fareBasis': null, 'carrier': null, 'flightNumber': null, 'flightStatus': null, 'operatingCarrier': null, 'bookingCode': null, 'designator': null, 'couponNumber': null, 'remark': null, 'baggageDetail': null }], 'iataCode': null, 'issueCity': null, 'passengerType': null, 'paymentInfo': null, 'emdsList': [], 'creditCardFeePrice': null, 'taxedPrice': null }, { 'ticketNumbers': ['0755569497594'], 'type': 'EMD', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_05', 'passengerId': 'ADULT_02', 'issueDateTime': null, 'fareCalculation': null, 'taxes': [], 'coupons': [{ 'arrival': null, 'departure': null, 'departureDate': null, 'status': 'OPEN FOR USE', 'fareBasis': null, 'carrier': null, 'flightNumber': null, 'flightStatus': null, 'operatingCarrier': null, 'bookingCode': null, 'designator': null, 'couponNumber': null, 'remark': null, 'baggageDetail': null }], 'iataCode': null, 'issueCity': null, 'passengerType': null, 'paymentInfo': null, 'emdsList': [], 'creditCardFeePrice': null, 'taxedPrice': null }, { 'ticketNumbers': ['0755569497593'], 'type': 'EMD', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_06', 'passengerId': 'ADULT_01', 'issueDateTime': null, 'fareCalculation': null, 'taxes': [], 'coupons': [{ 'arrival': null, 'departure': null, 'departureDate': null, 'status': 'OPEN FOR USE', 'fareBasis': null, 'carrier': null, 'flightNumber': null, 'flightStatus': null, 'operatingCarrier': null, 'bookingCode': null, 'designator': null, 'couponNumber': null, 'remark': null, 'baggageDetail': null }], 'iataCode': null, 'issueCity': null, 'passengerType': null, 'paymentInfo': null, 'emdsList': [], 'creditCardFeePrice': null, 'taxedPrice': null }, { 'ticketNumbers': ['0755569497592'], 'type': 'EMD', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_07', 'passengerId': 'ADULT_01', 'issueDateTime': null, 'fareCalculation': null, 'taxes': [], 'coupons': [{ 'arrival': null, 'departure': null, 'departureDate': null, 'status': 'OPEN FOR USE', 'fareBasis': null, 'carrier': null, 'flightNumber': null, 'flightStatus': null, 'operatingCarrier': null, 'bookingCode': null, 'designator': null, 'couponNumber': null, 'remark': null, 'baggageDetail': null }], 'iataCode': null, 'issueCity': null, 'passengerType': null, 'paymentInfo': null, 'emdsList': [], 'creditCardFeePrice': null, 'taxedPrice': null }, { 'ticketNumbers': ['0755569497591'], 'type': 'EMD', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_08', 'passengerId': 'ADULT_02', 'issueDateTime': null, 'fareCalculation': null, 'taxes': [], 'coupons': [{ 'arrival': null, 'departure': null, 'departureDate': null, 'status': 'OPEN FOR USE', 'fareBasis': null, 'carrier': null, 'flightNumber': null, 'flightStatus': null, 'operatingCarrier': null, 'bookingCode': null, 'designator': null, 'couponNumber': null, 'remark': null, 'baggageDetail': null }], 'iataCode': null, 'issueCity': null, 'passengerType': null, 'paymentInfo': null, 'emdsList': [], 'creditCardFeePrice': null, 'taxedPrice': null }, { 'ticketNumbers': ['0755569497590'], 'type': 'EMD', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_09', 'passengerId': 'ADULT_02', 'issueDateTime': null, 'fareCalculation': null, 'taxes': [], 'coupons': [{ 'arrival': null, 'departure': null, 'departureDate': null, 'status': 'OPEN FOR USE', 'fareBasis': null, 'carrier': null, 'flightNumber': null, 'flightStatus': null, 'operatingCarrier': null, 'bookingCode': null, 'designator': null, 'couponNumber': null, 'remark': null, 'baggageDetail': null }], 'iataCode': null, 'issueCity': null, 'passengerType': null, 'paymentInfo': null, 'emdsList': [], 'creditCardFeePrice': null, 'taxedPrice': null }, { 'ticketNumbers': ['0755569497589'], 'type': 'EMD', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_10', 'passengerId': 'ADULT_02', 'issueDateTime': null, 'fareCalculation': null, 'taxes': [], 'coupons': [{ 'arrival': null, 'departure': null, 'departureDate': null, 'status': 'OPEN FOR USE', 'fareBasis': null, 'carrier': null, 'flightNumber': null, 'flightStatus': null, 'operatingCarrier': null, 'bookingCode': null, 'designator': null, 'couponNumber': null, 'remark': null, 'baggageDetail': null }], 'iataCode': null, 'issueCity': null, 'passengerType': null, 'paymentInfo': null, 'emdsList': [], 'creditCardFeePrice': null, 'taxedPrice': null }, { 'ticketNumbers': ['0755569497588'], 'type': 'EMD', 'orderItemId': 'IBf93fd309fd9e4c55a27b1d7c08983f05OP_11', 'passengerId': 'ADULT_02', 'issueDateTime': null, 'fareCalculation': null, 'taxes': [], 'coupons': [{ 'arrival': null, 'departure': null, 'departureDate': null, 'status': 'OPEN FOR USE', 'fareBasis': null, 'carrier': null, 'flightNumber': null, 'flightStatus': null, 'operatingCarrier': null, 'bookingCode': null, 'designator': null, 'couponNumber': null, 'remark': null, 'baggageDetail': null }], 'iataCode': null, 'issueCity': null, 'passengerType': null, 'paymentInfo': null, 'emdsList': [], 'creditCardFeePrice': null, 'taxedPrice': null }], 'paymentItems': [{ 'type': 'IBERIA_PAY', 'tokenizedCardNumber': null, 'maskedCardNumber': null, 'authorization': 'J0SBA4', 'subtotal': 212.02, 'totalFee': 0, 'total': 212.02, 'unityFee': 0, 'currency': 'EUR' }], 'contextMetadata': { 'language': 'es', 'country': 'ES', 'currencies': [{ 'code': 'EUR', 'description': 'Euro', 'symbol': '€', 'alignment': 'R', 'groupingSeparator': '.', 'decimalSeparator': ',', 'decimals': 2, 'recommendedDisplay': 'symbol' }] }, 'fareFamilyConditions': [{ 'cabinType': 'E', 'cabinDescription': 'Turista', 'commercialCode': 'TBAESEU', 'commercialName': 'Básica', 'commercialNameES': 'Básica', 'priority': 0, 'conditions': [{ 'code': 'EQMANO', 'name': 'Equipaje de mano', 'text': '1 bulto (56x40x25cm)', 'units': 1, 'extendedInfo': { 'title': '1 bulto en cabina  (56x40x25cm)', 'message': '1 bulto (56x40x25cm)', 'code': 'CA_EQP_MANO_10KG', 'conditionStatus': true } }, { 'code': 'EQBODEGA', 'name': 'Equipaje en bodega', 'text': 'No incluido.', 'units': null, 'extendedInfo': { 'title': 'Sin equipaje en bodega', 'message': 'No incluido. ', 'code': 'CA_1_PIEZAS_PAGO', 'conditionStatus': false } }, { 'code': 'ASIENTO', 'name': 'Selección de asiento', 'text': 'De pago.', 'units': null, 'extendedInfo': { 'title': 'Seleccionable con coste', 'message': 'De pago. <a target="_blank" href="http://prea.iberia.es/web/product.do?popup=true&AAA=true&cntCat=Productos/PRSEAT&cntId=reserva_de_asiento&market=ES&language=es">Política de reserva anticipada de asientos</a>', 'code': 'CA_Asiento_Pago', 'conditionStatus': false } }, { 'code': 'CAMBIO', 'name': 'Cambios', 'text': 'Permitidos en cualquier momento con una penalización de 65€, excepto en caso de no presentarse al vuelo (No-Show), que no permite cambio', 'units': 65, 'extendedInfo': { 'title': 'Cambio permitido con coste', 'message': 'Permitidos en cualquier momento con una penalización de 65€, excepto en caso de no presentarse al vuelo (No-Show), que no permite cambio', 'code': 'CA_CAMBIO CON PENALTY_65€_NO_SHOW_NO_PERMITIDO', 'conditionStatus': false } }, { 'code': 'REEMBOLSO', 'name': 'Reembolso (por sentido)', 'text': 'No permitido', 'units': null, 'extendedInfo': { 'title': 'Reembolso no permitido', 'message': 'No permitido.', 'code': 'CA_REEMBOLSO NO PERMITIDO', 'conditionStatus': false } }, { 'code': 'TARJEMBANTIC', 'name': 'Tarjeta de embarque anticipada', 'text': 'No incluido', 'units': null, 'extendedInfo': { 'title': 'No incluido', 'message': 'No incluido', 'code': 'CA_Tarjeta_embarque_anticipada_no_incluido', 'conditionStatus': false } }, { 'code': 'EMBARQUE', 'name': 'Prioridad de Embarque', 'text': 'No', 'units': null, 'extendedInfo': { 'title': '', 'message': 'No', 'code': 'CA_Embarque_NO_Prioritario', 'conditionStatus': false } }, { 'code': 'SALAVIP', 'name': 'Acceso a salas VIP', 'text': 'No', 'units': null, 'extendedInfo': { 'title': '', 'message': 'No', 'code': 'Acceso a salas VIP No permitido', 'conditionStatus': false } }, { 'code': 'CABINA', 'name': 'Cabina', 'text': 'Turista', 'units': null, 'extendedInfo': { 'title': '', 'message': 'Turista', 'code': 'CA_Cabina_Turista', 'conditionStatus': false } }, { 'code': 'CHECKINDESK', 'name': 'Mostrador check-in exclusivo', 'text': 'No', 'units': null, 'extendedInfo': { 'title': '', 'message': 'No', 'code': 'Chek-in_desk_ NO', 'conditionStatus': false } }, { 'code': 'ASIENTOXL', 'name': 'Selección de asiento XL', 'text': 'De pago', 'units': null, 'extendedInfo': { 'title': 'Seleccionable con coste', 'message': 'De pago', 'code': 'CA_Asiento_XL_Pago', 'conditionStatus': false } }, { 'code': 'FASTTRACK', 'name': 'Fast Track', 'text': 'No', 'units': null, 'extendedInfo': { 'title': '', 'message': 'No', 'code': 'Fast Track NO', 'conditionStatus': false } }, { 'code': 'EQPPRIOR', 'name': 'Entrega prioritaria equipaje', 'text': 'No', 'units': null, 'extendedInfo': { 'title': '', 'message': 'No', 'code': 'Entrega_prioritaria_equipaje_ NO', 'conditionStatus': false } }], 'conditionsPriority': ['EQMANO', 'EQBODEGA', 'ASIENTO', 'CAMBIO', 'REEMBOLSO'] }], 'channel': 'IBCOM', 'onHoldInformation': null, 'relatedContent': [], 'qualifiers': [], 'reportingWeb': { 'device': 'DMRC', 'idColective': '', 'officeIata': 'MADIB08AB', 'iata': 'I', 'product': '1' }, 'flexibilizationCapabilitiesInformation': null, 'genericDisruptionCapabilitiesInformation': null, 'upgInformation': { 'url': null, 'flightsInformation': null, 'bidable': false }, 'orderFlags': [{ 'type': 'PRINT_ITINERARY', 'enabled': true }, { 'type': 'ON_BUSINESS_MODIFICATION', 'enabled': true }, { 'type': 'VOUCHER_REFUND', 'enabled': false }, { 'type': 'CASH_REFUND', 'enabled': false }, { 'type': 'ALLOWED_REFUND_CASH', 'enabled': false }, { 'type': 'ALLOWED_REFUND_VOUCHER', 'enabled': false }, { 'type': 'ALLOWED_INVOLUNTARY_FLIGHT_CHANGE', 'enabled': false }, { 'type': 'VOUCHER_REFUND_ON_DEMAND', 'enabled': false }, { 'type': 'VOUCHER_REFUND_RESTRICTION', 'enabled': false }, { 'type': 'ALLOWED_VOUCHER_COMPENSATION', 'enabled': true }], 'isAirShuttle': false, 'isOnHold': false
+    };
+    var fakePhoneList = {
+        RESERVAS: { 'prefix': '(+34)', 'telephone': '901 111 500', 'text': 'Reservas y Venta:', 'prefixAlt': '', 'telephoneAlt': '', 'textAlt': '', 'timeText': '24h' }
+    };
+
+    var fakeCommonsUtilService = {
+        'setTitlePage': jasmine.createSpy(),
+    };
+
+    var flightsAvailableCheck = { number: 2, slices: ['MADFCO20210315090500', 'FCOMAD20210322121500'] };
+    beforeEach(function () {
+        angular.mock.module('ib-MmB-refunds-tab-module', 'LocalStorageModule', function ($provide) {
+            $provide.value('MmBAppConstants', fakeMmBAppConstants);
+            $provide.value('MmBDatalayerUtilsService', fakeDatalayerUtilsService);
+            $provide.value('MmBUtilService', fakeMmBUtilService);
+            $provide.value('MMBDatalayerConstants', fakeDatalayerConstants);
+            $provide.value('RedirectionService', fakeRedirectionService);
+            $provide.value('$filter', $filterFake);
+            $provide.value('CommonsUtilService', fakeCommonsUtilService);
+        });
+
+        inject(function (_$rootScope_, _$controller_, _localStorageService_) {
+            $rootScope = _$rootScope_;
+            $scope = _$rootScope_.$new();
+            localStorage = _localStorageService_;
+            localStorage.set('bookingInfo', fakeBookingInfo);
+            localStorage.set('phonesList', fakePhoneList);
+            localStorage.set('fareFamilyConditionsConditions', [
+                { conditions: [
+                    { code: 'REEMBOLSO' }] }])
+            localStorage.set('flexibilityConditions', 'test')
+            localStorage.set('voucherOrderItemsPrice', { refundPercent: 45 })
+            controller = _$controller_('RefundsTabController', {
+                $scope: $scope,
+                $rootScope: $rootScope,
+            });
+        });
+    });
+
+
+    describe('when activate is called', function () {
+
+        it('and check normal', function (done) {
+            controller.$onInit();
+            done();
+        });
+
+        it('and call checkConditions with faremilyConditions null', function(done){
+            localStorage.set('fareFamilyConditionsConditions', null);
+            controller.$onInit();
+            done();
+        });
+    });
+
+    describe('When redirectToExternalVoucherForm is called', function () {
+        it('Should redirect to external', function (done) {
+            controller.redirectToExternalVoucherForm();
+            done();
+        });
+
+    });
+
+});

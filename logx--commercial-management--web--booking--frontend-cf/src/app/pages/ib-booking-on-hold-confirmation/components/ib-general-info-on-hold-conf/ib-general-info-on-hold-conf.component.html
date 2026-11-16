@@ -1,0 +1,148 @@
+<div class="row">
+    <div class="col-xs-12">
+      <div class="container-title">
+        <span class="text text-bold">{{ 'ON_HOLD_CONF_TEXT_1' | translate }}: {{ generalInfo.pnr }}</span>
+        <h1 class="text-title u-mb-small">{{ 'ON_HOLD_CONF_TEXT_2' | translate }}{{ generalInfo.destination.city.description }}</h1>
+        <ul class="container-list">
+          <li *ngIf="!isMulticity" class="container-item">
+            <span class="text text-bold">
+              <strong class="text text-bold">{{ 'GENERAL_OUTBOUND_TEXT' | translate }}</strong>
+            </span>
+            <span class="text">{{ (generalInfo.departureTime.date |  date:'dd/MM/yyyy') }}</span>
+          </li>
+          <li *ngIf="!isMulticity && generalInfo?.arrivalTime" class="container-item">
+            <span class="text text-bold">
+              <strong class="text text-bold">{{ 'GENERAL_INBOUND_TEXT' | translate }}</strong>
+            </span>
+            <span class="text">{{ (generalInfo?.arrivalTime.date | date:'dd/MM/yyyy') }}</span>
+          </li>
+          <li class="container-item">
+            <span class="container-icon icon-persona"></span>
+            <span class="text text-small">x {{ generalInfo.passengersNumber }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="container-box u-pl-none u-pr-none u-pb-none">
+            <div class="box-top">
+                <span *ngIf="!generalInfo.notConfirmable"
+                    class="box-title">{{ 'ON_HOLD_CONF_TEXT_3' | translate }}</span>
+                <span *ngIf="generalInfo.notConfirmable"
+                    class="box-title">{{ 'ON_HOLD_CONF_TEXT_5' | translate }}</span>
+                <div *ngIf="generalInfo.notConfirmable && !generalInfo.warnings" class="u-mt-small u-mb-small">
+                    <div class="box-message icon-alertas_2">
+                        <div class="box-message--spacing">
+                            <p class="box-message--text">{{ 'ON_HOLD_NOT_CONF_MESSAGE_1' | translate }}{{ 'ON_HOLD_NOT_CONF_NUMB_TEL' | translate }}{{ 'ON_HOLD_NOT_CONF_MESSAGE_2' | translate }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="generalInfo.warnings">
+                    <div *ngFor="let warning of generalInfo.warnings | keyvalue" class="u-mt-small u-mb-small">
+                        <div class="box-message-warning icon-alertas_2">
+                            <div class="box-message--spacing">
+                                <p class="box-message--text" [innerHTML]="warning.value.description"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ng-container *ngIf="remainingTime$ | async as remainingTime">
+                    <span class="box-subtitle u-mb-small">
+                    {{ 'ON_HOLD_CONF_TEXT_4' | translate }}
+                    </span>
+                    <div class="box-wrapper">
+                        <div class="box-mini-number">
+                            <span class="text-counter-number">{{ remainingTime.hours }}</span>
+                            <span class="text-counter-text">
+                            {{ ('GENERAL_HOUR_TEXT' | ibWordNumberFormat: +remainingTime.hours | translate) }}
+                            </span>
+                        </div>
+                        <div class="box-mini-number">
+                            <span class="text-counter-number">{{ remainingTime.minutes }}</span>
+                            <span class="text-counter-text">
+                            {{ ('GENERAL_MINUTE_TEXT' | ibWordNumberFormat: +remainingTime.minutes | translate) }}
+                            </span>
+                        </div>
+                        <div class="box-mini-number">
+                            <span class="text-counter-number">{{ remainingTime.seconds }}</span>
+                            <span class="text-counter-text">
+                            {{ ('GENERAL_SECOND_TEXT' | ibWordNumberFormat: +remainingTime.seconds | translate) }}
+                            </span>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="box-bottom">
+                <div class="box-passenger">
+                    <div class="box-passenger-shadow">
+                        <div class="box-passenger-cols">
+                            <div class="box-passenger-cols-left">
+                                <span class="box-passenger-cols-title u-mb-small">{{ 'GENERAL_PASSENGER_TEXT' | translate }}</span>
+                                <ul class="box-passenger-list">
+                                    <li *ngFor="let passenger of passengersInfo" class="box-passenger-item">
+                                        <span class="box-passenger-item-text">{{ passenger.personalInfo.name }} {{ passenger.personalInfo.surname ? passenger.personalInfo.surname : '' }} {{ passenger.personalInfo.lastSurname ? passenger.personalInfo.lastSurname : '' }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div *ngIf="generalInfo.price" class="box-passenger-cols-right">
+                                <span class="box-passenger-cols-title u-mb-small">{{ 'GENERAL_TOTAL_PRICE_TEXT' | translate }}</span>
+                                <span [ngClass]="{'text-price--long': generalInfo.originalPrice.length > 10 }"
+                                    class="text-price">{{ generalInfo.originalPrice }}</span>
+                                <span class="text-price-per-pass">
+                                ({{ generalInfo.price.perPassenger }} {{ 'ON_HOLD_CONF_PRICE_PER_PASSENGER' | translate }})
+                                </span>
+                                <p *ngIf="isUserLogged && aviosToEarn !== 0 && !resident && !isIbZero && !isOnb" class="text-price-info">
+                                {{ 'AVIOS_ELITE_TO_EARN_USER_1' | translate }}
+                                    <span class="text-price-info text-price-info--bold">
+                                        {{ aviosToEarn | aviosFormat }}
+                                        {{ 'AVIOS_ELITE_TO_EARN_USER_2' | translate }}
+                                        {{ elitePointsToEarn | aviosFormat }}
+                                        {{ 'AVIOS_ELITE_TO_EARN_USER_3' | translate }}
+                                    </span>
+                                </p>
+                                <p *ngIf="(isIbZero || !isUserLogged) && aviosToEarn !== 0 && !resident" class="text-price-info">
+                                {{ 'AVIOS_ELITE_TO_EARN_USER_1' | translate }}
+                                    <span class="text-price-info text-price-info--bold">
+                                        {{ aviosToEarn | aviosFormat }}
+                                        {{ 'AVIOS_ELITE_TO_EARN_ANOM_2' | translate }}
+                                        {{ elitePointsToEarn | aviosFormat }}
+                                        {{ 'AVIOS_ELITE_TO_EARN_ANOM_3' | translate }}
+                                    </span>
+                                {{ 'AVIOS_ELITE_TO_EARN_ANOM_4' | translate }}
+                                </p>
+                                <p *ngIf="aviosToEarn !== 0 && resident" class="text-price-info">
+                                {{ 'GET_AT_LEAST' | translate }}
+                                    <span class="text-price-info text-price-info--bold">
+                                        {{ aviosToEarn | aviosFormat }}
+                                        {{ 'AVIOS_ELITE_TO_EARN_USER_2' | translate }}
+                                        {{ elitePointsToEarn | aviosFormat }}
+                                        {{ 'AVIOS_ELITE_TO_EARN_USER_3' | translate }}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ng-container *ngIf="!generalInfo.notConfirmable">
+                    <div [ngClass]="{'container-buttons-content--second-button': showAncillariesButton}" class="container-buttons-content">
+                        <div class="container-buttons-left">
+                            <button *ngIf="showAncillariesButton" type="button" class="ib-button ib-button--reverse ib-button--spacing-right button" (click)="redirectToAncillaries()"
+                                    title="{{ 'CUSTOM_FLIGHT_TEXT' | translate }}">{{ 'CUSTOM_FLIGHT_TEXT' | translate }}</button>
+                            <button id="ON_HOLD_CONTINUE" type="button" class="ib-button ib-button--w-small button" (click)="confirmOrder()"
+                                    title="{{ 'GENERAL_BUY_TEXT' | translate }}">{{ 'GENERAL_BUY_TEXT' | translate }}</button>
+                        </div>
+                        <div class="container-buttons-right">
+                            <a href="javascript:void(0)" (click)="cancelOrder()" title="{{ 'GENERAL_CANCEL_TEXT' | translate }}" class="ib-link">{{ 'GENERAL_CANCEL_TEXT' | translate }}</a>
+                        </div>
+                    </div>
+                </ng-container>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

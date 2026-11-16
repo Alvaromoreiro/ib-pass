@@ -1,0 +1,123 @@
+<div
+  class="ib-ui-edition-forms ib-health-form"
+  data-ng-class="HealthFormCtrl.modifier"
+  uib-dropdown
+>
+  <div class="ib-ui-edition-forms__header ib-ui-edition-forms__header--focus">
+    <div
+      class="ib-ui-edition-forms__header-title"
+      data-ng-if="HealthFormCtrl.isChangeFlight"
+      data-ng-click="HealthFormCtrl.toggleCollapse()"
+    >
+    <p class="ib-health-form__changes--title ib-ui-titles--title-bold-hard ib-health-form__icon-quality ib-ui-titles-icon-health-form"><span class="ib-health-form__changes--title-text">{{'MMB_CHANGE_FLIGHTS_ADVISORY_4' | translate}}</span></p>
+    <p class="ib-health-form__changes--subtitle ib-ui-titles--title-bold-hard">{{'MMB_CHANGE_FLIGHTS_ADVISORY_5' | translate}}</p>
+    <p class="ib-health-form__extra-info">
+      {{'MMB_CHANGE_FLIGHTS_REFUND_BOLD_1' | translate}}
+      <b>{{'MMB_CHANGE_FLIGHTS_BOLD_2' | translate}}</b>
+      {{'MMB_CHANGE_FLIGHTS_REFUND_BOLD_3' | translate}}
+      <span>{{'MMB_CHANGE_FLIGHTS_REFUND_BOLD_5' | translate}}</span>
+    </p>
+    </div>
+    <div
+      class="ib-ui-edition-forms__header-title"
+      data-ng-if="HealthFormCtrl.isRefund"
+      data-ng-click="HealthFormCtrl.toggleCollapse()"
+    >
+    <p class="ib-health-form__changes--title ib-ui-titles--title-bold-hard ib-health-form__icon-quality ib-ui-titles-icon-health-form"><span class="ib-health-form__changes--title-text">{{'MMB_REFUND_ADVISORY_4' | translate}}</span></p>
+    <p class="ib-health-form__changes--subtitle ib-ui-titles--title-bold-hard">{{'MMB_REFUND_ADVISORY_5' | translate}}</p>
+    <p class="ib-health-form__extra-info">
+      {{'MMB_CHANGE_FLIGHTS_REFUND_BOLD_1' | translate}}
+      <b>{{'MMB_REFUND_BOLD_2' | translate}}</b>
+      {{'MMB_CHANGE_FLIGHTS_REFUND_BOLD_3' | translate}}
+      <span>{{'MMB_CHANGE_FLIGHTS_REFUND_BOLD_4' | translate}}</span>
+    </p>
+    </div>
+
+    <button
+      class="ib-health-form__collapse"
+      data-ng-click="HealthFormCtrl.toggleCollapse();"
+      aria-expanded="false"
+      aria-controls="ef-{{$id}}"
+      uib-dropdown-toggle
+    >
+      <span
+        class="ib-health-form__collapse-icon ib-accordion__icon"
+        data-ng-class="{'icon-flecha_1_abajo': HealthFormCtrl.isCollapsed, 'icon-flecha_1_arriba': !HealthFormCtrl.isCollapsed}"
+      ></span>
+    </button>
+  </div>
+
+  <div
+    class="ib-ui-edition-forms__content--pt-16 ib-box--no-lateral-padding"
+    id="ef-{{$id}}"
+    aria-hidden="HealthFormCtrl.isCollapsed"
+    uib-collapse="HealthFormCtrl.isCollapsed"
+  >
+    <div class="ib-ui-edition-forms__content-form">
+      <table
+        datatable=""
+        class="u-mt-none ib-table-shuttle ib-table-shuttle--health-form"
+      >
+        <caption class="hide-accessible">
+          HEALTH FORM TABLE
+        </caption>
+        <thead class="ib-table-shuttle__head">
+          <tr class="ib-table-shuttle__row">
+            <th
+              class="ib-table-shuttle__column ib-table-shuttle__column--head ib-table-shuttle__column--cursor"
+            >
+              <p
+                class="ib-table-shuttle__text ib-table-shuttle__text--head u-text-decoration-none ib-health-form__col-header"
+              >
+                {{'MMB_PASSENGER' | translate}}
+              </p>
+            </th>
+            <th
+              class="ib-table-shuttle__column ib-table-shuttle__column--head ib-table-shuttle__column--column-links"
+            >
+              <p
+                class="ib-table-shuttle__text--pr-0 ib-table-shuttle__text--head u-text-decoration-none ib-health-form__col-header"
+              >
+                {{'MMB_DOCUMENTATION' | translate}}
+              </p>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="ib-table-shuttle__body">
+          <tr
+            class="ib-table-shuttle__row ib-table-shuttle__row--responsive ib-table-shuttle__row--reverse"
+            ng-repeat="passenger in HealthFormCtrl.bookingInfo.passengers"
+          >
+            <td
+              class="ib-table-shuttle__column ib-table-shuttle__column--item-1 ib-table-shuttle__column--responsive"
+              data-column="{{ 'MMB_PASSENGER' | translate }}"
+            >
+              <span
+                class="ib-table-shuttle__text ib-health-form__passenger-icon"
+                data-ng-class="{'icon-persona': passenger.passengerType !== 'CHILD' && passenger.passengerType !== 'INFANT','icon-iberia_ninos' : passenger.passengerType === 'CHILD', 'icon-bebe' : passenger.passengerType === 'INFANT'}"
+                >{{passenger.personalInfo.name}}
+                {{passenger.personalInfo.surname}}</span
+              >
+            </td>
+            <td
+              class="ib-table-shuttle__column ib-table-shuttle__column--item-2 ib-table-shuttle__column--responsive"
+              data-column="{{ 'MMB_DOCUMENTATION' | translate }}"
+            >
+              <div class="ib-table-shuttle__text ib-health-form__add-form">
+                <span class="icon-nota ib-health-form__icon"></span>
+                <a
+                  ng-href="{{passenger.url}}&language={{HealthFormCtrl.language}}"
+                  ng-click="HealthFormCtrl.redirectHeathForm(passenger)"
+                  class="ib-lateral-menu__sublink ib-health-form__link"
+                  target="_blank"
+                >
+                  {{'MMB_ATTATCH_BILL'|translate}}
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

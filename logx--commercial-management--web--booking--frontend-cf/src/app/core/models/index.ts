@@ -1,0 +1,9 @@
+import './ib-booking-availability/availability-models';
+import './ib-booking-availability/availability-transformer-model';
+import './ib-booking-availability/ib-flash-offer-models';
+import './ib-check-partners-discount/ib-check-partners-discount-models';
+import './upgBidAndAvios/upgBidsandAvios-model';
+import './ib-booking-on-hold-now/ib-booking-on-hold-now-model';
+import './generic-models/generic-models';
+import '../enums/ib-booking-paymments/ib-booking-payments-enum';
+import './ib-booking-notice/ib-booking-notice-model';

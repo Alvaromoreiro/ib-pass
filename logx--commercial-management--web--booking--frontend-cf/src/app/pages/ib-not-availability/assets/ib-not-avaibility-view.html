@@ -1,0 +1,86 @@
+<style>
+    @media (max-width: 1024px) {
+        #lyt490 {
+            font-size: 13px !important;
+        }
+    }
+</style>
+<main class="ib-layout ib-layout--bck-1">
+    <ib-background></ib-background>
+
+    <ib-main-header ng-if="!root.showMainHeader" ng-hide="$root.showHeaders"></ib-main-header>
+    <div class="container ib-container-footer">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-error-amadeus u-mb-large u-mb-medium-md  u-mb-medium-mobile">
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+                        <h1>
+                            <span class="ib-error-amadeus__title">{{ 'BKI_REDEMPTION_ALERT_TITLE_1' | translate
+                                }}</span>
+                            <span class="ib-error-amadeus__title">{{ 'BKI_REDEMPTION_ALERT_TITLE_2' | translate
+                                }}</span>
+                        </h1>
+                    </div>
+                    <h2 class="ib-error-amadeus__description">{{ 'BKI_REDEMPTION_ALERT_SUBTITLE' | translate }}</h2>
+                </div>
+                <div ng-if="!NotAvaibilityCtlr.generatedAlert"
+                    class="ib-banner ib-banner__button-box ib-button--notify-mh">
+                    <button ng-if="!NotAvaibilityCtlr.sending && NotAvaibilityCtlr.email !== null"
+                        title="Reserva con Avios" ng-click="NotAvaibilityCtlr.sendLetMeKnowAlert()"
+                        class="ib-button ib-button--light-inverse icon-mensajes ib-button--notify ib-button--special">{{
+                        'LET_ME_KNOW_BUTTON' | translate | textFormatter: NotAvaibilityCtlr.email }}</button>
+                    <div ng-if="NotAvaibilityCtlr.sending"
+                        class="ib-layout__line-spacing ib-layout__line-spacing--text-center">
+                        <button type="button"
+                            class="ib-button ib-button--light-inverse ib-button--notify ib-button--special">
+                            <div class="ib-overlay-fly__icon">
+                                <div class="circle"></div>
+                                <div class="circle"></div>
+                            </div>
+                            {{ 'AVIOS_CALCULATOR_PROCESS_OK' | translate }}
+                        </button>
+                    </div>
+                </div>
+                <div ng-if="NotAvaibilityCtlr.generatedAlert"
+                    class="ib-layout__line-spacing ib-layout__line-spacing--text-center">
+                    <span
+                        class="ib-text--block icon-validar ib-text--to-center ib-text--color-light ib-text--especial ib-text--xxbig ib-text--with-icon-big">{{
+                        'AVIOS_CALCULATOR_SUBSCRIBED_OK' | translate }}</span>
+                </div>
+                <div ng-if="NotAvaibilityCtlr.generatedAlert"
+                    class="ib-avios-not-found--content ib-avios-not-found--content-big-lg u-mb-medium">
+                    <span id="lyt490"
+                        class="ib-text--block ib-text--to-center ib-text--color-light ib-text--lh-medium ib-text--medium ib-text--fslhmedium ib-text--fslhmarginxtra">{{
+                        'AVIOS_DURATION_ALERT_1' | translate }} {{ 'AVIOS_DURATION_ALERT_2' | translate }} {{
+                        'AVIOS_DURATION_ALERT_3' | translate }}</span>
+                </div>
+                <div class="ib-avios-not-found--content ib-avios-not-found--content-big-lg u-mt-xmedium  u-mb-medium">
+                    <span
+                        class="ib-text--block ib-text--to-center ib-text--color-light ib-text--lh-medium ib-text--fslhmedium">{{
+                        'BKI_REDEMPTION_ALERT_INFO_MESSAGE' | translate }}</span>
+                </div>
+
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--text-center u-mt-large-mobile">
+                    <a data-ng-click="NotAvaibilityCtlr.goRedemptionSearchEnginePage()"
+                        class="ib-button ib-button--unfocused ib-button--big ib-button--w-xlarge u-mb-small-mobile ib-text--medium ib-text--fslhmargin"
+                        title="{{ 'BKI_REDEMPTION_CHANGE_DATE_BUTTON' | translate
+                    }}">{{ 'BKI_REDEMPTION_CHANGE_DATE_BUTTON' | translate
+                        }}</a>
+                    <a data-ng-click="NotAvaibilityCtlr.getCurrentURL()"
+                        class="ib-button ib-button--big ib-button--w-xlarge ib-text--medium" title="{{ 'BKI_REDEMPTION_SEARCH_BUTTON' | translate
+                    }}">{{ 'BKI_REDEMPTION_SEARCH_BUTTON' | translate
+                        }}</a>
+                </div>
+
+                <div class="ib-text--to-center u-mt-large u-mb-large u-mb-big-mobile">
+                    <a ng-click="NotAvaibilityCtlr.redirectToIberiaPurchaseFlightsAvios()" href="javascript:void(0)"
+                       datalayer-info-click="{{ 'TRAVEL_TIPS' | translate }}"
+                       class="ib-link--color-light ib-text--extra-largest ib-text--to-center ib-text--color-light ib-text--especial ib-text--bold"
+                       title="{{'TRAVEL_TIPS' | translate}}">{{'TRAVEL_TIPS' | translate}}</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <ib-main-footer is-full-width="::true" is-fixed="::true"></ib-main-footer>
+</main>

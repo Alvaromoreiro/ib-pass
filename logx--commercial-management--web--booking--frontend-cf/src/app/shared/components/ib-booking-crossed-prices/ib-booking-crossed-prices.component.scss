@@ -1,0 +1,186 @@
+@import 'src/styles/component-tools';
+
+:host {
+    width: 100%;
+}
+
+.crossed-prices {
+    display: grid;
+    align-items: baseline;
+    column-gap: rem(4);
+    grid-template-areas:
+      "bestPrice shown";
+    grid-template-columns: auto min-content;
+
+    &.hasDiscount {
+      grid-template-areas:
+        "bestPrice shown"
+        ". without-discount";
+    }
+
+    .price__shown {
+        font-weight: 700; 
+        -webkit-font-smoothing: antialiased; 
+        -moz-osx-font-smoothing: grayscale;
+        grid-area: shown;
+    }
+
+    .bestPrice { grid-area: bestPrice; }
+
+    .price__without-discount {
+        font-family: var(--font-regular);
+        font-size: rem(11);
+        text-decoration: line-through;
+        grid-area: without-discount;
+    }
+}
+
+.bestPrice {
+    place-self: anchor-center end;
+}
+
+.crossed-prices--slice {
+    justify-content: right;
+    text-align: right;
+
+    &.hasDiscount {
+        margin: rem(4) 0;
+        row-gap: 0;
+    }
+
+    .price {
+        color: var(--ib-color-grey-800-33);
+
+        &__shown {
+            font-family: var(--font-headline);
+            font-size: rem(22);
+
+        }
+
+        &__without-discount {
+            font-family: var(--font-regular);
+            font-size: rem(13);
+            text-decoration: line-through;
+        }
+    }
+
+    &.mobile {
+        .price {
+            &__shown {
+                font-size: rem(18);
+                font-weight: 400;
+                line-height: rem(21);
+                -webkit-font-smoothing: antialiased; 
+                -moz-osx-font-smoothing: grayscale;
+
+                &.long {
+                    font-size:rem(14);
+                }
+            }
+
+            &__without-discount {
+                font-size: rem(13);
+                line-height: normal;
+                -webkit-font-smoothing: antialiased; 
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+    }
+
+
+}
+
+.crossed-prices--slice-detail, .crossed-prices--segment {
+    text-align: end;
+
+    .price {
+        &__without-discount {
+            font-family: var(--font-regular);
+            font-size: rem(11);
+        }
+
+        &__shown {
+            font-family: var(--font-headline);
+            font-size: rem(18);
+
+        }
+
+    }
+}
+
+.crossed-prices--detail {
+    justify-content: left;
+    column-gap: 0;
+
+    .price {
+        &__without-discount {
+            font-family: var(--font-regular);
+            font-size: rem(13);
+        }
+
+        &__shown {
+            font-family: var(--font-headline);
+            font-size: rem(18);
+            line-height: rem(22);
+        }
+
+    };
+}
+
+.crossed-prices--fare {
+    justify-content: left;
+    column-gap: 0;
+
+    .price {
+        &__shown {
+            font-family: var(--font-headline);
+            font-size: rem(18);
+        }
+
+        &__without-discount {
+            font-family: var(--font-regular);
+            font-size: rem(11);
+            text-decoration: line-through;
+        }
+    };
+}
+
+@include media-query-range("mf-sm") {
+     .crossed-prices--slice {
+        .price__without-discount {
+           font-size: rem(13);
+        }
+     }
+}
+
+@include media-query-range("mf-md") {
+     .crossed-prices--slice-detail, .crossed-prices--segment {
+        .price__shown {
+           font-size: rem(18);
+           line-height: 100%;
+
+           &.long {
+            font-size: rem(14);
+           }
+        }
+     }
+
+        .crossed-prices--fare {
+            .price__without-discount {
+                font-size: rem(11);
+            }
+    }
+}
+
+@include media-query-range("mf-lg") {
+     .crossed-prices--slice-detail, .crossed-prices--segment {
+        .price__shown {
+           font-size: rem(18);
+           line-height: 100%;
+
+           &.long {
+            font-size: rem(18);
+           }
+        }
+     }
+}

@@ -1,0 +1,11 @@
+import './ib-booking-modal-module';
+import './directives/ib-cpf-validator-directive';
+import './directives/ib-format-document';
+import './services/ib-booking-modal-service';
+import './controllers/ib-booking-fare-details-controller';
+import './controllers/ib-filters-modal-controller';
+import './controllers/ib-generic-modal-controller';
+import './controllers/ib-insurance-modal-controller';
+import './controllers/ib-loading-plane-controller';
+import './controllers/ib-modal-itravel-warning-controller';
+import './services/upgraded/ib-booking-modal-service-bridge.service';

@@ -1,0 +1,231 @@
+/* -------------------------------------------------------------
+    #DROPDOWN-ROOM
+----------------------------------------------------------------- */
+.#{$wefront__namespace}dropdown-room {
+    position: absolute;
+    z-index: 10;
+    top: rem(65);
+    right: rem(-197);
+    left: auto;
+    width: rem(830);
+    padding: 0;
+    border-radius: rem(4);
+    background: color(white);
+    box-shadow: 0 rem(2) rem(3) 0 color(black, 0.47), 0 rem(-1) rem(4) 0 color(black, 0.23);
+
+    &::after {
+        content: " ";
+        position: absolute;
+        bottom: 100%;
+        left: 37.5%;
+        width: 0;
+        height: 0;
+        margin-left: rem(-8);
+        border: solid transparent;
+        border-width: rem(8);
+        border-color: color(white, 0);
+        border-bottom-color: color(white);
+    }
+
+    &::before {
+        content: " ";
+        position: absolute;
+        bottom: 100%;
+        left: 37.5%;
+        width: 0;
+        height: 0;
+        margin-left: rem(-8);
+        border: solid transparent;
+        border-width: rem(8);
+        border-color: color(white, 0);
+        border-bottom-color: color(black);
+    }
+
+    &--extend {
+        width: rem(1035);
+
+        &::after,
+        &::before {
+            left: 51%;
+        }
+    }
+
+    // Items
+
+    &__row {
+        padding-top: rem(20);
+        padding-bottom: rem(10);
+        border-bottom: rem(1) solid color(gray-40);
+        font-size: 0;
+    }
+
+    &__col {
+        display: inline-block;
+        vertical-align: top;
+
+        // Modifiers
+
+        &--xs {
+            width: rem(120);
+            padding: 0 rem(8);
+        }
+
+        &--sm {
+            width: 100%;
+            max-width: rem(185);
+            padding: 0 rem(15) 0 rem(30);
+        }
+
+        &--md {
+            padding-left: rem(8);
+        }
+    }
+
+    &__number-room {
+        font-family: $font-special;
+        font-size: rem(34);
+        float: left;
+    }
+
+    &__title-room {
+        display: block;
+        padding: rem(8) 0 0 rem(47);
+        font-family: $font-special;
+        font-size: rem(20);
+        line-height: rem(20);
+    }
+
+    &__delete-room {
+        display: block;
+        padding: rem(8) 0 0 rem(47);
+        font-size: rem(11);
+        text-decoration: underline;
+        color: color(gray-10);
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: color(red-10);
+        }
+
+        &--responsive {
+            display: none;
+            padding-left: rem(8);
+        }
+    }
+
+    &__info-room {
+        display: block;
+        padding-top: rem(4);
+        font-size: rem(12);
+        color: color(gray-30);
+    }
+
+    // Footer
+
+    &__footer {
+        overflow: hidden;
+        padding: rem(23) rem(32);
+    }
+
+    &__footer-container {
+        display: block;
+        width: 100%;
+        font-size: 0;
+    }
+
+    &__footer-left {
+        display: inline-block;
+        width: calc(100% - 12rem);
+        padding-right: 0.625rem;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    &__footer-right {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+// Mixin
+
+@mixin dropdown-room-mobile() {
+    .#{$wefront__namespace}dropdown-room {
+        top: rem(54);
+        left: 0;
+        width: 100%;
+        border: rem(1) solid color(gray-120);
+        border-radius: 0;
+        box-shadow: none;
+
+        &::before,
+        &::after {
+            display: none;
+        }
+
+        // Items
+
+        &__row {
+            padding-top: rem(16);
+            padding-right: rem(8);
+            padding-left: rem(8);
+        }
+
+        &__col {
+            &--sm {
+                max-width: 100%;
+                padding-right: rem(8);
+                padding-bottom: rem(3);
+                padding-left: rem(8);
+            }
+
+            &--xs {
+                width: 100%;
+                padding-bottom: rem(11);
+            }
+        }
+
+        &__title-room {
+            padding-top: rem(20);
+            padding-left: rem(40);
+        }
+
+        &__delete-room {
+            display: none;
+
+            &--responsive {
+                display: block;
+            }
+        }
+        // Footer
+        &__footer {
+            padding: rem(15) rem(16);
+        }
+
+        &__footer-left {
+            display: block;
+            width: 100%;
+            padding: 0 0 rem(18);
+        }
+
+        &__footer-right {
+            display: block;
+        }
+
+        &__footer-btn {
+            width: 100%;
+        }
+    }
+}
+
+// Responsive
+
+
+@include media-query('md') {
+    @include dropdown-room-mobile();
+}
+
+@include media-query('mobile') {
+    @include dropdown-room-mobile();
+}

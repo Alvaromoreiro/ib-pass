@@ -1,0 +1,30 @@
+<div class="ribbon-calendar-mobile">
+    <button class="ribbon-prev"
+        *ngIf="!scrollLimitLeft"
+        (click)="scrollHandler( true )"
+        title="{{'BUTTON_PREVIOUS'|translate}}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" fill="none" viewBox="0 0 16 17">
+            <path fill="#D7192D" fill-rule="evenodd" d="m5.79 8.5 6.76-6.605a.382.382 0 0 0 0-.55l-.749-.731a.402.402 0 0 0-.562 0L3.45 8.226a.382.382 0 0 0 0 .548l7.79 7.612a.402.402 0 0 0 .562 0l.75-.732a.382.382 0 0 0 0-.549L5.79 8.5Z" clip-rule="evenodd"/>
+        </svg>
+    </button>
+    <div class="ribbon-days ribbon-days--carousel-scroll">
+        <ng-container *ngFor="let day of calendarSlides">
+            <ib-mobile-ribbon-day
+                (dayLoadingVisible)="onDayLoadingVisible( $event )"
+                (changeDay)="onChangeDay( $event )"
+                [ngClass]="{'selectedDay': calendarData.selectedSlide === day.slidePosition }"
+                [currentSelected]="calendarData.selectedSlide"
+                [currentDay]="day"
+                [dateState]="day.state"
+                ></ib-mobile-ribbon-day>
+        </ng-container>
+    </div>
+    <button class="ribbon-next"
+        *ngIf="!scrollLimitRigth"
+        (click)="scrollHandler( false )"
+        title="{{'BUTTON_NEXT'|translate}}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" fill="none" viewBox="0 0 16 17">
+            <path fill="#D7192D" fill-rule="evenodd" d="m10.21 8.5-6.76 6.605a.382.382 0 0 0 0 .55l.749.731a.402.402 0 0 0 .561 0l7.79-7.612a.382.382 0 0 0 0-.548L4.76.614a.402.402 0 0 0-.561 0l-.75.732a.382.382 0 0 0 0 .549L10.21 8.5Z" clip-rule="evenodd"/>
+        </svg>
+    </button>
+</div>

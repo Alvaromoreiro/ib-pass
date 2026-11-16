@@ -1,0 +1,104 @@
+<div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="ib-layout__line-spacing">
+                <span class="ib-text ib-text--block ib-text--xbig ib-text--especial">{{'APIS_ORIGIN_ADDRESS_SECTION_TITLE'|translate}}</span>
+            </div>
+        </div>
+</div>
+<div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="ib-layout__line-spacing">
+                <div class="ib-input" data-ng-class="{'ib-input--error' :apisOriginInfoCtrl.containerForm.$submitted && apisOriginInfoCtrl.containerForm.home_address.$invalid}">
+                    <label class="ib-input__label" data-ng-class="{'ib-input__label--focus' : apisOriginInfoCtrl.homeAddrFocused || apisOriginInfoCtrl.containerForm.home_address.$viewValue != null || apisOriginInfoCtrl.isInfant}"
+                        for="APIS_HOME_ADDRESS">{{ 'APIS_ADDRESS_FIELD_LABEL'|translate}}</label>
+                    <input class="ib-input__input" type="text" id="APIS_HOME_ADDRESS" name="home_address"
+                        ng-model="apisOriginInfoCtrl.homeAddress.address"
+                        maxlength="{{::$root.MmBPatterns.ADDRESS_MAX_LENGTH}}" ng-required="true"
+                        ng-focus="apisOriginInfoCtrl.homeAddrFocused=true" ng-blur="apisOriginInfoCtrl.homeAddrFocused=false"
+                        ng-disabled="apisOriginInfoCtrl.isInfant"
+                    />
+                </div>
+                <div ng-messages="apisOriginInfoCtrl.containerForm.$submitted && apisOriginInfoCtrl.containerForm.home_address.$error">
+                    <div class="ib-alert ib-alert--error" ng-message="required">{{'APIS_HOME_ADDRESS_REQUIRED_ERROR'|translate}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="ib-layout__line-spacing">
+                <div class="ib-input" data-ng-class="{'ib-input--error' : apisOriginInfoCtrl.containerForm.$submitted && apisOriginInfoCtrl.containerForm.home_zipCode.$invalid}">
+                    <label class="ib-input__label" for="APIS_ZIP_CODE" ng-class="{'ib-input__label--focus' : apisOriginInfoCtrl.zipCodeFocused || apisOriginInfoCtrl.containerForm.home_zipCode.$viewValue || apisOriginInfoCtrl.isInfant}">
+                        {{'APIS_POSTAL_CODE_FIELD_LABEL'|translate}}</label>
+                    <input class="ib-input__input" type="text" id="APIS_ZIP_CODE" name="home_zipCode"
+                        ng-model="apisOriginInfoCtrl.homeAddress.zipCode"
+                        maxlength="{{::$root.MmBPatterns.MAX_LENGTH_ZIP_CODE}}" ng-required="true"
+                        ng-focus="apisOriginInfoCtrl.zipCodeFocused=true" ng-blur="apisOriginInfoCtrl.zipCodeFocused=false" ng-disabled="apisOriginInfoCtrl.isInfant"
+                    />
+                </div>
+                <div ng-messages="apisOriginInfoCtrl.containerForm.$submitted && apisOriginInfoCtrl.containerForm.home_zipCode.$error">
+                    <div class="ib-alert ib-alert--error" ng-message="required">{{'APIS_ORIGIN_POSTAL_CODE_REQUIRED_ERROR'|translate}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="!apisOriginInfoCtrl.isInfant" class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="ib-layout__line-spacing">
+                <div class="ib-input" data-ng-class="{'ib-input--error' : apisOriginInfoCtrl.containerForm.$submitted && apisOriginInfoCtrl.containerForm.home_city.$invalid}">
+                    <label data-ng-class="{'ib-input__label--focus' : apisOriginInfoCtrl.homeCityFocused || apisOriginInfoCtrl.containerForm.home_city.$viewValue || apisOriginInfoCtrl.isInfant}"
+                        class="ib-input__label" for="APIS_ORIGIN_CITY">{{'APIS_CITY_FIELD_LABEL'|translate}}</label>
+                    <input class="ib-input__input" type="text" id="APIS_ORIGIN_CITY" name="home_city" ng-focus="apisOriginInfoCtrl.homeCityFocused=true"
+                        ng-blur="apisOriginInfoCtrl.homeCityFocused=false" ng-model="apisOriginInfoCtrl.homeAddress.city"
+                        maxlength="{{::$root.MmBPatterns.CITY_MAX_LENGTH}}" ng-pattern="::$root.MmBPatterns.NAME_SURNAME_PATTERN" ng-disabled="apisOriginInfoCtrl.isInfant"
+                        data-ib-validator-cleaner="{{::$root.MmBPatterns.NAME_SURNAME_CLEANER}}" ng-required="true"
+                    />
+                </div>
+                <div ng-messages="apisOriginInfoCtrl.containerForm.$submitted && apisOriginInfoCtrl.containerForm.home_city.$error">
+                    <div class="ib-alert ib-alert--error" ng-message="required">{{'APIS_ORIGIN_CITY_REQUIRED_ERROR'|translate}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+           <div class="ib-layout__line-spacing">
+                <div class="ib-input" data-ng-class="{'ib-input--error' : apisOriginInfoCtrl.containerForm.$submitted && apisOriginInfoCtrl.containerForm.origin_state.$invalid}">
+                <label data-ng-class="{'ib-input__label--focus' : apisOriginInfoCtrl.state || (apisOriginInfoCtrl.containerForm.origin_state.$viewValue != null && apisOriginInfoCtrl.containerForm.origin_state.$viewValue !== '')}"
+                        class="ib-input__label" for="APIS_ORIGIN_STATE_{{::apisOriginInfoCtrl.index}}">{{'APIS_STATE_FIELD_LABEL'|translate}}</label>
+                        <input class="ib-input__input" type="text" id="APIS_ORIGIN_STATE_{{::apisOriginInfoCtrl.index}}" name="origin_state" ng-focus="apisOriginInfoCtrl.state=true"
+                        ng-blur="apisOriginInfoCtrl.state=false" ng-model="apisOriginInfoCtrl.homeAddress.state" maxlength="{{::$root.MmBPatterns.CITY_MAX_LENGTH}}"
+                        ng-pattern="::$root.CHECKIN_PATTERNS.NAME_SURNAME_PATTERN" data-ib-validator-cleaner="{{::$root.MmBPatterns.NAME_SURNAME_CLEANER}}"
+                        ng-required="true" />
+                </div>
+                <div id="cki-apis-origin-info-state-required-error" ng-messages="apisOriginInfoCtrl.containerForm.$submitted && apisOriginInfoCtrl.containerForm.origin_state.$error">
+                <p class="ib-alert ib-alert--error" ng-message="required">{{'APIS_ORIGIN_STATE_REQUIRED_ERROR'|translate}}</p>
+                </div>
+           </div>
+        </div>
+        <div ng-if="!apisOriginInfoCtrl.isInfant" class="col-md-6 col-sm-12 col-xs-12">
+                <div class="ib-layout__line-spacing">
+                        <div class="ib-select"
+                        data-ng-class="{'ib-select--error': apisOriginInfoCtrl.containerForm.$submitted && apisOriginInfoCtrl.containerForm.APIS_HOME_COUNTRY.$invalid}">
+                        <label class="ib-select__label" for="APIS_HOME_COUNTRY"
+                                data-ng-class="apisOriginInfoCtrl.passengerData.basicInfo.homeCountry ? 'ib-select__label--focus' : 'ib-select__label--unfocus'">
+                                {{'APIS_HOME_COUNTRY_FIELD_LABEL'|translate}}</label>
+                        <ui-select class="ib-select__action" ng-model="apisOriginInfoCtrl.passengerData.basicInfo.homeCountry"
+                                ng-required="true" name="APIS_HOME_COUNTRY" ng-disabled="apisOriginInfoCtrl.isInfant">
+                                <ui-select-match class="ib-select__list-ipt"
+                                placeholder="{{'APIS_HOME_COUNTRY_FIELD_LABEL'|translate}}">
+                                <span class="ib-select__txt" ng-bind="$select.selected.description"></span>
+                                </ui-select-match>
+
+                                <ui-select-choices class="ib-select__list"
+                                repeat="country.code as country in apisOriginInfoCtrl.countries | prefixCheckSpecialCharactersFilter: $select.search">
+                                <span class="ib-select__list-txt" ng-bind="::country.description"></span>
+                                </ui-select-choices>
+                        </ui-select>
+                        </div>
+                        <div
+                        ng-if="apisOriginInfoCtrl.containerForm.$submitted && apisOriginInfoCtrl.containerForm.APIS_HOME_COUNTRY.$invalid">
+                        <div class="ib-alert ib-alert--error">{{'APIS_HOME_COUNTRY_REQUIRED_ERROR'|translate}}</div>
+                        </div>
+                </div>
+        </div>
+</div>
+    
+    
+    

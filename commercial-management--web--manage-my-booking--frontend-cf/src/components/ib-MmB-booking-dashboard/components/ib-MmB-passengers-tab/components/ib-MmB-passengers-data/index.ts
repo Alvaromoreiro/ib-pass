@@ -1,0 +1,1 @@
+import './ib-MmB-passengers-data-component';

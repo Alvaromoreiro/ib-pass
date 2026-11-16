@@ -1,0 +1,27 @@
+	<!-- directive: ib-comment "{{$root.generateDatalayerDOM()}}" !-->
+	<!-- End wrapper-->
+	<section class="container">
+		<!-- Main content-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="ib-layout__header ib-layout__header--title">
+					<h1 class="ib-heading ib-heading--type-1">{{'CHANGE_FLIGHT_TITLE'|translate}}</h1>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<ib-mmb-segment-details ng-if="changeCtrl.showSegmentDetails" show-alert="::false" show-details-flight="::false" show-body="::true" show-state="::false" show-pre-header="::true" show-footer="::false" segment-model="::changeCtrl.model.selectedSegmentInfo"></ib-mmb-segment-details>
+				<section ng-if="changeCtrl.showFlightSearchEngine" class="ib-layout__section">
+					<div class="ib-box ib-box--extra ib-box--extra-vertical">
+						<ib-flight-search-engine flight-search-model="changeCtrl.model.searchEngineModel" time-zone-options="changeCtrl.model.timeZonesList"></ib-flight-search-engine>
+					</div>
+				</section>
+				<ib-flight-search-engine-details ng-if="changeCtrl.showFlightSearchDetails" time-zone-options="changeCtrl.model.timeZonesList"
+				 flight-search-details-model="{'searchEngineModel':changeCtrl.model.searchEngineModel,
+				 								'origin': changeCtrl.model.selectedSegmentInfo.departureCity.description ,
+												  'destination': changeCtrl.model.selectedSegmentInfo.arrivalCity.description}"></ib-flight-search-engine-details>
+				<ib-change-flight-availability ng-if="changeCtrl.showChangeFlightAvailability" availability-model="changeCtrl.model.availabilityInfo"></ib-change-flight-availability>
+			</div>
+		</div>
+	</section>

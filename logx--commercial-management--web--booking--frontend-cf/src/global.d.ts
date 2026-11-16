@@ -1,0 +1,35 @@
+declare type CommonsNewHttpUtilsErrorService = import('ib-web-commons').CommonsHttpUtilsErrorService;
+declare type CurrencyService = import('ib-web-commons').CurrencyService;
+declare type DatalayerTemporalUtilsService = import('ib-web-commons').DatalayerUtilsService;
+declare type CommonsUtilService = import('ib-web-commons').CommonsUtilService;
+declare type IBCAssociatesZeroService = import('ib-web-commons').IBCAssociatesZeroService;
+declare type IBCContactDetailsZeroService = import('ib-web-commons').IBCContactDetailsZeroService;
+declare type IBCPersonalDataZeroService = import('ib-web-commons').IBCPersonalDataZeroService;
+declare type CommonsUserUtilsService = import('ib-web-commons').CommonsUserUtilsService;
+declare type IBCAssociatesService = import('ib-web-commons').IBCAssociatesService;
+declare type IBCContactDataService = import('ib-web-commons').IBCContactDataService;
+declare type IBCPersonalDataService = import('ib-web-commons').IBCPersonalDataService;
+declare type GetCountriesListService = import('ib-web-commons').GetCountriesListService;
+declare type GetPhoneCodesService = import('ib-web-commons').GetPhoneCodesService;
+declare type IbCCheckBonusService = import('ib-web-commons').IbCCheckBonusService;
+declare type CommonsConstantsType = import('ib-web-commons').CommonsConstantsType;
+declare type IBCTravelPreferencesService = import('ib-web-commons').IBCTravelPreferencesService;
+declare type CommonsGetLoginInfoService = import('ib-web-commons').CommonsGetLoginInfoService;
+declare type IbCAuthTokenService = import('ib-web-commons').IbCAuthTokenService;
+declare type CommonsModalService = import('ib-web-commons').CommonsModalService;
+declare type CommonsRootScope = import('ib-web-commons').CommonsRootScope;
+declare type CommonsLoginUtilsService = import('ib-web-commons').CommonsLoginUtilsService;
+// declare type DigitalDataService = import('ib-web-commons').DigitalDataService;
+declare type CommonsIbShortRegisterService = import('ib-web-commons').CommonsIbShortRegisterService;
+declare type MonetateUtilsService = import('ib-web-commons').MonetateUtilsService;
+declare type CommonsAncillariesService = import('ib-web-commons').CommonsAncillariesService;
+declare type DatalayerGeneralConstantsType = import('ib-web-commons').DatalayerGeneralConstantsType;
+declare type CommonsHttpServicesConstantsType = import('ib-web-commons').CommonsHttpServicesConstantsType;
+
+declare type BookingAppConstants = import('./app/core/constants/ib-booking-constants').BookingAppConstants;
+
+declare type BookingAncillariesConstant = import('./app/core/constants/ib-ancillaries-constants').BookingAncillariesConstant;
+declare type BookingAncillariesModel = import ('./app/core/models/ancillaries/ancillaries-model').BookingAncillariesModel;
+declare type HttpServicesConstantsType = import('./app/core/constants/ib-http-services-constants').HttpServicesConstants;
+declare type IbBookingConstants = import('./app/core/constants/ib-booking-constants').IbBookingConstants;
+declare type CallAncillariesService = import('./app/shared/http-services/ass-fass/ib-call-ancillaries-service');

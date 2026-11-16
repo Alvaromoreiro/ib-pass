@@ -1,0 +1,15 @@
+<div class="ib-date-carousel ib-date-carousel--bordered-full ib-date-carousel--gray">
+        <fieldset class="ib-date-carousel__list ib-date-carousel__list--responsive u-pl-none u-pr-none">
+            <legend class="u-hide-accessible">Dates list</legend>
+                <div class="ib-date-carousel__slick ib-date-carousel__slick--table">
+                    <div  ng-repeat="(index,slide) in sldrCalendarCtrl.sliderModel" class="ib-date-carousel__item ib-date-carousel__item--small"  ng-class="{'ib-date-carousel__item--active' : index === sldrCalendarCtrl.monthIndex}">
+                        <input class="ib-date-carousel__input" type="radio" id="{{::slide.transformedMonth}}_cal{{::slide.transformedYear}}" name="availability_day" value="{{::slide.transformedMonth}}_cal{{::slide.transformedYear}}" ng-click="sldrCalendarCtrl.changeMonth(index)"/>
+                           <label class="ib-date-carousel__date ib-date-carousel__date--auto" for="{{::slide.transformedMonth}}_cal{{::slide.transformedYear}}">
+                                <span class="ib-date-carousel__date-week" data-shortcut={{slide.transformedMonth}}><span>{{slide.transformedMonth}}</span></span>
+                                <span class="ib-date-carousel__date-day">{{slide.transformedYear}}</span>
+                                <span ng-if="slide.minAvios!==null" class="ib-date-carousel__price">{{slide.minAvios}} {{'IBPURC_PAYMENTS_DISCOUNTS_AVIOS' |translate}}</span>
+                            </label>
+                    </div>
+                </div>
+        </fieldset>
+    </div>

@@ -1,0 +1,84 @@
+<div class ="slice-block">
+    <button class="main-section" title="{{'IB_SLICE_SEE_DETAILS'|translate}}" (click)="toggleDetails()">
+        <span class="airline-section">
+            <span class="airline-name">
+            {{ showAirlineName() ? sliceInfoModel.allOperatedBy[0] : 'IB_BOOKING_MULTIPLE_AIRLINES'|translate}}
+                </span>
+            <span class="airline-logo" *ngIf=" showAirlineName() && showCompanyLogo">
+                <img src="/iberia-web-content/iconos{{sliceInfoModel.sliceURLMin}}" (error)="handleCompanyLogoError()">
+            </span>
+        </span>
+        <ib-booking-mobile-slice-info-flight
+            [stops]="sliceInfoModel.stopsNumber"
+            [techStops]="sliceInfoModel.technicalStop"
+            [segments]="sliceInfoModel.segments"
+            [flightDuration]="sliceInfoModel.durationParsed"
+            [arrivalTime]="sliceInfoModel.arrivalDateTimeParsed"
+            [departureTime]="sliceInfoModel.departureDateTimeParsed"
+            [daysOfTravel]="sliceInfoModel.daysOfTravel"
+        />
+
+        <span class="details-section">
+            <span class="details-cta">
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <g>
+                        <path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M7.78234 6.90917C7.52982 6.64179 7.08121 6.23181 6.68014 5.8753C7.61597 4.61565 7.54467 2.83014 6.42762 1.6507C5.17688 0.331632 3.09429 0.278156 1.77522 1.5289C0.456144 2.77964 0.402668 4.86223 1.65341 6.1813C2.77046 7.35777 4.55002 7.52414 5.85721 6.65664C6.19292 7.07851 6.57616 7.54494 6.83166 7.81231C7.40164 8.41183 8.11548 9.01429 8.53541 9.36869L8.54289 9.375C8.60825 9.3245 8.75679 9.19081 8.90831 9.0482C9.05685 8.9056 9.19945 8.763 9.25293 8.70061C8.92019 8.26389 8.35572 7.51226 7.78234 6.90917ZM2.33468 2.11685C1.34241 3.05862 1.30081 4.63022 2.24258 5.62249C3.07146 6.4989 4.3935 6.63259 5.3739 6.00277C5.43331 5.93444 5.567 5.80372 5.70663 5.67003C5.84924 5.53634 5.9859 5.41156 6.0572 5.35511C6.73456 4.41037 6.6692 3.08536 5.84032 2.20895C4.89855 1.21667 3.32696 1.17508 2.33468 2.11685Z" fill="#666666"/>
+                    </g>
+                </svg>
+                <span>{{'IB_SLICE_SEE_DETAILS'|translate}}</span>
+            </span>
+            <span class="details-promotions" *ngIf="sliceInfoModel.slicePromotionImage">
+                <img class="details-promotions-icons" src="{{sliceInfoModel.slicePromotionImage}}">
+            </span>
+        </span>
+
+
+    </button>
+    <button class="price-section" (click)="toggleCabins()" title="{{'AVAILABILITY_TRIP_INFO_BODY_A_DESC_4' | translate }}" *ngIf="!selectedSliceMode">
+        <span class="price-from">{{'GENERAL_FROM_TEXT'|translate}}</span>
+        <ib-booking-crossed-prices [priceToShow]="sliceInfoModel.slicePriceShown" [priceWithoutDiscount]="sliceInfoModel.sliceDiscountPriceShown" [variant]="'slice mobile'"></ib-booking-crossed-prices>
+        <span class="price-arrow" [ngClass]="{'price-arrow--up':!this.collapsedCabins,'price-arrow--discounted':sliceInfoModel.sliceDiscountPriceShown}">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g>
+                    <path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M8 9.65715L3.04597 4.58727C2.93227 4.47091 2.74793 4.47091 2.63427 4.58727L2.08528 5.14905C2.03067 5.2049 2 5.2807 2 5.35971C2 5.43872 2.03067 5.51451 2.08528 5.57037L7.79415 11.4127C7.90785 11.5291 8.09219 11.5291 8.20585 11.4127L13.9147 5.57041C13.9693 5.51455 14 5.43876 14 5.35975C14 5.28074 13.9693 5.20494 13.9147 5.14909L13.3657 4.5873C13.252 4.47095 13.0677 4.47095 12.954 4.5873L8 9.65715Z" fill="#D7192D"/>
+                </g>
+            </svg>
+        </span>
+    </button>
+</div>
+<div class="cabin-block collapse-container"
+    [ngClass]="{'collapse-open':!this.collapsedCabins || selectedSliceMode,'collapse-closed':this.collapsedCabins && !selectedSliceMode}"
+    [attr.aria-expanded]="!this.collapsedCabins || selectedSliceMode">
+    <ng-container *ngFor="let cabin of cabins ?? []; let i = index">
+        <div class="fare-block">
+            <button class="cabin-button {{cabin.cabinMobileStyleClass}}"
+                (click)="sendSelectedSlice(cabin.type);toggleFareCabin( i, cabin.collapsed );"
+                *ngIf="cabin.cabinAvailable"
+                title="{{cabin.cabinDescription}}"
+                [id]="'fareCollapseTrigger-'+i">
+                <span class="cabin-description">{{cabin.cabinDescription}}</span>
+                <span class="cabin-prices">
+                    <ib-booking-crossed-prices [priceToShow]="cabin.bestPriceShown" [priceWithoutDiscount]="cabin.bestPriceDiscountShown" [variant]="'slice-detail'" [isBestOffer]="cabin.bestCabinsPrice"></ib-booking-crossed-prices>
+                </span>
+                </button>
+            <div class="fares-container collapse-container"
+                [id]="'fareCollapseContainer-'+i"
+                [ngClass]="{'collapse-open':!cabin.collapsed,'collapse-closed':cabin.collapsed}"
+                [attr.aria-expanded]="!cabin.collapsed"
+                [attr.data-collapsed-cabin]="cabin.collapsed">
+                <ib-booking-fare-container
+                    [itemIdBase]="'bbki-slice-info-fare-details'"
+                    [newFare]="newFare"
+                    [fareFamilies]="cabin.fareFamilies"
+                    [selectedSliceIndex]="selectedSliceIndex"
+                    [originDestinationId]="originDestinationId"
+                    [currencies]="currencies"
+                    [selectedFare]="sliceInfoModel.selectedFareFamily"
+                    [selectedCabin]="cabin.type"
+                    [expensivePriceShown]="cabin.expensivePriceShown"
+                ></ib-booking-fare-container>
+            </div>
+        </div>
+    </ng-container>
+</div>
+

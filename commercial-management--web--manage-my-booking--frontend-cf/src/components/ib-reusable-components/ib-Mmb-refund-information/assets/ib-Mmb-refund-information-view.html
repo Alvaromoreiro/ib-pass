@@ -1,0 +1,30 @@
+<div class="ib-msg-alert ib-msg-alert--bond icon-informacion_2 alert u-mb-medium">
+    <h3 class="ib-msg-alert__text">{{'MMB_REFUNDS_INFORMATION_BOX_TITLE'|translate}}</h3>
+    <p class="ib-msg-alert__description u-mt-small">
+        <span class="ib-text ib-text--bold">{{'MMB_REFUNDS_INFORMATION_BOX_YOUR_REFUND_INCLUDES'|translate}}</span>
+    </p>
+    <ul class="ib-list u-mt-small" ng-repeat="included in refundInformationCtrl.includedInRefund">
+        <li class="ib-list__item ib-list__item--mt-14">
+            <span class="ib-text">{{included |translate}}</span>
+        </li>
+        <!-- <li class="ib-list__item ib-list__item--mt-14" ng-hide="refundInformationCtrl.flags.refundVoucherSection80">
+            <span class="ib-text">{{'MMB_REFUNDS_INFORMATION_BOX_YOUR_REFUND_INCLUDES_CONDITION_FLEX'|translate}}</span>
+        </li> -->
+    </ul>
+    <p class="ib-msg-alert__description u-mt-small">
+        <span class="ib-text ib-text--bold">{{'MMB_REFUNDS_INFORMATION_BOX_YOUR_REFUND_DOES_NOT_INCLUDE'|translate}}</span>
+    </p>
+    <ul class="ib-list u-mt-small" ng-repeat="notIncluded in refundInformationCtrl.notIncludedInRefund">
+        <li class="ib-list__item ib-list__item--mt-14">
+            <span class="ib-text">{{notIncluded|translate}}</span>
+        </li>
+    </ul>
+    <p ng-if="refundInformationCtrl.summaryModel.flexibilityOnDemand[0].subtype === 'FLEXIBILITY_PACK' && refundInformationCtrl.flags.showFlexibilizationChangeSection == false && refundInformationCtrl.flags.showLinkToRubiQ == false" class="ib-msg-alert__description u-mt-small">
+        <span class="ib-text ib-text--bold">{{'ANCILLARIES_FLEXIBILITY_IF_YOU_HIRE_PACK'|translate}}</span>
+    </p>
+    <ul ng-if="refundInformationCtrl.summaryModel.flexibilityOnDemand[0].subtype === 'FLEXIBILITY_PACK' && refundInformationCtrl.flags.showFlexibilizationChangeSection == false && refundInformationCtrl.flags.showLinkToRubiQ == false" class="ib-list u-mt-small">
+        <li class="ib-list__item ib-list__item--mt-14">
+            <span class="ib-text">{{'ANCILLARIES_FLEXIBILITY_WHEN_SELECT_PARTIAL_REFOUND'|translate}}</span>
+        </li>
+    </ul>
+</div>

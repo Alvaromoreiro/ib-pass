@@ -1,0 +1,91 @@
+.#{$wefront__namespace}check-filter {
+    width: 100%;
+    margin-top: rem(10);
+    font-family: $font-normal;
+
+    &__item {
+        display: inline-table;
+        height: rem(42);
+        padding: rem(2) 0;
+        margin-right: rem(5);
+        border: none;
+        background: transparent;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &__input:not(:checked),
+    &__input:checked {
+        position: absolute;
+        left: rem(-9999);
+    }
+
+    &__input + &__label {
+        position: relative;
+        display: inline-table;
+        padding: rem(8) rem(13) rem(8) rem(32) !important;
+        padding-left: rem(30);
+        margin: rem(8) 0 0;
+        border: rem(1) solid color(gray-70);
+        border-radius: rem(50);
+        font-size: rem(12);
+        color: color(gray-10);
+        background: color(gray-70);
+        cursor: pointer;
+    }
+
+    &__input:checked + &__label {
+        border-color: color(red-50);
+        color: color(white);
+        background: color(red-50);
+    }
+
+    /* checkbox aspect */
+    &__input:not(:checked) + &__label::before,
+    &__input:checked + &__label::before {
+        content: '';
+        position: absolute;
+        top: rem(7);
+        left: rem(8);
+        width: rem(18);
+        height: rem(18);
+        border-radius: 100%;
+        background: color(white);
+    }
+
+    &__input:not(:checked) + &__label::after,
+    &__input:checked + &__label::after {
+        content: '\e93e';
+        position: absolute;
+        top: rem(8);
+        left: rem(11);
+        font-family: $font-icons;
+        font-size: rem(12);
+        color: color(white);
+        transition: all 0.2s;
+    }
+
+    /* checked mark aspect changes */
+    &__input:checked + &__label::after {
+        color: color(red-50);
+    }
+    &__input:focus + .#{$wefront__namespace}check-filter__label {
+        border-color: color(orange-10);
+    }
+
+    &__label {
+        &:focus {
+            outline: 0;
+        }
+    }
+}
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}check-filter {
+        &__input + &__label {
+            padding: rem(6) rem(12) rem(7) rem(28) !important;
+        }
+    }
+}

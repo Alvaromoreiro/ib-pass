@@ -1,0 +1,50 @@
+<form name="modalCtrl.form" method="post">
+  <header class="ib-modals__header">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+      <h2 class="ib-heading ib-heading--type-1">{{'MMB_NOMBRE_PASS'|translate}}</h2>
+    </div>
+  </header>
+  <section class="ib-modals__body">
+    <div ng-if="modalCtrl.errorMessage" class="u-mb">
+      <ib-ui-warnings type="'simple-gray-50'" icon="'icon-informacion_2 u-color-gray-10'"
+         text="[{type:'normal',text:modalCtrl.errorMessage}]"
+          modifier="''" ></ib-ui-warnings>
+    </div>
+
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+      <p class="ib-text ib-layout__line-spacing">{{'MMB_ENTER_NAME'| translate}}</p>
+      <p class="ib-text ib-layout__line-spacing">
+        {{'MMB_THANKS' | translate}}
+      </p>
+      <div class="ib-box-separated__form-center">
+        <div class="ib-input"
+          ng-class="{'ib-input--error' : !modalCtrl.form.name.$valid && (modalCtrl.form.$submitted || modalCtrl.form.name.$dirty)}">
+          <label for="name" class="ib-input__label"
+            ng-class="{'ib-input__label--focus' :  focused || modalCtrl.model.name.length}">
+            {{'MMB_WRITE_NAME' | translate}}
+          </label>
+          <input maxlength="30" name="name" id="name" type="text" class="ib-input__input"
+            ng-model="modalCtrl.model.name" required ng-pattern="::$root.CHECKIN_PATTERNS.NAME_SURNAME_PATTERN"
+            ng-focus="focused=true" ng-blur="focused=false"
+            data-ibe-validator-cleaner="{{::$root.CHECKIN_PATTERNS.NAME_SURNAME_CLEANER}}" />
+        </div>
+        <div ng-if="!modalCtrl.form.name.$valid && (modalCtrl.form.$submitted || modalCtrl.form.name.$dirty)">
+          <p class="ib-alert ib-alert--error">{{'MMB_MOD_NAME_ERR' | translate}}</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <footer class="ib-modals__footer">
+    <div class="ib-content-buttons">
+      <div class="ib-content-buttons__content-left">
+        <button class="ib-button ib-button--w-medium" type="button" data-ng-click="modalCtrl.accept()">{{'MODAL_ACCEPT'
+          |translate}}</button>
+      </div>
+      <div class="ib-content-buttons__content-right">
+        <a href="javascript:void(0)" title="{{modalCtrl.model.cancel|translate}}" class="ib-link"
+          data-ng-click="modalCtrl.close()">{{'MODAL_CANCEL' | translate}}</a>
+      </div>
+    </div>
+  </footer>
+</form>

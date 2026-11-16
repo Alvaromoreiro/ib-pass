@@ -1,0 +1,147 @@
+<!-- Transition -->
+<!-- Loading -->
+<div class="ib-overlay-fly ib-overlay-fly--type-3 ib-overlay-fly--transparent"
+    data-ng-if="modalCtrl.model.submitted && !modalCtrl.model.showError && !modalCtrl.model.showOk">
+    <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+        <div class="ib-overlay-fly__icon">
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+        <span class="ib-overlay-fly__text">{{'AVAILABILITY_MULTI_TRIP_LOADING_MODAL' | translate}}</span>
+    </div>
+</div>
+<!-- KO -->
+<div class="ib-overlay-fly ib-overlay-fly--type-3 ib-overlay-fly--transparent" 
+    data-ng-if="modalCtrl.model.showError">
+    <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+        <div id="iconLoading" class="ib-overlay-fly__border">
+            <div id="initLoading" class="ib-overlay-fly__border-loading"></div>
+            <div id="error" class="ib-overlay-fly__border-error icon-alertas_3"></div>
+        </div>
+        <span id="text" class="ib-overlay-fly__text">{{'MMB_PASSENGER_MODAL_TRANSITIONS_TITLE_ERROR'|translate}}</span>
+    </div>
+</div>
+<!-- OK -->
+<div class="ib-overlay-fly ib-overlay-fly--type-3 ib-overlay-fly--transparent" 
+    data-ng-if="modalCtrl.model.showOk && !modalCtrl.model.showError">
+    <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+        <div id="iconLoading" class="ib-overlay-fly__border">
+            <div id="initLoading" class="ib-overlay-fly__border-loading"></div>
+            <div id="valid" class="ib-overlay-fly__border-valid icon-confirmacion"></div>
+        </div>
+        <span class="ib-overlay-fly__text">{{'MMB_PASSENGER_MODAL_TRANSITIONS_TITLE_OK'|translate}}</span>
+    </div>
+</div>
+<!-- modal -->
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{'MMB_PASSENGERS_FREQUENTLY_PASSENGER_DATA_TEXT'|translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.close('frequentFlyer')">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+
+<div class="ib-layout__line-spacing"
+    data-ng-if="modalCtrl.model.showErrorForm">
+    <div class="ib-msg-alert ib-msg-alert--danger icon-mas_2 alert">
+        <p class="ib-msg-alert__text ib-msg-alert__text--bold">{{'MMB_PASSENGER_MODAL_ALERT_TITLE_ERROR'|translate}}</p>
+        <p class="ib-msg-alert__text">{{ modalCtrl.model.errorMsg }}</p>
+    </div>
+</div>
+
+<section class="ib-modals__body ib-modals__body--cols-simple">
+    <form method="post" action="#" name="modalCtrl.modalFrequentFlyerForm" ib-form-scroll-to-error modal="true" novalidate>
+        <div class="ib-layout">
+            <div class="ib-layout__line-spacing">
+                <span class="ib-text ib-text--block ib-text--xbig ib-text--especial">{{modalCtrl.model.personalInfo.name +' '+ modalCtrl.model.personalInfo.surname}}</span>
+            </div>
+            <div class="ib-layout__line-spacing">
+                <span class="ib-text ib-text--block">{{'MMB_INTRODUCE_FIDELITATION_PROGRAM'|translate}}</span>
+            </div>
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--medium ib-layout__line-spacing--bordered">
+                <fieldset>
+                    <legend class="u-hide-accessible">{{'MODAL_PASSENGER_DATA'|translate}}</legend>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="ib-layout__line-spacing">
+                                    <div class="ib-select" data-ng-class="{'ib-select--error' : modalCtrl.modalFrequentFlyerForm.$submitted && modalCtrl.modalFrequentFlyerForm.company.$invalid}">
+                                        <label class="ib-select__label" for="select-01" ng-class="select.focused ? 'ib-select__label--focus' : 'ib-select__label--unfocus'">{{'IBPAS_MMB_PASSENGER_FORM_LABEL_COMPANY'|translate}}</label>
+                                        <ui-select class="ib-select__action" ng-model="modalCtrl.tempFrequentFlyerInfo.company" on-select="select.select();select.focused = true;modalCtrl.model.submitted = false;modalCtrl.tempFrequentFlyerInfo.number=''"
+                                            name="company" ng-required="true">
+                                            <ui-select-match class="ib-select__list-ipt" placeholder="{{'IBPAS_MMB_PASSENGER_FORM_LABEL_COMPANY'|translate}}">
+                                                <span class="ib-select__txt" ng-bind="$select.selected.airlineName"></span>
+                                            </ui-select-match>
+                                            <ui-select-choices class="ib-select__list" repeat="item.iataCompanyCode as item in modalCtrl.model.frequentFlyersCompanies">
+                                                <span class="ib-select__list-txt" ng-bind="item.airlineName"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                    <div ng-messages="modalCtrl.modalFrequentFlyerForm.$submitted && modalCtrl.modalFrequentFlyerForm.company.$error">
+                                        <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="ib-layout__line-spacing">
+                                    <div class="ib-input" data-ng-class="{'ib-input--error' : modalCtrl.modalFrequentFlyerForm.$submitted}">
+                                        <label class="ib-input__label" for="IBPAS_MMB_PASSENGER_FORM_NUMBER_CARD" ng-class="{'ib-input__label--focus' : modalCtrl.companyNumberFocused || (modalCtrl.modalFrequentFlyerForm.companyNumber.$viewValue != null && modalCtrl.modalFrequentFlyerForm.companyNumber.$viewValue !== '')}">{{'IBPAS_MMB_PASSENGER_FORM_NUMBER_CARD'|translate}}</label>
+                                        <input class="ib-input__input" type="text" id="IBPAS_MMB_PASSENGER_FORM_NUMBER_CARD" name="companyNumber" required ng-model="modalCtrl.tempFrequentFlyerInfo.number"
+                                            ng-if="modalCtrl.tempFrequentFlyerInfo.company === 'IB'"
+                                            maxlength="{{$root.MmBPatterns.NUMBER_CARD_NUMBER_MAX_LENGTH}}"
+                                            ng-pattern="::$root.MmBPatterns.NUMBER_IB_PLUS_PATTERN" data-ib-validator-cleaner="{{::$root.MmBPatterns.NUMBER_IB_PLUS_CLEANER}}"
+                                            ng-required="true" data-ng-focus="modalCtrl.companyNumberFocused=true" data-ng-blur="modalCtrl.companyNumberFocused=false"
+                                            ib-luhn-validator
+                                        />
+                                        <input class="ib-input__input" type="text" id="IBPAS_MMB_PASSENGER_FORM_NUMBER_CARD" name="companyNumber" required ng-model="modalCtrl.tempFrequentFlyerInfo.number"
+                                            ng-if="modalCtrl.tempFrequentFlyerInfo.company === 'AA'"
+                                            maxlength="{{::$root.MmBPatterns.NUMBER_FF_MAX_LENGTH_AA}}"
+                                            ng-pattern="::$root.MmBPatterns.AA_CARD_PATTERN" data-ib-validator-cleaner="{{::$root.MmBPatterns.AA_CARD_CLEANER}}"
+                                            ng-required="true" data-ng-focus="modalCtrl.companyNumberFocused=true" data-ng-blur="modalCtrl.companyNumberFocused=false"
+                                        /> 
+                                        <input class="ib-input__input" type="text" id="IBPAS_MMB_PASSENGER_FORM_NUMBER_CARD" name="companyNumber" required ng-model="modalCtrl.tempFrequentFlyerInfo.number"
+                                            ng-if="modalCtrl.tempFrequentFlyerInfo.company !== 'AA' && modalCtrl.tempFrequentFlyerInfo.company !== 'IB'"
+                                            maxlength="{{$root.MmBPatterns.NUMBER_FF_MAX_LENGTH_GENERAL}}"
+                                            ng-pattern="::$root.MmBPatterns.NUMBER_FF_PATTERN_GENERAL" data-ib-validator-cleaner="{{::$root.MmBPatterns.NUMBER_FF_PATTERN_CLEANER}}"
+                                            ng-required="true" data-ng-focus="modalCtrl.companyNumberFocused=true" data-ng-blur="modalCtrl.companyNumberFocused=false"
+                                        />
+                                    </div>
+                                    
+                                    
+                                    <div class="ib-alert ib-alert--error" 
+                                        ng-if="!modalCtrl.tempFrequentFlyerInfo.number && 
+                                                modalCtrl.model.showError && 
+                                                modalCtrl.model.submitted && 
+                                                !modalCtrl.companyNumberFocused">
+                                        {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                                    </div>
+                                    
+                                    <div class="ib-alert ib-alert--error"
+                                        ng-if="modalCtrl.model.showPatternError ||
+                                        (modalCtrl.tempFrequentFlyerInfo.number.length > 0 &&
+                                        modalCtrl.model.showError &&
+                                        (modalCtrl.tempFrequentFlyerInfo.company === 'IB' ? modalCtrl.tempFrequentFlyerInfo.number.length !== $root.MmBPatterns.MAX_LENGTH_IBERIA_CARD : modalCtrl.tempFrequentFlyerInfo.number.length > 20) &&
+                                        modalCtrl.model.submitted &&
+                                        !modalCtrl.companyNumberFocused)">
+                                        {{'GENERAL_FF_PATTERN_ERROR'|translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="ib-layout__line-spacing">
+                <div class="ib-content-buttons">
+                    <div class="ib-content-buttons__content-left">
+                        <button class="ib-button ib-button--w-medium" type="button" ng-click="modalCtrl.updateFrequentFlyerContactInfo(modalCtrl.modalFrequentFlyerForm, modalCtrl.model.index, modalCtrl.model.type)">{{'MODAL_ACCEPT'|translate}}</button>
+                    </div>
+                    <div class="ib-content-buttons__content-right ib-content-buttons__content-right--mb-mobile">
+                        <a href="javascript:void(0)" title="{{'MODAL_CANCEL'|translate}}" class="ib-link" ng-click="modalCtrl.close('frequentFlyer')">{{'MODAL_CANCEL'|translate}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,93 @@
+<form action="#" method="POST">
+    <header class="ib-modals__header">
+        <h2 class="ib-heading ib-heading--type-1">{{'AVAILABILITY_MODAL_FILTER_TITLE'| translate}}</h2>
+        <div class="ib-modals__header-settings">
+            <button type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.cancel()">
+                <span class="u-hide-accessible">Cerrar ventana modal</span>
+            </button>
+        </div>
+    </header>
+    <section class="ib-modals__body">
+        <div class="ib-layout">
+            <fieldset class="ib-layout__form-center">
+                <legend class="hide-accessible">Formulario para seleccionar preferencias de filtrado</legend>
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                    <span class="ib-heading ib-heading--type-5">{{'AVAILABILITY_MODAL_FILTERS_STOPSNUMBER_TITLE'| translate}}</span>
+                </div>
+                <div class="ib-layout__line-spacing">
+                    <equal-height>
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-xs-4" ng-repeat="scale in modalCtrl.model.scale">
+                                    <div class="ib-check-boxed ib-check-boxed--type-1">
+                                        <input class="ib-check-boxed__check" type="checkbox" ng-model="scale.checked" checked="true" name="scale_number_{{ scale.numScale }}" id="scale_number_{{ scale.numScale }}">
+                                        <label data-equal="boxed" class="ib-check-boxed__label" for="scale_number_{{ scale.numScale }}">
+                                            <span class="ib-check-boxed__text-big" aria-label="Número de escalas: {{ scale.numScale }}">{{ scale.numScale }}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </equal-height>
+                </div>
+                <div class="ib-layout__line-spacing" >
+                    <div class="ib-select" >
+                        <ui-select class="ib-select__action" ng-model="modalCtrl.model.fareSelected" on-select="select.select()">
+                            <ui-select-match class="ib-select__list-ipt" placeholder="{{'MMB_ALL_CABINS'| translate}}">
+                                <span class="ib-select__txt" ng-bind="$select.selected.name"></span>
+                            </ui-select-match>
+                            <ui-select-choices class="ib-select__list" repeat="item in (modalCtrl.model.fare | filter: $select.search) track by item.id" ng-model="item">
+                                <span class="ib-select__list-txt" ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--large" ng-controller="ibRangesliderController as range">
+                    <div class="ib-rangeslider ib-rangeslider--filter">
+                        <span class="ib-rangeslider__title">{{'MODAL_PRICE'| translate | uppercase}}</span>
+                        <rzslider rz-slider-model="modalCtrl.model.rangePrice.min"
+                                    rz-slider-high="modalCtrl.model.rangePrice.max"
+                                    rz-slider-options="modalCtrl.model.rangePrice.options"></rzslider>
+                    </div>
+                </div>
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--large" ng-controller="ibRangesliderController as range">
+                    <div class="ib-rangeslider ib-rangeslider--filter">
+                        <span class="ib-rangeslider__title">{{'MMB_DEPARTURE_TIME'| translate | uppercase}}:</span>
+                        <rzslider rz-slider-model="modalCtrl.model.rangeHoursDeparture.min"
+                                    rz-slider-high="modalCtrl.model.rangeHoursDeparture.max"
+                                    rz-slider-options="modalCtrl.model.rangeHoursDeparture.options"></rzslider>
+                    </div>
+                </div>
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--large" ng-controller="ibRangesliderController as range">
+                    <div class="ib-rangeslider ib-rangeslider--filter">
+                        <span class="ib-rangeslider__title">{{'MMB_ARRIVAL_TIME'| translate | uppercase}}:</span>
+                        <rzslider rz-slider-model="modalCtrl.model.rangeHoursArrival.min"
+                                    rz-slider-high="modalCtrl.model.rangeHoursArrival.max"
+                                    rz-slider-options="modalCtrl.model.rangeHoursArrival.options"></rzslider>
+                    </div>
+                </div>
+                <!--
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+                    <div class="ib-check">
+                        <input type="checkbox" id="example_check_1" name="example_check_1" class="ib-check__input" checked="" ng-model="modalCtrl.model.company" value="false">
+                        <label for="example_check_1" class="ib-check__label ib-check__label--with-icon">
+                            <span class="ib-check__text">{{'AVAILABILITY_MODAL_FILTERS_AVIOS'| translate}}</span>
+                            <figure class="ib-check__img ib-check__img--avios">
+                                <img ng-src="{{::$root.routes.icons}}/avios/booking_cash_and_avios_{{::$root.appLang}}.png" alt="{{'MMB_VC_AVIOS_DISCOUNT_IMG_ALT'| translate}}" />
+                            </figure>
+                        </label>
+                    </div>
+                </div>
+                -->
+                <div class="ib-content-buttons u-pt-medium-mobile">
+                    <div class="ib-content-buttons__content-left">
+                        <button type="button" class="ib-button ib-button--w-medium u-float-right" title="{{'AVAILABILITY_MODAL_FILTERS_APPLY'| translate}}" ng-click="modalCtrl.acceptModalData(modalCtrl.model)">{{'AVAILABILITY_MODAL_FILTERS_APPLY'| translate}}</button>
+                    </div>
+                    <div class="ib-content-buttons__content-right">
+                        <a class="ib-link" ng-click="modalCtrl.cancel('Cierro')" title="{{'MODAL_CANCEL'| translate}}">{{'MODAL_CANCEL'| translate}}</a>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </section>
+</form>

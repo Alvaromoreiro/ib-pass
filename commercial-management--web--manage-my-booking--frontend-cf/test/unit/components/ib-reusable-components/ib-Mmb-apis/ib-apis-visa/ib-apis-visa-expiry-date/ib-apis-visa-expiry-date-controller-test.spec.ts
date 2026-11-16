@@ -1,0 +1,535 @@
+describe('ApisVisaExpiryDateController test', function () {
+    var fakeMmBAppConstants = {
+        COOKIES: {
+            'PERSONALIZATION': 'IBERIACOM_PERSONALIZATION',
+            'LOGGED_TOKEN': 'IBERIACOM_SSO_ACCESS',
+            'LOGGED_TOKEN_EXPIRATION': 'IBERIACOM_SSO_ACCESS_TO',
+            'LOGGED_REFRESH_TOKEN': 'IBERIACOM_SSO_REFRESH',
+            'LOGGED_REFRESH_TOKEN_EXPIRATION': 'IBERIACOM_SSO_REFRESH_TO',
+            'CHECKIN_ID': 'IBERIACOM_GDR_PA_INFO',
+            'BOOKING_INFO': 'IBERIACOM_GDR_PA_ACCESS',
+            'AIR_SHUTTLE_ERROR': 'IBERIACOM_GDR_PA_ERROR',
+            'DEFAULT_EXPIRY_TIME': 1000 * 60 * 60 * 24 * 365 * 10, //ten years
+            'DEFAULT_PATH': '/'
+        },
+        nameParameters: {
+            lang: 'language',
+            market: 'market',
+            'CODE_ERROR': 'codeError'
+        },
+        PHONE_TYPE: 'MOBILE',
+        PASSENGER_TYPES: {
+            'adult': 'ADULT',
+            'child': 'CHILD',
+            'infant': 'INFANT'
+        },
+        SLICE_TYPES: {
+            'REGULAR': 'REGULAR',
+            'SHUTTLE': 'SHUTTLE'
+        },
+        SLICE_STATUS: {
+            'HOLD': 'ON_HOLD',
+            'ON_HOLD_CONFIRMABLE': 'ON_HOLD_CONFIRMABLE',
+            'FRAUD_ONHOLD': 'FRAUD_ONHOLD'
+        },
+        SEGMENT_TYPES: {
+            'OPEN': 'OPEN',
+            'CONFIRMED': 'CONFIRMED',
+        },
+        FARE_CODES: {
+            'EQMANO': 'EQMANO',
+            'EQBODEGA': 'EQBODEGA',
+            'REEMBOLSO': 'REEMBOLSO',
+        },
+        MmBPatterns: {
+            'NAME_SURNAME_PATTERN': /^(?!.*[0-9*¡!?¿<>\\\\ºª|/\·@#$%&,;=?¿())_+{}\[\]"\^€$£])/,
+            'NAME_SURNAME_CLEANER': '[0-9*¡!?¿<>\\\\ºª|/\\·@#$%&,;=?¿())_+{}\\[\\]"\\^€$£]',
+            'EMAIL_PATTERN': /^[A-Za-z0-9_\.\+-]+@[A-Za-z0-9-\.]+\.[A-Za-z0-9]+$/,
+            'PHONE_PATTERN': /^\d{6,}$/,
+            'PHONE_CLEANER': '[^0-9(+)]',
+            'CVV_PATTERN': /^\d+$/,
+            'CVV_CLEANER': '\\D+',
+            'CREDIT_CARD_NUMBER_PATTERN': /^\d+$/,
+            'CREDIT_CARD_NUMBER_CLEANER': '\\D+',
+            'CARD_NUMBER_PATTERN': /^\d+$/,
+            'CARD_NUMBER_CLEANER': '\\D+',
+            'DOCS_PATTERN': /^(?!.*[¡!?¿<>\\\\ºª|/\·@#$%&,;=?¿())_+{}\[\]"\^€$£])/,
+            'DOCS_CLEANER': '[¡!?¿<>\\\\ºª|/\\·@#$%&,;=?¿())_+{}\\[\\]"\\^€$£]',
+            'PNR_PATTERN': /^[a-zA-Z\s\d\-]+$/,
+            'PNR_CLEANER': '[^a-zA-Z\\s\\d\\-]',
+            'NUMBER_IB_PLUS_PATTERN': /^\d{8,}$/,
+            'NUMBER_IB_PLUS_CLEANER': '\\D+',
+            'NUMBER_FF_PATTERN': /^\d+$/,
+            'NUMBER_FF_CLEANER': '\\D+',
+            'PHONE_MAX_LENGTH': 16,
+            'EMAIL_MAX_LENGTH': 60,
+            'MAX_LENGTH_NAME': 30,
+            'NUMBER_IB_PLUS_MAX_LENGTH': 8,
+            'NUMBER_FF_MAX_LENGTH': 20,
+            'MAX_LENGTH_IBERIA_CARD': 8,
+            'MIN_LENGTH_FF': 8,
+            'MAX_LENGTH_PIN': 6,
+            'AWS_WARNING_ERRORS': /AWS/,
+            'APIS_DOCUMENT_MAX_LENGTH': 20,
+            'APIS_DNI_PSTS_MAX_LENGTH': 15,
+            'ONLY_LETTERS': /[^a-zA-Z+]/g
+        },
+        PAGES_URL: {
+            'SEARCH': '/chktrp',
+            'BOOKING_MANAGE': '/ibmtdt',
+            'CHANGE_FLIGHT': '/tcadvs',
+            'FLIGHT_CONFIRMATION': '/tcfrev',
+            'BOOKINGS_LIST': '/mytrps',
+            'PASSENGERS_INFO': '/moinfo',
+            'CHANGE_PASSENGERS_SPECIAL_NEEDS': '/mopmr',
+            'CONFIRM_ON_HOLD': '/ohmtdt',
+            'MMB_DASHBOARD': '/ibdash',
+            'MMB_INVOLUNTARY_CHANGE': '/ibinvchange',
+            'PAYMENTS': '/ohinfo',
+            'ON_HOLD_ANULATION': '/cnclit',
+            'MMB_CONFIRMATION_ORDER': '/confirmation',
+            'MMB_COMMUNICATION_LOST': '/communicationLost'
+        },
+        PAGE_TYPE_CHANNEL: {
+            'MOBI': 'MOBI'
+        },
+        STEP_PARAM_VALUES: {
+            'CHANGE_FLIGHT': 'changeFlight'
+        },
+        GDR_PA_ERRORS: {
+            'ERR_1': 'GDR_PA_ERROR_1'
+        },
+        GDR_CODE_ERRORS: {
+            'UNEXPECTED_TECHNICAL_EXCEPTION': 'FRAM_B0006'
+        },
+        CHECKIN_NEXT_STEP: {
+            'SEATS_MAP': 'seatsMap',
+            'BOARDING_CARDS': 'boardingCards',
+            'FLY_NOW': 'flyNow',
+            'FLIGHT_PASSENGER': 'flightPas'
+        },
+        STATUS: {
+            'UNCHECKABLE': 'UNCHECKABLE',
+            'CHECKABLE': 'CHECKABLE',
+            'CHECKED': 'CHECKED',
+            'STANDBY': 'STANDBY',
+            'REISSUE': 'REISSUE',
+            'NOT_SELECTABLE': 'NOT_SELECTABLE'
+        },
+        QUADRIGAM: {
+            'SEARCH': 'CHKTRP',
+            'LOGGED_SEARCH': 'MYTRPS',
+            'TRIP_DETAILS': 'IBMTDT',
+            'CHANGE_FLIGHT': 'TCADVS',
+            'CHANGE_FLIGHT_DISPO': 'TCFLPA',
+            'FLIGHT_CONFIRMATION': 'TCFREV',
+            'ORDER_TICKETS': 'IBENIT',
+            'ORDER_TICKETS_CONFIRMATION': 'IBCENIT',
+            'CHANGED_HOURS_INV': 'IBICHC',
+            'CANCEL_FLIGHT_INV': 'IBICFC',
+            'SPECIAL_NEEDS': 'MOPMR',
+            'SPECIAL_NEEDS_CONFIRMED': 'MOPMRCF',
+            'PASSENGER_INFO': 'MOINFO',
+            'ON_HOLD_CONF': 'OHMTDT',
+            'ON_HOLD_CONF_ON_BUSINESS': 'CIPOHMTDT',
+            'ON_HOLD_CONF_RESIDENTS': 'OHSARA',
+            'ON_HOLD_CONF_LOGIN': 'OHLOIN',
+            'ON_HOLD_CONF_PAYMENT': 'OHINFO',
+            'ON_HOLD_CONF_PAYMENT_ON_BUSINESS': 'CIPOHINFO',
+            'ON_HOLD_CONF_PAYMENT_WAIT': 'OHWAIT',
+            'ON_HOLD_CONF_PAYMENT_FRAUD': 'OHPCC',
+            'ON_HOLD_CONF_CONFIRMATION': 'RTBKCF',
+            'ON_HOLD_CONF_CONFIRMATION_ON_BUSINESS': 'CIPRTBKCF',
+            'ON_HOLD_CONF_CANCEL_ORDER_MODAL': 'CNCLOH',
+            'ON_HOLD_CONF_CANCEL_ORDER_MODAL_ON_BUSINESS': 'CIPCNCLOH',
+            'ON_HOLD_CONF_CANCEL_ORDER_CONFIRMATION': 'CNCLIT',
+            'ON_HOLD_CONF_CANCEL_ORDER_CONFIRMATION_ON_BUSINESS': 'CIPCNCLIT',
+
+            'PASSENGER_DATA': 'MODPAX',
+            'PASSENGER_FF_ADD': 'MOEMER',
+            'CONFIRM_EMERGENCY_CONTACT': 'MOCEME',
+            'FRECUENT_F': 'MOFFLY',
+            'CONFIRM_FF': 'MOCFFL',
+            'CONFIRM_ADD_APIS': 'MOCAPI',
+            'SPECIAL_NEEDS_ADD': 'MOPMR',
+            'CONFIRM_SPECIAL_NEEDS_ADD': 'MOCPMR',
+            'MANAGE_RESERV': 'IBMMBR',
+            'ADD_APIS': 'MOAPIS',
+            'MODAL_INFO_SEATS': 'MODSEA',
+            'MODAL_INFO_BAGGAGE': 'MODBAG',
+            'MODAL_INFO_SECUR': 'MODINS',
+            'YOUR_FLIGHTS': 'IBMTFL'
+        },
+        URL_PARAMETERS: {
+            'LOCATOR': 'pnr',
+            'SURNAME': 'surname',
+            'MARKET': 'market',
+            'LANGUAGE': 'language',
+            'CHANNEL': 'channel',
+            'DEVICE': 'device',
+            'ERROR_CODE': 'codeError',
+            'AIR_SHUTTLE': 'airshuttle',
+            'PREORDER': 'preorder'
+        },
+        GOOGLE_ADS_URIS: {
+            'TYPE_0': '/5508/iberia.com/check-in/Check-in-online-728x90',
+            'TYPE_1': '/5508/iberia.com/check-in/Check-in-online-300x250',
+            'TYPE_2': '/5508/iberia.com/check-in/Check-in-online-300x600',
+            'TYPE_3': '/5508/iberia.com/check-in/Check-in-online-160x600'
+        },
+        BANNER_IDS: {
+            'TYPE_0': 'banner_adds_728_90',
+            'TYPE_1': 'banner_adds_300_250',
+            'TYPE_2': 'banner_adds_300_600',
+            'TYPE_3': 'banner_adds_160_600'
+        },
+        DESTINATION_IMAGE_SIZE: {
+            'desktop': '_2000_1200.jpg',
+            'tablet': '_768_1024.jpg',
+            'mobile': '_320_568_2x.jpg'
+        },
+        WCS: {
+            'PHONE_TYPES': {
+                'SALES': 'RESERVAS'
+            }
+        },
+        MODAL_PAYMENT_TAXES: 'ib-modal-payment-taxes.html',
+        MODAL_SPECIAL_NEEDS: 'ib-modal-special-needs.html',
+        GENERAL_ERRORS_SERVICE: {
+            'SERVICE_GENERAL_ERROR': 'REST_SERVICE_ERROR_GENERAL',
+            'LOGGED_ERROR_TITLE': 'GENERAL_ADVICE_TITLE',
+            'LOGGED_ERROR_BODY': 'GENERAL_LOGGED_ERROR_BODY'
+        },
+        'PURCHASEKEY': 'PURCHASE_MESSAGE',
+        'ON_HOLD_MARKETS': ['IE', 'FI', 'SE', 'DK', 'GR', 'ZA', 'HU', 'CZ', 'PT', 'AT', 'SN', 'CH', 'BE', 'MA', 'NL', 'RU', 'IT', 'DE', 'IL', 'DZ', 'FR', 'ES'],
+        'MMB_MARKETS': ['IE', 'GR'],
+        DAYS_ARRAY: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18',
+            '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'
+        ],
+        MONTH_ARRAY: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+        DEFAULT_TO_YEARS: 100,
+        DEFAULT_FROM_YEARS: 0,
+        FORMAT_DATE: [{
+            'code': 'es',
+            'dateFormat': {
+                'fullDate': 'EEEE, D "de" MMMM "de" Y',
+                'longDate': 'D "de" MMMM "de" Y',
+                'medium': 'D MMM Y H:mm:ss',
+                'mediumDate': 'D MMM Y',
+                'mediumTime': 'H:mm:ss',
+                'short': 'D/M/YY H:mm',
+                'shortDate': 'D/M/YY',
+                'shortTime': 'H:mm'
+            }
+        }, {
+            'code': 'en',
+            'dateFormat': {
+                'fullDate': 'EEEE, MMMM D, Y',
+                'longDate': 'MMMM D, Y',
+                'medium': 'MMM D, Y h:mm:ss a',
+                'mediumDate': 'MMM D, Y',
+                'mediumTime': 'h:mm:ss a',
+                'short': 'M/D/YY h:mm a',
+                'shortDate': 'M/D/YY',
+                'shortTime': 'h:mm a'
+            }
+        }, {
+            'code': 'ls',
+            'dateFormat': {
+                'fullDate': 'EEEE, MMMM D, Y',
+                'longDate': 'MMMM D, Y',
+                'medium': 'MMM D, Y h:mm:ss a',
+                'mediumDate': 'MMM D, Y',
+                'mediumTime': 'h:mm:ss a',
+                'short': 'M/D/YY h:mm a',
+                'shortDate': 'M/D/YY',
+                'shortTime': 'h:mm a'
+            }
+        }, {
+            'code': 'zh',
+            'dateFormat': {
+                'fullDate': 'y\u5e74M\u6708d\u65e5EEEE',
+                'longDate': 'y\u5e74M\u6708d\u65e5',
+                'medium': 'y\u5e74M\u6708d\u65e5 ah:mm:ss',
+                'mediumDate': 'y\u5e74M\u6708d\u65e5',
+                'mediumTime': 'ah:mm:ss',
+                'short': 'Y/M/D ah:mm',
+                'shortDate': 'Y/M/D',
+                'shortTime': 'ah:mm'
+            }
+        }, {
+            'code': 'ca',
+            'dateFormat': {
+                'fullDate': 'EEEE, D MMMM "de" Y',
+                'longDate': 'D MMMM "de" Y',
+                'medium': 'D MMM Y H:mm:ss',
+                'mediumDate': 'D MMM Y',
+                'mediumTime': 'H:mm:ss',
+                'short': 'D/M/YY H:mm',
+                'shortDate': 'D/M/YY',
+                'shortTime': 'H:mm'
+            }
+        }, {
+            'code': 'de',
+            'dateFormat': {
+                'fullDate': 'EEEE, D. MMMM Y',
+                'longDate': 'D. MMMM Y',
+                'medium': 'DD.MM.Y HH:mm:ss',
+                'mediumDate': 'DD.MM.Y',
+                'mediumTime': 'HH:mm:ss',
+                'short': 'DD.MM.YY HH:mm',
+                'shortDate': 'DD.MM.YY',
+                'shortTime': 'HH:mm'
+            }
+        }, {
+            'code': 'fr',
+            'dateFormat': {
+                'fullDate': 'EEEE D MMMM Y',
+                'longDate': 'D MMMM Y',
+                'medium': 'D MMM Y HH:mm:ss',
+                'mediumDate': 'D MMM Y',
+                'mediumTime': 'HH:mm:ss',
+                'short': 'DD/MM/Y HH:mm',
+                'shortDate': 'D/MM/Y',
+                'shortTime': 'HH:mm'
+            }
+        }, {
+            'code': 'it',
+            'dateFormat': {
+                'fullDate': 'EEEE D MMMM Y',
+                'longDate': 'D MMMM Y',
+                'medium': 'DD MMM Y HH:mm:ss',
+                'mediumDate': 'DD MMM Y',
+                'mediumTime': 'HH:mm:ss',
+                'short': 'DD/MM/YY HH:mm',
+                'shortDate': 'DD/MM/YY',
+                'shortTime': 'HH:mm'
+            }
+        }, {
+            'code': 'pt',
+            'dateFormat': {
+                'fullDate': 'EEEE, D "de" MMMM "de" Y',
+                'longDate': 'D "de" MMMM "de" Y',
+                'medium': 'D "de" MMM "de" Y HH:mm:ss',
+                'mediumDate': 'D "de" MMM "de" Y',
+                'mediumTime': 'HH:mm:ss',
+                'short': 'DD/MM/YY HH:mm',
+                'shortDate': 'DD/MM/YY',
+                'shortTime': 'HH:mm'
+            }
+        }, {
+            'code': 'ja',
+            'dateFormat': {
+                'fullDate': 'y\u5e74M\u6708d\u65e5EEEE',
+                'longDate': 'y\u5e74M\u6708d\u65e5',
+                'medium': 'Y/MM/dd H:mm:ss',
+                'mediumDate': 'Y/MM/DD',
+                'mediumTime': 'H:mm:ss',
+                'short': 'Y/MM/DD H:mm',
+                'shortDate': 'Y/MM/DD',
+                'shortTime': 'H:mm'
+            }
+        }, {
+            'code': 'nl',
+            'dateFormat': {
+                'fullDate': 'EEEE D MMMM Y',
+                'longDate': 'D MMMM Y',
+                'medium': 'D MMM Y HH:mm:ss',
+                'mediumDate': 'D MMM Y',
+                'mediumTime': 'HH:mm:ss',
+                'short': 'DD-MM-YY HH:mm',
+                'shortDate': 'DD-MM-YY',
+                'shortTime': 'HH:mm'
+            }
+        }, {
+            'code': 'ru',
+            'dateFormat': {
+                'fullDate': 'EEEE, D MMMM Y "\u0433".',
+                'longDate': 'D MMMM Y "\u0433".',
+                'medium': 'D MMM Y "\u0433". H:mm:ss',
+                'mediumDate': 'D MMM Y "\u0433".',
+                'mediumTime': 'H:mm:ss',
+                'short': 'DD.MM.YY H:mm',
+                'shortDate': 'DD.MM.YY',
+                'shortTime': 'H:mm'
+            }
+        }],
+        PURCHASEMESSAGES: ['PURCHASE_WITHOUT_PAYMENT', 'PURCHASEOK_WITHOUT_TICKETS']
+    };
+
+    var fakeIbDatesConstants = {
+        'DAYS_ARRAY': ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18',
+            '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'
+        ],
+        'MONTH_ARRAY': ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+        'DEFAULT_TO_YEARS': 100,
+        'DEFAULT_FROM_YEARS': 0,
+        'DEFAULT_OPTIONS': {
+            'haveBirthdate': false
+        }
+    };
+
+    var fakeExpectedDays = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+        '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'
+    ];
+
+    var fakeExpectedDays2 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
+
+    var fakeExpectedMonths = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+
+    var $controller, $rootScope,$scope,controller,expectedYears,date,expectmonthsarray,expectmonth;
+
+    function expectedYearsFunction() {
+        var index, currentYear, yearsArray = [],
+            maxYears;
+        currentYear = new Date().getFullYear();
+        maxYears = currentYear + fakeMmBAppConstants.DEFAULT_TO_YEARS;
+        for (index = currentYear; index < maxYears; index++) {
+            yearsArray.push(currentYear);
+            currentYear++;
+        }
+        return yearsArray;
+    };
+
+    beforeEach(function () {
+        angular.mock.module('ib-apis-visa-expiry-date-module', function ($provide) {
+            $provide.value('MmBAppConstants', fakeMmBAppConstants);
+            $provide.value('IbDatesConstants', fakeIbDatesConstants);
+        });
+        inject(function (_$controller_, _$rootScope_) {
+            $controller = _$controller_;
+            $rootScope = _$rootScope_;
+            $scope = $rootScope.$new();
+            controller = $controller('ApisVisaExpiryDateController', {
+                $scope: $scope
+            });
+        });
+        controller['containerForm'] = { expiryVisaDateDay: { $invalid: false, $valid: true, $error: {}},
+                                        expiryVisaDateMonth: { $invalid: false, $valid: true, $error: {}},
+                                        expiryVisaDateYear: { $invalid: false, $valid: true, $error: {}}
+                                    };
+        controller['visa'] = { number: '12515' };
+    });
+
+    describe('when activate() function is called', function () {
+
+        it('should set correct values to availableYears,availableDays and availableMonths', function () {
+
+            expectedYears = expectedYearsFunction();
+            controller.$onInit();
+            expect(controller.availableYears).toEqual(expectedYears);
+            expect(controller.availableMonths).toEqual(fakeExpectedMonths);
+            expect(controller.availableDays).toEqual(fakeExpectedDays);
+        });
+
+    });
+
+    describe('when updateMonthExpiration() function is called', function () {
+
+        it('should update year value', function () {
+            date = new Date();
+            controller.month = date.getMonth() - 1;
+            controller.year = date.getFullYear() % 100;
+            controller.day = date.getDay();
+            controller.showDay = true;
+            controller.updateMonthExpiration();
+            expect(controller.year).toEqual(((date.getFullYear() % 100) + 1) + '');
+        });
+
+        it('should not update year value', function () {
+            date = new Date();
+            controller.month = date.getMonth() + 1;
+            controller.year = date.getFullYear() % 100;
+            controller.day = date.getDay();
+            controller.showDay = false;
+            controller.updateMonthExpiration();
+            expect(controller.year).toEqual((date.getFullYear() % 100));
+        });
+
+    });
+
+    describe('when updateYearExpiration() function is called', function () {
+
+        it('should update month value', function () {
+            date = new Date();
+            expectmonthsarray = fakeIbDatesConstants.MONTH_ARRAY.slice();
+            expectmonth = expectmonthsarray[date.getMonth()];
+            controller.month = date.getMonth() - 1;
+            controller.year = date.getFullYear() % 100;
+            controller.updateYearExpiration();
+            expect(controller.month).toEqual(expectmonth);
+        });
+
+        it('should not update month value', function () {
+            date = new Date();
+            controller.month = date.getMonth() + 1;
+            controller.year = date.getFullYear() % 100;
+            controller.updateYearExpiration();
+            expect(controller.month).toEqual(date.getMonth() + 1);
+        });
+
+    });
+
+    describe('when monthsSelected() function is called', function () {
+
+        it('should set correct day when month and year are null and day > availableDays', function () {
+            controller.day = '32';
+            controller.availableMonths = fakeExpectedMonths;
+            controller.availableDays = fakeExpectedDays2;
+            controller.monthsSelected();
+            expect(controller.day).toEqual('31');
+        });
+
+        it('should set correct day when month and year are null < availableDays', function () {
+            controller.day = '29';
+            controller.availableMonths = fakeExpectedMonths;
+            controller.availableDays = fakeExpectedDays2;
+            controller.monthsSelected();
+            expect(controller.day).toEqual('29');
+        });
+
+        xit('should set correct day when month and year exist', function () {
+            controller.month = 5;
+            controller.year = 19;
+            controller.availableMonths = [5,6];
+            controller.availableYears = [19];
+            date = new Date();
+            controller.day = (date.getDate() + 100)+'';
+            controller.monthsSelected();
+            expect(controller.day).toEqual('31');
+        });
+    });
+
+    describe('when controlVisaFields() function is called', function() {
+        it('set component required if visa and visa number exists', function() {
+            controller.controlVisaFields();
+            expect(controller.containerForm.expiryVisaDateDay.$valid).toBeFalsy();
+            expect(controller.containerForm.expiryVisaDateMonth.$valid).toBeFalsy();
+            expect(controller.containerForm.expiryVisaDateYear.$valid).toBeFalsy();
+
+            expect(controller.containerForm.expiryVisaDateDay.$invalid).toBeTruthy();
+            expect(controller.containerForm.expiryVisaDateMonth.$invalid).toBeTruthy();
+            expect(controller.containerForm.expiryVisaDateYear.$invalid).toBeTruthy();
+
+            expect(controller.containerForm.expiryVisaDateDay.$error).toEqual({required: true});
+            expect(controller.containerForm.expiryVisaDateMonth.$error).toEqual({required: true});
+            expect(controller.containerForm.expiryVisaDateYear.$error).toEqual({required: true});
+        });
+
+        it('set component required if visa and visa issuerCountry exists', function() {
+            controller['visa'] = { issuerCountry: 'ES' };
+            controller.controlVisaFields();
+            expect(controller.containerForm.expiryVisaDateDay.$valid).toBeFalsy();
+            expect(controller.containerForm.expiryVisaDateMonth.$valid).toBeFalsy();
+            expect(controller.containerForm.expiryVisaDateYear.$valid).toBeFalsy();
+
+            expect(controller.containerForm.expiryVisaDateDay.$invalid).toBeTruthy();
+            expect(controller.containerForm.expiryVisaDateMonth.$invalid).toBeTruthy();
+            expect(controller.containerForm.expiryVisaDateYear.$invalid).toBeTruthy();
+
+            expect(controller.containerForm.expiryVisaDateDay.$error).toEqual({required: true});
+            expect(controller.containerForm.expiryVisaDateMonth.$error).toEqual({required: true});
+            expect(controller.containerForm.expiryVisaDateYear.$error).toEqual({required: true});
+        });
+    });
+});

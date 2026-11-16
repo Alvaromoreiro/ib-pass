@@ -1,0 +1,168 @@
+@import "../../../../../styles/settings-tools";
+
+
+// RESET
+::ng-deep {
+  // 1. Quitar bordes e indicadores inferiores
+  .mat-mdc-form-field-focus-indicator::after,
+  .mat-mdc-form-field-design-placeholder::after,
+  .mdc-line-ripple::before,
+  .mdc-line-ripple::after,
+  .mat-mdc-form-field-bottom-align::before,
+  .mdc-line-ripple {
+    display: none !important;
+    border-bottom-width: 0 !important;
+  }
+
+  // 2. Quitar fondos (Base, Focus y Hover)
+  .mdc-text-field:not(.mdc-text-field--disabled),
+  .mdc-text-field--focused:not(.mdc-text-field--disabled),
+  .mdc-text-field:not(.mdc-text-field--disabled):hover {
+    background-color: transparent !important;
+  }
+
+  // 3. Desactivar capas visuales de interacción de MDC
+  .mdc-text-field__state-layer,
+  .mdc-text-field:hover .mdc-text-field__state-layer {
+    background-color: transparent !important;
+    opacity: 0 !important;
+  }
+
+  .mat-mdc-form-field-focus-overlay {
+    background-color: transparent !important;
+    opacity: 0 !important;
+  }
+
+  // 2. Eliminar el fondo por defecto del input en todos los estados (reposo, hover, focus)
+  .mdc-text-field--filled:not(.mdc-text-field--disabled),
+  .mdc-text-field--filled:not(.mdc-text-field--disabled):hover,
+  .mdc-text-field--focused:not(.mdc-text-field--disabled) {
+    background-color: transparent !important;
+  }
+
+  // 3. Matar las capas internas nativas de MDC
+  .mdc-text-field__state-layer {
+    display: none !important;
+    background-color: transparent !important;
+    opacity: 0 !important;
+  }
+
+  // 4. Asegurar la eliminación de la línea inferior (por si acaso)
+  .mdc-line-ripple,
+  .mdc-line-ripple::before,
+  .mdc-line-ripple::after {
+    display: none !important;
+    border-bottom-width: 0 !important;
+  }
+
+  .mat-mdc-input-element {
+    cursor: pointer;
+  }
+
+  .mat-form-field-disabled {
+    .mdc-text-field--disabled {
+        background-color: var(--ib-st-background-color-disabled-default);
+        cursor: not-allowed;
+    }
+
+    .mdc-text-field__input {
+        cursor: not-allowed;
+    }
+    .#{$mmb__namespace}form-select__label {
+        color: var(--ib-st-text-color-on-disabled);
+        cursor: not-allowed;
+    }
+  } 
+}
+
+//END RESET
+
+
+.#{$mmb__namespace}form-select {
+  display: block;
+
+  &:hover {
+    background-color: var(--ib-pt-base-grey-200);
+  }
+
+  &__field{
+    display: block;
+    border: rem(1) solid var(--ib-st-border-color-alt);
+    cursor: pointer;
+
+    .mdc-floating-label {
+      color: initial;
+    }
+
+    &.mat-focused {
+      border-color: var(--ib-st-border-color-focus-default);
+      outline: none;
+    }
+
+    &.mat-form-field-disabled {
+      border-color: var(--ib-st-border-color-disabled);
+      cursor: not-allowed;
+
+      .mat-mdc-form-field-infix {
+        cursor: not-allowed;
+      }
+      .#{$mmb__namespace}form-select {
+        &__label {
+          color: var(--ib-st-text-color-on-disabled);
+          cursor: not-allowed;
+        }
+
+        &__icon {
+          color: var(--ib-st-text-color-on-disabled);
+        }
+      }
+    }
+
+    
+  }
+
+  &__label {
+    font-family:var(--ib-st-font-family-body);
+    font-size: rem(14);
+    font-weight: 400;
+    color: var(--ib-st-text-color-primary);
+    cursor: pointer;
+    letter-spacing: initial;
+  }
+
+  &__icon {
+      &::after{
+        content: "\e972";
+        display: block;
+        margin-right: rem(20);
+        font-family: $font-icons;
+        font-size: rem(20);
+      }
+
+       &--open {
+          &::after{
+            content: "\e972";
+          }
+      } 
+
+      &--close {
+        &::after{
+          content: "\e971";
+        }
+      }
+  }
+
+
+  .mdc-floating-label {
+    cursor: pointer;
+
+    &--float-above{
+      .#{$mmb__namespace}select {
+        &__label {
+          font-size: rem(12);
+          color: var(--ib-color-grey-700-66);
+        }
+      }
+  }
+  }
+}

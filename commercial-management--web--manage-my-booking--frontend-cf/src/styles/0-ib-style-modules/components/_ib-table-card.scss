@@ -1,0 +1,167 @@
+/* -------------------------------------------------------------
+    #TEXT CUSTOM
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}table-card {
+    display: table;
+    width: 100%;
+
+    &__row {
+        display: table-row;
+    }
+
+    &__row-group {
+        display: table-row-group;
+    }
+
+    &__data {
+        display: table-cell;
+        min-width: rem(280);
+        max-width: 100%;
+
+        &:first-child {
+            min-width: rem(145);
+        }
+    }
+
+    &__text {
+        display: block;
+        margin-bottom: rem(8);
+        margin-left: rem(8);
+        font-family: $font-special;
+        font-size: rem(18);
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}table-card {
+        &__text {
+            display: block;
+            margin-bottom: rem(8);
+            margin-left: rem(8);
+            font-family: $font-special;
+            font-size: rem(18);
+        }
+    }
+}
+
+
+@include media-query('md') {
+    .#{$wefront__namespace}card-logo__data {
+        .#{$wefront__namespace}table-card {
+            &__text {
+                display: block;
+                margin-bottom: rem(8);
+                margin-left: rem(8);
+                font-family: $font-special;
+                font-size: rem(18);
+            }
+
+            &__data {
+                min-width: rem(230);
+
+                &:first-child {
+                    min-width: rem(145);
+                }
+            }
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}card-logo__data {
+        .#{$wefront__namespace}table-card {
+            display: block;
+
+            &__row {
+                display: block;
+            }
+
+            &__data {
+                display: block;
+                width: 100%;
+                min-width: inherit;
+
+                &:first-child {
+                    width: 100%;
+                    min-width: inherit;
+                }
+            }
+
+            &__text {
+                display: block;
+                margin-bottom: rem(8);
+                margin-left: rem(0);
+                font-family: $font-special;
+                font-size: rem(18);
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}card-logo__data {
+
+        .#{$wefront__namespace}table-card {
+            display: block;
+
+            &__row {
+                display: block;
+            }
+
+            &__data {
+                display: block;
+            }
+
+            &__text {
+                display: block;
+                margin-bottom: rem(8);
+                margin-left: rem(0);
+                font-family: $font-special;
+                font-size: rem(18);
+            }
+        }
+    }
+}
+
+@media print {
+
+    .#{$wefront__namespace}table-card {
+        &__data {
+            min-width: inherit;
+
+            &:first-child {
+                min-width: inherit;
+            }
+
+            &:first-of-type {
+                display: none;
+            }
+        }
+
+        &__text {
+            margin-left: 0;
+            font-size: rem(15);
+        }
+
+        &__row-group {
+            &--print {
+                display: table-row;
+
+                .#{$wefront__namespace}table-card {
+                    &__row {
+                        display: inline-block;
+                    }
+
+                    &__text {
+                        margin-right: rem(8);
+                    }
+
+                    &__data {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+}

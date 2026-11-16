@@ -1,0 +1,27 @@
+export const FareIconMapConstants: Record<string, string> = {
+    CABINA: 'icon-navegador_avion',
+    EQMANO: 'icon-e_equipaje',
+    EQMANO10: 'icon-e_equipaje',
+    EQMANO14: 'icon-e_equipaje',
+    EQPERSONAL: 'icon-equipaje-de-mano-mochila',
+    EQBODEGA: 'icon-e_equipaje_facturado',
+    ASIENTO: 'icon-asiento-normal',
+    ASIENTO24H: 'icon-asiento-normal',
+    ASIENTOXL: 'icon-asiento-plus',
+    ASIENTODELANTERO: 'icon-asiento-delantero',
+    ASIENTOPREFERENTE: 'icon-asiento-plus',
+    CAMBIO: 'icon-cambios_y_reembolsos',
+    REEMBOLSO: 'icon-reembolsos',
+    CHECKINDESK: 'icon-check_in',
+    SALAVIP: 'icon-sala_vip',
+    FASTTRACK: 'icon-fast_track',
+    TARJEMBANTIC: 'icon-tarjeta_de_embarque',
+    EQPPRIOR: 'icon-e_facturacion_prioritaria',
+    COMIDA: 'icon-c_comidas_nuevas',
+    EMBARQUE: 'icon-priority-boarding',
+    AEROPUERTO: 'icon-canary-plus',
+    AVIOSPLUS: 'icon-avios',
+    PUNTUALIDAD: 'icon-utilizacion_avios',
+    FASTLANE: 'icon-fast_track'
+};
+

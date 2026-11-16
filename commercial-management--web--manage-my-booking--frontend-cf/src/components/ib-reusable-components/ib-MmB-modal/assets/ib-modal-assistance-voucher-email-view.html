@@ -1,0 +1,164 @@
+<!-- Transition -->
+<!-- Loading -->
+<div
+  class="ib-overlay-fly ib-overlay-fly--type-3 ib-overlay-fly--transparent"
+  data-ng-if="modalCtrl.model.submitted && !modalCtrl.model.showError && !modalCtrl.model.showOk"
+>
+  <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+    <div class="ib-overlay-fly__icon">
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+    <span class="ib-overlay-fly__text"
+      >{{'MODAL_SEND_ASSISTANCE_VOUCHER_EMAIL_SENDING_STATE' | translate}}</span
+    >
+  </div>
+</div>
+<!-- KO -->
+<div
+  class="ib-overlay-fly ib-overlay-fly--type-3 ib-overlay-fly--transparent"
+  data-ng-if="modalCtrl.model.showError"
+>
+  <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+    <div id="iconLoading" class="ib-overlay-fly__border">
+      <div id="initLoading" class="ib-overlay-fly__border-loading"></div>
+      <div id="error" class="ib-overlay-fly__border-error icon-alertas_3"></div>
+    </div>
+    <span id="text" class="ib-overlay-fly__text"
+      >{{'MODAL_SEND_ASSISTANCE_VOUCHER_EMAIL_ERROR_STATE'|translate}}</span
+    >
+  </div>
+</div>
+<!-- OK -->
+<div
+  class="ib-overlay-fly ib-overlay-fly--type-3 ib-overlay-fly--transparent"
+  data-ng-if="modalCtrl.model.showOk && !modalCtrl.model.showError"
+>
+  <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+    <div id="iconLoading" class="ib-overlay-fly__border">
+      <div id="initLoading" class="ib-overlay-fly__border-loading"></div>
+      <div
+        id="valid"
+        class="ib-overlay-fly__border-valid icon-confirmacion"
+      ></div>
+    </div>
+    <span class="ib-overlay-fly__text"
+      >{{'MODAL_SEND_ASSISTANCE_VOUCHER_EMAIL_SENDED_STATE'|translate}}</span
+    >
+  </div>
+</div>
+
+<!-- modal -->
+<header class="ib-modals__header">
+  <h2 class="ib-heading ib-heading--type-1">
+    {{'MODAL_SEND_ASSISTANCE_VOUCHER_EMAIL_TITLE'|translate}}
+  </h2>
+  <div class="ib-modals__header-settings">
+    <button
+      type="button"
+      class="ib-modals__button-action icon-cerrar"
+      ng-click="modalCtrl.close()"
+    >
+      <span class="u-hide-accessible"
+        >{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span
+      >
+    </button>
+  </div>
+</header>
+
+<div class="ib-layout__line-spacing">
+  <div class="ib-msg-alert ib-msg-alert--danger icon-mas_2 alert">
+    <p class="ib-msg-alert__text ib-msg-alert__text--bold">
+     {{'MODAL_SEND_ASSISTANCE_VOUCHER_EMAIL_ALERT_ERROR_TITLE'|translate}}
+    </p>
+    <p class="ib-msg-alert__text">{{'MODAL_SEND_ASSISTANCE_VOUCHER_EMAIL_ALERT_ERROR_DESCRIPTION'|translate}}</p>
+  </div>
+</div>
+
+<section class="ib-modals__body ib-modals__body--cols-simple">
+  <form method="post" action="#" name="modalCtrl.voucherEmailForm">
+    <div class="ib-layout">
+      <div class="ib-layout__line-spacing">
+        <span class="ib-text ib-text--block"
+          >{{'MODAL_SEND_ASSISTANCE_VOUCHER_EMAIL_TXT'|translate}}</span
+        >
+      </div>
+      <div
+        class="ib-layout__line-spacing ib-layout__line-spacing--medium ib-layout__line-spacing--bordered"
+      >
+        <fieldset>
+          <legend class="u-hide-accessible">
+            {{'MODAL_PASSENGER_DATA'|translate}}
+          </legend>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="ib-layout__line-spacing">
+                  <div
+                    class="ib-input"
+                    data-ng-class="{'ib-input--error': modalCtrl.voucherEmailForm.$submitted && modalCtrl.voucherEmailForm.email.$invalid}"
+                  >
+                    <label
+                      class="ib-input__label"
+                      for="email"
+                      ng-class="{'ib-input__label--focus' : focused || modalCtrl.voucherEmailForm.email.$viewValue.length}"
+                      > {{'MODAL_SEND_ASSISTANCE_VOUCHER_EMAIL_LABEL'|translate}}</label
+                    >
+                    <input
+                      class="ib-input__input"
+                      ng-class="{'ib-input__label--focus' : focused || modalCtrl.voucherEmailForm.email.$viewValue.length}"
+                      type="email"
+                      id="email"
+                      name="email"
+                      ng-focus="focused=true"
+                      ng-blur="focused=false"
+                      ng-model="modalCtrl.data.email"
+                      ng-required="!modalCtrl.model.data.email"
+                      maxlength="{{::$root.MmBPatterns.EMAIL_MAX_LENGTH}}"
+                      ng-pattern="::$root.MmBPatterns.EMAIL_PATTERN"
+                      required
+                    />
+                  </div>
+                  <div
+                    ng-messages="modalCtrl.voucherEmailForm.$submitted && modalCtrl.voucherEmailForm.email.$error"
+                  >
+                    <div class="ib-alert ib-alert--error" ng-message="required">
+                      {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                    </div>
+                    <div class="ib-alert ib-alert--error" ng-message="pattern">
+                      {{'GENERAL_INPUT_PATTERN_ERROR'|translate}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="ib-layout__line-spacing">
+        <div class="ib-content-buttons">
+          <div class="ib-content-buttons__content-left">
+            <button
+              class="ib-button ib-button--w-medium"
+              type="button"
+              ng-click="modalCtrl.sendAssitanceVoucher()"
+            >
+            {{'MODAL_SEND_ASSISTANCE_VOUCHER_EMAIL_SEND_BTN'|translate}}
+            </button>
+          </div>
+          <div
+            class="ib-content-buttons__content-right ib-content-buttons__content-right--mb-mobile"
+          >
+            <a
+              href="javascript:void(0)"
+              title="{{'MODAL_CANCEL'|translate}}"
+              class="ib-link"
+              ng-click="modalCtrl.close();"
+              >{{'MODAL_CANCEL'|translate}}</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

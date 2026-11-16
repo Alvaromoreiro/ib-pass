@@ -1,0 +1,165 @@
+/* --------------------------------
+    #RESET-BOOTSTRAP
+-------------------------------- */
+.container {
+    max-width: 100%;
+    padding-right: rem($base_separation);
+    padding-left: rem($base_separation);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.container-fluid {
+    padding-right: rem($base_separation);
+    padding-left: rem($base_separation);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.row .row {
+    margin-right: -#{rem($base_separation)};
+    margin-left: -#{rem($base_separation)};
+}
+
+.container .container {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+[uib-typeahead-popup].dropdown-menu {
+    display: none;
+
+    &[aria-hidden="false"] {
+        display: block;
+    }
+
+    &:not([aria-hidden]) {
+        display: block;
+    }
+}
+
+// Gutters for grid system
+@mixin setGutterToCols($size) {
+    .row {
+        $rowMargin: -#{$size};
+
+        width: auto;
+        margin-right: $rowMargin;
+        margin-left: $rowMargin;
+    }
+
+    [class*="col"] {
+        padding-right: $size !important;
+        padding-left: $size !important;
+    }
+}
+
+.container[class*="gutter"],
+.container-fluid[class*="gutter"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+//FIX CONFLICTS BOOTSTRAP 5 WITH BOOTSTRAP 3
+.collapse.show {
+    display: block !important;
+}
+
+.fade.show {
+    opacity: 1;
+}
+
+.modal-backdrop.show {
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+
+.modal {
+    z-index: 1055;
+}
+
+ngb-modal-backdrop.ib-modals__backdrop {
+    z-index: 1055 !important;
+}
+
+.modal.show .modal-dialog {
+    transform: translate(0, 0);
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+//END FIX CONFLICTS BOOTSTRAP 5 WITH BOOTSTRAP 3
+
+// RESET BOOTSTRAP 5
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+//END BOOTSTRAP 5
+
+@each $separation, $separations-size in $separations {
+    .gutter#{$separation} {
+        @include setGutterToCols($separations-size);
+    }
+}
+
+@each $breakpoint, $query in $breakpoints {
+    @include media-query($breakpoint) {
+        @each $separation, $separations-size in $separations {
+            .gutter#{$separation}-#{$breakpoint} {
+                @include setGutterToCols($separations-size);
+            }
+        }
+    }
+}
+
+// End gutter for grid system
+@media (width >= 30rem) {
+    .container {
+        width: rem(480);
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+@media (width >= 48rem) {
+    .container {
+        width: rem(768);
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+@media (width <= 47.9375rem) {
+    .container {
+        width: 100%;
+        max-width: rem(480);
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+@media (width >= 64rem) {
+    .container {
+        width: rem(992);
+        padding-right: rem(16);
+        padding-left: rem(16);
+    }
+}
+
+@media (width >= 80rem) {
+    .container {
+        width: rem(1152);
+        padding-right: 0;
+        padding-left: 0;
+    }
+}

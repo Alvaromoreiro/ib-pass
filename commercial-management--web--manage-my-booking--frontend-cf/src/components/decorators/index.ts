@@ -1,0 +1,1 @@
+import './uib-datepicker-decorator';

@@ -1,0 +1,37 @@
+<div class="ib-date-carousel ib-date-carousel--bordered">
+    <fieldset class="ib-date-carousel__list">
+        <legend class="u-hide-accessible">Dates list</legend>
+        <div class="ib-date-carousel__slick">
+            <div class="slick-carousel">
+                <button type="button" class="ib-date-carousel__button ib-date-carousel__button-next ib-date-carousel__button-next--narrow"
+                data-ng-click="ibFlexCalendarCtrl.changeDay(true)" data-ng-class="{'ib-date-carousel__button-next--disabled' : ibFlexCalendarCtrl.blockChangeDateRight}">
+                    <span class="hide-accessible">Siguiente</span>
+                </button>
+                <div class="slick-carousel-list slick-carousel-list--flex-centered" ib-calendar-carousel>
+                    <div class="ib-date-carousel__item ib-date-carousel__item--empty" data-ng-repeat="(index, dateObj) in ibFlexCalendarCtrl.model.dateList" 
+                    ng-class="{'ib-date-carousel__item--active' : dateObj.date.isSame(ibFlexCalendarCtrl.selectedDate[ibFlexCalendarCtrl.model.selectedIndex].date, 'day')}">
+                        <input class="ib-date-carousel__input" type="radio" id="{{dateObj.date.format('MM_DD_YYYY')}}" name="availability_day" 
+                        ng-change="ibFlexCalendarCtrl.selectNewDate(index)" ng-value="dateObj" ng-model="ibFlexCalendarCtrl.selectedDate[ibFlexCalendarCtrl.model.selectedIndex]"/>
+                        <label class="ib-date-carousel__date ib-date-carousel__date--simple" for="{{dateObj.date.format('MM_DD_YYYY')}}">
+                            <span class="ib-date-carousel__date-week" data-shortcut="{{dateObj.date.format('ddd, ')}}"><span>{{dateObj.date.format('ddd, ')}}</span></span>
+                            <span class="ib-date-carousel__date-day">{{dateObj.date.format('D. ')}}</span>
+                            <span class="ib-date-carousel__date-month">{{dateObj.date.format('MMM')}}</span>
+                            <span data-ng-if="!dateObj.isAvailable" class="ib-date-carousel__availability">{{'AVAILABILITY_SLICE_BUTTON_SELECT_DISABLED' | translate}}</span>
+                            <!-- Loading -->
+                            <div data-ng-if="dateObj.isLoading" class="ib-date-carousel__price-loading">
+                                <div class="ib-date-carousel__price-loading--content">
+                                    <div class="ib-date-carousel__price-loading--spinner"><div></div><div></div></div>
+                                    <span class="ib-date-carousel__price-loading--text">{{'MMB_VC_AVAILABILITY_SLICK_LOADING' | translate}}</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <button type="button" class="ib-date-carousel__button ib-date-carousel__button-prev ib-date-carousel__button-prev--narrow"
+                data-ng-click="ibFlexCalendarCtrl.changeDay(false)" data-ng-class="{'ib-date-carousel__button-next--disabled' : ibFlexCalendarCtrl.blockChangeDateLeft}">
+                    <span class="hide-accessible">Anterior</span>
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</div>

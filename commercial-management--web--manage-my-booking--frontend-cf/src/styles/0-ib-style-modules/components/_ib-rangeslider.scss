@@ -1,0 +1,194 @@
+/* -------------------------------------------------------------
+    #RANGESILDER
+----------------------------------------------------------------- */
+.#{$wefront__namespace}rangeslider {
+    &--filter {
+        max-width: rem(280);
+        margin: 0 auto;
+    }
+
+    &__title {
+        font-size: rem(11);
+        color: color(gray-30);
+    }
+
+    //Library
+
+    .rzslider {
+        margin: rem(15) 0 rem(15) rem(10);
+
+        .rz-bar {
+            height: rem(3);
+            background-color: color(gray-50);
+        }
+
+        .rz-bubble {
+            top: rem(16);
+            font-size: rem(11);
+        }
+
+        .rz-pointer {
+            top: rem(-8);
+            width: rem(20);
+            height: rem(20);
+            border: rem(1) solid color(gray-20);
+            background-color: color(white);
+
+            &::after {
+                display: none;
+            }
+
+            &:hover,
+            &:focus,
+            &:active {
+                outline: 0;
+                //border: rem(1) solid color(primary);
+            }
+
+            &:focus {
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: rem(-3);
+                    left: rem(-3);
+                    width: remcalc(100%, " + ", rem(6));
+                    height: remcalc(100%, " + ", rem(6));
+                    border: rem(1) solid color(orange-10);
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .rz-selection {
+            background-color: color(gray-70);
+        }
+    }
+
+    &--avios {
+        width: 100%;
+        max-width: rem(710);
+        padding-bottom: rem(10);
+        margin: rem(20) auto 0;
+
+        .rzslider {
+            .rz-bar-wrapper {
+                margin-top: rem(-20);
+            }
+
+            .rz-bar {
+                height: rem(13) !important;
+                border: solid rem(1) color(gray-70);
+                border-radius: rem(8);
+                background-color: color(white);
+
+                &.rz-selection {
+                    background-color: color(primary) !important;
+                }
+            }
+
+            .rz-pointer,
+            .rz-pointer:hover,
+            .rz-pointer.rz-active {
+                width: rem(21);
+                height: rem(21);
+                border: solid rem(3) color(white);
+                border-radius: rem(100);
+                background-color: color(primary);
+                box-shadow: 0 rem(1) rem(5) 0 color(black, 0.28);
+            }
+
+            .rz-pointer.rz-active {
+                background-color: color(red-20);
+            }
+
+            .rz-tick {
+                width: rem(2);
+                height: rem(21);
+                margin-top: - rem(5);
+                background-color: color(gray-70);
+
+                &:first-child,
+                &:last-child {
+                    background-color: transparent;
+                }
+
+                &:first-child {
+                    .rz-tick-value {
+                        text-align: left;
+                        transform: translate(-20%, 0);
+                    }
+                }
+
+                &:last-child {
+                    .rz-tick-value {
+                        text-align: right;
+                        transform: translate(-90%, 0);
+                    }
+                }
+            }
+
+            .rz-tick-value {
+                top: rem(22);
+                bottom: rem(-19);
+                font-size: rem(11);
+                color: color(gray-30);
+            }
+
+            .rz-bubble {
+                margin-top: rem(-40);
+                font-size: rem(11);
+                color: color(primary) !important;
+            }
+        }
+    }
+}
+
+// Responsive
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}rangeslider {
+        &--avios {
+            margin: rem(10) auto rem(20);
+
+            .rzslider {
+                display: block;
+                margin: 0 0 0 auto;
+
+                .rz-tick-value {
+                    top: rem(25);
+                    width: rem(50);
+                    line-height: rem(12);
+                    white-space: normal !important;
+                }
+            }
+        }
+    }
+}
+
+@include media-query("sm") {
+    .#{$wefront__namespace}rangeslider {
+        &--avios {
+            margin: rem(10) auto rem(20);
+
+            .rzslider {
+                width: calc(122% - 5%);
+            }
+        }
+    }
+}
+
+@include media-query("xs") {
+    .#{$wefront__namespace}rangeslider {
+        &--filter {
+            max-width: rem(220);
+        }
+
+        &--avios {
+            margin: rem(10) auto rem(20);
+
+            .rzslider {
+                width: calc(100% - 28%);
+            }
+        }
+    }
+}

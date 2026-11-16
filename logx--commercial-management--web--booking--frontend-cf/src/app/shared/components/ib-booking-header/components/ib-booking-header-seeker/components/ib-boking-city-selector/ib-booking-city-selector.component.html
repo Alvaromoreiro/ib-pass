@@ -1,0 +1,223 @@
+<div class="ib-city-selector dropdown" [class]="cssClass" [class.open]="isOpen">
+  <div
+    class="ib-input ib-input--button ib-input--cities"
+    [class.ib-input--error]="touched && invalid"
+    [class.ib-input--disabled]="disabledInput"
+  >
+    <label
+      class="ib-input__label"
+      [for]="'SELECTOR_CITY_' + index"
+      [class.ib-input__label--focus]="focused || searchText"
+    >
+      {{ text | translate }}
+    </label>
+
+    <input
+      class="ib-input__input"
+      type="text"
+      [id]="'SELECTOR_CITY_' + index"
+      [name]="'selector_city_' + index"
+      [disabled]="disabledInput"
+      [(ngModel)]="searchText"
+      (focus)="enableFocus()"
+      (blur)="disableFocus()"
+      (click)="onInputClick($event)"
+      (ngModelChange)="onSearchChange()"
+      (keyup.escape)="isOpen = false"
+      autocomplete="off"
+      data-input
+    />
+
+    <button
+      *ngIf="!simpleSelector && !isCollapse"
+      type="button"
+      [id]="'BUTTON_SELECTOR_CITY_' + index"
+      class="ib-input__icon icon-senalizacion_mapas"
+      (click)="openCollapse()"
+      [attr.aria-describedby]="'HEADER_CITY_SELECTOR_DEPLOY_LIST_TEXT' | translate"
+    ></button>
+  </div>
+
+  <!-- Autocomplete Dropdown (for typing search) -->
+  <div
+    *ngIf="isTyping && filteredCities.length > 0 && searchText.length >= 3 && !isOpen"
+    class="dropdown-menu ib-autocomplete ib-autocomplete--cities show"
+  >
+    <ul class="ib-autocomplete__list" role="listbox">
+      <li
+        *ngFor="let city of filteredCities; trackBy: trackByCode"
+        class="ib-autocomplete__list-items"
+        role="option"
+        (mousedown)="$event.preventDefault(); onSelect(city)"
+      >
+        <a
+          href="javascript:void(0)"
+          class="ib-autocomplete__item"
+          [title]="city.description + ' (' + (city.countryLong || '') + ')'"
+        >
+          <span class="ib-autocomplete__item-name" [innerHTML]="city.descriptionWithHighlight  + ' (' + city.code + ')'"></span>
+          <span class="ib-autocomplete__item-detail">{{ city.country }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Validation Messages -->
+  <div *ngIf="containerForm?.hasError && !hideWarning ">
+    <span *ngIf="containerForm.errors.noCitySelected && !searchText" class="ib-alert ib-alert--error">
+      {{ 'GENERAL_INPUT_REQUIRED_ERROR' | translate }}
+    </span>
+    <span *ngIf="containerForm.errors.sameCity && searchText" class="ib-alert ib-alert--error">
+      {{ 'GENERAL_INPUT_PATTERN_ERROR_CITY_SELECTOR' | translate }}
+    </span>
+  </div>
+
+  <!-- Desktop Dropdown Panel (button click) -->
+  <section
+    *ngIf="!simpleSelector && !isCollapse && isOpen"
+    class="dropdown-menu ib-dropdown ib-dropdown--type-1 show"
+    [class.ib-dropdown--left]="isOrigin"
+    [class.ib-dropdown--left-lg]="isOrigin"
+    [class.ib-dropdown--center]="!isOrigin && !isOverflow"
+    [class.ib-dropdown--center-lg]="!isOrigin && !isOverflow"
+    [class.ib-dropdown--right]="!isOrigin && isOverflow"
+    [class.ib-dropdown--right-lg]="!isOrigin && isOverflow"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="ib-choose-city">
+      <div class="ib-choose-city__body">
+        <!-- Groups Menu -->
+        <div class="ib-choose-city__menu" *ngIf="modelCities?.listGroups?.length">
+          <nav>
+            <ul class="ib-choose-city__menu-list">
+              <li
+                *ngFor="let groupItem of modelCities.listGroups"
+                class="ib-choose-city__menu-item"
+              >
+                <a
+                  [id]="'change-group-' + groupItem + '-' + index + '-link'"
+                  href="javascript:void(0)"
+                  class="ib-choose-city__menu-select"
+                  [class.ib-choose-city__menu-select--selected]="group === groupItem"
+                  [title]="('HEADER_CITY_SELECTOR_DESTINY_TITLE' | translate) + ' ' + groupItem"
+                  (click)="changeGroup($event, groupItem)"
+                >
+                  {{ groupItem }}
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Letters and Cities Container -->
+        <div class="ib-choose-city__container">
+          <!-- Alphabet Navigation -->
+          <nav>
+            <div class="ib-choose-city__letters">
+              <ul class="ib-choose-city__letters-list">
+                <li class="ib-choose-city__letters-item">
+                  <a
+                    [id]="'change-letter-all-' + index + '-link'"
+                    href="javascript:void(0)"
+                    class="ib-choose-city__letters-select"
+                    [class.ib-choose-city__letters-select--active]="letterSelected === 'all'"
+                    [title]="'HEADER_CITY_SELECTOR_VIEW_ALL_TITLE' | translate"
+                    (click)="changeLetter('all'); $event.preventDefault()"
+                  >
+                    {{ 'HEADER_CITY_SELECTOR_CHOOSE_OPTION_ALL' | translate }}
+                  </a>
+                </li>
+                <li
+                  *ngFor="let letter of alphabet; trackBy: trackByName"
+                  class="ib-choose-city__letters-item"
+                >
+                  <a
+                    [id]="'change-letter-' + letter.name + '-' + index + '-link'"
+                    href="javascript:void(0)"
+                    class="ib-choose-city__letters-select"
+                    [class.ib-choose-city__letters-select--active]="letterSelected === letter.name"
+                    [title]="('HEADER_CITY_SELECTOR_VIEW_COUNTRIES_BEGIN_WITH_TITLE' | translate) + ' ' + letter.name"
+                    (click)="changeLetter(letter.name); $event.preventDefault()"
+                  >
+                    {{ letter.name }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+
+          <!-- Cities List -->
+          <ul class="ib-choose-city__cities-list">
+            <li
+              *ngFor="let city of displayedCities; trackBy: trackByCode"
+              class="ib-choose-city__cities-item"
+            >
+              <a
+                [id]="'select-city-' + city.code + '-' + index + '-link'"
+                href="javascript:void(0)"
+                class="ib-choose-city__cities-select"
+                [title]="('HEADER_CITY_SELECTOR_SELECT_DESTINY_TITLE' | translate) + ' ' + (city.description | translate)"
+                (click)="selectCity($event, city)"
+              >
+                {{ city.description | translate }}
+                <ng-container *ngIf="!modelCities.descriptionWithIATA">
+                  ({{ city.code }})
+                </ng-container>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile View -->
+    <div class="ib-choose-city-mobile">
+      <ul class="ib-choose-city-mobile__groups">
+        <li class="ib-choose-city-mobile__group-item">
+          <a
+            [id]="'change-country-all-' + index + '-link'"
+            href="javascript:void(0)"
+            class="ib-choose-city-mobile__group-select"
+            [class.ib-choose-city__menu-select--selected]="!group"
+            [title]="'HEADER_CITY_SELECTOR_VIEW_ALL_TITLE' | translate"
+            (click)="changeCountry('', $event)"
+          >
+            {{ 'HEADER_CITY_SELECTOR_CHOOSE_OPTION_ALL' | translate }}
+          </a>
+        </li>
+        <li
+          *ngFor="let groupItem of modelCities?.listGroups"
+          class="ib-choose-city-mobile__group-item"
+        >
+          <a
+            [id]="'change-country-' + groupItem + '-' + index + '-link'"
+            href="javascript:void(0)"
+            class="ib-choose-city-mobile__group-select"
+            [class.ib-choose-city__menu-select--selected]="group === groupItem"
+            [title]="('HEADER_CITY_SELECTOR_DESTINY_TITLE' | translate) + ' ' + groupItem"
+            (click)="changeCountry(groupItem, $event)"
+          >
+            {{ groupItem }}
+          </a>
+        </li>
+      </ul>
+
+      <!-- iOS List Component with letters and cities -->
+      <div
+        *ngIf="loadingFilter"
+        [id]="index + '-ios-list'"
+        class="ib-ios-list-container"
+      >
+        <div class="ib-choose-city-mobile__content">
+            <ib-ui-ioslist
+                id="{{index}}-ios-list"
+                class="ib-ios-list-container"
+                ng-if="loadingFilter"
+                [cities]="modelCities.listCities"
+                [group]="group"
+            ></ib-ui-ioslist>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

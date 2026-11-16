@@ -1,0 +1,10 @@
+import './ib-MmB-bookings-list-module';
+import './view-model/ib-MmB-bookings-list-model';
+import './transformers/ib-MmB-bookings-list-transformer';
+import './proxies/ib-bookings-list-proxy';
+import './proxies/ib-get-cities-images-proxy';
+import './services/ib-get-cities-images-service';
+import './services/ib-call-bookings-list-service';
+import './services/ib-MmB-bookings-list-service';
+import './controllers/ib-MmB-bookings-list-controller';
+import './components/ib-logged-booking-item';

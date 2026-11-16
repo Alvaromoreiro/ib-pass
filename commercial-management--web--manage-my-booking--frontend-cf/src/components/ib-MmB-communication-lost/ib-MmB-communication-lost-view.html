@@ -1,0 +1,105 @@
+    <!-- directive: ib-comment "{{$root.generateDatalayerDOM()}}" !-->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__header ib-layout__header--pre-title">
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall u-text-right hidden-md hidden-sm hidden-xs">
+                        <a id="IBBKER_PRINT_CONFIRMATION" class="ib-link ib-link--icon" href="javascript:void(0)"
+                            data-ng-click="mmbComLostCtrl.printSummary()" title="{{'COMMUNICATION_LOST_PRINT_CONFIRM_TITLE'|translate}}">
+                            <span class="ib-link__icon icon-imprimir"></span>
+                            <span class="ib-link__text">{{'COMMUNICATION_LOST_PRINT_CONFIRM'|translate}}</span>
+                        </a>
+                    </div>
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--big ib-layout__line-spacing--text-center">
+                        <h1 class="ib-heading ib-heading--type-1">{{'COMMUNICATION_LOST_PAGE_TITLE'|translate}}</h1>
+                    </div>
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--small ib-layout__line-spacing--text-center">
+                        <h2 class="ib-heading ib-heading--type-3">{{'COMMUNICATION_LOST_SUBTITLE'|translate}}</h2>
+                    </div>
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--small ib-layout__line-spacing--text-center">
+                        <p class="ib-text ib-text--unfocused">{{'COMMUNICATION_LOST_DESCRIPTION'|translate}}</p>
+                    </div>
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--medium ib-layout__line-spacing--text-center">
+                        <p class="ib-text ib-text--unfocused">{{'COMMUNICATION_LOST_PAGE_CONTACT_DESCRIPTION'|translate}}:</p>
+                    </div>
+                    <div class="ib-layout__form-center">
+                        <div class="ib-box-services">
+                            <span class="ib-box-services__icon icon-click_to_call"></span>
+                            <div class="ib-box-services__container">
+                                <span class="ib-box-services__title">{{'COMMUNICATION_LOST_SERVIBERIA'|translate}}:</span>
+                                <span class="ib-box-services__number" ng-bind-html="mmbComLostCtrl.model.relatedContent['CONNECTION_ERROR_PHONE']"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <section class="ib-layout__section">
+                    <div class="ib-box ib-box--big">
+                        <table class="ib-table-info">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">
+                                        <span class="ib-table-info__text">{{'COMMUNICATION_LOST_INFO_TABLE_TITLE'|translate}}</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="ib-table-info__text">{{'COMMUNICATION_LOST_INFO_PNR'|translate}}</span></td>
+                                    <td><span class="ib-table-info__text">{{::mmbComLostCtrl.model.communicationLostInfo.pnr}}</span></td>
+                                </tr>
+                                <tr ng-if="::mmbComLostCtrl.model.communicationLostInfo.paymentItems.CREDITCARD">
+                                    <td><span class="ib-table-info__text">{{'COMMUNICATION_LOST_INFO_CREDIT_CARD_TOTAL'|translate}}</span></td>
+                                    <td><span class="ib-table-info__text">{{::mmbComLostCtrl.model.communicationLostInfo.paymentItems.CREDITCARD.total}}</span></td>
+                                </tr>
+                                <tr ng-if="::mmbComLostCtrl.model.communicationLostInfo.paymentItems.CREDITCARD">
+                                    <td><span class="ib-table-info__text">{{'COMMUNICATION_LOST_INFO_CREDIT_CARD_AUTHORIZATION'|translate}}</span></td>
+                                    <td><span class="ib-table-info__text">{{::mmbComLostCtrl.model.communicationLostInfo.paymentItems.CREDITCARD.authorization}}</span></td>
+                                </tr>
+                                <tr ng-if="::mmbComLostCtrl.model.communicationLostInfo.paymentItems.CREDITCARD">
+                                    <td><span class="ib-table-info__text">{{'COMMUNICATION_LOST_INFO_CREDIT_CARD_NUMBER'|translate}}</span></td>
+                                    <td><span class="ib-table-info__text">{{::(mmbComLostCtrl.model.communicationLostInfo.paymentItems.CREDITCARD.cardDescription + ' '
+                                            + mmbComLostCtrl.model.communicationLostInfo.paymentItems.CREDITCARD.creditCardNumber)}}</span></td>
+                                </tr>
+                                <tr ng-if="::mmbComLostCtrl.model.communicationLostInfo.paymentItems.AVIOS">
+                                    <td><span class="ib-table-info__text">{{'COMMUNICATION_LOST_INFO_AVIOS_TOTAL'|translate}}</span></td>
+                                    <td><span class="ib-table-info__text">{{::mmbComLostCtrl.model.communicationLostInfo.paymentItems.AVIOS.aviosRedeemed}}</span></td>
+                                </tr>
+                                <tr ng-if="::mmbComLostCtrl.model.communicationLostInfo.paymentItems.AVIOS">
+                                    <td><span class="ib-table-info__text">{{'COMMUNICATION_LOST_INFO_AVIOS_DISCOUNT'|translate}}</span></td>
+                                    <td><span class="ib-table-info__text">{{::mmbComLostCtrl.model.communicationLostInfo.paymentItems.AVIOS.dicount}}</span></td>
+                                </tr>
+                                <tr ng-if="::mmbComLostCtrl.model.communicationLostInfo.paymentItems.AVIOS">
+                                    <td><span class="ib-table-info__text">{{'COMMUNICATION_LOST_INFO_AVIOS_AUTHORIZATION'|translate}}</span></td>
+                                    <td><span class="ib-table-info__text">{{::mmbComLostCtrl.model.communicationLostInfo.paymentItems.AVIOS.authorization}}</span></td>
+                                </tr>
+                                <tr ng-if="::mmbComLostCtrl.model.communicationLostInfo.paymentItems.VOUCHER">
+                                    <td><span class="ib-table-info__text">{{'COMMUNICATION_LOST_INFO_VOUCHER_DISCOUNT'|translate}}</span></td>
+                                    <td><span class="ib-table-info__text">{{::mmbComLostCtrl.model.communicationLostInfo.paymentItems.VOUCHER.dicount}}</span></td>
+                                </tr>
+                                <tr ng-if="::mmbComLostCtrl.model.communicationLostInfo.paymentItems.VOUCHER">
+                                    <td><span class="ib-table-info__text">{{'COMMUNICATION_LOST_INFO_VOUCHER_AUTHORIZATION'|translate}}</span></td>
+                                    <td><span class="ib-table-info__text">{{::mmbComLostCtrl.model.communicationLostInfo.paymentItems.VOUCHER.authorization}}</span></td>
+                                </tr>
+                                <tr ng-if="::mmbComLostCtrl.model.communicationLostInfo.ancillaries['SEATS']" data-ng-repeat="(tripId,seatsInfo) in mmbComLostCtrl.model.communicationLostInfo.ancillaries['SEATS'].info">
+                                    <td><span class="ib-table-info__text">{{mmbComLostCtrl.model.communicationLostInfo.ancillaries['SEATS'].title|translate}}
+                                            {{seatsInfo.trip}}</span></td>
+                                    <td><span class="ib-table-info__text">{{::seatsInfo.seats}}</span></td>
+                                </tr>
+                                <tr ng-if="::mmbComLostCtrl.model.communicationLostInfo.ancillaries['BAGGAGES']" data-ng-repeat="(tripId,baggagesInfo) in mmbComLostCtrl.model.communicationLostInfo.ancillaries['BAGGAGES'].info">
+                                    <td><span class="ib-table-info__text">{{mmbComLostCtrl.model.communicationLostInfo.ancillaries['BAGGAGES'].title|translate}}
+                                            {{baggagesInfo.trip}}</span></td>
+                                    <td><span class="ib-table-info__text">{{baggagesInfo.baggages}}
+                                            {{('ANCILLARIES_SELECT_BAGGAGE_MODAL_ADDED_BAGGAGE_TITLE' | WordNumberFormatFilter:
+                                            baggagesInfo.baggages | translate)}}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>

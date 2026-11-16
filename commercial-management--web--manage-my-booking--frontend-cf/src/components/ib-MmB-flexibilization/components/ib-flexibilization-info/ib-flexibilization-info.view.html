@@ -1,0 +1,501 @@
+<div class="ib-layout__line-spacing u-mb-small">
+    <uib-accordion close-others="true" class="ib-accordion ib-accordion--flex">
+        <div
+            uib-accordion-group
+            class="ib-accordion__panel"
+            is-open=" ibFlexibilizationInfoCtrl.openInfo"
+            data-ng-click="ibFlexibilizationInfoCtrl.changeState"
+        >
+            <uib-accordion-heading>
+                <span
+                    class="ib-heading ib-heading--type-5 ib-heading--red icon-informacion_2"
+                    >{{ ibFlexibilizationInfoCtrl.flags
+                    .showFlexibilizationChangeSection ?
+                    ("MMB_FLEXIBILIZATION_REASON_INFO_TITLE" | translate) :
+                    ibFlexibilizationInfoCtrl.flags
+                    .showVoluntaryFlexibleFlightChange ?
+                    ("MMB_FLEXIBILIZATION_REASON_INFO_TITLE" | translate) :
+                    ("MMB_VOLUNTARY_CHANGE_REASON_INFO_TITLE" | translate)
+                    }}</span
+                >
+                <span
+                    class="ib-accordion__icon"
+                    ng-class="{
+                        'icon-flecha_1_arriba':
+                        ibFlexibilizationInfoCtrl.openInfo,
+                        'icon-flecha_1_abajo':
+                        !ibFlexibilizationInfoCtrl.openInfo
+                    }"
+                ></span>
+            </uib-accordion-heading>
+            <div
+                class="ib-box ib-box--big ib-box--empty ib-box--covid u-pt-none"
+            >
+                <!-- FLEXIBILIZATION INFO -->
+                <div
+                    data-ng-if="ibFlexibilizationInfoCtrl.flags.showFlexibilizationChangeSection"
+                >
+                    <p
+                        id="mmb-flex-reason-info-txt-1"
+                        class="ib-text ib-text--block"
+                    >
+                        <span
+                            >{{
+                            ibFlexibilizationInfoCtrl.flexibilizationDate.text
+                            }}</span
+                        >
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-txt-2"
+                        ng-if="ibFlexibilizationInfoCtrl.flexibilizationInfoDates.allowedPeriodsText"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        <span
+                            ng-repeat="(index, allowedDate) in ibFlexibilizationInfoCtrl.allowedDates"
+                        >
+                            <span
+                                ng-if="ibFlexibilizationInfoCtrl.allowedDates.length > 1 && index===0"
+                            >
+                                {{"MMB_FLEXIBILIZATION_INFO_ALLOWED_MORE_THAN_ONE_DATE_RANGE_TEXT"
+                                | translate }}
+                            </span>
+                            {{ allowedDate.text }}
+                        </span>
+
+
+              </span
+            >
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-txt-3"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                        ng-if="ibFlexibilizationInfoCtrl.flexibilizationInfoDates.blackoutPeriodsText"
+                    >
+                        <span
+                            >{{ "MMB_FLEXIBILIZATION_REASON_INFO_TXT_3_NO_DATES"
+                            | translate }} {{
+                            ibFlexibilizationInfoCtrl.flexibilizationInfoDates.blackoutPeriodsText
+                            }}</span
+                        >
+                    </p>
+                    <!-- Subtitles -->
+                    <p
+                        id="mmb-flex-reason-info-keep-subtitle"
+                        class="ib-text ib-text--block ib-text--bold u-mt"
+                    >
+                        {{ "MMB_FLEXIBILIZATION_REASON_INFO_KEEP_SUBTITLE" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-keep-condition-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{ "MMB_FLEXIBILIZATION_REASON_INFO_KEEP_CONDITION_1" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-keep-condition-2"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{ "MMB_FLEXIBILIZATION_REASON_INFO_KEEP_CONDITION_2" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-keep-condition-3"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{ "MMB_FLEXIBILIZATION_REASON_INFO_KEEP_CONDITION_3" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-keep-condition-4"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_REFUNDS_INFORMATION_BOX_YOUR_REFUND_INCLUDES_CONDITION_FLEX"
+                        | translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-subtitle"
+                        class="ib-text ib-text--block ib-text--bold u-mt"
+                    >
+                        {{ "MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_SUBTITLE" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_CONDITION_1" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-txt-1"
+                        class="ib-text ib-text--block u-mt-xmedium"
+                    >
+                        {{ "MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_TXT_1" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-6"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_CONDITION_6" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-7"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_CONDITION_7" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-8"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_CONDITION_8" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-9"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_CONDITION_NEW_5" |
+                        translate }}
+                    </p>
+                </div>
+                <!-- VOLUNTARY CHANGE INFO -->
+                <div
+                    data-ng-if="ibFlexibilizationInfoCtrl.flags.showVoluntaryChangeFlightSection && !ibFlexibilizationInfoCtrl.flags.showVoluntaryFlexibleFlightChange"
+                >
+                    <p
+                        id="mmb-flex-reason-info-txt-1"
+                        class="ib-text ib-text--block"
+                    >
+                        <span
+                            >{{ "MMB_VOLUNTARY_CHANGE_REASON_INFO_TXT_1" |
+                            translate }}</span
+                        >
+                    </p>
+                    <!-- Subtitles -->
+                    <p
+                        ng-if="
+                            ibFlexibilizationInfoCtrl.orderItems
+                                .flexibilityOnDemand[0].subtype ===
+                                'FLEXIBILITY_PACK' &&
+                            ibFlexibilizationInfoCtrl.flags.showLinkToRubiQ ==
+                                false
+                        "
+                        id="mmb-flex-reason-info-remember-subtitle"
+                        class="ib-text ib-text--block ib-text--bold u-mt"
+                    >
+                        {{ "UPGRADING_REMEMBER" | translate }}
+                    </p>
+                    <p
+                        ng-if="
+                            ibFlexibilizationInfoCtrl.orderItems
+                                .flexibilityOnDemand[0].subtype ===
+                                'FLEXIBILITY_PACK' &&
+                            ibFlexibilizationInfoCtrl.flags.showLinkToRubiQ ==
+                                false
+                        "
+                        id="mmb-flex-reason-info-txt-remember-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        <span
+                            >{{
+                            "ANCILLARIES_FLEXIBILITY_IF_FLIGHT_CHANGE_NOT_REFOUND"
+                            | translate }}</span
+                        >
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-keep-subtitle"
+                        class="ib-text ib-text--block ib-text--bold u-mt"
+                    >
+                        {{ "MMB_VOLUNTARY_CHANGE_REASON_INFO_EXTRA_SUBTITLE" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-txt-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        <span
+                            >{{ "MMB_VOLUNTARY_CHANGE_REASON_INFO_TXT_2" |
+                            translate }}</span
+                        >
+                        <span
+                            >{{ "MMB_VOLUNTARY_CHANGE_REASON_INFO_TXT_3" |
+                            translate }}</span
+                        >
+                    </p>
+                    <!-- <p id="mmb-flex-reason-info-keep-subtitle" class="ib-text ib-text--block ib-text--bold u-mt">
+                        {{'MMB_FLEXIBILIZATION_REASON_INFO_KEEP_SUBTITLE' | translate}}</p> -->
+                    <p
+                        id="mmb-flex-reason-info-not-keep-subtitle"
+                        class="ib-text ib-text--block ib-text--bold u-mt"
+                    >
+                        {{ "MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_SUBTITLE" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-keep-condition-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{ "MMB_VOLUNTARY_CHANGE_REASON_INFO_KEEP_CONDITION_1" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-keep-condition-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{ "MMB_VOLUNTARY_CHANGE_REASON_INFO_KEEP_CONDITION_2" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-keep-condition-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{ "MMB_VOLUNTARY_CHANGE_REASON_INFO_KEEP_CONDITION_3" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-keep-condition-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{ "MMB_VOLUNTARY_CHANGE_REASON_INFO_KEEP_CONDITION_4" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_VOLUNTARY_CHANGE_REASON_INFO_NOT_KEEP_CONDITION_1"
+                        | translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-2"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_VOLUNTARY_CHANGE_REASON_INFO_NOT_KEEP_CONDITION_2"
+                        | translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-3"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_VOLUNTARY_CHANGE_REASON_INFO_NOT_KEEP_CONDITION_3"
+                        | translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-5"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_VOLUNTARY_CHANGE_REASON_INFO_NOT_KEEP_CONDITION_5"
+                        | translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-6"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_CONDITION_6"
+                        | translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-7"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_CONDITION_7"
+                        | translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-7"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_VOLUNTARY_CHANGE_REASON_INFO_NOT_KEEP_CONDITION_6"
+                        | translate }}
+                    </p>
+                </div>
+                <!-- VOLUNTARY FLEXIBLE CHANGE INFO -->
+                <div
+                    data-ng-if="ibFlexibilizationInfoCtrl.flags.showVoluntaryChangeFlightSection && ibFlexibilizationInfoCtrl.flags.showVoluntaryFlexibleFlightChange"
+                >
+                    <p
+                        id="mmb-flex-reason-info-txt-1"
+                        class="ib-text ib-text--block"
+                    >
+                        <span>
+                            {{
+                            "MMB_INVOLUNTARY_FLEXIBLE_CHANGE_REASON_INFO_TXT_1"
+                            | translate : { datesPeriod:
+                            ibFlexibilizationInfoCtrl.flexibilizationTextDatesRange
+                            } }} {{
+                            "MMB_INVOLUNTARY_FLEXIBLE_CHANGE_REASON_INFO_TXT_MIDDLE"
+                            | translate : { dateAllowed:
+                            ibFlexibilizationInfoCtrl.flexibilizationInfoDates.allowedPeriodsText } }}
+                            {{
+                            "MMB_INVOLUNTARY_FLEXIBLE_CHANGE_REASON_INFO_TXT_END"
+                            | translate }}
+                        </span>
+                    </p>
+                    <!-- Subtitles -->
+                    <p
+                        ng-if="
+                            ibFlexibilizationInfoCtrl.orderItems
+                                .flexibilityOnDemand[0].subtype ===
+                                'FLEXIBILITY_PACK' &&
+                            ibFlexibilizationInfoCtrl.flags.showLinkToRubiQ ==
+                                false
+                        "
+                        id="mmb-flex-reason-info-remember-subtitle"
+                        class="ib-text ib-text--block ib-text--bold u-mt"
+                    >
+                        {{ "UPGRADING_REMEMBER" | translate }}
+                    </p>
+                    <p
+                        ng-if="
+                            ibFlexibilizationInfoCtrl.orderItems
+                                .flexibilityOnDemand[0].subtype ===
+                                'FLEXIBILITY_PACK' &&
+                            ibFlexibilizationInfoCtrl.flags.showLinkToRubiQ ==
+                                false
+                        "
+                        id="mmb-flex-reason-info-txt-remember-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        <span
+                            >{{
+                            "ANCILLARIES_FLEXIBILITY_IF_FLIGHT_CHANGE_NOT_REFOUND"
+                            | translate }}</span
+                        >
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-keep-subtitle"
+                        class="ib-text ib-text--block ib-text--bold u-mt"
+                    >
+                        {{ "MMB_VOLUNTARY_CHANGE_REASON_INFO_EXTRA_SUBTITLE" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-txt-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        <span
+                            >{{ "MMB_VOLUNTARY_CHANGE_REASON_INFO_TXT_2" |
+                            translate }}</span
+                        >
+                        <span
+                            >{{ "MMB_VOLUNTARY_CHANGE_REASON_INFO_TXT_3" |
+                            translate }}</span
+                        >
+                    </p>
+                    <!-- <p id="mmb-flex-reason-info-keep-subtitle" class="ib-text ib-text--block ib-text--bold u-mt">
+                        {{'MMB_FLEXIBILIZATION_REASON_INFO_KEEP_SUBTITLE' | translate}}</p> -->
+                    <p
+                        id="mmb-flex-reason-info-not-keep-subtitle"
+                        class="ib-text ib-text--block ib-text--bold u-mt"
+                    >
+                        {{ "MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_SUBTITLE" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-keep-condition-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{ "MMB_VOLUNTARY_CHANGE_REASON_INFO_KEEP_CONDITION_1" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-keep-condition-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{ "MMB_VOLUNTARY_CHANGE_REASON_INFO_KEEP_CONDITION_2" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-keep-condition-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{ "MMB_VOLUNTARY_CHANGE_REASON_INFO_KEEP_CONDITION_3" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-keep-condition-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{ "MMB_VOLUNTARY_CHANGE_REASON_INFO_KEEP_CONDITION_4" |
+                        translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-1"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_VOLUNTARY_CHANGE_REASON_INFO_NOT_KEEP_CONDITION_1"
+                        | translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-2"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_VOLUNTARY_CHANGE_REASON_INFO_NOT_KEEP_CONDITION_2"
+                        | translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-3"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_VOLUNTARY_CHANGE_REASON_INFO_NOT_KEEP_CONDITION_3"
+                        | translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-4"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_VOLUNTARY_CHANGE_REASON_INFO_NOT_KEEP_CONDITION_4"
+                        | translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-6"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_CONDITION_6"
+                        | translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-7"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_CONDITION_7"
+                        | translate }}
+                    </p>
+                    <p
+                        id="mmb-flex-reason-info-not-keep-condition-8"
+                        class="ib-text ib-text--block u-mt-xsmall"
+                    >
+                        {{
+                        "MMB_FLEXIBILIZATION_REASON_INFO_NOT_KEEP_CONDITION_8"
+                        | translate }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </uib-accordion>
+</div>

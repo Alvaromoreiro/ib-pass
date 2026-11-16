@@ -1,0 +1,77 @@
+<div ib-auto-scroll-top data-ng-controller="CollapseDetailsController as collapse" collapse out-side-click="true">
+    <div data-uib-collapse="!collapse.isCollapsed" class="ib-header-booking__login-collapse ib-header-booking__login-collapse--arrow">
+        <div class="ib-header-booking__login-content">
+            <div class="ib-modals__header-settings">
+                <button title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" type="button" class="ib-modals__button-action icon-cerrar"
+                    data-ng-click="collapse.toggle()">
+                    <span class="u-hide-accessible">{{'FLIGHT_CONFIRMATION_BACK_MODAL_CLOSE_ACCESS'|translate}}</span>
+                </button>
+            </div>
+            <ib-login-access data-ng-show="collapse.isCollapsed && $root.isMobile.header"></ib-login-access>
+        </div>
+    </div>
+    <div data-ibtools="data-ibtools" class="ib-header-booking">
+        <div class="container">
+            <div class="ib-header-booking__row">
+                <div class="ib-header-booking__column ib-header-booking__column--left">
+                    <div class="ib-header-booking__logo">
+                        <a href="javascript:void(0)" title="{{'HEADER_IBERIA_LOGO_TITLE'|translate}}" class="ib-header-booking__logo-fig" ng-click="onHoldHeaderCtrl.backToMain()">
+                            <img ng-src="{{::$root.routes.icons}}/iberia/logo_iberia.svg" alt="{{'HEADER_IBERIA_LOGO_ALT'|translate}}" />
+                        </a>
+                    </div>
+                    <div class="ib-header-booking__fly ib-header-booking__fly--vertical-borders" data-ng-if="!onHoldHeaderCtrl.hideExtendedInfo">
+                        <span class="ib-header-booking__fly-text ib-header-booking__fly-text--small ib-header-booking__fly-text--responsive" data-content="{{onHoldHeaderCtrl.bookingInfo.origin.code}}">
+                            <span class="ib-header-booking__fly-text ib-header-booking__fly-text--small">{{onHoldHeaderCtrl.bookingInfo.origin.name}}</span>
+                        </span>
+                        <span ng-if="onHoldHeaderCtrl.bookingInfo.arrivalTime.date" class="ib-header-booking__fly-info icon-transferencia"></span>
+                        <span ng-if="!onHoldHeaderCtrl.bookingInfo.arrivalTime.date" class="ib-header-booking__fly-info ib-header-booking__fly-info--outbound icon-flecha_baja"></span>
+                        <span class="ib-header-booking__fly-text ib-header-booking__fly-text--small ib-header-booking__fly-text--responsive" data-content="{{onHoldHeaderCtrl.bookingInfo.destination.code}}">
+                            <span class="ib-header-booking__fly-text ib-header-booking__fly-text--small"> {{onHoldHeaderCtrl.bookingInfo.destination.name}}</span>
+                        </span>
+                        <a class="ib-header-booking__icon-tooltip icon-informacion_2 ib-popover-tooltip hidden-lg hidden-xl" ng-controller="IbPopoverController as popoverCtrl"
+                            title="{{'FLIGHT_DETAILS_TOOLTIP_TEXT_TITLE'|translate}}" aria-label="{{'FLIGHT_DETAILS_TOOLTIP_TEXT_TITLE_ACCESSIBLE'|translate}}"
+                            uib-popover popover-class="ib-popover ib-popover--header" uib-popover-template="'web-manage-my-booking/templates/ib-popover-main-header-flight.html'"
+                            popover-placement="bottom-right" href="javascript:void(0)" ng-click="popoverCtrl.showData((onHoldHeaderCtrl.bookingInfo.departureTime.date
+                            | DateFormatFilter).formatedDate,(onHoldHeaderCtrl.bookingInfo.arrivalTime.date
+                            | DateFormatFilter).formatedDate,onHoldHeaderCtrl.bookingInfo.passengersNumber,onHoldHeaderCtrl.position);$event.preventDefault()"
+                            popover-trigger="'outsideClick'" popover-is-open="popoverCtrl.isOpen"></a>
+                    </div>
+                    <div class="ib-header-booking__fly hidden-md hidden-sm hidden-xs" data-ng-if="!onHoldHeaderCtrl.hideExtendedInfo">
+                        <span class="ib-header-booking__fly-text ib-header-booking__fly-text--small">{{'GENERAL_OUTBOUND_TEXT'|translate}} {{(onHoldHeaderCtrl.bookingInfo.departureTime.date | DateFormatFilter).formatedDate}}
+                        </span>
+                    </div>
+                    <div class="ib-header-booking__fly hidden-md hidden-sm hidden-xs" data-ng-if="!onHoldHeaderCtrl.hideExtendedInfo && onHoldHeaderCtrl.bookingInfo.arrivalTime.date">
+                        <span class="ib-header-booking__fly-text ib-header-booking__fly-text--small u-pl-xsmall">{{'GENERAL_INBOUND_TEXT'|translate}} {{(onHoldHeaderCtrl.bookingInfo.arrivalTime.date | DateFormatFilter).formatedDate}}</span>
+                    </div>
+                    <div class="ib-header-booking__fly ib-header-booking__fly--vertical-borders hidden-md hidden-sm hidden-xs">
+                        <span class="ib-header-booking__fly-info icon-persona"></span>
+                        <span class="ib-header-booking__fly-text ib-header-booking__fly-text--small">x {{onHoldHeaderCtrl.bookingInfo.passengersNumber}}</span>
+                    </div>
+                    <div class="ib-header-booking__fly ib-header-booking__fly--right ib-header-booking__fly--pagination hidden-xl hidden-lg hidden-md">
+                        <span class="ib-header-booking__fly-text ib-header-booking__fly-text--mobile  ib-header-booking__fly-text--right ib-header-booking__fly-text--small">{{onHoldHeaderCtrl.position}}/2</span>
+                    </div>
+                </div>
+                <div class="ib-header-booking__column ib-header-booking__column--right hidden-lg hidden-xl" data-ng-if="onHoldHeaderCtrl.customerData">
+                    <div class="ib-header-booking__login ib-header-booking__login--width-fixed ib-header-booking__login--logued">
+                        <a href="javascript:void(0)" class="ib-header-booking__login-button" title="{{'HEADER_IBERIA_LOGIN_OPEN_MORE_DETAILS'|translate}}"
+                            ng-click="onHoldHeaderCtrl.openModal('ib-modal-user-logued', 'ib-modals ib-modals--right ib-modals--logued fade', $event, onHoldHeaderCtrl.customerData)">
+                            <span class="ib-header-booking__login-icon icon-usuario_logado">
+                                <span class="u-hide-accessible">{{'HEADER_BOOKING_IBERIA_LOGIN_OPEN_MORE_DETAILS'|translate}}</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="ib-header-booking__column ib-header-booking__column--right hidden-lg hidden-xl" data-ng-if="!onHoldHeaderCtrl.customerData && onHoldHeaderCtrl.loginButton">
+                    <div class="ib-header-booking__login ib-header-booking__login--width-fixed ib-header-booking__login--logued" data-ng-class="!collapse.isCollapsed ? 'closeCollapse' : 'openCollapse'">
+                        <a href="javascript:void(0)" class="ib-header-booking__login-button" title="{{'HEADER_IBERIA_LOGIN_ACCESS'|translate}}" data-ng-click="collapse.toggle();$event.preventDefault()"
+                            data-ng-class="!collapse.isCollapsed ? 'closeCollapse' : 'openCollapse'">
+                            <span class="ib-header-booking__login-icon icon-perfil_login">
+                                <span class="u-hide-accessible">{{'HEADER_BOOKING_IBERIA_LOGIN_ACCESS'|translate}}</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

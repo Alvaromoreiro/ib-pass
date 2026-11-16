@@ -1,0 +1,97 @@
+<div class="ib-select-date-container"  id="PASSENGER_BIRTH_DATE" [ngClass]="{
+    'ib-select-date--error': dateChange || (isFormSubmitted && (
+                birthDateForm.get('day')?.invalid
+                || birthDateForm.get('month')?.invalid
+                || birthDateForm.get('year')?.invalid
+            )),
+    'ib-select-date--disabled': haveBirthDate}" >
+    
+    <span class="ib-select-date__label">{{ 'BIRTH_DATE_FIELD_TITLE' | translate | lowercase | capitalize  }}</span>
+    <form [formGroup]="birthDateForm" *ngIf="birthDateForm">
+        <div class="form-container">
+
+            <div class="ib-select-date__input" *ngFor="let template of formatDate">
+                <ng-container [ngSwitch]="template">
+                    <ng-container *ngSwitchCase="'DAY'">
+                        <ng-container *ngTemplateOutlet="DAY; context: { form: birthDateForm }"></ng-container>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'MONTH'">
+                        <ng-container *ngTemplateOutlet="MONTH; context: { form: birthDateForm }"></ng-container>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'YEAR'">
+                        <ng-container *ngTemplateOutlet="YEAR; context: { form: birthDateForm }"></ng-container>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </form>  
+</div>
+
+
+
+
+<div *ngIf="dateChange" class="ib-alert ib-alert--error">{{ 'BIRTH_DATE_INCORRECT_WARNING' | translate }}</div>
+<div id="bbki-passenger-birth-date-required-err-modal" 
+    *ngIf="isFormSubmitted && (
+        birthDateForm.get('month')?.invalid ||
+        birthDateForm.get('day')?.invalid ||
+        birthDateForm.get('year')?.invalid
+    )"
+    class="ib-alert ib-alert--error">
+    {{ 'GENERAL_INPUT_REQUIRED_ERROR' | translate }}
+</div>
+
+<ng-template #DAY>
+    <p-autoComplete 
+        *ngIf="dayControl"
+        id="birth_date_day" class="ib-select-date__select" 
+        (onFocus)="onFocus('day')"
+        (onShow)="onShow('day')"
+        (onHide)="onHide('day')"
+        (onSelect)="onDaySelected($event)"
+        (onBlur)="onBlur('day')"
+        (completeMethod)="filterDays($event)"
+        [forceSelection]="true"
+        [dropdown]="true"
+        [formControl]="dayControl"
+        [suggestions]="filteredDays"
+        [placeholder]="'BIRTH_DATE_FIELD_DAY_PLACEHOLDER' | translate"
+        #dayAutoComplete>
+    </p-autoComplete>
+</ng-template>
+<ng-template #MONTH>
+    <p-autoComplete 
+        *ngIf="monthControl"
+        id="birth_date_month" class="ib-select-date__select" 
+        (onFocus)="onFocus('month')"
+        (onShow)="onShow('month')"
+        (onHide)="onHide('month')"
+        (onSelect)="onMonthSelected($event)"
+        (onBlur)="onBlur('month')"
+        (completeMethod)="filterMonths($event)"
+        [forceSelection]="true"
+        [dropdown]="true"
+        [formControl]="monthControl"
+        [suggestions]="filteredMonths"
+        [placeholder]="'BIRTH_DATE_FIELD_MONTH_PLACEHOLDER' | translate"
+        #monthAutoComplete>
+    </p-autoComplete>
+</ng-template>
+<ng-template #YEAR>
+    <p-autoComplete 
+        *ngIf="yearControl"
+        id="birth_date_year" class="ib-select-date__select" 
+        (onFocus)="onFocus('year')"
+        (onShow)="onShow('year')"
+        (onHide)="onHide('year')"
+        (onSelect)="onYearSelected($event)"
+        (onBlur)="onBlur('year')"
+        (completeMethod)="filterYears($event)"
+        [forceSelection]="true"
+        [dropdown]="true"
+        [formControl]="yearControl"
+        [suggestions]="filteredYears"
+        [placeholder]="'BIRTH_DATE_FIELD_YEAR_PLACEHOLDER' | translate"
+        #yearAutoComplete>
+    </p-autoComplete>
+</ng-template>

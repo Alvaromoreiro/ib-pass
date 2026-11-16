@@ -1,0 +1,24 @@
+<div class="ib-table-flight-cabins">
+    <div class="animate-show">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt-big" ng-if="ibFlexAvailabilityCtrl.showWarningPanel">
+            <div class="ib-alertbox ib-alertbox--darkgrey u-mb-none" aria-label="Información">
+                <div class="ib-alertbox__head">
+                    <span class="ib-alertbox__head--icon icon-alertas_2"><span class="hide-accessible">Alerta</span></span>
+                    <h3 class="ib-alertbox__head--title">{{'MMB_FLEXIBILIZATION_CONFIRMATION_INFO_NEW_ORDER' | translate}}</h3>
+                </div>
+                <div class="ib-alertbox__content ib-alertbox__content--indented u-mt-none">
+                    <p class="ib-alertbox__content--text">{{ibFlexAvailabilityCtrl.warningMessage}}</p>
+                </div>
+            </div>
+        </div>
+        <!-- Trip component -->
+        <ib-flexibilization-availability-trip data-ng-repeat="(slicesIndex, slices) in ibFlexAvailabilityCtrl.model.slices" slices="slices" slices-index="slicesIndex" 
+        selected-slices="ibFlexAvailabilityCtrl.model.selectedSlices" list-slices-show="ibFlexAvailabilityCtrl.model.listSlicesShow" total-show="ibFlexAvailabilityCtrl.model.totalShow"
+        selected-date="ibFlexAvailabilityCtrl.model.selectedDate" updated-date-list="ibFlexAvailabilityCtrl.model.updatedDateList[slicesIndex]"  
+        show-availability="ibFlexAvailabilityCtrl.model.showAvailability" show-error-page="ibFlexAvailabilityCtrl.model.showErrorPage" ribbon-flex-data="ibFlexAvailabilityCtrl.model.ribbonFlexData" new-sister-cities="ibFlexAvailabilityCtrl.newSisterCitiesModel"></ib-flexibilization-availability-trip>
+        <!-- Confirmation component -->
+        <ib-flexibilization-slice-confirmation data-ng-if="ibFlexAvailabilityCtrl.model.totalShow" total-show="ibFlexAvailabilityCtrl.model.totalShow" trips-length="ibFlexAvailabilityCtrl.model.tripsLength" 
+        list-slices-show="ibFlexAvailabilityCtrl.model.listSlicesShow" related-content="ibFlexAvailabilityCtrl.model.relatedContent" sister-cities="ibFlexAvailabilityCtrl.newSisterCitiesModel">
+        </ib-flexibilization-slice-confirmation>
+    </div>
+</div>

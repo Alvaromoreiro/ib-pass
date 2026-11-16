@@ -1,0 +1,25 @@
+
+@each $color, $color-key in $borders-palette {
+    @each $rule-classname, $rule in $color-rules {
+        .u-#{$rule-classname}-#{"" + $color} {
+            #{$rule}: $color-key;
+        }
+    }
+}
+
+@each $breakpoint, $query in $breakpoints {
+    @include media-query($breakpoint) {
+        @each $color, $color-key in $borders-palette {
+            @each $rule-classname, $rule in $color-rules {
+                .u-#{$rule-classname}-#{"" + $color}-#{$breakpoint} {
+                    #{$rule}: $color-key !important;
+                }
+            }
+        }
+    }
+}
+
+.u-link-disabled {
+    color: color(gray-40);
+    pointer-events: none;
+}

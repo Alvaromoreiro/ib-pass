@@ -1,0 +1,288 @@
+@import 'src/styles/component-tools';
+
+:host{
+    display: flex;
+    flex-flow: column nowrap;
+    margin-top: rem(2);
+    border-bottom: rem(1) solid var(--grey-300);
+    background-color: var(--ib-color-white);
+
+    &.selected-cabin {
+        padding: rem(8);
+        margin-top: 0;
+    }
+}
+
+.collapse-container {
+    height: 0;
+    transform: none;
+    transition: all .5s ease;
+
+    > * {
+        filter: none;
+        transition: none;
+    }
+
+    &.collapse-open {
+        height:auto;
+    }
+
+    &.collapse-closed {
+        transform: none;
+
+        >* {
+            filter: none;
+            transition: none;
+        }
+    };
+}
+
+.slice-block {
+    display: flex;
+    width: 100%;
+    flex-flow: row nowrap;
+}
+
+.airline{
+    &-section {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        line-height: rem(14);
+        gap: rem(2)
+    }
+
+    &-name {
+        font-family: var(--font-regular);
+        font-size: rem(11);
+        color: var(--ib-color-grey-700-66);
+    }
+
+    &-logo{
+        display: flex;
+        max-width: rem(18);
+    }
+
+}
+
+.main-section {
+    display: flex;
+    flex-flow: column nowrap;
+    flex-grow: 1;
+    align-items: flex-start;
+    padding: rem(8);
+    border: none;
+    background-color: transparent;
+    gap: rem(4);
+}
+
+.price{
+    &-section {
+        display: flex;
+        min-width: rem(134);
+        flex-flow: column nowrap;
+        align-items: flex-end;
+        justify-content: center;
+        padding: rem(8);
+        border: none;
+        background-color: var(--ib-color-grey-100-fa);
+        gap: rem(4);
+
+    }
+
+    &-from {
+        font-family: var(--font-regular);
+        font-size: rem(11);
+        line-height: rem(14);
+        color: var(--ib-color-grey-700-66);
+    }
+
+    &-total {
+        font-family: var(--font-headline);
+        font-size: rem(18);
+        line-height: rem(21);
+    }
+
+
+
+    &-arrow{
+        padding-top: rem(9);
+
+        &.price-arrow--up {
+            svg {
+                rotate: 180deg;
+            }
+        }
+
+        &.price-arrow--discounted {
+            padding-top: 0;
+        }
+    }
+}
+
+
+.details {
+    &-section {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        align-self:stretch;
+        justify-content: space-between;
+        line-height: rem(13);
+    }
+
+
+    &-cta {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        font-family: var(--font-regular);
+        font-size: rem(12);
+        font-weight: 400;
+        font-style: normal;
+        color: var(--ib-color-grey-700-66);
+
+        & > svg {
+            width: rem(10);
+        }
+    }
+
+    &-promotions {
+        width: rem(13);
+    }
+
+}
+
+.cabin {
+    &-block {
+        display: flex;
+        flex-flow: column nowrap;
+        background-color: var(--ib-color-white);
+
+        &.collapse {
+            &-open {
+                padding: rem(8);
+
+                .cabin-button {
+                    display: flex;
+
+                }
+            }
+
+            &-closed {
+                .cabin-button {
+                    display: none;
+                }
+            }
+        }
+    }
+
+
+
+    &-button {
+        display: flex;
+        flex-basis: 100%;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: rem(10) rem(8);
+        border: none;
+        color: var(--ib-color-white);
+        background-color: var(--cabin-economy);
+
+        &--business{
+            background-color: var(--cabin-business);
+        }
+
+        &--premium{
+        background-color: var(--cabin-premium);
+
+        }
+    }
+
+    &-prices {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: baseline;
+        justify-content: flex-end;
+        gap: rem(2);
+
+        &-total {
+            font-family: var(--font-headline);
+            font-size: rem(22);
+            font-weight: 400;
+            font-style: normal;
+            line-height: normal;
+        }
+
+        &-original {
+            align-self: baseline;
+            font-family: var(--font-headline);
+            font-size: rem(12);
+            font-weight: 400;
+            font-style: normal;
+            text-decoration:line-through;
+            line-height: normal;
+        }
+
+        &-cheapest{
+            width: rem(16);
+            fill: var(--ib-color-white);
+        }
+    }
+
+    &-description {
+        font-family: var(--font-regular);
+        font-size: rem(13);
+        font-weight: 400;
+        line-height: normal;
+
+    }
+}
+
+.fare-block {
+    display: flex;
+    flex-flow: column nowrap;
+
+    .collapse-container {
+        &.collapse {
+            &-open {
+                & > * {
+                    display: flex;
+                    flex-flow: column nowrap;
+                }
+            }
+
+            &-closed {
+                & > * {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+.fares-container {
+    background-color: var(--grey-300);
+}
+
+.details-info {
+    &.collapse-closed {
+        ib-booking-slice-details-info-legacy {
+            display: none;
+        }
+    }
+}
+
+@media (width <= 320px) {
+    .price{
+        &-section {
+            min-width:rem(101);
+        }
+
+        &-total {
+            font-size: rem(16);
+        }
+
+    }
+}

@@ -1,0 +1,65 @@
+<ib-booking-accordion [title]="'PASSENGER_INFO_TITLE'">
+    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.1203 3.99093C11.1203 6.41182 10.3885 7.97989 8.0006 7.97989C5.6072 7.97989 4.88093 6.41182 4.88093 3.99093C4.88093 1.56454 5.61271 0.00196756 8.0006 0.00196756C10.3885 -0.00353446 11.1203 1.56454 11.1203 3.99093ZM6.59603 5.81208V5.36642C7.49837 5.54799 8.43372 5.54799 9.40208 5.36642V5.80658C9.15449 6.25224 8.70882 6.50534 7.99905 6.50534C7.28929 6.50534 6.84912 6.25224 6.59603 5.81208Z" fill="#D7192D"/>
+        <path d="M14.63 10.3458C15.1637 12.1395 15.6204 14.1037 16 15.9964H0C0.37414 14.1037 0.830812 12.134 1.37001 10.3458C2.4044 9.77359 5.57359 9.27841 8 9.27841C10.3769 9.27841 13.5791 9.76259 14.6025 10.3128L14.63 10.3458Z" fill="#D7192D"/>
+      </svg>
+    <div class="box">
+        <table class="table">
+            <caption class="u-hide-accessible">{{'PASSENGER_INFO_TABLE_DESCRIPTION'|translate}}</caption>
+            <thead class="thead">
+                <tr class="row">
+                    <th class="cell">
+                        <span class="text">{{'PASSENGER_INFO_TYPE'|translate}}</span>
+                    </th>
+                    <th class="cell">
+                        <span class="text">{{'PASSENGER_INFO_NAME'|translate}}</span>
+                    </th>
+                    <th class="cell">
+                        <span class="text">{{'PASSENGER_INFO_SURNAME'|translate}}</span>
+                    </th>
+                    <th class="cell">
+                        <span class="text">{{'PASSENGER_INFO_LOYALTY_CARD'|translate}}</span>
+                    </th>
+                    <th class="cell">
+                        <span class="text">{{'PASSENGER_INFO_SPECIAL_NEEDS'|translate}}</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row row-mobile" *ngFor="let passenger of passengerInfo | keyvalue "  >
+                    <td class="cell cell-mobile" [attr.data-content]="('PASSENGER_INFO_TYPE'|translate)">
+                        <p class="text text--unfocused">
+                            {{passenger.value.type | translate}}
+                        </p>
+                    </td>
+                    <td class="cell cell-mobile" [attr.data-content]="('PASSENGER_INFO_NAME'|translate)">
+                        <p class="text text--unfocused">
+                            {{passenger.value.name}}
+
+                        </p>
+                    </td>
+                    <td class="cell cell-mobile" [attr.data-content]="('PASSENGER_INFO_SURNAME'|translate)">
+                        <p class="text text--unfocused">
+                            {{passenger.value.surname}}
+
+                        </p>
+                    </td>
+                    <td class="cell cell-mobile" [attr.data-content]="('PASSENGER_INFO_LOYALTY_CARD'|translate)">
+                        <p class="text text--unfocused">
+                            {{passenger.value.loyaltyCard |translate}}
+
+                        </p>
+                    </td>
+                    <td class="cell cell-mobile" [attr.data-content]="('PASSENGER_INFO_SPECIAL_NEEDS'|translate)"
+                        (click)="openSpecialNeedsModal(passenger.value.specialNeeds)" *ngIf="passenger.value.specialNeedFound">
+                        <p class="text text--unfocused text--underline">{{'PASSENGER_INFO_SPECIAL_NEEDS_YES'|translate}}</p>
+                    </td>
+                    <td class="cell cell-mobile" [attr.data-content]="('PASSENGER_INFO_SPECIAL_NEEDS'|translate)"
+                        *ngIf="!passenger.value.specialNeedFound">
+                        <p class="text text--unfocused">-</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ib-booking-accordion>

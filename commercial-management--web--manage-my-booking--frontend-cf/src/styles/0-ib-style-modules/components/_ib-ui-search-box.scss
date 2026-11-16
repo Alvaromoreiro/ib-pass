@@ -1,0 +1,154 @@
+/* -----------------------------------------------------------------
+    #UI SEARCH BOX
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}ui-search-box {
+    display: flex;
+    padding: rem(16);
+    border: solid rem(1) color(gray-25);
+    background-color: color(gray-50);
+
+    &__col {
+        width: 25%;
+        box-sizing: border-box;
+        padding-left: rem(16);
+
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &--separator {
+            margin-left: rem(16);
+            border-left: rem(1) solid color(gray-70);
+        }
+
+        &--dates {
+            width: 35%;
+        }
+
+        &--button {
+            width: 15%;
+        }
+    }
+
+    &__range-container {
+        position: relative;
+        top: rem(-3);
+        padding: 0;
+        margin: 0;
+
+        .rz-bubble {
+            display: none;
+        }
+
+        .rzslider {
+            margin: 0;
+        }
+    }
+
+    &__range-title {
+        font-family: $font-normal;
+        font-size: rem(12);
+        color: color(gray-15);
+    }
+
+    &__range-tag {
+        font-family: $font-normal;
+        font-size: rem(11);
+        text-align: center;
+        line-height: rem(13);
+        color: color(gray-30);
+    }
+
+    &__range-slider {
+        margin-top: rem(-9);
+        -webkit-appearance: none;
+    }
+
+    &--three {
+        padding: rem(16) 0 0;
+        border: none;
+        background-color: color(white);
+        gap: rem(24);
+        .#{$wefront__namespace}ui-search-box {
+            &__col {
+                width: calc(100% / 3);
+                padding-left: 0;
+            }
+        }
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}ui-search-box {
+        &--three {
+            .#{$wefront__namespace}button--h-xmedium-responsive {
+                min-height: rem(56);
+            }
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}ui-search-box {
+        flex-wrap: wrap;
+
+        &__col {
+            width: 50%;
+            padding-top: rem(16);
+
+            &--first,
+            &--second {
+                padding-top: rem(0);
+            }
+
+            &--third {
+                padding-left: rem(0);
+            }
+
+            &--right-button {
+                width: 100%;
+                padding-left: calc(50% + rem(16));
+            }
+        }
+
+        &--three {
+            flex-direction: column;
+            gap: rem(16);
+            .#{$wefront__namespace}ui-search-box {
+                &__col {
+                    width: 100%;
+                    padding: 0;
+                }
+            }
+            .#{$wefront__namespace}input--icon {
+                .#{$wefront__namespace}input__input {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}ui-search-box {
+        flex-direction: column;
+
+        &__col {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            border: none;
+        }
+
+        &--three {
+            gap: rem(16);
+            .#{$wefront__namespace}ui-search-box {
+                &__col {
+                    width: 100%;
+                    padding-left: 0;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,78 @@
+<main class="ib-layout ib-layout--bck-1 ng-scope">
+    <ib-header-steps class="ng-isolate-scope">
+        <header class="ib-header-steps">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ib-header-steps__content">
+                            <div class="ib-header-steps__block--left">
+                                <a href="javascript:void(0)" title="{{'MMB_VOUCHER_MODAL_LOGO_HOVER_TEXT' | translate}}" class="ib-header-steps__logo"
+                                    ng-click="fullModalCtrl.showModalCloseAndGoToIberia('generic-close-voucher-process.html')" focusin>
+                                    <figure class="ib-header-steps__fig">
+                                        <img alt="Logo Iberia"
+                                            data-ng-src="{{::$root.routes.images}}/logos/logo_iberia_red.svg">
+                                    </figure>
+                                </a>
+                                <div class="ib-header-steps__content--bordered">
+                                    <span class="ib-header-steps__txt" ng-hide="fullModalCtrl.flags.refundVoucherSection80">{{'MMB_REFUNDS_MAIN_TITLE' | translate}}</span>
+                                    <span class="ib-header-steps__txt" ng-show="fullModalCtrl.flags.refundVoucherSection80">{{'MMB_ANCILLARIES_FLEXIBILITY_PARCIAL_REFUND_TEXT_TITLE' | translate}}</span>
+                                    <span ng-if="fullModalCtrl.currentStep === 1" class="ib-header-steps__txt--short visible-sm-inline-block visible-xs-inline-block">1/2</span>
+                                    <span ng-if="fullModalCtrl.currentStep === 2" class="ib-header-steps__txt--short visible-sm-inline-block visible-xs-inline-block">2/2</span>
+                                </div>
+                            </div>
+                            <div class="ib-header-steps__block--right">
+                                <a href="javascript:void(0)" class="ib-header-steps__link icon-cerrar"
+                                    ng-click="fullModalCtrl.showModalCloseRefunds(true)" ng-if="fullModalCtrl.currentStep === 1" focusin>{{'MMB_VC_BACK_TO_BOOKING_MANAGEMENT' | translate}}</a>
+                                <a href="javascript:void(0)" class="ib-header-steps__link icon-cerrar"
+                                    ng-click="fullModalCtrl.showModalCloseRefunds(true)" ng-if="fullModalCtrl.currentStep === 2" focusin>{{'MMB_VOUCHER_REFUND_HEADER_CONFIRMATION_STEP_TITLE' | translate}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ib-main-steps ib-main-steps--flex hidden-sm hidden-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 ib-main-steps__scroll">
+                            <ul class="ib-main-steps__list--flex" steps-scroll="">
+                                <li class="ib-main-steps__item--flex">
+                                    <span class="ib-main-steps__txt--flex"
+                                        data-ng-class="{'ib-main-steps__txt--active': fullModalCtrl.currentStep === 1}">{{'MMB_VOUCHER_REFUND_MODAL_STEP_1_TITLE' | translate}}</span>
+                                </li>
+                                <li class="ib-main-steps__item--flex">
+                                    <span class="ib-main-steps__txt--flex"
+                                        data-ng-class="{'ib-main-steps__txt--active': fullModalCtrl.currentStep === 2}">{{'MMB_2_CONFIRMATION' | translate}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </ib-header-steps>
+    <div class="container" data-ng-if="fullModalCtrl.currentStep === 1">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__section ib-layout__section--big u-mb-medium">
+                    <ib-MmB-voucher-refund-breakdown model="fullModalCtrl.model.passengerSummaryModel" phone-list="fullModalCtrl.model.phoneList"
+                                                     contact-info="fullModalCtrl.model.email" voucher-price-info="fullModalCtrl.model.voucherPriceInfo"
+                                                     is-disruption="fullModalCtrl.model.isDisruption" cash-price-info="fullModalCtrl.model.cashPriceInfo"
+                                                     flags="fullModalCtrl.flags"
+                    ></ib-MmB-voucher-refund-breakdown>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" data-ng-if="fullModalCtrl.currentStep === 2">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__section ib-layout__section--big">
+                    <ib-MmB-voucher-refund-confirmation model="fullModalCtrl.model" phone-list="fullModalCtrl.model.phoneList" voucher-data="fullModalCtrl.voucherData" is-disruption="fullModalCtrl.model.isDisruption"></ib-MmB-voucher-refund-confirmation>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <ib-mmb-main-footer ng-show="$root.showHeaders"></ib-mmb-main-footer>
+</main>
+

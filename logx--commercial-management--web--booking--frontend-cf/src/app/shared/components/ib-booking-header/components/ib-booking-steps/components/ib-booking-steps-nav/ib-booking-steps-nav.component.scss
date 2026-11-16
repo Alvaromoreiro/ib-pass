@@ -1,0 +1,195 @@
+@import 'src/styles/component-tools';
+
+:host{
+    background-color: var(--ib-color-white);
+}
+
+.steps {
+    &-nav {
+        &-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &-btn {
+            position: relative;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            padding: rem(16) rem(8);
+            border: none;
+            color: var(--ib-color-primary-red-500);
+            background-color: var(--ib-color-white);
+            gap: rem(8);
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: rem(1);
+                background: var(--ib-color-grey-500-b1);
+            }
+
+            &:last-child {
+                &::after {
+                    display: none;
+                }
+            }
+
+            &:disabled{
+                cursor: not-allowed;
+            }
+
+            &-index {
+                display: flex;
+                overflow: hidden;
+                width: rem(16);
+                height: rem(16);
+                flex-shrink: 0;
+                align-items: center;
+                justify-content: center;
+                border: rem(1) solid var(--ib-color-primary-red-500);
+                border-radius: 50%;
+                font-family: var(--font-regular);
+                font-size: rem(12);
+                font-weight: 400;
+                
+
+                > svg {
+                    border: none;
+                    background-color: var(--ib-color-primary-red-500);
+                    fill: var(--ib-color-white);
+                }
+            }
+
+            &-text {
+                font-family: var(--font-regular);
+                font-size: rem(12);
+                font-weight: 400; 
+            }
+
+            &-current {
+                &> .steps-nav-btn-text {
+                    font-size: rem(13); 
+                }
+
+                &> .steps-nav-btn-index {
+                    font-size: rem(13);
+                }
+            }
+
+            &-next {
+                color: var(--ib-color-grey-700-66);
+
+                & > .steps-nav-btn-index {
+                    border-color: var(--ib-color-grey-700-66);
+                    
+                }
+            }
+
+            &:hover,&:focus {
+                &:not(:disabled){
+                    &>.steps-nav-btn-text {
+                        font-weight: 700;
+                    }
+
+                    &>.steps-nav-btn-index {
+                        font-weight: 700;
+                    }
+                }
+                
+            }
+            
+            &--inactive{
+                &:disabled {
+                    cursor: default;
+                }
+            }
+        }
+
+    }
+    
+}
+
+@include media-query-range("mf-md") {
+    .steps-nav {
+        width: 100%;
+
+        &-container {
+            position: relative;     
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+
+        }
+        
+        &-btn {
+            z-index: 1;
+
+            &:last-child {
+                padding-right: 0;
+            }
+
+            &:first-child {
+                padding-left: 0;
+            }
+
+            &::after {
+                display: none;
+            }
+
+            &.steps-nav-btn-current {
+                z-index: 0;
+      
+                &::before, &::after {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    right: 100%;
+                    display: block;
+                    width: 100vw;
+                    height: rem(1);
+                    background-color: var(--ib-color-primary-red-500);
+                }
+
+                &::after {
+                    right: initial;
+                    left: 100%;
+                    background-color: var(--ib-color-grey-700-66);
+                }
+
+            }
+
+            
+        }
+    }
+}
+
+@include media-query-range("mf-lg") {
+    .steps-nav {
+        &-btn {
+            &-text {
+               font-family: var(--font-headline);
+               font-size: rem(16);
+            }
+
+            &-index {
+                align-items: center;
+                font-size: rem(13);
+            }
+
+            &-current {
+                &> .steps-nav-btn-text {
+                    font-size: rem(16); 
+                }
+
+                &> .steps-nav-btn-index {
+                    font-size: rem(13);
+                }
+            }
+        }
+    }
+}

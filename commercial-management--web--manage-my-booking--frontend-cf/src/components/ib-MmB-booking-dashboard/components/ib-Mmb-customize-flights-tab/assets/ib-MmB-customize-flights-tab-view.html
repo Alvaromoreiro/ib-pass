@@ -1,0 +1,123 @@
+<div class="ib-layout__line-spacing u-text-center "><!--hidden-xl hidden-lg-->
+    <h2 class="ib-heading ib-heading--title-box">{{'MMB_MENU_PERSONALICE_FLIGHT_OPTION' | translate}}</h2>
+</div>
+<div class="row" ng-if="custFlightTabCtrl.showRedirection || custFlightTabCtrl.showRedirectionCheckin">
+    <div class="col-xs-12">
+        <div class="ib-msg-alert  ib-msg-alert--transparent icon-alertas_2 alert fade in ib-layout__section">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-border-left-none">
+                <p class="ib-msg-alert__text ib-msg-alert__text--title">{{'MMB_CUSTOMIZE_ALERT_TIME_TITLE'|translate}} </p>
+                <div class="row">
+                    <div class="col-md-9 col-sm-12 col-xs-12 u-mb">
+                        <p class="ib-msg-alert__text">{{'MMB_CUSTOMIZE_ALERT_TIME_DESCRIPTION'|translate}}</p>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12 u-text-right">
+                        <a id="mmb-customize-flights-cki-redirection-link" class="ib-link ib-link--inline ib-link--underline" ng-href="javascript:void(0)" ng-click="custFlightTabCtrl.redirectToCheckin()">{{'MMB_CUSTOMIZE_ALERT_TIME_LINK_TEXT'|translate}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--BANNER AVIOS-->
+<ib-ui-avios-summary-banner ng-if="!custFlightTabCtrl.isOnbUserLogged" logged="custFlightTabCtrl.userLoggeded"></ib-ui-avios-summary-banner>
+
+<!-- Involuntary seats change message -->
+<div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt-xsmall" ng-if="custFlightTabCtrl.seatChangeConditions.message && custFlightTabCtrl.seatChangeConditions.message.showInPageDetailTrip">
+    <div class="ib-msg-alert ib-msg-alert--info icon-informacion_2 alert fade in">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+            <p class="ib-msg-alert__text ib-msg-alert__text--bold">{{'SEATS_CHANGE_INV_WARNING_TITLE'|translate}}</p>
+            <p class="ib-msg-alert__text" ng-if="custFlightTabCtrl.seatChangeConditions.message && custFlightTabCtrl.seatChangeConditions.message.type === 'DOWNGRADE'">
+                {{'SEATS_CHANGE_INV_WARNING_SEATS_MODULE_TEXT'|translate}}
+            </p>
+            <p class="ib-msg-alert__text" ng-if="custFlightTabCtrl.seatChangeConditions.message && custFlightTabCtrl.seatChangeConditions.message.type === 'UPGRADE'">
+                {{'SEATS_CHANGE_INV_WARNING_UPGRADING_SEATS_MODULE_TEXT'|translate}}
+            </p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"  ng-if="custFlightTabCtrl.enableThirdPartyCompanies">
+        <div class="ib-msg-alert ib-msg-alert--transparent icon-alertas_2 alert fade in ib-layout__section">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-border-left-none">
+                <p class="ib-msg-alert__text ib-msg-alert__text--title">
+                    {{custFlightTabCtrl.thirdPartyCompanies.thirdPartyCompanies[0].message}} </p>
+                <p class="ib-msg-alert__text">{{'MMB_RES_COMPANY' | translate}}</p>
+            </div>
+            <ul class="ib-alert-list">
+                <li class="ib-alert-list__item ib-alert-list__item-icon icon-avion_ida" ng-repeat="flight in custFlightTabCtrl.thirdPartyCompanies.flights">
+                    <span class="ib-alert-list__item--col">
+                        <span class="ib-alert-list__text">{{flight.departureCity}} - {{flight.arrivalCity}}</span>
+                    </span>
+                    <span class="ib-alert-list__item--col">
+                        <a id="mmb-customize-flights-select-flight-{{$index}}-link" class="ib-link ib-link--inline ib-link--underline" ng-href="#"
+                           title="{{'MMB_SELECT_FLIGHT' | translate}} {{flight.companyName}}"
+                           ng-click="custFlightTabCtrl.redirectModal($event,$index,flight.companyName)">{{'MMB_SELECT_FLIGHT' | translate}}
+                            {{flight.companyName}}</a>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <equal-height  data-equal-height-reload="true">
+        <div ng-if="custFlightTabCtrl.ancillariesToShow" ng-repeat="ancillarieType in custFlightTabCtrl.model.ancillariesAvailable track by $index"
+              ng-class="{'col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 u-pl-small-lg u-pl-xsmall-md': custFlightTabCtrl.model.ancillariesAvailable.length >= 2 && $index % 2 !== 0 && !(ancillarieType === 'ALLIANZ_FUSION' && custFlightTabCtrl.model.ancillariesAvailable.length % 2 !== 0), 'col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 u-pr-small-lg u-pr-xsmall-md': custFlightTabCtrl.model.ancillariesAvailable.length >= 2 && $index % 2 === 0 && !(ancillarieType === 'ALLIANZ_FUSION' && custFlightTabCtrl.model.ancillariesAvailable.length % 2 !== 0), 'col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12': custFlightTabCtrl.model.ancillariesAvailable.length < 2 || (ancillarieType === 'ALLIANZ_FUSION' && custFlightTabCtrl.model.ancillariesAvailable.length % 2 !== 0) }">
+            <ib-baggages-box id="mmb-customize-flights-baggages-box-{{$index}}"
+                dataequalrow="custFlightTabCtrl.getBoxCardClassId($index)"
+                ng-if="ancillarieType === 'BAGGAGE'"
+                quanty="custFlightTabCtrl.model.baggagesQuanty"
+                available="custFlightTabCtrl.model.baggageAvailablePrice.priceFrom"
+                modules="4"></ib-baggages-box>
+            <ib-insurance-box id="mmb-customize-flights-insurance-box-{{$index}}" dataequalrow="custFlightTabCtrl.getBoxCardClassId($index)" ng-if="ancillarieType === 'INSURANCE'" price="custFlightTabCtrl.model.insuranceInfo.price" available = "custFlightTabCtrl.model.insuranceInfo.priceFrom" selected="custFlightTabCtrl.model.selectedInsurance" modules="4"></ib-insurance-box>
+            <!-- ALLIANZ_FUSION -->
+            <ib-insurance-allianz-fusion-box id="mmb-customize-flights-insurance-allianz-fusion-box-{{$index}}" dataequalrow="custFlightTabCtrl.getBoxCardClassId($index)" ng-if="(ancillarieType === 'ALLIANZ_FUSION' && (custFlightTabCtrl.bookingInfoMarket === custFlightTabCtrl.commercialDataMarket))" price="custFlightTabCtrl.model.insuranceInfo.priceFrom" selected="custFlightTabCtrl.model.selectedInsurance" modules="custFlightTabCtrl.model.ancillariesAvailable.length" index="$index" last="(custFlightTabCtrl.model.ancillariesAvailable.length - 1) % 2 !== 0"></ib-insurance-allianz-fusion-box>
+            <ib-seat-map-box 
+                id="mmb-customize-flights-seat-map-box-{{$index}}"
+                dataequalrow="custFlightTabCtrl.getBoxCardClassId($index)"
+                ng-if="ancillarieType === 'SEAT'"
+                [quantity]="custFlightTabCtrl.model.seatsQuanty" 
+                [availability]="custFlightTabCtrl.model.seatsAvailable" 
+                [modules]="4">
+            </ib-seat-map-box>
+            <ib-upgrade-box
+                id="mmb-customize-flights-upgrade-box-{{$index}}"
+                dataequalrow="custFlightTabCtrl.getBoxCardClassId($index)"
+                ng-if="(ancillarieType === 'UPGRADING_BID' || ancillarieType === 'UPGRADING_AVIOS' || ancillarieType === 'UPGRADING_AVIOS_BID' || ancillarieType === 'UPGRADING_WAITING_LIST')"
+                model="custFlightTabCtrl.upgradeModel"
+                modules="4"
+             ></ib-upgrade-box>
+            <ib-ancillary-box-component id="mmb-customize-petc-box-{{$index}}"
+            dataequalrow="custFlightTabCtrl.getBoxCardClassId($index)"
+                ng-if="ancillarieType === 'PET'"
+                [model]="custFlightTabCtrl.model.petcInfo"
+                [modules] ="4">
+            </ib-ancillary-box-component>
+            <ib-speqs-box id="mmb-customize-flights-speqs-box-{{$index}}" dataequalrow="custFlightTabCtrl.getBoxCardClassId($index)" ng-if="ancillarieType === 'SPECIAL_EQUIPMENT'" quanty="custFlightTabCtrl.model.speqsQuanty" available="custFlightTabCtrl.model.speqsAvailablePrice.priceFrom" modules="4"></ib-speqs-box>
+            <ib-carbon-footprint-box id="mmb-customize-flights-carbon-footprint-box-{{$index}}" dataequalrow="custFlightTabCtrl.getBoxCardClassId($index)" ng-if="ancillarieType === 'CO2_FOOTPRINT'" model="custFlightTabCtrl.model.ancillariesCarbonFootprint" modules="4"></ib-carbon-footprint-box>
+            <ib-ancillaries-components id="mmb-customize-flights-component-box-{{$index}}" dataequalrow="custFlightTabCtrl.getBoxCardClassId($index)" ng-if="ancillarieType === 'PRIORITY_BOARDING'" model="custFlightTabCtrl.model.priorityBoardingInfo"  modules="4"></ib-ancillaries-components>
+            <ib-bob-box ng-if="ancillarieType === 'INTEGRATED_BOB' && custFlightTabCtrl.bobAvailable()" bob-info="custFlightTabCtrl.bobInfo" flow-app="custFlightTabCtrl.flowApp" mmb-booked="custFlightTabCtrl.bobBooked"></ib-bob-box>
+            <ib-globick-transfers-box ng-if="ancillarieType === 'TRANSFERS'" modules="4"></ib-globick-transfers-box>
+            <div id="mmb-cx-gastronomic-card-{{$index}}" ng-if="ancillarieType === 'GASTRONOMIC_PROPOSAL'" dataequalrow="custFlightTabCtrl.getBoxCardClassId($index)">
+                <customer-experience-gastronomic-proposal
+                ng-attr-ancillaries-api-response="{{custFlightTabCtrl.ancillariesData  | json}}"
+                ng-attr-flow-id="{{custFlightTabCtrl.bookingInfo.flowId}}" />
+            </div>
+            <ib-shopping-component
+                ng-if="ancillarieType === 'PREORDER' && custFlightTabCtrl.provisionalWebComponent"
+                id="mmb-customize-flights-shopping-{{$index}}"
+                dataequalrow="custFlightTabCtrl.getBoxCardClassId($index)"
+                [model]="custFlightTabCtrl.model.shoppingModel"
+                [modules]="'4'"
+                [index]="$index"
+                [last]="$last"
+                ></ib-shopping-component>
+        </div>
+        <!--DESGLOSE-->
+        <ib-ui-avios-summary request="custFlightTabCtrl.model"></ib-ui-avios-summary>
+
+        <div class="u-mt-medium u-mb-medium" ng-if="custFlightTabCtrl.deepLinkData">
+            <p class="u-text-center"><a class="ib-link" ng-href="{{custFlightTabCtrl.deepLinkData.returnUrl}}">{{'MMB_DEEPLINK_COMEBACK_TO' | translate}} {{custFlightTabCtrl.deepLinkData.airline.name}}</a></p>
+        </div>
+    </equal-height>
+</div>
+<div id="bob-wrapper"></div>

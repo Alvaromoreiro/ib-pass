@@ -1,0 +1,143 @@
+/* -------------------------------------------------------------
+    #UI-BUTTONS-SETS
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}ui-buttons-sets {
+    display: flex;
+    width: 100%;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+
+    &__content {
+        .ib-link {
+            margin-right: rem(16);
+        }
+    }
+
+    &__button {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        margin-left: rem(8);
+        border: 0 none;
+        border-left: rem(1) solid color(gray-10);
+        background: 0 none;
+
+        &:hover,
+        &:focus {
+            .#{$wefront__namespace}card-item-payment__button {
+                &--text {
+                    color: color(primary);
+                }
+            }
+        }
+
+        &:first-child {
+            margin-left: 0;
+            border-left: 0 none;
+
+            [class^="icon-"] {
+                margin-left: 0;
+            }
+        }
+
+        [class^="icon-"] {
+            margin: 0 rem(6);
+            color: color(primary);
+        }
+
+        &--text {
+            font-family: $font-normal;
+            font-size: rem(13);
+            text-decoration: underline;
+            line-height: rem(22);
+            color: color(gray-10);
+        }
+
+        .icon {
+            &-modificar {
+                font-size: rem(12);
+            }
+
+            &-papelera {
+                margin: 0 rem(4);
+                font-size: rem(22);
+            }
+        }
+    }
+
+    //Modifiers
+    &--reverse {
+        justify-content: flex-end;
+    }
+}
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}ui-buttons-sets {
+        flex-flow: column nowrap;
+        margin-top: 0;
+        margin-bottom: rem(32);
+
+        &__content {
+            .ib-button {
+                width: 100%;
+                order: 0;
+            }
+
+            .ib-link {
+                order: 1;
+                margin-top: rem(24);
+                margin-right: 0;
+            }
+        }
+
+        &__button {
+            &--right {
+                &:first-child {
+                    margin: 0 0 0 auto;
+                }
+            }
+        }
+
+        &--no-edition {
+            flex-flow: row nowrap;
+            .#{$wefront__namespace}ui-buttons-sets {
+                &__content {
+                    justify-content: flex-end;
+                }
+            }
+        }
+    }
+}
+
+@include media-query("sm") {
+    .#{$wefront__namespace}ui-buttons-sets {
+        &__content {
+            display: flex;
+            width: 100%;
+            flex-flow: row nowrap;
+            justify-content: center;
+
+            &:first-child {
+                order: 1;
+            }
+        }
+    }
+}
+
+@include media-query("xs") {
+    .#{$wefront__namespace}ui-buttons-sets {
+        &__content {
+            display: flex;
+            width: 100%;
+            flex-flow: row nowrap;
+            justify-content: center;
+
+            &:first-child {
+                order: 1;
+            }
+        }
+    }
+}

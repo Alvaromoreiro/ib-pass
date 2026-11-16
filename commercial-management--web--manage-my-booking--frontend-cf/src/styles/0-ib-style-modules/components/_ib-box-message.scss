@@ -1,0 +1,116 @@
+/* -------------------------------------------------------------
+    #BOX MESSAGE
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}box-message {
+    max-width: rem(400);
+    padding: rem(32);
+    margin-right: auto;
+    margin-left: auto;
+    border: rem(1) solid color(gray-40);
+    background: color(gray-60);
+
+    &__details {
+        position: relative;
+        padding-top: rem(90);
+        text-align: center;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: rem(90);
+            height: rem(90);
+            border: rem(1) solid rgb(204 204 204 / 52%);
+            border-radius: 50%;
+            background: color(white);
+            transform: translate(-50%, 0);
+        }
+
+        &::before {
+            position: absolute;
+            z-index: 2;
+            top: rem(28);
+            left: 50%;
+            font-size: rem(35);
+            color: color(green-30);
+            transform: translate(-50%, 0);
+        }
+    }
+
+    &__title {
+        margin-top: rem(16);
+        font-family: $font-special;
+        font-size: rem(26);
+        line-height: 1.24;
+        color: color(green-30);
+        + .#{$wefront__namespace}box-message {
+            &__text {
+                margin-top: rem(16);
+            }
+        }
+    }
+
+    &__text {
+        font-family: $font-special;
+        font-size: rem(20);
+        line-height: 1.1;
+        color: color(gray-10);
+    }
+
+    &__description {
+        margin-top: rem(8);
+        font-size: rem(13);
+        line-height: 1.2;
+        color: color(gray-30);
+    }
+
+    &__confirm {
+        margin-top: rem(32);
+        font-family: $font-special;
+        font-size: rem(14);
+        line-height: 1.2;
+        color: color(gray-20);
+    }
+}
+
+.#{$wefront__namespace}heading {
+    + .#{$wefront__namespace}box-message {
+        margin-top: rem(35);        //40 - 5 in title
+    }
+}
+
+
+// Responsive
+@include media-query('lg') {
+    .#{$wefront__namespace}heading {
+        + .#{$wefront__namespace}box-message {
+            margin-top: rem(27);     //32 - 5 in title
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}heading {
+        + .#{$wefront__namespace}box-message {
+            margin-top: rem(27);     //32 - 5 in title
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}heading {
+        + .#{$wefront__namespace}box-message {
+            margin-top: rem(27);     //32 - 5 in title
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}heading {
+        + .#{$wefront__namespace}box-message {
+            margin-top: rem(19);     //32 - 5 in title
+        }
+    }
+}

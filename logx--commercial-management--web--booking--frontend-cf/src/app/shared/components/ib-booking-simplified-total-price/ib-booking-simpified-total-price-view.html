@@ -1,0 +1,108 @@
+<div data-ng-if="simpTotalPriceCtrl.withoutAviosMoney || simpTotalPriceCtrl.totalPointsNeeded" class="ib-box ib-box--message-box" ng-class="{'hidden-sm hidden-xs':$root.isPointsOBFlow}">
+    <div class="ib-box__wrapper">
+        <div class="hidden-sm hidden-xs">
+            <span class="ib-text ib-text--especial ib-text--message-big u-pb">{{!simpTotalPriceCtrl.totalPointsNeeded ? ('AVAILABILITY_REDEMPTION_TOTAL_PRICE_COMPONENT_TITLE'|translate) : ('AVAILABILITY_REDEMPTION_TOTAL_PRICE_COMPONENT_POINTS_TITLE' |translate)}}</span>
+            <span class="ib-text ib-text--especial ib-text--message-medium">{{!simpTotalPriceCtrl.totalPointsNeeded ? ('AVAILABILITY_REDEMPTION_TOTAL_PRICE_COMPONENT_TEXT_1'|translate) : ('AVAILABILITY_REDEMPTION_TOTAL_PRICE_COMPONENT_POINTS_TEXT' |translate)}}
+                <a id="bbki-simplified-total-price-new-availability-link" class="ib-link ib-link--inline ib-link--primary ib-link--especial ib-link--message-medium" title="AVAILABILITY_REDEMPTION_TOTAL_PRICE_COMPONENT_LINK_TITLE" ng-click="simpTotalPriceCtrl.newAvailability()">{{!simpTotalPriceCtrl.totalPointsNeeded ? ('AVAILABILITY_REDEMPTION_TOTAL_PRICE_COMPONENT_LINK'|translate) : ('AVAILABILITY_REDEMPTION_TOTAL_PRICE_COMPONENT_POINTS_LINK' |translate)}}</a>
+            </span>
+        </div>
+        <div data-ng-if="!$root.isPointsOBFlow" class="hidden-xl hidden-lg hidden-md">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--null">
+                <span class="ib-text ib-text--block ib-text--color-unfocused">{{simpTotalPriceCtrl.redemption ? ('TOTAL_PRICE_COMPONENT_TITLE'|translate) : ('AVAILABILITY_TRIP_BODY'|translate)}}</span>
+    			<span data-ng-if="simpTotalPriceCtrl.isChecked" class="ib-text ib-text--block ib-text--color-unfocused">{{simpTotalPriceCtrl.redemption || (($root.isLogged === simpTotalPriceCtrl.LOGIN_ONB) && simpTotalPriceCtrl.isChecked) ? ('TOTAL_PRICE_COMPONENT_TITLE'|translate) : ('AVAILABILITY_TRIP_BODY'|translate)}}</span>
+    			<span data-ng-if="($root.isLogged === simpTotalPriceCtrl.LOGIN_ONB) && !simpTotalPriceCtrl.isChecked" class="ib-text ib-text--block ib-text--color-unfocused">{{'AVAILABILITY_ON_BUSINESS_TOTAL_PRICE_TITLE_DISCOUNT'|translate}}</span>
+                <span data-ng-if="!simpTotalPriceCtrl.redemption" class="ib-text ib-text--especial ib-text--price-big" ng-class="{'ib-text--price-long':simpTotalPriceCtrl.totalPrice.length > 9}">{{simpTotalPriceCtrl.totalPrice}}</span>
+                <span data-ng-if="simpTotalPriceCtrl.explanationText && !simpTotalPriceCtrl.redemption" class="ib-text ib-text--block ib-text--color-bold"
+                    ng-bind-html="simpTotalPriceCtrl.explanationText"></span>
+                <span data-ng-if="simpTotalPriceCtrl.redemption" class="ib-text ib-text--especial ib-text--price-big ib-text--price-responsive">{{simpTotalPriceCtrl.totalPrice.price.fare}} {{'IBPURC_PAYMENTS_DISCOUNTS_AVIOS'|translate}}</span>
+				<span data-ng-if="simpTotalPriceCtrl.redemption" class="ib-text ib-text--especial ib-text--subprice ib-text--subprice-responsive">{{'AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate }} {{simpTotalPriceCtrl.totalPrice.price.total}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="{{simpTotalPriceCtrl.moduleId}}" class="ib-box ib-box--medium ib-box--separator" 
+     data-ng-class="{
+         'u-mb-none u-pb-big hidden-sm hidden-xs': simpTotalPriceCtrl.withoutAviosMoney,
+         'u-pb-big u-pt-big': simpTotalPriceCtrl.isAncillaries
+     }">
+    <div ng-if = "simpTotalPriceCtrl.totalPrice.couponApplied || simpTotalPriceCtrl.totalPrice.promotionApplied" class="u-pt-big">
+        <div class="ib-flag-info">
+            <div class="ib-flag-info__container">
+            <i class="ib-flag-info__icon icon-descuento"></i>
+            <p ng-if="!simpTotalPriceCtrl.totalPrice.couponApplied && simpTotalPriceCtrl.totalPrice.promotionApplied" class="ib-flag-info__txt">
+                {{'AVAILABILITY_REDEMPTION_FLIGHT_WITH_DISCOUNT'|translate}}
+            </p>
+            <p ng-if="simpTotalPriceCtrl.totalPrice.couponApplied" class="ib-flag-info__txt">{{'VOUCHER'|translate}}</p>
+            </div>
+        </div>
+        <span ng-if = "simpTotalPriceCtrl.totalPrice.couponApplied || simpTotalPriceCtrl.totalPrice.promotionApplied" class="ib-text ib-text--xbig ib-text--especial ib-text--line-through">
+            {{simpTotalPriceCtrl.totalPrice.oldPriceWithoutDiscount.totalAvios}} {{'IBPURC_PAYMENTS_DISCOUNTS_AVIOS' | translate}}{{'AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate }} {{simpTotalPriceCtrl.totalPrice.oldPriceWithoutDiscount.totalCash}}</span>
+    </div>
+
+    <ib-ui-warnings data-ng-if="simpTotalPriceCtrl.showLocaldiscountWarn===true"
+        type="'simple-gray-50'" icon="'icon-informacion_2'" modifier="'u-bg-gray-60 u-mb-medium'" text="simpTotalPriceCtrl.localdiscountWarningTextModel"></ib-ui-warnings>
+    <span data-ng-if="simpTotalPriceCtrl.isChecked || simpTotalPriceCtrl.isAncillaries" class="ib-text ib-text--block ib-text--color-unfocused">{{simpTotalPriceCtrl.redemption || $root.isShuttleFlow || (($root.isLogged === simpTotalPriceCtrl.LOGIN_ONB) && simpTotalPriceCtrl.isChecked) ? ('TOTAL_PRICE_COMPONENT_TITLE'|translate) : ('TOTAL_PRICE_COMPONENT_TITLE'|translate)}}</span>
+    <span data-ng-if="($root.isLogged === simpTotalPriceCtrl.LOGIN_ONB) && !simpTotalPriceCtrl.isChecked && simpTotalPriceCtrl.showDiscount" class="ib-text ib-text--block ib-text--color-unfocused">{{'AVAILABILITY_ON_BUSINESS_TOTAL_PRICE_TITLE_DISCOUNT'|translate}}</span>
+    <span data-ng-if="($root.isLogged === simpTotalPriceCtrl.LOGIN_ONB) && !simpTotalPriceCtrl.redemption && !simpTotalPriceCtrl.showDiscount && !simpTotalPriceCtrl.isChecked" class="ib-text ib-text--block ib-text--color-unfocused">{{'TOTAL_PRICE_COMPONENT_TITLE'|translate}}</span>
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7" data-ng-style="{'padding-left': simpTotalPriceCtrl.isAncillaries ? '0px' : null}">
+            <div class="ib-layout__line-spacing" ng-class="simpTotalPriceCtrl.totalPointsNeeded ? '' : simpTotalPriceCtrl.redemption ? 'ib-layout__line-spacing--null' : 'ib-layout__line-spacing--small'">
+                <span data-ng-if="($root.isLogged === simpTotalPriceCtrl.LOGIN_ONB) && !simpTotalPriceCtrl.redemption && simpTotalPriceCtrl.showDiscount" class="ib-text ib-text--price-old">{{simpTotalPriceCtrl.obDiscount}}</span>
+                <span data-ng-if="!simpTotalPriceCtrl.redemption" class="ib-text ib-text--especial ib-text--price-big" ng-class="{'ib-text--price-long':simpTotalPriceCtrl.totalPrice.length > 9}">{{simpTotalPriceCtrl.totalPrice}}</span>
+                <span data-ng-if="simpTotalPriceCtrl.explanationText && !simpTotalPriceCtrl.redemption" class="ib-text ib-text--block ib-text--color-bold"
+                    ng-bind-html="simpTotalPriceCtrl.explanationText"></span>
+                <span data-ng-if="simpTotalPriceCtrl.redemption &&  $root.isPointsOBFlow" class="ib-text ib-text--especial ib-text--price-big ib-text--price-responsive"> {{simpTotalPriceCtrl.totalPrice.price.totalPoints}} {{('AVAILABILITY_ON_BUSINESS_POINTS_NEEDED'|translate)}}</span>
+				<span data-ng-if="simpTotalPriceCtrl.redemption &&  !$root.isPointsOBFlow" class="ib-text ib-text--especial ib-text--price-big ib-text--price-responsive">{{simpTotalPriceCtrl.totalPrice.price.totalAvios}} {{('IBPURC_PAYMENTS_DISCOUNTS_AVIOS'|translate)}}</span>
+                <span data-ng-if="simpTotalPriceCtrl.redemption" class="ib-text ib-text--especial ib-text--subprice ib-text--subprice u-pb">{{'AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate }} {{simpTotalPriceCtrl.totalPrice.price.totalCash}}</span>
+            <button ng-if="simpTotalPriceCtrl.shouldShowPriceDetailCTA" data-ng-click="simpTotalPriceCtrl.openPriceDetailModal($event)" class="price-detail">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M7.94745 6.0906H8.0162C8.49848 6.0906 9.06355 5.96473 9.06355 5.19012V5.15139C9.06355 4.37195 8.49848 4.23156 8.0162 4.23156H7.94745C7.46469 4.23156 6.89865 4.37195 6.89865 5.15139V5.19012C6.89865 5.96473 7.46469 6.0906 7.94745 6.0906Z" fill="#333333"/>
+                    <path d="M7.05117 11.7694H8.91296V7.12178H7.05117V11.7694Z" fill="#333333"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99829 1.00244C4.13186 1.00244 0.998047 4.13473 0.998047 7.99805C0.998047 11.8662 4.13186 14.9985 7.99829 14.9985C11.8633 14.9985 14.998 11.8662 14.998 7.99805C14.998 4.13473 11.8633 1.00244 7.99829 1.00244ZM2.72523 7.99805C2.72523 10.9076 5.08963 13.275 7.99829 13.275C10.905 13.275 13.2713 10.9076 13.2713 7.99805C13.2713 5.0933 10.905 2.72593 7.99829 2.72593C5.08963 2.72593 2.72523 5.0933 2.72523 7.99805Z" fill="#333333"/>
+                </svg>
+                <p>{{'SUMMARY_FEES' | translate}}</p>
+            </button>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-5 col-md-5">
+            <div class="ib-layout__line-spacing u-text-right" ng-if="!simpTotalPriceCtrl.totalPointsNeeded">
+                <button id="AVAILABILITY_CONTINUE_BUTTON" title="{{(simpTotalPriceCtrl.withoutAviosMoney && simpTotalPriceCtrl.fareRate.length === 1) ? ('AVAILABILITY_REDEMPTION_FARE_RATES_AVIOS_BUTTON'|translate) : (simpTotalPriceCtrl.continueText | translate)}}" class="ib-button ib-button--w-medium ib-button--block-sm u-float-right u-mb-medium" type="submit"
+                data-ng-class="{'ib-button--disabled ib-button--reverse': simpTotalPriceCtrl.withoutAviosMoney && simpTotalPriceCtrl.fareRate.length !== 1}" data-ng-click="(simpTotalPriceCtrl.withoutAviosMoney && simpTotalPriceCtrl.fareRate.length === 1) ? simpTotalPriceCtrl.openModalLinks() : simpTotalPriceCtrl.continueEvent()">{{(simpTotalPriceCtrl.withoutAviosMoney && simpTotalPriceCtrl.fareRate.length === 1) ? ('AVAILABILITY_REDEMPTION_FARE_RATES_AVIOS_BUTTON'|translate) : ( simpTotalPriceCtrl.continueText | translate)}}</button>
+            </div>
+        </div>
+
+    </div>
+
+    <p class="ib-text ib-text--block ib-text--color-unfocused ib-text--spacing-large ng-scope"
+        data-ng-if="simpTotalPriceCtrl.isIbPlus && !simpTotalPriceCtrl.isIbZero && $root.isLogged !== simpTotalPriceCtrl.LOGIN_ONB && !$root.isRedemptionFlow && simpTotalPriceCtrl.aviosToEarn && simpTotalPriceCtrl.elitePointsToEarn">
+        {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+        <span class="ib-text ib-text--bold">
+            {{simpTotalPriceCtrl.aviosToEarn | aviosFormatter}}
+            {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+            {{simpTotalPriceCtrl.elitePointsToEarn | aviosFormatter}}
+            {{'AVIOS_ELITE_TO_EARN_USER_3'| translate}}
+        </span>
+    </p>
+    <p class="ib-text ib-text--block ib-text--color-unfocused ib-text--spacing-large ng-scope"
+        data-ng-if="(!simpTotalPriceCtrl.isIbPlus || simpTotalPriceCtrl.isIbZero) && $root.isLogged !== simpTotalPriceCtrl.LOGIN_ONB && !$root.isRedemptionFlow && simpTotalPriceCtrl.aviosToEarn && simpTotalPriceCtrl.elitePointsToEarn">
+        {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+        <span class="ib-text ib-text--bold">
+            {{simpTotalPriceCtrl.aviosToEarn | aviosFormatter}}
+            {{'AVIOS_ELITE_TO_EARN_ANOM_2'| translate}}
+            {{simpTotalPriceCtrl.elitePointsToEarn | aviosFormatter}}
+            {{'AVIOS_ELITE_TO_EARN_ANOM_3'| translate}}
+        </span>
+        {{'AVIOS_ELITE_TO_EARN_ANOM_4'| translate}}
+    </p>
+
+    <p class="ib-text ib-text--color-unfocused ng-scope" ng-bind-html="simpTotalPriceCtrl.conditionsText" ng-if="!simpTotalPriceCtrl.conditionsTextOffers || !simpTotalPriceCtrl.isSelectedFare"></p>
+    <p class="ib-text ib-text--color-unfocused ng-scope" ng-bind-html="simpTotalPriceCtrl.conditionsTextOffers" ng-if="simpTotalPriceCtrl.conditionsTextOffers && simpTotalPriceCtrl.isSelectedFare"></p>
+</div>
+<div data-ng-if="simpTotalPriceCtrl.withoutAviosMoney || (simpTotalPriceCtrl.totalPointsNeeded && $root.isPointsOBFlow)" class="ib-box ib-box--medium ib-box--separator u-mb-none u-pb hidden-xl hidden-lg hidden-md">
+    <span class="ib-text ib-text--lh-xmedium ib-text--especial ib-text--message-big u-pb">{{($root.isPointsOBFlow ? ('AVAILABILITY_REDEMPTION_TOTAL_PRICE_COMPONENT_POINTS_TITLE'|translate) : ('AVAILABILITY_REDEMPTION_TOTAL_PRICE_COMPONENT_TITLE'|translate))}}</span>
+    <span class="ib-text ib-text--especial ib-text--message-medium u-pb">{{($root.isPointsOBFlow ? ('AVAILABILITY_REDEMPTION_TOTAL_PRICE_COMPONENT_POINTS_TEXT_2'|translate) : ('AVAILABILITY_REDEMPTION_TOTAL_PRICE_COMPONENT_TEXT_2'|translate))}}</span>
+    <div class="u-text-center">
+        <button id="bbki-simplified-total-price-new-availability-btn" type="button" class="ib-button ib-button--w-medium" ng-click="simpTotalPriceCtrl.newAvailability()">{{($root.isPointsOBFlow ? ('AVAILABILITY_REDEMPTION_TOTAL_PRICE_COMPONENT_POINTS_BTN'|translate) : ('AVAILABILITY_REDEMPTION_TOTAL_PRICE_COMPONENT_BTN'|translate))}}</button>
+    </div>
+</div>

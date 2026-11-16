@@ -1,0 +1,93 @@
+<header class="ib-ticket-flights__ticket-header">
+    <div class="ib-ticket-flights__ticket-wrapper">
+        <div class="ib-ticket-flights__ticket-block u-text-left">
+            <span class="ib-ticket-flights__ticket-title">{{::segmentCtrl.segmentModel.departureCity.description}}</span>
+            <span class="ib-ticket-flights__ticket-subtitle">{{::segmentCtrl.segmentModel.departure.code}}</span>
+            <span class="ib-ticket-flights__ticket-description">
+                            <span ng-if="!segmentCtrl.showDetailsFlight" class="hidden-xs hidden-sm">{{::segmentCtrl.segmentModel.departure.name}}</span>
+                            <span ng-if="segmentCtrl.showDetailsFlight" class="hidden-xs hidden-sm">
+                                {{segmentCtrl.segmentModel.departure.terminal!=null &&  segmentCtrl.segmentModel.departure.terminal!=='' ? (('IBCOAC_MMB_SEGMENT_DETAILS_AIRPORT'|translate) + ' ' + segmentCtrl.segmentModel.departure.name + ' ' + ('IBCOAC_MMB_SEGMENT_DETAILS_TERMINAL'|translate)+''+ segmentCtrl.segmentModel.departure.terminal ) : (('IBCOAC_MMB_SEGMENT_DETAILS_AIRPORT'|translate) + ' ' + segmentCtrl.segmentModel.departure.name )}}
+                            </span>
+        </div>
+        <div class="ib-ticket-flights__ticket-icon">
+            <span class="icon-vuelos"></span>
+            <span ng-if="::segmentCtrl.segmentModel.type === 'OPEN' && !segmentCtrl.showState" class="ib-text ib-text--block ib-text--color-unfocused u-mt-xmedium" data-ng-class="{'ib-ticket-flights__ticket-text--open' : segmentCtrl.segmentModel.type === 'OPEN' && !segmentCtrl.showState}">{{'IBCOAC_MMB_SEGMENT_DETAILS_OPEN'|translate}}</span>
+        </div>
+        <span ng-if="::segmentCtrl.showState" class="ib-ticket-flights__ticket-state">{{'IBCOAC_MMB_SEGMENT_DETAILS_STATE'|translate}}:{{segmentCtrl.segmentModel.statusMessage|translate}}</span>
+        <div class="ib-ticket-flights__ticket-block u-text-right">
+            <span class="ib-ticket-flights__ticket-title">{{::segmentCtrl.segmentModel.arrivalCity.description}}</span>
+            <span class="ib-ticket-flights__ticket-description">
+                            <span ng-if="!segmentCtrl.showDetailsFlight" class="hidden-xs hidden-sm">{{::segmentCtrl.segmentModel.arrival.name}}</span>
+                            <span ng-if="segmentCtrl.showDetailsFlight" class="hidden-xs hidden-sm">
+                               {{segmentCtrl.segmentModel.arrival.terminal != null && segmentCtrl.segmentModel.arrival.terminal !== '' ? (('IBCOAC_MMB_SEGMENT_DETAILS_AIRPORT'|translate) + ' ' + segmentCtrl.segmentModel.arrival.name + ' ' + ('IBCOAC_MMB_SEGMENT_DETAILS_TERMINAL'|translate)+''+ segmentCtrl.segmentModel.arrival.terminal ) : (('IBCOAC_MMB_SEGMENT_DETAILS_AIRPORT'|translate) + ' ' + segmentCtrl.segmentModel.arrival.name  )}}
+                            </span>
+            </span>
+            <span class="ib-ticket-flights__ticket-subtitle">{{::segmentCtrl.segmentModel.arrival.code}}</span>
+        </div>
+    </div>
+</header>
+<div ng-if="::(segmentCtrl.showBody && segmentCtrl.segmentModel.type === 'CONFIRMED')" class="ib-ticket-flights__ticket-body">
+    <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-6">
+            <div class="u-text-left">
+                <span class="ib-text ib-text--block ib-text--color-unfocused ib-text--bold ib-ticket-flights__ticket-body--title">{{segmentCtrl.segmentModel.departure.terminal ? (('IBCOAC_MMB_SEGMENT_DETAILS_TERMINAL'|translate)) : ''}}{{::segmentCtrl.segmentModel.departure.terminal}}</span>
+                <span class="ib-text ib-text--block ib-text--color-unfocused ib-ticket-flights__ticket-body--date" data-ng-switch="$root.appMarket">
+                      <span data-ng-switch-when="US" ng-class="{'u-font-italic':segmentCtrl.segmentModel.flown}">{{segmentCtrl.segmentModel.transformedDepartureDate.month|translate}} {{::segmentCtrl.segmentModel.transformedDepartureDate.day}} {{::segmentCtrl.segmentModel.transformedDepartureDate.year}}</span>
+                      <span data-ng-switch-default ng-class="{'u-font-italic':segmentCtrl.segmentModel.flown}">{{::segmentCtrl.segmentModel.transformedDepartureDate.day}} {{segmentCtrl.segmentModel.transformedDepartureDate.month|translate}} {{::segmentCtrl.segmentModel.transformedDepartureDate.year}}</span>
+                </span>
+                <span class="ib-text ib-text--block ib-text--color-unfocused ib-ticket-flights__ticket-body--hour" ng-class="{'u-font-italic':segmentCtrl.segmentModel.flown}">{{::segmentCtrl.segmentModel.transformedDepartureDate.dateTime}}</span>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-6 col-md-offset-4">
+            <div class="u-text-right">
+                <span class="ib-text ib-text--block ib-text--color-unfocused ib-text--bold ib-ticket-flights__ticket-body--title">{{segmentCtrl.segmentModel.arrival.terminal ? (('IBCOAC_MMB_SEGMENT_DETAILS_TERMINAL'|translate)) : ''}}{{::segmentCtrl.segmentModel.arrival.terminal}}</span>
+                <span class="ib-text ib-text--block ib-text--color-unfocused ib-ticket-flights__ticket-body--date" data-ng-switch="$root.appMarket">
+                          <span data-ng-switch-when="US" ng-class="{'u-font-italic':segmentCtrl.segmentModel.flown}">{{segmentCtrl.segmentModel.transformedArrivalDate.month|translate}} {{::segmentCtrl.segmentModel.transformedArrivalDate.day}} {{::segmentCtrl.segmentModel.transformedArrivalDate.year}}</span>
+                          <span data-ng-switch-default ng-class="{'u-font-italic':segmentCtrl.segmentModel.flown}">{{::segmentCtrl.segmentModel.transformedArrivalDate.day}} {{segmentCtrl.segmentModel.transformedArrivalDate.month|translate}} {{::segmentCtrl.segmentModel.transformedArrivalDate.year}}</span>
+                </span>
+                <span class="ib-text ib-text--block ib-text--color-unfocused ib-ticket-flights__ticket-body--hour" ng-class="{'u-font-italic':segmentCtrl.segmentModel.flown}">{{::segmentCtrl.segmentModel.transformedArrivalDate.dateTime}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-md-offset-3">
+            <div class="ib-ticket-flights__ticket-operated-by">
+                <figure class="ib-ticket-flights__ticket-logo">
+                    <img ng-src="{{::segmentCtrl.segmentModel.segment.companyURL}}" alt="{{'GENERIC_LOGO_ALT'|translate}}{{::segmentCtrl.segmentModel.segment.operationalFlightNumber.compnay.description}}"
+                    />
+                </figure>
+                <span class="ib-text ib-text--block ib-text--xmedium">{{::segmentCtrl.segmentModel.segment.numberFlight}}</span>
+                <span class="ib-text ib-text--block ib-text--color-unfocused" data-ng-if="segmentCtrl.segmentModel.segment.operatedBy">{{'AVAILABILITY_COLUMN_OPERATED_BY'|translate}} {{::segmentCtrl.segmentModel.segment.operatedBy}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<footer ng-if="segmentCtrl.showFooter" class="ib-ticket-flights__ticket-footer">
+    <div class="ib-ticket-flights__prefooter">
+        <span ng-if="::(segmentCtrl.segmentModel.segmentStatus.code !== 'NOT_SELECTABLE')">
+                        <span class="ib-text ib-text--color-unfocused ib-text--bold">{{'IBCOAC_MMB_SEGMENT_DETAILS_SEATS_CABIN'|translate}} {{::segmentCtrl.segmentModel.cabinClass.description}}</span>
+        <span class="ib-text ib-text--color-unfocused">{{::segmentCtrl.segmentModel.seatList}}</span>
+        </span>
+        <a href="javascript:void(0);" ng-if="segmentCtrl.segmentModel.cabinClass.fareFamily" ng-click="segmentCtrl.openFareConditionsModal('md','ib-modal-fare-details.html',false)"
+            class="ib-ticket-flights__footer-link" title="{{'IBCOAC_MMB_SEGMENT_DETAILS_CONDITIONS_TITLE'|translate}}">{{'IBCOAC_MMB_SEGMENT_DETAILS_CONDITIONS'|translate}}</a>
+    </div>
+    <div ng-if="::(segmentCtrl.segmentModel.segmentStatus.code !== 'NOT_SELECTABLE' && segmentCtrl.segmentModel.segmentOptions.length > 0)"
+        class="ib-ticket-flights__box">
+        <ul class="ib-ticket-flights__list">
+            <li class="ib-ticket-flights__list-item" ng-repeat="(index, segmentOption) in segmentCtrl.segmentModel.segmentOptions">
+                <span class="ib-ticket-flights__icon" data-ng-class="{'icon-checking_online' : segmentOption.id === 'CHECKIN', 'icon-asiento' : segmentOption.id === 'SEAT',
+                                'icon-tarjeta_de_embarque' : segmentOption.id==='BOARDING','icon-cambios_y_reembolsos' : segmentOption.id==='MODIFY'}"></span>
+                <a href="javascript:void(0);" ng-click="segmentCtrl.selectOption(segmentOption)" class="ib-ticket-flights__link" title="{{segmentCtrl.getOptionTitle(segmentOption.id) | translate}}">{{segmentOption.description | translate}}</a>
+            </li>
+        </ul>
+    </div>
+    <div ng-if="::segmentCtrl.segmentModel.segmentStatus.code === 'NOT_SELECTABLE'" class="ib-ticket-flights__box">
+        <ul class="ib-ticket-flights__list">
+            <li class="ib-ticket-flights__list-item">
+                <p class="ib-ticket-flights__text-not">{{'IBCOAC_MMB_SEGMENT_DETAILS_NOT_SELECTABLE'|translate}}
+                    <a href="javascript:void(0);" ng-click="segmentCtrl.showSegmentError()" class="ib-link" title="{{'MORE_INFO_LINK_ACCESS'|translate}}">{{'MORE_INFO_LINK'|translate}}</a>
+                </p>
+            </li>
+        </ul>
+    </div>
+</footer>

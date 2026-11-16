@@ -1,0 +1,196 @@
+/* -----------------------------------------------------------------
+    #ACTION BOX
+----------------------------------------------------------------- */
+
+@mixin table-expand {
+    width: 100%;
+
+    tbody {
+        tr {
+            background: 0 none;
+            &.#{$wefront__namespace}table-expand {
+                &__row {
+                    background: 0 none;
+
+                    &.collapse.in,
+                    &.collapsing {
+                        display: table-row !important;
+                    }
+                }
+            }
+
+            td {
+                vertical-align: top;
+
+                tr {
+                    &:last-child {
+                        td {
+                            &.#{$wefront__namespace}table-expand {
+                                &__cell {
+                                    padding-bottom: rem(15);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        td {
+            text-align: left;
+            &.#{$wefront__namespace}table-expand {
+                &__cell {
+                    box-sizing: border-box;
+                    padding-top: rem(6);
+                    padding-bottom: rem(6);
+                    vertical-align: top;
+                }
+            }
+        }
+    }
+
+    &__text {
+        font-family: $font-normal;
+        font-size: rem(13);
+        color: color(gray-250);
+    }
+
+    &--expander {
+        position: relative;
+        text-decoration: underline;
+
+        &::before {
+            content: "\e971";
+            position: absolute;
+            // top: remcalcdivider('100%',' - ', rem(16), 2);
+            top: rem(7);
+            left: rem(-10);
+            font-family: $font-icons !important;
+            font-size: rem(22);
+            color: color(gray-10);
+        }
+
+        &-up {
+            &::before {
+                content: "\e972";
+            }
+        }
+    }
+}
+
+.#{$wefront__namespace}table-expand {
+    @include table-expand();
+}
+
+table.dataTable {
+    .#{$wefront__namespace}table-expand {
+        @include table-expand();
+    }
+}
+
+@mixin table-expand-mobile {
+    width: 100%;
+
+    tbody {
+        tr {
+            background: 0 none;
+            &.#{$wefront__namespace}table-expand {
+                &__row {
+                    cursor: default;
+                }
+            }
+
+            td {
+                padding-bottom: 0;
+
+                tr {
+                    &:last-child {
+                        td {
+                            &.#{$wefront__namespace}table-expand {
+                                &__cell {
+                                    padding-bottom: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &:nth-child(4),
+                &:last-child {
+                    text-align: left;
+                }
+            }
+        }
+
+        td {
+            width: 100% !important;
+            box-sizing: border-box;
+            padding-right: rem(16);
+            padding-bottom: 0;
+
+            &::before {
+                padding-bottom: 0;
+            }
+            &.#{$wefront__namespace}table-expand {
+                &__cell {
+                    width: 100% !important;
+                    padding-bottom: 0;
+
+                    &::before {
+                        padding-bottom: 0;
+                    }
+                }
+            }
+
+            &:nth-child(4) {
+                text-align: left;
+            }
+
+            &:last-child {
+                text-align: left;
+            }
+        }
+    }
+
+    &--expander {
+        text-decoration: none;
+
+        &::before {
+            display: none;
+        }
+
+        &-up {
+            &::before {
+                display: none;
+            }
+        }
+    }
+}
+
+@mixin table-expand-xs {
+    tbody {
+        tr,
+        &__row {
+            background: 0 none;
+        }
+    }
+}
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}table-expand {
+        @include table-expand-mobile();
+    }
+
+    table.dataTable {
+        &.#{$wefront__namespace}table-shuttle--collapsable {
+            tbody {
+                td {
+                    box-sizing: border-box;
+                }
+            }
+        }
+        .#{$wefront__namespace}table-expand {
+            @include table-expand-mobile();
+        }
+    }
+}

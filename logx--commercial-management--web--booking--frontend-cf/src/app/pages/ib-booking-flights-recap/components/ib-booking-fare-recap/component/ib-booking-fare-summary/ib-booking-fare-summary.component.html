@@ -1,0 +1,51 @@
+<ng-template #goPlane>
+    <svg class="header-slice-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="transparent">
+        <path d="M4.51456 15H6.08835C7.56077 13.349 10.0035 9.52552 10.2546 9.18276C12.2628 9.11034 14.4546 8.89793 14.9856 8.30897V8V7.69103C14.4546 7.10207 12.2628 6.89448 10.2546 6.81724C10.0084 6.47448 7.5656 2.65586 6.08835 1L4.51456 1L6.50835 6.90897C5.50904 7.00552 4.5918 7.14552 3.61663 7.29034C3.54422 7.16 3.05663 6.70621 1.88835 5.37379H1.01456L1.88835 8L1.01456 10.6262H1.88835C3.05663 9.29379 3.54422 8.84 3.61663 8.70966C4.58698 8.85448 5.50422 8.99448 6.50835 9.09103L4.51456 15Z" fill="currentColor"/>
+    </svg>
+</ng-template>
+
+<ng-template #returnPlane>
+    <svg class="header-slice-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="transparent">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9721 5.04394C11.0746 6.0201 9.57614 8.2899 9.4241 8.49193C8.22304 8.5158 6.91244 8.61893 6.58946 8.96584L6.583 9.33802C6.89374 9.69604 8.19995 9.84538 9.39946 9.91108C9.54439 10.1183 10.9632 12.4393 11.8262 13.4464L12.7673 13.4629L11.6375 9.89382C12.2356 9.8469 12.7852 9.7713 13.3674 9.69512C13.4099 9.77444 13.6949 10.0514 14.3802 10.8651L14.9023 10.8743L14.4078 9.28918L14.957 7.72266L14.4349 7.7135C13.7218 8.5024 13.4273 8.76921 13.3821 8.84699C12.8029 8.75042 12.2563 8.65558 11.6602 8.588L12.9132 5.06045L11.9721 5.04394Z" fill="currentColor"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.03317 2.53687C4.93063 3.51303 6.4291 5.78283 6.58114 5.98487C7.7822 6.00873 9.09279 6.11186 9.41578 6.45877L9.42224 6.83095C9.11149 7.18898 7.80529 7.33832 6.60578 7.40402C6.46085 7.61126 5.04208 9.93225 4.17905 10.9393L3.23797 10.9558L4.36771 7.38675C3.7696 7.33984 3.22002 7.26424 2.63784 7.18805C2.59538 7.26737 2.31034 7.54434 1.62508 8.35807L1.10293 8.36724L1.59743 6.78211L1.04821 5.2156L1.57036 5.20643C2.28345 5.99534 2.57793 6.26214 2.62312 6.33992C3.2023 6.24335 3.74892 6.14852 4.34504 6.08094L3.09208 2.55339L4.03317 2.53687Z" fill="currentColor"/>
+    </svg>
+</ng-template>
+
+<div class="header">
+    <div class="header-slice" *ngIf="sliceInfo">
+        <span>{{sliceInfo.origin}}</span>
+        <ng-container [ngSwitch]="planeType">
+            <ng-container *ngSwitchCase="'RETURN'">
+                <ng-container *ngTemplateOutlet="returnPlane"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+                <ng-container *ngTemplateOutlet="goPlane"></ng-container>
+            </ng-container>
+        </ng-container>
+        <span>{{sliceInfo.destination}}</span>
+    </div>
+    <p class="header-cabin" 
+        [ngClass]="{
+            'cabin-color--business': fareFamily.cabinType === 'B',
+            'cabin-color--premium': fareFamily.cabinType === 'N'
+        }"
+    >{{fareFamily.commercialName}}</p>
+</div>
+<div class="condition-list">
+    <div class = "condition-item" *ngFor="let conditionElemt of fareConditionsList">
+        <span class="condition-icon" 
+            [class]="conditionElemt.icon"
+            [ngClass]="{
+                'cabin-color--business': fareFamily.cabinType === 'B',
+                'cabin-color--premium': fareFamily.cabinType === 'N'
+            }"
+
+        ></span>
+        <div class="condition-text">
+            <p class="condition-title">{{conditionElemt.condition.name}}</p>
+            <p class="condition-info">{{conditionElemt.condition.text}}</p>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,232 @@
+/* -------------------------------------------------------------
+    #HEADING FLIGHT
+----------------------------------------------------------------- */
+.#{$wefront__namespace}heading-flight {
+    margin-top: rem(32);
+    font-size: rem(16);
+    background: color(white);
+
+    &__container {
+        padding: rem(18) 0 rem(12) 0;
+        margin: 0 rem(25);
+        border-bottom: rem(1) solid color(gray-70);
+    }
+
+    &__title {
+        font-family: $font-special;
+        font-size: rem(30);
+    }
+
+    &__date {
+        margin-left: rem(10);
+        font-size: rem(16);
+        color: color(gray-30);
+    }
+
+    &__close {
+        padding-left: rem(5);
+        border: 0;
+        background: transparent;
+        float: right;
+    }
+
+    &__close-text {
+        display: inline-block;
+        font-size: rem(12);
+        text-decoration: underline;
+        color: color(gray-30);
+        vertical-align: middle;
+
+        &--no-decoration {
+            text-decoration: none;
+        }
+
+        &--block {
+            display: block;
+        }
+    }
+
+    &__close-icon {
+        display: inline-block;
+        font-size: rem(40);
+        color: color(gray-30);
+        vertical-align: middle;
+    }
+
+    &__icon-container {
+        display: inline-block;
+        line-height: 3.4;
+        vertical-align: top;
+    }
+
+    &__icon {
+        font-family: $font-special;
+        font-size: rem(25);
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: color(secondary);
+        }
+
+        &--important {
+            color: color(primary);
+        }
+
+        &--medium {
+            font-size: rem(26);
+            line-height: 0.6;
+        }
+    }
+}
+
+// Mixin
+
+@mixin heading-flight-mobile() {
+    .#{$wefront__namespace}heading-flight {
+        &__container {
+            margin: 0 rem(25);
+        }
+
+        &__title {
+            font-family: $font-normal;
+            font-size: rem(16);
+        }
+
+        &__date {
+            display: inline-block;
+        }
+
+        &__close {
+            padding-left: 0;
+        }
+
+        &__close-text {
+            position: absolute;
+            left: -9999rem;
+        }
+
+        &__close-icon {
+            font-size: rem(25);
+        }
+    }
+}
+
+// Responsive
+
+@include media-query('md') {
+    .#{$wefront__namespace}heading-flight {
+        &__container {
+            margin: 0 rem(18);
+        }
+
+        &__title {
+            display: inline-block;
+            overflow: hidden;
+            max-width: rem(375);
+            text-overflow: ellipsis;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+    }
+}
+
+@include media-query('sm') {
+    @include heading-flight-mobile;
+    .#{$wefront__namespace}heading-flight {
+        &__container {
+            position: relative;
+            height: rem(53);
+            padding: rem(14) 0;
+            margin: 0 rem(16);
+
+            &--title {
+                height: auto;
+            }
+        }
+
+        &__title {
+            overflow: hidden;
+            max-width: rem(290);
+            text-overflow: ellipsis;
+            float: left;
+            white-space: nowrap;
+
+            &--pr {
+                padding-right: rem(5);
+            }
+        }
+
+        &__close {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            padding-left: 0;
+            -ms-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+        }
+
+        &__icon-container {
+            line-height: 1;
+        }
+    }
+}
+
+@include media-query('xs') {
+    @include heading-flight-mobile;
+    .#{$wefront__namespace}heading-flight {
+        &__container {
+            position: relative;
+            height: rem(53);
+            padding: rem(14) 0;
+            margin: 0 rem(16);
+
+            &--title {
+                height: auto;
+            }
+        }
+
+        &__title {
+            overflow: hidden;
+            max-width: rem(200);
+            text-overflow: ellipsis;
+            float: left;
+            white-space: nowrap;
+
+            &--iata {
+                font-size: 0;
+                text-indent: rem(-999);
+
+                &[data-iata]::before {
+                    content: attr(data-iata);
+                    display: block;
+                    font-size: rem(16);
+                    text-indent: 0;
+                }
+            }
+
+            &--pr {
+                padding-right: rem(5);
+            }
+        }
+
+        &__close {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            padding-left: 0;
+            -ms-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+        }
+
+        &__date {
+            &--xs {
+                float: right;
+            }
+        }
+
+        &__icon-container {
+            line-height: 1;
+        }
+    }
+}

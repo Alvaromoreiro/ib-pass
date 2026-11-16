@@ -1,0 +1,138 @@
+/* -------------------------------------------------------------
+    #COLLAPSE
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}collapse {
+    &__more-info {
+        padding: 4rem 0 0;
+        text-align: right;
+
+        &--text {
+            &.xui-collapse__more-info--text-close {
+                overflow: hidden;
+                height: 3rem;
+            }
+        }
+
+        &--parr {
+            padding: 0 0 1rem;
+            font-family: $font-normal;
+            font-size: rem(13);
+            text-align: justify;
+            line-height: rem(24);
+        }
+
+        &--link {
+            position: relative;
+            margin: 0 2rem;
+            font-family: $font-normal;
+            font-size: rem(13);
+            text-decoration: underline;
+            color: color(gray-10);
+
+            &:hover,
+            &:focus {
+                text-decoration: none;
+                color: color(red-10);
+                outline: none;
+            }
+
+            &::after {
+                content: "\e971";
+                position: absolute;
+                top: 0.1rem;
+                right: -1.7rem;
+                font-family: $font-icons;
+                color: color(gray-30);
+            }
+
+            &.xui-collapse__more-info--link-open {
+                &::after {
+                    content: "\e972";
+                }
+            }
+        }
+    }
+
+    &--flex {
+        .#{$wefront__namespace}collapse {
+            &__trigger {
+                display: flex;
+                width: 100%;
+                flex-flow: row nowrap;
+                align-items: center;
+                justify-content: space-between;
+                border: 0 none;
+                text-align: left;
+                background: 0 none;
+            }
+
+            &__icon {
+                max-width: rem(20);
+                color: color(primary);
+            }
+        }
+    }
+
+    &--open {
+        overflow: hidden;
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}collapse {
+        &__more-info {
+            padding: 4.5rem 0 0;
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}collapse {
+        &--flex {
+            .#{$wefront__namespace}collapse {
+                &__title {
+                    &-text {
+                        width: 100%;
+                        max-width: remcalc('100%', ' - ', rem(20));
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}collapse {
+        &--flex {
+            .#{$wefront__namespace}collapse {
+                &__title {
+                    &-text {
+                        width: 100%;
+                        max-width: remcalc('100%', ' - ', rem(20));
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}collapse {
+        &__more-info {
+            max-width: rem(418);
+            padding: 0;
+            margin: 2.063rem auto 0;
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}collapse {
+        &__more-info {
+            padding: 2.5rem 0 0;
+        }
+    }
+}

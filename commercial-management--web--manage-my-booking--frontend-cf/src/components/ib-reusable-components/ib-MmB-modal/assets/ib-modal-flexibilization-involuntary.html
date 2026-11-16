@@ -1,0 +1,80 @@
+<main class="ib-layout ib-layout--bck-1 ng-scope">
+    <ib-header-steps class="ng-isolate-scope">
+        <header class="ib-header-steps">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ib-header-steps__content">
+                            <div class="ib-header-steps__block--left">
+                                <a focusin="" href="javascript:void(0)" title="Ir a home" class="ib-header-steps__logo"
+                                    data-ng-if="fullModalCtrl.currentStep === 1"
+                                    ng-click="fullModalCtrl.showModalClose()">
+                                    <figure class="ib-header-steps__fig">
+                                        <img alt="Logo Iberia"
+                                            data-ng-src="{{::$root.routes.images}}/logos/logo_iberia_red.svg">
+                                    </figure>
+                                </a>
+                                <a focusin="" href="javascript:void(0)" title="Ir a home" class="ib-header-steps__logo"
+                                    data-ng-if="fullModalCtrl.currentStep === 2"
+                                    ng-click="fullModalCtrl.showModalCloseAndGoToInitMMB(false)">
+                                    <figure class="ib-header-steps__fig">
+                                        <img alt="Logo Iberia"
+                                            data-ng-src="{{::$root.routes.images}}/logos/logo_iberia_red.svg">
+                                    </figure>
+                                </a>
+                                <div class="ib-header-steps__content--bordered">
+                                    <span class="ib-header-steps__txt">{{'MMB_VC_CHANGE_FLIGHT' | translate}}</span>
+                                    <span
+                                        class="ib-header-steps__txt--short visible-sm-inline-block visible-xs-inline-block">1/2</span>
+                                </div>
+                            </div>
+                            <div class="ib-header-steps__block--right">
+                                <a href="javascript:void(0)" class="ib-header-steps__link icon-cerrar"
+                                    data-ng-if="fullModalCtrl.currentStep === 1"
+                                    ng-click="fullModalCtrl.showModalClose()" focusin>{{'MMB_VC_BACK_TO_BOOKING_MANAGEMENT' | translate}}</a>
+                                <a href="javascript:void(0)" class="ib-header-steps__link icon-cerrar"
+                                    data-ng-if="fullModalCtrl.currentStep === 2"
+                                    ng-click="fullModalCtrl.showModalCloseAndGoToInitMMB(false)" focusin>{{'MMB_VC_BACK_TO_BOOKING_MANAGEMENT' | translate}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ib-main-steps ib-main-steps--flex hidden-sm hidden-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 ib-main-steps__scroll">
+                            <ul class="ib-main-steps__list--flex" steps-scroll="">
+                                <li class="ib-main-steps__item--flex">
+                                    <span class="ib-main-steps__txt--flex"
+                                        data-ng-class="{'ib-main-steps__txt--active': fullModalCtrl.currentStep === 1}">{{'MMB_VC_1_SELECTION_OF_FLIGHTS' | translate}}</span>
+                                </li>
+                                <li class="ib-main-steps__item--flex">
+                                    <span class="ib-main-steps__txt--flex"
+                                        data-ng-class="{'ib-main-steps__txt--active': fullModalCtrl.currentStep === 2}">{{'MMB_2_CONFIRMATION' | translate}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </ib-header-steps>
+    <div class="container" data-ng-if="fullModalCtrl.currentStep === 1">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__section ib-layout__section--big">
+                    <ib-flexibilization-availability availability-data="fullModalCtrl.model.availabilityData" new-sister-cities-model="fullModalCtrl.model.sisterCitiesModel"></ib-flexibilization-availability>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" data-ng-if="fullModalCtrl.currentStep === 2">
+        <div class="ib-layout__section ib-layout__section--big">
+            <ib-flexibilization-confirmation model="fullModalCtrl.getStepModel(2)"></ib-flexibilization-confirmation>
+        </div>
+    </div>
+    
+    <ib-mmb-main-footer ng-show="$root.showHeaders"></ib-mmb-main-footer>
+</main>
+

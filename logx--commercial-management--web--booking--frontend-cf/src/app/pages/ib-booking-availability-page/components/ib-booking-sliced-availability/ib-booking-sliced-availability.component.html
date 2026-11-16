@@ -1,0 +1,292 @@
+<ib-partners-accordion *ngIf="showSelectedPartner"></ib-partners-accordion>
+<ib-booking-mobile-ribbon
+  (changeDay)="ribbonChangeDate($event)"
+  *ngIf="
+    mobileRibbonConfig.show &&
+    !selectedSlices[currentODIndex] &&
+    mobileRibbonConfig.calendarData?.slides.length > 0
+  "
+  [calendarData]="mobileRibbonConfig.calendarData"
+  (nextDay)="loadCalendarSlidesMobile($event.loadIndex, $event.isLower)"
+></ib-booking-mobile-ribbon>
+<div class="u-position-relative">
+  <div class="container">
+    <div
+      id="bbki-availability-loading-elem"
+      *ngIf="showLoadingFull"
+      class="ib-ui-loading ib-ui-loading--type-5 ib-ui-loading--grey ib-overlay-fly--full"
+    >
+      <div class="ib-ui-loading__container">
+        <div class="ib-ui-loading__icon">
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
+        <span class="ib-ui-loading__text">{{
+          loadingLiteral | translate
+        }}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="availability-top-column">
+          <ib-booking-local-discount-selector-legacy
+            *ngIf="localDiscountSelectorConfig.show"
+            [showTooltip]="true"
+            [originCity]="localDiscountSelectorConfig.originCity"
+            [destinationCity]="localDiscountSelectorConfig.destinationCity"
+            [residentCodeSelected]="
+              localDiscountSelectorConfig.residentCodeSelected
+            "
+            [familyCodeSelected]="
+              localDiscountSelectorConfig.familyCodeSelected
+            "
+            (discountChange)="onDomesticDiscountChange($event)"
+          >
+          </ib-booking-local-discount-selector-legacy>
+          <ib-booking-selected-outbound-flight
+            id="selected-outbound"
+            *ngIf="
+              slicesSelectionLimit !== 1 &&
+              selectedSlices.length > 0 &&
+              currentODIndex === 1
+            "
+            [selectedFlight]="selectedOutbound"
+            (repeatSearch)="onReselectOutboundFare()"
+          >
+          </ib-booking-selected-outbound-flight>
+        </div>
+      </div>
+    </div>
+    <div
+      class="row slidesel-animated-container"
+      [ngClass]="{ 'slidesel-animated-container--start': sliceAnimationRun }"
+    >
+      <div class="col-xs-12">
+        <div class="ib-table-flight-cabins">
+          <ng-container
+            *ngFor="let selectedSlice of selectedSlices ?? []; let i = index"
+          >
+            <ng-container *ngIf="i === currentODIndex">
+              <div class="ib-heading-flight" id="bki-heading-flight-{{ i }}">
+                <div
+                  class="ib-heading-flight__container ib-heading-flight__container--title"
+                >
+                  <span class="ib-heading-flight__title"
+                    >{{ "AVAILABILITY_SLICE_DETAILS_TITLE" | translate }}
+                    {{
+                      currentODIndex === 0
+                        ? ("AVAILABILITY_SLICE_DETAILS_TITLE_1" | translate)
+                        : ("AVAILABILITY_SLICE_DETAILS_TITLE_2" | translate)
+                    }}
+                  </span>
+                  <span class="ib-heading-flight__date">
+                    {{
+                      selectedSlices[currentODIndex].info.departureDateParsed
+                        .day
+                    }}
+                    {{
+                      selectedSlices[currentODIndex].info.departureDateParsed
+                        .month
+                        | translate
+                        | truncate: 3
+                        | toCase: "LOWER"
+                    }}
+                    <!-- {{::(selectedSlice.info.departureDateParsed.month
+                                        | translate | ShortenerFormatFilter:3:false:true)}}.-->
+                    <span class="hidden-sm hidden-xs">{{
+                      selectedSlices[currentODIndex].info.departureDateParsed
+                        .year
+                    }}</span>
+                  </span>
+
+                  <button
+                    id="bbki-availability-new-back-{{ i }}-btn"
+                    (click)="onRemoveSelectedSlice()"
+                    class="ib-heading-flight__close"
+                    title="{{
+                      'AVAILABILITY_SLICE_DETAILS_NEW_BACK_BUTTON' | translate
+                    }}"
+                  >
+                    <span
+                      class="ib-heading-flight__close-text ib-heading-flight__close-text--no-decoration"
+                      >{{
+                        "AVAILABILITY_SLICE_DETAILS_NEW_BACK_BUTTON" | translate
+                      }}</span
+                    >
+                    <span
+                      class="ib-heading-flight__close-icon icon-cerrar"
+                    ></span>
+                  </button>
+                </div>
+              </div>
+              <ib-booking-slice-info-legacy
+                *ngIf="!showAdaptativeMobileFlow"
+                id="bbki-availability-slice-info-{{ i }}"
+                [sliceInfoModel]="selectedSlice.info"
+                [origin]="selectedSlice.origin"
+                [destination]="selectedSlice.destination"
+                [originDestinationId]="selectedSlice.originDestinationId"
+                [currencies]="currencies"
+                [selectedSliceIndex]="i"
+                [showFaresSelected]="true"
+                [animationRun]="sliceAnimationRun"
+                [currentOriginDestinationIndex]="currentODIndex + 1"
+                [selectedSliceMode]="true"
+                [redemption]="false"
+                [flightRatio]="flightRatio"
+              >
+              </ib-booking-slice-info-legacy>
+              <ib-booking-mobile-slice-info
+                id="bbki-availability-slice-info-{{ i }}"
+                class="selected-cabin"
+                *ngIf="showAdaptativeMobileFlow"
+                [sliceInfoModel]="selectedSlice.info"
+                [origin]="selectedSlice.origin"
+                [destination]="selectedSlice.destination"
+                [originDestinationId]="selectedSlice.originDestinationId"
+                [currencies]="currencies"
+                [selectedSliceIndex]="i"
+                [showFaresSelected]="true"
+                [currentOriginDestinationIndex]="currentODIndex + 1"
+                [selectedSliceMode]="true"
+              >
+              </ib-booking-mobile-slice-info>
+              <!-- Ancillaries components container -->
+              <ng-container *ngIf="selectedSlice.info.selectedFareFamily">
+                <ib-booking-sliced-upselling-component
+                  id="bbki-availability-sliced-upsale-{{ i }}"
+                  [selectedSlice]="selectedSlice"
+                  [selectedFareFamily]="selectedSlice.info.selectedFareFamily"
+                  [currencies]="currencies"
+                  (selectUpselling)="onSelectedUpselling($event)"
+                ></ib-booking-sliced-upselling-component>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngIf="!selectedSlices[currentODIndex]">
+            <div
+              *ngFor="
+                let tripModel of tripConfig?.tripModels ?? [];
+                let i = index
+              "
+            >
+              <ib-booking-sliced-availability-trip
+                *ngIf="i === currentODIndex"
+                id="bbki-availavility-availability-trip-{{ i }}"
+                [tripModel]="tripModel"
+                [showAdaptativeMobileFlow]="showAdaptativeMobileFlow"
+                [currencies]="currencies"
+                [currentOriginDestinationIndex]="currentODIndex"
+                [selectedSlicesLength]="selectedSlices.length"
+                [animationRun]="false"
+                [selectedSliceInfoFamily]="
+                  selectedSlices[currentODIndex - 1]?.info.selectedFareFamily
+                "
+                [relatedContent]="tripConfig.relatedContent"
+                [originDestinationTitle]="
+                  currentODIndex === 0
+                    ? ('AVAILABILITY_TRIP_TITLE_1' | translate)
+                    : ('AVAILABILITY_TRIP_TITLE_2' | translate)
+                "
+                [isPetsFlow]="isPetsFlow"
+              />
+            </div>
+          </ng-container>
+        </div>
+        <!-- SLICED TOTAL PRICE -->
+        <ib-booking-common-total-price
+          *ngIf="
+            !showAdaptativeMobileFlow &&
+            slicesSelectionLimit !== 1 &&
+            selectedSlices?.length === 1 &&
+            currentODIndex === 0 &&
+            selectedSlices[currentODIndex].info.selectedFareFamily
+          "
+          [totalPrice]="slicedPriceConfig.totalPrice[currentODIndex]"
+          [priceTitle]="'SLICED_PRICE_COMPONENT_GO_TITLE'"
+          [customContinueText]="'SLICED_PRICE_COMPONENT_BUTTON'"
+          [conditionsText]="slicedPriceConfig.conditionsText"
+          (continueEvent)="onOutboundContinue()"
+        >
+        </ib-booking-common-total-price>
+        <!-- LEGACY TOTAL PRICE -->
+        <ib-booking-total-price-legacy
+          *ngIf="
+            !showAdaptativeMobileFlow &&
+            selectedSlices?.length === slicesSelectionLimit &&
+            selectedSlices[currentODIndex].info.selectedFareFamily
+          "
+          [isChecked]="true"
+          [totalPrice]="slicedPriceConfig.totalPrice[currentODIndex]"
+          [conditionsText]="slicedPriceConfig.conditionsText"
+          [totalPointsNeeded]="false"
+          [showLocaldiscountWarn]="localDiscountSelectorConfig.show"
+          [selectedLargefamDiscount]="
+            localDiscountSelectorConfig.familyCodeSelected
+          "
+          [selectedResidentDiscount]="
+            localDiscountSelectorConfig.residentCodeSelected
+          "
+          [continueText]="totalPriceDesktopContinueText"
+          (continueEvent)="onContinueEvent()"
+        >
+        </ib-booking-total-price-legacy>
+        <div
+          class="info-spacing"
+          *ngIf="
+            tripConfig?.relatedContent['EXPLANATION'] &&
+            selectedSlices[currentODIndex]?.info?.selectedFareFamily &&
+            selectedSlices?.length === slicesSelectionLimit
+          "
+        >
+          <div class="ib-msg-alert ib-msg-alert--simple ib-msg-alert--white">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+              <h3 class="ib-heading ib-heading--type-5">
+                {{ "GENERAL_INFORMATION_TITLE" | translate }}
+              </h3>
+              <p
+                class="ib-msg-alert__text ib-msg-alert__text--normal"
+                [innerHtml]="
+                  tripConfig.relatedContent['EXPLANATION'].toString()
+                "
+              ></p>
+            </div>
+          </div>
+        </div>
+        <ib-booking-mobile-conditions
+          *ngIf="
+            slicedPriceConfig.conditionsText &&
+            showAdaptativeMobileFlow &&
+            selectedSlices[currentODIndex]?.info?.selectedFareFamily &&
+            selectedSlices?.length === slicesSelectionLimit
+          "
+          [conditionsText]="slicedPriceConfig.conditionsText"
+        >
+        </ib-booking-mobile-conditions>
+      </div>
+    </div>
+  </div>
+  <ib-main-footer
+    id="footer"
+    [ngClass]="{ 'opacity-hidden': sliceAnimationRun }"
+    [footerModel]="footerModel"
+    [isFullWidth]="false"
+    [isFixed]="false"
+  >
+  </ib-main-footer>
+</div>
+<!-- MOBILE TOTAL PRICE -->
+<ib-booking-mobile-total-price
+  *ngIf="
+    !showLoadingFull &&
+    showAdaptativeMobileFlow &&
+    selectedSlices.length > 0 &&
+    selectedSlices[currentODIndex]?.info?.selectedFareFamily
+  "
+  [ngClass]="{ 'opacity-hidden': sliceAnimationRun }"
+  [customTitle]="mobileBottomFixedConfig.priceTitle"
+  [customContinueText]="mobileBottomFixedConfig.continueText"
+  [totalPrice]="slicedPriceConfig.totalPrice[currentODIndex]"
+  (continueEvent)="onMobileContinueFlow()"
+></ib-booking-mobile-total-price>

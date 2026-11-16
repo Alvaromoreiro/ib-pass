@@ -1,0 +1,86 @@
+<!-- Selectd slice -->
+<div class="ib-table-flight-cabins animate-show" iberia-flights-cabins-v2 data-ng-if="ibFlexTripCtrl.selectedSlices[ibFlexTripCtrl.slicesIndex]">
+    <div class="ib-table-flight-cabins__selected" data-flight-selected-container="return">
+        <div class="ib-heading-flight animate-show" data-flight-heading>
+            <div class="ib-heading-flight__container">
+                <span data-iata="{{ibFlexTripCtrl.selectedSlices[ibFlexTripCtrl.slicesIndex].origin.code}} - {{ibFlexTripCtrl.selectedSlices[ibFlexTripCtrl.slicesIndex].destination.code}}"
+                class="ib-heading-flight__title ib-heading-flight__title--iata">{{ibFlexTripCtrl.selectedSlices[ibFlexTripCtrl.slicesIndex].origin.description}} - {{ibFlexTripCtrl.selectedSlices[ibFlexTripCtrl.slicesIndex].destination.description}}</span>
+                <span class="ib-heading-flight__date">{{ ibFlexTripCtrl.selectedSlices[ibFlexTripCtrl.slicesIndex].departureDate | date: 'd MMM' }} 
+                    <span class="hidden-sm hidden-xs">{{ ibFlexTripCtrl.selectedSlices[ibFlexTripCtrl.slicesIndex].departureDate | date: 'yyyy' }}</span>
+                </span>
+                <button class="ib-heading-flight__close" data-ng-click="ibFlexTripCtrl.removeStateFlight(ibFlexTripCtrl.slicesIndex)" data-flight-selected-close="return" type="button">
+                    <span class="ib-heading-flight__close-text ib-heading-flight__close-text--no-decoration">{{'MMB_VC_SLICE_DETAILS_NEW_BACK_BUTTON'| translate}}</span>
+                    <span class="ib-heading-flight__close-icon icon-cerrar"></span>
+                </button>
+            </div>
+        </div>
+        <div data-flight-selected-wrapper>
+            <ib-flexibilization-slices class="animate-show" slice="ibFlexTripCtrl.selectedSlices[ibFlexTripCtrl.slicesIndex]" is-confirmation-slice="true" slice-index="ibFlexTripCtrl.slicesIndex" list-slices-show="ibFlexTripCtrl.listSlicesShow"></ib-flexibilization-slices>
+        </div>
+    </div>
+</div>
+<!-- list of slice of the trip -->
+<div data-ng-if="!ibFlexTripCtrl.selectedSlices[ibFlexTripCtrl.slicesIndex] && ibFlexTripCtrl.listSlicesShow == ibFlexTripCtrl.slicesIndex" class="animate-show">
+    <!-- Title -->
+    <h1 class="ib-table-flight-cabins__title">
+        {{ibFlexTripCtrl.slices[0].initialOrigin.description}} 
+        <span class="ib-table-flight-cabins__title--small" ng-if="ibFlexTripCtrl.slices[0].originNum">
+            {{ibFlexTripCtrl.slices[0].originNum}}
+        </span>
+         - {{ibFlexTripCtrl.slices[0].initialDestination.description}} 
+         <span class="ib-table-flight-cabins__title--small" ng-if="ibFlexTripCtrl.slices[0].destinationNum">
+            {{ibFlexTripCtrl.slices[0].destinationNum}}
+            </span>
+    </h1>
+
+    <div ng-if="ibFlexTripCtrl.newSisterCities.sisterCitiesOptionChecked" class="ib-layout__line-spacing">
+        <a href="javascript:void(0)" class="ib-box-cities__link icon-senalizacion_mapas" ng-click="ibFlexTripCtrl.openSisterCity()">
+            {{'MMB_SISTER_CHECK_SELECTION' | translate}}
+        </a>
+    </div>
+    <!-- Carousel -->
+    <div data-ng-if="ibFlexTripCtrl.ribbonFlexData" class="ib-layout__line-spacing">
+        <ib-flexibilization-calendar selected-date="ibFlexTripCtrl.selectedDate" updated-date-list="ibFlexTripCtrl.updatedDateList" slices-index="ibFlexTripCtrl.slicesIndex" ribbon-flex-data="ibFlexTripCtrl.ribbonFlexData"></ib-flexibilization-calendar>
+    </div>
+    <!-- error alert page -->
+    <div data-ng-if="ibFlexTripCtrl.showErrorPage.isError">
+        <div class="ib-msg-alert ib-msg-alert--notice ib-msg-alert__gdr--sized ib-msg-alert__gdr--unallow icon-informacion_2">
+            <p class="ib-msg-alert__text ib-msg-alert__text--title-large">{{ibFlexTripCtrl.showErrorPage.errorData.title.message | translate}}</p>
+            <p class="ib-msg-alert__text--subtitle">{{ibFlexTripCtrl.showErrorPage.errorData.message | translate}}</p>
+        </div>
+    </div>
+    <!-- Filters -->
+    <div class="ib-table-flight-filters ib-table-flight-filters--dark ib-table-flight-filters--change-flight" data-ng-if="ibFlexTripCtrl.showAvailability && !ibFlexTripCtrl.showErrorPage.isError">
+        <div class="ib-table-flight-filters__item">
+            <a href="javascript:void(0)" title="{{'MMB_VC_AVAILABILITY_MOBILE_FILTER_TIME_TITLE' | translate}}" class="ib-table-flight-filters__text hidden-sm hidden-xs" 
+            data-ng-click="ibFlexTripCtrl.activateFilter(ibFlexTripCtrl.listFlightFilter[0])"
+            data-ng-class="{'ib-table-flight-filters__text--up': (ibFlexTripCtrl.choosedFilter === 'departureTime' && !ibFlexTripCtrl.filterReverse), 'ib-table-flight-filters__text--down':(ibFlexTripCtrl.choosedFilter === 'departureTime' && ibFlexTripCtrl.filterReverse) }">{{'MMB_VC_AVAILABILITY_MOBILE_FILTER_TIME' | translate}}</a>
+            <div class="ib-dropdown-select ib-dropdown-select--type-1 hidden-xl hidden-lg hidden-md" uib-dropdown is-open="status.isopen">
+                <button id="fare1" type="button" class="ib-dropdown-select__button" uib-dropdown-toggle ng-disabled="disabled">
+                    <span class="ib-dropdown-select__button-text">{{ibFlexTripCtrl.selectedListFlightFilter.name | translate | uppercase}}</span>
+                </button>
+                <button class="ib-dropdown-select__caret" ng-class="{'ib-dropdown-select__caret--up':!ibFlexTripCtrl.filterReverse, 'ib-dropdown-select__caret--down':ibFlexTripCtrl.filterReverse}"
+                    focusin type="button" data-ng-click="ibFlexTripCtrl.activateFilter(ibFlexTripCtrl.selectedListFlightFilter)"></button>
+                <label for="oneInput" class="u-hide-accessible">
+                    <input id="oneInput" type="text" class="ib-dropdown-select__input u-hide-accessible" ng-model="ibFlexTripCtrl.selectedListFlightFilter" readonly tabindex="-1" />
+                </label>
+                <ul class="ib-dropdown-select__list" uib-dropdown-menu role="menu" aria-labelledby="fare">
+                    <li class="ib-dropdown-select__list-item" ng-repeat="item in ibFlexTripCtrl.listFlightFilter">
+                        <a href="javascript:void(0)" title="Click para {{item.title | translate}}" ng-click="ibFlexTripCtrl.activateFilter(item,$event)">{{item.name | translate}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="ib-table-flight-filters__item hidden-sm hidden-xs">
+            <a href="javascript:void(0)" title="{{'MMB_VC_AVAILABILITY_MOBILE_FILTER_DURATION_TITLE' | translate}}" class="ib-table-flight-filters__text" 
+            data-ng-click="ibFlexTripCtrl.activateFilter(ibFlexTripCtrl.listFlightFilter[1])"
+            data-ng-class="{'ib-table-flight-filters__text--up': (ibFlexTripCtrl.choosedFilter === 'durationMinutes' && !ibFlexTripCtrl.filterReverse), 'ib-table-flight-filters__text--down':(ibFlexTripCtrl.choosedFilter === 'durationMinutes' && ibFlexTripCtrl.filterReverse) }">{{'MMB_VC_AVAILABILITY_MOBILE_FILTER_DURATION' | translate}}</a>
+        </div>
+        <div class="ib-table-flight-filters__item">
+        </div>
+    </div>
+    <!-- Slices List -->
+    <ib-flexibilization-slices  data-ng-repeat="(sliceIndex, slice) in orderSlices = (ibFlexTripCtrl.slices | orderBy: ibFlexTripCtrl.choosedFilter : ibFlexTripCtrl.filterReverse)"
+        slice="slice" slice-index="sliceIndex" list-slices-show="ibFlexTripCtrl.listSlicesShow" selected-slice="ibFlexTripCtrl.selectedSlices[ibFlexTripCtrl.slicesIndex]" data-ng-if="ibFlexTripCtrl.showAvailability && !ibFlexTripCtrl.showErrorPage.isError">
+    </ib-flexibilization-slices>
+</div>

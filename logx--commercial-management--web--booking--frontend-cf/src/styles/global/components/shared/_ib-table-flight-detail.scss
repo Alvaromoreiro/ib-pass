@@ -1,0 +1,611 @@
+/* -------------------------------------------------------------
+#TABLE FLIGHT DETAIL
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}table-flight-detail {
+    display: table;
+    width: 100%;
+    font-size: rem(16);
+    background-color: color(white);
+    table-layout: fixed;
+
+    &--scale {
+        border-top: rem(1) solid color(gray-60);
+    }
+
+    &--sep-scale {
+        margin: rem(16) 0;
+        .#{$wefront__namespace}table-flight-detail__item {
+            padding: rem(6) rem(10) rem(10) rem(10);
+
+            &:nth-child(3) {
+                padding-left: 0;
+                text-align: left;
+            }
+
+            &:nth-child(3),
+            &:nth-child(4),
+            &:nth-child(5) {
+                border-top: rem(1) dashed color(gray-40);
+                border-bottom: rem(1) dashed color(gray-40);
+                background-color: color(gray-60);
+            }
+        }
+    }
+
+    &--warning {
+        margin: rem(16) 0;
+        .#{$wefront__namespace}table-flight-detail__item {
+            padding: rem(10) rem(10) rem(10) rem(20);
+            font-size: 0;
+
+            &:nth-child(1) {
+                width: rem(255);
+            }
+
+            &:nth-child(2) {
+                width: rem(806);
+                border-top: rem(1) dashed color(yellow-10);
+                border-bottom: rem(1) dashed color(yellow-10);
+                background-color: rgb(252 209 0 / 40%);
+            }
+        }
+    }
+
+    &--info {
+        margin: rem(16) 0;
+        .#{$wefront__namespace}table-flight-detail__item {
+            padding: rem(10) rem(10) rem(10) rem(20);
+            font-size: 0;
+
+            &:nth-child(1) {
+                width: rem(255);
+            }
+
+            &:nth-child(2) {
+                width: rem(806);
+                border-top: rem(1) dashed color(gray-40);
+                border-bottom: rem(1) dashed color(gray-40);
+                background-color: color(gray-60);
+            }
+        }
+    }
+
+    &--no-fixed {
+        table-layout: auto;
+    }
+
+    &__item {
+        position: relative;
+        display: table-cell;
+        vertical-align: top;
+
+        &:nth-child(1) {
+            width: rem(128);
+        }
+
+        &:nth-child(2) {
+            width: rem(127);
+        }
+
+        &:nth-child(3) {
+            width: rem(310);
+            padding-right: rem(65);
+        }
+
+        &:nth-child(4) {
+            width: rem(380);
+        }
+
+        &:nth-child(5) {
+            padding-top: rem(13);
+            text-align: right;
+        }
+
+        &--three-cols {
+            &.#{$wefront__namespace}table-flight-detail__item {
+                width: rem(690);
+            }
+        }
+
+        &--border-dashed {
+            border-bottom: rem(1) dashed color(gray-50);
+        }
+    }
+
+    &__hours {
+        &--spaced {
+            padding-left: rem(16);
+        }
+    }
+    // Elements
+    &__text-title-myTrips {
+        font-size: rem(15);
+    }
+
+    &__text-des {
+        display: block;
+        font-size: rem(16);
+        color: color(gray-10);
+
+        &--black {
+            color: color(gray-10);
+        }
+
+        &--small {
+            font-size: rem(12);
+        }
+
+        &--flex-center {
+            align-self: center;
+        }
+    }
+
+    &__icon {
+        display: block;
+        font-size: rem(33);
+        text-align: center;
+        color: color(primary);
+    }
+
+    &__collapse {
+        border: 0;
+        font-size: 0;
+        background-color: transparent;
+
+        &:focus {
+            outline: rem(2) solid color(primary);
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            outline: none;
+            .#{$wefront__namespace}table-flight-detail__collapse-text {
+                color: color(primary);
+                outline: none;
+            }
+        }
+    }
+
+    &__collapse-text {
+        position: relative;
+        display: inline-block;
+        padding-right: rem(23);
+        font-size: rem(12);
+        text-decoration: underline;
+        color: color(gray-30);
+        vertical-align: middle;
+
+        &::before {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            display: inline-block;
+            font-size: rem(20);
+            text-decoration: none;
+            color: color(gray-30);
+            -ms-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+            vertical-align: middle;
+        }
+    }
+
+    &__collapse-icon {
+        display: inline-block;
+        font-size: rem(20);
+        color: color(gray-30);
+        vertical-align: middle;
+    }
+
+    // Columns
+
+    &__logo {
+        display: inline-block;
+        width: rem(85);
+        vertical-align: middle;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &__text-title {
+        font-size: rem(20);
+        font-weight: bold;
+
+        &--special {
+            font-family: $font-special;
+            font-size: rem(22);
+            line-height: rem(22);
+        }
+
+        &--normal {
+            font-family: $font-normal;
+            font-size: rem(22);
+            font-weight: normal;
+        }
+    }
+
+    &__hours-icon {
+        display: inline-block;
+        font-size: rem(20);
+        color: color(gray-30);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+
+        &.icon-vuelos {
+            margin: 0 rem(4);
+        }
+
+        &--no-rotate {
+            -ms-transform: none;
+            transform: none;
+        }
+    }
+}
+
+// Responsive
+
+@include media-query('lg') {
+    .#{$wefront__namespace}table-flight-detail {
+        &__item {
+            &:nth-child(1) {
+                width: rem(125);
+            }
+
+            &:nth-child(2) {
+                width: rem(110);
+            }
+
+            &:nth-child(3) {
+                width: rem(305);
+                padding-right: rem(20);
+            }
+
+            &:nth-child(4) {
+                width: rem(310);
+            }
+
+            &--three-cols {
+                &.#{$wefront__namespace}table-flight-detail__item {
+                    width: rem(498);
+                }
+            }
+        }
+
+        &--warning,
+        &--info {
+            .#{$wefront__namespace}table-flight-detail__item {
+                &:nth-child(1) {
+                    width: rem(255);
+                }
+
+                &:nth-child(2) {
+                    width: rem(590);
+                }
+            }
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}table-flight-detail {
+        position: relative;
+        display: block;
+        width: 100%;
+        font-size: 0;
+
+        &__item {
+            display: inline-block;
+
+            &:nth-child(1) {
+                display: none;
+                width: rem(118);
+
+                &.ib-table-flight-detail__item--row-tablet {
+                    display: block;
+                    width: 100%;
+                }
+            }
+
+            &:nth-child(2) {
+                width: 15%;
+            }
+
+            &:nth-child(3) {
+                width: 45%;
+                padding-right: rem(10);
+            }
+
+            &:nth-child(4) {
+                width: 35%;
+            }
+
+            &:nth-child(5) {
+                width: 5%;
+                padding-top: rem(24);
+            }
+
+            &--row-tablet {
+                display: block;
+                width: 100%;
+                .#{$wefront__namespace}text {
+                    padding-bottom: rem(20);
+                }
+            }
+
+            &--three-cols {
+                &.#{$wefront__namespace}table-flight-detail__item {
+                    width: 80%;
+                }
+            }
+        }
+
+        &__collapse {
+            vertical-align: top;
+        }
+
+        &--warning,
+        &--info {
+            margin-bottom: rem(30);
+            .#{$wefront__namespace}table-flight-detail__item {
+                display: inline-block;
+
+                &:nth-child(1) {
+                    display: inline-block;
+                    width: 15%;
+                }
+
+                &:nth-child(2) {
+                    width: 85%;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}table-flight-detail {
+        &__item {
+            &:nth-child(1) {
+                display: none;
+            }
+
+            &:nth-child(2) {
+                display: inline-block;
+                width: 100%;
+                margin-bottom: rem(8);
+                text-align: left;
+            }
+
+            &:nth-child(3) {
+                display: inline-block;
+                width: 95%;
+                padding-right: 0;
+            }
+
+            &:nth-child(4) {
+                display: none;
+                &.#{$wefront__namespace}table-flight-detail__item--visible-mobile {
+                    display: inline-block;
+                    width: 100%;
+                    margin-top: rem(20);
+                    margin-bottom: rem(8);
+                    text-align: left;
+                }
+            }
+
+            &:nth-child(5) {
+                position: absolute;
+                top: rem(42);
+                right: rem(14);
+                display: inline-block;
+                width: rem(20);
+                padding: 0;
+            }
+        }
+
+        &__hours {
+            &--spaced {
+                padding-left: initial;
+            }
+        }
+
+        &__collapse {
+            width: rem(20);
+            height: rem(18);
+            float: right;
+
+            &:focus,
+            &:active {
+                outline: none;
+                .#{$wefront__namespace}table-flight-detail__collapse-text {
+                    outline: rem(2) solid color(primary);
+                }
+            }
+        }
+
+        &__collapse-text {
+            display: inline-block;
+            width: 100%;
+            padding: 0;
+            text-indent: -9999rem;
+
+            &::before {
+                padding: 0;
+                text-decoration: none;
+                text-indent: 0;
+            }
+        }
+
+        &__collapse-icon {
+            margin-left: 0;
+        }
+
+        &--sep-scale {
+            .#{$wefront__namespace}table-flight-detail {
+                &__item {
+                    &:nth-child(2) {
+                        display: none;
+                    }
+
+                    &:nth-child(3) {
+                        width: 100%;
+                        padding-top: rem(6);
+                        float: none;
+                    }
+
+                    &:nth-child(4) {
+                        display: table-cell;
+                        width: auto;
+                    }
+
+                    &:nth-child(5) {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        &--warning,
+        &--info {
+            .#{$wefront__namespace}table-flight-detail__item {
+                margin-left: 0;
+
+                &:nth-child(1) {
+                    display: none;
+                }
+
+                &:nth-child(2) {
+                    display: block !important;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}table-flight-detail {
+        &__item {
+            &:nth-child(1) {
+                display: none;
+            }
+
+            &:nth-child(2) {
+                display: inline-block;
+                width: 100%;
+                margin-bottom: rem(8);
+                text-align: left;
+                float: left;
+            }
+
+            &:nth-child(3) {
+                display: inline-block;
+                width: 90%;
+                padding-right: 0;
+                float: left;
+            }
+
+            &:nth-child(4) {
+                display: none;
+                &.#{$wefront__namespace}table-flight-detail__item--visible-mobile {
+                    display: inline-block;
+                    width: 100%;
+                    margin-top: rem(15);
+                    margin-bottom: rem(8);
+                    text-align: left;
+                }
+            }
+
+            &:nth-child(5) {
+                position: absolute;
+                top: rem(45);
+                right: rem(16);
+                width: rem(20);
+                padding: 0;
+                float: none;
+            }
+        }
+
+        &__hours {
+            &--spaced {
+                padding-left: initial;
+            }
+        }
+
+        &__collapse {
+            width: rem(20);
+            height: rem(18);
+            float: right;
+
+            &:focus,
+            &:active {
+                outline: none;
+                .#{$wefront__namespace}table-flight-detail__collapse-text {
+                    outline: rem(2) solid color(primary);
+                }
+            }
+        }
+
+        &__collapse-text {
+            display: inline-block;
+            width: 100%;
+            padding: 0;
+            text-indent: -9999rem;
+
+            &::before {
+                padding: 0;
+                text-decoration: none;
+                text-indent: 0;
+            }
+        }
+
+        &__collapse-icon {
+            margin-left: 0;
+        }
+
+        &--sep-scale {
+            .#{$wefront__namespace}table-flight-detail {
+                &__item {
+                    &:nth-child(2) {
+                        display: none;
+                    }
+
+                    &:nth-child(3) {
+                        display: table-cell;
+                        width: 68%;
+                        padding-top: rem(6);
+                        float: none;
+                    }
+
+                    &:nth-child(4) {
+                        display: table-cell;
+                        width: auto;
+                    }
+
+                    &:nth-child(5) {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        &--warning,
+        &--info {
+            .#{$wefront__namespace}table-flight-detail__item {
+                margin-left: 0;
+
+                &:nth-child(1) {
+                    display: none;
+                }
+
+                &:nth-child(2) {
+                    display: block !important;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

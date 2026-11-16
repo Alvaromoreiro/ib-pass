@@ -1,0 +1,95 @@
+<section class="ib-layout__section">
+    <div class="ib-box ib-box--extra ib-box--extra-vertical">
+        <fieldset>
+            <legend class="u-hide-accessible">{{'AVAILABILITY_FILTER_TIMEZONE_ACCESS'|translate}}</legend>
+            <div class="ib-heading-filters-shuttle">
+                <div class="ib-heading-filters-shuttle__content">
+                    <ul class="ib-heading-filters-shuttle__list">
+                        <li class="ib-heading-filters-shuttle__item" ng-repeat="item in cfAvailCtrl.filters">
+                            <a id="{{::item.id}}" href="javascript:void(0)" class="ib-heading-filters-shuttle__link" title="{{item.title|translate}}"
+                                ng-click="cfAvailCtrl.selectFilter(item)" ng-class="{'ib-heading-filters-shuttle__link--active ': cfAvailCtrl.selectedFilter === item}">{{item.id|translate}}</a>
+                        </li>
+                    </ul>
+                    <div class="ib-dropdown-select ib-dropdown-select--type-2 hidden-xl hidden-lg hidden-md" uib-dropdown is-open="status.isOpenFilter">
+                        <button id="AVAILABILITY_FILTER_TIMEZONES_MOBILE" type="button" class="ib-dropdown-select__button" uib-dropdown-toggle>
+							<span class="ib-dropdown-select__button-text">{{cfAvailCtrl.selectedFilter.id|translate}}</span>
+						</button>
+                        <input type="text" class="ib-dropdown-select__input u-hide" ng-model="cfAvailCtrl.selectedFilter" readonly/>
+                        <ul class="ib-dropdown-select__list" uib-dropdown-menu role="menu" aria-labelledby="AVAILABILITY_FILTER_TIMEZONES_MOBILE">
+                            <li class="ib-dropdown-select__list-item" ng-repeat="item in cfAvailCtrl.filters">
+                                <a id="{{::item.id}}_MOBILE" href="javascript:void(0)" title="{{item.title | translate}}" ng-click="cfAvailCtrl.selectFilter(item)">{{item.id|translate}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ib-dropdown-select hidden-xl hidden-lg hidden-md" uib-dropdown is-open="status.isOpenGrouping">
+                        <button id="AVAILABILITY_GROUPINGS_MOBILE" type="button" class="ib-dropdown-select__button" uib-dropdown-toggle>
+							<span class="ib-dropdown-select__button-text">{{cfAvailCtrl.selectedGrouping.description|translate}}</span>
+						</button>
+                        <button class="ib-dropdown-select__caret" type="button" ng-click="cfAvailCtrl.descendingOrder = !cfAvailCtrl.descendingOrder"
+                            ng-class="{'ib-dropdown-select__caret--up' : cfAvailCtrl.descendingOrder}">
+							<span class="caret"></span>
+						</button>
+                        <input type="text" class="ib-dropdown-select__input u-hideAccessible" ng-model="cfAvailCtrl.selectedGrouping" readonly/>
+                        <ul class="ib-dropdown-select__list" uib-dropdown-menu role="menu" aria-labelledby="AVAILABILITY_GROUPINGS_MOBILE">
+                            <li class="ib-dropdown-select__list-item" ng-repeat="grouping in cfAvailCtrl.groupings">
+                                <a id="{{::grouping.id}}_MOBILE" href="javascript:void(0)" title="{{grouping.description | translate}}" ng-click="cfAvailCtrl.selectGrouping(grouping)">{{grouping.description|translate}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ib-heading-filters-shuttle__content">
+                    <div class="ib-check">
+                        <input type="checkbox" id="AVAILABILITY_FILTER_AVAILABLES" ng-model="cfAvailCtrl.showOnlyAvailable" name="available_filter"
+                            class="ib-check__input" />
+                        <label for="AVAILABILITY_FILTER_AVAILABLES" class="ib-check__label">
+							<span class="ib-check__text">{{'AVAILABILITY_FILTER_AVAILABLES'|translate}}</span>
+						</label>
+                    </div>
+                </div>
+            </div>
+            <table class="ib-table-shuttle">
+                <caption class="hide-accessible">{{'AVAILABILITY_TABLE_ACCESS'|translate}}</caption>
+                <thead class="ib-table-shuttle__head">
+                    <tr class="ib-table-shuttle__row">
+                        <th class="ib-table-shuttle__column ib-table-shuttle__column--head" ng-repeat="grouping in cfAvailCtrl.groupings">
+                            <span ng-click="cfAvailCtrl.selectGrouping(grouping)" class="ib-table-shuttle__text ib-table-shuttle__text--head" ng-class="{'ib-table-shuttle__text--down' : cfAvailCtrl.selectedGrouping.id === grouping.id && !cfAvailCtrl.descendingOrder,
+                                           'ib-table-shuttle__text--up' : cfAvailCtrl.selectedGrouping.id === grouping.id && cfAvailCtrl.descendingOrder}">
+                                {{grouping.description|translate}}
+                            </span>
+                        </th>
+                        <th class="ib-table-shuttle__column ib-table-shuttle__column--head">
+                            <span class="hide-accessible">{{'AVAILABILITY_COLUMN_SELECT_BUTTON_ACCESS'|translate}}</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="ib-table-shuttle__body">
+                    <tr class="ib-table-shuttle__row" ng-repeat="(sIndex,slice) in cfAvailCtrl.availabilityModel.slices | filter:cfAvailCtrl.availabilityFilter | orderBy:cfAvailCtrl.selectedGrouping.id:cfAvailCtrl.descendingOrder"
+                        ng-class="{'ib-table-shuttle__row--disabled' : slice.remainingSeats === 0}">
+                        <td class="ib-table-shuttle__column ib-table-shuttle__column--item-1" data-column="{{'AVAILABILITY_COLUMN_OUTBOUND'|translate}}">
+                            <span class="ib-table-shuttle__text">{{::slice.outbound}}</span>
+                        </td>
+                        <td class="ib-table-shuttle__column ib-table-shuttle__column--item-2" data-column="{{'AVAILABILITY_COLUMN_INBOUND'|translate}}">
+                            <span class="ib-table-shuttle__text">{{::slice.inbound}}</span>
+                        </td>
+                        <td class="ib-table-shuttle__column ib-table-shuttle__column--item-3" data-column="{{'AVAILABILITY_COLUMN_OPERATED_BY'|translate}}">
+                            <figure class="ib-table-shuttle__img">
+                                <img ng-src="{{::slice.company.logo}}" alt="{{'GENERIC_LOGO_ALT'|translate}} {{::slice.company.description}}" />
+                            </figure>
+                        </td>
+                        <td class="ib-table-shuttle__column ib-table-shuttle__column--item-4" data-column="{{'AVAILABILITY_COLUMN_SEAT'|translate}}">
+                            <span ng-if="slice.remainingSeats > 1"class="ib-table-shuttle__text">{{slice.remainingSeats > 4 ? ('AVAILABILITY_SEATS_AVAILABLE'|translate) : (('AVAILABILITY_SEATS_REMAIN'|translate) + ' ' + slice.remainingSeats)}}</span>
+                            <span ng-if="slice.remainingSeats === 1"class="ib-table-shuttle__text">{{(('AVAILABILITY_SEAT_REMAIN'|translate) + ' ' + slice.remainingSeats)}}</span>
+                            <span ng-if="slice.remainingSeats <= 0" class="ib-table-shuttle__text">{{'AVAILABILITY_SEATS_UNAVAILABLE'|translate}}</span>
+                        </td>
+                        <td class="ib-table-shuttle__column ib-table-shuttle__column--item-5">
+                            <button id="AVAILABILITY_SLICE_BUTTON_SELECT_{{::(sIndex + '_' + slice.outbound + '_' + slice.inbound)}}" type="button" ng-click="cfAvailCtrl.selectSlice(slice)"
+                                class="ib-button ib-table-shuttle__button" ng-disabled="slice.remainingSeats === 0 || slice.myflight" ng-class="{'ib-button--disabled': slice.remainingSeats === 0 || slice.myflight, 'ib-button--grey': slice.remainingSeats > 0}">
+                                {{( slice.remainingSeats > 0 && !slice.myflight ? 'AVAILABILITY_SLICE_BUTTON_SELECT' : slice.myflight ? 'AVAILABILITY_SLICE_BUTTON_SELECT_MY_FLIGHT' : 'AVAILABILITY_SLICE_BUTTON_SELECT_DISABLED')|translate}}
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</section>

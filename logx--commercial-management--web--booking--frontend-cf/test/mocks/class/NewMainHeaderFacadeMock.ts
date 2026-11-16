@@ -1,0 +1,33 @@
+import { BehaviorSubject, of } from 'rxjs';
+import * as fullHeaderModel from 'test/unit/app/shared/components/ib-booking-header/mocks/HeaderModelRT.json';
+// const fullHeaderModel = require( '../../../test/unit/app/shared/components/ib-booking-header/mocks/HeaderModelRT.json' );
+export class NewMainHeaderFacadeTokenMock {
+    initHeader = jasmine.createSpy('initHeader').and.callFake(() => {});
+    finishWaiting = jasmine.createSpy( 'finishWaiting' );
+    updateTripsBasketFromDispo = jasmine.createSpy( 'updateTripsBasketFromDispo' );
+    deleteDiscountFromBasket = jasmine.createSpy( 'deleteDiscountFromBasket' );
+    deleteTripsBasketFromDispo = jasmine.createSpy( 'deleteTripsBasketFromDispo' );
+    updateBasketDiscountsNew = jasmine.createSpy('updateBasketDiscountsNew');
+    updateStepDescription = jasmine.createSpy('updateStepDescription');
+    updateStepsModel = jasmine.createSpy( 'updateStepsModel' );
+    updateSteps = jasmine.createSpy( 'updateSteps' );
+    updateBasketOthers = jasmine.createSpy( 'updateBasketOthers' );
+    checkAdaptativeMobileFlow = jasmine.createSpy( 'checkAdaptativeMobileFlow' ).and.callFake( () => false );
+    getObservableHeader = jasmine.createSpy( 'getObservableHeader' ).and.callFake( () => of( fullHeaderModel ) );
+    getAncillariesDeletion = jasmine.createSpy( 'getAncillariesDeletion' ).and.callFake( () => of( true ) );
+    addSimpleDiscount = jasmine.createSpy( 'addSimpleDiscount' ).and.callFake( () => { return {}; } );
+    setTotalDCC = jasmine.createSpy( 'setTotalDCC' );
+    updateHeaderModel = jasmine.createSpy( 'updateHeaderModel' );
+    showLogin = jasmine.createSpy( 'showLogin' );
+    forceVisualUpdate = jasmine.createSpy( 'forceVisualUpdate' );
+    updateShowBasket = jasmine.createSpy( 'updateShowBasket' );
+    updateTrips = jasmine.createSpy( 'updateTrips' );
+    deleteInsuranceFromBasket = jasmine.createSpy( 'deleteInsuranceFromBasket' );
+    deleteAssistCardFromBasket = jasmine.createSpy( 'deleteAssistCardFromBasket' );
+    deleteGlobickTransfersFromBasket = jasmine.createSpy( 'deleteGlobickTransfersFromBasket' );
+    setLoadingBasket = jasmine.createSpy( 'setLoadingBasket' );
+    updateBasketFlexibilization = jasmine.createSpy( 'updateBasketFlexibilization' );
+    getLoadingBasket = jasmine.createSpy( 'getLoadingBasket' ).and.returnValue(new BehaviorSubject(false));
+    setAncillariesDeletion = jasmine.createSpy( 'setAncillariesDeletion' );
+    blockNavigation = jasmine.createSpy( 'blockNavigation' );
+}

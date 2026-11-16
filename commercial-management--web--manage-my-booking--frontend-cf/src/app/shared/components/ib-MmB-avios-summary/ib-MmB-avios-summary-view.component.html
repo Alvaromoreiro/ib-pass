@@ -1,0 +1,112 @@
+<div class="row" *ngIf="show">
+    <div>
+        <section class="ib-layout__section">
+            <div class="ib-layout__line-spacing">
+                <div ngbAccordion #accordion="ngbAccordion" [closeOthers]="true" class="ib-accordion ib-accordion--medium-laterals">
+                    <div ngbAccordionItem="first" #first="ngbAccordionItem" [collapsed]="true" class="accordion-item">
+                        <div ngbAccordionHeader class="accordion-header">
+                            <a ngbAccordionToggle class="accordion-toggle" role="button">
+                                <div class="ib-flex ib-flex__row-nowrap u-pt-xsmall u-pb-xsmall u-display-align-start-mobile">
+                                    <figure class="ib-icons--avios-figure"><img class="ib-icons--avios-bki-breakdown" src="/iberia-web-content/iconos/avios/avios@3x.png" alt="Avios"></figure>
+                                    <div class="ib-flex ib-flex__column">
+                                        <p *ngIf="flowApp === 'MMB' || flowApp === 'MMBANC'" class="ib-heading ib-heading--type-5">{{'SBE_BREAKDOWN_ANCILLARIES_TITLE_MMB' | translate}}</p>
+                                        <p class="ib-heading ib-heading--type-8 u-display-none-xs" *ngIf="flowApp === 'MMB'">{{'SBE_BREAKDOWN_ANCILLARIES_DETAILS_MMB_CKI' | translate}}</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="accordion-icon" [ngClass]="{'icon-flecha_1_abajo': first.collapsed, 'icon-flecha_1_arriba': !first.collapsed}"></span>
+                                </div>
+                            </a>
+                        </div>
+                        <div ngbAccordionCollapse>
+                            <div ngbAccordionBody>
+                                <ng-template>
+                                    <div class="u-position-relative" *ngIf="isLoading" style="min-height: 300px">
+                                        <div class="ib-overlay-fly ib-overlay-fly--type-1 ib-overlay-fly--white">
+                                            <div class="ib-overlay-fly__container">
+                                                <div class="ib-overlay-fly__icon">
+                                                    <div class="circle"></div>
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <span class="ib-overlay-fly__text">{{'SBE_BREAKDOWN_ANCILLARIES_LOADING' | translate}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ib-box ib-box--medium-laterals ib-box--medium-bottom" *ngIf="serviceError">
+                                        <div class="u-pb-large u-pt-big ib-msg-alert--notice ib-msg-alert--error_trips ib-text ib-text--to-center u-pt-small u-mb-medium u-display-flex u-display-flex-align-center" style="flex-direction:column">
+                                            <span class="icon-informacion_2 ib-heading-flight__icon--important ib-icons ib-icons--myTrips u-pt-small"></span>
+                                            <p class="ib-heading ib-heading--type-19 ng-binding ng-scope u-pb-large u-mr-biggest-desktop u-ml-biggest-desktop u-text-center">{{service_error}} </p>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="!serviceError && !isLoading" class="ib-box ib-box--medium ib-box--avios-breakdown ib-box--separator u-mb-none u-pt-none-mobile u-pt-none u-pl-xxsmall-mobile u-pl-xmedium">
+                                        <div class="ib-layout__line-spacing ib-layout__line-spacing--large u-mt-small">
+                                            <div class="ib-table-breakdown ib-table-breakdown--same-desktop">
+                                                <div class="ib-box-cols__content">
+                                                    <div>
+                                                        <table class="ib-table-breakdown__table u-mb-medium-desktop" *ngFor="let passenger of modelSummary.passengers; let i = index">
+                                                            <caption *ngIf="modelSummary.passengers[i].flights.aviosAmount || modelSummary.passengers[i].items.length > 0" class="u-hide-accessible">{{'CONFIRM_SUMMARY_PASSENGERS' | translate}}</caption>
+                                                                <thead class="ib-table-breakdown__head">
+                                                                    <tr class="ib-table-breakdown__row">
+                                                                        <th class="ib-table-breakdown__cell-title">
+                                                                            <span class="ib-text ib-text--bold icon-persona ib-text--color-unfocused">{{passenger.name + ' ' + passenger.surnames}}</span>
+                                                                        </th>
+                                                                        <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                                            <span *ngIf="flowApp !== 'MMBANC' && flowApp !== 'MMB'" class="ib-text ib-text--bold"><b>{{passenger.totalAviosPassenger | aviosFormat}} {{('AVIOS_ELITE_TO_EARN_USER_2' | translate)}} {{(passenger.totalPointsPassenger | aviosFormat)}} {{('AVIOS_ELITE_TO_EARN_ANOM_3' | translate)}}</b></span>
+                                                                            <span *ngIf="flowApp === 'MMBANC' || flowApp === 'MMB'" class="ib-text ib-text--bold"><b>{{passenger.totalAviosPassenger | aviosFormat}} {{('AVIOS_TEXT' | translate)}}</b></span>
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="ib-table-breakdown__body">
+                                                                    <tr  class="ib-table-breakdown__row u-display-flex-mobile u-display-flex-sm u-display-flex-xs u-pb-none-mobile u-pt-none-mobile"  *ngIf="modelSummary.passengers[i].flights.aviosAmount">
+                                                                        <td class="ib-table-breakdown__cell">
+                                                                            <span class="ib-table-breakdown__txt">{{'OPTIMAL_FARE' | translate}}</span>
+                                                                        </td>
+                                                                        <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive">
+                                                                            <span class="ib-table-breakdown__txt">
+                                                                                {{modelSummary.passengers[i].flights.aviosAmount | aviosFormat}} {{'AVIOS_TEXT' | translate}} </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="ib-table-breakdown__row u-display-flex-mobile u-display-flex-sm u-display-flex-xs u-pb-none-mobile u-pt-none-mobile" *ngFor="let item of passenger.items">
+                                                                        <td class="ib-table-breakdown__cell">
+                                                                            <span class="ib-table-breakdown__txt">{{item.title | translate}}</span>
+                                                                        </td>
+                                                                        <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive">
+                                                                            <span class="ib-table-breakdown__txt">{{item.aviosAmount |aviosFormat}} {{'AVIOS_TEXT' | translate}}</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                                <tbody class="ib-table-breakdown__body u-pl-none" style="display: none; box-shadow: 0 rem(-1) 0 0 #ddd !important; text-align: -webkit-right;">
+                                                                    <tr class="ib-table-breakdown__row">
+                                                                        <td class="ib-table-breakdown__cell" style="width: 100%;">
+                                                                            <span class="ib-text ib-text--bold">
+                                                                                {{ (modelSummary.totalAvios | aviosFormat) + ' ' + ('AVIOS_ELITE_TO_EARN_USER_2'|translate) + ' ' + (modelSummary.totalPoints | aviosFormat) + ' ' + ('AVIOS_ELITE_TO_EARN_USER_3' | translate) }}
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p *ngIf="flowApp === 'MMB' || flowApp === 'MMBANC'" class="ib-text ib-text--medium ib-text--color-gray-dark ib-text--lh-xmedium u-mb-small u-ml-small-mobile">{{('SBE_BREAKDOWN_ANCILLARIES_DETAILS_FOOTER_01' | translate) + ' ' }}<span class="ib-text ib-text--bold">{{(modelSummary.totalAvios | aviosFormat) + ' ' + ('AVIOS_TEXT'|translate)}}</span>{{' ' + ('SBE_BREAKDOWN_ANCILLARIES_DETAILS_FOOTER_03' | translate)}}
+                                            <span *ngIf="!isUserLogged && actualStep !== 'ibcmtv'">
+                                                <a id="register-avios-summary-link"
+                                                title="{{'SBE_ANCILLARIES_REGISTER_USER_LINK'|translate}}"
+                                                href="{{urlRegisterLink}}"
+                                                onclick="redirect()"
+                                                target="_blank" rel="noopener noreferrer"
+                                                class="ib-heading ib-heading--type-6 ib-link">{{('SBE_ANCILLARIES_REGISTER_USER_LINK' | translate) + ' '}}</a> {{('SBE_ANCILLARIES_REGISTER_USER' | translate)}}</span>
+                                            <span *ngIf="isUserLogged && actualStep === 'ibcmtv'">{{'SBE_ANCILLARIES_REGISTER_USER_LINK' | translate}} {{('SBE_ANCILLARIES_REGISTER_USER' | translate)}}</span>
+                                        </p>
+                                        </div>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

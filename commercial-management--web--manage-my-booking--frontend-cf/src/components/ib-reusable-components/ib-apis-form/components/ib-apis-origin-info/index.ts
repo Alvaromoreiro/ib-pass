@@ -1,0 +1,1 @@
+import './ib-apis-origin-info-component';

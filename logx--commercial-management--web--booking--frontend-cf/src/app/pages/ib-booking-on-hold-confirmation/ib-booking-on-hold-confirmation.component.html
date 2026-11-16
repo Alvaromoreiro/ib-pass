@@ -1,0 +1,38 @@
+<main class="ib-layout">
+    <div class="background-banner">
+        <div class="background-figure" ibBookingLoadItemImage [ibLoadItemImage]="model?.generalInfo?.backgroundImageUrl"
+            [defaultImage]="defaultBackgroundImageUrl">
+        </div>
+        <div class="container">
+            <ng-container *ngIf="model?.generalInfo">
+                <ib-general-info-on-hold-conf
+                    [generalInfo]="model.generalInfo" [passengersInfo]="model?.passengers" [showAncillariesButton]="showAncillariesButton"
+                    (confirmOnHoldOrder)="confirmOnHoldOrder($event)" (cancelOnHoldOrder)="cancelOnHoldOrder()">
+                </ib-general-info-on-hold-conf>
+                <ib-cash-avios-info *ngIf="!model.generalInfo.notConfirmable" [cashAviosModel]="model.generalInfo.cashAviosPossibilities" [isUserLogged]="isUserLogged"></ib-cash-avios-info>
+                <ib-trip-info-on-hold-conf [generalInfo]="model?.generalInfo"></ib-trip-info-on-hold-conf>
+            </ng-container>
+            <div *ngIf="model?.generalInfo?.notConfirmable === false" class="general-container--row">
+                <div class="general-container--column">
+                    <div class="general-container--spacing">
+                        <div class="general-container">
+                            <div class="general-container--buttons" [ngClass]="{'second-button': showAncillariesButton}">
+                                <div class="general-container--columns general-container--columns--left">
+                                    <button *ngIf="showAncillariesButton" type="button" class="button button--ancilliaries" (click)="redirectToAncillaries()"
+                                        title="{{'CUSTOM_FLIGHT_TEXT'|translate}}">{{'CUSTOM_FLIGHT_TEXT'|translate}}</button>
+                                    <button (click)="confirmOnHoldOrder()" type="button" class="button button--confirm" title="{{'GENERAL_BUY_TEXT'|translate}}">{{'GENERAL_BUY_TEXT'|translate}}</button>
+                                </div>
+                                <div class="general-container--columns general-container--columns--right">
+                                    <a (click)="cancelOnHoldOrder()" href="javascript:void(0)" title="{{'GENERAL_CANCEL_TEXT'|translate}}" class="cancel-link">{{'GENERAL_CANCEL_TEXT'|translate}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<ib-main-footer id="footer" [footerModel]="footerModel"
+        [isFullWidth]="'true'" [isFixed]="false">
+</ib-main-footer>

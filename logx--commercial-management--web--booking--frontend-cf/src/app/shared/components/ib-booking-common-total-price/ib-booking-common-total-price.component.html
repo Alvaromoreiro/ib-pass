@@ -1,0 +1,43 @@
+<div class="ib-box ib-box--medium ib-box-check" *ngIf="isOnHold && termsAndConditionsCheck">
+    <div class="ib-check ib-check--regular" [ngClass]="{'ib-check--error': termsControl.invalid && (termsControl.dirty || termsControl.touched)}">
+        <input type="checkbox" class="ib-check__input" id="ohfree_accept_terms"
+        [formControl]="termsControl"
+        (change)="changeAcceptTerms()" required>
+        <label for="ohfree_accept_terms" class="ib-check__label">
+            <span class="ib-check__text" [innerHtml]="termsAndConditionsCheck"></span>
+        </label>
+    </div>
+    <div id="ohfree_accept_terms-err" *ngIf="termsControl.invalid && (termsControl.dirty || termsControl.touched)">
+        <div class="ib-alert ib-alert--error" *ngIf="termsControl.errors?.['required']">{{'TOTAL_PRICE_CHECKBOX_CONDITIONS_REQUIRED_ERROR'|translate}}</div>
+    </div>
+</div>
+<div class="ib-box ib-box--medium">
+    <p class="ib-text ib-text--block ib-text--color-unfocused">{{ priceTitle | translate }}</p>
+    <div class="info">
+        <div class="info_container">
+            <div class="info_container--left">
+                <div class="info_price">
+                    <p class="info_price_onhold">
+                        <span class="ib-text ib-text--especial ib-text--price-big" [ngClass]="{'ib-text--price-long': totalPrice?.length > 9}">{{totalPrice}}</span>
+                        <span class="ib-text ib-text--color-unfocused" *ngIf="isOnHold">({{onHoldPrice}} {{'TOTAL_PRICE_ON_HOLD_PER_PASSENGER'| translate}})</span>
+                    </p>
+                </div>
+                <button *ngIf="shouldShowPriceDetailCTA" (click)="openPriceDetailModal($event)" class="price-detail common">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M7.94745 6.0906H8.0162C8.49848 6.0906 9.06355 5.96473 9.06355 5.19012V5.15139C9.06355 4.37195 8.49848 4.23156 8.0162 4.23156H7.94745C7.46469 4.23156 6.89865 4.37195 6.89865 5.15139V5.19012C6.89865 5.96473 7.46469 6.0906 7.94745 6.0906Z" fill="#333333"/>
+                        <path d="M7.05117 11.7694H8.91296V7.12178H7.05117V11.7694Z" fill="#333333"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99829 1.00244C4.13186 1.00244 0.998047 4.13473 0.998047 7.99805C0.998047 11.8662 4.13186 14.9985 7.99829 14.9985C11.8633 14.9985 14.998 11.8662 14.998 7.99805C14.998 4.13473 11.8633 1.00244 7.99829 1.00244ZM2.72523 7.99805C2.72523 10.9076 5.08963 13.275 7.99829 13.275C10.905 13.275 13.2713 10.9076 13.2713 7.99805C13.2713 5.0933 10.905 2.72593 7.99829 2.72593C5.08963 2.72593 2.72523 5.0933 2.72523 7.99805Z" fill="#333333"/>
+                    </svg>
+                    <p>{{'SUMMARY_FEES' | translate}}</p>
+                </button>
+                <p class="info_price_total" *ngIf="isOnHold">
+                    <span class="ib-text ib-text--color-important">{{'TOTAL_PRICE_ON_HOLD_PRICE_TEXT'| translate}}</span>
+                    <span class="ib-text ib-text--especial ib-text--price-xsmall ib-text--color-important">{{totalPrice}}</span>
+                </p>
+            </div>
+            <button id="AVAILABILITY_CONTINUE_BUTTON" title="{{ nextButtonText | translate }}" class="ib-button" type="submit" (click)="onContinueEvent()">{{ nextButtonText | translate }}</button>
+        </div>
+        <p class="ib-text ib-text--color-unfocused" *ngIf="conditionsText" [innerHtml]="conditionsText"></p>
+    </div>
+
+</div>

@@ -1,0 +1,360 @@
+<mmb-layout>
+    <div class="ib-flex">
+        <div class="ib-layout__header ib-layout__header--pre-title u-text-right u-width-full">
+            <a id="pmt-mmb-confirmation-print-link" class="ib-link ib-link--icon hidden-md hidden-sm hidden-xs"
+                (click)="printSummary()"
+                title="{{'MMB_ANCILLARIES_PAYMENT_CONFIRMATION_PRINT_CONFIRM_TITLE'|translate}}">
+                <span class="ib-link__icon icon-imprimir"></span>
+                <span class="ib-link__text">{{'CONFIRM_PRINT_CONFIRM'|translate}}</span>
+            </a>
+            <h1 class="ib-heading ib-heading--type-1 ib-heading--block ib-heading--to-center">
+                <span
+                    class="ib-heading__icon ib-heading__icon--default ib-heading__icon--mobile-block icon-confirmacion hidden-xs hidden-sm"></span>
+                <span class="ib-heading__text">{{'CONFIRM_BUY_OK_TXT'|translate}}</span>
+            </h1>
+            <h2 class="ib-heading ib-heading--type-5 ib-heading--block ib-heading--to-center">
+                <span class="ib-heading__text">{{'MMB_ANCILLARIES_PAYMENT_CONFIRMATION_EMAIL'|translate}}
+                    {{email | lowercase}}
+                </span>
+            </h2>
+        </div>
+    </div>
+
+    <!--Warnings-->
+    <div class="ib-flex" *ngIf="issueOrderInfo?.warnings?.length > 0">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+            <div class="ib-msg-alert ib-msg-alert--info ib-msg-alert--white icon-alertas_2 alert fade in">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                    <p class="ib-msg-alert__text ib-msg-alert__text--bold"
+                        *ngFor="let warning of issueOrderInfo.warnings">
+                        {{warning.description}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ib-flex">
+        <div class="ib-layout__section ib-layout__section--medium u-width-full">
+            <div class="ib-box ib-box--medium">
+                <div class="ib-summary">
+                    <header class="ib-summary__header">
+                        <h3 class="ib-heading ib-heading--type-3">{{'SUMMARY_BASKET_TEXT' | translate}}</h3>
+                    </header>
+                    <div class="ib-summary__body">
+
+                        <!-- Seats -->
+                        <div class="ib-summary__section ib-summary__section--separator"
+                            *ngIf="summaryPayment.shoppingBasket.seats.hasSeats || summaryPayment.shoppingBasket.seats.segments.length > 0">
+                            <h4 class="ib-text ib-text--xmedium ib-text--bold u-mb">
+                                {{'MMB_BOOKING_SEATS_TITLE' | translate}}
+                            </h4>
+                            <div class="">
+                                <div class="" *ngFor="let slice of model.seats">
+                                    <div>
+                                        <span
+                                            class="ib-text ib-text--color-unfocused ib-text--bold ib-list-passengers__item-description__title u-pl-none">{{slice.origin.description}}
+                                            - {{slice.destination.description}}</span>
+                                    </div>
+                                    <ul class="ib-list-passengers">
+                                        <li class="ib-list-passengers__item" *ngFor="let segment of slice.segments">
+                                            <div class="ib-summary-breakdown__multiple-items">
+                                                <div class="ib-summary-breakdown__multiple-items--column">
+                                                    <span
+                                                        class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title u-pl-none">{{segment.origin.description}}
+                                                        - {{segment.destination.description}}</span>
+                                                </div>
+                                                <div class="ib-summary-breakdown__multiple-items--column">
+                                                    <span
+                                                        class="ib-summary-breakdown__multiple-items--item ib-summary-breakdown__multiple-items--item-right"
+                                                        *ngFor="let seat of segment.seats">
+                                                        {{seat.quanty}} {{seat.description ? seat.description : ""
+                                                        }} {{'MULTIPLE_X_TEXT'|translate}} {{seat.totalFormatted}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Baggages -->
+                        <div class="ib-summary__section ib-summary__section--separator"
+                            *ngIf="summaryPayment.shoppingBasket.baggages.hasBaggage">
+                            <h4 class="ib-text ib-text--xmedium ib-text--bold u-mb">
+                                {{'SUMMARY_ANCILLARIES_BAGGAGE_TITLE' | translate}}</h4>
+                            <ul class="ib-list-passengers">
+                                <li class="ib-list-passengers__item"
+                                    *ngFor="let segment of summaryPayment.shoppingBasket.baggages.segments">
+                                    <div class="ib-list-passengers__item-description u-pb-none ">
+                                        <span
+                                            class="ib-text ib-text--color-unfocused ib-text--bold u-mb">{{segment.origin.description}}
+                                            - {{segment.destination.description}} </span>
+                                    </div>
+                                    <ul>
+                                        <li *ngFor="let bag of segment.baggages"
+                                            class="ib-list-passengers__item-description ib-list-passengers__item-description--long">
+                                            <span class="ib-text ib-text--color-unfocused u-mb-none">
+                                                {{bag.quanty}} {{(bag.quanty===1 ? 'BAGGAGE_SINGULAR_TEXT'
+                                                :'BAGGAGE_PLURAL_TEXT') | translate }} {{bag.description}}
+                                            </span>
+                                            <span class="ib-text ib-text--color-normal">
+                                                {{bag.totalFormatted}}
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Speqs-->
+                        <div class="ib-summary__section ib-summary__section--separator"
+                            *ngIf="summaryPayment.shoppingBasket.speqs.hasSpeqs">
+                            <h4 class="ib-text ib-text--xmedium ib-text--bold u-mb">
+                                {{'ANCILLARIES_SPEQS_TITLE_TEXT'|translate}}
+                            </h4>
+                            <ul class="ib-list-passengers">
+                                <li class="ib-list-passengers__item"
+                                    *ngFor=" let segment of summaryPayment.shoppingBasket.speqs.segments">
+                                    <div class="ib-list-passengers__item-description u-pb-none ">
+                                        <span
+                                            class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none">{{segment.origin.description}}
+                                            - {{segment.destination.description}} </span>
+                                    </div>
+                                    <ul>
+                                        <li *ngFor=" let speq of segment.speqs"
+                                            class="ib-list-passengers__item-description ib-list-passengers__item-description--long u-mt-xsmall">
+                                            <span class="ib-text ib-text--color-unfocused u-mb-none">{{speq.quanty}}
+                                                {{speq.description}} </span>
+                                            <span class="ib-text ib-text--color-normal">
+                                                {{speq.totalFormatted}}
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <div class="ib-summary__subtotal ib-summary__subtotal--separator">
+                                <span class="ib-text ib-text--bold">{{'ANCILLARIES_SPEQS_AMOUNT'|translate}}</span>
+                                <span
+                                    class="ib-text ib-text--bold">{{summaryPayment.shoppingBasket.speqs.total.totalFormatted}}</span>
+                            </div>
+                        </div>
+                        <!-- Priority -->
+                        <div class="ib-summary__section ib-summary__section--separator"
+                            *ngIf="summaryPayment.shoppingBasket.priorityBoarding.hasPriorityBoarding">
+                            <h4 class="ib-text ib-text--xmedium ib-text--bold u-mb">
+                                {{'PRIORITY_BOARDING_TITLE'|translate}}
+                            </h4>
+                            <ul class="ib-list-passengers">
+                                <li class="ib-list-passengers__item"
+                                    *ngFor="let segment of summaryPayment.shoppingBasket.priorityBoarding.info.trips">
+                                    <div class="ib-list-passengers__item-description u-pb-none ">
+                                        <span
+                                            class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none">{{segment.departure.description}}
+                                            - {{segment.arrival.description}} </span>
+                                    </div>
+                                    <ul>
+                                        <li
+                                            class="ib-list-passengers__item-description ib-list-passengers__item-description--long u-mt-xsmall">
+                                            <span class="ib-text ib-text--color-unfocused u-mb-none">{{segment.quanty}}
+                                                {{'PRIORITY_BOARDING_TITLE'|translate}} </span>
+                                            <span class="ib-text ib-text--color-normal">
+                                                {{segment.priceFormatted}}
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <div class="ib-summary__subtotal ib-summary__subtotal--separator">
+                                <span
+                                    class="ib-text ib-text--bold">{{'ANCILLARIES_PRIORITY_BASKET_AMOUNT'|translate}}</span>
+                                <span
+                                    class="ib-text ib-text--bold">{{summaryPayment.shoppingBasket.priorityBoarding.info.priceFormatted}}</span>
+                            </div>
+                        </div>
+                        <!-- Insurance -->
+                        <div class="ib-summary__section ib-summary__section--separator"
+                            *ngIf="summaryPayment.shoppingBasket.insurance.hasInsurance">
+                            <h4 class="ib-text ib-text--xmedium ib-text--bold u-mb">
+                                {{'SUMMARY_ANCILLARIES_INSURANCE_TITLE' | translate}}
+                            </h4>
+                            <ul class="ib-list-passengers">
+                                <li class="ib-list-passengers__item">
+                                    <div class="ib-list-passengers__item-description">
+                                        <span>
+                                            <span
+                                                class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title u-pl-none">
+                                                {{summaryPayment.shoppingBasket.insurance.info.type}}
+                                            </span>
+                                            <span class="ib-text ib-text--color-normal u-float-right">
+                                                {{summaryPayment.shoppingBasket.insurance.total.totalFormatted}}
+                                            </span>
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- INSURANCE ALLIANZ FUSION -->
+                        <div class="ib-summary__section ib-summary__section--separator"
+                        *ngIf="summaryPayment.shoppingBasket.insuranceAllianzFusionInfo.hasInsuranceAllianzFusion">
+                            <ib-MmB-summary-insurance-allianz-fusion [model]="summaryPayment.shoppingBasket.insuranceAllianzFusionInfo"></ib-MmB-summary-insurance-allianz-fusion>
+                        </div>
+                        <!-- END INSURANCE ALLIANZ FUSION -->
+
+                        <!-- CarbonFootPrint -->
+                        <div class="ib-summary__section ib-summary__section--separator" *ngIf="summaryPayment.shoppingBasket.carbonFootprint.hasCarbonFootprint">
+                            <!-- <ib-pmt-summary-carbon-footprint [model]="summaryPayment.shoppingBasket.carbonFootprint.info"></ib-pmt-summary-carbon-footprint> -->
+                        </div>
+
+                        <!-- GLOBICK ACTIVITES-->
+                        <div class="ib-summary__section ib-summary__section--separator"
+                            *ngIf="summaryPayment.shoppingBasket.globickActivities.hasActivitiesGlobick">
+                            <ib-MmB-summary-globick-activities [model]="summaryPayment.shoppingBasket.globickActivities"></ib-MmB-summary-globick-activities>
+                        </div>
+
+                        <!-- GLOBICK TRANSFERS-->
+                        <div class="ib-summary__section ib-summary__section--separator" *ngIf="summaryPayment.shoppingBasket.globickTransfers.hasTransfersGlobick">
+                            <ib-MmB-summary-globick-transfers [model]="summaryPayment.shoppingBasket.globickTransfers"></ib-MmB-summary-globick-transfers>
+                        </div>
+
+                        <!-- Discount -->
+                        <div class="ib-summary__section ib-summary__section--separator"
+                            *ngIf="summaryPayment.discount">
+                            <h4 class="ib-text ib-text--xmedium ib-text--bold u-mb">
+                                {{'IBPURC_PAYMENTS_SUMMARY_DISCOUNT_VOUCHER_FOR_DUMBO' | translate}}
+                            </h4>
+                            <ul class="ib-list-passengers">
+                                <li class="ib-list-passengers__item">
+                                    <div class="ib-list-passengers__item-description">
+                                        <span>
+                                           <span class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title u-pl-none">
+                                                {{ summaryPayment.discount.rewardCode === 'AVIOS' ? ('MMB_AVIOS_PAYMENT_FEE_TEXT' | translate) : summaryPayment.discount.id }}
+                                            </span>
+                                            <span class="ib-text ib-text--color-normal u-float-right"> {{ '- ' +
+                                                summaryPayment.discount.amount}}
+                                            </span>
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <footer class="ib-summary__footer u-text-right">
+                        <!-- Total principal -->
+                        <div class="u-mb-small">
+                            <span
+                                class="ib-text ib-text--especial ib-summary__footer-price ib-summary__footer-price--small">
+                                {{'TOTAL_TEXT' | translate}}
+                            </span>
+                            <span
+                                class="ib-text ib-text--especial ib-summary__footer-price ib-summary__footer-price--medium">
+                                {{total}}
+                            </span>
+                        </div>
+
+                        <!-- Total DCC en una nueva línea -->
+                        <div *ngIf="totalDcc" class="u-mb-small">
+                            <span
+                                class="ib-text ib-text--especial ib-summary__footer-price ib-summary__footer-price--small">
+                                {{'DCC_FINAL_PRICE' | translate}}:
+                            </span>
+                            <span
+                                class="ib-text ib-text--especial ib-summary__footer-price ib-summary__footer-price--medium">
+                                {{ totalDcc }}
+                            </span>
+                        </div>
+
+                        <!-- Información de Avios -->
+                        <p class="ib-text ib-text--block ib-text--color-unfocused" *ngIf="flowApp !== 'MMBANC'">
+                            {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                            <span class="ib-text ib-text--bold ib-text--underline">
+                                {{aviosToEarn | aviosFormat }}
+                                {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+                                {{elitePointsToEarn | aviosFormat }}
+                                {{'AVIOS_ELITE_TO_EARN_USER_3'| translate}}
+                            </span>
+                        </p>
+                        <p class="ib-text ib-text--block ib-text--color-unfocused"
+                            *ngIf="flowApp === 'MMBANC' && aviosToEarn">
+                            {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                            <span class="ib-text ib-text--bold ib-text--underline">
+                                {{aviosToEarn | aviosFormat }}
+                                {{'AVIOS_TEXT'| translate}}
+                            </span>
+                        </p>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="u-mt-small u-mb-medium" *ngIf="deepLinkData">
+        <p class="u-text-center"><a class="ib-link" href="{{deepLinkData.returnUrl}}">{{'COMEBACK_TO' | translate}}
+                {{deepLinkData.airline.name}}</a></p>
+    </div>
+
+    <ib-mmb-avios-summary></ib-mmb-avios-summary>
+
+    <!-- <equal-height> -->
+    <div class="ib-flex ib-flex--gap-medium ib-flex--gap-small-mobile ib-flex--align-strech ib-flex__column--mobile ">
+        <section class="u-width-full">
+            <div class="ib-box ib-box--small ib-box--empty ib-box--bordered mmb-height-100" data-equal="box-info">
+                <div class="ib-info-icon ib-info-icon--small">
+                    <div class="ib-info-icon__wrapper">
+                        <span class="ib-info-icon__icon icon-logo_aplic_peque"></span>
+                        <div class="ib-info-icon__info">
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                                <span class="ib-heading ib-heading--type-5">{{'CONFIRM_IBERIA_PLUS'|translate}}</span>
+                            </div>
+                            <span class="ib-text">{{'CONFIRM_IBERIA_PLUS_EXPERIENCE'|translate}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="u-width-full">
+            <div class="ib-box ib-box--small ib-box--empty ib-box--bordered mmb-height-100" data-equal="box-info">
+                <div class="ib-info-icon ib-info-icon--small">
+                    <div class="ib-info-icon__wrapper">
+                        <span class="ib-info-icon__icon icon-editar_perfil"></span>
+                        <div class="ib-info-icon__info">
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                                <span class="ib-heading ib-heading--type-5">{{'CONFIRM_HELP_CENTER'|translate}}</span>
+                            </div>
+                            <span class="ib-text">{{'CONFIRM_HELP_INFO'|translate}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="u-width-full">
+            <div class="ib-box ib-box--small ib-box--empty ib-box--bordered mmb-height-100" data-equal="box-info">
+                <div class="ib-info-icon ib-info-icon--small">
+                    <div class="ib-info-icon__wrapper">
+                        <span class="ib-info-icon__icon icon-mensajes"></span>
+                        <div class="ib-info-icon__info">
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                                <span
+                                    class="ib-heading ib-heading--type-5">{{'CONFIRM_CUSTOMER_SUPPORT'|translate}}</span>
+                            </div>
+                            <span class="ib-heading"
+                                data-ng-class="{'ib-heading--type-2': ($rootScope.phonesList['RESERVAS'].prefixAlt + ' ' + $rootScope.phonesList['RESERVAS'].telephoneAlt).length < 10,'ib-heading--type-5':($rootScope.phonesList['RESERVAS'].prefixAlt + ' ' + $rootScope.phonesList['RESERVAS'].telephoneAlt).length >= 10}">
+                                {{$rootScope.phonesList['RESERVAS']?.prefixAlt + ' ' +
+                                $rootScope.phonesList['RESERVAS']?.telephoneAlt}}</span>
+                            <span class="ib-text">{{'CONFIRM_CONSULT'|translate}}
+                                <a id="pmt-mmb-confirmation-twitter-link" class="ib-link"
+                                    href="{{'TWITTER_LINK' | link }}" target="_blank" rel="noopener noreferrer"
+                                    title="{{'CONFIRM_TWITTER_TITLE'|translate}}">{{'CONFIRM_TWITTER'|translate}}</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- </equal-height> -->
+
+</mmb-layout>
+<div id="pmt-iberia-pay-logs" class="sr-only" *ngIf="ibPayTrace">{{ibPayTrace | json }}</div>

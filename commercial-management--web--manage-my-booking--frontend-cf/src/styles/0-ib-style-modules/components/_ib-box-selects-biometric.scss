@@ -1,0 +1,756 @@
+/* -------------------------------------------------------------
+    #BOX SELECTS BIOMETRIC
+----------------------------------------------------------------- */
+
+
+.#{$wefront__namespace}box-selects-biometric {
+    &__content {
+        display: table;
+        width: 100%;
+        font-size: 0;
+        background-color: color(white);
+        box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+
+        //State Modifiers
+        &--not-active {
+            .#{$wefront__namespace}box-selects-biometric {
+                &__icon {
+                    top: rem(2);
+                    color: color(primary);
+                    cursor: pointer;
+
+                    &--list {
+                        color: color(red-50);
+                    }
+                }
+            }
+        }
+
+        &--not-checked {
+            .#{$wefront__namespace}box-selects-biometric {
+                &__icon {
+                    color: color(primary);
+                }
+            }
+        }
+
+        &--active {
+            .#{$wefront__namespace}box-selects-biometric {
+                &__profile {
+                    padding-top: rem(13);
+                }
+
+                &__icon {
+                    top: rem(15);
+
+                    &.icon-biometria {
+                        color: color(primary);
+                    }
+
+                    &.icon-validar {
+                        position: static;
+                        color: color(green-30);
+                    }
+                }
+            }
+        }
+
+        &--available {
+            .#{$wefront__namespace}box-selects-biometric {
+                &__icon--list {
+                    color: color(gray-20);
+                }
+            }
+        }
+
+        &--not-available {
+            .#{$wefront__namespace}box-selects-biometric {
+                &__profile {
+                    padding-top: rem(13);
+                }
+
+                &__icon {
+                    top: rem(15);
+                    color: color(primary);
+
+                    &.icon-wrong {
+                        color: color(gray-15);
+                    }
+
+                    &--list {
+                        &.icon-wrong {
+                            color: color(gray-20);
+                        }
+                    }
+                }
+
+                &__header {
+                    opacity: 0.7;
+
+                    &--w-list {
+                        opacity: 1;
+                    }
+                }
+
+                &__profile-check {
+                    cursor: text;
+
+                    span {
+                        text-decoration: none;
+                        color: color(gray-15);
+                    }
+
+                    &::after {
+                        content: none;
+                    }
+                }
+            }
+        }
+
+        &--w-list {
+            padding: rem(16);
+            border-bottom: rem(1) solid color(gray-50);
+            background-color: color(gray-60);
+            box-shadow: none;
+        }
+    }
+
+
+    &__header {
+        position: relative;
+        display: table-cell;
+        width: 58%;
+        padding: rem(11) rem(72) rem(8) rem(16);
+        border-right: rem(1) solid color(gray-40);
+        vertical-align: top;
+
+        //Icon modifiers
+        &--adult {
+            .#{$wefront__namespace}box-selects-biometric__header-icon {
+                &::before {
+                    content: "\e981";
+                    margin-left: rem(7);
+                    font-family: $font-icons;
+                    font-size: rem(50);
+                    color: color(gray-30);
+                }
+            }
+
+            &.#{$wefront__namespace}box-selects-biometric__header--w-list {
+                .#{$wefront__namespace}box-selects-biometric__header-icon {
+                    &::before {
+                        margin: 0;
+                        font-size: rem(26);
+                        color: color(gray-20);
+                    }
+                }
+            }
+        }
+
+        &--kids {
+            .#{$wefront__namespace}box-selects-biometric__header {
+                padding-top: rem(20);
+                padding-bottom: rem(19);
+
+                &-icon {
+                    &::before {
+                        content: "\e986";
+                        margin: 0 rem(10);
+                        font-family: $font-icons;
+                        font-size: rem(36);
+                        color: color(gray-30);
+                    }
+                }
+            }
+
+            &.#{$wefront__namespace}box-selects-biometric__header--w-list {
+                .#{$wefront__namespace}box-selects-biometric__header-icon {
+                    &::before {
+                        margin: 0;
+                        font-size: rem(26);
+                        color: color(gray-20);
+                    }
+                }
+            }
+        }
+
+        &--baby {
+            .#{$wefront__namespace}box-selects-biometric__header {
+                padding-top: rem(20);
+                padding-bottom: rem(19);
+
+                &-icon {
+                    &::before {
+                        content: "\e917";
+                        margin: 0 rem(10);
+                        font-family: $font-icons;
+                        font-size: rem(36);
+                        color: color(gray-30);
+                    }
+                }
+            }
+
+            &.#{$wefront__namespace}box-selects-biometric__header--w-list {
+                .#{$wefront__namespace}box-selects-biometric__header-icon {
+                    &::before {
+                        margin: 0;
+                        font-size: rem(26);
+                        color: color(gray-20);
+                    }
+                }
+            }
+        }
+
+        &::before {
+            content: '""';
+            position: absolute;
+            top: rem(40);
+            right: rem(-6);
+            width: rem(10);
+            height: rem(10);
+            border-top: rem(1) solid color(gray-40);
+            border-right: rem(1) solid color(gray-40);
+            background-color: color(white);
+            transform: rotate(45deg);
+        }
+
+        &--w-list {
+            width: 40%;
+            padding: 0 rem(10) 0 0;
+            border-right: none;
+
+            &::before {
+                content: none;
+            }
+        }
+    }
+
+    &__header-text {
+        display: inline-block;
+        width: auto;
+        max-width: none;
+        max-width: calc(100% - 57px);
+        font-family: $font-special;
+        font-size: rem(26);
+        line-height: rem(32);
+        vertical-align: middle;
+
+        &--list {
+            max-width: none;
+            font-family: $font-normal;
+            font-size: rem(13);
+            line-height: normal;
+        }
+    }
+
+    &__header-icon {
+        position: relative;
+        color: color(gray-30);
+        vertical-align: middle;
+    }
+
+    &__baby {
+        padding-left: rem(42);
+
+        &-icon {
+            vertical-align: middle;
+
+            &::before {
+                content: "\e917";
+                margin: 0 rem(10);
+                font-family: $font-icons;
+                font-size: rem(36);
+                color: color(gray-30);
+            }
+        }
+    }
+
+    &__container {
+        padding: rem(16) rem(28) rem(18) rem(32);
+
+        &-col {
+            display: inline-block;
+            width: 100%;
+            vertical-align: top;
+
+            &--flex {
+                display: flex;
+                flex-flow: row wrap;
+                align-items: center;
+                column-gap: rem(8);
+            }
+        }
+
+        &-status-row {
+            display: flex;
+
+            span {
+                position: static;
+            }
+        }
+
+        &--list {
+            display: table-cell;
+            min-height: auto;
+            padding: 0;
+            vertical-align: middle;
+        }
+    }
+
+    &__profile {
+        position: relative;
+        padding-left: rem(28);
+
+        &-state {
+            font-family: $font-special;
+            font-size: rem(18);
+            line-height: rem(32);
+            color: color(gray-10);
+
+            &-value {
+                margin-left: rem(5);
+                font-size: 1rem;
+                font-weight: bold;
+            }
+
+            &--list {
+                font-family: $font-normal;
+                font-size: rem(13);
+                font-weight: normal;
+                line-height: normal;
+                color: color(gray-10);
+            }
+        }
+
+        &-check {
+            font-size: rem(13);
+
+            span {
+                text-decoration: underline;
+            }
+
+            &::after {
+                content: "\e973";
+                font-family: $font-icons;
+                font-size: rem(18);
+                line-height: rem(20);
+                color: color(primary);
+            }
+        }
+    }
+
+    &__icon {
+        position: absolute;
+        top: rem(4);
+        left: rem(-4);
+        font-family: $font-icons;
+        font-size: rem(29);
+
+        &--list {
+            font-size: rem(20);
+
+            &.icon-biometria {
+                font-size: rem(16);
+            }
+        }
+    }
+
+    &__message {
+        height: 100%;
+        padding: rem(10);
+        background-color: color(gray-15);
+
+        &-text {
+            font-family: $font-normal;
+            font-size: rem(13);
+            font-weight: bold;
+            line-height: rem(18);
+            color: color(white);
+        }
+    }
+
+    .popover {
+        max-width: rem(339);
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}box-selects-biometric {
+        &__header {
+            width: 50%;
+
+            &--w-list {
+                &::before {
+                    content: none;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}box-selects-biometric {
+        &__content {
+            display: block;
+
+            &--active {
+                .#{$wefront__namespace}box-selects-biometric {
+                    &__profile {
+                        padding-top: rem(4);
+                    }
+
+                    &__icon {
+                        top: rem(5);
+                    }
+                }
+            }
+
+            &--not-available {
+                .#{$wefront__namespace}box-selects-biometric {
+                    &__header {
+                        padding-top: rem(12);
+                        padding-bottom: rem(10);
+
+                        &--w-list {
+                            padding-top: 0;
+                            padding-bottom: 0;
+                        }
+                    }
+                }
+            }
+
+            &--w-list {
+                display: table;
+            }
+        }
+
+        &__header {
+            display: block;
+            width: 100%;
+            padding: 0 rem(11);
+            border-right: 0;
+            border-bottom: rem(1) solid color(gray-40);
+
+            &::before {
+                inset: auto auto rem(-6) rem(69);
+                transform: rotate(135deg);
+            }
+
+            &--w-list {
+                display: table-cell;
+                width: 40%;
+                padding: 0 rem(8) 0 0;
+                border-bottom: none;
+            }
+        }
+
+        &__header-text {
+            font-size: rem(24);
+
+            &--list {
+                font-family: $font-normal;
+                font-size: rem(13);
+            }
+        }
+
+        &__container {
+            width: 100%;
+            min-height: rem(72);
+            padding-right: rem(45);
+            padding-left: rem(61);
+
+            &--list {
+                padding: 0;
+            }
+        }
+
+        &__profile {
+            &-state {
+                display: inline-block;
+                margin-right: rem(26);
+
+                &--list {
+                    margin-right: rem(8);
+                }
+            }
+
+            &-check {
+                display: inline-block;
+                max-width: none;
+
+                &::after {
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}box-selects-biometric {
+        &__content {
+            display: block;
+
+            &--not-checked {
+                .#{$wefront__namespace}box-selects-biometric {
+                    &__container-col {
+                        &:first-child {
+                            width: 60%;
+                        }
+                    }
+
+                    &__container-col--flex {
+                        &:first-child {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+
+            &--active {
+                .#{$wefront__namespace}box-selects-biometric {
+                    &__profile {
+                        padding-top: rem(0);
+                    }
+
+                    &__icon {
+                        top: 0;
+                    }
+
+                    &__container-col {
+                        &:first-child {
+                            width: 60%;
+                        }
+                    }
+
+                    &__container-col--flex {
+                        &:first-child {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__header {
+            display: block;
+            width: 100%;
+            padding: rem(0) rem(11);
+            border-right: 0;
+            border-bottom: rem(1) solid color(gray-40);
+
+            &--baby,
+            &--kids {
+                .#{$wefront__namespace}box-selects-biometric__header {
+                    padding-top: rem(12);
+                    padding-bottom: rem(10);
+                }
+            }
+
+            &::before {
+                inset: auto auto rem(-6) rem(69);
+                transform: rotate(135deg);
+            }
+
+            &--w-list {
+                padding: 0;
+                border-bottom: none;
+
+                &.#{$wefront__namespace}ib-box-selects-biometric__container {
+                    padding: 0 0 0 rem(26);
+                }
+            }
+        }
+
+        &__header-text {
+            font-size: rem(24);
+
+            &--list {
+                font-family: $font-normal;
+                font-size: rem(13);
+            }
+        }
+
+        &__container {
+            width: 100%;
+            min-height: rem(87);
+            padding: rem(15) rem(29) rem(16) rem(61);
+
+            &-col--flex {
+                flex-direction: column;
+                align-items: flex-start;
+                row-gap: rem(8);
+            }
+
+            &--list {
+                min-height: auto;
+                padding: 0 0 0 rem(26);
+            }
+        }
+
+        &__profile {
+            &-check {
+                display: inline-block;
+                max-width: none;
+
+                &::after {
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}box-selects-biometric {
+        &__content {
+            &--not-checked,
+            &--active {
+                .#{$wefront__namespace}box-selects-biometric {
+                    &__container {
+                        min-height: rem(84);
+                        padding-top: rem(10);
+                        padding-bottom: rem(12);
+
+                        &-col {
+                            &:first-child {
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+                .#{$wefront__namespace}box-selects-biometric__container--list {
+                    padding-bottom: 0;
+                }
+            }
+
+            &--not-active {
+                .#{$wefront__namespace}box-selects-biometric__container {
+                    padding-bottom: rem(12);
+                }
+                .#{$wefront__namespace}box-selects-biometric__container--list {
+                    padding: rem(8) 0 0 rem(26);
+                }
+            }
+
+            &--not-available {
+                .#{$wefront__namespace}box-selects-biometric {
+                    &__profile-check {
+                        text-align: left;
+                    }
+
+                    &__container {
+                        padding-top: rem(16);
+                        padding-bottom: rem(12);
+                    }
+                }
+                .#{$wefront__namespace}box-selects-biometric__container--list {
+                    padding-bottom: 0;
+                    padding-left: rem(26);
+                }
+            }
+        }
+
+        &__header {
+            padding: rem(3) rem(2) 0;
+
+            &--adult {
+                .#{$wefront__namespace}box-selects-biometric__header {
+                    &-icon {
+                        &::before {
+                            margin-left: 0;
+                        }
+                    }
+
+                    &-text {
+                        margin-left: rem(-4);
+                    }
+                }
+            }
+
+            &--baby,
+            &--kids {
+                .#{$wefront__namespace}box-selects-biometric__header {
+                    padding-top: rem(2);
+                    padding-bottom: 0;
+
+                    &-icon {
+                        &::before {
+                            margin: 0 0 0 rem(9);
+                        }
+                    }
+                }
+            }
+
+            &-icon {
+                display: inline-block;
+                margin-top: rem(-8);
+                margin-bottom: rem(-4);
+                font-size: rem(50);
+
+                &--list {
+                    display: block;
+                    margin-top: 0;
+                    margin-bottom: 0;
+                    font-size: rem(26);
+                }
+            }
+
+            &-text {
+                font-size: rem(20);
+
+                &--list {
+                    font-size: rem(13);
+                }
+            }
+
+            &::before {
+                left: rem(52);
+            }
+
+            &--w-list {
+                &.#{$wefront__namespace}ib-box-selects-biometric__container--list {
+                    padding-bottom: 0;
+                    padding-left: rem(26);
+                }
+            }
+        }
+
+        &__container {
+            min-height: auto;
+            padding-top: rem(11);
+            padding-left: rem(47);
+
+            &-col {
+                &:first-child {
+                    width: 100%;
+                }
+
+                &:nth-child(2) {
+                    width: 100%;
+                }
+            }
+
+            &--list {
+                padding-bottom: 0;
+                padding-left: rem(26);
+            }
+        }
+
+        &__profile {
+            margin-bottom: rem(9);
+
+            &-state--list {
+                font-size: rem(12);
+            }
+        }
+
+        &__message {
+            max-width: rem(194);
+        }
+
+        .popover {
+            max-width: rem(258);
+        }
+    }
+}

@@ -1,0 +1,35 @@
+<div class="ib-select-date" id="EXPIRY_DATE" data-ng-class="{'ib-select-date--error': expDateCtrl.containerForm.$submitted && (expDateCtrl.containerForm.expiryDateDay.$invalid || expDateCtrl.containerForm.expiryDateMonth.$invalid || expDateCtrl.containerForm.expiryDateYear.$invalid)}">
+    <span class="ib-select-date__label">{{'EXPIRY_DATE_FIELD_TITLE'|translate}}</span>
+    <ui-select ng-if="expDateCtrl.showDay" class="ib-select-date__action ib-select-date__action--day" data-ng-model="expDateCtrl['day']"
+        data-ng-change="expDateCtrl.daysSelected()" required name="expiryDateDay">
+        <ui-select-match class="ib-select-date__list-ipt" placeholder="{{'EXPIRY_DATE_FIELD_DAY_PLACEHOLDER'|translate}}">
+            <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+        </ui-select-match>
+        <ui-select-choices class="ib-select-date__list" repeat="item in (expDateCtrl.availableDays | filter: $select.search)">
+            <span class="ib-select-date__list-txt" ng-bind="item"></span>
+        </ui-select-choices>
+    </ui-select>
+    <ui-select class="ib-select-date__action ib-select-date__action--month" data-ng-model="expDateCtrl['month']" data-ng-change="expDateCtrl.updateMonthExpiration()"
+        required name="expiryDateMonth" data-ng-class="{'ib-select-date__action--month-first' : !expDateCtrl.showDay}">
+        <ui-select-match class="ib-select-date__list-ipt" placeholder="{{'EXPIRY_DATE_FIELD_MONTH_PLACEHOLDER'|translate}}">
+            <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+        </ui-select-match>
+        <ui-select-choices repeat="item in (expDateCtrl.availableMonths | filter: $select.search)">
+            <span class="ib-select-date__list-txt" data-ng-bind="item"></span>
+        </ui-select-choices>
+    </ui-select>
+    <ui-select class="ib-select-date__action" ng-class="{'ib-select-date__action--year': expDateCtrl.showDay,'ib-select-date__action--day':!expDateCtrl.showDay}"
+        data-ng-model="expDateCtrl['year']" data-ng-change="expDateCtrl.updateYearExpiration()" required name="expiryDateYear">
+        <ui-select-match class="ib-select-date__list-ipt" placeholder="{{expDateCtrl.showDay ? ('EXPIRY_DATE_FIELD_YEAR_PLACEHOLDER'|translate) : ('EXPIRY_DATE_FIELD_LIGHT_YEAR_PLACEHOLDER'|translate)}}">
+            <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+        </ui-select-match>
+        <ui-select-choices repeat="item in (expDateCtrl.availableYears | filter: $select.search)">
+            <span class="ib-select-date__list-txt" data-ng-bind="item"></span>
+        </ui-select-choices>
+    </ui-select>
+</div>
+<div ng-messages="expDateCtrl.containerForm.$submitted && ((expDateCtrl.containerForm.expiryDateDay.$invalid && expDateCtrl.containerForm.expiryDateDay.$error) 
+                    || (expDateCtrl.containerForm.expiryDateMonth.$invalid && expDateCtrl.containerForm.expiryDateMonth.$error) 
+                    || (expDateCtrl.containerForm.expiryDateYear.$invalid && expDateCtrl.containerForm.expiryDateYear.$error))">
+    <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+</div>

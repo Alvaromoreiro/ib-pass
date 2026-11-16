@@ -1,0 +1,112 @@
+/* -------------------------------------------------------------
+    #COUNTER
+----------------------------------------------------------------- */
+//@keyframes animatebottom{from{bottom:-50px;opacity:0} to{bottom:0;opacity:1}}
+//.#{$wefront__namespace}fade{
+//	position:relative;
+//}
+//.#{$wefront__namespace}fading {
+//	animation: animatebottom 0.2s;
+//}
+.#{$wefront__namespace}counter {
+    position: relative;
+    display: block;
+    font-size: 0;
+
+    &__col {
+        position: relative;
+        display: inline-block;
+        width: 50%;
+        vertical-align: bottom;
+
+        &--right {
+            padding-left: rem(10);
+        }
+    }
+
+    &__txt {
+        display: inline-block;
+        font-family: $font-normal;
+        font-size: rem(13);
+        line-height: rem(24);
+        color: color(gray-10);
+        vertical-align: top;
+
+        &--message {
+            font-family: $font-special;
+            font-size: rem(22);
+            line-height: rem(24);
+            color: color(primary);
+        }
+
+        &--counter {
+            overflow: hidden;
+            max-width: calc(100% - 53px);
+            font-family: $font-special;
+            font-size: rem(48);
+            line-height: rem(62);
+            color: color(primary);
+            float: left;
+        }
+    }
+
+
+    &__icon {
+        display: inline-block;
+        width: 100%;
+        margin-left: rem(-8);
+        font-size: rem(53);
+        line-height: rem(58);
+        color: color(primary);
+        vertical-align: top;
+
+        &::before {
+            float: left;
+        }
+    }
+
+    &--mb-40 {
+        margin-bottom: rem(40);
+    }
+}
+
+// Responsive
+@include media-query('mobile') {
+    .#{$wefront__namespace}counter {
+        &__col {
+            display: block;
+            width: 100%;
+
+            &--left {
+                padding-right: 0;
+                padding-bottom: rem(10);
+            }
+
+            &--right {
+                padding-left: 0;
+            }
+        }
+
+        &__txt {
+            display: block;
+            line-height: rem(21);
+
+            &--message {
+                font-size: rem(18);
+            }
+
+            &--counter {
+                display: inline;
+                max-width: calc(100% - 2.8125rem);
+                font-size: rem(36);
+                line-height: rem(52);
+            }
+        }
+
+        &__icon {
+            margin-left: rem(-8);
+            font-size: rem(45);
+            line-height: rem(50);
+        }
+    }
+}

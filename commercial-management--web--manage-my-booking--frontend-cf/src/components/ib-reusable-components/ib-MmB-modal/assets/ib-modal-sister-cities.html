@@ -1,0 +1,110 @@
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{'MMB_SISTER_NEARBY_CITIES' | translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible">Cerrar ventana modal</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body">
+    <div class="ib-layout__line-spacing">
+        <div class="ib-box-cities ib-box-cities__modal">
+            <form class="ib-box-cities__form ">
+                <div class="ib-box-cities__container">
+
+                    <fieldset class="ib-box-cities__fieldset">
+                        <legend class="ib-box-cities__legend">{{'MMB_SISTER_SOURCE_CITY' | translate}}</legend>
+                        <!-- Radio button for the case when the country has NO sister cities -->
+                        <ul class="ib-box-cities__list" ng-if="!modalCtrl.model.newSisterCities[modalCtrl.model.sisTripSliceId].originHasSisterCities">
+                            <li class="ib-box-cities__list-item">
+                                <div class="ib-radio ib-radio--double-radio">
+                                    <input type="radio" class="ib-radio__input" checked/>
+                                    <label class="ib-radio__label">
+                                        <span class="ib-radio__text">
+                                            {{modalCtrl.model.newSisterCities[modalCtrl.model.sisTripSliceId].origin.originOrderCities.description}}
+                                            ({{modalCtrl.model.newSisterCities[modalCtrl.model.sisTripSliceId].origin.originOrderCities.code}})
+                                        </span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- Checkbox list for the case when the country HAS sister cities -->
+                        <ul class="ib-box-cities__list" ng-if="modalCtrl.model.newSisterCities[modalCtrl.model.sisTripSliceId].originHasSisterCities">
+                            <li class="ib-box-cities__list-item ib-check--unfocused">
+                                <div class="ib-check ib-check--disabled">
+                                    <input focusin type="checkbox" class="ib-check__input" disabled checked/>
+                                    <label class="ib-check__label">
+                                        <span class="ib-check__text">
+                                            {{modalCtrl.model.newSisterCities[modalCtrl.model.sisTripSliceId].origin.originOrderCities.description}} ({{modalCtrl.model.newSisterCities[modalCtrl.model.sisTripSliceId].origin.originOrderCities.code}})
+                                        </span>
+                                    </label>
+                                </div>
+                            </li>
+                            <li class="ib-box-cities__list-item" data-ng-repeat="originSisterCity in modalCtrl.model.newSisterCities[modalCtrl.model.sisTripSliceId].origin.originSisterCities">
+                                <div class="ib-check">
+                                    <input type="checkbox" class="ib-check__input" ng-model="originSisterCity.isSelected"
+                                    id="{{originSisterCity.code}}_check_0" name="{{originSisterCity.code}}_check_0"/>
+                                    <label class="ib-check__label" for="{{originSisterCity.code}}_check_0">
+                                        <span class="ib-check__text">
+                                            {{originSisterCity.description}} ({{originSisterCity.code}})
+                                        </span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+                    <fieldset class="ib-box-cities__fieldset">
+                        <legend class="ib-box-cities__legend">{{'MMB_SISTER_DESTINY_CITY' | translate}}</legend>
+                        <!-- Radio button for the case when the country has NO sister cities -->
+                        <ul class="ib-box-cities__list" ng-if="!modalCtrl.model.newSisterCities[modalCtrl.model.sisTripSliceId].destinationHasSisterCities">
+                            <li class="ib-box-cities__list-item">
+                                <div class="ib-radio ib-radio--double-radio">
+                                    <input type="radio" class="ib-radio__input" checked/>
+                                    <label class="ib-radio__label">
+                                        <span class="ib-radio__text">
+                                            {{modalCtrl.model.newSisterCities[modalCtrl.model.sisTripSliceId].destination.destinationOrderCities.description}} ({{modalCtrl.model.newSisterCities[modalCtrl.model.sisTripSliceId].destination.destinationOrderCities.code}})
+                                        </span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- Checkbox list for the case when the country HAS sister cities -->
+                        <ul class="ib-box-cities__list" ng-if="modalCtrl.model.newSisterCities[modalCtrl.model.sisTripSliceId].destinationHasSisterCities">
+                            <li class="ib-box-cities__list-item">
+                                <div class="ib-check ib-check--disabled">
+                                    <input focusin type="checkbox" class="ib-check__input" disabled checked/>
+                                    <label class="ib-check__label">
+                                        <span class="ib-check__text">
+                                            {{modalCtrl.model.newSisterCities[modalCtrl.model.sisTripSliceId].destination.destinationOrderCities.description}} ({{modalCtrl.model.newSisterCities[modalCtrl.model.sisTripSliceId].destination.destinationOrderCities.code}})
+                                        </span>
+                                    </label>
+                                </div>
+                            </li>
+                            <li class="ib-box-cities__list-item" data-ng-repeat="destinationSisterCity in modalCtrl.model.newSisterCities[modalCtrl.model.sisTripSliceId].destination.destinationSisterCities">
+                                <input focusin type="checkbox" class="ib-check__input" ng-model="destinationSisterCity.isSelected"
+                                id="{{destinationSisterCity.code}}_check_1" name="{{destinationSisterCity.code}}_check_1"/>
+                                <label class="ib-check__label" for="{{destinationSisterCity.code}}_check_1">
+                                    <span class="ib-check__text">
+                                        {{destinationSisterCity.description}} ({{destinationSisterCity.code}})
+                                    </span>
+                                </label>
+                            </li>
+                        </ul>
+                    </fieldset>
+                    <p class="ib-box-cities__text ib-box-cities__separation--double u-mt-medium">{{'MMB_SISTER_WARNING_1' | translate}}
+                        <b>{{'MMB_SISTER_WARNING_ORIGIN_DESTINATION' | translate}}</b>{{'MMB_SISTER_WARNING_2' | translate}}</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<footer class="ib-modals__footer">
+    <div class="ib-content-buttons">
+        <div class="ib-content-buttons__content-left">
+            <button class="ib-button ib-button ib-button--w-medium" type="button" ng-click="modalCtrl.accept()">{{'AVAILABILITY_SLICE_BUTTON_SELECT' | translate}}</button>
+        </div>
+        <div class="ib-content-buttons__content-right">
+            <a href="javascript:void(0)" title="Usarla solo para este vuelo" ng-click="modalCtrl.close()" class="ib-link">{{'MODAL_CANCEL' | translate}}</a>
+        </div>
+    </div>
+</footer>

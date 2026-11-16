@@ -1,0 +1,209 @@
+<div class="ib-layout__line-spacing ib-layout__line-spacing--large u-mt-xsmedium">
+
+    <div class="ib-box ib-box--medium ib-box--medium--invoice ib-box--empty-responsive u-pb-none">
+        <div ng-if="invoiceListCtrl.checkRequestInvoice" class="u-mb-mobile">
+            <div class="ib-flex ib-flex--align-center ib-icons--icon-left">
+                <span class="icon-nota ib-link__icon--big ib-link__icon--primary"></span>
+                <span class="ib-text ib-text--invoice-responsive">{{'MMB_INVOICES_FISCAL_DATA_FORM_TITLE1' | translate}}</span>
+            </div>
+            <p class="ib-text ib-text--small ib-text--lh-small ib-text--color-gray-dark--mobile">{{'MMB_INVOICES_FISCAL_DATA_FORM_BODY1' | translate}}</p>
+        </div>
+    </div>
+
+    <div ng-if="!invoiceListCtrl.noItemsRequestInvoice" class="ib-layout__line-spacing u-mt-xmedium hidden-md hidden-lg hidden-xl">
+        <div ng-if="invoiceListCtrl.selectableList">
+            <input
+                ng-change="invoiceListCtrl.addAllInvoiceItem()"
+                focusin
+                type="checkbox"
+                id="invoice_check_all_above"
+                name="invoice_check_all_above"
+                class="ib-check__input u-mr-small"
+                ng-model="invoiceListCtrl.checkAll"
+            />
+            <label for="invoice_check_all_above" class="ib-check__label ib-check__label--initial">
+                <span class="ib-check__text">
+                    {{'MMB_INVOICES_SELECTOR' | translate}}
+                </span>
+            </label>
+        </div>
+        <button ng-if="!invoiceListCtrl.noItemsRequestInvoice && !invoiceListCtrl.selectableList"
+            class="ib-button ib-button--block"
+            type="button"
+            data-ng-click="invoiceListCtrl.requestInvoices()">
+            {{invoiceListCtrl.literalRequestInvoice}}
+        </button>
+    </div>
+
+    <div ng-if="invoiceListCtrl.noItemsRequestInvoice" class="ib-layout__line-spacing--medium u-pb u-pt ib-flex ib-box u-mt-small hidden-md hidden-lg hidden-xl">
+        <span class="icon-informacion_2 ib-link__icon--xsmall ib-link__icon--primary"></span>
+        <span class="ib-text">
+            {{'MMB_INVOICES_ALERT_TEXT' | translate}}
+        </span>
+    </div>
+
+    <div class="ib-box ib-box--medium ib-box--medium--invoice">
+        <form name="tableForm" novalidate>
+            <legend class="u-hide-accessible">{{'MMB_INVOICES_TITLE'|translate}} form</legend>
+            <table class="ib-table-breakdown__table">
+                <thead class="ib-table-breakdown__head">
+                    <tr class="ib-table-breakdown__row">
+                        <th ng-if="invoiceListCtrl.selectableList " class="ib-table-breakdown__cell-title ib-table-breakdown__cell-title hidden-sm hidden-xs">
+                            <span class="ib-table-breakdown__txt"></span>
+                        </th>
+                        <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell-title--invoice hidden-sm hidden-xs">
+                            <span class="ib-table-breakdown__txt ib-table-breakdown__txt--bold">{{'MMB_INVOICES_TABLE_COLUMN1_TITLE' | translate}}</span>
+                        </th>
+                        <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell-title--invoice hidden-sm hidden-xs">
+                            <span class="ib-table-breakdown__txt ib-table-breakdown__txt--bold">{{'MMB_INVOICES_TABLE_COLUMN2_TITLE' | translate}}</span>
+                        </th>
+                        <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell-title--invoice hidden-sm hidden-xs">
+                            <span class="ib-table-breakdown__txt ib-table-breakdown__txt--bold">{{'MMB_INVOICES_TABLE_COLUMN3_TITLE' | translate}}</span>
+                        </th>
+                        <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell-title--invoice hidden-sm hidden-xs">
+                            <span class="ib-table-breakdown__txt"></span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="ib-table-breakdown__body ib-table-breakdown__body--responsive--invoice">
+                    <tr class="ib-table-breakdown__row"
+                        ng-class="invoiceListCtrl.selectableList ? 'ib-table-breakdown__row--responsive--invoice--checkbox' : 'ib-table-breakdown__row--responsive--invoice'"
+                        data-ng-repeat="invoice in invoiceListCtrl.listInvoices" >
+                        <td ng-if="invoiceListCtrl.selectableList && invoice.billingData === null" class="ib-table-breakdown__cell--responsive--invoice-check">
+                            <input
+                                ng-change="invoiceListCtrl.addRemoveInvoiceItem(invoice)"
+                                focusin
+                                type="checkbox"
+                                id="{{'invoice_check_' + $index}}"
+                                name="{{'invoice_check_' + $index}}"
+                                class="ib-check__input"
+                                ng-model="invoice.checked"
+                            />
+                            <label for="{{'invoice_check_' + $index}}" class="ib-check__label ib-check__label--vertical-align-baseline ib-check__label--vertical-align-sub">
+                                <span class="ib-check__text"></span>
+                            </label>
+                        </td>
+                        <td class="ib-table-breakdown__cell--responsive ib-table-breakdown__cell--responsive--invoice" data-attr="{{'MMB_INVOICES_TABLE_COLUMN1_TITLE' | translate}}">
+                            <span class="ib-table-breakdown__txt ib-table-breakdown__txt--responsive--invoice">{{invoice.route}}</span>
+                        </td>
+                        <td class="ib-table-breakdown__cell--responsive ib-table-breakdown__cell--responsive--invoice" data-attr="{{'MMB_INVOICES_TABLE_COLUMN2_TITLE' | translate}}">
+                            <span class="ib-table-breakdown__txt ib-table-breakdown__txt--responsive--invoice">{{invoice.concept}}</span>
+                        </td>
+                        <td class="ib-table-breakdown__cell--responsive ib-table-breakdown__cell--responsive--invoice u-text-right-desktop" data-attr="{{'MMB_INVOICES_TABLE_COLUMN3_TITLE' | translate}}">
+                            <span class="ib-table-breakdown__txt ib-table-breakdown__txt--responsive--invoice">{{invoice.price}}</span>
+                        </td>
+                        <td class="ib-table-breakdown__invoice-buttons">
+                            <div ng-if="!invoiceListCtrl.selectableList && invoice.state !== null" class="ib-flex ib-flex--flex-end ib-flex--align-center">
+                                <span data-ng-if="invoice.stateRequested === 'NOT_AVAILABLE'" class="icon-alertas ib-link__icon--small ib-link__icon--primary"></span>
+                                <span class="ib-table-breakdown__txt ib-table-breakdown__txt--responsive--invoice u-width-auto"
+                                data-ng-class="{ 'ib-table-breakdown__txt--red ib-text--underline' : invoice.stateRequested === 'NOT_AVAILABLE' }">{{invoice.state}}</span>
+                                <span data-ng-if="invoice.stateRequested !== 'NOT_AVAILABLE'" class="icon-nota ib-link__icon--big ib-link__icon--primary"></span>
+                                <a
+                                    data-ng-if="invoice.stateRequested !== 'NOT_AVAILABLE'"
+                                    data-ng-click="invoiceListCtrl.consult(invoice)"
+                                    class="ib-table-breakdown__txt ib-table-breakdown__txt--responsive--invoice ib-link ib-link--underline u-width-auto"
+                                    href="javascript:void(0)"
+                                    title="{{'MMB_INVOICES_ACTION1' | translate}}">
+                                    {{'MMB_INVOICES_ACTION1' | translate}}
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+
+        <div ng-if="!invoiceListCtrl.noItemsRequestInvoice" class="ib-layout__line-spacing ib-flex ib-flex--space-between u-mt-small u-ml-xsmall hidden-xs hidden-sm">
+            <div ng-if="invoiceListCtrl.selectableList" class="ib-flex">
+                <input
+                    ng-change="invoiceListCtrl.addAllInvoiceItem()"
+                    focusin
+                    type="checkbox"
+                    id="invoice_check_all_normal"
+                    name="invoice_check_all_normal"
+                    class="ib-check__input u-mr-small"
+                    ng-model="invoiceListCtrl.checkAll"
+                />
+                <label for="invoice_check_all_normal" class="ib-check__label">
+                    <span class="ib-check__text">
+                    {{'MMB_INVOICES_SELECTOR' | translate}}
+                    </span>
+                </label>
+            </div>
+            <div ng-if="!invoiceListCtrl.selectableList"></div>
+            <button ng-if="!invoiceListCtrl.noItemsRequestInvoice && !invoiceListCtrl.selectableList"
+                class="ib-link ib-link--button ib-link--primary ib-link--hover-primary ib-link--underline ib-link--black ib-link--arrow ib-link__icon--arrow-right"
+                type="button"
+                data-ng-click="invoiceListCtrl.requestInvoices()">
+                {{invoiceListCtrl.literalRequestInvoice}}
+            </button>
+        </div>
+
+        <div ng-if="invoiceListCtrl.noItemsRequestInvoice" class="ib-layout__line-spacing ib-flex ib-flex--align-center u-mt-small hidden-xs hidden-sm">
+            <span class="icon-informacion_2 ib-link__icon--big ib-link__icon--primary"></span>
+            <span class="ib-text">
+                {{'MMB_INVOICES_ALERT_TEXT' | translate}}
+            </span>
+        </div>
+    </div>
+
+    <div ng-if="!invoiceListCtrl.noItemsRequestInvoice" class="ib-layout__line-spacing u-mt-xmedium hidden-md hidden-lg hidden-xl">
+        <div ng-if="invoiceListCtrl.selectableList">
+            <input
+                ng-change="invoiceListCtrl.addAllInvoiceItem()"
+                focusin
+                type="checkbox"
+                id="invoice_check_all_below"
+                name="invoice_check_all_below"
+                class="ib-check__input u-mr-small"
+                ng-model="invoiceListCtrl.checkAll"
+            />
+            <label for="invoice_check_all_below" class="ib-check__label ib-check__label--initial">
+                <span class="ib-check__text">
+                    {{'MMB_INVOICES_SELECTOR' | translate}}
+                </span>
+            </label>
+        </div>
+        <button ng-if="!invoiceListCtrl.noItemsRequestInvoice && !invoiceListCtrl.selectableList"
+            class="ib-button ib-button--block"
+            type="button"
+            data-ng-click="invoiceListCtrl.requestInvoices()">
+            {{invoiceListCtrl.literalRequestInvoice}}
+        </button>
+    </div>
+
+    <div ng-if="invoiceListCtrl.noItemsRequestInvoice" class="ib-layout__line-spacing u-pt u-pb ib-flex ib-box u-mt-xmedium hidden-md hidden-lg hidden-xl">
+        <span class="icon-informacion_2 ib-link__icon--xsmall ib-link__icon--primary"></span>
+        <span class="ib-text">
+            {{'MMB_INVOICES_ALERT_TEXT' | translate}}
+        </span>
+    </div>
+
+    <div ng-if="invoiceListCtrl.selectableList" class="hidden-md hidden-lg hidden-xl">
+        <div class="ib-content-buttons">
+            <div class="ib-content-buttons__content-left">
+                <button
+                    class="ib-button ib-button--w-medium"
+                    type="button"
+                    ng-click="invoiceListCtrl.completeInvoiceData()"
+                    ng-disabled="invoiceListCtrl.listInvoicesSelected.length === 0"
+                    ng-class="{ 'ib-button--disabled' : invoiceListCtrl.listInvoicesSelected.length === 0 }"
+                >
+                    {{'MMB_INVOICES_FISCAL_DATA_FORM_ACTION3' | translate}}
+                </button>
+            </div>
+            <div
+                class="ib-content-buttons__content-right ib-content-buttons__content-right--mb-mobile"
+            >
+                <a
+                    href="javascript:void(0)"
+                    title="Cancelar"
+                    class="ib-link"
+                    ng-click="invoiceListCtrl.closeCompleteInvoiceData();"
+                    >{{'MMB_INVOICES_FISCAL_DATA_FORM_ACTION2' | translate}}</a
+                >
+            </div>
+        </div>
+    </div>
+
+</div>

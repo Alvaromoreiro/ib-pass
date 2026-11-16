@@ -1,0 +1,147 @@
+@import '../../../../../styles/_settings-tools';
+
+// :host:last-of-type > .ib-ng-accordion__tab {
+//     border: 0 none;
+// }
+
+.ib-ng-accordion__tab {
+    width: 100%;
+    padding: 0;
+    border-radius: 0;
+}
+
+.ib-ng-accordion__header {
+    &--disabled {
+        cursor: auto;
+    }
+}
+
+.ib-ng-accordion__link {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: rem(23) rem(24);
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+
+    &:focus {
+        z-index: 1;
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.ib-ng-accordion__headertext {
+    margin-right: 2.5rem;
+    font-family: $font-special;
+    font-size: rem(22);
+    font-weight: normal;
+    line-height: normal;
+    color: color(red-10);
+    letter-spacing: normal;
+    vertical-align: middle;
+
+    &::before{
+        font-size: rem(37);
+        vertical-align: bottom;
+    }
+}
+
+.ib-ng-accordion__icon {
+    position: relative;
+    order: 99;
+    margin-right: 0;
+    margin-left: auto;
+    transition: transform 0.2s;
+
+    &:hover,
+    &:focus {
+        color: color(red-10);
+
+        &::before {
+            color: color(red-10);
+        }
+    }
+
+    &::before {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        font-size: rem(35);
+        color: color(gray-30);
+        transform: translateY(-50%);
+    }
+}
+
+/** SAVED FOR ADD ICON ANIMATIONS
+.ib-ng-accordion .ib-ng-accordion__tab:not(.ib-ng-accordion__tab--active) .ib-ng-accordion-toggle-icon {
+
+    transform: rotate(0);
+}
+
+.ib-ng-accordion .ib-ng-accordion__tab.ib-ng-accordion__tab--active .ib-ng-accordion-toggle-icon {
+    transform: rotate(0);
+}
+*/
+
+.ib-ng-accordion-content__toggle {
+    overflow: hidden;
+}
+
+.ib-ng-accordion__content {
+    width: 100%;
+    padding: 0 0 rem(32);
+    border-radius: 0;
+    font-family: $font-normal;
+    font-size: rem(13);
+    line-height: rem(22);
+    color: color(gray-10);
+}
+
+.ib-ng-accordion__tab--active > .ib-ng-accordion-content__toggle:not(.ng-animating) {
+    overflow: inherit;
+}
+
+// .ib-ng-accordion__tab > .ib-ng-accordion-content__toggle {
+//     display: none;
+// }
+
+// .ib-ng-accordion__tab--active > .ib-ng-accordion-content__toggle {
+//     display: block;
+// }
+
+@include media-query("lg") {
+    .ib-ng-accordion__headertext {
+        font-size: rem(20);
+    }
+}
+
+@include media-query("md") {
+    .ib-ng-accordion__headertext {
+        font-size: rem(20);
+    }}
+
+
+@include media-query("sm") {
+    .ib-ng-accordion__link {
+        padding: rem(24) rem(16);
+    }
+
+    .ib-ng-accordion__headertext {
+        font-size: rem(20);
+    }
+}
+
+@include media-query("xs") {
+    .ib-ng-accordion__link {
+        padding: rem(24) rem(16);
+    }
+
+    .ib-ng-accordion__headertext {
+        font-size: rem(18);
+    }
+}

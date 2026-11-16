@@ -1,0 +1,423 @@
+/* -------------------------------------------------------------
+    #TABLE FLIGHT
+----------------------------------------------------------------- */
+.#{$wefront__namespace}table-flight-filters {
+    display: table;
+    width: 100%;
+    margin-bottom: rem(20);
+    table-layout: fixed;
+
+    &__item {
+        position: relative;
+        display: table-cell;
+        vertical-align: middle;
+
+        &:nth-child(1) {
+            width: rem(130);
+        }
+
+        &:nth-child(2) {
+            width: rem(228);
+        }
+
+        &:nth-child(3) {
+            width: rem(228);
+        }
+
+        &:nth-child(4) {
+            width: rem(228);
+        }
+
+        &:nth-child(5) {
+            width: rem(150);
+        }
+
+        &:nth-child(6) {
+            width: auto;
+            text-align: right;
+        }
+    }
+
+    &__text {
+        display: inline-block;
+        font-size: rem(12);
+        color: color(white);
+
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: underline;
+            color: color(white);
+            outline: none;
+
+            &::after {
+                text-decoration: none;
+            }
+        }
+        // Filter
+        &--up {
+            &::after {
+                content: "\e92e";
+                display: inline-block;
+                margin-left: rem(5);
+                font-family: $font-icons;
+                font-size: rem(16);
+                text-decoration: none;
+                color: color(gray-30);
+                vertical-align: middle;
+            }
+        }
+
+        &--down {
+            &::after {
+                content: "\e92d";
+                display: inline-block;
+                margin-left: rem(5);
+                font-family: $font-icons;
+                font-size: rem(16);
+                text-decoration: underline;
+                text-decoration: none;
+                color: color(gray-30);
+                vertical-align: middle;
+            }
+        }
+
+        &--underline {
+            text-decoration: underline;
+
+            &:focus,
+            &:active {
+                text-decoration: none;
+            }
+        }
+    }
+
+    &--cabins {
+        .#{$wefront__namespace}table-flight-filters {
+            &__item {
+                &:nth-child(1) {
+                    width: rem(211);
+                }
+
+                &:nth-child(2) {
+                    width: rem(269);
+                }
+
+                &:nth-child(3) {
+                    width: auto;
+                }
+
+                &:nth-child(4) {
+                    width: auto;
+                    text-align: right;
+                }
+            }
+        }
+    }
+
+    &--dark {
+        .#{$wefront__namespace}table-flight-filters {
+            &__text {
+                color: color(gray-10);
+            }
+        }
+    }
+
+    &--disruptions {
+        padding-left: rem(64);
+        margin-bottom: rem(13);
+        .#{$wefront__namespace}table-flight-filters {
+            &__item {
+                &:nth-child(1) {
+                    width: rem(272);
+                }
+
+                &:nth-child(2) {
+                    width: auto;
+                }
+            }
+        }
+    }
+
+    &--change-flight {
+        .#{$wefront__namespace}table-flight-filters__item {
+            width: auto;
+
+            &:nth-child(2) {
+                text-align: center;
+            }
+
+            &:last-child {
+                text-align: right;
+            }
+        }
+    }
+}
+
+// Responsive
+
+@include media-query('lg') {
+    .#{$wefront__namespace}table-flight-filters {
+        &__item {
+            &:nth-child(1) {
+                width: rem(150);
+            }
+
+            &:nth-child(2) {
+                width: rem(210);
+            }
+
+            &:nth-child(3) {
+                width: rem(150);
+            }
+
+            &:nth-child(4) {
+                width: rem(160);
+            }
+
+            &:nth-child(5) {
+                width: rem(140);
+            }
+
+            &:nth-child(6) {
+                width: auto;
+                text-align: right;
+            }
+        }
+
+        &--cabins {
+            .#{$wefront__namespace}table-flight-filters {
+                &__item {
+                    &:nth-child(1) {
+                        width: rem(176);
+                    }
+
+                    &:nth-child(2) {
+                        width: rem(237);
+                    }
+                }
+            }
+        }
+
+        &--disruptions {
+            .#{$wefront__namespace}table-flight-filters {
+                &__item {
+                    &:nth-child(1) {
+                        width: rem(246);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}table-flight-filters {
+        &__item {
+            &:nth-child(1) {
+                width: rem(107);
+            }
+
+            &:nth-child(2) {
+                width: rem(170);
+            }
+
+            &:nth-child(3) {
+                width: rem(120);
+            }
+
+            &:nth-child(4) {
+                width: rem(135);
+            }
+
+            &:nth-child(5) {
+                width: rem(50);
+            }
+
+            &:nth-child(6) {
+                width: rem(138);
+                text-align: right;
+            }
+        }
+
+        &--cabins {
+            .#{$wefront__namespace}table-flight-filters {
+                &__item {
+                    &:nth-child(1) {
+                        width: 18.5%;
+                    }
+
+                    &:nth-child(2) {
+                        width: 26%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}table-flight-filters {
+        &__item {
+            &:nth-child(1) {
+                width: auto;
+                min-width: rem(200);
+                text-align: left;
+            }
+
+            &:nth-child(6) {
+                text-align: right;
+            }
+        }
+
+        &--cabins {
+            .#{$wefront__namespace}table-flight-filters {
+                &__item {
+                    &:nth-child(1) {
+                        width: rem(350);
+                    }
+                    .#{$wefront__namespace}dropdown-select {
+                        padding-right: rem(26);
+
+                        &__caret {
+                            position: absolute;
+                            top: 0;
+                            padding: rem(1) 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        &--disruptions {
+            padding-left: 0;
+            margin-bottom: rem(17);
+            line-height: rem(8);
+            .#{$wefront__namespace}table-flight-filters {
+                &__item {
+                    &:nth-child(1) {
+                        width: auto;
+                    }
+                }
+            }
+        }
+
+        &--flex-smxs {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+            .#{$wefront__namespace}table-flight-filters {
+                width: auto;
+                max-width: initial;
+                margin-right: initial;
+                margin-left: initial;
+
+                &--cabins {
+                    width: auto;
+                    max-width: initial;
+                    margin-right: initial;
+                    margin-left: initial;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}table-flight-filters {
+        width: remcalc(100%, " + ", rem(32));
+        margin-right: rem(-16);
+        margin-left: rem(-16);
+
+        &__item {
+            &:nth-child(1) {
+                width: rem(200);
+                padding: 0 rem(8);
+                text-align: left;
+            }
+
+            &:nth-child(6) {
+                width: rem(90);
+                padding: 0 rem(8);
+                text-align: right;
+            }
+
+            &:first-child {
+                padding-left: rem(16);
+            }
+
+            &:last-child {
+                padding-right: rem(16);
+            }
+        }
+
+        &--cabins {
+            width: 100%;
+            padding: 0;
+            margin-right: 0;
+            margin-left: 0;
+            .#{$wefront__namespace}table-flight-filters {
+                &__item {
+                    padding: 0;
+
+                    &:nth-child(1) {
+                        width: rem(224);
+                    }
+                    .#{$wefront__namespace}dropdown-select {
+                        padding-right: rem(26);
+
+                        &__caret {
+                            position: absolute;
+                            top: 0;
+                            padding: rem(1) 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        &--disruptions {
+            width: 100%;
+            padding-left: 0;
+            margin-left: 0;
+            .#{$wefront__namespace}table-flight-filters {
+                &__item {
+                    &:nth-child(1) {
+                        width: auto;
+                    }
+                }
+            }
+        }
+
+        &--flex-smxs {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+            .#{$wefront__namespace}table-flight-filters {
+                width: auto;
+                max-width: initial;
+                margin-right: initial;
+                margin-left: initial;
+
+                &--cabins {
+                    width: auto;
+                    max-width: initial;
+                    margin-right: initial;
+                    margin-left: initial;
+                }
+            }
+        }
+    }
+
+    .ie9 {
+        .#{$wefront__namespace}table-flight-filters {
+            &__item {
+                &:nth-child(6) {
+                    width: rem(250);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,275 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ib-base
+//    Desripcion: Estilos de componentes mas generales
+//******************************************************************************/
+
+/* Estilos para botones */
+.#{$wefront__namespace}base__button {
+    border: 0;
+    background: transparent;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+/* Titulo y subtitulo principal de las vistas */
+.#{$wefront__namespace}base__page-titles {
+    padding-bottom: 1.15rem;
+
+    &-primary {
+        padding-bottom: 0;
+    }
+
+    &-secondary {
+        padding-top: 1rem;
+        padding-bottom: 0;
+        color: color(gray-30);
+    }
+    .#{$wefront__namespace}base__page-hightlight {
+        color: color(gray-10);
+    }
+
+    &--hightlight {
+        background: color(white);
+
+        /* padding-bottom: 1.338rem; */
+        .container {
+            position: relative;
+        }
+        .#{$wefront__namespace}base__page-titles-primary {
+            padding-top: 1.1rem;
+        }
+        .#{$wefront__namespace}base__page-icon {
+            position: absolute;
+            top: 1.2rem;
+            right: 2.6rem;
+            padding-right: 3rem;
+            line-height: 2rem;
+            .#{$wefront__namespace}base__page-icon__txt {
+                font-family: $font-normal;
+                font-size: rem(13);
+            }
+
+            &--close {
+                &::after {
+                    content: "\e935";
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    font-family: $font-icons;
+                    font-size: 2.5rem;
+                }
+            }
+        }
+    }
+}
+
+/* Duplicados en apis */
+
+.#{$wefront__namespace}base__choose-opt {
+    padding: 0 rem(15) rem(30) rem(15);
+    background: color(white);
+    box-shadow: 0 rem(2) 0 color(gray-40);
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &--radio {
+        padding: rem(30) rem(15);
+        background: color(white);
+        box-shadow: 0 rem(2) 0 color(gray-40);
+    }
+}
+
+.#{$wefront__namespace}base__choose--margint {
+    margin-top: 1.9625rem;
+}
+
+.#{$wefront__namespace}base__choose-opt__title {
+    border-bottom: rem(1) solid color(gray-50);
+}
+
+/* Total precios final de pagina */
+.#{$wefront__namespace}base__summary {
+    &--separator {
+        /* Version mobil */
+    }
+}
+.#{$wefront__namespace}base__summary-total {
+    padding: 0.6rem 2rem;
+    margin-bottom: 0.3rem;
+    text-align: right;
+    line-height: 3.2rem;
+    background: color(white);
+    box-shadow: 0 rem(2) 0 color(gray-40);
+    .#{$wefront__namespace}base__summary-text {
+        font-family: $font-special;
+        font-size: rem(32);
+        color: color(gray-30);
+        float: left;
+    }
+    .#{$wefront__namespace}base__summary-price {
+        font-family: $font-special;
+        //float: right;
+        font-size: rem(40);
+
+        &--cross-out {
+            margin-right: rem(20);
+            text-decoration: line-through;
+        }
+    }
+}
+
+
+/* Grupo de botones final de pagina flex-direction column */
+.#{$wefront__namespace}base__group-foot-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+    .#{$wefront__namespace}base__group-cancel {
+        margin-top: rem(15);
+
+        &--button {
+            margin-top: 0;
+        }
+    }
+}
+
+/* Grupo de botones final de pagina */
+.#{$wefront__namespace}base__group-foot {
+    padding-top: 1.55rem;
+
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+    .#{$wefront__namespace}base__group-cancel {
+        margin-top: rem(15);
+        float: left;
+
+        &--button {
+            margin-top: 0;
+        }
+    }
+    .#{$wefront__namespace}base__group-submit {
+        float: right;
+    }
+}
+
+
+/* Estilos elemento a la derecho y elemento a la izquierda */
+
+.#{$wefront__namespace}base__align-elements {
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+    .#{$wefront__namespace}base__align-elements-l {
+        float: left;
+    }
+    .#{$wefront__namespace}base__align-elements-r {
+        float: right;
+    }
+}
+
+.#{$wefront__namespace}base__breakdown-price {
+    display: none;
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}base__breakdown-price {
+        display: block;
+    }
+}
+
+
+/* SMALL RESOLUTION STYLES */
+
+@include media-query('mobile') {
+    /* Total precios final de pagina */
+    .#{$wefront__namespace}base__summary-total {
+        padding: 0.6rem 1.6rem;
+        .#{$wefront__namespace}base__summary-text {
+            font-size: rem(28);
+        }
+        .#{$wefront__namespace}base__summary-price {
+            font-size: rem(28);
+        }
+    }
+
+    .#{$wefront__namespace}base__breakdown-price {
+        display: block;
+    }
+    .#{$wefront__namespace}base__summary {
+        &--separator {
+            padding-bottom: rem(23);
+            margin-bottom: rem(7);
+            border-bottom: rem(1) solid color(gray-40);
+        }
+    }
+    .#{$wefront__namespace}base__choose-opt {
+        &--radio {
+            padding-top: 0;
+
+            .ibe-boarding-card__custom-check {
+                margin-top: rem(30);
+            }
+        }
+    }
+}
+
+
+/* X-SMALL RESOLUTION STYLES */
+
+@include media-query('xs') {
+    .#{$wefront__namespace}base__align-elements {
+        .#{$wefront__namespace}base__align-elements-l,
+        .#{$wefront__namespace}base__align-elements-r {
+            float: none;
+        }
+    }
+
+    /* Grupo de botones final de pagina */
+    .#{$wefront__namespace}base__group-foot {
+        .#{$wefront__namespace}base__group-cancel {
+            display: block;
+            margin-top: rem(15);
+            text-align: center;
+            float: none;
+
+            &--button {
+                width: 100%;
+                margin-top: rem(15);
+            }
+        }
+        .#{$wefront__namespace}base__group-submit {
+            display: block;
+            width: 100%;
+            float: none;
+        }
+
+        &--inline {
+            .#{$wefront__namespace}base__group-cancel {
+                display: inline-block;
+                text-align: left;
+                float: left;
+            }
+            .#{$wefront__namespace}base__group-submit {
+                display: inline-block;
+                width: auto;
+                float: right;
+            }
+        }
+    }
+}

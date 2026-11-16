@@ -1,0 +1,474 @@
+/* -----------------------------------------------------------------
+    #MMB DASHBOARD ITEM
+----------------------------------------------------------------- */
+.#{$wefront__namespace}mmb-dash-item {
+    display: block;
+    width: 100%;
+    padding: rem(24) rem(24) rem(32);
+    margin-top: rem(32);
+    background-color: color(white);
+    box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &__title {
+        font-family: $font-special;
+        font-size: rem(24);
+        line-height: normal;
+        color: color(gray-10);
+    }
+
+    &__action {
+        display: block;
+        width: 100%;
+        border-top: rem(4) solid color(primary);
+
+        &--link {
+            position: relative;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            padding: rem(20) rem(16) rem(24) rem(24);
+
+            &:hover {
+                text-decoration: none;
+            }
+
+            &::before {
+                position: relative;
+                top: rem(-2);
+                left: rem(-5);
+                font-size: rem(33);
+                color: color(primary);
+            }
+
+            &.icon-mensajes {
+                &::before {
+                    top: rem(5);
+                    font-size: rem(18);
+                }
+            }
+
+            &-content {
+                width: 100%;
+            }
+
+            &-title {
+                display: flex;
+                justify-content: space-between;
+                font-family: $font-special;
+                // padding-right: rem(15);
+                font-size: rem(24);
+                line-height: normal;
+                color: color(gray-10);
+
+                &::after {
+                    content: "\e973";
+                    position: relative;
+                    top: rem(4);
+                    right: rem(-7);
+                    margin-top: rem(0);
+                    font-family: $font-icons;
+                    font-size: rem(22);
+                    line-height: rem(23);
+                    color: color(primary);
+                }
+            }
+
+            &-text {
+                margin-top: rem(4);
+                font-family: $font-normal;
+                font-size: rem(13);
+                line-height: normal;
+                color: color(gray-30);
+            }
+        }
+    }
+
+    &__trip {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: flex-start;
+        border: 0;
+        line-height: rem(18);
+        background-color: transparent;
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &--departure,
+        &--arrival {
+            font-family: $font-special;
+            font-size: rem(18);
+            color: color(gray-10);
+        }
+
+        &--arrival {
+            &::before {
+                content: "-";
+                display: inline-block;
+                font-size: rem(12);
+                line-height: 1;
+                color: color(gray-15);
+            }
+        }
+
+        &--city,
+        &--code {
+            line-height: 1;
+        }
+
+        &--caret {
+            position: relative;
+            display: block;
+            width: 100%;
+            padding-right: rem(15);
+            text-align: left;
+
+            &::after {
+                content: "\e973";
+                position: absolute;
+                top: rem(-1);
+                right: rem(-4);
+                margin-top: rem(0);
+                font-family: $font-icons;
+                font-size: rem(19);
+                line-height: rem(20);
+                color: color(primary);
+            }
+        }
+
+        &--plane,
+        &--plane-reverse {
+            position: absolute;
+            top: rem(2);
+            left: rem(0);
+            padding-left: rem(15);
+
+            &::before {
+                content: "\ea54";
+                margin-top: rem(0);
+                font-family: $font-icons;
+                font-size: rem(17);
+                line-height: rem(20);
+                color: color(primary);
+            }
+        }
+
+        &--plane-reverse {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__info {
+        padding-top: rem(19);
+        margin-top: rem(17);
+        border-top: rem(1) solid color(gray-50);
+
+        &:first-child {
+            margin-top: rem(8);
+        }
+    }
+
+    &__concept {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-top: rem(8);
+        line-height: 1;
+
+        &--quantity,
+        &--text,
+        &--status,
+        &--info {
+            font-family: $font-normal;
+            font-size: rem(13);
+            line-height: rem(22);
+            color: color(gray-10);
+        }
+
+        &--status {
+            color: color(red-80);
+        }
+
+        &--icon {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: flex-start;
+            margin-right: rem(3);
+            line-height: 1;
+            color: color(gray-30);
+
+            &::before {
+                font-size: rem(22);
+                line-height: rem(22);
+            }
+            // Icon specifications
+            &.icon-flexibilidad {
+                &::before {
+                    font-size: rem(16);
+                }
+            }
+        }
+
+        &--info {
+            display: inline;
+        }
+
+        &--quantity {
+            &-x {
+                &::after {
+                    content: " x";
+                    display: inline;
+                }
+            }
+        }
+    }
+
+    &__travel {
+        &--date,
+        &--info {
+            margin-top: rem(8);
+            font-family: $font-normal;
+            font-size: rem(13);
+            line-height: normal;
+        }
+
+        &--date {
+            color: color(gray-10);
+        }
+
+        &--info {
+            text-decoration: underline;
+            color: color(gray-30);
+        }
+
+        &--icon {
+            display: inline-block;
+
+            &::before {
+                position: relative;
+                top: rem(0.4);
+                left: 0;
+                font-size: rem(17);
+                color: color(primary);
+            }
+
+            &-rotate {
+                -ms-transform: rotate(180deg);
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    &__passenger {
+        padding-top: rem(16);
+        margin-top: rem(16);
+        border-top: rem(1) solid color(gray-50);
+
+        &:first-child {
+            padding-top: 0;
+            margin-top: 0;
+            border-top: 0 none;
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &--name {
+            display: flex;
+            width: 100%;
+            font-family: $font-special;
+            font-size: rem(18);
+            line-height: rem(22);
+            color: color(gray-10);
+
+            &::before {
+                font-size: rem(22);
+                color: color(primary);
+            }
+        }
+
+        &--info {
+            padding-left: rem(22);
+            margin-top: rem(2);
+        }
+
+        &--text {
+            font-family: $font-normal;
+            font-size: rem(13);
+            color: color(gray-30);
+        }
+        .#{$wefront__namespace}mmb-dash-item {
+            &__trip {
+                &--caret {
+                    &::after {
+                        top: rem(1);
+                        line-height: rem(22);
+                    }
+                }
+            }
+        }
+    }
+
+    &__top {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__top--icon {
+        justify-content: initial;
+    }
+
+    &__top--icon::before {
+        font-size: rem(28);
+        color: color(primary);
+    }
+
+    &__menu {
+        position: relative;
+
+        &-button {
+            position: relative;
+            right: rem(-8);
+            display: flex;
+            width: rem(24);
+            height: rem(24);
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: center;
+            border: 0 none;
+            font-size: rem(23);
+            color: color(button-secondary);
+            background: 0 none;
+
+            &--active {
+                color: color(red-50);
+            }
+        }
+
+        &--list {
+            position: absolute;
+            right: rem(-8);
+            display: none;
+            min-width: rem(160);
+            height: auto;
+            margin-top: rem(5);
+            line-height: 1;
+            background-color: color(white);
+            box-shadow: rem(-1) rem(2) rem(6) 0 color(black, 0.04), 0 rem(-1) rem(27) 0 color(black, 0.07);
+            transition: display 0.5s ease-in;
+        }
+
+        &--open {
+            display: block;
+        }
+
+        &-item {
+            border-top: rem(1) solid color(gray-50);
+
+            &:first-child {
+                border-top: 0 none;
+            }
+        }
+
+        &-link {
+            display: block;
+            padding: rem(16);
+            font-size: rem(13);
+            color: color(gray-10);
+
+            &:hover,
+            &:focus,
+            &:active {
+                color: color(primary);
+            }
+        }
+    }
+    // Modifiers
+    &--action {
+        padding: rem(0);
+    }
+}
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}mmb-dash-item {
+        width: 100%;
+        padding: rem(24) rem(16);
+        // Modifiers
+        &--action {
+            padding: rem(0);
+        }
+    }
+}
+
+@include media-query("lg") {
+    .#{$wefront__namespace}mmb-dash-item {
+        padding: rem(24) rem(16);
+
+        &__trip {
+            &--departure,
+            &--arrival {
+                font-size: rem(15);
+            }
+        }
+
+        &__passenger {
+            &--name {
+                font-size: rem(15);
+            }
+        }
+        // Modifiers
+        &--action {
+            padding: rem(0);
+        }
+    }
+}
+
+@include media-query("md") {
+    .#{$wefront__namespace}mmb-dash-item {
+        &__trip {
+            &--departure,
+            &--arrival {
+                font-size: rem(17);
+            }
+        }
+
+        &__passenger {
+            &--name {
+                font-size: rem(17);
+            }
+        }
+    }
+}
+
+@include media-query("xs") {
+    .#{$wefront__namespace}mmb-dash-item {
+        padding: rem(24) rem(16);
+
+        &__trip {
+            &--departure,
+            &--arrival {
+                font-size: rem(15);
+            }
+        }
+
+        &__passenger {
+            &--name {
+                font-size: rem(15);
+            }
+        }
+        // Modifiers
+        &--action {
+            padding: rem(0);
+        }
+    }
+}

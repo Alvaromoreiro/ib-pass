@@ -1,0 +1,23 @@
+<div class="ib-ui-travel-info">
+    <div class="ib-ui-travel-info__travel" *ngFor="let journey of travelInfo.journey">
+        <p class="ib-ui-travel-info__passengers" *ngIf="journey.passengers">
+            <span class="ib-ui-travel-info__text--bold">{{'SUMMARY_PASSENGERS'|translate}}:</span>
+            <span class="ib-ui-travel-info__text--bold" *ngFor="let passenger of journey.passengers; let passIndex = index">{{passenger|lowercase}}{{passIndex === (journey.passengers.length - 1) ? '' : ', '}}</span>
+        </p>
+        <div class="ib-ui-travel-info__flights" *ngIf="journey.trips">
+            <div class="ib-ui-travel-info__flights--trip" *ngFor="let trip of journey.trips; let tripIndex = index">
+                <span class="ib-ui-travel-info__flights--icon" [ngClass]="{'icon-avion_vuelta': trip.type === 'return', 'icon-avion_ida': trip.type !=='return'}"></span>
+                <div class="ib-ui-travel-info__flights--info">
+                    <p class="ib-ui-travel-info__flights--travel">
+                        <span class="ib-ui-travel-info__flights--index ib-ui-travel-info__text" *ngIf="isMultiCity">{{'AVAILABILITY_MULTI_TRIP_TITLE_SLICE'|translate}} {{tripIndex + 1 + ': '}}</span>
+                        <span class="ib-ui-travel-info__flights--cities ib-ui-travel-info__text">{{trip.formedInfo}}</span>    
+                    </p>
+                    <p class="ib-ui-travel-info__flights--date ib-ui-travel-info__text" *ngIf="!isPaOpen">{{trip.date}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ib-ui-travel-info__claim ib-layout__line-spacing ib-layout__line-spacing--medium">
+        <p class="ib-ui-travel-info__text--bold">{{travelInfo.moreInfoText}}</p>
+    </div>
+</div>

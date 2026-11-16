@@ -1,0 +1,44 @@
+<div>
+    <header class="ib-modals__header">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+            <h2 class="ib-heading ib-heading--type-1">
+                <span class="ib-heading__text" *ngIf="!isOnHold">{{'KEEP_ALIVE_END_TIME_TITLE'|translate}}</span>
+                <span class="ib-heading__text" *ngIf="isOnHold">{{'KEEP_ALIVE_END_TIME_OH_TITLE'|translate}}</span>
+            </h2>
+        </div>
+        <div class="ib-modals__header-settings ib-modals__header-settings--mobile">
+            <button id="bbki-keep-alive-close-btn" type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" (click)="controlFlow( true )">
+                <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+            </button>
+        </div>
+    </header>
+    <section class="ib-modals__body">
+        <div>
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small" *ngIf="!moreInfo.show">
+                <p class="ib-text ib-text--bold">{{'KEEP_ALIVE_END_TIME_TEXT'|translate}}</p>
+            </div>
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--medium" *ngIf="!moreInfo.show">
+                <p *ngIf="!isOnHold" class="ib-text">{{'KEEP_ALIVE_END_TIME_TEXT_2'|translate}}</p>
+                <p *ngIf="isOnHold" class="ib-text">{{'KEEP_ALIVE_END_TIME_TEXT_OH_2'|translate}}</p>
+            </div>
+            <ib-activity-more-info
+                class="u-display-block u-mb-largeu-mt-large u-mt-medium-xs"
+                [travelInfo]="moreInfo"
+                [isMultiCity]="isMultiCity"
+                [isPaOpen]="isPaOpen"
+                *ngIf="moreInfo.show">
+            </ib-activity-more-info>
+        </div>
+    </section>
+    <footer class="ib-modals__footer">
+        <div class="ib-content-buttons">
+            <div class="ib-content-buttons__content-left">
+                <button *ngIf="!isOnHold" id="bbki-keep-alive-refreshflow" class="ib-button ib-button--w-medium" type="button" title="{{'KEEP_ALIVE_RELOAD_SEARCH'|translate}}" (click)="controlFlow( true )">{{'KEEP_ALIVE_RELOAD_SEARCH'|translate}}</button>
+                <button *ngIf="isOnHold" id="bbki-keep-alive-refreshflow" class="ib-button ib-button--w-medium" type="button" title="{{'KEEP_ALIVE_RETRIEVE_BOOKING'|translate}}" (click)="controlFlow( true )">{{'KEEP_ALIVE_RETRIEVE_BOOKING'|translate}}</button>
+            </div>
+            <div class="ib-content-buttons__content-right">
+                <a id="bbki-keep-alive-back-btn" class="ib-link" type="button" title="{{'KEEP_ALIVE_BACK_BUTTON'|translate}}" (click)="controlFlow( false )">{{'KEEP_ALIVE_BACK_BUTTON'|translate}}</a>
+            </div>
+        </div>
+    </footer>
+</div>

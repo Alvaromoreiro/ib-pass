@@ -1,0 +1,357 @@
+<div class="ib-layout__line-spacing u-text-center hidden-xl hidden-lg">
+    <h2 class="ib-heading ib-heading--title-box">{{'MMB_MANAGE_YOUR_RESERVATION' | translate}}</h2>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <!-- UMNR ALERT -->
+        <div data-ng-if="managTabCtrl.isActiveUmnr && !managTabCtrl.isDataUmnrCompleted"
+            class="ib-layout__section ib-msg-alert ib-msg-alert__gdr ib-msg-alert--umnr icon-iberia_ninos">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-border-left-none">
+                <p class="ib-msg-alert__text ib-msg-alert__text--umnr ib-fare-notice__txt ib-fare-notice__txt--bold">
+                    {{ 'Servicio de acompañamiento de menores' | translate }}
+                </p>
+                <p class="ib-msg-alert__text ib-msg-alert__umnr" bind-html-compile="managTabCtrl.model.umnrTest">
+                    Añade los datos del responsable legal del menor, y de las personas que le
+                    entregarán y recogerán en el aeropuerto.
+                </p>
+                <ul class="ib-list ib-list--umnr">
+                    <li class="ib-list__item">
+                        <button type="button" class="ib-button-link ib-link--underline"
+                            title="{{'Completar datos'|translate}}"
+                            data-ng-click="managTabCtrl.openDataModal({})">{{'Completar datos'|translate}}</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- END UMNR ALERT -->
+
+        <!-- ALERTA -->
+        <div ng-if="managTabCtrl.yourFlightsModel.noIberiaFlag" class="ib-msg-alert ib-msg-alert__gdr ib-msg-alert--info ib-msg-alert--transparent icon-alertas_2 alert fade in
+            ib-layout__section">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-border-left-none">
+                <p class="ib-msg-alert__text ib-msg-alert__text--title">
+                    {{'MMB_YOUR_FLIGHTS_FLIGHT_NO_IBERIA_ALERT_TITTLE'|translate}}</p>
+                <p class="ib-msg-alert__text">{{'MMB_YOUR_FLIGHTS_FLIGHT_NO_IBERIA_ALERT_TEXT'|translate}}</p>
+            </div>
+        </div>
+        <!-- Old Monetate warning message, COVID-19 warning -->
+        <div ng-if="managTabCtrl.flagsViews.showLinkToRubiQ || managTabCtrl.flagsViews.showFlexibilizationExceptionalMsg"
+            class="ib-msg-alert ib-msg-alert--bond icon-informacion_2 alert u-mb-smedium">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-border-left-none">
+                <h3 ng-if="managTabCtrl.flagsViews.showLinkToRubiQ" class="ib-msg-alert__text">
+                    {{managTabCtrl.infoBooking.flexibilizationCapabilitiesInformation.additionalInformation ?
+                    managTabCtrl.infoBooking.flexibilizationCapabilitiesInformation.additionalInformation.title:
+                    'MMB_FEXIBILIZATION_MONETATE_WARNING_TITLE'|translate}}</h3>
+                <h3 ng-if="managTabCtrl.flagsViews.showFlexibilizationExceptionalMsg && managTabCtrl.infoBooking"
+                    class="ib-msg-alert__text">
+                    {{managTabCtrl.getFlexibilizationTitle() | translate}}</h3>
+
+                <!-- <p class="ib-msg-alert__text ib-msg-alert__text--title">
+                    {{'MMB_FEXIBILIZATION_MONETATE_WARNING_TITLE'|translate}}</p> -->
+                <p ng-if="managTabCtrl.flagsViews.showLinkToRubiQ" class="ib-msg-alert__description u-mt-small">
+                    {{managTabCtrl.infoBooking.flexibilizationCapabilitiesInformation.additionalInformation ?
+                    managTabCtrl.infoBooking.flexibilizationCapabilitiesInformation.additionalInformation.subtitle :
+                    'MMB_FEXIBILIZATION_MONETATE_WARNING_SUBTITLE'|translate}}</p>
+                <p ng-if="managTabCtrl.flagsViews.showFlexibilizationExceptionalMsg"
+                    class="ib-msg-alert__description u-mt-small">
+                    {{managTabCtrl.infoBooking.flexibilizationCapabilitiesInformation.additionalInformation ?
+                    managTabCtrl.infoBooking.flexibilizationCapabilitiesInformation.additionalInformation.subtitle :
+                    'MMB_FLEX_CAPABILITIES_INFO_MODULE_SUBTITLE'|translate}}</p>
+                <p ng-if="managTabCtrl.flagsViews.showLinkToRubiQ" class="ib-msg-alert__description u-mt-small">
+                    {{'MMB_FEXIBILIZATION_MONETATE_WARNING_TITLE_LIST'|translate}}</p>
+                <ul class="ib-list u-mt-small">
+                    <!-- Change of flight options -->
+                    <li class="ib-list__item u-mt-xsmall"
+                        ng-if="!managTabCtrl.isCheckIn && managTabCtrl.flagsViews.showMonetateAlertCFPhone && managTabCtrl.flagsViews.allowedInvoluntaryFlightChange && !managTabCtrl.flagsViews.displayCCPhone">
+                        - <a href="javascript:void(0)" class="ib-msg-alert__link-black"
+                            ng-click="managTabCtrl.redirectToFlightChangeFlow()">{{'MMB_FEXIBILIZATION_MONETATE_WARNING_TITLE_FLIGHT_CHANGE'|translate}}</a>
+                    </li>
+                    <li class="ib-list__item u-mt-xsmall"
+                        ng-if="managTabCtrl.isCheckIn && managTabCtrl.flagsViews.showMonetateAlertCFPhone && managTabCtrl.flagsViews.allowedInvoluntaryFlightChange && !managTabCtrl.flagsViews.displayCCPhone">
+                        - <span
+                            class="ib-text u-text-decoration-none">{{'MMB_FEXIBILIZATION_MONETATE_WARNING_TITLE_FLIGHT_CHANGE'|translate}}</span>
+                    </li>
+                    <li class="ib-list__item u-mt-xsmall"
+                        ng-if="(!managTabCtrl.flagsViews.showMonetateAlertCFPhone && !managTabCtrl.externalAgency && managTabCtrl.flagsViews.allowedInvoluntaryFlightChange) || (managTabCtrl.flagsViews.displayCCPhone && !managTabCtrl.externalAgency)">
+                        - <span
+                            class="ib-text u-text-decoration-none">{{'MMB_FEXIBILIZATION_MONETATE_WARNING_TITLE_FLIGHT_CHANGE_CALLCENTER'|translate}}
+                            {{managTabCtrl.phone.RESERVAS.prefix}} {{managTabCtrl.phone.RESERVAS.telephone}}
+                            {{'MMB_FEXIBILIZATION_MONETATE_WARNING_TITLE_FLIGHT_CHANGE_CALLCENTER_JA_ZH' |
+                            translate}}</span>
+                    </li>
+                    <li class="ib-list__item u-mt-xsmall"
+                        ng-if="(!managTabCtrl.flagsViews.showMonetateAlertCFPhone && managTabCtrl.externalAgency) || (managTabCtrl.flagsViews.displayCCPhone && managTabCtrl.externalAgency)">
+                        - <span
+                            class="ib-text u-text-decoration-none">{{'MMB_FEXIBILIZATION_MONETATE_WARNING_TITLE_FLIGHT_CHANGE_CALLCENTER_EXTERNAL'|translate}}</span>
+                    </li>
+
+                    <!-- Voucher refund options -->
+                    <li class="ib-list__item u-mt-xsmall"
+                        ng-if="!managTabCtrl.flagsViews.showRefundVoucherSection  && ((managTabCtrl.flagsViews.showCashRefundOnline && managTabCtrl.flagsViews.showRefundCashSection)||!(!managTabCtrl.flagsViews.showCashRefundOnline && managTabCtrl.flagsViews.showRefundCashSection)) && managTabCtrl.flagsViews.allowedRefundVoucher">
+                        - <span class="ib-text u-text-decoration-none">{{managTabCtrl.oldExternalRubiQLabel |
+                            translate}} {{managTabCtrl.oldExternalRubiQLabelPhone}}
+                            {{managTabCtrl.oldExternalRubiQLabel2 | translate}}</span>
+                    </li>
+                    <li class="ib-list__item u-mt-xsmall"
+                        ng-if="!managTabCtrl.isCheckIn && managTabCtrl.flagsViews.showRefundVoucherSection && !managTabCtrl.flagsViews.showCashRefundOnline && managTabCtrl.flagsViews.allowedRefundVoucher">
+                        - <a href="javascript:void(0)" class="ib-msg-alert__link-black"
+                            ng-click="managTabCtrl.redirectToRefundSection()">{{'MMB_FEXIBILIZATION_MONETATE_WARNING_TITLE_VOUCHER'|translate}}</a>
+                    </li>
+                    <li class="ib-list__item u-mt-xsmall"
+                        ng-if="managTabCtrl.isCheckIn && managTabCtrl.flagsViews.showRefundVoucherSection && !managTabCtrl.flagsViews.showCashRefundOnline && managTabCtrl.flagsViews.allowedRefundVoucher">
+                        - <span>{{'MMB_FEXIBILIZATION_MONETATE_WARNING_TITLE_VOUCHER'|translate}}</span>
+                    </li>
+
+                    <!-- Cash refund options -->
+                    <li class="ib-list__item u-mt-xsmall"
+                        ng-if="!managTabCtrl.isCheckIn && !managTabCtrl.flagsViews.showRefundVoucherSection && managTabCtrl.flagsViews.showCashRefundOnline && managTabCtrl.flagsViews.showRefundCashSection">
+                        - <a href="javascript:void(0)" class="ib-msg-alert__link-black"
+                            ng-click="managTabCtrl.redirectToRefundSection()">{{'MMB_FLEX_CASH_REFUND_SUBTITLE'|translate}}</a>
+                    </li>
+                    <li class="ib-list__item u-mt-xsmall"
+                        ng-if="managTabCtrl.isCheckIn && !managTabCtrl.flagsViews.showRefundVoucherSection && managTabCtrl.flagsViews.showCashRefundOnline && managTabCtrl.flagsViews.showRefundCashSection">
+                        - <span>{{'MMB_FLEX_CASH_REFUND_SUBTITLE'|translate}}</span>
+                    </li>
+                    <li class="ib-list__item u-mt-xsmall"
+                        ng-if="!managTabCtrl.flagsViews.showCashRefundOnline && ((managTabCtrl.flagsViews.showRefundVoucherSection && managTabCtrl.flagsViews.allowedRefundVoucher)||!(!managTabCtrl.flagsViews.showRefundVoucherSection && managTabCtrl.flagsViews.allowedRefundVoucher)) && managTabCtrl.flagsViews.showRefundCashSection">
+                        - <span class="ib-text u-text-decoration-none">{{managTabCtrl.cashRefundText |
+                            translate}}</span>
+                    </li>
+
+                    <!-- Both Voucher and Cash refund options -->
+                    <li class="ib-list__item u-mt-xsmall"
+                        ng-if="!managTabCtrl.isCheckIn && managTabCtrl.flagsViews.showRefundVoucherSection && managTabCtrl.flagsViews.showCashRefundOnline && managTabCtrl.flagsViews.allowedRefundVoucher && managTabCtrl.flagsViews.showRefundCashSection">
+                        - <a href="javascript:void(0)" class="ib-msg-alert__link-black"
+                            ng-click="managTabCtrl.redirectToRefundSection()">{{'MMB_FLEX_CASH_VOUCHER_REFUND_SUBTITLE'|translate}}</a>
+                    </li>
+                    <li class="ib-list__item u-mt-xsmall"
+                        ng-if="managTabCtrl.isCheckIn && managTabCtrl.flagsViews.showRefundVoucherSection && managTabCtrl.flagsViews.showCashRefundOnline && managTabCtrl.flagsViews.allowedRefundVoucher && managTabCtrl.flagsViews.showRefundCashSection">
+                        - <span>{{'MMB_FLEX_CASH_VOUCHER_REFUND_SUBTITLE'|translate}}</span>
+                    </li>
+                    <li class="ib-list__item u-mt-xsmall"
+                        ng-if="!managTabCtrl.flagsViews.showRefundVoucherSection && !managTabCtrl.flagsViews.showCashRefundOnline && managTabCtrl.flagsViews.allowedRefundVoucher && managTabCtrl.flagsViews.showRefundCashSection">
+                        - <span class="ib-text u-text-decoration-none">{{managTabCtrl.cashVoucherRefundText |
+                            translate}}</span>
+                    </li>
+
+                    <li class="ib-list__item u-mt-xsmall"
+                        ng-if="managTabCtrl.isCheckIn && managTabCtrl.flagsViews.allowedInvoluntaryFlightChange">
+                        <span class="ib-text"><span
+                                class="ib-box-details__text--bold">{{'MMB_FEXIBILIZATION_MONETATE_WARNING_TITLE_FLIGHT_CHANGE_CALLCENTER_CKI'|translate}}</span>{{'MMB_FEXIBILIZATION_MONETATE_WARNING_TITLE_FLIGHT_CHANGE_CALLCENTER_CKI_2'|translate}}</span>
+                    </li>
+                    <li class="ib-list__item u-mt-xsmall"
+                        ng-if="managTabCtrl.isCheckIn && (managTabCtrl.flagsViews.showRefundVoucherSection || managTabCtrl.flagsViews.showCashRefundOnline)">
+                        <span class="ib-text"><span
+                                class="ib-box-details__text--bold">{{'MMB_FEXIBILIZATION_MONETATE_WARNING_TITLE_VOUCHER_AGENCY'|translate}}</span>{{'MMB_FEXIBILIZATION_MONETATE_WARNING_TITLE_VOUCHER_AGENCY_2'|translate}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Involuntary seats change message -->
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt-xsmall"
+            ng-if="managTabCtrl.seatChangeConditions.message && managTabCtrl.seatChangeConditions.message.showInPageDetailTrip">
+            <div class="ib-msg-alert ib-msg-alert--info icon-informacion_2 alert fade in">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                    <p class="ib-msg-alert__text ib-msg-alert__text--bold">
+                        {{'SEATS_CHANGE_INV_WARNING_TITLE'|translate}}</p>
+                    <p class="ib-msg-alert__text"
+                        ng-if="managTabCtrl.seatChangeConditions.message && managTabCtrl.seatChangeConditions.message.type === 'DOWNGRADE'">
+                        {{'SEATS_CHANGE_INV_WARNING_TEXT'|translate}} <span class="ib-link ib-link--light"
+                            ng-click="managTabCtrl.redirectToSeatmapLayout()">{{'SEATS_CHANGE_INV_WARNING_LINK_TEXT'|translate}}</span>
+                    </p>
+                    <p class="ib-msg-alert__text"
+                        ng-if="managTabCtrl.seatChangeConditions.message && managTabCtrl.seatChangeConditions.message.type === 'UPGRADE'">
+                        {{'SEATS_CHANGE_INV_WARNING_UPGRADING_TEXT'|translate}}
+                        <span class="ib-link ib-link--light" ng-click="managTabCtrl.redirectToSeatmapLayout()">
+                            {{'SEATS_CHANGE_INV_WARNING_LINK_TEXT'|translate}}
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Warning for Case 5, delay in operative window -->
+        <ib-disruption-delay-alert ng-if="managTabCtrl.caseFive" [flights]="managTabCtrl.delayedFlights">
+        </ib-disruption-delay-alert>
+    </div>
+</div>
+
+<div class="ib-mmb-dashboard__row" ng-if="!managTabCtrl.isSkeleton">
+    <ib-box-module-link class="ib-layout__section" data-ng-class="managTabCtrl.seatsAuctionData.colSize"
+        id="managTabCtrl.infoBooking.upgInformation"
+        data-ng-if="managTabCtrl.ancillariesInfo.ancillariesAvailable.indexOf('UPGRADING_BID') > -1 && (managTabCtrl.ancillariesInfo.bidsUpgradingInfo.bidsAvailable && !managTabCtrl.ancillariesInfo.bidsUpgradingInfo.bidsOpen) && managTabCtrl.ancillariesInfo.bidsUpgradingInfo.bidsOpen !== undefined"
+        link-id="managTabCtrl.seatsAuctionData.linkId" box-size="managTabCtrl.seatsAuctionData.boxSize"
+        icon="managTabCtrl.seatsAuctionData.icon" text="managTabCtrl.seatsAuctionData.text"></ib-box-module-link>
+
+    <ib-box-module-link class="ib-layout__section" data-ng-class="managTabCtrl.seatsAuctionPreBidData.colSize"
+        id="managTabCtrl.infoBooking.upgInformation"
+        data-ng-if="managTabCtrl.ancillariesInfo.ancillariesAvailable.indexOf('UPGRADING_BID') > -1 && (managTabCtrl.ancillariesInfo.bidsUpgradingInfo.bidsAvailable && managTabCtrl.ancillariesInfo.bidsUpgradingInfo.bidsOpen) && managTabCtrl.ancillariesInfo.bidsUpgradingInfo.bidsOpen !== undefined"
+        link-id="managTabCtrl.seatsAuctionPreBidData.linkId" col-size="managTabCtrl.seatsAuctionPreBidData.colSize"
+        box-size="managTabCtrl.seatsAuctionPreBidData.boxSize" icon="managTabCtrl.seatsAuctionPreBidData.icon"
+        text="managTabCtrl.seatsAuctionPreBidData.text"></ib-box-module-link>
+    <ib-box-module-link class="ib-layout__section" data-ng-class="managTabCtrl.digitalBoardingLinkData.colSize"
+        id="mmb-management-tab-digital-boarding-info" ng-if="managTabCtrl.showModuleLink"
+        link-id="managTabCtrl.digitalBoardingLinkData.linkId" col-size="managTabCtrl.digitalBoardingLinkData.colSize"
+        box-size="managTabCtrl.digitalBoardingLinkData.boxSize" is-digital-boarding="managTabCtrl.infoDigitalBoarding"
+        icon="managTabCtrl.digitalBoardingLinkData.icon"
+        text="managTabCtrl.digitalBoardingLinkData.text"></ib-box-module-link>
+    <ib-box-module-link class="ib-layout__section" data-ng-class="managTabCtrl.flightReminder.colSize"
+        id="mmb-management-tab-box-module-link" ng-if="managTabCtrl.flightReminder && managTabCtrl.print_itinerary"
+        link-id="managTabCtrl.flightReminder.linkId" col-size="managTabCtrl.flightReminder.colSize"
+        box-size="managTabCtrl.flightReminder.boxSize" icon="managTabCtrl.flightReminder.icon"
+        text="managTabCtrl.flightReminder.text"></ib-box-module-link>
+    <ib-box-module-link class="ib-layout__section" data-ng-class="managTabCtrl.checkInLinkData.colSize"
+        id="mmb-management-tab-box-module-link-2"
+        ng-if="managTabCtrl.model.infoCheckIn && managTabCtrl.availableForCheckin"
+        link-id="managTabCtrl.checkInLinkData.linkId" col-size="managTabCtrl.checkInLinkData.colSize"
+        box-size="managTabCtrl.checkInLinkData.boxSize" icon="managTabCtrl.checkInLinkData.icon"
+        text="managTabCtrl.checkInLinkData.text"></ib-box-module-link>
+</div>
+<div class="ib-mmb-dashboard__row">
+    <div class="ib-mmb-dashboard__column">
+        <!-- //sube en oculto descomentar cuando se desbloquee bonos de asistencia -->
+        <!-- <ib-mmb-manage-assistance-voucher-info
+            ng-if="managTabCtrl.attendanceVouchers.length > 0"
+            attendance-vouchers="managTabCtrl.attendanceVouchers">
+            </ib-mmb-manage-assistance-voucher-info> -->
+        <ib-MmB-manage-flights-info id="mmb-management-tab-manage-flights-info" ng-if="managTabCtrl.model.manageFlights"
+            model="managTabCtrl.model.manageFlights" flags="managTabCtrl.flagsViews">
+        </ib-MmB-manage-flights-info>
+
+        <ib-MmB-manage-baggage-info id="mmb-management-tab-manage-baggage-info" ng-if="managTabCtrl.model.baggageInfo"
+            model="managTabCtrl.model.baggageInfo" ancillaries-info="managTabCtrl.ancillariesInfo">
+        </ib-MmB-manage-baggage-info>
+
+        <vip-lounge-card ng-if="managTabCtrl.showGibeInvitationsLink"
+            ng-attr-exclusive-services-card-vip-data="{{managTabCtrl.gibeData | json}}">
+        </vip-lounge-card>
+
+        <ib-Mmb-manage-car-holidays-info ng-if="managTabCtrl.model.orderItems.vehicle"
+            model="managTabCtrl.model.orderItems.vehicle">
+        </ib-Mmb-manage-car-holidays-info>
+
+        <ib-Mmb-manage-experience-info ng-if="managTabCtrl.model.orderItems.experience"
+            model="managTabCtrl.model.orderItems.experience">
+        </ib-Mmb-manage-experience-info>
+
+        <ib-MmB-manage-insurance-info
+            ng-if="(managTabCtrl.model.manageInsurances && managTabCtrl.model.manageInsurances.length > 0) || (managTabCtrl.model.manageAllianzFusionInsurances && managTabCtrl.model.manageAllianzFusionInsurances.length > 0)"
+            model="managTabCtrl.model.manageInsurances.length === 0 ? managTabCtrl.model.manageAllianzFusionInsurances : managTabCtrl.model.manageInsurances">
+        </ib-MmB-manage-insurance-info>
+    </div>
+    <div class="ib-mmb-dashboard__column">
+        <ib-MmB-manage-passengers-info id="mmb-management-tab-manage-passengers-info"
+            ng-if="managTabCtrl.model.managePassengers" related="managTabCtrl.model.related"
+            model="managTabCtrl.model.managePassengers" apis="managTabCtrl.apis" flags="managTabCtrl.flags"
+            passengers="managTabCtrl.passengers">
+        </ib-MmB-manage-passengers-info>
+
+        <ib-MmB-manage-seat-info id="mmb-management-tab-manage-seat-info" ng-if="managTabCtrl.model.manageSeats"
+            model="managTabCtrl.model.manageSeats" order-items="managTabCtrl.model.orderItems"
+            ancillaries-info="managTabCtrl.ancillariesInfo" seat-conditions="managTabCtrl.seatChangeConditions"
+            canceled-seats-flag="managTabCtrl.canceledSeatsFlag">
+        </ib-MmB-manage-seat-info>
+
+        <ib-MmB-manage-petc-info id="mmb-management-tab-manage-petc-info" ng-if="managTabCtrl.model.orderItems.petc"
+            [model]="managTabCtrl.model.orderItems.petc" [passengers]="managTabCtrl.model.managePassengers"
+            [flights]="managTabCtrl.model.manageFlights">
+        </ib-MmB-manage-petc-info>
+
+        <ib-manage-carbon-footprint-info ng-if="managTabCtrl.model.co2FootprintInfo.showCarbonFootprintInfo"
+            [model]="managTabCtrl.model.co2FootprintInfo"></ib-manage-carbon-footprint-info>
+
+        <ib-MmB-manage-widget-info id="mmb-management-tab-widget-info"
+            ng-if="managTabCtrl.model.orderItems.globickV2.globickExperience.length > 0"
+            order="managTabCtrl.model.orderItems.globickV2.globickExperience" info-booking="managTabCtrl.infoBooking">
+        </ib-MmB-manage-widget-info>
+
+        <ib-Mmb-transfer-manage-widget-info id="mmb-management-tab-transfer-widget-info"
+            ng-if="managTabCtrl.model.orderItems.globickV2.globickTransfers.length > 0"
+            order="managTabCtrl.model.orderItems.globickV2.globickTransfers" info-booking="managTabCtrl.infoBooking">
+        </ib-Mmb-transfer-manage-widget-info>
+
+        <ib-MmB-manage-widget-info id="mmb-management-tab-widget-info"
+            ng-if="managTabCtrl.model.orderItems.globick.globickExperience.length > 0"
+            order="managTabCtrl.model.orderItems.globick.globickExperience" info-booking="managTabCtrl.infoBooking">
+        </ib-MmB-manage-widget-info>
+
+        <ib-Mmb-transfer-manage-widget-info id="mmb-management-tab-transfer-widget-info"
+            ng-if="managTabCtrl.model.orderItems.globick.globickTransfers.length > 0"
+            order="managTabCtrl.model.orderItems.globick.globickTransfers" info-booking="managTabCtrl.infoBooking">
+        </ib-Mmb-transfer-manage-widget-info>
+
+        <ib-MmB-manage-flexibility-info id="mmb-management-tab-manage-flex-info"
+            ng-if="managTabCtrl.model.orderItems.flexibilityOnDemand.length > 0"
+            model="managTabCtrl.model.orderItems.flexibilityOnDemand" ancillaries-info="managTabCtrl.ancillariesInfo"
+            flags="managTabCtrl.flags" flags-views="managTabCtrl.flagsViews" tabs="managTabCtrl.tabsModel"
+            order-flags="managTabCtrl.orderFlags">
+        </ib-MmB-manage-flexibility-info>
+
+        <!--when all the components are adapted to this, you have to eliminate the u-mt-none class that is removing the upper margin-->
+        <ib-mmb-dash-item ng-if="managTabCtrl.model.CardSpeqs" class="u-mt-none"
+            ng-repeat="colTwo in managTabCtrl.model.CardSpeqs" model="colTwo"
+            ancillaries-info="managTabCtrl.ancillariesInfo">
+        </ib-mmb-dash-item>
+
+        <customer-experience-manage-menus ng-attr-ancillaries-api-response="{{managTabCtrl.ancillariesInfoApi | json}}"
+            ng-attr-flow-id="{{managTabCtrl.infoBooking.flowId}}"></customer-experience-manage-menus>
+
+        <ib-mmb-dash-item ng-if="managTabCtrl.model.CardPriority" class="u-mt-none"
+            ng-repeat="col in managTabCtrl.model.CardPriority" model="col"
+            ancillaries-info="managTabCtrl.ancillariesInfo">
+        </ib-mmb-dash-item>
+
+        <ib-Mmb-manage-transfer-info ng-if="managTabCtrl.model.orderItems.transfer"
+            model="managTabCtrl.model.orderItems.transfer">
+        </ib-Mmb-manage-transfer-info>
+
+        <ib-Mmb-manage-hotel-holidays-info ng-if="managTabCtrl.model.orderItems.hotel"
+            model="managTabCtrl.model.orderItems.hotel">
+        </ib-Mmb-manage-hotel-holidays-info>
+        <ib-MmB-manage-bundles ng-if="managTabCtrl.model.orderItems.bundles"
+            model="managTabCtrl.model.orderItems.bundles[0]" ancillaries-info="managTabCtrl.ancillariesInfo">
+        </ib-MmB-manage-bundles>
+
+        <fast-track-card ng-if="managTabCtrl.showGibeFastLink"
+            ng-attr-fast-track-data="{{managTabCtrl.gibeData | json}}"></fast-track-card>
+    </div>
+</div>
+<div class="ib-mmb-dashboard__row">
+    <div class="ib-mmb-dashboard__column ib-mmb-dashboard__column--full">
+        <ib-MmB-manage-invoice-info id="mmb-management-tab-manage-invoice-info"
+            ng-if="(managTabCtrl.model.invoice && managTabCtrl.ibcomChannel && managTabCtrl.thereIsCurrencies) || managTabCtrl.isSkeleton"
+            model="managTabCtrl.model.invoice"
+            pricemodel="managTabCtrl.model.manageInsurances.length === 0 ? managTabCtrl.model.manageAllianzFusionInsurances : managTabCtrl.model.manageInsurances"
+            passengers="managTabCtrl.model.managePassengers.length" baggages="managTabCtrl.model.baggageInfo"
+            co2-footprint="managTabCtrl.model.co2Footprint">
+        </ib-MmB-manage-invoice-info>
+    </div>
+</div>
+<!-- Desglose pagos -->
+<div class="ib-mmb-dashboard__row" ng-hide="!managTabCtrl.model.orderItems.packagedProduct">
+    <div class="ib-mmb-dashboard__column ib-mmb-dashboard__column--full">
+        <ib-Mmb-manage-purchase-breakdown-info ng-if="managTabCtrl.model.orderItems.packagedProduct"
+            model="managTabCtrl.model.orderItems">
+        </ib-Mmb-manage-purchase-breakdown-info>
+    </div>
+</div>
+<!-- PAGO PASAJEROS -->
+<div class="ib-mmb-dashboard__row"
+    ng-if="managTabCtrl.tabsModel.IsIBV && managTabCtrl.model.orderItems.packagedProduct[0].payment.pending && managTabCtrl.model.orderItems.packagedProduct[0].payment.pending.total > 0">
+    <div class="ib-mmb-dashboard__column ib-mmb-dashboard__column--full">
+        <!-- TU COMPRA -->
+        <ib-Mmb-manage-what-passenger-pays-info ng-if="managTabCtrl.model.managePassengers"
+            model="managTabCtrl.model.managePassengers" ibv-info="managTabCtrl.model.orderItems.packagedProduct">
+        </ib-Mmb-manage-what-passenger-pays-info>
+    </div>
+</div>
+<!-- TOTAL A PAGAR -->
+<div class="ib-mmb-dashboard__row"
+    ng-if="managTabCtrl.tabsModel.IsIBV && managTabCtrl.model.orderItems.packagedProduct[0].payment.pending && managTabCtrl.model.orderItems.packagedProduct[0].payment.pending.total > 0">
+    <div class="ib-mmb-dashboard__column ib-mmb-dashboard__column--full">
+        <ib-Mmb-manage-maximum-to-pay-info ng-if="managTabCtrl.model.orderItems.packagedProduct"
+            model="managTabCtrl.model.orderItems.packagedProduct">
+        </ib-Mmb-manage-maximum-to-pay-info>
+    </div>
+</div>
+</div>

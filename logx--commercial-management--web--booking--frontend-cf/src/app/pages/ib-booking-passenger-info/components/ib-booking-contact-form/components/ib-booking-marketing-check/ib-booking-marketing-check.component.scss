@@ -1,0 +1,96 @@
+@import 'src/styles/component-tools';
+
+.check {
+    &-container {
+        display: flex;
+        flex-direction: row;
+
+        &-second{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: rem(8);
+
+            &:has(+ .ib-alert){
+                margin-bottom: rem(10);
+            }
+        }
+    }
+
+    &-input {
+        display: grid;
+        width: rem(24);
+        height: rem(24);
+        margin: 0;
+        margin-right: 0.625rem;
+        border: rem(1) solid var(--ib-color-grey-700-66);
+        border-radius: rem(3);
+        background-color: var(--ib-color-white);
+        appearance: none;
+        cursor: pointer;
+        outline: none;
+        place-content: center;
+
+        &[aria-invalid="true"] {
+            border: rem(1) solid var(--primary-red-700, #a8191a);
+        }
+
+        &:focus {
+            border: rem(1) solid var(--ib-color-primary-orange);
+            outline: none;
+        }
+
+        &::before {
+            content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1.5rem' height='1.5rem' viewBox='0 0 24 24' fill='%23B9191A' %3E%3Cpath fill-rule='evenodd' d='M11.204 1.03 10.4.253 5.097 4.039 1.711 1.793.795 2.7l2.97 4.358c.044.056.091.11.142.163.68.678 1.844.71 2.46.016h.001l4.836-6.209Z' clip-rule='evenodd'/%3E%3C/svg%3E");
+            position: relative;
+            top: rem(8);
+            left: rem(6.4);
+            width: rem(24);
+            height: rem(24);
+            color: var(--ib-color-primary-red-600);
+            fill: var(--ib-color-primary-red-600);
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+        }
+
+        &:checked::before {
+            transform: scale(1);
+        }
+
+        &:disabled {
+            background-color: var(--grey-200, #eee);
+        }
+
+        &--error {
+            .check-input {
+                border-color: color(red-20);
+
+            }
+        }
+    }
+
+    &-label {
+        font-family: var(--font-regular);
+        font-size: rem(13);
+        font-style: normal;
+        line-height: rem(16);
+        color: var(--ib-color-grey-700-66);
+    }
+
+    &-text {
+        font-family: var(--font-regular);
+        font-size: rem(13);
+        line-height: rem(16);
+        color: var(--ib-color-grey-700-66);
+
+        &--link{
+            text-decoration: underline;
+            color: var(--ib-color-grey-800-33);
+
+            &:active,&:focus,&:hover{
+                color: var(--ib-color-primary-red-500);
+                outline: none;
+            }
+        }
+    }
+}

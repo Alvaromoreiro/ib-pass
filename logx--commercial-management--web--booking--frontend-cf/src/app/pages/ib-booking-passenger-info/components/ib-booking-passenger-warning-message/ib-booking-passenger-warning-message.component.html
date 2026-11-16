@@ -1,0 +1,52 @@
+<!-- Check Advises -->
+<div
+  *ngIf="warningMessageInfo?.checkAdvises?.length > 0"
+  class="ib-layout__line-spacing ib-layout__line-spacing--small">
+  <div
+    *ngFor="let info of warningMessageInfo.checkAdvises; let type = index"
+    [id]="'warningMessages-' + info.id"
+    class="ib-layout__line-spacing ib-layout__line-spacing--small">
+    <div class="ib-msg-alert ib-msg-alert--info icon-alertas_2 alert fade in ib-msg-alert--bki-warns">
+      <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+        <p class="ib-msg-alert__text ib-msg-alert__text--bold">{{ info.title | translate }}</p>
+        <p class="ib-msg-alert__text" [innerHTML]="info.text"></p>
+      </div>
+      <div
+        class="ib-check"
+        [ngClass]="{ 'ib-check--error': info.showCheckBoxError }"
+        *ngIf="info.checkBox">
+        <input
+          type="checkbox"
+          [id]="info.id"
+          [name]="'warning_check_alert-' + info.id"
+          class="ib-check__input"
+          [(ngModel)]="info.checkBoxConditions"
+          required/>
+        <label [for]="info.id" class="ib-check__label">
+          <p class="ib-check__text ib-check__text--light" [innerHTML]="info.checkBoxText"></p>
+        </label>
+        <span
+          class="ib-alert ib-alert--error"
+          *ngIf="info.showCheckBoxError && !info.checkBoxConditions">
+          {{ 'GENERAL_INPUT_REQUIRED_ERROR' | translate }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Simple Advises -->
+<div
+  *ngIf="warningMessageInfo?.simpleAdvises?.length > 0"
+  class="ib-layout__line-spacing ib-layout__line-spacing--small">
+  <div class="ib-msg-alert ib-msg-alert--info icon-alertas_2 alert fade in ib-msg-alert--bki-warns">
+    <div
+      class="ib-layout__line-spacing ib-layout__line-spacing--small"
+      *ngFor="let info of warningMessageInfo.simpleAdvises; let i = index"
+      [id]="'warningMessages-' + info.id"
+      [ngClass]="{ 'u-mt': i > 0 }">
+      <p class="ib-msg-alert__text ib-msg-alert__text--bold">{{ info.title | translate }}</p>
+      <p class="ib-msg-alert__text" [innerHTML]="info.text"></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-lg-8">
+            <div class="ib-bond ib-bond--margin">
+                <div class="ib-bond__discount icon-reembolsos">
+                    <h1 class="ib-bond__title" ng-hide="voucherRefundConfirmationCtrl.voucherData.totalPriceInfoObject.isPartialRefund">
+                        {{voucherRefundConfirmationCtrl.voucherData.hasMoreThanOneVouchers
+                            ? ('MMB_VOUCHER_REFUND_CONFIRMATION_MULTIPLE_VOUCHER_TITLE'|translate) :
+                            ('MMB_VOUCHER_REFUND_CONFIRMATION_TOTAL_TITLE'|translate)}}
+                    </h1>
+                    <h1 class="ib-bond__title" ng-show="voucherRefundConfirmationCtrl.voucherData.totalPriceInfoObject.isPartialRefund">
+                        {{voucherRefundConfirmationCtrl.voucherData.hasMoreThanOneVouchers
+                            ? ('MMB_VOUCHER_REFUND_CONFIRMATION_MULTIPLE_PARTIAL_VOUCHER_TITLE'|translate) :
+                            ('MMB_VOUCHER_REFUND_CONFIRMATION_PARTIAL_TITLE'|translate)}}
+                    </h1>
+                    <p class="ib-bond__description" ng-hide="voucherRefundConfirmationCtrl.voucherData.totalPriceInfoObject.isPartialRefund">
+                        {{voucherRefundConfirmationCtrl.voucherData.hasMoreThanOneVouchers
+                            ? ('MMB_VOUCHER_REFUND_CONFIRMATION_MULTIPLE_VOUCHER_SUBTITLE'|translate) :
+                            ('MMB_VOUCHER_REFUND_CONFIRMATION_SUBTITLE'|translate)}}</p>
+                    <p class="ib-bond__description" ng-show="voucherRefundConfirmationCtrl.voucherData.totalPriceInfoObject.isPartialRefund">
+                        {{voucherRefundConfirmationCtrl.voucherData.hasMoreThanOneVouchers
+                            ? ('MMB_VOUCHER_REFUND_CONFIRMATION_MULTIPLE_PARTIAL_VOUCHER_SUBTITLE'|translate) :
+                            ('MMB_VOUCHER_REFUND_CONFIRMATION_SUBTITLE'|translate)}}</p>
+                </div>
+                <!-- TABLE -->
+                <h2 class="ib-bond__price u-mt-smedium">{{ voucherRefundConfirmationCtrl.voucherData.hasMoreThanOneVouchers ? 'MMB_MULTIPLE_VOUCHER_TOTAL_TEXT' : 'MMB_VOUCHER_REFUND_CONFIRMATION_VOUCHER_AMOUNT' |translate}}
+                    <span class="ib-bond__amount">{{voucherRefundConfirmationCtrl.voucherData.totalPriceInfoObject.formattedPrice}}</span>
+                    <span class="ib-bond__amount" style="font-size: 20px" ng-if="voucherRefundConfirmationCtrl.voucherData.totalPriceInfoObject.percentagePrice !== 0">({{voucherRefundConfirmationCtrl.voucherData.totalPriceInfoObject.priceWOPercentageFormatted}} + {{voucherRefundConfirmationCtrl.voucherData.totalPriceInfoObject.percentagePriceFormatted}})</span>
+                </h2>
+                <div class="ib-bond__table" ng-if="voucherRefundConfirmationCtrl.voucherData.hasMoreThanOneVouchers">
+                    <table class="ib-table-bond ib-table-bond--medium ib-table-bond--margin">
+                        <thead>
+                            <tr>
+                                <th class="ib-table-bond__th">{{'MMB_VOUCHER_REFUND_CONFIRMATION_TABLE_CODE_TITLE' | translate}}</th>
+                                <th class="ib-table-bond__th">{{'PASSENGER_INFO_NAME' | translate}}</th>
+                                <th class="ib-table-bond__th">{{'MODAL_PAYMENT_TAXES_TABLE_TITLE_2' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="voucherInfo in voucherRefundConfirmationCtrl.voucherData.voucherList">
+                                <td data-th="{{'MMB_VOUCHER_REFUND_CONFIRMATION_TABLE_CODE_TITLE' | translate}}" class="ib-table-bond__td"><span class="ib-table-bond__code">{{::voucherInfo.code}}</span></td>
+                                <td data-th="{{'PASSENGER_INFO_NAME' | translate}}" class="ib-table-bond__td"><span class="ib-table-bond__name">{{::voucherInfo.passengerName}}</span></td>
+                                <td data-th="{{'MODAL_PAYMENT_TAXES_TABLE_TITLE_2' | translate}}" class="ib-table-bond__td"><span class="ib-table-bond__amount">{{::voucherInfo.formattedPrice}}</span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="ib-table-bond__total" colspan="3">
+                                    <span class="ib-table-bond__total-text">{{'MMB_PRICE_BREAKDOWN_TOTAL_TITLE' | translate}}: </span>
+                                    <span class="ib-table-bond__amount">{{voucherRefundConfirmationCtrl.voucherData.totalPriceInfoObject.formattedPrice}}</span>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- SINGLE VOUCHER -->
+                <p class="ib-bond__text" ng-hide="voucherRefundConfirmationCtrl.flags.refundVoucherSection80">{{'MMB_VOUCHER_REFUND_CONFIRMATION_APOLOGIZE' | translate}}</p>
+                <p class="ib-bond__text" ng-show="voucherRefundConfirmationCtrl.flags.refundVoucherSection80">{{'MMB_VOUCHER_PARTIAL_REFUND_CONFIRMATION_APOLOGIZE' | translate}}</p>
+            </div>
+            <div class="ib-msg-alert ib-msg-alert--bond ib-msg-alert--bond-margin icon-informacion_2 alert">
+                <p class="ib-msg-alert__text">{{'MMB_VOUCHER_REFUND_CONFIRMATION_REMEMBER_THAT' | translate}}</p>
+                <ul class="ib-list ib-list--gray ib-list--square u-mt-small">
+                    <li class="ib-list__item ib-list__item--pl-0">
+                        <span class="ib-text">{{'MMB_VOUCHER_REFUND_CONFIRMATION_WARNING' | translate}} </span>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-4">
+            <div class="ib-box-info--flex ib-box-info--bond-margin">
+                <div class="ib-box-info ib-box-info--type-bond">
+                    <div class="ib-box-info__wrapper">
+                        <h2 class="ib-box-info__title">{{'MMB_VOUCHER_REFUND_INFORMATION_TITLE' | translate}}</h2>
+                        <div class="ib-box-info__container">
+                            <ul class="ib-box-info__list">
+                                <li class="ib-box-info__item"><a class="ib-link" ng-click="voucherRefundConfirmationCtrl.openVoucherModal()" title="{{'MMB_VOUCHER_REFUND_CONFIRMATION_VOUCHER_HOT_TO_USE' | translate}}">{{'MMB_VOUCHER_REFUND_CONFIRMATION_VOUCHER_HOT_TO_USE' | translate}}</a></li>
+                                <li class="ib-box-info__item">
+                                  <a ng-if="!voucherRefundConfirmationCtrl.flags.refundVoucherSection80"
+                                    class="ib-link" rel="noopener noreferrer" target="_blank"
+                                    ng-href="{{'VOUCHER_KNOW_MORE'|LinksFilter}}"
+                                    title="{{'MMB_VOUCHER_REFUND_INFORMATION_GENERAL_CONDITIONS_LINK' | translate}}">{{'MMB_VOUCHER_REFUND_INFORMATION_GENERAL_CONDITIONS_LINK' | translate}}</a>
+                                  <a ng-if="voucherRefundConfirmationCtrl.flags.refundVoucherSection80"
+                                    class="ib-link" rel="noopener noreferrer" target="_blank"
+                                    ng-href="{{'VOUCHER_KNOW_MORE_FLEX'|LinksFilter}}"
+                                    title="{{'MMB_VOUCHER_REFUND_INFORMATION_GENERAL_CONDITIONS_LINK' | translate}}">{{'MMB_VOUCHER_REFUND_INFORMATION_GENERAL_CONDITIONS_LINK' | translate}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="ib-box-info ib-box-info--type-bond">
+                    <div class="ib-box-info__wrapper">
+                        <h2 class="ib-box-info__title">{{'MMB_DISRUPTION_CALLCENTER_DOUBTS' | translate}}</h2>
+                        <div class="ib-box-info__container">
+                            <p class="ib-box-info__text">{{'MMB_DISRUPTION_CALLCENTER_CONTACT_MSG_NO_PHONE' | translate}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

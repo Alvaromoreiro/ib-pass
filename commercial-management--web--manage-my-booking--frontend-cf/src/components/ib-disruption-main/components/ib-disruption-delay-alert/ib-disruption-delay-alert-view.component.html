@@ -1,0 +1,24 @@
+<div class="ib-layout__line-spacing ib-layout__line-spacing--top-medium-responsive
+    ib-layout__line-spacing--medium u-mb-medium ib-msg-alert ib-msg-alert--danger ib-msg-alert--delay-info icon-canary-plus"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+    aria-labelledby="disruption-delay-alert-title"
+    aria-describedby="disruption-delay-alert-description">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-border-left-none">
+        <h3 *ngIf="hasSingleFlight" class="ib-msg-alert__text ib-msg-alert__text--title-free">
+            {{ 'MMB_YOUR_FLIGHTS_CHANGE_TIME_ALERT_TEXT_SIMPLE' | translate:{ origin: originDescription, destination: destinationDescription } }}
+        </h3>
+        <h3 *ngIf="hasMultipleFlights" class="ib-msg-alert__text ib-msg-alert__text--title-free">
+            {{ 'MMB_YOUR_FLIGHTS_CHANGE_TIME_ALERT_TEXT_PLURAL' | translate:{ origin: originDescription, destination: destinationDescription } }}
+        </h3>
+        <h3 *ngIf="!flights || !flights.length" class="ib-msg-alert__text ib-msg-alert__text--title-free">
+            {{ 'MMB_YOUR_FLIGHTS_CHANGE_TIME_ALERT_TEXT_SIMPLE_UNK' | translate }}
+        </h3>
+        <div class="ib-msg-alert__text">
+            <a [href]="linkMoreInfo" target="_blank">
+                {{ 'MMB_VOUCHER_TC_MODAL_MORE_INFO' | translate }}
+            </a>
+        </div>
+    </div>
+</div>

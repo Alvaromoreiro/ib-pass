@@ -1,0 +1,368 @@
+<fieldset class="ib-box-menu__section ib-box-menu__section--full">
+    <legend class="u-hide-accessible">{{'MMB_PASSENGERS_PASSENGER_DATA_TEXT'|translate}} {{passDataCtrl.index + 1}}
+    </legend>
+    <div>
+        <div class="ib-layout__section">
+            <div class="ib-box-cols ib-box-cols__gdr">
+                <div class="ib-box-cols__header ib-box-cols__header--icon">
+                    <h2 class="ib-box-cols__title ib-box-cols__title--with-subtitle"
+                        data-ng-class="{'icon-persona': passDataCtrl.model.passengerType !== 'CHILD' && passDataCtrl.model.passengerType !== 'INFANT','icon-iberia_ninos' : passDataCtrl.model.passengerType === 'CHILD', 'icon-bebe' : passDataCtrl.model.passengerType === 'INFANT'}">
+                        {{passDataCtrl.model.personalInfo.name}} {{passDataCtrl.model.personalInfo.surname}}
+                    </h2>
+                    <h3 class="ib-box-cols__title-txt">{{'MMB_PASSENGERS_PASSENGER_TEXT'|translate}}
+                        {{passDataCtrl.index + 1}}: {{passDataCtrl.model.passengerType
+                        | translate}}</h3>
+                </div>
+                <div class="ib-box-cols__content">
+                    <div class="ib-box-cols__subheader">
+                        <h3 class="ib-box-cols__title-section">{{'MMB_PASSENGERS_PERSONAL_DATA_TEXT'|translate}}</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                            <span
+                                class="ib-box-cols__txt ib-box-cols__txt--lvl-1">{{'MMB_PASSENGERS_NAME_TEXT'|translate}}</span>
+                            <span
+                                class="ib-box-cols__txt ib-box-cols__txt--lvl-2 break-word-full">{{passDataCtrl.model.personalInfo.name}}</span>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <span
+                                class="ib-box-cols__txt ib-box-cols__txt--lvl-1">{{'MMB_PASSENGERS_SURNAMES_TEXT'|translate}}</span>
+                            <span
+                                class="ib-box-cols__txt ib-box-cols__txt--lvl-2 break-word-full">{{passDataCtrl.model.personalInfo.surname}}</span>
+                        </div>
+                    </div>
+                    <div class="row" data-ng-if="passDataCtrl.model.personalInfo.birthDate">
+                        <div class="col-sm-6 col-xs-12">
+                            <span
+                                class="ib-box-cols__txt ib-box-cols__txt--lvl-1">{{'MMB_PASSENGERS_BIRTHDAY_TEXT'|translate}}</span>
+                            <span
+                                class="ib-box-cols__txt ib-box-cols__txt--lvl-2">{{passDataCtrl.model.personalInfo.birthDate}}</span>
+                        </div>
+                        <div class="col-sm-6 col-xs-12" data-ng-if="passDataCtrl.model.passengerType === 'INFANT'">
+                            <span
+                                class="ib-box-cols__txt ib-box-cols__txt--lvl-1">{{'MMB_PASSENGERS_RELATED_PASSENGER_TEXT'|translate}}</span>
+                            <span
+                                class="ib-box-cols__txt ib-box-cols__txt--lvl-2">{{passDataCtrl.model.relatedPassenger}}</span>
+                        </div>
+                    </div>
+                    <div class="row" data-ng-if="passDataCtrl.model.showUpdatePersonalInfo">
+                        <div class="col-md-12">
+                            <a class="ib-box-cols__link icon-modificar" data-ng-if="!passDataCtrl.model.modifiedPersonalInfo"
+                                data-ng-click="passDataCtrl.changePersonalInfo(passDataCtrl.index)" ng-href="javascript:void(0)"
+                                title="{{'MMB_PASSENGERS_PERSONAL_DATA_TEXT_EDIT'|translate}}">{{'MMB_PASSENGERS_PERSONAL_DATA_TEXT_EDIT'|translate}}</a>
+                            <span class="ib-text icon-informacion icon--red" data-ng-if="passDataCtrl.model.modifiedPersonalInfo">{{'MMB_PASSENGERS_PERSONAL_DATA_CORRECTED'|translate}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ib-box-cols__content" data-ng-if="passDataCtrl.apis.key === 'APIS_DOCUMENT_INFO'">
+                    <div class="ib-box-cols__subheader" ng-controller="IbPopoverController as popoverCtrl">
+                        <h3 class="ib-box-cols__title-section ib-box-cols__title-section--with-txt">
+                            {{'MMB_PASSENGERS_ADDITIONAL_DATA_REQUIRED_TEXT'|translate}}
+                            <a class="ib-table-flight-info__icon icon-informacion_2 ib-popover"
+                                ng-href="javascript:void(0)"
+                                title="{{'MMB_PASSENGERS_CLICK_FOR_INFORMATION_TEXT'|translate}}" uib-popover-template="::$root.routes.templates +
+                                'ib-passengers-information-popover.html'" popover-placement="auto top"
+                                ng-click="popoverCtrl.text ='MMB_POPUP_APIS'|translate;$event.preventDefault();"
+                                popover-trigger="'outsideClick'" popover-is-open="popoverCtrl.isOpen" focusin></a>
+                        </h3>
+                        <span
+                            class="ib-box-cols__txt-section">{{'MMB_PASSENGERS_NECESSARY_DATA_FOR_FLY_TEXT'|translate}}</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a class="ib-box-cols__link icon-modificar"
+                                data-ng-click="passDataCtrl.addApisData()" ng-href="javascript:void(0)"
+                                title="{{passDataCtrl.model.securityInformation.apisStatus}}">{{passDataCtrl.model.securityInformation.apisStatus}}</a>
+                        </div>
+                    </div>
+                </div>
+                <!--CDP-->
+                <div class="ib-box-cols__content" data-ng-if="passDataCtrl.model.passengerType !== 'INFANT' && (passDataCtrl.model.contactInfo || (!passDataCtrl.model.contactInfo && passDataCtrl.model.flags.CONTACT_DATA_MODIFICATION === true))">
+                    <div>
+                        <div class="ib-box-cols__subheader" ng-controller="IbPopoverController as popoverCtrl">
+                            <h3 class="ib-box-cols__title-section ib-box-cols__title-section--with-txt">{{'MMB_PASSENGERS_CONTACT_DATA_TEXT'|translate}}</h3>
+                        </div>
+                        <div>
+                            <div class="row" ng-if="passDataCtrl.model.contactInfo">
+                                <div class="col-sm-6 col-xs-12">
+                                    <span class="ib-box-cols__txt ib-box-cols__txt--lvl-1">{{'MMB_PASSENGERS_EMAIL_TEXT'|translate}}</span>
+                                    <span class="ib-box-cols__txt ib-box-cols__txt--lvl-2 u-ellipsis-inline">{{passDataCtrl.model.contactInfo.email}}</span>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <span class="ib-box-cols__txt ib-box-cols__txt--lvl-1">{{'MMB_PASSENGERS_PREFIX_AND_PHONE_TEXT'|translate}}</span>
+                                    <span class="ib-box-cols__txt ib-box-cols__txt--lvl-2 u-ellipsis-inline">{{passDataCtrl.model.contactInfo.phoneDetails.countryCode}}{{passDataCtrl.model.contactInfo.phoneDetails.number}}</span>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="passDataCtrl.model.flags.CONTACT_DATA_MODIFICATION === true">
+                                <div class="col-md-12" >
+                                    <a class="ib-box-cols__link icon-modificar"
+                                        data-ng-click="passDataCtrl.updateContactInfo(passDataCtrl.index)"
+                                        ng-href="javascript:void(0)"
+                                        title="{{passDataCtrl.model.contactInfo ? 'MMB_PASSENGERS_ADD_TEXT' : 'MMB_CUSTOMIZE_FLIGHTS_INSURANCE_BUTTON_TXT' | translate }}">
+                                        {{passDataCtrl.model.contactInfo ? 'MMB_PASSENGERS_ADD_TEXT' : 'MMB_CUSTOMIZE_FLIGHTS_INSURANCE_BUTTON_TXT' | translate }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FF -->
+                <div class="ib-box-cols__content"
+                    data-ng-if="passDataCtrl.model.passengerType !== 'INFANT' && passDataCtrl.turnLink('FREQUENT_FLYER_MODIFICATION')">
+                    <!-- <div> -->
+                    <!-- <div class="ib-box-cols__subheader" ng-controller="IbPopoverController as popoverCtrl">
+                            <h3 class="ib-box-cols__title-section ib-box-cols__title-section--with-txt">{{'MMB_PASSENGERS_FREQUENTLY_PASSENGER_DATA_TEXT'|translate}}<a
+                                    class="ib-table-flight-info__icon icon-informacion_2" ng-href="javascript:void(0)"
+                                    title="{{'MMB_PASSENGERS_CLICK_FOR_INFORMATION_TEXT'|translate}}"
+                                    uib-popover-template="::$root.routes.templates + 'ib-passengers-information-popover.html'"
+                                    popover-placement="auto right" ng-click="popoverCtrl.text ='Hello World';$event.preventDefault();"
+                                    popover-trigger="'outsideClick'" popover-is-open="popoverCtrl.isOpen" focusin></a></h3>
+                            <span class="ib-box-cols__txt-section">{{passDataCtrl.model.aviosAccumulated}}
+                                {{'MMB_PASSENGERS_ACCUMULATED_AVIOS_TEXT'|translate}}</span>
+                        </div> -->
+
+                    <!-- </div> -->
+                    <!-- data-ng-if="!passDataCtrl.model.frequentFlyerInfo.company || !passDataCtrl.model.frequentFlyerInfo.number" -->
+                    <div>
+                        <div class="ib-box-cols__subheader" ng-controller="IbPopoverController as popoverCtrl">
+                            <h3 class="ib-box-cols__title-section ib-box-cols__title-section--with-txt">
+                                {{'MMB_PASSENGERS_FREQUENTLY_PASSENGER_DATA_TEXT'|translate}}
+                                <a class="ib-table-flight-info__icon icon-informacion_2 ib-popover"
+                                    ng-href="javascript:void(0)"
+                                    title="{{'MMB_PASSENGERS_CLICK_FOR_INFORMATION_TEXT'|translate}}"
+                                    uib-popover-template="::$root.routes.templates + 'ib-passengers-information-popover.html'"
+                                    popover-placement="auto top" ng-click="popoverCtrl.text
+                                    ='MMB_POPUP_FF'|translate;$event.preventDefault();"
+                                    popover-trigger="'outsideClick'" popover-is-open="popoverCtrl.isOpen" focusin></a>
+                            </h3>
+
+                                <!-- passenger v2 -->
+                            <div ng-if="passDataCtrl.infoAviosForPassenger">
+                                <p class="ib-text ib-text-small ib-text--color-gray-dark" ng-if="passDataCtrl.infoAviosForPassenger[passDataCtrl.index].memberIdentifier === null">
+                                    Con esta compra acumularás {{ passDataCtrl.infoAviosForPassenger[passDataCtrl.index].avios }} Avios y {{ passDataCtrl.infoAviosForPassenger[passDataCtrl.index].elite }} Puntos Elite que podrás canjear por descuentos, si te registras en <a href="{{'IBCOSE_REGISTER_LINK'|LinksFilter}}" title="{{'LOGIN_MODULE_REGISTER'|translate}}"
+                                    class="ib-link ib-link--underline ">iberia plus</a>.
+                                </p>
+
+                                <p class="ib-text ib-text-small ib-text ib-text--color-gray-dark" ng-if="passDataCtrl.infoAviosForPassenger[passDataCtrl.index].memberIdentifier !== null">
+                                    Con esta compra acumularás {{ passDataCtrl.infoAviosForPassenger[passDataCtrl.index].avios }} Avios y {{ passDataCtrl.infoAviosForPassenger[passDataCtrl.index].elite }} Puntos Elite, que podrás canjear por descuentos en próximos vuelos.
+                                </p>
+                            </div>
+
+
+                        </div>
+                        <div ng-if="passDataCtrl.turnLink('FREQUENT_FLYER_MODIFICATION') || passDataCtrl.model.additionalFFInfo">
+                            <div class="row"  ng-repeat="additionalFFInfo in passDataCtrl.model.additionalFFInfo">
+                                <div class="col-sm-4 col-xs-12">
+                                    <span
+                                    class="ib-box-cols__txt ib-box-cols__txt--lvl-1">{{'MMB_PASSENGERS_FIDELITATION_PROGRAM_TEXT'|translate}}</span>
+                                    <span class="ib-box-cols__txt ib-box-cols__txt--lvl-2">{{additionalFFInfo.airlineName}}</span>
+                                </div>
+                                <div class="col-sm-8 col-xs-12">
+                                    <span class="ib-box-cols__txt ib-box-cols__txt--lvl-1">{{'MMB_PASSENGERS_CARD_NUMBER_TEXT'|translate}}</span>
+                                    <span class="ib-box-cols__txt ib-box-cols__txt--lvl-2">{{additionalFFInfo.number | LeftZerosRemover}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" >
+                                    <a class="ib-box-cols__link icon-modificar"
+                                        data-ng-click="passDataCtrl.addFrequentFlyer(passDataCtrl.index)"
+                                        ng-href="javascript:void(0)"
+                                        title="{{ passDataCtrl.model.additionalFFInfo.length > 0 ? 'MMB_PASSENGERS_ADD_ANOTHER_FIDELITATION_PROGRAM' : 'MMB_CUSTOMIZE_FLIGHTS_INSURANCE_BUTTON_TXT' | translate }}">
+                                            {{ passDataCtrl.model.additionalFFInfo.length > 0 ? 'MMB_PASSENGERS_ADD_ANOTHER_FIDELITATION_PROGRAM' : 'MMB_CUSTOMIZE_FLIGHTS_INSURANCE_BUTTON_TXT' | translate }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ib-box-cols__content" data-ng-if="passDataCtrl.model.ticketNumbers">
+                    <div class="ib-box-cols__subheader">
+                        <h3 class="ib-box-cols__title-section">{{'MMB_PASSENGERS_TICKET_NUMBERS'|translate}}</h3>
+                    </div>
+                    <div class="row">
+                        <div ng-repeat="ticket in passDataCtrl.model.ticketNumbers"
+                            class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                            <span
+                                class="ib-box-cols__txt ib-box-cols__txt--lvl-2 ib-box-cols__txt--item">{{ticket}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SN -->
+                <div class="ib-box-cols__content"
+                    data-ng-if="passDataCtrl.model.passengerType !== 'INFANT' && passDataCtrl.turnLink('SPECIAL_NEEDS_MODIFICATION') || passDataCtrl.model.specialNeeds">
+                    <div class="ib-box-cols__subheader" ng-controller="IbPopoverController as popoverCtrl">
+                        <h3 class="ib-box-cols__title-section">{{'MMB_PASSENGERS_SPECIAL_NEEDS_TEXT'|translate}}
+                            <a class="ib-table-flight-info__icon icon-informacion_2 ib-popover"
+                                ng-href="javascript:void(0)"
+                                title="{{'MMB_PASSENGERS_CLICK_FOR_INFORMATION_TEXT'|translate}}"
+                                uib-popover-template="::$root.routes.templates + 'ib-passengers-information-popover.html'"
+                                popover-placement="auto top"
+                                ng-click="popoverCtrl.text ='MMB_PASSENGERS_SPECIAL_NEEDS_TOOLTIP'|translate; $event.preventDefault();"
+                                popover-trigger="'outsideClick'" popover-is-open="popoverCtrl.isOpen" focusin></a>
+                        </h3>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <div class="col-md-12" data-ng-repeat="spNeed in passDataCtrl.model.specialNeeds.values" >
+                                <div class="ib-box-cols__cols ib-box-cols__cols--left"
+                                    data-ng-switch="spNeed.serviceCode">
+                                    <div data-ng-switch-when="BLND">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-vision">
+                                            {{'IBSPEC_MMB_SPECIAL_NEEDS_FORM_CHECK_VISION_DEFICIENCES_TEXT'| translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="DPNA">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-informacion">
+                                            {{spNeed.description ? spNeed.description : 'IBSPEC_MMB_SPECIAL_NEEDS_FORM_CHECK_INTELLECTUAL_DISABILITY_TEXT'|translate}}</span>
+                                    </div>
+                                    <div data-ng-switch-when="DEAF">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-audicion">
+                                            {{'IBSPEC_MMB_SPECIAL_NEEDS_FORM_CHECK_PROBLEM_HEARING_TEXT'| translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="WCHR">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-discapacitados">
+                                            {{'IBSPEC_MMB_SPECIAL_NEEDS_FORM_CHECK_WHEEL_CHAIR_TEXT'| translate}}: {{'IBSPEC_MMB_SPECIAL_NEEDS_FORM_CHECK_WHEEL_OPTION_ONE_TEXT'|
+                                            translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="WCHS">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-discapacitados">
+                                            {{'IBSPEC_MMB_SPECIAL_NEEDS_FORM_CHECK_WHEEL_CHAIR_TEXT'| translate}}: {{'IBSPEC_MMB_SPECIAL_NEEDS_FORM_CHECK_WHEEL_OPTION_TWO_TEXT'|
+                                            translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="WCHC">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-discapacitados">
+                                            {{'IBSPEC_MMB_SPECIAL_NEEDS_FORM_CHECK_WHEEL_CHAIR_TEXT'| translate}}: {{'IBSPEC_MMB_SPECIAL_NEEDS_FORM_CHECK_WHEEL_OPTION_THREE_TEXT'|
+                                            translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="SVAN">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-mascotas_domesticas">
+                                            {{'IBSPEC_MMB_SPECIAL_NEEDS_FORM_CHECK_VISION_DOG_TEXT'| translate}}</span>
+                                    </div>
+                                </div>
+                                <div class="ib-box-cols__cols ib-box-cols__cols--right ib-box-cols__status">
+                                    <span class="ib-box-cols__subtxt">{{spNeed.status.description ? spNeed.status.description : 'MMB_PASSENGERS_SPECIAL_NEEDS_STATUS'|translate}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a class="ib-box-cols__link icon-modificar"
+                                data-ng-click="passDataCtrl.addSpecialNeeds(passDataCtrl.index, passDataCtrl.model)"
+                                ng-href="javascript:void(0)"
+                                title="{{ (model.specialNeeds.values && passDataCtrl.model.specialNeeds.values.length > 0) ? 'MMB_PASSENGERS_MODIFY_TEXT' : 'MMB_CUSTOMIZE_FLIGHTS_INSURANCE_BUTTON_TXT' | translate}}">
+                                    {{ (passDataCtrl.model.specialNeeds.values && passDataCtrl.model.specialNeeds.values.length > 0) ? 'MMB_PASSENGERS_MODIFY_TEXT' : 'MMB_CUSTOMIZE_FLIGHTS_INSURANCE_BUTTON_TXT' | translate}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- AS -->
+                <div class="ib-box-cols__content"
+                    data-ng-if="passDataCtrl.model.additionalServices.length > 0">
+                    <div class="ib-box-cols__subheader" ng-controller="IbPopoverController as popoverCtrl">
+                        <h3 class="ib-box-cols__title-section">{{'MMB_ADDITIONAL_SERVICES'|translate}}
+                            <a class="ib-table-flight-info__icon icon-informacion_2 ib-popover"
+                                ng-href="javascript:void(0)"
+                                title="{{'MMB_PASSENGERS_CLICK_FOR_INFORMATION_TEXT'|translate}}"></a>
+                        </h3>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <div class="col-md-12" data-ng-repeat="additionalService in passDataCtrl.model.additionalServices" >
+                                <div class="ib-box-cols__cols ib-box-cols__cols--left"
+                                    data-ng-switch="additionalService.serviceCode">
+                                    <div data-ng-switch-when="AVIH">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-mascotas_domesticas">
+                                            {{'MMB_PET_IN_HOLD'| translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="BIKE">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-bicicleta">
+                                            {{'MMB_BICYCLE_IN_HOLD'|translate}}</span>
+                                    </div>
+                                    <div data-ng-switch-when="BSCT">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-bebe">
+                                            {{'MMB_CARRYCOTS_BABYSEATS_PRAMS'| translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="BULK">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-obj_equipaje_voluminoso_y_pesado">
+                                            {{'MMB_HEAVY_BULKY_EQUIPMENT'| translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="CBBG">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-asiento-normal">
+                                            {{'MMB_SPECIAL_BAGGAGE_A_SEAT'| translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="EXST">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-asiento-normal">
+                                            {{'MMB_EXTRA_SEAT'| translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="FRAG">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-equipaje-especial-2">
+                                            {{'MMB_FRAGILE_BAGGAGE'| translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="MAAS">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-hombre">
+                                            {{'MMB_ASSISTANCE_SERVICE'| translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="MEDA">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-botiquin">
+                                            {{'MMB_MEDICAL_CASES'| translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="PETC">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-mascotas_domesticas">
+                                            {{'MMB_PETS_IN_CABIN'| translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="UMNR">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-iberia_ninos">
+                                            {{'MMB_UNACCOMPANIED_MINOR_SERVICE'| translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="WEAP">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-obj_arma_de_fuego">
+                                            {{'MMB_FIREARMS_AMMUNITION'| translate}}
+                                        </span>
+                                    </div>
+                                    <div data-ng-switch-when="TUR">
+                                        <span class="ib-icon-container ib-box-cols__txt ib-box-cols__txt--lvl-2 icon-servicio_limusina">
+                                            {{'MMB_LIMOUSINE_SERVICE'| translate}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="ib-box-cols__cols ib-box-cols__cols--right ib-box-cols__status">
+                                    <span class="ib-box-cols__subtxt">{{additionalService.status |translate}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="ib-flex">
+                                <span class="icon-informacion_2 ib-link__icon--xsmall ib-link__icon--primary"></span>
+                                <span class="ib-text u-pl-xsmall ib-text--color-grey">
+                                    {{'PASSENGER_INFO_ADITIONAL_SERVICE_WARNING' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

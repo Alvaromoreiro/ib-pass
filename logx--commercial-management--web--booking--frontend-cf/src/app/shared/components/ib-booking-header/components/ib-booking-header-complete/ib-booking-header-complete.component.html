@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="ib-header-common__row">
+                <div class="ib-header-common__column ib-header-common--flex">
+                    <div class="ib-header-common__column-logo ib-header-common__column-logo--rbr">
+                        <a id="header-commons-iberia-logo-home-link" href="javascript:void(0)" title="{{'GO_TO_HOME_TEXT'|translate}}" class="ib-header-common__logo-fig" (click)="backToMain( true )" focusin>
+                            <img src="{{iconsPath}}/iberia/logo_iberia.svg" alt="{{'LOGO_IBERIA_TEXT'|translate}}" />
+                        </a>
+                    </div>
+                    <div class="ib-header-common__column-fly ib-header-common__column-fly--bln">
+                        <div class="ib-header-common__row-fly ib-header-common__row-fly--top" [ngClass]="{'ib-header-common__row-fly--auto u-pr-none':!profileIcon}" *ngIf="model?.trips">
+                            <ul class="ib-header-common__list">
+                                <li class="ib-header-common__item" *ngFor="let trip of model?.trips|limitTo:0:model.numberTrips; let isFirst = first; let i = index" [ngClass]="{'hidden-xs hidden-sm': i !== 0,'u-border-right-none': !model.isMultiflight}">
+                                    <ib-booking-header-trip *ngIf="!model.isMultiflight" [trip]="trip" [isShuttleFlow]="isShuttleFlow"></ib-booking-header-trip>
+                                    <ib-booking-header-multitrip *ngIf="model.isMultiflight" [trip]="trip"></ib-booking-header-multitrip>
+                                </li>
+                                <li class="ib-header-common__item" *ngIf="model.isMultiflight && model.trips.length > numberTrips">
+                                    <ib-booking-header-multitrip-tooltip [model]="model.trips" [numberTrips]="numberTrips"></ib-booking-header-multitrip-tooltip>
+                                </li>
+                            </ul>
+                            <ib-booking-header-info-tooltip [trips]="model.trips" [flightType]="model.flightType" [advancedSearch]="model.showAdvancedSearch" [isMultiFlight]="model.isMultiflight" [isHMad]="isHMad" (backToMulti)="backToMultiFlight( false )" (openSearch)="activeAdvancedSearch( )"></ib-booking-header-info-tooltip>
+                        </div>
+                        <div class="ib-header-common__row-fly ib-header-common__row-fly--bottom ib-header-common__row-fly--vbottom ib-header-common__row-fly--auto u-pl-none hidden-md hidden-sm hidden-xs" *ngIf="model?.passengers">
+                            <ib-booking-header-passengers [passengerNumber]="model.passengers.numberPassengers" [isMultiflight]="model.isMultiflight"></ib-booking-header-passengers>
+                            <div class="ib-header-common__fly-search" *ngIf="model.showAdvancedSearch">
+                                <button tabindex="0" title="{{'HEADER_IBERIA_CHANGE_SEARCH_LINK'|translate}}"
+                                    (click)="model.isMultiflight && !isHMad ? backToMultiFlight( false ) : activeAdvancedSearch( )"
+                                    class="ib-header-common__text ib-header-common__text--link" focusin>{{'HEADER_IBERIA_CHANGE_SEARCH_LINK'|translate}}</button>
+                            </div>
+                        </div>
+                        <div *ngIf="showPassengersInfo" class="ib-header-common__row-fly ib-header-common__row-fly--bottom hidden-md hidden-sm hidden-xs" [ngClass]="{'ib-header-common__row-fly--vbottom  ib-header-common__row-fly--auto u-pl-none': showPassengersInfo}">
+                            <div class="ib-header-common__fly-passenger u-border-left-none">
+                                <span class="ib-header-common__fly-icon ib-header-common__fly-icon--person icon-persona"></span>
+                                <span class="ib-header-common__text ib-header-common__text--type-3">{{'MULTIPLE_X_TEXT'|translate}}
+                                    {{model.trips.passengers}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ib-header-common__column ib-header-common__column--right hidden-md hidden-lg hidden-xl">
+                        <ib-booking-header-login-mobile
+                            [model]="login"
+                            [isMobile]="isMobile"
+                            *ngIf="isMobile"></ib-booking-header-login-mobile>
+                        <ib-booking-header-user-tooltip
+                            [model]="login"
+                            *ngIf="isMobile && login && login?.isLogged"></ib-booking-header-user-tooltip>
+                    </div>
+                    <ib-booking-header-basket *ngIf="model?.currency" [hidden]="!model?.showBasket" [model]="model?.shoppingBasket" [showButtonPay]="model?.showButtonPay" [flightType]="model?.flightType" class="ib-header-common--basket"></ib-booking-header-basket>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{'IBCOAC_MMB_SEGMENT_MODAL_TITLE'| translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}"  id="FARE_CONDITIONS_MODAL_CLOSE" data-ng-click="modalCtrl.close()">
+            <span class="hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+        <div class="ib-table-modal ib-table-modal__gdr ib-table-modal--left-head">
+            <table class="ib-table-modal__table">
+                <caption class="hide-accessible">{{'IBCOAC_MMB_SEGMENT_MODAL_HIDE_TABLE_TITLE'|translate}}</caption>
+                <tbody class="ib-table-modal__body">
+                    <tr class="ib-table-modal__row">
+                        <th class="ib-table-modal__column ib-table-modal__column--head ib-table-modal__column-ghost">
+                            <span class="ib-table-modal__column-icon hide-accessible">{{'IBCOAC_MMB_SEGMENT_MODAL_TABLE_TITLE'|translate}}</span>
+                        </th>
+                        <td class="ib-table-modal__column">
+                            <span class="ib-table-modal__column-title">{{modalCtrl.model.cabinDescription}}</span>
+                        </td>
+                    </tr>
+                    <tr class="ib-table-modal__row">
+                        <th class="ib-table-modal__column ib-table-modal__column--head" data-column="fareCondition">
+                            <span class="ib-table-modal__column-icon icon-cambios_y_reembolsos">{{'IBCOAC_MMB_SEGMENT_MODAL_CABIN'|translate}}</span>
+                        </th>
+                        <td class="ib-table-modal__column" data-column="fareDescription">
+                            <span class="ib-table__text">{{modalCtrl.model.cabinDescription}}</span>
+                        </td>
+                    </tr>
+                    <tr ng-if="conditions.extendedInfo.conditionStatus" class="ib-table-modal__row" ng-repeat="conditions in modalCtrl.model.conditions">
+                        <th class="ib-table-modal__column ib-table-modal__column--head" data-column="fareCondition">
+
+                            <span class="ib-table-modal__column-icon icon-e_equipaje" ng-if="conditions.code === 'EQMANO'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-e_equipaje_facturado" ng-if="conditions.code === 'EQBODEGA'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-asiento" ng-if="conditions.code === 'ASIENTO'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-asiento-plus" ng-if="conditions.code === 'ASIENTOXL'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-cambios_y_reembolsos" ng-if="conditions.code === 'CAMBIO'">{{conditions.name}} {{'COMPARE_FARES_MODAL_EXTRA_INFO' | translate}}</span>
+                            <span class="ib-table-modal__column-icon icon-reembolsos" ng-if="conditions.code === 'REEMBOLSO'">{{conditions.name}} {{'COMPARE_FARES_MODAL_EXTRA_INFO' | translate}}</span>
+                            <span class="ib-table-modal__column-icon icon-check_in" ng-if="conditions.code === 'CHECKINDESK'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-sala_vip" ng-if="conditions.code === 'SALAVIP'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-fast_track" ng-if="conditions.code === 'FASTTRACK'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-tarjeta_de_embarque" ng-if="conditions.code === 'TARJEMBANTIC'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-priority-boarding" ng-if="conditions.code === 'EMBARQUE'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-e_facturacion_prioritaria" ng-if="conditions.code === 'EQPPRIOR'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-c_comidas_nuevas" ng-if="conditions.code === 'COMIDA'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-wifi" ng-if="conditions.code === 'WIFI'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-navegador_avion" ng-if="conditions.code === 'CABINA'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-avios" ng-if="conditions.code === 'AVIO'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-canary-plus" ng-if="conditions.code === 'AEROPUERTO'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-avios" ng-if="conditions.code === 'AVIOSPLUS'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-utilizacion_avios" ng-if="conditions.code === 'PUNTUALIDAD'">{{conditions.name}}</span>
+                            <span class="ib-table-modal__column-icon icon-fast_track" ng-if="conditions.code === 'FASTLANE'">{{conditions.name}}</span>
+                        </th>
+
+                        <td class="ib-table-modal__column" data-column="fareDescription">
+                            <span class="ib-table__text">{{conditions.text}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

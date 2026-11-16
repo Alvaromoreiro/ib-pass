@@ -1,0 +1,237 @@
+/* -------------------------------------------------------------
+    #NOTICE BOX
+----------------------------------------------------------------- */
+.#{$wefront__namespace}notice-box {
+    padding: rem(15) rem(16);
+    margin-top: rem(24);
+    margin-bottom: rem(16);
+
+    &:first-child {
+        margin-top: rem(16);
+    }
+
+    &__text {
+        font-size: rem(11);
+        line-height: rem(16);
+
+        &--normal {
+            color: color(gray-10);
+        }
+
+        &--error {
+            color: color(red-50);
+        }
+
+        &--unfocused {
+            font-size: rem(12);
+            color: color(gray-30);
+        }
+    }
+
+    &__flights {
+        &--info {
+            border-top: rem(1) dashed color(gray-40);
+            border-bottom: rem(1) dashed color(gray-40);
+            background-color: color(gray-135);
+        }
+
+        &--warning {
+            border-top: rem(1) dashed color(yellow-10);
+            border-bottom: rem(1) dashed color(yellow-10);
+            background-color: color(yellow-50);
+        }
+
+        &--narrow {
+            padding: rem(12) rem(22);
+        }
+    }
+
+    &__flight-stats {
+        padding: rem(16) 0 0 0;
+        border-top: rem(1) solid color(gray-70);
+
+        &--title {
+            position: relative;
+            padding-left: rem(16);
+            margin-bottom: rem(10);
+            font-size: rem(0);
+            line-height: rem(20);
+
+            &-text {
+                display: inline-block;
+                font-family: $font-normal;
+                font-size: rem(12);
+                color: color(gray-10);
+            }
+            .#{$wefront__namespace}link-icon__icon {
+                position: absolute;
+                top: rem(3);
+                left: rem(-2);
+
+                &::before {
+                    color: color(gray-10);
+                }
+            }
+        }
+
+        &--list {
+            padding-left: rem(19);
+        }
+
+        &--list-item {
+            position: relative;
+            padding-left: rem(20);
+
+            &::before {
+                content: " ";
+                position: absolute;
+                top: rem(6);
+                left: rem(0);
+                display: inline-block;
+                width: rem(4);
+                height: rem(4);
+                background-color: color(gray-30);
+            }
+
+            &-title,
+            &-text {
+                margin-bottom: rem(5);
+                font-family: $font-normal;
+                font-size: rem(12);
+            }
+
+            &-title {
+                color: color(gray-10);
+            }
+
+            &-text {
+                color: color(gray-30);
+            }
+        }
+    }
+
+    &__scale-box {
+        display: flex;
+        width: 100%;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        .#{$wefront__namespace}notice-box {
+            &__text {
+                width: calc(50% - 1rem);
+            }
+        }
+
+        &--inherit {
+            justify-content: inherit;
+            padding-right: 0;
+            padding-left: 0;
+
+            &:first-child {
+                margin-top: rem(5);
+                margin-bottom: rem(10);
+            }
+        }
+    }
+}
+//Responsive
+@include media-query("lg") {
+    .#{$wefront__namespace}notice-box {
+        &__flight-stats {
+            .#{$wefront__namespace}notice-box {
+                &__content {
+                    padding-left: rem(20);
+                }
+            }
+        }
+
+        &__flights {
+            &--narrow {
+                padding: rem(12) rem(22);
+            }
+        }
+    }
+}//lg
+
+@include media-query("sm") {
+    .#{$wefront__namespace}notice-box {
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &__scale-box {
+            &--inherit {
+                display: grid;
+            }
+        }
+
+        &__flights {
+            &--narrow {
+                padding: rem(12) rem(22);
+            }
+        }
+    }
+}//mobile
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}notice-box {
+        padding: rem(8) rem(12);
+
+        &:first-child {
+            margin-top: rem(10);
+        }
+
+        &__scale-box {
+            align-items: baseline;
+
+            .#{$wefront__namespace}notice-box {
+                &__text {
+                    width: calc(78% - 1rem);
+
+                    +.#{$wefront__namespace}notice-box__text {
+                        width: 22%;
+                        text-align: right;
+                    }
+                }
+            }
+
+            &--inherit {
+                padding-right: 0;
+                padding-left: 0;
+            }
+        }
+
+        &__flight-stats {
+            padding: rem(16) 0 0 0;
+
+            &:first-child {
+                margin-top: rem(10);
+            }
+
+            &--title {
+                .#{$wefront__namespace}link-icon__icon {
+                    top: rem(3);
+                }
+            }
+        }
+    }
+}//xs
+
+@include media-query("xs") {
+    .#{$wefront__namespace}notice-box {
+        &__scale-box {
+            .#{$wefront__namespace}notice-box {
+                &__text {
+                    width: calc(64% - 8px);
+                    +.#{$wefront__namespace}notice-box__text {
+                        width: 36%;
+                    }
+                }
+            }
+
+            &--inherit {
+                display: grid;
+                padding: 0 !important;
+            }
+        }
+    }
+}//xs

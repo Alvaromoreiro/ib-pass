@@ -1,0 +1,51 @@
+    <!-- directive: ib-comment "{{$root.generateDatalayerDOM()}}" !-->
+    <!-- End wrapper-->
+    <section class="container">
+        <!-- Main content-->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__header ib-layout__header--title">
+                    <h1 class="ib-heading ib-heading--type-1">{{'IBCOSE2_PAGE_TITLE'|translate}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <section class="ib-layout__section">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-8">
+                            <section>
+                                <div id="BOOKIN_ITEM_OVER_OPACITY" data-ib-hover-opacity ng-repeat="bookingItem in bookingsCtrl.model.bookingList">
+                                    <ib-logged-booking-item booking-item-model="::bookingItem"></ib-logged-booking-item>
+                                </div>
+                            </section>
+                            <section ng-if="bookingsCtrl.model.bookingList.length === 0" class="ib-layout__section">
+                                <div class="ib-box ib-box--icon ib-box--empty ib-box--bordered icon-informacion_de_vuelos">
+                                    <div class="ib-layout__line-spacing">
+                                        <span class="ib-heading ib-heading--type-4 ib-text--block">{{'IBCOSE2_EMPTY_LIST_TITLE'|translate}}</span>
+                                        <ul class="ib-box__list">
+                                            <li class="ib-box__list-item">
+                                                <p class="ib-text ib-text">
+                                                    {{'IBCOSE2_EMPTY_LIST_NEW_SEARCH'|translate}}
+                                                    <a class="ib-link" ng-href="{{::bookingsCtrl.model.homeURL}}" title="{{'IBCOSE2_EMPTY_LIST_NEW_SEARCH_LINK_TITLE'|translate}}">{{'IBCOSE2_EMPTY_LIST_NEW_SEARCH_LINK'|translate}}</a>
+                                                </p>
+                                            </li>
+                                            <li class="ib-box__list-item">
+                                                <p class="ib-text ib-text">{{'IBCOSE2_EMPTY_LIST_ANONYMOUS_BOOKING_TEXT'|translate}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <aside class="ib-box-form ib-box-form--one-column ib-box-form--no-margin">
+                                <ib-anonymous-search search-title="{{'IBCOSE2_ANONYMOUS_FORM_TITLE'|translate}}" button-text="{{'IBCOSE2_ANONYMOUS_FORM_BUTTON_TEXT'|translate}}"
+                                    button-style="ib-button--grey" title-style="ib-box-form__title--font-medium"></ib-anonymous-search>
+                            </aside>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>

@@ -1,0 +1,832 @@
+<fieldset class="ib-box-menu__section ib-box-menu__section--full"
+    ng-if="manageInvoiceInfoCtrl.model.isSkeletonView || manageInvoiceInfoCtrl.model.finalPrices.total">
+    <legend class="u-hide-accessible">{{'MMB_GENERAL_YOUR_BUY_TEXT' | translate}}</legend>
+    <div>
+        <section class="ib-layout__section">
+            <div>
+                <div class="ib-box-cols">
+                    <div class="ib-box-cols__header">
+                        <h3 class="ib-box-cols__title">{{'MMB_GENERAL_YOUR_BUY_TEXT' | translate}}</h3>
+                    </div>
+                    <div class="ib-table-breakdown"
+                        ng-class="{'ib-table-breakdown__content-flex': manageInvoiceInfoCtrl.model.showAvios, 'ib-table-breakdown__content-flex ib-table-breakdown--longcoins': manageInvoiceInfoCtrl.model.isLongCurrency}">
+                        <div class="ib-box-cols__content"
+                            ng-class="{'ib-table-breakdown__flex--content': manageInvoiceInfoCtrl.model.showAvios}">
+                            <div ng-if="manageInvoiceInfoCtrl.model.isSkeletonView"
+                                class="mmb-skeleton-invoice__header">
+                                <ng-react [component]="manageInvoiceInfoCtrl.skeletonComponent"
+                                    [props]="manageInvoiceInfoCtrl.skeletonProps"></ng-react>
+                                <ng-react class="mmb-skeleton-invoice__header--mobile"
+                                    [component]="manageInvoiceInfoCtrl.skeletonComponent"
+                                    [props]="manageInvoiceInfoCtrl.skeletonProps"></ng-react>
+                            </div>
+
+                            <span class="ib-table-breakdown__title ib-table-breakdown__title--with-link"
+                                ng-if="!manageInvoiceInfoCtrl.model.isSkeletonView">{{'MMB_PRICE_BREAKDOWN_TOTAL_TITLE'
+                                | translate}}:
+                                <span
+                                    ng-if="manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount === 'points'">{{manageInvoiceInfoCtrl.model.finalPrices.totalAvios
+                                    | aviosFormatter}}
+                                    {{'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED' | translate}} + </span>
+                                <span
+                                    ng-if="manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount === 'avios'">{{manageInvoiceInfoCtrl.model.finalPrices.totalAvios
+                                    | aviosFormatter}}
+                                    {{'MENU_BAR_AVIOS' | translate}} + </span>
+                                {{manageInvoiceInfoCtrl.model.finalPrices.total}}</span>
+                        </div>
+                        <div class="mmb-skeleton-invoice" ng-if="manageInvoiceInfoCtrl.model.isSkeletonView">
+                            <ng-react [component]="manageInvoiceInfoCtrl.skeletonComponent"
+                                [props]="manageInvoiceInfoCtrl.skeletonTitle"></ng-react>
+                            <ng-react [component]="manageInvoiceInfoCtrl.skeletonComponent"
+                                [props]="manageInvoiceInfoCtrl.skeletonBreakdown"></ng-react>
+                        </div>
+
+
+                        <div class="ib-box-cols__content" ng-if="!manageInvoiceInfoCtrl.model.isSkeletonView">
+                            <span class="ib-table-breakdown__title">{{'MMB_PRICE_BREAKDOWN_TEXT' | translate}}</span>
+                            <div>
+                                <table class="ib-table-breakdown__table"
+                                    ng-class="{'ib-table-breakdown__table--avios':manageInvoiceInfoCtrl.model.showAvios, 'ib-table-breakdown__table--obo':manageInvoiceInfoCtrl.model.typeDiscount === 'points','ib-table-breakdown__table--cols-alignement':!manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount !== 'points'}">
+                                    <caption class="u-hide-accessible">{{'GENERAL_PASSENGER_TEXT' | translate}}
+                                    </caption>
+                                    <thead class="ib-table-breakdown__head">
+                                        <tr class="ib-table-breakdown__row">
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt">{{'GENERAL_PASSENGER_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt"
+                                                    ng-if="manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount === 'points'">{{'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED'
+                                                    | translate}}</span>
+                                                <span class="ib-table-breakdown__txt"
+                                                    ng-if="manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount === 'avios'">
+                                                    {{'MENU_BAR_AVIOS' | translate}} </span>
+                                                <span class="ib-table-breakdown__txt"
+                                                    ng-if="!manageInvoiceInfoCtrl.model.showAvios">{{'PRICE_BREAKDOWN_FARE'
+                                                    |
+                                                    translate}}</span>
+                                            </th>
+                                            <th ng-if="manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.showAvios !== undefined && manageInvoiceInfoCtrl.model.typeDiscount === 'avios'"
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'GENERAL_MONEY' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'TAXES_FEES_OTHER_CHARGES' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ib-table-breakdown__body">
+                                        <tr class="ib-table-breakdown__row"
+                                            data-ng-repeat="(index, passenger) in manageInvoiceInfoCtrl.model.passPricesByType">
+                                            <td class="ib-table-breakdown__cell">
+                                                <span class="ib-table-breakdown__txt"
+                                                    data-ng-class="{'icon-persona': index !== 'CHILD' && index !== 'INFANT','icon-iberia_ninos' : index === 'CHILD', 'icon-bebe' : index === 'INFANT'}">{{passenger.units}}
+                                                    x {{passenger.description}}</span>
+                                            </td>
+                                            <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive"
+                                                data-attr="{{passenger.points !== undefined ? 'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED' : 'PRICE_BREAKDOWN_FARE' | translate}}">
+                                                <span ng-if="passenger.points !== undefined"
+                                                    class="ib-table-breakdown__txt">
+                                                    {{passenger.units}} x {{(passenger.points | aviosFormatter)}}</span>
+                                                <span ng-if="passenger.points === undefined"
+                                                    class="ib-table-breakdown__txt">
+                                                    {{passenger.units}} x {{passenger.fare}}</span>
+                                            </td>
+
+                                            <td ng-if="manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.showAvios !== undefined && manageInvoiceInfoCtrl.model.typeDiscount === 'avios'"
+                                                class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive"
+                                                data-attr="{{'GENERAL_MONEY' | translate}}">
+                                                <span class="ib-table-breakdown__txt">
+                                                    {{passenger.fare}}</span>
+                                            </td>
+                                            <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right ib-table-breakdown__cell--responsive"
+                                                data-attr="{{'TAXES_FEES_OTHER_CHARGES' | translate}}">
+                                                <span class="ib-table-breakdown__txt">{{passenger.units}} x
+                                                    {{passenger.tax}}</span>
+                                            </td>
+                                            <td
+                                                class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt"
+                                                    ng-if="manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount === 'points'">{{passenger.points
+                                                    * passenger.units | aviosFormatter}}
+                                                    {{'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED' | translate}} +
+                                                    {{passenger.total}}</span>
+
+                                                <span class="ib-table-breakdown__txt"
+                                                    ng-if="manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount === 'avios'">{{passenger.points
+                                                    * passenger.units | aviosFormatter}}
+                                                    {{'MENU_BAR_AVIOS' | translate}} +
+                                                    {{passenger.total}}</span>
+
+
+                                                <span class="ib-table-breakdown__txt"
+                                                    ng-if="!manageInvoiceInfoCtrl.model.showAvios">{{passenger.total}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div
+                                ng-if="manageInvoiceInfoCtrl.seatNotFree && (manageInvoiceInfoCtrl.model.seatsPricesByType && manageInvoiceInfoCtrl.model.paidSeat)">
+                                <table class="ib-table-breakdown__table"
+                                    ng-class="{'ib-table-breakdown__table--avios-simple':manageInvoiceInfoCtrl.model.showAvios, 'ib-table-breakdown__table--obo':manageInvoiceInfoCtrl.model.typeDiscount === 'points','ib-table-breakdown__table--cols-alignement':!manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount !== 'points'}">
+                                    <caption class="u-hide-accessible">{{'MMB_BOOKING_SEATS_TITLE' | translate}}
+                                    </caption>
+                                    <thead class="ib-table-breakdown__head">
+                                        <tr class="ib-table-breakdown__row">
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_BOOKING_SEATS_TITLE' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_PRICE_BREAKDOWN_PRICE' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ib-table-breakdown__body">
+                                        <tr class="ib-table-breakdown__row"
+                                            data-ng-repeat="(tIndex, slice) in manageInvoiceInfoCtrl.model.seatsPricesByType">
+                                            <span style="font-size:16px;">{{tIndex}} {{slice}}</span>
+                                            <td
+                                                class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse">
+                                                <span class="ib-table-breakdown__txt"
+                                                    data-ng-repeat="(sIndex, seat) in slice" ng-if="$index < 1">
+                                                    <span class="ib-journey__box ib-journey__box--separator">
+                                                        <span
+                                                            class="ib-journey__box--city">{{seat.departureCity}}</span>
+                                                        <span
+                                                            class="ib-journey__box--iata ib-iata-text">{{seat.departureCityCode}}</span>
+                                                    </span>
+                                                    <span class="ib-journey__box">
+                                                        <span class="ib-journey__box--city">{{seat.arrivalCity}}</span>
+                                                        <span
+                                                            class="ib-journey__box--iata ib-iata-text">{{seat.arrivalCityCode}}</span>
+                                                    </span>
+                                                </span>
+                                            </td>
+                                            <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                                <span class="ib-table-breakdown__txt"
+                                                    data-ng-repeat="(sIndex, seat) in slice">{{seat.units}} x
+                                                    {{seat.fare}}</span>
+                                            </td>
+                                            <td
+                                                class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt"
+                                                    data-ng-repeat="(sIndex, seat) in slice">{{seat.total}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div
+                                ng-if="manageInvoiceInfoCtrl.model.priorityPricesByType && manageInvoiceInfoCtrl.model.paidPriority">
+                                <table class="ib-table-breakdown__table"
+                                    ng-class="{'ib-table-breakdown__table--avios-simple':manageInvoiceInfoCtrl.model.showAvios, 'ib-table-breakdown__table--obo':manageInvoiceInfoCtrl.model.typeDiscount === 'points','ib-table-breakdown__table--cols-alignement':!manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount !== 'points'}">
+                                    <caption class="u-hide-accessible">{{'PRIORITY_BOARDING_TITLE' | translate}}
+                                    </caption>
+                                    <thead class="ib-table-breakdown__head">
+                                        <tr class="ib-table-breakdown__row">
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt">{{'PRIORITY_BOARDING_TITLE' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_PRICE_BREAKDOWN_PRICE' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ib-table-breakdown__body">
+                                        <tr class="ib-table-breakdown__row"
+                                            data-ng-repeat="(tIndex, slice) in manageInvoiceInfoCtrl.model.priorityPricesByType">
+                                            <span style="font-size:16px;">{{tIndex}} {{slice}}</span>
+                                            <td
+                                                class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse">
+                                                <span class="ib-table-breakdown__txt"
+                                                    data-ng-repeat="(sIndex, priority) in slice" ng-if="$index < 1">
+                                                    <span class="ib-journey__box ib-journey__box--separator">
+                                                        <span
+                                                            class="ib-journey__box--city">{{priority.departureCity}}</span>
+                                                        <span
+                                                            class="ib-journey__box--iata ib-iata-text">{{priority.departureCityCode}}</span>
+                                                    </span>
+                                                    <span class="ib-journey__box">
+                                                        <span
+                                                            class="ib-journey__box--city">{{priority.arrivalCity}}</span>
+                                                        <span
+                                                            class="ib-journey__box--iata ib-iata-text">{{priority.arrivalCityCode}}</span>
+                                                    </span>
+                                                </span>
+                                            </td>
+                                            <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                                <span class="ib-table-breakdown__txt"
+                                                    data-ng-repeat="(sIndex, priority) in slice">{{priority.units}} x
+                                                    {{priority.fare}}</span>
+                                            </td>
+                                            <td
+                                                class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt"
+                                                    data-ng-repeat="(sIndex, priority) in slice">{{priority.total}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table class="ib-table-breakdown__table"
+                                    ng-if="manageInvoiceInfoCtrl.model.baggagesPricesByType && manageInvoiceInfoCtrl.model.paidBaggage"
+                                    ng-class="{'ib-table-breakdown__table--avios-simple':manageInvoiceInfoCtrl.model.showAvios, 'ib-table-breakdown__table--obo':manageInvoiceInfoCtrl.model.typeDiscount === 'points','ib-table-breakdown__table--cols-alignement':!manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount !== 'points'}">
+                                    <caption class="u-hide-accessible">{{'MMB_BOOKING_BAGGAGE_TITLE' | translate}}
+                                    </caption>
+                                    <thead class="ib-table-breakdown__head">
+                                        <tr class="ib-table-breakdown__row">
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_BOOKING_BAGGAGE_TITLE' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_PRICE_BREAKDOWN_PRICE' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ib-table-breakdown__body">
+                                        <span style="font-size: 1rem">{{
+                                            manageInvoiceInfoCtrl.model.baggagesPricesByType.length}}
+                                        </span>
+                                        <tr class="ib-table-breakdown__row"
+                                            data-ng-repeat="(tIndex, slice) in manageInvoiceInfoCtrl.model.baggagesPricesByType">
+                                            <td
+                                                class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse">
+                                                <span class="ib-table-breakdown__txt"
+                                                    data-ng-repeat="(sIndex, baggage) in slice"
+                                                    ng-if="$index < 1 && baggage">
+
+                                                    <span class="ib-journey__box ib-journey__box--separator">
+                                                        <span
+                                                            class="ib-journey__box--city">{{baggage.departureCity}}</span>
+                                                        <span
+                                                            class="ib-journey__box--iata ib-iata-text">{{baggage.departureCityCode}}</span>
+                                                    </span>
+                                                    <span class="ib-journey__box">
+                                                        <span
+                                                            class="ib-journey__box--city">{{baggage.arrivalCity}}</span>
+                                                        <span
+                                                            class="ib-journey__box--iata ib-iata-text">{{baggage.arrivalCityCode}}</span>
+                                                    </span>
+                                                </span>
+                                            </td>
+                                            <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                                <span class="ib-table-breakdown__txt"
+                                                    data-ng-repeat="(sIndex, baggage) in slice">{{baggage.units}} x
+                                                    {{baggage.fare}}</span>
+                                            </td>
+                                            <td
+                                                class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt"
+                                                    data-ng-repeat="(sIndex, baggage) in slice">{{baggage.total}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table class="ib-table-breakdown__table"
+                                    ng-if="manageInvoiceInfoCtrl.model.insurancePrices"
+                                    ng-class="{'ib-table-breakdown__table--avios-simple':manageInvoiceInfoCtrl.model.showAvios, 'ib-table-breakdown__table--obo':manageInvoiceInfoCtrl.model.typeDiscount === 'points','ib-table-breakdown__table--cols-alignement':!manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount !== 'points'}">
+                                    <caption class="u-hide-accessible">{{'MMB_BOOKING_INSURANCE_TEXT' | translate}}
+                                    </caption>
+                                    <thead class="ib-table-breakdown__head">
+                                        <tr class="ib-table-breakdown__row">
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_BOOKING_INSURANCE_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_PRICE_BREAKDOWN_PRICE' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ib-table-breakdown__body">
+                                        <tr class="ib-table-breakdown__row"
+                                            data-ng-repeat="insurance in manageInvoiceInfoCtrl.pricemodel">
+                                            <td class="ib-table-breakdown__cell">
+                                                <span
+                                                    class="ib-table-breakdown__txt ib-table-breakdown__txt--normal">{{'MMB_YOUR_SECURE'
+                                                    |
+                                                    translate}}
+                                                    ({{ insurance.contractNumber }})</span>
+                                            </td>
+                                            <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                                <span class="ib-table-breakdown__txt">1 x
+                                                    {{insurance.totalPrice}}</span>
+                                            </td>
+                                            <td
+                                                class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{insurance.totalPrice}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table class="ib-table-breakdown__table"
+                                    ng-if="manageInvoiceInfoCtrl.model.paidCarbonFootprint"
+                                    ng-class="{'ib-table-breakdown__table--avios-simple':manageInvoiceInfoCtrl.model.showAvios, 'ib-table-breakdown__table--obo':manageInvoiceInfoCtrl.model.typeDiscount === 'points','ib-table-breakdown__table--cols-alignement':!manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount !== 'points'}">
+                                    <caption class="u-hide-accessible"
+                                        data-ng-bind-html="'MMB_BOOKING_CO2_FOOTPRINT_TITLE' | translate">
+                                    </caption>
+                                    <thead class="ib-table-breakdown__head">
+                                        <tr class="ib-table-breakdown__row">
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt"
+                                                    data-ng-bind-html="'MMB_BOOKING_CO2_FOOTPRINT_TITLE' | translate"></span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_PRICE_BREAKDOWN_PRICE' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ib-table-breakdown__body">
+                                        <tr class="ib-table-breakdown__row">
+                                            <td class="ib-table-breakdown__cell">
+                                                <span
+                                                    class="ib-table-breakdown__txt ib-table-breakdown__txt--normal icon-carbon_footprint ib-summary-breakdown__icon--carbon-footprint-before"
+                                                    data-ng-bind-html="'MMB_BOOKING_CO2_FOOTPRINT_SUBTITLE'|translate:{kilosCo2Equivalent: manageInvoiceInfoCtrl.co2Footprint.kilosCo2EquivalentFormatted}">
+                                                </span>
+                                            </td>
+                                            <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                                <span class="ib-table-breakdown__txt">1 x {{
+                                                    manageInvoiceInfoCtrl.co2Footprint.price.totalFormatted }}</span>
+                                            </td>
+                                            <td
+                                                class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{
+                                                    manageInvoiceInfoCtrl.co2Footprint.price.totalFormatted }}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table class="ib-table-breakdown__table"
+                                    ng-if="manageInvoiceInfoCtrl.model.flexibilityOnDemand"
+                                    ng-class="{'ib-table-breakdown__table--avios-simple':manageInvoiceInfoCtrl.model.showAvios, 'ib-table-breakdown__table--obo':manageInvoiceInfoCtrl.model.typeDiscount === 'points','ib-table-breakdown__table--cols-alignement':!manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount !== 'points'}">
+                                    <caption class="u-hide-accessible">{{'ANCILLARIES_FLEXIBILITY_TITLE' | translate}}
+                                    </caption>
+                                    <thead class="ib-table-breakdown__head">
+                                        <tr class="ib-table-breakdown__row">
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt">{{'ANCILLARIES_FLEXIBILITY_TITLE'
+                                                    | translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_PRICE_BREAKDOWN_PRICE' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ib-table-breakdown__body">
+                                        <tr class="ib-table-breakdown__row">
+                                            <td class="ib-table-breakdown__cell">
+                                                <span
+                                                    ng-if="manageInvoiceInfoCtrl.model.flexibilityOnDemand[0].subtype === 'FLIGHT_CHANGE'"
+                                                    class="ib-table-breakdown__txt ib-table-breakdown__txt--normal">1
+                                                    {{'MMB_ANCILLARIES_FLEXIBILITY_CHANGE_FLIGHT_TEXT' |
+                                                    translate}}</span>
+                                                <span
+                                                    ng-if="manageInvoiceInfoCtrl.model.flexibilityOnDemand[0].subtype === 'VOUCHER_REFUND' && manageInvoiceInfoCtrl.model.flexibilityOnDemand[0].percentage < 100"
+                                                    class="ib-table-breakdown__txt ib-table-breakdown__txt--normal">{{'MMB_ANCILLARIES_FLEXIBILITY_PARCIAL_REFUND_TEXT_V2'
+                                                    | translate : {percentage:
+                                                    manageInvoiceInfoCtrl.model.flexibilityOnDemand[0].percentage}
+                                                    }}</span>
+                                                <span
+                                                    ng-if="manageInvoiceInfoCtrl.model.flexibilityOnDemand[0].subtype === 'VOUCHER_REFUND' && manageInvoiceInfoCtrl.model.flexibilityOnDemand[0].percentage >= 100"
+                                                    class="ib-table-breakdown__txt ib-table-breakdown__txt--normal">{{'MMB_VOUCHER_REFUND_MODAL_TITLE'
+                                                    | translate }}
+                                                    ({{manageInvoiceInfoCtrl.model.flexibilityOnDemand[0].percentage}}%)</span>
+                                                <span
+                                                    ng-if="manageInvoiceInfoCtrl.model.flexibilityOnDemand[0].subtype === 'FLEXIBILITY_PACK' && manageInvoiceInfoCtrl.model.flexibilityOnDemand[0].percentage < 100"
+                                                    class="ib-table-breakdown__txt ib-table-breakdown__txt--normal">{{'ANCILLARIES_FLEXIBILITY_CHANGE_OR_PARTIAL_REFOUND'
+                                                    | translate }}</span>
+                                                <span
+                                                    ng-if="manageInvoiceInfoCtrl.model.flexibilityOnDemand[0].subtype === 'FLEXIBILITY_PACK' && manageInvoiceInfoCtrl.model.flexibilityOnDemand[0].percentage >= 100"
+                                                    class="ib-table-breakdown__txt ib-table-breakdown__txt--normal">{{'ANCILLARIES_FLEXIBILITY_CHANGE_OR_TOTAL_REFOUND'
+                                                    | translate }}</span>
+                                            </td>
+                                            <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                                <span
+                                                    class="ib-table-breakdown__txt">{{manageInvoiceInfoCtrl.model.flexibilityOnDemand[0].units}}
+                                                    x
+                                                    {{manageInvoiceInfoCtrl.model.flexibilityOnDemand[0].price.fare}}</span>
+                                            </td>
+                                            <td
+                                                class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                <span
+                                                    class="ib-table-breakdown__txt">{{manageInvoiceInfoCtrl.model.flexibilityOnDemand[0].price.total}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table class="ib-table-breakdown__table"
+                                    ng-if="manageInvoiceInfoCtrl.model.specialEquipmentPricesByType && manageInvoiceInfoCtrl.model.paidSpecialEquipment"
+                                    ng-class="{'ib-table-breakdown__table--avios-simple':manageInvoiceInfoCtrl.model.showAvios, 'ib-table-breakdown__table--obo':manageInvoiceInfoCtrl.model.typeDiscount === 'points','ib-table-breakdown__table--cols-alignement':!manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount !== 'points'}">
+                                    <caption class="u-hide-accessible">{{'ANCILLARIES_SPEQS_TITLE_TEXT' | translate}}
+                                    </caption>
+                                    <thead class="ib-table-breakdown__head">
+                                        <tr class="ib-table-breakdown__row">
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt">{{'ANCILLARIES_SPEQS_TITLE_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_PRICE_BREAKDOWN_PRICE' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ib-table-breakdown__body">
+                                        <span style="font-size: 1rem">{{
+                                            manageInvoiceInfoCtrl.model.specialEquipmentPricesByType.length}}
+                                        </span>
+                                        <tr class="ib-table-breakdown__row"
+                                            data-ng-repeat="(tIndex, slice) in manageInvoiceInfoCtrl.model.specialEquipmentPricesByType">
+                                            <td
+                                                class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse">
+                                                <span class="ib-table-breakdown__txt"
+                                                    data-ng-repeat="(sIndex, specialEquipment) in slice"
+                                                    ng-if="$index < 1 && specialEquipment">
+
+                                                    <span class="ib-journey__box ib-journey__box--separator">
+                                                        <span
+                                                            class="ib-journey__box--city">{{specialEquipment.departureCity}}</span>
+                                                        <span
+                                                            class="ib-journey__box--iata ib-iata-text">{{specialEquipment.departureCityCode}}</span>
+                                                    </span>
+                                                    <span class="ib-journey__box">
+                                                        <span
+                                                            class="ib-journey__box--city">{{specialEquipment.arrivalCity}}</span>
+                                                        <span
+                                                            class="ib-journey__box--iata ib-iata-text">{{specialEquipment.arrivalCityCode}}</span>
+                                                    </span>
+                                                </span>
+                                            </td>
+                                            <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                                <span class="ib-table-breakdown__txt"
+                                                    data-ng-repeat="(sIndex, specialEquipment) in slice">{{specialEquipment.units}}
+                                                    x
+                                                    {{specialEquipment.fare}}</span>
+                                            </td>
+                                            <td
+                                                class="ib-table-breakdown__cell ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt"
+                                                    data-ng-repeat="(sIndex, specialEquipment) in slice">{{specialEquipment.total}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
+
+
+                            <div>
+                                <table class="ib-table-breakdown__table"
+                                    ng-if="manageInvoiceInfoCtrl.model.globickExperience.length > 0"
+                                    ng-class="{'ib-table-breakdown__table--avios-simple':manageInvoiceInfoCtrl.model.showAvios, 'ib-table-breakdown__table--obo':manageInvoiceInfoCtrl.model.typeDiscount === 'points','ib-table-breakdown__table--cols-alignement':!manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount !== 'points'}">
+                                    <caption class="u-hide-accessible">{{'WIDGET_YOUR_EXPERIENCES' | translate}}
+                                    </caption>
+
+                                    </caption>
+                                    <thead class="ib-table-breakdown__head">
+                                        <tr class="ib-table-breakdown__row">
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt">{{'WIDGET_YOUR_EXPERIENCES' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ib-table-breakdown__body">
+                                        <tr class="ib-table-breakdown__row"
+                                            data-ng-repeat="(tIndex, experience) in manageInvoiceInfoCtrl.model.globickExperience">
+                                            <td
+                                                class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas">
+                                                <span class="ib-table-breakdown__txt ib-table-breakdown__txt--normal">
+                                                    {{experience.name}}
+                                                </span>
+                                            </td>
+                                            <td colspan="2"
+                                                class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                                <span class="ib-table-breakdown__txt">{{experience.price}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div>
+                                <table class="ib-table-breakdown__table"
+                                    ng-if="manageInvoiceInfoCtrl.model.globickTransfers.length > 0"
+                                    ng-class="{'ib-table-breakdown__table--avios-simple':manageInvoiceInfoCtrl.model.showAvios, 'ib-table-breakdown__table--obo':manageInvoiceInfoCtrl.model.typeDiscount === 'points','ib-table-breakdown__table--cols-alignement':!manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount !== 'points'}">
+                                    <!-- <caption class="u-hide-accessible">{{'WIDGET_YOUR_EXPERIENCES' | translate}} -->
+                                    <caption class="u-hide-accessible">Tus traslados
+                                    </caption>
+
+                                    </caption>
+                                    <thead class="ib-table-breakdown__head">
+                                        <tr class="ib-table-breakdown__row">
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt">{{'WIDGET_YOUR_TRANSFERS' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ib-table-breakdown__body">
+                                        <tr class="ib-table-breakdown__row"
+                                            data-ng-repeat="(tIndex, transfers) in manageInvoiceInfoCtrl.model.globickTransfers">
+                                            <td
+                                                class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas">
+                                                <span class="ib-table-breakdown__txt ib-table-breakdown__txt--normal">
+                                                    {{transfers.name}}
+                                                </span>
+                                            </td>
+                                            <td colspan="2"
+                                                class="ib-table-breakdown__cell ib-table-breakdown__cell--right">
+                                                <span class="ib-table-breakdown__txt">{{transfers.price}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div>
+                                <table class="ib-table-breakdown__table"
+                                    ng-if="manageInvoiceInfoCtrl.model.upgradingBid"
+                                    ng-class="{'ib-table-breakdown__table--avios-simple':manageInvoiceInfoCtrl.model.showAvios, 'ib-table-breakdown__table--obo':manageInvoiceInfoCtrl.model.typeDiscount === 'points','ib-table-breakdown__table--cols-alignement':!manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount !== 'points'}">
+                                    <caption class="u-hide-accessible">{{'IMPROVE_UPGRADING_CABIN_TEXT' | translate}}
+                                    </caption>
+                                    <thead class="ib-table-breakdown__head">
+                                        <tr class="ib-table-breakdown__row">
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt">{{'IMPROVE_UPGRADING_CABIN_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+
+                                            <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs"
+                                                colspan="2">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ib-table-breakdown__body">
+                                        <tr class="ib-table-breakdown__row"
+                                            ng-repeat="upgrade in manageInvoiceInfoCtrl.model.upgradingBid">
+                                            <td
+                                                class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse">
+                                                <span class="ib-table-breakdown__txt ib-table-breakdown__txt--normal">
+                                                    {{('UPGRADING_TO_SUMMARY' | translate) | CapitalLetterFilter }}
+                                                    {{upgrade.cabin.type |
+                                                    CapitalLetterFilter}}
+                                                </span>
+                                            </td>
+
+                                            <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right"
+                                                colspan="2">
+                                                <span class="ib-table-breakdown__txt">{{upgrade.price.total}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table class="ib-table-breakdown__table" ng-if="manageInvoiceInfoCtrl.model.petc && manageInvoiceInfoCtrl.showPetc"
+                                    ng-class="{'ib-table-breakdown__table--avios-simple':manageInvoiceInfoCtrl.model.showAvios, 'ib-table-breakdown__table--obo':manageInvoiceInfoCtrl.model.typeDiscount === 'points','ib-table-breakdown__table--cols-alignement':!manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount !== 'points'}">
+                                    <caption class="u-hide-accessible">
+                                        {{'PETC_IN_CABIN' | translate}}
+                                    </caption>
+                                    <thead class="ib-table-breakdown__head">
+                                        <tr class="ib-table-breakdown__row">
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt">{{'PETC_IN_CABIN' | translate}}</span>
+                                            </th>
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt ib-table-breakdown__cell--right hidden-sm hidden-xs">{{'MMB_PRICE_BREAKDOWN_PRICE' | translate}}</span>
+                                            </th>
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt ib-table-breakdown__cell--right hidden-sm hidden-xs">{{'MMB_GENERAL_TOTAL_TEXT' | translate}}</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ib-table-breakdown__body">
+                                        <tr class="ib-table-breakdown__row"
+                                            data-ng-repeat="pet in manageInvoiceInfoCtrl.model.petc"
+                                            ng-if="pet.emd !== 'PENDING_PAYMENT'">
+                                            <td
+                                                class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse">
+                                                <span class="ib-table-breakdown__txt">
+                                                    <span class="ib-journey__box ib-journey__box--separator">
+                                                        <span class="ib-journey__box--city">
+                                                            {{pet.departureCity.city.description}}
+                                                        </span>
+                                                        <span class="ib-journey__box--iata ib-iata-text">{{pet.departureCity.code}}</span>
+                                                    </span>
+                                                    <span class="ib-journey__box">
+                                                        <span class="ib-journey__box--city">
+                                                            {{pet.arrivalCity.city.description}}
+                                                        </span>
+                                                        <span class="ib-journey__box--iata ib-iata-text">{{pet.arrivalCity.code}}</span>
+                                                    </span>
+                                                </span>
+                                            </td>
+                                            <td class="ib-table-breakdown__cell">
+                                                <span class="ib-table-breakdown__txt ib-table-breakdown__cell--right">{{pet.quantity}} x {{pet.price.fareFormatted}}</span>
+                                            </td>
+                                            <td class="ib-table-breakdown__cell">
+                                                <span class="ib-table-breakdown__txt ib-table-breakdown__cell--right">{{pet.totalSumFormatted}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table class="ib-table-breakdown__table" ng-if="manageInvoiceInfoCtrl.model.bundle">
+                                    <caption class="u-hide-accessible">{{'BUNDLE_SUMMARY_TITLE' | translate}}
+                                        ({{'BUNDLE_SUMMARY_ALL_TRIPS'|translate}})
+                                    </caption>
+                                    <thead class="ib-table-breakdown__head">
+                                        <tr class="ib-table-breakdown__row">
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt">{{'BUNDLE_SUMMARY_TITLE' |
+                                                    translate}}
+                                                    ({{'BUNDLE_SUMMARY_ALL_TRIPS'|translate}})</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_PRICE_BREAKDOWN_PRICE' |
+                                                    translate}}
+                                                    {{'PRIORITY_BOARDING_PER_PASSENGER'|translate}}</span>
+                                            </th>
+                                            <th
+                                                class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right hidden-sm hidden-xs">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ib-table-breakdown__body">
+                                        <tr class="ib-table-breakdown__row">
+                                            <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right"
+                                                colspan="2">
+                                                <span
+                                                    class="ib-table-breakdown__txt">{{manageInvoiceInfoCtrl.model.bundle.passengersQuantity}}
+                                                    x {{manageInvoiceInfoCtrl.model.bundle.passengerPrice}}</span>
+                                            </td>
+                                            <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right"
+                                                colspan="2">
+                                                <span
+                                                    class="ib-table-breakdown__txt">{{manageInvoiceInfoCtrl.model.bundle.formatPrice}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table class="ib-table-breakdown__table"
+                                    ng-if="manageInvoiceInfoCtrl.model.otherPricesByType"
+                                    ng-class="{'ib-table-breakdown__table--avios-simple':manageInvoiceInfoCtrl.model.showAvios, 'ib-table-breakdown__table--obo-simple':manageInvoiceInfoCtrl.model.typeDiscount === 'points','ib-table-breakdown__table--cols-alignement':!manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount !== 'points'}">
+                                    <caption class="u-hide-accessible">{{'MMB_OTHER_PAYMENTS_TEXT' | translate}}
+                                    </caption>
+                                    <thead class="ib-table-breakdown__head">
+                                        <tr class="ib-table-breakdown__row">
+                                            <th class="ib-table-breakdown__cell-title">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_OTHER_PAYMENTS_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                            <th class="ib-table-breakdown__cell-title ib-table-breakdown__cell--right  hidden-sm hidden-xs"
+                                                colspan="2">
+                                                <span class="ib-table-breakdown__txt">{{'MMB_GENERAL_TOTAL_TEXT' |
+                                                    translate}}</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ib-table-breakdown__body">
+                                        <tr class="ib-table-breakdown__row"
+                                            data-ng-repeat="(tIndex, other) in manageInvoiceInfoCtrl.model.otherPricesByType"
+                                            ng-if="other.hide === undefined || other.hide === true">
+                                            <td
+                                                class="ib-table-breakdown__cell ib-journey ib-journey__iatas ib-journey__iatas--inverse">
+                                                <span
+                                                    class="ib-table-breakdown__txt ib-table-breakdown__txt--normal">{{other.description}}</span>
+                                            </td>
+                                            <td class="ib-table-breakdown__cell ib-table-breakdown__cell--right"
+                                                colspan="2">
+                                                <span class="ib-table-breakdown__txt">{{other.totalFee}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="ib-table-breakdown__footer">
+                                <span class="ib-table-breakdown__total">{{'IBCOAC_MMB_CO2_MARK_TOTAL' | translate}}:
+                                    <span
+                                        ng-if="manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount === 'points'">{{manageInvoiceInfoCtrl.model.finalPrices.totalAvios
+                                        | aviosFormatter}}
+                                        {{'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED' | translate}} + </span>
+
+                                    <span
+                                        ng-if="manageInvoiceInfoCtrl.model.showAvios && manageInvoiceInfoCtrl.model.typeDiscount === 'avios'">{{manageInvoiceInfoCtrl.model.finalPrices.totalAvios
+                                        | aviosFormatter}}
+                                        {{'MENU_BAR_AVIOS' | translate}} + </span>
+                                    {{manageInvoiceInfoCtrl.model.finalPrices.total}}</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="manageInvoiceInfoCtrl.model.paidCarbonFootprint">
+                        <a class="ib-link ib-link__text" title="{{'MMB_BOOKING_CO2_FOOTPRINT_LINK'|translate}}"
+                            ng-href="{{'FOOTPRINT_CONFIRMATION_LINK' |LinksFilter}}" target="_blank"
+                            rel="noopener noreferrer" data-ng-bind-html="'MMB_BOOKING_CO2_FOOTPRINT_LINK' | translate">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</fieldset>

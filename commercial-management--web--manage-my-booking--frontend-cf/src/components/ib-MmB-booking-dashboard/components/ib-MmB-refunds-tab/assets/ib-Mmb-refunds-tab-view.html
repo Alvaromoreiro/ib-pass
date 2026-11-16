@@ -1,0 +1,54 @@
+<section ng-if="refundsTabCtrl.flags.allowedRefundVoucher || refundsTabCtrl.flags.allowedRefundCash">
+    <div class="ib-layout__line-spacing--medium u-text-center hidden-xl hidden-lg hidden-md hidden-sm">
+        <p class="ib-heading ib-heading--title-box">{{'MMB_REFUNDS_MAIN_TITLE'|translate}}</p>
+    </div>
+
+    <h2 ng-if="refundsTabCtrl.isFlex" class="ib-box-menu__title ib-box-menu__title--font-size-30">{{'MMB_REFUND_TITLE_FLEX'|translate}}</h2>
+    <h2 ng-if="refundsTabCtrl.isDigital" class="ib-box-menu__title ib-box-menu__title--font-size-30">{{'MMB_REFUND_TITLE_DIGITAL'|translate : {percentage: refundsTabCtrl.flexPercentage} }} </h2>
+    <p ng-if="refundsTabCtrl.isFlex" class="ib-box-menu__subtitle-flex u-mb-xmedium">{{'MMB_REFUND_ADVISORY_1'|translate}}</p>    
+    <p ng-if="refundsTabCtrl.isDigital" class="ib-box-menu__subtitle-flex u-mb-xmedium">{{'MMB_REFUND_ADVISORY_1_DIGITAL'|translate}}</p>    
+    <!-- VOUCHER REFUND INFORMATION -->
+    <ib-flexibilization-info-voucher-digital ng-if="refundsTabCtrl.isDigital"></ib-flexibilization-info-voucher-digital>    
+    <!-- VOUCHER REFUND COMPONENT -->
+    <ib-MmB-voucher-refund ng-if="refundsTabCtrl.flags.allowedRefundVoucher"
+                           contact-data="refundsTabCtrl.model.passengersModel.contactData.primaryContactInfo"
+                           summary-model="refundsTabCtrl.summaryModel"
+                           voucher-price-info="refundsTabCtrl.voucherPriceInfo"
+                           is-disruption="false"
+                           cash-price-info="refundsTabCtrl.cashPriceInfo"
+                           flexibility-percentage="refundsTabCtrl.flexPercentage">
+
+    </ib-MmB-voucher-refund>
+
+    <!-- CASH REFUND COMPONENT -->
+    <ib-MmB-cash-refund
+        id="mmb-cash-refund-module-f" 
+        ng-if="refundsTabCtrl.flags.showRefundCashSection" 
+        available="refundsTabCtrl.flags.showCashRefundOnline" 
+        is-voluntary="true"
+        flags="refundsTabCtrl.flags" 
+        summary-model="refundsTabCtrl.summaryModel" 
+        is-disruption="false" 
+        cash-price-info="refundsTabCtrl.cashPriceInfo" 
+        voucher-price-info="refundsTabCtrl.voucherPriceInfo"
+    ></ib-MmB-cash-refund>
+
+    <!-- REFUND INFORMATION COMPONENT -->
+    <ib-MmB-refund-information ng-if="!refundsTabCtrl.isDigital" summary-model="refundsTabCtrl.model.managementModel.orderItems"></ib-MmB-refund-information>
+    
+    <h2 class="ib-box-menu__title ib-box-menu__title--font-size-30">{{'MMB_REFUND_TITLE_HEALTH_FORM'|translate}}</h2>
+    <p class="ib-mmb-dashboard__advisory ib-mmb-dashboard__advisory--1 ib-mmb-dashboard__advisory--bold">{{'MMB_REFUND_ADVISORY_2'|translate}}</p>
+    <p class="ib-mmb-dashboard__advisory-hf ib-mmb-dashboard__advisory-last">{{'MMB_REFUND_ADVISORY_3'|translate}}</p>
+    <!-- Health reason (COVID) -->
+    <ib-health-form is-refund="true"></ib-health-form> 
+    
+    <!-- DOUBTS AND PASSENGER RIGHTS COMPONENT -->
+    <ib-MmB-refund-doubts-and-rights></ib-MmB-refund-doubts-and-rights>
+</section>
+<section ng-if="!(refundsTabCtrl.flags.allowedRefundVoucher || refundsTabCtrl.flags.allowedRefundCash)">
+    <h2 class="ib-box-menu__title hidden-xl hidden-lg">{{'MMB_VC_CHANGE_OF_FLIGHTS'|translate}}</h2>
+    <div class="ib-msg-alert ib-msg-alert--transparent ib-msg-alert__gdr--sized ib-msg-alert__gdr--unallow icon-informacion_2">
+        <p class="ib-msg-alert__text ib-msg-alert__text--title-large">{{'MMB_FLEXIBILIZATION_TITLE_GOTO_RUBIQ'|translate}}</p>
+        <p class="ib-msg-alert__text--subtitle">{{'MMB_FLEXIBILIZATION_TEXT_GOTO_RUBIQ_REFUNDS'|translate}} <a ng-click="refundsTabCtrl.redirectToExternalVoucherForm()" class="ib-link link__regular link__regular--underline">{{'MMB_FLEXIBILIZATION_LINK_GOTO_RUBIQ'|translate}}</a></p>
+    </div>
+</section>

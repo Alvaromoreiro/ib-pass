@@ -1,0 +1,58 @@
+<booking-layout>
+    <div class="pmt-container">
+        <ng-react class="pmt-loading" [component]="loadingDsComponent.component" [props]="loadingDsComponent.props"></ng-react>
+        <div class="pmt-top">
+            <h1 class="page-title">{{pageTitle}}</h1>
+            <div class="pmt-onhold" *ngIf="onHoldOrder && onHoldOptions.length === 1">
+                <div class="pmt-onhold-info">
+                    <ng-react [component]="onHoldInfoDiscountComponent.component" [props]="onHoldInfoDiscountComponent.props"></ng-react>
+                    <ng-react [component]="onHoldInfoTimeComponent.component" [props]="onHoldInfoTimeComponent.props"></ng-react>
+                    <ng-react [component]="onHoldInfoPriceComponent.component" [props]="onHoldInfoPriceComponent.props"></ng-react>
+                </div>
+            </div>
+            <div class="pmt-onhold" *ngIf="onHoldOrder && onHoldOptions.length > 1">
+                <ng-react [component]="onHoldOptionsComponent.component" [props]="onHoldOptionsComponent.props"></ng-react>
+            </div>
+        </div>
+        <div class="pmt-main">
+            <div *ngIf="renderPmtComponent" [ngClass]="{'u-hide': hidePaymentComponent}" [id]="PAYMENT_COMP_BLOCK_ID"></div>
+            <ib-pmt-pay-block *ngIf="renderPmtComponent"  [mobileFlow]="showAdaptativeMobileFlow"></ib-pmt-pay-block>
+            <ib-booking-total-onhold-free class="no_margin" *ngIf="!renderPmtComponent"
+                [mobileFlow]="showAdaptativeMobileFlow"
+                [totalPrice]="this.summaryComponent.props.totalPrice"
+                [onHoldPrice]="this.summaryComponent.props.otherItems[0]?.price"
+                [termsAndConditionsCheck]="termsAndConditionsCheck"
+                [conditionsText]="onHoldFreeConditions" (freeOnHoldContinue)="onFreeOnHoldContinue()">
+            </ib-booking-total-onhold-free>
+        </div>
+        <div class="pmt-side">
+            <div class="pmt-voucher" *ngIf="!onHoldOrder">
+                <ib-booking-voucher [orderId]="flowId"  [currency]="currency" [currentVoucher]="voucherDiscount" (voucherValidated)="onVoucherValidated($event)" ></ib-booking-voucher>
+            </div>
+            <div class="pmt-summary">
+                <ng-react [component]="summaryComponent.component" [props]="summaryComponent.props"></ng-react>
+            </div>
+        </div>
+    </div>
+</booking-layout>
+
+<ib-main-footer
+        id="footer"
+        [footerModel]="footerModel"
+        [isFullWidth]="false"
+        [isFixed]="false">
+</ib-main-footer>
+
+<!-- MOBILE TOTAL PRICE -->
+<ib-booking-mobile-total-price
+    [ngClass]="{'u-hide': loadingDsComponent.props.isOpen}"
+    *ngIf="showAdaptativeMobileFlow"
+    [totalPrice]="totalPrice.totalFormatted"
+    [customContinueText]="totalPrice.total === 0 ? ('TOTAL_PRICE_COMPONENT_HOLD_BUTTON') : null"
+    [customButtonSlot]="renderPmtComponent"
+    [customTermsSlot]="renderPmtComponent"
+    [termsAndConditionsText]="!renderPmtComponent? termsAndConditionsCheck: null"
+    (continueEvent)="onFreeOnHoldContinue()">
+    <pwc-terms-conditions no-box data-slot-terms></pwc-terms-conditions>
+    <pwc-pay-button data-slot-pay></pwc-pay-button>
+</ib-booking-mobile-total-price>

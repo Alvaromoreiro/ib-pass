@@ -1,0 +1,67 @@
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{'MMB_BAGGAGE_TITLE'|translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" id="FARE_CONDITIONS_MODAL_CLOSE" ng-click="modalCtrl.close()">
+            <span class="hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body">
+    <div class="ib-layout">
+        <div class="ib-layout__line-spacing">
+            <h3 class="ib-text ib-text--block ib-text--xbig ib-text--especial ib-journey ib-journey__iatas">
+                <span class="ib-journey__box ib-journey__box--separator">
+                    <span class="ib-journey__box--city">{{modalCtrl.model.selectedSliceInfo.departureCity.name}}</span>
+                    <span class="ib-journey__box--iata ib-iata-text">{{modalCtrl.model.selectedSliceInfo.departureCity.code}}</span>
+                </span>
+                <span class="ib-journey__box">
+                    <span class="ib-journey__box--city">{{modalCtrl.model.selectedSliceInfo.arrivalCity.name}}</span>
+                    <span class="ib-journey__box--iata ib-iata-text">{{modalCtrl.model.selectedSliceInfo.arrivalCity.code}}</span>
+                </span>
+            </h3>
+        </div>
+        <div class="ib-layout__line-spacing" data-ng-repeat="(index, passenger)  in modalCtrl.model.selectedSliceInfo.segments[0].sliceBaggage.passBaggages">
+            <div data-ng-if="passenger.passengerType !== 'INFANT'" class="ib-baggage ib-box ib-box--medium ib-box--border-narrow">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="ib-text ib-text--block ib-text--bold u-mb">{{passenger.personalInfo.name}} {{passenger.personalInfo.surname}} {{passenger.infant ? '+ ' + ('INFANT_TYPE_TEXT'|translate): ''}}
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div data-ng-if=" passenger.cabin || passenger.hold " class="ib-baggage__block col-md-6 col-sm-12 col-xs-12">
+                        <span class="ib-baggage__title ib-text ib-text--block u-mb u-mb-none-xs">{{'SUMMARY_CABIN_TITLE' | translate}}:</span>
+                        <div class="ib-baggage__info">
+                            <span data-ng-if=" passenger.cabin " class="ib-baggage__item ib-text ib-text--block u-pr-desktop">
+                                {{passenger.cabin.units > 0 ? passenger.cabin.units : ''}} {{ (passenger.cabin.units > 1 ? 'PLURAL_PIECE_TEXT' : (passenger.cabin.units > 0 ? 'PIECE_TEXT' : '')) | translate }}
+                                <span data-ng-if="passenger.cabin.units > 0" ng-bind-html="modalCtrl.transformAsHTML(passenger.cabin.title)"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div data-ng-if="passenger.baggageData[0].purchasedPieces" class="ib-baggage__block col-md-6 col-sm-12 col-xs-12">
+                        <span class="ib-baggage__title ib-text ib-text--block u-mb u-mb-none-xs u-pr-xsmall break-word-full">{{'MMB_PACKAGE_IN_BODEGA'|translate | titleCaseFilter}}:</span>
+                        <div class="ib-baggage__info ib-baggage__item">
+                            <span class="ib-baggage__item ib-text ib-text--block u-pr-desktop" ng-repeat="piece in passenger.baggageData">
+                                <div data-ng-if="piece.purchasedPieces">
+                                    {{piece.purchasedPieces}} {{(piece.purchasedPieces===1 ? 'BAGGAGE_SINGULAR_TEXT' :'BAGGAGE_PLURAL_TEXT') | translate }} {{piece.description}}
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="ib-modals__footer">
+    <div class="ib-content-buttons">
+        <div data-ng-class="{'ib-content-buttons ib-content-buttons--end': !modalCtrl.model.activeLink, 'ib-content-buttons__content-left': modalCtrl.model.activeLink}">
+            <button class="ib-button ib-button--w-medium" title="{{'MODAL_ACCEPT'|translate}}" type="button" ng-click="modalCtrl.close()">{{'MODAL_ACCEPT'|translate}}</button>
+        </div>
+        <div class="ib-content-buttons__content-right" ng-if="modalCtrl.model.activeLink">
+            <a href="javascript:void(0)" title="{{'CHECK_LIST_ADD_EXTRA_BAGGAGE_TEXT' | translate}}"
+                class="ib-link"
+                ng-click="modalCtrl.goToCustomizeBaggage(modalCtrl.model.selectedSliceInfo)">{{'CHECK_LIST_ADD_EXTRA_BAGGAGE_TEXT' | translate}}</a>
+        </div>
+    </div>
+</footer>

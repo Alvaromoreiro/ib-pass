@@ -1,0 +1,13 @@
+import './import-order-model/import-data-model';
+import './import-order-model/import-fare-model';
+import './import-order-model/import-passengers-model';
+import './import-order-model/import-tickets-model';
+import './import-order-model/order-models/import-order-model';
+import './import-order-model/order-models/import-slice-model';
+import './availability-model/availability-model';
+import './availability-model/availability-offer-model/availability-offer-model';
+import './availability-model/availability-request-model/availability-request-model';
+import './root-services-model/root-service-currency-model';
+import './datalayer-models/datalayer-model';
+import './voluntary-refunds-model/voluntary-refunds-model';
+import './travel-documents/travel-documents-model';

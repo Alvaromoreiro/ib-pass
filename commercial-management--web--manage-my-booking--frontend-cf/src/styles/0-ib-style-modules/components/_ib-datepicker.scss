@@ -1,0 +1,313 @@
+/* -------------------------------------------------------------
+    #DATE PICKER
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}datepicker {
+    padding: 0;
+
+    /* right: 0;
+    left: auto!important; */
+    * {
+        &:hover,
+        &:focus,
+        &:active {
+            outline: 0 !important;
+        }
+    }
+
+    button {
+        &:hover,
+        &:focus,
+        &:active {
+            outline: 0 !important;
+        }
+    }
+
+    &::after {
+        content: " ";
+        position: absolute;
+        right: rem(14.5);
+        bottom: 100%;
+        width: 0;
+        height: 0;
+        margin-left: rem(-8);
+        border: solid transparent;
+        border-width: rem(9);
+        border-bottom-color: color(white);
+    }
+
+    &::before {
+        content: " ";
+        position: absolute;
+        right: rem(16);
+        bottom: remcalc(100%, " + ", rem(2));
+        width: 0;
+        height: 0;
+        margin-left: rem(-8);
+        border: solid transparent;
+        border-width: rem(8);
+        border-bottom-color: color(gray-40);
+    }
+    // Table Header
+    .glyphicon {
+        font-family: $font-icons;
+    }
+
+    .glyphicon-chevron-left {
+        &::before {
+            content: "\e974";
+        }
+    }
+
+    .glyphicon-chevron-right {
+        &::before {
+            content: "\e973";
+        }
+    }
+
+    .btn-sm {
+        padding: rem(5) rem(10);
+    }
+
+    .uib-left,
+    .uib-right {
+        padding: rem(13);
+        border: 0;
+        font-size: rem(18);
+        color: color(red-10);
+        background: transparent;
+
+        &:hover,
+        &:focus {
+            color: color(white);
+            background: color(red-10);
+        }
+    }
+
+    .uib-title {
+        border: 0;
+        background: transparent;
+
+        strong {
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            background: transparent !important;
+        }
+
+        &.disabled,
+        &[disabled] {
+            cursor: default;
+            opacity: 1;
+        }
+    }
+
+    table {
+        width: 100%;
+
+        thead tr {
+            &:first-child {
+                th {
+                    border-bottom: rem(1) solid color(gray-40);
+                    vertical-align: middle;
+
+                    &:first-child {
+                        button {
+                            border-top-left-radius: rem(4);
+                        }
+                    }
+
+                    &:last-child {
+                        button {
+                            border-top-right-radius: rem(4);
+                        }
+                    }
+                }
+            }
+
+            &:last-child {
+                th {
+                    padding: rem(20) 0 rem(15) 0;
+
+                    &:first-child {
+                        padding-left: rem(15);
+                    }
+
+                    &:last-child {
+                        padding-right: rem(15);
+                    }
+                }
+            }
+        }
+
+        // Table Body
+        tbody tr {
+            td {
+                padding: rem(2);
+
+                &:first-child {
+                    padding-left: rem(15);
+                }
+
+                &:last-child {
+                    padding-right: rem(15);
+                }
+            }
+        }
+    }
+
+    .btn-default {
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+
+        span {
+            color: color(gray-30);
+        }
+
+        .text-muted {
+            color: color(gray-40);
+        }
+    }
+
+    .btn-default:active,
+    .btn-default.active,
+    .open > .btn-default.dropdown-toggle {
+        background: color(red-10);
+        box-shadow: none;
+
+        span {
+            color: color(white);
+        }
+    }
+    // Table Footer
+    &__footer {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: rem(15) rem(25);
+        border-top: rem(1) solid color(gray-40);
+        font-size: 0;
+        gap: rem(24);
+    }
+
+    &__footer-left {
+        display: inline-block;
+        width: auto;
+    }
+
+    &__footer-right {
+        display: inline-block;
+        width: auto;
+        text-align: right;
+    }
+
+    &__footer-text {
+        font-size: rem(13);
+        line-height: rem(13);
+        vertical-align: middle;
+
+        &--unfocused {
+            color: color(gray-30);
+            float: right;
+        }
+    }
+
+    &.uib-datepicker-popup.dropdown-menu {
+        margin-top: rem(10);
+    }
+}
+
+.#{$wefront__namespace}input {
+    &__group {
+        .#{$wefront__namespace}datepicker {
+            &::before {
+                bottom: remcalc(100%, " + ", rem(1));
+                left: rem(16);
+                border-width: rem(9);
+            }
+
+            &::after {
+                bottom: 100%;
+                left: rem(16);
+            }
+        }
+        .#{$wefront__namespace}input+.#{$wefront__namespace}input {
+            .#{$wefront__namespace}datepicker {
+                &::before {
+                    right: rem(16);
+                    left: auto;
+                }
+
+                &::after {
+                    right: rem(16);
+                    left: auto;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}datepicker {
+        &.uib-datepicker-popup.dropdown-menu {
+            width: rem(288);
+            //margin-left: rem(30);
+            max-width: 100%;
+        }
+
+        .btn-sm {
+            padding: rem(5) rem(8);
+        }
+
+        .uib-left,
+        .uib-right {
+            padding: rem(13);
+        }
+
+        table thead tr {
+            &:last-child {
+                th {
+                    &:first-child {
+                        padding-left: 0;
+                    }
+
+                    &:last-child {
+                        padding-right: 0;
+                    }
+                }
+            }
+        }
+
+        table tbody tr td {
+            padding: 0;
+
+            &:first-child {
+                padding-left: 0;
+            }
+
+            &:last-child {
+                padding-right: 0;
+            }
+        }
+
+        &--to-left {
+            &.uib-datepicker-popup.dropdown-menu {
+                left: 0 !important;
+            }
+        }
+    }
+    .#{$wefront__namespace}input {
+        &__group {
+            .#{$wefront__namespace}datepicker {
+                &.uib-datepicker-popup.dropdown-menu {
+                    max-width: rem(288);
+                }
+            }
+        }
+    }
+}

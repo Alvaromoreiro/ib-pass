@@ -1,0 +1,358 @@
+/* -------------------------------------------------------------
+    #BANNER
+----------------------------------------------------------------- */
+.#{$wefront__namespace}banner {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    min-height: rem(110);
+    margin: rem(20) 0;
+    text-align: center;
+
+    &--small {
+        min-height: auto;
+        padding: rem(24) 0;
+        margin: 0;
+    }
+
+    &--smallest {
+        min-height: auto;
+        padding: rem(14) 0 rem(18);
+        margin: 0;
+    }
+
+    >* {
+        margin: 0 auto;
+    }
+
+    &--grey {
+        border: rem(1) solid color(gray-95);
+        background-color: color(gray-100);
+    }
+
+    &--no-marginb {
+        margin-bottom: 0;
+    }
+
+    &--marginb {
+        margin-bottom: rem(32);
+    }
+
+    &__heading {
+        margin: rem(3) 0 0;
+        font-family: $font-special;
+        font-size: rem(24);
+        text-align: center;
+        line-height: 100%;
+
+        &--light {
+            color: color(white);
+        }
+    }
+
+    &__text {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        font-family: $font-special;
+        font-size: rem(24);
+        text-align: center;
+        color: color(gray-10);
+        -webkit-transform: translate(0, -50%);
+        -moz-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+        -o-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+
+        &--size {
+            &::after {
+                content: attr(data-size-xl);
+            }
+        }
+    }
+
+    &__content {
+        position: relative;
+        z-index: 1;
+        padding: 0 rem(16);
+    }
+
+    &__figure {
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__button-box {
+        margin-top: rem(17);
+
+        &--small {
+            margin-top: rem(10);
+        }
+    }
+
+    &__button {
+        display: inline-block;
+        min-width: rem(287);
+        height: auto;
+        min-height: rem(40);
+        padding: rem(2) rem(8) rem(2);
+        border: rem(1) solid color(white);
+        font-family: $font-special;
+        font-size: rem(24);
+        text-align: center;
+        text-decoration: none;
+
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: none;
+            color: color(white);
+            background-color: rgb(51 51 51 / 47%);
+        }
+
+        &--light {
+            color: color(white);
+        }
+
+        &--small {
+            min-width: rem(256);
+        }
+
+        &--text {
+            font-size: rem(22);
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__img--background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    &__container {
+        position: relative;
+        padding: 0 rem(367) 0 0;
+    }
+
+    &--horizontal {
+        position: relative;
+        display: block;
+        width: rem(728);
+        height: rem(90);
+        min-height: rem(90);
+        margin: rem(77) auto rem(79) auto;
+        text-align: center;
+    }
+
+    &--vertical {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: rem(300);
+        height: rem(600);
+        margin: rem(10) auto 0;
+    }
+
+    // COLORS
+    &--white {
+        background-color: color(white);
+    }
+}
+
+// Responsive
+
+@include media-query('xl') {
+    .#{$wefront__namespace}banner {
+        &__container {
+            min-height: rem(610);
+        }
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}banner {
+        &__text {
+            &--size {
+                &::after {
+                    content: attr(data-size-lg);
+                }
+            }
+        }
+
+        &__button {
+            &--small {
+                min-height: rem(37);
+                padding: rem(4) rem(10);
+                font-size: rem(20);
+            }
+        }
+
+        &--smallest {
+            padding: rem(17) 0 rem(12);
+            .#{$wefront__namespace}banner__heading {
+                font-size: rem(20);
+            }
+        }
+
+        &__container {
+            min-height: rem(610);
+            padding: 0 rem(176) 0 0;
+        }
+
+        &--vertical {
+            width: rem(160);
+            margin: rem(10) auto 0;
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}banner {
+        &--small {
+            padding: rem(19) 0;
+        }
+
+        &__text {
+            &--size {
+                &::after {
+                    content: attr(data-size-md);
+                }
+            }
+        }
+
+        &__heading {
+            font-size: rem(20);
+        }
+
+        &__button {
+            min-width: rem(245);
+            min-height: rem(35);
+            font-size: rem(20);
+        }
+
+        &__container {
+            padding: 0;
+        }
+
+        &--vertical {
+            position: relative;
+            width: rem(728);
+            height: rem(90);
+            margin: rem(30) auto 0;
+        }
+
+        &--horizontal {
+            margin-top: rem(62);
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}banner {
+        min-height: rem(80);
+
+        &__container {
+            padding: 0;
+        }
+
+        &--vertical,
+        &--horizontal {
+            position: relative;
+            width: rem(300);
+            height: rem(250);
+            margin: rem(30) auto 0;
+        }
+
+        &--horizontal {
+            margin: rem(58) auto rem(79) auto;
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}banner {
+        &--small {
+            padding: rem(19) 0;
+        }
+
+        &__text {
+            &--size {
+                &::after {
+                    content: attr(data-size-sm);
+                }
+            }
+        }
+
+        &__heading {
+            font-size: rem(15);
+        }
+
+        &__button {
+            min-width: rem(193);
+            min-height: rem(30);
+            padding-top: rem(8);
+            padding-bottom: rem(8);
+            font-size: rem(15);
+        }
+
+        &--vertical {
+            width: rem(300);
+            height: rem(250);
+            margin: rem(30) auto 0;
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}banner {
+        &--small {
+            padding: rem(19) 0;
+        }
+
+        &__text {
+            &--size {
+                &::after {
+                    content: attr(data-size-xs);
+                }
+            }
+        }
+
+        &__heading {
+            font-size: rem(14);
+        }
+
+        &__button {
+            min-width: rem(175);
+            min-height: rem(28);
+            padding-top: rem(8);
+            padding-bottom: rem(8);
+            font-size: rem(14);
+        }
+
+        &--vertical {
+            width: rem(300);
+            height: rem(250);
+            margin: rem(30) auto 0;
+        }
+
+        &--horizontal {
+            width: 100%;
+            height: rem(250);
+            margin-top: rem(60);
+        }
+    }
+}

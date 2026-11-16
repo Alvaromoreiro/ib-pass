@@ -1,0 +1,145 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
+import { TranslatePipeMock } from '@test/unit/utils/pipe-mock.pipe';
+import { IbCModalService } from 'ib-web-commons/ib-modal';
+import { IbMmBUmnrDataModalComponent } from '@src/components/ib-MmB-umnr-passengers/components/ib-MmB-umnr-data-modal/ib-MmB-umnr-data-modal.component';
+import { IbMmbUmnrUtilsService } from '@src/components/ib-MmB-umnr-passengers/services/ib-Mmb-umnr-utils.service';
+import { IbMmBUmnrPassengersComponent } from '@src/components/ib-MmB-umnr-passengers/ib-Mmb-umnr-passengers.component';
+
+interface UmnrDataModalComponentSpec {
+    saveDataUmnr: Subject<string>;
+}
+
+interface UmnrModalRefSpec {
+    componentInstance: UmnrDataModalComponentSpec;
+}
+
+interface IbMmbUmnrUtilsServiceSpec {
+    isDataUmnrCompleted(): boolean;
+}
+
+interface IbMmBUmnrPassengersComponentPrivateSpec {
+    modalSubscription?: Subscription;
+}
+
+class IbCModalServiceMock {
+    public saveDataUmnrSubject = new Subject<string>();
+
+    public modalRef: UmnrModalRefSpec = {
+        componentInstance: {
+            saveDataUmnr: this.saveDataUmnrSubject
+        }
+    };
+
+    showGenericComponentModal = jasmine
+        .createSpy('showGenericComponentModal')
+        .and.returnValue(this.modalRef);
+}
+
+class IbMmbUmnrUtilsServiceMock implements IbMmbUmnrUtilsServiceSpec {
+    isDataUmnrCompleted = jasmine
+        .createSpy('isDataUmnrCompleted')
+        .and.returnValue(false);
+}
+
+describe('Component: IbMmBUmnrPassengersComponent', () => {
+    let component: IbMmBUmnrPassengersComponent;
+    let fixture: ComponentFixture<IbMmBUmnrPassengersComponent>;
+
+    let fakeIbCModalService: IbCModalServiceMock;
+    let fakeIbMmbUmnrUtilsService: IbMmbUmnrUtilsServiceMock;
+
+    beforeEach(() => {
+        fakeIbCModalService = new IbCModalServiceMock();
+        fakeIbMmbUmnrUtilsService = new IbMmbUmnrUtilsServiceMock();
+
+        TestBed.configureTestingModule({
+            declarations: [
+                IbMmBUmnrPassengersComponent,
+                TranslatePipeMock
+            ],
+            providers: [
+                { provide: IbCModalService, useValue: fakeIbCModalService },
+                { provide: IbMmbUmnrUtilsService, useValue: fakeIbMmbUmnrUtilsService }
+            ],
+            schemas: [NO_ERRORS_SCHEMA]
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(IbMmBUmnrPassengersComponent);
+        component = fixture.componentInstance;
+    });
+
+    it('should create the component when init', () => {
+        component.ngOnInit();
+
+        expect(component).toBeTruthy();
+    });
+
+    it('should initialize isDataUmnrCompleted from IbMmbUmnrUtilsService', () => {
+        expect(fakeIbMmbUmnrUtilsService.isDataUmnrCompleted).toHaveBeenCalled();
+        expect(component.isDataUmnrCompleted).toBeFalse();
+    });
+
+    it('should initialize isDataUmnrCompleted as true when service returns true', () => {
+        fakeIbMmbUmnrUtilsService.isDataUmnrCompleted.and.returnValue(true);
+
+        const customFixture = TestBed.createComponent(IbMmBUmnrPassengersComponent);
+        const customComponent = customFixture.componentInstance;
+
+        expect(customComponent.isDataUmnrCompleted).toBeTrue();
+    });
+
+    it('should open data modal when openDataModal is called', () => {
+        const modalRef = component.openDataModal({});
+
+        expect(fakeIbCModalService.showGenericComponentModal).toHaveBeenCalledWith(
+            IbMmBUmnrDataModalComponent,
+            {
+                windowClass: 'ib-modals ib-modals--right mmb-modals mmb-modals--right ib-modals--full-mobile',
+                modalBlocked: false
+            }
+        );
+
+    expect(modalRef as unknown).toBe(fakeIbCModalService.modalRef as unknown);
+    });
+
+    it('should mark UMNR data as completed when modal emits saveDataUmnr', () => {
+        component.isDataUmnrCompleted = false;
+
+        component.openDataModal({});
+        fakeIbCModalService.saveDataUmnrSubject.next('data');
+
+        expect(component.isDataUmnrCompleted).toBeTrue();
+    });
+
+    it('should unsubscribe modal subscription when component is destroyed', () => {
+        component.openDataModal({});
+
+        const componentPrivate = component as unknown as IbMmBUmnrPassengersComponentPrivateSpec;
+        const modalSubscription = componentPrivate.modalSubscription;
+
+        if (!modalSubscription) {
+            fail('Expected modalSubscription to be defined');
+            return;
+        }
+
+        spyOn(modalSubscription, 'unsubscribe');
+
+        component.ngOnDestroy();
+
+        expect(modalSubscription.unsubscribe).toHaveBeenCalled();
+    });
+
+    it('should call alert when downloadPDF is called', () => {
+        spyOn(window, 'alert');
+
+        component.downloadPDF();
+
+        expect(window.alert).toHaveBeenCalledWith('prueba descarga PDF');
+    });
+
+    it('should call closeModal without errors', () => {
+        expect(() => component.closeModal()).not.toThrow();
+    });
+});

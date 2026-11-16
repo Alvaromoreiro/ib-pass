@@ -1,0 +1,64 @@
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{'MMB_MEALS_ON_BOARD_TITLE'|translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body">
+    <div class="ib-layout">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+            <div class="ib-table-rows ib-table-rows--mobile-blocks">
+                <div class="ib-table-rows__header">
+                    <h3 class="ib-table-rows__title">{{modalCtrl.model.selectedSegmentInfo.desc_departure}}
+                        ({{modalCtrl.model.selectedSegmentInfo.id_departure}}) -
+                        {{modalCtrl.model.selectedSegmentInfo.desc_arrival}}
+                        ({{modalCtrl.model.selectedSegmentInfo.id_arrival}})</h3>
+                </div>
+                <div class="ib-table-rows__content">
+                    <table class="ib-table-rows__table">
+                        <caption class="u-hide-accessible">
+                            {{'MMB_ANCILLARIES_SPECIAL_MEALS_MODAL_TABLE_PASSENGER_MEAL_GO_ACCESIBLE_TEXT' | translate}}</caption>
+                        <thead class="ib-table-rows__thead">
+                            <tr class="ib-table-rows__trow">
+                                <th class="ib-table-rows__tcell-head">
+                                    <span class="u-hide-accessible">{{'MMB_ANCILLARIES_SPECIAL_MEALS_GENERAL_LABEL_PASSENGER' | translate}}</span>
+                                </th>
+                                <th class="ib-table-rows__tcell-head">
+                                    <span class="u-hide-accessible">{{'MMB_ANCILLARIES_SPECIAL_MEALS_GENERAL_LABEL_MEAL' | translate}}</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="ib-table-rows__tbody">
+                            <tr class="ib-table-rows__trow"
+                                data-ng-repeat="(index, passenger)  in modalCtrl.model.selectedSegmentInfo.passengers">
+                                <td class="ib-table-rows__tcell">
+                                    <span class="ib-text">{{passenger.name |titleCaseFilter}} {{passenger.surname |titleCaseFilter}}</span>
+                                    <span class="ib-text" ng-if="passenger.infant"> + {{passenger.nameInfant |titleCaseFilter}} {{passenger.surnameInfant |titleCaseFilter}}</span>
+                                </td>
+                                <td class="ib-table-rows__tcell">
+                                    <!-- <span class="ib-text">{{passenger.menu_desc ? passenger.menu_desc : ('MMB_ANCILLARIES_SPECIAL_MEALS_DEFAULT_MENU_DESC' | translate)}}</span> -->
+                                    <span class="ib-text">{{passenger.menudesc ? passenger.menudesc : ('MMB_ANCILLARIES_SPECIAL_MEALS_DEFAULT_MENU_DESC' | translate)}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="ib-modals__footer">
+    <div class="ib-content-buttons">
+        <div data-ng-class="{'ib-content-buttons ib-content-buttons--end': !modalCtrl.model.activeLink, 'ib-content-buttons__content-left': modalCtrl.model.activeLink}" title="{{'MODAL_ACCEPT'|translate}}" >
+            <button class="ib-button ib-button--w-medium" type="button"
+                ng-click="modalCtrl.close()">{{'MODAL_ACCEPT'|translate}}</button>
+        </div>
+        <div class="ib-content-buttons__content-right" ng-if="modalCtrl.model.activeLink">
+            <a href="javascript:void(0)" title="{{'MMB_ANCILLARIES_SPECIAL_MEALS_MODIFY_MEAL_TEXT' | translate}}"
+                class="ib-link"
+                ng-click="modalCtrl.goToCustomizeSpecialMeals(modalCtrl.model.selectedSegmentInfo)">{{'MMB_ANCILLARIES_SPECIAL_MEALS_MODIFY_MEAL_TEXT' | translate}}</a>
+        </div>
+    </div>
+</footer>

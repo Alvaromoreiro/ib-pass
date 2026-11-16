@@ -1,0 +1,23 @@
+<span
+  class="crossed-prices"
+  [ngClass]="'crossed-prices--' + variant"
+  [class.hasDiscount]="hasDiscount"
+>
+  <span 
+    class="price__shown"
+    [class.long]="priceToShow && priceToShow.length > 9"
+  >
+    <span class="u-hide-accessible">{{ hasDiscount ? "AVAILABILITY_ON_BUSINESS_MODAL_OPTION_DISCOUNT" : "PRICE_HIDDEN_TEXT"|translate}}</span>
+    {{ priceToShow }}
+
+  </span>
+
+  <span class="price__without-discount" *ngIf="hasDiscount">
+    <span class="u-hide-accessible">{{ "PRICE_HIDDEN_TEXT"|translate}} {{"BKI_COUP_NO_DISCOUNT_TITLE"|translate}}</span>
+    {{ priceWithoutDiscount }}
+  </span>
+
+  <svg *ngIf="isBestOffer" class="bestPrice" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M14.9875 6.42461L13.1298 5.71729L13.5908 3.62199L11.6045 3.7709L11.0868 1.68659L9.36469 2.66084L7.97107 1L6.8542 2.60839L4.86179 1.70013L4.57123 3.62283L2.37418 3.64864L2.96737 5.50535L1 6.45845L2.36037 7.8807L1.01338 9.57243L2.87024 10.2797L2.40958 12.3759L4.39639 12.2266L4.91402 14.3126L6.63575 13.337L7.91106 15L9.1458 13.3899L11.0355 14.3422L11.4288 12.3746L13.6262 12.3488L13.0326 10.4934L15 9.53943L13.6405 8.1176L14.9875 6.42461ZM8.55045 10.237L11.8005 6.14794L11.2595 5.63734L7.6952 8.13072L5.42001 6.65051L4.80437 7.24911L6.80023 10.1186C6.82959 10.1562 6.86154 10.1918 6.89651 10.226C7.35241 10.6728 8.13643 10.6947 8.55045 10.237Z" fill="white"/>
+  </svg>
+</span>

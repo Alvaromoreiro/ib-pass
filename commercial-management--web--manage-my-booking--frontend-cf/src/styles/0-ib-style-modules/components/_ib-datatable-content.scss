@@ -1,0 +1,334 @@
+/* -------------------------------------------------------------
+    #ANGULAR DATATABLES
+----------------------------------------------------------------- */
+
+.dataTables_wrapper {
+    /* border: rem(1) solid color(gray-70); */
+    padding: 0;
+}
+
+.dataTables_wrapper .dataTables_info {
+    font-size: rem(13);
+}
+
+.dataTable,
+.dataTable.no-footer {
+    width: 0;
+    margin: 0;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+table.dataTable thead {
+    th.sorting,
+    th.sorting_asc,
+    th.sorting_desc {
+        min-width: rem(68);
+        background-image: none;
+    }
+}
+
+
+table.dataTable thead a {
+    &::after {
+        content: "\e92e";
+        position: absolute;
+        top: 30%;
+        right: 0;
+        font-family: $font-icons;
+        font-size: rem(16);
+        color: color(gray-30);
+        -ms-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+    }
+
+    &::before {
+        content: "\e92d";
+        position: absolute;
+        top: 70%;
+        right: 0;
+        font-family: $font-icons;
+        font-size: rem(16);
+        color: color(gray-30);
+        -ms-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+    }
+
+    &.#{$wefront__namespace}table-shuttle {
+        &__order-filter {
+            position: relative;
+            padding-right: rem(18);
+            font-size: rem(13);
+            color: color(gray-10);
+
+            &:hover,
+            &:focus {
+                text-decoration: underline;
+                color: color(gray-10);
+                outline: none;
+            }
+
+            &--down,
+            &--up {
+                &::before {
+                    display: none !important;
+                }
+
+                &::after {
+                    content: "\e92d";
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    font-family: $font-icons;
+                    font-size: rem(16);
+                    color: color(gray-10);
+                    -ms-transform: translate(0, -50%);
+                    transform: translate(0, -50%);
+                }
+            }
+
+            &--up {
+                &::after {
+                    content: "\e92e";
+                }
+            }
+        }
+    }
+}
+
+table.dataTable thead .sorting_asc a {
+    &::after {
+        content: "\e92e";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        font-family: $font-icons;
+        font-size: rem(16);
+        color: color(gray-30);
+        -ms-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+    }
+
+    &::before {
+        content: '';
+    }
+}
+
+table.dataTable  .#{$wefront__namespace}table-shuttle {
+    &__column {
+        &--cursor {
+            &.sorting_desc,
+            &.sorting_asc {
+                cursor: auto;
+            }
+        }
+    }
+}
+
+table.dataTable thead .sorting_desc a {
+    background-image: none;
+
+    &::before {
+        content: "\e92d";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        font-family: $font-icons;
+        font-size: rem(16);
+        color: color(gray-30);
+        -ms-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+    }
+
+    &::after {
+        content: '';
+    }
+}
+
+/* -- select box -- */
+.dataTables_length {
+    display: none;
+}
+
+.dataTables_length select {
+    border: 0;
+}
+
+.dataTables_length select:focus {
+    outline: none;
+}
+
+/* -- search box -- */
+.dataTables_filter {
+    margin-right: 0;
+}
+
+.dataTables_filter input[type="search"] {
+    border: 0;
+    border-radius: 0;
+}
+
+.dataTable thead th,
+table.dataTable thead td {
+    border-bottom: 0;
+}
+
+
+.dataTables_length,
+.dataTables_filter,
+.dataTables_info,
+.dataTables_processing,
+.dataTables_paginate {
+    color: transparent;
+}
+
+.dataTables_info {
+    margin-left: 0;
+}
+
+
+/* -------------------------------------------------------------
+    #ANGULAR DATATABLES IN TABLE-SHUTTLE
+  ------------------------------------------------------------ */
+
+@include media-query("lg") {
+    table.dataTable.ib-table-claims {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    table.dataTable.ib-table-claims thead th.sorting {
+        width: auto !important;
+        min-width: auto;
+        padding: rem(6) 0 rem(6) rem(16);
+    }
+
+    table.dataTable.ib-table-claims thead th.sorting:last-child {
+        padding-right: rem(16);
+    }
+
+    table.ib-table-claims .ib-collapse-table__sort {
+        display: inline-block;
+    }
+
+    table.ib-table-claims .ib-table-shuttle__column--claims {
+        padding-right: 0;
+        padding-left: rem(16);
+
+        &:last-child {
+            padding-right: rem(16);
+        }
+    }
+}
+
+@include media-query("md") {
+    table.dataTable.ib-table-claims {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    table.dataTable.ib-table-claims thead th.sorting {
+        width: auto !important;
+        min-width: auto;
+        padding: rem(6) 0 rem(6) rem(16);
+    }
+
+    table.dataTable.ib-table-claims thead th.sorting:last-child {
+        padding-right: rem(16);
+    }
+
+    table.ib-table-claims .ib-collapse-table__sort {
+        display: inline-block;
+    }
+
+    table.ib-table-claims .ib-table-shuttle__column--claims {
+        padding-right: 0;
+        padding-left: rem(16);
+
+        &:last-child {
+            padding-right: rem(16);
+        }
+    }
+}
+
+@include media-query("sm") {
+    .#{$wefront__namespace}table-shuttle {
+        border: 0;
+
+        &.dataTable tbody th,
+        &.dataTable tbody td {
+            padding: 0 0 rem(13);
+
+            &.#{$wefront__namespace}table-shuttle {
+                &__column {
+                    &--column-links {
+                        padding-bottom: 0;
+                    }
+                }
+            }
+        }
+
+        &.dataTable tbody td {
+            &.#{$wefront__namespace}table-shuttle {
+                &__column {
+                    &--responsive {
+                        padding: rem(16);
+                        padding-bottom: 0;
+                    }
+                }
+            }
+        }
+
+        &.dataTable tbody tr {
+            &.#{$wefront__namespace}table-shuttle {
+                &__row {
+                    &--responsive {
+                        padding-bottom: rem(10);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query("xs") {
+    .#{$wefront__namespace}table-shuttle {
+        width: calc(100% + 32px);
+        margin: rem(16) rem(-16);
+        border: 0;
+
+        &.dataTable tbody th,
+        &.dataTable tbody td {
+            padding: 0 0 rem(16);
+
+            &.#{$wefront__namespace}table-shuttle {
+                &__column {
+                    &--column-links {
+                        padding-bottom: 0;
+                    }
+                }
+            }
+        }
+
+        &.dataTable tbody td {
+            &.#{$wefront__namespace}table-shuttle {
+                &__column {
+                    &--responsive {
+                        padding: rem(16);
+                        padding-bottom: 0;
+                    }
+                }
+            }
+        }
+
+        &.dataTable tbody tr {
+            &.#{$wefront__namespace}table-shuttle {
+                &__row {
+                    &--responsive {
+                        padding-bottom: rem(10);
+                    }
+                }
+            }
+        }
+    }
+}

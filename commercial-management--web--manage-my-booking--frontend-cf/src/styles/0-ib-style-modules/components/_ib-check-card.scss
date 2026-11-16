@@ -1,0 +1,180 @@
+/* -------------------------------------------------------------
+    #CHECK-CARD
+----------------------------------------------------------------- */
+.#{$wefront__namespace}check-card {
+    width: 100%;
+    margin-bottom: rem(20);
+
+    &__box {
+        display: block;
+        width: 100%;
+        padding: rem(15) rem(15);
+        margin-bottom: rem(20);
+        border: solid rem(1) color(gray-50);
+        text-align: center;
+        background-color: color(white);
+        cursor: pointer;
+
+        &--active {
+            border: solid rem(1) color(gray-20);
+            background-color: color(gray-65);
+        }
+
+        &--biometric {
+            cursor: default;
+
+            .#{$wefront__namespace}check-card {
+                &__box-title {
+                    margin-bottom: rem(7);
+                }
+
+                &__box-check-icon {
+                    position: relative;
+                    display: inline-block;
+                    width: rem(40);
+                    height: rem(40);
+                    border: rem(1) solid color(gray-40);
+                    border-radius: 50%;
+                    background-color: color(white);
+
+                    &::before {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        font-size: rem(21);
+                        color: color(info);
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            outline: 0;
+        }
+
+        &:focus,
+        &:active {
+            border-color: color(orange-10);
+        }
+    }
+
+    &__box-icon {
+        display: block;
+        font-size: rem(80);
+        color: color(gray-30);
+
+        &.icon-mensajes,
+        &.icon-biometria {       //add new icon without spacing
+            padding: rem(21) 0 rem(10);
+            font-size: rem(41);
+        }
+
+        &.icon-biometria {
+            font-size: rem(41);
+        }
+    }
+
+    &__box-title {
+        display: block;
+        font-size: rem(15);
+        color: color(gray-30);
+    }
+
+    &__select {
+        min-height: rem(24);
+        text-align: center;
+    }
+
+    &__select-input {
+        position: absolute;
+        left: rem(-9999);
+
+        &:checked {
+            + .#{$wefront__namespace}check-card__select-label {
+                &::before {
+                    content: "\e93e";
+                }
+            }
+        }
+
+        &:focus,
+        &:active {
+            + .#{$wefront__namespace}check-card__select-label {
+                &::before {
+                    border-color: color(orange-10);
+                }
+            }
+        }
+    }
+
+    &__select-label {
+        position: relative;
+        padding-left: rem(32);
+        font-size: rem(15);
+        color: color(gray-10);
+        cursor: pointer;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: rem(-2);
+            left: 0;
+            width: rem(24);
+            height: rem(24);
+            border: solid rem(1) color(gray-20);
+            font-family: $font-icons;
+            font-size: rem(18);
+            text-align: center;
+            line-height: rem(24);
+            background-color: color(white);
+        }
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}check-card {
+        &__box {
+            &--biometric {
+                .#{$wefront__namespace}check-card {
+                    &__box-check-icon {
+                        width: rem(32);
+                        height: rem(32);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}check-card {
+        &__box {
+            &--biometric {
+                .#{$wefront__namespace}check-card {
+                    &__box-check-icon {
+                        width: rem(32);
+                        height: rem(32);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}check-card {
+        &__box {
+            &--biometric {
+                .#{$wefront__namespace}check-card {
+                    &__box-check-icon {
+                        width: rem(32);
+                        height: rem(32);
+                    }
+                }
+            }
+        }
+    }
+}

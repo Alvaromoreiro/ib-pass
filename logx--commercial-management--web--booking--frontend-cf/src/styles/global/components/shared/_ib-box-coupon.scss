@@ -1,0 +1,101 @@
+/* -------------------------------------------------------------
+    #BOX-COUPON
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}box-coupon {
+    &__container {
+        position: relative;
+        height: 100%;
+        border: rem(2) solid color(gray-50);
+        border-top: 0;
+        background-color: color(white);
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: rem(-2);
+            width: calc(100% + rem(4));
+            height: rem(4);
+            background-color: color(primary);
+        }
+    }
+
+    &__label {
+        display: block;
+        height: 100%;
+        padding: rem(24) rem(24) rem(16) rem(24);
+        cursor: pointer;
+    }
+
+    &__check {
+        position: absolute;
+        right: rem(9999);
+
+        &:checked {
+            + .#{$wefront__namespace}box-coupon__title {
+                &::before {
+                    background-color: color(primary);
+                }
+            }
+        }
+    }
+
+    &__title {
+        position: relative;
+        display: block;
+        padding-left: rem(40);
+        margin-bottom: rem(12);
+        font-family: $font-special;
+        font-size: rem(18);
+        font-weight: bold;
+        color: color(primary);
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: rem(24);
+            height: rem(24);
+            margin-right: rem(16);
+            border: rem(8) solid color(white);
+            border-radius: 50%;
+            background-color: color(white);
+            box-shadow: 0 0 0 rem(1) color(gray-30);
+        }
+    }
+
+    &__terms {
+        font-family: $font-normal;
+        font-size: rem(11);
+        color: color(gray-15);
+    }
+
+    &__terms-link {
+        font-family: $font-normal;
+        font-size: rem(11);
+        text-decoration: underline;
+        color: color(gray-15);
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: color(primary);
+        }
+    }
+
+    &--no-active {
+        .#{$wefront__namespace}box-coupon {
+            &__title {
+                color: color(gray-15);
+            }
+
+            &__container {
+                &::after {
+                    background-color: color(gray-15);
+                }
+            }
+        }
+    }
+}
