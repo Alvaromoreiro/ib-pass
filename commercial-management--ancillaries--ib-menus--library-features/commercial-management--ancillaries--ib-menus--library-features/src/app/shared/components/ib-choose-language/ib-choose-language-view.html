@@ -1,0 +1,53 @@
+<div class="col-md-12">
+    <div data-ng-controller="CollapseDetailsController as collapseCtrl"
+        class="ib-tools__lang" ib-collapse-details out-side-click="true">
+        <a id="ib-header-grey-bar-choose-language-link" title="{{'MENU_BAR_CHOOSE_LANGUAGE'|translate}}"
+            data-ng-click="collapseCtrl.toggle()"
+            data-ng-class="!collapseCtrl.isCollapsed ? 'closeCollapse' : 'openCollapse'"
+            class="ib-link ib-tools__lang-country link__modal" href="javascript:void(0)">
+            <span class="ib-tools__lang-text">{{ibChooseLanguageCtrl.model.selectedMarket.description}} - {{ibChooseLanguageCtrl.model.selectedLanguage.description}}</span>
+        </a>
+        <div data-uib-collapse="!collapseCtrl.isCollapsed" class="ib-tools__lang-collapse">
+            <form class="ib-form">
+                <fieldset>
+                    <legend class="u-hide-accessible">{{'MENU_BAR_LANGUAGE'|translate}}</legend>
+                    <div class="ib-select ib-select--search-full">
+                        <label for="select_language"
+                            class="ib-select__label u-hide-accessible">{{'MENU_BAR_COMBO_LANGUAGE'|translate}}</label>
+                        <ui-select id="select_language" on-select="ibChooseLanguageCtrl.changeLanguageForMarketSelector()" data-ng-model="ibChooseLanguageCtrl.model.selectedMarket"
+                            class="ib-select__action">
+                            <ui-select-match placeholder="{{'MENU_BAR_COMBO_MARKET'|translate}}"
+                                class="ib-select__list-ipt">
+                                <span class="ib-select__txt">{{$select.selected.description}}</span>
+                            </ui-select-match>
+                            <ui-select-choices
+                                repeat="item in (ibChooseLanguageCtrl.model.markets | filter: $select.search)"
+                                class="ib-select__list">
+                                <span data-ng-bind="::item.description" class="ib-select__list-txt"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="ib-select ib-select--search-full">
+                        <label for="select_language"
+                            class="ib-select__label u-hide-accessible">{{'MENU_BAR_COMBO_LANGUAGE'|translate}}</label>
+                        <ui-select id="select_language" data-ng-model="ibChooseLanguageCtrl.model.selectedLanguage"
+                            class="ib-select__action">
+                            <ui-select-match placeholder="{{'MENU_BAR_COMBO_LANGUAGE'|translate}}"
+                                class="ib-select__list-ipt">
+                                <span class="ib-select__txt">{{$select.selected.description}}</span>
+                            </ui-select-match>
+                            <ui-select-choices
+                                repeat="item in (ibChooseLanguageCtrl.model.languages | filter: $select.search)"
+                                class="ib-select__list">
+                                <span data-ng-bind="::item.description" class="ib-select__list-txt"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <button id="menus-header-grey-bar-accept-language-btn"
+                        data-ng-click="ibChooseLanguageCtrl.changeLanguage()"
+                        class="ib-button ib-button--red ib-button--big ib-button--block">{{'MENU_BAR_ACCEPT_LANGUAGE'|translate}}</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

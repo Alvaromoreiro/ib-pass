@@ -1,0 +1,42 @@
+<header class="ib-header">
+    <div class="container">
+        <div class="row">
+            <div class="">
+                <div class="ib-header__content ib-flex__row ib-flex--space-between ib-flex--align-center">
+                    <div class="navbar-header u-pl">
+                        <a data-ng-href="{{::mainHeaderCtrl.logoUri}}" title="{{'HEADER_IBERIA_LOGO_TITLE'|translate}}" class="navbar-brand" data-ng-click="mainHeaderCtrl.onCloseSession()">
+                            <figure class="ib-header__logo">
+                                <img class="ib-header__logo-img" alt="{{'HEADER_IBERIA_LOGO_ALT'|translate}}" ng-src="{{::$root.routes.icons}}/iberia/iberia-logo.png" />
+                            </figure>
+                        </a>
+                        <span ng-show="show" class="ib-header-common__text ib-header-common__text--type-4 hidden-xl hidden-lg hidden-md u-ml-xsmall u-pl-small">{{::mainHeaderCtrl.model.steps.position}}/{{::mainHeaderCtrl.model.steps.totalSteps}}</span>
+                    </div>
+                    <div class="ib-header__flex-right">
+                        <div class="ib-header__menu">
+                            <a href="{{'HEADER_ONE_WORLD'|LinksFilter}}" title="{{'HEADER_ONE_WORLD_LOGO_TITLE'|translate}}"
+                                class="logo-oneworld u-mr">
+                                <figure class="logo-oneworld__img">
+                                    <img ng-src="{{::$root.routes.icons}}/cabecera/oneworld.png"
+                                        alt="{{'HEADER_ONE_WORLD_LOGO_ALT'|translate}}" />
+                                </figure>
+                            </a>
+                        </div>
+                        <div class="ib-header-common__column ib-header-common__column--right hidden-md hidden-lg hidden-xl"
+                            data-ng-class="{'ib-header-common__column--separator': mainHeaderCtrl.showIconSeparators}"
+                            ng-if="mainHeaderCtrl.showComponentChooseLanguageMobile()">
+                            <ib-choose-language-mobile></ib-choose-language-mobile>
+                        </div>
+                        <div class="ib-header-common__column ib-header-common__column--right hidden-md hidden-lg hidden-xl"
+                            ng-if="mainHeaderCtrl.showUserTooltip">
+                    
+                            <ib-user-tooltip
+                                ng-if="mainHeaderCtrl.model.flightType!=='multiCityFlight' && mainHeaderCtrl.loginInfo && mainHeaderCtrl.loginInfo.isLogged"
+                                model="mainHeaderCtrl.loginInfo"></ib-user-tooltip>
+                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,1 @@
+import './ib-header-main-page-constant';

@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div class="ib-header-common__row">
+                <div class="ib-header-common__column ib-header-common--flex">
+                    <div class="ib-header-common__column-logo ib-header-common__column-logo--rbr">
+                        <a id="header-commons-iberia-logo-home-link" href="javascript:void(0)"
+                            title="{{'GO_TO_HOME_TEXT'|translate}}" class="ib-header-common__logo-fig"
+                            ng-click="headerCtrl.backToMain(true)" focusin>
+                            <img ng-src="{{::$root.routes.icons}}/iberia/logo_iberia.svg"
+                                alt="{{'LOGO_IBERIA_TEXT'|translate}}" />
+                        </a>
+                    </div>
+
+                    <div class="ib-header-common__column-fly ib-header-common__column-fly--bln">
+                        <div class="ib-header-common__row-fly ib-header-common__row-fly--top"
+                            ng-class="{'ib-header-common__row-fly--auto u-pr-none':!headerCtrl.profileIcon}"
+                            ng-controller="ibHeaderPopoverController as popover" ng-show="!headerCtrl.isMMB ||  headerCtrl.model.isOnHold === true">
+                            <ul class="ib-header-common__list">
+                                <li ng-class="{'ib-header-common__item':$first,'ib-header-common__item hidden-xs hidden-sm': !$first,'u-border-right-none':!headerCtrl.model.isMultiflight}"
+                                    ng-repeat="trip in headerCtrl.model.trips|limitTo:headerCtrl.numberTrips">
+                                    <span ng-switch="headerCtrl.model.flightType">
+                                        <ib-flight-component ng-switch-when="multiCityFlight" trip="trip"
+                                            template="ib-flight-multi-view.html"></ib-flight-component>
+                                        <ib-flight-component ng-switch-default trip="trip" is-shuttle-flow="headerCtrl.isShuttleFlow()"></ib-flight-component>
+                                    </span>
+                                </li>
+                                <li class="ib-header-common__item"
+                                    ng-if="headerCtrl.model.flightType==='multiCityFlight' && headerCtrl.model.trips.length > headerCtrl.numberTrips">
+                                    <ib-multipath-tooltip-component model="headerCtrl.model.trips"
+                                        number-trips="headerCtrl.numberTrips"></ib-multipath-tooltip-component>
+                                </li>
+                            </ul>
+                            <ib-tooltip trips="headerCtrl.model.trips" flight-type="headerCtrl.model.flightType" ng-if="headerCtrl.flowApp != 'SUBSCRIPTIONMODELS'" 
+                                advanced-search="headerCtrl.model.showAdvancedSearch" is-multi-flight="headerCtrl.model.isMultiflight"></ib-tooltip>
+                            <span ng-if="headerCtrl.model.steps"
+                                class="ib-header-common__text  hidden-xl hidden-lg hidden-md"
+                                  data-ng-class="{'ib-header-common__text--type-4' : headerCtrl.model.trips.length > 0,
+                                                    'ib-header-common__text--type-6' : headerCtrl.model.trips.length === 0}">
+                                {{headerCtrl.model.steps.position}}/{{headerCtrl.model.steps.totalSteps}}
+                            </span>
+
+                        </div>
+                        <div
+                            class="ib-header-common__row-fly ib-header-common__row-fly--bottom ib-header-common__row-fly--vbottom ib-header-common__row-fly--auto u-pl-none hidden-md hidden-sm hidden-xs"
+                            ng-if="headerCtrl.model.passengers"
+                        >
+                            <ib-passengers  passenger-number="headerCtrl.model.passengers.numberPassengers" is-multiflight="headerCtrl.model.isMultiflight"></ib-passengers>
+                            <div class="ib-header-common__fly-search" ng-show="headerCtrl.model.showAdvancedSearch">
+                                <a tabindex="0" click-simulation title="{{HEADER_IBERIA_CHANGE_SEARCH_LINK|translate}}"
+                                    ng-click="headerCtrl.model.isMultiflight ? headerCtrl.backToMultiFlight(false) : headerCtrl.activeAdvancedSearch()"
+                                    class="ib-header-common__text ib-header-common__text--link" focusin>{{'HEADER_IBERIA_CHANGE_SEARCH_LINK'|translate}}</a>
+                            </div>
+                        </div>
+
+
+                        <div ng-if="headerCtrl.showPassengersInfo"
+                            class="ib-header-common__row-fly ib-header-common__row-fly--bottom hidden-md hidden-sm hidden-xs"
+                            ng-class="{'ib-header-common__row-fly--vbottom  ib-header-common__row-fly--auto u-pl-none': headerCtrl.showPassengersInfo}">
+                            <div class="ib-header-common__fly-passenger u-border-left-none">
+                                <span
+                                    class="ib-header-common__fly-icon ib-header-common__fly-icon--person icon-persona"></span>
+                                <span
+                                    class="ib-header-common__text ib-header-common__text--type-3">{{'MULTIPLE_X_TEXT'|translate}}
+                                    {{headerCtrl.model.trips.passengers}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="ib-header-common__column ib-header-common__column--right hidden-md hidden-lg hidden-xl"
+                        data-ng-class="{'ib-header-common__column--separator': headerCtrl.showComponentChooseLanguageMobile()}"
+                        ng-if="headerCtrl.showComponentChooseLanguageMobile()">
+                        <ib-choose-language-mobile></ib-choose-language-mobile>
+                    </div>
+                        
+                    <div class="ib-header-common__column ib-header-common__column--right hidden-md hidden-lg hidden-xl">
+                    
+                        <ib-login-header ng-if="!headerCtrl.login.isLogged" model="headerCtrl.login"></ib-login-header>
+                    
+                        <ib-user-tooltip
+                            ng-if="headerCtrl.model.flightType!=='multiCityFlight' && headerCtrl.login && headerCtrl.login.isLogged"
+                            model="headerCtrl.login"></ib-user-tooltip>
+                    
+                    </div>
+
+                    <ib-basket model="headerCtrl.model.shoppingBasket" showButtonPay="headerCtrl.model.showButtonPay"
+                        flight-type="headerCtrl.model.flightType" class="ib-header-common--basket"></ib-basket>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

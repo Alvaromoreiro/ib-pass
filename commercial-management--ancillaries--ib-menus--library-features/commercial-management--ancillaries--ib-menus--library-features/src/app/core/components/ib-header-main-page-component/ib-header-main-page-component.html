@@ -1,0 +1,84 @@
+<div class="ib-tools hidden-sm hidden-xs"> <!-- CKI/MMB -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-sm-5 hidden-xs">
+                <div data-ng-controller="CollapseDetailsController as collapseCtrl"
+                    class="ib-tools__lang" ib-collapse-details out-side-click="true">
+                    <a id="ib-header-grey-bar-choose-language-link" title="{{'MENU_BAR_CHOOSE_LANGUAGE'|translate}}"
+                        data-ng-click="collapseCtrl.toggle()"
+                        data-ng-class="!collapseCtrl.isCollapsed ? 'closeCollapse' : 'openCollapse'"
+                        class="ib-link ib-tools__lang-country link__modal" href="javascript:void(0)">
+                        <span class="ib-tools__lang-text">{{ibHeaderMainCtrl.model.marketLabel}} - {{ibHeaderMainCtrl.model.selectedLanguage.description}}</span>
+                    </a>
+                    <div data-uib-collapse="!collapseCtrl.isCollapsed" class="ib-tools__lang-collapse">
+                        <form class="ib-form">
+                            <fieldset>
+                                <legend class="u-hide-accessible">{{'MENU_BAR_LANGUAGE'|translate}}</legend>
+                                <div class="ib-select ib-select--search-full" data-ng-if="ibHeaderMainCtrl.isFlowCki">
+                                    <label for="select_language"
+                                        class="ib-select__label u-hide-accessible">{{'MENU_BAR_COMBO_LANGUAGE'|translate}}</label>
+                                    <ui-select id="select_language" on-select="ibHeaderMainCtrl.changeLanguageForMarketSelector()" data-ng-model="ibHeaderMainCtrl.model.selectedMarket"
+                                        class="ib-select__action">
+                                        <ui-select-match placeholder="{{'MENU_BAR_COMBO_MARKET'|translate}}"
+                                            class="ib-select__list-ipt">
+                                            <span class="ib-select__txt">{{$select.selected.description}}</span>
+                                        </ui-select-match>
+                                        <ui-select-choices
+                                            repeat="item in (ibHeaderMainCtrl.model.markets | filter: $select.search)"
+                                            class="ib-select__list ib-select__list--limit">
+                                            <span data-ng-bind="::item.description" class="ib-select__list-txt"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                                <div class="ib-select ib-select--search-full">
+                                    <label for="select_language"
+                                        class="ib-select__label u-hide-accessible">{{'MENU_BAR_COMBO_LANGUAGE'|translate}}</label>
+                                    <ui-select id="select_language" data-ng-model="ibHeaderMainCtrl.model.selectedLanguage"
+                                        class="ib-select__action">
+                                        <ui-select-match placeholder="{{'MENU_BAR_COMBO_LANGUAGE'|translate}}"
+                                            class="ib-select__list-ipt">
+                                            <span class="ib-select__txt">{{$select.selected.description}}</span>
+                                        </ui-select-match>
+                                        <ui-select-choices
+                                            repeat="item in (ibHeaderMainCtrl.model.languages | filter: $select.search)"
+                                            class="ib-select__list">
+                                            <span data-ng-bind="::item.description" class="ib-select__list-txt"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                                <button id="menus-header-grey-bar-accept-language-btn"
+                                    data-ng-click="ibHeaderMainCtrl.changeLanguage()"
+                                    class="ib-button ib-button--red ib-button--block">{{'MENU_BAR_ACCEPT_LANGUAGE'|translate}}</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-7" ng-show="!ibHeaderMainCtrl.isLogged">
+                <ul data-ng-controller="CollapseDetailsController as collapseCtrl" class="ib-tools__login"
+                    ib-collapse-details out-side-click="true">
+                    <li class="ib-tools__login-item">
+                        <a id="menus-header-grey-bar-login-link" title="{{'MENU_BAR_LOGIN'|translate}}"
+                            data-ng-click="collapseCtrl.toggle()"
+                            data-ng-class="!collapseCtrl.isCollapsed ? 'closeCollapse' : 'openCollapse'"
+                            class="ib-link ib-link__modal ib-tools__login-item-login"
+                            href="javascript:void(0)">{{'MENU_BAR_LOGIN'|translate}}</a>
+                        <div data-uib-collapse="!collapseCtrl.isCollapsed" class="ib-tools__login-collapse">
+                            <ib-ui-login-iframe on-logged="ibHeaderMainCtrl.model.login.onLogin" after-login="ibHeaderMainCtrl.afterLogin"
+								on-error="ibHeaderMainCtrl.model.login.onError">
+							</ib-ui-login-iframe>
+                        </div>
+                    </li>
+                    <li class="ib-tools__login-item">
+                        <a id="menus-header-grey-bar-register-link" href="{{'LOGIN_MODULE_REGISTER_LINK'|IbCLinksFilter}}"
+                            title="{{'MENU_BAR_REGISTER'|translate}}"
+                            class="ib-link ib-tools__login-item-register">{{'MENU_BAR_REGISTER'|translate}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-7" ng-if="ibHeaderMainCtrl.isLogged">
+                <ib-user-info-header [is-grey-bar]=false></ib-user-info-header>
+            </div>
+        </div>
+    </div>
+</div>

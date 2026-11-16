@@ -1,0 +1,21 @@
+<!--MAIN HEADER-->
+<div class="ib-header-common--full-container">
+    <div ib-sticky class="ib-header--basket-group">
+        <div data-sticky-anchor>
+            <div header-collapse out-side-click="true" data-sticky-fixed data-parent-header>
+                <!-- GREY BAR -->
+                <ib-grey-bar model="newMainHeaderCtrl.model.greyBarModel" class="ib-header-common ib-header-common--top hidden-sm hidden-xs"></ib-grey-bar>
+                <!-- HEADER -->
+                <div data-ibtools="data-ibtools" class="ib-header-common ib-header-common--bottom">
+                    <ib-header ng-if="newMainHeaderCtrl.model.headerModel && newMainHeaderCtrl.model.stepsModel.position !== 'confirmation'" model="newMainHeaderCtrl.model.headerModel" login="newMainHeaderCtrl.model.greyBarModel" advanced-search="newMainHeaderCtrl.showAdvancedSearch"></ib-header>
+                    <ib-main-header ng-if="newMainHeaderCtrl.model.stepsModel.position === 'confirmation' || newMainHeaderCtrl.model.stepsModel.hasSteps === 'false'" model="newMainHeaderCtrl.model.headerModel" login-info="newMainHeaderCtrl.model.greyBarModel"></ib-main-header>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- STEPS -->
+    <ib-steps class="hidden-sm hidden-xs"  ng-if="newMainHeaderCtrl.model.stepsModel" model = "newMainHeaderCtrl.model.stepsModel"></ib-steps>
+</div>
+<ib-advanced-header-search-component ng-if="newMainHeaderCtrl.model.headerModel.showAdvancedSearch && newMainHeaderCtrl.showAdvancedSearch" is-onbusiness= "newMainHeaderCtrl.model.greyBarModel.isONB"
+    redemption="newMainHeaderCtrl.model.headerModel.redemption" trips="newMainHeaderCtrl.model.headerModel.trips" passengers="newMainHeaderCtrl.model.headerModel.passengers"
+    open-calendar="newMainHeaderCtrl.openCalendar"></ib-advanced-header-search-component>

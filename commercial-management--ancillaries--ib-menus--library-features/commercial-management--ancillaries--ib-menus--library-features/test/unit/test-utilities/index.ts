@@ -1,0 +1,1 @@
+export { TranslatePipeMock, LinkPipeMock } from './pipe-mock.pipe';

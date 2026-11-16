@@ -1,0 +1,1 @@
+import './ib-advanced-search-component/ib-advanced-search-component';

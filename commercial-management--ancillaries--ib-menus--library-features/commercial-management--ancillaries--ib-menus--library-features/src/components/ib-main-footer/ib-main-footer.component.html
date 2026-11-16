@@ -1,0 +1,76 @@
+<footer name="footer" class="ib-footer {{extraClass}}" [ngClass]="{'u-mt-none' : isFullWidth !== 'false' && !extraClass, 'ib-footer--fixed' : isFixed}">
+	<div [ngClass]="{'container' : isFullWidth !== 'true'}">
+		<div [ngClass]="{'row' : isFullWidth !== 'true'}">
+			<div [ngClass]="{'col-xs-12' : isFullWidth !== 'true'}">
+				<!-- RED BOX -->
+				<div class="ib-footer__box ib-footer__box--degraded">
+					<div [ngClass]="{'container' : isFullWidth !== 'false'}">
+						<div class="row">
+							<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+								<figure class="ib-footer__box-fig hidden-md hidden-sm hidden-xs">
+									<img src="{{$rootScope.routes.icons}}/iberia/iberia-logo.png"
+										alt="{{'FOOTER_IBERIA_LOGO_ALT'|translate}}" class="ib-footer__box-img" />
+								</figure>
+							</div>
+							<div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
+								<div class="row">
+									<div class="col-xs-12">
+										<a href="{{'ACCESSIBILITY_LINK' | link}}" target="_blank"
+											title="{{'FOOTER_ACCESSIBILITY_TITLE'|translate}}"
+											class="ib-footer__box-link">{{'FOOTER_ACCESSIBILITY_TEXT'|translate}}</a>
+									</div>
+									<div class="col-xs-12">
+										<a href="{{'DATA_PROTECTION_POLICY_LINK'| link}}" target="_blank"
+											title="{{'FOOTER_DATA_PROTECTION_POLICY_TITLE'|translate}}"
+											class="ib-footer__box-link">{{'FOOTER_DATA_PROTECTION_POLICY_TEXT'|translate}}</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- PAYMENT TYPES ICONS -->
+				<div *ngIf="paymentMethods.length > 0" class="ib-footer__box ib-footer-icons">
+					<div [ngClass]="{'container' : isFullWidth}">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="ib-footer-icons-box">
+									<div class="ib-footer-icons-methods">
+										<ul class="ib-footer-methods-ul">
+											<li *ngFor="let method of paymentMethods" class="ib-method-icon" name="payment-icon">
+												<img src="{{$rootScope.routes.icons}}/pie/payment-methods/{{method}}.svg">
+											</li>
+										</ul>
+									</div>
+									<div *ngIf="secureMethods.length > 0" class="ib-footer-icons-secures">
+										<ul class="ib-footer-secures-ul">
+											<li *ngFor="let method of secureMethods" class="ib-secure-icon" name="secure-icon">
+												<img src="{{$rootScope.routes.icons}}/pie/secure-methods/{{method}}.svg">
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- FOOTER COPYRIGHT -->
+				<div class="ib-footer__box ib-footer__box--copyright">
+					<div [ngClass]="{'container' : isFullWidth}">
+						<div class="row">
+							<div class="col-xs-6">
+								<span class="ib-text">{{('FOOTER_IBERIA_COPYRIGHT'|translate) + ' ' + year}}</span>
+							</div>
+							<div class="col-xs-6">
+								<figure class="ib-footer__box-fig ib-footer__box-fig--to-right hidden-xl hidden-lg">
+									<img src="{{$rootScope.routes.icons}}/pie/iberia-logo-footer.png"
+										alt="{{'FOOTER_IBERIA_LOGO_ALT'|translate}}" class="ib-footer__box-img" />
+								</figure>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>

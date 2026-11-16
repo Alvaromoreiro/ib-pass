@@ -1,0 +1,178 @@
+<div class="ib-advanced-search">
+    <div class="ib-advanced-search__container">
+        <div class="ib-overlay-fly ib-overlay-fly--type-1 ib-overlay-fly--white" ng-if="advHeaSerCtrl.loadingAdvancedSearch">
+            <div class="ib-overlay-fly__container ib-overlay-fly__container--top">
+                <div class="ib-overlay-fly__icon">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                </div>
+                <span class="ib-overlay-fly__text">{{'HEADER_ADVANCED_SEARCH_LOADING'|translate}}</span>
+            </div>
+        </div>
+        <div class="ib-advanced-search__header">
+            <div class="container">
+                <div class="row">
+                    <div class="ib-advanced-search__column-wrap ib-advanced-search__column-wrap--full">
+                        <div class="ib-header-common__column-logo">
+                            <a id="header-commons-iberia-logo-home-link" href="javascript:void(0)" title="{{'GO_TO_HOME_TEXT'|translate}}" class="ib-header-common__logo-fig" ng-click="advHeaSerCtrl.backToMain(true)" focusin>
+                                <img ng-src="{{::$root.routes.icons}}/iberia/logo_iberia.svg" alt="{{'LOGO_IBERIA_TEXT'|translate}}" />
+                            </a>
+                        </div>
+                        <div class="ib-advanced-search__column-search">
+                            <span class="ib-advanced-search__title">{{'HEADER_ADVANCED_SEARCH_OPEN'|translate}}</span>
+                        </div>
+                        <button type="button" class="ib-advanced-search__button-close icon-cerrar" ng-click="advHeaSerCtrl.close(event)" focusin>
+                            <span class="u-hide-accessible">{{'HEADER_ADVANCED_SEARCH_CLOSE'|translate}}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ib-advanced-search__body">
+            <div class="container">
+                <form name="advHeaSerCtrl.containerForm" novalidate>
+                    <div class="row">
+                        <!-- LEFT COLUMN -->
+                        <div class="ib-advanced-search__column-wrap ib-advanced-search__column-wrap--left">
+
+                            <!-- TOP ROW -->
+                            <div class="ib-advanced-search__row">
+                                <div class="ib-advanced-search__input-wrap u-float-left">
+                                    <ib-ui-city-selector-component is-loading="advHeaSerCtrl.showOriginDestinyFieldsLoading" class="ib-advanced-search__input-selector ib-advanced-search__input-selector--label-small" identificator="'city-origin'" css-class="'ib-dropdown--left ib-dropdown--left-lg'" container-form="advHeaSerCtrl.containerForm" model-cities="advHeaSerCtrl.model.cities"
+                                        is-origin="true" city-selected="advHeaSerCtrl.model.cityOrigin" index="0" text="'HEADER_ADVANCED_SEARCH_ORIGIN'" show-code-on-input="true"></ib-ui-city-selector-component>
+                                </div>
+                                <div class="ib-advanced-search__input-wrap u-float-left">
+                                    <ib-ui-city-selector-component is-loading="advHeaSerCtrl.showOriginDestinyFieldsLoading" class="ib-advanced-search__input-selector ib-advanced-search__input-selector--label-small" identificator="'city-destination'" css-class="'ib-dropdown--left ib-dropdown--left-lg'" container-form="advHeaSerCtrl.containerForm"
+                                        model-cities="advHeaSerCtrl.model.cities" is-origin="false" city-selected="advHeaSerCtrl.model.cityDestiny" index="1" text="'HEADER_ADVANCED_SEARCH_DESTINATION'" show-code-on-input="true"></ib-ui-city-selector-component>
+                                </div>
+                            </div>
+                            <!-- BOTTOM ROW -->
+                            <div class="ib-advanced-search__row ib-advanced-search__row--p-top">
+                                <div class="ib-advanced-search__input-wrap ib-advanced-search__input-wrap--auto">
+                                    <div class="ib-select ib-select__simple ib-select__simple--left">
+                                        <ui-select class="ib-select__action" ng-model="advHeaSerCtrl.model.tripOptionSelected" on-select="advHeaSerCtrl.updateDateOptionsOutbount()" data-ui-select-required="true" search-enabled="false" id="trip_option">
+                                            <ui-select-match class="ib-select__list-ipt" placeholder="{{advHeaSerCtrl.model.tripOptionSelected.description|translate}}">
+                                                <span class="ib-select__txt" ng-bind="$select.selected.description|translate"></span>
+                                            </ui-select-match>
+                                            <ui-select-choices class="ib-select__list" repeat="trips in (advHeaSerCtrl.model.tripOptions | filter: $select.search)">
+                                                <span class="ib-select__list-txt" ng-class="{'ib-select__list-txt--link': $index==2}" ng-bind="trips.description|translate"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                                <div class="ib-advanced-search__input-wrap ib-advanced-search__input-wrap--auto">
+                                    <div class="ib-check" ng-if="!advHeaSerCtrl.isOnbusiness">
+                                        <input ng-model="advHeaSerCtrl.model.payWithAvios" data-ng-change="advHeaSerCtrl.selectPayWithAvios(advHeaSerCtrl.model.payWithAvios)" type="checkbox" id="payWithAvios" name="payWithAvios" data-checkBaby="data-checkBaby" class="ib-check__input" focusin/>
+                                        <label for="payWithAvios" class="ib-check__label"><span class="ib-check__text">{{'HEADER_ADVANCED_SEARCH_AVIOS_PAYMENT'|translate}}</span></label>
+                                    </div>
+                                    <div class="ib-check" ng-if="advHeaSerCtrl.isOnbusiness">
+                                        <input ng-model="advHeaSerCtrl.model.payWithPoints" data-ng-change="advHeaSerCtrl.selectPayWithAvios(advHeaSerCtrl.model.payWithPoints)" type="checkbox" id="payWithPoints" name="payWithPoints" data-checkBaby="data-checkBaby" class="ib-check__input" focusin/>
+                                        <label for="payWithPoints" class="ib-check__label"><span class="ib-check__text">{{'HEADER_ADVANCED_SEARCH_POINTS_PAYMENT'|translate}}</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CENTER COLUMN  -->
+                        <div class="ib-advanced-search__column-wrap ib-advanced-search__column-wrap--center">
+                            <!-- TOP ROW -->
+                            <div class="ib-advanced-search__row">
+                                <div class="ib-advanced-search__input-wrap ib-advanced-search__input-wrap--large u-float-left">
+                                    <ib-ui-daterangepicker class="ib-ui-daterangepicker" text-date-gone="'HEADER_ADVANCED_SEARCH_DEPARTURE_DATE_OPTION'|translate" text-date-return="'HEADER_ADVANCED_SEARCH_ARRIVAL_DATE_OPTION'|translate" date-goneid="'dateGoneid'"
+                                        date-returnid="'dateReturnid'" roundtrip="advHeaSerCtrl.model.tripOptionSelected.code" date-gone="advHeaSerCtrl.model.selectedOutbondDate" date-return="advHeaSerCtrl.model.selectedReturnDate" container-form="advHeaSerCtrl.containerForm"
+                                        flex-dates="advHeaSerCtrl.model.flexDates"></ib-ui-daterangepicker>
+
+                                </div>
+                                <div class="ib-advanced-search__input-wrap ib-advanced-search__input-wrap--small u-float-left">
+                                    <ib-ui-passenger-selector icon-up="'icon-caret_arriba'" icon-down="'icon-caret_abajo'" passengers-conditions="advHeaSerCtrl.model.passengersConditions" container-form="advHeaSerCtrl.containerForm" passengers-types="advHeaSerCtrl.model.passengersSelected" pay-with-avios="advHeaSerCtrl.model.payWithAvios" only-teenager="advHeaSerCtrl.model.passengers.onlyTeenager"
+                                        class="ib-filter__icon-caret" reset-toggle-counter="advHeaSerCtrl.model.resetToggleCounter" special-passenger-has-error="advHeaSerCtrl.model.specialPassengerTypeHasError" no-input-label="true"></ib-ui-passenger-selector>
+                                </div>
+                            </div>
+                            <!-- BOTTOM ROW -->
+
+                            <div class="ib-advanced-search__row ib-advanced-search__row--p-top">
+                                <div class="ib-advanced-search__input-wrap ib-advanced-search__input-wrap--extra-large ib-advanced-search__input-wrap--extra-large-0">
+                                    <div class="ib-flex__row ib-flex__row--wrap ib-flex--align-center" ng-class="{ 'ib-flex--space-between' : advHeaSerCtrl.model.cityOrigin.country==='ES' && advHeaSerCtrl.model.cityDestiny.country==='ES' && advHeaSerCtrl.marketDescription==='ES', 'ib-flex--flex-end' : advHeaSerCtrl.model.cityOrigin.country!=='ES' || advHeaSerCtrl.model.cityDestiny.country!=='ES' || advHeaSerCtrl.marketDescription!=='ES' }">
+                                        <!-- Select radio component -->
+                                        <div class="u-mt-normal-md u-mt-normal-mobile ib-flex--basis-100-md-mobile ib-radio-select text-left ib-flex--basis-100-md-mobile u-mt-small-xs" ng-show="advHeaSerCtrl.model.cityOrigin.country ==='ES' &&
+                                            advHeaSerCtrl.model.cityDestiny.country ==='ES' && advHeaSerCtrl.marketDescription === 'ES'" ib-click-out-side="national-discount-collapse" data-menu-open="{{advHeaSerCtrl.isOpen}}">
+                                            <button type="button" class="ib-radio-select__button ib-radio-select__button--resident" data-target="select-radio-discounts" data-function="ib-filter__box" aria-haspopup="true" role="menuitem" data-ng-class="{'active':advHeaSerCtrl.isOpen === true}" ng-click="advHeaSerCtrl.triggerCollapse()"
+                                                focusin ng-keydown="advHeaSerCtrl.controlCollapse($event)">
+
+                                            <span class="ib-radio-select__match">
+                                                <span class="ib-radio-select--selected-text"
+                                                    ng-show="advHeaSerCtrl.showDiscountResident() ">
+                                                    {{advHeaSerCtrl.model.discountResident.description |translate}} /
+                                                </span>
+                                                <span class="ib-radio-select--selected-text">{{advHeaSerCtrl.model.discountFamily.description |translate}}</span>
+                                            </span>
+                                                <span class="ib-filter__icon ib-filter__icon--arrow ib-filter__icon--passenger"
+                                                    data-ng-class="{'icon-caret_arriba': advHeaSerCtrl.isOpen === true, 'icon-caret_abajo': advHeaSerCtrl.isOpen !== true}"></span>
+                                            </button>
+                                            <div class="ib-radio-select__dialog" data-ng-class="{'ib-radio-select__dialog--open': advHeaSerCtrl.isOpen === true}" data-filter="select-radio-discounts" data-my-position="left top+15" data-parent-position="left bottom" data-size-position="big-left"
+                                                ib-filter-position data-ng-show="advHeaSerCtrl.isOpen === true" role="menu" aria-expanded="{{advHeaSerCtrl.isOpen}}" aria-hidden="{{advHeaSerCtrl.isCollapsed}}" aria-label="{{advHeaSerCtrl.ariaText|translate}}"
+                                                ng-blur="advHeaSerCtrl.isOpen=false;">
+
+                                                <div class="ib-popover ib-popover--menu u-pt-none u-pb-none u-pl-none u-pr-none" data-filter-content>
+                                                    <div class="ib-popover--menu__container ">
+
+                                                        <div class="ib-radio-select__group" ng-show="advHeaSerCtrl.showDiscountResident()">
+                                                            <h4 class="ib-radio-select__title">{{advHeaSerCtrl.discountResident.type |translate}}</h4>
+                                                            <div class="ib-radio-select__group--items">
+                                                                <span class="ib-radio" ng-repeat="(index, radio) in advHeaSerCtrl.discountResident.items" ng-if="advHeaSerCtrl.validateRadioResident(radio)" data-ng-class="{'ib-radio--disabled': advHeaSerCtrl.model.payWithAvios && index !== 0}">
+                                                                <input type="radio" name="{{advHeaSerCtrl.discountResident.name}}"
+                                                                    id="{{advHeaSerCtrl.discountResident.name + index}}"
+                                                                    data-ng-model="advHeaSerCtrl.model.discountResident"
+                                                                    data-ng-value="radio"
+                                                                    value="{{radio.value}}" class="ib-radio__input" ng-disabled="advHeaSerCtrl.model.payWithAvios"/>
+                                                                <label for="{{advHeaSerCtrl.discountResident.name + index}}" class="ib-radio__label">{{radio.description |translate}} {{radio.checked}}</label>
+                                                            </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="ib-radio-select__group">
+                                                            <h4 class="ib-radio-select__title">{{advHeaSerCtrl.discountFamily.type |translate}}</h4>
+                                                            <div class="ib-radio-select__group--items">
+                                                                <span class="ib-radio" ng-repeat="(index, radio) in advHeaSerCtrl.discountFamily.items" data-ng-class="{'ib-radio--disabled': advHeaSerCtrl.model.payWithAvios && index !== 0}">
+                                                                <input type="radio" name="{{advHeaSerCtrl.discountFamily.name}}"
+                                                                    id="{{advHeaSerCtrl.discountFamily.name + index}}"
+                                                                    data-ng-model="advHeaSerCtrl.model.discountFamily"
+                                                                    data-ng-value="radio"
+                                                                    value="{{radio.value}}" class="ib-radio__input" ng-disabled="advHeaSerCtrl.model.payWithAvios"/>
+                                                                <label for="{{advHeaSerCtrl.discountFamily.name + index}}" class="ib-radio__label">{{radio.description |translate}} {{radio.checked}}</label>
+                                                            </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- END Select radio component -->
+                                        <div class="u-mt-normal-md u-mt-normal-mobile ib-flex--basis-100-md-mobile ib-select ib-select__simple ib-select__simple--header u-mt-small-xs" ng-class="{'ib-select--error':advHeaSerCtrl.containerForm.$submitted && advHeaSerCtrl.containerForm.selected_cabin.$invalid}">
+                                            <ui-select class="ib-select__action" ng-model="advHeaSerCtrl.model.cabinSelected" data-ui-select-required="true" search-enabled="false" name="selected_cabin" id="selected_cabin" focusin>
+                                                <ui-select-match class="ib-select__list-ipt" placeholder="{{advHeaSerCtrl.model.cabinSelected.description|translate}}">
+                                                    <span class="ib-select__txt" ng-bind="$select.selected.description|translate"></span>
+                                                </ui-select-match>
+                                                <ui-select-choices class="ib-select__list" repeat="cabin in (advHeaSerCtrl.model.typeCabins | filter: $select.search)">
+                                                    <span class="ib-select__list-txt" ng-bind="cabin.description|translate"></span>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- RIGHT COLUMN  -->
+                        <div class="ib-advanced-search__column-wrap ib-advanced-search__column-wrap--right">
+                            <div class="ib-advanced-search__input-wrap ib-advanced-search__input-wrap--xsmall u-pt-none-xs">
+                                <button type="submit" class="ib-button ib-button--block ib-button--h-xmedium-responsive u-float-right u-pl-none u-pr-none" ng-click="advHeaSerCtrl.newSearch()" focusin>
+                                    <span class="ib-advanced-search__icon-search icon-buscar hidden-xs hidden-sm hidden-md hidden-xl"></span>
+                                    <span class="ib-text ib-text--color-light hidden-lg">{{'HEADER_ADVANCED_SEARCH_ACTION_SEARCH'|translate}}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

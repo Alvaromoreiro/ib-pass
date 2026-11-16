@@ -1,0 +1,17 @@
+import './ib-shopping-basket-component';
+import './ib-activities-globick';
+import './ib-baggages';
+import './ib-basket-section';
+import './ib-bundle';
+import './ib-carbon-footprint';
+import './ib-discounts';
+import './ib-insurances';
+import './ib-others-fees';
+import './ib-petc';
+import './ib-priority';
+import './ib-seats';
+import './ib-speqs';
+import './ib-transfers-globick';
+import './ib-trips';
+import './ib-upgrading';
+import './ib-allianz-fusion';

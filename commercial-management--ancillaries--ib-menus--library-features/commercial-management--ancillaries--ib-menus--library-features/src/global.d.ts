@@ -1,0 +1,13 @@
+declare type CommonsRootScope = import('ib-web-commons').CommonsRootScope;
+declare type CommonsBrowserStorageService = import('ib-web-commons').CommonsBrowserStorageService;
+declare type CommonsUserUtilsService = import('ib-web-commons').CommonsUserUtilsService;
+declare type GetDestinationsService = import('ib-web-commons').GetDestinationsService;
+declare type CabinTypesService = import('ib-web-commons').CabinTypesService;
+declare type RedirectionService = import('ib-web-commons').RedirectionService;
+declare type CommonsModalService = import('ib-web-commons').CommonsModalService;
+declare type CommonLocalDiscountsService = import('ib-web-commons').CommonLocalDiscountsService;
+declare type getSpecialPassengerOriginDestinationListService = import('ib-web-commons').getSpecialPassengerOriginDestinationListService;
+declare type CommonsUtilService = import('ib-web-commons').CommonsUtilService;
+declare type DatalayerConstantsType = import('ib-web-commons').DatalayerConstantsType;
+declare type DigitalDataService = import('ib-web-commons').DigitalDataService;
+declare type DatalayerUtilsService = import('ib-web-commons').DatalayerUtilsService;

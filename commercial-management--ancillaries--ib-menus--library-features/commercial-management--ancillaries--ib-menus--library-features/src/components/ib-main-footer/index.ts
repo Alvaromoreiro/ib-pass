@@ -1,0 +1,1 @@
+import './ib-main-footer.module';

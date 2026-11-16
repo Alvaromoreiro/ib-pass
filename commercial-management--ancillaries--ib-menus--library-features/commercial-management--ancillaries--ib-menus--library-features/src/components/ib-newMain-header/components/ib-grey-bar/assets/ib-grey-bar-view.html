@@ -1,0 +1,34 @@
+<div class="container"> <!-- BKI/CKI -->
+	<div class="ib-header-common__row" ng-class="{'ib-header-common__row--two-column': greyBarCtrl.isFlowCki}">
+		<ib-choose-language-component class="u-width-full" ng-if="greyBarCtrl.showComponentChooseLanguage()"></ib-choose-language-component>
+		<ib-user-info-header [is-grey-bar]=true ng-if="greyBarCtrl.isLogged()" ng-class="{'ib-header-common__column': greyBarCtrl.isFlowCki}"></ib-user-info-header>
+		<div ng-show="greyBarCtrl.isNotLogged()" class="ib-header-common__column">
+			<ul ng-controller="IbHeaderCollapseController as collapse"
+				class="ib-header-common__items ib-header-common__items ib-header-common__items--no-border">
+				<li class="ib-header-common__items-item ib-header-common__items-item"
+					data-ng-class="!collapse.isCollapsed ? 'closeCollapse' : 'openCollapse'">
+					<a focusin class="ib-header-common__items-item__link" href="#" title="{{'VIEW_MORE_DETAILS_TEXT'|translate}}"
+					   data-ng-click="collapse.toggle();$event.preventDefault()"
+					   data-ng-class="!collapse.isCollapsed ? 'closeCollapse' : 'openCollapse'">
+						<span class="ib-header-common__items-item__icon icon-perfil_login"></span>
+						<span class="ib-header-common__items-item__text">{{'HEADER_LOGIN_ACCESS_TEXT'|translate}}</span>
+					</a>
+					<div data-uib-collapse="!collapse.isCollapsed"
+						 class="ib-header-common__login-collapse ib-header-common__login-collapse--arrow">
+						<div class="ib-header-common__login-content">
+							<div class="ib-modals__header-settings">
+								<button type="button" class="ib-modals__button-action icon-cerrar" id="menus-header-grey-bar-login-link"
+										data-ng-click="collapse.toggle()" tools focus-me="collapse.isCollapsed" focusin>
+									<span class="u-hide-accessible">{{'MODAL_HIDDEN_CLOSE_TEXT'|translate}}</span>
+								</button>
+							</div>
+							<ib-ui-login-iframe ng-if="greyBarCtrl.model.login && !greyBarCtrl.isMobile" on-logged="greyBarCtrl.model.login.onLogin" after-login="greyBarCtrl.afterLogin"
+								on-error="greyBarCtrl.model.login.onError">
+							</ib-ui-login-iframe>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

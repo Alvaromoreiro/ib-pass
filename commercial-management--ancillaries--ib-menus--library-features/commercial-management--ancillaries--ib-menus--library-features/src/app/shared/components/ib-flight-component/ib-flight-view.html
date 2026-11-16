@@ -1,0 +1,32 @@
+<div class="ib-header-common__container-top u-text-left">
+    <!-- Ida -->
+    <span class="ib-header-common__city hidden-md hidden-sm hidden-xs ib-header-common__text ib-header-common__text--type-2">
+        {{flightCtrl.trip.originCity}}
+    </span>
+    <span class="ib-header-common__city hidden-xl hidden-lg ib-header-common__text ib-header-common__text--type-2">
+        {{flightCtrl.trip.originCode}}
+    </span>
+    <!-- Flechas -->
+    <span ng-class="{'ib-header-common__fly-icon ib-header-common__fly-icon--one-direction icon-arrow-right': flightCtrl.trip.tripType === '1',
+    'ib-header-common__fly-icon ib-header-common__fly-icon--transfer icon-flechas': flightCtrl.trip.tripType === '2'}"></span>
+    <!-- Vuelta -->
+    <span class="ib-header-common__city hidden-md hidden-sm hidden-xs ib-header-common__text ib-header-common__text--type-2">
+        {{flightCtrl.trip.destinyCity}}
+    </span>
+    <span class="ib-header-common__city hidden-xl hidden-lg ib-header-common__text ib-header-common__text--type-2">
+        {{flightCtrl.trip.destinyCode}}
+    </span>
+</div>
+<!-- Fechas de vuelo -->
+<div class="ib-header-common__container-bottom hidden-md hidden-sm hidden-xs" ng-if="flightCtrl.trip.dateFlight && !flightCtrl.isShuttleFlow">
+    <div class="ib-header-common__fly-day">
+        <span class="ib-header-common__text ib-header-common__text--type-1">{{(('OUTBOUND_FLIGHT_TEXT'|translate) | uppercase) +' '+ flightCtrl.trip.dateFlight}}</span>
+        <span ng-if="flightCtrl.trip.returnFlight" class="ib-header-common__text ib-header-common__text--type-1 ib-header-common__text--return">{{(('RETURN_FLIGHT_TEXT'|translate) | uppercase) +' '+ flightCtrl.trip.returnFlight}}</span>
+    </div>
+</div>
+<!-- Puente Aereo -->
+<div class="ib-header-common__container-bottom hidden-md hidden-sm hidden-xs" ng-if="flightCtrl.isShuttleFlow">
+    <div class="ib-header-common__fly-day">
+        <span class="ib-header-common__text ib-header-common__text--type-1">{{'SHUTTLE_BRIDGE_AIR_OPEN'|translate}}</span>
+    </div>
+</div>
