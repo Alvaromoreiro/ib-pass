@@ -1,0 +1,176 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_autocomplete
+//    Desripcion: Estilos para el autocompletar
+//******************************************************************************/
+
+/* Autocomplete */
+.ui-autocomplete {
+	width: rem(281) !important;
+	max-height: rem(350);
+	overflow-x: hidden;
+	display: block;
+	position: absolute;
+	top: rem(66)!important;
+	left: 0;
+	padding: rem(10) 0;
+	background: $BCK-cromatico_1;
+	border-radius: 4px;
+	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.47), 0 -1px 4px 0 rgba(0, 0, 0, 0.23);
+	z-index: 100020;
+	font-family: $font-02;
+	.ui-menu-item {
+		.ui-menu-item-link {
+			display: block;
+			padding: rem(10) rem(23) 1px rem(24);
+			font-size: rem(15);
+			text-decoration: none;
+			color: $PC-cromatico_2;
+			&__city {
+				line-height: rem(16);
+			}
+			&__country {
+				font-size: rem(12);
+			}
+			&__notFound {
+				font-size: rem(13);
+				color:$PC-cromatico_1;
+			}
+			&:focus,
+			&:hover {
+				text-decoration: none;
+			}
+			&.ui-state-active {
+				color: $PC-cromatico_1;
+				background: $BCK-cromatico_2;
+			}
+
+		}
+		.ui-menu-item-notFound{
+			display: block;
+			padding: rem(6) rem(16) rem(6) rem(16);
+			font-size: rem(13);
+			text-decoration: none;
+			color: $PC-cromatico_1;
+
+			&.ui-state-active{
+				background-color: $BCK-cromatico_1;
+			}
+		}
+
+		&--rep {
+			&:nth-child(even) {
+				display: none;
+			}
+		}
+		&.ui-state-focus{
+			background: $BCK-cromatico_2;
+			.ui-menu-item-link{
+				color: $PC-cromatico_1;
+			}
+		}
+	}
+	&:after {
+		bottom: 100%;
+		left: 12%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		border-color: rgba(255, 255, 255, 0);
+		border-bottom-color: $BRD-standar_13;
+		border-width: 8px;
+		margin-left: rem(-8);
+	}
+	&:before {
+		bottom: 100%;
+		left: 12%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		border-color: rgba(255, 255, 255, 0);
+		border-bottom-color: $BRD-standar_20;
+		border-width: 8px;
+		margin-left: rem(-8);
+	}
+	+.arrow-list{
+		display: none;
+		position: absolute;
+		top: rem(66) !important;
+		width: 100%;
+		height:rem(16);
+		z-index: 999999;
+		&:before {
+			bottom: 100%;
+			left: 12%;
+			border: solid transparent;
+			content: " ";
+			height: 0;
+			width: 0;
+			position: absolute;
+			border-color: rgba(255, 255, 255, 0);
+			border-bottom-color: #000000;
+			border-width: 8px;
+			margin-left: -0.5rem;
+		}
+		&:after {
+			bottom: 100%;
+			left: 12%;
+			border: solid transparent;
+			content: " ";
+			height: 0;
+			width: 0;
+			position: absolute;
+			border-color: rgba(255, 255, 255, 0);
+			border-bottom-color: #FFFFFF;
+			border-width: 8px;
+			margin-left: -0.5rem;
+		}
+	}
+	&[aria-hidden="false"] + .arrow-list{
+		display: block;
+	}
+}
+
+.ibe-searcher{
+	.ui-autocomplete{
+		top: rem(56)!important;
+		+.arrow-list {
+			top: rem(56) !important;
+		}
+	}
+}
+
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe-autocomplete {
+
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe-autocomplete {
+
+	/* Autocomplete */
+	.ui-autocomplete {
+		width: 100% !important;
+		top: rem(66) !important;
+		max-height: rem(300);
+	}
+	.ibe-searcher{
+		.ui-autocomplete {
+			top: rem(56) !important;
+		}
+	}
+}
+
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe-autocomplete {
+	@include m-ibe-autocomplete;
+}
+
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe-autocomplete {
+	@include sm-ibe-autocomplete;
+}

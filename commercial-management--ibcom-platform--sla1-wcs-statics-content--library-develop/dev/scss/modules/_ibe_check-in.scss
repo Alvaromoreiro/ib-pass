@@ -1,0 +1,215 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe_checkIn
+//    Desripcion: Estilos para la pagina de checkIn Online
+//******************************************************************************/
+
+/*
+ * Lista de check-in
+ */
+.ibe-ckeckin__list{
+    margin-top: rem(30);
+}
+.ibe-ckeckin__list-container{
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: rem(0);
+}
+.ibe-ckeckin__list-item{
+    display: inline-block;
+    width: 33.3%;
+    vertical-align: top;
+    height: 100%;
+	
+    &--big{	//Design: https://zpl.io/blL4Boz
+        width: 50%;
+        &-left{
+            .ibe-ckeckin__list-box{
+                margin-left: 0;
+                margin-right: rem(16);
+				padding: rem(32) rem(32) rem(42) rem(88);		//Design: https://zpl.io/blL4Boz
+				&:before{
+					left: rem(19); 								//32px REAL spacing to left border
+					font-size: rem(54);
+				}
+				.ibe-ckeckin__list-text{
+					line-height: rem(22);						//Design: https://zpl.io/blL4Boz
+				}
+            }
+        }
+        &-right{
+            .ibe-ckeckin__list-box{
+                margin-left: rem(16);
+                margin-right: 0;
+				padding: rem(32) rem(32) rem(42) rem(88);		//Design: https://zpl.io/blL4Boz
+				.ibe-ckeckin__list-text{
+					line-height: rem(22);						//Design: https://zpl.io/blL4Boz
+				}
+				&:before{										//Design: https://zpl.io/blL4Boz
+					top: rem(24);
+					left: rem(32);
+					font-size: rem(38);
+				}
+            }
+        }
+    }
+}
+.ibe-ckeckin__list-word {
+    display: inline-block;
+    font-family: $font-04;
+    font-size: rem(20);
+    line-height: 24px;
+}
+.ibe-checkin__list-link{
+    display: block;
+    text-align: left;
+    border: 0;
+    background: transparent;
+    &:focus {
+        outline: 0;
+        .ibe-ckeckin__list-box {
+            outline: 1px solid #F08400;
+        }
+    }
+    &:hover,&:focus{
+        text-decoration: none;
+        .ibe-ckeckin__list-box{
+            color: $PC-cromatico_10;
+            &:before{
+                color: $PC-cromatico_10;
+            }
+            
+        }
+    }
+}
+.ibe-ckeckin__list-box{
+    position:relative;
+    display: block;
+    padding: rem(27) rem(28) rem(31) rem(101);
+    box-shadow: 0 1px 0 0 $PC-cromatico_4;
+    border: 2px solid $BRD_standar_5;
+    font-family: $font-05;
+    color: $PC-cromatico_1;
+    height: 100%;
+    margin: 0 rem(16);
+    line-height: inherit;
+    &:before{
+        position: absolute;
+        top: 0.65rem;
+        left: rem(30);
+        font-size: rem(55);
+        color: $PC-cromatico_2;
+    }
+    
+
+}
+.ibe-ckeckin__list-title{
+    font-family: $font-04;
+    font-size: rem(20);
+    line-height: 24px;
+    
+}
+.ibe-ckeckin__list-text{
+    display: block;
+    margin-top: rem(6);
+    font-family: $font-02;
+    font-size: rem(13);
+    line-height: 1.85;
+}
+
+/*
+ * Responsive de Check-In
+ */
+/*X-LARGE RESOLUTION STYLES*/
+@mixin xl-ibe_check-in {
+    .ibe-ckeckin__list-word{
+        padding-left: rem(4);
+    }
+}
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe_check-in {
+    .ibe-ckeckin__list{
+        margin-top: rem(20);
+    }
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe_check-in {
+    .ibe-ckeckin__list{
+        margin: rem(21) 0 rem(3) 0;
+    }
+    .ibe-ckeckin__list-box{
+        padding: rem(77) rem(23) rem(30) rem(22);
+        margin: 0 rem(16);
+        &:before{
+            top: rem(8);
+            left:rem(14);
+        }
+    }
+    
+}
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_check-in {
+    @include m-ibe_check-in;
+    .ibe-ckeckin__list{
+        margin: rem(20) rem(16) rem(8) rem(16);
+    }
+    .ibe-ckeckin__list-item{
+        width: 100%;
+        margin-bottom: rem(20);
+        &:last-child{
+            margin-bottom: 0;
+        }
+        &--big{
+            &-left{
+                .ibe-ckeckin__list-box{
+                    margin: 0;
+                }
+            }
+            &-right{
+                .ibe-ckeckin__list-box{
+                    margin: 0;
+                }
+            }
+        }
+    }
+    .ibe-ckeckin__list--big{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .ibe-ckeckin__list-box{
+        padding: rem(28) rem(21) rem(26) rem(78);
+        margin: 0;
+        &:before{
+            top: rem(8);
+            left:rem(15);
+        }
+    }
+    
+}
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe_check-in {
+    @include sm-ibe_check-in;
+    
+    .ibe-ckeckin__list{
+        margin: 0 rem(16);
+        margin-top: rem(20);
+        &-text {
+            line-height: 21px;
+        }
+    }
+    .ibe-ckeckin__list--big{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .ibe-ckeckin__list-box{
+        padding: rem(18) rem(14) rem(15) rem(56);
+        &:before{
+            font-size: rem(35);
+            top: rem(8);
+            left: rem(11);
+        }
+    }
+    
+}

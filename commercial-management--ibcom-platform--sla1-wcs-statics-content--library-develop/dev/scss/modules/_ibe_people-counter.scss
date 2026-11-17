@@ -1,0 +1,497 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe_people-counter
+//    Desripcion: Estilos para el contador de personas (Busqueda vuelos)
+//******************************************************************************/
+.ibe-people-counter {
+    display: none;
+    position: absolute;
+    top: rem(65);
+    left: 0;
+    width: rem(350);
+    padding: 0;
+    background: $BCK-cromatico_1;
+    border-radius: 4px;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.47), 0 -1px 4px 0 rgba(0, 0, 0, 0.23);
+    z-index: 1000;
+    /* Lista de contadores */
+    &__list{
+        &-item{
+            border-bottom: 1px solid $BRD_standar_2;
+            font-size: 0;
+            padding: rem(15) 0;
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+    &__item{
+        &-plus{
+            .ibe-people-counter__message--plus{
+                display: block;
+            }
+            .ibe-people-counter__buttons{
+                &-more{
+                    color: $PC-cromatico_9;
+                    &[disabled="disabled"]:hover{
+                        + .ibe-message-tooltip{
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+        &-minus{
+            .ibe-people-counter__message--minus{
+                display: block;
+            }
+            .ibe-people-counter__buttons{
+                &-less{
+                    color: transparent;
+                    position: relative;
+                    & + .ibe-message-tooltip:before{
+                        right: rem(63);
+                    }
+                    &[disabled="disabled"]:hover{
+                        + .ibe-message-tooltip{
+                            display: block;
+                        }
+                    }
+                }
+                &-less:before{
+                    background: $PC-cromatico_9;
+                }
+            }
+        }
+        &-children{
+            &-alone{
+                .ibe-people-counter__message--children-alone{
+                    display: block;
+                }
+            }
+            .ibe-people-counter__message--children{
+                display: block;
+            }
+        }
+        //&-baby{
+        //    .ibe-people-counter__message--avios-babies{
+        //        display: block;
+        //    }
+        //}
+    }
+    /* Contador */
+    &__counter{
+        display: inline-block;
+        width: 21%;
+        font-size: rem(35);
+        font-family: $font-04;
+        text-align: center;
+        &--plus{
+            color: $PC-cromatico_1;
+        }
+        &--none{
+            color: $PC-cromatico_9;
+        }
+    }
+    /* Texto informativo */
+    &__people{
+        display: inline-block;
+        width: 54%;
+        &-title{
+            display: block;
+            font-size: rem(20);
+            line-height: rem(20);
+            font-family: $font-04;
+        }
+        &-subtitle{
+            display: block;
+            font-size: rem(12);
+            line-height: 16px;
+            font-family: $font-07;
+            color: $PC-cromatico_2;
+        }
+    }
+    &__pets{
+        width: 75%;
+        float: left;
+        padding-bottom: 20px;
+
+        .icon-informacion_pet{
+            position: relative;
+            &:before{
+                font-size: 1.45rem;
+                position: absolute;
+                bottom: -3px;
+                left: 3px;
+            }
+        }
+
+        /* Tooltip pets */
+        .tooltip-pets {
+            background: var(--grey-200-ee, #EEE);
+            width: rem(260);
+            padding: rem(24);
+            box-sizing: border-box;
+            position: absolute;
+            bottom: rem(47);
+            z-index: 9000;
+            box-shadow: 0 0 8px 1px #bbb;
+            left: rem(36);
+
+            /* Encabezado */
+            .tooltip-pets-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 4px 6px;
+                margin-bottom: 8px;
+                position: relative;
+
+                h3 {
+                    margin: 0;
+                    font-size: 1rem;
+                    font-weight: bold;
+                    color: #555;
+                }
+
+                .close-btn {
+                    background: none;
+                    border: none;
+                    font-size: 2.1rem;
+                    color: #555;
+                    cursor: pointer;
+                    position: absolute;
+                    right: 0;
+                    top: rem(-7);
+                }
+            }
+
+            /* Contenido */
+            .tooltip-pets-content {
+                padding: 6px 8px;
+                color: #555;
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+        }
+    }
+    /* Botones más y menos */
+    &__buttons{
+        display: inline-block;
+        width: 25%;
+        //font-size: rem(31);
+        font-size: rem(25);
+        color: $PC-cromatico_3;
+        &-less{
+            width: rem(30);
+            height: rem(40);
+            line-height: rem(40);
+            border: 0;
+            background: transparent;
+            position: relative;
+            text-indent: -99999px;
+            &:focus{
+                //box-shadow: 0 0 0 2px $BRD_standar_3;
+                //outline: 0;
+            }
+            &:before {
+                content: "";
+                background-color: $PC-cromatico_3;
+                width: 1rem;
+                height: 0.125rem;
+                position: absolute;
+                top: 55%;
+                left: 50%;
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+        }
+        &-more{
+            width: rem(30);
+            height: rem(40);
+            line-height: rem(40);
+            border: 0;
+            background: transparent;
+            &:focus{
+                //box-shadow: 0 0 0 2px $BRD_standar_3;
+                //outline: 0;
+            }
+        }
+        &-no-hover {
+            pointer-events: none;
+        }
+    }
+    &__message{
+        display: none;
+        font-size: rem(11);
+        padding: rem(5) rem(16) 0 rem(74);        
+        &-text{
+            font-size: rem(11);
+            font-family: $font-07;
+            color: $PC-cromatico_10;
+            line-height: 12px;
+        }
+		&.active{
+			display: block;
+		}
+    }
+    /* Edad de los niños */
+    &__ages{
+        display: none;
+        .ibe_form__selectize-multi{
+            border: 0;
+            margin: 0;
+            padding: 0;
+            min-height: rem(31);
+            height: auto;
+            padding: rem(25) 0 0 rem(8);
+            background: transparent;
+        }
+        .ibe_form__input-label{
+            font-size: rem(11);
+        }
+    }
+    /* Pie de pagina */
+    &__footer{
+        padding: rem(24);
+        &--right {
+            text-align: right;
+        }
+    }
+    /* Arrow */
+    &:after {
+        bottom: 100%;
+        left: 9%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        border-color: rgba(255, 255, 255, 0);
+        border-bottom-color: $BRD-standar_13;
+        border-width: 8px;
+        margin-left: rem(-8);
+        z-index: 0;        
+    }
+    &:before {
+        bottom: 100%;
+        left: 9%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        border-color: rgba(255, 255, 255, 0);
+        border-bottom-color: $BRD-standar_20;
+        border-width: 8px;
+        margin-left: rem(-8);
+        z-index: 0;        
+    }
+    .ibe_form__input-label{
+        top: 0;
+    }
+    .ibe-select__edit {
+        z-index: 0;
+    }
+
+    &--full {
+        width: 100%;
+        .ibe-people-counter__counter {
+            width: rem(75);
+            vertical-align: top;
+        }
+        .ibe-people-counter__people {
+            width: calc(100% - 165px);
+            vertical-align: top;
+        }
+        .ibe-people-counter__buttons {
+            width: rem(75);
+            vertical-align: top;
+        }
+        .ibe-button {
+            min-width: rem(288);
+        }
+    }
+    &--focus-not-border{
+        &:focus{
+            outline-color:transparent!important;
+        }
+    }
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+
+@mixin l-ibe-people-counter {
+    .ibe-people-counter {
+        left: auto;
+        right: 0;
+        &:before, &:after {
+            left: 93%;
+        }
+    }
+}
+
+@mixin m-ibe-people-counter{ 
+    .ibe-people-counter__pets {
+		width: 65% !important;
+	}
+    .ibe-pets-counter__buttons {
+        padding-right: 0 !important;
+        position: relative;
+        right: rem(-7);
+    }
+    .ibe-people-counter{
+        width: rem(352);
+        top: rem(55);
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.47), 0 -1px 4px 0 rgba(0, 0, 0, 0.23);
+        border: none;
+        &__list{
+            &-item{
+                padding: rem(12) 0 rem(15) 0;
+            }
+        }
+        &__people{
+            width: 45%;
+        }
+        &__buttons{
+            width: 34%;
+            text-align: right;
+            padding-right: rem(15);
+        }
+        /* Edad de los niños */
+        &__ages{
+            width: 100%;
+            padding: rem(15) rem(30);
+            .ibe_form__selectize-multi{
+                border: 1px solid $BRD_standar_1;
+                padding: rem(10) 0;
+            }
+        }
+        &--full {
+            width: 100%;
+            top: rem(65);
+            .ibe-people-counter__counter {
+                width: rem(50);
+            }
+            .ibe-people-counter__people {
+                width: calc(100% - 143px);
+            }
+            .ibe-people-counter__buttons {
+                width: rem(70);
+                padding-right: 0;
+            }
+        }
+    }
+}
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe-people-counter{
+    .ibe-people-counter__pets {
+		width: 65% !important;
+	}
+    .ibe-pets-counter__buttons {
+        padding-right: 0 !important;
+        position: relative;
+        right: rem(-7);
+    }
+    .ibe-people-counter{
+        width: 100%;
+        top: rem(55);
+        border-radius: 0;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.47), 0 -1px 4px 0 rgba(0, 0, 0, 0.23);
+        border: none;
+        &__list{
+            &-item{
+                padding: rem(17) 0 rem(15) 0;
+            }
+        }
+        &__people{
+            width: 45%;
+        }
+        &__buttons{
+            width: 34%;
+            text-align: right;
+            padding-right: rem(19);
+        }
+        /* Edad de los niños */
+        &__ages{
+            width: 100%;
+            padding: rem(15) rem(30);
+            .ibe_form__selectize-multi{
+                border: 1px solid $BRD_standar_1;
+                padding: rem(10) 0;
+            }
+        }
+        &--full {
+            top: rem(65);
+            .ibe-people-counter__counter {
+                width: rem(50);
+            }
+            .ibe-people-counter__people {
+                width: calc(100% - 138px);
+            }
+            .ibe-people-counter__buttons {
+                width: rem(70);
+                padding-right: 0;
+            }
+            .ibe-button {
+                min-width: 100%;
+            }
+        }
+    }
+}
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe-people-counter{
+    .ibe-people-counter__pets {
+		width: 65% !important;
+	}
+    .ibe-pets-counter__buttons {
+        padding-right: 0 !important;
+        position: relative;
+        right: rem(-7);
+    }
+    .ibe-people-counter{
+        width: 100%;
+        top: rem(55);
+        border-radius: 0;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.47), 0 -1px 4px 0 rgba(0, 0, 0, 0.23);
+        border: none;
+        &__list{
+            &-item{
+                padding: rem(17) 0 rem(15) 0;
+            }
+        }
+        &__people{
+            width: 45%;
+        }
+        &__buttons{
+            width: 34%;
+            text-align: right;
+            padding-right: rem(19);
+        }
+        /* Edad de los niños */
+        &__ages{
+            width: 100%;
+            padding: rem(15) rem(30);
+            .ibe_form__selectize-multi{
+                border: 1px solid $BRD_standar_1;
+                padding: rem(10) 0;
+            }
+        }
+        &--full {
+            top: rem(65);
+            .ibe-people-counter__counter {
+                width: rem(50);
+            }
+            .ibe-people-counter__people {
+                width: calc(100% - 138px);
+            }
+            .ibe-people-counter__buttons {
+                width: rem(70);
+                padding-right: 0;
+            }
+            .ibe-button {
+                min-width: 100%;
+            }
+        }
+    }
+}

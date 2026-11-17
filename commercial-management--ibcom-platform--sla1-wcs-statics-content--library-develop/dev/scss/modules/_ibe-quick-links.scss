@@ -1,0 +1,230 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe-quick-links
+//    Desripcion: Estilos para componente Enlaces rapidos
+//******************************************************************************/
+
+.ibe-quick-links {
+	display: block;
+	padding: rem(22) rem(30) rem(30);
+	background-color: $PC-cromatico_4;
+	border-top: 2px solid $PC-cromatico_3;
+	&__columns {
+		display: flex;
+		// justify-content: space-around;
+	}
+	&__mt{
+		margin-top: rem(30);
+	}
+	&__mb{
+		margin-bottom: rem(10);
+	}
+	&__list{
+		padding: 0 rem(65) 0 rem(55);
+		font-size: 0;
+		&--column{
+			width: 100%;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+		}
+	}
+	&__item{
+		// display: inline-block;
+		max-width: 75%;
+		vertical-align: top;
+		padding: rem(15) 0 0 rem(10);
+	}
+	&__title{
+		position: relative;
+		font-family: $font-04;
+		color: $PC-cromatico_3;
+		font-size: rem(26);
+		line-height: 32px;
+		padding-right: rem(40);
+		&:before{
+			position: absolute;
+			top: 0;
+			right: 0;
+			font-size: rem(28);
+		}
+		&.icon-vuelos{
+			&:before{
+				-webkit-transform: rotate(33deg);
+				-moz-transform: rotate(33deg);
+				-ms-transform: rotate(33deg);
+				-o-transform: rotate(33deg);
+				transform: rotate(33deg);
+			}
+		}
+	}
+	&__direct-link{
+		position: absolute;
+		top: 0;
+		right: 0;
+		text-indent: -999rem;
+		width: rem(40);
+		height: 100%;
+		&:before{
+			position: absolute;
+			top: rem(1);
+			right: 0;
+			text-indent: 0;
+			font-size: rem(28);
+		}
+		&:hover,&:focus{
+			color: $PC-cromatico_12;
+		}
+		&:focus{
+			outline: 1px solid $PC-cromatico_13;
+		}
+	}
+	&__link{
+		position: relative;
+		display: inline-block;
+		padding-left: rem(17);
+		text-align: left;
+		&.link__regular{
+			line-height: 20px;
+		}
+		&:before{
+			content:"";
+			position: absolute;
+			top: rem(6);
+			left: 0;
+			display: block;
+			width: rem(8);
+			height: rem(8);
+			background-color: $PC-cromatico_3;
+		}
+	}
+	&--destiny{
+		padding: rem(40) rem(32);
+		border-top: none;
+		margin-top: 0px !important;
+		margin-bottom: rem(32) !important;
+		& h2{
+			font-size: rem(26);
+			color:#333333;
+		}
+		& ul{
+			padding: 0;
+			& li{
+				padding-left:0;
+				& .link__regular{
+					padding-left: rem(12);
+					font-size: 13px;
+					color:#333333;
+					text-decoration: underline;
+					&:before{
+						top:0.475rem;
+						width: rem(4);
+						height: rem(4);
+					}
+				}
+			} 
+		}
+	}
+}
+button.ibe-quick-links__link{
+	border:0;
+	background: none;
+	&:hover{
+		text-decoration: underline;
+	}
+}
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe-quick-links{
+	.ibe-quick-links {
+		&__list{
+			padding-left: rem(20);
+			padding-right: rem(20);
+		}
+		&__mt {
+			margin-top: rem(20);
+		}
+		&__mb {
+			margin-bottom: 0;
+		}
+		&__destiny{
+			padding: 32px 24px !important;
+			border: 10px solid red;
+			& .ibe-quick-links__list{
+				display: grid;
+				grid-template-rows: repeat(3,1fr);
+				grid-template-columns: repeat(2,1fr);
+				& .ibe-quick-links__item{
+					width: 100%;
+					height: fit-content;
+				}
+			}
+		}
+	}
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe-quick-links{
+	.ibe-quick-links {
+		padding-left: rem(17);
+		padding-right: rem(15);
+		&__list{
+			padding-left: rem(37);
+			padding-right: rem(37);
+			
+		}
+		&__mt {
+			margin-top: rem(20);
+		}
+		&__mb {
+			margin-bottom: 0;
+		}
+		&--destiny{
+			padding: 32px 24px;
+			& .ibe-quick-links__list{
+				display: grid;
+				grid-template-rows: repeat(3,1fr);
+				grid-template-columns: repeat(2,1fr);
+				& .ibe-quick-links__item{
+					width: 100%;
+					height: fit-content;
+				}
+			}
+		}
+	}
+}
+
+/*SMALL RESOLUTION STYLES*/
+
+@mixin sm-ibe-quick-links{
+	.ibe-quick-links{
+		padding: rem(22) rem(25) rem(22) rem(17);
+		&__columns{
+			flex-wrap: wrap;
+		}
+		&__list{
+			padding: 0;
+		}
+		&__item{
+			width: 100%;
+			padding-left: 0;
+		}
+		&__mt {
+			margin-top: rem(20);
+		}
+		&__mb {
+			margin-bottom: 0;
+		}
+	}
+}
+
+@mixin xs-ibe-quick-links{
+	@include sm-ibe-quick-links;
+	.ibe-quick-links{
+		&__mt {
+			margin-top: rem(20);
+		}
+		&__mb {
+			margin-bottom: 0;
+		}
+	}
+}

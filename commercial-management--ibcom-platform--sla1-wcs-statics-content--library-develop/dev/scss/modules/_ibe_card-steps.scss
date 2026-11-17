@@ -1,0 +1,85 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe_card-steps
+//    Desripcion: Estilos para la el componente cajas de pasos
+//******************************************************************************/
+// Contiene la clase contenedora ib-card-steps-container de las card de spets
+.ibe-card-steps {
+    display: table-cell;
+    height: auto;
+    padding: 0;
+    
+    &__box{
+        vertical-align: top;
+        background-color: $PC-cromatico_4;
+        border-top: 2px solid $PC-cromatico_3;
+        border-left: solid 1px $BRD_standar_33;
+        border-right: solid 1px $BRD_standar_33;
+        border-bottom: solid 3px $BRD_standar_33;
+        margin: 0 rem(10);
+        padding: rem(16) rem(40) rem(24) rem(24);
+        &--ultimo{
+           margin-right: 0; 
+        }
+    }
+
+    &__step{
+        font-family: $font-02;
+        font-size: rem(13);
+        font-weight: bold;
+        line-height: rem(24);
+        padding-bottom: rem(8);
+    }
+    &__title{
+        font-family: $font-04;
+        font-size: rem(23);
+        color: $PC-cromatico_3;
+        line-height: rem(24);
+        padding-bottom: rem(12);
+    }
+    &__text{
+        font-family: $font-02;
+        font-size: rem(13);
+        line-height: rem(24);
+        color: $PC-cromatico_2;
+        word-wrap: break-word;
+    }
+
+}
+
+.ib-card-steps-container{
+    display: table;
+    table-layout: fixed; /* keep equal cell widths */
+    width: calc(100% + 20px);
+    margin: rem(10) rem(-10) rem(0);
+}
+
+
+@mixin sm-ibe-card-steps{
+    .ibe-card-steps{
+        display: block; 
+
+        &__box{
+            margin-right: 0;
+            margin-bottom: rem(10) !important;
+        }
+    }
+    .ib-card-steps-container{
+        width: calc(100% + 10px);
+        margin: rem(10) rem(-10) rem(10);
+    }
+    // Fix Vertical Margins Responsive
+    [data-toggle="container"] .ib-card-steps-container:last-child {
+        margin-bottom:  rem(10) !important;
+    }
+    [data-toggle="container"] .ibe-card-steps:last-child {
+        margin-bottom:  rem(10) !important;
+    }
+    [data-toggle="container"] .ibe-card-steps__box:last-child {
+        margin-bottom:  rem(10) !important;
+    }
+    
+}
+@mixin xs-ibe-card-steps{
+    @include sm-ibe-card-steps;
+}

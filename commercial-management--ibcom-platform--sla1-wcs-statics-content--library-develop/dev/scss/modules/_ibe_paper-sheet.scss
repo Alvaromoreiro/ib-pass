@@ -1,0 +1,139 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_paper-sheet
+//    Desripcion: Estilos para el componente hoja de papel (Partners Iberia Plus)
+//******************************************************************************/
+.ibe-paper-sheet{
+    padding: rem(35) rem(30);
+    &__container{
+        position: relative;
+        padding: rem(41) rem(46);
+        background: $BCK-cromatico_1;
+        box-shadow: 0 0px 4px rgba(0, 0, 0, 0.5);
+        &--medium{
+            padding: rem(35) rem(33);
+        }
+    }
+    &__header{
+        padding-bottom: rem(29);
+        border-bottom: 1px solid #e5e5e5;
+        &-title-primary{
+            padding: 0 7% 0 0;
+            word-wrap: break-word;
+        }
+        &-title-secondary{
+            padding: rem(5) 0 0 0;
+            font-family: $font-04;
+            font-size: rem(18);
+            color: $PC-cromatico_2;
+        }
+        &--no-border {
+            border: 0;
+        }
+    }
+    &__options {
+        position: absolute;
+        top: rem(19);
+        right: rem(16);
+        font-family: $font-05;
+        &-close{
+            font-size: rem(35);
+            color: $PC-cromatico_2;
+            cursor: pointer;
+            &:before {
+                content: "\e935";
+            }
+        }
+    }
+    &__body{
+        .title{
+            padding: rem(21) 0 rem(26);
+        }
+        .ibe-table{
+            margin-bottom: rem(26);
+        }
+    }
+    /* Modulo perfil */
+    &__profile{
+        min-height: 70px;
+    }
+    &__profile-logo {
+        float: left;
+        margin: 0 20px 0 10px;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+    }
+    &__profile-title {
+        display: block;
+        padding: 0;
+        margin-bottom: 6px;
+        &.title{
+            padding: 0;
+        }
+    }
+    &__profile-subtitle {
+        display: block;
+        font-size: 18px;
+        color: #777;
+    }
+    .ibe-figure {
+        &.ibe-figure--full {
+            margin-left: rem(-46);
+            width: calc(100% + 92px);
+            margin-bottom: 1.6rem;
+            .ibe-img {
+                border: 0;
+            }
+        }
+    }
+}
+
+/* Animation expander ibe_gallery */
+.GI_TW_expander {
+    transition: height 0.4s ease-in;
+    -ms-transition: height 0.4s ease-in;
+    .GI_TW_expander-inner {
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+.GI_TW_expander.opened {
+    .GI_TW_expander-inner {
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 0.6s, opacity 0.4s linear;
+        -ms-transition: visibility 0.6s, opacity 0.4s linear;
+    }
+}
+
+/* Responsive */
+
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_paper-sheet{
+    .ibe-paper-sheet{
+        padding: rem(20) rem(17);
+        &__container{
+            padding: rem(36) rem(24);
+        }
+
+        .ibe-figure.ibe-figure--full {
+            margin-left: rem(-24);
+            width: calc(100% + 48px);
+
+            .ibe-img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+}
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe_paper-sheet{
+    @include sm-ibe_paper-sheet;
+}

@@ -1,0 +1,148 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe_connections-other-airports-card
+//    Descripcion: Estilos para la card de otros aeropuertos de conexiones.
+//******************************************************************************/
+.ibe-connections-other-airports-card-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding-top: rem(64);
+}
+
+.ibe-connections-other-airports-card {
+  flex-basis: 50%;
+
+  &:nth-child(odd) {
+    padding: 0 rem(12) rem(32) rem(16);
+  }
+
+  &:nth-child(even) {
+    padding: 0 rem(16) rem(32) rem(12);
+  }
+
+  &__title {
+    font-family: $font-04;
+    font-size: rem(22);
+    color: $PC-cromatico_3;
+    font-weight: bold;
+  }
+
+  &__img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__info {
+    background-color: $PC-cromatico_4;
+    color: $PC-cromatico_2;
+    padding: rem(24);
+  }
+
+  &__list {
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: rem(24);
+    row-gap: rem(16);
+    padding-top: rem(16);
+
+    li {
+      column-gap: rem(4);
+
+      p {
+        line-height: normal;
+      }
+    }
+  }
+
+  &__links {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: rem(24);
+    padding-top: rem(16);
+
+    .ibe-card-guides__footer-arrow {
+      &::after {
+        margin-left: rem(4);
+      }
+    }
+  }
+
+  [class^="icon-"] {
+    font-size: rem(22);
+  }
+}
+
+@mixin l-ibe-connections-other-airports-card {
+  .ibe-connections-other-airports-card {
+    &:nth-child(odd) {
+      padding: 0 rem(12) rem(24) rem(16);
+    }
+
+    &:nth-child(even) {
+      padding: 0 rem(16) rem(24) rem(12);
+    }
+
+    &__info {
+      padding: rem(24) rem(16);
+    }
+
+    &__list {
+      column-gap: rem(16);
+    }
+  }
+}
+
+@mixin m-ibe-connections-other-airports-card {
+  @include l-ibe-connections-other-airports-card;
+
+  .ibe-connections-other-airports-card {
+    flex-basis: 100%;
+    &:nth-child(odd) {
+      padding: 0 rem(16) rem(24) rem(16);
+    }
+
+    &:nth-child(even) {
+      padding: 0 rem(16) rem(24) rem(16);
+    }
+
+    &__title {
+      font-weight: normal;
+    }
+
+    &__info {
+      padding: rem(16);
+    }
+  }
+}
+
+@mixin sm-ibe-connections-other-airports-card {
+  @include m-ibe-connections-other-airports-card;
+
+  .ibe-connections-other-airports-card-container {
+    padding-top: rem(24);
+  }
+
+  .ibe-connections-other-airports-card {
+    padding: 0 rem(16) rem(24) rem(16);
+
+    &__list {
+      flex-direction: column;
+      align-items: flex-start;
+      row-gap: rem(8);
+    }
+
+    &__links {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: rem(24);
+    }
+  }
+}
+
+@mixin xs-ibe-connections-other-airports-card {
+  @include sm-ibe-connections-other-airports-card;
+}

@@ -1,0 +1,298 @@
+/*-------------------------------------------------------------
+    #TOGGLE SWITCH
+-----------------------------------------------------------------*/
+.ibe-switch {
+    display: inline-block;
+    width: 100%;
+    &__container{
+		background-color: transparent;
+        position: relative;
+		display: inline-block;
+        vertical-align: middle;
+        &--big{
+	        margin-top: rem(1);
+            width: 100%;
+            height: rem(40);
+            border-radius: rem(20);
+        }
+        &--big-separate {
+            height: rem(32);
+        }
+        &--small{
+            width: rem(40);
+            height: rem(24);
+            border-radius: rem(12);
+        }
+    }
+    &__label{
+        font-size: rem(15);
+        &:before { //icon-confirmacion
+            content: "\e93e";
+            font-family: $font-05;
+            color: $PC-cromatico_10;
+            position: absolute;
+            top: 0;
+            left: rem(3);
+            font-size: rem(17);
+        }
+        
+        &:after { //icon-cancelar
+            content: "\e92c";
+            font-family: $font-05;
+            color: $PC-cromatico_2;
+            position: absolute;
+            top: rem(2);
+            right: rem(10);
+            width: rem(8.5);
+            height: rem(8.5);
+        }
+    }
+    &__label-big{
+        font-family: $font-02;
+        font-size: rem(12);
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+		border: solid 1px $PC-cromatico_9;
+		border-radius: rem(20);
+        &--stopover {
+            border: none;
+        }
+        &:before {
+            content: attr(data-txt-check);
+            position: absolute;
+            text-align: center;
+            transition: color 0.4s ease;
+            color: $PC-cromatico_1;
+            left:0;
+            width: 50%;
+            top: 0;
+            line-height: 40px;
+            z-index: 1;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            padding: 0 rem(5);
+        }
+        &--stopover:before{
+            background-color: $PC-cromatico_5;
+            border-radius: 1.25rem;
+            left: -16px;
+            line-height: rem(32);
+        }
+        
+        &:after {
+            content: attr(data-txt-uncheck);
+            position: absolute;
+            text-align: center;
+            transition: color 0.4s ease;
+            color: $PC-cromatico_4;
+            right: 0;
+            width: 50%;
+            top: 0;
+            line-height: 40px;
+            z-index: 1;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            padding: 0 rem(5);
+        }
+
+        &--stopover:after {
+            line-height: rem(32);
+        }
+    }
+    &__checkbox{
+        opacity: 0;
+		width: 0;
+		height: 0;
+		&.focus{
+			+ .ibe-switch__slider{
+				border-color: $BRD_standar_3;
+			}
+		}
+    }
+
+    &__slider {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		-webkit-transition: 0.4s;
+        -moz-transition: 0.4s;
+        -o-transition: 0.4s;
+		transition: 0.4s;
+		border: solid 1px $PC-cromatico_9;
+		border-radius: rem(34);
+		z-index: 1;
+		&:before {
+			position: absolute;
+			content: "";
+			height: rem(16);
+			width: rem(16);
+			left: rem(4);
+			bottom: rem(3);
+            background-color: $PC-cromatico_2;
+			-webkit-transition: 0.4s;
+	        -moz-transition: 0.4s;
+	        -o-transition: 0.4s;
+			transition: 0.4s;
+			border-radius: 50%;
+        }
+    }
+    &__slider-big {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		-webkit-transition: 0.4s;
+        -moz-transition: 0.4s;
+        -o-transition: 0.4s;
+		transition: 0.4s;
+		border-radius: rem(34);
+		z-index: 0;
+		&:before {
+			position: absolute;
+            content: "";
+            width: 50%;
+            height: 100%;
+            bottom: 0;
+            left: 0;
+            border-radius: rem(20);
+            background-color: $PC-cromatico_10;
+			-webkit-transition: 0.4s;
+	        -moz-transition: 0.4s;
+	        -o-transition: 0.4s;
+            transition: 0.4s;
+            -webkit-transform: translateX(100%);
+            -moz-transform: translateX(100%);
+            -ms-transform: translateX(100%);
+            -o-transform: translateX(100%);
+            transform: translateX(100%);
+        }
+    }
+    &__checkbox:checked + &__slider:before {
+        background-color: $PC-cromatico_10;
+		-webkit-transform: translateX(14px);
+		-moz-transform: translateX(14px);
+		-ms-transform: translateX(14px);
+		-o-transform: translateX(14px);
+		transform: translateX(14px);
+    }
+    &__checkbox:checked ~ &__slider-big{
+        &:before {
+            -webkit-transform: translateX(0%);
+            -moz-transform: translateX(0%);
+            -ms-transform: translateX(0%);
+            -o-transform: translateX(0%);
+            transform: translateX(0%);
+        }
+    }
+    &__checkbox--stopover:checked ~ &__slider-big--stopover{
+        &:before {
+            left: -16px
+        }
+    }
+    &__checkbox:checked + &__label-big{
+        &:before {
+            transition: color 0.4s ease;
+            color: $PC-cromatico_4;
+        }
+        &:after {
+            transition: color 0.4s ease;
+            color: $PC-cromatico_1;
+        }
+    }
+
+    &__checkbox--stopover:checked + &__label-big{
+        &:before {
+            background-color: transparent;
+        }
+        &:after{
+            background-color: $PC-cromatico_5;
+            border-radius: 1.25rem;
+        }
+    }
+}
+
+[data-focusin].focus{
+	+ .ibe-switch__label-big{
+		border: 1px solid #F08400;
+		border-radius: 20px;
+	}
+}
+
+@mixin sm-ibe-switch{
+	.ibe-switch{
+		&__container{
+			&--small{
+				width: rem(62);
+				height: rem(32);
+			}
+		}
+		&__label{
+			&:before{
+				top: rem(-2);
+				left: rem(3);
+				font-size: rem(26);
+			}
+			&:after{
+				top: rem(-6);
+				right: rem(21);
+				font-size: rem(30);
+			}
+		}
+
+        &__label-big--stopover {
+            &:before {
+                left: 50%;
+                transform: translate(-50%);
+                line-height: rem(32);
+            }
+            &:after {
+                top: 40px;
+                left: 50%;
+                transform: translate(-50%);
+            }
+        }
+		&__slider{
+			&:before{
+				width: rem(24);
+				height: rem(24);
+				left: rem(7);
+				bottom: rem(3);
+			}
+		}
+        &__slider-big--stopover {
+            &:before{
+                top: rem(40);
+                left: 50%;
+                transform: translate(-50%);
+            }
+        }
+		&__checkbox{
+			&:checked{
+				+.ibe-switch__slider{
+					&:before{
+						transform: translateX(23px);
+					}
+				}
+			}
+		}
+
+        &__checkbox--stopover:checked ~ &__slider-big--stopover {
+            &:before{
+                top: 0px;
+                left: 50%;
+                transform: translate(-50%);
+            }
+        }
+	}
+}
+@mixin xs-ibe-switch{
+	@include sm-ibe-switch;
+}

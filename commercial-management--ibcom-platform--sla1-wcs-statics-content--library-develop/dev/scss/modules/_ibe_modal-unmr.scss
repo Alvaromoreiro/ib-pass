@@ -1,0 +1,968 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_modal-unmr.scss
+//    Descripcion: Estilos modal Servicio de Acompañamiento de Menores (UNMR)
+//                 Breakpoints: desktop (>1280), 1024, mobile (<768)
+//******************************************************************************/
+
+// ============================================================================
+// Modales UMNR (principal, términos y aviso 12 años): <div role="dialog" aria-modal="true">
+// Cerradas llevan el atributo hidden.
+// La propia capa es el fondo a pantalla completa con la caja .modal-dialog centrada en
+// horizontal, igual que la capa .ibe-dialog (así el clic fuera de la caja llega con
+// target = la capa). Términos y aviso 12 años van un z-index por encima de la principal.
+// ============================================================================
+.ibe-dialog-umnr {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100050;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.4);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+
+    &[hidden] {
+        display: none;
+    }
+}
+
+.ibe-dialog-umnr.fc-dialog-unmr-terms,
+.ibe-dialog-umnr.fc-dialog-unmr-age12 {
+    z-index: 100051;
+}
+// ============================================================================
+// Modal de términos y condiciones — layout propio (Figma), TOTALMENTE separado
+// de la modal principal: selectores propios (--terms), no hereda ni comparte
+// ninguna regla de tamaño/spacing con .modal-dialog-unmr / .ibe-modal-unmr.
+// ============================================================================
+.modal-dialog-unmr--terms {
+    min-width: rem(561);
+    max-width: rem(1120);
+    max-height: rem(534);
+    @media (max-width: #{$max-small}em) {
+        min-width: rem(288);
+        max-width: rem(560);
+        width: rem(375);
+        margin: rem(16) auto;
+    }
+    .modal-content {
+        box-shadow: 0 rem(1) rem(16) 0 rgba(0, 0, 0, 0.10);
+        border-radius: rem(4); // ib/st/border/radius/small
+    }
+}
+
+.ibe-modal-unmr--terms {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    max-height: 740px;
+    padding: rem(24);
+
+    // De 375px (excl.) hasta 768px (excl.)
+    @media (max-width: #{$max-small}em) {
+        height: auto;
+        max-height: 840px;
+
+        // De 375px hacia abajo (incl.)
+        @media (max-width: 375px) {
+            max-height: -webkit-fit-content;
+            max-height: -moz-fit-content;
+            max-height: 620px;
+        }
+    }
+}
+
+.ibe-modal-unmr__title--terms {
+    margin-bottom: 0;
+
+    // Especificidad reforzada (.ibe-modal-unmr__title--terms.ibe-modal-unmr__title) para ganarle
+    // en el mismo breakpoint al width: 230px de la modal normal (.ibe-modal-unmr__title), ya que
+    // el título de la modal de términos lleva ambas clases y sale después en el CSS compilado
+    @media (max-width: #{$max-small}em) {
+        &.ibe-modal-unmr__title {
+            width: 256px;
+
+            @media (max-width: 374px) {
+                width: 220px;
+            }
+        }
+    }
+}
+
+
+.ibe-modal-unmr__body--terms {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    margin-right: 32px;
+
+    // Azul corporativo en foco (en vez del naranja por defecto)
+    &:focus,
+    &:focus-visible {
+        outline: 2px solid #0074E8 !important;
+        outline-offset: rem(2);
+    }
+
+    @media (max-width: #{$max-small}em) {
+        margin-right: 0;
+    }
+
+    .ibe-modal-unmr__terms-description {
+        margin-bottom: rem(7);
+    }
+
+    .paragraph {
+        font-family: $font-07;
+        font-size: rem(13) !important;
+        line-height: rem(21);
+        font-weight: 400;
+        color: $PC-cromatico_2;
+        margin-top: 0;
+        margin-bottom: rem(16);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    // Tabla inyectada desde CMS (contenido enriquecido) — sin las clases BEM
+    // (ibe-table__thead-th, etc.), así que se estila directamente por etiqueta
+    table.ibe-table {
+        width: 100% !important;
+        max-width: 100%;
+        min-width: 0 !important; // pisa el min-width: 39rem global de .ibe-table
+        border: none !important;
+        border-collapse: collapse;
+        margin: 0 0 rem(16);
+
+        th,
+        td {
+            font-family: $font-07;
+            font-size: rem(13) !important;
+            line-height: rem(19);
+            padding: rem(10) rem(16);
+            border: none;
+            border-bottom: 1px solid $BRD_standar_5;
+            vertical-align: top;
+            text-align: left;
+
+            span {
+                font-size: rem(13) !important;
+            }
+        }
+
+        thead th {
+            background: $BCK-cromatico_2;
+            color: $PC-cromatico_1;
+            font-weight: 700;
+        }
+
+        tbody td {
+            color: $PC-cromatico_2;
+        }
+
+        // Mobile: la tabla desaparece (también para el lector de pantalla) y se muestra su
+        // versión <dl> (.ibe-modal-unmr__glossary), que genera enhanceUmnrTermsTables (JS)
+        @media (max-width: #{$max-small}em) {
+            display: none !important;
+        }
+    }
+
+    // Versión mobile de las tablas del CMS (Figma "Glossary"): lista de descripción con un
+    // bloque "Etiqueta / valor" por fila, separados por una línea inferior. En desktop no
+    // existe (display:none), así el lector solo encuentra la estructura que se ve
+    .ibe-modal-unmr__glossary {
+        display: none;
+        margin: 0 0 rem(16);
+        padding: 0;
+
+        @media (max-width: #{$max-small}em) {
+            display: block;
+        }
+
+        dt,
+        dd {
+            margin: 0;
+            padding: 0;
+            font-family: $font-07;
+            font-size: rem(13) !important;
+            line-height: rem(21);
+            font-weight: 400;
+            color: $PC-cromatico_2;
+
+            span {
+                font-size: rem(13) !important;
+                font-weight: 400 !important; // pisa el font-weight:normal/bold inline del CMS
+            }
+        }
+    }
+
+    .ibe-modal-unmr__glossary-item {
+        padding-bottom: rem(24);
+        margin-bottom: rem(24);
+        border-bottom: 1px solid $PC-cromatico_2; // Grey/700 #666666
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .ibe-modal-unmr__glossary-label,
+    .ibe-modal-unmr__glossary-value {
+        display: block;
+    }
+
+    // "Término", "Definición propuesta"... (cabecera de columna de la tabla del CMS)
+    .ibe-modal-unmr__glossary .ibe-modal-unmr__glossary-label {
+        font-weight: 600 !important;
+        color: $PC-cromatico_1;
+    }
+}
+// ============================================================================
+// Fin estilos modal de términos y condiciones
+// ============================================================================
+
+.modal-dialog-unmr {
+    min-width: rem(561) !important;
+    max-width: rem(1120) !important;
+    width: rem(561) !important;
+    overflow-y: auto;
+    @media (max-width: #{$max-small}em) {
+        min-width: rem(375) !important;
+        width: rem(375) !important;
+        margin: rem(16) auto !important;
+    }
+    .modal-content {
+        box-shadow: 0 rem(1) rem(16) 0 rgba(0, 0, 0, 0.10);
+        border-radius: rem(4); // ib/st/border/radius/small
+    }
+}
+
+.ibe-modal-unmr {
+    position: relative; // ancla de la X (position:absolute), que va como último hijo del DOM
+    padding: rem(24);
+    @media (max-width: #{$max-small}em) {
+        padding: rem(24);
+    }
+
+    // Header
+    .modal-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        border-bottom: 0;
+        padding: 0;
+        text-align: left;
+    }
+
+    &__header-content {
+        flex: 1;
+        // Hueco para que la primera línea de título/intro no quede bajo la X absoluta
+        padding-right: rem(40);
+    }
+
+    &__title {
+        font-family: $font-04;
+        font-size: rem(20) !important;
+        line-height: rem(26) !important;
+        font-weight: 400;
+        color: $PC-cromatico_1;
+        text-align: left;
+        text-transform: none;
+        margin-top: 0;
+        margin-bottom: rem(12);
+
+        @media (max-width: #{$max-small}em) {
+            width: 230px;
+        }
+    }
+
+    // Botón cerrar (X) — último hijo del DOM, posicionado arriba-derecha. Así cerrar es el
+    // último elemento en orden de lectura (NVDA) y de tabulación, sin JS externo.
+    .ibe-modal__options-icon--close {
+        position: absolute;
+        top: rem(24);
+        right: rem(24);
+        z-index: 1;
+        font-family: iberia; // glifo de la fuente de iconos
+        font-size: rem(24) !important;
+        color: #333333 !important;
+        line-height: 1 !important;
+        width: rem(24) !important;
+        height: rem(24) !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+
+        // El glifo "cerrar" ya no lo hereda del selector global .modal-header .ibe-modal__options
+        &::before {
+            content: '\e935';
+        }
+
+        &:focus-visible {
+            outline: 2px solid #0074E8 !important;
+            outline-offset: rem(2) !important;
+            border-radius: 2px !important;
+        }
+    }
+
+    // Body
+    &__body {
+        padding: 0;
+    }
+
+    &__intro {
+        font-family: $font-07;
+        font-size: rem(14) !important;
+        line-height: rem(21) !important;
+        font-weight: 400;
+        color: $PC-cromatico_2;
+        margin-bottom: rem(24);
+        padding-top: 0;
+        padding-bottom: 0;
+
+        @media (max-width: #{$max-small}em) {
+            width: 236px;
+        }
+    }
+
+    &__label {
+        font-family: $font-07;
+        font-size: rem(14) !important;
+        line-height: rem(21) !important;
+        font-weight: 400;
+        color: $PC-cromatico_1;
+        margin-top: 0;
+        margin-bottom: rem(24) !important;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    // Grid de fechas — siempre 1 columna, en cualquier resolución
+    &__dates-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: rem(16);
+        column-gap: rem(16);
+        margin-bottom: rem(24);
+    }
+
+    &__date-item {
+        box-sizing: border-box;
+
+        &--full {
+            grid-column: 1 / -1;
+        }
+    }
+
+    // Grupo de input de fecha
+    &__date-group {
+        position: relative;
+        margin: 0;
+        width: 100%;
+
+        &.has-error .ibe-modal-unmr__date-container {
+            border: 2px solid #9B1718;
+        }
+
+        // Label en reposo — fill width, hug height (21px)
+        // &.fc_form_group añadido para subir especificidad frente a estilos genéricos de .ibe_form
+        &.fc_form_group .ibe_form__input-label {
+            font-family: $font-07;
+            font-size: rem(14);
+            line-height: rem(21);
+            font-weight: 400;
+            text-transform: none;
+            color: #333333;
+            display: block;
+            width: 100%;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            pointer-events: none;
+            transition: top 0.15s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .ibe_form__input-text {
+            font-family: $font-07;
+            font-size: rem(14) !important;
+            line-height: rem(21) !important;
+            font-weight: 400;
+            color: $PC-cromatico_1;
+            height: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 0;
+            border: none;
+            background: $PC-cromatico_4;
+            padding-left:0px !important;
+
+            &:focus, 
+            &:not(:placeholder-shown) {
+                padding-top: 32px;    
+                outline: none;
+            }
+
+            &::placeholder {
+                color: transparent !important;
+                opacity: 0 !important;
+                padding-top: 0px;
+            }
+
+            &:focus::placeholder {
+                color: $PC-cromatico_2 !important;
+                opacity: 1 !important;
+                padding-top: 0px;
+            }
+        }
+
+        // Estado error con valor — flota el label
+        &.has-error.fc_form_group {
+            .ibe_form__input-text:not(:placeholder-shown) ~ .ibe-modal-umnr_date-label {
+                top: rem(8);
+                font-size: 12px !important;
+                line-height: rem(14);
+                transform: none !important;
+                color: $PC-cromatico_2;
+            }
+        }
+
+    }
+    // Container flex: label-wrap + icono calendario (wrap de Figma)
+    &__date-container {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        width: 100%;
+        height: rem(56);
+        border-radius: 0;
+        border: 1px solid #666666;
+        padding-left: rem(16);
+        background: #FFFFFF;
+        box-sizing: border-box;
+
+        // Foco de teclado — mismo recuadro azul (2px + separación) que el resto de la
+        // modal. El outline-offset deja un hueco entre el borde rojo de error (.has-error,
+        // border interior) y el anillo azul de foco, para que al tabular se distingan.
+        &:focus-within {
+            outline: 2px solid #0074E8;
+            outline-offset: rem(2);
+            border-radius: 2px;
+        }
+    }
+
+    // Área del label flotante + input (ib-comp-datepicker de Figma)
+    &__date-label-wrap {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        width: 100%;
+        align-self: stretch;
+        position: relative;
+    }
+
+    // Iconos PNG
+    &__icon {
+        display: block;
+        flex-shrink: 0;
+
+        &--alert {
+            width: rem(12);
+            height: rem(12);
+            margin-top: rem(1);
+            flex-shrink: 0;
+        }
+
+        &--info {
+            width: rem(24);
+            height: rem(24);
+            flex-shrink: 0;
+        }
+    }
+
+    // Mensajes de error — override estilos globales de ibe_form__msg-info
+    &__error-msg {
+        margin-top: rem(8);
+        display: none;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: rem(4);
+        width: 100%;
+        min-height: rem(36);
+        font-size: rem(12);
+        line-height: rem(21);
+        font-weight: 400;
+        color: #9B1718;
+        background-color: transparent;
+        text-align: left;
+        padding: 0;
+
+        &:not(.hidden) {
+            display: flex;
+        }
+    }
+
+    // Error del checkbox de términos — mismo estilo que los errores de fecha, pero fuera del
+    // flex row de __terms para ocupar el ancho normal de la modal (no la columna del checkbox)
+    &__error-msg--checkbox {
+        margin-top: 0;
+        margin-left: rem(4);
+        margin-bottom: rem(24);
+    }
+
+    &__icon--alert {
+        width: rem(12);
+        height: rem(12);
+        margin-top: rem(4);
+    }
+
+    // Caja informativa — fondo blanco, borde gris fino
+    &__info-box {
+        display: flex;
+        align-items: flex-start;
+        gap: rem(16);
+        background: $PC-cromatico_4; // #FFFFFF
+        border: 0.5px solid $BRD_standar_5; // #DDDDDD
+        padding: rem(16);
+        margin-bottom: rem(24);
+
+        p {
+            font-family: $font-07;
+            font-size: rem(14) !important;
+            line-height: rem(21);
+            font-weight: 400;
+            color: $PC-cromatico_1;
+            margin: 0;
+
+            @media (max-width: #{$max-small}em) {
+                width: 200px;
+            }
+        }
+    }
+
+    // Footer
+    &__footer {
+        display: flex ;
+        flex-direction: column ;
+        align-items: stretch ;
+        margin: 0;
+        border-top: 0;
+        padding: 0 ;
+    }
+
+    // Términos y condiciones
+    &__terms {
+        margin-bottom: rem(24);
+        display: flex;
+        align-items: flex-start;
+        position: relative;
+        width: 100%;
+
+        // Al pulsar "Continuar" sin marcar el checkbox, se resalta en rojo y el margen se
+        // reduce (el mensaje de error de abajo ya aporta su propio espacio hasta el botón)
+        &.has-error {
+            margin-bottom: rem(8);
+
+            .ibe-form__checkbox-label::before {
+                border: 2px solid #9B1718 !important;
+            }
+        }
+
+        // Checkbox nativo oculto pero accesible
+        input.ibe-form__checkbox-input[type="checkbox"] {
+            position: absolute !important;
+            width: 0 !important;
+            height: 0 !important;
+            opacity: 0 !important;
+            margin: 0 !important;
+            z-index: -1 !important;
+        }
+                
+        .ibe-form__checkbox-label {
+            text-align: left;
+            white-space: normal;
+            font-family: $font-07;
+            font-size: rem(14) !important;
+            line-height: rem(21) !important;
+            font-weight: 400;
+            color: $PC-cromatico_2;
+            cursor: pointer;
+            display: block;
+            position: relative;
+            outline: none !important;
+            padding-left: 32px !important;
+            flex: 1;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 0 !important;
+
+            // Checkbox custom
+            &::before {
+                content: '';
+                display: block;
+                position: absolute;
+                left: 4px;
+                width: rem(16);
+                height: rem(16);
+                top: rem(3.5);
+                background-size: rem(16) rem(16) !important;
+                border: 1px solid #666666 !important;
+                border-radius: 4px;
+                outline: none !important;
+                -webkit-tap-highlight-color: transparent !important;
+            }
+
+            a {
+                font-family: $font-07;
+                color: $PC-cromatico_2;
+                text-decoration: underline;
+
+                &:hover {
+                    color: $PC-cromatico_3;
+                }
+
+                // Foco de teclado — mismo recuadro azul que el resto de la modal
+                // (X, "Continuar", inputs). El !important pisa el `a:focus { outline: none }`
+                // global del tema.
+                &:focus-visible {
+                    outline: 2px solid #0074E8 !important;
+                    outline-offset: rem(2) !important;
+                    border-radius: 2px !important;
+                }
+            }
+        }
+
+        // Anula el naranja en focus/active
+        // Anula imagen naranja global en todos los estados
+        .ibe-form__checkbox-input.ibe-form__checkbox-input:focus + .ibe-form__checkbox-label,
+        .ibe-form__checkbox-input.ibe-form__checkbox-input:active + .ibe-form__checkbox-label {
+            &::before {
+                background: none !important;
+            }
+        }
+        // Tab — borde azul pegado al check
+        .ibe-form__checkbox-input:focus-visible + .ibe-form__checkbox-label {
+            &::before {
+                outline: 1px solid #0074E8 !important;
+            }
+        }
+        // Restaura el tick cuando está checked (con o sin focus)
+        .ibe-form__checkbox-input.ibe-form__checkbox-input:checked + .ibe-form__checkbox-label,
+        .ibe-form__checkbox-input.ibe-form__checkbox-input:checked:focus + .ibe-form__checkbox-label,
+        .ibe-form__checkbox-input.ibe-form__checkbox-input:checked:active + .ibe-form__checkbox-label {
+            &::before {
+                background: url($CONFIG_IMG_PATH + '/content/iconos/formulario/checkbox-checked.png') no-repeat center center !important;
+                background-size: rem(16) rem(16) !important;
+            }
+        }
+    }
+
+    // CTA Continuar — ib-button rojo: height 40px, radius 0, padding 16px, gap 8px
+    &__cta {
+        font-family: $font-07;
+        font-size: rem(14) !important;
+        line-height: 1 !important;
+        font-weight: 400 !important;
+        color: #FFFFFF !important;
+        text-align: center !important;
+        letter-spacing: 0 !important;
+        align-items: center !important;
+        //height: rem(40) !important;
+        border-radius: 0 !important;
+        padding-left: rem(16) !important;
+        padding-right: rem(16) !important;
+        background-color: #D7192D !important;
+        width: 98px !important;
+        margin-left: auto;
+        margin-bottom: 0;
+
+        &:hover {
+            background-color: #9B1718 !important;
+        }
+
+        &:focus-visible {
+            outline: 2px solid #0074E8 ;
+            border-radius: 2px ;
+        }
+
+    }
+
+}
+
+// ============================================================================
+// Modal aviso "el menor cumple 12 años en la vuelta" — se abre al pulsar
+// "Continuar" en la modal UNMR. Selectores propios (--age12): no comparte
+// reglas de tamaño/spacing con .modal-dialog-unmr / .ibe-modal-unmr.
+// ============================================================================
+.modal-dialog-unmr-age12 {
+    width: rem(446) !important;
+    height: rem(411) !important;
+    max-width: calc(100% - #{rem(32)});
+    // Tablet (768-1023): m-ibe_modal pone padding 0 16px a todo .modal-dialog y con el
+    // ancho fijo de 446 el contenido se quedaba en 414 y se cortaba por la derecha
+    padding: 0 !important;
+    .modal-content {
+        box-shadow: 0 rem(1) rem(16) 0 rgba(0, 0, 0, 0.10); // box-shadow/floating
+        border-radius: 0; // ib/st/border/radius/sharp
+        background: $PC-cromatico_4; // ib/st/background/color/floating/default
+    }
+}
+
+.ibe-modal-unmr-age12 {
+    position: relative; // ancla de la X (position:absolute), que va como último hijo del DOM
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 rem(24); // ib/st/space/lg
+
+    // Header (icon + title): 56px arriba (hueco de la X), alto 48, gap xs; divider debajo a 16px
+    .modal-header {
+        display: flex;
+        align-items: center;
+        gap: rem(8); // ib/st/space/xs
+        margin: 0 rem(24);
+        padding: rem(56) 0 rem(16);
+        border-bottom: 1px solid $BRD_standar_5; // Divider: ib/st/border/color/default #DDDDDD
+        text-align: left;
+    }
+
+    // Icono 24x24 dentro de una caja de 48x48
+    &__icon {
+        display: block;
+        flex-shrink: 0;
+        width: rem(24);
+        height: rem(24);
+        margin: rem(12);
+    }
+
+    &__title { // Heading/H1
+        font-family: $font-04;
+        font-size: rem(36) !important;
+        line-height: rem(46.8) !important; // 1.3
+        font-weight: 400;
+        color: $PC-cromatico_1;
+        text-align: left;
+        text-transform: none;
+        margin: 0;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    // Body con scroll propio: la barra queda a 12px del borde y el texto a 24px
+    &__body {
+        width: rem(398);
+        max-height: rem(185);
+        box-sizing: border-box;
+        margin: 0 rem(24) 0 rem(24);
+        padding: rem(16) 0 0 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: #CCCCCC transparent;
+
+        &::-webkit-scrollbar {
+            width: rem(4);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #CCCCCC;
+            border-radius: rem(4);
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &:focus-visible {
+            outline: 2px solid #0074E8 !important;
+            outline-offset: rem(2);
+        }
+
+        .paragraph {
+            font-family: $font-07;
+            font-size: rem(14) !important;
+            line-height: rem(21) !important;
+            font-weight: 400;
+            color: $PC-cromatico_1;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    // Footer: padding top/left/right lg, terciario + primario a la derecha. Un solo footer:
+    // en mobile se apilan con el primario arriba (column-reverse, ver media query).
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: rem(16); // ib/st/space/md entre "Ir a inicio" y "Continuar"
+        margin: rem(87) rem(24) 0; // 87px = slot container vacío de Figma entre texto y footer
+        padding: rem(24) 0 0; // ib/st/space/lg
+        border-top: 0;
+    }
+
+    &__btn {
+        font-family: $font-07;
+        font-size: rem(16) !important;
+        line-height: rem(24) !important;
+        font-weight: 400 !important;
+        letter-spacing: 0 !important;
+        // Button lg: height size/2xlg, padding md/lg, gap xs (icono-texto)
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: rem(8);
+        box-sizing: border-box;
+        height: rem(56) !important;
+        padding: rem(16) rem(24) !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        border: 0;
+        width: auto !important;
+
+        &:focus-visible {
+            outline: 2px solid #0074E8 !important;
+            outline-offset: rem(2) !important;
+            border-radius: 2px !important;
+        }
+
+        &--tertiary {
+            background: transparent !important;
+            color: $PC-cromatico_1 !important;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        &--primary {
+            background-color: #D7192D !important;
+            color: #FFFFFF !important;
+
+            &:hover {
+                background-color: #9B1718 !important;
+            }
+        }
+    }
+
+    // Botón cerrar (X) — último hijo del DOM, posicionado arriba-derecha
+    .ibe-modal__options-icon--close {
+        position: absolute;
+        top: rem(16);
+        right: rem(16);
+        z-index: 1;
+        font-family: iberia;
+        font-size: rem(24) !important;
+        color: #333333 !important;
+        line-height: 1 !important;
+        width: rem(24) !important;
+        height: rem(24) !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+
+        &::before {
+            content: '\e935';
+        }
+
+        &:focus-visible {
+            outline: 2px solid #0074E8 !important;
+            outline-offset: rem(2) !important;
+            border-radius: 2px !important;
+        }
+    }
+}
+
+// Mobile (viewport 320-743): 328px fijo (min 288), márgenes laterales 16, botones apilados
+@media (max-width: #{$max-small}em) {
+    // Fluido entre 288 y 328. !important para ganar al width/height fijos de desktop
+    // (446 x 411), que no van en media query
+    .modal-dialog-unmr-age12 {
+        width: 100% !important;
+        min-width: rem(288) !important;
+        max-width: rem(328) !important;
+        height: auto !important;
+        margin: rem(16) auto;
+    }
+
+    .ibe-modal-unmr-age12 {
+          padding: 0 0 0 !important; // ib/st/space/lg
+
+
+        // icon + title: 296 fill x 40 hug, gap xxs
+        .modal-header {
+            align-items: flex-start; // título arriba: 19px desde su base hasta el divider (Figma)
+            gap: rem(4); // ib/st/space/xxs
+            margin: 0 rem(16);
+            padding-top: rem(48);
+        }
+
+        // Icono 24x24 dentro de una caja de 40x40
+        &__icon {
+            margin: rem(8);
+        }
+
+        &__title { // Heading/H2
+            font-size: rem(28) !important;
+            line-height: rem(36.4) !important; // 1.3
+        }
+
+        // Fill: anula el width fijo de desktop (398); con márgenes de 16 queda en 296 a 328 de modal
+        &__body {
+            width: auto;
+            margin: 0 rem(16);
+            padding-right: 0;
+        }
+
+        // Primario arriba, terciario debajo, ambos a ancho completo. En el HTML va primero el
+        // terciario: column-reverse los invierte solo visualmente.
+        &__footer {
+            flex-direction: column-reverse;
+            align-items: stretch;
+            gap: rem(16); // ib/st/space/md
+            margin: rem(55) rem(16) 0; // slot container (55) + padding-top (16 gap) = 71px 
+        }
+
+        &__btn {
+            width: 100% !important;
+        }
+    }
+}
+// ============================================================================
+// Fin estilos modal aviso 12 años
+// ============================================================================
+
+// Forzar el tamaño flotante apuntando desde el contenedor raíz de tu archivo
+.ibe-modal-unmr {
+    // Cuando el input está enfocado
+    .ibe_form__input-text:focus ~ .ibe-modal-unmr_date-label,
+    .ibe_form__input-text:focus ~ .ibe-modal-umnr_date-label,
+    
+    // Cuando el input tiene texto dentro
+    .ibe_form__input-text:not(:placeholder-shown) ~ .ibe-modal-unmr_date-label,
+    .ibe_form__input-text:not(:placeholder-shown) ~ .ibe-modal-umnr_date-label {
+        font-family: $font-07;
+        font-size: 12px !important;
+        line-height: 18px !important;
+        top: 8px !important;
+        transform: none !important;
+        color: #666666 !important;
+        display: inline-block !important;
+    }
+}

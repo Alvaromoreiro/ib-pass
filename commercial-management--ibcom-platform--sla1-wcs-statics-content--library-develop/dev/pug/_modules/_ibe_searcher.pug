@@ -1,0 +1,479 @@
+mixin m-searcher(params)
+	-    params = params || "";
+	div.ibe-searcher.ibe-searcher--accordion
+		h2.hideAccessible!="Buscador Vintage"
+		div.ibe-tab.ibe-tab--scrolling.ibe-tab--center(data-tab="jquery-ui",  data-tab-active="0", data-tab-searcher, data-tab-view="desktop")
+			header.ibe-tab__scroll
+				ul.ibe-tab__menu
+					if(params.tab1 != false)
+						li.ibe-tab__menu-item
+							a.link.link__regular(href="#tab-searcher-1" title="Vuelo" data-active="1")!="VUELOS"
+					if(params.tab2 != false)
+						li.ibe-tab__menu-item
+							a.link.link__regular(href="#tab-searcher-2" title="Vuelo+Hotel" data-active="0")!="VUELO+HOTEL"
+					if(params.tab3 != false)
+						li.ibe-tab__menu-item
+							a.link.link__regular(href="#tab-searcher-3" title="Vuelo+Coche" data-active="2")!="VUELO+COCHE"
+					if(params.tab4 != false)
+						li.ibe-tab__menu-item
+							a.link.link__regular(href="http://www.google.es" target="_blank" title="Ir a ")!="HOTEL"
+					if(params.tab5 != false)
+						li.ibe-tab__menu-item
+							a.link.link__regular(href="http://www.google.es" target="_blank" title="Ir a ")!="COCHE"
+			div.ibe-tab__container.hidden
+				if(params.tab1 != false)
+					div(id="tab-searcher-1" data-move="tab")
+						div.ibe-accordion
+							h4.title__h4.ibe-accordion__header.hidden-xl.hidden-l(data-toggle="collapse" data-target="#tab_01" data-outer-click="true" data-header-searcher="collapse")
+								a.link(href="#" title="¿A dónde vas?")!="&iquest;A d&oacute;nde vas?"
+							div.ibe-accordion__collapse(id="tab_01" data-toggle="container")
+								form.ibe_form(action="#", method="post", autocomplete="off")
+									fieldset.ibe-tab__container-desktop
+										legend.hideAccessible!="Vuelo"
+										.ibe-searcher__row
+											div.ibe-searcher__row--col1.ibe-searcher__options
+												.ibe-searcher__col.ibe-searcher__col--ori
+													.ibe-modal__header-close(style="display:none;")
+														p.ibe-modal__header-close--title!="Orígenes"
+													div(class="ibe_form__group ibe_form__group--button-icon fc_form_group")
+														label(class="ibe_form__input-label", for="flight_origin")!="Origen"
+														input(class="ibe_form__input-text" name="flight_origin" id="flight_origin" type="text" placeholder="Origen" data-autocomplete="cities" spellcheck='false', value="Madrid (MAD)", data-destination-info="ES|MAD|Madrid", data-validate="input-origin" data-focusin)
+														p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Debes elegir un origen")
+														p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El origen no puede ser igual que el destino")
+														div.hidden-xs.hidden-sm.hidden-md
+															button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button", data-toggle="collapse", data-target="#id-tab-collapse-1", data-focusin)
+																span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+															//- "tab_1": {
+															//- 	"href": "tab-cities-1",
+															//- 	"name": "Espa&ntilde;a",
+															//- 	"title": "España"
+															//- },
+															//- "tab_2": {
+															//- 	"href": "tab-cities-2",
+															//- 	"name": "Europa",
+															//- 	"title": "Europa"
+															//- },
+															//- "tab_3": {
+															//- 	"href": "tab-cities-3",
+															//- 	"name": "Am&eacute;rica",
+															//- 	"title": "América"
+															//- },
+															//- "tab_4": {
+															//- 	"href": "tab-cities-4",
+															//- 	"name": "Africa y Oriente Medio",
+															//- 	"title": "Africa y Oriente Medio"
+															//- },
+															//- "tab_5": {
+															//- 	"href": "tab-cities-5",
+															//- 	"name": "Asia y Ocean&iacute;a",
+															//- 	"title": "Asia y Oceanía"
+															//- }
+															+m-choose-city-new({
+																"class": "ibe-choose-city--origin",
+																"format": "desktop",
+																"id": "id-tab-collapse-1",
+																"dataClose": "outsideClick"
+															})
+														div.hidden-lg.hidden-xl
+															button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(data-focusin, type="button", data-toggle="collapse", data-target="#id-tab-collapse-2")
+																span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+															//- "tab_1": {
+															//- 	"href": "tab-cities-mobile-1",
+															//- 	"name": "Espa&ntilde;a",
+															//- 	"title": "España"
+															//- },
+															//- "tab_2": {
+															//- 	"href": "tab-cities-mobile-2",
+															//- 	"name": "Europa",
+															//- 	"title": "Europa"
+															//- },
+															//- "tab_3": {
+															//- 	"href": "tab-cities-mobile-3",
+															//- 	"name": "Am&eacute;rica",
+															//- 	"title": "América"
+															//- },
+															//- "tab_4": {
+															//- 	"href": "tab-cities-mobile-4",
+															//- 	"name": "Africa y Oriente Medio",
+															//- 	"title": "Africa y Oriente Medio"
+															//- },
+															//- "tab_5": {
+															//- 	"href": "tab-cities-mobile-5",
+															//- 	"name": "Asia y Ocean&iacute;a",
+															//- 	"title": "Asia y Oceanía"
+															//- }
+															+m-choose-city-new({
+																"class": "ibe-choose-city--origin",
+																"format": "responsive",
+																"id": "id-tab-collapse-2"
+															})
+
+												.ibe-searcher__col.ibe-searcher__col--des
+													.ibe-modal__header-close(style="display:none;")
+														p.ibe-modal__header-close--title!="Destinos"
+													//- .ibe-modal__header-close(style="display:none;")
+													//- 	p.ibe-modal__header-close--title!="Destinos"
+													div(class="ibe_form__group ibe_form__group--button-icon fc_form_group")
+														label(class="ibe_form__input-label", for="flight_destiny")!="Destino"
+														input(class="ibe_form__input-text", name="flight_destiny", id="flight_destiny", type="text", placeholder="Destino" data-autocomplete="cities" spellcheck='false', data-validate="input-destiny" data-focusin)
+														p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Debes elegir un destino")
+														p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El destino no puede ser igual que el origen")
+														div.hidden-xs.hidden-sm.hidden-md
+															button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(data-focusin, type="button", data-toggle="collapse", data-target="#id-tab-collapse-3")
+																span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+															+m-choose-city-new({
+																"class": "ibe-choose-city--destination",
+																"format": "desktop",
+																"id": "id-tab-collapse-3",
+																"dataClose": "outsideClick"
+															})
+														div.hidden-lg.hidden-xl
+															button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(data-focusin, type="button", data-toggle="collapse", data-target="#id-tab-collapse-4")
+																span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+															+m-choose-city-new({
+																"class": "ibe-choose-city--destination",
+																"format": "responsive",
+																"id": "id-tab-collapse-4"
+															})
+
+												.ibe-form__radio-group.ibe-form__radio-group--col
+													.ibe_form__radio-box
+														span.ibe_form__radio
+															input.ibe_form__radio-input(type="radio" name="ida" id="ida" value="ida" data-function="oneway")
+															label.ibe_form__radio-text(for="ida")!="S&oacute;lo ida"
+														span.ibe_form__radio
+															input.ibe_form__radio-input(type="radio" name="ida" id="idavuelta" value="idavuelta" data-function="roundtrip" checked)
+															label.ibe_form__radio-text(for="idavuelta")!="Ida y vuelta"
+													a.link.link__regular.link__regular--underline(href="#" title="Multiples trayectos")!="Multiples trayectos"
+											div.ibe-searcher__row--col2.ibe-searcher__options
+												.ibe-searcher__col.ibe-searcher__col--date
+													div(class="ibe_form__group ibe_form__group--half" data-move="parent")
+														div.ibe_form__group-half.icon-caret_derecha.fc_form_group
+															div.ibe_form__box
+																label.ibe_form__input-label(for="flight_round_date")!="Fecha ida"
+																input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_round_date", id="flight_round_date", type="text", placeholder="DD/MM/YYYY", data-format="DD/MM/YYYY", data-toggle="collapse", data-target="#searcher-calendar-1", data-cal="start", data-placeholder="placeholder", maxlength="10", autocomplete="off")
+															+m-searcher-calendar({
+																id: "searcher-calendar-1",
+																type: "fly",
+																when: "start",
+																number: "1-3",
+																datahourrestriction:"48"
+															})
+														div.ibe_form__group-half.fc_form_group
+															div.ibe_form__box
+																label.ibe_form__input-label(for="flight_return_date") Fecha vuelta
+																input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_return_date", id="flight_return_date", type="text", placeholder="DD/MM/YYYY" data-format="DD/MM/YYYY" data-toggle="collapse" data-target="#searcher-calendar-2" data-cal="end" data-placeholder="placeholder", maxlength="10")
+															+m-searcher-calendar({
+																id: "searcher-calendar-2",
+																type: "fly",
+																when: "end",
+																number: "2-3",
+																datahourrestriction:"48"
+															})
+														p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Debes seleccionar fecha de ida y fecha de vuelta")
+														p.ibe_form__msg-info.hidden(data-validate="exist-one-way", data-validate-text="Debe seleccionar la fecha de ida")
+														p.ibe_form__msg-info.hidden(data-validate="date", data-validate-text="La fecha de vuelta debe ser posterior a la fecha de ida")
+														p.ibe_form__msg-info.hidden(data-validate="parse", data-validate-text="Formato de fecha incorrecto")
+														p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="La fecha debe ser posterior a la actual")
+														p.ibe_form__msg-info.hidden(data-validate="restriction", data-validate-text="La fecha debe ser posterior a la restricci&oacute;n")
+														p.ibe_form__msg-info.hidden(data-validate="max", data-validate-text="Debes seleccionar una fecha anterior a")
+												.ibe-searcher__col.ibe-searcher__col--alt
+													div(class="ibe_form__group ibe_form__group--icon icon-caret_abajo" data-move="parent" data-position="4")
+														button.pointer(class="ibe_form__input-text ibe_form__input-text--stop-animation" name="flight_passengers_1" id="flight_passengers_1" type="button" value="1 Adulto" data-modal data-value="1 Adulto" data-text-passenger="Pasajeros" data-toggle="collapse" data-target="#people-counter-1")!="1 Adulto"
+														+m-people-counter({
+															id: "people-counter-1",
+															data: "V"
+														})
+													div.ibe-modal__button-save
+														button(data-close-modal="true", style="display:none", hideAccessible!="Save", data-focusin, type="button").ibe-search-flights__search-button.ibe-button.ibe-button--big.ibe-button--block.ibe-button--icon.ibe-button--grey!="Guardar"
+
+												div.ibe-searcher__options-col.ibe-searcher__options-col--large
+													.ibe-modal__header-close(style="display:none;")
+														p.ibe-modal__header-close--title!="Residentes y Familia numerosa"
+													div.ibe-searcher__passenger.ibe-searcher__passenger--col
+														a.link.ibe-searcher__passenger-button(href="#" title="Tipo de pasajeros" data-toggle="collapse" data-target="#resident-1")
+															span(data-passenger-resident)!="No residente/"
+															//- !=" / "
+															span(data-passenger-family)!="No familia numerosa"
+														div.ibe-searcher__passenger-content(id="resident-1" data-toggle="container", data-keyboard-close="esc")
+															h4.ibe-searcher__passenger-title!="Residentes"
+															.ibe-form__radio-group(data-passenger-resident-radio)
+																span.ibe_form__radio
+																	input.ibe_form__radio-input(type="radio" name="resident" id="noresident" value="noresident" checked)
+																	label.ibe_form__radio-text(for="noresident")!="No residente /"
+																span.ibe_form__radio
+																	input.ibe_form__radio-input(type="radio" name="resident" id="canarias" value="canarias")
+																	label.ibe_form__radio-text(for="canarias")!="Residente en Las Canarias /"
+																span.ibe_form__radio
+																	input.ibe_form__radio-input(type="radio" name="resident" id="ceuta" value="ceuta")
+																	label.ibe_form__radio-text(for="ceuta")!="Residente en Ceuta /"
+																span.ibe_form__radio
+																	input.ibe_form__radio-input(type="radio" name="resident" id="melilla" value="melilla")
+																	label.ibe_form__radio-text(for="melilla")!="Residente en Melilla /"
+															h4.ibe-searcher__passenger-title!="Familia numerosa:"
+															.ibe-form__radio-group(data-passenger-family-radio)
+																span.ibe_form__radio
+																	input.ibe_form__radio-input(type="radio" name="family" id="nolarge" value="nolarge" checked)
+																	label.ibe_form__radio-text(for="nolarge")!="No familia numerosa"
+																span.ibe_form__radio
+																	input.ibe_form__radio-input(type="radio" name="family" id="largespecial" value="largespecial")
+																	label.ibe_form__radio-text(for="largespecial")!="Familia numerosa especial"
+																span.ibe_form__radio
+																	input.ibe_form__radio-input(type="radio" name="family" id="largegeneral" value="largegeneral")
+																	label.ibe_form__radio-text(for="largegeneral")!="Familia numerosa general"
+													div.ibe-modal__button-save
+														button(data-close-modal="true", style="display:none", hideAccessible!="Save", data-focusin, type="button").ibe-search-flights__search-button.ibe-button.ibe-button--big.ibe-button--block.ibe-button--icon.ibe-button--grey!="Guardar"
+												div.ibe-searcher__options-col.ibe-searcher__options-col--right
+													.ibe-modal__header-close(style="display:none;")
+														p.ibe-modal__header-close--title!="Tarifas"
+													label.ibe_form__selectize--label(for="tarifa")!="Elige una tarifa"
+													select(id="tarifa", class="ibe-select", name="tarifa", data-selectmenu="")
+														option(value="00") Tarifa m&aacute;s econ&oacute;mica
+														option(value="01") Business Class
+														option(value="02") Turista premium
+											div.ibe-searcher__row--col3.ibe-searcher__options
+												.ibe-searcher__col.ibe-searcher__col--button
+													button.ibe-search-flights__search-button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block.ibe-button--icon(type="submit",data-validate="origin-destiny")
+														span.ibe-button__icon.icon-buscar
+															span.hideAccessible!="Buscar"
+														span.ibe-button__text!="Buscar"
+											div.ibe-searcher__options-col.ibe-searcher__options-col--end
+												div.ibe-searcher__options.ibe-searcher__options--end
+													a.link.link__regular.link__regular--important.icon-responsive.icon-puente_aereo(href="#" title="Buscar puente aéreo")!="Buscar puente a&eacute;reo"
+													//-input.ibe-button.ibe-box-form__button.ibe-button--big.ibe-button--grey(type="button" value="Guardar" data-function="save-passenger")
+				if(params.tab2 != false)
+					div(id="tab-searcher-2" data-move="tab")
+						div.ibe-accordion
+							h4.title__h4.ibe-accordion__header(data-toggle="collapse" data-target="#tab_02" data-outer-click="true" data-header-searcher="collapse")
+								a.link(href="#" title="¿A dónde vas?")!="&iquest;A d&oacute;nde vas?"
+							div.ibe-accordion__collapse(id="tab_02" data-outer-click="true" data-toggle="container")
+								form.ibe_form(action="#" method="post")
+									fieldset.ibe-tab__container-desktop
+										legend.hideAccessible!="Vuelo+Hotel"
+										.ibe-searcher__row
+											div.ibe-searcher__row--col1.ibe-searcher__options
+												.ibe-searcher__col.ibe-searcher__col--ori
+													.ibe-modal__header-close(style="display:none;")
+														p.ibe-modal__header-close--title!="Orígenes"
+													div(class="ibe_form__group ibe_form__group--button-icon fc_form_group" data-move="parent" data-position="1")
+														label(class="ibe_form__input-label", for="flight_hotel_origin") Origen
+														input(class="ibe_form__input-text", name="flight_hotel_origin" id="flight_hotel_origin" type="text", placeholder="Origen" data-autocomplete="cities" spellcheck='false')
+														p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Debes elegir un origen")
+														p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El origen no puede ser igual que el destino")
+														div.hidden-xs.hidden-sm.hidden-md
+															button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(data-focusin, type="button", data-toggle="collapse", data-target="#id-tab-collapse-5")
+																span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+															+m-choose-city-new({
+																"class": "ibe-choose-city--origin",
+																"format": "desktop",
+																"id": "id-tab-collapse-5"
+															})
+														div.hidden-lg.hidden-xl
+															button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(data-focusin, type="button", data-toggle="collapse", data-target="#m-id-tab-collapse-6")
+																span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+															+m-choose-city-new({
+																"class": "ibe-choose-city--origin",
+																"format": "responsive",
+																"id": "m-id-tab-collapse-6"
+															})
+												.ibe-searcher__col.ibe-searcher__col--des
+													.ibe-modal__header-close(style="display:none;")
+														p.ibe-modal__header-close--title!="Destinos"
+													div(class="ibe_form__group ibe_form__group--button-icon fc_form_group" data-move="parent" data-position="2")
+														label(class="ibe_form__input-label", for="flight_hotel_destiny") Destino
+														input(class="ibe_form__input-text", name="flight_hotel_destiny", id="flight_hotel_destiny", type="text", placeholder="Destino", data-autocomplete="cities" spellcheck='false')
+														p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Debes elegir un destino")
+														p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El destino no puede ser igual que el origen")
+														div.hidden-xs.hidden-sm.hidden-md
+															button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(data-focusin, type="button", data-toggle="collapse", data-target="#id-tab-collapse-60")
+																span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+															+m-choose-city({
+																"class": "ibe-choose-city--destination",
+																"format": "desktop",
+																"id": "id-tab-collapse-60"
+															})
+														div.hidden-lg.hidden-xl
+															button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(data-focusin, type="button", data-toggle="collapse", data-target="#m-id-tab-collapse-7")
+																span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+															+m-choose-city({
+																"class": "ibe-choose-city--destination",
+																"format": "responsive",
+																"id": "m-id-tab-collapse-7"
+															})
+											div.ibe-searcher__row--col2.ibe-searcher__options
+												.ibe-searcher__col.ibe-searcher__col--date
+													div(class="ibe_form__group ibe_form__group--half" data-move="parent" data-position="3")
+														div.ibe_form__group-half.icon-caret_derecha.fc_form_group
+															div.ibe_form__box
+																label.ibe_form__input-label(for="flight_hotel_round_date")!="Fecha ida"
+																input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_hotel_round_date", id="flight_hotel_round_date", type="text", placeholder="DD/MM/YYYY" data-format="DD/MM/YYYY" data-toggle="collapse" data-target="#searcher-calendar-3" data-cal="start" data-placeholder="placeholder", maxlength="10")
+															+m-searcher-calendar({
+																id: "searcher-calendar-3",
+																type: "fly",
+																when: "start",
+																number: "3-3",
+																datahourrestriction:"2"
+															})
+														div.ibe_form__group-half.fc_form_group
+															div.ibe_form__box
+																label.ibe_form__input-label(for="flight_hotel_return_date") Fecha vuelta
+																input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_hotel_return_date", id="flight_hotel_return_date", type="text", placeholder="DD/MM/YYYY" data-format="DD/MM/YYYY" data-toggle="collapse" data-target="#searcher-calendar-4" data-cal="end" data-placeholder="placeholder", maxlength="10")
+															+m-searcher-calendar({
+																id: "searcher-calendar-4",
+																type: "fly",
+																when: "end",
+																number: "4-3",
+																datahourrestriction:"2"
+															})
+														p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Debes seleccionar fecha de ida y fecha de vuelta")
+														p.ibe_form__msg-info.hidden(data-validate="date", data-validate-text="La fecha de vuelta debe ser posterior a la fecha de ida")
+														p.ibe_form__msg-info.hidden(data-validate="parse", data-validate-text="Formato de fecha incorrecto")
+														p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="La fecha debe ser posterior a la actual")
+														p.ibe_form__msg-info.hidden(data-validate="restriction", data-validate-text="La fecha debe ser posterior a la restricci&oacute;n")
+														p.ibe_form__msg-info.hidden(data-validate="max", data-validate-text="Debes seleccionar una fecha anterior a")
+												.ibe-searcher__col.ibe-searcher__col--alt
+													div(class="ibe_form__group ibe_form__group--icon icon-caret_abajo" data-move="parent" data-position="4")
+														button.pointer(class="ibe_form__input-text ibe_form__input-text--stop-animation" name="flight_hotel_room" id="flight_hotel_room" type="button" value="1 Habitación" data-toggle="collapse" data-target="#searcher-rooms-1" data-text-room="Habitación" data-text-room-plural="Habitaciones")!="1 Habitación"
+														+m-searcher-room({
+															id: "searcher-rooms-1",
+															"input_adult": {
+																"id": "adult_{{index}}",
+																"name": "adult_{{index}}"
+															},
+															"input_children": {
+																"id": "children_{{index}}",
+																"name": "children_{{index}}"
+															},
+															"input_baby": {
+																"id": "baby_{{index}}",
+																"name": "baby_{{index}}"
+															}
+														})
+												div.ibe-searcher__options--right.ibe-searcher__options-col.ibe-searcher__options-col--right(data-move="parent" data-position="6")
+													.ibe-modal__header-close(style="display:none;")
+														p.ibe-modal__header-close--title!="Tarifas"
+													label.ibe_form__selectize--label(for="tarifa2")!="Elige una tarifa"
+													select(id="tarifa2", class="ibe-select", name="tarifa2", data-selectmenu="")
+														option(value="00") Tarifa m&aacute;s econ&oacute;mica
+														option(value="01") Business Class
+														option(value="02") Turista premium
+											div.ibe-searcher__row--col3.ibe-searcher__options
+												.ibe-searcher__col.ibe-searcher__col--button(data-move="parent" data-position="5")
+													button.ibe-search-flights__search-button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block.ibe-button--icon(type="submit",data-validate="origin-destiny")
+														span.ibe-button__icon.icon-buscar
+															span.hideAccessible!="Buscar"
+														span.ibe-button__text!="Buscar"
+				if(params.tab3 != false)
+					div(id="tab-searcher-3")
+						div.ibe-accordion
+							h4.title__h4.ibe-accordion__header(data-toggle="collapse" data-target="#tab_03" data-outer-click="true" data-header-searcher="collapse")
+								a.link(href="#" title="¿A dónde vas?")!="&iquest;A d&oacute;nde vas?"
+							div.ibe-accordion__collapse(id="tab_03" data-outer-click="true" data-toggle="container")
+								form.ibe_form(action="#" method="post")
+									fieldset.ibe-tab__container-desktop
+										legend.hideAccessible!="Vuelo+Coche"
+										.ibe-searcher__row
+											div.ibe-searcher__row--col1.ibe-searcher__options
+												.ibe-searcher__col.ibe-searcher__col--ori
+													.ibe-modal__header-close(style="display:none;")
+														p.ibe-modal__header-close--title!="Orígenes"
+													div(class="ibe_form__group ibe_form__group--button-icon fc_form_group" data-move="parent" data-position="1")
+														label(class="ibe_form__input-label", for="flight_car_origin") Origen
+														input(class="ibe_form__input-text", name="flight_car_origin", id="flight_car_origin", type="text", placeholder="Origen", data-autocomplete="cities" spellcheck='false')
+														p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Debes elegir un origen")
+														p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El origen no puede ser igual que el destino")
+														div.hidden-xs.hidden-sm.hidden-md
+															button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(data-focusin, type="button", data-toggle="collapse", data-target="#id-tab-collapse-8")
+																span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+															+m-choose-city-new({
+																"class": "ibe-choose-city--origin",
+																"format": "desktop",
+																"id": "id-tab-collapse-8"
+															})
+														div.hidden-lg.hidden-xl
+															button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(data-focusin, type="button", data-toggle="collapse", data-target="#m-id-tab-collapse-9")
+																span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+															+m-choose-city-new({
+																"class": "ibe-choose-city--origin",
+																"format": "responsive",
+																"id": "m-id-tab-collapse-9"
+															})
+												.ibe-searcher__col.ibe-searcher__col--des
+													.ibe-modal__header-close(style="display:none;")
+														p.ibe-modal__header-close--title!="Destinos"
+													div(class="ibe_form__group ibe_form__group--button-icon fc_form_group" data-move="parent" data-position="2")
+														label(class="ibe_form__input-label", for="flight_car_destiny") Destino
+														input(class="ibe_form__input-text", name="flight_car_destiny", id="flight_car_destiny", type="text", placeholder="Destino", data-autocomplete="cities" spellcheck='false')
+														p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Debes elegir un destino")
+														p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El destino no puede ser igual que el origen")
+														div.hidden-xs.hidden-sm.hidden-md
+															button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(data-focusin, type="button", data-toggle="collapse", data-target="#id-tab-collapse-10")
+																span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+															+m-choose-city({
+																"class": "ibe-choose-city--destination",
+																"format": "desktop",
+																"id": "id-tab-collapse-10"
+															})
+														div.hidden-lg.hidden-xl
+															button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(data-focusin, type="button", data-toggle="collapse", data-target="#m-id-tab-collapse-11")
+																span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+															+m-choose-city({
+																"class": "ibe-choose-city--destination",
+																"format": "responsive",
+																"id": "m-id-tab-collapse-11"
+															})
+											div.ibe-searcher__row--col2.ibe-searcher__options
+												.ibe-searcher__col.ibe-searcher__col--date
+													div(class="ibe_form__group ibe_form__group--half" data-move="parent" data-position="3")
+														div.ibe_form__group-half.icon-caret_derecha.fc_form_group
+															div.ibe_form__box
+																label.ibe_form__input-label(for="flight_car_round_date")!="Fecha ida"
+																input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_car_round_date", id="flight_car_round_date", type="text", placeholder="DD/MM/YYYY" data-format="DD/MM/YYYY" data-toggle="collapse" data-target="#searcher-calendar-5" data-cal="start" data-placeholder="placeholder", maxlength="10")
+															+m-searcher-calendar({
+																id: "searcher-calendar-5",
+																type: "fly",
+																when: "start",
+																number: "5-3"
+															})
+														div.ibe_form__group-half.fc_form_group
+															div.ibe_form__box
+																label.ibe_form__input-label(for="flight_car_return_date") Fecha vuelta
+																input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_car_return_date", id="flight_car_return_date", type="text", placeholder="DD/MM/YYYY" data-format="DD/MM/YYYY" data-toggle="collapse" data-target="#searcher-calendar-6" data-cal="end" data-placeholder="placeholder", maxlength="10")
+															+m-searcher-calendar({
+																id: "searcher-calendar-6",
+																type: "fly",
+																when: "end",
+																number: "6-3"
+															})
+														p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Debes seleccionar fecha de ida y fecha de vuelta")
+														p.ibe_form__msg-info.hidden(data-validate="date", data-validate-text="La fecha de vuelta debe ser posterior a la fecha de ida")
+														p.ibe_form__msg-info.hidden(data-validate="parse", data-validate-text="Formato de fecha incorrecto")
+														p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="La fecha debe ser posterior a la actual")
+														p.ibe_form__msg-info.hidden(data-validate="restriction", data-validate-text="La fecha debe ser posterior a la restricci&oacute;n")
+														p.ibe_form__msg-info.hidden(data-validate="max", data-validate-text="Debes seleccionar una fecha anterior a")
+												.ibe-searcher__col.ibe-searcher__col--alt
+													div(class="ibe_form__group ibe_form__group--icon icon-caret_abajo" data-move="parent" data-position="4")
+														button.pointer(class="ibe_form__input-text ibe_form__input-text--stop-animation", name="flight_car_passengers_2" id="flight_car_passengers_2" type="button" value="1 Adulto" data-modal data-value-adult="1 Adulto" data-value-senior="1 Senior" data-value-young="1 Joven" data-value-teenager="1 Adolescente" data-text-passenger="Pasajeros" data-toggle="collapse" data-target="#people-counter-1")!="1 Adulto"
+														+m-people-counter({
+															id: "people-counter-2",
+															data: "VC"
+														})
+													div.ibe-modal__button-save
+														button(data-close-modal="true", style="display:none", hideAccessible!="Save", data-focusin, type="button").ibe-search-flights__search-button.ibe-button.ibe-button--big.ibe-button--block.ibe-button--icon.ibe-button--grey!="Guardar"
+
+
+												div.ibe-searcher__options--right.ibe-searcher__options-col.ibe-searcher__options-col--right(data-move="parent" data-position="6")
+													.ibe-modal__header-close(style="display:none;")
+														p.ibe-modal__header-close--title!="Tarifas"
+													label.ibe_form__selectize--label(for="tarifa3")!="Elige una tarifa"
+													select(id="tarifa3", class="ibe-select", name="tarifa3", data-selectmenu="")
+														option(value="00") Tarifa m&aacute;s econ&oacute;mica
+														option(value="01") Business Class
+														option(value="02") Turista premium
+											div.ibe-searcher__row--col3.ibe-searcher__options
+												.ibe-searcher__col.ibe-searcher__col--button(data-move="parent" data-position="5")
+													button.ibe-search-flights__search-button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block.ibe-button--icon(type="submit",data-validate="origin-destiny")
+														span.ibe-button__icon.icon-buscar
+															span.hideAccessible!="Buscar"
+														span.ibe-button__text!="Buscar"
+

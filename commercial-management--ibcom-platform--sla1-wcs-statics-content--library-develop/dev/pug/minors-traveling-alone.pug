@@ -1,0 +1,338 @@
+extends _general/layout__primary
+include _modules/_modals/_ibe-modal-where
+block title
+	title!="IBERIA - Buscador avanzado"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main
+		+m-ibe-breadcrumbs({
+			"menu": "advSearch"
+		})
+		.container
+			.row
+				.col-xs-12
+					h1.title.title__h1.title--center!="Solicitud del Servicio"
+					section
+						form(data-valid-form action="#" method="post", id="form1" class="ibe_form ibe_form-warranty")
+							fieldset
+								legend.hideAccessible!="Tabla informativa de precios"
+								div.ibe-box__primary.ibe-box__primary--type01.ibe_box-separated.ibe_box-separated__line-spacing
+									h2.title.title__h2.title--no-paddT!="Coste del servicio de Acompañamiento de Menores"
+									h3.title.title__h4.title--no-padd!="Este servicio solo se ofrece en vuelos operados por Iberia, Iberia Express e Iberia Regional Air Nostrum."
+									p.paragraph.paragraph__regular!="No se aplica en vuelos IB26XX, IB5000, IB7000 operados por otras compañias."
+									h3.title.title__h4.title--no-padd!="Recibirás nuestra llamada respondiendo a tu solicitud para tramitar el servicio para el vuelo de ida o de ida y vuelta. El pago se efectuará una vez hayamos contactado contigo."
+									p.paragraph.paragraph__regular!="El horario para este servicio es de 24 horas todos los días de la semana."
+									//- Copiar para incluir la tabla en WCS
+									h3.title.title__h4!="Coste del servicio por trayecto"
+									div(style='overflow-x:auto;')
+										table.ibe-table.ibe-table--bordered(summary='Tabla con Coste del servicio')
+											caption.hidden="Coste del servicio por trayecto"
+											thead.ibe-table__thead
+												tr.ibe-table__thead-tr
+													th.ibe-table__thead-th(scope='col', style='width:27%')!="Vuelos domésticos (sin Canarias)"
+													th.ibe-table__thead-th(scope='col', style='width:46%')!="Europa, Canarias, Oriente Medio y África del Norte"
+													th.ibe-table__thead-th(scope='col', style='width:27%')!="América, Asia y Sudáfrica"
+											tbody.ibe-table__tbody
+												tr.ibe-table__tbody-tr
+													td.ibe-table__tbody-td.ibe-table__tbody-td-text-center!="45€/55$/40£"
+													td.ibe-table__tbody-td.ibe-table__tbody-td-text-center!="70€/85$/65£"
+													td.ibe-table__tbody-td.ibe-table__tbody-td-text-center!="120€/145$/110£"
+									h3.title.title__h4!="Coste del servicio para vuelos con tránsito"
+									div(style='overflow-x:auto;')
+										table.ibe-table.ibe-table--bordered(summary='Tabla con Coste del servicio')
+											caption.hidden!="Coste del servicio para vuelos con tránsito"
+											thead.ibe-table__thead
+												tr.ibe-table__thead-tr
+													th.ibe-table__thead-th(scope='col', style='width:27%')!="Con conexión Nacional (sin Canarias)"
+													th.ibe-table__thead-th(scope='col', style='width:46%')!="Con conexión a/desde Canarias, Europa, Oriente Medio y África del Norte"
+													th.ibe-table__thead-th(scope='col', style='width:27%')!="Con conexión a/desde América, Asia y Sudáfrica"
+											tbody.ibe-table__tbody
+												tr.ibe-table__tbody-tr
+													td.ibe-table__tbody-td.ibe-table__tbody-td-text-center!="70€/85$/65£"
+													td.ibe-table__tbody-td.ibe-table__tbody-td-text-center!="100€/120$/90£"
+													td.ibe-table__tbody-td.ibe-table__tbody-td-text-center!="150€/180$/135£"
+									//- fin de codigo para incluir la tabla en WCS
+							fieldset
+								legend.hideAccessible!="Datos de Formulario Tel&eacute;fono de contacto"
+								div
+									div.ibe_box-separated.ibe_box-separated__line-spacing
+										div.ibe_box-separated__header
+											h2.ibe_box-separated__title.ibe_box-separated__title--with-icon.icon-telefono_1!="Teléfono de contacto"
+											p.ibe_box-separated__subtitle.u-mb-small!="Te llamaremos lo antes posible una vez que recibamos tu solicitud. Déjanos tu teléfono fijo o móvil al que quieres que te llamemos."
+
+										div.ibe_box-separated__body
+											div.ibe_form__box--claim.ibe_form__box--claim__center
+												.div.ibe_layout__line-spacing
+													div.row
+														div.col-xs-12
+															.ibe_form__group.ibe__form__group--select.ibe_form__group--select-new.ibe_form__group--nomargintop(data-selectmenu_claim)
+																label.ibe_form__selectize--label(for="pref")
+																	span.ibe_form__input-text Prefijo
+																select(id="pref", class="ibe-select ibe_form__input-text", name="pref", data-selectmenu="", required, data-valid)
+																	option(value="") Prefijo
+																	option(value="op5") +34
+																	option(value="op6") +44
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group fc_form_group ")
+																label(class="ibe_form__input-label", for="code07") Tel&eacute;fono de contacto
+																input(class="ibe_form__input-text", name="code07", id="code07", type="text", required, placeholder="Tel&eacute;fono de contacto", maxlength="20",  data-validator="tel" )
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+							fieldset
+								legend.hideAccessible!="Datos de Formulario Reserva"
+								div.ibe_layout__line-spacing.ibe_box-separated__line-spacing
+									div.ibe_box-separated
+										div.ibe_box-separated__header
+											h2.ibe_box-separated__title.ibe_box-separated__title--with-icon.icon-gestion_de_reservas!="Reserva"
+											p.ibe_box-separated__subtitle.u-mb-small!="Si ya tienes billete emitido y quieres solicitar el servicio, indícanos el código de Reserva."
+											p.ibe_box-separated__subtitle.u-mb-small!="De lo contrario, pasa al siguiente bloque."
+										div.ibe_box-separated__body
+											div.ibe_form__box--claim.ibe_form__box--claim__center
+												.div.ibe_layout__line-spacing
+													div.row
+														div.col-xs-12
+															.ibe_form__group.fc_form_group.ibe_form__group--nomargintop.ibe-form__group--m-mobile
+																label(for="res-code" class="ibe_form__input-label ") C&oacute;digo de reserva
+																input(name="res-code" id="res-code" type="text" placeholder="C&oacute;digo de reserva" class="ibe_form__input-text", required, maxlength="6", data-validator='code')
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+																p.ibe_form__modal
+																	a(href="#", title="¿Qué es el código de reserva?", data-modal="button" data-modal-view=".fc-dialog-where").link.link__regular.link__regular--underline.link__regular--align-right.link__regular--block ¿Qué es el código de reserva?
+																+m-ibe-modal-where()
+							fieldset
+								legend.hideAccessible!="Datos de Formulario Pasajero"
+								div.ibe_layout__line-spacing.ibe_box-separated__line-spacing
+									div.ibe_box-separated
+										div.ibe_box-separated__header
+											h2.ibe_box-separated__title.ibe_box-separated__title--with-icon.icon-persona!="Pasajero"
+											p.ibe_box-separated__subtitle.u-mb-small!="Introduce los datos del menor que necesita el servicio."
+
+										div.ibe_box-separated__body
+											div.ibe_form__box--claim.ibe_form__box--claim__center
+												.div.ibe_layout__line-spacing
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group ")
+																label(class="ibe_form__input-label", for="code02") Nombre
+																input(class="ibe_form__input-text", name="code02", id="code02", type="text", required, placeholder="Nombre", maxlength="30", data-validator="personal")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code03") Primer Apellido
+																input(class="ibe_form__input-text", name="code03", id="code03", type="text", required, placeholder="Primer Apellido", maxlength="30", data-validator="personal")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code04") Segundo Apellido
+																input(class="ibe_form__input-text", name="code04", id="code04", type="text", placeholder="Segundo Apellido", maxlength="30", data-validator="personal")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													div.row
+														div.col-xs-12
+															.ibe_form__group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+																label.ibe_form__selectize--label(for="edad")
+																	span.ibe_form__input-text Edad del menor
+																select(id="edad", class="ibe-select ibe_form__input-text", name="edad", data-selectmenu="", required, data-valid)
+																	option(value="") Edad
+																	option(value="op5") Opci&oacute;n 5
+																	option(value="op6") Opci&oacute;n 6
+																	option(value="op7") Opci&oacute;n 7
+																	option(value="op8") Opci&oacute;n 8
+																	option(value="op9") Opci&oacute;n 9
+																	option(value="op10") Opci&oacute;n 10
+																	option(value="op11") Opci&oacute;n 11
+																	option(value="op12") Opci&oacute;n 12
+																	option(value="op13") Opci&oacute;n 13
+																	option(value="op14") Opci&oacute;n 14
+																	option(value="op15") Opci&oacute;n 15
+																	option(value="op16") Opci&oacute;n 16
+																	option(value="op17") Opci&oacute;n 17
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+							fieldset
+								legend.hideAccessible!="Datos de Formulario Origen"
+								div.ibe_layout__line-spacing.ibe_box-separated__line-spacing
+									div.ibe_box-separated
+										div.ibe_box-separated__header
+											h2.ibe_box-separated__title.ibe_box-separated__title--with-icon.icon-despegue!="Origen"
+											p.ibe_box-separated__subtitle.u-mb-small!="Introduce los datos de contacto de la persona que entregará al menor en el origen."
+											p.ibe_box-separated__subtitle.u-mb-small!="El número de teléfono que nos proporcionas en este apartado debe pertenecer a un móvil si deseas recibir nuestros mensajes de información (SMS). Disponible para vuelos con origen en Madrid."
+										div.ibe_box-separated__body
+											div.ibe_form__box--claim.ibe_form__box--claim__center
+												.div.ibe_layout__line-spacing
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group ")
+																label(class="ibe_form__input-label", for="code22") Nombre
+																input(class="ibe_form__input-text", name="code22", id="code22", type="text", required, placeholder="Nombre", maxlength="30", data-validator="personal")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code23") Primer Apellido
+																input(class="ibe_form__input-text", name="code23", id="code23", type="text", required, placeholder="Primer Apellido", maxlength="30", data-validator="personal")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code24") Segundo Apellido
+																input(class="ibe_form__input-text", name="code24", id="code24", type="text", placeholder="Segundo Apellido", maxlength="30", data-validator="personal")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													div.row
+														div.col-xs-12
+															.ibe_form__group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+																label.ibe_form__selectize--label(for="pref2")
+																	span.ibe_form__input-text Prefijo
+																select(id="pref2", class="ibe-select ibe_form__input-text", name="pref2", data-selectmenu="", required, data-valid)
+																	option(value="") Prefijo
+																	option(value="op5") +34
+																	option(value="op6") +44
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code27") Tel&eacute;fono de contacto
+																input(class="ibe_form__input-text", name="code27", id="code27", type="text", required, placeholder="Tel&eacute;fono de contacto", maxlength="20",  data-validator="tel" )
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code08") Domicilio
+																input(class="ibe_form__input-text", name="code08", id="code08", type="text", required, placeholder="Domicilio", maxlength="30")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group fc_form_group ibe_form__group--button-icon  ibe-form__group--m-mobile" data-move="parent")
+																label(class="ibe_form__input-label", for="flight_origin")!="Origen"
+																input(class="ibe_form__input-text" name="flight_origin" id="flight_origin" type="text" placeholder="Origen" data-autocomplete="cities" spellcheck='false' value="", data-destination-info="ES|MAD|Madrid", data-validate="input-origin", data-fligths-collapse-mobile="button", data-close='outsideclick', required)
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El origen no puede ser igual que el destino")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+																div.hidden-xs.hidden-sm.hidden-md
+																	button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-minors-alone00")
+																		span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+																	+m-choose-city({
+																		"class": "ibe-choose-city--origin",
+																		"format": "desktop",
+																		"id": "id-minors-alone00",
+																		"dataClose": true
+																	})
+																div.hidden-lg.hidden-xl
+																	button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#m-id-minors-alone00")
+																		span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+																	+m-choose-city({
+																		"class": "ibe-choose-city--origin",
+																		"format": "responsive",
+																		"id": "m-id-minors-alone00",
+																		"dataClose": true
+																	})
+							fieldset
+								legend.hideAccessible!="Datos de Formulario Destino"
+								div.ibe_layout__line-spacing.ibe_box-separated__line-spacing
+									div.ibe_box-separated
+										div.ibe_box-separated__header
+											h2.ibe_box-separated__title.ibe_box-separated__title--with-icon.icon-aterrizaje!="Destino"
+											p.ibe_box-separated__subtitle.u-mb-small!="Introduce los datos de contacto de la persona que recogerá al menor en el destino."
+										div.ibe_box-separated__body
+											div.ibe_form__box--claim.ibe_form__box--claim__center
+												.div.ibe_layout__line-spacing
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group ")
+																label(class="ibe_form__input-label", for="code32")!="Nombre"
+																input(class="ibe_form__input-text", name="code32", id="code32", type="text", required, placeholder="Nombre", maxlength="30", data-validator="personal")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code33") Primer Apellido
+																input(class="ibe_form__input-text", name="code33", id="code33", type="text", required, placeholder="Primer Apellido", maxlength="30", data-validator="personal")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code34") Segundo Apellido
+																input(class="ibe_form__input-text", name="code34", id="code34", type="text", placeholder="Segundo Apellido", maxlength="30", data-validator="personal")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													div.row
+														div.col-xs-12
+															.ibe_form__group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+																label.ibe_form__selectize--label(for="pref3")
+																	span.ibe_form__input-text Prefijo
+																select(id="pref3", class="ibe-select ibe_form__input-text", name="pref3", data-selectmenu="", required, data-valid)
+																	option(value="") Prefijo
+																	option(value="op5") +34
+																	option(value="op6") +44
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code37") Tel&eacute;fono de contacto
+																input(class="ibe_form__input-text", name="code37", id="code37", type="text", required, placeholder="Tel&eacute;fono de contacto", maxlength="20",  data-validator="tel" )
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code38") Domicilio
+																input(class="ibe_form__input-text", name="code38", id="code38", type="text", required, placeholder="Domicilio", maxlength="30")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group fc_form_group ibe_form__group--button-icon " data-move="parent")
+																label(class="ibe_form__input-label", for="flight_destiny")!="Destino"
+																input(class="ibe_form__input-text", name="flight_destiny", id="flight_destiny", type="text", placeholder="Destino" data-autocomplete="cities" spellcheck='false' data-validate="input-destiny", data-fligths-collapse-mobile="button", required)
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El destino no puede ser igual que el origen")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+																div.hidden-xs.hidden-sm.hidden-md
+																	button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-minors-alone01")
+																		span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+																	+m-choose-city({
+																		"class": "ibe-choose-city--destination",
+																		"format": "desktop",
+																		"id": "id-minors-alone01",
+																		"dataClose": true
+																	})
+																div.hidden-lg.hidden-xl
+																	button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#m-id-minors-alone01")
+																		span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+																	+m-choose-city({
+																		"class": "ibe-choose-city--destination",
+																		"format": "responsive",
+																		"id": "m-id-minors-alone01",
+																		"dataClose": true
+																	})
+							fieldset
+								legend.hideAccessible!="Términos y condiciones y boton enviar"
+								div.ibe-box__primary.ibe-box__primary--type01
+									div(class="ibe_form__group  fc_form_group")
+										input(type="checkbox", id="ejemplo_check03", name="ejemplo_check03", class="ibe-form__checkbox-input", required, data-checkBaby)
+										label(for="ejemplo_check03" class="ibe-form__checkbox-label")
+											span.paragraph.paragraph__regular.paragraph__regular--m-bottom-30!="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
+											a(href="" title="Lorem ipsum" class="link link__regular--red link__regular--p-left-5 link__regular--underline")="ut enim ad minim veniam"
+										p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Tiene que aceptar los T&eacute;rminos y condiciones" style="width:219px; margin-bottom:30px;")
+									button(type="button" class="ibe-button ibe-button--red ibe-button--smaller ibe-button--morelarge ibe-button--right")!="Enviar"
+									button(type="reset" class="ibe-button ibe-button--reset ibe-button--link02")!="Cancelar"
+	+m-footer({
+		"full": true
+	})

@@ -1,0 +1,193 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_food-table
+//    Desripcion: Estilos para el componente tabla de alimentos
+//******************************************************************************/
+.ibe-food-table{
+    position: relative;
+    margin: rem(40) 0 rem(60) 0;
+    &__footer{
+        margin-top: 1.4rem;
+        padding-top: rem(40);
+        border-top: 1px solid $BRD_standar_5;
+        text-align: right;
+    }
+
+    .ibe-food-table__list {
+        font-size: 0;
+        padding-top: 0;
+    }
+
+    .ibe-food-table__item {
+        text-align: center;
+        width: calc((100% / 3) - 1.8rem);
+        font-size: 1rem;
+        margin-right: 2.7rem;
+        margin-left: 0;
+
+        &:nth-child(3n+0) {
+            margin-right: 0;
+        }
+    }
+
+    &__link {
+        display: block;
+        margin: rem(20) 0 0.5rem;
+        color: $PC-cromatico_1;
+        text-decoration: none;
+
+        &:hover, &:focus {
+
+            .ibe-food-table__text{
+                color: $PC-cromatico_1;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .ibe-food-table__text {
+        font-size: rem(13);
+        display: inline-block;
+        padding: 0.7rem 0 0;
+        text-decoration: underline;
+    }
+    
+
+    .ibe-figure {
+        width: 100%;
+        float: none;
+        margin: 0;
+    }
+
+    .ibe-img {
+        border: 1px solid $BRD_standar_1;
+    }
+
+    .GI_TW_expander {
+        background-color: $BCK-cromatico_18;
+
+        .GI_TW_pointer {
+            display: none;
+        }
+
+        .GI_TW_expander-inner {
+            width: 100%;
+        }
+
+        .GI_TW_close {
+            top: 54px;
+            right: 42px;
+        }
+    }
+
+    .GI_TW_Current {
+        position: relative;
+
+        &:after {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translate(-50%, 0);
+            -ms-transform: translate(-50%, 0);
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            border-color: #fff;
+            border-bottom-color: #DDD;
+            border-width: 8px;
+        }
+
+        .ibe-food-table__text {
+            font-weight: bold;
+            text-decoration: none;
+        }
+    }
+
+    .ibe-paper-sheet {
+        &__options-close {
+            font-family: $font-05;
+        }
+    }
+    
+}
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_food-table{
+    .ibe-food-table{
+        margin: 0 0 rem(30) 0;
+        &__footer{
+            margin-top: rem(22);
+            padding-top: rem(23);
+            .ibe-button{
+                display: block;
+                width: 100%;
+            }
+        }
+
+        .ibe-food-table__list {
+            white-space: nowrap;
+            overflow-y: auto;
+            padding-bottom: 0.25rem;
+        }
+
+        .ibe-food-table__item {
+            width: 13.4rem;
+            margin-right: 1rem;
+
+            &:nth-child(3n) {
+                margin-right: 1rem;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        &__link {
+            margin-top: 0.2rem;
+        }
+
+        .ibe-food-table__text {
+            padding: 0;
+        }
+
+        .ibe-figure{
+            height: auto;
+            margin-bottom: 0.7rem;
+        }
+
+        .ibe-img {
+            position: static;
+            transform: translate(0, 0);
+            -ms-transform: translate(0, 0);
+        }
+
+        .GI_TW_expander {
+            .GI_TW_close {
+                top: 29px;
+                right: 15px;
+            }
+        }
+
+        .ibe-paper-sheet {
+            &__options-close {
+                font-size: rem(26);
+            }
+
+            &__header-title-primary {
+                padding: 0;
+            }
+        }
+    }
+}
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe_food-table{
+    @include sm-ibe_food-table;
+
+    .ibe-food-table {
+        .GI_TW_expander {
+            width: 108%;
+            left: -4%;
+        }
+    }
+}

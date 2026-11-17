@@ -1,0 +1,588 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe-mosaic
+//    Desripcion: Estilos para mosaico
+//******************************************************************************/
+.ibe_mosaic {
+	display: block;
+	font-size: 0;
+	&>.tab-pane{
+		background-color: pink!important; 
+	}
+
+	&[data-btn-show-more='true']::parent{ 
+		background-color: red!important;
+	}
+	&:after {
+		content: "";
+		//- height: rem(32);
+		//- background-color: #FFF;
+		width: 100%;
+		clear: both;
+		display: block;
+	}
+
+	&__piece {
+		float: left;
+		position: relative;
+		opacity: 0;
+		-webkit-transform: scale(0.3);
+		-moz-transform: scale(0.3);
+		-ms-transform: scale(0.3);
+		-o-transform: scale(0.3);
+		transform: scale(0.3);
+
+		&--w-100 {
+			width: 100%;
+			.ibe_mosaic {
+				&__info {
+					max-width: rem(560);
+					padding: 0 rem(15);
+				}
+			}
+		}
+
+		&--w-50 {
+			width: 50%;
+
+			.ibe_mosaic {
+				&__info {
+					max-width: rem(560);
+					padding: 0 rem(15);
+				}
+			}
+
+		}
+		
+		&--w-33 {
+			width: calc(100% / 3);
+
+			.ibe_mosaic {
+				&__info {
+					max-width: rem(374);
+					padding: 0 rem(5);
+				}
+
+				&__title {
+					font-size: rem(36);
+				}
+
+				&__price {
+					font-size: rem(40);
+				}
+			}
+		}
+
+		&--w-25 {
+			width: 25%;
+
+			.ibe_mosaic {
+				&__info {
+					max-width: rem(280);
+					padding: 0 rem(5);
+				}
+
+				&__title {
+					font-size: rem(27);
+					line-height: rem(78);
+
+					&:after {
+						top: rem(64);
+					}
+				}
+
+				&__price {
+					font-size: rem(35);
+					line-height: rem(52);
+				}
+			}
+		}
+
+		&--h-large {
+			// Se utilizan pixels por problema con la funcion rem() en Explorer
+			height: 468px;
+		}
+
+		&--h-normal {
+			// Se utilizan pixels por problema con la funcion rem() en Explorer
+			height: 234px;
+		}
+
+		&--h-medium {
+			// Se utilizan pixels por problema con la funcion rem() en Explorer
+			height: 216px;
+		}
+
+		&--h-small {
+			// Se utilizan pixels por problema con la funcion rem() en Explorer
+			height: 175px;
+		}
+
+		&:focus,
+		&:hover{
+			cursor: pointer;
+			outline: none;
+			.ibe_mosaic {
+				&__img {
+					&:after {
+						background-color: rgba(51, 51, 51, 0.70);
+						transition: background-color 0.35s;
+					}
+				}
+			}
+		}
+
+		&.active {
+			opacity: 1;
+			-webkit-transition: opacity 1.3s, -webkit-transform 1.3s;
+			-moz-transition: opacity 1.3s, -moz-transform 1.3s;
+			-o-transition: opacity 1.3s, -o-transform 1.3s;
+			transition: opacity 1.3s, transform 1.3s;
+			-webkit-transform: scale(1);
+			-moz-transform: scale(1);
+			-ms-transform: scale(1);
+			-o-transform: scale(1);
+			transform: scale(1);
+		}
+	}
+
+	&__figure {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+
+	&__img {
+		background-position: center center;
+		background-size: cover;
+		width: 100%;
+		height: 100%;
+
+		&:after {
+			content: "";
+			background-color: rgba(51, 51, 51, 0.47);
+			// color: rgba(51, 51, 51, 0.47);
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: block;
+		}
+	}
+	&__info-wrap {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		display: table;
+	}
+
+	&__info {
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+	}
+
+	&__title {
+		display: inline-block;
+		position: relative;
+		width: 100%;
+		font-size: rem(50);
+		color: $PC-cromatico_4;
+		font-family: $font-04;
+		line-height: rem(100);
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+
+		&:after {
+			content: "";
+			position: absolute;
+			top: rem(85);
+			width: rem(90);
+			height: rem(3);
+			background-color: $PC-cromatico_4;
+			left: calc(50% - 45px);
+		}
+	}
+
+	&__subtitle {
+		display: inline-block;
+		width: 100%;
+		font-size: rem(13);
+		color: $PC-cromatico_4;
+		font-family: $font-02;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+
+	&__price {
+		display: inline-block;
+		width: 100%;
+		font-size: rem(45);
+		font-family: $font-04;
+		color: $PC-cromatico_4;
+		line-height: rem(55);
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+	&__show-more{
+		&--hide{
+			display: none;
+		}
+	}
+}
+
+
+@mixin xl-ibe_mosaic {
+	.ibe_mosaic {}
+}
+
+
+
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe_mosaic {
+	.ibe_mosaic {
+		&__piece {
+			&--w-100 {
+				.ibe_mosaic {
+					&__info {
+						max-width: rem(925);
+					}
+				}
+			}
+			&--w-50 {
+				.ibe_mosaic {
+					&__info {
+						max-width: rem(462);
+					}
+				}
+			}
+			&--w-33 {
+				.ibe_mosaic {
+					&__info {
+						max-width: rem(309);
+					}
+					&__title {
+						font-size: rem(28.8);
+						&:after {
+							top: rem(64);
+						}
+					}
+					&__price {
+						font-size: rem(32);
+					}
+				}
+			}
+			&--w-25 {
+				.ibe_mosaic {
+					&__info {
+						max-width: rem(232);
+					}
+					&__title {
+						font-size: rem(21.6);
+						line-height: rem(65);
+						&:after {
+							top: rem(54);
+						}
+					}
+					&__price {
+						font-size: rem(28);
+						// line-height: rem(52);
+					}
+				}
+			}
+			&--h-large {
+				height: rem(480);
+			}
+			&--h-normal {
+				height: rem(240);
+			}
+			&--h-medium {
+				height: rem(240);
+			}
+			&--h-small {
+				height: rem(180);
+			}
+		}
+		&__title {
+			font-size: rem(40);
+			line-height: rem(78);
+			&:after {
+				width: rem(71.2);
+				height: rem(2.4);
+				left: calc(50% - 35px);
+				top: rem(69);
+			}
+		}
+		&__subtitle {
+			font-size: rem(12);
+		}
+
+		&__price {
+			font-size: rem(36);
+			line-height: rem(40);
+		}
+	}
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe_mosaic {
+	.ibe_mosaic {
+		&__piece {
+			&--w-100 {
+				.ibe_mosaic {
+					&__info {
+						max-width: rem(736);
+					}
+				}
+			}
+			&--w-50 {
+				.ibe_mosaic {
+					&__info {
+						max-width: rem(367);
+					}
+				}
+			}
+			&--w-33 {
+				.ibe_mosaic {
+					&__info {
+						max-width: rem(246);
+					}
+					&__title {
+						font-size: rem(23);
+						&:after {
+							top: rem(49);
+						}
+					}
+					&__subtitle{
+						font-size: rem(11);
+					}
+					&__price {
+						font-size: rem(25.6);
+					}
+				}
+			}
+			&--w-25 {
+				.ibe_mosaic {
+					&__info {
+						max-width: rem(185);
+					}
+					&__title {
+						font-size: rem(18);
+						line-height: rem(48);
+						&:after {
+							top: rem(40);
+						}
+					}
+					&__subtitle{
+						font-size: rem(11);
+					}
+					&__price {
+						font-size: rem(22.4);
+						line-height: rem(30);
+					}
+				}
+			}
+			&--h-large {
+				height: rem(384);
+			}
+
+			&--h-normal {
+				height: rem(192);
+			}
+
+			&--h-medium {
+				height: rem(192);
+			}
+
+			&--h-small {
+				height: rem(143);
+			}
+		}
+		&__title {
+			font-size: rem(32);
+			line-height: rem(60);
+			&:after {
+				width: rem(57);
+				height: rem(1.9);
+				left: remcalc(50%, " - " , rem(30));
+				top: rem(56);
+			}
+		}
+		&__subtitle{
+			font-size: rem(12);
+		}
+		&__price {
+			font-size: rem(28.8);
+			line-height: rem(38);
+		}
+	}
+}
+
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_mosaic {
+	.ibe_mosaic {
+		&__piece {
+			&--w-100 {
+				.ibe_mosaic {
+					&__info {
+						max-width: rem(445);
+					}
+				}
+			}
+			&--w-50 {
+				.ibe_mosaic {
+					&__info {
+						max-width: rem(224);
+					}
+				}
+			}
+			&--w-33 {
+				.ibe_mosaic {
+					&__info {
+						max-width: rem(149);
+					}
+					&__title {
+						font-size: rem(18);
+					}
+					&__subtitle{
+						font-size: rem(11);
+					}
+					&__price {
+						font-size: rem(22);
+					}
+				}
+			}
+			&--w-25 {
+				width: 50%;
+				.ibe_mosaic {
+					&__info {
+						max-width: rem(224);
+					}
+					&__title {
+						font-size: rem(22);
+						line-height: rem(54);
+						&:after {
+							top: rem(42);
+						}
+					}
+					&__subtitle{
+						font-size: rem(12);
+					}
+					&__price {
+						font-size: rem(24);
+						line-height: rem(30);
+					}
+				}
+			}
+			&--h-large {
+				height: rem(238);
+			}
+
+			&--h-normal {
+				height: rem(119);
+			}
+
+			&--h-medium {
+				height: rem(119);
+			}
+
+			&--h-small {
+				height: rem(119);
+			}
+		}
+		&__title {
+			font-size: rem(22);
+			line-height: rem(48);
+			&:after {
+				width: rem(58);
+				height: rem(1);
+				left: calc(50% - 28px);
+				top: rem(38);
+			}
+		}
+		&__subtitle{
+			font-size: rem(12);
+		}
+		&__price {
+			font-size: rem(24);
+			line-height: rem(32);
+		}
+	}
+}
+
+@mixin xs-ibe_mosaic {
+	.ibe_mosaic {
+		&__piece {
+			&--w-100,
+			&--w-50,
+			&--w-33,
+			&--w-25 {
+				width: 100%;
+				.ibe_mosaic {
+					&__info {
+						max-width: rem(288);
+						padding: 0 rem(10);
+
+					}
+					&__title {
+						font-size: rem(26);
+						line-height: rem(50);
+						&:after {
+							width: rem(58);
+							height: rem(1);
+							left: remcalc(50%, " - " , rem(30));
+							top: rem(42);
+						}
+					}
+					&__subtitle{
+						font-size: rem(12);
+					}
+					&__price {
+						font-size: rem(24);
+						line-height: rem(32);
+					}
+				}
+			}
+			&--h-large {
+				height: rem(150);
+			}
+
+			&--h-normal {
+				height: rem(150);
+			}
+
+			&--h-medium {
+				height: rem(150);
+			}
+
+			&--h-small {
+				height: rem(150);
+			}
+		}
+		&__info {
+			max-width: rem(288);
+		}
+		&__title {
+			font-size: rem(26);
+			line-height: rem(50);
+			&:after {
+				width: rem(58);
+				height: rem(1);
+				left: remcalc(50%, " - " , rem(30));
+				top: rem(42);
+			}
+		}
+		&__subtitle{
+			font-size: rem(12);
+		}
+		&__price {
+			font-size: rem(24);
+			line-height: rem(32);
+		}
+	}
+}

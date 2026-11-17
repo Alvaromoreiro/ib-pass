@@ -1,0 +1,22 @@
+image: mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019
+
+stages:
+  - push_branch
+
+push_branch:
+  stage: push_branch
+  only:
+    - master
+  except:
+    refs:
+      - tags
+  script:
+    - git checkout "master"
+    - git merge origin/master
+    - git remote add github https://token:%GITHUB_TOKEN%@github.com/Iberia-Ent/%PROJECT_NAME%.git
+    - git push --force github master:GitLabSync
+  before_script:
+    - echo "GITLAB GITHUB SYNC STARTED"
+  after_script:
+    - git remote rm github
+    - echo "GITLAB GITHUB SYNC FINISHED"

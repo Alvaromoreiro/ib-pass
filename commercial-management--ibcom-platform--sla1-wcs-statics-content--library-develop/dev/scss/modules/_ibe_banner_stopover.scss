@@ -1,0 +1,195 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe-banner-stopover
+//    Desripcion: Estilos para el banner de Stopover
+//******************************************************************************/
+
+.ibe-banner-stopover {
+	font-family: $font-04;
+	text-align: left;
+	margin: 0;
+	height: rem(768);
+	position: relative;
+	background-position: right 90% bottom 50%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	&__img-container {
+		overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: inherit;
+	}
+
+	&__container {
+		position: relative;
+		height:100%; 
+		width: 100%;
+		z-index: 2;
+		text-align: left;
+	}
+
+	&__logo {
+		margin: rem(92) 0 0;
+	}
+
+	&__title {
+		color: $PC-cromatico_4;
+		font-size: rem(45);
+		width: rem(450);
+		margin: rem(24) 0 0 0;
+	}
+
+	&__subtitle {
+		color: $PC-cromatico_4;
+		font-size: rem(24);
+		width: rem(535);
+		margin: rem(16) 0 rem(88) 0;
+	}
+
+	&__back-img{
+		position: absolute;
+    left: 0;
+    z-index: 1;
+
+		&--top{
+			top: -242px;
+			left: -100px;
+			width: rem(648);
+			height: rem(648);
+			animation: rotation 30s infinite linear;
+		}
+
+		&--bottom {
+			bottom: 0;
+			width: rem(450);
+		}
+	}
+
+	&:after {
+		content:"";
+		position:absolute;
+		display: block;
+		top:0;
+		left:rem(-180);
+		width:60%;
+		height:100%;
+		z-index: 0;
+		-ms-transform: skew(-22deg); /* IE 9 */
+		-webkit-transform: skew(-22deg); /* Safari */
+		transform: skew(-22deg); /* Standard syntax */
+		background: linear-gradient(89.97deg, #D7192D 66.02%, rgba(215, 25, 45, 0) 197.8%);
+	}
+}
+
+@mixin l-ibe-banner-stopover {
+	.ibe-banner-stopover {
+		background-position: right 125% bottom 72%;
+		&:after {
+			width: 70%;
+		}
+
+		&__subtitle {
+			width: rem(450);
+		}
+	}
+}
+
+@mixin m-ibe-banner-stopover {
+	.ibe-banner-stopover {
+		&:after {
+			content:"";
+			position:absolute;
+			display: block;
+			top:0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 0;
+			-ms-transform: skew(0deg); /* IE 9 */
+			-webkit-transform: skew(0deg); /* Safari */
+			transform: skew(0deg); /* Standard syntax */
+			background: linear-gradient(#D7192D, #D7192D);
+			}
+		}
+}
+
+@mixin sm-ibe-banner-stopover {
+	.ibe-banner-stopover {
+		&:after {
+			content:"";
+			position:absolute;
+			display: block;
+			top:0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 0;
+			-ms-transform: skew(0deg); /* IE 9 */
+			-webkit-transform: skew(0deg); /* Safari */
+			transform: skew(0deg); /* Standard syntax */
+			background: linear-gradient(#D7192D, #D7192D);
+		}
+		
+		&__title{
+			width: auto;
+		}
+
+		&__subtitle {
+			width: auto;
+		}
+		
+		&__back-img--top {
+			display: none;
+		}
+	}
+}
+
+@mixin xs-ibe-banner-stopover {
+	.ibe-banner-stopover {
+		height: rem(480);
+		&:after {
+			content:"";
+			position:absolute;
+			display: block;
+			top:0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 0;
+			-ms-transform: skew(0deg); /* IE 9 */
+			-webkit-transform: skew(0deg); /* Safari */
+			transform: skew(0deg); /* Standard syntax */
+			background: linear-gradient(#D7192D, #D7192D);
+		}
+
+		&__logo {
+			margin: rem(42) 0 0;
+			width: rem(193);
+		}
+		
+		&__title {
+			font-size: rem(34);
+			width: rem(288);
+			margin-top: rem(16);
+		}
+
+		&__subtitle {
+			font-size: rem(16);
+			width: rem(288);
+			margin-top: rem(8);
+			margin-bottom: rem(67);
+		}
+
+		&__back-img--top {
+			display: none;
+		}
+	}}
+
+	@keyframes rotation {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(359deg);
+		}
+	}

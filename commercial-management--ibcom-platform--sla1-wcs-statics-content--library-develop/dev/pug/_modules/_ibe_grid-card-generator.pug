@@ -1,0 +1,42 @@
+
+mixin m-grid-card-generator(n)
+	- const possibleThemeCss = ["ibe-card-guides__theme--orange","ibe-card-guides__theme--yellow","ibe-card-guides__theme--purple","ibe-card-guides__theme--pin"]
+	- const possibleTheme = ["Ocio", "Compras", "Museos"]
+	- const possibleImgSrc = ["/modules/ibe_travel-guides/big-1.png","/modules/ibe_travel-guides/big-2.png"]
+	- const possibleRecommend = [true, false]
+	- const possibleOffer = [20, 50]
+	each i in Array(n)
+		- const themeCss = possibleThemeCss[Math.floor(Math.random() * possibleThemeCss.length)]
+		- const theme = possibleTheme[Math.floor(Math.random() * possibleTheme.length)]
+		- const imgSrc = possibleImgSrc[Math.floor(Math.random() * possibleImgSrc.length)]
+		- const recommend = possibleRecommend[Math.floor(Math.random() * possibleRecommend.length)]
+		- const offer = possibleOffer[Math.floor(Math.random() * possibleOffer.length)]
+		li.col-lg-4.col-md-4.col-sm-12.col-xs-12.ibe-card.ibe-card--stopover.ibe-card--news.ibe-grid__feature 
+			+m-card-guides-type({
+				"id": "1476391160540",
+				"guide": {
+					"group": "0",
+					"type": "body",
+					"cssClass": "ibe-card-guides--stopover"
+				},
+				"img": {
+					"src": globals.imgPath + imgSrc,
+					"alt": "Puente de Michigan",
+					"type": "tall"
+				},
+				"title": "Puente de Michigan 22",
+				"theme": theme,
+				"themeCss": themeCss,
+				"info": "Te sentir&aacute;s abrumado al ver la gradiosidad de este s&iacute;mbolo de la ciudad.",
+				"link": {
+					"href": "#",
+					"title": "Ver ficha",
+					"text": "Ver ficha",
+					"arrow": true
+				},
+				"cssClass": "ibe-card-guides__info--mobile",
+				"pClass": "ibe-ellipsis",
+				"offer": offer,
+				"recommend": recommend
+			})
+													

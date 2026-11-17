@@ -1,0 +1,338 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_choose-city-modal
+//    Desripcion: Estilos para el toggle de elegir ciudad (flights-plus-hotel) (caja de busqueda)
+//******************************************************************************/
+/* Elegir ciudad */
+.fc-dialog-all-destinations {
+    .ibe-choose-city {
+        display: none;
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 0;
+        background: $BCK-cromatico_1;
+        border-radius: 4px;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.47), 0 -1px 4px 0 rgba(0, 0, 0, 0.23);
+        z-index: 100;
+        max-height: rem(437);
+        /* Tab */
+        .ibe-tab {
+            display: flex;
+            align-items: stretch;
+            &__menu{
+                display: flex;
+                flex-flow: column nowrap;
+                width: rem(160);
+                padding: 0;
+                background-color: $PC-cromatico_4;
+                border-right: solid 1px #cccccc;
+                overflow: initial;
+                max-height: initial;
+            }
+            &__menu-item{
+                display: flex;
+                flex-flow: row nowrap;
+                width: 100%;
+                height: 100%;
+                padding: 0;  
+                background: $PC-cromatico_4;
+                border-bottom: solid 1px #cccccc;
+                .link{
+                    display: flex;
+                    justify-content: left;
+                    align-items: center;
+                    flex-flow: row wrap;
+                    width: 100%;
+                    padding: rem(22) rem(16) rem(22) rem(16);
+                    min-height: initial;
+                    font-family: $font-07;
+                    font-size: rem(13);
+                    line-height: initial;
+                    text-align: left;
+                    color: #777777;
+                    height: 100%;
+                }
+                &.ui-tabs-active{
+                    background: #d7192d;
+                    .link{
+                        color: $PC-cromatico_4;
+                        border: 0;
+                    }
+                }
+                &:first-child {
+                    margin-top: 0;
+                }
+                &:last-child {
+                    border-bottom: 0;
+                }
+
+            }
+            &__container{
+                display: block;
+                width: remcalc(100%, " - ",  rem(160));
+                max-width: 100%;
+                padding: 0;
+                background: $PC-cromatico_4;
+            }
+            &__title-accordion {
+                display: none;
+            }
+        }
+        /* Filter letter */
+        .ibe-filter-letter{
+            &__header{
+                display: none;
+            }
+            &__result {
+                column-count: 4;
+                -moz-column-count: 4; /* Firefox */
+                -webkit-column-count: 4; /* Chrome, Safari, Opera */
+            }
+            &__result-item {
+                width: 100%;
+                margin-left: rem(48);
+                .link {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                    color: #333333;
+                    font-size: rem(13);
+                    font-family: $font-07;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+            &__container{
+                margin-top: 0;
+                padding: rem(24) rem(80) rem(35) rem(48);
+            }
+            &--icon-mobile{
+                &:before{
+                    content: "\ea37";
+                    display: none;
+                }
+            }
+        }
+        /* Arrow .ibe-choose-city */
+        &:after {
+            display: none;
+        }
+        &:before {
+            display: none;
+        }
+        /* Modificadores */
+        &--visible{
+            display: block;
+            position: inherit;
+            top: inherit;
+            left: inherit;
+            z-index: 0;
+            &:after, &:before {
+                bottom: inherit;
+                left: inherit;
+                border: none;
+                content: '';
+                height: inherit;
+                width: inherit;
+                position: inherit;
+                margin-left: inherit;
+            }
+        }
+
+    }
+}
+/*X LARGE RESOLUTION STYLES*/
+@mixin xl-ibe_choose-city-modal{
+    .fc-dialog-all-destinations {
+        .ibe-choose-city{
+            .ibe-filter-letter{
+                display: block !important;
+                height: auto !important;
+            }
+        }
+    }
+}
+
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe_choose-city-modal{
+    .fc-dialog-all-destinations {
+        .ibe-choose-city{
+            .ibe-filter-letter{
+                display: block !important;
+                height: auto !important;
+            }
+        }
+    }
+}
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe_choose-city-modal{
+    .fc-dialog-all-destinations {
+        .ibe-choose-city {
+            max-height: inherit;
+            .ibe-tab {
+                flex-flow: row wrap;
+                &__menu {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    border-right: 0;
+                    border-bottom: solid 1px #cccccc;
+                    width: 100%;
+                }
+                &__menu-item {
+                    display: flex;
+                    width: 100%;
+                    min-width: 0;
+                    border-top: 0;
+                    border-bottom: 0;
+                    border-right: solid 1px #cccccc;
+                    text-align: center;
+                    justify-content: center;
+                    .link {
+                        text-align: center;
+                        justify-content: center;;
+                    }
+                    &:last-child {
+                        border-right: 0;
+                    }
+                }
+                &__container {
+                    display: block;
+                    width: 100%;
+                }
+            }
+            .ibe-filter-letter{
+                display: block !important;
+                height: auto !important;
+            }
+        }
+    }
+}
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_choose-city-modal{
+    @include m-ibe_choose-city-modal;
+    .fc-dialog-all-destinations {
+        .ibe-choose-city {
+            .ibe-tab {
+                &__menu {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    width: 100% !important;
+                    padding-right: rem(64);
+                    border: 0;
+                    background-color: #d7192d;
+                    overflow-y: scroll;
+                }
+                &__menu-item {
+                    position: relative;
+                    flex: 0 0 auto;
+                    width: auto;
+                    background-color: transparent;
+                    border-right: 0;
+                    .link {
+                        padding: rem(17) rem(12) rem(13) rem(12);
+                        color: #FFF;
+                        font-size: rem(12);
+                    }
+                    &.ui-tabs-active{
+                        &::after{
+                            content: "";
+                            border-bottom: 2px solid #FFF;
+                            width: 60%;
+                            position: absolute;
+                            bottom: 0;
+                            left: 50%;
+                            transform: translate(-50%, 0);
+                        }
+                    }
+                }
+                &__title-accordion {
+                    display: block;
+                    width: 100%;
+                    padding: 0;
+                    margin: 0;
+                    border-bottom: 0;
+                    &.collapsed {
+                        background: #d7192d;
+                        .ibe-tab__title-accordion-link {
+                            background: #d7192d;
+                            color: $PC-cromatico_4;
+                        }
+                        &:before {
+                            color: $PC-cromatico_4;
+                        }
+                    }
+                    &:before {
+                        right: rem(16);
+                        top: 50%;
+                        transform: translate(0, -50%);
+                        -ms-transform: translate(0, -50%);
+                        font-size: rem(20);
+                    }
+                }
+                &__title-accordion-link {
+                    display: block;
+                    padding: rem(14) rem(18);
+                    width: 100%;
+                    background: $PC-cromatico_4;
+                    font-family: $font-07;
+                    font-size: rem(11);
+                    line-height: 1.27;
+                    text-align: left;
+                    color: #777777;
+                }
+                .ibe-filter-letter{
+                    padding: 0;
+                    &__container {
+                        padding: rem(14) rem(76);
+                        max-height: inherit;
+                        overflow-x: initial;
+                    }
+                    &__result {
+                        padding: 0;
+                        column-count: 2;
+                        -moz-column-count: 2;
+                        -webkit-column-count: 2;
+                        column-gap: rem(16);
+                        .link {
+                            padding: 0;
+                        }
+                        &-item{
+                            margin-left: 0;
+                        }
+                    }
+                }
+                .ui-tabs-panel {
+                    // display: block !important;
+                    border-bottom: solid 1px #cccccc;
+                    &:last-child {
+                        border-bottom: 0;
+                    }
+                }
+                &__container {
+                    margin-bottom: 0;
+                    display: block;
+                    width: 100%;
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
+
+@mixin xs-ibe_choose-city-modal{
+    @include sm-ibe_choose-city-modal;
+    .fc-dialog-all-destinations {
+        .ibe-choose-city {
+            .ibe-tab {
+                .ibe-filter-letter{
+                    &__container {
+                        padding: rem(14) rem(16);
+                    }
+                }
+            }
+        }
+    }
+}

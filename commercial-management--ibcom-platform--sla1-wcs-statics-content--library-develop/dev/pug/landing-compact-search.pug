@@ -1,0 +1,57 @@
+extends _general/layout__primary
+
+block title
+	title!="IBERIA - Landings buscador reducido"
+block body
+
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({  
+		"login": false
+	})
+
+	// End wrapper 
+	main.ibe-compact-search
+		h1.sr-only Landing buscador reducido
+		div.ibe-search-flights.ibe-search-compact
+			div.ibe-search-compact__banner(style="background-image: url('../images/general/compact-search-provisional-bg.png')")
+				//- figure.ibe-search-compact__banner-fig
+				//- 	img.ibe-search-compact__banner-img(src="images/general/compact-search-provisional-bg.png" alt="")
+				div.ibe-search-flights__search.ibe-search-compact__searcher(data-function="data-compact-searcher")
+					div.ibe-search-flights__search-container.container.hidden-md.hidden-sm.hidden-xs(data-function="data-focus-searcher")
+						div.row
+							div.col-xs-12
+								div.ibe-search-compact__searcher-container--desktop
+									h2.title.title__h1.ibe-search-compact__searcher-title Buscar ofertas
+									div.fc-searcher-detector
+										button.ibe-search-compact__searcher-trigger(title="¿A dónde vas?", data-compact-searcher="trigger")
+											span.ibe-search-compact__searcher-trigger-input ¿A dónde vas?
+											span.ibe-search-compact__searcher-trigger-button
+												span.ibe-search-compact__searcher-trigger-button-icon.icon-buscar
+												span.ibe-search-compact__searcher-trigger-button-text.hidden-xs.hidden-sm Buscar
+										div.ibe-search-compact__searcher-container.ibe-search-compact__searcher-container--close(data-compact-searcher="desktop", style="display: none;")
+											div.ibe-search-flights__search-box(data-validate-searcher)
+												+m-searcher-accordion()
+					
+					div.ibe-search-compact__searcher-container--mobile.container.hidden-lg(data-function="data-focus-searcher-mobile")
+						div.row
+							div.col-xs-12
+								h2.title.title__h1.ibe-search-compact__searcher-title Buscar ofertas
+								div.fc-searcher-detector
+									button.ibe-search-compact__searcher-trigger(title="¿A dónde vas?", data-compact-searcher="trigger")
+										span.ibe-search-compact__searcher-trigger-input ¿A dónde vas?
+										span.ibe-search-compact__searcher-trigger-button
+											span.ibe-search-compact__searcher-trigger-button-icon.icon-buscar
+											span.ibe-search-compact__searcher-trigger-button-text.hidden-xs.hidden-sm Buscar
+									div.ibe-search-compact__searcher-container.ibe-search-compact__searcher-container--close(data-compact-searcher="mobile", style="display: none;")
+										div.ibe-search-flights__search-box(data-validate-searcher)
+											+m-searcher-accordion-mobile()
+				
+		
+	+m-footer({
+		"full": true
+	})

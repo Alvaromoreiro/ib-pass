@@ -1,0 +1,20 @@
+mixin m-box-items(params)
+	div.ibe-box-items(data-css="ibe-components/ibe-box-items/ibe-box-items", data-ibe-component="true")
+		each contentItem in params.contents
+			.ibe-box-items__content
+				h3.ibe-box-items__title(data-fc-height="3")!=contentItem.title
+				ul.ibe-box-items__list
+					each item in contentItem.items
+						li.ibe-box-items__item
+							if (item.description)
+								p.ibe-box-items__description(data-fc-box-height)!=item.description
+								a.ibe-box-items__link.icon-flecha_1_derecha(data-focusin, href=(item.href !== undefined ? item.href : "#ni"), title="Ir a " + item.text)
+									span.ibe-box-items__text!=item.text
+							else
+								if (item.type === "button")
+									button.ibe-box-items__item-link(type="button", data-focusin)
+										span.ibe-box-items__text!=item.text
+								else
+									a.ibe-box-items__item-link.icon-flecha_1_derecha(data-focusin, href=(item.href !== undefined ? item.href : "#ni"), title="Ir a " + item.text)
+										span.ibe-box-items__text!=item.text
+

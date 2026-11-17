@@ -1,0 +1,488 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe_flex
+//    Desripcion: Estilos para cajas flexibles usando flexbox
+//******************************************************************************/
+/* -------------------------------------------------------------
+    #FLEX CONTAINERS
+----------------------------------------------------------------- */
+
+.ibe-flex {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    //MODIFIERS
+    &__row {
+        display: flex;
+        flex-flow: row wrap;
+
+        &--nowrap {
+            display: flex;
+            flex-flow: row nowrap;
+        }
+    }
+
+    &__column {
+        display: flex;
+        flex-flow: column wrap;
+
+        &--nowrap {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+    }
+    //ITEM MODIFIERS
+    &--flex {
+        &-center {
+            justify-content: center;
+        }
+
+        &-start {
+            justify-content: flex-start;
+        }
+
+        &-end {
+            justify-content: flex-end;
+        }
+        &-1-1-0 {
+            flex: 1 1 0;
+        }
+    }
+
+    &--space {
+        &-between {
+            justify-content: space-between;
+        }
+
+        &-around {
+            justify-content: space-around;
+        }
+
+        &-evenly {
+            justify-content: space-evenly;
+        }
+    }
+
+    &--align {
+        &-center {
+            align-items: center;
+        }
+
+        &-start {
+            align-items: flex-start;
+        }
+
+        &-end {
+            align-items: flex-end;
+        }
+
+        &-strech {
+            align-items: stretch;
+        }
+
+        &-baseline {
+            align-items: baseline;
+        }
+
+        &-content {
+            &-start {
+                align-content: flex-start;
+            }
+        }
+    }
+
+    &--self {
+        &-strech {
+            align-self: stretch;
+        }
+
+        &-start {
+            align-self: flex-start;
+        }
+
+        &-end {
+            align-self: flex-end;
+        }
+    }
+
+    &--shrink {
+        &-1 {
+            flex-shrink: 1;
+        }
+
+        &-2 {
+            flex-shrink: 2;
+        }
+
+        &-235 {
+            flex-shrink: 2.35;
+        }
+    }
+
+    &--basis {
+        &-15 {
+            flex-basis: 15%;
+
+            &-spaced {
+                flex-basis: remcalc(15%, ' - ', rem(8));
+                margin-right: rem(8);
+            }
+        }
+
+        &-20 {
+            flex-basis: 20%;
+            margin-right: rem(24);
+
+            &-spaced {
+                flex-basis: remcalc(20%, ' - ', rem(32));
+                margin: rem(32) rem(32) 0 0;
+            }
+        }
+
+        &-25 {
+            flex-basis: 25%;
+            margin-right: rem(24);
+
+            &-spaced {
+                flex-basis: remcalc(25%, ' - ', rem(8));
+                margin-right: rem(8);
+
+                &:nth-child(4n) {
+                    margin-right: 0;
+                }
+            }
+
+            &-no-margin {
+                margin: 0;
+            }
+        }
+
+        &-40 {
+            flex-basis: 40%;
+            margin-right: rem(24);
+        }
+
+        &-50 {
+            flex-basis: 50%;
+
+            &-spaced {
+                flex-basis: remcalc(50%, ' - ', rem(12));
+            }
+            &-spaced-16 {
+                flex-basis: remcalc(50%, ' - ', rem(16));
+            }
+        }
+
+        &-60 {
+            flex-basis: 60%;
+            margin-right: rem(24);
+        }
+
+        &-75 {
+            flex-basis: 75%;
+        }
+
+        &-100 {
+            flex-basis: 100%;
+        }
+    }
+
+    &--pairs {
+        &:nth-child(2n) {
+            margin-right: 0;
+        }
+    }
+    &--gap{
+        &-none {
+            gap: 0; 
+        }
+        &-small {
+            gap: rem(8);
+        }
+        &-simple {
+           gap: rem(16); 
+        }
+        &-medium {
+            gap: rem(24);
+        }
+        &-double {
+            gap: rem(32);
+        }
+        &-card {
+            column-gap: rem(32);
+            padding: 0 rem(16);
+        }
+    }
+}
+
+//Responsive
+
+
+
+
+
+/* Responsive */
+/*TABLET RESOLUTION STYLES*/
+@mixin m-ibe_flex{
+    .ibe-flex {
+        &__row,
+        &__column {
+            &--wrap-md {
+                flex-wrap: wrap;
+            }
+
+            &--nowrap-md {
+                flex-wrap: nowrap;
+            }
+        }
+
+        &--flex {
+            &-center-md {
+                justify-content: center;
+            }
+
+            &-start-md {
+                justify-content: flex-start;
+            }
+
+            &-end-md {
+                justify-content: flex-end;
+            }
+        }
+
+        &--basis {
+            &-33 {
+                &-md {
+                    flex-basis: remcalc(33%, ' - ', rem(24));
+
+                    &:nth-child(3n) {
+                        margin-right: 0;
+                    }
+                }
+            }
+
+            &-80 {
+                &-md {
+                    flex-basis: 80%;
+                }
+            }
+
+            &-90 {
+                &-md {
+                    flex-basis: 90%;
+                }
+            }
+
+            &-95 {
+                &-md {
+                    flex-basis: 95%;
+                }
+            }
+
+            &-100 {
+                &-md {
+                    flex-basis: 100%;
+                }
+
+                &-md-mobile {
+                    flex-basis: 100%;
+                    margin-top: rem(21);
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+
+        &--gap {
+            &-card {
+                column-gap: rem(16);
+            }
+        }
+    }
+}
+
+/*MOBILE RESOLUTION STYLES*/
+@mixin mobile-ibe_flex {
+    .ibe-flex {
+        &__row {
+            &--mobile {
+                flex-flow: row wrap;
+            }
+
+            &--mobile-nw {
+                flex-flow: row nowrap;
+            }
+
+            &--mobile-w {
+                flex-flow: row wrap;
+            }
+        }
+
+        &__column {
+            &--mobile {
+                flex-flow: column wrap;
+            }
+
+            &--mobile-nw {
+                flex-flow: column nowrap;
+            }
+
+            &--mobile-w {
+                flex-flow: row wrap;
+            }
+        }
+
+        &__row,
+        &__column {
+            &--wrap-mobile {
+                flex-wrap: wrap;
+            }
+
+            &--nowrap-mobile {
+                flex-wrap: nowrap;
+            }
+        }
+
+        &--flex {
+            &-center-responsive {
+                justify-content: center;
+            }
+
+            &-start-responsive {
+                justify-content: flex-start;
+            }
+
+            &-end-responsive {
+                justify-content: flex-end;
+            }
+        }
+
+        &--align {
+            &-start-mobile {
+                align-items: flex-start;
+                justify-content: flex-start;
+            }
+        }
+
+        &--shrink {
+            &-mobile-none {
+                flex-shrink: inherit;
+            }
+        }
+
+        &--flex-start-mobile {
+            justify-content: flex-start;
+        }
+
+        &--basis {
+            &-100 {
+                &-mobile {
+                    flex-basis: 100%;
+                }
+
+                &-margin-mobile {
+                    flex-basis: 100%;
+                    margin-top: rem(21);
+                    margin-right: 0;
+                }
+
+                &-md-mobile {
+                    flex-basis: 100%;
+                    margin-top: rem(21);
+                    margin-right: 0;
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+            }
+
+            &-90 {
+                &-mobile {
+                    flex-basis: 90%;
+                }
+            }
+
+            &-m-0 {
+                margin-top: rem(0);
+            }
+        }
+
+        &[class*="-basis-"] {
+            margin-right: 0;
+        }
+        &--gap{
+            &-none-mobile {
+               gap: 0; 
+            }
+            &-small-mobile {
+                gap: rem(8);
+            }
+            &-simple-mobile {
+               gap: rem(16); 
+            }
+            &-medium-mobile {
+                gap: rem(24);
+            }
+            &-double-mobile {
+                gap: rem(32);
+            }
+        }
+    }
+}
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_flex {
+    @include mobile-ibe_flex;
+    .ibe-flex {
+        &--basis {
+            &-90-sm {
+                flex-basis: 90%;
+            }
+
+            &-95-sm {
+                flex-basis: 95%;
+            }
+
+            &-80-sm {
+                flex-basis: 80%;
+            }
+
+            &-100-sm {
+                flex-basis: 100%;
+            }
+        }
+
+        &--gap {
+            &-card {
+                column-gap: rem(16);
+            }
+        }
+    }
+}
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe_flex {
+    @include mobile-ibe_flex;
+    .ibe-flex {
+        &--basis {
+            &-25 {
+                flex-basis: 100%;
+                margin-right: rem(0);
+
+                &-spaced {
+                    flex-basis: 100%;
+                    margin-right: rem(0);
+                }
+            }
+
+            &-80-xs {
+                flex-basis: 80%;
+            }
+
+            &-100-xs {
+                flex-basis: 100%;
+            }
+        }
+    }
+}

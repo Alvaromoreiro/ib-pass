@@ -1,0 +1,260 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe-grouped-links
+//    Desripcion: Estilos para el grouped-links
+//******************************************************************************/
+.ibe-grouped-links{
+    margin-top: rem(50);
+    &__title{
+        font-size: rem(32);
+        font-family: $font-04;
+        color: $PC-cromatico_1;
+        text-align: center;
+        line-height: normal;
+    }
+    &__container{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+    &__item{
+        padding: rem(16) rem(24) rem(14);
+        background-color: $PC-cromatico_4;
+        max-width: calc((100% - 36px)/2);
+        flex-basis: 50%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-top: rem(24);
+        &:nth-child(1), &:nth-child(2){
+            margin-top: 0;
+        }
+        &:hover{
+            text-decoration: none;
+            .ibe-grouped-links__link{
+                &-text{
+                    color: $PC-cromatico_35;
+                    text-decoration: underline;
+                }
+                &-icon{
+                    color: $PC-cromatico_35;
+                    text-decoration: none;
+                }
+            }
+        }
+        &:focus{
+            outline: none;
+            border: 2px solid $BRD_standar_3;
+            text-decoration: none;
+            .ibe-grouped-links__link{
+                &-text{
+                    color: $PC-cromatico_35;
+                    text-decoration: underline;
+                }
+                &-icon{
+                    color: $PC-cromatico_35;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+    &__link{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        // max-width: 50%;
+        min-width: 40%;
+        &-text{
+            min-height: rem(28);
+            font-family: $font-04;
+            color: $PC-cromatico_3;
+            font-size: rem(26);
+            line-height: rem(26);
+            max-width: calc(100% - 20px);
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            word-break: break-all;
+        }
+        &-icon{
+            color: $PC-cromatico_3;
+            font-size: rem(20);
+            margin-left: rem(20);
+            line-height: rem(26);
+            transform: translateY(rem(1));
+        }
+        
+    }
+    &__link-back{
+        &-text{
+            min-height: rem(28);
+            font-family: $font-02;
+            color: $PC-cromatico_3;
+            font-size: rem(13);
+            line-height: rem(26);
+            max-width: calc(100% - 20px);
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            word-break: break-all;
+        }
+        &-icon{
+            color: $PC-cromatico_3;
+            font-size: rem(20);
+            margin-left: rem(20);
+            line-height: rem(26);
+        }
+        &-wrapper{
+            display: flex;
+        }
+        &:hover, &:focus{
+            text-decoration: underline;
+            color: $PC-cromatico_3;
+        }
+    }
+    &__info{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: baseline;
+        // max-width: 50%;
+    }
+    &__start-price{
+        &--md{
+            display: block;
+            font-family: $font-02;
+            color: $BCK-cromatico_20;
+            font-size: rem(16);
+            line-height: normal;
+            text-align: center;
+            margin: rem(16) 0 rem(40);
+        }
+    }
+    &__price{
+        font-family: $font-04;
+        color: $PC-cromatico_1;
+        font-size: rem(28);
+        margin-left: rem(9);
+        line-height: normal;
+    }
+    .title{
+        margin-bottom: rem(20);
+    }
+    &__bottom{
+		margin-top: rem(24);
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: center;
+		align-items: center;
+	}
+	&__more{
+		width: rem(48);
+		height: rem(48);
+		background-color: none;
+		border: 0 none;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50%;
+		border: rem(2) solid $BCK-cromatico_20;
+		background-color: $BCK-cromatico_1;
+		color: $BCK-cromatico_20;
+		&-icon{
+			font-size: rem(24);
+		}
+		&:hover{
+			border-color: $PC-cromatico_10;
+			color: $PC-cromatico_10;
+		}
+	}
+}
+
+/* LARGE RESOLUTION */
+@mixin l-ibe-grouped-links{
+    .ibe-grouped-links{
+        &__item{
+            padding: rem(16) rem(16) rem(14);
+            max-width: calc((100% - 32px)/2);
+        }
+        &__link{
+            // max-width: 49%;
+        }
+        &__info{
+            // max-width: 51%;
+        }
+    }
+}
+/* MEDIUM RESOLUTION */
+@mixin m-ibe-grouped-links{
+    .ibe-grouped-links{
+        &__title{
+            // margin-bottom: rem(16);
+        }
+        &__link{
+            // max-width: 50%;
+        }
+        &__info{
+            // max-width: 40%;
+        }
+        &__start-price{
+            // 
+        }
+    }
+}
+/* SMALL RESOLUTION */
+@mixin sm-ibe-grouped-links{
+    @include m-ibe_grouped-links;
+    .ibe-grouped-links{
+        margin-top: rem(42);
+        &__title{
+            // margin-bottom: rem(50);
+        }
+        &__container{
+            flex-flow: column nowrap;
+        }
+        &__item{
+            max-width: initial;
+            flex-basis: 100%;
+            flex-flow: row wrap;
+            &:nth-child(2){
+                margin-top: rem(24);
+            }
+        }
+        &__link{
+            max-width: 80%;
+        }
+        &__info{
+            max-width: 20%;
+        }
+        &__start-price{
+            //
+        }
+    }
+}
+
+/* X-SMALL RESOLUTION */
+@mixin xs-ibe-grouped-links{
+    @include sm-ibe_grouped-links;
+    .ibe-grouped-links{
+        margin-top: rem(50);
+        &__title{
+            // margin-bottom: rem(48);
+        }
+        &__item{
+            flex-flow: column nowrap;
+        }
+        &__link{
+            max-width: 100%;
+        }
+        &__info{
+            max-width: 100%;
+            margin-top: rem(10);
+        }
+    }
+}

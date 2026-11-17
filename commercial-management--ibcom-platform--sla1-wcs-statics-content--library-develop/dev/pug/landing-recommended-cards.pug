@@ -1,0 +1,200 @@
+extends _general/layout__primary
+
+block title
+	title!="IBERIA - Home"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main
+		+m-ibe-breadcrumbs({
+			"menu": "advSearch"
+		})
+
+		h1.sr-only Landing vuelos baratos 
+		.container
+			.row
+				.col-xs-12
+					.ibe-geo-origin(data-located="false")
+						h2.ibe-geo-origin__title
+							span.ibe-geo-origin__title-text!="Ofertas de vuelos desde"
+							div.ibe-geo-origin__selector
+								button.ibe-geo-origin__selector-button(type="button", data-toggle="collapse", data-target="#id-origin-selector", data-focusindata-target="", title="Seleccione el origen", data-close="outsideclick", data-focusin)
+									span.ibe-geo-origin__selector-button-text!="Madrid"
+									span.ibe-geo-origin__selector-button-icon.icon-caret_abajo
+								div.ibe_form.ibe-geo-origin__container.collapse(id="id-origin-selector", data-toggle="container", data-collapse="hide-resize", data-keyboard-close="esc", data-close="outsideclick")
+									div.ibe-geo-origin__content
+										div.ibe-geo-origin__wrap
+											div(class="ibe_form__group ibe_form__group--compact ibe_form__group--button-icon ibe_form__group--content u-text-left")
+												label(class="ibe_form__input-label", for="flight_origin")!="Origen"
+												input(class="ibe_form__input-text" name="flight_origin" id="flight_origin" type="text" placeholder="Origen" data-autocomplete="cities" spellcheck='false', value="Introduce un origen", data-destination-info="BCN", data-validate="input-origin", data-fligths-collapse-mobile="button", data-autocomplete-no-results="Tralala", data-char-activation="1",  data-target="#geopos-list", data-positioned="fc-geo-positioned")
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Debes elegir un origen")
+										div.ibe-geo-origin__active
+											button.ibe-geo-origin__active-button
+												span.ibe-geo-origin__active-button-icon.icon-senalizacion_mapas
+												span.ibe-geo-origin__active-button-text(title="Permitir la ubicación")!="Permitir la ubicación"
+										div.ibe-geo-origin__autocomplete(id="geopos-list")
+										div.ibe-geo-origin__positioned.fc-geo-positioned
+											div.ibe-geo-origin__location
+												div.ibe-geo-origin__group
+													p.ibe-geo-origin__group-title!="Tu ubicación"
+													ul.ui-menu.ui-autocomplete
+														li.ui-menu-item
+															a.ui-menu-item-link(href="#" title="Barcelona")
+																p.ui-menu-item-link__city Barcelona
+																span.ui-menu-item-link__country España
+												div.ibe-geo-origin__group
+													p.ibe-geo-origin__group-title Aeropuertos cercanos
+													ul.ui-menu.ui-autocomplete
+														li.ui-menu-item
+															a.ui-menu-item-link(href="#" title="Palma de Mallorca")
+																p.ui-menu-item-link__city!="Palma de Mallorca"
+																span.ui-menu-item-link__country!="245 km, España"
+														li.ui-menu-item
+															a.ui-menu-item-link(href="#" title="Perpignan")
+																p.ui-menu-item-link__city!="Perpignan"
+																span.ui-menu-item-link__country!="180 km, Francia"
+											div.ibe-geo-origin__unlocated
+												div.ibe-geo-origin__group
+													ul.ui-menu.ui-autocomplete
+														li.ui-menu-item
+															a.ui-menu-item-link(href="#" title="Madrid")
+																p.ui-menu-item-link__city!="Madrid"
+																span.ui-menu-item-link__country!="España"
+														li.ui-menu-item
+															a.ui-menu-item-link(href="#" title="Barcelona")
+																p.ui-menu-item-link__city!="Barcelona"
+																span.ui-menu-item-link__country!="España"
+														li.ui-menu-item
+															a.ui-menu-item-link(href="#" title="Palma de Mallorca")
+																p.ui-menu-item-link__city!="Palma de Mallorca"
+																span.ui-menu-item-link__country!="España"
+														li.ui-menu-item
+															a.ui-menu-item-link(href="#" title="Madrid")
+																p.ui-menu-item-link__city!="Madrid"
+																span.ui-menu-item-link__country!="España"
+														li.ui-menu-item
+															a.ui-menu-item-link(href="#" title="Barcelona")
+																p.ui-menu-item-link__city!="Barcelona"
+																span.ui-menu-item-link__country!="España"
+														li.ui-menu-item
+															a.ui-menu-item-link(href="#" title="Palma de Mallorca")
+																p.ui-menu-item-link__city!="Palma de Mallorca"
+																span.ui-menu-item-link__country!="España"
+
+			.row
+				.col-xs-12
+					.ibe-recommended-cards
+						h3.sr-only Recomendados
+						.ibe-recommended-cards__container(id="recommended-cards-content-0")
+							.ibe-recommended-cards__card
+								a(href="#" title="Vuelos a Gran Canaria - 120 €" class="ibe-recommended-cards__link")
+									div.ibe-recommended-cards__card-content
+										figure.ibe-recommended-cards__card-figure
+											img.ibe-recommended-cards__card-img(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/content/ABC_720x38.jpg", data-default-img="images/content/image-not-available.png", alt="Oferta Disneyland" )
+										div.ibe-recommended-cards__card-info
+											h3.ibe-recommended-cards__card-title Vuelos a San Juan Bautista de la Gomera (Islas Canarias)
+											div.ibe-recommended-cards__card-bottom
+												p.ibe-recommended-cards__card-text Vuelos ida y vuelta desde
+												p.ibe-recommended-cards__card-price 60 &euro;
+		
+							.ibe-recommended-cards__card
+								a(href="#" title="Vuelos a Gran Canaria - 120 €" class="ibe-recommended-cards__link")
+									div.ibe-recommended-cards__card-content
+										figure.ibe-recommended-cards__card-figure
+											img.ibe-recommended-cards__card-img(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/content/underground.jpg", data-default-img="images/content/image-not-available.png", alt="Oferta Disneyland" )
+										div.ibe-recommended-cards__card-info
+											h3.ibe-recommended-cards__card-title Oporto
+											div.ibe-recommended-cards__card-bottom
+												p.ibe-recommended-cards__card-text Vuelos ida y vuelta desde
+												p.ibe-recommended-cards__card-price 60 &euro;
+		
+							.ibe-recommended-cards__card
+								a(href="#" title="Vuelos a Gran Canaria - 120 €" class="ibe-recommended-cards__link")
+									div.ibe-recommended-cards__card-content
+										figure.ibe-recommended-cards__card-figure
+											img.ibe-recommended-cards__card-img(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/content/paris.jpg", data-default-img="images/content/image-not-available.png", alt="Oferta Disneyland" )
+										div.ibe-recommended-cards__card-info
+											h3.ibe-recommended-cards__card-title Bilbao
+											div.ibe-recommended-cards__card-bottom
+												p.ibe-recommended-cards__card-text Vuelos ida y vuelta desde
+												p.ibe-recommended-cards__card-price 60 &euro;
+		
+							.ibe-recommended-cards__card
+								a(href="#" title="Vuelos a Gran Canaria - 120 €" class="ibe-recommended-cards__link")
+									div.ibe-recommended-cards__card-content
+										figure.ibe-recommended-cards__card-figure
+											img.ibe-recommended-cards__card-img(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/content/grecia.jpg", data-default-img="images/content/image-not-available.png", alt="Oferta Disneyland" )
+										div.ibe-recommended-cards__card-info
+											h3.ibe-recommended-cards__card-title Alicante
+											div.ibe-recommended-cards__card-bottom
+												p.ibe-recommended-cards__card-text Vuelos ida y vuelta desde
+												p.ibe-recommended-cards__card-price 60 &euro;
+		
+							.ibe-recommended-cards__card
+								a(href="#" title="Vuelos a Gran Canaria - 120 €" class="ibe-recommended-cards__link")
+									div.ibe-recommended-cards__card-content
+										figure.ibe-recommended-cards__card-figure
+											img.ibe-recommended-cards__card-img(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/content/disney.jpg", data-default-img="images/content/image-not-available.png", alt="Oferta Disneyland" )
+										div.ibe-recommended-cards__card-info
+											h3.ibe-recommended-cards__card-title Miami
+											div.ibe-recommended-cards__card-bottom
+												p.ibe-recommended-cards__card-text Vuelos ida y vuelta desde
+												p.ibe-recommended-cards__card-price 60 &euro;
+		
+							.ibe-recommended-cards__card
+								a(href="#" title="Vuelos a Gran Canaria - 120 €" class="ibe-recommended-cards__link")
+									div.ibe-recommended-cards__card-content
+										figure.ibe-recommended-cards__card-figure
+											img.ibe-recommended-cards__card-img(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/content/chicago.jpg", data-default-img="images/content/image-not-available.png", alt="Oferta Disneyland" )
+										div.ibe-recommended-cards__card-info
+											h3.ibe-recommended-cards__card-title Berlín
+											div.ibe-recommended-cards__card-bottom
+												p.ibe-recommended-cards__card-text Vuelos ida y vuelta desde
+												p.ibe-recommended-cards__card-price 60 &euro;
+		
+							.ibe-recommended-cards__card
+								a(href="#" title="Vuelos a Gran Canaria - 120 €" class="ibe-recommended-cards__link")
+									div.ibe-recommended-cards__card-content
+										figure.ibe-recommended-cards__card-figure
+											img.ibe-recommended-cards__card-img(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/content/pod_pack_vacacional.jpg", data-default-img="images/content/image-not-available.png", alt="Oferta Disneyland" )
+										div.ibe-recommended-cards__card-info
+											h3.ibe-recommended-cards__card-title Zúrich
+											div.ibe-recommended-cards__card-bottom
+												p.ibe-recommended-cards__card-text Vuelos ida y vuelta desde
+												p.ibe-recommended-cards__card-price 60 &euro;
+		
+							.ibe-recommended-cards__card
+								a(href="#" title="Vuelos a Gran Canaria - 120 €" class="ibe-recommended-cards__link")
+									div.ibe-recommended-cards__card-content
+										figure.ibe-recommended-cards__card-figure
+											img.ibe-recommended-cards__card-img(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/content/pod_coche.jpg", data-default-img="images/content/image-not-available.png", alt="Oferta Disneyland" )
+										div.ibe-recommended-cards__card-info
+											h3.ibe-recommended-cards__card-title San José de Costa Rica
+											div.ibe-recommended-cards__card-bottom
+												p.ibe-recommended-cards__card-text Vuelos ida y vuelta desde
+												p.ibe-recommended-cards__card-price 60 &euro;
+		
+							.ibe-recommended-cards__card
+								a(href="#" title="Vuelos a Gran Canaria - 120 €" class="ibe-recommended-cards__link")
+									div.ibe-recommended-cards__card-content
+										figure.ibe-recommended-cards__card-figure
+											img.ibe-recommended-cards__card-img(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/content/pod_vuelo_hotel.jpg", data-default-img="images/content/image-not-available.png", alt="Oferta Disneyland" )
+										div.ibe-recommended-cards__card-info
+											h3.ibe-recommended-cards__card-title Santiago de Compostela
+											div.ibe-recommended-cards__card-bottom
+												p.ibe-recommended-cards__card-text Vuelos ida y vuelta desde
+												p.ibe-recommended-cards__card-price 60 &euro;
+						.ibe-recommended-cards__bottom
+							button.ibe-recommended-cards__more(title="Ver más")
+								span.sr-only Ver más
+								span.ibe-recommended-cards__more-icon.icon-mas_3
+		
+	+m-footer()

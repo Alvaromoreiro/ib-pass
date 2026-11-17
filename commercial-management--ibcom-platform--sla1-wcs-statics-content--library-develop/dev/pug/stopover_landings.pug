@@ -1,0 +1,64 @@
+extends _general/layout__primary
+
+mixin list-page(params)
+	- params = params || {};
+
+	ul
+		each val in params.items
+			li
+				a(href=val.href, title="Ir a " + val.title, target="_blank", style="font-size: 16px; color: grey; font-weight: 700; font-family: iberiaheadline")!=val.title
+
+block title
+	title!="IBERIA -Pagina de enlaces del proyecto"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	section.container
+		div.row
+			div.col-xs-12
+				h2(class="title title__h2") Stopover Landings
+				+list-page({
+					'items': [
+						{
+							'title': 'NEW TAB HOME',
+							'href': 'stopover_home-tabs.html'
+						},
+						{
+							'title': 'EXPERIENCE FILE',
+							'href': 'stopover_experience-file.html'
+						},
+												{
+							'title': 'EXPERIENCE FILE DISCOUNT EMAIL',
+							'href': 'stopover_experience-file-discount-email.html'
+						}, 
+						{
+							'title': 'EXPERIENCE FILE NO OFFER',
+							'href': 'stopover_experience-file-no-offer.html'
+						}, 
+						{
+							'title': 'EXPERIENCES',
+							'href': 'stopover_experiences.html'
+						},
+						{
+							'title': 'RECOMMENDED PLANS',
+							'href': 'stopover_recommended-plans.html'
+						},
+						{
+							'title': 'HOME',
+							'href': 'stopover_home.html'
+						},
+						{
+							'title': 'FAQS',
+							'href': 'stopover_faqs.html'
+						},
+					]
+				})
+

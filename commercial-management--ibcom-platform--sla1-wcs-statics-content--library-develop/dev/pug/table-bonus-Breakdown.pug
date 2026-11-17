@@ -1,0 +1,47 @@
+extends _general/layout__primary
+include _modules/_ibe_searcher-flight-status
+include _modules/_modals/_ibe-modal-where
+
+block title
+	title!="IBERIA - Consulta y unificacion de bonos"
+block body
+		section.container
+			div.row
+				div.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-xs-12
+					h2.title.title--padd-bono.title__h2.title--f-26.title--grey Consulta y gestión de tus bonos
+			div.row
+				div.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-xs-12
+					section.ibe-flight-status.ibe-flight-status__section
+						div.ibe-tab.ibe-tab--main
+							ul.ibe-tab__menu(data-tab="bootstrap-tabdrop", data-tab-text="Otros")
+								li.ibe-tab__menu-item.active
+									a.ibe-tab__menu-item__text(href="#tab-1", title="Consulta tu bono", data-toggle="tab")!= "Consulta tu bono"
+								li.ibe-tab__menu-item
+									a.ibe-tab__menu-item__text(href="#tab-2", title="Unifica tus bonos" data-toggle="tab")!= "Unifica tus bonos"
+							.tab-content
+								//- CONTAINER Consulta y unificacion de bonos
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium.active(id="tab-1" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+										
+								//- CONTAINER Consulta y unificacion de bonos
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium.active(id="tab-2" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+										div.ibe_form__box--claim.ibe_form__box--center-msg
+											.ibe-alert.ibe-alert--info-light.ibe-alert--smedium.ibe-alert--no-margin
+												p.ibe-alert__text.ibe-alert__text--red.ibe-alert__text--bold.u-mb-small Lo sentimos, no hemos podido enviárte un correo de confirmación
+												p.ibe-alert__text.ibe-alert__text--gray Te aconsejamos que apuntes el código de tu bono o guardes una captura de pantalla para usarlo posteriormente
+										div.ibe_form__box--claim.ibe_form__box--center-big.ibe_form__box--center-big--p-top
+											div.ibe_form__box--center-big__confirm-bono
+												span.ibe-icon-form-bonus
+												p.title__big.title__h1.title--font-bono!="Te hemos enviado tu bono con código"
+												p.title__big.title__h1.title--font-bono!="KILASJO751032948203984"
+												p.title__h5.title--font-bono-mail.paragraph__regular--m-top-10.paragraph__regular--bold!="Tu bono llegará a "
+													span.title__h5.title--font-bono-mail.paragraph__regular--bold(data-mail-confirm)!="#correo@dominio.com#"
+												p.title__h5.title__h5--small.title--m-medium!=" Si no lo recibes en 72 horas, busca el email "
+													a.title__h5.title__h5--small(href="#", title="Ir a busca el email" data-mail-confirm)!="bono@iberia.com "
+													span.title__h5.title__h5--small.title--font-bono-mail!="en tu carpeta de correo no deseado (spam), y recupéralo."
+												button.ibe-button--top-bonos.ibe-button.ibe-button--red.ibe-button--smaller.ibe-button--morelarge(type='button') Unificar otros bonos
+											
+												
+								
+											

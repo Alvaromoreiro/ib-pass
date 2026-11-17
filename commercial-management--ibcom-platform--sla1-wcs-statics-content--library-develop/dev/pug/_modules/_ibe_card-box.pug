@@ -1,0 +1,93 @@
+mixin m-card-box(params)
+    if (params.isLink)
+        article.ibe-card-box(class=(params.autoHeight != undefined ? params.autoHeight : "" + params.modifier != undefined ? params.modifier:""))
+            a.ibe-card-box__link(data-focusin href="#", title=(params.link != undefined ? params.link.name : params.title), class=(params.zoom != undefined ? "ibe-effects__link--zoomin" : ""))
+                div.ibe-card-box__container 
+                    div.ibe-card-box__background
+                        figure.ibe-card-box__figure
+                            //-img.ibe-card-box__img(src=(params.image.customSrc != undefined ? params.image.customSrc : globals.imgPath + params.image.src), alt=params.image.alt)
+                            img.ibe-card-box__img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==", data-src=(params.image.customSrc != undefined ? params.image.customSrc : globals.imgPath + params.image.src) ,alt=params.image.alt)
+                        if(params.video)
+                            div.ibe-card-box__video
+                        if (params.logo)
+                            figure.ibe-card-box__logo
+                                img.ibe-card-box__logo-img(src=(params.logo.customSrc != undefined ? params.logo.customSrc : globals.imgPath + params.logo.src) alt=params.logo.alt)
+                    div.ibe-card-box__content
+                        if (params.iconBefore)
+                            figure.ibe-card-box__img-logo
+                                img(src=globals.imgPath + params.iconBefore.src, alt=params.iconBefore.alt)
+                        if (params.date)
+                            p.ibe-card-box__date!=params.date
+                        div(data-dotdotdot=(params.dotdotdot != undefined ? "false" : "collapse-text"), class=(params.bigText != undefined ? "ibe-card-box__text--text-ellipsis-big" : "ibe-card-box__text--text-ellipsis"), class=(params.price != undefined ? " ibe-card-box__text--price" : ""))
+                            if (params.imageRss)
+                                h3.ibe-card-box__title.ibe-card-box__title-rrss!=params.title
+                                figure.ibe-card-box__icon-rrss
+                                    img(src=globals.imgPath + params.imageRss.srcRss, alt=params.imageRss.altRss, title=params.imageRss.altRss).ibe-card-box__icon-rrss--img
+                            else if(params.iconEmpty)
+                                h3.ibe-card-box__title.ibe-card-box__title-empty!=params.title
+                            else
+                                h3.ibe-card-box__title!=params.title
+                            p.ibe-card-box__paragraph--paragraph-ellipsis!=(params.text != undefined ? params.text : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sollicitudin tortor justo, id tincidunt sapien volutpat non. Praesent sollicitudin tortor justo, id tincidunt sapien volutpat non. Praesent sollicitudin tortor justo, id tincidunt sapien volutpat non. Praesent sollicitudin tortor justo, id tincidunt sapien volutpat non. ")
+                            if (params.exampleText)
+                                if (params.exampleText === true)
+                                    p.ibe-card-box__paragraph--paragraph-ellipsis Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sollicitudin tortor justo, id tincidunt sapien volutpat non; Cras fringilla lectus sollicitudin sem mattis facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin tempus justo a quam ultricies, ac laoreet libero condimentum.
+                                else
+                                    p.ibe-card-box__paragraph--paragraph-ellipsis!=params.exampleText
+                        if (params.priceText)
+                            p.ibe-card-box__paragraph--paragraph-small-ellipsis!="Hotel 1 noche p/p desde"
+                        if (params.price)
+                            p.ibe-card-box__price!="35 "
+                                span.paragraph--currency &euro;                         
+                        if (params.link!==undefined)
+                            span.link.link__regular.link__regular--important(class=(params.iconBefore!=undefined?" link__regular--single-arrow":""))!=params.link.content
+                        //-if (params.linkPartner)
+                        //-    span.link.link-partners.link__regular.link__regular--important!=params.linkPartner.content
+                        //- if (params.date)
+                        //-     p.ibe-card-box__date!=params.date
+    else
+        article.ibe-card-box(class=(params.autoHeight != undefined ? params.autoHeight : ""))
+            if (params.offer) 
+                div.ibe-card-box__container
+                        div.ibe-card-box__background.ibe-card-box__background--small
+                            figure.ibe-card-box__figure
+                                img.ibe-card-box__img(src=(params.image.customSrc != undefined ? params.image.customSrc : globals.imgPath + params.image.src), alt=params.image.alt)
+                            if (params.logo)
+                                figure.ibe-card-box__logo
+                                    img.ibe-card-box__logo-img(src=(params.logo.customSrc != undefined ? params.logo.customSrc : globals.imgPath + params.logo.src) alt=params.logo.alt)
+                        div.ibe-card-box__content
+                            div.ibe-card-box__text
+                                h3.ibe-card-box__title.ibe-card-box__title--red.ibe-card-box__title--big!=params.title
+                                    if(params.subtitle && params.subtitle != "") 
+                                        span.ibe-card-box__title.ibe-card-box__title--red.ibe-card-box__title--big!=params.subtitle
+                                p.ibe-card-box__paragraph--paragraph-ellipsis.ibe-card-box__paragraph--paragraph-ellipsis--font-bigsize!=(params.text != undefined ? params.text : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sollicitudin tortor justo, id tincidunt sapien volutpat non. Praesent sollicitudin tortor justo, id tincidunt sapien volutpat non. Praesent sollicitudin tortor justo, id tincidunt sapien volutpat non. Praesent sollicitudin tortor justo, id tincidunt sapien volutpat non. ")
+                        if (params.price)
+                            div.ibe-card-box__price-group.ibe-card-box__price-group--bottom
+                                p.paragraph.paragraph__regular
+                                    span.ibe-card-box__paragraph--paragraph-no-margin="ida y vuelta desde"
+                                p.paragraph.paragraph__regular--prize.fs-48
+                                    span.paragraph--highlight!="602,45"
+                                    span.paragraph--highlight &euro;
+            else 
+                div.ibe-card-box__container
+                        div.ibe-card-box__background
+                            figure.ibe-card-box__figure
+                                img.ibe-card-box__img(src=(params.image.customSrc != undefined ? params.image.customSrc : globals.imgPath + params.image.src), alt=params.image.alt)
+                            if (params.logo)
+                                figure.ibe-card-box__logo
+                                    img.ibe-card-box__logo-img(src=(params.logo.customSrc != undefined ? params.logo.customSrc : globals.imgPath + params.logo.src) alt=params.logo.alt)
+                        div.ibe-card-box__content
+                            div.ibe-card-box__text--text-ellipsis(data-dotdotdot="collapse-text")
+                                h3.ibe-card-box__title!=params.title
+                                p.ibe-card-box__paragraph--paragraph-ellipsis Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sollicitudin tortor justo, id tincidunt sapien volutpat non.
+                                    if (params.exampleText)
+                                        if (params.exampleText === "example")
+                                            p.ibe-card-box__paragraph--paragraph-ellipsis Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sollicitudin tortor justo, id tincidunt sapien volutpat non; Cras fringilla lectus sollicitudin sem mattis facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin tempus justo a quam ultricies, ac laoreet libero condimentum.
+                                            p.ibe-card-box__paragraph-paragraph-small-ellipsis Lorem ipsum dolor sit amet.
+                                        else
+                                            p.ibe-card-box__paragraph--paragraph-ellipsis!=params.exampleText
+                            if (params.link)
+                                a.link.link__regular.link__regular--important(href="#", title=(params.link.title != undefined ? params.link.title : params.link.content))!=params.link.content
+                        if (params.price)
+                            p.paragraph.paragraph__regular
+                                span.paragraph--highlight!="35 "
+                                span.paragraph--currency &euro;

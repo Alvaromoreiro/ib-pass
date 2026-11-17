@@ -1,0 +1,24 @@
+mixin m-lat-menu(params)
+    nav.ibe-lat-menu.hidden-md.hidden-sm.hidden-xs
+        ul.ibe-lat-menu__list
+            each item in params.items
+                if (item.cssClass)
+                    li.ibe-lat-menu__item(class=item.cssClass)
+                        a.ibe-lat-menu__link(href="#" title=item.title)!=item.link
+                        if (item.sub)
+                            ul.ibe-lat-menu__sublist
+                                each subitem in item.sub
+                                    li.ibe-lat-menu__item
+                                        a.ibe-lat-menu__link(href="#" title=subitem.title)!=subitem.link
+                else
+                    li.ibe-lat-menu__item
+                        a.ibe-lat-menu__link(href="#" title=item.title)!=item.link
+                        if (item.sub)
+                            ul.ibe-lat-menu__sublist
+                                each subitem in item.sub
+                                    if (subitem.cssClass)
+                                        li.ibe-lat-menu__item(class=subitem.cssClass)
+                                            a.ibe-lat-menu__link(href="#" title=subitem.title)!=subitem.link
+                                    else
+                                        li.ibe-lat-menu__item
+                                            a.ibe-lat-menu__link(href="#" title=subitem.title)!=subitem.link

@@ -1,0 +1,1181 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_table
+//    Desripcion: Estilos para el modulo de idioma y ayuda
+//******************************************************************************/
+.ibe-table-flight-status {
+	&__table {
+		display: table;
+		border: 1px solid $PC-cromatico_5;
+		border-radius: 0;
+		width: 100% !important;
+		font-size: rem(13); 
+		border-collapse: separate;
+
+		tr[data-flight-status-tr]{
+			cursor: pointer;
+		}
+	}
+
+	&__thead {
+		padding: 0 rem(16);
+		background-color: $PC-cromatico_8;
+
+	}
+
+	&__tr {
+		
+		
+		&:nth-of-type(even) {
+			background-color: $PC-cromatico_7;
+		}
+	}
+	
+
+	&__th {
+		font-family: $font-02;
+		;
+		font-weight: bold;
+		color: $PC-cromatico_28;
+		padding: rem(9) rem(10) rem(9) 0;
+		pointer-events: none;
+
+		&--order {
+			pointer-events: initial;
+			cursor: pointer;
+
+			&.sorting_asc {
+				>.ibe-table-flight-status__text {
+					&:after {
+						content: "\e92e";
+						display: inline-block;
+						font-family: $font-05;
+						padding-left: rem(4);
+						line-height: 15px;
+						vertical-align: middle;
+					}
+				}
+			}
+
+			&.sorting_desc {
+				>.ibe-table-flight-status__text {
+					&:after {
+						content: "\e92d";
+						display: inline-block;
+						font-family: $font-05;
+						padding-left: rem(4);
+						line-height: 15px;
+						vertical-align: middle;
+					}
+				}
+			}
+
+			&.sorting {
+				>.ibe-table-flight-status__text {
+					&:after {
+						content: "\ea68";
+						display: inline-block;
+						font-family: $font-05;
+						font-size: rem(8);
+						padding-left: rem(4);
+						line-height: 15px;
+						vertical-align: middle;
+					}
+				}
+			}
+		}
+
+		&:first-child {
+			padding-left: rem(16);
+		}
+
+		&:last-child {
+			padding-right: rem(23);
+		}
+	}
+
+	&__td {
+		padding-top: rem(22);
+		padding-bottom: rem(24);
+		border-top: 1px solid $PC-cromatico_5;
+		vertical-align: top;
+
+		&--detail{
+			padding: 0!important;
+		}
+
+		.icon-reloj-bold:before {
+			font-weight: 600;
+			font-size: 18px;
+			padding-top: 2px;
+		}
+	}
+
+	
+
+	&__text {
+		display: inline-block;
+		width: 100%;
+		word-break: break-word;
+		font-family: $font-02;
+		font-size: rem(13);
+		line-height: 22px;
+		color: $PC-cromatico_1;
+
+		&--grey {
+			color: $PC-cromatico_28;
+		}
+
+		&--clear {
+			color: $PC-cromatico_2;
+		}
+
+		&--pt {
+			padding-top: rem(2);
+		}
+
+		&--pt-medium {
+			padding-top: rem(10);
+		}
+
+		&--bold {
+			font-weight: bold;
+		}
+		&--black {
+			color: black;
+		}
+		&--plus-one{
+			display:inline;
+			padding-left: rem(2);
+			font-size: rem(13);
+			color: #666
+		}
+
+		&--icon {
+			vertical-align: top;
+			padding-left: rem(23);
+			padding-right: rem(6);
+		}
+
+		&--block {
+			display: block;
+		}
+		&--inline {
+			display: inline;
+		}
+
+		&--mobile {
+			display: none;
+		}
+		&--green {
+			color: $PC-cromatico_25;
+		}
+		&--brown {
+			color: $PC-cromatico_29;
+		}
+		&--small {
+			font-size: rem(12);
+		}
+	}
+
+	&__figure {
+		width: auto;
+		height: rem(21);
+
+		.ibe-table-flight-status__img { 
+			width: auto;
+			height: 100%;
+			max-width: 90%; //- Esto fue por poner en paralelo los logo de IBE y AIR nostrum. 
+			//-Si ponen algun logo en formato cuadrado, probablemte se descuadre. 
+			//-Entonces hay que levantar el motivo por lo que está esta limitación
+			
+		}	
+	}
+
+	&__img {
+		&--mobile {
+			display: none;
+		}
+	}
+	
+
+	&__detail{
+		
+		position: relative;
+		padding-top: rem(20);
+		padding-bottom: rem(20);
+		background: $BCK-cromatico_18;
+		//display: none;
+		
+
+		&::before{
+			bottom: 100%;
+			left: 50%;
+			border: solid transparent;
+			content: " ";
+			height: 0;
+			width: 0;
+			position: absolute;
+			border-color: rgba(255, 255, 255, 0);
+			border-bottom-color: $BCK-cromatico_18;
+			border-width: rem(7);
+			margin-left: -0.5rem;
+			z-index: 0;
+		}
+		&--numflight{
+			margin-top: rem(12);
+			margin-bottom: rem(16);
+			padding-top: 40px;
+			padding-bottom: 40px;
+			&::before{
+				left: rem(94);
+			}
+			
+		}
+
+		&-box{
+			position: relative;
+			margin: 0 auto;
+			width: 100%;
+			max-width: rem(736);
+			background: $BCK-cromatico_1;
+			padding: rem(52) rem(48) rem(20) rem(48);
+			box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.32), 0 -1px 4px 0 rgba(0, 0, 0, 0.11);
+
+			.ibe-button-closed{
+				position: absolute;
+				display: block;
+				width: rem(24);
+				height: rem(24);
+				right: rem(14);
+				top: rem(14);
+				background-color: transparent;
+				border: 0;
+				color: $PC-cromatico_2;
+				font-family: "iberia";
+				font-size: rem(35);
+				font-weight: 500;
+				cursor: pointer;
+				&::before{
+					content: "\e935";
+					position: absolute;
+					right: rem(-6);
+					top: rem(-12);
+				}
+			}
+			.ibe-table-flight-status__text--green {
+				color: $PC-cromatico_25;
+			}
+			&--numflight{
+				padding-top: rem(32);
+				.ibe-table-flight-status__detail_table-head{
+					.ibe-table-flight-status__th-detail--small{
+						padding-top: rem(35);
+					}
+				}
+				
+			}
+		}
+		&_table-head{
+			width: 100%;
+			cursor: inherit;
+			&__thead{
+				background-color: $BCK-cromatico_4;
+				
+				font-size: rem(11);
+				line-height: 20px;
+			}
+			.ibe-table-flight-status__text--green {
+				color: $PC-cromatico_25;
+			}
+			.ibe-table-flight-status__text--brown {
+				color: $PC-cromatico_29;
+			}
+			.ibe-table-flight-status__text--black {
+				color: $PC-cromatico_16;
+				
+			}
+			.ibe-table-flight-status__text--grey {
+				color: $PC-cromatico_28;
+			}
+			
+			.ibe-table-flight-status__th-detail{
+				
+				padding: rem(13) rem(10) rem(11) 0;
+				&:first-child {
+					padding-left: rem(23);
+				}
+		
+				&:last-child {
+					padding-right: rem(23);
+				}
+			}
+			.ibe-flight-status__icon--status::before {
+				top: rem(2); 
+			}
+			
+			.ibe-table-flight-status__th-detail--small{
+				width: 34%;
+				display: inline-block;
+				vertical-align: top;
+			}
+			.ibe-table-flight-status__th-detail--long{
+				display: inline-block;
+				width: 30%;
+				height: rem(50);
+				text-align: center;
+				vertical-align: top;
+				padding-top: rem(22);
+				vertical-align: top;
+				
+				
+			}
+			.ibe-table-flight-status__th-detail--right{
+				text-align: right;
+			}
+			.ibe-table-flight-status__th-detail--center{
+				text-align: center;
+				padding-top: rem(10);
+			}
+			
+			.ibe-table-flight-status__text{
+				font-size: rem(11);
+				line-height: 20px;
+			}
+			.ibe-table-flight-status__icon-detail{
+				
+				.ibe-table-flight-status__text{
+					font-size: rem(18);
+					font-family: $font-04;
+				}
+				.ibe-table-flight-status__text--icon{
+					display: inline;
+				}
+				
+				
+			}
+			.ibe-view-movil{
+				display: none
+			}
+
+			.icon-reloj-bold:before {
+				padding-top: 0;
+			}
+		}
+		&_table-dates{
+			width: 100%;
+			background: $PC-cromatico_4;
+			border-bottom: 1px solid $BRD_standar_5;
+			border-left: 1px solid $BRD_standar_5;
+			border-right: 1px solid $BRD_standar_5;
+			.ibe-table-flight-status__origin{
+				width: 100%;
+			}
+			.ibe-table-flight-status__text{
+				font-size: rem(13);
+				line-height: 20px;
+			}
+			.ibe-table-flight-status__text--icon{
+				font-size: rem(13);
+			}
+			.ibe-flight-status__icon--status{
+				font-size: 1.375rem;;
+				
+			}
+			
+			.ibe-table-flight-status__td-detail{
+				display: inline-block;
+				border-top: 0;
+				padding-left: rem(20);
+				width: 49.5%;
+				background: $PC-cromatico_4;
+				padding-top: rem(18);
+				padding-bottom: rem(20);
+				
+			}
+			.ibe-table-flight-status__td-detail:first-child{ 
+				border-right: 1px solid $BRD_standar_5;
+			}
+			.ibe-table-flight-status__td-detail-left,
+			.ibe-table-flight-status__td-detail-right{
+				font-size: rem(13);
+				line-height: 20px;
+				padding-top: 0;
+				padding-bottom: 0;
+				background: $BCK-cromatico_1;
+				
+			}.ibe-table-flight-status__td-detail-dates-right{
+				padding-left: rem(20);
+				.ibe-table-flight-status__text--plus-one{
+					font-size: rem(13);
+				}
+			}
+			.ibe-table-flight-status__td-detail:last-child{
+				padding-right: 0;
+			}
+			.ibe-table-flight-status__td-detail-left:first-child,
+			.ibe-table-flight-status__td-detail-right:first-child{
+				padding-top: 0;
+				padding-bottom: rem(4);
+				border-right: 0;
+			}
+			.ibe-table-flight-status__td-detail-left{
+				width: 57%;
+				//-padding-left: rem(20);
+				.ibe-table-flight-status__text{
+					color: $PC-cromatico_28;
+					font-size: rem(13);
+				}
+				.ibe-table-flight-status__text--green {
+					color: $PC-cromatico_25;
+				}
+				.ibe-table-flight-status__text--brown {
+					color: $PC-cromatico_29;
+				}
+				.ibe-table-flight-status__text--black {
+					color: $PC-cromatico_16;
+					
+				}
+				.ibe-table-flight-status__text--grey {
+					color: $PC-cromatico_28;
+				}
+			}
+			.ibe-table-flight-status__td-detail-right{
+				padding-right: rem(20);
+				width: 43%;
+				text-align: right;
+				.ibe-table-flight-status__text{
+					font-size: rem(13);
+				}
+				.ibe-table-flight-status__text--green {
+					color: $PC-cromatico_25;
+				}
+				.ibe-table-flight-status__text--brown {
+					color: $PC-cromatico_29;
+				}
+				.ibe-table-flight-status__text--black {
+					color: $PC-cromatico_16;
+					
+				}
+				.ibe-table-flight-status__text--grey {
+					color: $PC-cromatico_28;
+				}
+			}
+
+			.ibe-table-flight-status__text--plus-one + .ibe-table-flight-status__text{
+				padding-bottom: rem(8);
+			}
+			.ibe-table-flight-status__text-movil{
+				display: none
+			}	
+			
+		
+		}
+		.ibe-table-flight-status__text-local-hour{
+			padding-top: rem(10);
+			padding-bottom: rem(20);
+			font-size: rem(11);
+			line-height: 20px;
+			
+		}
+		.ibe-table-flight-status__text-punctuality{
+			padding-top: rem(21);
+			padding-right: rem(20);
+			font-size: rem(11);
+			line-height: 20px;
+			border-top: 1px solid $BRD_standar_5;
+			&--list{
+				display: block;
+				padding-bottom: rem(10);
+			}
+			
+		}
+		
+		
+	}	
+}
+
+@mixin xl-ibe_table-flight-status {
+	.ibe-table-flight-status {
+		&__th {
+			&--xlong {
+				width: 19% !important;
+			}
+
+			&--long {
+				width: 17% !important;
+			}
+
+			&--short {
+				width: 15% !important;
+			}
+
+			&--medium {
+				width: 17% !important; 
+			}
+			&--responsive{
+				width: 30% !important;
+			}
+			&--responsive-big{
+				width: 40% !important;
+			}
+
+			// Responsive cell
+			&:nth-child(7),
+			&:nth-child(8),
+			&:nth-child(9) {
+				// width: 0;
+				display: none !important;
+			}
+		}
+
+		&__td {
+
+			// Responsive cell
+			&:nth-child(7),
+			&:nth-child(8),
+			&:nth-child(9) {
+				display: none;
+			}
+
+			&:first-child {
+				padding-left: rem(16);
+				padding-top: rem(22);
+			}
+
+			&:last-child {
+				padding-right: rem(23);
+			}
+		}
+	}
+}
+
+@mixin l-ibe_table-flight-status {
+	.ibe-table-flight-status {
+		&__th {
+			&--xlong {
+				width: 19% !important;
+			}
+
+			&--long {
+				width: 17% !important;
+			}
+
+			&--short {
+				width: 15% !important;
+			}
+
+			&--medium {
+				width: 17% !important; 
+			}
+
+			// Responsive cell
+			&:nth-child(7),
+			&:nth-child(8),
+			&:nth-child(9) {
+				// width: 0;
+				display: none !important;
+			}
+		}
+
+		&__td {
+			padding-top: rem(18);
+			padding-bottom: rem(19);
+
+			// Responsive cell
+			&:nth-child(7),
+			&:nth-child(8),
+			&:nth-child(9) {
+				display: none;
+			}
+
+			&:first-child {
+				padding-left: rem(16);
+				padding-top: rem(22);
+			}
+
+			// &:last-child {
+			// 	padding-right: rem(23);
+			// }
+		}
+
+		&__detail{
+
+			&_table-head{
+				.ibe-table-flight-status__th-detail--small{
+					width: 34%;
+					background-color: $BCK-cromatico_4;
+				}
+				&__thead{
+					.ibe-table-flight-status__th-detail--long{
+						background-color: $BCK-cromatico_4;
+					}
+				}
+
+
+			}
+			.ibe-table-flight-status__td-detail-right{
+				.ibe-table-flight-status__text--plus-one{
+					font-size: rem(13);
+				}
+			}
+		}
+	}
+}
+
+@mixin m-ibe_table-flight-status {
+	.ibe-table-flight-status {
+		&__table {
+			border-top: none;
+		}
+
+		&__th,
+		&__td {
+
+			&:nth-child(1),
+			&:nth-child(2),
+			&:nth-child(3),
+			&:nth-child(4),
+			&:nth-child(5),
+			&:nth-child(6) {
+				display: none;
+			}
+		}
+
+		&__th {
+			
+			&:nth-child(7) {
+				padding-left: rem(16);
+			}
+
+			&:nth-child(8) {
+				text-align: center;
+			}
+			&:last-child {
+				text-align: right;
+				padding-right: rem(16);
+			}
+			.ibe-table-flight-status__text{
+				padding-bottom: 0;
+			}
+		}
+		
+
+		&__td {
+			padding: 0;
+
+			&:nth-child(7),
+			&:nth-child(9) {
+				//display: table-cell;
+				width: 30% !important;
+			}
+			&:nth-child(8) {
+				width: 40% !important;
+				text-align: center;
+			}
+			&:last-child {
+				text-align: right;
+				padding-right: rem(16);
+			}
+
+			// &:last-child{
+			// 	padding: 0;
+			// }
+
+			&--responsive {
+				padding: rem(16) rem(16) rem(9);
+			}
+		}
+
+		&__res-wrap {
+			padding-bottom: rem(17);
+			width: 100%;
+			text-align: center;
+
+			&--footer {
+				clear: both;
+				display: block;
+				padding-top: rem(7);
+				padding-bottom: 0;
+				border-top: 1px solid $PC-cromatico_5;
+				text-align: center;
+			}
+		}
+
+		&__res-column {
+			display: inline-block;
+			text-align: center;
+			width: 20%;
+
+			&--left {
+				width: 40%;
+				float: left;
+				text-align: left;
+			}
+
+			&--right {
+				width: 40%;
+				float: right;
+				text-align: right;
+			}
+
+			&--full {
+				width: auto;
+			}
+
+		}
+
+		&__figure {
+			margin: auto;
+			height: rem(18);
+			margin-bottom: rem(6);
+
+			.ibe-table-flight-status__img {
+				height: rem(18);
+			}
+		}
+
+		&__text {
+			padding-bottom: rem(4);
+			&--icon {
+				padding-right: 0;
+			}
+			// &--grey{
+			// 	display: none;
+			// }
+		}
+
+
+		&__detail{
+			padding-top: rem(15);
+			padding-bottom: rem(15);
+			&-box{
+				width: 100%;
+				max-width: rem(640);
+				padding: rem(52) rem(18) rem(20) rem(18);
+				&--numflight{
+					padding-top: rem(32);
+					.ibe-table-flight-status__th-detail--small{
+						padding-top: rem(30);
+					}
+				}
+			}
+			&--numflight{
+				padding: rem(30) rem(24);
+			}
+			.ibe-table-flight-status__td-detail-right{
+				.ibe-table-flight-status__text--plus-one{
+					font-size: rem(13);
+				}
+			}
+	
+		}
+	}
+}
+
+@mixin sm-ibe_table-flight-status {
+
+	@include m-ibe_table-flight-status;
+
+	.ibe-table-flight-status {
+		&__th {
+			&:nth-child(8){
+				.ibe-table-flight-status__text--grey{
+					display: none;
+				}
+			}
+		}
+		&__td {
+			&--responsive {
+				//-padding: rem(14) rem(21) rem(10) rem(21);
+			}
+			&:nth-child(7),
+			&:nth-child(9) {
+				//display: table-cell;
+				width: 30% !important;
+			}
+			&:nth-child(8) {
+				width: 40% !important;
+				text-align: center;
+			}
+		}
+		
+		&__text {
+			&--desktop {
+				display: none;
+			}
+
+			&--mobile {
+				display: block;
+			}
+			&--small {
+				font-size: rem(13);
+				font-weight: bold;
+			}
+		}
+		&__figure {
+			width: rem(22);
+		}
+		&__img {
+			&--desktop {
+				display: none;
+			}
+
+			&--mobile {
+				display: block;
+			}
+		}
+		&__detail{
+			padding-top: rem(13);
+			padding-bottom: rem(13);
+			table{
+				width: 100%;
+				display: inline-block !important;
+			}
+
+			&-box{
+				width: 100%;
+				max-width: rem(362);
+				padding: rem(50) rem(20) rem(20) rem(20);
+				&--numflight{
+					padding-top: rem(32);
+					.ibe-table-flight-status__detail_table-head{
+						.ibe-table-flight-status__th-detail--small{
+							padding-top: rem(0); 
+						}
+					}
+				}
+			}
+			&--numflight{
+				padding: rem(26) rem(15);
+			}
+			
+			&_table-head{
+				
+				.ibe-table-flight-status__th-detail{
+					width: 100%;
+					background-color: $BCK-cromatico_4;
+					//-display: table-row;
+					text-align: left;
+					
+				}
+				.ibe-table-flight-status__th-detail--small,
+				.ibe-table-flight-status__th-detail--long{
+					text-align: left;
+					padding-left: rem(51);
+				}
+				.ibe-table-flight-status__th-detail:first-child {
+					padding-left: rem(51);
+					padding-bottom: rem(0);
+				}
+				.ibe-table-flight-status__th-detail--small:first-child{
+					padding-top: rem(5);
+				}
+				.ibe-table-flight-status__text{
+					font-size: rem(11);
+					line-height: 20px;
+				}
+				.ibe-view-desktop{
+					display: none;
+				}
+				.ibe-view-movil{
+					display: block;
+					.ibe-table-flight-status__icon-detail{
+						margin-left: rem(-22);
+						margin-bottom: rem(-5);
+					}
+				}
+				
+				
+				
+			}
+			&_table-dates{
+				.ibe-table-flight-status__td-detail:first-child{ 
+					border-right: 0;
+				}
+				
+				.ibe-table-flight-status__td-detail{
+					padding-left: rem(21);
+					width: 100%;
+					padding-bottom: rem(5);
+					
+				}
+				.ibe-table-flight-status__text{
+					font-size: rem(13);
+				}
+
+				.ibe-table-flight-status{
+					width: 90%;
+					padding-left: rem(1);
+					padding-bottom: rem(15);
+				}
+
+				.ibe-table-flight-status__origin{
+					border-bottom: 1px solid $BRD_standar_5;	
+				}	
+				.ibe-table-flight-status__tr{
+					width: 100%;	
+				}
+				.ibe-table-flight-status__text--icon{
+					font-size: rem(13);
+				}
+				
+				.ibe-table-flight-status__td-detail-left{
+					width: 58%;
+					vertical-align: top;
+					padding-left: rem(20);
+					min-width: rem(155);
+					
+				}
+				.ibe-table-flight-status__td-detail-right{
+					width: 42%;
+					vertical-align: top;
+					padding-right: 0;
+					padding-left: rem(20);
+					.ibe-table-flight-status__text--plus-one{
+						font-size: rem(13);
+					}
+				
+				}
+				
+				
+				
+			}
+
+			
+		}
+	}
+}
+
+@mixin xs-ibe_table-flight-status {
+
+	@include sm-ibe_table-flight-status;
+
+	.ibe-table-flight-status {
+		&__th {
+			
+			&:nth-child(8){
+				.ibe-table-flight-status__text--grey{
+					display: none;
+				}
+			}
+			&:nth-child(7) {
+				padding-left: rem(8);
+				padding-right: rem(0);
+			}
+			&:nth-child(9) {
+				padding-right: rem(8);
+				padding-left: rem(0);
+			}
+		}
+		&__td {
+			
+			&--responsive {
+				padding: rem(12) rem(8) rem(35) rem(8);
+				position: relative;
+			
+			}
+			&:nth-child(7),
+			&:nth-child(9) {
+				//display: table-cell;
+				width: 30% !important;
+			}
+			&:nth-child(8) {
+				width: 40% !important;
+				text-align: center;
+			}
+			&:last-child {
+				padding-right: rem(8);
+			}
+
+		}
+
+		
+
+		&__text {
+			&--desktop {
+				display: none;
+			}
+
+			&--mobile {
+				display: block;
+			}
+			&--small {
+				font-size: rem(13);
+				font-weight: bold;
+			}
+			&--320{
+				position: absolute;
+				top: 78px;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				line-height: 17px;
+				vertical-align: top;
+				min-height: 38px;
+				font-size: 12px;
+
+			}
+			&--plus-one{
+				display:block;
+				padding-left: rem(2);
+				font-size: rem(13);
+			}
+		}
+
+		&__figure {
+			width: rem(22);
+		}
+
+		&__img {
+			&--desktop {
+				display: none;
+			}
+
+			&--mobile {
+				display: block;
+			}
+		}
+
+		&__res-column {
+			width: 30%;
+
+			&--left {
+				width: 35%;
+			}
+
+			&--right {
+				width: 35%;
+			}
+
+			&--full {
+				width: auto;
+			}
+		}
+
+		&__res-wrap {
+			padding-bottom: rem(13);
+
+			&--footer {
+				padding-bottom: 0;
+			}
+		}
+
+		&__detail{
+					
+			table{
+				width: 100%;
+				display: inline-block !important;
+			}
+
+			&-box{
+				width: 100%;
+				max-width: rem(236);
+				padding: rem(50) rem(10) rem(20) rem(10);
+				&--numflight{
+					padding-top: rem(32);
+				}
+			}
+			&--numflight{
+				padding: rem(26) rem(10);
+			}
+			
+			
+			&_table-head{
+				.ibe-table-flight-status__th-detail{
+					width: 100%;
+					background-color: $BCK-cromatico_4;
+					//-display: table-row;
+					text-align: left;
+					
+				}
+				.ibe-table-flight-status__th-detail--small:first-child{
+					padding-top: rem(5);
+				}
+				.ibe-table-flight-status__th-detail--small,
+				.ibe-table-flight-status__th-detail--long{
+					text-align: left;
+					padding-left: rem(43);
+				}
+				.ibe-table-flight-status__th-detail:first-child {
+					padding-left: rem(43);
+					padding-bottom: rem(0);
+				}
+				.ibe-table-flight-status__th-detail:last-child {
+					padding-bottom: rem(18);
+				}
+				.ibe-table-flight-status__text{
+					font-size: rem(11);
+					line-height: 20px;
+				}
+				.ibe-view-desktop{
+					display: none;
+				}
+				.ibe-view-movil{
+					display: block;
+					.ibe-table-flight-status__icon-detail{
+						margin-left: rem(-22);
+						margin-bottom: rem(-5);
+					}
+				}
+				.ibe-flight-status__icon--status::before {
+					top: rem(2);
+				}
+				
+				
+			}
+			&_table-dates{
+				.ibe-table-flight-status__td-detail:first-child{ 
+					border-right: 0;
+				}
+				.ibe-table-flight-status__td-detail{
+					padding-left: rem(21);
+					width: 100%;
+					padding-bottom: rem(0);
+				}
+				.ibe-table-flight-status__text{
+					font-size: rem(13);
+					padding-bottom: rem(2);
+				}
+				.ibe-table-flight-status{
+					width: 90%;
+					padding-left: rem(1);
+					padding-bottom: rem(15);
+				}
+				.ibe-table-flight-status__origin{
+					border-bottom: 1px solid $BRD_standar_5;	
+				}		
+				.ibe-table-flight-status__tr{
+					width: 100%;
+					
+				}
+				.ibe-table-flight-status__text--icon{
+					font-size: rem(13);
+					padding-bottom: rem(8);
+				}
+				.ibe-table-flight-status__td-detail-left{
+					width: 100%;
+					vertical-align: top;
+					padding-left: rem(20);
+				}
+				.ibe-table-flight-status__td-detail-right{
+					display: none;
+				}
+				.ibe-table-flight-status__text-movil{
+					display: block;
+					font-size: rem(13);
+					color: #333;
+				}
+				.ibe-table-flight-status__text--plus-one{
+					display:block;
+					padding-left: rem(2);
+					font-size: rem(13);
+				}
+				
+				
+			}
+
+			
+		}
+		
+	} 
+}

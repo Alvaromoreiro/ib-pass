@@ -1,0 +1,18 @@
+mixin m-tabs-icons(params)
+    div.ibe-tabs-icons
+        div.ibe-tabs-icons__box.ibe-tabs-icons__box--tabs
+            ul.ibe-tabs-icons--list
+                each item, index in params.items
+                    li.ibe-tabs-icons--list-item(class=(item.active!=undefined?"active":""))
+                        a.ibe-link(href="#icon-"+(index+1), title!=item.title, data-toggle="tab", data-scrollTop="partner")
+                            figure.ico_tab
+                                img.ico_img(src=globals.imgPath + item.src, alt!=item.alt) 
+               
+            div.tab-content
+                each item, index in params.items
+                    .tab-pane.ibe-tab__container(id="icon-"+(index+1), class=(item.active!=undefined?"active":""))
+                        p.paragraph.paragraph__regular.paragraph--bold.paragraph__regular--no-margin!=item.title
+                        p.paragraph.paragraph__regular.paragraph__regular--small.paragraph__regular--grey!=item.text 
+                        if item.link
+                            a.link.link__regular.link__regular--important.link__regular--single-arrow(href="#", title!=item.altLink)!=item.link
+                

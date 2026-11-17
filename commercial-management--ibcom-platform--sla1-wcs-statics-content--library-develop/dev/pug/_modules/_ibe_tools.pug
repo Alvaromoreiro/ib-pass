@@ -1,0 +1,86 @@
+mixin m-ibe-tools(params)
+	- params = params || {};
+	.ibe-tools(class={'ibe-tools--new': params.new===true})
+		.container
+			.row.hidden-md.hidden-sm.hidden-xs
+				.col-xs-4.col-sm-4.col-md-4.col-lg-4.col-xl-4.ibe-tools__col1
+					.ibe-tools__lang
+						a.link.link__regular.ibe-tools__lang-country(href="#"  title="Elije un idioma" data-toggle="collapse" data-target="#tool_lang" aria-expanded="false")
+							span.ibe-tools__lang-text!="Espa&ntilde;a - Espa&ntilde;ol"
+						.ibe-tools__lang-collapse(id="tool_lang" data-toggle="container")
+							form.ibe_form(action="#" method="post")
+								fieldset
+									legend.hideAccessible!="Mercado"
+									div.ibe_form__group.no_marginTop
+										label.ibe_form__selectize--label(for="mercado")!="Mercado"
+										select(class="ibe_form__selectize ibe_form__selectize--placeholder", id="mercado" name="mercado", data-selectmenu-edit, data-placeholder="mercado")
+											option(value="") Mercado
+											option(value="alemania") Alemania
+											option(value="francia") Francia
+											option(value="espana") Espa&ntilde;a
+											option(value="alemania") Alemania
+											option(value="francia") Francia
+											option(value="espana") Espa&ntilde;a
+											option(value="alemania") Alemania
+											option(value="francia") Francia
+											option(value="espana") Espa&ntilde;a
+									legend.hideAccessible!="Idioma"
+									div.ibe_form__group
+										label.ibe_form__selectize--label(for="idioma")!="Idioma"
+										select(class="ibe_form__selectize ibe_form__selectize--placeholder", id="idioma", name="idioma", data-selectmenu-edit, data-placeholder="idioma")
+											option(value="") Idioma
+											option(value="alemania") Alem&aacute;n
+											option(value="francia") Franc&eacute;s
+											option(value="espana") Espa&ntilde;ol
+											option(value="alemania") Alem&aacute;n
+											option(value="francia") Franc&eacute;s
+											option(value="espana") Espa&ntilde;ol
+											option(value="alemania") Alem&aacute;n
+											option(value="francia") Franc&eacute;s
+											option(value="espana") Espa&ntilde;ol
+									button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block!="Aceptar"
+				.col-xs-4.col-sm-4.col-md-4.col-lg-4.col-xl-4.ibe-tools__col2
+					.ibe-tools__middle.row
+						.ibe-tools__help
+							span!="&iquest;Necesitas "
+								a.link.link__regular.link__regular--important(href="#" title="Ayuda")!="Ayuda"
+								!="?"
+						//- .ibe-tools__dudes(data-ng-controller="angucompletecontroller")
+						.ibe-tools__dudes
+							form.ibe_form(action="#" method="post")
+								fieldset
+									legend.hideAccessible!="Dudas"
+									.ibe-tools__dudes-search
+										input.ibe-tools__dudes-input(id="questions" name="questions" placeholder="Escribe aquí tus dudas" data-autocomplete="tools_questions" data-placeholder="custom" data-autocomplete-result='[{"label":"Aeropuerto","value":"Aeropuerto"},{"label":"Facturación","value":"Facturación"},{"label":"Maletas","value":"Maletas"},{"label":"Checkin","value":"Checkin"}]')
+										label.hideAccessible(for="questions")!="Escribe aqu&iacute; tus dudas"
+				.col-xs-4.col-sm-4.col-md-4.col-lg-4.col-xl-4.ibe-tools__col3
+					div.ibe-tools__logueado(style="display:none;")
+						span.ibe-tools__logueado-txt!="Hola "
+						a.ibe-tools__logueado-txt.ibe-tools__logueado-txt--highlight.ibe-tools__logueado-txt--separator(href="#" title="User")!="Guillermo Hernandez"
+						a.ibe-tools__logueado-txt.ibe-tools__logueado-txt--highlight.ibe-tools__logueado-txt--separator(href="#" title="Avios")!=" Tus Avisos "
+							span.ibe-tools__logueado-txt!="739 "
+						a.ibe-tools__logueado-txt.ibe-tools__logueado-txt--highlight.ibe-tools__logueado-txt--separator(href="#" title="Salir")!="Salir"
+					ul.ibe-tools__login
+						li.ibe-tools__login-item
+							a.link.link__regular.ibe-tools__login-item-login(href="#" title="Acceder" data-toggle="collapse" data-target="#tool_login" aria-expanded="false")!="Acceder"
+							.ibe-tools__login-collapse(id="tool_login" data-toggle="container")
+								.iberia-plus-connect
+									form.ibe_form(method="post", action="#ni")
+										fieldset.ibe-form__fieldset
+											div(class="ibe_form__group")
+												input(class="ibe_form__input-text", name="id_number2", id="id_number2", type="text", placeholder="Número de Iberia Plus")
+												label(class="ibe_form__input-label", for="id_number2") N&uacute;mero de Iberia Plus
+											div(class="ibe_form__group")
+												input(class="ibe_form__input-text", name="id_pin2", id="id_pin2", type="text", placeholder="PIN")
+												label(class="ibe_form__input-label", for="id_pin2") PIN
+											p.paragraph.paragraph__regular.text-right
+												a.link.link__regular(href="#" title="¿Has olvidado tu PIN?")!="&iquest;Has olvidado tu pin?"
+											button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block(type="button")!="Entrar"
+											p.paragraph.paragraph__regular.paragraph__regular--separator.text-center!="o"
+											button.ibe-button.ibe-button--facebook.ibe-button--big.ibe-button--block(type="button")!="Entrar con Facebook"
+											button.ibe-button.ibe-button--linkedin.ibe-button--big.ibe-button--block(type="button")!="Entrar con Linkedin"
+											p.paragraph.paragraph__regular.paragraph__regular--border-top.text-center
+												span.iberia-plus-connect__link-register!="&iquest;No eres de Iberia Plus? "
+												a.link.link__regular.link__regular--important(href="" title="Regístrate")!="Reg&iacute;strate"
+						li.ibe-tools__login-item
+							a.link.link__regular.ibe-tools__login-item-register(href="#" title="Registrarse")!="Registrarse"

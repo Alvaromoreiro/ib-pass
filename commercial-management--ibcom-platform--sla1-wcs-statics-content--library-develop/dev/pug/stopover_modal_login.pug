@@ -1,0 +1,37 @@
+extends _general/layout__primary
+include _modules/_modals/_ibe-modal-login-stopover
+include _modules/_modals/_ibe-modal-login-stopover-simple
+include _modules/_modals/_ibe-modal-login-stopover-simple-error
+
+block title
+	title!='IBERIA - Modales'
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main.container
+		// Main content
+		div.row
+			.col-xs-6
+				.row
+					div
+						a(href="#" title="Login" data-modal="button" data-modal-view=".fc-dialog-login-stopover")!="Modal Login Stopover"
+					div
+						a(href="#" title="Login" data-modal="button" data-modal-view=".fc-dialog-login-stopover-simple")!="Modal Login Stopover simple"
+					div
+						a(href="#" title="Login" data-modal="button" data-modal-view=".fc-dialog-login-stopover-simple-error")!="Modal Login Stopover simple with error"
+	
+	+m-ibe-modal-login-stopover()
+	+m-ibe-modal-login-stopover-simple()
+	+m-ibe-modal-login-stopover-simple-error()
+
+	+m-footer({
+		full: true
+	}) 

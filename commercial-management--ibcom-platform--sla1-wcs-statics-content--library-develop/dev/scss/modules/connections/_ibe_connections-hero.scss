@@ -1,0 +1,143 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe_connections-hero
+//    Desripcion: Estilos para el hero de conexiones
+//******************************************************************************/
+.ibe-connections-description {
+  display: none;
+  font-size: rem(13);
+  font-style: normal;
+  font-weight: 400;
+  color: #666;
+  margin-top: rem(23);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.ibe-connections-hero {
+  width: rem(1232);
+  min-height: rem(400);
+  margin: 0 auto;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: rem(70);
+  padding-left: rem(110);
+  padding-bottom: rem(150);
+  ::before {
+    content: attr(data-image);
+  }
+  &[data-image="madrid"] {
+    background-image: url($CONFIG_IMG_PATH + "/modules/connections/madrid/madrid_1280.png");
+  }
+  &[data-image="otros"] {
+    background-image: url($CONFIG_IMG_PATH + "/modules/connections/other/other_1280.png");
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: rem(16);
+    &-title {
+      font-family: $font-04;
+      font-weight: 400;
+      font-size: rem(42);
+      color: white;
+    }
+    &-description {
+      &-madrid {
+        max-width: 100%;
+      }
+      max-width: rem(500);
+      font-weight: 400;
+      font-size: rem(22);
+      color: white;
+      line-height: rem(28);
+    }
+  }
+}
+// hasta 1024 px
+@mixin l-ibe-connections-hero {
+  .ibe-connections-hero {
+    width: 100%;
+    padding-bottom: rem(20);
+  }
+}
+// hasta 768 px
+@mixin m-ibe-connections-hero {
+  .ibe-connections-hero {
+    width: 100%;
+    padding-bottom: rem(20);
+    min-height: rem(250);
+    padding-top: rem(33);
+    padding-left: rem(17);
+    &__container {
+      &-title {
+        font-size: rem(42);
+      }
+    }
+  }
+}
+// hasta 480 px
+@mixin sm-ibe-connections-hero {
+  .ibe-connections-description {
+    display: block;
+  }
+  .ibe-connections-hero {
+    padding-bottom: rem(20);
+    width: 100%;
+    min-height: rem(190);
+    padding-top: rem(33);
+    padding-left: rem(17);
+    &[data-image="madrid"] {
+      background-image: url($CONFIG_IMG_PATH + "/modules/connections/madrid/madrid_480.png");
+    }
+    &[data-image="otros"] {
+      background-image: url($CONFIG_IMG_PATH + "/modules/connections/other/other_480.png");
+    }
+    &__container {
+      &-title {
+        font-size: rem(32);
+      }
+      &-description {
+        display: none;
+        &-madrid {
+          font-size: rem(13);
+          display: block;
+        }
+      }
+    }
+  }
+}
+// hasta 320 pxs
+@mixin xs-ibe-connections-hero {
+  .ibe-connections-description {
+    display: block;
+  }
+  .ibe-connections-hero {
+    padding-bottom: rem(20);
+    width: 100%;
+    min-height: rem(190);
+    padding-top: rem(33);
+    padding-left: rem(17);
+    &[data-image="madrid"] {
+      background-image: url($CONFIG_IMG_PATH + "/modules/connections/madrid/madrid_320.png");
+    }
+    &[data-image="otros"] {
+      background-image: url($CONFIG_IMG_PATH + "/modules/connections/other/other_320.png");
+    }
+    &__container {
+      &-title {
+        font-size: rem(32);
+      }
+      &-description {
+        display: none;
+        &-madrid {
+          font-size: rem(13);
+          display: block;
+          width: 100%;
+          padding-right: rem(10);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,75 @@
+extends _general/layout__primary
+block title
+	title!='IBERIA - Spinner repository'
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main.container
+		// Main content
+		div.row
+			.col-xs-12
+				h1.title.title__h1.title--grey Listado de spinners
+				p Inicializar: dFrontJs.ibe_loading.open(id), sin id se abrirán todos los que existan en la página
+				p Cerrar: dFrontJs.ibe_loading.close(id), sin id se cerrarán todos los que existan en la página
+				p NOTA: por general tienen de alto 284px menos el --grey porque está hecho para noticias y mide 64px de alto
+		div.row
+			h2.title.title__h1.title--red Spinner transparente negro
+			.col-xs-12
+				p Contenido a cubrir
+				.ibe-loading__overlay.ibe-loading__overlay--open(data-loading)
+					.ibe-loading__spinner
+						.ibe-loading__icon
+							.circle
+							.circle
+						.ibe-loading__text Cargando...
+			h2.title.title__h1.title--red Spinner transparente blanco
+		div.row
+			.col-xs-12
+				p Contenido a cubrir
+				.ibe-loading__overlay.ibe-loading__overlay--white.ibe-loading__overlay--open(data-loading)
+					.ibe-loading__spinner
+						.ibe-loading__icon
+							.circle
+							.circle
+						.ibe-loading__text Cargando...
+			h2.title.title__h1.title--red Spinner fondo blanco
+		div.row
+			.col-xs-12
+				p Contenido a cubrir
+				.ibe-loading__overlay.ibe-loading__overlay--light.ibe-loading__overlay--open(data-loading)
+					.ibe-loading__spinner
+						.ibe-loading__icon
+							.circle
+							.circle
+						.ibe-loading__text Cargando...
+			h2.title.title__h1.title--red Spinner fondo gris
+		div.row
+			.col-xs-12
+				p Contenido a cubrir
+				.ibe-loading__overlay.ibe-loading__overlay--grey.ibe-loading__overlay--open(data-loading)
+					.ibe-loading__spinner
+						.ibe-loading__icon
+							.circle
+							.circle
+						.ibe-loading__text
+		|<hr>
+		div.row
+			.col-xs-12
+				div!="Por defecto, hay que poner display none a la clase .ibe-loading__spinner y luego ejecutar la funcion dFrontJs.ibe_loading.spinnerButton()"
+				button.ibe-button.ibe-button--red.ibe-button--smaller.ibe-button--morelarge(type='button', data-boton-send-form, data-focusin)
+					span.ibe-loading__overlay.ibe-loading__overlay--nocolor.ibe-loading__overlay--open(data-loading)
+						.ibe-loading__spinner
+							.ibe-loading__icon.ibe-loading__icon--small
+								.circle.circle-thin
+								.circle.circle-thin
+							.ibe-loading__text
+					span(data-boton-text)!="Actualizando" 
+

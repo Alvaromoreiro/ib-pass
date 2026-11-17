@@ -1,0 +1,103 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe-menu-links
+//    Desripcion: Estilos para componente Enlaces rapidos
+//******************************************************************************/
+@import "../_function";
+@import "../config";
+@import "../general/_colors";
+@import "../general/_var-font";
+
+@import "../general/settings__responsive";
+@import "../general/_tools__responsive";
+
+.ibe-menu-links {
+	&__list {
+		display: flex;
+		width: 100%;
+		flex-flow: row;
+		align-items: center;
+		border: rem(1) solid #333;
+		background: #FFF;
+	}
+	
+	&__item {
+		width: 100%;
+		text-align: center;
+		&:first-child {
+			.ibe-menu-links__text {
+				border-left: 0;
+			}
+		}
+	}
+	
+	&__link {
+		display: block;
+		width: 100%;
+		font-size: rem(14);
+		line-height: rem(17);
+		background: none;
+		border: 0;
+		&:focus{
+			outline: rem(1) solid $BRD-standar_3;
+		}
+	}
+	
+	&__text {
+		display: block;
+		padding: rem(5) rem(4) rem(6);
+		margin: rem(11) 0;
+		border-left: rem(1) solid #333;
+	}
+}
+
+/*Mobile RESOLUTION STYLES*/
+@include media-query('mobile') {
+	.ibe-menu-links {
+		&__list {
+			flex-wrap: wrap;
+		}
+		&__text {
+			padding: rem(15) rem(4) rem(16);
+			margin: 0;
+		}
+	}
+}
+
+/*SMALL RESOLUTION STYLES*/
+@include media-query('sm') {
+	.ibe-menu-links {
+		&__item{
+			width: 50%;
+			&:nth-child(odd) {
+				.ibe-menu-links__text {
+					border-left: 0;
+				}
+			}
+			&:nth-last-child(-n+2){
+				.ibe-menu-links__text {
+					border-top: rem(1) solid #333;
+				}
+			}
+		}
+	}
+}
+
+/*X-SMALL RESOLUTION STYLES*/
+@include media-query('xs') {
+	.ibe-menu-links {
+		&__item {
+			width: 100%;
+			&:first-child{
+				.ibe-menu-links__text {
+					border-top: 0;
+				}
+			}
+		}
+		&__text{
+			padding: rem(11) rem(4) rem(12);
+			border-left: 0;
+			border-top: rem(1) solid #333;
+		}
+	}
+}

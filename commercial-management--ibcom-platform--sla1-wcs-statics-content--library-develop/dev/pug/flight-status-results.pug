@@ -1,0 +1,984 @@
+extends _general/layout__primary
+include _modules/_ibe_searcher-flight-status
+include _modules/_ibe_searcher-flight-status-numflight
+include _modules/_ibe_searcher-flight-status-airport
+
+block title
+	title!="IBERIA - Estado de vuelos"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main
+		+m-ibe-breadcrumbs({
+			"menu": "advSearch"
+		})
+		section.container
+			.row
+				.col-xs-12
+					header.ibe-flight-status__header.ibe-flight-status__header--center
+						h1.title.title__h1.title--no-paddT.title--p-bottom-6!="Llegadas y salidas"
+						h2.title.title__h5.title--no-padd.title.title__h5--small!="Conoce la informaci&oacute;n de los vuelos programados, seleccionando el origen y destino as&iacute; como las fechas de salida y regreso (siempre ser&aacute; la fecha y la hora local del aeropuerto seleccionado)."
+			.row
+				.col-xs-12
+					section.ibe-flight-status.ibe-flight-status__section 
+						div.ibe-tab.ibe-tab--main
+							ul.ibe-tab__menu(data-tab="bootstrap-tabdrop", data-tab-text="Otros")
+								li.ibe-tab__menu-item
+									a.ibe-tab__menu-item__text(href="#tab-1", title="Numero de vuelo", data-toggle="tab")!= "N&uacute;mero de vuelo"
+								li.ibe-tab__menu-item
+									a.ibe-tab__menu-item__text(href="#tab-2", title="Origen y destino" data-toggle="tab")!= "Origen y destino"
+								li.ibe-tab__menu-item.active
+									a.ibe-tab__menu-item__text(href="#tab-3", title="Aeropuerto" data-toggle="tab")!= "Aeropuerto"
+							.tab-content
+								//- CONTAINER NUMERO DE VUELO
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium(id="tab-1" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+										//- TAB NUMERO DE VUELO
+										article.ibe-flignt-status.ibe-flight-status__box(data-airlines="IB|YW|I2|AA|BA|CJ|MN|ZU|CX|KA|AY|JL|XM|NU|LA|4M|JJ|4C|XL|LP|MH|QF|ONZ|QR|RJ|S7|GH|SJ|VY", data-url="images/logos/isotipos/")
+											+m-searcher-flight-status-numflight()
+										article.ibe-flignt-status.ibe-flight-status__box.ibe-flight-status__box--mt-extra.ibe-flight-status__box--bt
+											//- NUM FLIGHT
+											div.ibe-flight-status__wrap-course
+												span.ibe-flight-status__course-city!= "IB6215"
+												span.ibe-flight-status__text.ibe-flight-status__text--block!= "Martes, 17 de octubre de 2017"
+										div.ibe-table-flight-status__detail.ibe-table-flight-status__detail--numflight
+											div.ibe-table-flight-status__detail-box.ibe-table-flight-status__detail-box--numflight
+												
+												div.ibe-table-flight-status__detail_table-head(data-focusin, tabindex="0")
+													span.hideAccessible="Aqui se muestra informaci&oacute;n en detalle sobre el estado de los vuelos"
+													div.ibe-table-flight-status__th-detail.ibe-table-flight-status__th-detail--long.ibe-view-movil
+														div.ibe-table-flight-status__icon-detail
+															span.ibe-flight-status__icon.ibe-flight-status__icon--status.icon-aterrizaje.ibe-table-flight-status__text--green
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--icon.ibe-table-flight-status__text--green!= "En hora"
+													div.ibe-table-flight-status__detail_table-head__thead
+														div.ibe-table-flight-status__th-detail.ibe-table-flight-status__th-detail--small
+															//-span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold(data-flight-date)!="00 de octubre de 0000"
+															span.ibe-table-flight-status__text!="Duración de vuelo "
+																span(data-flight-duration)!="1:30h " 
+														div.ibe-table-flight-status__th-detail.ibe-table-flight-status__th-detail--long.ibe-view-desktop
+															div.ibe-table-flight-status__icon-detail
+																span.ibe-flight-status__icon.ibe-flight-status__icon--status.icon-aterrizaje.ibe-table-flight-status__text--green
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--icon.ibe-table-flight-status__text--green!= "En hora"
+														div.ibe-table-flight-status__th-detail.ibe-table-flight-status__th-detail--small.ibe-table-flight-status__th-detail--right
+															//-span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold(data-flight)!="00000"
+															span.ibe-table-flight-status__text(data-airplane)!="Airbus 320"
+												div.ibe-table-flight-status__detail_table-dates(data-focusin, tabindex="0")
+													div.ibe-table-flight-status__detail-thead
+
+														div.ibe-table-flight-status__td-detail.ibe-table-flight-status__td-detail-numflight
+															span.ibe-flight-status__icon.ibe-flight-status__icon--status.icon-despegue
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--icon.ibe-table-flight-status__text--bold(data-from)!="Madrid (MAD)"
+															table.ibe-table-flight-status.ibe-table-flight-status__origin
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Salida programada:"
+																		span.ibe-table-flight-status__text.ibe-table-flight-status__text--plus-one(data-date-arrival)!="30 diciembre"
+																		span.ibe-table-flight-status__text-movil!="08:30"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text.ibe-table-flight-status__text--plus-one(data-date-arrival)!="30 diciembre"
+																		span.ibe-table-flight-status__text!="08:30"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text.ibe-table-flight-status__text--green!="Salida confirmada:"
+																		span.ibe-table-flight-status__text-movil.ibe-table-flight-status__text--green!="08:48"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text.ibe-table-flight-status__text--green!="08:48"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Terminal:"
+																		span.ibe-table-flight-status__text-movil!="4"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text!="4"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Puerta:"
+																		span.ibe-table-flight-status__text-movil!="J50"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text!="J50"
+														div.ibe-table-flight-status__td-detail
+															span.ibe-flight-status__icon.ibe-flight-status__icon--status.icon-aterrizaje
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--icon.ibe-table-flight-status__text--bold(data-to)!="Barcelona (BCN)"
+															table.ibe-table-flight-status
+																tr.ibe-table-flight-status-tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Llegada programada:"
+																		span.ibe-table-flight-status__text-movil!="09:00"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text.ibe-table-flight-status__text--plus-one(data-date-arrival)!="30 diciembre"
+																		span.ibe-table-flight-status__text!="09:00"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text.ibe-table-flight-status__text--green!="Llegada confirmada:"
+																		span.ibe-table-flight-status__text-movil.ibe-table-flight-status__text--green!="09:00"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text.ibe-table-flight-status__text--green!="09:00"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Terminal:"
+																		span.ibe-table-flight-status__text-movil!="1"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text!="1"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Cinta recogida equipaje:"
+																		span.ibe-table-flight-status__text-movil!="-"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text!="-"
+
+												div.ibe-table-flight-status__text-local-hour!="Siempre será la fecha y la hora local del aeropuerto seleccionado."
+												div.ibe-table-flight-status__text-punctuality
+													span.ibe-table-flight-status__text-punctuality--list!="Puntualidad para este vuelo durante el año: "
+														span.ibe-table-flight-status__text--inline!="90% "
+													span.ibe-table-flight-status__text-punctuality--list!="Puntualidad para este vuelo en las últimas 10 operaciones: "
+														span.ibe-table-flight-status__text--inline!="100% "
+
+								//- FIN TAB NUMERO DE VUELO
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium(id="tab-1" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+								//- CONTAINER ORIGEN DESTINO
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium(id="tab-2" data-function="radiobuttons-tabs")
+									//- SEARCH
+									article.ibe-flignt-status.ibe-flight-status__box
+										+m-searcher-flight-status()
+									//- FLIGHT/FILTER
+									article.ibe-flignt-status.ibe-flight-status__box.ibe-flight-status__box--mt-extra.ibe-flight-status__box--bt
+										//- ORIGIN/DESTINATION
+										div.ibe-flight-status__wrap-course
+											span.ibe-flight-status__course-city.ibe-flight-status__course-city--desktop!= "Madrid"
+											span.ibe-flight-status__course-city.ibe-flight-status__course-city--mobile!= "MAD"
+											div.ibe-flight-status__icon.ibe-flight-status__icon--course
+												span.icon-avion_ida
+											span.ibe-flight-status__course-city.ibe-flight-status__course-city--desktop!= "Barcelona"
+											span.ibe-flight-status__course-city.ibe-flight-status__course-city--mobile!= "BCN"
+											span.ibe-flight-status__text.ibe-flight-status__text--block!= "Martes, 17 de octubre de 2017"
+										//- FILTER
+										div.ibe-flight-status__wrap-filter
+											span.ibe-flight-status__text!= "VER:"
+											a.ibe-flight-status__link.link.link__regular.link__regular--underline.active(href="#", title="Filtro todos los vuelos")!= "TODOS"
+											a.ibe-flight-status__link.link.link__regular.link__regular--underline(href="#", title="Filtro vuelos puente aéreo")!= "PUENTE A&Eacute;REO"
+											a.ibe-flight-status__link.link.link__regular.link__regular--underline(href="#", title="Filtro vuelos regulares")!= "REGULARES"
+									//- TABLE
+									article.ibe-flignt-status.ibe-flight-status__box.ibe-flight-status__box--mt-medium
+										//- div.ibe-tab__container-desktop.ibe-tab__container-desktop--margin-top-medium.ibe-tab__container-desktop--margin-bottom-small
+										table.ibe-table-flight-status__table(data-type-trip,data-table-flight-status-order, data-flight-status-table, data-text-ascending=": ordenar de forma ascendente", data-text-descending=": ordenar de forma descendente", aria-label="tabla ordenada por hora estimada de llegada de forma ascendente")
+											caption.hideAccessible Esta tabla muestra informaci&oacute;n sobre el estado de los vuelos
+											thead.ibe-table-flight-status__thead
+												tr.ibe-table-flight-status__tr
+													th.ibe-table-flight-status__th.ibe-table-flight-status__th--xlong(data-focusin)
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Vuelo"
+													th.ibe-table-flight-status__th.ibe-table-flight-status__th--long(data-focusin)
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Origen"
+													th.ibe-table-flight-status__th.ibe-table-flight-status__th--long(data-focusin)
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Destino"
+													th.ibe-table-flight-status__th.ibe-table-flight-status__th--short.ibe-table-flight-status__th--order(aria-sort="ascending", data-focusin)
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Salida"
+													th.ibe-table-flight-status__th.ibe-table-flight-status__th--short.ibe-table-flight-status__th--order(data-focusin)
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Llegada"
+													th.ibe-table-flight-status__th.ibe-table-flight-status__th--medium.ibe-table-flight-status__th--order(data-focusin)
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Estado"
+													th.ibe-table-flight-status__th.ibe-table-flight-status__th--responsive.ibe-table-flight-status__th--order(data-focusin)
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Salida"
+													th.ibe-table-flight-status__th.ibe-table-flight-status__th--responsive-big(data-focusin)
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Vuelo"
+													th.ibe-table-flight-status__th.ibe-table-flight-status__th--responsive.ibe-table-flight-status__th--order(data-focusin)
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Llegada"
+											tbody.ibe-table-flight-status__tbody
+												//- ROW 1 START
+												tr.ibe-table-flight-status__tr(data-flight-status-tr, data-flight="IB4547", data-company="Iberia", data-from="Sevilla (SQV)", data-to="Roma (ROM)",
+												data-terminal-from="4", data-terminal-to="1", data-flight-date="07 de noviembre de 2018", data-date-departure='30 diciembre', data-date-arrival='31 diciembre', data-flight-duration="1-15h",
+												data-airplane="Airbus 320", data-hour-scheduled-from="09:30", data-confirmed-departure-from="09:30", data-gate-from="3",
+												data-hour-scheduled-to="10:45", data-confirmed-departure-to="10:45", data-gate-to="35G", data-flight-color="grey", data-state="En tierra",
+												data-puntuality1="78%", data-puntuality2="80%", data-icon="avion_ida", data-focusin, tabindex="0" )
+													td.ibe-table-flight-status__td
+														figure.ibe-table-flight-status__figure
+															img.ibe-table-flight-status__img(src=globals.imgPath + "/logos/aerolineas/logo_pos_IB.svg" alt="Logo Iberia")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--clear.ibe-table-flight-status__text--pt!= "Iberia"
+													td.ibe-table-flight-status__td
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Madrid "
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (MAD)"
+														span.ibe-table-flight-status__text!= "Terminal 4"
+													td.ibe-table-flight-status__td
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Barcelona"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (BCN)"
+														span.ibe-table-flight-status__text!= "Terminal 1"
+													td.ibe-table-flight-status__td(data-order="08:00")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "08:00"
+													td.ibe-table-flight-status__td(data-order="09:20")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "09:20 (+1)"
+													td.ibe-table-flight-status__td
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "EN TIERRA"
+													//- RESPONSIVE COLUMN
+													td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="08:00")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Madrid "
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (MAD)"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "MAD"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "08:00"
+
+													td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive
+														figure.ibe-table-flight-status__figure
+															img.ibe-table-flight-status__img.ibe-table-flight-status__img--desktop(src=globals.imgPath + "/logos/aerolineas/logo_pos_IB.svg" alt="Logo Iberia")
+															img.ibe-table-flight-status__img.ibe-table-flight-status__img--mobile(src=globals.imgPath + "/general/iberia-logo-mini.png" alt="Logo Iberia")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey.ibe-table-flight-status__text--320!= "EN TIERRA"
+													
+													td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="09:20")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Barcelona"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (BCN)"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "BCN"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "09:20"
+													
+
+
+												//- ROW 2 START
+												tr.ibe-table-flight-status__tr(data-flight-status-tr, data-flight="IB4547", data-company="Iberia", data-from="Madrid (MAD)", data-to="Londres (LON)",
+												data-terminal-from="4", data-terminal-to="1", data-flight-date="06 de noviembre de 2018", data-flight-duration="2h",
+												data-airplane="Airbus 320", data-hour-scheduled-from="10:00", data-confirmed-departure-from="10:00", data-gate-from="11D",
+												data-hour-scheduled-to="12:00", data-confirmed-departure-to="12:00", data-gate-to="45B", data-flight-color="grey",  data-state="Programado",
+												data-puntuality1="90%", data-puntuality2="97%", data-icon="reloj", data-focusin, tabindex="0" )
+													td.ibe-table-flight-status__td
+														figure.ibe-table-flight-status__figure
+															img.ibe-table-flight-status__img(src=globals.imgPath + "/logos/aerolineas/logo_pos_IB.svg" alt="Logo Iberia")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--clear.ibe-table-flight-status__text--pt!= "Iberia"
+													td.ibe-table-flight-status__td
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Madrid "
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (MAD)"
+														span.ibe-table-flight-status__text!= "Terminal 4"
+													td.ibe-table-flight-status__td
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Barcelona"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (BCN)"
+														span.ibe-table-flight-status__text!= "Terminal 1"
+													td.ibe-table-flight-status__td(data-order="09:00")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "09:00"
+													td.ibe-table-flight-status__td(data-order="10:20")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "10:20"	
+														
+													td.ibe-table-flight-status__td
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "PROGRAMADO" 
+													//- RESPONSIVE COLUMN
+													td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="09:00")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Madrid "
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (MAD)"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "MAD"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "09:00"
+
+													td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive
+														figure.ibe-table-flight-status__figure
+															img.ibe-table-flight-status__img.ibe-table-flight-status__img--desktop(src=globals.imgPath + "/logos/aerolineas/logo_pos_IB.svg" alt="Logo Iberia")
+															img.ibe-table-flight-status__img.ibe-table-flight-status__img--mobile(src=globals.imgPath + "/general/iberia-logo-mini.png" alt="Logo Iberia")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey.ibe-table-flight-status__text--320!= "PROGRAMADO" 
+													
+													td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="10:20")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Barcelona"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (BCN)"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "BCN"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "10:20"
+														
+													
+												//- ROW 3 START
+												tr.ibe-table-flight-status__tr(data-flight-status-tr, data-flight="BA00034", data-company="British Airways", data-from="Londres (LON)", data-to="Málaga (MAL)",
+												data-terminal-from="T2", data-terminal-to="T1", data-flight-date="06 de noviembre de 2018", data-flight-duration="2h",
+												data-airplane="Airbus 320", data-hour-scheduled-from="08:00", data-confirmed-departure-from="08:10", data-gate-from="11D",
+												data-hour-scheduled-to="10:00", data-confirmed-departure-to="10:20", data-gate-to="5", data-flight-color="green",  data-state="En hora",
+												data-puntuality1="99%", data-puntuality2="99%", data-icon="aterrizaje", data-focusin, tabindex="0" )
+													td.ibe-table-flight-status__td
+														figure.ibe-table-flight-status__figure
+															img.ibe-table-flight-status__img.ibe-table-flight-status__img--desktop(src=globals.imgPath + "/logos/aerolineas/logo_pos_VY.svg" alt="Logo Vueling")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--clear.ibe-table-flight-status__text--pt!= "Vueling"
+													td.ibe-table-flight-status__td
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Madrid "
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (MAD)"
+														span.ibe-table-flight-status__text!= "Terminal 4"
+													td.ibe-table-flight-status__td
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Barcelona"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (BCN)"
+														span.ibe-table-flight-status__text!= "Terminal 1"
+													td.ibe-table-flight-status__td(data-order="10:00")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "10:00"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--green.ibe-table-flight-status__text--small!= "Real 10:18"
+													td.ibe-table-flight-status__td(data-order="11:20")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "11:20"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--green.ibe-table-flight-status__text--small!= "Estimada: 11:20"
+													td.ibe-table-flight-status__td
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--green!= "EN HORA"
+													//- RESPONSIVE COLUMN
+													td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="10:00")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Madrid "
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (MAD)"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "MAD"
+														div.ibe-table-flight-status__text--desktop
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada:"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--inline!= " 10:00"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--green.ibe-table-flight-status__text--small!= "Real 10:18"
+														div.ibe-table-flight-status__text--mobile
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--green.ibe-table-flight-status__text--small!= "10:18"
+
+													td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive
+														figure.ibe-table-flight-status__figure
+															img.ibe-table-flight-status__img.ibe-table-flight-status__img--desktop(src=globals.imgPath  + "/logos/aerolineas/logo_pos_VY.svg" alt="Logo Vueling")
+															img.ibe-table-flight-status__img.ibe-table-flight-status__img--mobile(src=globals.imgPath + "/general/iberia-logo-mini.png" alt="Logo Iberia")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--green.ibe-table-flight-status__text--320!= "EN HORA"
+													
+													td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="11:20")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Barcelona"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (BCN)"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "BCN"
+														div.ibe-table-flight-status__text--desktop
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada:"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--inline!= " 11:20"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--green.ibe-table-flight-status__text--small!= "Estimada: 11:20"
+														div.ibe-table-flight-status__text--mobile
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--green.ibe-table-flight-status__text--small!= "11:20"
+													
+												//- ROW 4 START
+												tr.ibe-table-flight-status__tr(data-flight-status-tr, data-flight="BA00034", data-company="British Airways", data-from="Londres (LON)", data-to="Málaga (MAL)",
+												data-terminal-from="T2", data-terminal-to="T1", data-flight-date="06 de noviembre de 2018", data-flight-duration="2h",
+												data-airplane="Airbus 320", data-hour-scheduled-from="08:00", data-confirmed-departure-from="08:10", data-gate-from="11D",
+												data-hour-scheduled-to="10:00", data-confirmed-departure-to="10:20", data-gate-to="5", data-flight-color="brown",  data-state="Con retraso",
+												data-puntuality1="99%", data-puntuality2="99%", data-icon="aterrizaje", data-focusin, tabindex="0" )
+													td.ibe-table-flight-status__td
+														figure.ibe-table-flight-status__figure
+															img.ibe-table-flight-status__img(src=globals.imgPath + "/logos/aerolineas/logo_pos_BA.svg" alt="Logo British Airways")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--clear.ibe-table-flight-status__text--pt!= "British Airways"
+													td.ibe-table-flight-status__td
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Madrid "
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (MAD)"
+														span.ibe-table-flight-status__text!= "Terminal 4"
+													td.ibe-table-flight-status__td
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Barcelona"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (BCN)"
+														span.ibe-table-flight-status__text!= "Terminal 1"
+													td.ibe-table-flight-status__td(data-order="11:00")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "11:00"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown.ibe-table-flight-status__text--small!= "Retrasado: 11:30"
+													td.ibe-table-flight-status__td(data-order="12:20")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "12:20"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown.ibe-table-flight-status__text--small!= "Estimada: 13:00"
+													td.ibe-table-flight-status__td
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown!= "CON RETRASO"
+													//- RESPONSIVE COLUMN
+													td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Madrid "
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (MAD)"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "MAD"
+														div.ibe-table-flight-status__text--desktop
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada:"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--inline!= " 11:00"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown.ibe-table-flight-status__text--small!= "Retrasado: 11:30"
+														div.ibe-table-flight-status__text--mobile
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown.ibe-table-flight-status__text--small!= "11:30"
+													td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="11:00")
+														figure.ibe-table-flight-status__figure
+															img.ibe-table-flight-status__img.ibe-table-flight-status__img--desktop(src=globals.imgPath + "/logos/aerolineas/logo_pos_BA.svg" alt="Logo british airways")
+															img.ibe-table-flight-status__img.ibe-table-flight-status__img--mobile(src=globals.imgPath + "/general/iberia-logo-mini.png" alt="Logo Iberia")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown.ibe-table-flight-status__text--320!= "CON RETRASO DOS LINEAS"
+													
+													td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="12:20")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Barcelona"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (BCN)"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "BCN"
+														div.ibe-table-flight-status__text--desktop
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada:"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--inline!= " 12:20"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown.ibe-table-flight-status__text--small!= "Estimada: 13:00"
+														div.ibe-table-flight-status__text--mobile
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown.ibe-table-flight-status__text--small!= "13:00"
+													
+												//- ROW 5 START
+												tr.ibe-table-flight-status__tr(data-flight-status-tr, data-flight="XX00034", data-company="British Airways", data-from="Londres (LON)", data-to="Málaga (MAL)",
+												data-terminal-from="T2", data-terminal-to="T1", data-flight-date="06 de noviembre de 2018", data-flight-duration="2h",
+												data-airplane="Airbus 320", data-hour-scheduled-from="08:00", data-confirmed-departure-from="08:10", data-gate-from="11D",
+												data-hour-scheduled-to="10:00", data-confirmed-departure-to="10:20", data-gate-to="5", data-flight-color="black",  data-state="No opera",
+												data-puntuality1="99%", data-puntuality2="99%", data-icon="reloj", data-focusin, tabindex="0" )
+													td.ibe-table-flight-status__td
+														figure.ibe-table-flight-status__figure
+															img.ibe-table-flight-status__img(src=globals.imgPath + "/logos/aerolineas/logo_pos_IB.svg" alt="Logo Iberia")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--clear.ibe-table-flight-status__text--pt!= "Iberia"
+													td.ibe-table-flight-status__td
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Madrid "
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (MAD)"
+														span.ibe-table-flight-status__text!= "Terminal 4"
+													td.ibe-table-flight-status__td
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Barcelona"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (BCN)"
+														span.ibe-table-flight-status__text!= "Terminal 1"
+													td.ibe-table-flight-status__td(data-order="12:00")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "12:00"
+													td.ibe-table-flight-status__td(data-order="13:20")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "13:20"
+													td.ibe-table-flight-status__td
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "NO OPERA"
+													//- RESPONSIVE COLUMN
+													td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="12:00")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Madrid "
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (MAD)"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "MAD"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "12:00"
+														
+													td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive
+														figure.ibe-table-flight-status__figure
+															img.ibe-table-flight-status__img.ibe-table-flight-status__img--desktop(src=globals.imgPath  + "/logos/aerolineas/logo_pos_IB.svg" alt="Logo Iberia")
+															img.ibe-table-flight-status__img.ibe-table-flight-status__img--mobile(src=globals.imgPath + "/general/iberia-logo-mini.png" alt="Logo Iberia")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--320!= "NO OPERA"
+													
+													td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="13:20")
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Barcelona"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (BCN)"
+														span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "BCN"
+														pan.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "13:20"
+													
+									//- FLIGHT INFORMATION 
+									article.ibe-flignt-status.ibe-flight-status__box.ibe-flight-status__box--mt-extra
+										//- div.ibe-tab__container-desktop.ibe-tab__container-desktop--margin-top.ibe-tab__container-desktop--margin-bottom
+										div
+											h3.title.title__h4.title--no-padd.title--p-bottom-6!= "Informaci&oacute;n de vuelos"
+											p.paragraph.paragraph__info-flight.paragraph__info-flight--grey!= "La informaci&oacute;n del vuelo es orientativa para el pasajero y puede sufrir modificaciones y actualizaciones por parte del aeropuerto: Por favor, consulta siempre la informaci&oacute;n de &uacute;ltima hora en las pantallas del aeropuerto."
+											p.paragraph.paragraph__info-flight.paragraph__info-flight--grey!= "El horario de facturaci&oacute;n del vuelo es el indicado en el mail de confirmaci&oacute; de la compra, indepedientemente del horario final de salida."
+
+									//- FLIGHT PUNCTUALITY
+									article.ibe-flight-status.ibe-flight-status__box.ibe-flight-status__box--mt-extra-res.ibe-flight-status__box--bt
+										div.ibe-flight-status.ibe-flight-status__wrap
+											div.ibe-flignt-status.ibe-flight-status__puntuality
+												h4.title.title__h5.title__h5--small.title--no-padd.title__h5--p-bottom-10!= "Puntualidad durante el año:"
+												p.paragraph!= "97%"
+											div.ibe-flignt-status.ibe-flight-status__puntuality
+												h4.title.title__h5.title__h5--small.title--no-padd.title__h5--p-bottom-10!= "Puntualidad en los &uacute;ltimos 10 d&iacute;as:"
+												p.paragraph!= "99%"
+									//- STRUCTURE OF DETAIL'S BOX
+									div(style="display:none")
+										div.ibe-table-flight-status__detail(data-box-detail)
+											div.ibe-table-flight-status__detail-box
+												button.ibe-button-closed(data-close-detail, data-dialog='close', data-focusin, type="button")
+												span.hideAccessible!="Cerrar detalle"
+												div.ibe-table-flight-status__detail_table-head(data-focusin, tabindex="0")
+													span.hideAccessible="Aqui se muestra informaci&oacute;n en detalle sobre el estado de los vuelos"
+													div.ibe-table-flight-status__th-detail.ibe-table-flight-status__th-detail--long.ibe-view-movil
+														div.ibe-table-flight-status__icon-detail
+															span.ibe-flight-status__icon.ibe-flight-status__icon--status(data-icon)
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--icon(data-state)!= "Estado"
+													div.ibe-table-flight-status__detail_table-head__thead
+														div.ibe-table-flight-status__th-detail.ibe-table-flight-status__th-detail--small
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold(data-flight-date)!="00 de octubre de 0000"
+															span.ibe-table-flight-status__text!="Duración de vuelo "
+																span(data-flight-duration)!="0h " 
+														div.ibe-table-flight-status__th-detail.ibe-table-flight-status__th-detail--long.ibe-view-desktop
+															div.ibe-table-flight-status__icon-detail
+																span.ibe-flight-status__icon.ibe-flight-status__icon--status(data-icon)
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--icon(data-state)!= "Estado"
+														div.ibe-table-flight-status__th-detail.ibe-table-flight-status__th-detail--small.ibe-table-flight-status__th-detail--right
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold(data-flight)!="00000"
+															span.ibe-table-flight-status__text(data-airplane)!="000"
+												div.ibe-table-flight-status__detail_table-dates(data-focusin, tabindex="0")
+													div.ibe-table-flight-status__detail-thead
+
+														div.ibe-table-flight-status__td-detail
+															span.ibe-flight-status__icon.ibe-flight-status__icon--status.icon-despegue
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--icon.ibe-table-flight-status__text--bold(data-from)!="Madrid (MAD)"
+															table.ibe-table-flight-status.ibe-table-flight-status__origin
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Salida programada:"
+																		span.ibe-table-flight-status__text-movil.ibe-table-flight-status__text--plus-one(data-date-departure-responsive)!="00 mes"
+																		span.ibe-table-flight-status__text-movil(data-scheduled-departure-responsive-from)!="00:00"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text.ibe-table-flight-status__text--plus-one(data-date-departure)!="00 mes"
+																		span.ibe-table-flight-status__text(data-scheduled-departure-from)!="00:00"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Salida confirmada:"
+																		span.ibe-table-flight-status__text-movil(data-confirmed-departure-resposive-from)!="00:00"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text(data-confirmed-departure-from)!="00:00"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Terminal:"
+																		span.ibe-table-flight-status__text-movil(data-terminal-responsive-from)!="00"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text(data-terminal-from)!="00"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Puerta:"
+																		span.ibe-table-flight-status__text-movil(data-gate-responsive-from)!="000"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text(data-gate-from)!="000"
+														div.ibe-table-flight-status__td-detail
+															span.ibe-flight-status__icon.ibe-flight-status__icon--status.icon-aterrizaje
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--icon.ibe-table-flight-status__text--bold(data-to)!="Barcelona (BCN)"
+															table.ibe-table-flight-status
+																tr.ibe-table-flight-status-tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Llegada programada:"
+																		span.ibe-table-flight-status__text-movil.ibe-table-flight-status__text--plus-one(data-date-arrival-responsive)!="00 mes"
+																		span.ibe-table-flight-status__text-movil(data-Scheduled-departure-responsive-to)!="00:00"
+																		
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text.ibe-table-flight-status__text--plus-one(data-date-arrival)!="00 mes"
+																		span.ibe-table-flight-status__text(data-Scheduled-departure-to)!="00:00"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Llegada confirmada:"
+																		span.ibe-table-flight-status__text.ibe-table-flight-status__text--plus-one(data-date-arrival)!="00 mes"
+																		span.ibe-table-flight-status__text-movil(data-confirmed-departure-resposive-to)!="00:00"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text(data-confirmed-departure-to)!="00:00"
+																		span.ibe-table-flight-status__text.ibe-table-flight-status__text--plus-one!="(+1)"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Terminal:"
+																		span.ibe-table-flight-status__text-movil(data-terminal-responsive-to)!="0"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text(data-terminal-to)!="0"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Cinta recogida equipaje:"
+																		span.ibe-table-flight-status__text-movil(data-gate-to)!="0"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text(data-gate-responsive-to)!="0"
+												div.ibe-table-flight-status__text-local-hour!="Siempre será la fecha y la hora local del aeropuerto seleccionado."
+												div.ibe-table-flight-status__text-punctuality
+													span.ibe-table-flight-status__text-punctuality--list!="Puntualidad para este vuelo durante el año: "
+														span.ibe-table-flight-status__text--inline(data-puntuality1)!="0% "
+													span.ibe-table-flight-status__text-punctuality--list!="Puntualidad para este vuelo en las últimas 10 operaciones: "
+														span.ibe-table-flight-status__text--inline(data-puntuality2)!="0% "
+								//- CONTAINER AEROPUERTO
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium.active(id="tab-3" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+										article.ibe-flignt-status.ibe-flight-status__box
+											+m-searcher-flight-status-airport()
+										article.ibe-flignt-status.ibe-flight-status__box.ibe-flight-status__box--mt-extra.ibe-flight-status__box--bt.inte-flight-status-title.inte-flight-status-results
+											//- NUM FLIGHT
+											.row
+												.col-md-6.col-xs-12.airport-title
+													div.ibe-flight-status__wrap-course
+														span.ibe-flight-status__course-city!= "Aeropuerto de Madrid - Barajas"
+														span.ibe-flight-status__text.ibe-flight-status__text--block!= "Martes, 17 de octubre de 2017"
+												
+													
+										//- TABLE
+										article.ibe-flignt-status.ibe-flight-status__box.ibe-flight-status__box--mt-medium
+											//- div.ibe-tab__container-desktop.ibe-tab__container-desktop--margin-top-medium.ibe-tab__container-desktop--margin-bottom-small
+											table.ibe-table-flight-status__table(data-type-trip, data-table-flight-status-order, data-flight-status-table, data-text-ascending=": ordenar de forma ascendente", data-text-descending=": ordenar de forma descendente", aria-label="tabla ordenada por hora estimada de llegada de forma ascendente")
+												caption.hideAccessible Esta tabla muestra informaci&oacute;n sobre el estado de los vuelos
+												thead.ibe-table-flight-status__thead
+													tr.ibe-table-flight-status__tr
+														th.ibe-table-flight-status__th.ibe-table-flight-status__th--xlong(data-focusin)
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Vuelo"
+														th.ibe-table-flight-status__th.ibe-table-flight-status__th--long(data-focusin)
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Origen"
+														th.ibe-table-flight-status__th.ibe-table-flight-status__th--long(data-focusin)
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Destino"
+														th.ibe-table-flight-status__th.ibe-table-flight-status__th--short.ibe-table-flight-status__th--order(aria-sort="ascending", data-focusin)
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Salida"
+														th.ibe-table-flight-status__th.ibe-table-flight-status__th--short.ibe-table-flight-status__th--order(data-focusin)
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Llegada"
+														th.ibe-table-flight-status__th.ibe-table-flight-status__th--medium.ibe-table-flight-status__th--order(data-focusin)
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Estado"
+														th.ibe-table-flight-status__th.ibe-table-flight-status__th--responsive.ibe-table-flight-status__th--order(data-focusin)
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Salida"
+														th.ibe-table-flight-status__th.ibe-table-flight-status__th--responsive-big(data-focusin)
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Vuelo"
+														th.ibe-table-flight-status__th.ibe-table-flight-status__th--responsive.ibe-table-flight-status__th--order(data-focusin)
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Llegada"
+												tbody.ibe-table-flight-status__tbody
+													//- ROW 1 START
+													tr.ibe-table-flight-status__tr(data-flight-status-tr, data-flight="IB4547", data-company="Iberia", data-from="Sevilla (SQV)", data-to="Roma (ROM)",
+													data-terminal-from="4", data-terminal-to="1", data-flight-date="07 de noviembre de 2018", data-date-departure='30 diciembre', data-date-arrival='31 diciembre', data-flight-duration="1-15h",
+													data-airplane="Airbus 320", data-hour-scheduled-from="09:30", data-confirmed-departure-from="09:30", data-gate-from="3",
+													data-hour-scheduled-to="10:45", data-confirmed-departure-to="10:45", data-gate-to="35G", data-state="En tierra",
+													data-puntuality1="78%", data-puntuality2="80%", data-icon="avion_ida", data-focusin, tabindex="0" )
+														td.ibe-table-flight-status__td
+															figure.ibe-table-flight-status__figure
+																img.ibe-table-flight-status__img(src=globals.imgPath + "/logos/aerolineas/logo_pos_IB.svg" alt="Logo Iberia")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--clear.ibe-table-flight-status__text--pt!= "Iberia"
+														td.ibe-table-flight-status__td
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Madrid "
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (MAD)"
+															span.ibe-table-flight-status__text!= "Terminal 4"
+														td.ibe-table-flight-status__td
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Barcelona"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (BCN)"
+															span.ibe-table-flight-status__text!= "Terminal 1"
+														td.ibe-table-flight-status__td(data-order="08:00")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "08:00"
+														td.ibe-table-flight-status__td(data-order="09:20")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "09:20"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--plus-one!="(+1)"
+														td.ibe-table-flight-status__td
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "EN TIERRA"
+														//- RESPONSIVE COLUMN
+														td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="08:00")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Madrid "
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (MAD)"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "MAD"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "08:00"
+
+														td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive
+															figure.ibe-table-flight-status__figure
+																img.ibe-table-flight-status__img.ibe-table-flight-status__img--desktop(src=globals.imgPath + "/logos/aerolineas/logo_pos_IB.svg" alt="Logo Iberia")
+																img.ibe-table-flight-status__img.ibe-table-flight-status__img--mobile(src=globals.imgPath + "/general/iberia-logo-mini.png" alt="Logo Iberia")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "EN TIERRA"
+														
+														td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="09:20")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Barcelona"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (BCN)"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "BCN"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "09:20"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--plus-one!="(+1)"
+														
+
+
+													//- ROW 2 START
+													tr.ibe-table-flight-status__tr(data-flight-status-tr, data-flight="IB4547", data-company="Iberia", data-from="Madrid (MAD)", data-to="Londres (LON)",
+													data-terminal-from="4", data-terminal-to="1", data-flight-date="06 de noviembre de 2018", data-date-departure='', data-date-arrival='', data-flight-duration="2h",
+													data-airplane="Airbus 320", data-hour-scheduled-from="10:00", data-confirmed-departure-from="10:00", data-gate-from="11D",
+													data-hour-scheduled-to="12:00", data-confirmed-departure-to="12:00", data-gate-to="45B", data-state="Programado",
+													data-puntuality1="90%", data-puntuality2="97%", data-icon="reloj", data-focusin, tabindex="0" )
+														td.ibe-table-flight-status__td
+															figure.ibe-table-flight-status__figure
+																img.ibe-table-flight-status__img(src=globals.imgPath + "/logos/aerolineas/logo_pos_IB.svg" alt="Logo Iberia")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--clear.ibe-table-flight-status__text--pt!= "Iberia"
+														td.ibe-table-flight-status__td
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Madrid "
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (MAD)"
+															span.ibe-table-flight-status__text!= "Terminal 4"
+														td.ibe-table-flight-status__td
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Barcelona"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (BCN)"
+															span.ibe-table-flight-status__text!= "Terminal 1"
+														td.ibe-table-flight-status__td(data-order="09:00")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "09:00"
+														td.ibe-table-flight-status__td(data-order="10:20")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "10:20"	
+														td.ibe-table-flight-status__td
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "PROGRAMADO" 
+														//- RESPONSIVE COLUMN
+														td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="09:00")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Madrid "
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (MAD)"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "MAD"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "09:00"
+
+														td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive
+															figure.ibe-table-flight-status__figure
+																img.ibe-table-flight-status__img.ibe-table-flight-status__img--desktop(src=globals.imgPath + "/logos/aerolineas/logo_pos_IB.svg" alt="Logo Iberia")
+																img.ibe-table-flight-status__img.ibe-table-flight-status__img--mobile(src=globals.imgPath + "/general/iberia-logo-mini.png" alt="Logo Iberia")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "PROGRAMADO" 
+														
+														td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="10:20")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Barcelona"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (BCN)"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "BCN"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "10:20"
+														
+													//- ROW 3 START
+													tr.ibe-table-flight-status__tr(data-flight-status-tr, data-flight="IB9999", data-company="British Airways", data-from="Londres (LON)", data-to="Málaga (MAL)",
+													data-terminal-from="T2", data-terminal-to="T1", data-flight-date="06 de noviembre de 2018", data-flight-duration="2h",
+													data-airplane="Airbus 320", data-hour-scheduled-from="08:00", data-confirmed-departure-from="08:10", data-gate-from="11D",
+													data-hour-scheduled-to="10:00", data-confirmed-departure-to="10:20", data-gate-to="5", data-state="En hora",
+													data-puntuality1="99%", data-puntuality2="99%", data-icon="aterrizaje", data-focusin, tabindex="0" )
+														td.ibe-table-flight-status__td
+															figure.ibe-table-flight-status__figure
+																img.ibe-table-flight-status__img.ibe-table-flight-status__img--desktop(src=globals.imgPath + "/logos/aerolineas/logo_pos_VY.svg" alt="Logo Vueling")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB9999"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--clear.ibe-table-flight-status__text--pt!= "Vueling"
+														td.ibe-table-flight-status__td
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Madrid "
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (MAD)"
+															span.ibe-table-flight-status__text!= "Terminal 4"
+														td.ibe-table-flight-status__td
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Barcelona"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (BCN)"
+															span.ibe-table-flight-status__text!= "Terminal 1"
+														td.ibe-table-flight-status__td(data-order="10:00")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "10:00"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--green.ibe-table-flight-status__text--small!= "Real 10:18"
+														td.ibe-table-flight-status__td(data-order="11:20")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "11:20"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--green.ibe-table-flight-status__text--small!= "Estimada: 11:20"
+														td.ibe-table-flight-status__td
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--green!= "EN HORA"
+														//- RESPONSIVE COLUMN
+														td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="10:00")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Madrid "
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (MAD)"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "MAD"
+															div.ibe-table-flight-status__text--desktop
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada:"
+																	span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--inline!= " 10:00"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--green.ibe-table-flight-status__text--small!= "Real 10:18"
+															div.ibe-table-flight-status__text--mobile
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--green.ibe-table-flight-status__text--small!= "10:18"
+
+														td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive
+															figure.ibe-table-flight-status__figure
+																img.ibe-table-flight-status__img.ibe-table-flight-status__img--desktop(src=globals.imgPath  + "/logos/aerolineas/logo_pos_VY.svg" alt="Logo Vueling")
+																img.ibe-table-flight-status__img.ibe-table-flight-status__img--mobile(src=globals.imgPath + "/general/iberia-logo-mini.png" alt="Logo Iberia")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--green!= "EN HORA"
+														
+														td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="11:20")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Barcelona"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (BCN)"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "BCN"
+															div.ibe-table-flight-status__text--desktop
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada:"
+																	span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--inline!= " 11:20"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--green.ibe-table-flight-status__text--small!= "Estimada: 11:20"
+															div.ibe-table-flight-status__text--mobile
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--green.ibe-table-flight-status__text--small!= "11:20"
+														
+													//- ROW 4 START
+													tr.ibe-table-flight-status__tr(data-flight-status-tr, data-flight="BA00034", data-company="British Airways", data-from="Londres (LON)", data-to="Málaga (MAL)",
+													data-terminal-from="T2", data-terminal-to="T1", data-flight-date="06 de noviembre de 2018", data-flight-duration="2h",
+													data-airplane="Airbus 320", data-hour-scheduled-from="08:00", data-confirmed-departure-from="08:10", data-gate-from="11D",
+													data-hour-scheduled-to="10:00", data-confirmed-departure-to="10:20", data-gate-to="5", data-state="Con retraso",
+													data-puntuality1="99%", data-puntuality2="99%", data-icon="aterrizaje", data-focusin, tabindex="0" )
+														td.ibe-table-flight-status__td
+															figure.ibe-table-flight-status__figure
+																img.ibe-table-flight-status__img(src=globals.imgPath + "/logos/aerolineas/logo_pos_BA.svg" alt="Logo British Airways")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--clear.ibe-table-flight-status__text--pt!= "British Airways"
+														td.ibe-table-flight-status__td
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Madrid "
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (MAD)"
+															span.ibe-table-flight-status__text!= "Terminal 4"
+														td.ibe-table-flight-status__td
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Barcelona"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (BCN)"
+															span.ibe-table-flight-status__text!= "Terminal 1"
+														td.ibe-table-flight-status__td(data-order="11:00")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "11:00"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown.ibe-table-flight-status__text--small!= "Retrasado: 11:30"
+														td.ibe-table-flight-status__td(data-order="12:20")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "12:20"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown.ibe-table-flight-status__text--small!= "Estimada: 13:00"
+														td.ibe-table-flight-status__td
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown!= "CON RETRASO"
+														//- RESPONSIVE COLUMN
+														td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Madrid "
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (MAD)"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "MAD"
+															div.ibe-table-flight-status__text--desktop
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada:"
+																	span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--inline!= " 11:00"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown.ibe-table-flight-status__text--small!= "Retrasado: 11:30"
+															div.ibe-table-flight-status__text--mobile
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown.ibe-table-flight-status__text--small!= "11:30"
+														td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="11:00")
+															figure.ibe-table-flight-status__figure
+																img.ibe-table-flight-status__img.ibe-table-flight-status__img--desktop(src=globals.imgPath + "/logos/aerolineas/logo_pos_BA.svg" alt="Logo british airways")
+																img.ibe-table-flight-status__img.ibe-table-flight-status__img--mobile(src=globals.imgPath + "/general/iberia-logo-mini.png" alt="Logo Iberia")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown!= "CON RETRASO"
+														
+														td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="12:20")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Barcelona"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (BCN)"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "BCN"
+															div.ibe-table-flight-status__text--desktop
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--grey!= "Programada:"
+																	span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--inline!= " 12:20"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown.ibe-table-flight-status__text--small!= "Estimada: 13:00"
+															div.ibe-table-flight-status__text--mobile
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--brown.ibe-table-flight-status__text--small!= "13:00"
+														
+													//- ROW 5 START
+													tr.ibe-table-flight-status__tr(data-flight-status-tr, data-flight="XX00034", data-company="British Airways", data-from="Londres (LON)", data-to="Málaga (MAL)",
+													data-terminal-from="T2", data-terminal-to="T1", data-flight-date="06 de noviembre de 2018", data-flight-duration="2h",
+													data-airplane="Airbus 320", data-hour-scheduled-from="08:00", data-confirmed-departure-from="08:10", data-gate-from="11D",
+													data-hour-scheduled-to="10:00", data-confirmed-departure-to="10:20", data-gate-to="5", data-state="No opera",
+													data-puntuality1="99%", data-puntuality2="99%", data-icon="reloj", data-focusin, tabindex="0" )
+														td.ibe-table-flight-status__td
+															figure.ibe-table-flight-status__figure
+																img.ibe-table-flight-status__img(src=globals.imgPath + "/logos/aerolineas/logo_pos_IB.svg" alt="Logo Iberia")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--clear.ibe-table-flight-status__text--pt!= "Iberia"
+														td.ibe-table-flight-status__td
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Madrid "
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (MAD)"
+															span.ibe-table-flight-status__text!= "Terminal 4"
+														td.ibe-table-flight-status__td
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "Barcelona"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline!= " (BCN)"
+															span.ibe-table-flight-status__text!= "Terminal 1"
+														td.ibe-table-flight-status__td(data-order="12:00")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "12:00"
+														td.ibe-table-flight-status__td(data-order="13:20")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "13:20"
+														td.ibe-table-flight-status__td
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "NO OPERA"
+														//- RESPONSIVE COLUMN
+														td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="12:00")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Madrid "
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (MAD)"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "MAD"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "12:00"
+															
+														td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive
+															figure.ibe-table-flight-status__figure
+																img.ibe-table-flight-status__img.ibe-table-flight-status__img--desktop(src=globals.imgPath  + "/logos/aerolineas/logo_pos_IB.svg" alt="Logo Iberia")
+																img.ibe-table-flight-status__img.ibe-table-flight-status__img--mobile(src=globals.imgPath + "/general/iberia-logo-mini.png" alt="Logo Iberia")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text!= "IB4547"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "NO OPERA"
+														
+														td.ibe-table-flight-status__td.ibe-table-flight-status__td--responsive(data-order="13:20")
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold.ibe-table-flight-status__text--desktop!= "Barcelona"
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--inline.ibe-table-flight-status__text--desktop!= " (BCN)"
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--mobile.ibe-table-flight-status__text--bold!= "BCN"
+															pan.ibe-table-flight-status__text.ibe-table-flight-status__text--bold!= "13:20"
+													
+									//- FLIGHT INFORMATION 
+									article.ibe-flignt-status.ibe-flight-status__box.ibe-flight-status__box--mt-extra
+										//- div.ibe-tab__container-desktop.ibe-tab__container-desktop--margin-top.ibe-tab__container-desktop--margin-bottom
+										div
+											h3.title.title__h4.title--no-padd.title--p-bottom-6!= "Informaci&oacute;n de vuelos"
+											p.paragraph.paragraph__info-flight.paragraph__info-flight--grey!= "La informaci&oacute;n del vuelo es orientativa para el pasajero y puede sufrir modificaciones y actualizaciones por parte del aeropuerto: Por favor, consulta siempre la informaci&oacute;n de &uacute;ltima hora en las pantallas del aeropuerto."
+											p.paragraph.paragraph__info-flight.paragraph__info-flight--grey!= "El horario de facturaci&oacute;n del vuelo es el indicado en el mail de confirmaci&oacute; de la compra, indepedientemente del horario final de salida."
+
+									//- FLIGHT PUNCTUALITY
+									article.ibe-flight-status.ibe-flight-status__box.ibe-flight-status__box--mt-extra-res.ibe-flight-status__box--bt
+										div.ibe-flight-status.ibe-flight-status__wrap
+											div.ibe-flignt-status.ibe-flight-status__puntuality
+												h4.title.title__h5.title__h5--small.title--no-padd.title__h5--p-bottom-10!= "Puntualidad durante el año:"
+												p.paragraph!= "97%"
+											div.ibe-flignt-status.ibe-flight-status__puntuality
+												h4.title.title__h5.title__h5--small.title--no-padd.title__h5--p-bottom-10!= "Puntualidad en los &uacute;ltimos 10 d&iacute;as:"
+												p.paragraph!= "99%"
+									//- STRUCTURE OF DETAIL'S BOX
+									div(style="display:none")
+										div.ibe-table-flight-status__detail(data-box-detail)
+											div.ibe-table-flight-status__detail-box
+												button.ibe-button-closed(data-close-detail, data-dialog='close', data-focusin, type="button")
+												span.hideAccessible!="Cerrar detalle"
+												div.ibe-table-flight-status__detail_table-head(data-focusin, tabindex="0")
+													span.hideAccessible="Aqui se muestra informaci&oacute;n en detalle sobre el estado de los vuelos"
+													div.ibe-table-flight-status__th-detail.ibe-table-flight-status__th-detail--long.ibe-view-movil
+														div.ibe-table-flight-status__icon-detail
+															span.ibe-flight-status__icon.ibe-flight-status__icon--status(data-icon)
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--icon(data-state)!= "Estado"
+													div.ibe-table-flight-status__detail_table-head__thead
+														div.ibe-table-flight-status__th-detail.ibe-table-flight-status__th-detail--small
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold(data-flight-date)!="00 de octubre de 0000"
+															span.ibe-table-flight-status__text!="Duración de vuelo "
+																span(data-flight-duration)!="0h " 
+														div.ibe-table-flight-status__th-detail.ibe-table-flight-status__th-detail--long.ibe-view-desktop
+															div.ibe-table-flight-status__icon-detail
+																span.ibe-flight-status__icon.ibe-flight-status__icon--status(data-icon)
+																span.ibe-table-flight-status__text.ibe-table-flight-status__text--icon(data-state)!= "Estado"
+														div.ibe-table-flight-status__th-detail.ibe-table-flight-status__th-detail--small.ibe-table-flight-status__th-detail--right
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--bold(data-flight)!="00000"
+															span.ibe-table-flight-status__text(data-airplane)!="000"
+												div.ibe-table-flight-status__detail_table-dates(data-focusin, tabindex="0")
+													div.ibe-table-flight-status__detail-thead
+
+														div.ibe-table-flight-status__td-detail
+															span.ibe-flight-status__icon.ibe-flight-status__icon--status.icon-despegue
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--icon.ibe-table-flight-status__text--bold(data-from)!="Madrid (MAD)"
+															table.ibe-table-flight-status.ibe-table-flight-status__origin
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Salida programada:"
+																		span.ibe-table-flight-status__text-movil.ibe-table-flight-status__text--plus-one(data-date-departure-responsive)!="00 mes"
+																		span.ibe-table-flight-status__text-movil(data-scheduled-departure-responsive-from)!="00:00"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text.ibe-table-flight-status__text--plus-one(data-date-departure)!="00 mes"
+																		span.ibe-table-flight-status__text(data-scheduled-departure-from)!="00:00"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Salida confirmada:"
+																		span.ibe-table-flight-status__text-movil.ibe-table-flight-status__text--black(data-confirmed-departure-resposive-from)!="00:00"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text.ibe-table-flight-status__text--black(data-confirmed-departure-from)!="00:00"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Terminal:"
+																		span.ibe-table-flight-status__text-movil(data-terminal-responsive-from)!="00"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text.ibe-table-flight-status__text--black(data-terminal-from)!="00"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Puerta:"
+																		span.ibe-table-flight-status__text-movil.ibe-table-flight-status__text--black(data-gate-responsive-from)!="000"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text(data-gate-from)!="000"
+														div.ibe-table-flight-status__td-detail
+															span.ibe-flight-status__icon.ibe-flight-status__icon--status.icon-aterrizaje
+															span.ibe-table-flight-status__text.ibe-table-flight-status__text--icon.ibe-table-flight-status__text--bold(data-to)!="Barcelona (BCN)"
+															table.ibe-table-flight-status
+																tr.ibe-table-flight-status-tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Llegada programada:"
+																		span.ibe-table-flight-status__text-movil.ibe-table-flight-status__text--plus-one(data-date-arrival-responsive)!="00 mes"
+																		span.ibe-table-flight-status__text-movil(data-Scheduled-departure-responsive-to)!="00:00"
+																		
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text.ibe-table-flight-status__text--plus-one(data-date-arrival)!="00 mes"
+																		span.ibe-table-flight-status__text(data-Scheduled-departure-to)!="00:00"
+																		
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Llegada confirmada:"
+																		span.ibe-table-flight-status__text-movil(data-confirmed-departure-resposive-to)!="00:00"
+																		
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text(data-confirmed-departure-to)!="00:00"
+																		
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Terminal:"
+																		span.ibe-table-flight-status__text-movil(data-terminal-responsive-to)!="0"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text(data-terminal-to)!="0"
+																tr.ibe-table-flight-status__tr
+																	td.ibe-table-flight-status__td-detail-left
+																		span.ibe-table-flight-status__text!="Cinta recogida equipaje:"
+																		span.ibe-table-flight-status__text-movil(data-gate-to)!="0"
+																	td.ibe-table-flight-status__td-detail-right
+																		span.ibe-table-flight-status__text(data-gate-responsive-to)!="0"
+
+					//- LAST HOUR OF FLIGHTS
+					section.ibe-flight-status.ibe-flight-status__section
+						//- Reused component, that's why infocheckin remains
+						article.ibe-infocheckin__box.ibe-infocheckin__box--no-margin.ibe-infocheckin__box--icon
+							figure.ibe-figure
+								img.ibe-img(src=globals.imgPath + "/modules/icons/svgs/informacion_2.svg" alt="información")
+							h3.title.title__h4.ibe-infocheckin__box-title!= "&Uacute;ltima hora de nuestros vuelos"
+							div.ibe-collapse_moreInfo(data-view-more='parent')
+								div.xui-collapse_moreInfo-text-close(data-view-more='container')
+									p.paragraph.paragraph__regular!= "Virus Zika. Flesibilizaci&oacute;n de tarifas para mujeres embarazadas"
+									p.paragraph.paragraph__regular!= "Aliquam in purus vel augue lobortis laoreet. Aliquam et mauris placerat, consequat arcu vitae, bibendum dolor. Sed a massa consequat, eleifend neque vel, volutpat turpis."
+									p.paragraph.paragraph__regular!= "Praesent tincidunt tristique massa et cursus. Cras felis mi, aliquam sit amet dignissim in, elementum vitae magna. In in interdum ligula. Vestibulum vitae dui eget felis dapibus volutpat."
+								a.link.link__regular.ibe-link-view-more.ibe-link-view-more--more(href="#" title="Mostrar más" data-value="more" data-view-more='button', data-text-expanded="Ocultar" data-text-collapsed="Leer más") Leer m&aacute;s
+
+
+	+m-footer({
+		"full": true
+	})

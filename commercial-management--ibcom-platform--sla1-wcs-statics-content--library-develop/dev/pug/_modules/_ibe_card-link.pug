@@ -1,0 +1,128 @@
+mixin m-card-link(params)
+	- var highlightClass = ""
+	- var mainClass = ""
+	if (typeof(params.mainClass) !== 'undefined')
+		- mainClass = "ibe-card-link--" + params.mainClass
+	if (params.highlight)
+		- highlightClass = "ibe-card-link--highlight"
+	if (params.isLink)
+		a.ibe-card-link(href="#", title=params.title.name, class=mainClass+" "+highlightClass+" "+params.autoHeight)
+			.ibe-card-link__container
+				if (params.logo.bool)
+					figure.ibe-card-link__logo
+						img.ibe-card-link__logo-img(src=globals.imgPath+params.logo.src alt=params.logo.alt)
+				figure.ibe-card-link__background
+					img.ibe-card-link__background-img(src=(params.image.customSrc!=undefined?params.image.customSrc:globals.imgPath+params.image.src) alt=params.image.alt)
+				.ibe-card-link__info.ibe-card-link__info--no-footer
+					- var iconClass = ""
+					if (params.title.icon)
+						- iconClass = "ibe-card-link__title--icon"
+					h3.title__h3.ibe-card-link__title(class=iconClass)!=params.title.name
+					case params.typeContent
+						when "paragraph"
+							p.paragraph.paragraph__regular!="Reserva tres noches o m&aacute;s y ll&eacute;vate la &uacute;ltima noche gratis. Reserva tres noches o m&aacute;s y ll&eacute;vate la &uacute;ltima noche gratis."
+							p.paragraph.paragraph__regular!="Y adem&aacute;s, servicio de minibus ida y vuelta gratuito del hotel"
+						when "list"
+							p.paragraph.paragraph__regular!="Disfruta de un clima tropical en los mejores hoteles"
+							ol.ibe-list.ibe-list--normal
+								li.ibe-list__item
+									p.paragraph.paragraph__regular!="Tenerife desde "
+										a(href="#" title="Tenerife desde 11€").link.link__regular.link__regular--important!="11&euro;"
+								li.ibe-list__item
+									p.paragraph.paragraph__regular!="Gran Canaria desde "
+										a(href="#" title="Gran Canaria desde 26€").link.link__regular.link__regular--important!="26&euro;"
+								li.ibe-list__item
+									p.paragraph.paragraph__regular!="Lanzarote desde "
+										a(href="#" title="Lanzarote desde 34€").link.link__regular.link__regular--important!="34&euro;"
+						when "price"
+							p.paragraph.paragraph__regular!="Al&oacute;jate en el centro de la ciudad y descubre sus encantos de noche y de d&iacute;a. Al&oacute;jate en el centro de la ciudad y descubre."
+							p.paragraph.paragraph__regular!="Hotel 1 noche p/p desde"
+							p.paragraph.paragraph__regular
+								span.paragraph--highlight!="35 &euro;"
+						when "description"
+							if (params.description.title)
+								p.paragraph.paragraph__regular.paragraph__title!=params.description.title || "El pasajero que nunca vuela a tu lado"
+							p.paragraph.paragraph__regular!=params.description.text || "Siempre dispondr&aacute;s de un asiento libre al lado, as&iacute; consingues un mayor confort y m&aacute;s espacio sobre ti."
+
+					case params.typeContent
+						when "paragraph"
+						when "list"
+							.ibe-card-link__footer
+								button.ibe-button.ibe-button--red.ibe-button--small!="Reserva ahora"
+	else
+		if(params.promo)
+			article.ibe-card-link(class=mainClass+" "+params.cssClass)
+				.ibe-card-link__container
+					figure.ibe-card-link__background
+						img.ibe-card-link__background-img(src=(params.image.customSrc!=undefined?params.image.customSrc:globals.imgPath+params.image.src) alt=params.image.alt)
+					if(params.vertical)
+						.ibe-card-link__info(data-fc-height=params.heightnumber)
+
+							h3.title__h2.ibe-card-link__title!=params.title.name
+
+							p.paragraph.paragraph__regular!="Butacas m&aacute;s amplias, conexi&oacute;n a internet, estrenos de cine en tu pantalla, cocina gourmet y bodega. Adem&aacute;s de un cuidado servicio en tierra antes de volar"
+							p.paragraph.paragraph__regular
+								a.link.link__regular(class=params.linkClass href="#" title="Siente tu experiencia Business Plus")!="Siente tu experiencia Business Plus"
+					else if(params.flex)
+						.ibe-card-link__info
+							div 
+								h3.title__h3.title__h2.ibe-card-link__title!=params.title.name
+								p.paragraph.paragraph__regular(class=params.pClass)!=params.description.text
+							div.ibe-card-link__button
+								a.ibe-button.ibe-button--red.ibe-button--min-1.ibe-button--iberia-headline.ibe-button--fs-16!=params.buttonText || "Reserva ahora"
+
+					else
+						.ibe-card-link__info
+							h3.title__h2.ibe-card-link__title!=params.title.name
+							h4.title__h1.ibe-card-link__subtitle!="Tus emociones volar&aacute;n a otro nivel"
+
+							p.paragraph.paragraph__regular!="Butacas m&aacute;s amplias, conexi&oacute;n a internet, estrenos de cine en tu pantalla, cocina gourmet y bodega. Adem&aacute;s de un cuidado servicio en tierra antes de volar"
+							p.paragraph.paragraph__regular
+								a.link.link__regular(class=params.linkClass href="#" title="Siente tu experiencia Business Plus")!="Siente tu experiencia Business Plus"
+
+		else
+			article.ibe-card-link(class=mainClass+" "+highlightClass+" "+params.autoHeight)
+				.ibe-card-link__container
+					if (params.logo.bool)
+						figure.ibe-card-link__logo
+							img.ibe-card-link__logo-img(src=(params.image.customSrc!=undefined?params.image.customSrc:globals.imgPath+params.image.src) alt=params.logo.alt)
+					else if (params.logo.background)
+						figure.ibe-card-link__background(style="background-image:url(../images/content/disney.jpg);background-size:cover;background-position: center;")
+					else
+						figure.ibe-card-link__background
+							img.ibe-card-link__background-img(src=(params.image.customSrc!=undefined?params.image.customSrc:globals.imgPath+params.image.src) alt=params.image.alt)
+					.ibe-card-link__info
+						if (params.title.icon)
+							- var iconClass = "ibe-card-link__title--icon"
+						h3.title__h3.ibe-card-link__title(class=iconClass)!=params.title.name
+						case params.typeContent
+							when "paragraph"
+								p.paragraph.paragraph__regular!="Reserva tres noches o m&aacute;s y ll&eacute;vate la &uacute;ltima noche gratis. Reserva tres noches o m&aacute;s y ll&eacute;vate la &uacute;ltima noche gratis."
+								p.paragraph.paragraph__regular!="Y adem&aacute;s, servicio de minibus ida y vuelta gratuito del hotel"
+							when "list"
+								p.paragraph.paragraph__regular!="Disfruta de un clima tropical en los mejores hoteles"
+								ol.ibe-list.ibe-list--normal
+									li.ibe-list__item
+										p.paragraph.paragraph__regular!="Tenerife desde "
+											a(href="#" title="Tenerife desde 11€").link.link__regular.link__regular--important!="11&euro;"
+									li.ibe-list__item
+										p.paragraph.paragraph__regular!="Gran Canaria desde "
+											a(href="#" title="Gran Canaria desde 26€").link.link__regular.link__regular--important!="26&euro;"
+									li.ibe-list__item
+										p.paragraph.paragraph__regular!="Lanzarote desde "
+											a(href="#" title="Lanzarote desde 34€").link.link__regular.link__regular--important!="34&euro;"
+							when "price"
+								p.paragraph.paragraph__regular!="Al&oacute;jate en el centro de la ciudad y descubre sus encantos de noche y de d&iacute;a. Al&oacute;jate en el centro de la ciudad y descubre."
+								p.paragraph.paragraph__regular!="Hotel 1 noche p/p desde"
+								p.paragraph.paragraph__regular
+									span!="35 €"
+							when "description"
+								if (params.description.title)
+									p.paragraph.paragraph__regular.paragraph__title!=params.description.title || "El pasajero que nunca vuela a tu lado"
+								p.paragraph.paragraph__regular!=params.description.text || "Siempre dispondr&aacute;s de un asiento libre al lado, as&iacute; consingues un mayor confort y m&aacute;s espacio sobre ti."
+					case params.typeContent
+						when "paragraph"
+						when "list"
+						when "description"
+							.ibe-card-link__footer
+								a.ibe-button.ibe-button--red.ibe-button--small.ibe-button--link!=params.buttonText || "Reserva ahora"

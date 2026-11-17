@@ -1,0 +1,47 @@
+extends _general/layout__primary
+include _modules/_ibe_searcher
+include _modules/_ibe-banner-layers
+block title
+	title!="IBERIA - Analisis Banner por capas"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+ 
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+
+	// End wrapper
+	main.ibe-cub
+		+m-ibe-breadcrumbs({
+			menu: "checkin"
+		})
+		div.ibe-search-flights.ibe-search-flights--cug.ibe-search-flights--cug-vintage 
+		
+			div.ibe-search-flights__search
+				div.container.ibe-search-flights__search-container(data-function="data-focus-searcher")
+					div.row
+						div.col-xs-12
+							//- Mostrar en caso de buscador vintage
+							div.ibe-search-flights__search-box(data-validate-searcher)
+								+m-searcher({
+									"tab1": true,
+									"tab2": true,
+									"tab3": true,
+									"tab4": true,
+									"tab5": true,      
+								})
+							//- Mostrar en caso de buscador home
+							//-div.ibe-search-flights__search-box.hidden-sm.hidden-xs.hidden-md
+								+m-searcher-accordion-flights()
+
+
+			+m-banner-layers({
+				"img": "images/content/ibplus_home_slider_chase_US_mar18_en.jpg",
+			})
+
+
+	+m-footer()

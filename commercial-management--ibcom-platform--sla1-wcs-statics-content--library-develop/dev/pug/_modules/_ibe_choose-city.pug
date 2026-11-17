@@ -1,0 +1,114 @@
+mixin m-choose-city(params)
+	if (params.format === "desktop")
+		div.ibe-choose-city(id=params.id, class=params.class, data-choose-city=params.dataType, data-toggle="container", data-city-list="collapse", data-collapse="hide-resize", data-keyboard-close="esc", data-close="outsideclick")
+			div.ibe-tab(data-tab="jquery-ui")
+				ul.ibe-tab__menu
+					if (params.tab_1 !== undefined)
+						li.ibe-tab__menu-item
+							a.link.link__regular(href="#" + params.tab_1.href, title=params.tab_1.title)!=params.tab_1.name
+						li.ibe-tab__menu-item
+							a.link.link__regular(href="#" + params.tab_2.href, title=params.tab_2.title)!=params.tab_2.name
+						li.ibe-tab__menu-item
+							a.link.link__regular(href="#" + params.tab_3.href, title=params.tab_3.title)!=params.tab_3.name
+						li.ibe-tab__menu-item
+							a.link.link__regular(href="#" + params.tab_4.href, title=params.tab_4.title)!=params.tab_4.name
+						li.ibe-tab__menu-item
+							a.link.link__regular(href="#" + params.tab_5.href, title=params.tab_5.title)!=params.tab_5.name
+				div.ibe-tab__container(data-cities-list)
+					div.ibe-filter-letter__header
+						ul.ibe-filter-letter__menu
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="Todos" data-filter-letter="all")!="Todos"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="A" data-filter-letter="A")!="A"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="B" data-filter-letter="B")!="B"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="C" data-filter-letter="C")!="C"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="D" data-filter-letter="D")!="D"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="E" data-filter-letter="E")!="E"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="F" data-filter-letter="F")!="F"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="G" data-filter-letter="G")!="G"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="H" data-filter-letter="H")!="H"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="I" data-filter-letter="I")!="I"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="J" data-filter-letter="J")!="J"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="K" data-filter-letter="K")!="K"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="L" data-filter-letter="L")!="L"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="M" data-filter-letter="M")!="M"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="N" data-filter-letter="N")!="N"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="Ñ" data-filter-letter="Ñ")!="Ñ"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="O" data-filter-letter="O")!="O"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="P" data-filter-letter="P")!="P"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="Q" data-filter-letter="Q")!="Q"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="R" data-filter-letter="R")!="R"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="S" data-filter-letter="S")!="S"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="T" data-filter-letter="T")!="T"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="U" data-filter-letter="U")!="U"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="V" data-filter-letter="V")!="V"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="W" data-filter-letter="W")!="W"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="X" data-filter-letter="X")!="X"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="Y" data-filter-letter="Y")!="Y"
+							li.ibe-filter-letter__menu-item
+								a.link.link__regular(href="#" title="Z" data-filter-letter="Z")!="Z"
+					if (params.tab_1 !== undefined)
+						div(id=params.tab_1.href data-tab-cities="desktop")
+							+m-filter-letter-new()
+						div(id=params.tab_2.href data-tab-cities="desktop")
+							+m-filter-letter-new()
+						div(id=params.tab_3.href data-tab-cities="desktop")
+							+m-filter-letter-new()
+						div(id=params.tab_4.href data-tab-cities="desktop")
+							+m-filter-letter-new()
+						div(id=params.tab_5.href data-tab-cities="desktop")
+							+m-filter-letter-new()
+	else
+		div.ibe-choose-city.ibe-choose-city--mobile(class=params.class, id=params.id, data-toggle="container", data-city-list="collapse", data-collapse="hide-resize", data-close=(params.dataClose != undefined ? "outsideclick" : ""))
+			div.ibe-tab(data-tab="jquery-ui")
+				header.ibe-tab__scroll
+					ul.ibe-tab__menu
+						if (params.tab_1 !== undefined)
+							li.ibe-tab__menu-item
+								a.link.link__regular(href="#" + params.tab_1.href, title=params.tab_1.title)!=params.tab_1.name
+							li.ibe-tab__menu-item
+								a.link.link__regular(href="#" + params.tab_2.href, title=params.tab_2.title)!=params.tab_2.name
+							li.ibe-tab__menu-item
+								a.link.link__regular(href="#" + params.tab_3.href, title=params.tab_3.title)!=params.tab_3.name
+							li.ibe-tab__menu-item
+								a.link.link__regular(href="#" + params.tab_4.href, title=params.tab_4.title)!=params.tab_4.name
+							li.ibe-tab__menu-item
+								a.link.link__regular(href="#" + params.tab_5.href, title=params.tab_5.title)!=params.tab_5.name
+				div.ibe-tab__container
+					if (params.tab_1 !== undefined)
+						div(id=params.tab_1.href data-tab-cities="mobile")
+							div.ioslist(data-function="city-list")
+						div(id=params.tab_2.href data-tab-cities="mobile")
+							div.ioslist(data-function="city-list")
+						div(id=params.tab_3.href data-tab-cities="mobile")
+							div.ioslist(data-function="city-list")
+						div(id=params.tab_4.href data-tab-cities="mobile")
+							div.ioslist(data-function="city-list")
+						div(id=params.tab_5.href data-tab-cities="mobile")
+							div.ioslist(data-function="city-list")

@@ -1,0 +1,28 @@
+mixin m-ibe-modal-login-stopover-simple(params)
+	- params = params || {};
+	div.ibe-dialog.fc-dialog-login-stopover-simple.ibe_inputs
+		div.modal-dialog
+			div.modal-content
+				div.ibe-modal
+					header.modal-header
+						h2.title--stopover.title--stopover-no-padd.paragraph__regular--m-top-24!="¿Ya tienes tu "
+							span.paragraph--red.paragraph--bold!=" Stopover?"
+						h3.ibe-modal_subtitle!="Accede a tu reserva de Stopover para poder ver los códigos de descuentos"
+						div.ibe-modal__options
+							button(type="button" data-dialog="close" class="ibe-button--reset ibe-modal__options-icon ibe-modal__options-icon--close")
+								span.hideAccessible!="Cerrar"
+					div.modal-body
+						div.ibe-modal_body.ibe-modal_body--stopover-simple
+							div.ibe-modal_body--content-centered
+								h4.ibe-modal_body-title.ibe-modal_body-title--level3-sec!="Accede con tus datos de vuelo"
+								div(class="ibe_form__group ibe_form__group--mt-24 ibe_form__group--error")
+									input(class="ibe_form__input-text", name="lastName", id="lastName", type="text", placeholder="Apellido del pasajero")
+									label(class="ibe_form__input-label", for="lastName") Apellido del pasajero
+									p.ibe_form__msg-info.ibe_form__msg-info--fs-14.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+								div(class="ibe_form__group ibe_form__group--mt-22 ibe_form__group--error")
+									input(class="ibe_form__input-text", name="bookingNumber", id="bookingNumber", type="text", placeholder="Código de reserva")
+									label(class="ibe_form__input-label", for="bookingNumber") Código de reserva
+									p.ibe_form__msg-info.ibe_form__msg-info--fs-14.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+								p.paragraph.paragraph__regular.paragraph__regular--mt-22.text-right
+									a.link.link__regular.link__regular--underline(href="#" title="¿Qué es el código de reserva?")!="&iquest;Qué es el código de reserva?"
+								button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block.ibe-modal__button-stopover(type="button")!="Gestiona tu reserva"

@@ -1,0 +1,97 @@
+# Description: Workflow reusable CD for deploying in S3.
+# Version 1.0
+# GitHub Code: https://github.com/Iberia-Ent/software-engineering--workflow--node--cd-s3
+# Git Flow Code: https://github.com/Iberia-Ent/software-engineering--git-flow--template
+name: CD
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment to deploy to
+        required: true
+        default: Integration
+        type: string
+      level-config-file:
+        description: Level to read into config file
+        required: true
+        default: cd-int
+        type: string
+      config-file-path:
+        description: Path to config file
+        required: false
+        default: .github/config/ci-config.json
+        type: string
+
+jobs:
+    CD:
+        name: CD - ${{ inputs.environment }}
+        runs-on:
+          group: ${{ vars.RUNNER_GROUP }}
+          labels: ${{ fromJson(vars.RUNNER_LABELS) }}
+        environment:
+            name: ${{ inputs.environment }}
+
+        steps:
+        - name: 🔽 Checkout Code
+          uses: actions/checkout@v4
+
+        - name: ✅ Check Empty Variables
+          uses: Iberia-Ent/software-engineering--check-empty-variables-action@v1
+          with:
+            variables: '${{ inputs.level-config-file }};${{ inputs.config-file-path }};${{ inputs.environment }}'
+
+        - name: 📖 Read Config File
+          uses: Iberia-Ent/software-engineering--read-file-action@v1
+          with:
+            file-path: ${{ inputs.config-file-path }}
+            level: ${{ inputs.level-config-file }}
+
+        - name: 🔧 Configure AWS Credentials for Resources Common
+          uses: Iberia-Ent/software-engineering--reset-and-configure-aws-credentials--action@v1
+          with:
+            role-to-assume: ${{ secrets.AWS_RESOURCES_COMMON_ROLE }}
+            aws-region: ${{ env.AWS_REGION }}
+
+        - name: 🔧 Configure Bucket S3 Deploy AWS credentials
+          uses: Iberia-Ent/software-engineering--reset-and-configure-aws-credentials--action@v1
+          with:
+            role-to-assume: ${{ secrets.AWS_DEPLOYMENT_ROLE }}
+            aws-region: ${{ env.AWS_REGION }}
+
+        - name: 🔄 Replace variables in distribution
+          uses: Iberia-Ent/software-engineering--replace-environments-variables-in-distribution-package--action@v1
+          with:
+            vars: "${{ toJson(vars)}}"
+            secrets: "${{ toJson(secrets)}}"
+
+        - name: 🔼 Upload app files to S3
+          uses: Iberia-Ent/software-engineering--upload-to-s3-bucket--action@v1
+          with:
+            target_folder: ./src
+            bucket_repository_name: ${{ env.S3_DEPLOY_BUCKET_REPOSITORY_NAME }}
+            destination_folder: ${{ env.S3_DEPLOY_DESTINATION_FOLDER }}
+            clean_destination_folder: true
+   
+        - name: 🔧 Fix Content-Type on .woff2 files
+          run: |
+            for file in $(aws s3 ls s3://${{ env.S3_DEPLOY_BUCKET_REPOSITORY_NAME }}/ --recursive | awk '{print $4}' | grep '\.woff2$'); do
+              aws s3 cp "s3://${{ env.S3_DEPLOY_BUCKET_REPOSITORY_NAME }}/$file" "s3://${{ env.S3_DEPLOY_BUCKET_REPOSITORY_NAME }}/$file" \
+                --metadata-directive REPLACE \
+                --content-type font/woff2
+            done
+
+
+        - name: 🔧 Configure AWS Credentials for Invalid Cache CloudFront
+          if: ${{ env.AWS_CLOUDFRONT_REGION != 'NA' && env.AWS_CLOUDFRONT_REGION != '' && env.AWS_CLOUDFRONT_DISTRIBUTION_ID != 'NA' && env.AWS_CLOUDFRONT_DISTRIBUTION_ID != '' }}
+          uses: Iberia-Ent/software-engineering--reset-and-configure-aws-credentials--action@v1.0
+          with:
+            role-to-assume: ${{ secrets.AWS_CLOUDFRONT_CACHE_ROLE }}
+            aws-region: ${{ env.AWS_CLOUDFRONT_REGION }}
+
+        - name: ☁️ Invalide CloudFront Cache
+          if: ${{ env.AWS_CLOUDFRONT_REGION != 'NA' && env.AWS_CLOUDFRONT_REGION != '' && env.AWS_CLOUDFRONT_DISTRIBUTION_ID != 'NA' && env.AWS_CLOUDFRONT_DISTRIBUTION_ID != '' }}
+          run: aws cloudfront --region ${{ env.AWS_CLOUDFRONT_REGION }} create-invalidation --distribution-id ${{ env.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths '${{ env.AWS_CLOUDFRONT_INVALIDATION_PATH }}'
+
+        - name: 🗑️ Clean up
+          if: always()
+          uses: Iberia-Ent/software-engineering--clean-up-working-directory-action@v1

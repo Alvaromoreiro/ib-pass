@@ -1,0 +1,200 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe_box-separated
+//    Desripcion: Estilos para modulos a dos columas separa por una linea 
+//    vertical con sombra
+//******************************************************************************/
+.ibe_box-separated{ 
+	display: table;
+	width: 100%;
+	position: relative;
+	background:$PC-cromatico_4;
+	box-shadow: rem(2) rem(2) rem(30) 0 rgba(0, 0, 0, 0.02);
+	font-size: 0;
+	
+	/* .ibe_layout__line-spacing {
+		margin-bottom: 1.5rem;
+	} */
+	
+	&__header {
+		display: table-cell;
+		position: relative;
+		width: rem(383);
+		padding: rem(50) rem(68) rem(50) rem(64);
+		box-sizing: border-box;
+	}
+	
+	&__title {
+		display: block;
+		position: relative;
+		font-family: $font-04;
+		font-size: 1.375rem;
+		color: $PC-cromatico_3;
+		line-height: 1.09;
+		margin-bottom: rem(14);
+		&--with-icon::before{
+			font-size: rem(39);
+			position: absolute;
+			top: rem(-8);
+			left: rem(-42)
+		}
+	}
+	
+	[class^="icon-"], [class*=" icon-"] {
+		speak: none;
+		font-style: normal;
+		font-weight: normal;
+		font-variant: normal;
+		text-transform: none;
+		line-height: 1;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+	&__line-spacing {
+		margin-bottom: rem(24);
+	}
+	&__subtitle {
+		display: block;
+		font-family: $font-07, Arial, Helvetica, sans-serif;
+		font-size: rem(13);
+		color: $PC-cromatico_2;
+		line-height: 1.54;
+	}
+	&__subtitle--bold {
+		font-weight: bold;
+	}
+		
+	&__body {
+		display: table-cell;
+		vertical-align: top;
+		position: relative;
+		width: calc(100% - 383px);
+		padding: rem(64);
+		box-shadow: 0 rem(2) rem(9) rem(2) rgba(0, 0, 0, 0.07);
+		height: 100%;
+	}
+	.ibe_form__box--claim__center{
+		margin: 0 auto;
+		border-bottom: 0;
+	}
+	.ibe-choose-city--origin, .ibe-choose-city--destination {
+		left: auto;
+		right: -10.9375rem;
+		margin-top: rem(10);
+	}
+	.ibe-choose-city:before, .ibe-choose-city:after {
+		left: 80.4%;
+	}
+}
+/*XLARGE RESOLUTION STYLES*/
+@mixin xl-ibe_box-separated{} 
+
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe_box-separated{
+	.ibe_box-separated{ 
+        &__header {
+			width: rem(320);
+			padding: rem(50) rem(32) rem(50) rem(60);
+		}
+
+		&__body {
+			width: calc(100% - 320px);
+			padding: rem(64);
+		}
+		.ibe-choose-city--origin, .ibe-choose-city--destination {
+			left: auto;
+			right: rem(-143);
+			margin-top: rem(10);
+		}
+		.ibe-choose-city:before, .ibe-choose-city:after {
+			left: 81.4%;
+		}
+    }
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe_box-separated{
+	//@include l-ibe_box-separated;
+	.ibe_box-separated{ 
+        &__header {
+			width: 18rem;
+			padding: 3.125rem 2rem 3.125rem 3.25rem;
+		}
+
+		&__body {
+			width: calc(100% - 288px);
+			padding: 4rem 4rem; 
+		}
+		.ibe-choose-city--origin, .ibe-choose-city--destination {
+			right: inherit;
+		}
+    }
+}
+
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_box-separated{
+	@include m-ibe_box-separated;
+	.ibe_box-separated{
+		padding: rem(32) rem(56);
+		&__header {
+			display: block;
+			width: 100%;
+			padding: 0 0 1rem;
+		}
+		&__body {
+			display: block;
+			width: 100%;
+			box-shadow: none;
+			padding: 0;
+			min-height: auto;
+		}
+		.ibe-table{
+			min-width: rem(750);
+		}
+		.ibe-table--bordered > .ibe-table__thead > .ibe-table__thead-tr > .ibe-table__thead-th,
+		.ibe-table--bordered > .ibe-table__tbody > .ibe-table__tbody-tr > .ibe-table__tbody-td{
+			padding-left: rem(10);
+			padding-right: rem(10);
+		}
+		&.ibe-box__primary--type01{
+			display: block;
+		}
+	}
+} 
+
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe_box-separated{
+	@include sm-ibe_box-separated;
+	.ibe_box-separated{
+		padding: rem(21) rem(16) rem(32);
+		&__header {
+			display: block;
+			width: 100%;
+			padding: 0 0 1rem;
+		}
+		&__title--with-icon:before {
+			font-size: 2rem;
+			left: -2rem;
+		}
+		&__title--with-icon {
+			margin-left: rem(19);
+		}
+		&__title {
+			font-size: 1.1875rem;
+		}
+		&__body {
+			display: block;
+			width: 100%;
+			box-shadow: none;
+			padding: 0;
+		}
+		.ibe_form__box--claim__center{
+			width: 100%;
+		}
+		.ibe-table{
+			min-width: rem(550);
+		}
+
+	}
+	
+}

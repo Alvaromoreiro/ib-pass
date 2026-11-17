@@ -1,0 +1,170 @@
+extends _general/layout__primary
+block title
+	title!="IBERIA - Comprar, regalar, transferir"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main
+		+m-ibe-breadcrumbs({
+			"menu": "checkin"
+		})
+		section.container
+			div.row
+				div.col-lg-9.col-xs-12.col-lg-push-3
+					section.ibe-infocheckin
+						header.ibe-infocheckin__header
+							h1.title.title__h1.ibe-infocheckin__header-primary!="Comprar, regalar, transferir"
+							h2.title.title__h5.ibe-infocheckin__header-secondary!="Comprar, regalar, transferir"
+
+						div.ibe-minibox-icon
+							div.row
+								div.col-xs-12.col-md-4
+									div.ibe-minibox-icon__container(data-fc-minibox-height)
+										figure.ibe-figure
+											img.ibe-img(src=globals.imgPath + "/modules/icons/shopping-car-icon.png" alt="Comprar AVIOS")
+										div.ibe-minibox-icon__title
+											span.ibe-minibox-icon__title-text!="Comprar AVIOS"
+										div.ibe-minibox-icon__no-log
+											span.ibe-minibox-icon__no-log-text!="Identif&iacute;se m&aacute;s abajo y acceda a los productos"
+								div.col-xs-12.col-md-4
+									div.ibe-minibox-icon__container(data-fc-minibox-height)
+										figure.ibe-figure
+											img.ibe-img(src=globals.imgPath + "/modules/icons/gift-icon.png" alt="Regalar AVIOS")
+										div.ibe-minibox-icon__title
+											span.ibe-minibox-icon__title-text!="Regalar AVIOS"
+										div.ibe-minibox-icon__no-log
+											span.ibe-minibox-icon__no-log-text!="Identif&iacute;se m&aacute;s abajo y acceda a los productos"
+								div.col-xs-12.col-md-4
+									div.ibe-minibox-icon__container(data-fc-minibox-height)
+										figure.ibe-figure
+											img.ibe-img(src=globals.imgPath + "/modules/icons/transfer-icon.png" alt="Transferir AVIOS")
+										div.ibe-minibox-icon__title
+											span.ibe-minibox-icon__title-text!="Transferir AVIOS"
+										div.ibe-minibox-icon__no-log
+											span.ibe-minibox-icon__no-log-text!="Identif&iacute;se m&aacute;s abajo y acceda a los productos"
+
+						article.ibe-infocheckin__box.ibe-infocheckin__box--grey
+							figure.ibe-figure
+								img.ibe-img(src=globals.imgPath + "/content/logo-avios.png" alt="AVIOS")
+							div.ibe-infocheckin__box-container
+								p.paragraph.paragraph__regular!="Compra, regala o transfiere los Avios que necesitas para tu pr&oacute;ximo viaje o para utilizar con nuestros partners. "
+								a.link.link__regular.link__regular--important(href="#" title="Ver precios")!="Ver precios"
+								!=" o "
+								a.link.link__regular.link__regular--important(href="#" title="Ver términos y condiciones")!="Ver t&eacute;rminos y condiciones"
+
+						form.ibe-infocheckin__box.ibe-box-form(action="#" method="post" data-ng-controller="modalcontroller", class="ibe_form")
+							fieldset
+								legend.ibe-box-form__title!="Identif&iacute;quese y acceda a los productos"
+								div.ibe-box-form__container
+									div(class="ibe_form__group")
+										input(class="ibe_form__input-text", name="iberia-plus", id="iberia-plus", type="text", autocomplete="off" placeholder="Número de Iberia Plus")
+										label(class="ibe_form__input-label", for="iberia-plus")!="N&uacute;mero de Iberia Plus"
+
+									div(class="ibe_form__group")
+										input(class="ibe_form__input-text", name="iberia-plus-pass", id="iberia-plus-pass", type="password", autocomplete="off" placeholder="Código PIN")
+										label(class="ibe_form__input-label", for="iberia-plus-pass")!="C&oacute;digo PIN"
+										p(class="ibe_form__msg-info")
+											a(class="ibe_form__msg-link" href="#")!="¿Has olvidado tu pin?"
+									input.ibe-button.ibe-box-form__button.ibe-button--big.ibe-button--grey(type="submit", value="Iniciar Sesión")
+									a.ibe-box-form__linkfoot(href="#" title="Regístrate ahora en Iberia Plus")!="Reg&iacute;strate ahora en Iberia Plus"
+
+						div.ibe-minibox-icon
+							div.row
+								div.col-xs-12.col-md-4
+									div.ibe-minibox-icon__container(data-fc-minibox-loged-height)
+										figure.ibe-figure
+											img.ibe-img(src=globals.imgPath + "/modules/icons/shopping-car-icon.png" alt="Comprar AVIOS")
+										div.ibe-minibox-icon__title
+											span.ibe-minibox-icon__title-text!="Comprar AVIOS"
+										form.ibe-minibox-icon__form.ibe_form
+											fieldset
+												legend.hidden!="Comprar AVIOS"
+												button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block(type="button")!="Comprar"
+												.ibe-form__checkbox
+													input.ibe-form__checkbox-input(type="checkbox" id="usuario-tarjeta-1" name="usuario-tarjeta-1" checked)
+													label.ibe-form__checkbox-label(for="usuario-tarjeta-1")
+														span!="Usuario de Tarjeta Iberia"
+
+								div.col-xs-12.col-md-4
+									div.ibe-minibox-icon__container(data-fc-minibox-loged-height)
+										figure.ibe-figure
+											img.ibe-img(src=globals.imgPath + "/modules/icons/gift-icon.png" alt="Regalar AVIOS")
+										div.ibe-minibox-icon__title
+											span.ibe-minibox-icon__title-text!="Regalar AVIOS"
+										form.ibe-minibox-icon__form.ibe_form
+											fieldset
+												legend.hidden!="Comprar AVIOS"
+												button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block(type="button")!="Comprar"
+												.ibe-form__checkbox
+													input.ibe-form__checkbox-input(type="checkbox" id="usuario-tarjeta-2" name="usuario-tarjeta-2" checked)
+													label.ibe-form__checkbox-label(for="usuario-tarjeta-2")
+														span!="Usuario de Tarjeta Iberia"
+
+								div.col-xs-12.col-md-4
+									div.ibe-minibox-icon__container(data-fc-minibox-loged-height)
+										figure.ibe-figure
+											img.ibe-img(src=globals.imgPath + "/modules/icons/transfer-icon.png" alt="Transferir AVIOS")
+										div.ibe-minibox-icon__title
+											span.ibe-minibox-icon__title-text!="Transferir AVIOS"
+										form.ibe-minibox-icon__form.ibe_form
+											fieldset
+												legend.hidden!="Comprar AVIOS"
+												button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block(type="button")!="Comprar"
+												.ibe-form__checkbox
+													input.ibe-form__checkbox-input(type="checkbox" id="usuario-tarjeta-3" name="usuario-tarjeta-3" checked)
+													label.ibe-form__checkbox-label(for="usuario-tarjeta-3")
+														span!="Usuario de Tarjeta Iberia"
+
+
+				div.col-lg-3.col-xs-12.col-lg-pull-9
+					+m-lat-menu({
+						items: [
+							{
+								link: "Prepara tu equipaje",
+								title: "Prepara tu equipaje"
+							},
+							{
+								link: "Equipaje de mano",
+								title: "Equipaje de mano",
+								cssClass: "ibe-lat-menu__item--active"
+							},
+							{
+								link: "Equipaje facturable",
+								title: "Equipaje facturable"
+							},
+							{
+								link: "Equipajes peligrosos",
+								title: "Equipajes peligrosos"
+							},
+							{
+								link: "Dispositivos electr&oacute;nicos",
+								title: "Dispositivos electrónicos"
+							},
+							{
+								link: "Equipajes especiales",
+								title: "Equipajes especiales"
+							},
+							{
+								link: "Equipaje de valor declarado",
+								title: "Equipaje de valor declarado"
+							},
+							{
+								link: "Equipaje adicional",
+								title: "Equipaje adicional"
+							},
+							{
+								link: "Recomendaciones",
+								title: "Recomendaciones"
+							}
+						]
+					})
+
+	+m-footer()

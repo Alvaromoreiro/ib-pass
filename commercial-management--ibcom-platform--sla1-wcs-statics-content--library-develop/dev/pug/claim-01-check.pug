@@ -1,0 +1,126 @@
+extends _general/layout__primary
+
+block title
+	title!="IBERIA - Reclamaciones - Verificación"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main.ibe-claim
+		+m-ibe-breadcrumbs({
+			menu: "claim"
+		})
+		div.container(data-guide="header")
+			div.row
+				div.col-xs-12
+					h1.title.title__h1.title--center.title--grey.title--padding-bottom-short.title--p-top-0 Contacta con nosotros
+					h2.title.title__h5.title.title__h5--small.title--center.title--no-paddT.title--light.title--p-bottom-40 Nuestro Centro de Atenci&oacute;n al Cliente recoge, analiza y responde a tus reclamaciones
+			div.row
+				div.col-xl-9.col-lg-8.col-md-12.col-sm-12.col-xs-12
+					.ibe-box__primary.ibe-box__primary--type02
+							h3.title__h3.title--center.title--p-bottom-40 Tu reclamaci&oacute;n ha sido enviada correctamente
+							.ibe-box__tertiary.ibe-box__tertiary--type02
+								p.paragraph.paragraph__regular Referencia de incidencia:
+								p.paragraph.paragraph__regular.paragraph__regular--bold.paragraph__regular--no-margin.paragraph__regular--f-size-25 1234567X
+								p.paragraph.paragraph__regular Recibir&aacute;s un correo de confirmaci&oacute;n al mail que has facilitado en los datos de contacto
+							div.ibe-box--information
+								p.paragraph.paragraph__regular.paragraph__regular--no-margin-top Lorem ipsum,
+								p.paragraph.paragraph__regular Nolor sit amet, consectetur adipiscing elit. Nullam tempus elit nec arcu lacinia, non vulputate lacus blandit. Vivamus hendrerit imperdiet dui, eu molestie eros condimentum vitae. Sed eget arcu felis. Donec a pulvinar lacus, ut rhoncus massa. Phasellus consequat mauris bibendum dui interdum mattis. Nullam eget eros interdum, imperdiet leo et, commodo urna. Aenean tortor risus, gravida sed sapien eget, vulputate blandit sapien.
+								p.paragraph.paragraph__regular Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tempus elit nec arcu lacinia, non vulputate lacus blandit. Vivamus hendrerit imperdiet dui, eu molestie eros condimentum vitae. Sed eget arcu felis. Donec a pulvinar lacus, ut rhoncus massa.
+							div.ibe-box--information
+								p.paragraph.paragraph__regular Tus archivos se han enviado correctamente:
+								ul.ibe-list--circle
+									li.ibe-list--circle__item Lorem ipsum dolor sit amet
+									li.ibe-list--circle__item Suspendisse at erat mattis enim malesuada bibendu
+							div
+								p.paragraph.paragraph__regular.paragraph__regular--bold Nuestro Servicio de Atención al Cliente se pondra en contacto contigo para cominicarte la resolución de tu incidencia.
+								p.paragraph.paragraph__regular Si quieres saber la situación de una reclamación ya reportada, utiliza el formulario
+								a.link.link__regular.link__regular--red(href="#", title="Ir a consulta") "Consulta el estado de tu incidencia".
+				div.col-xl-3.col-lg-4.col-md-12.col-sm-12.col-xs-12
+					.ibe-cart-cont
+						div.ibe-card-cont__container.ibe-card-cont__container--small
+							form(class="ibe_form")
+								fieldset
+									legend.title__h3.ibe-card-cont__title Consulta el estado de  tu incidencia
+									.row
+										.col-xl-12.col-lg-12.col-md-6.col-sm-12.col-xs-12
+											.ibe_form__group.fc_form_group
+												label(for="ref01" class="ibe_form__input-label") Referencia
+												input(name="ref01" id="ref01" type="text" placeholder="Referencia" class="ibe_form__input-text")
+										.col-xl-12.col-lg-12.col-md-6.col-sm-12.col-xs-12
+											.ibe_form__group.fc_form_group
+												label(for="lastname01" class="ibe_form__input-label") Apellidos del pasajero
+												input(name="lastname01" id="lastname01" type="text" placeholder="Apellidos del pasajero" class="ibe_form__input-text" maxlength="80" required)
+										.col-xl-12.col-lg-12.col-md-6.col-sm-12.col-xs-12
+											.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+												label.ibe_form__selectize--label(for="document-type")
+													span.ibe_form__input-text Tipo de documento
+												select(required, id="document-type", class="ibe-select ibe_form__input-text", name="document-type", data-selectmenu="")
+													option(value="") Tipo de documento
+													option(value="dni") DNI espa&ntilde;ol (incl.letra)
+													option(value="carnet") Carn&eacute; Nacional de Identidad
+													option(value="pasaporte") Pasaporte
+													option(value="tarjeta") Tarjeta Residente en Espa&ntilde;a
+										.col-xl-12.col-lg-12.col-md-6.col-sm-12.col-xs-12
+											.ibe_form__group.fc_form_group.ibe_form__group--separated
+												label(for="docnum01" class="ibe_form__input-label") N&uacute;mero de documento
+												input(name="docnum01" id="docnum01" type="text" placeholder=" N&uacute;mero de documento" class="ibe_form__input-text" maxlength="15" required)
+										.col-xl-12.col-lg-12.col-md-6.col-sm-12.col-xs-12
+											.ibe-form__checkbox
+												input.ibe-form__checkbox-input(type='checkbox', name='check01', id="check01")
+												label.ibe-form__checkbox-label.ibe-form__checkbox-label--separated(for='check01')
+													span.ibe-form__checkbox-label--text Es titular de una tarjeta Iberia Plus o de otra tarjeta Oneworld
+										.col-xl-12.col-lg-12.col-lg-offset-0.col-md-offset-2.col-md-4.col-sm-12.col-xs-12
+											button.ibe-button.ibe-button--red.ibe-button--block.ibe-button--smaller(type='button') Ver estado
+
+				div.col-xl-3.col-lg-4.col-md-12.col-sm-12.col-xs-12
+					div.ibe-card-cont__container.ibe-card-cont__container--grey
+						h3.title__h3.ibe-card-cont__title.ibe-card-cont__title--black Herramientas de ayuda
+						ul.ibe-list--new
+							li.ibe-list__item--border
+								a(href="#", title="Ir a Serviberia", class="ibe-list__item--link")
+									span.ibe-list__item--red Serviberia
+									span.ibe-list__item--text Venta Telefónica de Iberia
+							li.ibe-list__item--border
+								a(href="#", title="Ir a Centro de Servicios Iberia Plus", class="ibe-list__item--link")
+									span.ibe-list__item--red Centro de Servicios Iberia Plus
+									span.ibe-list__item--text Centros Iberia Plus
+							li.ibe-list__item--border
+								a(href="#", title="Ir a Oficinas de Iberia", class="ibe-list__item--link")
+									span.ibe-list__item--red Oficinas de Iberia
+									span.ibe-list__item--text Siempre nos encontrarás cerca
+							li.ibe-list__item--border
+								a(href="#", title="Ir a centro atencion equipajes", class="ibe-list__item--link")
+									span.ibe-list__item--red Centro Atenci&oacute;n Iberia Equipajes
+									span.ibe-list__item--text Si desea consultar el estado actual de la b&uacute;squeda que estamos efectuando
+							li.ibe-list__item--border
+								a(href="#", title="Ir a objetos perdidos", class="ibe-list__item--link")
+									span.ibe-list__item--red Objetos perdidos
+									span.ibe-list__item--text Conoce la manera de recuperar un objeto extraviado en el aeropuerto.
+							li.ibe-list__item--border
+								a(href="#", title="Ir a Iberia conecta", class="ibe-list__item--link")
+									span.ibe-list__item--red Iberia Conecta
+									span.ibe-list__item--text Conoce las actualizaciones relacionadas con tu vuelo por sms o email.
+	div.ibe-dialog.fc-dialog-claim
+		div.modal-dialog.modal-dialog--big
+			div.modal-content
+				div.ibe-modal.ibe-modal--big
+					div.modal-header.modal-header--p-bottom-28
+						h2.title.title__h1.ibe-modal__title-primary="¿Estás seguro de cancelar tu reclamación?"
+						.ibe-modal__options.ibe-modal__options--claim
+							button.ibe-button--reset.ibe-modal__options-icon.ibe-modal__options-icon--close(data-focusin, type="button" data-dialog="close")
+								span.hideAccessible!="Cerrar"
+					div.modal-body
+						p.paragraph.paragraph__regular.paragraph__regular--modal-claim Si cancelar tu reclamación eliminaremos todos los datos que nos has facilitado Vestibulum ut sapien in justo tincidunt vestibulum. Suspendisse volutpat semper quam, sodales aliquet dolor egestas quis.
+					div.modal-footer.modal-footer--left
+						button.ibe-button.ibe-button--red.ibe-button--smaller.ibe-button--morelarge.ibe-button--right.ibe-button--modal(type='button' title="Cancelar" data-dialog="close") Cancelar Reclamación
+						button.ibe-button.ibe-button--reset.ibe-button--link02.ibe-button--modal(type='button' title="Continuar" data-dialog="close") Continuar con la reclamación
+	+m-footer()
+

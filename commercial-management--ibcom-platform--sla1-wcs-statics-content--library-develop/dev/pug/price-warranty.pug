@@ -1,0 +1,332 @@
+extends _general/layout__primary
+include _modules/_ibe_accordion
+block title
+	title!="IBERIA - Precio Garantizado"
+block body
+	// New header
+	+m-header-new({
+		"login": true
+	})
+
+	// New menu
+	+m-menu-new({
+		"login": true
+	})
+	// End wrapper
+	main
+		+m-ibe-breadcrumbs({
+			menu: "claim"
+		})
+		section.container
+			div.row
+				div.col-lg-9.col-xs-12.col-lg-push-3
+					h1.title.title__h1.title--center!="Mejor precio garantizado"
+					div.div.ibe-box__primary.ibe-box__price-warranty.ibe-box__price-warranty--box
+						div.ibe-box--with-font
+							div.paragraph.paragraph__regular.paragraph__regular--black!="Se puede contestar afirmativamente a las siguientes cuestiones, rellena el cuestionario. En caso contrario te rogamos leas detenidamente las Condiciones Generales de nuevo."
+							ul.ibe-list.ibe-list--checked
+								li.ibe-list__item.ibe-list__item--green
+									span!="Has efectuado la reserva, compra y emisión del billete en el día de hoy a través de iberia.com?"
+								li.ibe-list__item.ibe-list__item--green
+									span!="¿Es el billete emitido un billete electrónico?"
+								li.ibe-list__item.ibe-list__item--green
+									span!="¿Has comprobado que se trate de los mismos vuelos, fechas y número/s de pasajero/s?"
+								li.ibe-list__item.ibe-list__item--green
+									span!="¿Has seleccionado la tarifa más económica?"
+								li.ibe-list__item.ibe-list__item--green
+									span!="¿La página donde encontró la tarifa era una página ubicada en España?"
+							figure.ibe-icono-secured
+								img(src=globals.imgPath + "/modules/icons/veridigns_secured.png" alt="Descargar Adobe Flash")
+					div.div.ibe-box__primary.ibe-box__price-warranty.ibe-box__price-warranty--box
+						form(data-valid-form action="#" method="post", id="form1" class="ibe_form ibe_form-warranty")
+							h3.title.title__h3.title__h3-form-warranty!="Formulario de reclamación precio mínimo garantizado"
+							div.ibe_form__box--claim.ibe_form__box--claim__center
+								fieldset
+									legend.title__h5.title__h5--small.title--light.title--p-bottom-18!="Información relativa al pasajero"
+									div.row
+										div.col-xs-12
+											p.paragraph.paragraph__regular--six-digit.paragraph__regular--grey  SEXO
+									div.row
+										div.col-xs-12
+											.ibe_form__radio
+												input(type="radio", name="radios1", id="ejemplo_radio01", class="ibe_form__radio-input" checked)
+												label(for="ejemplo_radio01", class="ibe_form__radio-text") Sr.
+											.ibe_form__radio
+												input(type="radio", name="radios1", id="ejemplo_radio02", class="ibe_form__radio-input")
+												label(for="ejemplo_radio02", class="ibe_form__radio-text") Sra.
+									div.row
+										div.col-xs-12
+											div(class="ibe_form__group  fc_form_group")
+												label(class="ibe_form__input-label", for="code01") Nº IB Plus/FQTV Ib
+												input(class="ibe_form__input-text", name="code01", id="code01", type="text", required, placeholder="Nº IB Plus/FQTV Ib", data-validator="plus", maxlength="12")
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+
+									div.row
+										div.col-xs-12
+											div(class="ibe_form__group  fc_form_group ")
+												label(class="ibe_form__input-label", for="code02") Nombre
+												input(class="ibe_form__input-text", name="code02", id="code02", type="text", required, placeholder="Nombre", maxlength="30", data-validator="personal")
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+									div.row
+										div.col-xs-12
+											div(class="ibe_form__group  fc_form_group")
+												label(class="ibe_form__input-label", for="code03") Primer Apellido
+												input(class="ibe_form__input-text", name="code03", id="code03", type="text", required, placeholder="Primer Apellido", maxlength="30", data-validator="personal")
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+									div.row
+										div.col-xs-12
+											div(class="ibe_form__group  fc_form_group")
+												label(class="ibe_form__input-label", for="code04") Segundo Apellido
+												input(class="ibe_form__input-text", name="code04", id="code04", type="text", required, placeholder="Segundo Apellido", maxlength="30", data-validator="personal")
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+									div.row
+										div.col-xs-12
+											div(class="ibe_form__group  fc_form_group")
+												label(class="ibe_form__input-label", for="code05") Email
+												input(class="ibe_form__input-text", name="code05", id="code05", type="text", placeholder="Email",  maxlength="60", data-validator="mail", data-no-copy)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+									div.row
+										div.col-xs-12
+											div(class="ibe_form__group  fc_form_group")
+												label(class="ibe_form__input-label", for="code06") Confirma tu email
+												input(class="ibe_form__input-text", name="code06", id="code06", type="text", placeholder="Confirma tu email", maxlength="60", data-validator="mail", data-different, data-no-paste)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+												p.ibe_form__msg-info.hidden(data-validate="different", data-validate-text="El email es diferente")
+									div.row
+										div.col-xs-12
+											div(class="ibe_form__group fc_form_group ibe_form__box--claim ibe_form__box--claim-short")
+												label(class="ibe_form__input-label", for="code07") Tel&eacute;fono de contacto
+												input(class="ibe_form__input-text", name="code07", id="code07", type="text", required, placeholder="Tel&eacute;fono de contacto", maxlength="20",  data-validator="tel" )
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+
+								fieldset
+									legend.title__h5.title__h5--small.title--light.title--p-bottom-18.title--p-top-24!="Información relativa al viaje adquirido en iberia.com"
+									div.row
+										div.col-xs-12
+											.ibe_form__radio
+												input(type="radio", name="radios3", id="ejemplo_radio03", class="ibe_form__radio-input" data-roundtrip checked)
+												label(for="ejemplo_radio03", class="ibe_form__radio-text") Ida y vuelta.
+											.ibe_form__radio
+												input(type="radio", name="radios3", id="ejemplo_radio04", class="ibe_form__radio-input" data-oneway)
+												label(for="ejemplo_radio04", class="ibe_form__radio-text") S&oacute;lo ida.
+									div.row
+										div.col-xs-12
+											div(class="ibe_form__group fc_form_group")
+												label(class="ibe_form__input-label", for="code08") C&oacute;digo de reserva
+												input(class="ibe_form__input-text", name="code08", id="code08", type="text", placeholder="C&oacute;digo de reserva", maxlength="6", data-validator="code")
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+
+											.ibe_form__group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+												label.ibe_form__selectize--label(for="n_pasajeros")
+													span.ibe_form__input-text Nº de pasajeros
+												select(id="n_pasajeros", class="ibe-select ibe_form__input-text", name="n_pasajeros", data-selectmenu="", required, data-valid)
+													option(value="") Nº de pasajeros
+													option(value="op1") Opci&oacute;n 1
+													option(value="op2") Opci&oacute;n 2
+													option(value="op3") Opci&oacute;n 3
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+											div(class="ibe_form__group fc_form_group ibe_form__group--button-icon  ibe-form__group--m-mobile" data-move="parent" data-position="1")
+												label(class="ibe_form__input-label", for="flight_origin")!="Origen"
+												input(class="ibe_form__input-text" name="flight_origin" id="flight_origin" type="text" placeholder="Origen" data-autocomplete="cities" spellcheck='false' value="", data-destination-info="ES|MAD|Madrid", data-validate="input-origin", data-fligths-collapse-mobile="button", data-close='outsideclick', required)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El origen no puede ser igual que el destino")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+												div.hidden-xs.hidden-sm.hidden-md
+													button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-claim00")
+														span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+													+m-choose-city({
+														"class": "ibe-choose-city--origin",
+														"format": "desktop",
+														"id": "id-tab-collapse-claim00",
+														"dataClose": true
+													})
+												div.hidden-lg.hidden-xl
+													button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#m-id-tab-collapse-claim00")
+														span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+													+m-choose-city({
+														"class": "ibe-choose-city--origin",
+														"format": "responsive",
+														"id": "m-id-tab-collapse-claim00",
+														"dataClose": true
+													})
+											div(class="ibe_form__group fc_form_group ibe_form__group--button-icon " data-move="parent" data-position="2")
+												label(class="ibe_form__input-label", for="flight_destiny")!="Destino"
+												input(class="ibe_form__input-text", name="flight_destiny", id="flight_destiny", type="text", placeholder="Destino" data-autocomplete="cities" spellcheck='false' data-validate="input-destiny", data-fligths-collapse-mobile="button", required)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El destino no puede ser igual que el origen")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+												div.hidden-xs.hidden-sm.hidden-md
+													button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-claim01")
+														span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+													+m-choose-city({
+														"class": "ibe-choose-city--destination",
+														"format": "desktop",
+														"id": "id-tab-collapse-claim01",
+														"dataClose": true
+													})
+												div.hidden-lg.hidden-xl
+													button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#m-id-tab-collapse-claim01")
+														span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+													+m-choose-city({
+														"class": "ibe-choose-city--destination",
+														"format": "responsive",
+														"dataClose": true
+													})
+											.ibe_form__group.fc_form_group.ibe-datepicker-general
+												label.ibe_form__input-label(for='form_calendar') Fecha de salida
+												input.ibe_form__input-text.pointer(name='form_calendar', id="form_calendar" type='text', placeholder='DD/MM/YYYY', data-format='DD/MM/YYYY', data-toggle='collapse', data-target='#calendar-form', data-cal='claim', data-flight="start", data-placeholder='placeholder', data-close='outsideclick', data-one-month, data-validator='date-valid', required)
+												button.ibe_form__input-button.ibe_form__input-button--medium.icon.icon-calendario(type='button', data-toggle='collapse', data-target='#calendar-form', data-close='outsideclick')
+													span.hideAccessible(data-toggle-status='true', data-status-open='Click para plegar calendario', data-status-close='Click para desplegar calendario') Click para desplegar calendario
+												+m-searcher-calendar-simple({
+													className: "ibe-searcher__calendar--start ibe-searcher__calendar--right ibe-searcher__calendar--claim",
+													id: "calendar-form",
+													number: "form-1",
+													claims: true,
+													datahourrestriction:"48"
+												})
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+												p.ibe_form__msg-info.hidden(data-validate="range-return", data-validate-text="La fecha es superior a vuelta")
+												p.ibe_form__msg-info.hidden(data-validate="restriction", data-validate-text="La fecha debe ser posterior a la restricci&oacute;n")
+											.ibe_form__group.fc_form_group.ibe-datepicker-general
+												label.ibe_form__input-label(for='form_calendar2') Fecha de llegada
+												input.ibe_form__input-text.pointer(name='form_calendar2', id="form_calendar2" type='text', placeholder='DD/MM/YYYY', data-format='DD/MM/YYYY', data-toggle='collapse', data-target='#calendar-form2', data-cal='claim', data-flight="return", data-placeholder='placeholder', data-close='outsideclick', data-one-month, data-validator='date-valid', required, data-cal-end)
+												button.ibe_form__input-button.ibe_form__input-button--medium.icon.icon-calendario(type='button', data-toggle='collapse', data-target='#calendar-form2', data-close='outsideclick')
+													span.hideAccessible(data-toggle-status='true', data-status-open='Click para plegar calendario', data-status-close='Click para desplegar calendario') Click para desplegar calendario
+												+m-searcher-calendar-simple({
+													className: "ibe-searcher__calendar--start ibe-searcher__calendar--right ibe-searcher__calendar--claim",
+													id: "calendar-form2",
+													number: "form-2",
+													claims: true,
+													datahourrestriction:"48"
+												})
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+												p.ibe_form__msg-info.hidden(data-validate="range-go", data-validate-text="La fecha es inferior a la ida")
+												p.ibe_form__msg-info.hidden(data-validate="restriction", data-validate-text="La fecha debe ser posterior a la restricci&oacute;n")
+											.ibe_form__group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+												label.ibe_form__selectize--label(for="clase_precio")
+													span.ibe_form__input-text Nº de pasajeros
+												select(id="clase_precio", class="ibe-select ibe_form__input-text", name="clase_precio", data-selectmenu="", required, data-valid)
+													option(value="") Clase/Precio
+													option(value="op1") Opci&oacute;n 1
+													option(value="op2") Opci&oacute;n 2
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+											div(class="ibe_form__group fc_form_group").ibe_form__box--claim.ibe_form__box--claim-short
+												label(class="ibe_form__input-label", for="code10") Precio sin tasas
+												input(class="ibe_form__input-text", name="code10", id="code10", type="text", placeholder="Precio sin tasas", , maxlength="15", required data-validator='price')
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+								fieldset
+									legend.title__h5.title__h5--small.title--light.title--p-top-24!="Información relacionada con la web en la que encontraste el precio más económico."
+									div.row
+										div.col-xs-12
+											div(class="ibe_form__group fc_form_group")
+												label.ibe_form__input-label(for='code22') Fecha actual
+												input(class="ibe_form__input-text", name="code22", id="code22", type="text", value="10/10/2018", disabled)
+												p(class="ibe_form__msg-info") Fecha en la que encontraste la tarifa sin tasas de importe inferior
+									div.row
+										div.col-xs-12
+											div(class="ibe_form__group fc_form_group")
+												label(class="ibe_form__input-label", for="code11") Precio sin tasas de importe inferior
+												input(class="ibe_form__input-text", name="code11", id="code11", type="text", required, placeholder="Precio sin tasas de importe inferior")
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+									div.row
+										div.col-xs-12
+											div(class="ibe_form__group fc_form_group")
+												label(class="ibe_form__input-label", for="code12") Dirección de la página (URL) en la que encontraste la tarifa
+												input(class="ibe_form__input-text", name="code12", id="code12", type="text", required, data-validator='url', placeholder="Dirección de la página (URL) en la que encontraste la tarifa")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+									div.row
+										div.col-xs-12
+											.ibe_form__group.fc_form_group
+												label(for="textarea").hideAccessible Text area comentarios
+												textarea.ibe_form__textarea(rows="7", placeholder="Comentarios (opcional). Máximo 1500 caracteres", data-textarea, id="textarea", title="Comentarios extra")
+												div(data-textarea-text).paragraph.paragraph__regular.paragraph__regular--f-right
+									h5.title__h5.title__h5--small.title--f-16.title--grey.paragraph.paragraph__regular--m-top-24.ibe_form__box--claim.ibe_form__box--claim-short Adjuntar archivos
+										.row
+											div(class="ibe-upload") 
+												.col-xs-12
+													p.paragraph.paragraph__regular.paragraph__regular--inline.paragraph--break Puedes adjuntar hasta tres archivos (peso máximo 5Mb) de los siguientes tipos: bmp, jpg, png, pdf, doc, docx
+												.col-xs-12
+													div.ibe_form__group.ibe_form__group--error
+														input.hideAccessible(type='file', data-validator="file", name='files[]', multiple, id="uploadfile", data-file, accept=".bmp,.jpg,.png,.pdf,.doc,.docx")
+														label(for="uploadfile").btn.fileinput-button.ibe-button.ibe-button--upload.ibe-button--max-width-none Adjuntar un archivo
+														p.ibe_form__msg-info.ibe_form__msg-info--msg-file.hidden(data-validate="valid", data-validate-text="Formato no válido")
+												.col-xs-12
+													div(style='margin-top:15px;' class='ibe-alert ibe-alert--alert ibe-alert--yellow ibe-alert--small hidden', data-alert='files')
+														p(class='ibe-alert__text') Se pueden adjuntar como máximo 3 archivos
+													div(style='margin-top:15px;' class='ibe-alert ibe-alert--alert ibe-alert--yellow ibe-alert--small hidden', data-alert='type')
+														p(class='ibe-alert__text') El archivo no tiene formato válido
+													div(style='margin-top:15px;' class='ibe-alert ibe-alert--alert ibe-alert--yellow ibe-alert--small hidden', data-alert='same')
+														p(class='ibe-alert__text') El archivo que intentas adjuntar ya ha sido añadido
+													div(style='margin-top:15px;' class='ibe-alert ibe-alert--alert ibe-alert--yellow ibe-alert--small hidden', data-alert='size')
+														p(class='ibe-alert__text') Se ha superado el máximo tamaño permitido
+													div(style='margin-top:15px;' class='ibe-alert ibe-alert--alert ibe-alert--yellow ibe-alert--small hidden', data-alert='required')
+														p(class='ibe-alert__text') Es necesario adjuntar al menos 1 archivo.
+													ul(data-fileList).ibe-list--files
+								button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--min1.ibe-button--right.ibe-button--m-top-24(type='button' data-modal="button" data-modal-view=".fc-dialog-claim") Continuar
+								button.ibe-button.ibe-button--reset.ibe-button--link02(type='button' data-modal="button" data-modal-view=".fc-dialog-claim") Cancelar
+								div.ibe-dialog.fc-dialog-claim
+									div.modal-dialog.modal-dialog--big
+										div.modal-content
+											div.ibe-modal.ibe-modal--big
+												div.modal-header.modal-header--p-bottom-28
+													h2.title.title__h1.ibe-modal__title-primary="¿Estás seguro de cancelar tu reclamación?"
+													.ibe-modal__options.ibe-modal__options--claim
+														button.ibe-button--reset.ibe-modal__options-icon.ibe-modal__options-icon--close(type="button" data-dialog="close")
+															span.hideAccessible!="Cerrar"
+												div.modal-body
+													p.paragraph.paragraph__regular.paragraph__regular--modal-claim Si cancelar tu reclamación eliminaremos todos los datos que nos has facilitado Vestibulum ut sapien in justo tincidunt vestibulum. Suspendisse volutpat semper quam, sodales aliquet dolor egestas quis   
+												div.modal-footer.modal-footer--left
+													button.ibe-button.ibe-button--red.ibe-button--smaller.ibe-button--morelarge.ibe-button--right.ibe-button--modal(type='button' title="Cancelar" data-dialog="close") Continuar
+													button.ibe-button.ibe-button--reset.ibe-button--link02.ibe-button--modal(type='button' title="Continuar" data-dialog="close") Cancelar Reclamación
+				div.col-lg-3.col-xs-12.col-lg-pull-9
+					+m-lat-menu({
+						items: [
+							{
+								link: "Condiciones Transporte",
+								title: "Condiciones Transporte"
+
+							},
+							{
+								link: "Tu seguridad es lo primero",
+								title: "Tu seguridad es lo primero"
+							},
+							{
+								link: "Condiciones Generales del Programa Iberia Plus",
+								title: "Condiciones Generales del Programa Iberia Plus"
+							},
+							{
+								link: "Mejor precio garantizado",
+								title: "Mejor precio garantizado",
+								cssClass: "ibe-lat-menu__item--active"
+							},
+							{
+								link: "Compromiso de servicio",
+								title: "Compromiso de servicio"
+							},
+							{
+								link: "Derechos del pasajero",
+								title: "Derechos del pasajero"
+							},
+							{
+								link: "Accesibilidad",
+								title: "Accesibilidad"
+							},
+							{
+								link: "Información Legal",
+								title: "Información Legal"
+							}
+						]
+					})
+	+m-footer()

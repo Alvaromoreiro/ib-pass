@@ -1,0 +1,622 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe_search-flights
+//    Desripcion: Estilos para la busqueda de hotel mas vuelo
+//******************************************************************************/
+.ibe-hero-banner{
+	&__container{
+		// max-width: rem(607);
+		padding-top: rem(19);
+	}
+	&__throttle{
+		font-family: $font-07;
+		font-size: rem(16);
+		color: $PC-cromatico_10;
+		font-weight: normal;
+		background-color: $PC-cromatico_8;
+		display: inline-block;
+		position: relative;
+		padding: rem(5) rem(18);
+		margin-bottom: rem(13);
+		&:after{
+			content: "";
+			display: inline-block;
+			position: absolute;
+			top: 100%;
+			left: calc((100% - 6px)/2);
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: rem(7) rem(5) 0 rem(5);
+			border-color: #eeeeee transparent transparent transparent;
+			-webkit-transform:rotate(360deg);
+		}
+	}
+	&__title{
+		max-width: rem(607);
+		font-family: $font-04;
+		font-size: rem(45);
+		color: $PC-cromatico_3;
+		font-weight: bold;
+		line-height: rem(52);
+	}
+	&__subtitle{
+		font-family: $font-07;
+		font-size: rem(20);
+		color: $PC-cromatico_1;
+		line-height: normal;
+		font-weight: normal;
+		margin-top: rem(4);
+	}
+	&__box{
+		margin-top: rem(14);
+	}
+	&__destination{
+		font-family: $font-07;
+		font-size: rem(22);
+		line-height: rem(29);
+		color: $PC-cromatico_1;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+	&__offers{
+		margin-top: rem(6);
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: flex-start;
+		align-items: stretch;
+		&-box{
+			position: relative;
+			display: flex;
+			flex-flow: column nowrap;
+			align-items: flex-start;
+			&:nth-child(odd){
+				padding-right: rem(24);
+			}
+			&:nth-child(even){
+				padding-left: rem(24);
+				&::before{
+					content: '';
+					position: absolute;
+					top: rem(4);
+					left: 0;
+					width: rem(2);
+					height: remcalc(100%, " - ", rem(4));
+					border-left: rem(1) solid $BRD-standar_19;
+				}
+
+			}
+		}
+		&-type{
+			font-family: $font-07;
+			font-size: rem(17);
+			line-height: rem(21);
+			color: $PC-cromatico_1;
+			// text-transform: uppercase;
+		}
+		&-start-price{
+			font-family: $font-07;
+			font-size: rem(16);
+			color: $PC-cromatico_1;
+			line-height: rem(20);
+		}
+		&-price{
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: flex-start;
+			align-items: baseline;
+			line-height: rem(56);
+			&-total{
+				font-family: $font-04;
+				font-size: rem(65);
+				line-height: rem(60);	//in design the position top is on to previous text
+				color: $PC-cromatico_1;
+			}
+			&-currency{
+				font-family: $font-04;
+				font-size: rem(48);
+				color: $PC-cromatico_1;
+			}
+			&--reverse{
+				.ibe-hero-banner__offers-price{
+					&-total{
+						order: 1;
+					}
+				}
+			}
+		}
+	}
+	&__cover{
+		&--dark.is-loaded{
+			&::after{
+				content: '';
+				display: block;
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(255, 255, 255, 0) 100%);
+			}
+		}
+		&--white.is-loaded{
+			&::after{
+				content: '';
+				display: block;
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(to right, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 30%,  rgba(255, 255, 255, 0) 100%);
+			}
+		}
+		
+	}
+	&--simple{
+		.ibe-hero-banner{
+			&__title{
+				font-size: rem(38);
+				line-height: rem(45);
+			}
+			&__subtitle{
+				margin-bottom: rem(30);
+			}
+		}
+	}
+	&--dark{
+		.ibe-hero-banner{
+			&__title, &__subtitle, &__destination{
+				color: $PC-cromatico_4;
+			}
+			&__offers{
+				&-box{
+					&:nth-child(even){
+						border-color: $PC-cromatico_4;
+					}
+				}
+				&-type, &-start-price{
+					color: $PC-cromatico_4;
+				}
+				&-price{
+					&-total, &-currency{
+						color: $PC-cromatico_4;
+					}
+				}
+			}
+		}
+	}
+}
+.ibe-search-flights {
+	&__cover {
+		&--carousel-home {
+			.ibe-home__banner-text--bottom{
+				&.ibe-hero-banner{
+					top: rem(183);
+					.ibe-link__carousel{
+						font-size: rem(16);
+						font-weight: normal;
+						text-transform: uppercase;
+						padding: 0;
+						display: flex;
+						flex-flow: row nowrap;
+						justify-content: flex-start;
+						align-items: center;
+						margin: 0;
+						line-height: rem(45);
+						&::after{
+							position: relative;
+							right: inherit;
+							top: inherit;
+							font-size: rem(20);
+						}
+					}
+					.ibe-button{
+						margin: 0;
+						padding: rem(11) rem(22);
+						font-weight: normal;
+						// min-width: rem(198);
+					}
+					&--dark{
+						.ibe-link__carousel{
+							color: $PC-cromatico_4;
+							&::after{
+								color: $PC-cromatico_4;
+							}
+							&:hover{
+								text-decoration: none;
+								&::after{
+									text-decoration: none;
+								}
+								.ibe-link__carousel{
+									&-text{
+										text-decoration: underline;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+/* Responsive */
+/*XLARGE RESOLUTION STYLES*/
+@mixin xl-ibe-hero-banner {
+	.ibe-hero-banner{
+		&__offers{
+			&-price{
+				&-currency{
+					line-height: rem(72);
+				}
+			}
+		}
+	}
+}
+
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe-hero-banner {
+	.ibe-hero-banner{
+		&__container{
+			// max-width: rem(540);
+			padding-top: rem(8);
+		}
+		&__title{
+			max-width: rem(540);
+			font-size: rem(28);
+			line-height: rem(32);
+		}
+		&__box{
+			margin-top: rem(7);
+		}
+		&__destination{
+			font-size: rem(16);
+			line-height: rem(20);
+		}
+		&__offers{
+			margin-top: rem(2);
+			&-type{
+				font-size: rem(14.5);
+				line-height: rem(18);
+			}
+			&-start-price{
+				font-size: rem(13);
+				line-height:rem(16);
+			}
+			&-price{
+				&-total{
+					font-size: rem(40);
+					line-height: rem(44);
+				}
+				&-currency{
+					font-size: rem(28);
+					line-height: rem(40);
+				}
+			}
+		}
+		&__throttle{
+			padding-bottom: rem(7);
+		}
+		&--simple{
+			.ibe-hero-banner{
+				&__container{
+					padding-top: rem(15);
+				}
+				&__title{
+					font-size: rem(32);
+					line-height: rem(37);
+					letter-spacing: rem(0.8);
+				}
+				&__subtitle{
+					font-size: rem(16);
+					line-height: rem(20);
+					margin-bottom: rem(16);
+				}
+			}
+		}
+	}
+	.ibe-search-flights {
+		&__cover {
+			&--carousel-home {
+				.ibe-home__banner-text{
+					.ibe-hero-banner{
+						.ibe-link__carousel{
+							font-size: rem(16);
+						}
+						.ibe-button{
+							padding: rem(8) rem(22);
+						}
+					}
+				}
+				.ibe-home__banner-text--bottom{
+					&.ibe-hero-banner{
+						top: rem(159);
+						bottom: 0;
+						.ibe-link__carousel{
+							line-height: rem(29);
+						}
+						.ibe-button{
+							padding: rem(4) rem(14);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe-hero-banner {
+	.ibe-hero-banner{
+		&__container{
+			// max-width: rem(406);
+			padding-top: rem(12);
+		}
+		&__title{
+			max-width: rem(406);
+			font-size: rem(32);
+			line-height: rem(38);
+		}
+		&__box{
+			margin-top: rem(10);
+		}
+		&__destination{
+			font-size: rem(18);
+			line-height: rem(23);
+		}
+		&__offers{
+			margin-top: rem(0);
+			&-price{
+				&-total{
+					font-size: rem(45);
+					line-height: rem(50);
+				}
+				&-currency{
+					font-size: rem(34);
+					line-height: rem(52);
+				}
+			}
+			&-type{
+				font-size: rem(14.5);
+				line-height: rem(18);
+			}
+			&-box{
+				&:nth-child(odd){
+					padding-right: rem(18);
+				}
+				&:nth-child(even){
+					padding-left: rem(18);
+				}
+			}
+		}
+		&--simple{
+			.ibe-hero-banner{
+				&__title{
+					font-size: rem(32);
+					line-height: rem(37);
+					margin-bottom: rem(4);
+				}
+				&__subtitle{
+					font-size: rem(16);
+					line-height: rem(20);
+					margin-top: 0;
+					margin-bottom: rem(10);
+				}
+			}
+		}
+	}
+	.ibe-search-flights {
+		&__cover {
+			&--carousel-home {
+				.ibe-home__banner-text--bottom{
+					&.ibe-hero-banner{
+						top: rem(0);
+						.ibe-link__carousel{
+							font-size: rem(13);
+							line-height: rem(29);
+						}
+						.ibe-button{
+							padding: rem(4) rem(14);
+							font-size: rem(13);
+							line-height: rem(20);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe-hero-banner {
+	@include m-ibe-hero-banner;
+	.ibe-hero-banner{
+		&__container{
+			// max-width: initial;
+			padding-left: rem(20);
+			padding-right: rem(20);
+		}
+		&__title{
+			max-width: initial;
+			font-size: rem(28);
+			line-height: rem(32);
+		}
+		&__destination{
+			font-size: rem(15);
+			line-height: rem(20);
+		}
+		&__cover{
+			&--white.is-loaded{
+				&:after{
+					background: linear-gradient(to right, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 60%,  rgba(255, 255, 255, 0) 100%);
+				}
+			}
+			&--dark.is-loaded{
+				&:after{
+					background: linear-gradient(to right, rgba(0,0,0,0.4) 0%, rgba(255, 255, 255, 0) 100%);
+				}
+			}
+		}
+		&__offers{
+			&-price{
+				&-total{
+					line-height: rem(45); 
+
+				}
+				&-currency{
+					line-height: rem(40);
+				}
+			}
+		}
+		&--simple{
+			.ibe-hero-banner{
+				&__title{
+					font-size: rem(28);
+					line-height: rem(32);
+					letter-spacing: rem(1);
+					margin-bottom: rem(5);
+				}
+				&__subtitle{
+					margin-bottom: rem(17);
+					font-size: rem(16);
+				}
+			}
+		}
+	}
+	.ibe-search-flights {
+		&__cover {
+			&--carousel-home {
+				.ibe-home__banner-text--bottom{
+					&.ibe-hero-banner{
+						.ibe-button{
+							padding: rem(4) rem(8);
+							margin-top: rem(2);
+							min-width: rem(128);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe-hero-banner {
+	@include sm-ibe-hero-banner;
+	.ibe-hero-banner{
+		&__container{
+			padding-left: rem(10);
+			padding-right: rem(10);
+		}
+		&__throttle{
+			font-size: rem(13);
+			line-height: rem(16);
+			margin-bottom: rem(9);
+			padding: rem(3) rem(12);
+		}
+		&__title{
+			font-size: rem(20);
+			line-height: rem(23);
+			margin-bottom: rem(1);
+		}
+		&__destination{
+			font-size: rem(14);
+			line-height: rem(19);
+		}
+		&__box{
+			margin-top: rem(5);
+		}
+		&__offers{
+			margin-top: rem(0);
+			&-type, &-start-price{
+				font-size: rem(13);
+				line-height: rem(17);
+			}
+			&-type{
+				margin-right: rem(4);
+			}
+			&-price{
+				width: 100%;
+				margin-top: rem(4);
+				&-total{
+					font-size: rem(31.5);
+					line-height: rem(33);
+				}
+				&-currency{
+					font-size: rem(22.4);
+					line-height: rem(26);
+				}
+			}
+			&-box{
+				display: none;
+				&:nth-child(odd){
+					padding-right: rem(18);
+				}
+				&:nth-child(even){
+					padding-left: rem(18);
+				}
+				&:first-child{
+					padding: 0;
+					display: flex;
+					flex-flow: row wrap;
+					width: 100%;
+					justify-content: flex-start;
+					align-items: center;
+				}
+			}
+		}
+		&__cover{
+			&--white.is-loaded{
+				&:after{
+					background: linear-gradient(to right, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 30%,  rgba(255, 255, 255, 0) 100%);
+				}
+			}
+		}
+		&--simple{
+			.ibe-hero-banner{
+				&__title{
+					font-weight: bold;
+					font-size: rem(20);
+					line-height: rem(23);
+					margin-bottom: rem(1);
+				}
+				&__subtitle{
+					margin-bottom: rem(7);
+					font-size: rem(13);
+					line-height: rem(17);
+				}
+			}
+		}
+	}
+	.ibe-search-flights {
+		&__cover {
+			&--carousel-home {
+				.ibe-home__banner-text--bottom{
+					&.ibe-hero-banner{
+						.ibe-button{
+							margin-top: rem(5);
+							min-width: initial;
+							padding-left: rem(14);
+							padding-right: rem(14);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+@media (min-width: 1025px) and (max-width: 1200px) {
+.heightCarousel{
+	height:100% !important;
+}
+}
+@media (min-width: 1280px) and (max-width: 2000px) {
+	.heightCarousel{
+		height:100% !important;
+	}
+}

@@ -1,0 +1,294 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_accordion
+//    Desripcion: Estilos para los accordeones (jquery ui)
+//******************************************************************************/
+/* Estilos para jquery ui accordion */
+.ibe-accordion{
+    margin: rem(8) 0 rem(16) 0;
+
+    &__overlay-text{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%; 
+        background: rgba(51, 51, 51, 0.45);
+        height: 100%; 
+        z-index: 999;
+    }
+    &__button{
+        color: $PC-cromatico_4;
+        font-family: $font-07;
+        font-size: rem(16);
+        padding: 0.625rem 2.1875rem;
+        display: inline-block;
+        vertical-align: top;
+        position: relative; 
+        width: 100%; 
+        box-sizing: border-box;
+        z-index: 2;
+        text-align: left;
+        border: 0;
+        border-radius: 0;
+        background: $PC-cromatico_3;
+        &:focus{
+            outline: 1px solid $PC-cromatico_13;
+        }
+    }
+    &__overlay-button {
+        .ibe-accordion__button{
+            background: rgba(51, 51, 51, 0.45);
+            color: $PC-cromatico_24;
+        }
+    }
+    &__header{
+        display: block;
+        position: relative;
+        margin-top: rem(29);
+        font-size: rem(20);
+        border-bottom: 2px dashed $BRD_standar_5;
+        padding: 0 rem(32) rem(26) 0;
+        cursor: pointer;
+        .link{
+            &:hover{
+                color: $PC-cromatico_1;
+                text-decoration: none;
+            }
+            &:focus{
+                color: $PC-cromatico_1;
+                outline: 2px auto $BRD_standar_3;
+                outline-offset: 2px;
+            }
+        }
+        &.collapsed{
+            &:before{
+                position: absolute;
+                right: 0;
+                font-family: $font-05;
+                content: "\e972";
+            }
+        }
+        &:before{
+            position: absolute;
+            right: 0;
+            font-family: $font-05;
+            font-size: rem(25);
+            color: $PC-cromatico_2;
+            content: "\e971";
+        }
+        &--arrow-primary {
+            &:before {
+                color: $PC-cromatico_3;
+            }
+           
+        }
+        &--no-border{
+            border-bottom: 0;
+            padding: 0 0 rem(10) 0;
+        }
+        &--treatment{
+            padding: rem(25) rem(30) rem(16) 0;
+            margin: 0;
+            border-bottom: 0;
+            text-align: right;
+            font-size: rem(13);
+            &::before{
+                top: rem(19);
+                font-size: rem(21);
+            }
+            .link{
+                color: $PC-cromatico_1;
+            }
+            
+        }
+    }
+   
+    &__title{
+        padding: 0;
+        margin-top: 1.9rem;
+        margin-bottom: 1.25rem;
+    }
+    &__wrapper{
+        &--border{
+            border-bottom: 2px dashed $BRD_standar_5;
+            .ibe-accordion__header{
+                border-bottom: 0;
+            }
+        }
+    }
+    &__collapse{
+        display: none;
+        &-separate-paragraphs{
+            margin: rem(16) 0 rem(30) 0;
+            padding-bottom: rem(22);
+            border-bottom: 1px solid $BRD_standar_5;
+            > .xui-collapse_moreInfo-text-close{
+                height: rem(100);
+                overflow: hidden;
+            }
+            &--no-border{
+                padding-bottom: 0;
+                border: 0;
+            }
+        }
+    }
+    &__spacing{
+        padding-bottom: rem(40);
+    }
+    &__options{
+        text-align: right;
+    }
+    &__button-collapse{
+        border: 0;
+        background: transparent;
+    }
+
+    &__fligths-collapse-mobile{
+        display: none;
+    }
+
+    // Modifiers
+
+    &--white {
+        background: $BCK-cromatico_1;
+    }
+
+    &--simple {   
+        .ibe-accordion__header {
+            padding: rem(16) rem(20);
+            border-bottom: none;
+            &.collapsed {
+                &:before {
+                    content: "\e971";
+                }
+            }
+            &:before {
+                content: "\e972";
+                font-size: rem(20);
+                right: rem(20);
+                
+            }
+        }
+        .ibe-accordion__collapse {
+            border-top: 1px solid $BRD_standar_5;
+        }
+    }
+    &--nomargin{
+        margin: 0;
+    }
+    // Reset
+
+    .panel {
+        margin: 0;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        border-radius: 0;
+    }
+    &.ibe-tab{
+        display: table;
+        width: 100%;
+    }
+}
+
+.ibe-searcher{
+    .ibe-accordion{
+        &__header{
+            &.collapsed {
+                &:before {
+                    //content: "\e971";     //Cambio flecha por lupa Fin sprint 31 19/05/2017
+                    content: "\e91d";
+                }
+            }
+        }
+    }
+    &--accordion{
+        .ibe-accordion{
+            &__header{
+                &-mobile{
+                    &.ibe-accordion__overlay-button {
+                        &:before,&:after{
+                            color: $PC-cromatico_24;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_accordion{
+    /* Estilos para jquery ui accordion*/
+    .ibe-accordion{
+        &__header{
+            font-size: rem(18);
+            padding: 0 rem(24) rem(18) 0;
+            margin-top: rem(13);
+
+            &--treatment{
+                padding: rem(25) rem(30) rem(16) 0;
+                margin: 0;
+                border-bottom: 0;
+                text-align: right;
+                font-size: rem(13);
+                &::before{
+                    top: rem(19);
+                    font-size: rem(21);
+                }
+                .link{
+                    color: $PC-cromatico_1;
+                }
+                
+            }
+        }
+        &__collapse{
+            &-separate-paragraphs{
+                margin-top: rem(14);
+                margin-bottom: 0;
+                padding-bottom: rem(7);
+                .ibe-infocheckin__box-title{
+                    padding-bottom: rem(16);
+                }
+            }
+        }
+       
+    }
+}
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe_accordion{
+    /* Estilos para jquery ui accordion*/
+    .ibe-accordion{
+        &__header{
+            font-size: rem(18);
+            padding: 0 rem(25) rem(18) 0;
+            margin-top: rem(13);
+
+            &--treatment{
+                padding: rem(25) rem(30) rem(16) 0;
+                margin: 0;
+                border-bottom: 0;
+                text-align: right;
+                font-size: rem(13);
+                &::before{
+                    top: rem(19);
+                    font-size: rem(21);
+                }
+                .link{
+                    color: $PC-cromatico_1;
+                }
+                
+            }
+        }
+        &__collapse{
+            &-separate-paragraphs{
+                margin-top: rem(14);
+                margin-bottom: 0;
+                padding-bottom: rem(7);
+                .ibe-infocheckin__box-title{
+                    padding-bottom: rem(16);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+extends _general/layout__primary
+include _modules/_ibe_hero_connections_other
+include _modules/_ibe_faq.pug
+include _modules/_modals/_ibe_modal-connections-info-other-airports
+include _modules/connections/_ibe_connections_contact.pug
+include _modules/connections/_ibe-connections-other-airports-card
+
+block title
+	title!='IBERIA - Connections in other aitports Landing page'
+block body
+	+m-header-new({
+		"login": false
+	})
+	main
+		+m-ibe-breadcrumbs({
+			"menu": "checkin"
+		})
+		+m-hero-other()
+		section.container
+			.row
+				div.ibe-connections-other-airports-card-container
+					+m-connections-other-airports-card()
+					+m-connections-other-airports-card()
+					+m-connections-other-airports-card()
+					+m-connections-other-airports-card()
+					+m-connections-other-airports-card()
+					+m-connections-other-airports-card()
+
+		div.container
+			+m-faq()
+		+m-connections-contact
+
+	+m-ibe-modal-connections-info-other-airports()
+	+m-footer({
+    "full": true
+  })

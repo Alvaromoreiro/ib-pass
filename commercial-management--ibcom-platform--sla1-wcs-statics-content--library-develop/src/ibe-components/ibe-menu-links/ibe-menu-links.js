@@ -1,0 +1,1 @@
+(()=>{var n,o;dFrontJs.ibe_menu_links=(jQuery,n=function(n){var o=n.currentTarget,t=$(o).data("scroll"),e=$(t).offset().top;$("html, body").animate({scrollTop:e},1e3,"swing")},(o=function(){$("[data-scroll]").on("click",n)})(),$(document).on("loaded-ibe-component-css",function(n,t){t.indexOf(!1)&&o()}),{init:o})})();

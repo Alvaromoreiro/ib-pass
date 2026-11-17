@@ -1,0 +1,130 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_toggle-tab
+//    Desripcion: Estilos para la vista Partners Iberia Plus
+//******************************************************************************/
+.ibe-toggle-tab{
+    /* Cabecera */
+    &__header{
+        margin-top: rem(35);
+        padding-left: rem(123);
+        /* Logo */
+        .ibe-fig{
+            float: left;
+            width: rem(50);
+        }
+        .ibe-img{
+            width: 100%;
+        }
+        /* Tab menu */
+        .ibe-tab{
+            border-bottom: 0;
+            &__item{
+                .link{
+                    margin: 0;
+                    padding: rem(13) rem(17) rem(33);
+                    border: 0;
+                    text-transform: uppercase;
+                    &:hover,
+                    &:focus{
+                        border: 0;
+                        background: transparent;
+                    }
+                }
+                /* Clases propias */
+                &.active{
+                    text-decoration: underline;
+                    .link{
+                        position: relative;
+                        border: 0;
+                        background: transparent;
+                        /* Flechas */
+                        &:before {
+                            position: absolute;
+                            bottom: 0;
+                            left: 50%;
+                            transform: translate(-50%,0);
+                            -ms-transform: translate(-50%,0);
+                            border: solid transparent;
+                            content: " ";
+                            height: 0;
+                            width: 0;
+                            position: absolute;
+                            border-color: rgba(255, 255, 255, 0);
+                            border-bottom-color: $BRD_standar_5;
+                            border-width: 8px;
+                            margin-left: -8px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /* Cuerpo */
+    &__body{
+        /* Tab content */
+        .tab-content{
+            background: $BCK-cromatico_18;
+        }
+    }
+    /* Modificadores .ibe-toggle-tab */
+    &--separator{
+        padding-bottom: 31px;
+        border-bottom: 1px solid $BRD_standar_5;
+    }
+}
+
+
+/* Responsive */
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe_toggle-tab{
+
+}
+
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_toggle-tab{
+    .ibe-toggle-tab{
+        &__header {
+            padding-left: 0;
+            font-size: 0;
+            .ibe-fig {
+                display: inline-block;
+                width: rem(50);
+            }
+            .ibe-tab{
+                width: calc(100% - 50px);
+                display: inline-block;
+                &__item {
+                    width: 50%;
+                    display: table-cell;
+                    vertical-align: bottom;
+                    .link{
+                        padding: rem(13) rem(10) rem(33);
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe_toggle-tab{
+    @include sm-ibe_toggle-tab;
+    .ibe-toggle-tab{
+        &__header {
+            padding-left: 0;
+            font-size: 0;
+            .ibe-fig {
+                padding-top: rem(12);
+            }
+            .ibe-tab{
+                &__item {
+                    .link{
+                        padding: rem(13) rem(9) rem(33);
+                    }
+                }
+            }
+        }
+    }
+}

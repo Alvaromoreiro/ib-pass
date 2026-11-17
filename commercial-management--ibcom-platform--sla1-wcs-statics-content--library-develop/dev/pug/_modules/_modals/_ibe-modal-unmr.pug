@@ -1,0 +1,142 @@
+mixin m-ibe-modal-unmr(params)
+	- params = params || {}
+	- var maxMinors = params.minors || 1
+	- var dialogId = params.id || 'fc-dialog-unmr'
+	div(class="ibe-dialog " + dialogId)
+		div.modal-dialog.modal-dialog-unmr(role="dialog" aria-modal="true" aria-labelledby="unmr-title-" + dialogId)
+			div.modal-content
+				div.ibe-modal.ibe-modal-unmr
+					header.modal-header
+						div.ibe-modal-unmr__header-content
+							h4.ibe-modal-unmr__title(id="unmr-title-" + dialogId tabindex="-1")!="Servicio de Acompañamiento de menores"
+							p.paragraph.paragraph__regular.ibe-modal-unmr__intro!="Deberás reservar el Servicio de acompañamiento de menores para todos pasajeros entre 5 y 11 años que viajen sin un adulto. Este servicio está incluido en el precio de la tarifa."
+					div.modal-body.ibe-modal-unmr__body
+						p.paragraph.paragraph__regular.ibe-modal-unmr__label!="Selecciona la fecha de nacimiento de los pasajeros:"
+						div.ibe-modal-unmr__dates-grid
+							- for (var i = 1; i <= maxMinors; i++)
+								div.ibe-modal-unmr__date-item
+									div.ibe_form__group.fc_form_group.ibe-modal-unmr__date-group
+										div.ibe-modal-unmr__date-container
+											div.ibe-modal-unmr__date-label-wrap
+												input.ibe_form__input-text.ibe-modal-unmr__date-input(
+													type="text"
+													id="unmr-birthdate-" + dialogId + "-" + i
+													name="unmr-birthdate-" + dialogId + "-" + i
+													placeholder="dd/mm/aaaa"
+													data-validate="birthdate"
+													data-minor-index=i
+													autocomplete="off"
+													inputmode="numeric"
+													maxlength="10"
+												)
+												label.ibe_form__input-label(for="unmr-birthdate-" + dialogId + "-" + i)!="Fecha de nacimiento niño " + i
+											span.ibe-modal-unmr__date-calendar(aria-hidden="true")
+												img.ibe-modal-unmr__icon(src=globals.imgPath + "/general/ib--icon--changes-schedule--fill.svg" alt="")
+										p.ibe_form__msg-info.ibe_form__msg-info--error.hidden.ibe-modal-unmr__error-msg(data-validate="date-format")
+											img.ibe-modal-unmr__icon.ibe-modal-unmr__icon--alert(src=globals.imgPath + "/general/ib--icon--danger--fill.svg" alt="" aria-hidden="true")
+											!=" [Seeker.FormatoFecha] El formato de la fecha no es válido. Utiliza dd/mm/aaaa."
+										p.ibe_form__msg-info.ibe_form__msg-info--error.hidden.ibe-modal-unmr__error-msg(data-validate="format")
+											img.ibe-modal-unmr__icon.ibe-modal-unmr__icon--alert(src=globals.imgPath + "/general/ib--icon--danger--fill.svg" alt="" aria-hidden="true")
+											!=" La fecha de nacimiento no se corresponde con la de este servicio"
+										p.ibe_form__msg-info.ibe_form__msg-info--error.hidden.ibe-modal-unmr__error-msg.ibe-modal-unmr__error-msg--age2-4(data-validate="age-2-4")
+											img.ibe-modal-unmr__icon.ibe-modal-unmr__icon--alert(src=globals.imgPath + "/general/ib--icon--danger--fill.svg" alt="" aria-hidden="true")
+											!=" Los niños de 2 a 4 años deberán volar obligatoriamente con un pasajero mayor de 16 años."
+										p.ibe_form__msg-info.ibe_form__msg-info--error.hidden.ibe-modal-unmr__error-msg.ibe-modal-unmr__error-msg--age12(data-validate="age-12-return")
+											img.ibe-modal-unmr__icon.ibe-modal-unmr__icon--alert(src=globals.imgPath + "/general/ib--icon--danger--fill.svg" alt="" aria-hidden="true")
+											!=" El menor habrá cumplido 12 años cuando realice el vuelo de vuelta. Si continúas con el proceso incluiremos el Servicio de acompañamiento de menores en ambos trayectos; si deseas contratarlo sólo en la ida, realiza una reserva por cada tramo."
+						div.ibe-modal-unmr__info-box
+							img.ibe-modal-unmr__icon.ibe-modal-unmr__icon--info(src=globals.imgPath + "/general/icon-information-blue.svg" alt="" aria-hidden="true")
+							p.paragraph.paragraph__small!="Si quieres contratar el Servicio de acompañamiento de menores para pasajeros entre 12 y 17 años, llama a nuestro Centro de atención al cliente."
+					div.modal-footer.ibe-modal-unmr__footer
+						div.ibe-modal-unmr__terms
+							input.ibe-form__checkbox-input(
+								type="checkbox"
+								id="unmr-terms-" + dialogId
+								name="unmr-terms-" + dialogId
+								data-validate="terms"
+							)
+							label.ibe-form__checkbox-label(for="unmr-terms-" + dialogId)
+								| He leído y acepto&nbsp;
+								a.link.link__regular--underline(href="javascript:void(0)" title="los términos y condiciones del servicio de menores acompañados" data-modal="button" data-modal-view=".fc-dialog-unmr-terms")!="los términos y condiciones"
+								!="&nbsp;del servicio de menores acompañados"
+						p.ibe_form__msg-info.ibe_form__msg-info--error.hidden.ibe-modal-unmr__error-msg.ibe-modal-unmr__error-msg--checkbox(data-validate="terms")
+							img.ibe-modal-unmr__icon.ibe-modal-unmr__icon--alert(src=globals.imgPath + "/general/ib--icon--danger--fill.svg" alt="" aria-hidden="true")
+							!=" [lit_umnr_error_checkbox] Debes aceptar los términos y condiciones para continuar."
+						button.ibe-button.ibe-button--red.ibe-modal-unmr__cta(type="button")!="Continuar"
+					//- Botón de cierre como último hijo del DOM: cerrar es el último elemento en orden de
+					//- lectura (NVDA) y de tabulación. Se posiciona arriba-derecha por CSS (position:absolute).
+					button.ibe-button--reset.ibe-modal__options-icon.ibe-modal__options-icon--close(type="button" data-dialog="close" aria-label="Cerrar ventana")
+
+mixin m-ibe-modal-unmr-error()
+	div.ibe-dialog.fc-dialog-unmr-error
+		div.modal-dialog.modal-dialog-unmr(role="dialog" aria-modal="true" aria-labelledby="unmr-title-error")
+			div.modal-content
+				div.ibe-modal.ibe-modal-unmr
+					header.modal-header
+						div.ibe-modal-unmr__header-content
+							h4.ibe-modal-unmr__title(id="unmr-title-error")!="Servicio de Acompañamiento de menores"
+							p.paragraph.paragraph__regular.ibe-modal-unmr__intro!="Deberás reservar el Servicio de acompañamiento de menores para todos pasajeros entre 5 y 11 años que viajen sin un adulto. Este servicio está incluido en el precio de la tarifa."
+					div.modal-body.ibe-modal-unmr__body
+						p.paragraph.paragraph__regular.ibe-modal-unmr__label!="Selecciona la fecha de nacimiento de los pasajeros:"
+						div.ibe-modal-unmr__dates-grid
+
+							//- Error 1: fecha fuera de rango del servicio
+							div.ibe-modal-unmr__date-item
+								div.ibe_form__group.fc_form_group.ibe-modal-unmr__date-group.has-error
+									div.ibe-modal-unmr__date-container
+										div.ibe-modal-unmr__date-label-wrap
+											input.ibe_form__input-text.ibe-modal-unmr__date-input(type="text" id="err-date-1" value="17/03/2026" placeholder="dd/mm/aaaa" data-validate="birthdate" autocomplete="off")
+											label.ibe_form__input-label(for="err-date-1")!="Fecha de nacimiento niño 1"
+										button.ibe-button--reset.ibe-modal-unmr__date-calendar(type="button" aria-label="Abrir calendario")
+											img.ibe-modal-unmr__icon(src=globals.imgPath + "/general/ib--icon--changes-schedule--fill.svg" alt="" aria-hidden="true")
+									p.ibe_form__msg-info.ibe_form__msg-info--error.ibe-modal-unmr__error-msg
+										img.ibe-modal-unmr__icon.ibe-modal-unmr__icon--alert(src=globals.imgPath + "/general/ib--icon--danger--fill.svg" alt="" aria-hidden="true")
+										!=" La fecha de nacimiento no se corresponde con la de este servicio"
+
+							//- Error 2: niño de 2 a 4 años
+							div.ibe-modal-unmr__date-item
+								div.ibe_form__group.fc_form_group.ibe-modal-unmr__date-group.has-error
+									div.ibe-modal-unmr__date-container
+										div.ibe-modal-unmr__date-label-wrap
+											input.ibe_form__input-text.ibe-modal-unmr__date-input(type="text" id="err-date-2" value="17/03/2026" placeholder="dd/mm/aaaa" data-validate="birthdate" autocomplete="off")
+											label.ibe_form__input-label(for="err-date-2")!="Fecha de nacimiento niño 2"
+										button.ibe-button--reset.ibe-modal-unmr__date-calendar(type="button" aria-label="Abrir calendario")
+											img.ibe-modal-unmr__icon(src=globals.imgPath + "/general/ib--icon--changes-schedule--fill.svg" alt="" aria-hidden="true")
+									p.ibe_form__msg-info.ibe_form__msg-info--error.ibe-modal-unmr__error-msg.ibe-modal-unmr__error-msg--age2-4
+										img.ibe-modal-unmr__icon.ibe-modal-unmr__icon--alert(src=globals.imgPath + "/general/ib--icon--danger--fill.svg" alt="" aria-hidden="true")
+										!=" Los niños de 2 a 4 años deberán volar obligatoriamente con un pasajero mayor de 16 años."
+
+							//- Error 3: menor cumple 12 en vuelo de vuelta
+							div.ibe-modal-unmr__date-item
+								div.ibe_form__group.fc_form_group.ibe-modal-unmr__date-group.has-error
+									div.ibe-modal-unmr__date-container
+										div.ibe-modal-unmr__date-label-wrap
+											input.ibe_form__input-text.ibe-modal-unmr__date-input(type="text" id="err-date-3" value="17/03/2026" placeholder="dd/mm/aaaa" data-validate="birthdate" autocomplete="off")
+											label.ibe_form__input-label(for="err-date-3")!="Fecha de nacimiento niño 3"
+										button.ibe-button--reset.ibe-modal-unmr__date-calendar(type="button" aria-label="Abrir calendario")
+											img.ibe-modal-unmr__icon(src=globals.imgPath + "/general/ib--icon--changes-schedule--fill.svg" alt="" aria-hidden="true")
+									p.ibe_form__msg-info.ibe_form__msg-info--error.ibe-modal-unmr__error-msg.ibe-modal-unmr__error-msg--age12
+										img.ibe-modal-unmr__icon.ibe-modal-unmr__icon--alert(src=globals.imgPath + "/general/ib--icon--danger--fill.svg" alt="" aria-hidden="true")
+										!=" El menor habrá cumplido 12 años cuando realice el vuelo de vuelta. Si continúas con el proceso incluiremos el Servicio de acompañamiento de menores en ambos trayectos; si deseas contratarlo sólo en la ida, realiza una reserva por cada tramo."
+
+						div.ibe-modal-unmr__info-box
+							img.ibe-modal-unmr__icon.ibe-modal-unmr__icon--info(src=globals.imgPath + "/general/icon-information-blue.svg" alt="" aria-hidden="true")
+							p.paragraph.paragraph__small!="Si quieres contratar el Servicio de acompañamiento de menores para pasajeros entre 12 y 17 años, llama a nuestro Centro de atención al cliente."
+					div.modal-footer.ibe-modal-unmr__footer
+						div.ibe-modal-unmr__terms.has-error
+							input.ibe-form__checkbox-input(
+								type="checkbox"
+								id="unmr-terms-error"
+								name="unmr-terms-error"
+								data-validate="terms"
+							)
+							label.ibe-form__checkbox-label(for="unmr-terms-error")
+								| He leído y acepto&nbsp;
+								a.link.link__regular--underline(href="javascript:void(0)" title="los términos y condiciones del servicio de menores acompañados" data-modal="button" data-modal-view=".fc-dialog-unmr-terms")!="los términos y condiciones"
+								!="&nbsp;del servicio de menores acompañados"
+						p.ibe_form__msg-info.ibe_form__msg-info--error.ibe-modal-unmr__error-msg.ibe-modal-unmr__error-msg--checkbox(data-validate="terms")
+							img.ibe-modal-unmr__icon.ibe-modal-unmr__icon--alert(src=globals.imgPath + "/general/ib--icon--danger--fill.svg" alt="" aria-hidden="true")
+							!=" [lit_umnr_error_checkbox] Debes aceptar los términos y condiciones para continuar."
+						button.ibe-button.ibe-button--red.ibe-modal-unmr__cta(type="button" disabled=true)!="Continuar"
+					//- Botón de cierre como último hijo del DOM (ver nota en m-ibe-modal-unmr).
+					button.ibe-button--reset.ibe-modal__options-icon.ibe-modal__options-icon--close(type="button" data-dialog="close" aria-label="Cerrar ventana")

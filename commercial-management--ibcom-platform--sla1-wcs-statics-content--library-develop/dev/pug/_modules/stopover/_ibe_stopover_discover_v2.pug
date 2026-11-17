@@ -1,0 +1,47 @@
+//- Nuevo bloque "Descubre" (v2) basado en _ibe_stopover_discover.pug / IB_TP_DescubreMagiaMadrid
+//- Layout nuevo (Figma [CX RETAIL] Stopover): imagen de fondo full-bleed, logo centrado,
+//- título/subtítulo, fila de features centrada y botón CTA opcional.
+//- CSS propio en scss/modules/_ibe_stopover_discover_v2.scss (no reutiliza _ibe_static_banner.scss)
+mixin m-ibe-stopover_discover_v2(params)
+	-
+		var features = (params && params.features) || [
+			{
+				icon: globals.imgPath + "/modules/icons/Subtracticon_ocio.png",
+				title: "Oferta cultural",
+				description: "Disfruta de la amplia oferta de eventos culturales de Madrid"
+			},
+			{
+				icon: globals.imgPath + "/modules/icons/Subtracticon_food.png",
+				title: "Gastronomía",
+				description: "Descubre los mejores restaurantes al mejor precio"
+			},
+			{
+				icon: globals.imgPath + "/modules/icons/Subtracticon_shopping.png",
+				title: "Compras y ocio",
+				description: "Encuentra las primeras marcas a tu disposición"
+			}
+		];
+	div.ibe-stopover-discover-v2(style=params && params.dataBackground ? "background-image: url('" + params.dataBackground + "')" : null)
+		div.ibe-stopover-discover-v2__overlay
+		div.container
+			div.row
+				div.col-xs-12
+					div.ibe-stopover-discover-v2__content
+						if params && params.logo
+							figure.ibe-stopover-discover-v2__logo
+								img(src=params.logo, alt=params.logoAlt || "")
+						h2.ibe-stopover-discover-v2__title= (params && params.title) || "Descubre la magia de Madrid"
+						p.ibe-stopover-discover-v2__subtitle= (params && params.subtitle) || "Este Stopover no es una escala: es una oportunidad para vivir la ciudad."
+						ul.ibe-stopover-discover-v2__features
+							each feature in features
+								li.ibe-stopover-discover-v2__feature
+									div.ibe-stopover-discover-v2__feature-icon(aria-hidden="true")
+										img(src=feature.icon, role="icon")
+									div.ibe-stopover-discover-v2__feature-text
+										h3.ibe-stopover-discover-v2__feature-title= feature.title
+										p.ibe-stopover-discover-v2__feature-description= feature.description
+						if params && params.buttonText
+							if params.buttonHref
+								a.ibe-button.ibe-button--red.ibe-button--large-3.ibe-stopover-discover-v2__cta(href=params.buttonHref, role="button", aria-label=params.buttonAriaLabel || params.buttonText)= params.buttonText
+							else
+								button.ibe-button.ibe-button--red.ibe-button--large-3.ibe-stopover-discover-v2__cta(type="button", role="button", aria-label=params.buttonAriaLabel || params.buttonText)= params.buttonText

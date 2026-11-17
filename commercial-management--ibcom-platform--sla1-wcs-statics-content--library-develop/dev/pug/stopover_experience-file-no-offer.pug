@@ -1,0 +1,30 @@
+extends _general/layout__primary
+include _modules/_modals/_ibe-modal-login-stopover-simple
+include _modules/stopover/_ibe_stopover_experience-file-no-offer
+include _modules/stopover/_ibe_stopover_experience-gallery
+include _modules/stopover/_ibe_stopover_experience-location
+
+block title
+    title!='IBERIA - Stopover banner'
+block body
+    // Inicio nuevo header
+    +m-header-new({
+        "login": false
+    })
+
+    // Inicio nuevo menu
+    +m-menu-new({
+        "login": false
+    })
+    // End wrapper
+    main
+        // Main content
+
+        div.ibe-static-banner.ibe-exp-file--banner-img(data-background='images/modules/stopover/exp-file-banner')
+        div.container.ibe-exp-file--card
+            +m-ibe-stopover-experience-file-no-offer({"ibplus": true})
+            +m-ibe-stopover_experience-gallery()
+            +m-ibe-stopover_experience-location()
+    +m-footer({
+		"full": true  
+	})

@@ -1,0 +1,206 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe_google-map
+//    Desripcion: Estilos para el componente de google map (guide-download-pdf)
+//******************************************************************************/
+.ibe-google-map{
+    position: relative;
+    // height: rem(560) !important;
+    overflow: hidden;
+    margin-top: rem(32);
+    margin-bottom: rem(48);
+    border-bottom: 2px solid $BRD_standar_5;
+    //height: 224px;
+    iframe{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    //Modificadores
+    &--separator-md{
+        margin-top: rem(32);
+        margin-bottom: rem(48);
+    }
+    &--responsive-height{
+        & .ibe-card-guides__image{
+            display: none;
+        }
+        & .ibe-card-guides__body{
+            padding: 0;
+        }
+    }
+    &--big{
+        height: rem(560) !important;
+        max-height: rem(560) !important;
+    }
+    &--medium{
+        height: rem(420) !important;
+        max-height: rem(420) !important;
+    }
+    &--small{
+        height: rem(214) !important;
+        max-height: rem(214) !important;
+    }
+    // google maps style
+    .gm-style-iw-t::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(-50%,0);
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: none;
+    }
+
+    .gm-style .gm-style-iw-t::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(-50%,0);
+        width: 0;
+        height: 0;
+        border-left: 9px solid transparent;
+        border-right: 9px solid transparent;
+        border-top: 11px solid white;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .gm-ui-hover-effect{
+        background: #ffffffB3 !important;
+        border-radius: 50%;
+        & > span{
+            background-color: $PC-cromatico_3 !important;
+        }
+    }
+
+    .gm-style .gm-style-iw-c {
+        position: absolute;
+        box-sizing: border-box;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        transform: translate(-50%,-100%);
+        // background-color: #4353FF;
+        border-radius: 0;
+        padding: 0 !important;
+        box-shadow: none;
+        color:white;
+        max-width:420px !important;
+    }
+
+
+    .gm-style-iw-d {
+        overflow: auto !important;
+        max-height: fit-content !important;
+        min-width: auto;
+        & .ibe-card-guides{
+            width: 232px;
+            margin-bottom: 0;
+            color: #333;
+            border: 0;
+        }
+        & .ibe-card-guides__image{
+            height: 7.3rem;
+        }
+        & .ibe-card-guides__body{
+            height: auto !important;
+        }
+        & .ibe-card-guides__header{
+            padding: rem(16);
+            padding-bottom: 0;
+        }
+        & .title__h3{
+            font-size: rem(18.5);
+        }
+        & .ibe-card-guides__theme{
+            font-size: rem(12);
+            &::before{
+                font-size: rem(22);
+            }
+        }
+    }
+
+}
+/* Response */
+/*X-LARGE RESOLUTION STYLES*/
+@mixin xl-ibe_google-map{
+    .ibe-google-map{
+        //Modificadores
+        &--separator-md{
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+}
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe_google-map{
+    @include xl-ibe_google-map;
+}
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe_google-map{
+    .ibe-google-map{
+        margin-top: rem(16);
+        margin-bottom: 0;
+        & .ibe-card-guides__body{
+            padding: 0;
+        }
+        & .gm-style-iw-d {
+            & .title__h3{
+                font-size: rem(17);
+            }
+            & .ibe-card-guides__theme{
+                font-size: rem(11);
+                padding-left: rem(20);
+                &::before{
+                    font-size: rem(20);
+                }
+            }
+        }
+    }
+}
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_google-map{
+    @include m-ibe_google-map;
+    .ibe-google-map{
+        .ibe-card-guides__image {
+            display: none;
+        }
+        & .gm-style-iw-d {
+            & .title__h3{
+                font-size: rem(18) !important;
+            }
+        }
+        & .ibe-card-guides__header{
+            padding: rem(12);
+        }
+    }
+}
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe_google-map{
+    @include sm-ibe_google-map;
+    .ibe-google-map{
+        & .gm-style-iw-d {
+            & .title__h3{
+                font-size: rem(14);
+            }
+            &  .ibe-card-guides{
+                &__header{
+                    .title{
+                        font-size: rem(16) !important;
+                        &.title__h3 {
+                            font-size: rem(20) !important;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

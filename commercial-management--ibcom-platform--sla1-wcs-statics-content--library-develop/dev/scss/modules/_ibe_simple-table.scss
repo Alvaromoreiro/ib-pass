@@ -1,0 +1,59 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_simple-table
+//    Desripcion: Estilos para el componente tabla simple con iconos (menu-board)
+//******************************************************************************/
+.ibe-simple-table{
+    margin: 32px 0;
+    border: 1px solid #DDD;
+    &__item{
+        position: relative;
+        padding: 25px 10px 15px 70px;
+        margin: 0 32px;
+        border-bottom: 1px solid #DDD;
+        &:last-child{
+            border-bottom: 0;
+        }
+        &:before{
+            position: absolute;
+            top: 25px;
+            left: 0;
+        }
+        /* Modificadores */
+        &--asian{
+            &:before{ content: url($CONFIG_IMG_PATH+"/modules/icons/icon-broccoli.png"); }
+        }
+        &--lactose{
+            &:before{ content: url($CONFIG_IMG_PATH+"/modules/icons/icon-food-lactose.png"); }
+        }
+        &--babies{
+            &:before{ content: url($CONFIG_IMG_PATH+"/modules/icons/icon-food-babies.png"); }
+        }
+        &--halal{
+            &:before{ content: url($CONFIG_IMG_PATH+"/modules/icons/icon-food-halal.png"); }
+        }
+    }
+    .paragraph{
+        margin-top: 5px;
+    }
+}
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_simple-table{
+    .ibe-simple-table{
+        &__item{
+            margin: 0 22px;
+            padding: 73px 0 7px 0;
+            &:before{
+                top: 20px;
+                left: 50%;
+                transform: translate(-50%,0);
+                -ms-transform: translate(-50%,0);
+            }
+        }
+    }
+
+}
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe_simple-table{
+    @include sm-ibe_simple-table;
+}

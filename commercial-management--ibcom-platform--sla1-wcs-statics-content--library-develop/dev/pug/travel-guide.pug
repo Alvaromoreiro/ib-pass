@@ -1,0 +1,1220 @@
+extends _general/layout__primary
+block title
+	title!="IBERIA - Guías de destino"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main
+		+m-ibe-breadcrumbs({
+			menu: "checkin"
+		})
+		div.container
+			div.row
+				div.col-xs-12
+					h1.title.title__h1.title--center!="Tus gu&iacute;as de destino"
+			div.row
+				div.col-xs-12.col-lg-4
+					form.ibe_form.ibe_form--guides(action="#" method="POST")
+						fieldset
+							legend.hideAccessible!="Buscador de destinos"
+							div.ibe_form__group.ibe_form__group--button-icon.ibe_form__group--compact
+								input(class="ibe_form__input-text ibe_form__input-text--square" name="code0566" id="code0566" type="text" placeholder="Encuentra tu destino" data-autocomplete="cities" spellcheck='false')
+								label(class="ibe_form__input-label" for="code0566")!="Encuentra tu destino"
+								button.ibe_form__input-button-high.icon-buscar(type="button")
+									span(data-toggle-status="true" data-status-open="Click para plegar destinos" data-status-close="Click para desplegar destinos" class="hideAccessible")!="Click para desplegar destinos"
+								+m-choose-city({
+									"class": "ibe-choose-city--origin",
+									"format": "desktop",
+									"dataType": "predictive",
+									"id": "id-tab-collapse-1"
+								})
+				div.col-xs-12.col-lg-8
+					+m-ibe-box-links()
+			div.row
+				div.col-xs-12
+					section
+						h3.title.title__h3.title__h3--second!="Europa"
+						div.row
+							div.col-xs-12.col-md-6
+								article.ibe-wall-articles
+									a.ibe-wall-articles__container(href="#" title="Amsterdam")
+										figure.ibe-wall-articles__cont-img
+											img(alt="Imagen 1" src=globals.imgPath + "/modules/ibe_travel-guides/big-1.png")
+									a.ibe-wall-articles__link(href="#" title="Amsterdam")
+										h3.ibe-wall-articles__title!="AMSTERDAM "
+										span.ibe-wall-articles__detail!="(56 planes)"
+							div.col-xs-12.col-md-6
+								div.row
+									div.col-xs-6
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="Berlin")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 2" src=globals.imgPath + "/modules/ibe_travel-guides/small-1.png")
+											a.ibe-wall-articles__link(href="#" title="Berlin")
+												h3.ibe-wall-articles__title!="BERLÍN "
+												span.ibe-wall-articles__detail!="(75 planes)"
+									div.col-xs-6
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="Roma")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 3" src=globals.imgPath + "/modules/ibe_travel-guides/small-2.png")
+											a.ibe-wall-articles__link(href="#" title="Roma")
+												h3.ibe-wall-articles__title!="ROMA "
+												span.ibe-wall-articles__detail!="(75 planes)"
+								div.row
+									div.col-xs-6
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="Santiago de Compostela")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 4" src=globals.imgPath + "/modules/ibe_travel-guides/small-3.png")
+											a.ibe-wall-articles__link(href="#" title="Santiago de Compostela")
+												h3.ibe-wall-articles__title!="SANTIAGO DE COMPOSTELA "
+												span.ibe-wall-articles__detail!="(75 planes)"
+									div.col-xs-6
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="San Petesburgo")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 5" src=globals.imgPath + "/modules/ibe_travel-guides/small-4.png")
+											a.ibe-wall-articles__link(href="#" title="San Petesburgo")
+												h3.ibe-wall-articles__title!="SAN PETESBURGO "
+												span.ibe-wall-articles__detail!="(75 planes)"
+						div.row
+							div.col-xs-12
+								div.ibe-collapse-dest
+									a.ibe-collapse-dest__button(href="#", title="Todos los destinos", data-toggle="collapse", data-target="#all_destiny_1") Todos los destinos
+									div.ibe-collapse-dest__container.collapse(id="all_destiny_1", data-toggle="container")
+										div.ibe-collapse-dest__wrapper
+											div(data-columns-list)
+												script(id="tpl-destinies" type="text/template" data-destinies)
+													ul.ibe-list-column
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="A Coruña") A Coru&ntilde;a
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Alicante") Alicante
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Asturias") Asturias
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Atenas") Atenas
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Barcelona") Barcelona
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Bilbao") Bilbao
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Bolonia") Bolonia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Bruselas") Bruselas
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Budapest") Budapest
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Burdeos") Burdeos
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Comunidad de Madrid") Comunidad de Madrid
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Copenhague") Copenhague
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Dublín") Dubl&iacute;n
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Dusseldorf") Dusseldorf
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Frankfurt") Frankfurt
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Fuerteventura") Fuerteventura
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Ginebra") Ginebra
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Granada") Granada
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Ibiza") Ibiza
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Jerez") Jerez
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Lanzarote") Lanzarote
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Lisboa") Lisboa
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Londres") Londres
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Lyon") Lyon
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Madrid") Madrid
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Marsella") Marsella
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Melilla") Melilla
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Menorca") Menorca
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Milán") Mil&aacute;n
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Moscú") Mosc&uacute;
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Murcia") Murcia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Málaga") M&aacute;laga
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Múnich") M&uacute;nich
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Nantes") Nantes
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Niza") Niza
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Nápoles") N&aacute;poles
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Oporto") Oporto
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Palma de Mallorca") Palma de Mallorca
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Pamplona") Pamplona
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="París") Par&iacute;s
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Praga") Praga
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Roma") Roma
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="San Petersburgo") San Petersburgo
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="San Sebastián") San Sebasti&aacute;n
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Santa Cruz de la Palma") Santa Cruz de la Palma
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Santander") Santander
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Santiago de Compostela") Santiago de Compostela
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Sevilla") Sevilla
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Tenerife") Tenerife
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Toulouse") Toulouse
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Valencia") Valencia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Venecia") Venecia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Viena") Viena
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Vigo") Vigo
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Zúrich") Z&uacute;rich
+
+					section
+						h3.title.title__h3.title__h3--second!="Am&eacute;rica del Norte"
+						div.row
+							div.col-xs-12.col-md-3
+								div.row
+									div.col-xs-6.col-md-12
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="Berlin")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 2" src=globals.imgPath + "/modules/ibe_travel-guides/small-9.png")
+											a.ibe-wall-articles__link(href="#" title="Berlin")
+												h3.ibe-wall-articles__title!="BERLÍN "
+												span.ibe-wall-articles__detail!="(75 planes)"
+									div.col-xs-6.col-md-12
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="Roma")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 3" src=globals.imgPath + "/modules/ibe_travel-guides/small-2.png")
+											a.ibe-wall-articles__link(href="#" title="Roma")
+												h3.ibe-wall-articles__title!="ROMA "
+												span.ibe-wall-articles__detail!="(75 planes)"
+							div.col-xs-12.col-md-6
+								article.ibe-wall-articles
+									a.ibe-wall-articles__container(href="#" title="Amsterdam")
+										figure.ibe-wall-articles__cont-img
+											img(alt="Imagen 1" src=globals.imgPath + "/modules/ibe_travel-guides/big-3.png")
+									a.ibe-wall-articles__link(href="#" title="Amsterdam")
+										h3.ibe-wall-articles__title!="AMSTERDAM "
+										span.ibe-wall-articles__detail!="(56 planes)"
+							div.col-xs-12.col-md-3
+								div.row
+									div.col-xs-6.col-md-12
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="Santiago de Compostela")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 4" src=globals.imgPath + "/modules/ibe_travel-guides/small-3.png")
+											a.ibe-wall-articles__link(href="#" title="Santiago de Compostela")
+												h3.ibe-wall-articles__title!="SANTIAGO DE COMPOSTELA "
+												span.ibe-wall-articles__detail!="(75 planes)"
+									div.col-xs-6.col-md-12
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="San Petesburgo")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 5" src=globals.imgPath + "/modules/ibe_travel-guides/small-4.png")
+											a.ibe-wall-articles__link(href="#" title="San Petesburgo")
+												h3.ibe-wall-articles__title!="SAN PETESBURGO "
+												span.ibe-wall-articles__detail!="(75 planes)"
+						div.row
+							div.col-xs-12
+								div.ibe-collapse-dest
+									a.ibe-collapse-dest__button(href="#", title="Todos los destinos", data-toggle="collapse", data-target="#all_destiny_2") Todos los destinos
+									div.ibe-collapse-dest__container.collapse(id="all_destiny_2", data-toggle="container")
+										div.ibe-collapse-dest__wrapper
+											div(data-columns-list)
+												script(id="tpl-destinies" type="text/template" data-destinies)
+													ul.ibe-list-column
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="California") California
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="San Francisco") San Francisco
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Seatle") Seatle
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Atenas") Atenas
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Barcelona") Barcelona
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Bilbao") Bilbao
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Bolonia") Bolonia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Bruselas") Bruselas
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Budapest") Budapest
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Burdeos") Burdeos
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Comunidad de Madrid") Comunidad de Madrid
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Copenhague") Copenhague
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Dublín") Dubl&iacute;n
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Dusseldorf") Dusseldorf
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Frankfurt") Frankfurt
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Fuerteventura") Fuerteventura
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Ginebra") Ginebra
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Granada") Granada
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Ibiza") Ibiza
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Jerez") Jerez
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Lanzarote") Lanzarote
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Lisboa") Lisboa
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Londres") Londres
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Lyon") Lyon
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Madrid") Madrid
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Marsella") Marsella
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Melilla") Melilla
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Menorca") Menorca
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Milán") Mil&aacute;n
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Moscú") Mosc&uacute;
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Murcia") Murcia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Málaga") M&aacute;laga
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Múnich") M&uacute;nich
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Nantes") Nantes
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Niza") Niza
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Nápoles") N&aacute;poles
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Oporto") Oporto
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Palma de Mallorca") Palma de Mallorca
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Pamplona") Pamplona
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="París") Par&iacute;s
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Praga") Praga
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Roma") Roma
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="San Petersburgo") San Petersburgo
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="San Sebastián") San Sebasti&aacute;n
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Santa Cruz de la Palma") Santa Cruz de la Palma
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Santander") Santander
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Santiago de Compostela") Santiago de Compostela
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Sevilla") Sevilla
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Tenerife") Tenerife
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Toulouse") Toulouse
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Valencia") Valencia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Venecia") Venecia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Viena") Viena
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Vigo") Vigo
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Zúrich") Z&uacute;rich
+
+					section
+						h3.title.title__h3.title__h3--second!="Centroamérica"
+						div.row
+							div.col-xs-12.col-md-6
+								div.row
+									div.col-xs-6
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="Ciudad de Mexico")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 2" src=globals.imgPath + "/modules/ibe_travel-guides/small-11.png")
+											a.ibe-wall-articles__link(href="#" title="ciudad de mexico")
+												h3.ibe-wall-articles__title!="CIUDAD DE MEXICO "
+												span.ibe-wall-articles__detail!="(75 planes)"
+									div.col-xs-6
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="San Pedro")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 3" src=globals.imgPath + "/modules/ibe_travel-guides/small-12.png")
+											a.ibe-wall-articles__link(href="#" title="San Pedro")
+												h3.ibe-wall-articles__title!="SAN PEDRO "
+												span.ibe-wall-articles__detail!="(75 planes)"
+								div.row
+									div.col-xs-6
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="Santiago de Compostela")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 4" src=globals.imgPath + "/modules/ibe_travel-guides/small-13.png")
+											a.ibe-wall-articles__link(href="#" title="Santiago de Compostela")
+												h3.ibe-wall-articles__title!="SANTIAGO DE COMPOSTELA "
+												span.ibe-wall-articles__detail!="(75 planes)"
+									div.col-xs-6
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="San Petesburgo")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 5" src=globals.imgPath + "/modules/ibe_travel-guides/small-4.png")
+											a.ibe-wall-articles__link(href="#" title="San Petesburgo")
+												h3.ibe-wall-articles__title!="SAN PETESBURGO "
+												span.ibe-wall-articles__detail!="(75 planes)"
+							div.col-xs-12.col-md-6
+								article.ibe-wall-articles
+									a.ibe-wall-articles__container(href="#" title="Amsterdam")
+										figure.ibe-wall-articles__cont-img
+											img(alt="Imagen 1" src=globals.imgPath + "/modules/ibe_travel-guides/big-7.png")
+									a.ibe-wall-articles__link(href="#" title="Amsterdam")
+										h3.ibe-wall-articles__title!="AMSTERDAM "
+										span.ibe-wall-articles__detail!="(56 planes)"
+						div.row
+							div.col-xs-12
+								div.ibe-collapse-dest
+									a.ibe-collapse-dest__button(href="#", title="Todos los destinos", data-toggle="collapse", data-target="#all_destiny_3") Todos los destinos
+									div.ibe-collapse-dest__container.collapse(id="all_destiny_3", data-toggle="container")
+										div.ibe-collapse-dest__wrapper
+											div(data-columns-list)
+												script(id="tpl-destinies" type="text/template" data-destinies)
+													ul.ibe-list-column
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Mexico") Mexico
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Panama") Panama
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Guatemala") Guatemala
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Atenas") Atenas
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Barcelona") Barcelona
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Bilbao") Bilbao
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Bolonia") Bolonia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Bruselas") Bruselas
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Budapest") Budapest
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Burdeos") Burdeos
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Comunidad de Madrid") Comunidad de Madrid
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Copenhague") Copenhague
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Dublín") Dubl&iacute;n
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Dusseldorf") Dusseldorf
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Frankfurt") Frankfurt
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Fuerteventura") Fuerteventura
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Ginebra") Ginebra
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Granada") Granada
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Ibiza") Ibiza
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Jerez") Jerez
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Lanzarote") Lanzarote
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Lisboa") Lisboa
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Londres") Londres
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Lyon") Lyon
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Madrid") Madrid
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Marsella") Marsella
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Melilla") Melilla
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Menorca") Menorca
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Milán") Mil&aacute;n
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Moscú") Mosc&uacute;
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Murcia") Murcia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Málaga") M&aacute;laga
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Múnich") M&uacute;nich
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Nantes") Nantes
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Niza") Niza
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Nápoles") N&aacute;poles
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Oporto") Oporto
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Palma de Mallorca") Palma de Mallorca
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Pamplona") Pamplona
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="París") Par&iacute;s
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Praga") Praga
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Roma") Roma
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="San Petersburgo") San Petersburgo
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="San Sebastián") San Sebasti&aacute;n
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Santa Cruz de la Palma") Santa Cruz de la Palma
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Santander") Santander
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Santiago de Compostela") Santiago de Compostela
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Sevilla") Sevilla
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Tenerife") Tenerife
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Toulouse") Toulouse
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Valencia") Valencia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Venecia") Venecia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Viena") Viena
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Vigo") Vigo
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Zúrich") Z&uacute;rich
+
+					section
+						h3.title.title__h3.title__h3--second!="&Aacute;merica del Sur"
+						div.row
+							div.col-xs-12.col-md-6
+								article.ibe-wall-articles
+									a.ibe-wall-articles__container(href="#" title="Amsterdam")
+										figure.ibe-wall-articles__cont-img
+											img(alt="Imagen 2" src=globals.imgPath + "/modules/ibe_travel-guides/big-6.png")
+									a.ibe-wall-articles__link(href="#" title="Berlin")
+										h3.ibe-wall-articles__title!="AMSTERDAM "
+										span.ibe-wall-articles__detail!="(56 planes)"
+
+							div.col-xs-12.col-md-6
+								div.row
+									div.col-xs-6
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="Berlin")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 10" src=globals.imgPath + "/modules/ibe_travel-guides/small-15.png")
+											a.ibe-wall-articles__link(href="#" title="Berlín")
+												h3.ibe-wall-articles__title!="BERLÍN "
+												span.ibe-wall-articles__detail!="(75 planes)"
+									div.col-xs-6
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="París")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 2" src=globals.imgPath + "/modules/ibe_travel-guides/small-3.png")
+											a.ibe-wall-articles__link(href="#" title="Berlin")
+												h3.ibe-wall-articles__title!="PARÍS "
+												span.ibe-wall-articles__detail!="(75 planes)"
+								div.row
+									div.col-xs-6
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="Roma")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 2" src=globals.imgPath + "/modules/ibe_travel-guides/small-17.png")
+											a.ibe-wall-articles__link(href="#" title="Berlin")
+												h3.ibe-wall-articles__title!="ROMA "
+												span.ibe-wall-articles__detail!="(75 planes)"
+									div.col-xs-6
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="San Petesburgo")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 2" src=globals.imgPath + "/modules/ibe_travel-guides/small-18.png")
+											a.ibe-wall-articles__link(href="#" title="San Petesburgo")
+												h3.ibe-wall-articles__title!="SAN PETESBURGO "
+												span.ibe-wall-articles__detail!="(75 planes)"
+						div.row
+							div.col-xs-12
+								div.ibe-collapse-dest
+									a.ibe-collapse-dest__button(href="#", title="Todos los destinos", data-toggle="collapse", data-target="#all_destiny_4") Todos los destinos
+									div.ibe-collapse-dest__container.collapse(id="all_destiny_4", data-toggle="container")
+										div.ibe-collapse-dest__wrapper
+											div(data-columns-list)
+												script(id="tpl-destinies" type="text/template" data-destinies)
+													ul.ibe-list-column
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Mexico") Mexico
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Panama") Panama
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Guatemala") Guatemala
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Atenas") Atenas
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Barcelona") Barcelona
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Bilbao") Bilbao
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Bolonia") Bolonia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Bruselas") Bruselas
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Budapest") Budapest
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Burdeos") Burdeos
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Comunidad de Madrid") Comunidad de Madrid
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Copenhague") Copenhague
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Dublín") Dubl&iacute;n
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Dusseldorf") Dusseldorf
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Frankfurt") Frankfurt
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Fuerteventura") Fuerteventura
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Ginebra") Ginebra
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Granada") Granada
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Ibiza") Ibiza
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Jerez") Jerez
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Lanzarote") Lanzarote
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Lisboa") Lisboa
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Londres") Londres
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Lyon") Lyon
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Madrid") Madrid
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Marsella") Marsella
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Melilla") Melilla
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Menorca") Menorca
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Milán") Mil&aacute;n
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Moscú") Mosc&uacute;
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Murcia") Murcia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Málaga") M&aacute;laga
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Múnich") M&uacute;nich
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Nantes") Nantes
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Niza") Niza
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Nápoles") N&aacute;poles
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Oporto") Oporto
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Palma de Mallorca") Palma de Mallorca
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Pamplona") Pamplona
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="París") Par&iacute;s
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Praga") Praga
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Roma") Roma
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="San Petersburgo") San Petersburgo
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="San Sebastián") San Sebasti&aacute;n
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Santa Cruz de la Palma") Santa Cruz de la Palma
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Santander") Santander
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Santiago de Compostela") Santiago de Compostela
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Sevilla") Sevilla
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Tenerife") Tenerife
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Toulouse") Toulouse
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Valencia") Valencia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Venecia") Venecia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Viena") Viena
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Vigo") Vigo
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Zúrich") Z&uacute;rich
+					section
+						h3.title.title__h3.title__h3--second!="&Aacute;frica y Oriente Medio"
+						div.row
+							div.col-xs-12.col-md-3
+								div.row
+									div.col-xs-6.col-md-12
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="Berlin")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 2" src=globals.imgPath + "/modules/ibe_travel-guides/small-19.png")
+											a.ibe-wall-articles__link(href="#" title="Berlin")
+												h3.ibe-wall-articles__title!="BERLÍN "
+												span.ibe-wall-articles__detail!="(75 planes)"
+									div.col-xs-6.col-md-12
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="Roma")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 3" src=globals.imgPath + "/modules/ibe_travel-guides/small-20.png")
+											a.ibe-wall-articles__link(href="#" title="Roma")
+												h3.ibe-wall-articles__title!="ROMA "
+												span.ibe-wall-articles__detail!="(75 planes)"
+							div.col-xs-12.col-md-6
+								article.ibe-wall-articles
+									a.ibe-wall-articles__container(href="#" title="Amsterdam")
+										figure.ibe-wall-articles__cont-img
+											img(alt="Imagen 1" src=globals.imgPath + "/modules/ibe_travel-guides/big-5.png")
+									a.ibe-wall-articles__link(href="#" title="Amsterdam")
+										h3.ibe-wall-articles__title!="AMSTERDAM "
+										span.ibe-wall-articles__detail!="(56 planes)"
+							div.col-xs-12.col-md-3
+								div.row
+									div.col-xs-6.col-md-12
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="Santiago de Compostela")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 4" src=globals.imgPath + "/modules/ibe_travel-guides/small-6.png")
+											a.ibe-wall-articles__link(href="#" title="Santiago de Compostela")
+												h3.ibe-wall-articles__title!="SANTIAGO DE COMPOSTELA "
+												span.ibe-wall-articles__detail!="(75 planes)"
+									div.col-xs-6.col-md-12
+										article.ibe-wall-articles
+											a.ibe-wall-articles__container(href="#" title="San Petesburgo")
+												figure.ibe-wall-articles__cont-img
+													img(alt="Imagen 5" src=globals.imgPath + "/modules/ibe_travel-guides/small-4.png")
+											a.ibe-wall-articles__link(href="#" title="San Petesburgo")
+												h3.ibe-wall-articles__title!="SAN PETESBURGO "
+												span.ibe-wall-articles__detail!="(75 planes)"
+						div.row
+							div.col-xs-12
+								div.ibe-collapse-dest
+									a.ibe-collapse-dest__button(href="#", title="Todos los destinos", data-toggle="collapse", data-target="#all_destiny_5") Todos los destinos
+									div.ibe-collapse-dest__container.collapse(id="all_destiny_5", data-toggle="container")
+										div.ibe-collapse-dest__wrapper
+											div(data-columns-list)
+												script(id="tpl-destinies" type="text/template" data-destinies)
+													ul.ibe-list-column
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Alejandria") Alejandria
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Tunez") Tunez
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Tripoli") Tripoli
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Adis Abeba") Adis Abeba
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Barcelona") Barcelona
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Bilbao") Bilbao
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Bolonia") Bolonia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Bruselas") Bruselas
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Budapest") Budapest
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Burdeos") Burdeos
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Comunidad de Madrid") Comunidad de Madrid
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Copenhague") Copenhague
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Dublín") Dubl&iacute;n
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Dusseldorf") Dusseldorf
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Frankfurt") Frankfurt
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Fuerteventura") Fuerteventura
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Ginebra") Ginebra
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Granada") Granada
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Ibiza") Ibiza
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Jerez") Jerez
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Lanzarote") Lanzarote
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Lisboa") Lisboa
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Londres") Londres
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Lyon") Lyon
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Madrid") Madrid
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Marsella") Marsella
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Melilla") Melilla
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Menorca") Menorca
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Milán") Mil&aacute;n
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Moscú") Mosc&uacute;
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Murcia") Murcia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Málaga") M&aacute;laga
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Múnich") M&uacute;nich
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Nantes") Nantes
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Niza") Niza
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Nápoles") N&aacute;poles
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Oporto") Oporto
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Palma de Mallorca") Palma de Mallorca
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Pamplona") Pamplona
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="París") Par&iacute;s
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Praga") Praga
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Roma") Roma
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="San Petersburgo") San Petersburgo
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="San Sebastián") San Sebasti&aacute;n
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Santa Cruz de la Palma") Santa Cruz de la Palma
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Santander") Santander
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Santiago de Compostela") Santiago de Compostela
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Sevilla") Sevilla
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Tenerife") Tenerife
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Toulouse") Toulouse
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Valencia") Valencia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Venecia") Venecia
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Viena") Viena
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Vigo") Vigo
+														li.ibe-list-column__item
+															a.ibe-list-column__item-link(href="#", title="Zúrich") Z&uacute;rich
+			div.row.ibe-offer-landings__container
+				.col-xs-12.u-mt-big.u-p-none-mobile
+					div.ibe-offer-landings(aria-label="Ofertas por destinos")
+						.ibe-offer-landings__top
+							figure.ibe-offer-landings__figure 
+								img.ibe-offer-landings__image(src="../images/general/flas-offers-temp.png" alt="Ofertas a España")
+								figcaption.sr-only Ofertas a España
+							div.ibe-offer-landings__info
+								h3.ibe-offer-landings__title.ibe-offer-landings__title--small Vuelos Baratos
+								p.ibe-offer-landings__text Precio mínimo ida y vuelta
+						.ibe-offer-landings__offers(class="ibe-fc-offers-collapse" data-function="data-offers-collapser" data-offers-number="5" data-content-collapsable="true" data-cont-open="Contenedor desplegado" data-cont-closed="Contenedor plegado" data-button-open="Plegar" data-button-closed="Desplegar")
+							button.ibe-offer-landings__trigger(aria-label="Desplegar módulo de ofertas" data-offers-collapse="trigger" data-offers-collapsed="true" data-focusin)
+								span.sr-only Desplegar
+								span.ibe-offer-landings__trigger-icon.icon-flecha_1_abajo
+							.ibe-offer-landings__offers-container
+								p.ibe-offer-landings__text-mobile Precio mínimo ida y vuelta
+								.ibe-offer-landings__offers-wrapper(aria-label="Contenedor plegado" data-offers-collapse="container" data-offers-collapsed="true")
+									.ibe-offer-landings__offers-column
+										ul.ibe-offer-landings__offers-list
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 39€")
+													span.ibe-offer-landings__offer-city Madrid
+													span.ibe-offer-landings__offer-text 39€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Santiago de Compostela ida y vuelta desde 52€")
+													span.ibe-offer-landings__offer-city Menorca
+													span.ibe-offer-landings__offer-text 39€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 39€")
+													span.ibe-offer-landings__offer-city Ibiza
+													span.ibe-offer-landings__offer-text 39€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 45€")
+													span.ibe-offer-landings__offer-city Barcelona
+													span.ibe-offer-landings__offer-text 45€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 39€")
+													span.ibe-offer-landings__offer-city Madrid
+													span.ibe-offer-landings__offer-text 39€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 52€")
+													span.ibe-offer-landings__offer-city Menorca
+													span.ibe-offer-landings__offer-text 52€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 39€")
+													span.ibe-offer-landings__offer-city Ibiza
+													span.ibe-offer-landings__offer-text 39€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 45€")
+													span.ibe-offer-landings__offer-city Barcelona
+													span.ibe-offer-landings__offer-text 45€
+									.ibe-offer-landings__offers-column
+										ul.ibe-offer-landings__offers-list
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 39€")
+													span.ibe-offer-landings__offer-city Lanzarote
+													span.ibe-offer-landings__offer-text 39€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 89€")
+													span.ibe-offer-landings__offer-city Tenerife
+													span.ibe-offer-landings__offer-text 89€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 112€")
+													span.ibe-offer-landings__offer-city Palma de Mallorca
+													span.ibe-offer-landings__offer-text 112€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 130€")
+													span.ibe-offer-landings__offer-city Fuerteventura
+													span.ibe-offer-landings__offer-text 130€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 39€")
+													span.ibe-offer-landings__offer-city Lanzarote
+													span.ibe-offer-landings__offer-text 39€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 89€")
+													span.ibe-offer-landings__offer-city Tenerife
+													span.ibe-offer-landings__offer-text 89€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 112€")
+													span.ibe-offer-landings__offer-city Palma de Mallorca
+													span.ibe-offer-landings__offer-text 112€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 130€")
+													span.ibe-offer-landings__offer-city Fuerteventura
+													span.ibe-offer-landings__offer-text 130€
+									.ibe-offer-landings__offers-column
+										ul.ibe-offer-landings__offers-list
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 39€")
+													span.ibe-offer-landings__offer-city Viena
+													span.ibe-offer-landings__offer-text 39€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 45€")
+													span.ibe-offer-landings__offer-city Milan
+													span.ibe-offer-landings__offer-text 45€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 39€")
+													span.ibe-offer-landings__offer-city Bruselas
+													span.ibe-offer-landings__offer-text 39€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 78€")
+													span.ibe-offer-landings__offer-city Praga
+													span.ibe-offer-landings__offer-text 78€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 39€")
+													span.ibe-offer-landings__offer-city Viena
+													span.ibe-offer-landings__offer-text 39€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 45€")
+													span.ibe-offer-landings__offer-city Milan
+													span.ibe-offer-landings__offer-text 45€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 39€")
+													span.ibe-offer-landings__offer-city Bruselas
+													span.ibe-offer-landings__offer-text 39€
+											li.ibe-offer-landings__offers-list-item
+												a.ibe-offer-landings__offer(href="#" title="Madrid ida y vuelta desde 78€")
+													span.ibe-offer-landings__offer-city Praga
+													span.ibe-offer-landings__offer-text 78€
+						.ibe-offer-landings__bottom
+							a.ibe-offer-landings__bottom-link(href="#" title="Ver todos los vuelos a España")
+								span.ibe-offer-landings__bottom-link-content
+									span.ibe-offer-landings__bottom-link-text Ver todos los vuelos a España
+									span.ibe-offer-landings__bottom-link-account (90)
+								span.icon-flecha_1_derecha
+
+
+		.container
+			.row
+				.col-xs-12.ibe-box-table
+					.ibe-box-table__box-group
+						.ibe-box-table__box-table.center
+							div.ibe-box-table__header
+								h2.title.title__h1.ibe-box-table__title-selectize!="Sugerencias para próximos viajes"
+								div.ibe-tab.ibe-tab--scrolling.ibe-tab--center(data-tab="jquery-ui", data-tab-active="0")
+									header.ibe-tab__scroll
+										ul.ibe-tab__menu
+											li.ibe-tab__menu-item
+												a.link.link__regular(href="#tab-col-1" title="Categoria 1")!="Categoria 1"
+											li.ibe-tab__menu-item
+												a.link.link__regular(href="#tab-col-2" title="Categoria 2")!="Categoria 2"
+											li.ibe-tab__menu-item
+												a.link.link__regular(href="#tab-col-3" title="Categoria 3")!="Categoria 3"
+											li.ibe-tab__menu-item
+												a.link.link__regular(href="#tab-col-4" title="Categoria 4")!="Categoria 4"
+											li.ibe-tab__menu-item
+												a.link.link__regular(href="#tab-col-5" title="Categoria 5")!="Categoria 5"
+									div.ibe-tab__container.ibe-tab__container--padding-small.ibe-tab__container--transparent
+										div(id="tab-col-1")
+											div.row
+												div.col-xl-4.col-lg-4.ibe-card-box--md.ibe-card-box--vertical
+													.ibe-box-table__box-info(data-fc-height="2")
+														a(href="#" title="Vuelos a Gran Canaria - 120 €" class="link link__regular link__regular--unformatted ibe-effects__link--zoomin")
+															article.ibe-card-link
+																div.ibe-card-link__container
+																	div.ibe-card-link__info(data-fc-height="100")
+																		h3.title__h4.title--red.ibe-card-link__title BOSTON
+																		p.paragraph.paragraph__regular.paragraph__regular--grey (56 planes)
+												div.col-xl-4.col-lg-4.ibe-card-box--md.ibe-card-box--vertical
+													.ibe-box-table__box-info(data-fc-height="2")
+														a(href="#" title="Vuelos a Alicante - 120 €" class="link link__regular link__regular--unformatted ibe-effects__link--zoomin")
+															article.ibe-card-link
+																div.ibe-card-link__container
+																	div.ibe-card-link__info(data-fc-height="0")
+																		h3.title__h4.title--red.ibe-card-link__title Vuelos a Alicante
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-md.hidden-sm.hidden-xs Desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-lg Ida y vuelta desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+												div.col-xl-4.col-lg-4.ibe-card-box--md.ibe-card-box--vertical
+													.ibe-box-table__box-info(data-fc-height="2")
+														a(href="#" title="Vuelos a Bruselas - 120 €" class="link link__regular link__regular--unformatted ibe-effects__link--zoomin")
+															article.ibe-card-link
+																div.ibe-card-link__container
+																	div.ibe-card-link__info(data-fc-height="0")
+																		h3.title__h4.title--red.ibe-card-link__title Vuelos a Bruselas
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-md.hidden-sm.hidden-xs Desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-lg Ida y vuelta desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+												div.col-xl-4.col-lg-4.ibe-card-box--md.ibe-card-box--vertical
+													.ibe-box-table__box-info(data-fc-height="2")
+														a(href="#" title="Vuelos a Milán - 120 €" class="link link__regular link__regular--unformatted ibe-effects__link--zoomin")
+															article.ibe-card-link
+																div.ibe-card-link__container
+																	div.ibe-card-link__info(data-fc-height="0")
+																		h3.title__h4.title--red.ibe-card-link__title Vuelos a Mil&aacute;n
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-md.hidden-sm.hidden-xs Desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-lg Ida y vuelta desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+												div.col-xl-4.col-lg-4.ibe-card-box--md.ibe-card-box--vertical
+													.ibe-box-table__box-info(data-fc-height="2")
+														a(href="#" title="Vuelos a Sevilla - 120 €" class="link link__regular link__regular--unformatted ibe-effects__link--zoomin")
+															article.ibe-card-link
+																div.ibe-card-link__container
+																	div.ibe-card-link__info(data-fc-height="0")
+																		h3.title__h4.title--red.ibe-card-link__title Vuelos a Sevilla
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-md.hidden-sm.hidden-xs Desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-lg Ida y vuelta desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+												div.col-xl-4.col-lg-4.ibe-card-box--md.ibe-card-box--vertical
+													.ibe-box-table__box-info(data-fc-height="2")
+														a(href="#" title="Vuelos a Nueva York - 120 €" class="link link__regular link__regular--unformatted ibe-effects__link--zoomin")
+															article.ibe-card-link
+																div.ibe-card-link__container
+																	div.ibe-card-link__info(data-fc-height="0")
+																		h3.title__h4.title--red.ibe-card-link__title Vuelos a Nueva York
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-md.hidden-sm.hidden-xs Desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-lg Ida y vuelta desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+												div.col-xl-4.col-lg-4.ibe-card-box--md.ibe-card-box--vertical
+													.ibe-box-table__box-info(data-fc-height="2")
+														a(href="#" title="Vuelos a Bruselas - 120 €" class="link link__regular link__regular--unformatted ibe-effects__link--zoomin")
+															article.ibe-card-link
+																div.ibe-card-link__container
+																	div.ibe-card-link__info(data-fc-height="0")
+																		h3.title__h4.title--red.ibe-card-link__title Vuelos a Bruselas
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-md.hidden-sm.hidden-xs Desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-lg Ida y vuelta desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+												div.col-xl-4.col-lg-4.ibe-card-box--md.ibe-card-box--vertical
+													.ibe-box-table__box-info(data-fc-height="2")
+														a(href="#" title="Vuelos a París - 120 €" class="link link__regular link__regular--unformatted ibe-effects__link--zoomin")
+															article.ibe-card-link
+																div.ibe-card-link__container
+																	div.ibe-card-link__info(data-fc-height="0")
+																		h3.title__h4.title--red.ibe-card-link__title Vuelos a Par&iacute;s
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-md.hidden-sm.hidden-xs Desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-lg Ida y vuelta desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+												div.col-xl-4.col-lg-4.ibe-card-box--md.ibe-card-box--vertical
+													.ibe-box-table__box-info(data-fc-height="2")
+														a(href="#" title="Vuelos a Alicante - 120 €" class="link link__regular link__regular--unformatted ibe-effects__link--zoomin")
+															article.ibe-card-link
+																div.ibe-card-link__container
+																	div.ibe-card-link__info(data-fc-height="0")
+																		h3.title__h4.title--red.ibe-card-link__title Vuelos a Alicante
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-md.hidden-sm.hidden-xs Desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-lg Ida y vuelta desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+										div(id="tab-col-2")
+											div.row
+												div.col-xl-4.col-lg-4.ibe-card-box--md.ibe-card-box--vertical
+													.ibe-box-table__box-info(data-fc-height="2")
+														a(href="#" title="Vuelos a Gran Canaria - 120 €" class="link link__regular link__regular--unformatted ibe-effects__link--zoomin")
+															article.ibe-card-link
+																div.ibe-card-link__container
+																	div.ibe-card-link__info(data-fc-height="0")
+																		h3.title__h4.title--red.ibe-card-link__title Vuelos a Gran Canaria
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-md.hidden-sm.hidden-xs Desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-lg Ida y vuelta desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+												div.col-xl-4.col-lg-4.ibe-card-box--md.ibe-card-box--vertical
+													.ibe-box-table__box-info(data-fc-height="2")
+														a(href="#" title="Vuelos a Alicante - 120 €" class="link link__regular link__regular--unformatted ibe-effects__link--zoomin")
+															article.ibe-card-link
+																div.ibe-card-link__container
+																	div.ibe-card-link__info(data-fc-height="0")
+																		h3.title__h4.title--red.ibe-card-link__title Vuelos a Alicante
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-md.hidden-sm.hidden-xs Desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-lg Ida y vuelta desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+												div.col-xl-4.col-lg-4.ibe-card-box--md.ibe-card-box--vertical
+													.ibe-box-table__box-info(data-fc-height="2")
+														a(href="#" title="Vuelos a Bruselas - 120 €" class="link link__regular link__regular--unformatted ibe-effects__link--zoomin")
+															article.ibe-card-link
+																div.ibe-card-link__container
+																	div.ibe-card-link__info(data-fc-height="0")
+																		h3.title__h4.title--red.ibe-card-link__title Vuelos a Bruselas
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-md.hidden-sm.hidden-xs Desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-lg Ida y vuelta desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+												div.col-xl-4.col-lg-4.ibe-card-box--md.ibe-card-box--vertical
+													.ibe-box-table__box-info(data-fc-height="2")
+														a(href="#" title="Vuelos a Milán - 120 €" class="link link__regular link__regular--unformatted ibe-effects__link--zoomin")
+															article.ibe-card-link
+																div.ibe-card-link__container
+																	div.ibe-card-link__info(data-fc-height="0")
+																		h3.title__h4.title--red.ibe-card-link__title Vuelos a Mil&aacute;n
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-md.hidden-sm.hidden-xs Desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+																		p.paragraph.paragraph__regular.paragraph__regular--grey.hidden-lg Ida y vuelta desde
+																			span.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--prize 60 &euro;
+										div(id="tab-col-3")
+											p.paragraph.paragraph__regular Contenido Pesta&ntilde;a 3
+										div(id="tab-col-4")
+											p.paragraph.paragraph__regular Contenido Pesta&ntilde;a 4
+										div(id="tab-col-5")
+							.row
+								.col-xl-offset-9.col-xl-3.col-lg-offset-9.col-lg-3
+									.ibe-box-table__box-table--spacing.ibe-line-spacing.ibe-line-spacing--large
+										a.link.link__regular.link__regular--underline.link__regular--right(href="#" title="Ver más ofertas de vuelos") Ver m&aacute;s ofertas de vuelos
+
+
+			div.row
+				div.col-xs-12
+					h2.title.title__h2!="El titulo de ofertas!!"
+					.ibe-flex.ibe-flex--space-between.ibe-flex__row--wrap-md
+						.ibe-card-box--md.ibe-card-box--vertical.ibe-flex--basis-50-spaced-16.ibe-flex--basis-100-md-mobile
+							+m-card-box({
+								"isLink": true,
+								"zoom": true,
+								"exampleText": false,
+								"link": {
+									"name": "Ofertas de vuelo + hotel"
+								},
+								"image": {
+									"src": "/general/flas-offers-temp.png",
+									"alt": "Ofeta Disneyland"
+								},
+								"title": "Ofertas de vuelo + hotel Ofertas de vuelo + hotel"
+							})
+						.ibe-card-box--md.ibe-card-box--vertical.ibe-flex--basis-50-spaced-16.ibe-flex--basis-100-md-mobile
+							+m-card-box({
+								"isLink": true,
+								"zoom": true,
+								"exampleText": false,
+								"link": {
+									"name": "Lorem ipsum"
+								},
+								"image": {
+									"src": "/general/herobanner_1precio_es-fr_210619_es_480.jpg",
+									"alt": "Ofeta Disneyland"
+								},
+								"title": "Lorem ipsum"
+							})
+	div.ibe-dialog.ibe-dialog--special.fc-dialog-all-destinations
+		div.modal-dialog
+			div.modal-content
+				div.ibe-modal
+					div.modal-header
+						.ibe-dialog__options
+							button.ibe-dialog__close(type="button" data-dialog="close")
+								span.ibe-dialog__close-text Cerrar
+								span.ibe-dialog__close-icon.icon-cerrar
+					div.modal-body
+	+m-my-guides()
+	+m-footer()

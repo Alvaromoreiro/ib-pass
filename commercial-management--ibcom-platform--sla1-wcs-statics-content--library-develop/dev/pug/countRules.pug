@@ -1,0 +1,84 @@
+extends _general/layout__primary
+block title
+	title!="Contador de Reglas CSS"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main
+		div.container
+			div.row
+				div.col-xs-12
+					h2.title.title_h2 Contador de Reglas CSS
+
+					.fc-log Log:
+					.fc-result Result:
+
+					script.
+						setTimeout(function(){
+							function countCSSRules() {
+								var results = '',
+									log = '',
+									resultsHTML = '',
+									logHTML = '';
+								if (!document.styleSheets) {
+									return;
+								}
+								for (var i = 0; i < document.styleSheets.length; i++) {
+									countSheet(document.styleSheets[i]);
+								}
+
+								function countSheet(sheet) {
+									if (sheet && sheet.cssRules) {
+										var count = countSelectors(sheet);
+
+										log += '\nFile: ' + (sheet.href ? sheet.href : 'inline <style> tag');
+										log += '\nRules: ' + sheet.cssRules.length;
+										log += '\nSelectors: ' + count;
+										log += '\n--------------------------';
+										logHTML += '<p>\nFile: ' + (sheet.href ? sheet.href + '</p>' : 'inline <style> tag');
+										logHTML += '<p>\nRules: ' + sheet.cssRules.length + '</p>';
+										logHTML += '<p>\nSelectors: ' + count + '</p>';
+										logHTML += '<p>\n--------------------------' + '</p>';
+										if (count >= 4096) {
+											results += '\n********************************\nWARNING:\n There are ' + count + ' CSS rules in the stylesheet ' + sheet.href + ' - IE will ignore the last ' + (count - 4096) + ' rules!\n';
+											resultsHTML += '<p>\n********************************\nWARNING:\n There are ' + count + ' CSS rules in the stylesheet ' + sheet.href + ' - IE9 will ignore the last ' + (count - 4096) + ' rules!\n</p>';
+										}
+									}
+								}
+
+								function countSelectors(group) {
+									var count = 0
+									for (var j = 0, l = group.cssRules.length; j < l; j++) {
+										var rule = group.cssRules[j];
+										if (rule instanceof CSSImportRule) {
+											countSheet(rule.styleSheet);
+										}
+										if (rule instanceof CSSMediaRule) {
+											count += countSelectors(rule);
+										}
+										if (!rule.selectorText) {
+											continue;
+										}
+										count += rule.selectorText.split(',').length;
+									}
+									return count;
+								}
+
+								console.log(log);
+								$(".fc-log").html(logHTML)
+								console.log(results);
+								$(".fc-result").html(resultsHTML)
+							};
+							countCSSRules();
+						},1000)
+
+
+	+m-footer()

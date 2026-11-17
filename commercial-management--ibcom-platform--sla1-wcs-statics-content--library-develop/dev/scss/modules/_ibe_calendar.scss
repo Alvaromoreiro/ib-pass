@@ -1,0 +1,101 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_calendar
+//    Desripcion: Estilos para el calendario
+//******************************************************************************/
+.ibe-calendar{
+    margin-top: rem(30);
+    &__item{
+        margin-bottom: rem(15);
+        border: 1px solid $BRD_standar_1;
+        border-radius: 4px;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.32), 0 -1px 4px 0 rgba(0, 0, 0, 0.11);
+    }
+    &__header{
+        padding: rem(20) rem(10) rem(15) rem(10);
+        font-size: rem(14);
+        border-bottom: 1px solid $BRD_standar_1;
+    }
+    &__body{
+        padding: rem(18) rem(22);
+    }
+    &__footer{
+        margin-top: rem(15);
+    }
+    &__leyend{
+        display: inline-block;
+        position: relative;
+        margin-right: rem(25);
+        padding-left: rem(25);
+        color: $PC-cromatico_2;
+        &--important,
+        &--default,
+        &--highlight{
+            &:before{
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: rem(16);
+                height: rem(16);
+            }
+
+        }
+
+        &--important{
+            &:before{
+                border: 1px solid $BRD-standar_6;
+            }
+        }
+        &--default{
+            &:before{
+                border: 1px solid $BRD-standar_19;
+            }
+        }
+        &--highlight{
+            &:before{
+                background: $BCK-cromatico_5;
+            }
+        }
+    }
+    /* Modificadores ibe-calendar */
+    &--xl{}
+    &--lg{}
+}
+/* MEDIUM RESOLUTION */
+@mixin m-ibe-calendar{
+    .ibe-calendar{
+        &--lg{
+            .ibe-calendar__leyend{
+                display: block;
+                margin-bottom: rem(6);
+                padding-left: rem(30);
+                &:last-child{
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+/* SMALL RESOLUTION */
+@mixin sm-ibe-calendar{
+    .ibe-calendar{
+        &--xl,
+        &--lg{
+            .ibe-calendar__leyend{
+                display: block;
+                margin-bottom: rem(6);
+                padding-left: rem(30);
+                &:last-child{
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+/* X-SMALL RESOLUTION */
+@mixin xs-ibe-calendar{
+    @include sm-ibe-calendar;
+}

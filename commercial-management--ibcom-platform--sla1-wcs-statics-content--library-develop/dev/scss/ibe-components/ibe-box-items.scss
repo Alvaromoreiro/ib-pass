@@ -1,0 +1,146 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe-box-items
+//    Desripcion: Estilos para componente cajas con listado de enlaces
+//******************************************************************************/
+@import "../_function";
+@import "../config";
+@import "../general/_colors";
+@import "../general/_var-font";
+
+@import "../general/settings__responsive";
+@import "../general/_tools__responsive";
+
+.ibe-box-items{
+	display: flex;
+	width: 100%;
+	margin-top: rem(24);
+	flex-flow: row;
+	align-items: stretch;
+	flex-wrap: wrap;
+	padding: rem(32) rem(32) rem(48);
+	background: $BCK-cromatico_1;
+	
+	&__content{
+		width: calc(100%/3);
+		padding: rem(10) rem(24) 0;
+		border-left: 1px solid $BRD_standar_5;
+		&:first-child{
+			border-left: 0;
+			padding-left: 0;
+		}
+		&:last-child{
+			padding-right: 0;
+		}
+	}
+	
+	&__list{
+		padding-top: rem(10);
+	}
+	&__item{
+		margin-top: rem(14);
+	}
+	&__item-link,.link__regular{
+		display: block;
+		font-size: rem(13);
+		line-height: rem(18);
+		color: #666;
+		max-height: rem(45);
+		
+		&:hover, &:focus {
+			color: $PC-cromatico_10;
+		}
+		
+		&:before {
+			float: right;
+			font-size: rem(16);
+			margin-right: rem(-8);
+			color: $PC-cromatico_3;
+		}
+	}
+	
+	&__title {
+		font-family: $font-04;
+		font-size: rem(22);
+		line-height: rem(24);
+		max-height: rem(50);
+	}
+	
+	&__link{
+		display: inline-block;
+		margin-top: rem(10);
+		font-size: rem(13);
+		line-height: rem(24);
+		color: $PC-cromatico_3;
+		&:hover,&:focus{
+			color: $PC-cromatico_10;
+		}
+		&:before{
+			float: right;
+			margin-top: rem(2);
+			margin-left: rem(2);
+		}
+	}
+	&__description, .paragraph__regular{
+		font-size: rem(13);
+		line-height: rem(18);
+		padding-top: rem(12);
+		max-height: 4.5rem;
+	}
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+@include media-query('md') {
+	.ibe-box-items {
+		padding: rem(32) rem(24);
+	}
+}
+
+/*Mobile RESOLUTION STYLES*/
+@include media-query('mobile') {
+	.ibe-box-items {
+		padding: rem(24) rem(32);
+		&__content{
+			width: calc(100%/2);
+			&:nth-child(2){
+				padding-right: 0;
+			}
+			&:last-child{
+				width: 100%;
+				padding-top: rem(48);
+				padding-left: 0;
+				border-left: 0;
+			}
+		}
+		&__link{
+			float: right;
+		}
+		&__title{
+			height: auto!important;
+		}
+	}
+}
+
+/*X-SMALL RESOLUTION STYLES*/
+@include media-query('xs') {
+	.ibe-box-items {
+		margin-top: rem(16);
+		&__content{
+			width: 100%;
+			padding: rem(16) 0;
+			border-left: 0;
+			border-top: rem(1) solid $BRD_standar_5;
+			&:first-child{
+				padding-top: 0;
+				border-top: 0;
+			}
+			&:last-child{
+				padding-top: rem(16);
+				padding-bottom: 0;
+			}
+		}
+		&__title{
+			height: auto!important;
+		}
+	}
+}

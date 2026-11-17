@@ -1,0 +1,813 @@
+//*****************************************************************************
+//	  Proyecto: IberiaCOM
+//    Titulo: ibe-menu-new
+//    Desripcion: Modulo para el nuevo menu
+//******************************************************************************/
+// ibe-menu-new */
+
+.ibe-menu-new{ 
+	position: relative;
+	min-height: rem(56);
+	background-color: $PC-cromatico_4;
+	border-bottom: 2px solid $PC-cromatico_5;
+	.container{
+		padding: 0 rem(16);
+	}
+	&__list{
+		display: flex;
+		width: 100%;
+		text-align: left;
+		font-size: 0;
+		flex-direction: row;
+		&--submenu{
+			padding-right: rem(25);
+			&.active{
+				transform: translate(0,0);
+			}
+		}
+		&--icons{
+			padding-left: rem(35);
+		}
+		
+	}
+	&__item{
+		display: inline-flex;
+		vertical-align: middle;
+		height: rem(56);
+		border-right: 1px solid $PC-cromatico_5;
+		width: 100%;
+		text-align: center;
+		cursor: pointer;
+		&:first-child{
+			border-left: 1px solid $PC-cromatico_5 ;
+		}
+		&--back{
+			display: none;
+		}
+		&--submenu{
+			display: inline-block;
+			vertical-align: top;
+			text-align: left;
+			width: 16.6%;
+			padding-right: rem(5);
+		}
+		&--column{
+			padding-top: rem(12);
+			position: relative;
+			&:nth-child(2){
+				padding-top: 0;
+			}
+			&:before{
+				color: $PC-cromatico_3;
+				position: absolute;
+				line-height: 16px;
+				font-size: rem(18);
+				left: rem(-23);
+			}
+			&.icon-vuelos{
+				&:before{
+					transform: rotate(90deg);
+				}
+			}
+			&.icon-vuelo_coche_1{
+				&:before{
+					font-size: rem(12);
+					left: rem(-35);
+				}
+			}
+			&.icon-vuelo_hotel_1{
+				&:before{
+					font-size: rem(14.5);
+					left: rem(-36);
+					top: rem(14);
+				}
+				
+			}
+		}
+		&--underline{
+			&:first-child{
+				&:after{
+					width: rem(222);
+				}
+			}
+
+			.ibe-menu-new__link--tab{
+				&:after{
+					content: "";
+					display: block;
+					width: 100%;
+					height: rem(4);
+					background-color: $PC-cromatico_3;
+					position: absolute;
+					bottom: rem(-2);
+				}
+			}
+		}
+		&--active{
+			background-color:$PC-cromatico_8;
+			border-bottom: none;
+			&:first-child{
+				&:after{
+					width: rem(222);
+				}
+			}
+			&:after{
+				content:"";
+				display: block;
+				width: rem(223);
+				height: rem(4);
+				background-color: $PC-cromatico_8;
+				position: absolute;
+				z-index: 1005;
+				
+			}
+		}
+		&:focus{
+			background-color: $PC-cromatico_8;
+		}
+	}
+	&__link{
+		&--tab{
+			display: block;
+			padding: rem(20) 0 rem(13);
+			font-family: $font-04;
+			font-size: rem(20);
+			color: $PC-cromatico_1;
+			line-height: 18px;
+			border: none;
+			background-color: transparent;
+			width: 100%;
+			position: relative;
+			&:hover, &:focus{
+				text-decoration: none;
+				outline: none;
+				color: $PC-cromatico_1;
+			}
+		}
+		&--submenu {
+			font-family: $font-02;
+			font-size: rem(13);
+			text-align: left;
+			width: 100%;
+			color: $PC-cromatico_1;
+			display: block;
+			line-height: 16px;
+			background: transparent;
+    		border: none;
+			&:focus, &:hover{
+				color: $PC-cromatico_1;
+				text-decoration: underline;
+				outline: none;
+			}
+		}
+		&--icon{
+			padding-right: rem(20);
+			&:after {
+				content: "\e973";
+				position: absolute;
+				right: auto;
+				display: inline-block;
+				padding-top: rem(2);
+				font-family: $font-05;
+				font-size: rem(20);
+				color: $PC-cromatico_3;
+				text-decoration: underline;
+			}
+			&.ibe-menu-new__link--icon{
+				&:after{
+					text-decoration: none;
+				}
+			}
+		}
+		&--icon-desktop{
+			padding-right: rem(20);
+			&:after {
+				content: "\e973";
+				position: absolute;
+				right: auto;
+				display: inline-block;
+				padding-top: rem(1);
+				font-family: $font-05;
+				font-size: rem(15);
+				color: $PC-cromatico_3;
+				text-decoration: underline;
+				padding-left: rem(6);
+			}
+			&.ibe-menu-new__link--icon-desktop{
+				&:after{
+					text-decoration: none;
+				}
+			}
+		}
+		
+	}
+	&__container{
+		position: absolute; 
+		top: rem(56);
+		right: 0;
+		width: 100%;
+		background-color:$PC-cromatico_8;
+		z-index: 99999;
+		padding: rem(20) rem(0) rem(32);
+		cursor: auto;
+		display: none;
+		box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.09);
+		border-top: 1px solid $PC-cromatico_5;
+		&--active{
+			display: block;
+		}
+	}
+	&__title{
+		font-family: $font-04;
+		color: $PC-cromatico_3;
+		font-size: rem(18);
+		text-align: left;
+		padding-bottom: rem(11);
+		display: inline-block;
+		line-height: 21px;
+		background: transparent;
+    	border: none;
+		pointer-events: none;
+		cursor: default;
+		text-decoration:none;
+		&--link{
+			cursor: pointer;
+			pointer-events: visible;
+			position: relative;
+			&:focus,&:hover{
+				color: $PC-cromatico_3;
+				text-decoration: underline;
+				outline: none;
+			}
+		}
+		
+	}
+	&__title-desktop{
+		color: $PC-cromatico_3;
+		font-size: rem(13);
+		text-align: left;
+		padding-bottom: rem(11);
+		display: inline-block;
+		line-height: 21px;
+		background: transparent;
+    	border: none;
+		pointer-events: none;
+		cursor: default;
+		text-decoration:none;
+		&--link{
+			cursor: pointer;
+			pointer-events: visible;
+			position: relative;
+			&:focus,&:hover{
+				color: $PC-cromatico_3;
+				text-decoration: underline;
+				outline: none;
+			}
+		}
+		
+	}
+	&__overlay{
+		position: absolute;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		height: 100%;
+		background: $PC-cromatico_16;
+		opacity: 0.5;
+		-webkit-transition: background .3s ease-out;
+        transition: background .3s ease-out;
+        z-index: 9997;
+	}
+	&__links{
+		display: none;
+	}
+	
+	
+}
+
+//*  End ibe-menu-new */
+
+//Responsive
+@mixin l-ibe-menu-new{
+	.ibe-menu-new{
+		min-height: rem(45);
+		.container{
+			padding: 0 rem(32);
+		}
+		&__link{
+			&--tab{
+				padding: rem(12) 0;
+				font-size: rem(18);
+				line-height: 17px;
+			}
+		}
+		&__item{
+			height: rem(45);
+			&--underline{
+				&:first-child{
+					&:after{
+						width: rem(184);
+					}
+				}
+				&:after{
+					width: rem(185);
+				}
+			}
+			&--active{
+				&:first-child{
+					&:after{
+						width: rem(184);
+					}
+				}
+				&:after{
+					width: rem(185);
+				}
+			}
+			&--submenu{
+				padding-right: rem(8);
+			}
+		}
+		&__container {
+			top: rem(43);
+			padding: rem(16) rem(0) rem(24);
+		}
+		&__title{
+			font-size: rem(16);
+			line-height: 19px;
+		}
+		&__list--submenu{
+			padding-right: 0;
+		}
+	}
+}
+@mixin m-ibe-menu-new{
+	.ibe-menu-new{
+		//display: none;
+		visibility: hidden;
+		width: rem(370);
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 9998;
+		height: 100%;
+		overflow-x: hidden;
+		overflow-y: auto;
+		box-shadow: 3px 2px 3px 0 rgba(0, 0, 0, 0.1);
+		//left: rem(-370);
+		transform:translate(rem(-370),0);
+		transition: transform .3s ease;
+		will-change: transform;
+		&.active{
+			//visibility: visible;
+			//display: block;
+			transform:translate(0,0);
+		}
+		.container{
+			padding: 0;
+		}
+		&__list{
+			display: block;
+			position: relative;
+			z-index: 10;
+			transition: transform .3s ease-out;
+			&--premenu{
+				display: none;
+				//visibility: hidden;
+				z-index: 11;
+				position: absolute;
+				top:0;
+				left: 0;
+				transform:translate(rem(-370),0);
+				width: 100%;
+				background-color: $PC-cromatico_4;
+				transition: transform .3s ease-out;
+				will-change: transform;
+				&.active{
+					display: block;
+					transform:translate(0,0);
+				}
+			}
+			&--submenu{
+				display: none;
+				//visibility: hidden;
+				padding-right: 0;
+				z-index: 11;
+				position: absolute;
+				top:0;
+				transform:translate(rem(-370),0);
+				width: 100%;
+				background-color: $PC-cromatico_4;
+				transition: transform .3s ease-out;
+		
+			}
+			
+			&--links{
+				border-bottom: 1px solid $PC-cromatico_8;
+			}
+			&--tools{
+				display: block;
+				border-bottom: 1px solid $PC-cromatico_8;
+			}
+			
+			&--icons{
+				padding-left: 0;
+			}
+			
+		}
+		&__item--underline{
+			border: none;
+		}
+		&__item{
+			border: none;
+			display: block;
+			width: 100%;
+			text-align: left;
+			height: auto;
+			&--submenu{
+				display: block;
+				width: 100%;
+				padding-right: 0;
+				&:nth-child(2){
+					.ibe-menu-new__title{
+						&:before{
+							display: none;
+						}
+					}
+				}
+			}
+			&--back{
+				display: block;
+				width: 100%;
+				background-color: $PC-cromatico_8;
+			}
+			&--column{
+				padding-top: 0;
+				&:nth-child(2){
+					.ibe-menu-new__link--submenu{
+						&:before{
+							display: none;
+						}
+					}
+				}
+			}
+			&--links{
+				width: 100%;
+				height: auto;
+				&:first-child{
+					.ibe-menu-new__link--links{
+						&:after{
+							display: none;
+						}
+					}
+				}
+			}
+			&--tools{
+				width: 100%;
+				height: auto;
+				&:first-child{
+					.ibe-menu-new__link--tools{
+						&:after{
+							display: none;
+						}
+					}
+				}
+			}
+			&:after{
+				display: none;
+			}
+			&:first-child{
+				border: 0;
+				.ibe-menu-new__link--tab{
+					&:before{
+						display: none;
+					}
+				}
+			}
+			&--active{
+				+ .ibe-menu-new__item {
+					.ibe-menu-new__link--tab{
+						&:before{
+							display: none;
+						}
+					}
+				}
+			}
+			&--underline{
+				&:after{
+					display: none;
+				}
+			}
+
+			.ibe-menu-new__link--tab{
+				&:after{
+					content:"\e92f";
+					position: absolute;
+					font-family: $font-05;
+					font-size: rem(20);
+					color: $PC-cromatico_3;
+					right: rem(23);
+					background-color: transparent;
+					bottom: inherit;
+					width: auto;
+					height: auto;
+					display: inline-block;
+				}
+			}
+		}
+		&__container{
+			top: 0;
+			height: auto;
+			box-shadow: none;
+			border-top:0;
+			padding: 0;
+			display: block;
+		}
+		&__link{
+			&--tab{
+				font-size: rem(13);
+				font-family: $font-02;
+				padding: rem(18) rem(50) rem(16) rem(48);
+				position: relative;
+				text-align: left;
+				line-height: 16px;
+				&:before{
+					content: "";
+					background: $PC-cromatico_8;
+					height: 1px;
+					display: block;
+					width: calc(100% - 30px);
+					position: absolute;
+					top:0;
+					left:0;
+				}
+			}
+			&--back{
+				position: relative;
+				font-size: rem(13);
+				font-family: $font-02;
+				color: $PC-cromatico_1;
+				padding: 0 rem(20) 0 rem(40);
+				display: block;
+				line-height: 16px;
+				&:hover, &:focus{
+					color: $PC-cromatico_1;
+					text-decoration: none;
+				}
+				&:before{
+					content:"\e974";
+					position: absolute;
+					left: 0;
+					top: 0;
+					height: rem(40);
+					width: rem(40);
+					font-family: $font-05;
+					color: $PC-cromatico_3;
+					font-size: rem(30);
+					border-right: 1px solid #dadada;
+					padding: rem(12) 0 0 rem(5);
+				}
+			}
+			&--icon{
+				&:after{
+					display: none;
+				}
+			}
+			&--submenu{
+				font-size: rem(13);
+				font-family: $font-02;
+				padding: rem(18) rem(50) rem(16) rem(48);
+				position: relative;
+				line-height: 16px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				&:before{
+					content: "";
+					background: $PC-cromatico_8;
+					height: 1px;
+					display: block;
+					width: calc(100% - 30px);
+					position: absolute;
+					top:0;
+					left:0;
+				}
+				&:after{
+					content:"\e92f";
+					position: absolute;
+					font-family: $font-05;
+					font-size: rem(20);
+					color: $PC-cromatico_3;
+					right: rem(23);
+				}
+				&:focus,&:hover{
+					text-decoration: none;
+					outline: none;
+					color: $PC-cromatico_1;
+					background-color: $PC-cromatico_8;
+				}
+			}
+			&--links{
+				position: relative;
+				display: block;
+				padding: rem(18) rem(30) rem(16) rem(46);
+				font-size: rem(13);
+				font-family: $font-02;
+				color: $PC-cromatico_1;
+				line-height: 16px;
+				&:before{
+					font-size:rem(24);
+					color: $PC-cromatico_3;
+					position: absolute;
+					left: rem(12);
+				}
+				&:after{
+					content: "";
+					background: $PC-cromatico_8;
+					height: 1px;
+					display: block;
+					width: calc(100% - 30px);
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
+				&:hover, &:focus{
+					color: $PC-cromatico_1;
+					text-decoration: none;
+					background-color: $PC-cromatico_8;
+				}
+			}
+			&--tools{
+				position: relative;
+				display: block;
+				padding: rem(18) rem(30) rem(16) rem(46);
+				font-size: rem(13);
+				font-family: $font-02;
+				color: $PC-cromatico_1;
+				line-height: 16px;
+				&:before{
+					font-size:rem(24);
+					position: absolute;
+					left: rem(12);
+				}
+				&:after{
+					content: "";
+					background: $PC-cromatico_8;
+					height: 1px;
+					display: block;
+					width: calc(100% - 30px);
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
+				&:hover, &:focus{
+					color: $PC-cromatico_1;
+					text-decoration: none;
+					background-color: $PC-cromatico_8;
+				}
+				
+			}
+			
+		}
+		&__txt{
+			&--back{
+				display: block;
+				padding: rem(12);
+				border-left: 1px solid $PC-cromatico_4;
+				font-style: italic;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			&--tab, &--submenu{
+				width: 100%;
+				display: inline-block;
+				line-height: 16px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				vertical-align: middle;
+			}
+		}
+		&__title{
+			font-size: rem(13);
+			font-family: $font-02;
+			padding: rem(18) rem(50) rem(16) rem(48);
+			position: relative;
+			line-height: 16px;
+			width: 100%;
+			color: $PC-cromatico_1;
+			pointer-events: visible;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			
+			&:before{
+				content: "";
+				background: $PC-cromatico_8;
+				height: 1px;
+				display: block;
+				width: calc(100% - 30px);
+				position: absolute;
+				top:0;
+				left:0;
+			}
+			&:after{
+				content:"\e92f";
+				position: absolute;
+				font-family: $font-05;
+				font-size: rem(20);
+				color: $PC-cromatico_3;
+				right: rem(23);
+				text-decoration: none;
+			}
+			&:focus, &:hover{
+				text-decoration: none;
+				outline: none;
+				color: $PC-cromatico_1;
+				background-color: $PC-cromatico_8;
+			}
+			&--link{
+				&:focus,&:hover{
+					text-decoration: none;
+					outline: none;
+					color: $PC-cromatico_1;
+					background-color: $PC-cromatico_8;
+				}
+			}
+			
+		}
+		&__links{
+			display: block;
+			background-color: $PC-cromatico_4;
+			border-top: 1px solid $PC-cromatico_8;
+			position: relative;
+			z-index: 11;
+		}
+		&__button{
+			&--dudes{
+				width: rem(48);
+				height: rem(48);
+				position: absolute;
+				top: rem(4);
+				right: rem(4);
+				background-color: $PC-cromatico_3;
+				border: none;
+				&:before{
+					font-size: rem(22);
+					color: $PC-cromatico_4;
+				}
+			}
+		}
+		&__modal{
+			.ibe_form__input-text{
+				padding-left: rem(23);
+				padding-right: rem(60);
+			}
+			.ibe_form__input-label{
+				left: rem(23);
+				width: calc(100% - 84px);
+			}
+			.ibe-button--block{
+				margin-top: rem(16);
+			}
+			.ibe-select__input{
+				&:focus{
+					border: 1px solid $BRD_standar_3;
+    				outline: none;
+				}
+			}
+		}
+		
+		
+		
+		
+	}
+}
+
+@mixin sm-ibe-menu-new{
+	@include  m-ibe-menu-new;
+}
+@mixin xs-ibe-menu-new{
+	@include  sm-ibe-menu-new;
+	.ibe-menu-new {
+		width: rem(280);
+		transform:translate(rem(-280),0);
+		&__modal{
+			.ibe_form__input-text{
+				padding-left: rem(16);
+				padding-right: rem(48);
+			}
+			.ibe_form__input-label{
+				left: rem(16);
+				width: calc(100% - 70px);
+			}
+		}
+		&__item__img {
+			position: absolute;
+			width: rem(23);
+			top: rem(14.1);
+			left: rem(12.11);
+		}
+	}
+}
+

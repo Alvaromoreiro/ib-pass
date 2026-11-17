@@ -1,0 +1,271 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe-geo-origin-selector
+//    Desripcion: Estilos para el selector de origenes con geolocazación
+//******************************************************************************/
+.ibe-geo-origin{
+	margin: rem(20) 0 rem(16);
+	&__title{
+		padding-bottom: rem(7);
+		text-align: center;
+		&-text{
+			font-family: $font-04;
+			font-size: rem(38);
+			text-align: center;
+			vertical-align: middle;
+		}
+		&-link{
+			max-width: 50%;
+			margin: 0 auto;
+			.title{
+				margin: 0;
+			}
+		}
+	}
+	&__selector{
+		display: inline-block;
+		vertical-align: middle;
+		margin-left: rem(10);
+		position: relative;
+		&-button{
+			background: 0 none;
+			padding: 0;
+			border: none;
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: flex-start;
+			align-items: center;
+			&-text{
+				font-family: $font-04;
+				font-size: rem(38);
+			}
+			&-icon{
+				margin-left: rem(5);
+				font-size: rem(21);
+			}
+			&:hover, &:focus{
+				background: 0 none;
+			}
+			&[aria-expanded="true"]{
+				.ibe-geo-origin__selector{
+					&-button{
+						&-icon{
+							transform: rotate(180deg);
+						}
+					}
+				}
+			}
+		}
+	}
+	&__wrap{
+		padding: 0 rem(16);
+		margin-top: rem(0);
+	}
+	&__container{
+		position: absolute;
+		top: calc(100% + 16px);
+		left: calc((100% - 280px)/2);
+		width: rem(280);
+		z-index: 99998;
+		&[data-location-groups = "1"]{
+			.ibe-geo-origin__location {
+				.ui-menu{
+					&.ui-autocomplete{
+						max-height: rem(238);
+					}
+				}
+			}
+		}
+	}
+	&__content{
+		padding: rem(16) 0;
+		min-height: rem(384);
+		max-height: rem(416);
+		overflow: hidden;
+		background-color: $PC-cromatico_4;
+		border: rem(1) solid $PC-cromatico_9;
+		box-shadow: 0 rem(2) rem(3) 0 rgba(0,0,0,.30),0 rem(-1) rem(4) 0 rgba(0,0,0,.15);
+		
+		/* Arrow */
+		&:before{
+			content: '';
+			position: absolute;
+			bottom: calc(100% - 8px);
+			left: calc((100% - 26px)/2);
+			z-index: 0;
+			width: rem(16);
+			height: rem(16);
+			transform: rotate(45deg);
+			background-color: $PC-cromatico_9;
+		}
+		&:after {
+			content: '';
+			position: absolute;
+			bottom: calc(100% - 11px);
+			left: calc((100% - 26px)/2);
+			z-index: 3;
+			width: rem(17);
+			height: rem(17);
+			transform: rotate(45deg);
+			background-color: $BRD-standar_13;
+		}
+	}
+	&__active{
+		margin-top: rem(10);
+		&-button{
+			width: 100%;
+			background-color: $PC-cromatico_7;
+			padding: rem(12) rem(24) rem(12) rem(18);
+			border: none;
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: flex-start;
+			align-items: center;
+			&-text{
+				font-family: $font-02;
+				font-size: rem(14);
+				color: $BCK-cromatico_20;
+			}
+			&-icon{
+				font-size: rem(24);
+				color: $BCK-cromatico_20;
+				margin-right: rem(8);
+				font-size: rem(21);
+			}
+		}
+	}
+	&__group{
+		margin-top: rem(16);
+		&-title{
+			font-family: $font-02;
+			font-weight: bold;
+			font-size: rem(14);
+			color: $BCK-cromatico_20;
+			text-align: left;
+			padding: rem(0) rem(24);
+		}
+		.ui-menu{
+			&.ui-autocomplete{
+				border-radius: none;
+				.ui-menu-item{
+					.ui-menu-item-link{
+						padding-left: rem(40);
+					}
+				}
+			}
+		}
+	}
+	&__unlocated{
+		.ui-menu{
+			&.ui-autocomplete{
+				border-radius: none;
+				.ui-menu-item{
+					.ui-menu-item-link{
+						padding-left: rem(24);
+					}
+				}
+			}
+		}
+	}
+	.ui-autocomplete{
+		display: block;
+		position: relative;
+		max-height: rem(219.2);
+		top: initial !important;
+		left: initial !important;
+		box-shadow: none;
+		border: 0 none;
+		padding: 0;
+		text-align: left;
+		margin-top: rem(16);
+		&:before, &:after{
+			display: none;
+		}
+		.ui-menu-item{
+			&:hover, &:focus, &.ui-state-focus, &.ui-state-focus{
+				background-color: $PC-cromatico_7;
+			}
+			.ui-menu-item-link{
+				display: flex;
+				flex-flow: column nowrap;
+				align-content: center;
+				padding: rem(8) rem(24);
+			}
+		}
+	}
+	&__location{
+		.ui-menu{
+			&.ui-autocomplete{
+				max-height: rem(144);
+			}
+		}
+	}
+	&[data-located="false"]{
+		.ibe-geo-origin{
+			&__location{
+				display: none;
+			}
+		}
+	}
+	&[data-located="true"]{
+		.ibe-geo-origin{
+			&__unlocated, &__active{
+				display: none;
+			}
+			&__autocomplete{
+				.ui-menu{
+					&.ui-autocomplete{
+						max-height: rem(262.4);
+					}
+				}
+			}
+		}
+	}
+	&[data-enabled="true"]{
+		.ibe-geo-origin{
+			&__selector-button-text{
+				text-decoration: underline;	
+			}
+		}
+	}
+}
+/* Responsive */
+/*XLARGE RESOLUTION STYLES*/
+@mixin xl-ibe-geo-origin-selector {
+	.ibe-geo-origin-selector{}
+}
+
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe-geo-origin-selector {
+	.ibe-geo-origin-selector{}
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe-geo-origin-selector {
+	.ibe-geo-origin-selector{
+		&__title{
+			&-link{
+				max-width: 100%;
+			}
+		}
+	}
+}
+
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe-geo-origin-selector {
+	@include m-ibe-geo-origin-selector;
+	.ibe-geo-origin{
+		&__selector{
+			position: inherit;
+		}
+		&__container{
+			top: 100%;
+		}
+	}
+}
+
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe-geo-origin-selector {
+	@include sm-ibe-geo-origin-selector;
+	.ibe-geo-origin-selector{}
+}

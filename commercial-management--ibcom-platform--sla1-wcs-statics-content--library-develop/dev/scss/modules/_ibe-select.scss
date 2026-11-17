@@ -1,0 +1,488 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe-select
+//    Desripcion: Estilos para selectmenu jquery
+//******************************************************************************/
+
+.ibe-select {
+	//-display: none;
+	&__button{
+		position: relative;
+		display: block;
+		width: 100% !important;
+		padding: 0;
+		cursor: pointer;
+		&.disabled{
+			cursor: not-allowed;
+			background-color: $BCK-cromatico_26;
+			pointer-events: none;
+		}
+		.ui-selectmenu-text{
+			max-width: rem(188);
+			min-width: auto;
+			padding: 0 rem(0) rem(3) rem(0);
+			vertical-align: top;
+			text-align: left;
+			font-size: rem(13);
+			color: $PC-cromatico_1;
+			margin-right: rem(20);
+			border-bottom: 1px dashed #CCCCCC;
+		}
+		.ui-icon{
+			display: block;
+			position: absolute;
+			top: 50%;
+			right: rem(-8);
+			width: 0;
+			height: 0;
+			-webkit-transform: translate(0,-50%);
+			-moz-transform: translate(0,-50%);
+			-ms-transform: translate(0,-50%);
+			-o-transform: translate(0,-50%);
+			transform: translate(0,-50%);
+			border-style: solid;
+			border-width: 5px 5px 0 5px;
+			border-color: $BRD-standar_14 transparent transparent transparent;
+		}
+		&:focus{
+			outline: none;
+			.ui-selectmenu-text{
+				text-decoration: underline;
+			}
+		}
+		&--open{
+			.ui-icon{
+				border-width: 0 5px 5px 5px;
+				border-color: transparent transparent $BRD-standar_14 transparent;
+			}
+			
+		}
+		&.ui-corner-top{
+			.ui-icon{
+				border-top: 0 solid transparent;
+    			border-bottom: 5px solid $BRD-standar_14;
+			}
+		}
+		&--background-white{
+			background: $BCK-cromatico_1; 
+		}
+		
+	}
+	
+	&__menu{
+		position: relative;
+		width: auto;
+		height: auto;
+		margin: rem(-6) 0 0;
+		text-align: left;
+		box-sizing: border-box;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		border-radius: 0 0 3px 3px;
+		background: $BCK-cromatico_1;
+		border: 1px solid $BRD-standar_15;
+		z-index: 1001;
+		&--scroll{
+			max-height: rem(230);
+			overflow-x: hidden;
+		}
+		.ui-menu-item-wrapper{
+			padding: rem(5) rem(22);
+			color: $PC-cromatico_1;
+			font-family: $font-02;
+			font-size: rem(13);
+			cursor: pointer;
+			&:hover,&.ui-state-active{
+				background-color: #EEE;
+				color:$PC-cromatico_2;
+			}
+		}
+		.ui-menu-item-link{
+			position: relative;
+			display: inline-block;
+			width: 100%;
+			padding: rem(5) rem(22);
+			color: $PC-cromatico_1;
+			font-family: $font-02;
+			font-size: rem(13);
+			cursor: pointer;
+			text-decoration: none;
+			&::before{
+				content: "\e973";
+				position: absolute;
+				right: rem(16);
+				margin-left: rem(16);
+				top: rem(6);
+				font-family: "iberia";
+				font-size: rem(13);
+				color: #D7192D;
+			}
+		}
+	}
+	&__edit{
+		position: relative;
+		display: inline-block;
+		width: auto;
+		padding: 0;
+		margin-left: rem(10);
+		max-width: 100%;
+		height: auto;
+		overflow: inherit;
+		vertical-align: middle;
+		text-align: left;
+		border: 0;
+		box-shadow: 0 0;
+		border-radius: 0;
+		&--open{
+			.ibe-select__toggle {
+				&:after {
+					border-width: 0 5px 5px 5px;
+					border-color: transparent transparent $PC-cromatico_1 transparent;
+				}
+			}
+		}
+		&.custom-combobox {
+			&--disabled {
+				//- Deshabilita los <a> en los selectmenu
+				background: $BCK-cromatico_2;
+				opacity: 0.5;
+				.custom-combobox-toggle {
+					pointer-events: none;
+				}
+			}
+		}
+	}
+	&__input{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		max-width: 100%;
+		padding: 0;
+		font-family: $font-04;
+		font-size: rem(38);
+		line-height: 42px;
+		color: $PC-cromatico_1;
+		z-index: 98;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+		background: transparent;
+		border: 0;
+		padding-right: rem(15);
+		cursor: pointer;
+		
+		&:focus{
+			outline: none;
+		}
+		&::-ms-clear {
+			display: none;
+		}
+	}
+	&__label{
+		position: relative;
+		display: block;
+		width:  auto;
+		vertical-align: middle;
+		color: transparent;
+		border-bottom: 1px solid black;
+		padding: 0;
+		margin-right: rem(20);
+	}
+	&__toggle{
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: rem(20);
+		height: 100%;
+		cursor: pointer;
+		z-index: 99;
+		&:after{
+			content: "";
+			position: absolute;
+			top: 50%;
+			right: rem(5);
+			-webkit-transform: translate(0,-50%);
+			-moz-transform: translate(0,-50%);
+			-ms-transform: translate(0,-50%);
+			-o-transform: translate(0,-50%);
+			transform: translate(0,-50%);
+			border-style: solid;
+			border-width: 5px 5px 0 5px;
+			border-color: $PC-cromatico_1 transparent transparent transparent;
+		}
+	}
+	&__autocomplete{
+		position: absolute;
+		top: calc(100% + 2px)!important;
+		padding: 0;
+		margin: -1px 0 0 0;
+		min-width: rem(200);
+		border: 1px solid $BRD-standar_15;
+		text-align: left;
+		box-sizing: border-box;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		border-radius: 0 0 3px 3px;
+		z-index: 30;
+		width: auto!important;
+		background-color: $BCK-cromatico_1;
+		.ui-menu-item-wrapper{
+			padding: 0.625rem 1.375rem;
+			color: $PC-cromatico_2;
+			font-family: $font-02;
+			font-size: rem(14);
+			cursor: pointer;
+			&:hover,&.ui-state-active{
+				background-color: $BCK-cromatico_4;
+			}
+		}
+		&:after,&:before{
+			display: none;
+		}
+	}
+	&--selectize {
+		right: 1rem;
+		& + .custom-combobox .ibe-select__toggle {
+			&:after {
+				content: "\e971";
+				font-family: $font-05;
+				font-size: rem(12);
+				border: 0;
+				color: #777777;
+				right: 1.25rem;
+				margin-top: -0.5rem;
+				display: block;
+				position: absolute;
+				top: 50%;
+				right: 15px;
+				margin-top: -3px;
+				width: 0;
+				height: 0;
+			}	
+		}
+	}
+	&__placeholder{
+		&.ibe-select__edit{
+			width: 100%;
+			display: block;
+			margin-left: 0;
+			&--open{
+				.ibe-select__toggle {
+					&:after {
+						border-bottom-color: rgb(128, 128, 128);
+					}
+				}
+			}
+		}
+		.ibe-select__input{
+			font-size: rem(14);
+			color: $PC-cromatico_2;
+			font-family: $font-02;
+			text-transform: capitalize;
+			border: 1px solid $PC-cromatico_9;
+			background-color: $PC-cromatico_4;
+			z-index: 5;
+			padding: rem(18) rem(22);
+			height: rem(56);
+			line-height: 1;
+			&:focus{
+				border: 1px solid $BRD_standar_3;
+    			outline: none;
+			}
+			
+		}
+		.ibe-select__label{
+			border: 0;
+			
+		}
+		.ibe-select__toggle{
+			&:after{
+				border-top-color: rgb(128, 128, 128);
+				right: 15px;
+			}
+			z-index: 5;
+			
+		}
+		.ibe-select__autocomplete{
+			width: 100%!important;
+			position: absolute;
+			z-index: 10;
+			border: 1px solid #d0d0d0;
+			background: #ffffff;
+			margin: -1px 0 0 0;
+			border-top: 0 none;
+			box-sizing: border-box;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+			border-radius: 0 0 3px 3px;
+			left: 0!important;
+			max-height: rem(150);
+			overflow-x: hidden;
+			.ui-menu-item{
+				line-height: 18px;
+			}
+		}
+	}
+}
+.ibe-claim{
+	.ibe_form__group .xui-label--up{
+		text-transform: uppercase;
+	}
+}
+
+.ibe_form__group--select-edit{
+	.ibe-select__edit{
+		width: 100%;
+		height: rem(56);
+		margin: 0;
+		.ibe-select__label, .ibe-select__input{
+			height: 100%;
+			
+		}
+		.ibe-select__label{
+			display: none;
+		}
+		.ibe-select__input.custom-combobox-input{
+			width: 100%;
+			height: rem(56);
+			padding: rem(18) rem(30) rem(18) rem(14);
+			font-family: $font-04;
+			font-size: rem(16);
+			border: 1px solid $BRD_standar_1;
+			max-width: 100%;
+			color: $PC-cromatico_1;
+			line-height: 1;
+			white-space:nowrap;
+			text-transform: capitalize;
+			background-color: $PC-cromatico_4;
+			z-index: 5;
+		}
+		.ibe-select__autocomplete{
+			top: 100%!important;
+			width: 100%!important;
+		}
+		.ibe-select__toggle{
+			right: rem(20);
+			&:after{
+				border-top-color: $BRD-standar_14;
+			}
+		}
+		&--open{
+			.ibe-select__toggle{
+				&:after{
+					border-bottom-color: $BRD-standar_14;
+				}
+			}
+		}
+	}
+	&.ibe_form__group--hide-label{
+		.ibe-select__label{
+			display: none;
+		}
+	}
+}
+
+/*LARGE RESOLUTION STYLES*/
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe-select{
+	.ibe-select{
+		&__input{
+			font-size: rem(30);
+			line-height: 32px;
+			
+		}
+		&__autocomplete{
+			top: calc(100% + 2px)!important;
+		}
+
+		&__menu{
+			.ui-menu-item-wrapper,
+			.ui-menu-item-link{
+				padding: rem(10) rem(22);
+			}
+			.ui-menu-item-link{
+				&::before{
+					top: rem(12);
+				}
+			}
+			
+		}
+	}
+}
+
+/*SMALL RESOLUTION STYLES*/
+
+@mixin sm-ibe-select{
+	.ibe-select{
+		&__input{
+			font-size: rem(24);
+			line-height: 28px;
+		}
+		&__autocomplete{
+			top: calc(100% + 2px)!important;
+		}
+		&__menu{
+			.ui-menu-item-wrapper,
+			.ui-menu-item-link{
+				padding: rem(10) rem(22);
+			}
+			.ui-menu-item-link{
+				&::before{
+					top: rem(12);
+				}
+			}
+		}
+	}
+	.ibe-searcher--accordion{
+		.ui-selectmenu-menu{
+			left: auto!important;
+			right: inherit;
+		}
+
+		& [data-position-mobile="6"]{
+			.ui-selectmenu-menu{
+				left: 0px;
+				right: inherit;
+			}
+		}
+	}
+}
+
+@mixin xs-ibe-select{
+	.ibe-select{
+		&__input{
+			font-size: rem(22);
+			line-height: 26px;
+			
+		}
+		&__autocomplete{
+			top: calc(100% + 2px)!important;
+		}
+		&__menu{
+			.ui-menu-item-wrapper,
+			.ui-menu-item-link{
+				padding: rem(10) rem(22);
+			}
+			.ui-menu-item-link{
+				&::before{
+					top: rem(12);
+				}
+			}
+		}
+	}
+	.ui-selectmenu-menu{
+		position: relative;
+		float: left;
+		width: 100%;
+		left: 0!important;
+	}
+	.ibe-claim {
+		.ui-selectmenu-menu{
+			.ibe-select__menu{
+				right: rem(0);
+			}
+		}
+	}
+
+}

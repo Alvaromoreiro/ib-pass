@@ -1,0 +1,161 @@
+extends _general/layout__primary
+include _modules/_ibe_searcher-flight-status
+include _modules/_modals/_ibe-modal-where
+
+block title
+	title!="IBERIA - Consulta tus bonos"
+block body
+		section.container
+			div.row
+				div.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-xs-12
+					h2.title.title__h2.title--f-26.title--grey Consulta y gestión de tus bonos
+			div.row
+				div.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-xs-12
+					section.ibe-flight-status
+						div.ibe-tab.ibe-tab--main
+							ul.ibe-tab__menu(data-tab="bootstrap-tabdrop", data-tab-text="Otros")
+								li.ibe-tab__menu-item.active
+									a.ibe-tab__menu-item__text(href="#tab-1", title="Consulta tus bonos", data-toggle="tab")!= "Consulta tu bonos"
+								li.ibe-tab__menu-item
+									a.ibe-tab__menu-item__text(href="#tab-2", title="Unifica tus bonos" data-toggle="tab")!= "Unifica tus bonos"
+							.tab-content
+								//- CONTAINER Código de tu bono
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium.active(id="tab-1" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+										div.ibe_form__box--claim.ibe_form__box--center-medium
+											form(data-valid-form action="#" method="post", id="form1" class="ibe_form ibe_form-invoice-request")
+													p.title__h5.title__h5--small!="Introduce el código de tu bono y el email que hayas usado al solicitarlo para recibir información sobre el saldo restante, la fecha de caducidad y las condiciones del mismo."
+													div.row
+														.col-md-6.col-xs-12
+															.ibe_form__group.fc_form_group
+																div(class="ibe_form__group  fc_form_group ")
+																	label(class="ibe_form__input-label", for="code03") Código de tu bono
+																	input(class="ibe_form__input-text", name="code03", id="code03", type="text", required, placeholder="Código de tu bono", maxlength="30", data-validator="personal")
+																	p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																	p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+														.col-md-6.col-xs-12
+															.ibe_form__group.fc_form_group
+																label(for="mail" class="ibe_form__input-label") Email
+																input(name="mail" id="mail" type="text" placeholder="Email" class="ibe_form__input-text" maxlength="80" required data-validator="mail")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													button.ibe-button.ibe-button--m-top-40.ibe-button--red.ibe-button--smaller.ibe-button--morelarge-2.ibe-button--right(type='button', data-boton-send-form, data-focusin) Consultar
+
+										div.ibe_form__box--claim.ibe_form__box--center-medium.ibe_form__box--p-top
+											table.ibe-table.ibe-table--bordered.ibe-table--bono-2
+												caption.hideAccessible Texto descripcion de la tabla
+												thead.ibe-table__thead
+													tr.ibe-table__thead-tr
+														th(colspan="2").ibe-table__thead-th.ibe-table__thead-th--color-bold.ibe-table__thead-th--header-table Información de tu nuevo bono
+												tbody.ibe-table__tbody
+													tr.ibe-table__tbody-tr
+														td.ibe-table__tbody-td.ibe-table__tbody-td--even.ibe-table__tbody-td--first-cell Código del bono
+														td.ibe-table__tbody-td.ibe-table__tbody-td--odd.ibe-table__tbody-td--second-cell KILASJO751032948203984
+													tr.ibe-table__tbody-tr
+														td.ibe-table__tbody-td.ibe-table__tbody-td--even.ibe-table__tbody-td--first-cell Saldo restante
+														td.ibe-table__tbody-td.ibe-table__tbody-td--odd.ibe-table__tbody-td--second-cell 600€
+													tr.ibe-table__tbody-tr
+														td.ibe-table__tbody-td.ibe-table__tbody-td--even.ibe-table__tbody-td--first-cell Fecha de caducidad
+														td.ibe-table__tbody-td.ibe-table__tbody-td--odd.ibe-table__tbody-td--second-cell 23/08/2021
+													tr.ibe-table__tbody-tr
+														td.ibe-table__tbody-td.ibe-table__tbody-td--even.ibe-table__tbody-td--first-cell Compañias aereas disponibles
+														td.ibe-table__tbody-td.ibe-table__tbody-td--odd.ibe-table__tbody-td--second-cell Iberia, Air nostrum. Permitidas conexiones
+													tr.ibe-table__tbody-tr
+														td.ibe-table__tbody-td.ibe-table__tbody-td--even.ibe-table__tbody-td--first-cell Fechas permitidas para volar (Regreso)
+														td.ibe-table__tbody-td.ibe-table__tbody-td--odd.ibe-table__tbody-td--second-cell 23/08/2012
+													tr.ibe-table__tbody-tr
+														td.ibe-table__tbody-td.ibe-table__tbody-td--even.ibe-table__tbody-td--first-cell Número de usos restantes
+														td.ibe-table__tbody-td.ibe-table__tbody-td--odd.ibe-table__tbody-td--second-cell Sin límite de uso hasta consumir el saldo
+													tr.ibe-table__tbody-tr
+														td.ibe-table__tbody-td.ibe-table__tbody-td--even.ibe-table__tbody-td--first-cell Uso de tu bono 
+														td.ibe-table__tbody-td.ibe-table__tbody-td--odd.ibe-table__tbody-td--use-bono
+															div.ibe-table--flex-td-bono
+																span LZXVHY, 25/09/2020, 200,00 €
+																span XHYVCD, 31/11/2020, 400,00 €
+																span AGYJKA, 4/12/2020, 100,00 €
+
+								//- CONTAINER Unifica tus bonos
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium(id="tab-2" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+										div.ibe_form__box--claim.ibe_form__box--center-medium.ibe_form__box--center-medium--p-top-bono
+											h3.title.title--width-bono.title__h3.title--no-paddT.title--margB Paso 2/2: Revisa la información y confirma la solicitud de unificación
+											form(data-valid-form action="#" method="post", id="form2" class="ibe_form ibe_form-invoice-request")
+												table.ibe-table.ibe-table--normal.ibe-table--bono.ibe-table--spacing-table
+													caption.hideAccessible Texto descripcion de la tabla
+													thead.ibe-table__thead
+														tr.ibe-table__thead-tr
+															th.ibe-table__thead-th.ibe-table__thead-th--color-bold Codigo del bono
+															th.ibe-table__thead-th.ibe-table__thead-th--align-text.ibe-table__thead-th--header-table-2.ibe-table__thead-th--color-bold Fecha de caducidad
+															th.ibe-table__thead-th.ibe-table__thead-th--align-text.ibe-table__thead-th--color-bold Saldo restante
+													tbody.ibe-table__tbody
+														tr.ibe-table__tbody-tr
+															td(data-name="Codigo del bono").title--grey-bonos.ibe-table__tbody-td KILAS07501329488203984
+															td(data-name="Fecha de caducidad").ibe-table__tbody-td.ibe-table__tbody-td--align-text 23/08/2012
+															td(data-name="Saldo restante").ibe-table__tbody-td.ibe-table__tbody-td--align-text 100,00€
+														tr.ibe-table__tbody-tr
+															td(data-name="Codigo del bono").title--grey-bonos.ibe-table__tbody-td KILAS07501329488203984
+															td(data-name="Fecha de caducidad").ibe-table__tbody-td.ibe-table__tbody-td--align-text 23/08/2012
+															td(data-name="Saldo restante").ibe-table__tbody-td.ibe-table__tbody-td--align-text 50,00€
+														tr.ibe-table__tbody-tr
+															td(data-name="Codigo del bono").title--grey-bonos.ibe-table__tbody-td KILAS07501329488203984
+															td(data-name="Fecha de caducidad").ibe-table__tbody-td.ibe-table__tbody-td--align-text 23/08/2012
+															td(data-name="Saldo restante").ibe-table__tbody-td.ibe-table__tbody-td--align-text 200,00€
+														tr.ibe-table__tbody-tr
+															td(data-name="Codigo del bono").title--grey-bonos.ibe-table__tbody-td KILAS07501329488203984
+															td(data-name="Fecha de caducidad").ibe-table__tbody-td.ibe-table__tbody-td--align-text 23/08/2012
+															td(data-name="Saldo restante").ibe-table__tbody-td.ibe-table__tbody-td--align-text 100,00€
+														tr.ibe-table__tbody-tr
+															td(data-name="Codigo del bono").title--grey-bonos.ibe-table__tbody-td KILAS07501329488203984
+															td(data-name="Fecha de caducidad").ibe-table__tbody-td.ibe-table__tbody-td--align-text 23/08/2012
+															td(data-name="Saldo restante").ibe-table__tbody-td.ibe-table__tbody-td--align-text 20,00€
+														tr.ibe-table__tbody-tr
+															td(data-name="Codigo del bono").title--grey-bonos.ibe-table__tbody-td KILAS07501329488203984
+															td(data-name="Fecha de caducidad").ibe-table__tbody-td.ibe-table__tbody-td--align-text 23/08/2012
+															td(data-name="Saldo restante").ibe-table__tbody-td.ibe-table__tbody-td--align-text 45,00€
+														tr.ibe-table__tbody-tr
+															td(data-name="Codigo del bono").title--grey-bonos.ibe-table__tbody-td KILAS07501329488203984
+															td(data-name="Fecha de caducidad").ibe-table__tbody-td.ibe-table__tbody-td--align-text 23/08/2012
+															td(data-name="Saldo restante").ibe-table__tbody-td.ibe-table__tbody-td--align-text 23,00€
+														tr.ibe-table__tbody-tr
+															td(data-name="Codigo del bono").title--grey-bonos.ibe-table__tbody-td KILAS07501329488203984
+															td(data-name="Fecha de caducidad").ibe-table__tbody-td.ibe-table__tbody-td--align-text 23/08/2012
+															td(data-name="Saldo restante").ibe-table__tbody-td.ibe-table__tbody-td--align-text 100,00€
+
+												table.ibe-table.ibe-table--bordered.ibe-table--bono-2.ibe_form__box--p-top
+													caption.hideAccessible Texto descripcion de la tabla
+													thead.ibe-table__thead
+														tr.ibe-table__thead-tr
+															th(colspan="2").ibe-table__thead-th.ibe-table__thead-th--color-bold.ibe-table__thead-th--header-table Información de tu nuevo bono
+													tbody.ibe-table__tbody
+														tr.ibe-table__tbody-tr
+															td.ibe-table__tbody-td.ibe-table__tbody-td--even.ibe-table__tbody-td--first-cell Código del bono
+															td.ibe-table__tbody-td.ibe-table__tbody-td--odd.ibe-table__tbody-td--second-cell KILASJO751032948203984
+														tr.ibe-table__tbody-tr
+															td.ibe-table__tbody-td.ibe-table__tbody-td--even.ibe-table__tbody-td--first-cell Saldo restante
+															td.ibe-table__tbody-td.ibe-table__tbody-td--odd.ibe-table__tbody-td--second-cell 600€
+														tr.ibe-table__tbody-tr
+															td.ibe-table__tbody-td.ibe-table__tbody-td--even.ibe-table__tbody-td--first-cell Fecha de caducidad
+															td.ibe-table__tbody-td.ibe-table__tbody-td--odd.ibe-table__tbody-td--second-cell 23/08/2021
+														tr.ibe-table__tbody-tr
+															td.ibe-table__tbody-td.ibe-table__tbody-td--even.ibe-table__tbody-td--first-cell Compañias aereas disponibles
+															td.ibe-table__tbody-td.ibe-table__tbody-td--odd.ibe-table__tbody-td--second-cell Iberia, Air nostrum. Permitidas conexiones
+														tr.ibe-table__tbody-tr
+															td.ibe-table__tbody-td.ibe-table__tbody-td--even.ibe-table__tbody-td--first-cell Fechas permitidas para volar (Regreso)
+															td.ibe-table__tbody-td.ibe-table__tbody-td--odd.ibe-table__tbody-td--second-cell 23/08/2012
+														tr.ibe-table__tbody-tr
+															td.ibe-table__tbody-td.ibe-table__tbody-td--even.ibe-table__tbody-td--first-cell Número de usos restantes
+															td.ibe-table__tbody-td.ibe-table__tbody-td--odd.ibe-table__tbody-td--second-cell Sin límite de uso hasta consumir el saldo
+												
+												div.ibe_form__group.ibe_form__group--m-table-bono.ibe-form__checkbox.inte-elementshowhide
+													input#legal.ibe-form__checkbox-input(name='legal', type='checkbox', required='')
+													label#legal_label.ibe_form__group--flex-bonos.ibe-form__checkbox-label.ibe-form__checkbox-label--bono(for='legal')
+														span Acepto que las condiciones del bono resultante de la unificación se corresponderán con las más restrictivas de los bonos unificados.
+													p.ibe_form__msg-info.hidden(data-validate='exist', data-validate-text='Este campo es obligatorio')
+													
+												button.ibe-button.ibe-button--morelarge.ibe-button--m-bot-30.ibe-button--modal.ibe-button--x-small.ibe-button--red.ibe-button--morelarge.ibe-button--right.ibe-button--bono(type='button') Unificar
+												button.ibe-button.ibe-button--reset.ibe-button--link02(type='button' data-modal="button" data-modal-view=".fc-dialog-claim") Cancelar
+													
+												
+													
+													
+

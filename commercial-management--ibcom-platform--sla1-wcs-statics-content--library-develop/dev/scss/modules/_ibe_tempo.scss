@@ -1,0 +1,349 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_tempo
+//    Desripcion: Estilos para el modulo de informacion meteorologica
+//******************************************************************************/
+.ibe-tempo{
+	margin-top: rem(47);
+	background: $BCK-cromatico_1;
+	&__container{
+		padding: rem(25) rem(33) rem(38) rem(32);
+	}
+	/* Columna informacion meteorologica */
+	&__column-weather{
+		border-right: 1px solid $BRD_standar_2;
+		.title{
+			padding: 0 0 rem(20) 0;
+		}
+		&__footer{
+			margin: rem(20) rem(30) 0 0;
+			text-align: right;
+			.paragraph{
+				margin: 0;
+			}
+			.paragraph,
+			.link{ font-size: rem(12); }
+			.paragraph{
+				color: $PC-cromatico_2;
+			}
+			.link{
+				color: $PC-cromatico_1;
+			}
+		}
+	}
+	&__list-weather{
+		font-size: 0;
+		&__item{
+			text-align: center;
+			font-size: rem(12);
+			display: inline-block;
+			max-width: rem(83);
+			padding-right: rem(7);
+			width: 100%;
+			color: $PC-cromatico_2;
+			vertical-align: top;
+			&-day{
+				display: block;
+				font-weight: bold;
+				color: $PC-cromatico_1;
+			}
+			&-month{}
+			&-degrees{
+				position: relative;
+				text-align: right;
+				margin-top: 0;
+				padding-top: rem(70);
+				&__num{
+					display: block;
+					font-size: rem(29);
+					color: $PC-cromatico_1;
+				}
+				&__opt{
+					display: inline-block;
+    				width: 50%;
+					font-size: 0;
+					&-item {
+						display: inline-block;
+						padding: 0 rem(2);
+						font-size: rem(13);
+						&--active{
+							color: $PC-cromatico_1;
+						}
+					}
+				}
+				&:before{
+					position: absolute;
+					top: rem(6);
+					left: rem(-3);
+					font-size: rem(85);
+					color: $PC-cromatico_9;
+				}
+				&--today{
+					margin-top: rem(22);
+					padding-top: 0;
+					&:before{
+						top: rem(-15);
+						left: rem(-24);
+					}
+				}
+
+				&--icon-showers{//Chubascos
+					&:before{ font-family: $font-05; content: "\ea12"; }
+				}
+				&--icon-rain{//Lluvia
+					&:before{ font-family: $font-05; content: "\ea13"; }
+				}
+				&--icon-mostly-cloudy{//Mayormente Nublado
+					&:before{ font-family: $font-05; content: "\ea14"; }
+				}
+				&--icon-mainly-sunny{//Mayormente soleado
+					&:before{ font-family: $font-05; content: "\ea15"; }
+				}
+				&--icon-cloudy{//Nublado
+					&:before{ font-family: $font-05; content: "\ea19"; }
+				}
+				&--icon-partly-cloudy-sunny{//Parcialmente nueblado soleado
+					&:before{ font-family: $font-05; content: "\ea1b"; }
+				}
+				&--icon-sun{//soleado
+					&:before{ font-family: $font-05; content: "\ea1c"; }
+				}
+				&--icon-storm{//storm
+					&:before{ font-family: $font-05; content: "\ea1d"; }
+				}
+
+				&--icon-snow{//snow
+					&:before{ font-family: $font-05; content: "\ea18" }
+				}
+				&--icon-wind{//wind
+					&:before{ font-family: $font-05; content: '\ea1e' }
+				}
+			}
+			&-weather{
+				margin-top: rem(26);
+				padding-bottom: rem(15);
+				line-height: rem(16);
+				display: block;
+				min-height: rem(50);
+				text-align: center;
+			}
+			&-scale{
+				text-align: center;
+				&__txt{
+					margin: 0 rem(5);
+				}
+			}
+			&--day-1{
+				.ibe-tempo__list-weather__item-weather{ margin-top: 22px; color: #333; }
+			}
+			/* Pseudoclass */
+			&:first-child{
+				max-width: rem(145);
+				border-right: 1px solid $BRD_standar_2;
+				margin-right: rem(30);
+				padding-right: rem(40);
+				padding-left: rem(15);
+			}
+
+		}
+	}
+	/* Columna informacion practica */
+	&__column-practical{
+		padding: 0 rem(32);
+		border-right: 1px solid $BRD_standar_2;
+		.title{
+			padding: 0;
+		}
+		&__container{
+			.paragraph{
+				padding: rem(20) 0 0 0;
+				margin: 0;
+				line-height: rem(20);
+				color: $PC-cromatico_2;
+			}
+		}
+		.link{
+			float: right;
+			padding-top: rem(16);
+		}
+	}
+	/* Columna informacion categorias */
+	&__column-categories{
+		padding: 0 rem(16) 0 rem(32);
+		.title{
+			padding: 0;
+		}
+		.ui-progressbar{
+			margin-top: rem(5);
+			height: rem(8);
+			background-color: $BCK-cromatico_13;
+		}
+		.ui-progressbar-value {
+			height: rem(8);
+			background-color: $BCK-cromatico_14;
+		}
+		&__list{
+			margin-top: rem(20);
+			&-item{
+				padding-bottom: rem(8);
+			}
+			&-txt{
+				font-size: rem(13);
+				color: $PC-cromatico_2;
+			}
+		}
+	}
+}
+
+/* Responsive */
+/*XLARGE RESOLUTION STYLES*/
+@mixin xl-ibe_tempo{
+
+}
+
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe_tempo{
+	.ibe-tempo{
+		&__list-weather{
+			&__item{
+				&--day-5{ display: none; }
+				&:first-child{
+					margin-right: rem(20);
+				}
+			}
+		}
+	}
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe_tempo{
+	.ibe-tempo{
+		&__list-weather{
+			&__item{
+				&--day-5,
+				&--day-4,
+				&--day-3{ display: none; }
+			}
+		}
+	}
+}
+
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_tempo{
+	.ibe-tempo{
+		&__container{
+			padding: rem(25) 0 rem(29) 0 ;
+		}
+		&__list-weather{
+			text-align: center;
+			&__item{
+				&--day-5,
+				&--day-4,
+				&--day-3{ display: none; }
+			}
+		}
+		/* Columna informacion meteorologica */
+		&__column-weather{
+			border-right: 0;
+			padding: 0 rem(40) rem(22) rem(40);
+			/*width: calc(100% + 44px);
+			margin: 0 -22px;*/
+			.title{
+				padding: 0 0 rem(8) 0;
+			}
+			&__footer{
+				margin: rem(24) 0 0 0;
+				text-align: center;
+			}
+		}
+		/* Columna informacion practica */
+		&__column-practical{
+			padding: rem(22) rem(40) rem(25) rem(40);
+			border-top: 1px solid $BRD_standar_2;
+			border-right: 0;
+			.paragraph {
+				padding: rem(10) 0 rem(10) 0;
+			}
+			.link{
+				padding-top: 0;
+			}
+		}
+		/* Columna informacion categorias */
+		&__column-categories{
+			padding: rem(23) rem(40) 0 rem(40);
+			border-top: 1px solid $BRD_standar_2;
+			border-right: 0;
+			&__list {
+				margin-top: rem(13);
+			}
+		}
+	}
+}
+
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe_tempo{
+	.ibe-tempo{
+		&__container{
+			padding: rem(25) 0 rem(29) 0 ;
+		}
+		&__list-weather{
+			text-align: center;
+			&__item{
+				&-weather{
+					min-height: rem(30);
+				}
+				&--day-5,
+				&--day-4,
+				&--day-3,
+				&--day-2{ display: none; }
+				&:first-child{
+					max-width: rem(120);
+					margin-right: 0;
+					padding: 0 rem(15) 0 rem(15);
+					border: 0;
+				}
+			}
+
+		}
+		/* Columna informacion meteorologica */
+		&__column-weather{
+			border-right: 0;
+			padding: 0 rem(40) rem(22) rem(40);
+			/*width: calc(100% + 44px);
+			margin: 0 -22px;*/
+			.title{
+				padding: 0 0 rem(28) 0;
+			}
+			&__footer{
+				margin: rem(20) 0 0 0;
+				text-align: center;
+			}
+		}
+		/* Columna informacion practica */
+		&__column-practical{
+			padding: rem(22) rem(40) rem(25) rem(40);
+			border-top: 1px solid $BRD_standar_2;
+			border-right: 0;
+			.paragraph {
+				padding: rem(10) 0;
+			}
+			.link{
+				padding-top: 0;
+			}
+			&__container{
+				&--hide{
+					height: rem(100);
+				}
+			}
+		}
+		/* Columna informacion categorias */
+		&__column-categories{
+			padding: rem(23) rem(40) 0 rem(40);
+			border-top: 1px solid $BRD_standar_2;
+			border-right: 0;
+			&__list {
+				margin-top: rem(13);
+			}
+		}
+	}
+}

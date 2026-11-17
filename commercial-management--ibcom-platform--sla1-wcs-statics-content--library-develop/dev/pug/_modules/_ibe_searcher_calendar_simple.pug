@@ -1,0 +1,12 @@
+mixin m-searcher-calendar-simple(params)
+	div.ibe-toggle.ibe-searcher__calendar(id=params.id class=params.className data-toggle="container", data-close="outsideclick")
+		div.ibe-searcher__calendar-header
+			.ibe-form__checkbox 
+				input.ibe-form__checkbox-input(type="checkbox" id="flexible"+params.number name="flexible"+params.number value="flexible"+params.number)
+				label.ibe-form__checkbox-label(for="flexible"+params.number)
+					span!="Mis fechas son flexibles"
+			span.ibe-searcher__calendar-current!="Hoy : 6 de Junio, 2016"
+		if(!params.claims)
+			div(data-function="cal-start", data-language="es", data-format=(params.dataformat!=undefined?params.dataformat:"dd/mm/yy"), data-firstday="1")
+		else
+			div(data-function="cal-form", data-language="es", data-hour-restriction=(params.datahourrestriction!=undefined?params.datahourrestriction:null), data-format=(params.dataformat!=undefined?params.dataformat:"dd/mm/yy"),data-firstday="1")

@@ -1,0 +1,81 @@
+extends _general/layout__primary
+include _modules/_ibe_accordion
+block title
+	title!="IBERIA - Precio Garantizado error"
+block body
+	// New header
+	+m-header-new({
+		"login": true
+	})
+
+	// New menu
+	+m-menu-new({
+		"login": true
+	})
+	// End wrapper
+	main
+		+m-ibe-breadcrumbs({
+			menu: "claim"
+		})
+		section.container
+			div.row
+				div.col-lg-9.col-xs-12.col-lg-push-3
+					.ibe-alert.ibe-alert--alert.ibe-alert--margin-top.ibe-alert--inline-block
+						p.ibe-alert__text.ibe-alert__text--bold Lo sentimos
+						p.ibe-alert__text Por favor, comprueba que tu número de localizador es correcto e introduce la nueva información que te permitirá entrar al Formulario de Garantía de Precio Mínimo.
+						a.ibe-alert__link-regular-to-right ampliar informaci&oacute;n
+					div.ibe-box__primary.ibe-box__primary--type04
+						h3.title.title__h3.title--padding-bottom-short.title--no-paddT Reclamación del Precio Mínimo Garantizado
+						p.paragraph.paragraph__regular.paragraph__regular--small A continuación introduce el código de reserva y recuerda que no se tramitarán reclamaciones de billetes que no hayan sido reservados, comprados y emitidos en el día de hoy.
+						.row
+							.col-md-6.col-xs-12
+								form(action="#" method="post", id="form1")
+									.ibe_form__group.fc_form_group.ibe_form__group--button-icon.ibe_form__group--separated.ibe_form__group--nomargintop
+										label.ibe_form__input-label(for='code12') C&oacute;odigo de reserva
+										input(class="ibe_form__input-text", name="code12", id="code12", type="text", placeholder="C&oacute;digo de reserva")
+										p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+										button.ibe_form__input-button.ibe_form__input-button--medium.icon-informacion_2.ibe_form__input-button--red(type='button' data-tooltipGeneric title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in consectetur orci. Lorem ipsum dolor sit amet.")
+											span.hideAccessible(data-toggle-status='true', data-status-open='Click para info', data-status-close='Click para info') Click para m&aacute;s informaci&oacute;n
+							.col-md-6.col-xs-12
+								button.ibe-button.ibe-button--red.ibe-button--large.ibe-button--large-plus.ibe-button--right(type='button') Continuar
+
+				div.col-lg-3.col-xs-12.col-lg-pull-9
+					+m-lat-menu({
+						items: [
+							{
+								link: "Condiciones Transporte",
+								title: "Condiciones Transporte"
+
+							},
+							{
+								link: "Tu seguridad es lo primero",
+								title: "Tu seguridad es lo primero"
+							},
+							{
+								link: "Condiciones Generales del Programa Iberia Plus",
+								title: "Condiciones Generales del Programa Iberia Plus"
+							},
+							{
+								link: "Mejor precio garantizado",
+								title: "Mejor precio garantizado",
+								cssClass: "ibe-lat-menu__item--active"
+							},
+							{
+								link: "Compromiso de servicio",
+								title: "Compromiso de servicio"
+							},
+							{
+								link: "Derechos del pasajero",
+								title: "Derechos del pasajero"
+							},
+							{
+								link: "Accesibilidad",
+								title: "Accesibilidad"
+							},
+							{
+								link: "Información Legal",
+								title: "Información Legal"
+							}
+						]
+					})
+	+m-footer()

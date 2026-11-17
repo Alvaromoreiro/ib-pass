@@ -1,0 +1,38 @@
+mixin m-faqs(params)
+	div.ibe-faqs(data-css='ibe-components/ibe-faqs/ibe-faqs', data-js='ibe-components/ibe-faqs/ibe-faqs', data-ibe-component='true')
+		h3.ibe-faqs__title(class=(params.type === 'services' ? 'icon-mas_servicios' : 'icon-ayuda_2'))!=params.title
+		div.ibe-faqs__box(class=(params.type === 'services' ? 'ibe-faqs__box-services' : ''))
+			if (params.type === 'services')
+				each item in params.items
+					div.ibe-faqs__box-item
+						span.ibe-faqs__item-title(data-fc-height="2", data-dotdotdot-new)!=item.title
+						span.ibe-faqs__item-description(data-dotdotdot-new)!=item.description
+						a.ibe-faqs__link-more.icon-flecha_1_derecha(data-focusin, href=(item.href !== undefined ? item.href : '#ni'), title='Ir a ' + item.title) M&aacute;s informaci&oacute;n
+				if (params.itemsMore)
+					div.ibe-faqs__box-more(data-more-box)
+						each item in params.itemsMore
+							div.ibe-faqs__box-item
+								span.ibe-faqs__item-title(data-fc-height="2", data-dotdotdot-new)!=item.title
+								span.ibe-faqs__item-description(data-dotdotdot-new)!=item.description
+								a.ibe-faqs__link-more.icon-flecha_1_derecha(data-focusin, href=(item.href !== undefined ? item.href : '#ni'), title='Ir a ' + item.title) M&aacute;s informaci&oacute;n
+
+			else
+				each item in params.items
+					div.ibe-faqs__box-item
+						span.ibe-faqs__item-title(data-fc-height="1", data-dotdotdot-new)!=item.title
+						ul.ibe-faqs__list
+							each listItem in item.list
+								li.ibe-faqs__item
+									a.ibe-faqs__link.icon-flecha_1_derecha(data-dotdotdot, data-focusin, href=(listItem.href !== undefined ? listItem.href : '#ni'), title='Ir a ' + listItem.text)!=listItem.text
+						a.ibe-faqs__link-more(data-focusin, href=(item.href !== undefined ? item.href : '#ni'), title='Ir a ' + item.text) Ver mas
+				if (params.itemsMore)
+					div.ibe-faqs__box-more(data-more-box)
+						each item in params.itemsMore
+							div.ibe-faqs__box-item
+								span.ibe-faqs__item-title(data-fc-height="1", data-dotdotdot-new)!=item.title
+								ul.ibe-faqs__list
+									each listItem in item.list
+										li.ibe-faqs__item
+											a.ibe-faqs__link.icon-flecha_1_derecha(data-dotdotdot, data-focusin, href=(listItem.href !== undefined ? listItem.href : '#ni'), title='Ir a ' + listItem.text)!=listItem.text
+								a.ibe-faqs__link-more(data-focusin, href=(item.href !== undefined ? item.href : '#ni'), title='Ir a ' + item.text) Ver mas
+		button.ibe-faqs__link-bottom.icon-flecha_1_abajo(type="button", aria-expanded="false", data-focusin, data-more='collapsed', data-text-opened=params.linkBottomOpened, data-text-closed=params.linkBottom, title=params.linkBottom)!=params.linkBottom

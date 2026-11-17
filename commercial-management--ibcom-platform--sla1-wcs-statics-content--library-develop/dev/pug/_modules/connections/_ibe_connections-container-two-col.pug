@@ -1,0 +1,30 @@
+include ../_modals/_ibe-modal-connections-qr
+
+mixin m-connections-container-two-col(params)
+    div.ibe-infocheckin__box
+        h2.title__h2!="Tu conexión en tiempo real"
+        p.paragraph.paragraph__regular
+            span.paragraph--bold!="En Iberia monitorizamos nuestros vuelos,"
+            span!=" pudiendo conocer su estado en todo momento. Además, te mantendremos al tanto por la vía que prefieras:"
+        div.ibe-flex.ibe-flex--gap-simple.ibe-connections-container
+            div.ibe-flex.ibe-flex--align-center.ibe-flex--gap-simple.ibe-connections-container-col
+                figure.ibe-connections-container-col__img
+                    picture 
+                        img(src="../images/modules/connections/madrid/madrid_real-time-1.png", alt="")
+                p.paragraph.paragraph__regular
+                    span.paragraph--bold.paragraph--highlight 1. App de Iberia e Iberia Conecta.
+                    span  Guarda tu vuelo en la 
+                    //- This link opens the modal with the QR
+                    //- For mobile, the link should redirec to https://www.iberia.com/es/es/iberia-app/
+                    a(href="javascript:void(0)" class="link link__regular link__regular--underline" title="Modal QR" data-modal="button" data-modal-view=".fc-dialog-connections-qr") App de Iberia
+                    span  y recibirás actualizaciones e información de última hora. O regístrate en iberia.com y te informaremos vía SMS o e-mail, desde Iberia Conecta.
+            div.ibe-flex.ibe-flex--align-center.ibe-flex--gap-simple.ibe-connections-container-col
+                figure.ibe-connections-container-col__img
+                    picture 
+                        img(src="../images/modules/connections/madrid/madrid_real-time-2.png", alt="")
+                p.paragraph.paragraph__regular
+                    span.paragraph--bold.paragraph--highlight 2. En el aeropuerto,
+                    span  mantente al tanto de tu conexión a través de los
+                    span.paragraph--bold  monitores y la señalética azul.
+
+    +m-ibe-modal-connections-qr()

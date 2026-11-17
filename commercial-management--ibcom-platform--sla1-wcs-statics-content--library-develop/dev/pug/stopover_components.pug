@@ -1,0 +1,276 @@
+extends _general/layout__primary
+include _modules/stopover/_ibe_stopover_top-banner
+include _modules/stopover/_ibe_stopover_carousel-wall-images
+include _modules/stopover/_ibe_stopover_discover
+include _modules/stopover/_ibe_stopover_experience-file
+include _modules/stopover/_ibe_stopover_experience-file-no-offer
+include _modules/stopover/_ibe_stopover_experience-gallery
+include _modules/stopover/_ibe_stopover_experience-grid
+include _modules/stopover/_ibe_stopover_experience-location
+include _modules/stopover/_ibe_stopover_faqs
+include _modules/stopover/_ibe_stopover_mail
+include _modules/stopover/_ibe_stopover_other-experiences
+include _modules/stopover/_ibe_stopover_partners
+include _modules/stopover/_ibe_stopover_recommendation-card
+include _modules/stopover/_ibe_stopover_routes
+
+block title
+	title!="IBERIA -Pagina de enlaces del proyecto"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	div(style="margin:40px")
+		div(class='ibe-exp-file__title' style='margin-top: 20px; font-size: 58px; text-align: center') COMPONENTES UTILIZADOS EN LAS LANDINGS DE STOPOVER
+		div.col-xs-12
+			div.ibe-accordion.ibe-stopover-faq
+				p.ibe-accordion__options
+					button.ibe-accordion__button-collapse.link.link__regular.link__regular--underline.collapsed(type="button" data-toggle="button-collapse" data-text-collapsed="Ampliar todo" data-text-expanded="Cerrar todo")!="Ampliar todo"
+				div.ibe-accordion__wrapper.ibe-accordion__wrapper--border
+					h4.title.title__h4.ibe-accordion__header(data-toggle="accordion", data-target="#group_01_accordion_01")
+						a.link(href="#" title="BANNER")!="BANNER"
+					div.ibe-accordion__collapse.ibe-accordion__spacing(id="group_01_accordion_01", data-toggle="container")
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="m-ibe-stopover_top-banner(params)"
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span!=" Aunque puede usarse en cualquier punto de la aplicación, el banner de stopover se utiliza en las diferentes landings de stopover y es parametrizable para poder reutilizarlo en todas las landings donde aparece."
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="Params:"
+								li.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!="dataBackground:"
+								span.paragraph__regular--bold.black!="string."
+								span!="Con este valor pasamos la imágen que se mostrará en el banner"
+								li.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!="isSearcher:"
+								span.paragraph__regular--bold.black!="bool."
+								span!="si está a true mostraremos el buscador si está a false no mostraremos el buscador"
+								li.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!="infoBanner:"
+								span.paragraph__regular--bold.black!="bool."
+								span!="indica si a continuación del buscador aparece la sección de información como aparece en la home"
+								li.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!="type:"
+								span.paragraph__regular--bold.black!="string."
+								span!="indicamos el tipo de banner que mostraremos: single == únicamente la imágen; text == mostraremos texto dentro del banner; action == banner con el texto centrado y como aparece en quieres conocer madrid; home== banner de la home con imágenes dinámicas"
+						
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") EMPTY BANNER
+							+m-ibe-stopover_top-banner(
+								{
+									"dataBackground" : 'images/modules/stopover/exp-file-banner',
+									"type" : "empty"
+								})
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") TEXT BANNER WITH SEARCHER
+							+m-ibe-stopover_top-banner({
+								"dataBackground": 'images/modules/stopover/banner-experiences',
+								"isSearcher": true,
+								"classSearcher" : "ibe-stopover-banner--searcher",
+								"type" : "text"
+							})
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px; margin-bottom: -68px") ACTION BANNER WITH SEARCHER
+							+m-ibe-stopover_top-banner(
+								{
+									"dataBackground" : 'images/modules/stopover/img-call-to-action-conocer-madrid',
+									"isSearcher" : true,
+									"classBanner" : "ibe-static-banner--m-t",
+									"classSearcher" : "ibe-search-collapse-stopover-position__secondary",
+									"type" : "action"
+								})
+
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px; margin-bottom: -68px") ACTION BUTTON BANNER
+							+m-ibe-stopover_top-banner({
+								"type" : "actionButton",
+								"classBanner" : "ibe-static-banner__stopover"
+							})
+
+
+				div.ibe-accordion__wrapper.ibe-accordion__wrapper--border
+					h4.title.title__h4.ibe-accordion__header(data-toggle="accordion", data-target="#group_01_accordion_02")
+						a.link(href="#" title="CAROUSEL WALL IMAGE")!="CAROUSEL WALL IMAGE"
+					div.ibe-accordion__collapse.ibe-accordion__spacing(id="group_01_accordion_02", data-toggle="container")
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="m-ibe-stopover_carousel-wall-images()"
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span!=" El carousel wall muestra un collage de imagenes y es usado en la home de stopover."
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") CAROUSEL WALL
+							+m-ibe-stopover_carousel-wall-images()
+				
+				div.ibe-accordion__wrapper.ibe-accordion__wrapper--border
+					h4.title.title__h4.ibe-accordion__header(data-toggle="accordion", data-target="#group_01_accordion_03")
+						a.link(href="#" title="DISCOVER")!="DISCOVER"
+					div.ibe-accordion__collapse.ibe-accordion__spacing(id="group_01_accordion_03", data-toggle="container")
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="m-ibe-stopover_discover()"
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span!=" El discover se utiliza en la home de stopover y muestra un banner con un texto y unos iconos."
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") DISCOVER
+							+m-ibe-stopover_discover()
+
+				div.ibe-accordion__wrapper.ibe-accordion__wrapper--border
+					h4.title.title__h4.ibe-accordion__header(data-toggle="accordion", data-target="#group_01_accordion_03")
+						a.link(href="#" title="EXPERIENCE FILE")!="EXPERIENCE FILE"
+					div.ibe-accordion__collapse.ibe-accordion__spacing(id="group_01_accordion_03", data-toggle="container")
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="m-ibe-stopover-experience-file-no-offer()"
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span!=" El experience file muestra la sección principal de la ficha de experiencias y puede a su derecha mostrar el codigo de descuento o no"
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") EXPERIENCE FILE
+							+m-ibe-stopover-experience-file({})
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") EXPERIENCE FILE NO OFFER
+							+m-ibe-stopover-experience-file-no-offer({})
+				
+				
+				div.ibe-accordion__wrapper.ibe-accordion__wrapper--border
+					h4.title.title__h4.ibe-accordion__header(data-toggle="accordion", data-target="#group_01_accordion_03")
+						a.link(href="#" title="EXPERIENCE GALLERY")!="EXPERIENCE GALLERY"
+					div.ibe-accordion__collapse.ibe-accordion__spacing(id="group_01_accordion_03", data-toggle="container")
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="m-ibe-stopover_experience-gallery()"
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span!=" El experience gallery muestra una galeria de imagenes"
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") EXPERIENCE GALLERY
+							+m-ibe-stopover_experience-gallery()
+				
+				div.ibe-accordion__wrapper.ibe-accordion__wrapper--border
+					h4.title.title__h4.ibe-accordion__header(data-toggle="accordion", data-target="#group_01_accordion_03")
+						a.link(href="#" title="EXPERIENCE GRID")!="EXPERIENCE GRID"
+					div.ibe-accordion__collapse.ibe-accordion__spacing(id="group_01_accordion_03", data-toggle="container")
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="+m-ibe-stopover_experience-grid(params)"
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span!=" Aunque puede usarse en cualquier punto de la plicación, el banner de stopover se utiliza en las diferentes landings de stopover y es parametrizable para poder reutilizarlo en todas las landings donde aparece."
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="Params:"
+								li.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!="filter:"
+								span.paragraph__regular--bold.black!="bool."
+								span!="Este valor indica si aparecerá en la parte superior el filtrado de imagenes"
+								li.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!="isSearcher:"
+								span.paragraph__regular--bold.black!="bool."
+								span!="este valor indica si tenemos un slider para recorrer las diferentes tarjetas"
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") EXPERIENCE GRID WITH SLIDER
+							+m-ibe-stopover_experience-grid({
+								"filter" : false,
+								"slider" : true
+							})
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") EXPERIENCE GRID WITH FILTER
+							+m-ibe-stopover_experience-grid({
+								"filter" : true,
+								"slider" : false
+							})
+
+				
+				div.ibe-accordion__wrapper.ibe-accordion__wrapper--border
+					h4.title.title__h4.ibe-accordion__header(data-toggle="accordion", data-target="#group_01_accordion_03")
+						a.link(href="#" title="EXPERIENCE LOCATION")!="EXPERIENCE LOCATION "
+					div.ibe-accordion__collapse.ibe-accordion__spacing(id="group_01_accordion_03", data-toggle="container")
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="m-ibe-stopover_experience-location()"
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span!=" El experience location muestra un mapa con la localización y a la derecha una serie de datos de contacto"
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") EXPERIENCE LOCATION
+							+m-ibe-stopover_experience-location()
+
+
+				div.ibe-accordion__wrapper.ibe-accordion__wrapper--border
+					h4.title.title__h4.ibe-accordion__header(data-toggle="accordion", data-target="#group_01_accordion_03")
+						a.link(href="#" title="FAQS")!="FAQS "
+					div.ibe-accordion__collapse.ibe-accordion__spacing(id="group_01_accordion_03", data-toggle="container")
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="m-ibe-stopover_faqs()"
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span!=" El componente de faqs se usa en la landing de preguntas frecuentes y son una serie de preguntas que muestran la respuesta con un acordeón"
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") FAQS
+							+m-ibe-stopover_faqs()
+
+				div.ibe-accordion__wrapper.ibe-accordion__wrapper--border
+					h4.title.title__h4.ibe-accordion__header(data-toggle="accordion", data-target="#group_01_accordion_03")
+						a.link(href="#" title="MAIL")!="MAIL "
+					div.ibe-accordion__collapse.ibe-accordion__spacing(id="group_01_accordion_03", data-toggle="container")
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="m-ibe-stopover_mail()"
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span!=" El componente de mail es una pequeña sección que muestra un correo electrónico"
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") MAIL
+							+m-ibe-stopover_mail()
+
+				div.ibe-accordion__wrapper.ibe-accordion__wrapper--border
+					h4.title.title__h4.ibe-accordion__header(data-toggle="accordion", data-target="#group_01_accordion_03")
+						a.link(href="#" title="OTHER EXPERIENCES")!="OTHER EXPERIENCES "
+					div.ibe-accordion__collapse.ibe-accordion__spacing(id="group_01_accordion_03", data-toggle="container")
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="m-ibe-stopover_other-experiences()"
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span!=" El componente de otras experiencias es muy parecido al grid de experiencias pero sin el slider"
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") OTHER EXPERIENCES
+							+m-ibe-stopover_other-experiences()
+
+				div.ibe-accordion__wrapper.ibe-accordion__wrapper--border
+					h4.title.title__h4.ibe-accordion__header(data-toggle="accordion", data-target="#group_01_accordion_03")
+						a.link(href="#" title="PARTNERS")!="PARTNERS "
+					div.ibe-accordion__collapse.ibe-accordion__spacing(id="group_01_accordion_03", data-toggle="container")
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="m-ibe-stopover_partners()"
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span!=" El componente de partners muestra un slider de iconos de cada uno de los partners"
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") PARTNERS
+							+m-ibe-stopover_partners()
+
+				div.ibe-accordion__wrapper.ibe-accordion__wrapper--border
+					h4.title.title__h4.ibe-accordion__header(data-toggle="accordion", data-target="#group_01_accordion_03")
+						a.link(href="#" title="ROUTES")!="ROUTES "
+					div.ibe-accordion__collapse.ibe-accordion__spacing(id="group_01_accordion_03", data-toggle="container")
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="m-ibe-stopover_routes()"
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span!=" El componente de rutas muestra el mapa con la lupa de elementos que ver en x dias en Madrid"
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") ROUTES
+							+m-ibe-stopover_routes()
+
+				div.ibe-accordion__wrapper.ibe-accordion__wrapper--border
+					h4.title.title__h4.ibe-accordion__header(data-toggle="accordion", data-target="#group_01_accordion_03")
+						a.link(href="#" title="RECOMMENDATION CARD")!="RECOMMENDATION CARD"
+					div.ibe-accordion__collapse.ibe-accordion__spacing(id="group_01_accordion_03", data-toggle="container")
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="+m-ibe-stopover_recommendation-card(params)"
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span!=" Es una sección que puede mostrar una tarjeta o dos con su correspondiente botón"
+						p.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!=""
+							span.paragraph__regular--bold.black!="Params:"
+								li.paragraph.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--secondary!="single:"
+								span.paragraph__regular--bold.black!="bool."
+								span!="Este valor indica si mostramos una tarjeta o dos"
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") RECOMMENDATION CARD SINGLE
+							+m-ibe-stopover_recommendation-card({
+								"single" : true
+							})
+						div.col-xs-12.col-sm-12.col-md-12.col-l-12.col-xl-12
+							p.paragraph.paragraph__regular.paragraph__regular--bg-grey(style="font-size: 20px") RECOMMENDATION CARD DOUBLE
+							+m-ibe-stopover_recommendation-card({
+								"single" : false
+							})
+
+
+						
+	+m-footer({
+		"full": true
+	})

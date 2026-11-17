@@ -1,0 +1,248 @@
+extends _general/layout__primary
+include _modules/_ibe_searcher-flight-status
+include _modules/_modals/_ibe-modal-where
+
+block title
+	title!="IBERIA - Solicitud de factura"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main
+		+m-ibe-breadcrumbs({
+			"menu": "advSearch"
+		})
+		section.container
+			.row
+				.col-xs-12
+					header.ibe-flight-status__header.ibe-flight-status__header--center
+						h1.title.title__h1.title--no-paddT.title--p-bottom-6!="Solicitud de facturas"
+						h2.title.title__h5.title--no-padd.title.title__h5--small!="Estos datos son necesarios para emitir tu factura. Por favor, complétalos y te la enviaremos al correo electrónico que nos indiques."
+							span.title.title__h5.title--no-padd.title.title__h5--small.title--bold!=" rellena los siguientes campos. "
+							span.title.title__h5.title--no-padd.title.title__h5--small!="Recuerda que, si es a nombre de una empresa, esta tendrá que ser únicamente de España, Gibraltar o Andorra."
+			.row
+				.col-xs-12
+					section.ibe-flight-status.ibe-flight-status__section
+						div.ibe-tab.ibe-tab--main
+							ul.ibe-tab__menu(data-tab="bootstrap-tabdrop", data-tab-text="Otros")
+								li.ibe-tab__menu-item.active
+									a.ibe-tab__menu-item__text(href="#tab-1", title="Solo vuelo (billete electrónico)", data-toggle="tab")!= "Solo vuelo (billete electrónico)"
+								li.ibe-tab__menu-item
+									a.ibe-tab__menu-item__text(href="#tab-2", title="Packs Iberia Vacaciones" data-toggle="tab")!= "Packs Iberia Vacaciones"
+							.tab-content
+								//- CONTAINER Solo vuelo (billete electrónico)
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium.active(id="tab-1" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+										div.ibe_form__box--claim.ibe_form__box--center-big
+											form(data-valid-form action="#" method="post", id="form1" class="ibe_form ibe_form-invoice-request")
+												fieldset
+													legend.title__h4!="Datos fiscales"
+													p.paragraph.paragraph__regular.paragraph__regular--small-line!="Estos datos son necesarios para emitir tu factura. Por favor, complétalos y te la enviaremos al correo electrónico que nos indiques."
+													div.row
+														div.col-xs-12
+															p.paragraph.paragraph--big.paragraph__regular--grey.ibe_title_radio  Tipo de factura
+															div.row
+																div.col-xs-12
+																	.ibe_form__radio
+																		input(type="radio", name="radios1", id="ejemplo_radio01", data-type="personal", class="ibe_form__radio-input" checked)
+																		label(for="ejemplo_radio01", class="ibe_form__radio-text") Persona física
+																	.ibe_form__radio
+																		input(type="radio", name="radios1", id="ejemplo_radio02", data-type="company", class="ibe_form__radio-input")
+																		label(for="ejemplo_radio02", class="ibe_form__radio-text") Persona judírica
+													div.row
+														.col-md-6.col-xs-12
+															.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+																label.ibe_form__selectize--label(for="idioma")
+																	span.ibe_form__input-text Idioma
+																select(id="idioma", class="ibe-select ibe_form__input-text", name="idioma", data-selectmenu="", required)
+																	option(value="") Idioma
+																	option(value="espanol") Espa&ntilde;ol
+																	option(value="english") Ingl&eacute;s
+																	option(value="catalan") Catal&aacute;n
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+														.col-md-6.col-xs-12
+															.ibe_form__group.fc_form_group
+																label(for="mail" class="ibe_form__input-label") Correo electr&oacute;nico
+																input(name="mail" id="mail" type="text" placeholder="Correo electr&oacute;nico" class="ibe_form__input-text" maxlength="80" required data-validator="mail")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													
+														
+												fieldset(data-box="personal")
+													legend.paragraph.paragraph--big.paragraph__regular--grey!="Datos personales"
+												
+													div.row
+														.col-md-6.col-xs-12
+															.ibe_form__group.fc_form_group
+																div(class="ibe_form__group  fc_form_group ")
+																	label(class="ibe_form__input-label", for="code03") Nombre
+																	input(class="ibe_form__input-text", name="code03", id="code03", type="text", required, placeholder="Nombre", maxlength="30", data-validator="personal")
+																	p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																	p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+														.col-md-6.col-xs-12
+															.ibe_form__group.fc_form_group
+																div(class="ibe_form__group  fc_form_group ")
+																	label(class="ibe_form__input-label", for="code04") Apellidos
+																	input(class="ibe_form__input-text", name="code04", id="code04", type="text", required, placeholder="Apellidos", maxlength="30", data-validator="personal")
+																	p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																	p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													div.row
+														.col-md-6.col-xs-12
+															.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+																div(class="ibe_form__group  fc_form_group ")
+																	label(class="ibe_form__input-label", for="code05") NIF/NIE
+																	input(class="ibe_form__input-text", name="code05", id="code05", type="text", required, placeholder="Apellidos", maxlength="30", data-validator="nif-cif")
+																	p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																	p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+												fieldset(data-box="company")
+													legend.legend.paragraph.paragraph--big.paragraph__regular--grey!="Datos empresa"
+												
+													div.row
+														.col-md-6.col-xs-12
+															.ibe_form__group.fc_form_group
+																div(class="ibe_form__group  fc_form_group ")
+																	label(class="ibe_form__input-label", for="code06") Nombre de la empresa
+																	input(class="ibe_form__input-text", name="code06", id="code06", type="text", required, placeholder="Nombre de la empresa", maxlength="30")
+																	p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																	p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+														.col-md-6.col-xs-12
+															.ibe_form__group.fc_form_group
+																div(class="ibe_form__group  fc_form_group ")
+																	label(class="ibe_form__input-label", for="code07") CIF
+																	input(class="ibe_form__input-text", name="code07", id="code07", type="text", required, placeholder="CIF", maxlength="30", data-validator="nif-cif")
+																	p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																	p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+													
+												fieldset
+													legend.legend.paragraph.paragraph--big.paragraph__regular--grey!="Dirección postal"
+													div.row
+														.col-md-6.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code08") Domicilio
+																input(class="ibe_form__input-text", name="code08", id="code08", type="text", required, placeholder="Domicilio", maxlength="30")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+														.col-md-6.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code09") Ciudad
+																input(class="ibe_form__input-text", name="code09", id="code09", type="text", required, placeholder="Ciudad", maxlength="30")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+												
+													div.row
+														.col-md-6.col-xs-12
+															.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+																label.ibe_form__selectize--label(for="idioma")
+																	span.ibe_form__input-text Provincia
+																select(id="provincia", class="ibe-select ibe_form__input-text", name="provincia", data-selectmenu="", required)
+																	option(value="") Provincia
+																	option(value="madrid") Madrid
+																	option(value="bcn") Barcelona
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+														.col-md-6.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code10") C&oacute;digo postal
+																input(class="ibe_form__input-text ", name="code10", id="code10", type="text", required, placeholder=" ",  maxlength="30", data-validator="cod-postal")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+
+													div.row
+														.col-md-6.col-xs-12
+															.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+																label.ibe_form__selectize--label(for="idioma")
+																	span.ibe_form__input-text Pa&iacute;s
+																select(id="pais", class="ibe-select ibe_form__input-text", name="pais", data-selectmenu="")
+																	option(value="") Pa&iacute;s
+																	option(value="espana") Espa&ntilde;a
+																	option(value="francia") Francia
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												div.row
+													.col-xs-12
+														p.paragraph.paragraph__regular.paragraph__regular--small!="Estos datos serán incorporados a los ficheros de carácter personal de los que es responsable Iberia, donde serán conservados en territorio español por Iberia de forma confidencial, y tendrán como finalidad la generación de la factura solicitada. Si deseas información acerca de cómo ejercer tus derechos, consulta en"
+															a(href="", title="Lorem ipsum" class='link link__regular link__regular--p-left-5 link__regular--underline link__regular--small') Privacidad e Información legal.
+												
+												button.ibe-button.ibe-button--red.ibe-button--smaller.ibe-button--morelarge.ibe-button--right(type='button', data-boton-send-form, data-focusin)
+													span.ibe-loading__overlay.ibe-loading__overlay--nocolor.ibe-loading__overlay--open(data-loading)
+														.ibe-loading__spinner(style='display="none"')
+															.ibe-loading__icon.ibe-loading__icon--small
+																.circle.circle-thin
+																.circle.circle-thin
+															.ibe-loading__text
+													span(data-boton-text='Actualizando')!="Guardar y solicitar factura" 
+												button.ibe-button.ibe-button--reset.ibe-button--link02(type='button', data-focusin)!="volver"
+												
+												
+								//- CONTAINER Packs Iberia Vacaciones
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium(id="tab-2" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+										div.ibe_form__box--claim.ibe_form__box--center
+											form(data-valid-form action="#" method="post", id="form2" class="ibe_form ibe_form-invoice-request")
+												fieldset
+													legend.paragraph.paragraph__regular.paragraph__regular--small-line!="Esta factura incluirá el total de Ítems que hayas contratado."
+													
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group ")
+																label(for="res-code" class="ibe_form__input-label ") C&oacute;digo de reserva
+																input(name="res-code" id="res-code" type="text" placeholder="C&oacute;digo de reserva" class="ibe_form__input-text", required, maxlength="6", data-validator='code')
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+																p.ibe_form__modal
+																	a(href="javascript:void(0)" title="¿Qué es el código de reserva?" data-modal="button" data-modal-view=".fc-dialog-where-2").link.link__regular.link__regular--underline.link__regular--align-right.link__regular--block!="¿Qué es el código de reserva?"
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code03") Apellidos del pasajero
+																input(class="ibe_form__input-text", name="code03", id="code03", type="text", required, placeholder="Apellidos del pasajero", maxlength="30", data-validator="personal")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+																p.ibe_form__msg-info.ibe_form__msg-info--noerror!="Tal y como aparece en el billete"
+													div.row
+														div.col-xs-12
+															div.ibe_form__group.fc_form_group.ibe-datepicker-general
+																label.ibe_form__input-label(for='form_calendard') Fecha
+																input.ibe_form__input-text.pointer(name='form_calendar', id="form_calendard" type='text', placeholder='DD/MM/YYYY', data-format='DD/MM/YYYY', data-toggle='collapse', data-target='#calendar-form', data-cal='claim', data-placeholder='placeholder', data-close='outsideclick', data-one-month, data-validator='date', required)
+																button.ibe_form__input-button.ibe_form__input-button--medium.icon.icon-calendario(type='button', data-toggle='collapse', data-target='#calendar-form', data-close='outsideclick', data-focusin)
+																	span.hideAccessible(data-toggle-status='true', data-status-open='Click para plegar calendario', data-status-close='Click para desplegar calendario') Click para desplegar calendario
+																+m-searcher-calendar-simple({
+																	className: "ibe-searcher__calendar--start ibe-searcher__calendar--right ibe-searcher__calendar--claim",
+																	id: "calendar-form",
+																	number: "form-1",
+																	claims: true
+																})
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+												
+													div.row
+														div.col-xs-12
+															div(class="ibe-accordion ibe-accordion--nomargin")
+																p.ibe-accordion__header.ibe-accordion__header--treatment(data-focusin, data-toggle="accordion", data-target="#group_01_accordion_01")
+																	a.link(href="#" title="Ver tratamiento de datos")!="Ver tratamiento de datos"
+																div.ibe-accordion__collapse(id="group_01_accordion_03", data-toggle="container", data-steps="collapse")
+																	div.row
+																		div.col-xs-12
+																			p.paragraph.paragraph.paragraph__regular--small.paragraph__regular--last-grey.u-pb!="El responsable del tratamiento de tus datos es Iberia L.A.E. S.A. Operadora, Sociedad Unipersonal (en adelante, “Iberia”) con domicilio social en calle Martínez Villergas 49, 28027 Madrid. Tus datos se tratarán para la gestión y resolución de tus solicitudes y reclamaciones, en base a la ejecución del contrato. Los destinatarios son entidades del Grupo IAG, al que IBERIA pertenece. El usuario podrá revocar en cualquier momento su consentimiento, así como ejercitar los derechos de oposición, acceso, portabilidad, rectificación, limitación y supresión de datos. Puedes conocer el detalle de esta información en nuestra "
+																				a.link.link__regular.link__regular--underline!="política de privacidad."
+													
+													+m-ibe-modal-where({
+														name : "fc-dialog-where-2",
+													})
+															
+													
+													
+												button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--min1.ibe-button--right.u-mt.ibe-button--one-third-container(type='button' data-focusin) Continuar
+
+												
+									
+
+
+	+m-footer({
+		"full": true
+	})

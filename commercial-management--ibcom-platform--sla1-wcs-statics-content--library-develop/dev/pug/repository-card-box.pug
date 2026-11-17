@@ -1,0 +1,39 @@
+extends _general/layout__primary
+include _modules/_modals/_ibe-modal-advise
+mixin list-page(params)
+	- params = params || {};
+	ul
+		each val in params.items
+			li
+				a(href=val.href, title="Ir a " + val.title, target="_blank", style="font-size: 16px; color: grey; font-weight: 700; font-family: iberiaheadline")!=val.title
+block title
+	title!='IBERIA - Cardbox'
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main.container
+		// Main content
+		div.row
+			.col-xs-12
+			.col-xs-6
+				.row
+					.col-xs-12
+						h1.title.title__h1.title--grey Listado de Cardbox
+						+list-page({
+							'items': [
+								{
+									'title': 'Cardbox Prices',
+									'href': 'card-box-prices.html'
+								}, {
+									'title': 'Next Cardbox',
+									'href': '#.html'
+								}
+							]
+						})

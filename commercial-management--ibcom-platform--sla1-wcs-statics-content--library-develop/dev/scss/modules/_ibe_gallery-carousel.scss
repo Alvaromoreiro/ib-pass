@@ -1,0 +1,269 @@
+//*****************************************************************************
+//	  Proyecto: Iberia
+//    Titulo: ibe-gallery-carousel
+//    Desripcion: Modulo para galeria carrusel
+//******************************************************************************/
+//* ibe-gallery-carousel */
+.ibe-gallery-carousel {
+    @include clearfix;
+    &__main {
+        @include clearfix;
+        max-height: rem(415);
+        overflow: hidden;
+        &--flex {
+            display: flex;
+            height: rem(393);
+
+            .ibe-gallery-carousel__link--main {
+                height: 100%;
+                width: 100%;
+            }
+            .ibe-gallery-carousel__figure {
+                height: 100%;
+            }
+            .ibe-gallery-carousel__img {
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+    &__list {
+        position: relative;
+        float: left;
+        width: 100%;
+        overflow: hidden;
+        margin: 0 rem(-2.5);
+        .ibe-gallery-carousel__col {
+            &:nth-child(n+4) {
+                display: none;
+            }
+        }
+    }
+    &__col {
+        position: relative;
+        float: left;
+        width: 33.33%;
+        padding: 0 rem(2.5);
+        overflow: hidden;
+    }
+    &__row {
+        display: block;
+        height: 33.33%;
+        width: rem(219);
+    }
+    &__link {
+        position: relative;
+        display: block;
+        &-video{
+            max-height: rem(110);
+            &:before{
+                content:"";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 999;
+            }
+            &:after{
+                content: "\e9dd";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                font-family: "iberia";
+                font-size: rem(86);
+                color: #FFFFFF;
+                line-height: 1em;
+                z-index: 40;
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+    &__figure {
+        overflow: hidden;
+    }
+    &__img {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+        min-width: 100%;
+    }
+    &__footer {
+        position: relative;
+        float: left;
+        width: 100%;
+        max-height: rem(110);
+        overflow: hidden;
+        .ibe-gallery-carousel__col {
+            width: 25%;
+            padding: 0;
+            height: rem(110);
+        }
+        .ibe-gallery-carousel__link {
+            height: 100%;
+        }
+        .ibe-gallery-carousel__img {
+            width: auto;
+            min-width: 100%;
+            position: absolute;
+            top: 50%;
+            height: 100%;
+            left: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            -o-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+        }
+        .ibe-gallery-carousel__number {
+            &:after {
+                margin-top: rem(-9);
+                font-size: rem(18);
+            }
+        }
+    }
+    &__side {
+        width: rem(219);
+    }
+    &__number {
+        position: absolute;
+        text-indent: -999rem;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        opacity: 0.8;
+        &:after {
+            content: attr(data-number);
+            position: absolute;
+            display: block;
+            width: 100%;
+            top: 50%;
+            margin-top: rem(-6);
+            font-size: rem(12);
+            line-height: 100%;
+            text-decoration: underline;
+            text-align: center;
+            text-indent: 0;
+            color: #FFF;
+        }
+    }
+    &--small {
+        .ibe-gallery-carousel__figure {
+            position: relative;
+            height: rem(80);
+        }
+        .ibe-gallery-carousel__img {
+            width: 178%;
+            top: 0;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0);
+            -ms-transform: translate(-50%, 0);
+        }
+    }
+}
+
+@mixin l-ibe-gallery-carousel {
+    .ibe-gallery-carousel {
+        &--small {
+            .ibe-gallery-carousel__figure {
+                height: rem(64);
+            }
+        }
+    }
+}
+
+@mixin m-ibe-gallery-carousel {
+    @include l-ibe-gallery-carousel;
+}
+
+//*  End ibe-gallery-carousel */
+@mixin sm-ibe-gallery-carousel {
+    .ibe-gallery-carousel {
+        &__footer {
+            .ibe-gallery-carousel__col {
+                float: left;
+                width: 50%;
+            }
+            .ibe-gallery-carousel__img {
+                position: absolute;
+                width: 100%;
+                min-height: 100%;
+                height: auto;
+            }
+        }
+
+        &__main--flex {
+            flex-direction: column;
+            height: auto;
+        }
+
+        &__side {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            height: rem(131);
+            .ibe-gallery-carousel__row {
+                width: 50%;
+                height: rem(131);
+                &:first-child, &:nth-child(n+4) {
+                    display: none;
+                }
+            }
+            .ibe-gallery-carousel__link {
+                height: 100%;
+            }
+        }
+
+        &.ibe-gallery-carousel--small {
+            .ibe-gallery-carousel__list {
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+@mixin xs-ibe-gallery-carousel {
+    .ibe-gallery-carousel {
+        &.ibe-gallery-carousel--small {
+            .ibe-gallery-carousel__figure {
+                height: rem(64);
+            }
+            .ibe-gallery-carousel__img {
+                width: 200px;
+            }
+            .ibe-gallery-carousel__list {
+                margin: 0 auto;
+            }
+        }
+        &__footer {
+            .ibe-gallery-carousel__col {
+                float: left;
+                width: 50%;
+            }
+        }
+
+        &__main--flex {
+            flex-direction: column;
+            height: auto;
+        }
+
+        &__side {
+            width: 100%;
+            height: rem(131);
+            .ibe-gallery-carousel__row {
+                width: 100%;
+                height: rem(131);
+                &:nth-child(-n+2) {
+                    display: none;
+                }
+            }
+            .ibe-gallery-carousel__link {
+                height: 100%;
+            }
+        }
+    }
+}

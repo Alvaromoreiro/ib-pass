@@ -1,0 +1,1 @@
+dFrontJs.ibe_box_more=(jQuery,{init:($(".ibe-box-more__content").css({"max-height":"8rem"},{overflow:"hidden"}),void dFrontJs.ibe_read_more.init())});

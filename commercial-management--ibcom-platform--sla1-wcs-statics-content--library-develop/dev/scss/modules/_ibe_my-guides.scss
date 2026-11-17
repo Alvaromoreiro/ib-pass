@@ -1,0 +1,373 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_my-guides
+//    Desripcion: Estilos para el componente mostras mis guias
+//******************************************************************************/
+.ibe-my-guides{
+    /* Overlay fondo*/
+    &__overlay{
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 102;
+    }
+    /* Boton abrir mis guias*/
+    &__open{
+        position: fixed;
+        top: 20%;
+        right: 0;
+        z-index: 101;
+        width: rem(95);
+        height: rem(88);
+        background: $BCK-cromatico_1;
+        border-top-left-radius: 50%;
+        border-bottom-left-radius: 50%;
+        box-shadow: -1px 1px 5px 0 rgba(0, 0, 0, 0.4);
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        /* Modificadores */
+        &.xui-active{
+            right: rem(-110);
+        }
+    }
+    &__open-button{
+        position: relative;
+        width: rem(78);
+        height: rem(78);
+        margin: rem(5);
+        font-size: rem(11);
+        background: $BCK-cromatico_2;
+        border: 2px solid #f0f0f0;
+        border-radius: 50%;
+        &:hover,
+        &:focus{
+            background: $PC-cromatico_8;
+        }
+        &:before{
+            display: block;
+            text-align: center;
+            font-size: rem(25);
+            color: $PC-cromatico_3;
+        }
+        &:after{
+            content: attr(data-content);
+            position: absolute;
+            top: rem(-10);
+            left: rem(-13);
+            width: rem(32);
+            height: rem(32);
+            padding: rem(6);
+            font-family: $font-04;
+            font-size: rem(18);
+            color: $PC-cromatico_4;
+            background: $BCK-cromatico_5;
+            border-radius: 50%;
+        }
+    }
+    /* Contenido */
+    &__box{
+        position: absolute;
+        top: 0;
+        right: rem(-750);
+        width: rem(736);
+        height: 100%;
+        background: $BCK-cromatico_1;
+        z-index: 102;
+        &.xui-active{
+            right: 0;
+        }
+    }
+    &__box-container{
+        padding: rem(55) rem(48);
+        background: $BCK-cromatico_1;
+    }
+    &__box-close{
+        position: absolute;
+        top: rem(170);
+        left: rem(-25);
+        width: rem(48);
+        height: rem(48);
+        border: 0;
+        background: $BCK-cromatico_5;
+        border-radius: 50%;
+        &:before{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: rem(25);
+            color: $PC-cromatico_4;
+            transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+        }
+    }
+    &__box-close-responsive{
+        display: none;
+        position: absolute;
+        top: rem(15);
+        right: rem(20);
+        font-size: rem(35);
+        color: $PC-cromatico_2;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        &:before{
+            font-family: $font-05;
+            content: "\e935";
+        }
+    }
+    /* Cabecera */
+    &__header{
+        padding-bottom: rem(25);
+        text-align: center;
+        border-bottom: 1px solid $BRD_standar_5;
+    }
+    &__header-title{
+        display: block;
+        padding: 0;
+        margin-bottom: rem(7);
+    }
+    &__header-subtitle{
+        display: block;
+        font-family: $font-04;
+        font-size: rem(18);
+        color: $PC-cromatico_3;
+    }
+    &__header-logo {
+        position: relative;
+        width: rem(100);
+        height: rem(100);
+        background: $BCK-cromatico_13;
+        border-radius: 50%;
+        margin: 0 auto rem(20) auto;
+        &:before{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            font-size: rem(75);
+            color: $PC-cromatico_8;
+        }
+    }
+    /* Lista de mis guias */
+    &__list {
+        margin-top: rem(32);
+        background: $BCK-cromatico_18;
+        padding: rem(32);
+        .ibe-paper-sheet{
+            padding: 0;
+            &__header{
+                padding-bottom: rem(20);
+            }
+            .row{
+                margin-left: -8px;
+                margin-right: -8px;
+            }
+            .row > [class^="col-"],
+            .row > [class*=" col-"]{
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+        }
+    }
+    &__list-item {
+        margin-bottom: rem(32);
+
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+    /* Lista ordenada (tutorial) */
+    .ibe-ordered-list{
+        width: 430px;
+        margin: 60px auto 42px;
+    }
+}
+/* Responsive */
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe_my-guides {
+    /*.ibe-my-guides{
+        &__box{
+            width: rem(720);
+        }
+        &__box-close{
+            display: none;
+        }
+        &__box-container{
+            padding: rem(48) rem(18);
+        }
+        // Cabecera
+        &__header{
+            padding-bottom: rem(22);
+            padding-left: rem(5);
+        }
+        &__header-logo{
+            width: rem(50);
+            height: rem(50);
+            margin: 0;
+            float: left;
+            margin-right: rem(14);
+            &:before{
+                font-size: rem(35);
+            }
+        }
+        &__header-title{
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+        &__header-subtitle{
+            text-align: left;
+        }
+        // Lista de mis guias
+        &__list{
+            margin-top: rem(24);
+            padding: rem(16);
+            // Hoja de papel
+            .ibe-paper-sheet{
+                &__header{
+                    padding-bottom: rem(5);
+                }
+                &__container{
+                    padding: rem(14);
+                }
+                &__profile-logo{
+                    margin: 0 rem(6) 0 0;
+                    width: rem(50);
+                    height: rem(50);
+                }
+                &__profile-title{
+                    padding-top: rem(5);
+                    padding-bottom: 0;
+                }
+                &__profile-subtitle{
+                    font-size: rem(14);
+                }
+                &__footer{
+                    .ibe-button{
+                        margin-top: rem(16);
+                        &--red{
+                            margin-top: 0;
+                        }
+                        &--icon-to-left{
+                            text-align: left;
+                        }
+                    }
+                }
+            }
+        }
+    }*/
+}
+
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_my-guides{
+    .ibe-my-guides{
+        /* Boton desplegable */
+        &__open{
+            width: rem(42);
+            height: rem(40);
+        }
+        &__open-button{
+            width: rem(36);
+            height: rem(36);
+            margin: rem(2);
+            &__txt{
+                display: none;
+            }
+            &:after{
+                display: none;
+            }
+        }
+        &__box{
+            width: 95%;
+        }
+        &__box-close{
+            display: none;
+        }
+        &__box-close-responsive{
+            display: block;
+        }
+        &__box-container{
+            padding: rem(48) rem(18);
+        }
+        /* Cabecera */
+        &__header{
+            padding-bottom: rem(22);
+            padding-left: rem(5);
+        }
+        &__header-logo{
+            width: rem(50);
+            height: rem(50);
+            margin: 0;
+            float: left;
+            margin-right: rem(14);
+            &:before{
+                font-size: rem(35);
+            }
+        }
+        &__header-title{
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+        &__header-subtitle{
+            text-align: left;
+        }
+        /* Lista de mis guias */
+        &__list{
+            margin-top: rem(24);
+            padding: rem(16);
+            /* Hoja de papel */
+            .ibe-paper-sheet{
+                &__header{
+                    padding-bottom: rem(5);
+                }
+                &__container{
+                    padding: rem(14);
+                }
+                &__profile-logo{
+                    margin: 0 rem(6) 0 0;
+                    width: rem(50);
+                    height: rem(50);
+                }
+                &__profile-title{
+                    padding-top: rem(5);
+                    padding-bottom: 0;
+                }
+                &__profile-subtitle{
+                    font-size: rem(14);
+                }
+                &__footer{
+                    .ibe-button{
+                        margin-top: rem(16);
+                        &--red{
+                            margin-top: 0;
+                        }
+                        &--icon-to-left{
+                            text-align: left;
+                        }
+                    }
+                }
+            }
+        }
+        /* Lista ordenada (tutorial) */
+        .ibe-ordered-list{
+            width: 100%;
+            margin: 25px auto 42px;
+        }
+    }
+}
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe_my-guides{
+    @include sm-ibe_my-guides;
+}

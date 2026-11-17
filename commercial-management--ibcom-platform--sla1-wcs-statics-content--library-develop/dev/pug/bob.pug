@@ -1,0 +1,76 @@
+extends _general/layout__primary
+include _modules/bob/_ibe_bob_banner
+include _modules/bob/_ibe_bob_cards-title
+include _modules/bob/_ibe_bob_cards
+include _modules/bob/_ibe_bob_info-works
+include _modules/bob/_ibe_bob_valorations
+include _modules/bob/_ibe_bob_opinions
+include _modules/bob/_ibe_bob_map
+include _modules/bob/_ibe_bob_faqs
+
+
+block title
+    title!='IBERIA - BOB'
+block body
+    // Inicio nuevo header
+    +m-header-new({
+        "login": false
+    })
+
+    // Inicio nuevo menu
+    +m-menu-new({
+        "login": false
+    })
+    +m-ibe-breadcrumbs({
+		"menu": "checkin"
+	})
+    // End wrapper
+    main.ibe-bob
+        // Main content
+        +m-ibe-bob_banner({
+            "dataBackground": 'images/modules/bob/bob-banner',
+            "classBanner": 'ibe-bob--banner'
+        })
+
+        div.ibe-bob--container
+            +m-ibe-bob_cards-title()
+            +m-ibe-bob_cards({
+                "title": "Olvidate de cargar con las maletas",
+                "info": "El mismo día de tu viaje o el día anterior, en colaboración con nuestro partner Bag on Board recogemos tu equipaje en la dirección que indiques, asegurándonos de que llegue a su destino final de manera segura y puntual.",
+                "left": true,
+                "type": "1"
+            })
+            +m-ibe-bob_cards({
+                "title": "Nos ocupamos de los trámites",
+                "info": "Seguimos un riguroso proceso de verificación, identificación del cliente y empaquetado de la maleta, cumpliendo con todos los estándares de seguridad y garantía.",
+                "right": true,
+                "type": "2"
+            })
+            +m-ibe-bob_cards({
+                "title": "Tus maletas aterrizarán contigo",
+                "info": "Solo tendrás que recoger tu equipaje de la cinta transportadora del aeropuerto de destino.",
+                "left": true,
+                "type": "3"
+            })
+            +m-ibe-bob_cards({
+                "title": "Disfrútalo de forma gratuita",
+                "info": "Nuestro servicio de recogida de equipaje en domicilio es gratuito tanto para clientes que vuelen en clase Business, como para clientes Iberia Plus Infinita, Infinita Prime y Platino. ",
+                "right": true,
+                "type": "4",
+                "last": true
+            })
+            div.ibe-bob--cards-button--container
+                span.ibe-button.ibe-button--red.ibe-button--small.ibe-bob--cards-button--btn!="Reservar"
+        div.ibe-bob--container.ibe-bob--container-no-m
+            +m-ibe-bob_info-works()
+        div.ibe-bob--valorations-container
+        div.ibe-bob--valorations-containerb.ibe-bob--valorations-icon-container.ibe-bob--container-no-m
+            +m-ibe-bob_valorations()
+            +m-ibe-bob_opinions()
+        div.ibe-bob--container.ibe-bob--container-bottom
+            +m-ibe-bob_map()
+            +m-ibe-bob_faqs()
+    div.ibe-bob--footer
+        +m-footer({
+            "full": true  
+        })

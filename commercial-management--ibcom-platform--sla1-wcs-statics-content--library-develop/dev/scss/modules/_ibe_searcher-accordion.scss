@@ -1,0 +1,1216 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe_searcher
+//    Desripcion: Estilos para la busqueda de hotel mas vuelo
+//******************************************************************************/
+.ibe-searcher {
+    
+    &__calendar {
+        font-size: rem(16);
+        display: none;
+        position: absolute;
+        width: auto;
+        left: 0;
+        top: rem(64);
+        width: 37.2rem;
+        line-height: rem(14);
+        background: $PC-cromatico_7;
+        border-radius: 4px;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.47), 0 -1px 4px 0 rgba(0, 0, 0, 0.23);
+        z-index: 1000;
+
+        &:after {
+            bottom: 100%;
+            left: 4.7%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            border-color: rgba(255, 255, 255, 0);
+            border-bottom-color: $PC-cromatico_7;
+            border-width: 8px;
+            margin-left: rem(-8);
+        }
+        &:before {
+            bottom: 100%;
+            left: 4.7%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            border-color: rgba(255, 255, 255, 0);
+            border-bottom-color: $BRD-standar_20;
+            border-width: 8px;
+            margin-left: rem(-8);
+        }
+
+        &-header {
+            display: inline-block;
+            width: 100%;
+            padding: rem(18) rem(24) rem(8) rem(32);
+
+            .ibe-form__checkbox {
+                float: left;
+            }
+
+            .ibe_form__selectize-multi {
+                padding: 0;
+                height: auto;
+                width: auto;
+                margin: 0;
+                border: 0;
+                background: none;
+                float: left;
+
+                .ibe_form__input-label{
+                    font-size: rem(11);
+                    display: inline-block;
+                    padding: 0.25rem 0.6rem 0 0;
+                    vertical-align: top;
+                    letter-spacing: -0.02rem;
+                }
+
+                .ibe_form__selectize-multi__selectors {
+                    display: inline-block;
+                    vertical-align: top;
+                    margin-top: -0.2rem;
+
+                    .ibe_form__selectize .selectize-input {
+                        background: none;
+                        padding-right: 1rem;
+                        padding-left: 0.5rem;
+                        width: 3.2rem;
+
+                        &:after {
+                            right: 0.9rem;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        &-current {
+            font-size: rem(13);
+            color: $PC-cromatico_2;
+            float: right;
+            padding-top: rem(3);
+        }
+
+        .ui-datepicker-header {
+            border-bottom: 1px solid $BRD_standar_1;
+            padding: 0 0 1.35rem;
+            position: relative;
+
+            .ui-corner-all {
+                position:absolute;
+                .ui-icon {
+                    display: none;
+                }
+                &:hover {
+                    text-decoration: none;
+                }
+                &.ui-datepicker-prev {
+                    top: rem(2);
+                    left: rem(18);
+                    &:before {
+                        content: "\e974";
+                        font-family: $font-05;
+                        font-size: rem(20);
+                        color: $PC-cromatico_3;
+                    }
+                }
+                &.ui-datepicker-next {
+                    top: rem(2);
+                    right: rem(20);
+                    &:before {
+                        content: "\e973";
+                        font-family: $font-05;
+                        font-size: rem(20);
+                        color: $PC-cromatico_3;
+                    }
+                }
+            }
+        }
+
+        .ui-datepicker-title{
+            text-align: center;
+            padding: 0.1rem 2.5rem 0;
+
+            .ui-datepicker-month, .ui-datepicker-year {
+                font-weight: bold;
+                font-size: rem(14);
+            }
+        }
+
+        .ui-datepicker-calendar {
+            width: rem(253);
+            margin: 1.65rem 0.85rem 0.95rem 0.85rem;
+            thead {
+                span {
+                    text-transform: uppercase;
+                    font-size:  rem(13);
+                }
+                th {
+                    padding: 0 0 1.1rem 0;
+                    text-align: center;
+                }
+            }
+            tbody td {
+                    padding: 0.3rem 0 0.05rem 0;
+                    text-align: center;
+                a {
+                    font-size:  rem(13);
+                    color: $PC-cromatico_1;
+                    display: block;
+                    padding: 0.31rem 0 0.31rem;
+                }
+                span {
+                    font-size:  rem(13);
+                    display: block;
+                    padding: 0.31rem 0 0.31rem;
+                    color: $PC-cromatico_2;
+                }
+            }
+            .ui-datepicker-today a {
+                font-weight: bold;
+            }
+            .highlight a {
+                background-color: $PC-cromatico_17;
+            }
+            .range a {
+                background-color: $PC-cromatico_17;
+            }
+        }
+
+        &--start {
+            .ui-datepicker-calendar {
+                a {
+                    &:hover {
+                        background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png") right center no-repeat;
+                        text-decoration: none;
+                        color: $PC-cromatico_4;
+                    }
+                }
+            }
+
+            .ui-datepicker-current-day .ui-state-active {
+                background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png") right center no-repeat;
+                text-decoration: none;
+                color: $PC-cromatico_4;
+            }
+
+            .ui-datepicker-today .ui-state-highlight {
+                background: none;
+                color: $PC-cromatico_1;
+            }
+        }
+
+        &--end {
+            left: rem(31);
+            &:before,
+            &:after {
+                left: 22%;
+            }
+
+            .ui-datepicker-calendar {
+                a {
+                    &:hover {
+                        background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end-bk.png") left center no-repeat;
+                        text-decoration: none;
+                        color: $PC-cromatico_4;
+                    }
+                }
+                .range a {
+                    &:hover {
+                        background: $PC-cromatico_17 url($CONFIG_IMG_PATH + "/modules/calendar/cal-end-bk.png") left center no-repeat;
+                    }
+                }
+                .ui-datepicker-today {
+                    a {
+                        background: none;
+                        color: $PC-cromatico_1;
+                    }
+                }
+            }
+
+            .ui-datepicker-current-day .ui-state-active {
+                background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end-bk.png") left center no-repeat;
+                text-decoration: none;
+                color: $PC-cromatico_4;
+            }
+            .ui-datepicker-calendar .first{
+                a {
+                    background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png") right center no-repeat;
+                    text-decoration: none;
+                    color: $PC-cromatico_4;
+                    &:hover {
+                        background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-end.png") right center no-repeat;
+                    }
+                }
+                &.end-selected {
+                    a {
+                        background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png") right center no-repeat;
+                    }
+                    &.ui-datepicker-current-day {
+                        a {
+                            background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-end.png") right center no-repeat;
+                        }
+                        &.highlight {
+                            a {
+                                background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png") right center no-repeat;
+                            }
+                        }
+                    }
+                }
+                &.highlight a {
+                    background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png") right center no-repeat;
+                }
+            }
+            &.ibe-searcher__calendar--car {
+                left: -14.5rem;
+                &:before {
+                    left: 44%;
+                }
+                &:after {
+                    left: 44%;
+                }
+            }
+        }
+    }
+    .hasDatepicker {
+        padding-bottom: rem(16);
+    }
+    .ibe-tab {
+        min-height: rem(140);
+    }
+    .ui-tabs-panel {
+        display: none;
+    }
+    .ibe-form__radio-group {
+        display: inline-block;
+    }
+    .ibe-accordion{
+        margin-bottom: 0;
+    }
+    .selectize-control{
+        margin-top: 0;
+    }
+    .ibe_form__selectize .selectize-input{
+        .item,
+        input{
+            font-size: rem(13);
+            color: $PC-cromatico_1;
+            position: relative!important;
+            left: 0!important;
+        }
+    }
+    &__options {
+        padding: rem(15) 0 0;
+        width: 100%;
+        font-size: 0;
+        .icon-responsive {
+            &:before {
+                display: none;
+            }
+        }
+        &> .link {
+            vertical-align: top;
+        }
+
+        &> .link__regular {
+            display: inline-block;
+        }
+
+        &> .ibe-form__radio-group {
+            margin-top: -0.25rem;
+            margin-bottom: rem(6);
+        }
+
+        &> .ibe_form__selectize {
+            padding: 0;
+        }
+
+        .ibe-searcher__passenger-button {
+            &.link {
+                display: inline;
+                padding-bottom: rem(2);
+                color: $PC-cromatico_1;
+                font-size: rem(13);
+                border-bottom: 1px dashed $BRD_standar_1;
+                position: relative;
+                max-width: rem(240);
+                &:after {
+                    content: ' ';
+                    display: block;
+                    position: absolute;
+                    bottom: 7px;
+                    right: -1rem;
+                    //margin-top: -3px;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 5px 5px 0 5px;
+                    border-color: #808080 transparent transparent transparent;
+                }
+            }
+        }
+
+        &--end {
+            text-align: right;
+            .icon-responsive {
+                &:before {
+                    display: inline-block;
+                    font-size:rem(20);
+                    width:rem(10);
+                    vertical-align: bottom;
+                    margin-right: rem(15);
+                }
+            }
+        }
+    }
+
+    &__rate {
+        float: right;
+        margin-right: 1.2rem;
+        margin-left: 2rem;
+
+        &.selectize-control {
+            border-bottom: 1px dashed $BRD_standar_1;
+
+            .selectize-input {
+                padding-right: 0;
+            }
+
+            &.single {
+
+                .selectize-input{
+                    &:after {
+                        right: -1rem;
+                    }
+                }
+            }
+
+            .selectize-dropdown {
+                margin-left: 0;
+                min-width: rem(200);
+            }
+        }
+    }
+
+    &__passenger {
+        position: relative;
+        padding-top: 0;
+
+        &-content {
+            margin-top: 0.5rem;
+            display: none;
+            width: 17.7rem;
+            position: absolute;
+            background-color: $BCK-cromatico_1;
+            z-index: 30;
+            border-radius: 4px;
+            box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.47), 0 -1px 4px 0 rgba(0, 0, 0, 0.23);
+        }
+
+        &-title {
+            background: $BCK-cromatico_2;
+            font-size: rem(15);
+            padding: 1rem 1rem 1.5rem;
+        }
+
+        .ibe-form__radio-group {
+            display: block;
+            padding: 0.5rem 2rem 0;
+        }
+
+        .ibe_form__radio {
+            display: block;
+            margin: 0 0 1.6rem;
+
+            &:last-child {
+                margin-bottom: 1rem;
+            }
+        }
+
+        .ibe-button {
+            width: calc(100% - 2rem);
+            margin: 1rem 1rem 1.5rem 1rem!important;
+        }
+
+    }
+    .xui-return-date-hide{
+        display: none;
+    }
+    .xui-car-city-hide {
+        display: none;
+    }
+
+    &__title {			
+		display: block;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		border: 0;
+		font-family: $font-04;
+		font-size: 1.125rem;
+		text-align: left;
+		color: $PC-cromatico_1;
+		background: transparent;
+		border-radius: 0;				
+	}
+
+    /* Modificadores */
+
+    &--xs {
+        .ibe-search-flights__search-button {
+            margin-top: rem(16);
+        }
+        .ibe-searcher__options {
+            padding: rem(15) 0 0 0;
+            > .ibe-form__radio-group {
+                display: block;
+                margin-bottom: rem(10);
+                .ibe_form__radio {
+                    margin-right: 0;
+                    padding-left: rem(30);
+                }
+            }
+        }
+        .ibe_form__group {
+            &--button-icon {
+                .ibe_form__input-label {
+                    width: 75%;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+                .ibe_form__input-button {
+                    width: rem(40);
+                }
+            }
+            &--half{}
+            &--icon{
+                &:before{
+                    right: rem(11);
+                }
+            }
+        }
+        .ibe_form__group-half,
+        .ibe_form__group-full {
+            padding-left: rem(10);
+            .ibe_form__input-text {
+                padding-left: rem(5);
+                padding-right: 0;
+                font-family: $font-04;
+                font-size: rem(16);
+                &:focus{
+                    width: 100%;
+                    padding: 0 0 0 rem(5);
+                }
+            }
+        }
+        .ibe_form__group-full {
+            padding-right: rem(40);
+            &:before {
+                right: rem(10);
+            }
+        }
+        .ibe_form__input-text{
+            padding-left: rem(14);
+            font-family: $font-04;
+            font-size: rem(16);
+        }
+        .ibe_form__input-label{
+            left: rem(15);
+        }
+        /* Desplegables */
+        .ui-autocomplete {
+            left: auto!important;
+            right: 0;
+            &:before,
+            &:after {
+                left: 35%;
+            }
+        }
+        .ibe-choose-city {
+            right: 0;
+            left: auto;
+            &:before,
+            &:after{
+                right: 1%;
+                left: auto;
+            }
+        }
+        .ibe-searcher__calendar {
+            left: auto;
+            right: 0;
+            &:before,
+            &:after {
+                left: auto;
+                right: 26%;
+            }
+            &--end{
+                &:before,
+                &:after {
+                    left: auto;
+                    right: 7%;
+                }
+            }
+        }
+        .ibe-people-counter {
+            left: auto;
+            right: 0;
+            &:before,
+            &:after {
+                left: auto;
+                right: 50%;
+            }
+        }
+        .ibe-searcher-room {
+            left: auto;
+            right: 0;
+            &:before,
+            &:after {
+                left: auto;
+                right: 21%;
+            }
+        }
+    }//--xs
+    .tab-searcher{
+        display: none;
+        &:first-child{
+            display: block;     //De esta forma, en caso de que tarde el componente en cargar hacemos visible solo el primer buscador
+        }
+    }
+}
+
+.ui-datepicker-group {
+    width: 50%;
+    float: left;
+}
+.ui-datepicker {
+    overflow: hidden;
+    width: 100% !important;
+}
+
+/* Responsive */
+/*XLARGE RESOLUTION STYLES*/
+@mixin xl-ibe_searcher{
+    .ibe-searcher {
+        .ibe-accordion__header {
+            display: none;
+        }
+        .ibe-accordion__collapse {
+            display: block !important;
+            height: auto !important;
+        }
+
+        &__rate {
+            &--alone {
+                float: left;
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe_searcher{
+    .ibe-searcher {
+        &__options {
+            &> .ibe-form__radio-group {
+                margin-bottom: rem(16);
+            }
+            &--end {
+                .icon-responsive {
+                    &:before {
+                        width:rem(70);
+                    }
+                }
+            }
+        }
+        &__calendar {
+            left: -2.65rem;
+            &:before{
+                left: 14%;
+            }
+            &:after{
+                left: 14%;
+            }
+            &--end {
+                left: -2.65rem;
+
+                &:before{
+                    left: 36%;
+                }
+                &:after{
+                    left: 36%;
+                }
+                &.ibe-searcher__calendar--car {
+                    left: -17.1rem;
+
+                    &:before {
+                        left: 55%;
+                    }
+
+                    &:after {
+                        left: 55%;
+                    }
+                }
+            }
+        }
+        .ibe-accordion__header {
+            display: none;
+        }
+        .ibe-accordion__collapse {
+            display: block !important;
+            height: auto !important;
+        }
+
+        &__rate {
+            &--alone {
+                float: left;
+                margin-left: 0;
+            }
+        }
+        &__options {
+            .icon-responsive {
+                display: block;
+                text-align: center;
+                font-size:0;
+                &:before {
+                    font-size: rem(28);
+                    display: block;
+                }
+                &:hover {
+                    color: $PC-cromatico_10;
+                    text-decoration: none;
+                }
+            }
+        }
+        /* Modificadores */
+        &--xs {
+            .ibe-choose-city {
+                width: rem(900);
+            }
+            .ibe-form__radio-group .ibe_form__radio {
+                float:none !important;
+                margin-bottom: rem(8);
+            }
+            .ibe-searcher__rate {
+                float: left;
+                margin-left:0;
+                .item {
+                    max-width: rem(128);
+                }
+            }
+        }
+    }
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe_searcher{
+    .ibe-searcher {
+        .ibe-accordion__header {
+            font-family: $font-02;
+            border: 1px solid $BRD_standar_1;
+            margin: 0;
+            padding: 0.8rem 4.4rem 0.95rem 1.4rem;
+            .link {
+                font-size: rem(14);
+            }
+            &:before {
+                content: "\e91d";
+                color: $PC-cromatico_4;
+                width: 2.9rem;
+                height: 100%;
+                background-color: $BCK-cromatico_5;
+                top: 0;
+                padding: 0.8rem 0 0 0.8rem;
+                font-size: rem(22);
+            }
+            &.accordion-header-close {
+                text-align: center;
+                background-color: $PC-cromatico_5;
+                color: $PC-cromatico_2;
+                border-color: $PC-cromatico_5;
+                .link {
+                    font-weight: bold;
+                }
+                &:before {
+                    content: "\e935";
+                    width: 3.3rem;
+                    padding: 0.7rem 0 0 0;
+                    background-color: $PC-cromatico_5;
+                    color: $PC-cromatico_2;
+                    font-size: rem(25);
+                }
+            }
+        }
+        &__options {
+            &-col {
+                &--right {
+                    float: none;
+                }
+            }
+        }
+        &__calendar {
+            width: 100%;
+            height: 47rem;
+            top: rem(56);
+            box-shadow: 0 0 0;
+            border-radius: 0;
+            overflow-y: scroll;
+
+            &:before {
+                border: 0;
+            }
+
+            &:after {
+                border: 0;
+            }
+
+            .ui-datepicker-calendar{
+                width: calc(100% - 27px);
+            }
+
+            &-current {
+                display: none;
+            }
+
+            &--start {
+
+                .ui-datepicker-calendar {
+                    a {
+                        background-size: 28px !important;
+                        &:hover {
+                            background-position: calc(50% + 2px) center;
+                        }
+                    }
+                }
+
+                .ui-datepicker-current-day {
+                    .ui-state-active {
+                        background-position: calc(50% + 2px) center;
+                    }
+                }
+
+            }
+
+            &--end {
+
+                left: 0;
+
+                .ui-datepicker-calendar {
+                    margin-top: rem(-4);
+                    margin-bottom: 0.6rem;
+
+                    a {
+                        &:hover {
+                            background-position: remcalc(50%, " - " , rem(2)) center;
+                            background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png");
+                        }
+                    }
+
+                    .highlight {
+                        a {
+                            background-color: transparent;
+                        }
+                    }
+
+                    .range a {
+                        background-color: transparent;
+
+                        &:hover {
+                            background-position: remcalc(50%, " - " , rem(2)) center;
+                            background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png");
+                            background-color: transparent;
+                        }
+                    }
+
+                    .ui-datepicker-today {
+                        a {
+                            background-position: calc(50% + 2px) center;
+
+                            &:hover {
+                                background-image: none;
+                            }
+                        }
+                    }
+
+                    .first {
+
+                        a {
+                            background-position: calc(50% + 2px) center;
+
+                            &:hover {
+                                background-position: calc(50% + 2px) center;
+                                background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-end.png");
+                            }
+                        }
+
+                        &.highlight {
+                            a {
+                                background-position: calc(50% + 2px) center;
+                                background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+                            }
+                        }
+
+                        &.end-selected {
+
+                            a{
+                                background-position: calc(50% + 2px) center;
+                                background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+                            }
+
+                            &.ui-datepicker-current-day {
+                                a {
+                                    background-position: calc(50% + 2px) center;
+                                }
+
+                                &.highlight {
+                                    a{
+                                        background-position: calc(50% + 2px) center;
+                                        background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+                                    }
+                                }
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                .ui-datepicker-current-day .ui-state-active {
+                    background-position: remcalc(50%, " - " , rem(2)) center;
+                    background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png");
+                }
+
+                &.ibe-searcher__calendar--car {
+                    left: 0;
+                }
+
+            }
+
+            .ui-datepicker-header {
+                border: 0;
+
+                .ui-corner-all {
+                    display: none;
+                }
+            }
+
+            .hasDatepicker {
+                width: rem(416);
+                margin: 0 auto;
+            }
+        }
+
+        &__options {
+            &> .ibe_form__selectize {
+                padding: 0;
+                margin-bottom: 0.5rem;
+            }
+
+            &> .ibe-form__radio-group {
+                .ibe_form__radio {
+                    margin-right: 1.5rem;
+                }
+            }
+
+            &> .link__regular {
+                line-height: 1.5rem;
+                float: right;
+            }
+
+            &--end {
+                text-align: center;
+                padding: 0 0 0.95rem 0;
+            }
+        }
+
+        &__passenger {
+            float: right;
+            padding-right: 1.2rem;
+            text-align: right;
+            padding-top: 0;
+
+            &-content {
+                width: 100%;
+                text-align: left;
+            }
+        }
+        &--responsive {
+            .ibe-searcher__calendar {
+                width: rem(595);
+            }
+            .ibe-searcher-room {
+                width: rem(595);
+                right: 0;
+                left: auto;
+            }
+        }
+    }
+    .ui-datepicker-group {
+        width: 100%;
+    }
+}
+
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_searcher{
+    .ibe-searcher {
+        .ibe-accordion__header {
+            font-family: $font-02;
+            border: 1px solid $BRD_standar_1;
+            margin: 0;
+            padding: 0.8rem 4.4rem 0.95rem 1.4rem;
+            .link {
+                font-size: rem(14);
+            }
+            &:before {
+                content: "\e91d";
+                color: $PC-cromatico_4;
+                width: 2.9rem;
+                height: 100%;
+                background-color: $BCK-cromatico_5;
+                top: 0;
+                padding: 0.8rem 0 0 0.8rem;
+                font-size: rem(22);
+            }
+            &.accordion-header-close {
+                text-align: center;
+                background-color: $PC-cromatico_5;
+                color: $PC-cromatico_2;
+                border-color: $PC-cromatico_5;
+                .link {
+                    font-weight: bold;
+                }
+                &:before {
+                    content: "\e935";
+                    width: 3.3rem;
+                    padding: 0.7rem 0 0 0;
+                    background-color: $PC-cromatico_5;
+                    color: $PC-cromatico_2;
+                    font-size: rem(25);
+                }
+            }
+        }
+        &__options {
+            &-col {
+                &--right {
+                    float: none;
+                }
+            }
+        }
+        &__calendar {
+            width: 100%;
+            height: 47rem;
+            top: rem(56);
+            box-shadow: 0 0 0;
+            border-radius: 0;
+            overflow-y: scroll;
+
+            &:before {
+                border: 0;
+            }
+
+            &:after {
+                border: 0;
+            }
+
+            .ui-datepicker-calendar{
+                width: calc(100% - 27px);
+            }
+
+            &-current {
+                display: none;
+            }
+
+            &--start {
+
+                .ui-datepicker-calendar {
+                    a {
+                        background-size: 28px !important;
+                        &:hover {
+                            background-position: calc(50% + 2px) center;
+                        }
+                    }
+                }
+
+                .ui-datepicker-current-day {
+                    .ui-state-active {
+                        background-position: calc(50% + 2px) center;
+                    }
+                }
+
+            }
+
+            &--end {
+
+                left: 0;
+
+                .ui-datepicker-calendar {
+                    margin-top: rem(-4);
+                    margin-bottom: 0.6rem;
+
+                    a {
+                        &:hover {
+                            background-position: remcalc(50%, " - " , rem(2)) center;
+                            background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png");
+                        }
+                    }
+
+                    .highlight {
+                        a {
+                            background-color: transparent;
+                        }
+                    }
+
+                    .range a {
+                        background-color: transparent;
+
+                        &:hover {
+                            background-position: remcalc(50%, " - " , rem(2)) center;
+                            background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png");
+                            background-color: transparent;
+                        }
+                    }
+
+                    .ui-datepicker-today {
+                        a {
+                            background-position: calc(50% + 2px) center;
+
+                            &:hover {
+                                background-image: none;
+                            }
+                        }
+                    }
+
+                    .first {
+
+                        a {
+                            background-position: calc(50% + 2px) center;
+
+                            &:hover {
+                                background-position: calc(50% + 2px) center;
+                                background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-end.png");
+                            }
+                        }
+
+                        &.highlight {
+                            a {
+                                background-position: calc(50% + 2px) center;
+                                background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+                            }
+                        }
+
+                        &.end-selected {
+
+                            a{
+                                background-position: calc(50% + 2px) center;
+                                background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+                            }
+
+                            &.ui-datepicker-current-day {
+                                a {
+                                    background-position: calc(50% + 2px) center;
+                                }
+
+                                &.highlight {
+                                    a{
+                                        background-position: calc(50% + 2px) center;
+                                        background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+                                    }
+                                }
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                .ui-datepicker-current-day .ui-state-active {
+                    background-position: remcalc(50%, " - " , rem(2)) center;
+                    background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png");
+                }
+
+                &.ibe-searcher__calendar--car {
+                    left: 0;
+                }
+
+            }
+
+            .ui-datepicker-header {
+                border: 0;
+
+                .ui-corner-all {
+                    display: none;
+                }
+            }
+
+            .hasDatepicker {
+                width: rem(416);
+                margin: 0 auto;
+            }
+        }
+
+        &__options {
+            &> .ibe_form__selectize {
+                padding: 0;
+                margin-bottom: 0.5rem;
+            }
+
+            &> .ibe-form__radio-group {
+                .ibe_form__radio {
+                    margin-right: 1.5rem;
+                }
+            }
+
+            &> .link__regular {
+                line-height: 1.5rem;
+            }
+
+            &--end {
+                text-align: center;
+                padding: 0 0 0.95rem 0;
+            }
+        }
+
+        &__passenger {
+            float: right;
+            padding-right: 1.2rem;
+            text-align: right;
+            padding-top: 0;
+
+            &-content {
+                width: 100%;
+                text-align: left;
+            }
+        }
+    }
+    .ui-datepicker-group {
+        width: 100%;
+    }
+}
+
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe_searcher{
+    @include sm-ibe_searcher;
+    .ibe-searcher{
+        &__calendar {
+            .ui-datepicker-calendar {
+                td a {
+                    background-size: 27px 100% !important;
+                }
+            }
+            .hasDatepicker {
+                width: 100%;
+            }
+        }
+    }
+}

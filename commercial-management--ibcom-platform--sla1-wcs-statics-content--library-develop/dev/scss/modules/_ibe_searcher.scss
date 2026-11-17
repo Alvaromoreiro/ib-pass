@@ -1,0 +1,6425 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe_searcher
+//    Desripcion: Estilos para la busqueda de hotel mas vuelo
+//******************************************************************************/
+.ibe-searcher {
+	&__calendar {
+		font-size: rem(16);
+		display: none;
+		position: absolute;
+		left: 0;
+		top: rem(64);
+		width: 37.2rem;
+		line-height: rem(14);
+		background: $PC-cromatico_7;
+		border-radius: 3px;
+		box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.47), 0 -1px 4px 0 rgba(0, 0, 0, 0.23);
+		z-index: 1000;
+		opacity: 1;
+		font-family: $font-02;
+
+		&:after {
+			bottom: 100%;
+			left: 4.7%;
+			border: solid transparent;
+			content: " ";
+			height: 0;
+			width: 0;
+			position: absolute;
+			border-color: rgba(255, 255, 255, 0);
+			border-bottom-color: $PC-cromatico_7;
+			border-width: 8px;
+			margin-left: rem(-8);
+		}
+		&:before {
+			bottom: 100%;
+			left: 4.7%;
+			border: solid transparent;
+			content: " ";
+			height: 0;
+			width: 0;
+			position: absolute;
+			border-color: rgba(255, 255, 255, 0);
+			border-bottom-color: $BRD-standar_20;
+			border-width: 8px;
+			margin-left: rem(-8);
+		}
+
+		&-header {
+			display: inline-block;
+			width: 100%;
+			padding: rem(18) rem(24) rem(30) rem(32);
+			background: $PC-cromatico_7;
+
+			.ibe-form__checkbox {
+				float: left;
+			}
+
+			.ibe_form__selectize-multi {
+				padding: 0;
+				height: auto;
+				width: auto;
+				margin: 0;
+				border: 0;
+				background: none;
+				float: left;
+
+				.ibe_form__input-label {
+					font-size: rem(11);
+					display: inline-block;
+					padding: 0.25rem 0.6rem 0 0;
+					vertical-align: top;
+					letter-spacing: -0.02rem;
+				}
+
+				.ibe_form__selectize-multi__selectors {
+					display: inline-block;
+					vertical-align: top;
+					margin-top: -0.2rem;
+
+					.ibe_form__selectize .selectize-input {
+						background: none;
+						padding-right: 1rem;
+						padding-left: 0.5rem;
+						width: 3.2rem;
+
+						&:after {
+							right: 0.9rem;
+						}
+					}
+				}
+			}
+
+		}
+
+		&-current {
+			font-size: rem(13);
+			color: $PC-cromatico_2;
+			float: right;
+			padding-top: rem(3);
+		}
+
+		.ui-datepicker-header {
+			border-bottom: 1px solid $BRD_standar_1;
+			padding: 0 0 1.35rem;
+			position: relative;
+
+			.ui-corner-all {
+				position: absolute;
+				.ui-icon {
+					display: none;
+				}
+				&:hover {
+					text-decoration: none;
+				}
+				&.ui-datepicker-prev, &.ui-datepicker-next {
+					line-height: 1;
+					&:focus {
+						outline: 1px solid $BRD_standar_3;
+					}
+					&.ui-state-disabled {
+						cursor: initial;
+						&:before {
+							color: $PC-cromatico_2;
+						}
+					}
+				}
+				&.ui-datepicker-prev {
+					top: rem(2);
+					left: rem(18);
+					&:before {
+						content: "\e974";
+						font-family: $font-05;
+						font-size: rem(20);
+						color: $PC-cromatico_3;
+					}
+				}
+				&.ui-datepicker-next {
+					top: rem(2);
+					right: rem(20);
+					&:before {
+						content: "\e973";
+						font-family: $font-05;
+						font-size: rem(20);
+						color: $PC-cromatico_3;
+					}
+				}
+			}
+		}
+
+		.ui-datepicker-title {
+			text-align: center;
+			padding: 0.1rem rem(35) 0;
+
+			.ui-datepicker-month, .ui-datepicker-year {
+				font-weight: bold;
+				font-size: rem(14);
+			}
+		}
+
+		.ui-datepicker-calendar {
+			width: rem(253);
+			margin: 1.65rem 0.85rem 0.95rem 0.85rem;
+			thead {
+				span {
+					text-transform: uppercase;
+					font-size: rem(13);
+				}
+				th {
+					padding: 0 0 1.1rem 0;
+					text-align: center;
+				}
+			}
+			tbody td {
+				width: rem(35);
+				padding: 0.3rem 0 0.05rem 0;
+				text-align: center;
+				&.ui-state-disabled {
+					cursor: not-allowed;
+				}
+				a {
+					font-size: rem(13);
+					color: $PC-cromatico_1;
+					display: block;
+					padding: 0.31rem 0 0.31rem;
+					font-weight: bold;
+					&:focus {
+						outline: 1px solid #F08400;
+					}
+				}
+				span {
+					font-size: rem(13);
+					display: block;
+					padding: 0.31rem 0 0.31rem;
+					color: $PC-cromatico_2;
+				}
+			}
+			.ui-datepicker-today a {
+				font-weight: bold;
+			}
+			.highlight a {
+				background-color: $PC-cromatico_17;
+				background-repeat: no-repeat;
+			}
+			// .range a, .mouse a {
+			// 	background-color: $PC-cromatico_17;
+			// 	+ .selected-day--from a, + .selected-day--to a {
+			// 		background-color: $PC-cromatico_17;
+			// 		font-weight: normal;
+			// 	}
+			// }
+			.range, .mouse {
+				a{
+					background-color: $PC-cromatico_17;
+					+ .selected-day--from a, + .selected-day--to a {
+						background-color: $PC-cromatico_17;
+						font-weight: normal;
+					}
+				}
+				+ td{
+					&.mouse,&.isHover,&.selected-day--to,&.seleceted-day--from,&.date-has-tooltip{
+						a, span{
+							background-color: $PC-cromatico_17;
+						}
+					}
+					&.selected-day--to{
+						a{
+							background-color: inherit;
+						}
+					}
+				}
+				&.date-has-tooltip{
+					span{
+						background-color: $PC-cromatico_17;
+					}
+				}
+				&.isHover{
+					a{
+						color: white;
+					}
+					a, span{
+						background-image: url('../images/modules/calendar/cal-end-bk.png');
+						background-repeat: no-repeat;
+						background-color: inherit;
+					}
+					// + td{
+					// 	a, span{
+					// 		background-color: inherit;
+					// 	}
+					// }
+				}
+			}
+			.mouse{
+				&.selected-day--to{
+					+ td{
+						&.mouse,&.isHover,&.selected-day--to,&.seleceted-day--from,&.date-has-tooltip{
+							a, span{
+								background-color: inherit;
+							}
+						}
+					}
+				}
+			}
+			.range{
+				&.selected-day--to{
+					+ td{
+						a{
+							background-color: inherit;
+						}
+					}
+				}
+				&.date-has-tooltip{
+					&.isHover{
+						span{
+							background-image: inherit;
+						}
+					}
+				}
+				&.mouse{
+					&.isHover{
+						&.selected-day--to{
+							background-color: $PC-cromatico_17;
+						}
+					}
+				}
+			}
+			.ui-datepicker-current-day {
+				&.highlight a {
+					background: $PC-cromatico_3;
+					color: $PC-cromatico_4;
+				}
+			}
+			.selected-day--from {
+				a, span {
+					background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png") center right no-repeat;
+					background-color: transparent;
+					color: $PC-cromatico_4;
+				}
+				&.range, &.mouse, &.ui-datepicker-current-day {
+					a, &.ui-state-active {
+						background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png") rem(4) center no-repeat;
+						color: $PC-cromatico_4;
+						margin-right: rem(-0.5);
+						font-weight: normal;
+					}
+
+				}
+			}
+			.selected-day--to {
+				a, span {
+					background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end-bk.png") left center no-repeat;
+					background-color: transparent;
+					color: $PC-cromatico_4;
+					font-weight: normal;
+				}
+				&.range, &.mouse, &.ui-datepicker-current-day {
+					a, &.ui-state-active {
+						background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end-bk.png") left center no-repeat;
+						margin-left: rem(-1);
+						font-weight: normal;
+					}
+
+				}
+			}
+			.selected-day--both {
+				a {
+					font-weight: normal;
+					background: none;
+					background-color: $BCK-cromatico_5;
+				}
+				&.range, &.mouse, &.ui-datepicker-current-day {
+					a, &.ui-state-active {
+						font-weight: normal;
+						background: none;
+						background-color: $BCK-cromatico_5;
+					}
+					&.selected-day--to {
+						a:hover {
+							background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png") left center no-repeat;
+							background-color: transparent;
+							color: $PC-cromatico_4;
+							font-weight: normal;
+						}
+					}
+					&.selected-day--from {
+						a:hover {
+							background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png") right center no-repeat;
+							background-color: transparent;
+							color: $PC-cromatico_4;
+						}
+					}
+				}
+			}
+		}
+
+		&--start {
+			.ui-datepicker-calendar {
+				//Bold current day
+				.ui-datepicker-current-day.ui-datepicker-days-cell-over:not(.first) {
+					a {
+						&.ui-state-active {
+							&:hover {
+								//font-weight: bold;
+								// background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png") right center no-repeat;
+								//background:$PC-cromatico_3;
+								//text-decoration: none;
+								//color: $PC-cromatico_4;
+							}
+						}
+					}
+				}
+				.ui-datepicker-today:not(.first) {
+					a {
+						//background: none;
+						//color: $PC-cromatico_1;
+						&:hover {
+							//background-color: $PC-cromatico_3 !important;
+							text-decoration: none;
+							//color: $PC-cromatico_4 !important;
+						}
+					}
+				}
+				a {
+					&:hover {
+						background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png") right center no-repeat;
+						//background-color: $PC-cromatico_3;
+						text-decoration: none;
+						color: $PC-cromatico_4;
+						/*&.ui-state-active {
+                            background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png") right center no-repeat;
+                        }*/
+					}
+				}
+				.range a, .mouse a {
+					&:hover {
+						background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png") right center no-repeat;
+					}
+				}
+				.selected-day--from {
+					&.range, &.mouse {
+						a {
+							&:hover {
+								background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png") rem(4) center no-repeat;
+							}
+						}
+					}
+				}
+				.selected-day--to {
+					&.range, &.mouse {
+						a {
+							&:hover {
+								background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png") right center no-repeat;
+							}
+						}
+					}
+				}
+			}
+			tr[class] .last-day, .range + .last-day, .mouse + .last-day {
+				a {
+					// background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end-bk.png") left center no-repeat;
+					background: none;
+					text-decoration: none;
+					color: $PC-cromatico_4;
+					background: $PC-cromatico_3;
+					&.ui-state-active {
+						&:hover {
+							font-weight: bold;
+							// background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png") right center no-repeat;
+							background: $PC-cromatico_3;
+							text-decoration: none;
+							color: $PC-cromatico_4;
+						}
+					}
+				}
+			}
+			.ui-datepicker-current-day .ui-state-active {
+				// background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png")  center no-repeat;
+				//background-color:$PC-cromatico_3 !important;
+				text-decoration: none;
+				//color: $PC-cromatico_4;
+			}
+			.ui-datepicker-today:not(.first) .ui-state-highlight {
+				//color: $PC-cromatico_1;
+				//background: none;
+			}
+			.ui-datepicker-today.ui-datepicker-current-day .ui-state-highlight {
+				//color: $PC-cromatico_4;
+				//background-color:$PC-cromatico_3;
+			}
+			.ui-datepicker-today.ui-datepicker-current-day .ui-state-active {
+				//color: $PC-cromatico_4;
+				//background-color:$PC-cromatico_3;
+			}
+
+			.last-day {
+				.ui-state-default {
+					background-color: $PC-cromatico_3 !important;
+					text-decoration: none;
+					color: $PC-cromatico_4;
+				}
+			}
+		}
+
+		&--end {
+			left: rem(31);
+			&:before,
+			&:after {
+				left: 22%;
+			}
+
+			.ui-datepicker-calendar {
+				.ui-datepicker-current-day {
+					&.ui-datepicker-today {
+						.ui-state-active {
+							//background: $PC-cromatico_3;
+							text-decoration: none;
+							//color: $PC-cromatico_4;
+							//font-weight: normal;
+							&:hover {
+								//background: $PC-cromatico_3;
+								text-decoration: none;
+								//color: $PC-cromatico_4;
+							}
+							&.selected-day--from {
+								a {
+									background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png") right center no-repeat;
+									background-color: transparent;
+									color: $PC-cromatico_4;
+								}
+								&.range, &.mouse {
+									a {
+										background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png") right center no-repeat;
+										&:hover {
+											background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png") left center no-repeat;
+										}
+									}
+								}
+							}
+							&.selected-day--to {
+								a {
+									background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end-bk.png") left center no-repeat;
+									background-color: transparent;
+									color: $PC-cromatico_4;
+								}
+								&.range, &.mouse {
+									a {
+										background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end-bk.png") left center no-repeat;
+									}
+									&:hover {
+										background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png") left center no-repeat;
+									}
+								}
+							}
+						}
+					}
+				}
+				a {
+					&:hover {
+						background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png") left center no-repeat;
+						//background: $PC-cromatico_3;
+						text-decoration: none;
+						color: $PC-cromatico_4;
+					}
+				}
+				.range a, &.mouse a {
+					&:hover {
+						background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end-bk.png") left center no-repeat;
+						text-decoration: none;
+						color: $PC-cromatico_4;
+						margin-left: rem(-1);
+					}
+				}
+				.selected-day--from {
+					&.range, &.mouse {
+						a {
+							&:hover {
+								background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png") left center no-repeat;
+							}
+						}
+					}
+				}
+				.selected-day--to {
+					&.range, &.mouse {
+						a {
+							&:hover {
+								background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png") left center no-repeat;
+							}
+						}
+					}
+				}
+				.selected-day--both {
+					&.ui-datepicker-current-day.selected-day--from {
+						a:hover {
+							background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png") left center no-repeat;
+						}
+					}
+				}
+				.ui-datepicker-today {
+					a {
+						//background: none !important;
+						color: $PC-cromatico_1;
+						&:hover {
+							background: $PC-cromatico_3;
+							// background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end-bk.png") left center no-repeat;
+							text-decoration: none;
+							color: $PC-cromatico_4;
+						}
+					}
+					&.ui-datepicker-current-day {
+						&.highlight {
+							a {
+								//background-color: $PC-cromatico_17;
+							}
+						}
+					}
+				}
+			}
+
+			.ui-datepicker-current-day .ui-state-active {
+				// background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end-bk.png") left center no-repeat;
+				background-color: $PC-cromatico_3;
+				text-decoration: none;
+				color: $PC-cromatico_4;
+			}
+			.ui-datepicker-days-cell-over {
+				&.ui-datepicker-current-day {
+					.ui-state-active {
+						background: none;
+						text-decoration: none;
+						color: $PC-cromatico_1;
+						font-weight: bold;
+						&:hover {
+							//background: $PC-cromatico_3;
+							background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png") left center no-repeat;
+							text-decoration: none;
+							color: $PC-cromatico_4;
+						}
+					}
+					&.ui-datepicker-today {
+						.ui-state-active {
+							//background: $PC-cromatico_3;
+							text-decoration: none;
+							//color: $PC-cromatico_4;
+							&:hover {
+								background: $PC-cromatico_3;
+								text-decoration: none;
+								color: $PC-cromatico_4;
+							}
+						}
+					}
+				}
+
+			}
+			.ui-datepicker-calendar .first {
+				a {
+					// background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png") right center no-repeat;
+					background: $PC-cromatico_3;
+					text-decoration: none;
+					color: $PC-cromatico_4;
+					&:hover {
+						// background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-end.png") right center no-repeat;
+						background: $PC-cromatico_3;
+					}
+				}
+				&.end-selected {
+					a {
+						// background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png") right center no-repeat;
+						background: $PC-cromatico_3;
+					}
+					&.ui-datepicker-current-day {
+						a {
+							// background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png") right center no-repeat;
+							background: $PC-cromatico_3 !important;
+							color: white;
+							font-weight: normal;
+						}
+						&.highlight {
+							a {
+								// background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png") right center no-repeat;
+								background: $PC-cromatico_3;
+							}
+						}
+					}
+				}
+				&.highlight a {
+					// background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png") right center no-repeat;
+					background: $PC-cromatico_3;
+				}
+			}
+			&.ibe-searcher__calendar--car {
+				left: -14.5rem;
+				&:before {
+					left: 44%;
+				}
+				&:after {
+					left: 44%;
+				}
+			}
+		}
+
+		&--claim {
+			left: auto;
+			right: 0;
+			width: rem(282);
+			height: rem(330);
+			.ibe-searcher__calendar-header {
+				padding-bottom: rem(20);
+				.ibe-form__checkbox {
+					display: none;
+				}
+			}
+			&:before, &:after {
+				left: auto;
+				right: rem(24);
+			}
+			.ui-datepicker-calendar a {
+				&:hover {
+					background: none;
+					background-color: $PC-cromatico_3;
+					color: $PC-cromatico_4;
+				}
+			}
+			.ui-datepicker-current-day {
+				.ui-state-active {
+					background-color: $PC-cromatico_3;
+					color: $PC-cromatico_4;
+				}
+			}
+		}
+
+		&-reset,&-btn {
+			cursor: pointer;
+			background: none;
+			border: none;
+			padding: 0.25rem .5rem;
+			min-height: 2rem;
+			&:hover{
+				text-decoration: underline;
+			}
+			
+			.ibe-searcher__calendar-img {
+				position:relative; 
+				top: rem(3);
+			}
+		}
+
+		&-react {
+			width: auto;
+			left: rem(-183);
+			border-radius: .75rem;
+			background: #fff;
+
+			.ibe-searcher__calendar-container{
+				padding: 0.75rem;
+				width: auto;
+			}
+
+			.ibe-searcher__calendar-footer {
+				padding: 1.5rem;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+
+				p.ibe-searcher__calendar-text {
+					min-height: 40px;
+					align-content: center;
+				}
+			}
+
+			&:before,&:after {
+				content: none;
+			}
+		}
+
+		&-react,&-react--mobile {
+			.ibe-searcher__calendar-text {
+				position: relative;
+			}
+			.ibe-searcher__calendar-tooltip {
+				background: #fff;
+				width: rem(260);
+				padding: rem(12);
+				box-sizing: border-box;
+				position: absolute;
+				bottom: rem(47);
+				z-index: 9000;
+				box-shadow: 0 0 8px 1px #bbb;
+				right: 0;
+
+				&::after{
+					content: "";
+					position: absolute;
+					bottom: rem(-6);    
+					right: rem(10);      
+					width: rem(12);
+					height: rem(12);
+					background: #fff;
+					transform: rotate(45deg);
+					box-shadow: 2px 2px 6px rgba(0,0,0,.08);
+				}
+
+				/* Encabezado */
+				.tooltip-pets-header {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					padding: 4px 6px;
+					margin-bottom: 8px;
+					position: relative;
+
+					h3 {
+						margin: 0;
+						font-weight: bold;
+						font-size: rem(14);
+						color: #333;
+					}
+
+					.close-btn {
+						background: none;
+						border: none;
+						font-size: 1.5rem;
+						color: #555;
+						cursor: pointer;
+						position: absolute;
+						right: 0;
+						top: 0;
+						width: rem(24);				
+						height: rem(24);			
+					}
+				}
+
+				/* Contenido */
+				.tooltip-pets-content {
+					padding: 6px 8px;
+					color: #555;
+					font-size: rem(14);
+					line-height: rem(21);
+				}
+			}
+		}
+
+		&-react--mobile {
+			background-color: #fff !important;
+			.ibe-searcher__calendar-tooltip {
+				.close-btn {
+					top: rem(-5);
+				}
+			}
+		}
+	}
+
+	/* Contenedor del toggle */
+	&-switch {
+		position: relative;
+		display: inline-block;
+		width: 60px;
+		height: 26px;
+
+		/* Ocultamos el checkbox original */
+		input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+
+			/* Cuando está activado */
+			&:checked + .ibe-searcher-slider {
+				background-color: #D7192D; /* rojo */
+				&::before {
+					transform: translateX(34px);
+				}
+			}
+			/* Cuando está desactivado */
+			&[disabled] + .ibe-searcher-slider {
+				background-color: #eee;
+				cursor: not-allowed;
+			}
+		}
+	}
+
+	/* El fondo del toggle */
+	&-slider {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #fff; /* blanco por defecto */
+		transition: 0.4s;
+		border-radius: 34px;
+		box-shadow: 0 0 2px rgba(0, 0, 0, 1);
+
+		/* La bolita blanca */
+		&:before {
+			position: absolute;
+			content: "";
+			height: 26px;
+			width: 26px;
+			left: 0px;
+			bottom: 0px;
+			background-color: white;
+			transition: 0.4s;
+			border-radius: 50%;
+			box-shadow: 0 0 2px rgba(0, 0, 0, 1);
+		}
+	}
+
+	&__isotipo{
+		width: rem(20);
+		height: auto;
+		position: absolute;
+		z-index: 1;
+		top: rem(20);
+		right: rem(15);
+	}
+	.hasDatepicker {
+		padding-bottom: rem(16);
+		background: $PC-cromatico_7;
+	}
+	.ibe-tab {
+		min-height: rem(151.56) !important;
+		&__scroll {
+			+ .ibe-tab__container {
+				padding-bottom: 0;
+			}
+		}
+	}
+	[data-move="tab"] {
+		display: none;
+		&.active{
+			display: block;
+		}
+	}
+	.ibe-form__radio-group {
+		display: inline-block;
+		vertical-align: top;
+		&--col {
+			max-width: 40%;
+			min-width: 40%;
+			&-left{
+				.ibe-select__button {
+					float: left;
+					margin: rem(6) rem(32) rem(8) 0;
+				}
+				.ibe-select-opciones{
+					@include clearfix;
+					width: auto;
+					float: left;
+				}
+			}
+		}
+
+		.ibe-form__checkbox-label{
+			padding-top: rem(5);
+			color: $PC-cromatico_28;
+		}
+
+	}
+	.ibe-accordion {
+		margin-bottom: 0;
+		position: relative;
+	}
+	.selectize-control {
+		margin-top: 0;
+		min-width: rem(150);
+	}
+	.ibe_form__selectize .selectize-input {
+		.item,
+		input {
+			font-size: rem(13);
+			color: $PC-cromatico_1;
+			left: 0 !important;
+		}
+	}
+	&__options {
+		position: relative;
+		display: inline-block;
+		width: 100%;
+		padding: rem(15) 0 0;
+		font-size: 0;
+		&-col {
+			display: inline-block;
+			vertical-align: middle;
+			// .ui-selectmenu-button {
+			// 	margin: 0 rem(10) 0 0 !important;
+			// }
+			&--right {
+				position: relative;
+				float: right;
+				padding-left: rem(20);
+				padding-right: rem(150);
+			}
+			&--large {
+				min-width: 59.5%;
+				max-width: 59.5%;
+			}
+			&--end {
+				position: absolute;
+				right: rem(6);
+				z-index: 1;
+				.ibe-searcher__options--end {
+					padding-top: 0;
+				}
+				+ .ibe-searcher__options-col--right {
+					// padding-right: rem(160);
+				}
+
+			}
+		}
+		.ibe-select__button {
+			//float: right;
+			margin: 0 rem(10) 0 0;
+			.ui-selectmenu-text {
+				margin-right: rem(9);
+			}
+		}
+
+		& > .link {
+			vertical-align: top;
+		}
+
+		& > .link__regular {
+			display: inline-block;
+		}
+
+		& > .ibe-form__radio-group {
+			margin-top: -0.25rem;
+			margin-bottom: rem(2);
+		}
+
+		& > .ibe_form__selectize {
+			padding: 0;
+		}
+
+		.ibe-searcher__passenger-button {
+			&.link {
+				display: inline-block;
+				padding-bottom: rem(2);
+				color: $PC-cromatico_1;
+				font-size: rem(13);
+				border-bottom: 1px dashed $BRD_standar_1;
+				position: relative;
+				// max-width: rem(315);
+				min-width: rem(171);
+				&:focus {
+					outline: 0;
+					text-decoration: underline;
+				}
+				span {
+					display: inline;
+					vertical-align: top;
+					position: relative;
+					margin-right: rem(4);
+					&.option-span {
+						display: none;
+					}
+				}
+				&:after {
+					content: ' ';
+					display: inline-block;
+					vertical-align: top;
+					position: absolute;
+					width: 0;
+					height: 0;
+					margin-top: rem(8);
+					//margin-left: rem(18);
+					border-style: solid;
+					border-width: 0 5px 5px 5px;
+					border-color: transparent transparent #808080 transparent;
+				}
+				&.collapsed {
+					&:after {
+						content: ' ';
+						display: inline-block;
+						vertical-align: top;
+						position: absolute;
+						width: 0;
+						height: 0;
+						margin-top: rem(8);
+						//margin-left: rem(18);
+						border-style: solid;
+						border-width: 5px 5px 0 5px;
+						border-color: #808080 transparent transparent transparent;
+					}
+				}
+			}
+		}
+
+		&--end {
+			text-align: right;
+			.icon-responsive {
+				&:before {
+					display: none;
+					font-size: rem(20);
+					width: rem(10);
+					vertical-align: bottom;
+					margin-right: rem(15);
+				}
+			}
+			.icon-no-responsive {
+				&:before {
+					display: inline-block;
+					font-size: rem(20);
+					width: rem(10);
+					vertical-align: bottom;
+					margin-right: rem(15);
+				}
+			}
+		}
+	}
+	&__row {
+		position: relative;
+		margin-bottom: rem(5);
+		padding: 0 rem(4);
+		font-size: 0;
+		&--no-padding{
+			padding: 0;
+		}
+		&--no-margin{
+			margin: 0;
+		}
+	}
+	&__col {
+		display: inline-block;
+		vertical-align: top;
+		margin: 0 rem(3.8);
+		font-size: rem(16);
+
+		&--search-airport{
+			margin-top: rem(14);
+			margin-left: 0;
+			.ui-selectmenu-button{
+				margin-top: rem(5);
+			}
+			.ibe-select__button{
+				width: auto !important;
+				.ui-selectmenu-text {
+					margin-right: rem(8);
+				}
+			}
+			.ibe_form__radio{
+				margin-right: rem(21);
+			}
+			.ui-selectmenu-menu{
+				margin-top: rem(7);
+			}
+		}
+		&--search-selector{
+			margin-top: rem(20);
+			margin-right: 0;
+		}
+
+    &--medium{
+            width: 28.7%;
+						margin:0 rem(16) 0 0;
+		}
+		&--remedium{
+            width: 37%;
+			margin:0 rem(16) 0 0;
+		}
+
+		&--small{
+            width: 20.2%;
+            margin:0 rem(16) 0 0;
+		}
+		&--big{
+            width: 39.5%;
+            margin:0 rem(16) 0 0;
+        }
+
+    &--button-type-2 {
+            margin-left: 0;
+            margin-right: 0;
+						width: 17.8%;
+						.icon-buscar{
+							display: none;
+			}
+    }
+
+		&--ori {
+			margin-left: 0;
+			width: 20.7%;
+		}
+		&--des {
+			width: 20.7%;
+		}
+		&--date {
+			width: 25.5%;
+		}
+		&--alt {
+			width: 16%;
+			.ibe_form__input-text {
+				padding: rem(12) rem(14);
+				text-overflow: ellipsis;
+				max-width: 100%;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+		}
+		&--button {
+			margin-right: 0;
+			width: 14%;
+		}
+	}
+	&__rate {
+		float: right;
+		margin-right: 1.2rem;
+		margin-left: 2rem;
+
+		&.selectize-control {
+			border-bottom: 1px dashed $BRD_standar_1;
+
+			.selectize-input {
+				padding-right: 0;
+			}
+
+			&.single {
+
+				.selectize-input {
+					&:after {
+						right: -1rem;
+					}
+				}
+			}
+
+			.selectize-dropdown {
+				margin-left: 0;
+				min-width: rem(200);
+			}
+		}
+	}
+	&__passenger {
+		position: relative;
+		padding-top: 0;
+
+		&-content {
+			margin-top: 0.5rem;
+			display: none;
+			width: 17.7rem;
+			position: absolute;
+			background-color: $BCK-cromatico_1;
+			z-index: 10000;
+			border-radius: 4px;
+			box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.47), 0 -1px 4px 0 rgba(0, 0, 0, 0.23);
+			padding-bottom: rem(20);
+			left: 0;
+		}
+
+		&-title {
+			background: $BCK-cromatico_2;
+			font-size: rem(15);
+			padding: 1rem 1rem 1.5rem;
+		}
+
+		.ibe-form__radio-group {
+			display: block;
+			padding: 0.5rem 2rem rem(16);
+		}
+
+		.ibe_form__radio {
+			display: block;
+			margin: 0 0 1.6rem;
+
+			&:last-child {
+				margin-bottom: 1rem;
+			}
+			&--option-radio {
+				display: none;
+			}
+		}
+
+		.ibe-button {
+			width: calc(100% - 2rem);
+			margin: 1rem 1rem rem(4) 1rem !important;
+		}
+
+		&--col {
+			display: inline-block;
+			vertical-align: top;
+			max-width: 46%;
+			.ibe-searcher__passenger-button {
+				display: inline-block;
+				vertical-align: top;
+				max-width: rem(291);
+			}
+		}
+		&--option-combo {
+			visibility: hidden;
+		}
+	}
+	.xui-return-date-hide {
+		display: none;
+	}
+	.xui-car-city-hide {
+		display: none;
+	}
+	&__title {
+		display: block;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		border: 0;
+		font-family: $font-04;
+		font-size: 1.125rem;
+		text-align: left;
+		color: $PC-cromatico_1;
+		background: transparent;
+		border-radius: 0;
+	}
+	.ibe_form__input-text {
+		text-align: left;
+	}
+	&__odSwitch{
+		position: absolute;
+		top: rem(7);
+		left: calc((100% - 38px)/2);
+		z-index: 9;
+		&--button{
+			background-color: $PC-cromatico_4;
+			color: $PC-cromatico_1;
+			border: rem(1) solid $BRD_standar_1;
+			border-radius: 50%;
+			width: rem(32);
+			height: rem(32);
+			font-size: rem(25);
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
+			/*&:hover{
+				animation: spin 2s linear;
+			}*/
+			&:focus{
+				outline: rem(2) solid $BRD_standar_3;
+			}
+		}
+		@keyframes spin {
+			25% {
+				transform:rotate(180deg);
+			}
+			50% {
+				transform:rotate(360deg);
+			}
+			75% {
+				transform:rotate(180deg);
+			}
+			100% {
+				transform:rotate(0deg);
+			}
+		}
+	}
+	/* Modificadores */
+
+	&--xs {		
+		.ibe-tab__menu-item{			
+			margin-top: 0 !important;
+		}				
+		.ibe-search-flights__search-button {
+			margin-top: rem(16);
+		}
+		.ibe-searcher__options {
+			padding: rem(15) 0 0 0;
+			> .ibe-form__radio-group {
+				display: block;
+				margin-bottom: rem(10);
+				.ibe_form__radio {
+					margin-right: 0;
+					padding-left: rem(30);
+				}
+			}
+		}
+		.ibe_form__group {
+			&--button-icon {
+				.ibe_form__input-label {
+					width: 75%;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					overflow: hidden;
+				}
+				.ibe_form__input-button {
+					width: rem(40);
+				}
+			}
+			&--icon {
+				&:before {
+					right: rem(11);
+				}
+			}
+		}
+		.ibe_form__group-half,
+		.ibe_form__group-full {
+			padding-left: rem(10);
+			.ibe_form__input-text {
+				padding-left: rem(5);
+				padding-right: 0;
+				font-family: $font-04;
+				font-size: rem(16);
+				&:focus {
+					width: 100%;
+					padding: 0 0 0 rem(5);
+				}
+			}
+		}
+		.ibe_form__group-full {
+			padding-right: rem(40);
+			&:before {
+				right: rem(10);
+			}
+		}
+		.ibe_form__input-text {
+			padding-left: rem(14);
+			font-family: $font-04;
+			font-size: rem(16);
+		}
+		.ibe_form__input-label {
+			left: rem(15);
+		}
+		/* Desplegables */
+		.ui-autocomplete {
+			left: auto !important;
+			right: 0;
+			&:before,
+			&:after {
+				left: 35%;
+			}
+		}
+		.ibe-choose-city {
+			right: 0;
+			left: auto;
+			min-width: 48.4rem;
+    		width: 100%;
+			&:before,
+			&:after {
+				right: 1%;
+				left: auto;
+			}
+		}
+		.ibe-searcher__calendar {
+			left: auto;
+			right: 0;
+			&:before,
+			&:after {
+				left: auto;
+				right: 26%;
+			}
+			&--end {
+				&:before,
+				&:after {
+					left: auto;
+					right: 7%;
+				}
+			}
+		}
+		.ibe-people-counter {
+			left: auto;
+			right: 0;
+			&:before,
+			&:after {
+				left: auto;
+				right: 50%;
+			}
+		}
+		.ibe-searcher-room {
+			left: auto;
+			right: 0;
+			&:before,
+			&:after {
+				left: auto;
+				right: 21%;
+			}
+		}
+		.ibe-tab__menu{
+			width: auto;
+			display: inline-flex;
+			white-space: nowrap;
+			padding: 0.9375rem 0.125rem 0.3125rem;
+			vertical-align: top;
+			border: none;
+			.ibe-tab__menu-item a[title~="España"]{
+				padding: 0 !important;
+			}
+			.ibe-tab__menu-item .link {
+				padding: 0 !important;
+				&:hover{
+					text-decoration: none !important;
+				}			
+			}
+			.ibe-tab__menu-item{
+				&.ui-tabs-active{
+					.link{
+						border-bottom: 2px solid $BRD-standar_6 !important;
+					}
+				}				
+			}
+		}
+	}
+	//--xs
+	.tab-searcher {
+		display: none;
+		&:first-child {
+			display: block; //De esta forma, en caso de que tarde el componente en cargar hacemos visible solo el primer buscador
+		}
+	}
+	&--accordion {
+		.ibe-searcher__passenger-content {
+			padding-bottom: rem(20);
+		}
+		.ibe-select__menu {
+			min-width: rem(200);
+			right: rem(0);
+		}
+		.ibe-tab--scrolling {
+			.ibe-tab__menu {
+				//-padding: rem(15) 0 0;
+				margin-bottom: rem(2) !important;
+				line-height: rem(22);
+			}
+		}
+		.ibe_form__group {
+			&:not(.ibe_form__group--error) {
+				.ibe_form__msg-info {
+					display: none;
+				}
+			}
+		}
+		.ibe_form__input-text {
+			text-align: left;
+		}
+		.ibe-choose-city .ibe-tab__container:nth-child(1) {
+			display: block;
+			width: 100%;
+			overflow-x: hidden;
+			.ibe-filter-letter__header {
+				text-align: center;
+			}
+		}
+		.ibe-tab {
+			&__container {
+				.ibe-searcher__row {
+
+					//- &--col1{ background-color: #808080}
+					//- &--col2{ background-color: #F08400;}
+					&--col1 {
+						width: 43%;
+						@include clearfix;
+						float: left;
+						padding-top: 0;
+					}
+					&--col2 {
+						@include clearfix;
+						width: 42.5%;
+						float: left;
+						padding-top: 0;
+					}
+					&--col3 {
+						@include clearfix;
+						width: 14.5%;
+						float: left;
+						padding-top: 0;
+					}
+					&--col1 {
+						.ibe-searcher__col--ori,
+						.ibe-searcher__col--des {
+							width: 48.6%;
+						}
+						.ibe-form__radio-group--col {
+							max-width: 100%;
+							min-width: 100%;
+							margin-top: rem(10);
+
+						}
+
+						.ibe-form__radio-group--date {
+							width: 60%;
+						}
+						.ibe-form__radio-group--alt {
+							width: 40%;
+						}
+
+						.ibe-searcher__col--ori,
+						.ibe-searcher__col--des {
+							// .ibe_form__group.ibe_form__group--button-icon.fc_form_group:before {
+							// 	bottom: -11px;
+							// 	left: 12%;
+							// 	border: solid transparent;
+							// 	content: " ";
+							// 	height: 0;
+							// 	width: 0;
+							// 	position: absolute;
+							// 	border-color: rgba(255, 255, 255, 0);
+							// 	border-bottom-color: #000;
+							// 	border-width: 8px;
+							// 	margin-left: -0.5rem;
+							// 	z-index: 100027;
+							// }
+							// .ibe_form__group.ibe_form__group--button-icon.fc_form_group:after {
+							// 	bottom: -11px;
+							// 	left: 12%;
+							// 	border: solid transparent;
+							// 	content: " ";
+							// 	height: 0;
+							// 	width: 0;
+							// 	position: absolute;
+							// 	border-color: rgba(255, 255, 255, 0);
+							// 	border-bottom-color: #fff;
+							// 	border-width: 8px;
+							// 	margin-left: -0.5rem;
+							// 	z-index: 100027;
+							// }
+						}
+					}
+					&--col2 {
+						.ibe-searcher__col--date {
+							width: 55.6%;
+						}
+						.ibe-searcher__col--alt {
+							width: 41%;
+						}
+						.ibe-searcher__options-col--right {
+							padding-right: 0;
+							padding-left: rem(9);
+						}
+						.ibe-searcher__passenger--col {
+							max-width: 100%;
+							.ibe-searcher__passenger-button span {
+								margin-right: 0;
+							}
+							.ibe-searcher__passenger-button:after {
+								right: rem(-15);
+							}
+						}
+						.ibe-searcher__options-col--large {
+							padding-top: rem(19);
+							max-width: 55.6%;
+							min-width: 55.6%;
+							padding-left: rem(5);
+							.ibe-searcher__passenger--col {
+								max-width: initial;
+								min-width: initial;
+								// margin-left: rem(-23);
+							}
+						}
+					}
+					&--col3 {
+						.ibe-searcher__col--button {
+							width: 100%;
+						}
+					}
+					.ibe-searcher__options-col--right {
+						padding-top: rem(19);
+						vertical-align: top;
+						.ui-menu-item-wrapper {
+							color: $PC-cromatico_1;
+							font-size: rem(13);
+							//-line-height: 29px;
+							&:hover, &.ui-state-active {
+								color: $PC-cromatico_2;
+							}
+						}
+
+					}
+					.ibe-searcher__options > .ibe-form__radio-group {
+						padding: 0;
+						padding-top: rem(3);
+					}
+				}
+				.ibe-searcher__options-col--end {
+					width: 100%;
+					.ibe-searcher__options--end {
+						position: absolute;
+						top: rem(62);
+						right: rem(-4);
+						width: auto;
+					}
+				}
+
+				.ibe-searcher {
+					.selectize-control {
+						min-width: rem(141);
+					}
+					&__options {
+						& > .ibe-form__radio-group {
+							margin-bottom: 0;
+							padding: rem(0) rem(0) rem(0) rem(5);
+							.ibe_form__radio {
+								margin-right: rem(32);
+								vertical-align: middle;
+							}
+						}
+						& > .ibe_form__selectize {
+							padding: 0;
+						}
+					}
+					&__row {
+						margin-bottom: rem(5);
+						padding: 0 rem(4);
+						font-size: 0;
+
+					}
+					&__col {
+						display: inline-block;
+						vertical-align: top;
+						margin: 0 rem(3.8);
+						font-size: rem(16);
+						&--ori {
+							margin-left: 0;
+							width: 20.7%;
+						}
+						&--des {
+							width: 20.7%;
+						}
+						&--date {
+							width: 25.5%;
+						}
+						&--alt {
+							width: 16%;
+							.ibe_form__input-text {
+								padding: rem(12) rem(14);
+								text-overflow: ellipsis;
+								max-width: 100%;
+								white-space: nowrap;
+								overflow: hidden;
+							}
+						}
+						&--button {
+							margin-right: 0;
+							width: 14%;
+						}
+					}
+				}
+			}
+			&__scroll {
+				+ .ibe-tab__container {
+					padding-bottom: rem(8);
+				}
+			}
+		}
+		.ibe-people-counter__buttons {
+			&-less {
+				color: transparent;
+				position: relative;
+				&:before {
+					content: "";
+					background-color: $PC-cromatico_3;
+					width: rem(16);
+					height: rem(2);
+					position: absolute;
+					top: 55%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+				}
+			}
+		}
+		.ibe_form__group--half-only-round {
+			.ibe_form__group-half {
+				&:first-child {
+					width: 100%;
+					border-right: 1px solid $BRD_standar_1;
+				}
+				&:nth-child(2) {
+					display: none;
+				}
+			}
+		}
+	}
+	.ibe-searcher__options {
+		.ibe_form__selectize {
+			.selectize-input.items {
+				.item {
+					z-index: 10;
+				}
+				&.full.has-items {
+					&:after {
+						top: rem(12);
+						// right: rem(13);
+					}
+				}
+
+			}
+		}
+		.ibe-select__button{
+			width: auto !important;
+		}
+		.ibe-select__menu{
+			margin: rem(-1) 0 0;
+		}
+		.ibe-searcher-room__column-ages {
+			.ibe_form__selectize {
+				.selectize-input.items {
+
+					&.full.has-items {
+						&:after {
+							right: rem(21);
+						}
+					}
+				}
+			}
+		}
+	}
+	.ibe_form__group-half {
+		&.icon-caret_derecha {
+			+ .ibe_form__group-half {
+				.ibe_form__input-label {
+					text-align: right;
+					&.xui-label--up {
+						text-align: left;
+					}
+				}
+				&.ibe_form__group--content {
+					.ibe_form__input-label {
+						text-align: left;
+					}
+				}
+			}
+		}
+	}
+	.ibe_form__group--error {
+		&.ibe_form__group--button-icon {
+			.ibe_form__input-button {
+				height: rem(45);
+			}
+		}
+		&.ibe_form__group--half {
+			.ibe_form__group-half {
+				&:first-child {
+					&:before {
+						top: rem(23);
+
+					}
+				}
+			}
+
+		}
+	}
+	.ibe_form__group--button-icon {
+		.ibe_form__input-button {
+			width: rem(50);
+		}
+	}
+	&--destiny{
+		margin-bottom: 32px;
+		border: 20px solid red;
+	}
+}
+.ib-calendar--tooltip{
+	&.tooltip{
+		&.in{
+			opacity: 1;
+		}
+		&.top{
+			padding-top: 0;
+			.tooltip{
+				&-arrow{
+					border-top-color: white;
+				}
+				&-inner{
+					background-color: white;
+					color: $PC-cromatico_1;
+					padding-left: rem(20);
+					box-shadow: 0 rem(2) rem(3) 0 #bbb, 0 rem(-1) rem(4) 0 #bbb;
+				}
+			}
+			.icon{
+				&-menos_2{
+					position: absolute;
+					top: rem(3);
+					left: rem(2);
+					font-size: rem(16);
+				}
+			}
+		}
+	}
+}
+.ibe_form__group--half-only-round {
+	.ibe-searcher__calendar {
+		.ui-datepicker-calendar {
+			.selected-day--from {
+				a {
+					font-weight: normal;
+					background: none;
+					background-color: $BCK-cromatico_5;
+				}
+				&.range, &.mouse, &.ui-datepicker-current-day {
+					a, &.ui-state-active {
+						font-weight: normal;
+						background: none;
+						background-color: $BCK-cromatico_5;
+						&:hover {
+							background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png") left center no-repeat;
+							background-color: transparent;
+							color: $PC-cromatico_4;
+							font-weight: normal;
+						}
+					}
+
+				}
+			}
+		}
+	}
+}
+
+[data-day-calendar] {
+	.ibe-searcher__calendar--start {
+		.ui-datepicker-current-day {
+			&.ui-datepicker-days-cell-over:not(.first, :hover) {
+				.ui-state-active {
+					background: none;
+					color: $PC-cromatico_1;
+					font-weight: bold;
+
+					// background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png") right center no-repeat;
+					background: $PC-cromatico_3;
+					text-decoration: none;
+					color: $PC-cromatico_4;
+					&.ui-state-hover {
+						font-weight: bold;
+					}
+				}
+			}
+		}
+
+	}
+
+}
+
+.ui-datepicker-group {
+	display: inline-block;
+	width: 50%;
+}
+
+.ui-datepicker {
+	overflow: hidden;
+	width: 100% !important;
+	//background: #FAFAFA;
+	margin-top: -1px;
+}
+
+/* Responsive */
+/*XLARGE RESOLUTION STYLES*/
+@mixin xl-ibe_searcher {
+	.ibe-searcher {
+		// &__options {
+		// 	.ibe-select__button {
+		// 		margin: rem(2) rem(56) 0 rem(20);
+		// 	}
+        // }
+        &--xs{
+			.ibe-tab__menu-item a[title~="España"]{
+				padding: 0 !important;
+				margin-top: 0 !important;
+			}
+			.ibe-tab__menu-item .link {
+				padding: 0 !important;
+			}
+		}
+		.ibe-accordion__header {
+			display: none;
+		}
+		.ibe-accordion__collapse {
+			display: block !important;
+			height: auto !important;
+		}
+		&__row {
+			&--flightstatus-routes {
+				>.ibe-searcher__col--big{
+					width: remcalc(22.9%, " - ", rem(16));
+				}
+				>.ibe-searcher__col--medium{
+					width: remcalc(20.5%, " - ", rem(16));
+				}
+				>.ibe-searcher__col--small{
+					width: remcalc(18.6%, " - ", rem(16));
+				}
+				>.ibe-searcher__col--button-type-2{
+					width: remcalc(16.6%, " - ", rem(16));
+				}
+			}
+		}
+		&__rate {
+			&--alone {
+				float: left;
+				margin-left: 0;
+			}
+		}
+		&--accordion {
+			.ibe-searcher {
+				.selectize-control {
+					min-width: rem(141);
+				}
+				&__options {
+					& > .ibe_form__selectize {
+						margin: rem(2) 17% 0 rem(20);
+					}
+					.ibe-form__radio-group--col .link {
+						max-width: rem(205);
+						display: inline-block;
+						vertical-align: middle;
+					}
+				}
+			}
+			.ibe-tab {
+				&__container {
+					.ibe-searcher {
+						&__options {
+							& > .ibe-form__radio-group {
+								.ibe_form__radio {
+									max-width: rem(115);
+								}
+							}
+						}
+					}
+				}
+			}
+			.ibe-searcher--xs .ibe-choose-city {
+				.ibe-tab__menu {
+					max-width: rem(164);
+				}
+			}
+		}
+		&__vintage {
+
+			.ibe-searcher--accordion {
+
+				.ibe-searcher__row {
+
+					//&--col1{ background-color: #808080}
+					//&--col2{ background-color: #F08400;}
+					&--col1 {
+						width: 43%;
+						@include clearfix;
+						float: left;
+						padding-top: 0;
+					}
+					&--col2 {
+						@include clearfix;
+						width: 42.5%;
+						float: left;
+						padding-top: 0;
+					}
+					&--col3 {
+						@include clearfix;
+						width: 14.5%;
+						float: left;
+						padding-top: 0;
+					}
+					&--col1 {
+						.ibe-searcher__col--ori,
+						.ibe-searcher__col--des {
+							width: 48.6%;
+						}
+						.ibe-form__radio-group--col {
+							max-width: 100%;
+							min-width: 100%;
+							margin-top: rem(10);
+
+						}
+
+						.ibe-form__radio-group--date {
+							width: 60%;
+						}
+						.ibe-form__radio-group--alt {
+							width: 40%;
+						}
+					}
+					&--col2 {
+						.ibe-searcher__col--date {
+							width: 55.6%;
+						}
+						.ibe-searcher__col--alt {
+							width: 41%;
+						}
+						.ibe-searcher__options-col--right {
+							padding-right: 0;
+							padding-left: rem(11);
+						}
+						.ibe-searcher__options-col--large {
+							padding-top: rem(17);
+							max-width: 55.6%;
+							min-width: 55.6%;
+							padding-left: rem(5);
+							.ibe-searcher__passenger--col {
+								max-width: initial;
+								min-width: initial;
+								// margin-left: rem(-23);
+							}
+						}
+					}
+					&--col3 {
+						.ibe-searcher__col--button {
+							width: 100%;
+						}
+
+					}
+					.ibe-searcher__options-col--right {
+						padding-top: rem(16);
+					}
+					.ibe-searcher__options > .ibe-form__radio-group {
+						padding: 0;
+						padding-top: rem(3);
+					}
+				}
+				.ibe-searcher__options-col--end {
+					width: 100%;
+					.ibe-searcher__options--end {
+						position: absolute;
+						top: rem(59);
+
+						width: auto;
+					}
+				}
+				.ibe-select__menu {
+					min-width: rem(200);
+				}
+			}
+			.ibe-search-flights__search-box{
+				min-height: rem(168)
+			}
+		}
+	}
+}
+
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe_searcher {
+	.ibe-searcher {
+		&--xs{
+			.ibe-tab__menu-item a[title~="España"]{
+				padding: 0 !important;
+				margin-top: 0 !important;
+			}
+			.ibe-tab__menu-item .link {
+				padding: 0 !important;
+			}
+		}
+		&__row {
+			&--flightstatus-routes {
+				>.ibe-searcher__col--big{
+					width: remcalc(22.9%, " - ", rem(16));
+				}
+				>.ibe-searcher__col--medium{
+					width: remcalc(20.5%, " - ", rem(16));
+				}
+				>.ibe-searcher__col--small{
+					width: remcalc(18.6%, " - ", rem(16));
+				}
+				>.ibe-searcher__col--button-type-2{
+					width: remcalc(16.6%, " - ", rem(16));
+				}
+			}
+		}
+		&__col {
+            &--medium{
+				width: 28.3%;
+                margin: 0 rem(13) 0 0;
+			}
+			&--remedium{
+				width: 35%;
+
+			}
+			&--small{
+				width: 20.7%;
+				margin:0 rem(16) 0 0;
+			}
+			&--big{
+				width: 39.2%;
+				margin:0 rem(16) 0 0;
+			}
+			&--ori {
+				width: 22.5%;
+			}
+			&--des {
+				width: 22.5%;
+			}
+			&--date {
+				width: 30.4%;
+			}
+			&--alt {
+				width: 14.6%;
+			}
+			&--button {
+
+				width: 5.3%;
+			}
+
+		}
+		&__options {
+
+			& > .ibe-form__radio-group {
+				margin-bottom: rem(16);
+			}
+			.ibe-form__radio-group--col {
+				min-width: 48%;
+				max-width: 48%;
+			}
+			&-col {
+				&--large {
+					min-width: 52%;
+					max-width: 52%;
+				}
+				&--right {
+					float: none;
+					padding-right: rem(57);
+				}
+				&--end {
+					right: rem(17);
+				}
+				.ibe-select__button {
+					margin: 0;
+
+				}
+
+			}
+			.ibe-form__radio-group--col .link {
+				max-width: rem(170);
+				display: inline-block;
+				vertical-align: middle;
+			}
+		}
+		&__calendar {
+			left: -2.65rem;
+			&:before {
+				left: 14%;
+			}
+			&:after {
+				left: 14%;
+			}
+			&--end {
+				left: -2.65rem;
+
+				&:before {
+					left: 36%;
+				}
+				&:after {
+					left: 36%;
+				}
+				&.ibe-searcher__calendar--car {
+					left: -17.1rem;
+
+					&:before {
+						left: 55%;
+					}
+
+					&:after {
+						left: 55%;
+					}
+				}
+			}
+			&--claim {
+				left: auto;
+				&:before, &:after {
+					left: auto;
+					right: rem(24);
+				}
+			}
+			&.ibe-searcher__calendar-react {
+				left: rem(-327) !important;
+			}
+		}
+		.ibe-accordion__header {
+			display: none;
+		}
+		.ibe-accordion__collapse {
+			display: block !important;
+			height: auto !important;
+		}
+		&__passenger {
+			&--col {
+				max-width: 45%;
+			}
+		}
+		&__rate {
+			&--alone {
+				float: left;
+				margin-left: 0;
+			}
+		}
+		&__options {
+			.icon-responsive {
+
+				width: rem(40);
+				height: rem(40);
+				font-size: 0;
+				&:before {
+					font-size: rem(28);
+					margin-right: 0;
+					display: block;
+					width: auto;
+				}
+				&:hover {
+					color: $PC-cromatico_10;
+					text-decoration: none;
+				}
+			}
+		}
+		.ibe-searcher-room {
+			width: rem(785);
+			right: rem(-88);
+
+		}
+		/* Modificadores */
+		&--xs {
+			.ibe-choose-city {
+				width: rem(900);
+			}
+			.ibe-form__radio-group .ibe_form__radio {
+				float: none !important;
+				margin-bottom: rem(8);
+			}
+			.ibe-searcher__rate {
+				float: left;
+				margin-left: 0;
+				.item {
+					max-width: rem(128);
+				}
+			}
+		}
+		&--accordion {
+			.ibe-accordion {
+				margin-top: rem(3);
+			}
+			.ibe-searcher__calendar {
+				left: rem(-135);
+				&:before {
+					left: rem(180);
+				}
+				&:after {
+					left: rem(180);
+				}
+				&--end {
+					left: rem(-135);
+
+					&:before {
+						left: rem(300);
+					}
+					&:after {
+						left: rem(300);
+					}
+				}
+			}
+			.ibe-tab {
+				&--scrolling {
+					.ibe-tab__menu {
+						//padding-top: rem(7);
+						padding-bottom: 0;
+						line-height: 24px;
+					}
+				}
+				&__container {
+					.ibe-searcher__row {
+
+						//&--col1{ background-color: #808080}
+						//&--col2{ background-color: #F08400;}
+						&--col1 {
+							@include clearfix;
+							width: 47%;
+							float: left;
+							padding-top: 0;
+						}
+						&--col2 {
+							@include clearfix;
+							width: 47.5%;
+							float: left;
+							padding-top: 0;
+						}
+						&--col3 {
+							@include clearfix;
+							width: 5.3%;
+							float: left;
+							padding-top: 0;
+						}
+						.ibe-searcher__options-col--right {
+							padding-top: rem(16);
+							padding-right: rem(41);
+						}
+						&--col1 {
+							.ibe-searcher__col--ori,
+							.ibe-searcher__col--des {
+								width: 47.8%;
+							}
+							.ibe-form__radio-group--col {
+								max-width: 100%;
+								min-width: 100%;
+								margin-top: rem(10);
+							}
+							.ibe-form__radio-group--date {
+								width: 60%;
+							}
+							.ibe-form__radio-group--alt {
+								width: 40%;
+							}
+						}
+						&--col2 {
+							.ibe-searcher__col--date {
+								width: 57.6%;
+							}
+							.ibe-searcher__col--alt {
+								width: 36%;
+							}
+							.ibe-searcher__options-col--right {
+								padding-top: rem(17);
+								padding-right: 0;
+								padding-left: 0;
+								margin-left: rem(24);
+							}
+							.ibe-searcher__options-col--large {
+								padding-top: rem(17);
+								max-width: 55.6%;
+								min-width: 55.6%;
+								padding-left: rem(5);
+								.ibe-searcher__passenger--col {
+									max-width: initial;
+								}
+							}
+							.ibe-searcher__passenger--col {
+								max-width: 100%;
+								.ibe-searcher__passenger-button span {
+									margin-right: 0;
+								}
+								.ibe-searcher__passenger-button::after {
+									right: rem(-15);
+								}
+							}
+						}
+						&--col3 {
+							.ibe-searcher__col--button {
+								width: 100%;
+							}
+						}
+						.ibe-searcher__options > .ibe-form__radio-group {
+							padding: 0;
+							padding-top: rem(2);
+						}
+
+					}
+
+					.ibe-searcher__options--end {
+						position: absolute;
+						top: rem(63);
+						right: rem(65);
+					}
+					.ibe-searcher {
+						.selectize-control {
+							min-width: rem(141);
+						}
+						&__options {
+							& > .ibe-form__radio-group {
+								margin-bottom: 0;
+								padding: rem(1) rem(0) rem(0) rem(4);
+								.ibe_form__radio {
+									margin-right: rem(20);
+									max-width: rem(115);
+								}
+							}
+							& > .ibe_form__selectize {
+								padding: 0;
+								margin: rem(2) rem(76) 0 rem(20);
+							}
+						}
+						&__row {
+							margin-bottom: rem(5);
+							padding: 0 rem(4);
+
+						}
+						&__col {
+							display: inline-block;
+							vertical-align: top;
+							margin: 0 rem(5.9);
+							&--ori {
+								width: 22.5%;
+								margin-left: 0;
+							}
+							&--des {
+								width: 22.5%;
+							}
+							&--date {
+								width: 30.4%;
+							}
+							&--alt {
+								width: 14.6%;
+								//border: 1px solid $PC-cromatico_9;    //delete this; author: CCG
+								.ibe_form__input-text {
+									//max-width: rem(110);
+									padding-left: rem(10);
+									text-overflow: ellipsis;
+									//border: none;                 //delete this; author: CCG
+									//height: rem(43);              //delete this; author: CCG
+									//padding-top: rem(12);         //delete this; author: CCG
+									//padding-bottom: rem(12);      //delete this; author: CCG
+								}
+							}
+							&--button {
+								width: 5.3%;
+								margin-left: 0;
+								margin-right: 0;
+							}
+						}
+					}
+				}
+			}
+			&.ibe-searcher--xs .ibe-choose-city {
+				.ibe-tab {
+					&__menu {
+						max-width: rem(147);
+					}
+				}
+			}
+		}
+		&__vintage {
+			.ibe-searcher--accordion {
+				.ibe-searcher__row {
+
+					//&--col1{ background-color: #808080}
+					//&--col2{ background-color: #F08400;}
+					&--col1 {
+						@include clearfix;
+						width: 47%;
+						float: left;
+						padding-top: 0;
+					}
+					&--col2 {
+						@include clearfix;
+						width: 47.5%;
+						float: left;
+						padding-top: 0;
+					}
+					&--col3 {
+						@include clearfix;
+						width: 5.3%;
+						float: left;
+						padding-top: 0;
+					}
+					.ibe-searcher__options-col--right {
+						padding-top: rem(16);
+						padding-right: rem(41);
+					}
+					&--col1 {
+						.ibe-searcher__col--ori,
+						.ibe-searcher__col--des {
+							width: 47.8%;
+						}
+						.ibe-form__radio-group--col {
+							max-width: 100%;
+							min-width: 100%;
+							margin-top: rem(10);
+						}
+						.ibe-form__radio-group--date {
+							width: 60%;
+						}
+						.ibe-form__radio-group--alt {
+							width: 40%;
+						}
+						// modal origin / destiny
+						.ibe-searcher__col--ori.modal-mode,
+						.ibe-searcher__col--des.modal-mode {
+							display: none;
+						}
+					}
+					&--col2 {
+						.ibe-searcher__col--date {
+							width: 57.6%;
+						}
+						.ibe-searcher__col--alt {
+							width: 36%;
+						}
+						.ibe-searcher__options-col--right {
+							padding-top: rem(17);
+							padding-right: 0;
+							padding-left: 0;
+						}
+						.ibe-searcher__options-col--large {
+							padding-top: rem(17);
+							max-width: 55.6%;
+							min-width: 55.6%;
+							padding-left: rem(5);
+							.ibe-searcher__passenger--col {
+								max-width: initial;
+							}
+						}
+						.ibe-searcher__passenger--col {
+							.ibe-searcher__passenger-button span {
+								margin-right: 0;
+							}
+							.ibe-searcher__passenger-button::after {
+								right: rem(-15);
+							}
+						}
+						.ibe-searcher__col--date {
+							&.modal-mode {
+								display: none;
+							}
+						}
+						.ibe-searcher__col--alt {
+							.ibe-searcher-room {
+								width: rem(800);
+								right: rem(-85);
+
+							}
+							.ibe-searcher-room::before,
+							.ibe-searcher-room::after {
+								left: 80%;
+							}
+						}
+
+					}
+					&--col3 {
+						.ibe-searcher__col--button {
+							width: 100%;
+						}
+					}
+					.ibe-searcher__options > .ibe-form__radio-group {
+						padding: 0;
+						padding-top: rem(2);
+					}
+					.ibe-searcher__options-col {
+						&.ibe-searcher__options-col--right,
+						&.ibe-searcher__options-col--large {
+							&.modal-mode {
+								display: none;
+							}
+						}
+					}
+				}
+				.ibe-searcher__col {
+					&.ibe-searcher__col--alt {
+						&.modal-mode {
+							display: none;
+						}
+					}
+				}
+
+				.ibe-searcher__options--end {
+					position: absolute;
+					top: rem(63);
+					right: rem(65);
+				}
+				.ibe-select__menu {
+					min-width: rem(190);
+				}
+			}
+			.ibe-searcher__calendar {
+				.ui-datepicker-calendar {
+					.selected-day--from.range, .selected-day--from.mouse {
+						a {
+							margin-right: rem(-0.5);
+						}
+					}
+				}
+			}
+		}
+
+	}
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe_searcher {
+	.ibe-searcher {
+	.ibe-select__button {
+		float: left;
+		margin-left: 0;
+	}
+	&__row {
+		&--flightstatus-routes {
+
+			>.ibe-searcher__col{
+				width: remcalc(50%, " - ", rem(8));
+				&:nth-child(even) {
+					margin-right: 0;
+				}
+			}
+			>.ibe-searcher__col--button-type-2{
+				width: 100%;
+				padding-top: rem(8);
+				margin-top: rem(24);
+				border-top: solid 1px $BRD_standar_1;
+				.ibe_form__group {
+					text-align: right;
+				}
+				.ibe-search-flights__search-button{
+					width: 28.6%;
+				}
+				.ibe-button__text {
+					display: block;
+				}
+				.icon-buscar{
+					display: none;
+				}
+			}
+		}
+	}
+    &__col{
+			&--medium{
+				width: 31.8%;
+				margin:0 rem(16) 0 0;
+			}
+
+			&--remedium{
+				width: 41.4%;
+			}
+			&--small{
+				width: 22.1%;
+				margin:0 rem(16) 0 0;
+			}
+			&--big{
+				width: 44%;
+				margin:0 rem(16) 0 0;
+			}
+			&--button-type-2{
+				width: 6.9%;
+				margin-right: 0;
+				.icon-buscar{
+					display: block;
+				}
+				.ibe-button__text{
+					display: none;
+				}
+				.ibe-button--icon{
+					padding: 0;
+				}
+
+			}
+		}
+
+
+		.ibe-accordion__button {
+			font-size: rem(19);
+		}
+
+		.ibe-accordion__header {
+			font-family: $font-02;
+			border: 1px solid $BRD_standar_1;
+			margin: 0;
+			padding: 0.8rem 4.4rem 0.95rem 1.4rem;
+			.link {
+				font-size: rem(14);
+			}
+			&:before {
+				content: "\e91d";
+				color: $PC-cromatico_4;
+				width: 2.9rem;
+				height: 100%;
+				background-color: $BCK-cromatico_5;
+				top: 0;
+				padding: 0.8rem 0 0 0.8rem;
+				font-size: rem(22);
+			}
+			&.accordion-header-close {
+				text-align: center;
+				background-color: $PC-cromatico_5;
+				color: $PC-cromatico_2;
+				border-color: $PC-cromatico_5;
+				.link {
+					font-weight: bold;
+				}
+				&:before {
+					content: "\e935";
+					width: 3.3rem;
+					padding: 0.7rem 0 0 0;
+					background-color: $PC-cromatico_5;
+					color: $PC-cromatico_2;
+					font-size: rem(25);
+				}
+			}
+		}
+		&__calendar {
+			width: rem(594);
+			height: rem(344);
+			&.ibe-searcher__calendar-react {
+				display: none !important;
+			}
+			&-header {
+				padding-bottom: rem(25);
+			}
+			&--right {
+				right: 0;
+				left: auto;
+				&:before, &:after {
+					right: 48.7%;
+					left: auto;
+				}
+			}
+			&--center {
+				left: calc(-50% + 35px);
+				&:before, &:after {
+					left: 27%;
+				}
+			}
+			&--start {
+				.ui-datepicker-calendar {
+					a {
+						background-size: rem(31) !important;
+						&:hover {
+							background-position: calc(50% + 2px) center;
+						}
+					}
+
+					.range a, .mouse a {
+						background-position: calc(50% + 2px) center;
+						&:hover {
+							margin-right: rem(-0.5);
+						}
+					}
+
+					.ui-datepicker-today:not(.first) {
+						a {
+							//background: none;
+							//color: $PC-cromatico_1;
+						}
+					}
+
+					.first {
+
+						a {
+							background-position: calc(50% + 2px) center;
+
+							&:hover {
+								background-position: calc(50% + 2px) center;
+								// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-end.png");
+								background: $PC-cromatico_3;
+							}
+						}
+
+						&.end-selected {
+
+							a {
+								background-position: calc(50% + 2px) center;
+								// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+								background: $PC-cromatico_3;
+							}
+
+							&.ui-datepicker-current-day {
+								a {
+									background-position: calc(50% + 2px) center;
+								}
+
+								&.highlight {
+									a {
+										background-position: calc(50% + 2px) center;
+										// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+										background: $PC-cromatico_3;
+									}
+								}
+							}
+
+						}
+
+					}
+				}
+
+				.ui-datepicker-current-day {
+					.ui-state-active {
+						background-position: calc(50% + 2px) center;
+						// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+						//background:$PC-cromatico_3;
+					}
+				}
+
+				.last-day a.ui-state-default {
+					background-position: remcalc(50%, " - " , rem(2)) center;
+					// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png");
+					background: $PC-cromatico_3 !important;
+					background-color: transparent;
+				}
+
+			}
+			&--end {
+				left: 0;
+				.ui-datepicker-calendar {
+					a {
+						background-size: rem(31) !important;
+					}
+					a
+					.ui-datepicker-today {
+						a {
+							background: none;
+							color: $PC-cromatico_1;
+							&:hover {
+								background-position: remcalc(50%, " - " , rem(2)) center;
+								// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png");
+								background: $PC-cromatico_3;
+								color: $PC-cromatico_4;
+								background-repeat: no-repeat;
+							}
+						}
+					}
+
+					.first {
+
+						a {
+							color: #FFF;
+							background-position: calc(50% + 2px) center;
+
+							&:hover {
+								background-position: calc(50% + 2px) center;
+								// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-end.png");
+								background: $PC-cromatico_3;
+							}
+						}
+
+						&.highlight {
+							a {
+								background-position: calc(50% + 2px) center;
+								// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+								background: $PC-cromatico_3;
+							}
+						}
+
+						&.end-selected {
+
+							a {
+								background-position: calc(50% + 2px) center;
+								// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+								background: $PC-cromatico_3;
+							}
+
+							&.ui-datepicker-current-day {
+								a {
+									background-position: calc(50% + 2px) center;
+								}
+
+								&.highlight {
+									a {
+										background-position: calc(50% + 2px) center;
+										// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+										background: $PC-cromatico_3;
+									}
+								}
+							}
+
+						}
+
+					}
+
+				}
+
+				/*.ui-datepicker-current-day .ui-state-active {
+                    background-position: remcalc(50%, " - " , rem(2)) center;
+                    background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png");
+                }*/
+
+				&.ibe-searcher__calendar--car {
+					left: 0;
+				}
+
+				&:before, &:after {
+					left: 32%;
+				}
+
+			}
+			.hasDatepicker {
+				margin: 0 auto;
+				padding-bottom: rem(16);
+				background: transparent;
+			}
+			&--claim {
+				width: rem(282);
+				min-height: rem(330);
+				.ibe-searcher__calendar-header {
+					padding-bottom: rem(5);
+				}
+				&:before, &:after {
+					left: auto;
+					right: rem(24);
+				}
+			}
+			.ui-datepicker-calendar {
+				.selected-day--from {
+					&.range, &.mouse {
+						a {
+							background-size: rem(33) !important;
+						}
+					}
+				}
+				.selected-day--to {
+					&.range, &.mouse {
+						a {
+							background-size: rem(33) !important;
+						}
+					}
+				}
+			}
+		}
+		&__calendar-react--mobile {
+			.modal-dialog.modal-dialog--big {
+				margin: 0;
+				padding: 0;
+				height: auto;
+
+				.modal-content {
+					height: auto;
+				}
+			}
+			.ibe-searcher__calendar-react {
+				display: flex !important;
+				position: static;
+				overflow: hidden auto;
+				width: 100%;
+        		border: none;
+				box-shadow: 0 0 0;
+				margin-bottom: 1rem;
+				min-height: 65vh;
+				min-height: 65dvh;
+				justify-content: center;
+
+				.ibe-searcher__calendar-container {
+					height: 100%;
+				}
+			}
+
+			.modal-body{
+				padding: 0 1rem;
+
+				.fc_form_group{
+					.ibe_form__box .ibe_form__input-label {
+						position: static;
+					}	
+					.ibe_form__box .ibe_form__input-text {
+						border: 1px solid #666;
+						border-radius: 4px;
+						padding: .5rem 1rem;
+					}
+				}
+			}
+
+			.modal-header {
+				border-bottom: 1px solid #ccc;
+				padding: 1rem;
+				margin-bottom: 1rem;
+			}
+		}
+		&__options {
+			.ibe-form__checkbox-label{
+				margin-left: rem(24);
+			}
+
+			& > .ibe_form__selectize {
+				padding: 0;
+				margin-bottom: 0.5rem;
+			}
+
+			& > .ibe-form__radio-group {
+				.ibe_form__radio {
+					margin-right: 1.5rem;
+				}
+			}
+
+			& > .link__regular {
+				padding-top: rem(15);
+				line-height: 1.5rem;
+				float: right;
+			}
+
+			&--end {
+				text-align: center;
+				padding: 0 0 0.95rem 0;
+			}
+			&--responsive {
+				padding-top: 0;
+			}
+
+			.ibe-searcher__passenger-button {
+				&.link {
+					margin-right: rem(30);
+					&:after {
+						top: 50%;
+						right: rem(-15);
+						margin-top: 0;
+						-webkit-transform: translate(0, -50%);
+						-moz-transform: translate(0, -50%);
+						-ms-transform: translate(0, -50%);
+						-o-transform: translate(0, -50%);
+						transform: translate(0, -50%);
+					}
+					&.collapsed {
+						&:after {
+							top: 50%;
+							right: rem(-15);
+							margin-top: 0;
+							-webkit-transform: translate(0, -50%);
+							-moz-transform: translate(0, -50%);
+							-ms-transform: translate(0, -50%);
+							-o-transform: translate(0, -50%);
+							transform: translate(0, -50%);
+						}
+					}
+				}
+			}
+		}
+		&__passenger {
+			float: right;
+			padding-right: rem(5);
+			text-align: left;
+			padding-top: 0;
+
+			&-content {
+				//-width: 100%;
+				width: auto;
+				min-width: rem(230);
+
+				text-align: left;
+			}
+		}
+		&--responsive {
+			.ibe-searcher__calendar {
+				width: rem(595);
+			}
+			.ibe-searcher-room {
+				width: rem(595);
+				right: 0;
+				left: auto;
+			}
+		}
+		&--accordion {
+
+			.selectize-dropdown {
+				z-index: 1000;
+			}
+			.ibe-searcher__passenger {
+				text-align: left;
+				padding-top: rem(7);
+			}
+			.ibe-accordion__header-mobile {
+				border-top: 1px solid $BCK-cromatico_1;
+				background: $BCK-cromatico_5;
+				position: relative;
+				&:after {
+					position: absolute;
+					right: 0.5625rem;
+					top: 50%;
+					transform: translate(0, -50%);
+					font-family: "iberia";
+					font-size: rem(19);
+					color: $PC-cromatico_4;
+					content: "\e971";
+					z-index: 3;
+				}
+				&:before {
+					color: $BCK-cromatico_1;
+					width: rem(16);
+					height: auto;
+					margin-right: rem(10);
+					position: absolute;
+					top: 53%;
+					left: rem(10);
+					transform: translate(0, -50%);
+					-ms-transform: translate(0, -50%);
+					z-index: 3;
+
+				}
+				&.collapsed {
+					border-top: 1px solid $BCK-cromatico_5;
+					background: $BCK-cromatico_1;
+					&:before {
+						color: $BCK-cromatico_5;
+					}
+					.link.link__regular {
+						color: $BCK-cromatico_5;
+					}
+				}
+				.link.link__regular {
+					color: $BCK-cromatico_1;
+					font-family: $font-07;
+					font-size: rem(18);
+					display: inline-block;
+					vertical-align: top;
+					width: 100%;
+					padding: rem(10) rem(35);
+					z-index: 2;
+					position: relative;
+					text-align: left;
+					&:hover {
+						text-decoration: none;
+					}
+				}
+				&--link-simple {
+					&:after {
+						transform: rotate(270deg);
+						-ms-transform: rotate(270deg);
+						top: 20%;
+					}
+				}
+
+			}
+			.ibe-accordion__collapse {
+				padding: 0 rem(32) rem(20) rem(32);
+			}
+			.ibe_form__input-text {
+				padding-top: rem(12);
+				padding-bottom: rem(12)
+			}
+			.m-tab-searcher-1 {
+				.ibe-accordion__header-mobile:not(.collapsed) {
+					border: none;
+				}
+			}
+			.ibe_form__group--n-mt, .ibe_form__group--n-mt-2 {
+				margin-top: 0;
+			}
+			.ibe-tab__container .ibe-searcher__options > .ibe_form__selectize {
+				margin-left: 0;
+				float: left;
+			}
+			.ibe-tab__container .ibe-searcher__row--col2 .ibe-searcher__options-col--large {
+				max-width: 100%;
+				min-width: 100%;
+			}
+			.ibe-tab__container .ibe-searcher__options-col--end .ibe-searcher__options--end {
+				position: relative;
+				margin: 0 auto;
+				top: rem(10);
+				text-align: center;
+				width: 100%;
+				right: inherit;
+            }
+
+        }
+
+
+		&__vintage {
+
+			.ibe-searcher--accordion {
+				.ibe-tab__menu {
+					//margin-top: rem(-7);
+				}
+				.ibe-select__menu {
+					min-width: rem(200);
+					right: rem(-2);
+				}
+				.ibe-searcher__passenger-content {
+					left: initial;
+					right: 0;
+				}
+				.ibe-tab__scroll + .ibe-tab__container {
+					padding-bottom: rem(8);
+					padding-top: rem(0);
+				}
+
+				.ibe_form__group--icon:before {
+					top: rem(22);
+				}
+				.ibe-tab--scrolling {
+					.ibe-tab__menu {
+						padding: rem(8) 0 rem(7) 0;
+						z-index: 999;
+
+					}
+				}
+				.ibe-searcher__options {
+					.ibe_form__selectize {
+						.selectize-input.items.full.has-items:after {
+
+							right: rem(18);
+						}
+					}
+				}
+
+				.ibe-accordion {
+					.ibe-searcher__options .ibe-select__button .ui-selectmenu-text {
+						margin-right: rem(17);
+					}
+					.ibe-select__button .ui-selectmenu-text {
+						min-width: inherit;
+						padding: 0 0.175rem 0.1875rem 0;
+					}
+					.ibe-searcher__options .ibe-searcher__passenger-button.link.collapsed:after {
+						margin-right: rem(-1);
+					}
+
+					.ibe-accordion__header {
+						margin-top: rem(0);
+					}
+
+					&.active {
+						position: fixed;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						background: $PC-cromatico_4;
+						overflow-x: hidden;
+						z-index: 999999;
+						.ibe-accordion__header a {
+							font-weight: 800;
+							color: $PC-cromatico_2;
+						}
+						.ibe-accordion__header {
+							background-color: $PC-cromatico_5;
+							border: 0;
+							padding: rem(20) rem(70);
+							font-family: $font-02;
+							font-weight: 900;
+							font-size: rem(13);
+							line-height: 16px;
+							text-align: center;
+
+							&::before {
+								content: "\e935";
+								position: absolute;
+								display: block;
+								right: rem(13);
+								top: rem(8);
+								font-family: $font-05;
+								color: $PC-cromatico_2;
+								font-size: rem(25);
+								font-weight: 500;
+								background-color: transparent;
+							}
+						}
+
+					}
+					.ibe-searcher__row--col1 {
+						.ibe-searcher__col--ori,
+						.ibe-searcher__col--des {
+							width: 50%;
+							margin: 0;
+							.ibe-choose-city {
+								.ibe-tab__container {
+									margin-top: rem(-9);
+								}
+								.ibe-tab__scroll {
+									display: inline-block;
+								}
+							}
+
+						}
+					}
+					.ibe-searcher__row--col1 {
+						.ibe-searcher__col--ori {
+							padding-right: rem(16);
+
+							.ibe-tab__menu {
+								margin-top: rem(-7);
+							}
+						}
+					}
+					.ibe-searcher__row--col1 {
+						.ibe-searcher__col--des {
+							padding-left: rem(16);
+						}
+					}
+
+					.ibe-searcher__row--col2 {
+						.ibe-searcher__col--date,
+						.ibe-searcher__col--alt {
+							width: 50%;
+							margin: 0;
+						}
+						.ibe-searcher__passenger--col {
+							.ibe-searcher__passenger-button {
+								max-width: 100%;
+								margin-right: 0;
+							}
+						}
+					}
+					.ibe-searcher__row--col2 {
+						.ibe-searcher__col--date {
+							padding-right: rem(16);
+						}
+					}
+					// modal origin / destiny
+					.ibe-searcher__row--col1 {
+						.ibe-searcher__col--ori.modal-mode,
+						.ibe-searcher__col--des.modal-mode {
+
+							position: fixed;
+							width: 100%;
+							height: 100%;
+							background: $PC-cromatico_4;
+							overflow-x: hidden;
+							left: 0;
+							top: 0;
+							z-index: 9999;
+							padding-right: 0;
+
+							.ioslist {
+								border-top: 1px solid #ddd;
+							}
+
+							.ibe_form__group {
+								margin-top: 0;
+							}
+							.ibe-modal__header-close {
+								width: 100%;
+								height: rem(56);
+								background-color: #fff; // ojo, cambiar a blanco
+								position: absolute;
+								top: 0;
+								z-index: 99;
+								&--title {
+									padding-left: rem(40);
+									padding-top: rem(16);
+									color: $PC-cromatico_2;
+									font-family: $font-04;
+									font-size: rem(16);
+									line-height: 24px;
+								}
+							}
+							.ibe-button-close-modal-city {
+								width: rem(40);
+								height: rem(35);
+								right: rem(4);
+								top: rem(7);
+
+								position: absolute;
+								display: block;
+								background-color: transparent;
+								border: 0;
+								&::before {
+									content: "\e935";
+									font-family: $font-05;
+									color: $PC-cromatico_2;
+									font-size: rem(24);
+									font-weight: 500;
+								}
+							}
+							.city-selected {
+								color: $PC-cromatico_1;
+								font-weight: 600;
+							}
+							.ibe-choose-city {
+								height: 100% !important;
+								display: block !important;
+								top: rem(56);
+								border: 0;
+								border-top: 1px solid $BRD_standar_5;
+								.ibe-tab__menu-item {
+									padding: 0;
+								}
+							}
+
+							.ibe-choose-city--mobile {
+								.ibe-tab__menu-item {
+									.link {
+										padding: rem(14) rem(24) rem(14) rem(10);
+									}
+								}
+								.ioslist ul {
+									margin-top: rem(-24.4);
+								}
+							}
+							.ibe-tab__scroll {
+								text-align: left;
+								margin-left: rem(14);
+							}
+
+						}
+					}
+					.ibe-searcher__row--col1 {
+						.ibe-searcher__col--des.modal-mode {
+							padding-left: 0;
+
+						}
+					}
+					// Modal date
+					.ibe-searcher__row--col2 {
+						.ibe-searcher__col--date {
+							&.modal-mode {
+								position: fixed;
+								width: 100%;
+								height: 100%;
+								overflow: hidden;
+								left: 0;
+								top: 0;
+								z-index: 9999;
+								padding-right: 0;
+								//background: #F08400;
+
+								.ibe-button-close-modal {
+									width: rem(40);
+									height: rem(35);
+									right: rem(4);
+									top: rem(7);
+									position: absolute;
+									z-index: 9999;
+									display: block;
+									background-color: transparent;
+									border: 0;
+									&::before {
+										content: "\e935";
+										font-family: $font-05;
+										color: $PC-cromatico_2;
+										font-size: rem(24);
+										font-weight: 500;
+									}
+								}
+
+								.ibe_form__group {
+									margin-top: 0;
+									position: relative;
+									width: 100%;
+									height: 100%;
+								}
+								.ibe_form__group-half:first-child:before {
+									top: rem(23);
+								}
+								// #searcher-calendar-1{
+								//      height: 21.5rem;
+								// }
+								//.ibe-searcher__calendar{
+								//    display: block;
+								//}
+								.ibe-searcher__calendar-header {
+									padding-bottom: rem(15);
+									padding-top: rem(15);
+									background: $BCK-cromatico_2;
+								}
+								.ibe-searcher__calendar {
+									box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(0, 0, 0, 0.3);
+								}
+								.ibe_form__box {
+									padding-right: rem(50);
+								}
+								.ibe_form__group-half.icon-caret_derecha + .ibe_form__group-half {
+									.ibe_form__input-label {
+										text-align: left;
+									}
+								}
+								// .ibe-searcher__calendar--start{
+								//     max-width: rem(768); // Provisional
+
+								// }
+								// .ibe-searcher__calendar--all-months{
+
+								//     min-height: 100%;
+								//     max-height: auto;
+								//     overflow: inherit;
+								//     overflow-x: hidden;
+								//     background: $PC-cromatico_4;
+								// }
+								.ui-datepicker {
+									height: auto;
+								}
+								.ui-datepicker-next {
+									display: none;
+								}
+							}
+						}
+
+					}
+					// Modal fares
+					.ibe-searcher__options-col {
+						&.ibe-searcher__options-col--right {
+							&.modal-mode {
+								position: fixed;
+								width: 100%;
+								height: 100%;
+								background: $PC-cromatico_4;
+								overflow-x: hidden;
+								left: 0;
+								top: 0;
+								z-index: 9999;
+								padding-right: 0;
+
+								.ibe-modal__header-close {
+									width: 100%;
+									height: rem(56);
+									background-color: #fff; // ojo, cambiar a blanco
+									position: absolute;
+									top: 0;
+									z-index: 99;
+									&--title {
+										padding-left: rem(40);
+										padding-top: rem(15);
+										color: $PC-cromatico_2;
+										font-family: $font-04;
+										font-size: rem(16);
+										line-height: 24px;
+									}
+								}
+								.ibe-button-close-modal-fares {
+									width: rem(40);
+									height: rem(35);
+									right: rem(20);
+									top: rem(10);
+
+									position: absolute;
+									display: block;
+									background-color: transparent;
+									border: 0;
+									&::before {
+										content: "\e935";
+										font-family: $font-05;
+										color: $PC-cromatico_2;
+										font-size: rem(24);
+										font-weight: 500;
+									}
+								}
+
+								.ibe_form__group {
+									margin-top: 0;
+
+								}
+								.ibe-select__menu {
+									position: fixed;
+									display: block;
+									width: 100% !important;
+									height: 100%;
+									top: rem(56);
+									left: 0;
+									li {
+										border-bottom: 1px solid $PC-cromatico_5;
+									}
+								}
+								// .fare-selected{
+								//     font-weight: 800;
+								// }
+								// .ui-menu-item-wrapper {
+								//     color: #777;
+								// }
+								// .ui-state-active {
+								//     color: #333;
+								//     font-weight: 800;
+								//     background-color: transparent;
+								// }
+							}
+						}
+
+					}
+					// modal family
+					.ibe-searcher__options-col {
+						&.ibe-searcher__options-col--large {
+							min-width: 50%;
+							position: relative;
+							right: -170px;
+							&.modal-mode {
+								position: fixed;
+								width: 100%;
+								height: 100%;
+								background: $PC-cromatico_4;
+								overflow-x: hidden;
+								left: 0;
+								top: 0;
+								z-index: 9999;
+								padding-left: 0;
+
+								.ibe-modal__header-close {
+									width: 100%;
+									height: rem(56);
+									background-color: #fff; // ojo, cambiar a blanco
+									position: absolute;
+									top: 0;
+									z-index: 9999;
+									&--title {
+										padding-left: rem(40);
+										padding-top: rem(15);
+										color: $PC-cromatico_2;
+										font-family: $font-04;
+										font-size: rem(16);
+										line-height: 24px;
+									}
+								}
+								.ibe-button-close-modal-family {
+									width: rem(40);
+									height: rem(35);
+									right: rem(4);
+									top: rem(6);
+									z-index: 9999;
+									position: absolute;
+									display: block;
+									background-color: white;
+									border: 0;
+									&::before {
+										content: "\e935";
+										font-family: $font-05;
+										color: $PC-cromatico_2;
+										font-size: rem(24);
+										font-weight: 500;
+									}
+								}
+
+								.ibe_form__group {
+									margin-top: 0;
+								}
+								.ibe-searcher__passenger-content {
+									position: relative;
+									display: block !important;
+									width: 100% !important;
+									height: 100% !important;
+									top: 0;
+									right: 0;
+									//margin-top: rem(-5);
+									border-radius: 0;
+									box-shadow: inherit;
+									border-top: 1px solid $PC-cromatico_5;
+								}
+								.ibe-searcher__passenger {
+									padding-right: 0;
+								}
+								.ibe-modal__button-save {
+									position: relative;
+									display: inline-block;
+									width: 100%;
+									padding: rem(32) rem(16);
+									padding-top: 0;
+									margin-top: rem(-5);
+									z-index: 4;
+									.ibe-button {
+										min-height: rem(56);
+										padding: rem(16);
+									}
+
+									.ibe-search-flights__search-button {
+										display: block !important;
+										z-index: 4;
+									}
+								}
+								.ibe-searcher__passenger-button {
+									max-width: 100%;
+								}
+								.ibe-searcher__passenger-button.link {
+									border-bottom: 0;
+									white-space: nowrap;
+								}
+
+							}
+						}
+					}
+					// Modal passenger
+					.ibe-searcher__col {
+						&.ibe-searcher__col--alt {
+							&.modal-mode {
+								position: fixed;
+								width: 100%;
+								height: 100%;
+								background: $PC-cromatico_4;
+								overflow-x: hidden;
+								left: 0;
+								top: 0;
+								z-index: 9999;
+								padding-left: 0;
+
+								.ibe-modal__header-close {
+									width: 100%;
+									height: 47px;
+									background-color: #fff; // ojo, cambiar a blanco
+									position: absolute;
+									top: 0;
+									z-index: 99;
+									&--title {
+										padding-left: rem(40);
+										padding-top: rem(12);
+										color: $PC-cromatico_2;
+										font-family: $font-04;
+										font-size: rem(16);
+										line-height: 24px;
+									}
+								}
+								.ibe-button-close-modal-passenger {
+									width: rem(40);
+									height: rem(35);
+									right: rem(4);
+									top: rem(2);
+
+									position: absolute;
+									display: block;
+									background-color: white;
+									border: 0;
+									&::before {
+										content: "\e935";
+										font-family: $font-05;
+										color: $PC-cromatico_2;
+										font-size: rem(24);
+										font-weight: 500;
+									}
+								}
+
+								.ibe_form__group {
+									margin-top: 0;
+
+								}
+								.ibe-people-counter {
+									position: relative;
+									display: block !important;
+									width: 100% !important;
+									height: 100%;
+									top: 0;
+									left: 0;
+									box-shadow: inherit;
+									border-radius: 0;
+									&::before, &::after {
+										display: none;
+									}
+									li {
+										border-bottom: 1px solid $PC-cromatico_5;
+									}
+								}
+								.ibe-people-counter__counter {
+									width: 25%;
+									text-align: right;
+									padding-right: rem(25);
+								}
+								.ibe-people-counter__people {
+									width: 45%;
+									padding-left: rem(2);
+								}
+								.ibe-people-counter__buttons {
+									width: 30%;
+									text-align: left;
+									padding-left: rem(21);
+
+								}
+								.ibe-modal__button-save {
+									position: relative;
+									display: inline-block;
+									width: 100%;
+									padding: rem(32) rem(16);
+									padding-top: 0;
+									margin-top: rem(25);
+									z-index: 4;
+									.ibe-button {
+										min-height: rem(56);
+										padding: rem(16);
+									}
+									.ibe-search-flights__search-button {
+										display: block !important;
+										z-index: 4;
+									}
+								}
+
+								.ibe-people-counter {
+									display: block !important;
+									height: 100% !important;
+									.ibe-people-counter__list-item {
+										padding: rem(17) 0 rem(12) 0;
+									}
+								}
+								.ibe_form__input-text {
+									border: 0;
+									border-bottom: 1px solid $PC-cromatico_5 !important;
+								}
+								// .link__regular {
+								//     vertical-align: middle;
+								//     margin-left: rem(-10);
+								//     display: inline-block;
+								//     padding-top: rem(0);
+								//     &.ibe-searcher-room__room-link{
+								//         display: none;
+								//     }
+								// }
+
+							}
+						}
+
+					}
+					// end modal passenger
+					.ibe-searcher__row--col2 {
+						.ibe-searcher__col--alt {
+							padding-left: rem(16);
+						}
+					}
+					.ibe-searcher__row--col2 {
+						.ibe-form__radio-group--col,
+						.ibe-searcher__col--button {
+							width: 100%;
+						}
+					}
+					.ibe-searcher__row--col1,
+					.ibe-searcher__row--col2,
+					.ibe-searcher__row--col3 {
+						width: 100%;
+
+					}
+
+					.ibe-searcher__col {
+						margin-left: 0;
+						width: 100%;
+						&--date {
+							position: relative;
+						}
+					}
+					.ibe-searcher__options {
+						padding: 0;
+						.ibe-form__radio-group {
+							padding-top: rem(18);
+							padding-bottom: rem(4);
+						}
+					}
+					.ibe-searcher__passenger--col {
+						.ibe-form__radio-group {
+							padding-top: rem(7);
+							margin-bottom: rem(12);
+						}
+					}
+
+					.ibe-form__radio-group {
+						margin-top: rem(2);
+						padding-bottom: rem(15);
+					}
+
+					.ibe-form__radio-group--col {
+						max-width: 100%;
+						min-width: 100%;
+						.link__regular {
+							vertical-align: middle;
+						}
+						.ibe_form__radio-box {
+							display: inherit;
+						}
+
+						.ibe_form__radio {
+							padding-right: rem(6);
+						}
+						.ibe_form__radio-text {
+							vertical-align: middle;
+						}
+					}
+					.ibe-search-flights__search-button {
+						max-width: 100%;
+					}
+					.ibe-accordion__collapse {
+						padding: 0 rem(16) rem(16) rem(16);
+					}
+					.ibe-searcher__options-col--large {
+						max-width: 100%;
+						min-width: 100%;
+						padding-top: rem(0);
+
+						.ibe-searcher__passenger {
+							padding-top: rem(24);
+							padding-right: rem(18);
+							max-width: 100%;
+							width: 100%;
+							text-align: right;
+						}
+					}
+
+					.ibe-searcher__options--right {
+						//margin-top: rem(16);
+						padding-right: 0;
+
+					}
+					.ibe-searcher__options-col--right {
+						float: right;
+						padding-right: 0;
+						padding-top: rem(24);
+						margin-right: rem(0);
+					}
+					.ibe-searcher__options--left {
+						@include clearfix;
+						margin-top: rem(16);
+						float: left;
+					}
+					.ibe-searcher__options--center {
+						margin: rem(10);
+						// background-color: #F08400;
+						text-align: center;
+					}
+				}
+				.ibe-searcher__options-col--end {
+					position: relative;
+					display: inline-block;
+					width: 100%;
+					padding-left: rem(10);
+
+					.link__regular {
+						float: none;
+						padding-top: 0;
+					}
+				}
+				.ibe-searcher__passenger {
+					@include clearfix;
+					float: left;
+					padding-top: rem(10);
+				}
+				.ibe-people-counter {
+					position: relative;
+					top: rem(12);
+				}
+
+			}
+			.ibe-searcher__calendar--end {
+				left: initial;
+				right: 0;
+			}
+			.ibe-searcher__calendar--end:before,
+			.ibe-searcher__calendar--end:after {
+				left: initial;
+				right: 55%;
+			}
+			.ibe-searcher {
+				&__calendar {
+					height: 0;
+					border-radius: 0;
+					box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.47), 0 0 0 0 rgba(0, 0, 0, 0.23);
+					&--all-months {
+						position: absolute;
+						width: 100%;
+						height: 100% !important;
+						overflow-x: hidden;
+						top: rem(44);
+						background-color: $PC-cromatico_4;
+						padding-bottom: rem(25);
+						.ui-datepicker-group {
+							width: 50%;
+							margin-top: rem(0);
+							min-height: rem(299);
+							&:nth-child(odd) {
+								margin-right: -5%;
+								margin-left: 5%;
+
+							}
+							&:nth-child(even) {
+								margin-left: -5%;
+
+							}
+						}
+						.ui-datepicker-calendar {
+							margin: rem(16) auto rem(15.2) auto;
+							color: $PC-cromatico_1;
+						}
+						.ui-datepicker-calendar thead th {
+							padding: 0 0 rem(16.5) 0;
+						}
+						.ui-datepicker-calendar tbody td.ui-datepicker-unselectable.ui-state-disabled span {
+							color: $PC-cromatico_9;
+						}
+						.ui-datepicker-calendar tbody td a {
+							color: $PC-cromatico_2;
+						}
+						.ui-datepicker-calendar tbody td a:hover {
+							color: $PC-cromatico_4;
+						}
+						.ui-datepicker-header {
+							border-bottom: none;
+							padding: 0;
+						}
+						.ibe-searcher__calendar-current {
+							display: none;
+						}
+						.ui-datepicker-prev {
+							display: none;
+						}
+						.ui-datepicker-title {
+							text-align: center;
+							padding: rem(8.65) rem(16) 0;
+							.ui-datepicker-month {
+								font-size: rem(13);
+								text-transform: capitalize;
+							}
+						}
+						.ui-datepicker-calendar tbody td span, [data-handler="selectDay"] {
+							padding: rem(7.75) 0 rem(7.75);
+						}
+					}
+					&.ibe-searcher__calendar--start {
+
+						.ui-datepicker-calendar tbody td.selected-day--to a, .ui-datepicker-calendar tbody td.selected-day--from a {
+							color: $PC-cromatico_4;
+							font-weight: normal;
+						}
+					}
+					&.ibe-searcher__calendar--end {
+						// left: -100%;
+						.ui-datepicker-calendar tbody td.selected-day--to a, .ui-datepicker-calendar tbody td.selected-day--from a {
+							color: $PC-cromatico_4;
+							font-weight: normal;
+						}
+					}
+                }
+
+
+            }
+
+			.xui-one-way + .ibe-searcher__calendar--all-months {
+				width: 100%;
+			}
+			.ibe-people-counter__ages {
+				padding: rem(12) rem(146) rem(12) rem(191);
+			}
+			.ibe-message-tooltip {
+				right: rem(126);
+			}
+			// .ibe-choose-city--mobile{
+			//     .ioslist-wrapper{
+			//         height: rem(384);
+			//     }
+			// }
+			// .ibe-choose-city--mobile [data-function='city-list'] {
+			//      height: rem(900);
+			// }
+
+        }
+
+        &__odSwitch{
+            left: calc((100% - 32px)/2);
+        }
+	}
+}
+
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_searcher {
+	.ibe-searcher {
+
+		&__options--end {
+			&.ftr {
+				padding-top: 0;
+			}
+		}
+		&--xs{
+			.ibe-tab__menu .ibe-tab__menu-item a[title~="España"]{
+				padding-top: 0 !important;
+			}
+		}
+		.ibe-accordion__header {
+			font-family: $font-02;
+			border: 1px solid $BRD_standar_1;
+			margin: 0;
+			padding: 0.8rem 4.4rem 0.95rem 1.4rem;
+			.link {
+				font-size: rem(14);
+			}
+			&:before {
+				content: "\e91d";
+				color: $PC-cromatico_4;
+				width: 2.9rem;
+				height: 100%;
+				background-color: $BCK-cromatico_5;
+				top: 0;
+				padding: 0.8rem 0 0 0.8rem;
+				font-size: rem(22);
+			}
+			&.accordion-header-close {
+				text-align: center;
+				background-color: $PC-cromatico_5;
+				color: $PC-cromatico_2;
+				border-color: $PC-cromatico_5;
+				.link {
+					font-weight: bold;
+				}
+				&:before {
+					content: "\e935";
+					width: 3.3rem;
+					padding: 0.7rem 0 0 0;
+					background-color: $PC-cromatico_5;
+					color: $PC-cromatico_2;
+					font-size: rem(25);
+				}
+			}
+		}
+		&__calendar {
+			height: rem(334);
+			top: rem(56);
+			box-shadow: 0 0 0;
+			border-radius: rem(3);
+			border: 1px solid $BRD_standar_1;
+			width: calc(100% + 43px);
+			left: rem(-20);
+			.ui-datepicker-calendar {
+				//width: calc(100% - 35px);
+				//width: rem(420);
+				width: calc(100% - 28px);
+				.selected-day--from, .selected-day--to {
+					&.range a, &.mouse a {
+						background-color: $PC-cromatico_3;
+					}
+					a {
+						font-weight: normal;
+					}
+				}
+				.selected-day--to a {
+					background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end-bk.png") left center no-repeat;
+				}
+				.selected-day--from.range a, .selected-day--from.mouse a {
+					margin-right: rem(-0.5);
+				}
+			}
+
+			&.ibe-searcher__calendar-react {
+				display: none !important;
+			}
+
+			&-header {
+				padding: rem(15) rem(13) rem(18) rem(13);
+			}
+
+			&-current {
+				display: none;
+			}
+			&--start {
+				&:before {
+					left: 16.7%;
+					border-width: 10px;
+					border-bottom-color: $BRD_standar_1;
+				}
+				&:after {
+					left: 16.7%;
+					border-width: 9px;
+				}
+			}
+			&--end {
+				&:before {
+					border-width: 10px;
+					border-bottom-color: $BRD_standar_1;
+					left: 66.7%;
+				}
+				&:after {
+					left: 66.7%;
+					border-width: 9px;
+				}
+			}
+			&--start {
+				.ui-datepicker-calendar {
+					a {
+						//background-size: 28px !important;
+						&:hover {
+							background-position: calc(50% + 2px) center;
+						}
+					}
+
+					.range a, .mouse a {
+						background-position: calc(50% + 2px) center;
+						&:hover {
+							//background-position: remcalc(50%, " - " , rem(2)) center;
+							// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-bk.png");
+							background-color:$PC-cromatico_17;
+						}
+					}
+
+					.ui-datepicker-today:not(.first) {
+						a {
+							//background: none;
+							//color: $PC-cromatico_1;
+						}
+					}
+
+					.first {
+
+						a {
+							background-position: calc(50% + 2px) center;
+
+							&:hover {
+								background-position: calc(50% + 2px) center;
+								// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-end.png");
+								background: $PC-cromatico_3;
+							}
+						}
+
+						&.end-selected {
+
+							a {
+								background-position: calc(50% + 2px) center;
+								// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+								background: $PC-cromatico_3;
+							}
+
+							&.ui-datepicker-current-day {
+								a {
+									background-position: calc(50% + 2px) center;
+								}
+
+								&.highlight {
+									a {
+										background-position: calc(50% + 2px) center;
+										// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+										background: $PC-cromatico_3;
+									}
+								}
+							}
+
+						}
+
+					}
+				}
+
+				.ui-datepicker-current-day {
+					.ui-state-active {
+						background-position: calc(50% + 2px) center;
+						// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+						//background:$PC-cromatico_3;
+					}
+				}
+
+				.last-day a.ui-state-default {
+					background-position: remcalc(50%, " - " , rem(2)) center;
+					// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png");
+					//background:$PC-cromatico_3;
+				}
+			}
+			&--end {
+				.ui-datepicker-calendar {
+					a {
+						&:hover {
+							background-position: remcalc(50%, " - " , rem(2)) center;
+							// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png");
+							background: $PC-cromatico_3;
+						}
+					}
+
+					.range a, .mouse a {
+						&:hover {
+							//background-position: remcalc(50%, " - " , rem(2)) center;
+							background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end-bk.png") left center no-repeat;
+							background-color:$PC-cromatico_17;
+						}
+					}
+
+					.ui-datepicker-today {
+						a {
+							background-position: calc(50% + 2px) center;
+
+							&:hover {
+								background-image: none;
+							}
+						}
+						&.ui-datepicker-current-day {
+							a {
+								//background: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png") left center no-repeat;
+								//background-position: remcalc(50%, " - " , rem(2)) center;
+							}
+						}
+					}
+
+					.first {
+
+						a {
+							color: #FFF;
+							background-position: calc(50% + 2px) center;
+							&:hover {
+								background-position: calc(50% + 2px) center;
+								// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start-end.png");
+								background: $PC-cromatico_3;
+							}
+						}
+
+						&.highlight {
+							a {
+								background-position: calc(50% + 2px) center;
+								// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+								background: $PC-cromatico_3;
+							}
+						}
+
+						&.end-selected {
+
+							a {
+								background-position: calc(50% + 2px) center;
+								// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+								background: $PC-cromatico_3;
+							}
+
+							&.ui-datepicker-current-day {
+								a {
+									background-position: calc(50% + 2px) center;
+								}
+
+								&.highlight {
+									a {
+										background-position: calc(50% + 2px) center;
+										// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-start.png");
+										background: $PC-cromatico_3;
+									}
+								}
+							}
+
+						}
+
+					}
+
+				}
+
+				.ui-datepicker-current-day .ui-state-active {
+					background-position: remcalc(50%, " - " , rem(2)) center;
+					// background-image: url($CONFIG_IMG_PATH + "/modules/calendar/cal-end.png");
+					background: $PC-cromatico_3;
+				}
+
+				&.ibe-searcher__calendar--car {
+					left: 0;
+				}
+
+			}
+
+			.hasDatepicker {
+				width: rem(288);
+				max-width: 100%;
+				margin: 0 auto;
+				background: transparent;
+			}
+
+			&--claim {
+				left: auto;
+				right: 0;
+				top: rem(70);
+				&:before, &:after {
+					left: auto;
+					right: rem(20);
+				}
+				.ibe-searcher__calendar-header {
+					.ibe-searcher__calendar-current {
+						display: block;
+					}
+				}
+			}
+		}
+		&__calendar-react--mobile {
+			.modal-dialog.modal-dialog--big {
+				margin: 0;
+				padding: 0;
+				height: auto;
+
+				.modal-content {
+					height: auto;
+				}
+			}
+			.ibe-searcher__calendar-react {
+				display: flex !important;
+				position: static;
+				overflow: hidden auto;
+				width: 100%;
+        		border: none;
+				box-shadow: 0 0 0;
+				margin-bottom: 1rem;
+				min-height: 65vh;
+				min-height: 65dvh;
+				justify-content: center;
+
+				.ibe-searcher__calendar-container {
+					height: 100%;
+				}
+			}
+
+			.modal-body{
+				padding: 0 1rem;
+
+				.fc_form_group{
+					.ibe_form__box .ibe_form__input-label {
+						position: static;
+					}	
+					.ibe_form__box .ibe_form__input-text {
+						border: 1px solid #666;
+						border-radius: 4px;
+						padding: .5rem 1rem;
+					}
+				}
+			}
+
+			.modal-header {
+				border-bottom: 1px solid #ccc;
+				padding: 1rem;
+				margin-bottom: 1rem;
+			}
+		}
+		& [data-position-mobile="6"]{
+			.ibe-select__button{
+				float: left;
+				margin: 0 0 0.5rem 0;
+				margin-right: rem(24);
+			}
+
+		}
+		&__options {
+
+			vertical-align: top;
+			& > .ibe_form__selectize {
+				padding: 0;
+				margin-bottom: 0.5rem;
+			}
+
+			& > .ibe-form__radio-group {
+				.ibe_form__radio {
+					margin-right: 1.5rem;
+				}
+			}
+
+			& > .link__regular {
+				line-height: 1.5rem;
+			}
+
+			&--end {
+				text-align: center;
+				padding: 0;
+				padding-top: rem(15);
+			}
+			&--responsive {
+				text-align: left;
+
+			}
+			.ibe-searcher__passenger-button {
+				&.link {
+					&:after {
+						top: 50%;
+						right: rem(-15);
+						margin-top: 0;
+						-webkit-transform: translate(0, -50%);
+						-moz-transform: translate(0, -50%);
+						-ms-transform: translate(0, -50%);
+						-o-transform: translate(0, -50%);
+						transform: translate(0, -50%);
+					}
+					&.collapsed {
+						&:after {
+							top: 50%;
+							right: rem(-15);
+							margin-top: 0;
+							-webkit-transform: translate(0, -50%);
+							-moz-transform: translate(0, -50%);
+							-ms-transform: translate(0, -50%);
+							-o-transform: translate(0, -50%);
+							transform: translate(0, -50%);
+						}
+					}
+				}
+			}
+		}
+
+		&__passenger {
+			float: none;
+			padding-left: 0;
+			display: inline-block;
+			padding-top: rem(15);
+			text-align: left;
+
+			&-content {
+				width: auto;
+				text-align: left;
+				left: initial;
+				right: inherit;
+			}
+		}
+
+		&--accordion {
+			.selectize-dropdown {
+				z-index: 1000;
+			}
+			.ibe_form__input-text {
+				padding-top: rem(12);
+				padding-bottom: rem(12)
+			}
+			.ibe-searcher__options {
+				.ibe_form__radio {
+					padding-bottom: rem(5);
+				}
+			}
+			.ibe-accordion__header-mobile {
+				border-top: 1px solid $BCK-cromatico_1;
+				background: $BCK-cromatico_5;
+				position: relative;
+				&:after {
+					position: absolute;
+					right: 0.5625rem;
+					top: 50%;
+					transform: translate(0, -50%);
+					font-family: "iberia";
+					font-size: rem(19);
+					color: $PC-cromatico_4;
+					content: "\e971";
+					z-index: 3;
+
+				}
+				&:before {
+					color: $BCK-cromatico_1;
+					width: rem(16);
+					height: auto;
+					margin-right: rem(10);
+					position: absolute;
+					top: 53%;
+					left: rem(10);
+					transform: translate(0, -50%);
+					-ms-transform: translate(0, -50%);
+					z-index: 3;
+				}
+				&.collapsed {
+					border-top: 1px solid $BCK-cromatico_5;
+					background: $BCK-cromatico_1;
+					&:before {
+						color: $BCK-cromatico_5;
+					}
+					.link.link__regular {
+						color: $BCK-cromatico_5;
+					}
+				}
+				.link.link__regular {
+					color: $BCK-cromatico_1;
+					font-family: $font-07;
+					font-size: rem(16);
+					display: inline-block;
+					vertical-align: top;
+					padding: rem(10) rem(35);
+					width: 100%;
+					box-sizing: border-box;
+					z-index: 2;
+					position: relative;
+					text-align: left;
+					&:hover {
+						text-decoration: none;
+					}
+				}
+				&--link-simple {
+					&:after {
+						transform: rotate(270deg);
+						-ms-transform: rotate(270deg);
+						top: 20%;
+					}
+				}
+			}
+			.ibe_form__group--n-mt {
+				margin-top: 0;
+			}
+			.ibe-accordion__collapse {
+				padding: 0 rem(23) rem(15) rem(20);
+			}
+			.m-tab-searcher-1 {
+				.ibe-accordion__header-mobile:not(.collapsed) {
+					border: none;
+				}
+			}
+			.ibe-tab__container .ibe-searcher__options > .ibe_form__selectize {
+				margin-left: 0;
+				float: left;
+			}
+			.ibe-tab__container .ibe-searcher__row--col2 .ibe-searcher__options-col--large {
+				max-width: 100%;
+				min-width: 100%;
+			}
+			.ibe-tab__container .ibe-searcher__options-col--end .ibe-searcher__options--end {
+				position: relative;
+				margin: 0 auto;
+				top: rem(10);
+				text-align: center;
+				width: 100%;
+				right: inherit;
+			}
+		}
+		&__odSwitch{
+			top: rem(41);
+			left: rem(24);
+			&--button{
+				transform: rotate(180deg);
+				&:hover{
+					animation: none;
+				}
+			}
+		}
+		&__vintage {
+			.ibe-searcher--accordion {
+				.ibe-tab__menu {
+					margin-top: rem(5);
+					padding-top: rem(0);
+					padding-bottom: rem(0);
+				}
+				.ibe-select__menu {
+					min-width: rem(200);
+					right: rem(10);
+				}
+				.ibe-tab__scroll + .ibe-tab__container {
+					padding-bottom: rem(8);
+					padding-top: rem(0);
+				}
+				.ibe_form__group--icon:before {
+					top: rem(22);
+				}
+				.ibe-searcher__options {
+					.ibe_form__selectize {
+						.selectize-input.items.full.has-items:after {
+
+							right: rem(18);
+						}
+					}
+				}
+				.ibe-accordion {
+					.ibe-searcher__options .ibe-select__button .ui-selectmenu-text {
+						margin-right: rem(8);
+					}
+					.ibe-select__button .ui-selectmenu-text {
+						min-width: inherit;
+						padding: 0 0 0.1875rem 0.125rem;
+					}
+					.ibe-searcher__options .ibe-searcher__passenger-button.link.collapsed:after {
+						margin-right: rem(-1);
+					}
+					.ibe-accordion__header {
+						margin-top: rem(0);
+						padding-top: rem(15);
+						padding-bottom: rem(16);
+					}
+					.ibe-accordion__collapse {
+						padding: 0 rem(10) rem(10) rem(10);
+						.ibe_form {
+							padding: 0;
+						}
+					}
+					.ibe_form__group {
+						margin-top: rem(16);
+					}
+
+					&.active {
+						position: fixed;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						background: $PC-cromatico_4;
+						overflow-x: hidden;
+						z-index: 9999;
+						.ibe-accordion__header {
+							background-color: $PC-cromatico_5;
+							border: 0;
+							padding: rem(20) rem(45);
+							font-family: $font-02;
+							font-weight: 900;
+							font-size: rem(13);
+							line-height: 16px;
+							text-align: center;
+							&::before {
+								content: "\e935";
+								position: absolute;
+								display: block;
+								right: 0.5rem;
+								top: rem(8);
+								font-family: $font-05;
+								color: $PC-cromatico_2;
+								font-size: rem(25);
+								font-weight: 500;
+								background-color: transparent;
+							}
+						}
+						.ibe-accordion__header a {
+							font-weight: 800;
+							color: $PC-cromatico_2;
+						}
+					}
+					.ibe-searcher__row--col1 {
+						.ibe-searcher__col--ori,
+						.ibe-searcher__col--des {
+							width: 100%;
+							.ibe-choose-city {
+								.ibe-tab__container {
+									margin-top: rem(-15);
+								}
+								.ibe-tab{
+									border: 0;
+								}
+								.ibe-tab__scroll {
+									display: inline-block;
+								}
+							}
+
+						}
+					}
+					.ibe-searcher__row--col1 {
+						.ibe-searcher__col--ori {
+							.ibe-tab__menu {
+								//margin-top: rem(-6);
+							}
+
+						}
+					}
+
+					.ibe-searcher__row--col2 {
+						.ibe-searcher__col--date,
+						.ibe-searcher__col--alt {
+							width: 100%;
+						}
+						.ibe-searcher__passenger--col {
+							.ibe-searcher__passenger-button {
+								max-width: 100%;
+							}
+						}
+					}
+					.ibe-searcher__row--col2 {
+						.ibe-form__radio-group--col,
+						.ibe-searcher__col--button {
+							width: 100%;
+						}
+					}
+					.ibe-searcher__row--col1,
+					.ibe-searcher__row--col2,
+					.ibe-searcher__row--col3 {
+						width: 100%;
+
+					}
+					.ibe-searcher__col--ori,
+					.ibe-searcher__col--des,
+					.ibe-searcher__col--date,
+					.ibe-searcher__col--alt,
+					.ibe-searcher__col--button,
+					.ibe-form__radio-group--col {
+						width: 100%;
+					}
+
+					.ibe-searcher__col {
+						margin-left: 0;
+						&--date {
+							position: relative;
+						}
+					}
+					// modal date
+					.ibe-searcher__row--col2 {
+						.ibe-searcher__col--date {
+							&.modal-mode {
+								position: fixed;
+								width: 100%;
+								height: 100%;
+								background: $PC-cromatico_4;
+								overflow: hidden;
+								left: 0;
+								top: 0;
+								z-index: 9999;
+								padding-right: 0;
+
+								.ibe-button-close-modal {
+									position: absolute;
+									z-index: 9999;
+									width: rem(40);
+									height: auto;
+									display: block;
+									right: rem(5);
+									top: rem(7);
+									background-color: transparent;
+									border: 0;
+									&::before {
+										content: "\e935";
+										font-family: $font-05;
+										color: $PC-cromatico_2;
+										font-size: rem(21);
+										font-weight: 500;
+
+									}
+								}
+								.ibe_form__group {
+									margin-top: 0;
+									position: relative;
+									width: 100%;
+									height: 100%;
+								}
+								.ibe_form__group-half:first-child:before {
+									top: rem(23);
+								}
+								.ibe_form__box {
+									padding-right: rem(40);
+								}
+								.ibe-searcher__calendar-header {
+									background: $BCK-cromatico_2;
+									padding-bottom: rem(15);
+									padding-top: rem(15);
+								}
+								.ibe_form__group-half.icon-caret_derecha + .ibe_form__group-half {
+									.ibe_form__input-label {
+										text-align: left;
+									}
+								}
+
+								.ibe-searcher__calendar {
+									box-shadow: none;
+									border: 0;
+									border-top: 1px solid #ccc;
+									left: 0;
+									max-width: 100%;
+								}
+								.ibe-searcher__calendar--all-months {
+									.ui-datepicker-group {
+										width: rem(280);
+										display: block;
+										margin: 0 auto;
+									}
+								}
+								.ui-datepicker-next {
+									display: none;
+								}
+
+							}
+						}
+
+					}
+					// Modal passenger
+					.ibe-searcher__col {
+						&.ibe-searcher__col--alt {
+							&.modal-mode {
+								position: fixed;
+								width: 100%;
+								height: 100%;
+
+								background: $PC-cromatico_4;
+								overflow-x: hidden;
+								left: 0;
+								top: 0;
+								z-index: 9999;
+								padding-left: 0;
+
+								.ibe-button-close-modal-passenger {
+									width: rem(40);
+									height: rem(42);
+									right: rem(7);
+									top: rem(2);
+
+									position: absolute;
+									display: block;
+									background-color: white;
+									border: 0;
+									&::before {
+										content: "\e935";
+										font-family: $font-05;
+										color: $PC-cromatico_2;
+										font-size: rem(24);
+										font-weight: 500;
+									}
+								}
+
+								.ibe_form__group {
+									margin-top: 0;
+								}
+								.ibe-people-counter {
+									position: relative;
+									display: block !important;
+									width: 100% !important;
+									height: 100% !important;
+									max-width: 100%;
+									top: 0;
+									left: 0;
+									box-shadow: inherit;
+									border-radius: 0;
+									&::before, &::after {
+										display: none;
+									}
+									li {
+										border-bottom: 1px solid $PC-cromatico_5;
+									}
+								}
+								.ibe-people-counter__counter {
+
+									//padding-right: rem(-3);
+								}
+								.ibe-people-counter__people {
+
+									padding-left: rem(6);
+								}
+								.ibe-people-counter__buttons {
+
+									padding-left: rem(0);
+								}
+								.ibe-people-counter__list-item {
+									padding: rem(17) 0 rem(14) 0;
+								}
+								.ibe-modal__button-save {
+									position: relative;
+									display: inline-block;
+									width: 100%;
+									padding: rem(25) rem(16);
+									.ibe-search-flights__search-button {
+										display: block !important;
+										z-index: 4;
+									}
+									.ibe-button {
+										min-height: rem(56);
+										padding: rem(16);
+									}
+								}
+
+							}
+						}
+
+					}
+					// end modal passenger
+
+					// modal family
+					.ibe-searcher__options-col {
+						&.ibe-searcher__options-col--large {
+							&.modal-mode {
+								position: fixed;
+								width: 100%;
+								height: 100%;
+								background: $PC-cromatico_4;
+								overflow-x: hidden;
+								left: 0;
+								top: 0;
+								z-index: 9999;
+								padding-left: 0;
+
+								.ibe-modal__header-close {
+									width: 100%;
+									height: rem(56);
+									background-color: #fff; // ojo, cambiar a blanco
+									position: absolute;
+									top: 0;
+									z-index: 99;
+									&--title {
+										padding-left: rem(40);
+										padding-top: rem(10);
+										color: $PC-cromatico_2;
+										font-family: $font-04;
+										font-size: rem(16);
+										line-height: 24px;
+									}
+								}
+								.ibe-button-close-modal-family {
+									width: rem(40);
+									height: rem(42);
+									right: rem(7);
+									top: rem(2);
+									position: absolute;
+									display: block;
+									z-index: 9999;
+									background-color: white;
+									border: 0;
+									&::before {
+										content: "\e935";
+										font-family: $font-05;
+										color: $PC-cromatico_2;
+										font-size: rem(24);
+										font-weight: 500;
+									}
+								}
+
+								.ibe_form__group {
+									margin-top: 0;
+								}
+								.ibe-searcher__passenger-content {
+									position: relative;
+									display: block !important;
+									width: 100% !important;
+									height: 100% !important;
+									top: 0;
+									right: 0;
+									margin-top: rem(0);
+									padding-bottom: rem(5);
+									border-radius: 0;
+									box-shadow: inherit;
+									border-top: 1px solid $PC-cromatico_5;
+								}
+								.ibe-searcher__passenger {
+									padding-right: 0;
+								}
+								.ibe-modal__button-save {
+									position: relative;
+									display: inline-block;
+									width: 100%;
+									padding: rem(0) rem(16);
+									margin-top: rem(0);
+									padding-bottom: rem(20);
+									.ibe-button {
+										min-height: rem(56);
+										padding: rem(16);
+									}
+
+									.ibe-search-flights__search-button {
+										display: block !important;
+										z-index: 4;
+
+									}
+								}
+								.ibe-searcher__passenger-button {
+									max-width: 100%;
+								}
+								.ibe-searcher__passenger-button.link {
+									border-bottom: 0;
+									white-space: nowrap;
+								}
+
+							}
+						}
+					}
+					// end modal family
+
+					// Modal fares
+					.ibe-searcher__options-col {
+						&.ibe-searcher__options-col--right {
+							&.modal-mode {
+								position: fixed;
+								width: 100%;
+								height: 100%;
+								background: $PC-cromatico_4;
+								overflow-x: hidden;
+								right: 0;
+								top: 0;
+								z-index: 9999;
+								padding-right: 0;
+								margin-right: 0;
+
+								.ibe-modal__header-close {
+									width: 100%;
+									height: rem(56);
+									background-color: #fff; // ojo, cambiar a blanco
+									position: absolute;
+									top: 0;
+									z-index: 99;
+									&--title {
+										padding-left: rem(40);
+										padding-top: rem(15);
+										color: $PC-cromatico_2;
+										font-family: $font-04;
+										font-size: rem(16);
+										line-height: 24px;
+									}
+								}
+								.ibe-button-close-modal-fares {
+									width: rem(40);
+									height: 100%;
+									right: rem(20);
+									top: rem(0);
+
+									position: absolute;
+									display: block;
+									background-color: transparent;
+									border: 0;
+									&::before {
+										content: "\e935";
+										font-family: $font-05;
+										color: $PC-cromatico_2;
+										font-size: rem(24);
+										font-weight: 500;
+									}
+								}
+
+								.ibe_form__group {
+									margin-top: 0;
+								}
+								.ibe-select__menu {
+									position: fixed;
+									display: block;
+									width: 100% !important;
+									height: 100%;
+									top: rem(56);
+									left: 0;
+									li {
+										border-bottom: 1px solid $PC-cromatico_5;
+
+									}
+									.ui-menu-item-wrapper {
+										padding-left: rem(28);
+									}
+								}
+
+								// .fare-selected{
+								//     font-weight: 800;
+								// }
+								// .ui-menu-item-wrapper {
+								//     color: #777;
+								// }
+								// .ui-state-active {
+								//     color: #333;
+								//     font-weight: 800;
+								//     background-color: transparent;
+								// }
+							}
+						}
+
+					}
+					// modal origin / destiny
+					.ibe-searcher__row--col1 {
+						.ibe-searcher__col--ori.modal-mode,
+						.ibe-searcher__col--des.modal-mode {
+
+							position: fixed;
+							width: 100%;
+							height: 100%;
+							background: $PC-cromatico_4;
+							overflow-x: hidden;
+							left: 0;
+							top: 0;
+							z-index: 9999;
+							padding-right: 0;
+
+							.ioslist {
+								border-top: 1px solid #ddd;
+								margin-top: rem(10);
+							}
+							.ibe-choose-city--mobile {
+								//border: 0;
+							}
+
+							.ibe_form__group {
+								margin-top: 0;
+							}
+							.ibe-modal__header-close {
+								width: 100%;
+								height: rem(56);
+								background-color: #fff; // ojo, cambiar a blanco
+								position: absolute;
+								top: 0;
+								z-index: 99;
+								&--title {
+									padding-left: rem(40);
+									padding-top: rem(15);
+									color: $PC-cromatico_2;
+									font-family: $font-04;
+									font-size: rem(16);
+									line-height: 24px;
+								}
+							}
+							.ibe-button-close-modal-city {
+								width: rem(40);
+								height: 100%;
+								right: rem(7);
+								top: rem(0);
+
+								position: absolute;
+								display: block;
+								background-color: transparent;
+								border: 0;
+								&::before {
+									content: "\e935";
+									font-family: $font-05;
+									color: $PC-cromatico_2;
+									font-size: rem(24);
+									font-weight: 500;
+								}
+							}
+							.city-selected {
+								color: $PC-cromatico_1;
+								font-weight: 600;
+							}
+							.ibe-choose-city {
+								height: auto !important;
+								display: block !important;
+								top: rem(56);
+								.ibe-tab__menu-item {
+									padding: 0;
+									padding-left: rem(15);
+								}
+								.ibe-tab__container {
+									margin-top: rem(-16);
+								}
+							}
+							.ibe-tab__scroll {
+								margin-left: 0;
+								text-align: left;
+								width: calc(100% - 30px) !important;
+							}
+
+						}
+					}
+					//end modal origin / destiny
+					.ibe-searcher__options > .ibe-form__radio-group {
+						padding: 0;
+					}
+					.ibe-form__radio-group {
+						margin-top: rem(16);
+					}
+					// #tab_01 .ibe-searcher__col--date {
+					//     margin-top: rem(-14);
+					// }
+					.link__regular {
+						margin-top: rem(7);
+						padding-bottom: rem(7);
+						display: inline-block;
+						&.ibe-searcher-room__room-link {
+							display: none;
+						}
+					}
+
+					.ibe-form__radio-group--col {
+						max-width: 100%;
+						min-width: 100%;
+						.ibe_form__radio {
+							padding-right: rem(50);
+						}
+
+						.ibe_form__radio-text {
+							vertical-align: middle;
+						}
+					}
+
+					.ibe-searcher__options-col--right {
+						float: right;
+						padding-right: 0;
+						padding-top: rem(24);
+						margin-right: rem(0);
+					}
+					.ibe-searcher__options-col--large {
+						max-width: 100%;
+						min-width: 100%;
+						padding-top: rem(24);
+						.ibe-searcher__passenger {
+							padding-top: 0;
+							padding-right: rem(18);
+							max-width: 100%;
+							width: 100%;
+							text-align: right;
+
+						}
+					}
+					.ibe-search-flights__search-button {
+						max-width: 100%;
+					}
+					.ibe-searcher__passenger--col {
+						.ibe-form__radio-group {
+							margin-top: 0;
+							padding-top: rem(10);
+							margin-bottom: rem(0);
+
+						}
+					}
+
+					.ibe-searcher__options--right {
+
+						margin-bottom: rem(20);
+						padding-right: 0;
+						margin-right: rem(-8);
+					}
+					.ibe-searcher__options--left {
+						@include clearfix;
+						margin-top: rem(16);
+						float: left;
+					}
+					.ibe-searcher__options--center {
+						margin: rem(10);
+						// background-color: #F08400;
+						text-align: center;
+					}
+					.ibe-search-flights__search-button {
+						margin-top: rem(24);
+					}
+
+				}
+				.ibe-searcher__options {
+					.ibe_form__radio {
+						padding-bottom: 0;
+					}
+
+				}
+
+				.ibe-people-counter {
+					position: relative;
+					top: rem(12);
+				}
+				.ibe-choose-city {
+					max-width: 100%;
+				}
+			}
+
+			.ibe-searcher__calendar--end {
+				left: initial;
+				right: 0;
+			}
+			.ibe-searcher__calendar--end:before,
+			.ibe-searcher__calendar--end:after {
+				left: initial;
+				right: 45%;
+			}
+			.ibe-searcher {
+				&__calendar {
+					height: 0;
+					border-radius: 0;
+					box-shadow: none;
+					&--all-months {
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						overflow-x: hidden;
+						top: rem(44);
+						background-color: $PC-cromatico_4;
+						padding-bottom: rem(30);
+						.ui-datepicker-group {
+							width: 100%;
+						}
+						.ui-datepicker-group {
+							width: 100%;
+						}
+						.ui-datepicker-calendar {
+							margin: rem(16) auto rem(15.2) auto;
+							color: $PC-cromatico_1;
+						}
+						.ui-datepicker-calendar thead th {
+							padding: 0 0 rem(16.5) 0;
+						}
+						.ui-datepicker-calendar tbody td.ui-datepicker-unselectable.ui-state-disabled span {
+							color: $PC-cromatico_9;
+						}
+						.ui-datepicker-calendar tbody td a {
+							color: $PC-cromatico_2;
+						}
+						.ui-datepicker-header {
+							border-bottom: none;
+							padding: 0;
+							padding-top: rem(10);
+						}
+						.ibe-searcher__calendar-current {
+							display: none;
+						}
+						.ui-datepicker-prev {
+							display: none;
+						}
+						.ui-datepicker-title {
+							text-align: center;
+							padding: rem(8.65) rem(16) 0;
+							.ui-datepicker-month {
+								font-size: rem(13);
+								text-transform: capitalize;
+							}
+						}
+						.ui-datepicker-calendar tbody td span, [data-handler="selectDay"] {
+							padding: rem(7.75) 0 rem(7.75);
+						}
+						&.ibe-searcher__calendar--start {
+							.ui-datepicker-calendar tbody td.selected-day--to a, .ui-datepicker-calendar tbody td.selected-day--from a {
+								color: $PC-cromatico_4;
+
+							}
+						}
+						&.ibe-searcher__calendar--end {
+
+							.ui-datepicker-calendar tbody td.selected-day--to a, .ui-datepicker-calendar tbody td.selected-day--from a {
+								color: $PC-cromatico_4;
+
+							}
+						}
+					}
+					.ui-datepicker-calendar {
+						.selected-day--from {
+							a {
+								background-position-x: rem(4);
+							}
+							&.range, &.mouse {
+								a {
+									background-color: transparent;
+								}
+							}
+						}
+						.selected-day--to {
+							&.range, &.mouse {
+								a {
+									background-color: transparent;
+								}
+							}
+							a {
+								background-position: 0;
+							}
+						}
+					}
+				}
+			}
+			.ibe-people-counter__ages {
+				padding-left: 22%;
+			}
+
+			// .ibe-choose-city--mobile [data-function='city-list'] {
+			//     height: rem(900);
+			// }
+
+		}
+		.ibe-searcher__options-col--end {
+			position: relative;
+			display: inline-block;
+			width: 100%;
+			padding-left: rem(10);
+			.ibe-searcher__options--end {
+				margin: 0 auto;
+				top: rem(10);
+				text-align: center;
+			}
+			.link__regular {
+				float: none;
+			}
+		}
+		// .ibe-searcher__passenger {
+		// 	@include clearfix;
+		// 	float: left;
+		// 	padding-top: rem(10);
+        // }
+
+    &__col{
+			&--medium,
+			&--remedium,
+			&--small,
+			&--big{
+                width: 100%;
+                margin: 0;
+			}
+			&--search-airport{
+				margin-top: rem(5);
+				.ui-selectmenu-menu{
+					margin-top: rem(7);
+				}
+
+			}
+
+			&--search-selector{
+					.ibe-select {
+						&__button{
+							width: auto !important;
+							display: inline-block;
+							margin: 0 1.5rem 0.5rem 0;
+								.ui-selectmenu-text{
+									margin-right: 0.5625rem;
+								}
+						}
+
+					}
+			}
+
+            &--button-type-2{
+				width: 100%;
+				.ibe-button--xbig {
+					min-height: rem(48);
+				}
+            }
+		}
+	}
+}
+
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe_searcher {
+	@include sm-ibe_searcher;
+	.ibe-searcher {
+		&--xs{
+			.ibe-tab__menu .ibe-tab__menu-item a[title~="España"]{
+				padding-top: 0 !important;
+			}
+		}
+		&__col{
+			&--search-airport{
+				.ui-selectmenu-button {
+					margin-top: 0;
+				}
+				.ibe_form__radio-box{
+					width: rem(280);
+				}
+
+				.ui-selectmenu-menu{
+					margin-top: rem(7);
+				}
+			}
+
+		}
+		.ibe_form__group-half {
+			padding: 0;
+			&.ibe_form__group--content {
+				.ibe_form__input-label {
+					left: rem(10);
+				}
+				.ibe_form__input-text {
+					padding: 0 rem(10) 0 rem(10);
+				}
+			}
+		}
+		.ibe_form__input-label {
+			left: rem(12);
+			&.xui-label--up {
+				& + .ibe_form__input-text {
+					padding: rem(18) rem(10) 0 rem(10);
+				}
+			}
+		}
+		.ibe_form__group--content {
+			.ibe_form__input-text {
+				padding: rem(18) rem(10) 0 rem(10);
+			}
+		}
+		.ibe_form__input-text {
+			padding: 0 rem(10) 0 rem(10);
+		}
+		.ibe_form__group--button-icon {
+			.ibe_form__input-button {
+				width: rem(40);
+			}
+		}
+		&__calendar {
+			border: 1px solid $BRD_standar_1;
+			width: calc(100% + 20px);
+			left: rem(-10);
+			&--start {
+				&:before {
+					border-width: 10px;
+					left: 16.5%;
+					border-bottom-color: $BRD_standar_1;
+				}
+			}
+			&--end {
+				&:before {
+					border-width: 10px;
+					left: 66.5%;
+					border-bottom-color: $BRD_standar_1;
+				}
+			}
+			&-header {
+				padding: rem(15) rem(13) rem(18) rem(13);
+			}
+
+			.ui-datepicker-header {
+				padding: 0 0 rem(21);
+				.ui-corner-all {
+					&.ui-datepicker-prev {
+						top: rem(4);
+						left: rem(4);
+					}
+					&.ui-datepicker-next {
+						top: rem(4);
+						right: rem(4);
+					}
+				}
+			}
+			.ui-datepicker-calendar {
+				width: calc(100% - 35px);
+				.selected-day--from, .selected-day--to {
+					a {
+						background-position-x: right;
+					}
+				}
+				.selected-day--to a {
+					background-position-x: rem(1);
+					font-weight: normal;
+				}
+			}
+			.hasDatepicker {
+				width: rem(288);
+				max-width: 100%;
+				padding-bottom: 0;
+				background: transparent;
+			}
+			&--claim {
+				&:before {
+					left: auto;
+				}
+			}
+		}
+		& [data-position-mobile="6"]{
+			.ibe-select__button{
+				float: none;
+				display: inline-block;
+				margin: 0;
+				margin-bottom: rem(8);
+			}
+			.ibe-select-opciones{
+				width: 100%;
+				display: inline-block;
+				margin-bottom: rem(12);
+				vertical-align: top;
+				@include clearfix;
+			}
+			.ibe-form__checkbox{
+				padding-bottom: rem(5);
+			}
+		}
+		&__options {
+
+			.ibe-select__button {
+				float: left;
+				display: inline-block;
+				margin: 0 rem(24) rem(8) 0;
+			}
+
+			.ibe-form__checkbox-label{
+				display: block;
+				width: 100%;
+			}
+			&--responsive {
+				padding: 0 rem(15);
+				text-align: left;
+				padding-top: rem(8);
+			}
+		}
+		&--accordion {
+			.ibe-searcher__passenger {
+				padding-right: rem(20);
+				padding-left: 0;
+			}
+			.selectize-dropdown {
+				z-index: 1000;
+			}
+			.ibe-searcher__options {
+				.ibe_form__radio {
+					padding-bottom: rem(5);
+				}
+			}
+			.ibe-accordion__header-mobile {
+				border-top: 1px solid $BCK-cromatico_1;
+				background: $BCK-cromatico_5;
+				position: relative;
+				&:after {
+					position: absolute;
+					right: 0.5625rem;
+					top: 50%;
+					transform: translate(0, -50%);
+					font-family: "iberia";
+					font-size: rem(19);
+					color: $PC-cromatico_4;
+					content: "\e971";
+					z-index: 3;
+				}
+				&:before {
+					color: $BCK-cromatico_1;
+					width: rem(16);
+					height: auto;
+					margin-right: rem(10);
+					position: absolute;
+					top: 53%;
+					left: rem(10);
+					transform: translate(0, -50%);
+					-ms-transform: translate(0, -50%);
+					z-index: 3;
+				}
+				&.collapsed {
+					border-top: 1px solid $BCK-cromatico_5;
+					background: $BCK-cromatico_1;
+					&:before {
+						color: $BCK-cromatico_5;
+					}
+					.link.link__regular {
+						color: $BCK-cromatico_5;
+						display: inline-block;
+						vertical-align: top;
+					}
+				}
+				.link.link__regular {
+					color: $BCK-cromatico_1;
+					font-family: $font-07;
+					font-size: rem(16);
+					padding: rem(10) rem(35);
+					display: inline-block;
+					vertical-align: top;
+					position: relative;
+					width: 100%;
+					box-sizing: border-box;
+					z-index: 2;
+					text-align: left;
+					&:hover {
+						text-decoration: none;
+					}
+				}
+				&--link-simple {
+					&:after {
+						transform: rotate(270deg);
+						-ms-transform: rotate(270deg);
+						top: 20%;
+					}
+				}
+			}
+
+			.ibe-accordion__collapse {
+				padding: 0;
+				.ibe_form {
+					padding: 0 rem(10) rem(15) rem(10);
+				}
+			}
+			.m-tab-searcher-1 {
+				.ibe-accordion__header-mobile:not(.collapsed) {
+					border: none;
+				}
+			}
+			.ibe_form__group--n-mt {
+				margin-top: 0;
+			}
+			.ibe-tab__container .ibe-searcher__options {
+				margin-left: rem(1);
+				& > .ibe-form__radio-group {
+					padding: 0 0 rem(5) 0;
+					.ibe_form__radio {
+						margin-right: rem(5);
+						&:first-child {
+							margin-right: rem(38.6);
+						}
+					}
+					.ibe_form__radio-text:after {
+						top: rem(17.6);
+						width: rem(22);
+						height: rem(22);
+					}
+				}
+			}
+			.ibe-tab__container .ibe-searcher__options > .ibe_form__selectize {
+				margin-left: rem(32);
+				float: right;
+			}
+		}
+		&__vintage {
+			.ibe-searcher--accordion {
+
+				.ibe-tab__menu {
+					margin-top: rem(0);
+					padding-top: rem(0);
+					padding-bottom: rem(5);
+				}
+				.ibe-tab__menu-item{
+					vertical-align: inherit;
+				}
+				.ibe-choose-city--mobile .ibe-tab__menu-item:first-child{
+					margin-top: 0;
+				}
+				.ibe-select__menu {
+					min-width: rem(200);
+					right: rem(0);
+				}
+				.ibe-tab__scroll + .ibe-tab__container {
+					padding-bottom: rem(8);
+					padding-top: rem(0);
+				}
+				.ibe-searcher__calendar {
+					//width: calc(201.5%);
+					margin-left: 0;
+				}
+				.ibe_form__group--icon:before {
+					top: rem(22);
+				}
+				.ibe-searcher__options {
+					.ibe_form__selectize {
+						.selectize-input.items.full.has-items:after {
+
+							right: rem(18);
+						}
+					}
+				}
+
+				.ibe-accordion {
+					.ui-selectmenu-menu,
+					.ibe-searcher__passenger-content {
+						width: auto;
+						left: initial;
+						right: 0;
+					}
+
+					.ibe-searcher__options .ibe-select__button  {
+						margin-right: rem(21);
+						.ui-selectmenu-text{
+							margin-right: rem(8);
+						}
+
+					}
+
+					.ibe-searcher__options .ibe-searcher__passenger-button.link.collapsed:after {
+						margin-right: rem(-1);
+					}
+					.ibe_form__group {
+						margin-top: rem(16);
+					}
+					.ibe-form__radio-group--col .ibe_form__radio {
+						padding-right: 0;
+					}
+					.ibe-accordion__header {
+						margin-top: rem(0);
+					}
+					&.active {
+						position: fixed;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						background: $PC-cromatico_4;
+						overflow-x: hidden;
+						z-index: 9999;
+						padding-bottom: rem(16);
+						.ibe-accordion__header {
+
+							&:before {
+								right: rem(8);
+
+							}
+						}
+
+						.ibe-accordion__header a {
+							font-weight: 800;
+							color: $PC-cromatico_2;
+						}
+
+					}
+
+					.ibe-searcher__col--ori,
+					.ibe-searcher__col--des,
+					.ibe-searcher__col--date,
+					.ibe-searcher__col--alt,
+					.ibe-searcher__col--button,
+					.ibe-form__radio-group--col {
+						width: 100%;
+					}
+
+					.ibe-searcher__row--col1 {
+						.ibe-searcher__col--ori,
+						.ibe-searcher__col--des {
+							width: 100%;
+							.ibe-choose-city {
+								.ibe-tab__container {
+									margin-top: rem(-15);
+								}
+								.ibe-tab__scroll {
+									display: inline-block;
+								}
+							}
+						}
+					}
+					.ibe-searcher__row--col1 {
+						.ibe-searcher__col--ori {
+							.ibe-tab__menu {
+								//margin-top: rem(-6);
+							}
+						}
+					}
+					.ibe-searcher__options-col--large {
+						padding-top: rem(5);
+					}
+
+					.ibe-searcher__col {
+						margin-left: 0;
+					}
+					// modal date
+					.ibe-searcher__row--col2 {
+						.ibe-searcher__col--date {
+							&.modal-mode {
+								position: fixed;
+								width: 100%;
+								height: 100%;
+								background: $PC-cromatico_4;
+								overflow: hidden;
+								left: 0;
+								top: 0;
+								z-index: 99;
+								padding-right: 0;
+								.ibe-button-close-modal {
+									position: absolute;
+									width: rem(40);
+									height: auto;
+									display: block;
+									right: rem(0);
+									top: rem(7);
+									background-color: transparent;
+									cursor: pointer;
+									&::before {
+										content: "\e935";
+										font-family: $font-05;
+										color: $PC-cromatico_2;
+										font-size: rem(21);
+										font-weight: 500;
+									}
+								}
+								.ibe_form__group {
+									margin-top: 0;
+									position: relative;
+									width: 100%;
+									height: 100%;
+								}
+								.ibe_form__box {
+									padding-right: rem(30);
+								}
+								.ibe_form__group-half:first-child:before {
+									top: rem(23);
+								}
+								.ibe-searcher__calendar-header {
+									background: $BCK-cromatico_2;
+									padding-bottom: rem(15);
+									padding-top: rem(15);
+								}
+								.ibe-searcher__calendar {
+									box-shadow: none;
+									border: 0;
+									border-top: 1px solid #ccc;
+								}
+								.ibe-searcher__calendar--all-months {
+									.ui-datepicker-group {
+										width: rem(280);
+										display: block;
+										margin: 0 auto;
+									}
+								}
+							}
+						}
+
+					}
+					// Modal passenger
+					.ibe-searcher__col {
+						&.ibe-searcher__col--alt {
+							&.modal-mode {
+								position: fixed;
+								width: 100%;
+								height: 100%;
+								background: $PC-cromatico_4;
+								overflow-x: hidden;
+								left: 0;
+								top: 0;
+								z-index: 9999;
+								padding-left: 0;
+
+								.ibe-button-close-modal-passenger {
+									width: rem(40);
+									height: rem(42);
+									right: rem(7);
+									top: rem(2);
+
+									position: absolute;
+									display: block;
+									background-color: white;
+									border: 0;
+									&::before {
+										content: "\e935";
+										font-family: $font-05;
+										color: $PC-cromatico_2;
+										font-size: rem(24);
+										font-weight: 500;
+									}
+								}
+
+								.ibe_form__group {
+									margin-top: 0;
+								}
+								.ibe-people-counter {
+									position: relative;
+									display: block !important;
+									width: 100% !important;
+									height: 100% !important;
+									top: 0;
+									left: 0;
+									box-shadow: inherit;
+									border-radius: 0;
+									&::before, &::after {
+										display: none;
+									}
+									li {
+										border-bottom: 1px solid $PC-cromatico_5;
+									}
+								}
+								.ibe-people-counter__counter {
+
+									//padding-right: rem(-3);
+								}
+								.ibe-people-counter__people {
+
+									padding-left: rem(6);
+								}
+								.ibe-people-counter__buttons {
+
+									padding-left: rem(0);
+								}
+								.ibe-people-counter__list-item {
+									padding: rem(17) 0 rem(14) 0;
+								}
+								.ibe-modal__button-save {
+									position: relative;
+									display: inline-block;
+									width: 100%;
+									padding: rem(25) rem(16);
+									.ibe-search-flights__search-button {
+										display: block !important;
+										z-index: 4;
+									}
+									.ibe-button {
+										min-height: rem(56);
+										padding: rem(16);
+									}
+								}
+
+							}
+						}
+
+					}
+					// end modal passenger
+
+					// modal family
+					.ibe-searcher__options-col {
+						&.ibe-searcher__options-col--large {
+							&.modal-mode {
+								position: fixed;
+								width: 100%;
+								height: 100%;
+								background: $PC-cromatico_4;
+								overflow-x: hidden;
+								left: 0;
+								top: 0;
+								z-index: 9999;
+								padding-left: 0;
+
+								.ibe-modal__header-close {
+									width: 100%;
+									height: rem(56);
+									background-color: #fff; // ojo, cambiar a blanco
+									position: absolute;
+									top: 0;
+									z-index: 99;
+									&--title {
+										padding-left: rem(40);
+										padding-top: rem(15);
+										color: $PC-cromatico_2;
+										font-family: $font-04;
+										font-size: rem(16);
+										line-height: 24px;
+									}
+								}
+								.ibe-button-close-modal-family {
+									width: rem(40);
+									height: rem(42);
+									right: rem(7);
+									top: rem(2);
+									position: absolute;
+									display: block;
+									background-color: white;
+									border: 0;
+									z-index: 9999;
+									&::before {
+										content: "\e935";
+										font-family: $font-05;
+										color: $PC-cromatico_2;
+										font-size: rem(24);
+										font-weight: 500;
+									}
+								}
+
+								.ibe_form__group {
+									margin-top: 0;
+								}
+								.ibe-searcher__passenger-content {
+									position: relative;
+									display: block !important;
+									width: 100% !important;
+									height: 100% !important;
+									top: 0;
+									right: 0;
+									margin-top: rem(16);
+									padding-bottom: rem(5);
+									border-radius: 0;
+									box-shadow: inherit;
+									border-top: 1px solid $PC-cromatico_5;
+								}
+								.ibe-searcher__passenger {
+									padding-right: 0;
+								}
+								.ibe-modal__button-save {
+									position: relative;
+									display: inline-block;
+									width: 100%;
+									padding: rem(32) rem(16);
+									padding-top: rem(16);
+									.ibe-button {
+										min-height: rem(56);
+										padding: rem(16);
+									}
+
+									.ibe-search-flights__search-button {
+										display: block !important;
+										z-index: 4;
+
+									}
+								}
+								.ibe-searcher__passenger-button {
+									max-width: 100%;
+								}
+								.ibe-searcher__passenger-button.link {
+									border-bottom: 0;
+								}
+
+							}
+						}
+					}
+					// end modal family
+
+					// Modal fares
+					.ibe-searcher__options-col {
+						&.ibe-searcher__options-col--right {
+							&.modal-mode {
+								position: fixed;
+								width: 100%;
+								height: 100%;
+								background: $PC-cromatico_4;
+								overflow-x: hidden;
+								right: 0;
+								top: 0;
+								z-index: 9999;
+								padding-right: 0;
+								margin-right: 0;
+
+								.ibe-modal__header-close {
+									width: 100%;
+									height: rem(56);
+									background-color: #fff; // ojo, cambiar a blanco
+									position: absolute;
+									top: 0;
+									z-index: 99;
+									&--title {
+										padding-left: rem(40);
+										padding-top: rem(15);
+										color: $PC-cromatico_2;
+										font-family: $font-04;
+										font-size: rem(16);
+										line-height: 24px;
+									}
+								}
+								.ibe-button-close-modal-fares {
+									width: rem(40);
+									height: 100%;
+									right: rem(15);
+									top: rem(0);
+
+									position: absolute;
+									display: block;
+									background-color: transparent;
+									border: 0;
+									&::before {
+										content: "\e935";
+										font-family: $font-05;
+										color: $PC-cromatico_2;
+										font-size: rem(24);
+										font-weight: 500;
+									}
+								}
+
+								.ibe_form__group {
+									margin-top: 0;
+								}
+								.ibe-select__menu {
+									position: fixed;
+									display: block;
+									width: 100% !important;
+									height: 100%;
+									top: rem(56);
+									left: 0;
+									li {
+										border-bottom: 1px solid $PC-cromatico_5;
+
+									}
+									.ui-menu-item-wrapper {
+										padding-left: rem(28);
+									}
+								}
+
+								// .fare-selected{
+								//     font-weight: 800;
+								// }
+								// .ui-menu-item-wrapper {
+								//     color: #777;
+								// }
+								// .ui-state-active {
+								//     color: #333;
+								//     font-weight: 800;
+								//     background-color: transparent;
+								// }
+							}
+						}
+
+					}
+					// end modal fares
+
+					// modal origin / destiny
+					.ibe-searcher__row--col1 {
+						.ibe-searcher__col--ori.modal-mode,
+						.ibe-searcher__col--des.modal-mode {
+
+							position: fixed;
+							width: 100%;
+							height: 100%;
+							background: $PC-cromatico_4;
+							overflow-x: hidden;
+							left: 0;
+							top: 0;
+							z-index: 9999;
+							padding-right: 0;
+
+							.ioslist {
+								border-top: 1px solid #ddd;
+								margin-top: rem(10);
+							}
+							.ibe-choose-city--mobile {
+								//border: 0;
+							}
+
+							.ibe_form__group {
+								margin-top: 0;
+							}
+							.ibe-modal__header-close {
+								width: 100%;
+								height: rem(56);
+								background-color: #fff; // ojo, cambiar a blanco
+								position: absolute;
+								top: 0;
+								z-index: 99;
+								&--title {
+									padding-left: rem(40);
+									padding-top: rem(15);
+									color: $PC-cromatico_2;
+									font-family: $font-04;
+									font-size: rem(16);
+									line-height: 24px;
+								}
+							}
+							.ibe-button-close-modal-city {
+								width: rem(40);
+								height: 100%;
+								right: rem(7);
+								top: rem(0);
+
+								position: absolute;
+								display: block;
+								background-color: transparent;
+								border: 0;
+								&::before {
+									content: "\e935";
+									font-family: $font-05;
+									color: $PC-cromatico_2;
+									font-size: rem(24);
+									font-weight: 500;
+								}
+							}
+							.city-selected {
+								color: $PC-cromatico_1;
+								font-weight: 600;
+							}
+							.ibe-choose-city {
+								height: auto !important;
+								display: block !important;
+								top: rem(56);
+								.ibe-tab__menu-item {
+									padding: 0;
+									padding-left: rem(15);
+									margin-bottom: rem(-5);
+								}
+							}
+							.ibe-tab__scroll {
+								margin-left: 0;
+								text-align: left;
+								width: calc(100% - 30px) !important;
+							}
+
+						}
+					}
+					//end modal origin / destiny
+					.ibe-form__radio-group {
+						margin-top: rem(0);
+
+					}
+
+					.ibe-searcher__options {
+						padding: 0;
+						.ibe-form__radio-group {
+							padding-top: rem(15);
+							padding-bottom: rem(0);
+						}
+					}
+					.link__regular {
+						margin-top: rem(7);
+						padding-bottom: 0;
+						display: inline-block;
+						&.ibe-searcher-room__room-link {
+							display: none;
+						}
+					}
+
+					.ibe-form__radio-group--col {
+						max-width: 100%;
+						min-width: 100%;
+						padding-bottom: rem(14);
+						.ibe_form__radio {
+							width: auto;
+							padding-right: rem(10);
+						}
+						.ibe_form__radio-text {
+							vertical-align: middle;
+						}
+					}
+
+					.ibe-search-flights__search-button {
+						max-width: 100%;
+
+					}
+
+					.ibe-searcher__passenger--col {
+						.ibe-form__radio-group {
+							padding-top: rem(9);
+							margin-bottom: rem(12);
+						}
+					}
+
+					.ibe-searcher__options-col--large {
+						max-width: 100%;
+						min-width: 100%;
+
+					}
+					.ibe-searcher__options-col--right {
+						margin: rem(0) rem(-10) 0;
+
+					}
+					.ibe-searcher__options--right {
+						//margin-top: rem(16);
+						padding-right: 0;
+						margin-bottom: rem(20);
+
+					}
+					.ibe-searcher__options--left {
+						@include clearfix;
+						margin-top: rem(16);
+						float: left;
+						background-color: #F08400;
+					}
+					.ibe-searcher__options--center {
+						margin: rem(10);
+						// background-color: #F08400;
+						text-align: center;
+					}
+					.ibe-searcher__options {
+						.ibe_form__radio {
+							padding-bottom: 0;
+						}
+					}
+
+				}
+
+			}
+			.ibe-searcher__calendar--end:before,
+			.ibe-searcher__calendar--end:after {
+				left: initial;
+				right: 32%;
+			}
+			.ibe-searcher {
+				&__calendar {
+					height: 0;
+					border-radius: 0;
+					box-shadow: none;
+					&--all-months {
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						overflow-x: hidden;
+						top: rem(44);
+						z-index: 999;
+						left: rem(-1);
+						background-color: $PC-cromatico_4;
+						//max-height: rem(350);
+						.ui-datepicker-group {
+							width: 100%;
+						}
+						.ui-datepicker-group:first-child {
+							padding-top: rem(7);
+						}
+						.ui-datepicker-calendar {
+							margin: rem(16) auto rem(15.2) auto;
+							color: $PC-cromatico_1;
+						}
+						.ui-datepicker-calendar thead th {
+							padding: 0 0 rem(16.5) 0;
+						}
+						.ui-datepicker-calendar tbody td.ui-datepicker-unselectable.ui-state-disabled span {
+							color: $PC-cromatico_9;
+						}
+						.ui-datepicker-calendar tbody td a {
+							color: $PC-cromatico_2;
+						}
+						.ui-datepicker-header {
+							border-bottom: none;
+							padding: 0;
+
+						}
+						.ibe-searcher__calendar-current {
+							display: none;
+						}
+						.ui-datepicker-prev {
+							display: none;
+						}
+						.ui-datepicker-title {
+							text-align: center;
+							padding: rem(8.65) rem(16) 0;
+							.ui-datepicker-month {
+								font-size: rem(13);
+								text-transform: capitalize;
+							}
+						}
+						.ui-datepicker-calendar tbody td span, [data-handler="selectDay"] {
+							padding: rem(7.75) 0 rem(7.75);
+						}
+						&.ibe-searcher__calendar--start {
+							.ui-datepicker-calendar tbody td.selected-day--to a, .ui-datepicker-calendar tbody td.selected-day--from a {
+								color: $PC-cromatico_4;
+
+							}
+						}
+						&.ibe-searcher__calendar--end {
+							//left: -100%;
+							.ui-datepicker-calendar tbody td.selected-day--to a, .ui-datepicker-calendar tbody td.selected-day--from a {
+								color: $PC-cromatico_4;
+
+							}
+						}
+						.ui-datepicker-header .ui-corner-all.ui-datepicker-next.ui-state-disabled {
+							display: none;
+						}
+					}
+				}
+			}
+			// .ibe-choose-city--mobile [data-function='city-list'] {
+			//     height: rem(900);
+			// }
+		}
+	}
+}

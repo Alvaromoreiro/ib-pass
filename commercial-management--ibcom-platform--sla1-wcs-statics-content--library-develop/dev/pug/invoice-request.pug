@@ -1,0 +1,157 @@
+extends _general/layout__primary
+include _modules/_ibe_searcher-flight-status
+include _modules/_modals/_ibe-modal-where
+
+block title
+	title!="IBERIA - Solicitud de factura"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main
+		+m-ibe-breadcrumbs({
+			"menu": "advSearch"
+		})
+		section.container
+			.row
+				.col-xs-12
+					header.ibe-flight-status__header.ibe-flight-status__header--center
+						h1.title.title__h1.title--no-paddT.title--p-bottom-6!="Solicitud de facturas"
+						h2.title.title__h5.title--no-padd.title.title__h5--small!="Si has comprado tu billete en Iberia.com o en Serviberia y quieres pedir tu factura, simplemente"
+							span.title.title__h5.title--no-padd.title.title__h5--small.title--bold!=" rellena los siguientes campos. "
+							spantitle.title__h5.title--no-padd.title.title__h5--small!="Recuerda que, si es a nombre de una empresa, esta tendrá que ser únicamente de España, Gibraltar o Andorra."
+			.row
+				.col-xs-12
+					section.ibe-flight-status.ibe-flight-status__section
+						div.ibe-tab.ibe-tab--main
+							ul.ibe-tab__menu(data-tab="bootstrap-tabdrop", data-tab-text="Otros")
+								li.ibe-tab__menu-item.active
+									a.ibe-tab__menu-item__text(href="#tab-1", title="Solo vuelo (billete electrónico)", data-toggle="tab")!= "Solo vuelo (billete electrónico)"
+								li.ibe-tab__menu-item
+									a.ibe-tab__menu-item__text(href="#tab-2", title="Packs Iberia Vacaciones" data-toggle="tab")!= "Packs Iberia Vacaciones"
+							.tab-content
+								//- CONTAINER Solo vuelo (billete electrónico)
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium.active(id="tab-1" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+										div.ibe_form__box--claim.ibe_form__box--center
+											form(data-valid-form action="#" method="post", id="form1" class="ibe_form ibe_form-invoice-request")
+												fieldset
+													legend.paragraph.paragraph__regular.paragraph__regular--small-line!="La factura de tu vuelo no incluye los extras que hayas podido contratar (reserva de asiento, maleta, etc.). Las facturas de esos ítems tendrás que pedirlas por separado y de forma independiente."
+													
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group ")
+																label(class="ibe_form__input-label", for="code02") Nombre del pasajero
+																input(class="ibe_form__input-text", name="code02", id="code02", type="text", required, placeholder="Nombre del pasajero", maxlength="30", data-validator="personal")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+																p.ibe_form__msg-info.ibe_form__msg-info--noerror!="Tal y como aparece en el billete"
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code03") Primer apellido del pasajero
+																input(class="ibe_form__input-text", name="code03", id="code03", type="text", required, placeholder="Primer apellido del pasajero", maxlength="30", data-validator="personal")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+																p.ibe_form__msg-info.ibe_form__msg-info--noerror!="Tal y como aparece en el billete"
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group fc_form_group")
+																label(class="ibe_form__input-label", for="code08") N&uacute;mero de billete
+																input(class="ibe_form__input-text", name="code08", id="code08", type="text", required, placeholder="N&uacute;mero de billete", maxlength="14", value="075-", data-validator="cod-ticket", data-format="ticket")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__modal
+																	a(href="javascript:void(0)" title="¿Qu&eacute; es el n&uacute;mero de billete electr&oacute;nico?" data-modal="button" data-modal-view=".fc-dialog-where").link.link__regular.link__regular--underline.link__regular--align-right.link__regular--block!="¿Qu&eacute; es el n&uacute;mero de billete electr&oacute;nico?"
+													div.row
+														div.col-xs-12
+															div(class="ibe-accordion ibe-accordion--nomargin")
+																p.ibe-accordion__header.ibe-accordion__header--treatment(data-focusin, data-toggle="accordion", data-target="#group_01_accordion_01")
+																	a.link(href="#" title="Ver tratamiento de datos")!="Ver tratamiento de datos"
+																div.ibe-accordion__collapse(id="group_01_accordion_03", data-toggle="container", data-steps="collapse")
+																	div.row
+																		div.col-xs-12
+																			p.paragraph.paragraph.paragraph__regular--small.paragraph__regular--last-grey.u-pb!="El responsable del tratamiento de tus datos es Iberia L.A.E. S.A. Operadora, Sociedad Unipersonal (en adelante, “Iberia”) con domicilio social en calle Martínez Villergas 49, 28027 Madrid. Tus datos se tratarán para la gestión y resolución de tus solicitudes y reclamaciones, en base a la ejecución del contrato. Los destinatarios son entidades del Grupo IAG, al que IBERIA pertenece. El usuario podrá revocar en cualquier momento su consentimiento, así como ejercitar los derechos de oposición, acceso, portabilidad, rectificación, limitación y supresión de datos. Puedes conocer el detalle de esta información en nuestra "
+																				a.link.link__regular.link__regular--underline!="política de privacidad."
+													
+													+m-ibe-modal-where()
+															
+													
+													
+												button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--min1.ibe-button--right.u-mt.ibe-button--one-third-container.ibe-button--morelarge(type='button' data-focusin) Continuar
+
+												
+								//- CONTAINER Packs Iberia Vacaciones
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium(id="tab-2" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+										div.ibe_form__box--claim.ibe_form__box--center
+											form(data-valid-form action="#" method="post", id="form2" class="ibe_form ibe_form-invoice-request")
+												fieldset
+													legend.paragraph.paragraph__regular.paragraph__regular--small-line!="Esta factura incluirá el total de Ítems que hayas contratado."
+													
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group ")
+																label(for="res-code" class="ibe_form__input-label ") C&oacute;digo de reserva
+																input(name="res-code" id="res-code" type="text" placeholder="C&oacute;digo de reserva" class="ibe_form__input-text", required, maxlength="6", data-validator='code')
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+																p.ibe_form__modal
+																	a(href="javascript:void(0)" title="¿Qué es el código de reserva?" data-modal="button" data-modal-view=".fc-dialog-where-2").link.link__regular.link__regular--underline.link__regular--align-right.link__regular--block!="¿Qué es el código de reserva?"
+													div.row
+														div.col-xs-12
+															div(class="ibe_form__group  fc_form_group")
+																label(class="ibe_form__input-label", for="code103") Apellidos del pasajero
+																input(class="ibe_form__input-text", name="code103", id="code103", type="text", required, placeholder="Apellidos del pasajero", maxlength="30", data-validator="personal")
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+																p.ibe_form__msg-info.ibe_form__msg-info--noerror!="Tal y como aparece en el billete"
+													div.row
+														div.col-xs-12
+															div.ibe_form__group.fc_form_group.ibe-datepicker-general
+																label.ibe_form__input-label(for='form_calendard') Fecha
+																input.ibe_form__input-text.pointer(name='form_calendar', id="form_calendard" type='text', placeholder='DD/MM/YYYY', data-format='DD/MM/YYYY', data-toggle='collapse', data-target='#calendar-form', data-cal='claim', data-placeholder='placeholder', data-close='outsideclick', data-one-month, data-validator='date', required)
+																button.ibe_form__input-button.ibe_form__input-button--medium.icon.icon-calendario(type='button', data-toggle='collapse', data-target='#calendar-form', data-close='outsideclick', data-focusin)
+																	span.hideAccessible(data-toggle-status='true', data-status-open='Click para plegar calendario', data-status-close='Click para desplegar calendario') Click para desplegar calendario
+																+m-searcher-calendar-simple({
+																	className: "ibe-searcher__calendar--start ibe-searcher__calendar--right ibe-searcher__calendar--claim",
+																	id: "calendar-form",
+																	number: "form-1",
+																	claims: true
+																})
+																p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+												
+													div.row
+														div.col-xs-12
+															div(class="ibe-accordion ibe-accordion--nomargin")
+																p.ibe-accordion__header.ibe-accordion__header--treatment(data-focusin, data-toggle="accordion", data-target="#group_01_accordion_01")
+																	a.link(href="#" title="Ver tratamiento de datos")!="Ver tratamiento de datos"
+																div.ibe-accordion__collapse(id="group_01_accordion_03", data-toggle="container", data-steps="collapse")
+																	div.row
+																		div.col-xs-12
+																			p.paragraph.paragraph.paragraph__regular--small.paragraph__regular--last-grey.u-pb!="El responsable del tratamiento de tus datos es Iberia L.A.E. S.A. Operadora, Sociedad Unipersonal (en adelante, “Iberia”) con domicilio social en calle Martínez Villergas 49, 28027 Madrid. Tus datos se tratarán para la gestión y resolución de tus solicitudes y reclamaciones, en base a la ejecución del contrato. Los destinatarios son entidades del Grupo IAG, al que IBERIA pertenece. El usuario podrá revocar en cualquier momento su consentimiento, así como ejercitar los derechos de oposición, acceso, portabilidad, rectificación, limitación y supresión de datos. Puedes conocer el detalle de esta información en nuestra "
+																				a.link.link__regular.link__regular--underline!="política de privacidad."
+													
+													+m-ibe-modal-where({
+														name : "fc-dialog-where-2",
+													})
+															
+													
+													
+												button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--min1.ibe-button--right.u-mt.ibe-button--one-third-container.ibe-button--morelarge(type='button' data-focusin) Continuar 
+
+												
+									
+
+
+	+m-footer({
+		"full": true
+	})

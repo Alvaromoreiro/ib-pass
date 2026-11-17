@@ -1,0 +1,118 @@
+mixin m-searcher-room(params)
+	div.ibe-searcher-room(id=params.id, data-toggle="container")
+		div.ibe-searcher-room__container
+			script(type="text/template" id="template-searcher-room-"+params.id data-template-searcher-room)
+				div.ibe-searcher-room__item.ibe-searcher-room__item--pt-small(data-searcher-room="room-{{index}}" data-index="{{index}}" data-sequence="{{sequence}}")
+					.ibe-searcher-room__column.ibe-searcher-room__column--md
+						div.ibe-searcher-room__room.ibe-searcher-room__room--p-small
+							span.ibe-searcher-room__room-number(data-searcher-room='number')!="{{sequence}}º"
+							span.ibe-searcher-room__room-title.ibe-searcher-room__room-title--p-small!="Habitaci&oacute;n"
+							a.link.link__regular.link__regular--underline.ibe-searcher-room__room-link(data-searcher-room='delete' data-index='{{index}}' href='#' title='Eliminar') Eliminar
+					.ibe-searcher-room__column.ibe-searcher-room__column--xs
+						.ibe_form__selectize-multi.ibe_form__selectize-multi--hide-label
+							label.ibe_form__input-label!="Adultos:"
+							.ibe_form__selectize-multi__selectors
+								label.hideAccessible(for=params.input_adult.id) Adultos
+								select(class="ibe_form__selectize", name=params.input_adult.name, data-selectize='simple', id=params.input_adult.id, data-selectize-multi="hide-label", data-searcher-room="adults")
+									option(value="") Adultos
+									option(value="1") 1
+									option(value="2") 2
+									option(value="3") 3
+									option(value="4") 4
+									option(value="5") 5
+									option(value="6") 6
+									option(value="7") 7
+									option(value="8") 8
+									option(value="9") 9
+						span.ibe-searcher-room__info M&aacute;s de 12 a&ntilde;os
+					.ibe-searcher-room__column.ibe-searcher-room__column--xs
+						.ibe_form__selectize-multi.ibe_form__selectize-multi--hide-label
+							label.ibe_form__input-label!="Ni&ntilde;os:"
+							.ibe_form__selectize-multi__selectors
+								label.hideAccessible(for=params.input_children.id) Ni&ntilde;os
+								select(class="ibe_form__selectize", name=params.input_children.name, data-selectize='simple', id=params.input_children.id, data-selectize-multi="hide-label" data-searcher-room="children")
+									option(value="") Ni&ntilde;os
+									option(value="0") 0
+									option(value="1") 1
+									option(value="2") 2
+									option(value="3") 3
+									option(value="4") 4
+									option(value="5") 5
+									option(value="6") 6
+									option(value="7") 7
+									option(value="8") 8
+						span.ibe-searcher-room__info De 2 a 12 a&ntilde;os
+					if (params.adv)
+						.ibe-searcher-room__column.ibe-searcher-room__column--md.ibe-searcher-room__column--hide(data-searcher-room="children-ages")
+							.ibe-searcher-room__column-ages
+								.ibe_form__selectize-multi
+									label.ibe_form__input-label Edades niños:
+									button.ibe-button.ibe-button--icon-circle.icon-informacion(type="button" data-tooltip='bootstrap' title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ante arcu, interdum a diam sed, ")
+										span.hideAccessible Informaci&oacute;n de edad
+									div.ibe_form__selectize-multi__selectors
+						.ibe-searcher-room__column.ibe-searcher-room__column--xs
+							.ibe_form__selectize-multi.ibe_form__selectize-multi--hide-label
+								label.ibe_form__input-label!="Beb&eacute;s:"
+								.ibe_form__selectize-multi__selectors
+									label.hideAccessible(for=params.input_baby.id) Beb&eacute;s
+									select(class="ibe_form__selectize", name=params.input_baby.name, data-selectize='simple', id=params.input_baby.id, data-selectize-multi="hide-label" data-searcher-room="babies")
+										option(value="") Beb&eacute;s
+										option(value="0") 0
+										option(value="1") 1
+										option(value="2") 2
+							span.ibe-searcher-room__info Menos de 2 a&ntilde;os
+						//- Seleccion edades de niños
+					else
+						.ibe-searcher-room__column.ibe-searcher-room__column--xs
+							.ibe_form__selectize-multi.ibe_form__selectize-multi--hide-label
+								label.ibe_form__input-label!="Beb&eacute;s"
+								.ibe_form__selectize-multi__selectors
+									label.hideAccessible(for=params.input_baby.id) Beb&eacute;s
+									select(class="ibe_form__selectize", name=params.input_baby.name, data-selectize='simple', id=params.input_baby.id, data-selectize-multi="hide-label" data-searcher-room="babies")
+										option(value="") Beb&eacute;s
+										option(value="0") 0
+										option(value="1") 1
+										option(value="2") 2
+							span.ibe-searcher-room__info Menos de 2 a&ntilde;os
+						//- Seleccion edades de niños
+						.ibe-searcher-room__column.ibe-searcher-room__column--md.ibe-searcher-room__column--hide(data-searcher-room="children-ages", data-min-ages="2", data-max-ages="17")
+							.ibe-searcher-room__column-ages
+								.ibe_form__selectize-multi
+									label.ibe_form__input-label Edades de los ni&ntilde;os
+									div.ibe_form__selectize-multi__selectors
+							button.ibe-button.ibe-button--icon-circle.icon-informacion(type="button" data-tooltip='bootstrap' title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ante arcu, interdum a diam sed, ")
+								span.hideAccessible Informaci&oacute;n de edad
+					a.link.link__regular.link__regular--underline.ibe-searcher-room__link-delete(href='#' title='Eliminar habitación' data-searcher-room='delete' data-index='{{index}}') Eliminar habitaci&oacute;n
+			if (params.adv === "advanced-searcher")
+				script(type="text/template" id="template-select-children-years-"+params.id data-select-children-years)
+					.ibe_form__selectize-multi-min
+						label.ibe_form__input-label-min(for='room_children_{{countRoom}}-{{index}}')!="Ni&ntilde;o {{index}}:"
+						select.ibe_form__selectize(name='room_children_{{countRoom}}-{{index}}' data-selectize='simple'  id='room_children_{{countRoom}}-{{index}}')
+							option(value='02')!="02"
+							option(value='03')!="03"
+							option(value='04')!="04"
+							option(value='05')!="05"
+							option(value='06')!="06"
+							option(value='07')!="07"
+							option(value='08')!="08"
+							option(value='09')!="09"
+							option(value='10')!="10"
+							option(value='11')!="11"
+			else if (params.adv)
+				script(type="text/template" id="template-select-children-years-"+params.id data-select-children-years)
+					label.hideAccessible(for='room_children_{{countRoom}}-{{index}}')!="Edad ni&ntilde;o {{index}}"
+					select.ibe_form__selectize(name='room_children_{{countRoom}}-{{index}}' data-selectize='simple'  id='room_children_{{countRoom}}-{{index}}')
+						option(value='02')!="02"
+						option(value='03')!="03"
+						option(value='04')!="04"
+						option(value='05')!="05"
+						option(value='06')!="06"
+						option(value='07')!="07"
+						option(value='08')!="08"
+						option(value='09')!="09"
+						option(value='10')!="10"
+						option(value='11')!="11"
+		footer.ibe-searcher-room__footer
+			a.link.link__regular.link__regular--underline.ibe-searcher-room__footer-add-file(href="#" title="Añadir habitación" data-searcher-room="add-room" data-text-default="Añadir habitación")!="A&ntilde;adir habitaci&oacute;n"
+			span.ibe-searcher-room__footer-add-complete.ibe-searcher-room__footer-add-file(data-no-more-rooms="true")!="No se puede añadir m&aacute;s habitaciones"
+			//-button.ibe-button.ibe-button--grey.ibe-button--large.pull-right(type="button" data-toggle='close-collapse') Guardar

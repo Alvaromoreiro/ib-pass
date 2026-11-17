@@ -1,0 +1,43 @@
+mixin m-card-guides-type(params)
+	div(class="ibe-card-guides "+params.guide.cssClass, data-card-guides="group-"+params.guide.group, data-type=params.guide.type, id=params.id ? params.id : '')
+		if(params.stopover)
+			a.link.link__regular.link__regular--unformatted(href="#")
+				figure.ibe-card-guides__image(class=params.img.type = "tall" ? "ibe-card-guides__image--tall" : '')
+					img(src=params.img.src, alt=params.img.alt)
+		else
+			figure.ibe-card-guides__image(class=params.img.type = "tall" ? "ibe-card-guides__image--tall" : '')
+				img(src=params.img.src, alt=params.img.alt)
+
+		if(params.recommend)
+			div.rectangle-label-event.rectangle-label-event--stopover
+				div.text-label-event__icon
+					p.text-label-event.text-label-event--stopover Recomendado
+		if(params.ibplus)
+			div.rectangle-label-event.rectangle-label-event--stopover-ibplus
+				div.text-label-event__icon-ibplus
+					p.text-label-event.text-label-event--stopover-ibplus Iberia Plus
+		div.ibe-card-guides__body
+			div.ibe-card-guides__header.ibe-card-guides__pb-none
+				span(class="ibe-card-guides__theme "+params.themeCss)!=params.theme
+				if(params.modal)
+					a(href="javascript:void(0)" title=params.modal.title data-modal="button" data-modal-view=params.modal.view class="ibe-card-guides__title--link")
+						span.title.title__h3.ibe-card-guides__title--icon!=params.title
+				else if(params.stopover)
+					a(href="javascript:void(0)" title=params.title class="link link__regular link__regular--unformatted")
+						span.title.title__h4.ibe-ellipsis-1!=params.title
+				else
+					span.title.title__h3!=params.title
+			div.ibe-card-guides__info(class=params.cssClass)
+				p.paragraph.paragraph__regular.paragraph__regular--grey(class=params.pClass)!=params.info
+				if(params.offer)
+					div.ibe-flex.ibe-flex--align-center.title--red.paragraph--big
+						img(src="../images/content/icono_estrella_roja.png", class="ibe-card-guides__offer-icon")
+						p.bold.ibe-card-guides__offer-text Promoción
+					p.ibe-card-guides__offer-info.ibe-ellipsis-1 #{params.offer}% de descuento
+		div.ibe-card-guides__footer(class=params.link.arrow && "ibe-card-guides__footer--icon")
+			if(params.stopover)
+				a.link.link__regular--important.paragraph__regular--small(href=params.link.href, title=params.link.title)!=params.link.text
+			else
+				a.link.link__regular.link__regular--important(href=params.link.href, title=params.link.title)!=params.link.text
+			span(class=params.link.arrow && "ibe-card-guides__footer-arrow")
+			//- a.link.link__regular.link__regular--important(href=params.link.href, title=params.link.title)!=params.link.text

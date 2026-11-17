@@ -1,0 +1,177 @@
+mixin m-ibe-stopover-tabs_plans-filters()
+        section(data-function="filter-stopoverpartner")
+            div.container
+                div.row
+                    div.col-xs-12
+                        section.ibe-box-work--mt
+                            header.ibe-infocheckin__header
+                                h1.title--stopover.ibe-stopover-tabs--plans-title-route
+                                    span.title--red.title--bold Descubre todo 
+                                    span lo que ofrece esta ciudad
+                        form.ibe_form.ibe-stopover-tabs--experiences-filter
+                            fieldset.ibe_form__fieldset
+                                div.ibe-filter(id="filter")
+                                    ul.ibe-filter__main
+                                        li.ibe-filter__main-item
+                                            input.ibe-filter__check.ibe-filter__check--dark(type="checkbox" id="filter-todos" name="filter-todos" value="Todos" data-info="Todos" onclick="clickAllFilter()" checked)
+                                            label.ibe-filter__label.ibe-filter__label--dark.ibe-filter__label--fs-13(for="filter-todos") Todos
+                                        li.ibe-filter__main-item
+                                            input.ibe-filter__check.ibe-filter__check--dark(type="checkbox" id="days1" name="days1" value="days1" data-info="days1" onclick="clickDayFilter(1)")
+                                            label.ibe-filter__label.ibe-filter__label--dark.ibe-filter__label--fs-13(for="days1") 1 día              
+                                        li.ibe-filter__main-item
+                                            input.ibe-filter__check.ibe-filter__check--dark(type="checkbox" id="days2" name="days2" value="days2" data-info="days2" onclick="clickDayFilter(2)")
+                                            label.ibe-filter__label.ibe-filter__label--dark.ibe-filter__label--fs-13(for="days2") 2 días
+                                        li.ibe-filter__main-item
+                                            input.ibe-filter__check.ibe-filter__check--dark(type="checkbox" id="days3" name="days3" value="days3" data-info="days3" onclick="clickDayFilter(3)")
+                                            label.ibe-filter__label.ibe-filter__label--dark.ibe-filter__label--fs-13(for="days3") 3 días
+                                            script.
+                                                let todos = document.getElementById("filter-todos");
+                                                let days1 = document.getElementById("days1");
+                                                let days2 = document.getElementById("days2");
+                                                let days3 = document.getElementById("days3");
+
+                                                function clickAllFilter(){                                            
+                                                    if(todos.checked){                                                        
+                                                        days1.checked = false;                                                        
+                                                        days2.checked = false;                                                        
+                                                        days3.checked = false;
+                                                        let ruta1day = document.getElementById("plans-1day");
+                                                        let ruta2day = document.getElementById("plans-2day");
+                                                        let ruta3day = document.getElementById("plans-3day");
+                                                        ruta1day.classList.add('ibe-stopover-tabs--plans-1day');
+                                                        ruta2day.classList.add('ibe-stopover-tabs--plans-2day');
+                                                        ruta3day.classList.add('ibe-stopover-tabs--plans-3day');
+                                                        ruta1day.classList.remove('ibe-stopover-tabs--plans-1day-hidden');
+                                                        ruta2day.classList.remove('ibe-stopover-tabs--plans-2day-hidden');
+                                                        ruta3day.classList.remove('ibe-stopover-tabs--plans-3day-hidden');
+                                                        addSeparator(2);
+                                                    }
+                                                    else {
+                                                        todos.checked= true
+                                                    }
+                                                }
+
+                                                function clickDayFilter(day){
+                                                    let ruta1day = document.getElementById("plans-1day");
+                                                    let ruta2day = document.getElementById("plans-2day");
+                                                    let ruta3day = document.getElementById("plans-3day");
+                                                    if(!days1.checked && !days2.checked && !days3.checked && !todos.checked){
+                                                        if(day === 1){
+                                                            days1.checked = true;
+                                                        }
+                                                        else if (day === 2) {
+                                                            days2.checked = true;
+                                                        }
+                                                        else {
+                                                            days3.checked = true;
+                                                        }
+                                                    } 
+                                                    if(days1.checked && days2.checked && days3.checked){
+                                                        ruta1day.classList.add('ibe-stopover-tabs--plans-1day');
+                                                        ruta2day.classList.add('ibe-stopover-tabs--plans-2day');
+                                                        ruta3day.classList.add('ibe-stopover-tabs--plans-3day');
+                                                        ruta1day.classList.remove('ibe-stopover-tabs--plans-1day-hidden');
+                                                        ruta2day.classList.remove('ibe-stopover-tabs--plans-2day-hidden');
+                                                        ruta3day.classList.remove('ibe-stopover-tabs--plans-3day-hidden');
+                                                        addSeparator(2);
+                                                        disableAll();
+                                                    }
+                                                    if(days1.checked && days2.checked && !days3.checked) {
+                                                        ruta1day.classList.add('ibe-stopover-tabs--plans-1day');
+                                                        ruta1day.classList.remove('ibe-stopover-tabs--plans-1day-hidden');
+                                                        ruta2day.classList.add('ibe-stopover-tabs--plans-2day');
+                                                        ruta2day.classList.remove('ibe-stopover-tabs--plans-2day-hidden');                                                        
+                                                        ruta3day.classList.add('ibe-stopover-tabs--plans-3day-hidden');
+                                                        ruta3day.classList.remove('ibe-stopover-tabs--plans-3day');
+                                                        addSeparator(1);
+                                                        todos.checked = false;
+                                                    }
+                                                    if(days1.checked && !days2.checked && days3.checked) {
+                                                        ruta1day.classList.add('ibe-stopover-tabs--plans-1day');
+                                                        ruta1day.classList.remove('ibe-stopover-tabs--plans-1day-hidden');
+                                                        ruta2day.classList.remove('ibe-stopover-tabs--plans-2day');
+                                                        ruta2day.classList.add('ibe-stopover-tabs--plans-2day-hidden');                                                        
+                                                        ruta3day.classList.remove('ibe-stopover-tabs--plans-3day-hidden');
+                                                        ruta3day.classList.add('ibe-stopover-tabs--plans-3day');
+                                                        addSeparator(1);
+                                                        todos.checked = false;
+                                                    }
+                                                    if(days1.checked && !days2.checked && !days3.checked) {
+                                                        ruta1day.classList.add('ibe-stopover-tabs--plans-1day');
+                                                        ruta1day.classList.remove('ibe-stopover-tabs--plans-1day-hidden');
+                                                        ruta2day.classList.remove('ibe-stopover-tabs--plans-2day');
+                                                        ruta2day.classList.add('ibe-stopover-tabs--plans-2day-hidden');                                                        
+                                                        ruta3day.classList.add('ibe-stopover-tabs--plans-3day-hidden');
+                                                        ruta3day.classList.remove('ibe-stopover-tabs--plans-3day');
+                                                        addSeparator(0);
+                                                        todos.checked = false;
+                                                    }
+                                                    if(!days1.checked && days2.checked && days3.checked) {
+                                                        ruta1day.classList.remove('ibe-stopover-tabs--plans-1day');
+                                                        ruta1day.classList.add('ibe-stopover-tabs--plans-1day-hidden');
+                                                        ruta2day.classList.add('ibe-stopover-tabs--plans-2day');
+                                                        ruta2day.classList.remove('ibe-stopover-tabs--plans-2day-hidden');                                                        
+                                                        ruta3day.classList.remove('ibe-stopover-tabs--plans-3day-hidden');
+                                                        ruta3day.classList.add('ibe-stopover-tabs--plans-3day');
+                                                        addSeparator(3);
+                                                        todos.checked = false;
+                                                    }
+                                                    if(!days1.checked && !days2.checked && days3.checked) {
+                                                        ruta1day.classList.remove('ibe-stopover-tabs--plans-1day');
+                                                        ruta1day.classList.add('ibe-stopover-tabs--plans-1day-hidden');
+                                                        ruta2day.classList.remove('ibe-stopover-tabs--plans-2day');
+                                                        ruta2day.classList.add('ibe-stopover-tabs--plans-2day-hidden');                                                        
+                                                        ruta3day.classList.remove('ibe-stopover-tabs--plans-3day-hidden');
+                                                        ruta3day.classList.add('ibe-stopover-tabs--plans-3day');
+                                                        addSeparator(0);
+                                                        todos.checked = false;
+                                                    }
+                                                    if(!days1.checked && days2.checked && !days3.checked) {
+                                                        ruta1day.classList.remove('ibe-stopover-tabs--plans-1day');
+                                                        ruta1day.classList.add('ibe-stopover-tabs--plans-1day-hidden');
+                                                        ruta2day.classList.add('ibe-stopover-tabs--plans-2day');
+                                                        ruta2day.classList.remove('ibe-stopover-tabs--plans-2day-hidden');                                                        
+                                                        ruta3day.classList.add('ibe-stopover-tabs--plans-3day-hidden');
+                                                        ruta3day.classList.remove('ibe-stopover-tabs--plans-3day');
+                                                        addSeparator(0);
+                                                        todos.checked = false;
+                                                    }
+                                                    if(!days1.checked && !days2.checked && !days3.checked) {
+                                                        addSeparator(2);
+                                                        todos.checked = true;
+                                                    }
+                                                }
+                                                function addSeparator(line){
+                                                    let line1 = document.getElementById("plansline1");
+                                                    let line2 = document.getElementById("plansline2");
+                                                    if(line ===1){
+                                                        line1.classList.add('ibe-stopover-tabs--plans-line1');
+                                                        line2.classList.add('ibe-stopover-tabs--plans-line2-hidden');
+                                                        line1.classList.remove('ibe-stopover-tabs--plans-line1-hidden');
+                                                        line2.classList.remove('ibe-stopover-tabs--plans-line2');
+                                                    }
+                                                    else if(line === 2){
+                                                        line1.classList.remove('ibe-stopover-tabs--plans-line1-hidden');
+                                                        line2.classList.remove('ibe-stopover-tabs--plans-line2-hidden');
+                                                        line1.classList.add('ibe-stopover-tabs--plans-line1');
+                                                        line2.classList.add('ibe-stopover-tabs--plans-line2');
+                                                    }
+                                                    else if (line ===3){
+                                                        line1.classList.add('ibe-stopover-tabs--plans-line1-hidden');
+                                                        line2.classList.remove('ibe-stopover-tabs--plans-line2-hidden');
+                                                        line1.classList.remove('ibe-stopover-tabs--plans-line1');
+                                                        line2.classList.add('ibe-stopover-tabs--plans-line2');
+                                                    }
+                                                    else {
+                                                        line1.classList.add('ibe-stopover-tabs--plans-line1-hidden');
+                                                        line2.classList.add('ibe-stopover-tabs--plans-line2-hidden');
+                                                        line1.classList.remove('ibe-stopover-tabs--plans-line1');
+                                                        line2.classList.remove('ibe-stopover-tabs--plans-line2');
+                                                    }
+                                                }
+                                                function disableAll() {
+                                                    todos.checked = true;
+                                                    days1.checked = false;                                                        
+                                                    days2.checked = false;                                                        
+                                                    days3.checked = false;
+                                                }

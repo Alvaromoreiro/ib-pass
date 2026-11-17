@@ -1,0 +1,552 @@
+extends _general/layout__primary
+
+block title
+	title!="IBERIA - Reclamaciones"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main.ibe-claim
+		+m-ibe-breadcrumbs({ 
+			menu: "claim"
+		})
+		div.container(data-guide="header")
+			div.row
+				div.col-xs-12
+					h1.title.title__h1.title--center.title--grey.title--padding-bottom-short.title--p-top-0 Contacta con nosotros
+					h2.title.title__h5.title.title__h5--small.title--center.title--no-paddT.title--light.title--p-bottom-40 Nuestro Centro de Atenci&oacute;n al Cliente recoge, analiza y responde a tus reclamaciones
+			div.row
+				div.col-xl-9.col-lg-8.col-md-12.col-sm-12.col-xs-12
+					.ibe-box__primary.ibe-box--small.ibe-box--form
+						form(data-valid-claim id="form1" class="ibe_form")
+							h3.title__h3 Reclamaci&oacute;n
+							p.paragraph.paragraph__regular.paragraph__regular--m-bottom-19 Introduce tus datos para efectuar la reclamaci&oacute;n.
+							div.ibe_form__box--claim.ibe_form__box--claim-short
+								h4.title__h5.title__h5--small.title--red.title--information Motivo de la reclamaci&oacute;n
+								button(type="button" class="title--information-btn" data-tooltipGeneric title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in consectetur orci. Lorem ipsum dolor sit amet.")
+								fieldset
+									legend.hideAccessible Tipo de reclamaci&oacute;n
+									.row
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new.ibe_form__group--nomargintop.ibe_form__group--disabled.ibe-form__group--m-mobile(data-selectmenu_claim)
+												label.ibe_form__selectize--label(for="claim-type")
+													span.ibe_form__input-text Tipo de reclamaci&oacute;n
+												select(id="claim-type", class="ibe-select ibe_form__input-text", name="claim-type", data-selectmenu="", required, data-valid)
+													option(value="") Tipo de reclamaci&oacute;n
+													option(value="asistencia") Asistencia
+													option(value="asiento") Cambio de asiento
+													option(value="programa") Cambio de programaci&oacute;n
+													option(value="cancel") Cancelaci&oacute;n
+													option(value="denegado") Denegaci&oacute;n a embarque
+													option(value="Equipaje") Equipaje
+													option(value="factura") Facturaci&oacute;n
+													option(value="iberia-plus") Programa Iberia Plus
+													option(value="retraso") Retraso
+													option(value="trato") Trato proporcionado
+													option(value="perdida") P&eacute;rdida de conexi&oacute;n
+													option(value="overbooking") Overbooking
+													option(value="Otros") Otros
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new.ibe_form__group--nomargintop(data-selectmenu_claim)
+												label.ibe_form__selectize--label(for="claim-reason00")
+													span.ibe_form__input-text Motivo
+												select(id="claim-reason00", class="ibe-select ibe_form__input-text", name="claim-reason00", data-selectmenu="")
+													option(value="") Motivo
+													option(value="equi-demora") Demora
+													option(value="equi-dete") Deterioro
+													option(value="equi-mano") Equipaje de mano
+													option(value="equi-extravio") Extrav&iacute;o
+													option(value="equi-falta") Falta de contenido
+													option(value="equi-olv") Objeto olvidado a bordo
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+										.col-xs-12
+											.ibe_form__group.ibe-form__checkbox.inte-elementshowhide
+												input#legal.ibe-form__checkbox-input(name='legal', type='checkbox', required='')
+												label#legal_label.ibe-form__checkbox-label(for='legal')
+													span Acepto los términos y condiciones de uso
+													p.ibe_form__msg-info.hidden(data-validate='exist', data-validate-text='Este campo es obligatorio')
+									.row
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group.ibe_form__group--button-icon.ibe_form__group--separated
+												label.ibe_form__input-label(for='pir') PIR
+												input.ibe_form__input-text(name='code0565', type='text', placeholder='Lugar de destino', id="pir", maxlength="10", data-validator='PIR')
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+												button.ibe_form__input-button.ibe_form__input-button--medium.icon-informacion(type='button' data-tooltipGeneric title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in consectetur orci. Lorem ipsum dolor sit amet.")
+													span.hideAccessible(data-toggle-status='true', data-status-open='Click para info', data-status-close='Click para info') Click para m&aacute;s informaci&oacute;n
+										.col-xs-12
+											.ibe-box__secondary
+												p.paragraph.paragraph__regular.paragraph__regular--no-margin-top Para reclamaciones de equipaje puedes contactar con nosotros mediante el número de teléfono
+													span.paragraph--big.paragraph--dark.paragraph--p-left-10.paragraph--red 901 111 342.
+												p.paragraph.paragraph__regular.paragraph__regular--no-margin Si llamas desde fuera de España, por favor,
+													a(href="#", title="Ir a consultar el telefono").link.link__regular--red.link__regular--p-left-5.link__regular--underline consulta aquí el teléfono.
+										.col-xs-12
+											.ibe-box__secondary.ibe-box__secondary--p-left-50.ibe-box__secondary--m-bottom-30
+												.icon-ayuda_2.ibe-icons--help
+												h5.title__h5.title__h5--small.title--grey.title--p-bottom-10.title--m-left-30 Te puede interesar
+												ul
+													li
+														a(href="#", title="Ir a comprobar el estado").link.link__regular.link__regular--red.link__regular--underline Comprobar el estado del equipaje retrasado / Información del expediente o PIR
+														p.paragraph.paragraph__regular Si deseas efectuar consultas para conocer cómo se encuentra el proceso de localización de tu equipaje.
+													li
+														a(href="#", title="Ir a objetos pérdidos").link.link__regular.link__regular--red.link__regular--underline Objetos perdidos
+														p.paragraph.paragraph__regular Si has olvidado alguna pertenencia durante el vuelo o en la Sala Vip o de menores (UMs) de Iberia, probablemente haya sido recuperado por nosotros.
+						form(data-valid-claim id="form2" class="ibe_form")
+							div.ibe_form__box--claim.ibe_form__box--claim-short
+								fieldset
+									legend.hideAccessible Datos de la reserva
+									h4.title__h5.title__h5--small.title--red.title--information Datos de la reserva
+									button(type="button" class="title--information-btn" data-tooltipGeneric title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in consectetur orci. Lorem ipsum dolor sit amet.")
+									.row
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group.ibe_form__group--nomargintop.ibe-form__group--m-mobile
+												label(for="res-code" class="ibe_form__input-label ") C&oacute;digo de reserva
+												input(name="res-code" id="res-code" type="text" placeholder="C&oacute;digo de reserva" class="ibe_form__input-text", required, maxlength="6", data-validator='code')
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+												p.ibe_form__modal
+													a(href="#", title="¿Qué es el código de reserva?").link.link__regular.link__regular--underline.link__regular--align-right.link__regular--block ¿Qué es el código de reserva?
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group.ibe_form__group--nomargintop
+												label(for="ticket-num" class="ibe_form__input-label") N&uacute;mero de billete
+												input(name="ticket-num" id="ticket-num" type="text" placeholder="N&uacute;mero de billete" class="ibe_form__input-text" required maxlength="14", data-validator='ticket', data-format="ticket")
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+												p.ibe_form__modal
+													a(href="#", title="¿Dónde encontrar el número de billete?").link.link__regular.link__regular--underline.link__regular--align-right.link__regular--block ¿Dónde encontrar el número de billete?
+
+							div.ibe_form__box--claim.ibe_form__box--claim-short
+								fieldset
+									legend.hideAccessible Datos del vuelo
+									h4.title__h5.title__h5--small.title--red.title--information Datos del vuelo
+									button(type="button" class="title--information-btn" data-tooltipGeneric title="Lorem ipsum dolor sit amet, c.col-md-6.col-xs-12onsectetur adipiscing elit. Morbi in consectetur orci. Lorem ipsum dolor sit amet.")
+									.row
+										.col-md-6.col-xs-12
+											div(class="ibe_form__group ibe_form__group--button-icon fc_form_group ibe_form__group--nomargintop ibe-form__group--m-mobile" data-move="parent" data-position="1")
+												label(class="ibe_form__input-label", for="flight_origin")!="Origen"
+												input(class="ibe_form__input-text" name="flight_origin" id="flight_origin" type="text" placeholder="Origen" data-autocomplete="cities" spellcheck='false', value="Madrid (MAD)", data-destination-info="ES|MAD|Madrid",data-validate="input-origin", data-fligths-collapse-mobile="button", data-close='outsideclick', required)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El origen no puede ser igual que el destino")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+												div.hidden-xs.hidden-sm.hidden-md
+													button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-claim00")
+														span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+													+m-choose-city({
+														"class": "ibe-choose-city--origin",
+														"format": "desktop",
+														"id": "id-tab-collapse-claim00",
+														"dataClose": true,
+														"tab_1": {
+															"href": "tab-cities-13-7",
+															"name": "Espa&ntilde;a",
+															"title": "España"
+														},
+														"tab_2": {
+															"href": "tab-cities-23-7",
+															"name": "Europa",
+															"title": "Europa"
+														},
+														"tab_3": {
+															"href": "tab-cities-33-7",
+															"name": "Am&eacute;rica",
+															"title": "América"
+														},
+														"tab_4": {
+															"href": "tab-cities-43-7",
+															"name": "Africa y Oriente Medio",
+															"title": "Africa y Oriente Medio"
+														},
+														"tab_5": {
+															"href": "tab-cities-53-7",
+															"name": "Asia y Ocean&iacute;a",
+															"title": "Asia y Oceanía"
+														}
+													})
+												div.hidden-lg.hidden-xl
+													button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#m-id-tab-collapse-claim00")
+														span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+													+m-choose-city({
+														"class": "ibe-choose-city--origin",
+														"format": "responsive",
+														"id": "m-id-tab-collapse-claim00",
+														"dataClose": true,
+														"tab_1": {
+															"href": "tab-cities-mobile-13",
+															"name": "Espa&ntilde;a",
+															"title": "España"
+														},
+														"tab_2": {
+															"href": "tab-cities-mobile-23",
+															"name": "Europa",
+															"title": "Europa"
+														},
+														"tab_3": {
+															"href": "tab-cities-mobile-33",
+															"name": "Am&eacute;rica",
+															"title": "América"
+														},
+														"tab_4": {
+															"href": "tab-cities-mobile-43",
+															"name": "Africa y Oriente Medio",
+															"title": "Africa y Oriente Medio"
+														},
+														"tab_5": {
+															"href": "tab-cities-mobile-53",
+															"name": "Asia y Ocean&iacute;a",
+															"title": "Asia y Oceanía"
+														}
+													})
+										.col-md-6.col-xs-12
+											div(class="ibe_form__group ibe_form__group--button-icon fc_form_group ibe_form__group--nomargintop" data-move="parent" data-position="2")
+												label(class="ibe_form__input-label", for="flight_destiny")!="Destino"
+												input(class="ibe_form__input-text", name="flight_destiny", id="flight_destiny", type="text", placeholder="Destino" data-autocomplete="cities" spellcheck='false', data-validate="input-destiny", data-fligths-collapse-mobile="button", required)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El destino no puede ser igual que el origen")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+												div.hidden-xs.hidden-sm.hidden-md
+													button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-claim01")
+														span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+													+m-choose-city({
+														"class": "ibe-choose-city--destination",
+														"format": "desktop",
+														"id": "id-tab-collapse-claim01",
+														"dataClose": true,
+														"tab_1": {
+															"href": "tab-cities-13-7",
+															"name": "Espa&ntilde;a",
+															"title": "España"
+														},
+														"tab_2": {
+															"href": "tab-cities-23-7",
+															"name": "Europa",
+															"title": "Europa"
+														},
+														"tab_3": {
+															"href": "tab-cities-33-7",
+															"name": "Am&eacute;rica",
+															"title": "América"
+														},
+														"tab_4": {
+															"href": "tab-cities-43-7",
+															"name": "Africa y Oriente Medio",
+															"title": "Africa y Oriente Medio"
+														},
+														"tab_5": {
+															"href": "tab-cities-53-7",
+															"name": "Asia y Ocean&iacute;a",
+															"title": "Asia y Oceanía"
+														}
+													})
+												div.hidden-lg.hidden-xl
+													button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#m-id-tab-collapse-claim01")
+														span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+													+m-choose-city({
+														"class": "ibe-choose-city--destination",
+														"format": "responsive",
+														"dataClose": true,
+														"id": "m-id-tab-collapse-claim01",
+														"tab_1": {
+															"href": "tab-cities-mobile-13",
+															"name": "Espa&ntilde;a",
+															"title": "España"
+														},
+														"tab_2": {
+															"href": "tab-cities-mobile-23",
+															"name": "Europa",
+															"title": "Europa"
+														},
+														"tab_3": {
+															"href": "tab-cities-mobile-33",
+															"name": "Am&eacute;rica",
+															"title": "América"
+														},
+														"tab_4": {
+															"href": "tab-cities-mobile-43",
+															"name": "Africa y Oriente Medio",
+															"title": "Africa y Oriente Medio"
+														},
+														"tab_5": {
+															"href": "tab-cities-mobile-53",
+															"name": "Asia y Ocean&iacute;a",
+															"title": "Asia y Oceanía"
+														}
+													})
+									.row
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group
+												label(for="flight-num" class="ibe_form__input-label") Vuelo
+												input(name="flight-num" id="flight-num" type="text" placeholder="Vuelo" class="ibe_form__input-text" required data-validator="flight")
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+										.col-md-6.col-xs-12
+											.ibe_form__group.ibe_form__group--half.ibe-datepicker-general
+												.ibe_form__group-half.ibe_form__group-half--full.fc_form_group
+													.ibe_form__box
+														label.ibe_form__input-label(for='flight_round_date-mt') Fecha
+														input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name='flight_round_date-mt', id="flight_round_date-mt" type='text', placeholder='DD/MM/YYYY', data-format='DD/MM/YYYY', data-toggle='collapse', data-target='#searcher-calendar-1-mt', data-cal='start', data-placeholder='placeholder', data-close='outsideclick')
+														div
+															button.ibe_form__input-button.ibe_form__input-button--medium.icon.icon-calendario(type='button', data-toggle='collapse', data-target='#searcher-calendar-1-mt', data-close='outsideclick')
+																span.hideAccessible(data-toggle-status='true', data-status-open='Click para plegar calendario', data-status-close='Click para desplegar calendario') Click para desplegar calendario
+													+m-searcher-calendar-simple({
+														className: "ibe-searcher__calendar--start ibe-searcher__calendar--right",
+														id: "searcher-calendar-1-mt",
+														number: "mt1" 
+													})
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+												p.ibe_form__msg-info.hidden(data-validate="range-max", data-validate-text="La fecha es superior a un año con respecto al actual")
+												p.ibe_form__msg-info.hidden(data-validate="range-min", data-validate-text="La fecha es anterior a 5 años con respecto al actual")
+									.row
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+												label.ibe_form__selectize--label(for="cabine")
+													span.ibe_form__input-text Cabina
+												select(id="cabine", class="ibe-select ibe_form__input-text", name="cabine", data-selectmenu="")
+													option(value="") Cabina
+													option(value="business") business
+													option(value="nomal") normal
+							div.ibe_form__box--claim.ibe_form__box--claim-short
+								fieldset
+									legend.hideAccessible Datos del pasajero
+									h4.title__h5.title__h5--small.title--red.title--information Datos del pasajero
+									button(type="button" class="title--information-btn" data-tooltipGeneric title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in consectetur orci. Lorem ipsum dolor sit amet.")
+									.row
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group.ibe_form__group--nomargintop.ibe-form__group--m-mobile
+												label(for="name" class="ibe_form__input-label") Nombre
+												input(name="name" id="name" type="text" placeholder="Nombre" class="ibe_form__input-text" maxlength="40" required)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group.ibe_form__group--nomargintop
+												label(for="surname" class="ibe_form__input-label") Apellidos
+												input(name="surname" id="surname" type="text" placeholder="Apellidos" class="ibe_form__input-text" required)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+									.row
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group
+												label(for="phone-num" class="ibe_form__input-label") Tel&eacute;fono
+												input(name="phone-num" id="phone-num" type="text" placeholder="Tel&eacute;fono" class="ibe_form__input-text" maxlength="40" required)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group
+												label(for="mail" class="ibe_form__input-label") Email
+												input(name="mail" id="mail" type="text" placeholder="email" class="ibe_form__input-text" maxlength="80" required data-validator="mail")
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+									.row
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group
+												label(for="iberianum" class="ibe_form__input-label") N&uacute;mero Iberia Plus
+												input(name="iberianum" id="iberianum" type="text" placeholder="N&uacute;mero Iberia Plus" class="ibe_form__input-text" maxlength="8" data-validator="plus")
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+												label.ibe_form__selectize--label(for="residence")
+													span.ibe_form__input-text Pa&iacute;s de residencia
+												select(id="residence", class="ibe-select ibe_form__input-text", name="residence", data-selectmenu="")
+													option(value="") Pa&iacute;s de residencia
+													option(value="spain") España
+													option(value="germany") Alemania
+													option(value="france") Francia
+									.row
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+												label.ibe_form__selectize--label(for="document-type02")
+													span.ibe_form__input-text Documento de identificaci&oacute;n
+												select(id="document-type02", class="ibe-select ibe_form__input-text", name="document-type02", data-selectmenu="", required)
+													option(value="") Documento de identificaci&oacute;n
+													option(value="dni") DNI espa&ntilde;ol (incl.letra)
+													option(value="carnet") Carn&eacute; Nacional de Identidad
+													option(value="pasaporte") Pasaporte
+													option(value="tarjeta") Tarjeta Residente en Espa&ntilde;a
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group
+												label(for="docnum02" class="ibe_form__input-label") N&uacute;mero de documento
+												input(name="docnum02" id="docnum02" type="text" placeholder=" N&uacute;mero de documento" class="ibe_form__input-text", maxlength="15", required)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+
+							div.ibe_form__box--claim.ibe_form__box--claim-short
+								fieldset
+									legend.hideAccessible Datos de contacto
+									h4.title__h5.title__h5--small.title--red.title--information.title--p-bottom-15 Datos de contacto
+									button(type="button" class="title--information-btn" data-tooltipGeneric title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in consectetur orci. Lorem ipsum dolor sit amet.")
+									.ibe-form__checkbox.ibe_form__group.fc_form_group
+										input.ibe-form__checkbox-input(type='checkbox', name='check02', id="check02", required)
+										label.ibe-form__checkbox-label.ibe-form__checkbox-label--m-bottom-18(for='check02')
+											span.ibe-form__checkbox-label--text02 Mismos datos de contacto que los de la reserva
+										p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+									.row
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group.ibe_form__group--nomargintop.ibe-form__group--m-mobile
+												label(for="name02" class="ibe_form__input-label") Nombre
+												input(name="name02" id="name02" type="text" placeholder="Nombre" class="ibe_form__input-text" maxlength="40" required)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group.ibe_form__group--nomargintop
+												label(for="surname02" class="ibe_form__input-label") Apellidos
+												input(name="surname02" id="surname02" type="text" placeholder="Apellidos" class="ibe_form__input-text" maxlength="80" required)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+									.row
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group
+												label(for="phone-num02" class="ibe_form__input-label") Tel&eacute;fono
+												input(name="phone-num02" id="phone-num02" type="text" placeholder="Tel&eacute;fono (opcional)" class="ibe_form__input-text" maxlength="40" required)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group
+												label(for="mail02" class="ibe_form__input-label") Email
+												input(name="mail02" id="mail02" type="text" placeholder="E-mail" class="ibe_form__input-text" maxlength="80" required data-validator="mail")
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+									.row
+										.col-md-6.col-xs-12
+											.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+												label.ibe_form__selectize--label(for="contact-type")
+													span.ibe_form__input-text Forma de contacto preferida
+												select(id="contact-type", class="ibe-select ibe_form__input-text", name="contact-type", data-selectmenu="")
+													option(value="") Forma de contacto preferida
+													option(value="mail") E-mail
+													option(value="phone") M&oacute;vil
+							div.ibe_form__box--claim.ibe_form__box--claim-short
+								fieldset
+									legend.hideAccessible Informcion adicional
+									h4.title__h5.title__h5--small.title--red.title--p-bottom-4 Informaci&oacute;n adicional (opcional)
+									.row
+										.col-xs-12
+											.ibe_form__group.fc_form_group
+												label(for="textarea").hideAccessible Text area comentarios
+												textarea.ibe_form__textarea(rows="7", placeholder="Comentarios (opcional). Máximo 1500 caracteres", data-textarea, id="textarea", title="Comentarios extra")
+												div(data-textarea-text).paragraph.paragraph__regular.paragraph__regular--f-right
+									h5.title__h5.title--f-16.title--grey Adjuntar archivos
+									.row
+										div(class="ibe-upload")
+											.col-lg-6.col-md-6.col-sm-12
+												p.paragraph.paragraph__regular.paragraph__regular--inline.paragraph--break Puedes adjuntar hasta tres archivos (peso máximo 5Mb) de los siguientes tipos: GIF, JPG, PNG, PDF, gif, jpg, png, pdf, doc, docx, xlsx , xls
+											.col-lg-6.col-md-6.col-sm-12
+												div.ibe_form__group.ibe_form__group--error.ibe_form__group--propped
+													input.hideAccessible(type='file', required, data-validator="file", name='files[]', multiple, id="uploadfile", data-file, accept=".gif,.jpg,.png,.pdf,.doc,.docx,.xlsx,.xls")
+													label(for="uploadfile").btn.fileinput-button.ibe-button.ibe-button--upload Adjuntar un archivo
+													p.ibe_form__msg-info.ibe_form__msg-info--msg-file.hidden(data-validate="exist", data-validate-text="Obligatorio adjuntar un archivo")
+													p.ibe_form__msg-info.ibe_form__msg-info--msg-file.hidden(data-validate="valid", data-validate-text="Formato no válido")
+											.col-lg-12.col-md-12.col-sm-12
+												div(style='margin-top:15px;' class='ibe-alert ibe-alert--alert ibe-alert--yellow ibe-alert--small hidden', data-alert='files')
+													p(class='ibe-alert__text') Se pueden adjuntar como máximo 3 archivos
+												div(style='margin-top:15px;' class='ibe-alert ibe-alert--alert ibe-alert--yellow ibe-alert--small hidden', data-alert='type')
+													p(class='ibe-alert__text') El archivo no tiene formato válido
+												div(style='margin-top:15px;' class='ibe-alert ibe-alert--alert ibe-alert--yellow ibe-alert--small hidden', data-alert='same')
+													p(class='ibe-alert__text') El archivo que intentas adjuntar ya ha sido añadido
+												div(style='margin-top:15px;' class='ibe-alert ibe-alert--alert ibe-alert--yellow ibe-alert--small hidden', data-alert='size')
+													p(class='ibe-alert__text') Se ha superado el máximo tamaño permitido
+												div(style='margin-top:15px;' class='ibe-alert ibe-alert--alert ibe-alert--yellow ibe-alert--small hidden', data-alert='required')
+													p(class='ibe-alert__text') Es necesario adjuntar al menos 1 archivo.
+												ul(data-fileList).ibe-list--files
+							p.paragraph.paragraph__regular.paragraph__regular--m-bottom-30 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+								a(href="", title="Lorem ipsum" class='link link__regular--red link__regular--p-left-5 link__regular--underline') ut enim ad minim veniam.
+
+							button.ibe-button.ibe-button--red.ibe-button--smaller.ibe-button--morelarge.ibe-button--right(type='button') Continuar
+							button.ibe-button.ibe-button--reset.ibe-button--link02(type='button' data-modal="button" data-modal-view=".fc-dialog-claim") Cancelar
+				div.col-xl-3.col-lg-4.col-md-12.col-sm-12.col-xs-12
+					.ibe-cart-cont
+						div.ibe-card-cont__container.ibe-card-cont__container--small
+							form(data-valid-claim id="form3" class="ibe_form")
+								fieldset
+									legend.title__h3.ibe-card-cont__title Consulta el estado de  tu incidencia
+									.row
+										.col-xl-12.col-lg-12.col-md-6.col-sm-12.col-xs-12
+											.ibe_form__group.fc_form_group
+												label(for="ref01" class="ibe_form__input-label") Referencia
+												input(name="ref01" id="ref01" type="text" placeholder="Referencia" class="ibe_form__input-text" required)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+										.col-xl-12.col-lg-12.col-md-6.col-sm-12.col-xs-12
+											.ibe_form__group.fc_form_group
+												label(for="lastname01" class="ibe_form__input-label") Apellidos del pasajero
+												input(name="lastname01" id="lastname01" type="text" placeholder="Apellidos del pasajero" class="ibe_form__input-text" maxlength="80" required)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+										.col-xl-12.col-lg-12.col-md-6.col-sm-12.col-xs-12
+											.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+												label.ibe_form__selectize--label(for="document-type")
+													span.ibe_form__input-text Tipo de documento
+												select(required, id="document-type", class="ibe-select ibe_form__input-text", name="document-type", data-selectmenu="")
+													option(value="") Tipo de documento
+													option(value="dni") DNI espa&ntilde;ol (incl.letra)
+													option(value="carnet") Carn&eacute; Nacional de Identidad
+													option(value="pasaporte") Pasaporte
+													option(value="tarjeta") Tarjeta Residente en Espa&ntilde;a
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+										.col-xl-12.col-lg-12.col-md-6.col-sm-12.col-xs-12
+											.ibe_form__group.fc_form_group.ibe_form__group--separated
+												label(for="docnum01" class="ibe_form__input-label") N&uacute;mero de documento
+												input(name="docnum01" id="docnum01" type="text" placeholder=" N&uacute;mero de documento" class="ibe_form__input-text" maxlength="15" required)
+												p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+												p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+										.col-xl-12.col-lg-12.col-md-6.col-sm-12.col-xs-12
+											.ibe-form__checkbox
+												input.ibe-form__checkbox-input(type='checkbox', name='check01', id="check01")
+												label.ibe-form__checkbox-label.ibe-form__checkbox-label--separated(for='check01')
+													span.ibe-form__checkbox-label--text Es titular de una tarjeta Iberia Plus o de otra tarjeta Oneworld
+										.col-xl-12.col-lg-12.col-lg-offset-0.col-md-offset-2.col-md-4.col-sm-12.col-xs-12
+											button.ibe-button.ibe-button--red.ibe-button--block.ibe-button--smaller(type='button') Ver estado
+
+				div.col-xl-3.col-lg-4.col-md-12.col-sm-12.col-xs-12
+					div.ibe-card-cont__container.ibe-card-cont__container--grey
+						h3.title__h3.ibe-card-cont__title.ibe-card-cont__title--black Herramientas de ayuda
+						ul.ibe-list--new
+							li.ibe-list__item--border
+								a(href="#", title="Ir a Serviberia", class="ibe-list__item--link")
+									span.ibe-list__item--red Serviberia
+									span.ibe-list__item--text Venta Telefónica de Iberia
+							li.ibe-list__item--border
+								a(href="#", title="Ir a Centro de Servicios Iberia Plus", class="ibe-list__item--link")
+									span.ibe-list__item--red Centro de Servicios Iberia Plus
+									span.ibe-list__item--text Centros Iberia Plus
+							li.ibe-list__item--border
+								a(href="#", title="Ir a Oficinas de Iberia", class="ibe-list__item--link")
+									span.ibe-list__item--red Oficinas de Iberia
+									span.ibe-list__item--text Siempre nos encontrarás cerca
+							li.ibe-list__item--border
+								a(href="#", title="Ir a centro atencion equipajes", class="ibe-list__item--link")
+									span.ibe-list__item--red Centro Atenci&oacute;n Iberia Equipajes
+									span.ibe-list__item--text Si desea consultar el estado actual de la b&uacute;squeda que estamos efectuando
+							li.ibe-list__item--border
+								a(href="#", title="Ir a objetos perdidos", class="ibe-list__item--link")
+									span.ibe-list__item--red Objetos perdidos
+									span.ibe-list__item--text Conoce la manera de recuperar un objeto extraviado en el aeropuerto.
+							li.ibe-list__item--border
+								a(href="#", title="Ir a Iberia conecta", class="ibe-list__item--link")
+									span.ibe-list__item--red Iberia Conecta
+									span.ibe-list__item--text Conoce las actualizaciones relacionadas con tu vuelo por sms o email.
+	div.ibe-dialog.fc-dialog-claim
+		div.modal-dialog.modal-dialog--big
+			div.modal-content
+				div.ibe-modal.ibe-modal--big
+					div.modal-header.modal-header--p-bottom-28
+						h2.title.title__h1.ibe-modal__title-primary="¿Estás seguro de cancelar tu reclamación?"
+						.ibe-modal__options.ibe-modal__options--claim
+							button.ibe-button--reset.ibe-modal__options-icon.ibe-modal__options-icon--close(data-focusin,type="button" data-dialog="close")
+								span.hideAccessible!="Cerrar"
+					div.modal-body
+						p.paragraph.paragraph__regular.paragraph__regular--modal-claim Si cancelar tu reclamación eliminaremos todos los datos que nos has facilitado Vestibulum ut sapien in justo tincidunt vestibulum. Suspendisse volutpat semper quam, sodales aliquet dolor egestas quis.
+					div.modal-footer.modal-footer--left
+						button.ibe-button.ibe-button--red.ibe-button--smaller.ibe-button--morelarge.ibe-button--right.ibe-button--modal(type='button' title="Cancelar" data-dialog="close") Cancelar Reclamación
+						button.ibe-button.ibe-button--reset.ibe-button--link02.ibe-button--modal(type='button' title="Continuar" data-dialog="close") Continuar con la reclamación
+	+m-footer()
+

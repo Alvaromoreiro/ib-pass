@@ -1,0 +1,59 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe_grid
+//    Desripcion: Estilos para cajas flexibles usando grid
+//******************************************************************************/
+/* -------------------------------------------------------------
+    #GRID CONTAINERS
+----------------------------------------------------------------- */
+
+.ibe-grid {
+    display: grid;
+    padding-bottom: rem(88);
+    &__columns {
+        padding: 0 rem(16);
+        grid-template-columns: calc(25% - 24px) calc(25% - 24px) calc(25% - 24px) calc(25% - 24px);
+    }
+    &__col-gap {
+        grid-column-gap: rem(32);
+    }
+    &__row-gap {
+        grid-row-gap: rem(24);
+    }
+    //MODIFIERS
+
+    &--pb-0 {
+        padding-bottom: 0;
+    }
+}
+
+//Responsive
+@mixin m-ibe_flex {
+    .ibe-grid {
+        &__columns {
+            grid-template-columns: calc(50% - 16px) calc(50% - 16px);
+        }
+        &__col-gap {
+            grid-column-gap: rem(16);
+        }
+    }
+}
+
+@mixin sm-ibe_flex {
+    .ibe-grid {
+        &__columns {
+            grid-template-columns: calc(50% - 8px) calc(50% - 8px);
+        }
+        &__col-gap {
+            grid-column-gap: rem(16);
+        }
+    }
+}
+
+@mixin xs-ibe_flex {
+    .ibe-grid {
+        &__columns {
+            grid-template-columns: 100%;
+        }
+    }
+}

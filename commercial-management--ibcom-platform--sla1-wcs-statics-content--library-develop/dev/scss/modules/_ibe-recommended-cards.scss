@@ -1,0 +1,270 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe-recommended-cards
+//    Desripcion: Estilos para la busqueda de hotel mas vuelo
+//******************************************************************************/
+.ibe-recommended-cards{
+	margin-bottom: rem(50);
+	&__container{
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		align-items: stretch;
+	}
+	&__link{
+		text-decoration: none !important;
+		line-height: normal;
+		&:hover{
+			.ibe-recommended-cards{
+				&__card{
+					&-title, &-price, &-price:after{
+						color: $PC-cromatico_10;
+						text-decoration: none !important;
+					}
+					&-img{
+						-webkit-transform: translate(-50%,-50%) scale(1.3);
+						-moz-transform: translate(-50%,-50%) scale(1.3);
+						-ms-transform: translate(-50%,-50%) scale(1.3);
+						-o-transform: translate(-50%,-50%) scale(1.3);
+						transform: translate(-50%,-50%) scale(1.3);
+					}
+				}
+			}
+		}
+	}
+	&__card{
+		flex-basis: calc((100% - 64px)/3);
+		margin: rem(32) 0 0 rem(32);
+		&:nth-of-type(1), &:nth-of-type(3n+1){
+			margin-left: 0;
+		}
+		&-content{
+			display: block;
+			text-decoration: none !important;
+			box-shadow: 0 rem(2) 0 $BCK-cromatico_18;
+			position: relative;
+		}
+		&-figure{
+			width: 100%;
+			height: rem(178);
+			position: relative;
+			overflow: hidden;
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: center;
+			align-items: center;
+		}
+		&-img{
+			position: relative;
+			display: block;
+			max-width: initial;
+
+			-webkit-transform:t ranslate(-50%, -50%) scale(1);
+			-moz-transform: translate(-50%, -50%) scale(1);
+			-ms-transform: translate(-50%, -50%) scale(1);
+			-o-transform: translate(-50%, -50%) scale(1);
+			transform: translate(-50%, -50%) scale(1);
+			-webkit-transition: 0.6s ease-in-out;
+			transition: 0.6s ease-in-out;
+
+			width: auto;
+			min-width: 100%;
+
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			max-height: 100%;
+		}
+		&-info{
+			position: relative;
+			padding: rem(16);
+			background-color: $BCK-cromatico_1;
+			color: $PC-cromatico_2;
+			z-index: 1;
+			margin-left: 0;
+			min-height: rem(140);
+			display: flex;
+			flex-flow: column nowrap;
+			justify-content: space-between;
+		}
+		&-title{
+			min-height: rem(50);
+			line-height: rem(25);
+			position: relative;
+			color: $PC-cromatico_3;
+			font-family: $font-04;
+			font-size: rem(28);
+
+			display: -webkit-box;
+			overflow: hidden;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+		}
+		&-bottom{
+			margin-top: rem(8);
+		}
+		&-text{
+			color: $PC-cromatico_1;
+			font-family: $font-02;
+			font-size: rem(14);
+			
+			display: -webkit-box;
+			overflow: hidden;
+			-webkit-line-clamp: 1;
+			-webkit-box-orient: vertical;
+		}
+		&-price{
+			display: block;
+			position: relative;
+			color: $PC-cromatico_1;
+			font-family: $font-04;
+			font-size: rem(28);
+			line-height: 0.9;
+			margin-top: rem(8);
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: space-between;
+			align-items: center;
+			&:after{
+				font-family: $font-05;
+				content: "\e973";
+				font-size: rem(20);
+				color: $PC-cromatico_3;
+			}
+		}
+	}
+	&__bottom{
+		margin-top: rem(16);
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: center;
+		align-items: center;
+	}
+	&__more{
+		width: rem(48);
+		height: rem(48);
+		background-color: none;
+		border: 0 none;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50%;
+		border: rem(2) solid $BCK-cromatico_20;
+		background-color: $BCK-cromatico_1;
+		color: $BCK-cromatico_20;
+		&-icon{
+			font-size: rem(24);
+		}
+		&:hover{
+			border-color: $PC-cromatico_10;
+			color: $PC-cromatico_10;
+		}
+	}
+	&--errorimage{
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: center;
+		align-items: center;
+		.ibe-recommended-cards__card-img{
+			display: none;
+		}
+		.ibe-default-image{
+			position: relative;
+			display: block;
+
+			-webkit-transform:t ranslate(-50%, -50%) scale(1);
+			-moz-transform: translate(-50%, -50%) scale(1);
+			-ms-transform: translate(-50%, -50%) scale(1);
+			-o-transform: translate(-50%, -50%) scale(1);
+			transform: translate(-50%, -50%) scale(1);
+			-webkit-transition: 0.6s ease-in-out;
+			transition: 0.6s ease-in-out;
+
+			width: auto;
+			min-width: 100%;
+
+			position: absolute;
+			left: 50%;
+			top: 50%;
+		}
+		&.is-loaded{
+			.ibe-recommended-cards__card-img{
+				display: block;
+			}
+		}
+	}
+}
+/* Responsive */
+/*XLARGE RESOLUTION STYLES*/
+@mixin xl-ibe-recommended-cards {
+	.ibe-recommended-cards{}
+}
+
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe-recommended-cards {
+	.ibe-recommended-cards{}
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe-recommended-cards {
+	.ibe-recommended-cards{
+		margin-top: 0;
+		&__card{
+			flex-basis: calc((100% - 32px)/2);
+			&:nth-of-type(3n+1){
+				margin-left: rem(32);
+			}
+			&:nth-of-type(1), &:nth-of-type(2n+1){
+				margin-left: 0;
+			}
+			&-figure{
+				height: rem(142);
+			}
+			&-info{
+				min-height: rem(163);
+			}
+		}
+	}
+}
+
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe-recommended-cards {
+	@include m-ibe-recommended-cards;
+	.ibe-recommended-cards{
+		&__container{
+			background-color: initial;
+		}
+		&__card{
+			&-figure{
+				height: rem(105);
+			}
+			 &-text{
+				 font-size: rem(13);
+			 }
+		}
+	}
+	
+}
+
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe-recommended-cards {
+	@include sm-ibe-recommended-cards;
+	.ibe-recommended-cards{
+		margin: 0 rem(-16);
+		&__container{
+			padding-left: 0;
+			padding-right: 0;
+		}
+		&__card{
+			flex-basis: 100%;
+			margin: rem(16) 0 0;
+			&:nth-of-type(3n+1){
+				margin-left: 0;
+			}
+			&-figure{
+				height: rem(131);
+			}
+		}
+	}
+}

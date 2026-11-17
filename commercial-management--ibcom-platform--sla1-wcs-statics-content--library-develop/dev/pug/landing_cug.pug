@@ -1,0 +1,150 @@
+extends _general/layout__primary
+include _modules/_ibe_searcher
+include _modules/_ibe_searcher-accordion-flights
+include _modules/_ibe_searcher-accordion-mobile-flights
+include _modules/_ibe_outstanding
+block title
+	title!="IBERIA - Landing CUG"
+block body
+	+m-header-new({
+		"login": false
+	})
+	+m-menu-new({
+		"login":false
+	})
+
+	// End wrapper
+	main.ibe-cub
+		+m-ibe-breadcrumbs({
+			menu: "checkin"
+		})
+		h1.title.title__h1.ibe-search-flights__search-title.ibe-search-flights__search-title-landing!="Descuentos exclusivos"
+		div.ibe-search-flights.ibe-search-flights--cug.ibe-search-flights--cug-vintage.ibe-search-flights__menu-vintage.ibe-searcher__vintage
+			div.ibe-search-flights__search
+				div.container.ibe-search-flights__search-container(data-function="data-focus-searcher")
+					div.row
+						div.col-xs-12
+							//- Mostrar en caso de buscador vintage
+							div.ibe-search-flights__search-box(data-validate-searcher)
+								+m-searcher({
+									"tab1": true,
+									"tab2": false,
+									"tab3": false,
+									"tab4": false,
+									"tab5": false
+								})
+			div.ibe-search-flights__cover-bigger
+				figure.ibe-search-flights__cover-fig.hidden-xs
+					img.ibe-search-flights__cover-img(src="images/content/carousel/herobanner_cug_01_1280.jpg" alt="")
+				div.container
+					h2.hideAccessible Descuentos
+					div.ibe-card-dincounts-container
+						ul.ibe-card-discounts(data-function="discount")
+							li.ibe-card-discounts__item
+								span.ibe-card-discounts__item--number!="-5%"
+								span.ibe-card-discounts__item--text(data-dotdotdot="collapse-text")!="Vuelos dentro de Espa&ntilde;a"
+							li.ibe-card-discounts__item
+								span.ibe-card-discounts__item--number!="-10%"
+								span.ibe-card-discounts__item--text(data-dotdotdot="collapse-text")!="Vuelos a Europa"
+							li.ibe-card-discounts__item
+								span.ibe-card-discounts__item--number!="-15%"
+								span.ibe-card-discounts__item--text(data-dotdotdot="collapse-text")!="Vuelos a &Aacute;sia, &Aacute;frica, Europa y &Aacute;merica"
+				div.ibe-outstanding
+					div.container
+						div.row
+							div.col-xs-12
+								+m-outstanding-yellow({
+									items: [
+										{
+											"title": "Adel&aacute;ntate",
+											"icon": "icon-calendario",
+											"text": "Compra tus billetes a Espa&ntilde;a y Europa 30 d&iacute;as antes Europa 30 d&iacute;as antes Europa 30 d&iacute;as antes del vuelo."
+										},
+										{
+											"title": "Compra",
+											"icon": "icon-carrito_compra",
+											"text": "Del 01/12/2017 al 15/06/2018."
+										},
+										{
+											"title": "Vuela",
+											"icon": "icon-avion_ida",
+											"text": "Del 01/12/2017 al 15/06/2018."
+										},
+										{
+											"title": "Ahorra",
+											"icon": "icon-descuento",
+											"text": "Descuentos del 90% y 25% para menores de 11 a&ntilde;os."
+										}
+									]
+								})
+								p.ibe_cug-condiciones
+									a.link.link__regular.link__regular--underline.link__regular--white(href="#general-conditions", title="link a condiciones generales", data-scrollTop="conditions")!="Ver condiciones generales"
+		div.ibe-icons-advantage
+			div.container
+				.row
+					.col-xs-12
+						div.ibe-icons-advantage__container
+							div.ibe-icons-advantage__container__text-box
+								h3.ibe-icons-advantage__container__text!="Ventajas como estas, para socios como tú."
+							div.ibe-icons-advantage__container__icons-box
+								ul.ibe-icons-advantage__container__list
+									li.ibe-icons-advantage__container__icons
+										figure.ibe-icons-advantage__container__icons-figure
+											img(src="images/content/iconos/cug/FAC81DD9-4BBD-4365-BCE8-C32B42B76CE7.png" alt="texto alternativo")
+									li.ibe-icons-advantage__container__icons
+										figure.ibe-icons-advantage__container__icons-figure
+											img(src="images/content/iconos/cug/7F5737EB-D4B5-4914-9F04-7D0E9789FC50.png" alt="texto alternativo")
+									li.ibe-icons-advantage__container__icons
+										figure.ibe-icons-advantage__container__icons-figure
+											img(src="images/content/iconos/cug/D73CA71B-40B0-486B-9044-02D29B26ACF2.png" alt="texto alternativo")
+									li.ibe-icons-advantage__container__icons
+										figure.ibe-icons-advantage__container__icons-figure
+											img(src="images/content/iconos/cug/99F74EEB-CA6F-4682-A4F5-D076E4343127.png" alt="texto alternativo")
+		section.container
+			div.row
+				div.col-xs-12
+					article#general-conditions.ibe-box-landing__primary.ibe-box-landing__primary--small-marginBottom
+						h2.title.title__h3!="Condiciones generales"
+						ul.ibe-list.ibe-list--normal.ibe-list--noMargin-bottom
+							li.ibe-list__item.ibe-list__item--smaller-padding
+								span!="Los precios indicados durante el proceso de reserva, incluyen el descuento indicado y pueden tener una ligera variaci&oacute;n con el precio final (+/-1€)."
+							li.ibe-list__item.ibe-list__item--smaller-padding
+								span!="El descuento es v&Aacute;lido para vuelos con salida desde Ciudad de M&eacute;xico, operados por Iberia, Iberia Express e Iberia Regional Air Nostrum. No es v&Aacute;lido en vuelos IB4XXX, IB5XXX, o IB7XXX)."
+							li.ibe-list__item.ibe-list__item--smaller-padding
+								span!="En los billetes de ida y vuelta, s&oacute;lo se permiten trayectos con salida y regreso desde la misma ciudad, no es posible realizar paradas en diferentes ciudades."
+							li.ibe-list__item.ibe-list__item--smaller-padding
+								span!="El descuento se aplica &uacute;nicamente sobre el importe de la tarifa. Esta informaci&oacute;n est&Aacute; desglosada en el proceso de compra 'Desglose de precios'. Las tasas e impuestos no tienen descuento."
+							li.ibe-list__item.ibe-list__item--smaller-padding
+								span!="<strong>IMPORTANTE</strong>: La b&uacute;squeda de disponibilidad, reserva y compra, debe realizarse s&oacute;lo desde esta p&Aacute;gina."
+			div.row
+				div.col-md-6.ibe-card-box--md.ibe-card-box--vertical
+					+m-card-box({
+						"isLink": true,
+						"zoom": true,
+						"exampleText": false,
+						"link": {
+							"name": "Ofertas de vuelo + hotel"
+						},
+						"autoHeight": "ibe-card-box__content--auto-height",
+						"image": {
+							"src": "/modules/ibe-card-box/192x320.png",
+							"alt": "Ofeta Disneyland"
+						},
+						"title": "Ofertas de vuelo + hotel Ofertas de vuelo + hotel"
+					})
+				div.col-md-6.ibe-card-box--md.ibe-card-box--vertical
+					+m-card-box({
+						"isLink": true,
+						"zoom": true,
+						"exampleText": false,
+						"link": {
+							"name": "Lorem ipsum"
+						},
+						"autoHeight": "ibe-card-box__content--auto-height",
+						"image": {
+							"src": "/modules/ibe-card-box/192x320.png",
+							"alt": "Ofeta Disneyland"
+						},
+						"title": "Lorem ipsum"
+					})
+	+m-footer()

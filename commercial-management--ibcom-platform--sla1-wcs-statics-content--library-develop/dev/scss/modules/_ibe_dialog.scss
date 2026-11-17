@@ -1,0 +1,166 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_dialog
+//    Desripcion: Estilos para las modales
+//******************************************************************************/
+.ibe-dialog {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100050;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    background: rgba(0, 0, 0, 0.4);
+
+    //Modifiers
+
+    &--special{
+        .modal-dialog{
+            width: 65rem;
+            margin: 12% auto rem(20) auto;
+            max-width: none;
+        }
+        .modal-content {
+            background: transparent;
+        }
+        .modal-header {
+            padding: 0;
+            border-bottom: 0;
+        }
+        .modal-body {
+            background: $BCK-cromatico_1;
+        }
+        .ibe-dialog__options {
+            position: relative;
+            top: auto;
+            right: auto;
+            margin-bottom: 8px;
+            text-align: right;
+        }
+        .ibe-dialog__close {
+            font-size: 0;
+            background: transparent;
+            border: 0;
+
+            &:focus,
+            &:active {
+                outline: 2px solid $BRD-standar_6;
+            }
+        }
+        .ibe-dialog__close-icon {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: rem(28);
+            color: $PC-cromatico_4;
+        }
+        .ibe-dialog__close-text {
+            display: inline-block;
+            vertical-align: middle;
+            font-family: $font-07;
+            font-size: rem(14);
+            color: $PC-cromatico_4;
+        }
+        .ibe-modal {
+            padding: 0;
+        }
+    }
+
+    &--bg-none {
+        background-color: transparent;
+    }
+    
+    &.fc-dialog-login{
+        display: none;
+    }
+    &.fc-dialog-all-destinations {
+        .modal-dialog{
+            width: rem(1120);
+            max-width: 100%;
+        }
+    }
+}
+
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe-dialog {
+    .ibe-dialog {
+
+        //Modifiers
+
+        &--special{
+            .modal-dialog{
+                margin-top: 12%; 
+                width: 60rem;
+            }
+        }
+    }
+}
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe-dialog {
+    .ibe-dialog {
+
+        //Modifiers
+
+        &--special{
+            .modal-dialog{
+                width: 100%;
+            }
+        }
+    }
+}
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe-dialog {
+    .ibe-dialog {
+
+        //Modifiers
+
+        &--special{
+            .modal-dialog{
+                margin-top: 15%;
+                width: 100%;
+            }
+        }
+        &.fc-dialog-all-destinations {
+            .modal-dialog {
+                margin: 0;
+                padding: 0;
+            }
+            .ibe-dialog__options {
+                margin: 0;
+            }
+            .ibe-dialog__close {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: rem(64);
+                height: rem(45);
+                z-index: 9;
+                background-color: #d7192d;
+                &-text {
+                    position: absolute;
+                    left: -9999rem;
+                    font-size: 0;
+                }
+                &:focus{
+                    outline: 2px solid #FFF;
+                }
+            }
+        }
+    }
+}
+
+@mixin xs-ibe-dialog {
+    @include sm-ibe-dialog;
+    .ibe-dialog {
+        //Modifiers
+
+        &--special{
+            .modal-dialog {
+                margin-top: 33%;
+                width: 100%;
+            }
+        }
+    }
+}

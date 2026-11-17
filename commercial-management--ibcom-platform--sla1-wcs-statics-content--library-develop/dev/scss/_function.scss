@@ -1,0 +1,117 @@
+//*****************************************************************************
+//    Proyecto: Telefónica .com
+//    Titulo: functiones
+//    Desripcion: Funciones genéricas
+//******************************************************************************/
+// PIXEL TO EM FUNCTION
+    // Definition of: Base-Font-Size
+    $browser-context: 16; // Default
+
+    $fontPath: "fonts";
+    @function em($pixels, $context: $browser-context) {
+      @return #{$pixels/$context}em
+    }
+
+// PIXEL TO REM FUNCTION
+    @function rem($pixels, $context: $browser-context) {
+      @return #{$pixels/$context}rem
+    }
+
+// Calc PIXEL TO REM FUNCTION
+	//Example SCSS without function -->  width: remcalc(100% - 50px);
+	//Example SCSS with function --> width: remcalc(100%, " - " , rem(50));
+	
+	@function remcalc($percentage, $operator, $rem) {
+		@return calc(#{$percentage + $operator + $rem})
+	}
+
+
+    @mixin clearfix($clear:both){
+        &:after{
+            content:"";
+            display:block;
+            clear:$clear;
+        }
+    }
+// PERCENTAJE FUNCTION
+	@function percentaje($elemPixels,$totalPixels){
+		@return unquote(($elemPixels*100)/$totalPixels+"%")
+	}
+    @mixin generateFontFace($fontName,$path:$fontPath,$fontTypes:("ttf"),$fontConfig:(("normal",("normal"))),$separator:"-"){
+        //Solución al fallo de manejo de listas, cuando se indicaba en el mixin una lista con un único item trataba la sublista como una lista produciendo fallos en el manejo de los itesm
+        //Si se indica solo un item en la lista el hijo será tratado como un string en lugar de una lista
+        @if type_of(nth($fontConfig,1)) != "list"{
+            //se añade un item falso para probocar la creación de la lista
+            $fontConfig : ($fontConfig,null);
+        }
+        @each $currentFontConfig in $fontConfig {
+            @if $currentFontConfig != null {
+                $currentFontWeight: nth($currentFontConfig, 1);
+                @if $currentFontWeight == "normal" {
+                    $currentFontWeight: "";
+                }
+                $currentFontWeightRoute: str-slice($currentFontWeight,0,1)+str-slice($currentFontWeight,2,str-length($currentFontWeight));
+                $currentFontStyles: nth($currentFontConfig, 2);
+                @each $currentFontStyle in $currentFontStyles {
+                    @if $currentFontStyle == "normal" {
+                        $currentFontStyle: "";
+                    }
+                    $currentSeparator: "";
+                    @if str-length($currentFontWeight) > 0 {
+                        $currentSeparator: $separator;
+                    } @else if str-length($currentFontStyle) > 0 {
+                        $currentSeparator: $separator;
+                    }
+                    $currentFontStyleRoute: str-slice($currentFontStyle,0,1)+str-slice($currentFontStyle,2,str-length($currentFontStyle));
+                    @font-face {
+                        font-family: unquote($fontName+$currentSeparator+$currentFontWeightRoute+$currentFontStyleRoute);
+                        $currentFontFamily: "";
+                        $useSRC: "src:";
+                        $endOf: ";";
+                        $cont: 0;
+                        $result: "";
+                        @each $currentFontType in $fontTypes {
+                            @if $fontName == "iberia" {
+                                $result: unquote("url('"+$path+"/"+$fontName+"/"+$currentFontType+"/"+$fontName+$currentSeparator+$currentFontWeightRoute+$currentFontStyleRoute+"."+$currentFontType);                           
+                            } @else {
+                                $result: unquote("url('"+$path+"/"+$fontName+"."+$currentFontType);                           
+                            }
+
+                            @if $currentFontType == "eot" {
+                                $currentFontFamily: $currentFontFamily+unquote($result+"')")+$endOf;
+                                @if (length($fontTypes) > 1) OR $cont < (length($fontTypes)-1) {
+                                    $endOf: ",";
+                                } @else {
+                                    $endOf: "";
+                                }
+                                $currentFontFamily: $currentFontFamily+$useSRC+unquote($result+"?#iefix') format('embedded-opentype')")+$endOf;
+                            } @else {
+                                @if $cont < (length($fontTypes)-1) {
+                                    $endOf: ",";
+                                } @else {
+                                    $endOf: "";
+                                }
+                                @if $currentFontType == "ttf" {
+                                    $currentFontFamily: $currentFontFamily+unquote($result+"') format('truetype')")+$endOf;
+                                } @else if $currentFontType == "woff" {
+                                    $currentFontFamily: $currentFontFamily+unquote($result+"') format('woff')")+$endOf;
+                                } @else if $currentFontType == "svg" {
+                                    $currentFontFamily: $currentFontFamily+unquote($result+"##"+$fontName+"') format('svg')")+$endOf;
+                                } @else {
+                                    $currentFontFamily: $currentFontFamily+unquote($result+"')")+$endOf;
+                                }
+                            }
+                            $useSRC: "";
+
+                            $cont: $cont+1;
+
+                        }
+                        src: unquote($currentFontFamily);
+                        font-weight: normal;
+                        font-style: normal;
+                        font-display: swap;
+                    }
+                }
+            }
+        }
+   }

@@ -1,0 +1,1489 @@
+extends _general/layout__primary
+include _modules/_ibe_card-steps
+include _modules/connections/_ibe_connections_alert
+
+block title
+	title!="IBERIA - Repositorio Iberia"
+block body
+	// End wrapper
+	section.container.ibe-repository
+		//- MENU PRINCIPAL DEL REPOSITORIO
+		nav(class="ibe-lat-menu")
+			ul.ibe-lat-menu__list
+				li.ibe-lat-menu__item
+					a.ibe-lat-menu__link(href="#form-input" title="Inputs formulario") Inputs formulario
+				li.ibe-lat-menu__item
+					a.ibe-lat-menu__link(href="#form-select" title="Selects formulario") Selects formulario
+				li.ibe-lat-menu__item
+					a.ibe-lat-menu__link(href="#list" title="Listados") Listados
+				li.ibe-lat-menu__item
+					a.ibe-lat-menu__link(href="#table" title="Tablas") Tablas
+				li.ibe-lat-menu__item
+					a.ibe-lat-menu__link(href="#accordions" title="Accordion") Accordion
+				li.ibe-lat-menu__item
+					a.ibe-lat-menu__link(href="#selectorCiudades" title="Selector") Selector Ciudades
+				li.ibe-lat-menu__item
+					a.ibe-lat-menu__link(href="#avisos" title="Mensajes de aviso") Mensajes de aviso
+				li.ibe-lat-menu__item
+					a.ibe-lat-menu__link(href="#leer_mas" title="Leer más") Leer m&aacute;s
+				li.ibe-lat-menu__item
+					a.ibe-lat-menu__link(href="#filtros" title="Filtros") Filtros
+				li.ibe-lat-menu__item
+					a.ibe-lat-menu__link(href="#cards" title="Cards") Cards
+				li.ibe-lat-menu__item
+					a.ibe-lat-menu__link(href="#tabs" title="Tabs") Tabs
+				li.ibe-lat-menu__item
+					a.ibe-lat-menu__link(href="#search_fly" title="Buscador de vuelos") Buscador de vuelos
+		//- CONTENIDO PRINCIPAL DEL REPOSITORIO
+		div.col-lg-12.col-md-12.col-sm-12.col-xs-12(class="ibe-repository__content")
+			//- COMPONENTES FORMULARIO (INPUTS)
+			article(id="form-input", class="ibe_form")
+				div.row
+					.col-xs-12
+						h1.title.title__h1.title--grey Componentes formulario (INPUTS)
+				div.row.ibe-repository__article
+					div.col-xs-12
+						h3.title.title__h3 Input sin mensaje:
+						div(class="ibe_form__group fc_form_group")
+							label(class="ibe_form__input-label", for="code01") C&oacute;digo de reserva o Nº de billete
+							input(class="ibe_form__input-text", name="code01", id="code01", type="text", placeholder="Código de reserva o Nº de billete")
+					div.col-xs-12
+						h3.title.title__h3 Input con mensaje info no clicable
+						div(class="ibe_form__group fc_form_group")
+							label(class="ibe_form__input-label", for="code02") C&oacute;digo de reserva o Nº de billete
+							input(class="ibe_form__input-text", name="code02", id="code02", type="text", placeholder="Código de reserva o Nº de billete")
+							p(class="ibe_form__msg-info") Mensaje de informaci&oacute;n
+
+					div.col-xs-12
+						h3.title.title__h3 Input sin mensaje:
+						div(class="ibe_form__group fc_form_group")
+							label(class="ibe_form__input-label", for="code10") C&oacute;digo de reserva o Nº de billete
+							input(class="ibe_form__input-text ibe-form__validate--error", name="code10", id="code10", type="text", placeholder="Código de reserva o Nº de billete")
+							
+					div.col-xs-12
+						h3.title.title__h3 Input con mensaje Error
+						div(class="ibe_form__group fc_form_group ibe_form__group--error ")
+							label(class="ibe_form__input-label", for="code03") C&oacute;digo de reserva o Nº de billete
+							input(class="ibe_form__input-text ibe-form__validate--error", name="code03", id="code03", type="text", placeholder="Código de reserva o Nº de billete")
+							p(class="ibe_form__msg-info") Mensaje de informaci&oacute;n
+					div.col-xs-12
+						h3.title.title__h3 TextArea sin mensaje
+						div(class="ibe_form__group fc_form_group")
+							textarea.ibe_form__textarea(rows="7", placeholder="Comentarios (opcional). Máximo 1500 caracteres", data-textarea, id="textarea1", title="Comentarios extra")
+							div(data-textarea-text).paragraph.paragraph__regular.paragraph__regular--f-right
+					div.col-xs-12
+						h3.title.title__h3 TextArea con mensaje Error
+						div(class="ibe_form__group fc_form_group ibe_form__group--error ")
+							textarea.ibe_form__textarea.ibe-form__validate--error(rows="7", placeholder="Comentarios (opcional). Máximo 1500 caracteres", data-textarea, id="textarea2", title="Comentarios extra")
+							div(data-textarea-text).paragraph.paragraph__regular.paragraph__regular--f-right
+							p(class="ibe_form__msg-info") Mensaje de informaci&oacute;n
+					div.col-xs-12
+						h3.title.title__h3 Input con mensaje info clicable
+						div(class="ibe_form__group fc_form_group")
+							label(class="ibe_form__input-label", for="code04") C&oacute;digo de reserva
+							input(class="ibe_form__input-text", name="code04", id="code04", type="text", placeholder="Código de reserva")
+							p(class="ibe_form__msg-info")
+								a.ibe_form__msg-link(href="#") &iquest;D&oacute;nde los encuentro?
+					div.col-xs-12
+						h3.title.title__h3 Input con boton (icono)
+						div(class="ibe_form__group fc_form_group ibe_form__group--button-icon")
+							label(class="ibe_form__input-label", for="code0565") Lugar de destino
+							input(class="ibe_form__input-text", name="code0565", id="code0565", type="text", placeholder="Lugar de destino")
+							button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button")
+								span(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades" class="hideAccessible")!="Click para desplegar ciudades"
+					div.col-xs-12
+						h3.title.title__h3 Input con boton (icono)
+						div(class="ibe_form__group fc_form_group ibe_form__group--button-icon")
+							label(class="ibe_form__input-label", for="code1111") Lugar de destino
+							input(class="ibe_form__input-text", name="code1111", id="code1111", type="text", placeholder="Contraseña")
+							button.ibe_form__input-button.icon-pass-hidden(data-showhide, data-text-show="Mostrar contraseña", data-text-hide="Ocultar contraseña" type="button")
+								span(class="hideAccessible")!="Mostrar contraseña"
+					div.col-xs-12
+						h3.title.title__h3 Input con botón
+						div(class="ibe_form__group fc_form_group ibe_form__group--button-icon")
+							label(class="ibe_form__input-label", for="code0566") Encuentra tu destino
+							input(class="ibe_form__input-text", name="code0566", id="code0566", type="text", placeholder="Encuentra tu destino")
+							button.ibe_form__input-button-high.icon-buscar(type="button")
+								span(data-toggle-status="true" data-status-open="Click para plegar destinos" data-status-close="Click para desplegar destinos" class="hideAccessible")!="Click para desplegar destinos"
+					div.col-xs-12
+						h3.title.title__h3 Input compartido con icono en medio
+						div(class="ibe_form__group ibe_form__group--half")
+							div.ibe_form__group-half.icon-caret_derecha
+								label.hideAccessible(for="code05") Fecha ida
+								input.ibe_form__input-text(name="code05", id="code05", type="text", placeholder="Fecha ida")
+							div.ibe_form__group-half
+								label.hideAccessible(for="code06") Fecha vuelta
+								input.ibe_form__input-text(name="code06", id="code06", type="text", placeholder="Fecha vuelta")
+					div.col-xs-12
+						div(class="ibe_form__group ibe_form__group--half")
+							h3.title.title__h3 Rango de fechas
+							div.ibe_form__group.ibe_form__group--half
+								div.ibe_form__group-half.icon-caret_derecha
+									label.ibe_form__input-label.hideAccessible(for="flight_round_date") Fecha ida
+									input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_round_date", id="flight_round_date", type="text", placeholder="Fecha ida" data-toggle="collapse" data-target="#searcher-calendar-1" data-cal="start" data-placeholder="placeholder" readonly)
+									+m-searcher-calendar({
+										id: "searcher-calendar-1",
+										type: "fly",
+										when: "start",
+										number: "1"
+									})
+								div.ibe_form__group-half
+									label.ibe_form__input-label.hideAccessible(for="flight_return_date") Fecha vuelta
+									input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_return_date", id="flight_return_date", type="text", placeholder="Fecha vuelta" data-toggle="collapse" data-target="#searcher-calendar-2" data-cal="end" data-placeholder="placeholder" readonly)
+									+m-searcher-calendar({
+										id: "searcher-calendar-2",
+										type: "fly",
+										when: "end",
+										number: "2"
+									})
+
+					div.col-xs-12
+						h3.title.title__h3 Input con icono no clicable (readonly)
+						div(class="ibe_form__group ibe_form__group--icon icon-caret_abajo")
+							label.hideAccessible(class="ibe_form__input-label", for="code07") C&oacute;digo de reserva
+							input(class="ibe_form__input-text ibe_form__input-text--stop-animation", name="code07", id="code07", type="text", placeholder="Código de reserva" value="Código de reserva" readonly)
+						h3.title.title__h3 Input con icono rojo
+						.ibe_form__group.fc_form_group.ibe_form__group--button-icon.ibe_form__group--separated.ibe_form__group--nomargintop
+							label.ibe_form__input-label(for='code12') C&oacute;odigo de reserva
+							input(class="ibe_form__input-text", name="code12", id="code12", type="text", placeholder="C&oacute;digo de reserva")
+							p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+							button.ibe_form__input-button.ibe_form__input-button--medium.icon-informacion_2.ibe_form__input-button--red(type='button' data-tooltipGeneric title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in consectetur orci. Lorem ipsum dolor sit amet.")
+								span.hideAccessible(data-toggle-status='true', data-status-open='Click para info', data-status-close='Click para info') Click para m&aacute;s informaci&oacute;n
+						h3.title.title__h3 Input disabled
+						.ibe_form__group.fc_form_group.ibe_form__group--button-icon.ibe_form__group--separated.ibe_form__group--nomargintop
+							label.ibe_form__input-label(for='code112') Nombre
+							input(class="ibe_form__input-text ibe_form__group--disabled", disabled, name="code112", id="code112", type="text",  placeholder="Nombre")
+							
+			
+			//- COMPONENTES FORMULARIO (SELECT, CHECK, RADIO)
+			article(id="form-select")
+				div.row
+					.col-xs-12
+						h1.title.title__h1.title--grey Componentes formulario (SELECT, CHECK, RADIO)
+				div.row.ibe-repository__article
+					div.col-md-6.col-sm-12.col-xs-12
+						h3.title.title__h3
+							strike Select
+							| (Deprecated)
+						.ibe_form__select
+							//- select(id="ejemplo01", class="ibe_form__selectize", name="ejemplo01", data-ibe-selectize, data-ng-model="resultSelect", data-selectize='simple')
+							select(id="ejemplo01", class="ibe_form__selectize", name="ejemplo01", data-ibe-selectize, data-selectize='simple')
+								option(value="") Elige un ejemplo
+								option(value="01") Ejemplo 01
+								option(value="02") Ejemplo 02
+								option(value="03") Ejemplo 03
+								option(value="04") Ejemplo 04
+								option(value="05") Ejemplo 05
+								option(value="06") Ejemplo 06
+							label.ibe_form__selectize-label.hideAccessible(for="ejemplo01")!="Elige un ejemplo"
+					div.col-md-6.col-sm-12.col-xs-12
+						h3.title.title__h3 Selectize multiples select
+						.ibe_form__selectize-multi
+							label.ibe_form__input-label!="Fecha de caducidad"
+							.ibe_form__selectize-multi__selectors
+								label.hideAccessible(for="dia") Dias
+								select(class="ibe_form__selectize", name="dia", data-selectize='simple', id="dia")
+									option(value="") Dia
+									option(value="01") 01
+									option(value="02") 02
+									option(value="03") 03
+									option(value="04") 04
+									option(value="05") 05
+								label.hideAccessible(for="mes") mes
+								select(class="ibe_form__selectize", name="mes", data-selectize='simple', id="mes")
+									option(value="") Mes
+									option(value="01") 01
+									option(value="02") 02
+									option(value="03") 03
+									option(value="04") 04
+									option(value="05") 05
+								label.hideAccessible(for="anio") anio
+								select(class="ibe_form__selectize ibe_form__selectize--year", name="anio", data-selectize='simple', id="anio")
+									option(value="") Año
+									option(value="1989") 1989
+									option(value="1990") 1990
+									option(value="1991") 1991
+									option(value="1992") 1992
+									option(value="1993") 1993
+					div.col-md-6.col-sm-12.col-xs-12
+						h3.title.title__h3 Select con label
+						.ibe_form__select.ibe_form__select--label
+							//- select(id="ejemplo03", class="ibe_form__selectize", name="ejemplo01", data-ibe-selectize, data-ng-model="resultSelect", data-selectize='simple')
+							select(id="ejemplo03", class="ibe_form__selectize", name="ejemplo01", data-ibe-selectize, data-selectize='simple')
+								option(value="") Elige un ejemplo
+								option(value="01") Ejemplo 01
+								option(value="02") Ejemplo 02
+								option(value="03") Ejemplo 03
+								option(value="04") Ejemplo 04
+								option(value="05") Ejemplo 05
+								option(value="06") Ejemplo 06
+							label.ibe_form__selectize-label(for="ejemplo03") Elige una opcion
+					div.col-md-6.col-sm-12.col-xs-12
+						h3.title.title__h3 Select (mensaje error)
+						.ibe_form__select.ibe_form__group.ibe_form__group--error
+							//- select(id="ejemplo02", class="ibe_form__selectize", name="ejemplo01", data-ibe-selectize, data-ng-model="resultSelect", data-selectize='simple')
+							select(id="ejemplo02", class="ibe_form__selectize", name="ejemplo01", data-ibe-selectize, data-selectize='simple')
+								option(value="") Elige un ejemplo
+								option(value="01") Ejemplo 01
+								option(value="02") Ejemplo 02
+								option(value="03") Ejemplo 03
+								option(value="04") Ejemplo 04
+								option(value="05") Ejemplo 05
+								option(value="06") Ejemplo 06
+							label.ibe_form__selectize-label.hideAccessible(for="ejemplo02")!="Elige un ejemplo"
+							p(class="ibe_form__msg-info") Mensaje de informaci&oacute;n
+
+					div.col-md-6.col-sm-12.col-xs-12
+						h3.title.title__h3 Select normal nuevo
+						.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new.ibe-form__group--m-mobile.ibe_form__group--nomargintop
+							label.ibe_form__selectize--label(for="residencia")
+								span.ibe_form__input-text Residencia:
+							select(id="residencia", class="ibe-select ibe_form__input-text", name="residencia", data-selectmenu="")
+								option(value="Residencia") Residencia
+								option(value="NUMEROSA1") No residente
+					div.col-md-6.col-sm-12.col-xs-12
+						h3.title.title__h3 Select Label nuevo
+						.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new.ibe_form__group--nomargintop.ibe-form__group--m-mobile(data-selectmenu_claim)
+							label.ibe_form__selectize--label(for="tarifa")
+								span.ibe_form__input-text Tarifa:
+							select(id="tarifa", class="ibe-select ibe_form__input-text", name="tarifa", data-selectmenu="")
+								option(value="") Tarifa
+								option(value="Más económica") M&aacute;s econ&oacute;mica
+								option(value="Turista Premium") Turista Premium
+								option(value="Business Class") Business Class
+					div.col-md-6.col-sm-12.col-xs-12
+						h3.title.title__h3 Select Label nuevo con opción seleccionada
+						.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new.ibe_form__group--nomargintop.ibe-form__group--m-mobile(data-selectmenu_claim)
+							label.ibe_form__selectize--label.ibe_form__selectize--label02(for="opcion")
+								span.ibe_form__input-text.ibe_form__input-text--selectnew Opcion:
+							select(id="opcion", class="ibe-select ibe_form__input-text", name="opcion", data-selectmenu="")
+								option(value="") Opcion
+								option(value="1", selected) Opción 1
+								option(value="2") Opción 2
+								option(value="3") Opción 3
+					div.col-md-6.col-sm-12.col-xs-12
+						h3.title.title__h3 Select nuevo label con Autocomplete
+						.ibe_form__group--select-edit
+							label.ibe_form__selectize--label.title(for="country")!="Destino preferido"
+							select(id="country", class="ibe-select", name="country", data-selectmenu-edit)
+								option(value="") Destino preferido
+								option(value="00") Madrid
+								option(value="01") Bruselas
+								option(value="02") Santiago de Compostela
+					div.col-md-6.col-sm-12.col-xs-12
+						h3.title.title__h3 Select nuevo sin label con Autocomplete
+						.ibe_form__group--select-edit.ibe_form__group--hide-label
+							label.ibe_form__selectize--label(for="country2")!="Destino preferido"
+							select(id="country2", class="ibe-select", name="country", data-selectmenu-edit)
+								option(value="") Destino preferido
+								option(value="00") Madrid
+								option(value="01") Bruselas
+								option(value="02") Santiago de Compostela
+					div.col-md-6.col-sm-12.col-xs-12
+						h3.title.title__h3 Check
+						.ibe-form__checkbox
+							input.ibe-form__checkbox-input(type="checkbox" id="ejemplo_check01" name="ejemplo_check01" checked)
+							label.ibe-form__checkbox-label(for="ejemplo_check01")
+								span He le&iacute;do y acepto la politica sobre
+					div.col-md-6.col-sm-12.col-xs-12
+						h3.title.title__h3 Check (mensaje error)
+						.ibe-form__checkbox.ibe-form__checkbox--error
+							input.ibe-form__checkbox-input(type="checkbox" id="ejemplo_check02" name="ejemplo_check02")
+							label.ibe-form__checkbox-label(for="ejemplo_check02")
+								span He le&iacute;do y acepto la politica sobre
+							p(class="ibe_form__msg-info") Mensaje de informaci&oacute;n
+					div.col-md-6.col-sm-12.col-xs-12
+						h3.title.title__h3 Radio Button
+						.ibe_form__radio
+							input(type="radio", name="radios1", id="ejemplo_radio01", class="ibe_form__radio-input")
+							label(for="ejemplo_radio01", class="ibe_form__radio-text") He le&iacute;do y acepto la politica sobre
+
+					div.col-md-6.col-sm-12.col-xs-12
+			//- COMPONENTES LISTAS
+			article(id="list")
+				div.row
+					.col-xs-12
+						h1.title.title__h1.title--grey Listados
+				div.row.ibe-repository__article
+					div.col-md-4.col-sm-12.col-xs-12
+						h3.title.title__h3 Lista (normal)
+						ul.ibe-list.ibe-list--normal
+							li.ibe-list__item
+								p.paragraph.paragraph__regular Item 1
+							li.ibe-list__item
+								p.paragraph.paragraph__regular Item 2
+							li.ibe-list__item
+								p.paragraph.paragraph__regular Item 3
+							li.ibe-list__item
+								p.paragraph.paragraph__regular Item 4
+					div.col-md-4.col-sm-12.col-xs-12
+						h3.title.title__h3 Lista (normal smaller)
+						ul.ibe-list.ibe-list--normal
+							li.ibe-list__item.ibe-list__item--smaller-padding
+								p.paragraph.paragraph__regular Item 1
+							li.ibe-list__item.ibe-list__item--smaller-padding
+								p.paragraph.paragraph__regular Item 2
+							li.ibe-list__item.ibe-list__item--smaller-padding
+								p.paragraph.paragraph__regular Item 3
+							li.ibe-list__item.ibe-list__item--smaller-padding
+								p.paragraph.paragraph__regular Item 4
+
+					div.col-md-4.col-sm-12.col-xs-12
+						h3.title.title__h3 Lista (Square-o)
+						ul.ibe-list.ibe-list--square-o
+							li.ibe-list__item
+								p.paragraph.paragraph__regular Item 1
+							li.ibe-list__item
+								p.paragraph.paragraph__regular Item 2
+							li.ibe-list__item
+								p.paragraph.paragraph__regular Item 3
+							li.ibe-list__item
+								p.paragraph.paragraph__regular Item 4
+				div.row.ibe-repository__article
+					div.col-md-4.col-sm-12.col-xs-12
+						h3.title.title__h3 Lista (checked)
+						ul.ibe-list.ibe-list--checked
+							li.ibe-list__item.ibe-list__item--correct
+								p.paragraph.paragraph__regular Item 1
+							li.ibe-list__item.ibe-list__item--correct
+								p.paragraph.paragraph__regular Item 2
+							li.ibe-list__item.ibe-list__item--incorrect
+								p.paragraph.paragraph__regular Item 3
+							li.ibe-list__item.ibe-list__item--incorrect
+								p.paragraph.paragraph__regular Item 4
+					div.col-md-4.col-sm-12.col-xs-12
+						h3.title.title__h3 Lista (numbers)
+						ul.ibe-list.ibe-list--numbers
+							li.ibe-list__item
+								p.paragraph.paragraph__regular Item 1
+							li.ibe-list__item
+								p.paragraph.paragraph__regular Item 2
+							li.ibe-list__item
+								p.paragraph.paragraph__regular Item 3
+							li.ibe-list__item
+								p.paragraph.paragraph__regular Item 4
+					div.col-md-4.col-sm-12.col-xs-12
+						h3.title.title__h3 Lista (numbers smaller)
+						ul.ibe-list.ibe-list--numbers
+							li.ibe-list__item.ibe-list__item--smaller-padding
+								p.paragraph.paragraph__regular Item 1
+							li.ibe-list__item.ibe-list__item--smaller-padding
+								p.paragraph.paragraph__regular Item 2
+							li.ibe-list__item.ibe-list__item--smaller-padding
+								p.paragraph.paragraph__regular Item 3
+							li.ibe-list__item.ibe-list__item--smaller-padding
+								p.paragraph.paragraph__regular Item 4			
+				div.row.ibe-repository__article
+					div.col-md-6.col-sm-12.col-xs-12
+						h3.title.title__h3 Lista (simple)
+						ul.ibe-list.ibe-list--simple
+							li.ibe-list__item
+								a.link.link__regular.link__regular--important(href="#" title="Item 1") Item 1
+							li.ibe-list__item
+								a.link.link__regular.link__regular--important(href="#" title="Item 2") Item 2
+							li.ibe-list__item
+								a.link.link__regular.link__regular--important(href="#" title="Item 3") Item 3
+							li.ibe-list__item
+								a.link.link__regular.link__regular--important(href="#" title="Item 4") Item 4
+					div.col-md-6.col-sm-12.col-xs-12
+						h3.title.title__h3 Lista (links)
+						ul.ibe-list.ibe-list--links
+							li.ibe-list__item
+								a.link.link__regular.link__regular--important(href="#" title="Item 1") Item 1
+							li.ibe-list__item
+								a.link.link__regular.link__regular--important(href="#" title="Item 2") Item 2
+							li.ibe-list__item
+								a.link.link__regular.link__regular--important(href="#" title="Item 3") Item 3
+							li.ibe-list__item
+								a.link.link__regular.link__regular--important(href="#" title="Item 4") Item 4
+			//- COMPONENTES TABLAS
+			article(id="table")
+				div.row
+					.col-xs-12
+						h1.title.title__h1.title--grey Tablas
+				div.row
+					div.col-xs-12
+						div.ibe-infocheckin__box
+							h3.title.title__h3 --bordered
+							div.ibe-table-responsive
+								table.ibe-table.ibe-table--bordered
+									caption.hideAccessible Texto descripcion de la tabla
+									thead.ibe-table__thead
+										tr.ibe-table__thead-tr
+											th.ibe-table__thead-th Titulo tabla 1
+											th.ibe-table__thead-th Titulo tabla 2
+											th.ibe-table__thead-th Titulo tabla 3
+									tbody.ibe-table__tbody
+										tr.ibe-table__tbody-tr
+											td.ibe-table__tbody-td Descripcion de la tabla
+											td.ibe-table__tbody-td Descripcion de la tabla
+											td.ibe-table__tbody-td Descripcion de la tabla
+										tr.ibe-table__tbody-tr
+											td.ibe-table__tbody-td Descripcion de la tabla
+											td.ibe-table__tbody-td Descripcion de la tabla
+											td.ibe-table__tbody-td Descripcion de la tabla
+				div.row
+					div.col-xs-12
+						div.ibe-infocheckin__box
+							h3.title.title__h3 --normal
+							div.ibe-table-responsive
+								table.ibe-table.ibe-table--normal
+									caption.hideAccessible Texto descripcion de la tabla
+									thead.ibe-table__thead
+										tr.ibe-table__thead-tr
+											th.ibe-table__thead-th Titulo tabla 1
+											th.ibe-table__thead-th Titulo tabla 2
+											th.ibe-table__thead-th Titulo tabla 3
+									tbody.ibe-table__tbody
+										tr.ibe-table__tbody-tr
+											td.ibe-table__tbody-td Descripcion de la tabla
+											td.ibe-table__tbody-td Descripcion de la tabla
+											td.ibe-table__tbody-td Descripcion de la tabla
+										tr.ibe-table__tbody-tr
+											td.ibe-table__tbody-td Descripcion de la tabla
+											td.ibe-table__tbody-td Descripcion de la tabla
+											td.ibe-table__tbody-td Descripcion de la tabla
+				div.row
+					div.col-xs-12
+						div.ibe-infocheckin__box
+							div.ibe-table-responsive
+								h3.title.title__h3 --border
+								table.ibe-table.ibe-table--border
+									caption.hideAccessible Texto descripcion de la tabla
+									thead.ibe-table__thead
+										tr.ibe-table__thead-tr
+											th.ibe-table__thead-th Titulo tabla 1
+											th.ibe-table__thead-th Titulo tabla 2
+											th.ibe-table__thead-th Titulo tabla 3
+									tbody.ibe-table__tbody
+										tr.ibe-table__tbody-tr
+											td.ibe-table__tbody-td Descripcion de la tabla
+											td.ibe-table__tbody-td Descripcion de la tabla
+											td.ibe-table__tbody-td Descripcion de la tabla
+										tr.ibe-table__tbody-tr
+											td.ibe-table__tbody-td Descripcion de la tabla
+											td.ibe-table__tbody-td Descripcion de la tabla
+											td.ibe-table__tbody-td Descripcion de la tabla
+
+				div.row
+					div.col-xs-12
+						div.ibe-infocheckin__box
+							div.ibe-table-responsive
+								h3.title.title__h3 Tabla con contenido clickable
+								div.ibe-table-responsive
+									table.ibe-table.ibe-table--border.ibe-table--clickable
+										caption.hideAccessible!="Esta tabla muestra informaci&oacute;n sobre las opciones de vuelos"
+										thead.ibe-table__thead
+											tr.ibe-table__thead-tr
+												th.ibe-table__thead-th
+													span.ibe-table__thead-text!="Trayecto"
+												th.ibe-table__thead-th
+													span.ibe-table__thead-text!="Encontrado hace"
+												th.ibe-table__thead-th.ibe-table__thead-th--right
+													span.ibe-table__thead-text!="Desde"
+										tbody.ibe-table__tbody
+											tr.ibe-table__tbody-tr
+												td.ibe-table__tbody-td
+													a(href="#", class="ibe-table__td-link")
+														span.ibe-table__tbody-text!="Madrid - Palma de Mallorca"
+												td.ibe-table__tbody-td
+													a(href="#", class="ibe-table__td-link")
+														span.ibe-table__tbody-text--small(data-mobile="Encontrado hace")!="15h 41m"
+												td.ibe-table__tbody-td.ibe-table__tbody-td--right
+													a(href="#", class="ibe-table__td-link")
+														span.ibe-table__tbody-text--big(data-mobile="Desde")!="42&euro;"
+											tr.ibe-table__tbody-tr
+												td.ibe-table__tbody-td
+													a(href="#", class="ibe-table__td-link")
+														span.ibe-table__tbody-text!="Barcelona - Palma de Mallorca"
+												td.ibe-table__tbody-td
+													a(href="#", class="ibe-table__td-link")
+														span.ibe-table__tbody-text.ibe-table__tbody-text--small(data-mobile="Encontrado hace")!="15h 41m"
+												td.ibe-table__tbody-td.ibe-table__tbody-td--right
+													a(href="#", class="ibe-table__td-link")
+														span.ibe-table__tbody-text.ibe-table__tbody-text--big(data-mobile="Desde")!="232&euro;"
+											tr.ibe-table__tbody-tr
+												td.ibe-table__tbody-td
+													a(href="#", class="ibe-table__td-link")
+														span.ibe-table__tbody-text!="Ibiza - Palma de Mallorca"
+												td.ibe-table__tbody-td
+													a(href="#", class="ibe-table__td-link")
+														span.ibe-table__tbody-text.ibe-table__tbody-text--small(data-mobile="Encontrado hace")!="15h 41m"
+												td.ibe-table__tbody-td.ibe-table__tbody-td--right
+													a(href="#", class="ibe-table__td-link")
+														span.ibe-table__tbody-text.ibe-table__tbody-text--big(data-mobile="Desde")!="62&euro;"
+											tr.ibe-table__tbody-tr
+												td.ibe-table__tbody-td
+													a(href="#", class="ibe-table__td-link")
+														span.ibe-table__tbody-text!="Menorca - Palma de Mallorca"
+												td.ibe-table__tbody-td
+													a(href="#", class="ibe-table__td-link")
+														span.ibe-table__tbody-text.ibe-table__tbody-text--small(data-mobile="Encontrado hace")!="15h 41m"
+												td.ibe-table__tbody-td.ibe-table__tbody-td--right
+													a(href="#", class="ibe-table__td-link")
+														span.ibe-table__tbody-text.ibe-table__tbody-text--big(data-mobile="Desde")!="34&euro;"
+											tr.ibe-table__tbody-tr
+												td.ibe-table__tbody-td
+													a(href="#", class="ibe-table__td-link")
+														span.ibe-table__tbody-text!="Valencia - Palma de Mallorca"
+												td.ibe-table__tbody-td
+													a(href="#", class="ibe-table__td-link")
+														span.ibe-table__tbody-text.ibe-table__tbody-text--small(data-mobile="Encontrado hace")!="15h 41m"
+												td.ibe-table__tbody-td.ibe-table__tbody-td--right
+													a(href="#", class="ibe-table__td-link")
+														span.ibe-table__tbody-text.ibe-table__tbody-text--big(data-mobile="Desde")!="67&euro;"
+
+				div.row
+					div.col-xs-12
+						div.ibe-infocheckin__box
+							h3.title.title__h3 Tabla compleja (Inspeccionar attr: headers)
+							.ibe-table__wrapper
+								table.ibe-table.ibe-table--normal
+									thead.ibe-table__thead
+										tr.ibe-table__thead-tr
+											th.ibe-table__thead-th(id="bagEnabled") Permitido
+											th.ibe-table__thead-th(id="bagAditionaLowSeason") Equipaje adicional (temporada baja)
+											th.ibe-table__thead-th(id="bagAditionaHighSeason") Equipaje adicional (temporada alta)
+									tbody.ibe-table__tbody
+										tr.ibe-table__tbody-tr
+											th.ibe-table__tbody-td(rowspan='2' id="BusinessClass")
+												p.paragraph.paragraph__regular.bold Business Class
+												span.ibe-table__icon.icon-e_equipaje_facturado
+												span.ibe-table__icon.icon-e_equipaje_facturado
+												span.ibe-table__icon.icon-e_equipaje_facturado
+												p.paragraph.paragraph__regular Sobrepeso: gratis
+											th.ibe-table__tbody-td(id="nextBagAditionaLowSeason")!="Siguientes"
+											th.ibe-table__tbody-td(id="nextBagAditionaHighSeason")!="Siguientes"
+										tr.ibe-table__tbody-tr
+											td.ibe-table__tbody-td(headers="BusinessClass bagAditionaLowSeason nextBagAditionaLowSeason")
+												p.paragraph.paragraph__regular Online: 140€/155USD/110GBP
+												p.paragraph.paragraph__regular.paragraph__regular--grey Aeropuerto: 150€/165USD/120GBP
+											td.ibe-table__tbody-td(headers="BusinessClass bagAditionaHighSeason nextBagAditionaHighSeason")
+												p.paragraph.paragraph__regular Online: 160€/175USD/125GBP
+												p.paragraph.paragraph__regular.paragraph__regular--grey Aeropuerto: 190€/210USD/150GBP
+										tr.ibe-table__tbody-tr
+											th.ibe-table__tbody-td(rowspan='2' id="touristComplete")
+												p.paragraph.paragraph__regular.bold Turista Completa
+												span.ibe-table__icon.icon-e_equipaje_facturado
+												span.ibe-table__icon.icon-e_equipaje_facturado
+												p.paragraph.paragraph__regular Sobrepeso: 100€/110USD/80GBP
+											th.ibe-table__tbody-td(id="thirdSubsequentBagAditionaLowSeason")!="Tercera y siguientes"
+											th.ibe-table__tbody-td(id="thirdSubsequentBagAditionaHighSeason")!="Tercera y siguientes"
+										tr.ibe-table__tbody-tr
+											td.ibe-table__tbody-td(headers="touristComplete bagAditionaLowSeason thirdSubsequentBagAditionaLowSeason")
+												p.paragraph.paragraph__regular Online: 140€/155USD/110GBP
+												p.paragraph.paragraph__regular.paragraph__regular--grey Aeropuerto: 150€/165USD/120GBP
+											td.ibe-table__tbody-td(headers="touristComplete bagAditionaHighSeason thirdSubsequentBagAditionaHighSeason")
+												p.paragraph.paragraph__regular Online: 160€/175USD/125GBP
+												p.paragraph.paragraph__regular.paragraph__regular--grey Aeropuerto: 190€/210USD/150GBP
+										tr.ibe-table__tbody-tr
+											th.ibe-table__tbody-td(rowspan='4' id="touristEconomy")
+												p.paragraph.paragraph__regular.bold Turista Económica
+												span.ibe-table__icon.icon-e_equipaje_facturado
+												p.paragraph.paragraph__regular Sobrepeso: 100€/110USD/80GBP
+											th.ibe-table__tbody-td(id="secondBagAditionaLowSeason")!="Segunda"
+											th.ibe-table__tbody-td(id="secondBagAditionaHighSeason")!="Segunda"
+										tr.ibe-table__tbody-tr
+											td.ibe-table__tbody-td(headers="touristEconomy bagAditionaLowSeason secondBagAditionaLowSeason")
+												p.paragraph.paragraph__regular Online: 75€/82USD/60GBP
+												p.paragraph.paragraph__regular.paragraph__regular--grey Aeropuerto: 100€/110USD/80GBP
+											td.ibe-table__tbody-td(headers="touristEconomy bagAditionaHighSeason secondBagAditionaHighSeason")
+												p.paragraph.paragraph__regular Online: 80€/87USD/64GBP
+												p.paragraph.paragraph__regular.paragraph__regular--grey Aeropuerto: 100€/110USD/80GBP
+										tr.ibe-table__tbody-tr
+											th.ibe-table__tbody-td(id="touristEconomyThirdSubsequentBagAditionaLowSeason")!="Tercera y siguientes"
+											th.ibe-table__tbody-td(id="touristEconomyThirdSubsequentBagAditionaHighSeason")!="Tercera y siguientes"
+										tr.ibe-table__tbody-tr
+											td.ibe-table__tbody-td(headers="touristEconomy bagAditionaLowSeason touristEconomyThirdSubsequentBagAditionaLowSeason")
+												p.paragraph.paragraph__regular Online: 140€/155USD/110GBP
+												p.paragraph.paragraph__regular.paragraph__regular--grey Aeropuerto: 150€/165USD/120GBP
+											td.ibe-table__tbody-td(headers="touristEconomy bagAditionaHighSeason touristEconomyThirdSubsequentBagAditionaHighSeason")
+												p.paragraph.paragraph__regular Online: 160€/175USD/125GBP
+												p.paragraph.paragraph__regular.paragraph__regular--grey Aeropuerto: 190€/210USD/150GBP
+			//- COMPONENTES ACCORDIONS
+			article(id="accordions")
+				div.row
+					.col-xs-12
+						h1.title.title__h1.title--grey Accordions
+				div.row
+					div.col-xs-12
+						div.ibe-infocheckin__box
+							div.ibe-accordion
+								p.ibe-accordion__options
+									button.ibe-accordion__button-collapse.link.link__regular.link__regular--underline.collapsed(type="button" data-toggle="button-collapse" data-text-collapsed="Ampliar todo" data-text-expanded="Cerrar todo") Ampliar todo
+								div
+									h4.title.title__h4.ibe-accordion__header(data-toggle="collapse" data-target="#group_01_accordion_01" data-outer-click="true")
+										a.link(href="#" title="¿Quién puede utilizar este servicio?") &iquest;Qui&eacute;n puede utilizar este servicio?
+									div.ibe-accordion__collapse(id="group_01_accordion_01" data-toggle="container")
+										ul.ibe-list.ibe-list--checked
+											li.ibe-list__item.ibe-list__item--correct
+												p.paragraph.paragraph__regular!="Todos los Clientes de Iberia con billetes emitidos para vuelos de Iberia con salida de estos "
+												a.link.link__regular.link__regular--underline(href='#' title='Lista de aeropuertos')!="aeropuertos"
+												!=" y a cualquier destino de Iberia."
+											li.ibe-list__item.ibe-list__item--correct
+												p.paragraph.paragraph__regular Si viajas en vuelos con c&oacute;digo IB7XXX e IB4XXX operados por British Airways y American Airlines podr&aacute;s iniciar el checkin online de Iberia.com con el c&oacute;digo de reserva notificado en la confirmaci&oacute;n de compra. Tambi&eacute;n podr&aacute;s iniciar el checkin online de Iberia.com en vuelos con c&oacute;digo IB5XXX operado por Vueling
+								div
+									h4.title.title__h4.ibe-accordion__header(data-toggle="collapse" data-target="#group_01_accordion_02" data-outer-click="true")
+										a.link(href="#" title="¿Quién puede utilizar este servicio?") &iquest;Qui&eacute;n puede utilizar este servicio?
+									div.ibe-accordion__collapse(id="group_01_accordion_02", data-toggle="container")
+										ul.ibe-list.ibe-list--checked
+											li.ibe-list__item.ibe-list__item--correct
+												p.paragraph.paragraph__regular!="Todos los Clientes de Iberia con billetes emitidos para vuelos de Iberia con salida de estos "
+												a.link.link__regular.link__regular--underline(href='#' title='Lista de aeropuertos')!="aeropuertos"
+												!=" y a cualquier destino de Iberia."
+											li.ibe-list__item.ibe-list__item--correct
+												p.paragraph.paragraph__regular Si viajas en vuelos con c&oacute;digo IB7XXX e IB4XXX operados por British Airways y American Airlines podr&aacute;s iniciar el checkin online de Iberia.com con el c&oacute;digo de reserva notificado en la confirmaci&oacute;n de compra. Tambi&eacute;n podr&aacute;s iniciar el checkin online de Iberia.com en vuelos con c&oacute;digo IB5XXX operado por Vueling
+			//- Advertise Message
+			article(id="avisos")
+				div.row
+					.col-xs-12
+						h1.title.title__h1.title--grey Avisos
+				div.row
+					div.col-xs-12
+						//ALERT PASSWORD LOGIN
+						.ibe-alert.ibe-alert--success.ibe-alert--smedium.icon-confirmacion
+							p.ibe-alert__text.ibe-alert__text--gray.ibe-alert__text--bold.u-mb-small Tu nueva contraseña se ha guardado correctamente.
+							p.ibe-alert__text.ibe-alert__text--gray Para acceder a tu Área Personal de Iberia Plus, identifícate con tu usuario y tu nueva contraseña.
+
+						.ibe-alert.ibe-alert--info-light.ibe-alert--smedium.icon-confirmacion
+							p.ibe-alert__text.ibe-alert__text--red.ibe-alert__text--bold.u-mb-small Lo sentimos, no hemos podido enviárte un correo de confirmación
+							p.ibe-alert__text.ibe-alert__text--gray Te aconsejamos que apuntes el código de tu bono o guardes una captura de pantalla para usarlo posteriormente
+
+						.ibe-alert.ibe-alert--alert
+							p.ibe-alert__text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet odio nisi, accumsan convallis lorem fringilla sed. Cras vulputate elit id tortor consequat gravida. Mauris consectetur sapien at metus finibus, #[a(href="#", class="link link__regular link__regular--advertise", title="Enlace a") Enlace pinche aqui]  a placerat nisi tristique. Donec a congue nibh. Nam vel turpis tempus, placerat dui a, malesuada felis. Morbi et mauris ac justo placerat ultricies id vitae massa. Maecenas vel tellus orci. Donec nec nisl euismod, varius erat eu, facilisis dolor. Nulla cursus massa at dapibus gravida. Vestibulum varius dolor non dui aliquet lobortis eu vel neque.
+
+						.ibe-alert.ibe-alert--info
+							p.ibe-alert__text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet odio nisi, accumsan convallis lorem fringilla sed. Cras vulputate elit id tortor consequat gravida. Mauris consectetur sapien at metus finibus, a placerat nisi tristique. Donec a congue nibh. #[a(href="#", class="link link__regular link__regular--advertise", title="Enlace a") Enlace pinche aqui] Nam vel turpis tempus, placerat dui a, malesuada felis. Morbi et mauris ac justo placerat ultricies id vitae massa. Maecenas vel tellus orci. Donec nec nisl euismod, varius erat eu, facilisis dolor. Nulla cursus massa at dapibus gravida. Vestibulum varius dolor non dui aliquet lobortis eu vel neque.
+
+						.ibe-alert.ibe-alert--alert.ibe-alert--yellow.ibe-alert--small
+							p.ibe-alert__text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet odio nisi, accumsan convallis lorem fringilla sed. Cras vulputate elit id tortor consequat gravida. Mauris consectetur sapien at metus finibus, #[a(href="#", class="link link__regular link__regular--important", title="Enlace a") Enlace pinche aqui]  a placerat nisi tristique. Donec a congue nibh. Nam vel turpis tempus, placerat dui a, malesuada felis. Morbi et mauris ac justo placerat ultricies id vitae massa. Maecenas vel tellus orci. Donec nec nisl euismod, varius erat eu, facilisis dolor. Nulla cursus massa at dapibus gravida. Vestibulum varius dolor non dui aliquet lobortis eu vel neque.
+
+						.ibe-alert.ibe-alert--alert.ibe-alert--margin-top.ibe-alert--inline-block
+							p.ibe-alert__text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet odio nisi, accumsan convallis lorem fringilla sed. Cras vulputate elit id tortor consequat gravida. Mauris consectetur sapien at metus finibus, a placerat nisi tristique. Donec a congue nibh. Nam vel turpis tempus, placerat dui a, malesuada felis. Morbi et mauris ac justo placerat ultricies id vitae massa. Maecenas vel tellus orci. Donec nec nisl euismod, varius erat eu, facilisis dolor. Nulla cursus massa at dapibus gravida. Vestibulum varius dolor non dui aliquet lobortis eu vel neque.
+							a.ibe-alert__link-regular-to-right ampliar informaci&oacute;n
+
+						+m-ibe-connections_alert({
+						"boldText": "Si haces escala en Madrid, ",
+						"regularText": "deberás recoger tu equipaje en la cinta de recogida de equipajes de la planta 0, subir a la zona de Salidas y facturarlo en el mostrador de Iberia."
+						})
+
+			//- Leer más
+			article(id="leer_mas")
+				div.row
+					.col-xs-12
+						h1.title.title__h1.title--grey Leer m&aacute;s
+				div.row
+					div.col-xs-12
+						div.ibe-infocheckin__boxs-content
+							article.ibe-infocheckin__box.ibe-infocheckin__box--medium(data-view-more='parent')
+								h3.title.title__h3.ibe-infocheckin__box-title Es posible realizar llamadas
+								div.xui-collapse_moreInfo-text-close(data-view-more='container')
+									p.paragraph.paragraph__regular.paragraph__regular--grey En tu asiento dispones de un tel&eacute;fono t&aacute;ctil con el que podr&aacute;s comunicarte con tus compa&ntilde;eros de viaje de manera gratuita o llamar a tierra c&oacute;modamente.
+									p.paragraph.paragraph__regular.paragraph__regular--grey En tu asiento dispones de un tel&eacute;fono t&aacute;ctil con el que podr&aacute;s comunicarte con tus compa&ntilde;eros de viaje de manera gratuita o llamar a tierra c&oacute;modamente.
+									p.paragraph.paragraph__regular.paragraph__regular--grey En tu asiento dispones de un tel&eacute;fono t&aacute;ctil con el que podr&aacute;s comunicarte con tus compa&ntilde;eros de viaje de manera gratuita o llamar a tierra c&oacute;modamente.
+									p.paragraph.paragraph__regular.paragraph__regular--grey En tu asiento dispones de un tel&eacute;fono t&aacute;ctil con el que podr&aacute;s comunicarte con tus compa&ntilde;eros de viaje de manera gratuita o llamar a tierra c&oacute;modamente.
+								a.link.link__regular.ibe-link-view-more.ibe-link-view-more--more(href="#", title="Mostrar más", data-view-more='button', data-text-expanded="Ocultar", data-text-collapsed="Leer más", data-value="more")!="Leer m&aacute;s"
+
+			//- Filtros
+			article(id="filtros")
+				div.row
+					.col-xs-12
+						h1.title.title__h1 Filtros
+				div.row
+					.col-xs-12
+						div.ibe-filter
+							ul.ibe-filter__main
+								li.ibe-filter__main-item
+									input.ibe-filter__check(type="checkbox" id="monumentos" name="monumentos" checked)
+									label.ibe-filter__label(for="monumentos") Monumentos
+								li.ibe-filter__main-item
+									input.ibe-filter__check(type="checkbox" id="compras" name="compras" checked)
+									label.ibe-filter__label(for="compras") Compras
+								li.ibe-filter__main-item
+									input.ibe-filter__check(type="checkbox" id="ocio" name="ocio" checked)
+									label.ibe-filter__label(for="ocio") Ocio
+								li.ibe-filter__main-item
+									input.ibe-filter__check(type="checkbox" id="gastronomia" name="gastronomia")
+									label.ibe-filter__label(for="gastronomia") Gastronom&iacute;a
+								li.ibe-filter__main-item
+									input.ibe-filter__check(type="checkbox" id="aire_libre" name="aire_libre")
+									label.ibe-filter__label(for="aire_libre") Aire libre
+								li.ibe-filter__main-item
+									input.ibe-filter__check(type="checkbox" id="museos" name="museos")
+									label.ibe-filter__label(for="museos") Museos
+							div.ibe-filter__view
+								span.ibe-filter__view-txt VISTA DE:
+								span.ibe-filter__view-txt LISTADO
+			//- COMPONENTES cardSteps
+			article(id="cardSteps")
+				div.row
+					.col-xs-12
+						h1.title.title__h1.title--grey Cardbox pasos a seguir (Partners)
+				div.row
+					div.col-xs-12
+						div.ibe-infocheckin__box
+							div.ibe-infocheckin__box-container-bordered
+								div.ibe-accordion
+									h4.title.title__h4.ibe-accordion__header.ibe-accordion__header--no-border(data-toggle="accordion", data-target="#group_01_accordion_01")
+										a.link(href="#" title="¿C&oacute;mo consigo Avios con Avis?")!="&iquest;C&oacute;mo consigo Avios con Avis?"
+									div.ibe-accordion__collapse(id="group_01_accordion_03", data-toggle="container", data-steps="collapse")
+										div.row
+											div.col-xs-12
+												div.ib-card-steps-container
+
+													+m-card-steps({
+														"title": "Cambio en oficinas",
+														"step": "Paso 1",
+														"text": "Si cambias en las oficinas: Presenta tu tarjeta al realizar el cambio."
+
+													})
+													+m-card-steps({
+														"title": "Reservando un coche con Avis",
+														"step": "Paso 2",
+														"text": "Si cambias online: Introduce tu nº de tarjeta Iberia Plus al finalizar tu pedido Iberia Plus al finalizar tu pedido."
+													})
+													+m-card-steps({
+														"title": "Cambio en otro lugar",
+														"step": "Paso 3",
+														"text": "Si cambias online: Introduce tu nº de tarjeta Iberia Plus al finalizar tu pedido."
+													})
+			//- Ibe card
+			article(id="cards")
+				div.row
+					.col-xs-12
+						h1.title.title__h1 IBE CARDS
+				div.row
+					.col-xs-12
+						ul.row.ibe-card-container(data-show-more="guides-0" data-show-more-init="4" data-show-more-number="4")
+							li.col-xs-6.col-xl-3.ibe-card.ibe-card--col-sm-2.ibe-card--news
+								+m-card-guides({
+									"guide": {
+										"group": "0",
+										"type": "body"
+									},
+									"img": {
+										"src": globals.imgPath + "/modules/ibe_travel-guides/big-1.png",
+										"alt": "Puente de Michigan"
+									},
+									"title": "Puente de Michigan",
+									"info": "Te sentir&aacute;s abrumado al ver la gradiosidad de este s&iacute;mbolo de la ciudad",
+									"link": {
+										"href": "#",
+										"title": "Añadir a tu guía",
+										"text": "A&ntilde;adir a tu gu&iacute;a"
+									}
+								})
+							li.col-xs-6.col-xl-3.ibe-card.ibe-card--col-sm-2.ibe-card--news
+								+m-card-guides({
+									"guide": {
+										"group": "0",
+										"type": "body"
+									},
+									"img": {
+										"src": globals.imgPath + "/modules/ibe_travel-guides/big-2.png",
+										"alt": "Alquila un kayak"
+									},
+									"title": "Alquila un kayak",
+									"info": "Esta es una actividad muy divertida, segura y sana. Despl&aacute;zate tu mismo por el r&iacute;o y vive la aventura.",
+									"link": {
+										"href": "#",
+										"title": "Añadir a tu guía",
+										"text": "A&ntilde;adir a tu gu&iacute;a"
+									}
+								})
+							li.col-xs-6.col-xl-3.ibe-card.ibe-card--col-sm-2.ibe-card--news
+								+m-card-guides({
+									"guide": {
+										"group": "0",
+										"type": "body"
+									},
+									"img": {
+										"src": globals.imgPath + "/modules/ibe_travel-guides/big-3.png",
+										"alt": "Water taxi"
+									},
+									"title": "Water taxi",
+									"info": "&iquest;Te imaginas coger un taxi por el agua? en Chicago todo es posible, incluso coger un taxi por el agua.",
+									"link": {
+										"href": "#",
+										"title": "Añadir a tu guía",
+										"text": "A&ntilde;adir a tu gu&iacute;a"
+									}
+								})
+							li.col-xs-6.col-xl-3.ibe-card.ibe-card--col-sm-2.ibe-card--news
+								+m-card-guides({
+									"guide": {
+										"group": "0",
+										"type": "body"
+									},
+									"img": {
+										"src": globals.imgPath + "/modules/ibe_travel-guides/big-4.png",
+										"alt": "Paseo por el río"
+									},
+									"title": "Paseo por el r&iacute;o",
+									"info": "Disfruta de las vistas por la ciudad en un paseo por el r&iacute;o. Otra manera de conocer Chicago.",
+									"link": {
+										"href": "#",
+										"title": "Añadir a tu guía",
+										"text": "A&ntilde;adir a tu gu&iacute;a"
+									}
+								})
+							li.col-xs-6.col-xl-3.ibe-card.ibe-card--col-sm-2.ibe-card--news
+								+m-card-guides({
+									"guide": {
+										"group": "0",
+										"type": "body"
+									},
+									"img": {
+										"src": globals.imgPath + "/modules/ibe_travel-guides/big-5.png",
+										"alt": "Club The Underground"
+									},
+									"title": "Club The Underground",
+									"info": "Si quieres vivir la noche de Chicago d&eacute;jate caer por este local y disfruta.",
+									"link": {
+										"href": "#",
+										"title": "Añadir a tu guía",
+										"text": "A&ntilde;adir a tu gu&iacute;a"
+									}
+								})
+							li.col-xs-6.col-xl-3.ibe-card.ibe-card--col-sm-2.ibe-card--news
+								+m-card-guides({
+									"guide": {
+										"group": "0",
+										"type": "body"
+									},
+									"img": {
+										"src": globals.imgPath + "/modules/ibe_travel-guides/big-6.png",
+										"alt": "Un partido de basket"
+									},
+									"title": "Un partido de basket",
+									"info": "No desperdicies la oportunidad de vivir un partido de basket.",
+									"link": {
+										"href": "#",
+										"title": "Añadir a tu guía",
+										"text": "A&ntilde;adir a tu gu&iacute;a"
+									}
+								})
+							li.col-xs-6.col-xl-3.ibe-card.ibe-card--col-sm-2.ibe-card--news
+								+m-card-guides({
+									"guide": {
+										"group": "0",
+										"type": "body"
+									},
+									"img": {
+										"src": globals.imgPath + "/modules/ibe_travel-guides/big-7.png",
+										"alt": "Chinatown"
+									},
+									"title": "Chinatown",
+									"info": "Siempre es bonito pasear por el barrio chino y ver la cultura tan diferente al resto de la ciudad",
+									"link": {
+										"href": "#",
+										"title": "Añadir a tu guía",
+										"text": "A&ntilde;adir a tu gu&iacute;a"
+									}
+								})
+							li.col-xs-6.col-xl-3.ibe-card.ibe-card--col-sm-2.ibe-card--news
+								+m-card-guides({
+									"guide": {
+										"group": "0",
+										"type": "body"
+									},
+									"img": {
+										"src": globals.imgPath + "/modules/ibe_travel-guides/big-1.png",
+										"alt": "Pops for Champagne"
+									},
+									"title": "Pops for Champagne",
+									"info": "T&oacute;mate un delicioso champagne para finalizar el d&iacute;a y acompa&ntilde;ado de platos.",
+									"link": {
+										"href": "#",
+										"title": "Añadir a tu guía",
+										"text": "A&ntilde;adir a tu gu&iacute;a"
+									}
+								})
+						div.ibe-infocheckin__footer-show-more
+							button.ibe-button--show-more.icon-mas_2(type="button" data-show-more-button="guides-0")
+			//- Tabs
+			article(id="tabs")
+				div.row
+					.col-xs-12
+						h1.title.title__h1 TABS
+				div.row
+					.col-xs-12
+						ul.ibe-tab__menu(data-tab="bootstrap-tabdrop" data-tab-text="Otros...")
+							li.ibe-tab__menu-item.active
+								a.ibe-tab__menu-item__text(href="#tab-1" title="Ejemplo 1" data-toggle="tab") Ejemplo 1
+							li.ibe-tab__menu-item
+								a.ibe-tab__menu-item__text(href="#tab-2" title="Ejemplo 2" data-toggle="tab") Ejemplo 2
+						.tab-content
+							.tab-pane.ibe-tab__container.active(id="tab-1")
+								div.ibe-tab.ibe-tab--simple
+									p.ibe-tab__title-float!="VISTA DE: "
+									ul.ibe-tab__menu(data-tab="jquery-ui")
+										li.ibe-tab__menu-item.active
+											a.ibe-tab__menu-item__text(href="#table-1" title="Opcion 1" data-toggle="tab") Opcion 1
+										li.ibe-tab__menu-item
+											a.ibe-tab__menu-item__text(href="#map-1" title="Opcion 2" data-toggle="tab") Opcion 2
+									.tab-content
+										.tab-pane.ibe-tab__container.active(id="table-1")
+											p Contenido de opcion 1
+										.tab-pane.ibe-tab__container(id="map-1")
+											p Contenido de opcion 2
+							.tab-pane.ibe-tab__container(id="tab-2") Contenido del ejemplo 2
+				div.row
+					.col-xs-12
+						.ibe-info-airplane__box.ibe-info-airplane__box--grey.ibe-info-airplane__box--tabs
+							div.ibe-tab.ibe-tab--main
+								ul.ibe-tab__menu
+									li.ibe-tab__menu-item.active
+										a.ibe-tab__menu-item__text.icon-wifi(href="#icon-1", title="Wifi", data-toggle="tab") Wifi
+									li.ibe-tab__menu-item
+										a.ibe-tab__menu-item__text.icon-entretenimiento_individual(href="#icon-2", title="TV", data-toggle="tab") TV
+									li.ibe-tab__menu-item
+										a.ibe-tab__menu-item__text.icon-decarga_movil(href="#icon-3", title="Cargador", data-toggle="tab") Cargador
+									li.ibe-tab__menu-item
+										a.ibe-tab__menu-item__text.icon-asiento(href="#icon-4", title="Asientos", data-toggle="tab") Asientos
+									li.ibe-tab__menu-item
+										a.ibe-tab__menu-item__text.icon-c_restaurante(href="#icon-5", title="Comedor", data-toggle="tab") Comedor
+								.tab-content
+									.tab-pane.ibe-tab__container.ibe-tab__container--img.active(id="icon-1")
+										p.paragraph.paragraph__regular Tab 1
+									.tab-pane.ibe-tab__container.ibe-tab__container--img(id="icon-2")
+										p.paragraph.paragraph__regular Tab 2
+									.tab-pane.ibe-tab__container.ibe-tab__container--img(id="icon-3")
+										p.paragraph.paragraph__regular Tab 3
+									.tab-pane.ibe-tab__container.ibe-tab__container--img(id="icon-4")
+										p.paragraph.paragraph__regular Tab 4
+									.tab-pane.ibe-tab__container.ibe-tab__container--img(id="icon-5")
+										p.paragraph.paragraph__regular Tab 5
+			//- Buscador de vuelos
+			article(id="search_fly")
+				div.row
+					.col-xs-12
+						h1.title.title__h1 Buscador de vuelos
+				div.row
+					.col-xs-12
+						div.ibe-search-flights.ibe-section-bottom-small
+							div.ibe-search-flights__search-box
+								//+m-searcher()
+
+			article(id="card-distributive")
+				div.row
+					.col-xs-12
+						h1.title.title__h1 Card distributive
+				div.row
+					div.col-xs-12
+						div.ibe-infocheckin__box
+							div.ibe-card-distributive
+								div.row
+									div.col-md-6.col-xs-12
+										+m-card-distributive({
+											"mainClass": "no-image ibe-card-distributive__card--border-box ibe-card-distributive__card--margin-small",
+											"link": {
+												"href": "#",
+												"title": "Consulta la programación de este mes"
+											},
+											"image": {
+												"init": false
+											},
+											"title": "Consulta la programaci&oacute;n de este mes",
+											"data": "card-distributive-1"
+										})
+									div.col-md-6.col-xs-12
+										+m-card-distributive({
+											"mainClass": "no-image ibe-card-distributive__card--border-box ibe-card-distributive__card--margin-small",
+											"link": {
+												"href": "#",
+												"title": "Avance de la programación del próximo mes"
+											},
+											"image": {
+												"init": false
+											},
+											"title": "Lo m&aacute;s destacado del mes",
+											"data": "card-distributive-1"
+										})
+				div.row
+					.col-xs-12
+						h2.title.title__h1 Card distributive only
+				div.row
+					div.col-xs-12
+						div.ibe-infocheckin__box
+							div.ibe-card-distributive
+								div.row
+									div.col-md-6.col-xs-12
+										div(data-resize="card-distributive-2")
+											a.ibe-card-distributive--only(data-dotdotdot="collapse-text", href="#", title="prueba") Consulta la programaci&oacute;n de este mes
+									div.col-md-6.col-xs-12
+										div(data-resize="card-distributive-2")
+											a.ibe-card-distributive--only(data-dotdotdot="collapse-text", href="#", title="prueba") Lo m&aacute;s destacado del mes
+
+			//- COMPONENTE PASAJEROS
+			.ibe-advanced-searcher__separator.ibe-advanced-searcher__separator--pb.ibe-advanced-searcher__separator--npt
+				div.row
+					.col-xs-12
+						h2.title.title__h1.title--grey Componente pasajeros (people_counter)
+				.row
+					.col-md-12.col-xs-12
+						.ibe-infocheckin__box
+							.ibe_form__group.ibe_form__group--icon-select.icon-caret_abajo.fc_form_group.ibe_form__group--nomargintop
+								button.pointer(class="ibe_form__input-text ibe_form__input-text--select ibe_form__input-text--stop-animation" name="flight_passengers_3" id="flight_passengers_3" type="button" value="1 Adulto" data-value="1 Adulto" data-text-babies="Bebés" data-text-children="Niños" data-text-adults="Adultos" data-text-baby="Bebé" data-text-child="Niño" data-text-adult="Adulto" data-toggle="collapse" data-target="#people-counter-3")!="1 Adulto"
+								+m-people-counter-simple({
+									id: "people-counter-3",
+									data: "V",
+									cssClass: "ibe-people-counter--full"
+								})
+
+				//- COMPONENTES Accordion compatible para IE9
+				div.row
+					.col-xs-12
+						h2.title.title__h1.title--grey Accordion compatible para IE9
+				div.row
+					div.col-xs-12
+						article.ibe-infocheckin__box.ibe-infocheckin__box--img-big
+							div.ibe-infocheckin__box-container
+								div.ibe-collapse_moreInfo(data-view-more='parent')
+									div.xui-collapse_moreInfo-text-close(data-view-more='container')
+										p.paragraph.paragraph__regular.paragraph__regular--grey!="Si quieres que tu hijo viaje solo o en una cabina diferente a la que t&uacute; est&aacute;s viajando, es obligatorio contratar el servicio especial de acompa&ntilde;amiento de menores."
+										p.paragraph.paragraph__regular.paragraph__regular--grey!="Aliquam in purus vel augue lobortis laoreet. Aliquam et mauris placerat, consequat arcu vitae, bibendum dolor. Sed a massa consequat, eleifend neque vel, volutpat turpis."
+										p.paragraph.paragraph__regular.paragraph__regular--grey!="Praesent tincidunt tristique massa et cursus. Cras felis mi, aliquam sit amet dignissim in, elementum vitae magna. In in interdum ligula. Vestibulum vitae dui eget felis dapibus volutpat."
+									a.link.link__regular.ibe-link-view-more.ibe-link-view-more--more(href="#" title="Mostrar más" data-view-more='button', data-text-expanded="Ocultar", data-text-collapsed="Leer más") Leer m&aacute;s
+										span.ib-arrow-accordion
+
+			//- COMPONENTES Charts
+			.ibe-chart
+				div.row
+					.col-xs-12 
+						h2.title.title__h1 Charts
+				div.row
+					.col-xs-12
+						div(class="ibe-chart__box", data-chart="simple")
+							canvas(class="ibe-chart__canvas", id="example1")
+				div.row
+					.col-xs-12 
+						div(class="ibe-chart__box", data-chart="advanced")
+							canvas(class="ibe-chart__canvas", id="example2")
+
+
+			//- COMPONENTES selectorCiudades
+			article(id="selectorCiudades")
+				div.row
+					.col-xs-12
+						h2.title.title__h1.title--grey selector Ciudades
+				div.row
+					div.col-xs-12
+						div.ibe-infocheckin__box
+							div(class="ibe-tab ibe-tab--scrolling ibe-tab--center")
+								div(class="hidden-xs hidden-sm hidden-md")
+									div(class="ibe-choose-city ibe-choose-city--visible")
+										div.ibe-tab(data-tab="jquery-ui")
+											ul.ibe-tab__menu
+												li.ibe-tab__menu-item
+													a.link.link__regular(href="#tab-cities-mobile-1", title='España') Espa&ntilde;a
+												li.ibe-tab__menu-item
+													a.link.link__regular(href="#tab-cities-mobile-2", title='Europa') Europa
+												li.ibe-tab__menu-item
+													a.link.link__regular(href="#tab-cities-mobile-3", title='America') América
+												li.ibe-tab__menu-item
+													a.link.link__regular(href="#tab-cities-mobile-4", title='Africa y Oriente medio') Afric y Oriente medio
+												li.ibe-tab__menu-item
+													a.link.link__regular(href="#tab-cities-mobile-5", title='Aisa y Oceania') Asía y Oceania
+											div.ibe-tab__container(data-cities-list)
+												div(id="tab-cities-mobile-1")
+													+m-filter-letter({
+														"items": [{
+															"name": "A Coruña (LCG)",
+															"title": "A Coruña (LCG)",
+															"letter": "A",
+															"country": "España"
+														}, {
+															"name": "Albacete (ABC)",
+															"title": "Albacete (ABC)",
+															"letter": "A",
+															"country": "España"
+														}, {
+															"name": "Alicante (ALC)",
+															"title": "Alicante (ALC)",
+															"letter": "A",
+															"country": "España"
+														}, {
+															"name": "Almería (LEI)",
+															"title": "Almería (LEI)",
+															"letter": "A",
+															"country": "España"
+														}, {
+															"name": "Asturias - Oviedo (OVD)",
+															"title": "Asturias - Oviedo (OVD)",
+															"letter": "A",
+															"country": "España"
+														}, {
+															"name": "Badajoz (BJZ)",
+															"title": "Badajoz (BJZ)",
+															"letter": "B",
+															"country": "España"
+														}, {
+															"name": "Barcelona (BCN)",
+															"title": "Barcelona (BCN)",
+															"letter": "B",
+															"country": "España"
+														}, {
+															"name": "Bilbao (BIO)",
+															"title": "Bilbao (BIO)",
+															"letter": "B",
+															"country": "España"
+														}, {
+															"name": "Burgos (RGS)",
+															"title": "Burgos (RGS)",
+															"letter": "B",
+															"country": "España"
+														}, {
+															"name": "Córdoba (OBD)",
+															"title": "Córdoba (OBD)",
+															"letter": "C",
+															"country": "España"
+														}, {
+															"name": "Fuerteventura (FUE)",
+															"title": "Fuerteventura (FUE)",
+															"letter": "F",
+															"country": "España"
+														}, {
+															"name": "Gran Canaria (LPA)",
+															"title": "Gran Canaria (LPA)",
+															"letter": "G",
+															"country": "España"
+														}, {
+															"name": "Granada - Jaén (GRX)",
+															"title": "Granada - Jaén (GRX)",
+															"letter": "G",
+															"country": "España"
+														}, {
+															"name": "Jerez de la Frontera (XRY)",
+															"title": "Jerez de la Frontera (XRY)",
+															"letter": "J",
+															"country": "España"
+														}, {
+															"name": "Lanzarote (ACE)",
+															"title": "Lanzarote (ACE)",
+															"letter": "L",
+															"country": "España"
+														}, {
+															"name": "León (LEN)",
+															"title": "León (LEN)",
+															"letter": "L",
+															"country": "España"
+														}, {
+															"name": "Lleida (ILD)",
+															"title": "Lleida (ILD)",
+															"letter": "L",
+															"country": "España"
+														}, {
+															"name": "Logroño (RJL)",
+															"title": "Logroño (RJL)",
+															"letter": "L",
+															"country": "España"
+														}, {
+															"name": "Lorca (XJR)",
+															"title": "Lorca (XJR)",
+															"letter": "L",
+															"country": "España"
+														}, {
+															"name": "Madrid (MAD)",
+															"title": "Madrid (MAD)",
+															"letter": "M",
+															"country": "España"
+														}, {
+															"name": "Málaga (AGP)",
+															"title": "Málaga (AGP)",
+															"letter": "M",
+															"country": "España"
+														}, {
+															"name": "Melilla (MLN)",
+															"title": "Melilla (MLN)",
+															"letter": "M",
+															"country": "España"
+														}
+														]
+													})
+												div(id="tab-cities-mobile-2")
+													+m-filter-letter({
+														"items": [{
+															"name": "Londres (LON)",
+															"title": "Londres (LON)",
+															"letter": "L",
+															"country": "Reino Unido"
+														}, {
+															"name": "Paris (PAR)",
+															"title": "Paris (PAR)",
+															"letter": "P",
+															"country": "Francia"
+														}]
+													})
+												div(id="tab-cities-mobile-3")
+													+m-filter-letter({
+														"items": [{
+															"name": "Buenos Aires (BUA)",
+															"title": "Buenos Aires (BUA)",
+															"letter": "B",
+															"country": "Argentina"
+														}, {
+															"name": "Bogotá (BOG)",
+															"title": "Bogotá (BOG)",
+															"letter": "B",
+															"country": "Colombia"
+														}]
+													})
+												div(id="tab-cities-mobile-4")
+													+m-filter-letter({
+														"items": [{
+															"name": "El cairo (ELC)",
+															"title": "El cairo (ELC)",
+															"letter": "E",
+															"country": "Egipto"
+														}, {
+															"name": "Túnez (TUN)",
+															"title": "Túnez (TUN)",
+															"letter": "T",
+															"country": "Túnez"
+														}]
+													})
+												div(id="tab-cities-mobile-5")
+													+m-filter-letter({
+														"items": [{
+															"name": "Moscú (LCG)",
+															"title": "Moscú (LCG)",
+															"letter": "M",
+															"country": "Rusia"
+														}, {
+															"name": "Pekín (PEN)",
+															"title": "Pekín (PEN)",
+															"letter": "P",
+															"country": "China"
+														}]
+													})
+								div(class="hidden-lg hidden-xl")
+									div(class="ibe-choose-city ibe-choose-city--mobile ibe-choose-city--visible")
+										div.ibe-tab(data-tab="jquery-ui")
+											header.ibe-tab__scroll
+												ul.ibe-tab__menu
+													li.ibe-tab__menu-item
+														a.link.link__regular(href="#tab-cities-mobile-111", title='España') Espa&ntilde;a
+													li.ibe-tab__menu-item
+														a.link.link__regular(href="#tab-cities-mobile-222", title='Europa') Europa
+													li.ibe-tab__menu-item
+														a.link.link__regular(href="#tab-cities-mobile-333", title='America') América
+													li.ibe-tab__menu-item
+														a.link.link__regular(href="#tab-cities-mobile-444", title='Africa y Oriente medio') Africa y Oriente medio
+													li.ibe-tab__menu-item
+														a.link.link__regular(href="#tab-cities-mobile-555", title='Aisa y Oceania') Asía y Oceania
+											div.ibe-tab__container
+												div(id="#tab-cities-mobile-111")
+													div(data-function="city-list-type")
+														div.ioslist-group-container
+															div.ioslist-group-header!="A"
+															ul
+																li
+																	a.link.link__regular.ibe-filter-letter--icon-mobile(href="#" title="A Coruña (LCG)" data-filter-result="A")!="A Coru&ntilde;a (LCG)"
+																li
+																	a.link.link__regular(href="#" title="Albacete (ABC)" data-filter-result="A")!="Albacete (ABC)"
+																li
+																	a.link.link__regular(href="#" title="Alicante (ALC)" data-filter-result="A")!="Alicante (ALC)"
+																li
+																	a.link.link__regular(href="#" title="Almería (LEI)" data-filter-result="A")!="Almería (LEI)"
+																li
+																	a.link.link__regular(href="#" title="Asturias - Oviedo (OVD)" data-filter-result="A")!="Asturias - Oviedo (OVD)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="B"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Badajoz (BJZ)" data-filter-result="B")!="Badajoz (BJZ)"
+																li
+																	a.link.link__regular(href="#" title="arcelona (BCN)" data-filter-result="B")="Barcelona (BCN)"
+																li
+																	a.link.link__regular(href="#" title="ilbao (BIO)" data-filter-result="B")="Bilbao (BIO)"
+																li
+																	a.link.link__regular(href="#" title="urgos (RGS)" data-filter-result="B")="Burgos (RGS)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="C"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Córdoba" data-filter-result="C")!="C&oacute;rdoba"
+														div.ioslist-group-container
+															div.ioslist-group-header!="F"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Fuerteventura (FUE)" data-filter-result="F")!="Fuerteventura (FUE)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="G"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Gran Canaria (LPA)" data-filter-result="G")!="Gran Canaria (LPA)"
+																li
+																	a.link.link__regular(href="#" title="Granada (GRX)" data-filter-result="G")!="Granada (GRX)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="J"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Jerez de la Frontera (XRY)" data-filter-result="J")!="Jerez de la Frontera (XRY)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="L"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Lanzarote (ACE)" data-filter-result="L")!="Lanzarote (ACE)"
+																li
+																	a.link.link__regular(href="#" title="León (LEN)" data-filter-result="L")!="Le&oacute;n (LEN)"
+																li
+																	a.link.link__regular(href="#" title="Lleida (ILD)" data-filter-result="L")!="Lleida (ILD)"
+																li
+																	a.link.link__regular(href="#" title="Logroño (RJL)" data-filter-result="L")!="Logro&ntilde;o (RJL)"
+																li
+																	a.link.link__regular(href="#" title="Lorca (XJR)" data-filter-result="L")!="Lorca (XJR)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="M"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Madrid (MAD)" data-filter-result="M")!="Madrid (MAD)"
+																li
+																	a.link.link__regular(href="#" title="Málaga (AGP)" data-filter-result="M")!="M&aacute;laga (AGP)"
+																li
+																	a.link.link__regular(href="#" title="Melilla (MLN)" data-filter-result="M")!="Melilla (MLN)"
+												div(id="#tab-cities-mobile-222")
+													div(data-function="city-list")
+														div.ioslist-group-container
+															div.ioslist-group-header!="A"
+															ul
+																li
+																	a.link.link__regular(href="#" title="A Coruña (LCG)" data-filter-result="A")!="A Coru&ntilde;a (LCG)"
+																li
+																	a.link.link__regular(href="#" title="Albacete (ABC)" data-filter-result="A")!="Albacete (ABC)"
+																li
+																	a.link.link__regular(href="#" title="Alicante (ALC)" data-filter-result="A")!="Alicante (ALC)"
+																li
+																	a.link.link__regular(href="#" title="Almería (LEI)" data-filter-result="A")!="Almería (LEI)"
+																li
+																	a.link.link__regular(href="#" title="Asturias - Oviedo (OVD)" data-filter-result="A")!="Asturias - Oviedo (OVD)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="B"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Badajoz (BJZ)" data-filter-result="B")!="Badajoz (BJZ)"
+																li
+																	a.link.link__regular(href="#" title="arcelona (BCN)" data-filter-result="B")="Barcelona (BCN)"
+																li
+																	a.link.link__regular(href="#" title="ilbao (BIO)" data-filter-result="B")="Bilbao (BIO)"
+																li
+																	a.link.link__regular(href="#" title="urgos (RGS)" data-filter-result="B")="Burgos (RGS)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="C"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Córdoba" data-filter-result="C")!="C&oacute;rdoba"
+														div.ioslist-group-container
+															div.ioslist-group-header!="F"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Fuerteventura (FUE)" data-filter-result="F")!="Fuerteventura (FUE)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="G"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Gran Canaria (LPA)" data-filter-result="G")!="Gran Canaria (LPA)"
+																li
+																	a.link.link__regular(href="#" title="Granada (GRX)" data-filter-result="G")!="Granada (GRX)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="J"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Jerez de la Frontera (XRY)" data-filter-result="J")!="Jerez de la Frontera (XRY)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="L"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Lanzarote (ACE)" data-filter-result="L")!="Lanzarote (ACE)"
+																li
+																	a.link.link__regular(href="#" title="León (LEN)" data-filter-result="L")!="Le&oacute;n (LEN)"
+																li
+																	a.link.link__regular(href="#" title="Lleida (ILD)" data-filter-result="L")!="Lleida (ILD)"
+																li
+																	a.link.link__regular(href="#" title="Logroño (RJL)" data-filter-result="L")!="Logro&ntilde;o (RJL)"
+																li
+																	a.link.link__regular(href="#" title="Lorca (XJR)" data-filter-result="L")!="Lorca (XJR)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="M"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Madrid (MAD)" data-filter-result="M")!="Madrid (MAD)"
+																li
+																	a.link.link__regular(href="#" title="Málaga (AGP)" data-filter-result="M")!="M&aacute;laga (AGP)"
+																li
+																	a.link.link__regular(href="#" title="Melilla (MLN)" data-filter-result="M")!="Melilla (MLN)"
+												div(id="#tab-cities-mobile-333")
+													div(data-function="city-list")
+														div.ioslist-group-container
+															div.ioslist-group-header!="A"
+															ul
+																li
+																	a.link.link__regular(href="#" title="A Coruña (LCG)" data-filter-result="A")!="A Coru&ntilde;a (LCG)"
+																li
+																	a.link.link__regular(href="#" title="Albacete (ABC)" data-filter-result="A")!="Albacete (ABC)"
+																li
+																	a.link.link__regular(href="#" title="Alicante (ALC)" data-filter-result="A")!="Alicante (ALC)"
+																li
+																	a.link.link__regular(href="#" title="Almería (LEI)" data-filter-result="A")!="Almería (LEI)"
+																li
+																	a.link.link__regular(href="#" title="Asturias - Oviedo (OVD)" data-filter-result="A")!="Asturias - Oviedo (OVD)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="B"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Badajoz (BJZ)" data-filter-result="B")!="Badajoz (BJZ)"
+																li
+																	a.link.link__regular(href="#" title="arcelona (BCN)" data-filter-result="B")="Barcelona (BCN)"
+																li
+																	a.link.link__regular(href="#" title="ilbao (BIO)" data-filter-result="B")="Bilbao (BIO)"
+																li
+																	a.link.link__regular(href="#" title="urgos (RGS)" data-filter-result="B")="Burgos (RGS)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="C"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Córdoba" data-filter-result="C")!="C&oacute;rdoba"
+														div.ioslist-group-container
+															div.ioslist-group-header!="F"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Fuerteventura (FUE)" data-filter-result="F")!="Fuerteventura (FUE)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="G"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Gran Canaria (LPA)" data-filter-result="G")!="Gran Canaria (LPA)"
+																li
+																	a.link.link__regular(href="#" title="Granada (GRX)" data-filter-result="G")!="Granada (GRX)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="J"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Jerez de la Frontera (XRY)" data-filter-result="J")!="Jerez de la Frontera (XRY)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="L"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Lanzarote (ACE)" data-filter-result="L")!="Lanzarote (ACE)"
+																li
+																	a.link.link__regular(href="#" title="León (LEN)" data-filter-result="L")!="Le&oacute;n (LEN)"
+																li
+																	a.link.link__regular(href="#" title="Lleida (ILD)" data-filter-result="L")!="Lleida (ILD)"
+																li
+																	a.link.link__regular(href="#" title="Logroño (RJL)" data-filter-result="L")!="Logro&ntilde;o (RJL)"
+																li
+																	a.link.link__regular(href="#" title="Lorca (XJR)" data-filter-result="L")!="Lorca (XJR)"
+														div.ioslist-group-container
+															div.ioslist-group-header!="M"
+															ul
+																li
+																	a.link.link__regular(href="#" title="Madrid (MAD)" data-filter-result="M")!="Madrid (MAD)"
+																li
+																	a.link.link__regular(href="#" title="Málaga (AGP)" data-filter-result="M")!="M&aacute;laga (AGP)"
+																li
+																	a.link.link__regular(href="#" title="Melilla (MLN)" data-filter-result="M")!="Melilla (MLN)"
+												div(id="#tab-cities-mobile-444")
+												div(id="#tab-cities-mobile-555")
+
+			

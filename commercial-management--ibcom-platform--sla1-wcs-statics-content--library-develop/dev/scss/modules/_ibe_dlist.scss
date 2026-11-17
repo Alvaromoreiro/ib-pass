@@ -1,0 +1,153 @@
+//*****************************************************************************
+//	  Proyecto: Iberia
+//    Titulo: ibe-dlist
+//    Desripcion: Modulo para
+//******************************************************************************/
+//* ibe-dlist */
+
+.ibe-dlist{
+	@include clearfix;
+	width: 100%;
+	border-top: 1px solid $BRD-standar_15;
+	border-right:1px solid $BRD-standar_15;
+	&__row{
+		width: 100%;
+	}
+	&__group{
+		display: table;
+		width: 100%;
+		height: 100%;
+	}
+	&__col{
+		position: relative;
+		display: table-cell;
+		width: 50%;
+		height: 100%;
+		vertical-align: middle;
+		overflow: hidden;
+		border-bottom: 1px solid $BRD-standar_15;
+		&:before{
+			content: "";
+			display: block;
+			position: absolute;
+			left: 0;
+			width: calc(48%);
+			background-color: #EEE;
+			top: 0;
+			height: 200%;
+			border-left: 1px solid $BRD-standar_15;
+			z-index: 1;
+		}
+		&:after{
+			content: "";
+			display: block;
+			position: absolute;
+			right: 0;
+			width: calc(52%);
+			background-color: #FFF;
+			top: 0;
+			height: 200%;
+			border-left: 1px solid $BRD-standar_15;
+			z-index: 1;
+		}
+	}
+	&__list{
+		display: table;
+		width: 100%;
+		border-top: 1px solid $BRD-standar_15;
+		&:first-child {
+			border-top:0;
+		}
+		&--double {
+			min-height: rem(76);
+		}
+	}
+	&__title,&__description{
+		position: relative;
+		display: table-cell;
+		width: 50%;
+		height: 100%;
+		font-size: rem(13);
+		color: #333;
+		padding: rem(9) rem(7) rem(9) rem(17);
+		vertical-align: middle;
+		z-index: 3;
+	}
+	&__description {
+		width: 52%;
+		//background-color: #FFFFFF;
+	}
+	&__title{
+		width: 48%;
+		font-weight: bold;
+		color: #828282;
+		//background-color: #EEEEEE;
+		border-left: 1px solid $BRD-standar_15;
+	}
+}
+
+//*  End ibe-dlist */
+
+@mixin sm-ibe-dlist {
+	.ibe-dlist{
+		display: block;
+		&__list{
+			display: table;
+			width: 100%;
+			border-top: 1px solid $BRD-standar_15;
+			&:first-child {
+				border-top:0;
+			}
+			&--double {
+				min-height: 0;
+			}
+		}
+		&__body{
+			display: block;
+			width: 100%;
+		}
+		&__row{
+			display: block;
+			font-size: 0;
+		}
+		&__title,&__description{
+			padding: rem(9) rem(7) rem(9) rem(15);
+			-ms-word-break: break-all;
+			word-break: break-all;
+		}
+		&__col{
+			float: left;
+			width: 100%;
+			border-right: 0;
+			&:after,&:before{
+				display: none;
+			}
+		}
+		&__title{
+			background-color: #EEE;
+		}
+		&__description{
+			border-left: 1px solid $BRD-standar_15;
+		}
+	}
+}
+
+@mixin xs-ibe-dlist {
+	@include sm-ibe-dlist;
+	.ibe-dlist {
+		&__col{
+			&:before{
+				width: 54%;
+			}
+			&:after{
+				width: 46%;
+			}
+		}
+		&__title {
+			width: 54%;
+		}
+		&__description {
+			width: 46%;
+		}
+	}
+}

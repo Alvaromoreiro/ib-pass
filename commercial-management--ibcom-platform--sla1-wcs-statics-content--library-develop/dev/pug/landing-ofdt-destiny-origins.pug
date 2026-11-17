@@ -1,0 +1,169 @@
+extends _general/layout__primary
+include _modules/_ibe_searcher
+include _modules/_ibe_searcher-accordion-flights
+include _modules/_ibe_searcher-accordion-mobile-flights
+include _modules/_ibe_outstanding
+include _modules/_ibe-banner-layers
+
+block title
+	title!="IBERIA - Landings OFDT - Un origen, varios destinos"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	main.ibe-cub
+		+m-ibe-breadcrumbs({
+			menu: "checkin"
+		})
+	div.ibe-search-flights.ibe-search-flights__menu-vintage.ibe-searcher__vintage
+			div.ibe-search-flights__search
+				div.container.ibe-search-flights__search-container(data-function="data-focus-searcher")
+					div.row
+						div.col-xs-12
+							//- Mostrar en caso de buscador vintage
+							div.ibe-search-flights__search-box(data-validate-searcher)
+								+m-searcher({
+									"tab1": true,
+									"tab2": true,
+									"tab3": false,
+									"tab4": false,
+									"tab5": false
+								})
+							//- Mostrar en caso de buscador home
+							//-div.ibe-search-flights__search-box.hidden-sm.hidden-xs.hidden-md
+								+m-searcher-accordion-flights()
+
+
+			+m-banner-layers({
+				"img": "images/general/B77A77E4-F72E-4252-81BB-50AD4D74D870.png",
+				"type": "destiny",
+			})
+	// End wrapper
+	main
+		div.container.ibe-box-landing__primary--ofdt
+			div.row
+				div.col-xs-12
+					article.ibe-box__primary.ibe-box__primary--type05.ibe-box__primary--table-ori-des
+						h2.title__h3.ibe-home__title-selectize!="Vuelos en oferta, ida y vuelta hasta"
+						label.ibe_form__selectize--label.title.title__h1(for="country")!="Madrid"
+						select(id="country", class="ibe-select", name="country", data-selectmenu-edit, data-selectmenu-city="des")
+							option(value="00", data-city-select="MAD") Madrid
+							option(value="01", data-city-select="LPA") Gran Canaria
+							option(value="02", data-city-select="BIO") Bilbao
+							option(value="03", data-city-select="ES|AGP|MÁLAGA") Málaga
+						table.ibe-table.ibe-table--order(data-type-trip, data-table-order, data-table-destination="origin", data-text-ascending=": ordenar de forma ascendente", data-text-descending=": ordenar de forma descendente", aria-label="tabla ordenada por precio de forma ascendente")
+							caption.hideAccessible Esta tabla muestra informaci&oacute;n sobre vuelos a Roma ida y vuelta
+							thead.ibe-table__thead
+								tr.ibe-table__thead-tr
+									th.ibe-table__thead-th
+										span.ibe-table__thead-text Origen
+									th.ibe-table__thead-th.ibe-table__thead-th--right
+										span.ibe-table__thead-text Precio
+							tbody.ibe-table__tbody
+								tr.ibe-table__tbody-tr
+									td.ibe-table__tbody-td
+										a(href="javascript:void(0)", data-city="MAD",  title="al buscador", data-table-click, class="ibe-table__tbody-td--link")
+											span.hideAccessible Buscar un vuelo de Madrid a Roma desde 29€.
+										span(aria-hidden="true").ibe-table__tbody-text Madrid
+									td.ibe-table__tbody-td.ibe-table__tbody--right
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--small desde
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--price 29€
+								tr.ibe-table__tbody-tr
+									td.ibe-table__tbody-td
+										a(href="javascript:void(0)", data-city="LPA" , title="al buscador", data-table-click, class="ibe-table__tbody-td--link")
+											span.hideAccessible Buscar un vuelo de Gran Canaria a Roma desde 2.900.900PBO.
+										span(aria-hidden="true").ibe-table__tbody-text Gran Canaria
+									td.ibe-table__tbody-td.ibe-table__tbody--right
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--small desde
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--price.ibe-table__tbody-text--price--large 2.900.900PBO
+								tr.ibe-table__tbody-tr
+									td.ibe-table__tbody-td
+										a(href="javascript:void(0)", data-city="BIO", title="al buscador", data-table-click, class="ibe-table__tbody-td--link")
+											span.hideAccessible Buscar un vuelo de Bilbao a Roma desde 40€.
+										span(aria-hidden="true").ibe-table__tbody-text Bilbao
+									td.ibe-table__tbody-td.ibe-table__tbody--right
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--small desde
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--price 40€
+								tr.ibe-table__tbody-tr
+									td.ibe-table__tbody-td
+										a(href="javascript:void(0)", data-city="AGP", title="al buscador", data-table-click, class="ibe-table__tbody-td--link")
+											span.hideAccessible Buscar un vuelo de Málaga a Roma desde 42€.
+										span(aria-hidden="true").ibe-table__tbody-text Málaga
+									td.ibe-table__tbody-td.ibe-table__tbody--right
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--small desde
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--price 42€
+								tr.ibe-table__tbody-tr
+									td.ibe-table__tbody-td
+										a(href="javascript:void(0)", data-city="ALC", title="al buscador", data-table-click, class="ibe-table__tbody-td--link")
+											span.hideAccessible Buscar un vuelo de Alicante a Roma desde 45€.
+										span(aria-hidden="true").ibe-table__tbody-text Alicante
+									td.ibe-table__tbody-td.ibe-table__tbody--right
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--small desde
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--price 45€
+
+					article.ibe-box__primary.ibe-box__primary--type05.ibe-box__primary--table-ori-des
+						h2.title__h3.ibe-home__title-selectize!="Vuelos en oferta, ida y vuelta desde"
+						label.ibe_form__selectize--label.title.title__h1(for="country")!="Marruecos"
+						select(id="country2", class="ibe-select", name="country", data-selectmenu-edit, data-selectmenu-city="ori")
+							option(value="00", data-city-select="MAD") Madrid
+							option(value="01", data-city-select="LPA") Gran Canaria
+							option(value="02", data-city-select="BIO") Bilbao
+							option(value="03", data-city-select="AGP") Málaga
+						table.ibe-table.ibe-table--order(data-type-trip, data-table-order, data-table-destination="destiny", data-text-ascending=": ordenar de forma ascendente", data-text-descending=": ordenar de forma descendente", aria-label="tabla ordenada por precio de forma ascendente")
+							caption.hideAccessible Esta tabla muestra informaci&oacute;n sobre vuelos a Roma ida y vuelta
+							thead.ibe-table__thead
+								tr.ibe-table__thead-tr
+									th.ibe-table__thead-th
+										span.ibe-table__thead-text Destino
+									th.ibe-table__thead-th.ibe-table__thead-th--right
+										span.ibe-table__thead-text Precio
+							tbody.ibe-table__tbody
+								tr.ibe-table__tbody-tr
+									td.ibe-table__tbody-td
+										a(href="javascript:void(0)", data-city="MAD",  title="al buscador", data-table-click, class="ibe-table__tbody-td--link")
+											span.hideAccessible Buscar un vuelo de Madrid a Roma desde 29€.
+										span(aria-hidden="true").ibe-table__tbody-text Madrid
+									td(data-order="29").ibe-table__tbody-td.ibe-table__tbody--right
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--small desde
+										span(aria-hidden="true" ).ibe-table__tbody-text.ibe-table__tbody-text--price 29€
+								tr.ibe-table__tbody-tr
+									td.ibe-table__tbody-td
+										a(href="javascript:void(0)", data-city="LPA" , title="al buscador", data-table-click, class="ibe-table__tbody-td--link")
+											span.hideAccessible Buscar un vuelo de Gran Canaria a Roma desde 2.900.900€
+										span(aria-hidden="true").ibe-table__tbody-text Gran Canaria
+									td(data-order="2,900,900").ibe-table__tbody-td.ibe-table__tbody--right
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--small desde
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--price.ibe-table__tbody-text--price--large 2,900,900€
+								tr.ibe-table__tbody-tr
+									td.ibe-table__tbody-td
+										a(href="javascript:void(0)", data-city="BIO", title="al buscador", data-table-click, class="ibe-table__tbody-td--link")
+											span.hideAccessible Buscar un vuelo de Bilbao a Roma desde 400€.
+										span(aria-hidden="true").ibe-table__tbody-text Bilbao
+									td(data-order="400").ibe-table__tbody-td.ibe-table__tbody--right
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--small desde
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--price 400€
+								tr.ibe-table__tbody-tr
+									td.ibe-table__tbody-td
+										a(href="javascript:void(0)", data-city="AGP", title="al buscador", data-table-click, class="ibe-table__tbody-td--link")
+											span.hideAccessible Buscar un vuelo de Málaga a Roma desde 42€.
+										span(aria-hidden="true").ibe-table__tbody-text Málaga
+									td(data-order="42").ibe-table__tbody-td.ibe-table__tbody--right
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--small desde
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--price 42€
+								tr.ibe-table__tbody-tr
+									td.ibe-table__tbody-td
+										a(href="javascript:void(0)", data-city="ALC", title="al buscador", data-table-click, class="ibe-table__tbody-td--link")
+											span.hideAccessible Buscar un vuelo de Alicante a Roma desde 45€.
+										span(aria-hidden="true").ibe-table__tbody-text Alicante
+									td(data-order="45").ibe-table__tbody-td.ibe-table__tbody--right
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--small desde
+										span(aria-hidden="true").ibe-table__tbody-text.ibe-table__tbody-text--price 45€
+
+
+	+m-footer()

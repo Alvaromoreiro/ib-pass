@@ -1,0 +1,289 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_card-guides
+//    Desripcion: Estilos para el componente card mis guias
+//******************************************************************************/
+
+.ibe-card-guides{
+    display: block;
+    position: relative;
+    overflow: hidden;
+    // margin-bottom: rem(25);
+    background-color: $BCK-cromatico_1;
+    border: 1px solid $BRD_standar_5;
+    &__image{
+        width: 100%;
+        height: rem(124);
+        float: none;
+        overflow: hidden;
+        img{
+            position: relative;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+        &--tall {
+            height: rem(190);
+        }
+    }
+    &__header{
+        padding: rem(25) rem(30) 0 rem(30);
+        .title{
+            padding: 0;
+        }
+    }
+    &__info{
+        padding: 0 rem(30) rem(10) rem(30);
+        .paragraph{
+            line-height: rem(20);
+        }
+    }
+    &__footer{
+        padding: 0 rem(30) rem(25) rem(30);
+        text-align: right;
+        &--icon {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-end;
+        }
+    }
+    &__footer-arrow{
+        &:after{
+            font-family: $font-05;
+            content: "\e973";
+            font-size: rem(18);
+            color: #D7192D;
+            margin-left: rem(15);
+        }
+    }
+    &__theme {
+        position: relative;
+        display: block;
+        font-family: $font-07;
+        font-size: rem(13);
+        line-height: 1.8;
+        text-align: left;
+        color: #777777;
+        margin-bottom: rem(3);
+        padding-left: rem(26);
+        &:before {
+            font-family: "iberia";
+            content:"\e9fa";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: rem(24);
+            line-height: 1;
+        }
+        &--orange {
+            &:before {
+                color: #ff8700;
+            }
+        }
+        &--purple {
+            &:before {
+                color: #c429f3;
+            }
+        }
+        &--yellow {
+            &:before {
+                color: #ffb100;
+            }
+        }
+        &--pin {
+            &::before{
+                content: "\e9e7";
+                color: #EEC500;
+            }
+        }
+    }
+    &__title{
+        &--link{
+            display: block;
+            text-decoration: none !important;
+        }
+        &--icon {
+			padding-right: rem(20);
+            padding: 0 1rem 0.875rem 0 !important;
+            position: relative;
+            display: block;
+            color: #333;
+			&:before {
+				content: "\e973";
+				font-family: $font-05;
+				font-size: rem(20);
+				color: $PC-cromatico_3;
+				position: absolute;
+				right: 0;
+				top: rem(4);
+			}
+            &:hover, &:focus{
+                color: $PC-cromatico_3;
+                text-decoration: none;
+            }
+		}
+    }
+    &__offer-icon {
+        width: auto;
+        margin-right: rem(5);
+    }
+    &__offer-text {
+        font-family: $font-02;
+        font-size: rem(13);
+    }
+    &__offer-text-bigger {
+        font-family: $font-02;
+        font-size: rem(16);
+    }
+    &__offer-info {
+        font-family: $font-04;
+        font-size: rem(18);
+    }
+    /* Modificadores */
+    &--xs{
+        .ibe-card-guides__image{
+            max-height: rem(95);
+        }
+        .ibe-card-guides__header{
+            padding: rem(15);
+            .title{
+                font-size: rem(18);
+            }
+        }
+        .ibe-card-guides__info,
+        .ibe-card-guides__footer{
+            padding-left: rem(15);
+            padding-right: rem(15);
+        }
+    }
+    &--selected {
+        .ibe-card-guides__image {
+            &:before {
+                content: "\e93e";
+                position: absolute;
+                width: 25px;
+                height: 25px;
+                line-height: 25px;
+                top: 14px;
+                right: 14px;
+                font-family: "iberia";
+                text-align: center;
+                color: #D7192D;
+                background: #EEEEEE;
+                border-radius: 50%;
+                font-size: 20px;
+                z-index: 1;
+            } 
+        }
+    }
+    &--no-border {
+        border: 0;
+    }
+    &__cdv{
+        align-self: stretch;
+        color: var(--grey-70066, var(--Grey-700, #666));
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: $font-07;
+        font-size: rem(13);
+        font-style: normal;
+        font-weight: 700;
+        line-height: rem(20);
+    }
+}
+/* Responsive */
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe-card-guides{
+    .ibe-card-guides { 
+        &__header {
+            padding: rem(11) 0 0;
+        }
+        &__body {
+            padding: rem(11) rem(14) 0;
+        }
+        &__footer {
+            padding: 0 rem(14) rem(20);
+        }
+        &__info {
+            padding: 0;
+        }
+        &__offer-text-bigger {
+            font-size: rem(14);
+        }
+
+    }
+}
+/*X-SMALL RESOLUTION STYLES*/
+@mixin sm-ibe-card-guides{
+    .ibe-card-guides{
+        &__header{
+            .title{
+                font-size: rem(18);
+                &.title__h3 {
+                    font-size: rem(26);
+                }
+            }
+        }
+        &__offer-text-bigger {
+            font-size: rem(14);
+        }
+    }
+}
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe-card-guides{
+    .ibe-card-guides{
+        margin-bottom: rem(16);
+        &__body {
+            height: auto !important;
+        }
+        &__header{
+            padding: rem(18) rem(15);
+            .title{
+                font-size: rem(18);
+                &.title__h3 {
+                    font-size: rem(26);
+                }
+                &.title__h4 {
+                    font-size: rem(22);
+                }
+            }
+        }
+        &__info{
+            display: none;
+            &--mobile {
+                display: block;
+            }
+        }
+        &__info,
+        &__footer{
+            padding-left: rem(15);
+            padding-right: rem(15);
+        }
+        &__footer{
+            padding-bottom: rem(15);
+            .link{
+                font-size: rem(12);
+            }
+        }
+        &--xs{
+            margin-bottom: rem(16);
+            .ibe-card-guides__image{
+                max-height: rem(70);
+            }
+            .ibe-card-guides__header{
+                padding: rem(15);
+                .title{
+                    font-family: $font-07;
+                    font-size: rem(14);
+                }
+            }
+            .ibe-card-guides__info,
+            .ibe-card-guides__footer{
+                padding-left: rem(15);
+                padding-right: rem(15);
+            }
+        }
+         &__pb-none {
+            padding-bottom: 0;
+        }
+    }
+}

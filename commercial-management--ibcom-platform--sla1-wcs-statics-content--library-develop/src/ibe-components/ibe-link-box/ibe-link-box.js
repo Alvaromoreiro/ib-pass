@@ -1,0 +1,1 @@
+dFrontJs.ibe_link_box=(jQuery,{init:(dFrontJs.app.fcHeight(),void dFrontJs.ibe_box_ellipsis.dot(".ibe-link-box [data-dotdotdot-new]:visible",null))});

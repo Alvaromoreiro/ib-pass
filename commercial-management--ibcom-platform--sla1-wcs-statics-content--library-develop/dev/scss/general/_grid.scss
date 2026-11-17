@@ -1,0 +1,352 @@
+//*****************************************************************************
+//    Titulo: _grid.scss
+//    Desripcion: "Nora" Grid Styles
+//******************************************************************************/
+
+// See _config.scss
+//Globals
+
+// las versiones ocultas de la configuración "visible" hereda de _visibleHide
+%_visibleHide{
+    display:none !important;
+}
+
+/// Obtiene la longitud para una columna en base al n�mero de columnas
+/// @access private
+/// @group grid
+/// @param {number} $currentCol     Columna actual para la cual calcular ancho
+/// @param {number} $numCols        Total de columnas
+/// @return {number} width
+@function _getWidth($currentCol,$numCols) {
+    @return (100*$currentCol)/$numCols;
+}
+
+/// Genera el css para la columna en base a unos prefijos y tama�o
+/// @access private
+/// @group grid
+/// @param {String}             $colPrefix      Prefijo a a�adir para la columna
+/// @param {String}             $screenPrefix   Prefijo a a�adir para el tama�ao (resoluci�n)
+/// @param {String | number}    $size           number o String correspondiente a la columna actual
+/// @param {number}             $numCols        N�mero de columnas totales
+/// @see _getWidth
+/// @output Genera la clase css con los estilos para la columna seg�n el formato:
+///  colPrefix-screenPrefix-size{
+///     @extend screenPrefix
+///     width
+///  }
+@mixin _createCol($colPrefix,$screenPrefix,$size,$numCols) {
+    .#{$colPrefix}-#{$screenPrefix}-#{$size} {
+        @extend %#{$screenPrefix};
+        width: unquote(_getWidth($size,$numCols)+"%");
+    }
+}
+
+/// Genera el css para el offset de las columnas
+/// @access private
+/// @group grid
+/// @param {String}             $colPrefix      Prefijo a a�adir para la columna
+/// @param {String}             $screenPrefix   Prefijo a a�adir para el tama�ao (resoluci�n)
+/// @param {String}             $offsetPrefix   Prefijo a a�adir para identificar que es offset
+/// @param {String | number}    $size           number o String correspondiente a la columna actual
+/// @param {number}             $numCols        N�mero de columnas totales
+/// @see _getWidth
+/// @output Genera la clase css con los estilos para la columna seg�n el formato:
+///  $colPrefix-$screenPrefix-$offsetPrefix-$size{
+///     margin-left
+///  }
+@mixin _createOffset($colPrefix,$screenPrefix,$offsetPrefix,$size,$numCols) {
+    .#{$colPrefix}-#{$screenPrefix}-#{$offsetPrefix}-#{$size} {
+        margin-left: unquote(_getWidth($size,$numCols)+"%");
+    }
+}
+
+@mixin _createPull($colPrefix,$screenPrefix,$pullPrefix,$size,$numCols) {
+    .#{$colPrefix}-#{$screenPrefix}-#{$pullPrefix}-#{$size} {
+        right: unquote(_getWidth($size,$numCols)+"%");
+    }
+}
+@mixin _createPush($colPrefix,$screenPrefix,$pushPrefix,$size,$numCols) {
+    .#{$colPrefix}-#{$screenPrefix}-#{$pushPrefix}-#{$size} {
+        left: unquote(_getWidth($size,$numCols)+"%");
+    }
+}
+
+/// Genera el css para el clear de las columnas
+/// @access private
+/// @group grid
+/// @param {String}             $colPrefix      Prefijo a a�adir para la columna
+/// @param {String}             $screenPrefix   Prefijo a a�adir para el tama�ao (resoluci�n)
+/// @param {String}             $clearPrefix    Prefijo a a�adir para identificar que es clear
+/// @param {String}             $leftPrefix     Prefijo a a�adir para identificar que es de la izquierda
+/// @param {String}             $rightPrefix    Prefijo a a�adir para identificar que es de la derecha
+/// @param {String}             $bothPrefix     Prefijo a a�adir para identificar que es de ambos lados
+/// @param {number}             $numCols        N�mero de columnas totales
+/// @see _getWidth
+/// @output Genera la clase css con los estilos para la columna seg�n el formato:
+///  $colPrefix-$screenPrefix-$clearPrefix-($leftPrefix|$rightPrefix|$bothPrefix){
+///     (&:after|&before){
+///         content:"";
+///         display:block;
+///         clear
+///     }
+///  }
+///
+@mixin _createClear($colPrefix,$screenPrefix,$clearPrefix,$leftPrefix,$rightPrefix,$bothPrefix) {
+    .#{$colPrefix}-#{$screenPrefix}-#{$clearPrefix}-#{$rightPrefix} {
+        &:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    }
+    .#{$colPrefix}-#{$screenPrefix}-#{$clearPrefix}-#{$leftPrefix} {
+        &:before {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    }
+    .#{$colPrefix}-#{$screenPrefix}-#{$clearPrefix}-#{$bothPrefix} {
+        &:before {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        &:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    }
+}
+
+/// Genera el css para cancelar los padding laterales de cada col
+/// @access private
+/// @group grid
+/// @param {String}             $colPrefix              Prefijo a a�adir para la columna
+/// @param {String}             $screenPrefix           Prefijo a a�adir para el tama�ao (resoluci�n)
+/// @param {String}             $cancelGutterPrefix    Prefijo a a�adir para identificar el cancelamiento de padding
+/// @param {String}             $leftPrefix             Prefijo a a�adir para identificar que es de la izquierda
+/// @param {String}             $rightPrefix            Prefijo a a�adir para identificar que es de la derecha
+/// @param {String}             $bothPrefix             Prefijo a a�adir para identificar que es de ambos lados
+/// @param {number}             $numCols                N�mero de columnas totales
+/// @see _getWidth
+/// @output Genera la clase css con los estilos para la columna seg�n el formato:
+///  $colPrefix-$screenPrefix-$cancelGutterPrefix-($leftPrefix|$rightPrefix|$bothPrefix){
+///         padding-(left|right)
+///  }
+///
+@mixin _createCancelGutter($colPrefix,$screenPrefix,$cancelGutterPrefix,$leftPrefix,$rightPrefix,$bothPrefix) {
+    .#{$colPrefix}-#{$screenPrefix}-#{$cancelGutterPrefix}-#{$rightPrefix} {
+        padding-right: 0;
+    }
+    .#{$colPrefix}-#{$screenPrefix}-#{$cancelGutterPrefix}-#{$leftPrefix} {
+        padding-left: 0;
+    }
+    .#{$colPrefix}-#{$screenPrefix}-#{$cancelGutterPrefix}-#{$bothPrefix} {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+/// Genera el css para los padding laterales externos
+/// @access private
+/// @group grid
+/// @param {String}             $gutter                 Prefijo a a�adir para el tama�o del padding (se indica en px y se pasa a em con la funci�n).
+/// @output Genera la clase css con los estilos seg�n el formato:
+///  .gridContainer {
+///      padding-(left|right): em($gutter/2);
+///  }
+///
+@mixin _makeContainer($gutter) {
+    .gridContainer {
+        padding-left: rem($gutter/2);
+        padding-right: rem($gutter/2);
+    }
+}
+
+/// Genera los estilos base de cada columna (col), los padding laterales a todo lo que sea columna y el flotado con box-sizing por cada uno de los tama�os.
+/// @access private
+/// @group grid
+/// @param {String}             $gutter         Prefijo a a�adir para el tama�o del padding (se indica en px y se pasa a em con la funci�n).
+/// @param {String | number}    $size           Number o String correspondiente a la columna actual
+/// @output Genera la clase css con los estilos seg�n el formato:
+///  %#{$size} {
+///     float: left;
+///     box-sizing: border-box;
+///  }
+///  [class*="col-"] {
+///     padding-(left|right): em($gutter/2);
+///  }
+///
+@mixin _makeBaseCol($size,$gutter) {
+    %#{$size} {
+        float: left;
+        box-sizing: border-box;
+    }
+    [class*="col-"] {
+        position: relative;
+        padding-left: rem($gutter/2);
+        padding-right: rem($gutter/2);
+    }
+}
+
+/// Genera los margin laterales negativos para cada fila (row)
+/// @access private
+/// @group grid
+/// @param {String}             $gutter             Prefijo a a�adir para el tama�o del margin (se indica en px y se pasa a em con la funci�n).
+/// @output Genera la clase css con los estilos seg�n el formato:
+///  .row{
+///      margin-(left|right): em($gutter/-2);
+///  }
+///
+@mixin _makeRow($gutter, $margin-row) {
+    .row{
+        @if $margin-row{
+            margin-left: rem($gutter/-2);
+            margin-right: rem($gutter/-2);
+        }
+        @else{
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .row{
+            margin-left: rem($gutter/-2);
+            margin-right: rem($gutter/-2);
+        }
+    }
+}
+@mixin _createEnd($colPrefix,$screenPrefix,$endPrefix) {
+    .#{$colPrefix}-#{$screenPrefix}-#{$endPrefix} {
+        float: right;
+    }
+}
+/// Genera todas las columnas seg�n su configuraci�n invocando los mixins anteriores.
+/// @access public
+/// @group grid
+/// @param {number}             $width              Resolución a la que comenzará a aplicarse los estilos
+/// @param {String}             $gutter             Prefijo a a�adir para el tama�o del margin (se indica en px y se pasa a em con la funci�n).
+/// @param {String}             $colPrefix          Prefijo a a�adir para la columna
+/// @param {String}             $screenPrefix       Prefijo a a�adir para el tama�ao (resoluci�n)
+/// @param {String}             $offsetPrefix       Prefijo a a�adir para identificar que es offset
+/// @param {number}             $numCols            N�mero de columnas totales
+/// @param {number}             $toNumCols          N�mero de columnas totales + 1 para recorrer bucle que empieza desde 1.
+/// @param {number}             $i                  Contador para recorrer el bucle.
+/// @param {String}             $cancelGutterPrefix    Prefijo a a�adir para identificar el cancelamiento de padding
+/// @param {String}             $clearPrefix        Prefijo a a�adir para identificar que es clear
+/// @param {String}             $leftPrefix         Prefijo a a�adir para identificar que es de la izquierda
+/// @param {String}             $rightPrefix        Prefijo a a�adir para identificar que es de la derecha
+/// @param {String}             $bothPrefix         Prefijo a a�adir para identificar que es de ambos lados
+/// @see _makeContainer
+/// @see _makeBaseCol
+/// @see _makeRow
+/// @see _createOffset
+/// @see _createClear
+/// @see _createCancelGutter
+/// @see _createCol
+/// @output Genera la clase css con los estilos seg�n el formato:
+///  .row{
+///      margin-(left|right): em($gutter/-2);
+///  }
+///
+@mixin makeCols($minWidth,$maxWidth,$gutter,$colPrefix,$screenPrefix,$numCols, $margin-row) {
+
+    @media (min-width: unquote($minWidth+"px")) {
+        $toNumCols: $numCols+1;
+        @include _makeContainer($gutter);
+        @include _makeBaseCol($screenPrefix, $gutter);
+        @include _makeRow($gutter, $margin-row);
+        @for $i from 0 to $numCols {
+            @include _createOffset($colPrefix, $screenPrefix, $offsetPrefix, $i, $numCols);
+            @include _createPull($colPrefix, $screenPrefix, $pullPrefix, $i, $numCols);
+            @include _createPush($colPrefix, $screenPrefix, $pushPrefix, $i, $numCols);
+        }
+        @include _createClear($colPrefix, $screenPrefix, $clearPrefix, $leftPrefix, $rightPrefix, $bothPrefix);
+        @include _createCancelGutter($colPrefix, $screenPrefix, $cancelGutterPrefix, $leftPrefix, $rightPrefix, $bothPrefix);
+        @for $i from 1 to $toNumCols {
+            @include _createCol($colPrefix, $screenPrefix, $i, $numCols);
+        }
+    }
+    @media (min-width: unquote($minWidth+"px")) and (max-width: unquote($maxWidth - 1 +"px" )) {
+		@include _createVisible($screenPrefix,$visiblePrefix);
+        @include _createInlineVisible($screenPrefix,$inlineVisiblePrefix);
+        @include _createHide($screenPrefix, $hidePrefix);
+		@include _createEnd ($colPrefix, $screenPrefix, $endPrefix);
+    }
+	@include _createVisibleHide($screenPrefix,$inlineVisiblePrefix);
+    @include _createVisibleHide($screenPrefix,$visiblePrefix);
+}
+@mixin _createHide ($screenPrefix, $hidePrefix){
+    .#{$screenPrefix}-#{$hidePrefix}{
+        display: none !important;
+    }
+}
+@mixin _createVisible($screenPrefix, $visiblePrefix) {
+    .#{$screenPrefix}-#{$visiblePrefix} {
+        display: block !important;
+    }
+}
+@mixin _createInlineVisible($screenPrefix, $inlineVisiblePrefix) {
+    .#{$screenPrefix}-#{$inlineVisiblePrefix} {
+        display: inline-block !important;
+    }
+}
+@mixin _createVisibleHide ($screenPrefix, $visiblePrefix){
+    .#{$screenPrefix}-#{$visiblePrefix} {
+        @extend %_visibleHide;
+    }
+}
+/// Genera los pseudoselectores :after y :before para limpiar el contenido y ocupar el espacio.
+/// @access public
+/// @group grid
+/// @output Genera la clase css con los estilos seg�n el formato:
+///  .row{
+///      (&:after|&:before) {
+///         content: "";
+///         display: block;
+///         clear: both;
+///      }
+///  }
+///
+.row {
+    &:before {
+        content: "";
+        display: block;
+        clear: both;
+    }
+    &:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+}
+
+/// Genera los estilos para las diferentes vistas.
+/// @access public
+/// @group grid
+/// @param {number}             ($xs-cols|$sm-cols|$md-cols|$lg-cols|$xl-cols)                      N�mero de columnas para cada vista.
+/// @param {number}             ($xs-min|$sm-min|$md-min|$lg-min|$xl-min)                           Tama�o minimo (en px) que entra a verse cada vista.
+/// @param {number}             ($xs-gutter|$sm-gutter|$md-gutter|$lg-gutter|$xl-gutter)            Tama�o entre columnas (en px).
+/// @param {String}             $colPrefix                                                          Prefijo a a�adir para la columna.
+/// @param {String}             ($xsColPrefix|$smColPrefix|$mdColPrefix|$lgColPrefix|$xlColPrefix)  Prefijo definido para cada columna.                                        Prefijo a a�adir para la columna
+/// @see _config.scss
+///
+@if ($xs-cols) {
+    @include makeCols($xs-min,$sm-min,$xs-gutter, $colPrefix, $xsColPrefix, $xs-cols, $margin-row);
+}
+
+@if ($sm-cols) {
+    @include makeCols($sm-min,$md-min,$sm-gutter, $colPrefix, $smColPrefix, $sm-cols, $margin-row);
+}
+
+@if ($md-cols) {
+    @include makeCols($md-min,$lg-min,$md-gutter, $colPrefix, $mdColPrefix, $md-cols, $margin-row);
+}
+
+@if ($lg-cols) {
+    @include makeCols($lg-min,$xl-min,$lg-gutter, $colPrefix, $lgColPrefix, $lg-cols, $margin-row);
+}
+
+@if ($xl-cols) {
+    @include makeCols($xl-min,2000,$xl-gutter, $colPrefix, $xlColPrefix, $xl-cols, $margin-row);
+}

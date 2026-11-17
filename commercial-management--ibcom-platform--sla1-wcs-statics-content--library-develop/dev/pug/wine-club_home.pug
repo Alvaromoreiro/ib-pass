@@ -1,0 +1,41 @@
+extends _general/layout__primary
+include _modules/wine-club/_ibe_wine-club_banner
+include _modules/wine-club/_ibe_wine-club_card-link
+include _modules/wine-club/_ibe_wine-club_how-it-works
+include _modules/wine-club/_ibe_wine-club_fall-in-love
+include _modules/wine-club/_ibe_wine-club_icon-banner
+include _modules/wine-club/_ibe_wine-club_info-section
+include _modules/wine-club/_ibe_wine-club_card-info
+include _modules/wine-club/_ibe_wine-club_carousel
+
+block title
+    title!='IBERIA - Wine club'
+block body
+    // Inicio nuevo header
+    +m-header-new({
+        "login": false
+    })
+
+    // Inicio nuevo menu
+    +m-menu-new({
+        "login": false
+    })
+    +m-ibe-breadcrumbs({
+		"menu": "checkin"
+	})
+    // End wrapper
+    main.ibe-wine-club
+        // Main content
+        +m-ibe-wine-club_banner({
+            "dataBackground": 'images/modules/wineclub/wineclub-banner'
+        })      
+        div.container
+            +m-ibe-wine-club_how-it-works()
+            +m-ibe-wine-club_card-link()
+            +m-ibe-wine-club_icon-banner()
+            +m-ibe-wine-club_card-info()
+            +m-ibe-wine-club_fall-in-love()
+            
+    +m-footer({
+		"full": true  
+	})

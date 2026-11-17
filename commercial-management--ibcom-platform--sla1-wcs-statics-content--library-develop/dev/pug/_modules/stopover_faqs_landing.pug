@@ -1,0 +1,36 @@
+extends _general/layout__primary
+include _modules/_ibe_carousel_cards-slider
+include _modules/_ibe_faq
+
+block title
+    title!='IBERIA - Stopover Header component'
+block body
+    // Inicio nuevo header
+    +m-header-new({
+        "login": false
+    })
+
+    div.ibe-static-banner.u-mb-biggest(style="background-image: url('images/modules/stopover/img-call-to-action-conocer-madrid.jpg'); height: 351px")
+        div.container
+            div.row
+                div.col-xs-12
+                    div.ibe-static-banner__content--middle
+                        div.ibe-static-banner__title-section--no-margin.positionR
+                            div.ibe-flex.ibe-flex--flex-center.ibe-flex--align-end.ibe-stopover-banner--searcher(style="top:9rem")
+                                .ibe-search-collapse__item.ibe-search-collapse__item--input.ibe-stopover-banner--input.u-mr-none
+                                    .ibe_form__group.fc_form_group.ibe_form__group--button-icon
+                                        label(for="flight_origin_stop" class="ibe_form__input-label") ¿Quieres hacer stopover?
+                                        input.ibe_form__input-text.ui-autocomplete-input(type="text", id="flight_origin_stop",
+                                        data-focusin, data-autocomplete="cities", data-toggle-element,
+                                        data-validate="input-origin", required, name="stop_origin", style="height: 60px")
+                                        p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+                                        p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+                                button.ibe-search-collapse__item.ibe-search-collapse__item--button-b.ibe-stopover-banner--button(type='button', data-focusin="data-focusin")!="Buscar"
+
+    main.container.u-mt-big
+        +m-faq()
+        +m-ibe-carousel-cards-slider()
+
+    +m-footer({
+        "full": true
+    })

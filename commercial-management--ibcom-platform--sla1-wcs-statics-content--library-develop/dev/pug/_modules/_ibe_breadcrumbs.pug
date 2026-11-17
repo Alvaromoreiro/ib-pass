@@ -1,0 +1,243 @@
+mixin m-ibe-breadcrumbs(params)
+	div(class="ibe-infocheckin__menu" + (params.menu === "partners"?" ibe-infocheckin__menu--partners":  params.menu === "cheapFlights"?" ibe-infocheckin__menu--diagonal-separator": ""))
+		.container
+			.row
+				.col-xs-12
+					if (params.menu === "checkin")
+						div.ibe-infocheckin__menu-scroll
+							ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--menu.ibe-infocheckin__menu-wrapper--menu-responsive
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-responsive
+									a.link.link__regular(href="#", data-focusin, title="Ver más", data-inforcheckin="unlock")
+										span.hideAccessible!="Ver m&aacute;s"
+							div.ibe-infocheckin__menu-container
+								ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--menu(data-inforcheckin="menu", aria-label="Usted esta aquí:")
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-home
+										a.link.link__regular.icon-inicio(href="#", data-focusin, title="Home")
+											span.hideAccessible!="Home"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt
+										a.link.link__regular(href="#", data-focusin, title="Tus vuelos")!="Tus vuelos"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt
+										a.link.link__regular(href="#", data-focusin, title="Check-in online")!="Check-in online"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt.xui-infocheckin__menu-blocked
+										span.link.link__regular!="Informaci&oacute;n sobre el Check-in"
+							ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--social
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-share
+									a.link.link__regular.icon-compartir(href="#", data-focusin, title="Compartir", data-toggle="popover", data-placement="bottom")
+										span(data-toggle-status="true", data-status-open="Click para ocultar redes sociales", data-status-close="Click para mostrar redes sociales", class="hideAccessible")!="Click para mostrar redes sociales"
+									div.hidden(data-function="ibe-popover-content" id="tooltip-social-media")
+										ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--social-tooltip
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-weibo
+												a.link.link__regular(href="#", data-focusin, title="Ir a Weibo")
+													span.hideAccessible!="Weibo"
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-wechat
+												a.link.link__regular(href="#", data-focusin, title="Ir a Wechat", data-function="show-qr")
+													span.hideAccessible!="Wechat"
+													div(class="ibe-infocheckin__qr", aria-hidden="true")
+														figure
+															img(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", data-src='https://chart.googleapis.com/chart?cht=qr&chl=http%3A%2F%2Fgoogle.es&chs=180x180&choe=UTF-8&chld=L|2', alt='')
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-youku
+												a.link.link__regular(href="#", data-focusin, title="Ir a Youku")
+													span.hideAccessible!="Youku"
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-google
+												a.link.link__regular(href="#", data-focusin, title="Ir a Google +")
+													span.hideAccessible!="Google +"
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-weibo
+									a.link.link__regular(href="#", data-focusin, title="Ir a Weibo")
+										span.hideAccessible!="Weibo"
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-wechat
+									a.link.link__regular(href="#", data-focusin, title="Ir a Wechat", data-function="show-qr")
+										span.hideAccessible!="Wechat"
+										div(class="ibe-infocheckin__qr", aria-hidden="true")
+											figure
+												img(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src='https://chart.googleapis.com/chart?cht=qr&chl=http%3A%2F%2Fgoogle.es&chs=180x180&choe=UTF-8&chld=L|2', alt='')
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-youku
+									a.link.link__regular(href="#", data-focusin, title="Ir a Youku")
+										span.hideAccessible!="Youku"
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-google
+									a.link.link__regular(href="#", data-focusin, title="Ir a Google +")
+										span.hideAccessible!="Google +"
+					else if (params.menu === "partners")
+						div.ibe-infocheckin__menu-scroll.ibe-infocheckin__menu-scroll--white
+							ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--menu.ibe-infocheckin__menu-wrapper--menu-responsive
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-responsive
+									a.link.link__regular(href="#", data-focusin, title="Ver más" data-inforcheckin="unlock")
+										span.hideAccessible!="Ver m&aacute;s"
+							div.ibe-infocheckin__menu-container
+								ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--menu(data-inforcheckin="menu")
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt
+										a.link.link__regular(href="#", data-focusin, title="Hoteles")!="Hoteles"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt.xui-infocheckin__menu-blocked
+										span.link.link__regular!="NH Hotel Group"
+					else if (params.menu === "claim")
+						div.ibe-infocheckin__menu-scroll
+							ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--menu.ibe-infocheckin__menu-wrapper--menu-responsive
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-responsive
+									a.link.link__regular(href="#", data-focusin, title="Ver más", data-inforcheckin="unlock")
+										span.hideAccessible!="Ver m&aacute;s"
+							div.ibe-infocheckin__menu-container
+								ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--menu(data-inforcheckin="menu", aria-label="Usted esta aquí:")
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-home
+										a.link.link__regular.icon-inicio(href="#", data-focusin, title="Home")
+											span.hideAccessible!="Home"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt
+										a.link.link__regular(href="#", data-focusin, title="Ir a centro de ayuda")!="Centro de ayuda"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt.xui-infocheckin__menu-blocked
+										span.link.link__regular!="Contacta con nosotros"
+							ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--social
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-share
+									a.link.link__regular.icon-compartir(href="#", data-focusin, title="Compartir", data-toggle="popover", data-placement="bottom")
+										span(data-toggle-status="true", data-status-open="Click para ocultar redes sociales", data-status-close="Click para mostrar redes sociales", class="hideAccessible")!="Click para mostrar redes sociales"
+									div.hidden(data-function="ibe-popover-content", id="tooltip-social-media")
+										ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--social-tooltip
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-facebook
+												a.link.link__regular(href="#", data-focusin, title="Ir a Facebook")
+													span.hideAccessible!="Facebook"
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-twitter
+												a.link.link__regular(href="#", data-focusin, title="Ir a Twitter")
+													span.hideAccessible!="Twitter"
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-linkedin
+												a.link.link__regular(href="#", data-focusin, title="Ir a LinkedIn")
+													span.hideAccessible!="LinkedIn"
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-google
+												a.link.link__regular(href="#", data-focusin, title="Ir a Google +")
+													span.hideAccessible!="Google +"
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-facebook
+									a.link.link__regular(href="#", data-focusin, title="Ir a Facebook")
+										span.hideAccessible!="Facebook"
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-twitter
+									a.link.link__regular(href="#", data-focusin, title="Ir a Twitter")
+										span.hideAccessible!="Twitter"
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-linkedin
+									a.link.link__regular(href="#", data-focusin, title="Ir a LinkedIn")
+										span.hideAccessible!="LinkedIn"
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-google
+									a.link.link__regular(href="#", data-focusin, title="Ir a Google +")
+										span.hideAccessible!="Google +"
+					else if (params.menu === "advSearch")
+						div.ibe-infocheckin__menu-scroll.ibe-infocheckin__menu-scroll--white
+							ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--menu.ibe-infocheckin__menu-wrapper--menu-responsive
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-responsive
+									a.link.link__regular(href="#", data-focusin, title="Ver más", data-inforcheckin="unlock")
+										span.hideAccessible!="Ver m&aacute;s"
+							div.ibe-infocheckin__menu-container
+								ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--menu(data-inforcheckin="menu")
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-home
+										a.link.link__regular.icon-inicio(href="#", data-focusin, title="Home")
+											span.hideAccessible!="Home"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt
+										a.link.link__regular(href="#", data-focusin, title="Viaja")!="Viaja"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt.xui-infocheckin__menu-blocked
+										span.link.link__regular!="Buscar"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt
+										a.link.link__regular(href="#", data-focusin, title="Vuelos")!="Vuelos"
+					else if (params.menu === "cheapFlights")
+						div.ibe-infocheckin__menu-scroll
+							div.ibe-infocheckin__menu-container
+								ul.ibe-infocheckin__menu-wrapper(aria-label="Usted esta aquí:")
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-home
+										a.link.link__regular.icon-inicio(href="#", data-focusin, title="Home")
+											span.hideAccessible!="Home"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt
+										a.link.link__regular(href="#", data-focusin, title="Vuelos baratos")!="Vuelos baratos"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt
+										a.link.link__regular(href="#", data-focusin, title="Nivel 2")!="Nivel 2"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt
+										a.link.link__regular(href="#", data-focusin, title="Nivel 3")!="Nivel 3"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt
+										a.link.link__regular(href="#", data-focusin, title="Nivel 4")!="Nivel 4"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt
+										a.link.link__regular(href="#", data-focusin, title="Nivel 5")!="Nivel 5"																				
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt.xui-infocheckin__menu-blocked
+										span.link.link__regular!="Santiago de Compostela - Santiago de Chile"
+							ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--social
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-share
+									a.link.link__regular.icon-compartir(href="#", data-focusin, title="Compartir", data-toggle="popover", data-placement="bottom")
+										span(data-toggle-status="true", data-status-open="Click para ocultar redes sociales", data-status-close="Click para mostrar redes sociales", class="hideAccessible")!="Click para mostrar redes sociales"
+									div.hidden(data-function="ibe-popover-content" id="tooltip-social-media")
+										ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--social-tooltip
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-weibo
+												a.link.link__regular(href="#", data-focusin, title="Ir a Weibo")
+													span.hideAccessible!="Weibo"
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-wechat
+												a.link.link__regular(href="#", data-focusin, title="Ir a Wechat", data-function="show-qr")
+													span.hideAccessible!="Wechat"
+													div(class="ibe-infocheckin__qr", aria-hidden="true")
+														figure
+															img(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", data-src='https://chart.googleapis.com/chart?cht=qr&chl=http%3A%2F%2Fgoogle.es&chs=180x180&choe=UTF-8&chld=L|2', alt='')
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-youku
+												a.link.link__regular(href="#", data-focusin, title="Ir a Youku")
+													span.hideAccessible!="Youku"
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-google
+												a.link.link__regular(href="#", data-focusin, title="Ir a Google +")
+													span.hideAccessible!="Google +"
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-weibo
+									a.link.link__regular(href="#", data-focusin, title="Ir a Weibo")
+										span.hideAccessible!="Weibo"
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-wechat
+									a.link.link__regular(href="#", data-focusin, title="Ir a Wechat", data-function="show-qr")
+										span.hideAccessible!="Wechat"
+										div(class="ibe-infocheckin__qr", aria-hidden="true")
+											figure
+												img(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src='https://chart.googleapis.com/chart?cht=qr&chl=http%3A%2F%2Fgoogle.es&chs=180x180&choe=UTF-8&chld=L|2', alt='')
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-youku
+									a.link.link__regular(href="#", data-focusin, title="Ir a Youku")
+										span.hideAccessible!="Youku"
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-google
+									a.link.link__regular(href="#", data-focusin, title="Ir a Google +")
+										span.hideAccessible!="Google +"
+					else
+						div.ibe-infocheckin__menu-scroll.ibe-infocheckin__menu-scroll--white
+							ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--menu.ibe-infocheckin__menu-wrapper--menu-responsive
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-responsive
+									a.link.link__regular(href="#", data-focusin, title="Ver más", data-inforcheckin="unlock")
+										span.hideAccessible!="Ver m&aacute;s"
+							div.ibe-infocheckin__menu-container
+								ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--menu(data-inforcheckin="menu")
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-home
+										a.link.link__regular.icon-inicio(href="#", data-focusin, title="Home")
+											span.hideAccessible!="Home"
+									each item in params.items
+										if (item.text)
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt
+												a.link.link__regular(href=(item.href !== undefined ? item.href : "#ni") title=item.text)!=item.text
+										li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt.xui-infocheckin__menu-blocked
+											span.link.link__regular!=item.finalText
+							if (params.social)
+								ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--social
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-share
+										a.link.link__regular.icon-compartir(href="#", data-focusin, title="Compartir" data-toggle="popover" data-placement="bottom")
+											span(data-toggle-status="true" data-status-open="Click para ocultar redes sociales" data-status-close="Click para mostrar redes sociales" class="hideAccessible")!="Click para mostrar redes sociales"
+										div.hidden(data-function="ibe-popover-content" id="tooltip-social-media")
+											ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--social-tooltip
+												li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-weibo
+													a.link.link__regular(href="#", data-focusin, title="Ir a Weibo")
+														span.hideAccessible!="Weibo"
+												li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-wechat
+													a.link.link__regular(href="#", data-focusin, title="Ir a Wechat", data-function="show-qr")
+														span.hideAccessible!="Wechat"
+														div(class="ibe-infocheckin__qr", aria-hidden="true")
+															figure
+																img(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src='https://chart.googleapis.com/chart?cht=qr&chl=http%3A%2F%2Fgoogle.es&chs=180x180&choe=UTF-8&chld=L|2', alt='')
+												li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-youku
+													a.link.link__regular(href="#", data-focusin, title="Ir a Youku")
+														span.hideAccessible!="Youku"
+												li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-google
+													a.link.link__regular(href="#", data-focusin, title="Ir a Google +")
+														span.hideAccessible!="Google +"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-weibo
+										a.link.link__regular(href="#", data-focusin, title="Ir a Weibo")
+											span.hideAccessible!="Weibo"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-wechat
+										a.link.link__regular(href="#", data-focusin, title="Ir a Wechat", data-function="show-qr")
+											span.hideAccessible!="Wechat"
+											div(class="ibe-infocheckin__qr", aria-hidden="true")
+												figure
+													img(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src='https://chart.googleapis.com/chart?cht=qr&chl=http%3A%2F%2Fgoogle.es&chs=180x180&choe=UTF-8&chld=L|2', alt='')
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-youku
+										a.link.link__regular(href="#", data-focusin, title="Ir a Youku")
+											span.hideAccessible!="Youku"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-google
+										a.link.link__regular(href="#", data-focusin, title="Ir a Google +")
+											span.hideAccessible!="Google +"
+
+

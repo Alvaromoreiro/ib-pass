@@ -1,0 +1,242 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_table-inverted
+//    Desripcion: Estilos para tablas
+//******************************************************************************/
+.ibe-table-inverted{
+    display: table;
+    > .ibe-table-inverted__tbody > .ibe-table-inverted__tbody-tr > .ibe-table-inverted__tbody-td{
+        &--left{
+            text-align: left;
+        }
+        &--right{
+            text-align: right;
+        }
+    }
+    > .ibe-table-inverted__tbody > .ibe-table-inverted__tbody-tr:nth-of-type(odd){
+        background-color: $BCK-cromatico_2;
+    }
+    > .ibe-table-inverted__tbody > .ibe-table-inverted__tbody-tr:nth-of-type(even){
+        background-color: $BCK-cromatico_1;
+    }
+}
+.ibe-table-invertedcell{
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+}
+.ibe-table-inverted{
+    &__cell{
+        display: table-cell;
+        vertical-align: top;
+        padding-right:rem(10);
+        &:last-child{
+            padding-right:0;
+        }
+    }
+    /* Modificadores */
+    //Tabla con borde exterior
+    &--border{
+        min-width: 100%;
+        border-collapse: collapse;
+        border-radius: 0;
+        border: 2px solid $BCK-cromatico_12;
+        text-align: left;
+        &-no{
+            border: none;
+        }
+
+        .ibe-table-inverted__thead-text{
+            font-size: rem(12);
+            color: $PC-cromatico_2;
+        }
+        .ibe-table-inverted__tbody-text{
+            font-size: rem(14);
+            line-height: rem(25);
+            &--big{
+                font-size: rem(16);
+            }
+            &--small{
+                font-size: rem(12);
+                color: $PC-cromatico_2;
+            }
+        }
+        > thead > tr > td{
+            background-color: $BCK-cromatico_2;
+        }
+        > thead > tr > td{
+            padding: rem(8) rem(22) rem(13) rem(22);
+            line-height: 1.42857143;
+            vertical-align: top;
+        }
+        > tbody > tr > td{
+            padding: rem(16) rem(22) rem(18) rem(22);
+            line-height: 1.42857143;
+            vertical-align: top;
+            &.ibe-table-inverted__tbody-td--bottom {
+                vertical-align: bottom;
+            }
+        }
+    }
+    &--no-border{
+        border: 0;
+    }
+    &--no-border-left{
+        border-left: 0;
+    }
+    &--no-border-right{
+        border-right: 0;
+    }
+    // Calendario
+    &--calendar{
+        width: 100%;
+        min-width: 100%;
+        thead > tr > th,
+        tbody > tr > td{
+            text-align: center;
+            color: $PC-cromatico_2;
+        }
+        thead > tr > th{
+            color: $PC-cromatico_1;
+            padding-bottom: rem(9);
+        }
+        tbody > tr > td{
+            height: rem(30);
+            line-height: 30px;
+            a {
+                display: block;
+                position: relative;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+            &.disabled{
+                color: $PC-cromatico_9;
+                a {
+                    color: $PC-cromatico_9;
+                }
+            }
+            &.leyend-x{
+                border: 1px solid $BRD-standar_13;
+                -webkit-box-shadow: inset 0px 0px 0px 10px $BRD-standar_6;
+                -moz-box-shadow: inset 0px 0px 0px 10px $BRD-standar_6;
+                box-shadow: inset 0px 0px 0px 1px $BRD-standar_6;
+            }
+            &.leyend-y{
+                border: 1px solid $BRD-standar_13;
+                -webkit-box-shadow: inset 0px 0px 0px 10px $BRD-standar_19;
+                -moz-box-shadow: inset 0px 0px 0px 10px $BRD-standar_19;
+                box-shadow: inset 0px 0px 0px 1px $BRD-standar_19;
+            }
+            &.leyend-z{
+                border: 1px solid $BRD-standar_13;
+                color: $PC-cromatico_4;
+                background: $BCK-cromatico_5;
+                a {
+                    color: $PC-cromatico_4;
+                }
+            }
+        }
+    }
+    // Sin overflow-x y la tabla al 100%
+    &--full{
+        min-width: auto;
+    }
+    &__icon {
+        font-size: rem(65);
+    }
+}
+.ibe-table-inverted__footer{
+    border-top: 1px solid $BCK-cromatico_12;
+    &-link {
+        display: block;
+        padding-right: 0;
+        border: 0;
+        padding: rem(21) rem(23);
+        font-size: 0.75rem;
+        color: #D7192D;
+        font-family: $font-07;
+        line-height: 1.4rem;
+        position: relative;
+        &:after {
+            content: "\e973";
+            font-family: "iberia";
+            font-size: 1.25rem;
+            color: #D7192D;
+            display: inline-block;
+            font-size: rem(16);
+            position: relative;
+            top: rem(3);
+        }
+        &:hover {
+            color: #D7192D;
+        }
+    }
+}
+
+.ibe-table-inverted--clickable{
+    &.ibe-table-inverted{
+        &> .ibe-table-inverted__tbody > .ibe-table-inverted__tbody-tr > .ibe-table-inverted__tbody-td{
+            padding:0;
+        }
+    }
+    .ibe-table-inverted__td-link{
+        display: block;
+        color: #333;
+        padding: rem(17) rem(22) rem(16);
+    }
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe-table-inverted{
+	.ibe-table-inverted {
+		.ibe-table-inverted__tbody-text{
+            font-size: rem(12);
+            line-height: rem(25);
+            &--big{
+                font-size: rem(12);
+            }
+        }
+        > tbody > tr > td{
+            padding: rem(10) rem(21) rem(8);
+            line-height: 1.42857143;
+            vertical-align: top;
+            &.ibe-table-inverted__tbody-td--bottom {
+                vertical-align: bottom;
+                text-align: right;
+            }
+        }
+        &__footer{
+            &-link {
+                padding: rem(14) rem(22);
+            }
+        }
+	}
+}
+
+
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe-table-inverted{
+	.ibe-table-inverted {
+		.ibe-table-inverted__tbody-text{
+            font-size: rem(13);
+            line-height: rem(25);
+            &--big{
+                font-size: rem(13);
+            }
+        }
+	}
+}
+
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe-table-inverted{
+	.ibe-table-inverted {
+		.ibe-table-inverted__tbody-text{
+            font-size: rem(13);
+            line-height: rem(25);
+            &--big{
+                font-size: rem(13);
+            }
+        }
+	}
+}

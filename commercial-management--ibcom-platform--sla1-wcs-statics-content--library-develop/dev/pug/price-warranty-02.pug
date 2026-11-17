@@ -1,0 +1,113 @@
+extends _general/layout__primary
+include _modules/_ibe_accordion
+block title
+	title!="IBERIA - Precio Garantizado Paso 2"
+block body
+	// New header
+	+m-header-new({
+		"login": true
+	})
+
+	// New menu
+	+m-menu-new({
+		"login": true
+	})
+	// End wrapper
+	main
+		+m-ibe-breadcrumbs({
+			menu: "claim"
+		})
+		section.container
+			div.row
+				div.col-lg-9.col-xs-12.col-lg-push-3
+					h1.title.title__h1.title--center!="Mejor precio garantizado"
+					div.ibe-box__primary.ibe-box__price-warranty.ibe-box__price-warranty--box
+						div.ibe-box--with-font
+							div.paragraph.paragraph__regular.paragraph__regular--black.paragraph__regular--small!="Iberia.com se compromete a ofrecerte, en el momento de realizar la compra online, el precio mínimo disponible en los vuelos de Iberia con origen del viaje España."
+								p!="Si en otra página web española encuentras un precio más bajo al billete que has comprado en www.iberia.com, tras comprobarlo, Iberia te reembolsará la diferencia."
+									p!="Para utilizar la garantía de precio mínimo, consulta los Términos y Condiciones y rellena nuestro Formulario."
+
+					div.ibe-box__primary.ibe-box__price-warranty.ibe-box__price-warranty--box
+						h3.title.title__h3 Reclamación del Precio Mínimo Garantizado
+						p.paragraph.paragraph__regular.paragraph__regular--small.paragraph__regular--no-margin A continuación introduce el código de reserva y recuerda que no se tramitarán reclamaciones de billetes que no hayan sido reservados, comprados y emitidos en el día de hoy.
+						form(action="#" method="post", id="form1" data-valid-form="data-valid-form")
+							.row
+								.col-md-6.col-xs-12
+									.ibe_form__group.fc_form_group.ibe_form__group--nomargintop.ibe-form__group--m-mobile
+										label(for="res-code" class="ibe_form__input-label ") C&oacute;digo de reserva
+										input(name="res-code" id="res-code" type="text" placeholder="C&oacute;digo de reserva" class="ibe_form__input-text", required, maxlength="6", data-validator='code')
+										p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+										p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+										p.ibe_form__modal
+											a(href="#", title="¿Qué es el código de reserva?").link.link__regular.link__regular--underline.link__regular--align-right.link__regular--block ¿Qué es el código de reserva?
+								.col-md-6.col-xs-12
+									button.ibe-button.ibe-button--red.ibe-button--large.ibe-button--large-plus.ibe-button--right(type='button') Continuar
+					div.ibe-box__primary.ibe-box__price-warranty.ibe-box__price-warranty--box
+						h3.title.title__h3 T&eacute;rminos y condiciones
+						ul.ibe-list.ibe-list--normal
+							li.ibe-list__item.ibe-list__item--small-padding
+								p.paragraph.paragraph__regular.paragraph__regular--black Sólo se aplicará a aquellos billetes electrónicos que sean emitidos en el portal www.iberia.com desde la página española (no son válidos aquellos billetes emitidos por otros canales de distribución), haber seleccionado "tarifa más económica", con código de vuelo Iberia, origen del viaje en España e inicio, como mínimo, 48 horas después de haber realizado la compra online en iberia.com.
+							li.ibe-list__item.ibe-list__item--small-padding
+								p.paragraph.paragraph__regular.paragraph__regular--black La tarifa tendrá el mismo Origen/Destino, la misma fecha, el mismo número de vuelo, el mismo tipo y cantidad de pasajeros y debe ser en clase turista.
+							li.ibe-list__item.ibe-list__item--small-padding
+								p.paragraph.paragraph__regular.paragraph__regular--black En los billetes emitidos de Puente Aéreo, se tomará como fecha del vuelo, la fecha de emisión de los billetes.
+							li.ibe-list__item.ibe-list__item--small-padding
+								p.paragraph.paragraph__regular.paragraph__regular--black El importe sobre el que se establece el precio mínimo es sobre las tarifas públicas, incluyendo tasas, gastos de gestión, recargos de combustible. Si eliges abonar el viaje con una de estas tarjetas, se aplicará un cargo adicional por reserva de un 1% del importe final en vuelos de largo radio y 2% en el resto de vuelos. El importe deberá estar expresado en euros (€).
+							li.ibe-list__item.ibe-list__item--small-padding
+								p.paragraph.paragraph__regular.paragraph__regular--black La Garantía de Precio Mínimo sólo se aplica a billetes reservados, comprados y emitidos en el mismo día y que no hayan sufrido ningún tipo de modificación.
+							li.ibe-list__item.ibe-list__item--small-padding
+								p.paragraph.paragraph__regular.paragraph__regular--black Quedan excluídos todos aquellos billetes con descuentos promocionales o especiales que emitan tanto Iberia como otros distribuidores y correspondan a descuentos por pronto pago, tarifas de grupo, tarifas vacacionales, corporativas, negociadas, devolución de comisiones, etc.
+							li.ibe-list__item.ibe-list__item--small-padding
+								p.paragraph.paragraph__regular.paragraph__regular--black La página donde se encuentre la tarifa más económica de Iberia.com tendrá que ser Agente Autorizado por Iberia para la emisión de billetes en sus vuelos y tener Domicilio Fiscal en España.
+							li.ibe-list__item.ibe-list__item--small-padding
+								p.paragraph.paragraph__regular.paragraph__regular--black La reclamación deberá efectuarse usando el Formulario de Reclamación, disponible unicamente en www.iberia.com, antes de la media noche (23.59 horas, hora peninsular) del mismo día en que se realizó la compra.
+							li.ibe-list__item.ibe-list__item--small-padding
+								p.paragraph.paragraph__regular.paragraph__regular--black Se admitirá una sola Reclamación por reserva, no pudiendo ser ésta vía correo electónico, teléfono o a través de cualquier otro medio que no sea el Formulario de Reclamación on-line.
+							li.ibe-list__item.ibe-list__item--small-padding
+								p.paragraph.paragraph__regular.paragraph__regular--black Para poder acogerse a la Garantía del Precio Mínimo deberás poder adjuntar copia de las pantallas donde visualizaste la tarifa más económica en caso de ser requerido por Iberia.com. Estas copias de pantalla serán enviadas exclusivamente en formato GIF o JPG y deberán mostrar que, en el momento de la consulta, había plazas disponibles a la venta al precio de la tarifa encontrada.
+							li.ibe-list__item.ibe-list__item--small-padding
+								p.paragraph.paragraph__regular.paragraph__regular--black Si procede, Iberia efectuará en las siguientes 48 horas el reembolso de la diferencia a la misma tarjeta con la que se abonó el billete en Iberia.com, tardando el tiempo estándar de la operación bancaria, según el tipo de tarjeta de pago y entidad bancaria. El billete resultante se regirá por las condiciones de la nueva tarifa aplicada, a efectos de cambios voluntarios.
+							li.ibe-list__item.ibe-list__item--small-padding
+								p.paragraph.paragraph__regular.paragraph__regular--black Iberia.com no se responsabiliza de fallos, errores o malas prácticas, imputables a otras páginas web, en cuyo caso no se aplicará la Garantía del Precio Mínimo.
+							li.ibe-list__item.ibe-list__item--small-padding
+								p.paragraph.paragraph__regular.paragraph__regular--black Iberia.com se reserva el derecho de no atenerse a la "Garantía de precio mínimo" si no se puede demostrar y/o documentar fehacientemente el objeto de la reclamación. Así mismo la Garantía de Precio Mínimo estará vigente mientras permanezca publicado en la web de Iberia.
+				div.col-lg-3.col-xs-12.col-lg-pull-9
+					+m-lat-menu({
+						items: [
+							{
+								link: "Condiciones Transporte",
+								title: "Condiciones Transporte"
+
+							},
+							{
+								link: "Tu seguridad es lo primero",
+								title: "Tu seguridad es lo primero"
+							},
+							{
+								link: "Condiciones Generales del Programa Iberia Plus",
+								title: "Condiciones Generales del Programa Iberia Plus"
+							},
+							{
+								link: "Mejor precio garantizado",
+								title: "Mejor precio garantizado",
+								cssClass: "ibe-lat-menu__item--active"
+							},
+							{
+								link: "Compromiso de servicio",
+								title: "Compromiso de servicio"
+							},
+							{
+								link: "Derechos del pasajero",
+								title: "Derechos del pasajero"
+							},
+							{
+								link: "Accesibilidad",
+								title: "Accesibilidad"
+							},
+							{
+								link: "Información Legal",
+								title: "Información Legal"
+							}
+						]
+					})
+	+m-footer()

@@ -1,0 +1,24 @@
+mixin m-switch(params)
+    fieldset.ibe-switch
+        legend.hideAccessible!=params.labelHide
+        if params.type == "small"
+            div.ibe-switch__container.ibe-switch__container--small
+                label(for=params.id class="ibe-switch__label")
+                    input(type="checkbox" checked="checked" data-focusin="data-focusin" id=params.id name=params.name class="ibe-switch__checkbox", data-click='oneway')
+                    span.ibe-switch__slider
+                        span.sr-only!=params.labelHide
+
+        if params.type == "big"
+            div.ibe-switch__container.ibe-switch__container--big
+                input(type="checkbox" checked data-focusin="data-focusin" id=params.id name=params.name class="ibe-switch__checkbox")
+                label(for=params.id class="ibe-switch__label-big" data-txt-check=params.check data-txt-uncheck=params.notCheck)
+                span.ibe-switch__slider-big
+                    span.sr-only!=params.label
+                //- span.ibe-switch__text!=params.label
+
+        if params.type == "big-separate"
+            div.ibe-switch__container.ibe-switch__container--big.ibe-switch__container--big-separate
+                input(type="checkbox" checked data-focusin="data-focusin" id=params.id name=params.name class="ibe-switch__checkbox ibe-switch__checkbox--stopover")
+                label(for=params.id class="ibe-switch__label-big ibe-switch__label-big--stopover" data-txt-check=params.check data-txt-uncheck=params.notCheck)
+                span.ibe-switch__slider-big.ibe-switch__slider-big--stopover
+                    span.sr-only!=params.label

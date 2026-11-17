@@ -1,0 +1,36 @@
+extends _general/layout__primary
+
+mixin list-page(params)
+	- params = params || {};
+
+	ul
+		each val in params.items
+			li
+				a(href=val.href, title="Ir a " + val.title, target="_blank", style="font-size: 16px; color: grey; font-weight: 700; font-family: iberiaheadline")!=val.title
+
+block title
+	title!="IBERIA -Pagina de enlaces del proyecto"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	section.container
+		div.row
+			div.col-xs-12
+				h2(class="title title__h2") BOB Landings
+				+list-page({
+					'items': [
+						{
+							'title': 'HOME',
+							'href': 'bob.html'
+						},
+					]
+				})
+

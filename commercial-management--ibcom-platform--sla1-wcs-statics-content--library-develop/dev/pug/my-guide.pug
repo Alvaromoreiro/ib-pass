@@ -1,0 +1,384 @@
+extends _general/layout__primary
+include _modules/_modals/_ibe-modal-advise
+
+
+block title
+	title!="IBERIA - Mi Guía"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+ 
+	script(type="text/javascript", src="http://maps.googleapis.com/maps/api/js?language=es;sensor=false")
+	main.ibe-guide
+		div.container
+			div.row
+				div.col-xs-12
+					div.ibe-infocheckin__menu
+						div.ibe-infocheckin__menu-scroll
+							ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--menu.ibe-infocheckin__menu-wrapper--menu-responsive
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-responsive
+									a.link.link__regular(href="#" title="Ver más" data-inforcheckin="unlock")
+										span.hideAccessible!="Ver m&aacute;s"
+							div.ibe-infocheckin__menu-container
+								ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--menu(data-inforcheckin="menu" role="navigation" aria-label="Usted esta aquí:")
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-home
+										a.link.link__regular.icon-inicio(href="#" title="Home")
+											span.hideAccessible!="Home"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt
+										a.link.link__regular(href="#" title="Tus guías de viaje")!="Tus gu&iacute;as de viaje"
+									li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--txt.xui-infocheckin__menu-blocked
+										span.link.link__regular!="Gu&iacute;a de Chicago"
+							ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--social
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon.ibe-infocheckin__menu-item--icon-share
+									a.link.link__regular.icon-compartir(href="#" title="Compartir" data-toggle="popover" data-placement="bottom")
+										span(data-toggle-status="true" data-status-open="Click para ocultar redes sociales" data-status-close="Click para mostrar redes sociales" class="hideAccessible")!="Click para mostrar redes sociales"
+									div.hidden(data-function="ibe-popover-content" id="tooltip-social-media")
+										ul.ibe-infocheckin__menu-wrapper.ibe-infocheckin__menu-wrapper--social-tooltip
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-facebook
+												a.link.link__regular(href="#" title="Ir a Facebook")
+													span.hideAccessible!="Facebook"
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-twitter
+												a.link.link__regular(href="#", title="Ir a Twitter")
+													span.hideAccessible!="Twitter"
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-linkedin
+												a.link.link__regular(href="#" title="Ir a LinkedIn")
+													span.hideAccessible!="LinkedIn"
+											li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-google
+												a.link.link__regular(href="#" title="Ir a Google +")
+													span.hideAccessible!="Google +"
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-facebook
+									a.link.link__regular(href="#" title="Ir a Facebook")
+										span.hideAccessible!="Facebook"
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-twitter
+									a.link.link__regular(href="#", title="Ir a Twitter")
+										span.hideAccessible!="Twitter"
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-linkedin
+									a.link.link__regular(href="#" title="Ir a LinkedIn")
+										span.hideAccessible!="LinkedIn"
+								li.ibe-infocheckin__menu-item.ibe-infocheckin__menu-item--icon-google
+									a.link.link__regular(href="#" title="Ir a Google +")
+										span.hideAccessible!="Google +"
+		div.container
+			div.row
+				div.col-xs-12
+					h1.title.title__h1.title--center Ya puedes visitar Chicago con tu propia gu&iacute;a
+			div.row
+				div.col-xs-12.center
+					div.ibe-line-spacing
+						button.ibe-button.ibe-button--icon-to-left.ibe-button--medium.icon-descargar_pdf(type="button") Descarga tu gu&iacute;a
+						button.ibe-button.ibe-button--icon-to-left.ibe-button--medium.icon-compartir_2(type="button") Comparte tu gu&iacute;a
+		div()
+			//- div.ibe-google-map.ibe-google-map--separator-md(data-google-map data-guide="figure" id="dvMap2")
+			div.ibe-google-map.ibe-google-map--separator-md(data-google-map data-guide="figure" id="dvMap")
+			div.ibe-legend-map
+				ul.ibe-legend-map__list
+					li.ibe-legend-map__item
+						span.ibe-legend-map__marker.ibe-legend-map__marker--purple Monumentos
+					li.ibe-legend-map__item
+						span.ibe-legend-map__marker.ibe-legend-map__marker--yellow Compras
+					li.ibe-legend-map__item
+						span.ibe-legend-map__marker.ibe-legend-map__marker--orange Ocio
+					li.ibe-legend-map__item
+						span.ibe-legend-map__marker.ibe-legend-map__marker--green Gastronom&iacute;a
+					li.ibe-legend-map__item
+						span.ibe-legend-map__marker.ibe-legend-map__marker--blue Aire libre
+					li.ibe-legend-map__item
+						span.ibe-legend-map__marker.ibe-legend-map__marker--red Museos
+		
+		div.container
+			div.row
+				div.col-xs-12
+					div.ibe-accordion.ibe-accordion--white.ibe-accordion--simple.hidden-xl.hidden-lg.hidden-md
+						div
+							h2.title__h4.ibe-accordion__header.ibe-accordion__header--arrow-primary(data-toggle="collapse", data-target="#legend", data-outer-click="true")
+								a.link.link__regular(href="#" title="Leyenda")!="Leyenda"
+							div.ibe-accordion__collapse(id="legend" data-toggle="container")
+								div.ibe-legend-map
+									ul.ibe-legend-map__list
+										li.ibe-legend-map__item
+											span.ibe-legend-map__marker.ibe-legend-map__marker--purple Monumentos
+										li.ibe-legend-map__item
+											span.ibe-legend-map__marker.ibe-legend-map__marker--yellow Compras
+										li.ibe-legend-map__item
+											span.ibe-legend-map__marker.ibe-legend-map__marker--orange Ocio
+										li.ibe-legend-map__item
+											span.ibe-legend-map__marker.ibe-legend-map__marker--green Gastronom&iacute;a
+										li.ibe-legend-map__item
+											span.ibe-legend-map__marker.ibe-legend-map__marker--blue Aire libre
+										li.ibe-legend-map__item
+											span.ibe-legend-map__marker.ibe-legend-map__marker--red Museos
+			div.row
+				div.col-xs-12
+					h2.title.title__h3 Tienes 8 actividades para hacer en Chicago
+			div.row.u-mb-medium
+				div.col-xl-6.col-lg-4.col-md-4.col-sm-12.col-xs-12
+					div.ibe-card-guides
+						figure.ibe-card-guides__image
+							img(src=globals.imgPath + "/modules/ibe_travel-guides/big-1.png" alt="Puente de Michigan")
+						div.ibe-card-guides__body
+							div.ibe-card-guides__header
+								p.title.title__h3!="&iquest;A&uacute;n no tienes los vuelos?"
+								p.title.title__h3!="Empieza ahora tu viaje a Chicago"
+							div.ibe-card-guides__info
+								p.paragraph.paragraph__regular.paragraph__regular--grey!="Te sentir&aacute;s abrumado al ver la grandiosidad de este s&iacute;mbolo."
+								p!="i/v desde"
+								p!="602,45&euro;"
+				div.col-xl-3.col-lg-4.col-md-4.col-sm-12.col-xs-12
+					div.ibe-box-download
+						div.ibe-box-download__header
+							p.ibe-box-download__title
+								span.icon-guia
+								span.title.title__h3 Descarga ahora tu mejor gu&iacute;a en PDF
+						div.ibe-box-download__body
+							div
+								button.ibe-button!="Descarga tu gu&iacute;a"
+				div.col-xl-3.col-lg-4.col-md-4.col-sm-12.col-xs-12
+					div.ibe-box-share
+						div.ibe-box-share__header
+							p.ibe-box-share__title
+								span.icon-compartir_2
+								span.title.title__h3!="Comparte como ves Chicago"
+						div.ibe-box-share__body
+							div.ibe-box-share__social-links
+								a.ibe-box-share__social-link.ibe-box-share__social-link--like.icon-me_gusta(href="#" title="Me gusta")
+								a.ibe-box-share__social-link.ibe-box-share__social-link--facebook.icon-social_facebook_2(href="#" title="Compartir Facebook")
+								a.ibe-box-share__social-link.ibe-box-share__social-link--twitter.icon-social_twitter_2(href="#" title="Compartir Twitter")
+								a.ibe-box-share__social-link.ibe-box-share__social-link--linked-in.icon-social_linkedin_2(href="#" title="Compartir Linkedin")
+								a.ibe-box-share__social-link.ibe-box-share__social-link--googleplus.icon-social_googleplus_2(href="#" title="Compartir Google Plus")
+							form.ibe_form(action="#" method="post")
+								fieldset
+									legend.hideAccessible Datos de enlace para compartir
+									div.ibe-form__group
+										label.hideAccessible(for="link") Campo de enlace para compartir
+										input.ibe_form__input-text(type="text" id="link" name="link" value="http://www.iberia.com/website…")
+									div
+										button.ibe-button(type="submit")!="Enviar enlace por mail"
+			ul.row.ibe-card-container
+				li.col-xl-3.col-lg-4.col-md-4.col-sm-12.col-xs-12.ibe-card
+					+m-card-guides-type({
+						"id": "1476391160540",
+						"guide": {
+							"group": "0",
+							"type": "body"
+						},
+						"img": {
+							"src": globals.imgPath + "/modules/ibe_travel-guides/big-1.png",
+							"alt": "Puente de Michigan"
+						},
+						"title": "Puente de Michigan 22",
+						"theme": "Ocio",
+						"themeCss": "ibe-card-guides__theme--orange",
+						"info": "Te sentir&aacute;s abrumado al ver la gradiosidad de este s&iacute;mbolo de la ciudad.",
+						"link": {
+							"href": "#",
+							"title": "Eliminar plan",
+							"text": "Eliminar plan"
+						},
+						"cssClass": "ibe-card-guides__info--mobile",
+						"modal": {
+							"view": "#idMichiganModal",
+							"title": "Ventana Michigan"
+						}
+					})
+				li.col-xl-3.col-lg-4.col-md-4.col-sm-12.col-xs-12.ibe-card
+					+m-card-guides-type({
+						"id": "1476391160699",
+						"guide": {
+							"group": "0",
+							"type": "body"
+						},
+						"img": {
+							"src": globals.imgPath + "/modules/ibe_travel-guides/big-2.png",
+							"alt": "Alquila un kayak"
+						},
+						"title": "Alquila un kayak",
+						"theme": "Monumentos",
+						"themeCss": "ibe-card-guides__theme--purple",
+						"info": "Esta es una actividad muy divertida, segura y sana. Despl&aacute;zate tu mismo por el r&iacute;o y vive la aventura.",
+						"link": {
+							"href": "#",
+							"title": "Eliminar plan",
+							"text": "Eliminar plan"
+						},
+						"cssClass": "ibe-card-guides__info--mobile",
+						"modal": {
+							"view": "#idKayakModal",
+							"title": "Ventana kayak"
+						}
+					})
+				li.col-xl-3.col-lg-4.col-md-4.col-sm-12.col-xs-12.ibe-card
+					+m-card-guides-type({
+						"id": "1476391160827",
+						"guide": {
+							"group": "0",
+							"type": "body"
+						},
+						"img": {
+							"src": globals.imgPath + "/modules/ibe_travel-guides/big-3.png",
+							"alt": "Water taxi"
+						},
+						"title": "Water taxi",
+						"theme": "Compras",
+						"themeCss": "ibe-card-guides__theme--yellow",
+						"info": "&iquest;Te imaginas coger un taxi por el agua? en Chicago todo es posible, incluso coger un taxi por el agua.",
+						"link": {
+							"href": "#",
+							"title": "Eliminar plan",
+							"text": "Eliminar plan"
+						},
+						"cssClass": "ibe-card-guides__info--mobile",
+						"modal": {
+							"view": "#idTaxiModal",
+							"title": "Ventana kayak"
+						}
+					})
+				li.col-xl-3.col-lg-4.col-md-4.col-sm-12.col-xs-12.ibe-card
+					+m-card-guides-type({
+						"id": "id4",
+						"guide": {
+							"group": "0",
+							"type": "body"
+						},
+						"img": {
+							"src": globals.imgPath + "/modules/ibe_travel-guides/big-1.png",
+							"alt": "Puente de Michigan"
+						},
+						"title": "Puente de Michigan",
+						"theme": "Ocio",
+						"themeCss": "ibe-card-guides__theme--orange",
+						"info": "Te sentir&aacute;s abrumado al ver la gradiosidad de este s&iacute;mbolo de la ciudad.",
+						"link": {
+							"href": "#",
+							"title": "Eliminar plan",
+							"text": "Eliminar plan"
+						},
+						"cssClass": "ibe-card-guides__info--mobile"
+					})
+				li.col-xl-3.col-lg-4.col-md-4.col-sm-12.col-xs-12.ibe-card
+					+m-card-guides-type({
+						"id": "1476391160955",
+						"guide": {
+							"group": "0",
+							"type": "body"
+						},
+						"img": {
+							"src": globals.imgPath + "/modules/ibe_travel-guides/big-1.png",
+							"alt": "Puente de Michigan"
+						},
+						"title": "Puente de Michigan",
+						"theme": "Ocio",
+						"themeCss": "ibe-card-guides__theme--orange",
+						"info": "Te sentir&aacute;s abrumado al ver la gradiosidad de este s&iacute;mbolo de la ciudad.",
+						"link": {
+							"href": "#",
+							"title": "Eliminar plan",
+							"text": "Eliminar plan"
+						},
+						"cssClass": "ibe-card-guides__info--mobile"
+					})
+				li.col-xl-3.col-lg-4.col-md-4.col-sm-12.col-xs-12.ibe-card
+					+m-card-guides-type({
+						"id": "1476391161101",
+						"guide": {
+							"group": "0",
+							"type": "body"
+						},
+						"img": {
+							"src": globals.imgPath + "/modules/ibe_travel-guides/big-2.png",
+							"alt": "Alquila un kayak"
+						},
+						"title": "Alquila un kayak",
+						"theme": "Monumentos",
+						"themeCss": "ibe-card-guides__theme--purple",
+						"info": "Esta es una actividad muy divertida, segura y sana. Despl&aacute;zate tu mismo por el r&iacute;o y vive la aventura.",
+						"link": {
+							"href": "#",
+							"title": "Eliminar plan",
+							"text": "Eliminar plan"
+						},
+						"cssClass": "ibe-card-guides__info--mobile"
+					})
+				li.col-xl-3.col-lg-4.col-md-4.col-sm-12.col-xs-12.ibe-card
+					+m-card-guides-type({
+						"id": "1476391161101",
+						"guide": {
+							"group": "0",
+							"type": "body"
+						},
+						"img": {
+							"src": globals.imgPath + "/modules/ibe_travel-guides/big-3.png",
+							"alt": "Water taxi"
+						},
+						"title": "Water taxi",
+						"theme": "Compras",
+						"themeCss": "ibe-card-guides__theme--yellow",
+						"info": "&iquest;Te imaginas coger un taxi por el agua? en Chicago todo es posible, incluso coger un taxi por el agua.",
+						"link": {
+							"href": "#",
+							"title": "Eliminar plan",
+							"text": "Eliminar plan"
+						},
+						"cssClass": "ibe-card-guides__info--mobile"
+					})
+				li.col-xl-3.col-lg-4.col-md-4.col-sm-12.col-xs-12.ibe-card
+					+m-card-guides-type({
+						"guide": {
+							"group": "0",
+							"type": "body"
+						},
+						"img": {
+							"src": globals.imgPath + "/modules/ibe_travel-guides/big-1.png",
+							"alt": "Puente de Michigan"
+						},
+						"title": "Puente de Michigan",
+						"theme": "Ocio",
+						"themeCss": "ibe-card-guides__theme--orange",
+						"info": "Te sentir&aacute;s abrumado al ver la gradiosidad de este s&iacute;mbolo de la ciudad.",
+						"link": {
+							"href": "#",
+							"title": "Eliminar plan",
+							"text": "Eliminar plan"
+						},
+						"cssClass": "ibe-card-guides__info--mobile"
+					})
+ 
+		+m-ibe-modal-advise({
+			"id": "idMichiganModal",
+			"detail": true,
+			"img": {
+				"src": globals.imgPath + "/modules/ibe_travel-guides/big-1.png",
+				"alt": "Conocer la historia del Puente de Michigan"
+			},
+			"title": "Conocer la historia de la ciudad de un vistazo en el Puente de Michigan",
+			"theme": "Ocio",
+		})
+		+m-ibe-modal-advise({
+			"id": "idKayakModal",
+			"detail": true,
+			"img": {
+				"src": globals.imgPath + "/modules/ibe_travel-guides/big-1.png",
+				"alt": "Conocer la historia del Puente de Michigan"
+			},
+			"title": "Conocer la historia de la ciudad de un vistazo en el Puente de Michigan",
+			"theme": "Ocio",
+		})
+		+m-ibe-modal-advise({
+			"id": "idTaxiModal",
+			"detail": true,
+			"img": {
+				"src": globals.imgPath + "/modules/ibe_travel-guides/big-1.png",
+				"alt": "Conocer la historia del Puente de Michigan"
+			},
+			"title": "Conocer la historia de la ciudad de un vistazo en el Puente de Michigan",
+			"theme": "Ocio",
+		})
+	+m-footer()
+	

@@ -1,0 +1,181 @@
+mixin m-ibe-stopover-tabs_search-collapse(params)
+	div.ibe-search-collapse.ibe-stopover-tabs-banner__searcher-collapse
+		.ibe-search-collapse__container(data-validate-searcher)
+			form(action='#' method='post' class='ibe_form')
+				fieldset
+					legend.hideAccessible Buscador Hola Madrid
+					.ibe-search-collapse__row.ibe-search-collapse__row--first
+						//- Origin/Date
+						.ibe-search-collapse__row.ibe-search-collapse__row--inputs
+							if (params.stopover)
+								div.ibe-flex
+									.ibe-search-collapse__item
+										+m-switch({
+											"type": "small",
+											"id": "round-trip",
+											"name": "input-round-trip",
+											"labelHide": "Seleccione si desea ida y vuelta",
+											"oneWay": true
+										})
+									span.ibe-search-collapse__txt.ibe-search-collapse__txt--check.ibe-search-collapse__txt--check-stopover.paragraph--nowrap!="Ida y vuelta"
+
+							.ibe-search-collapse__item.ibe-search-collapse__item--input
+								.ibe_form__group.fc_form_group.ibe_form__group--button-icon
+									label(for="flight_origin_stop" class="ibe_form__input-label ibe-search-compact__searcher-text") Origen
+									input.ibe_form__input-text.ui-autocomplete-input(type="text", id="flight_origin_stop",
+									data-focusin, data-autocomplete="cities", data-toggle-element,
+									data-validate="input-origin", required, name="stop_origin")
+									p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+									p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El origen no puede ser igual que el destino")
+									p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+									div.hidden-xs.hidden-sm.hidden-md
+										button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle-element data-focusin data-toggle="collapse" data-target="#id-tab-collapse-stop")
+											span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+										+m-choose-city-new({
+											"class": "ibe-choose-city--origin",
+											"format": "desktop",
+											"id": "id-tab-collapse-stop",
+										})
+									div.hidden-lg.hidden-xl
+										button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-dinamic-open data-toggle-element data-focusin data-toggle="collapse" data-target="#m-id-tab-collapse-stop")
+											span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+										.ibe-dinamic-modal__header
+											button.ibe-dinamic-modal__button.ibe-dinamic-modal__button--close(type="button" data-dinamic-close)
+												span.ibe-dinamic-modal__icon.ibe-dinamic-modal__icon--cerrar.icon-cerrar
+											h2.ibe-dinamic-modal__title Origenes de Iberia
+										+m-choose-city-new({
+											"class": "ibe-choose-city--origin",
+											"format": "responsive",
+											"id": "m-id-tab-collapse-stop",
+										})
+							.ibe-search-collapse__item.ibe-search-collapse__item--input
+								.ibe_form__group.ibe_form__group--button-icon.fc_form_group
+									label(for="flight_destiny_stop" class="ibe_form__input-label ibe-search-compact__searcher-text") Destino
+									input.ibe_form__input-text.ui-autocomplete-input(type="text", id="flight_destiny_stop",
+									data-focusin, data-autocomplete="cities", data-toggle-element,
+									data-validate="input-origin", required, name="stop_destiny")
+									p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+									p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El origen no puede ser igual que el destino")
+									p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+									div.hidden-xs.hidden-sm.hidden-md
+										button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle-element data-focusin data-toggle="collapse" data-target="#id-tab-collapse-stop1")
+											span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+										+m-choose-city-new({
+											"class": "ibe-choose-city--destiny",
+											"format": "desktop",
+											"id": "id-tab-collapse-stop1"
+
+										})
+									div.hidden-lg.hidden-xl
+										button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-dinamic-open data-toggle-element data-focusin data-toggle="collapse" data-target="#m-id-tab-collapse-stop1")
+											span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+										.ibe-dinamic-modal__header
+											h2.ibe-dinamic-modal__title Destinos de Iberia
+											button.ibe-dinamic-modal__button.ibe-dinamic-modal__button--close(type="button" data-dinamic-close)
+												span.ibe-dinamic-modal__icon.ibe-dinamic-modal__icon--cerrar.icon-cerrar
+										+m-choose-city-new({
+											"class": "ibe-choose-city--destiny",
+											"format": "responsive",
+											"id": "m-id-tab-collapse-stop1"
+										})
+							.ibe-search-collapse__item.ibe-search-collapse__item--button-s(data-focusin="data-focusin", data-toggle-element='both', class=params.stopover && "ibe-button-searcher--no-margin")
+								button.ibe-search-collapse__button( type='button')
+									span.ibe-search-collapse__icon.icon-flecha_1_abajo
+									span.ibe-search-collapse__icon.icon-cerrar
+							//- Search button
+							.ibe-search-collapse__item.ibe-search-collapse__item--input.ibe-searcher__stopover-calendar
+								div(class="ibe_form__group ibe_form__group--half" data-move="parent" data-position="3")
+									div.ibe_form__group-half.icon-caret_derecha.fc_form_group
+										button.ibe-dinamic-modal__button.ibe-dinamic-modal__button--close(type="button" data-dinamic-close)
+											span.ibe-dinamic-modal__icon.ibe-dinamic-modal__icon--cerrar.icon-cerrar
+										div.ibe_form__box
+											label(for="flight_round_date" class= params.stopover ? "ibe_form__input-label ibe_form__input-label--stopover ibe-search-compact__searcher-text" : "ibe_form__input-label")!="Fecha ida"
+											input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_round_date", id="flight_round_date", type="text", class=params.stopover && "ibe_form__input-text--stopover", placeholder="DD/MM/YYYY" data-format="DD/MM/YYYY" data-toggle="collapse" data-target="#searcher-calendar-1" data-cal="start" data-placeholder="placeholder", maxlength="10", autocomplete="off", data-toggle-element, data-dinamic-open)
+										+m-searcher-calendar({
+											id: "searcher-calendar-1",
+											type: "fly",
+											when: "start",
+											number: "1-3",
+											datahourrestriction:"48"
+										})
+									div.ibe_form__group-half.fc_form_group
+										div.ibe_form__box
+											label(for="flight_return_date" class= params.stopover ? "ibe_form__input-label ibe_form__input-label--stopover ibe-search-compact__searcher-text" : "ibe_form__input-label") Fecha vuelta
+											input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_return_date", id="flight_return_date", type="text", class=params.stopover && "ibe_form__input-text--stopover", placeholder="DD/MM/YYYY" data-format="DD/MM/YYYY" data-toggle="collapse" data-target="#searcher-calendar-2" data-cal="end" data-placeholder="placeholder", maxlength="10", data-toggle-element, data-dinamic-open)
+										+m-searcher-calendar({
+											id: "searcher-calendar-2",
+											type: "fly",
+											when: "end",
+											number: "2-3",
+											datahourrestriction:"48"
+										})
+									p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Debes seleccionar fecha de ida y fecha de vuelta")
+									p.ibe_form__msg-info.hidden(data-validate="exist-one-way", data-validate-text="Debe seleccionar la fecha de ida")
+									p.ibe_form__msg-info.hidden(data-validate="date", data-validate-text="La fecha de vuelta debe ser posterior a la fecha de ida")
+									p.ibe_form__msg-info.hidden(data-validate="parse", data-validate-text="Formato de fecha incorrecto")
+									p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="La fecha debe ser posterior a la actual")
+									p.ibe_form__msg-info.hidden(data-validate="restriction", data-validate-text="La fecha debe ser posterior a la restricci&oacute;n")
+									p.ibe_form__msg-info.hidden(data-validate="max", data-validate-text="Debes seleccionar una fecha anterior a")
+
+					div(class='ibe-accordion__collapse' data-toggle-content)
+						//- Check big
+						//- For fist design: class=params.stopover && "ibe-search-collapse__row--stopover"
+						.ibe-search-collapse__row.ibe-search-collapse__row--small(data-open='oneway') 
+							span.ibe-search-collapse__txt.ibe-search-collapse__txt--check-b!="¿Cúando quieres hacer tu parada en Madrid?"
+							.ibe-search-collapse__item.ibe-search-collapse__item--check
+								if params.stopover
+									//- According to original design, type: "big-separate", but changed to "big"
+									+m-switch({
+										"type": "big",
+										"id": "going",
+										"name": "input-going",
+										"labelHide": "Seleccione si desesea parar en Madrid en la ida",
+										"check": "On outbound jorney blabla bla",
+										"notCheck": "On retourn jorney blablab blabla"
+									})
+						//- Number of night
+						.ibe-search-collapse__row.ibe-search-collapse__row--small
+							span.ibe-search-collapse__txt.ibe-search-collapse__txt--mr!="¿Cúantas noches quieres pasar en Madrid?"
+							.ibe-search-collapse__item.ibe-search-collapse__item--count(data-max-night='5')
+								button.ibe-search-collapse__button--minus(data-night-button="less" type='button' data-focusin)="-"
+								span.ibe-search-collapse__txt--count(data-night-counter)!="01"
+								button.ibe-search-collapse__button--plus(data-night-button="plus" type='button' data-focusin)="+"
+								.ibe-message-tooltip
+									button(type='button', class='ibe-message-tooltip__button-close icon-cerrar', data-focusin)
+										span.hideAccessible Cerrar ventana tooltip
+									span.ibe-message-tooltip__title Información
+									span.ibe-message-tooltip__content Solo puedes reservar
+										span.ibe-message-tooltip__content--number 5
+										span=" noches máximas"
+
+						//- Selectors
+						.ibe-search-collapse__row
+							.ibe-search-collapse__item.ibe-search-collapse__item--selector
+								div(class="ibe_form__group ibe_form__group--icon icon-caret_abajo" data-move="parent" data-position="4")
+									button.ibe-dinamic-modal__button.ibe-dinamic-modal__button--close(type="button" data-dinamic-close='reset')
+										span.ibe-dinamic-modal__icon.ibe-dinamic-modal__icon--cerrar.icon-cerrar
+									button.pointer(class="ibe_form__input-text ibe_form__input-text--stop-animation ibe-search-compact__searcher-text" name="flight_passengers_1" id="flight_passengers_1" type="button" placeholder="1 Adulto" value="1 " data-value-adult="1 Adulto" data-value-senior="1 Senior" data-value-young="1 Joven" data-value-teenager="1 Teenager" data-text-passenger="Pasajeros" data-toggle="collapse" data-target="#people-counter-1" data-focusin data-dinamic-open )!="1 Adulto"
+									+m-people-counter({
+										id: "people-counter-1",
+										data: "V"
+									})
+									.ibe-dinamic-modal__footer
+										button.ibe-dinamic-modal__button.ibe-dinamic-modal__button--save(type="button" data-dinamic-close='save')!= 'Guardar'
+							.ibe-search-collapse__item.ibe-search-collapse__item--selector
+								div(class="ibe_form__group fc_form_group ibe__form__group--select ibe_form__group--select-new")
+									button.ibe-dinamic-modal__button.ibe-dinamic-modal__button--close(type="button" data-dinamic-close)
+										span.ibe-dinamic-modal__icon.ibe-dinamic-modal__icon--cerrar.icon-cerrar
+									.ibe-dinamic-modal__header
+										h2.ibe-dinamic-modal__title Tarifas
+									label(for="tarifa" class="ibe_form__selectize--label")
+										span(class="ibe_form__input-text ibe-search-compact__searcher-text") Elige una tarifa
+									select(id="tarifa", name="tarifa," data-selectmenu="", required, data-focusin, class="ibe-select ibe_form__input-text" )
+										option(value="00") Tarifa m&aacute;s econ&oacute;mica
+										option(value="01") Business Class
+										option(value="02") Turista premium
+
+						//- Search button
+						.ibe-search-collapse__row
+							button.ibe-search-collapse__item.ibe-search-collapse__item--button-b(type='button', data-focusin="data-focusin")!="Buscar"
+						.ibe-search-collapse__row.ibe-search-collapse__row--last
+							button.ibe-search-collapse__item.ibe-search-collapse__item--button-cancel(data-toggle-element='close' type='button')!="Cancelar"

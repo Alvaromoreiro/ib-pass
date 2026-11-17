@@ -1,0 +1,272 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe_language-pdf
+//    Desripcion: Estilos para la el componente cartas de ofertas
+//******************************************************************************/
+
+.ibe-language-pdf {
+	display: block;
+	text-decoration: none !important;
+	box-shadow: 0 2px 0 $BRD_standar_5;
+	&__container {
+		position: relative;
+	}
+	&__title {
+		position: relative;
+		padding: rem(6) 0 rem(14) 0;
+		color: $PC-cromatico_1;
+		word-wrap: break-word;
+		&.title__h3 {
+			font-size: rem(26);
+		}
+		&--icon {
+			padding-right: rem(20);
+			&:before {
+				content: "\e973";
+				font-family: $font-05;
+				font-size: rem(20);
+				color: $PC-cromatico_3;
+				position: absolute;
+				right: 0;
+				top: rem(10);
+			}
+		}
+		&--icon-pdf {
+			min-height: 50px;
+			padding-left: rem(40) !important;
+			&:before {
+				content: "\e949";
+				position: absolute;
+				left: -14px;
+				top: 2px;
+				font-family: iberia;
+				font-size: 50px;
+			}
+		}
+	}
+	&__info {
+		position: relative;
+		padding: rem(15) rem(22);
+		background-color: $BCK-cromatico_1;
+		color: $PC-cromatico_2;
+		z-index: 1;
+		.paragraph {
+			margin-top: 0;
+			line-height: rem(20);
+			&--highlight {
+				font-family: $font-04;
+				font-size: rem(28);
+			}
+		}
+		&--no-footer {
+			padding-bottom: rem(23);
+		}
+	}
+	&__list{
+		display: inline-block;
+		vertical-align: top;
+		margin-top: rem(2);
+	}
+	&__list-item{
+		position: relative;
+		display: block;
+		padding-left: rem(20);
+		&:before{
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 0;
+			-webkit-transform: translate(0,-40%);
+			-moz-transform: translate(0,-40%);
+			-ms-transform: translate(0,-40%);
+			-o-transform: translate(0,-40%);
+			transform: translate(0,-40%);
+			width: rem(8);
+			height: rem(8);
+			background-color: $PC-cromatico_1;
+		}
+	}
+	&__available{
+		padding-right: rem(30);
+	}
+	/* Modificadores */
+	
+	&--red {
+		.ibe-language-pdf {
+			&__info {
+				background: $BRD-standar_6;
+				padding-bottom: rem(15);
+			}
+			&__title {
+				color: $PC-cromatico_13;
+			}
+			&__subtitle {
+				color: $PC-cromatico_4;
+				padding-bottom: 1.1rem;
+			}
+			&__list-item{
+				position: relative;
+				display: block;
+				padding-left: rem(20);
+				&:before {
+					background-color: $PC-cromatico_4;
+				}
+			}
+		}
+		
+		.paragraph {
+			color: $PC-cromatico_4;
+			line-height: 1.5rem;
+		}
+		.link.link__regular{
+			color: $PC-cromatico_4;
+		}
+		
+		&.ibe-language-pdf {
+			&--invert {
+				.ibe-language-pdf__info {
+					background-color: $BCK-cromatico_1;
+				}
+				
+				.ibe-language-pdf__title {
+					color: $PC-cromatico_1;
+				}
+				
+				.ibe-language-pdf__subtitle {
+					color: $PC-cromatico_3;
+				}
+				
+				.paragraph {
+					color: $PC-cromatico_1;
+				}
+			}
+		}
+	}
+	&--left-column{
+		.ibe-language-pdf__available{
+			display: block;
+			padding-right: 0;
+		}
+	}
+	&:hover,
+	&:focus {
+		.ibe-language-pdf__title {
+			&--icon {
+				&:before {
+					right: rem(-8);
+				}
+			}
+		}
+	}
+	&:focus {
+		outline: $PC-cromatico_3 solid 4px;
+	}
+
+}
+
+/* Responsive */
+
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe_language-pdf {
+	
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+@mixin m-ibe_language-pdf {
+	.ibe-language-pdf {
+		&--red {
+			.ibe-language-pdf {
+				&__title {
+					font-size: rem(22);
+				}
+				&__subtitle {
+					font-size: rem(32);
+				}
+			}
+			&.ibe-language-pdf--wide {
+				.ibe-language-pdf__info {
+					padding-top: 1.1rem;
+					padding-bottom: 0.9rem;
+				}
+			}
+		}
+		&--left-column{
+			.ibe-language-pdf__available{
+				display: inline-block;
+				padding-right: rem(30);
+			}
+		}
+	}
+}
+
+/*SMALL RESOLUTION STYLES*/
+@mixin sm-ibe_language-pdf {
+	.ibe-language-pdf {
+		&__title {
+			padding: rem(6) 0 rem(4) 0;
+			&--icon {
+				padding-right: rem(20);
+				&:before {
+					top: rem(5);
+				}
+			}
+		}
+		&__footer {
+			text-align: right;
+			.ibe-button {
+				width: auto;
+				padding-left: rem(48);
+				padding-right: rem(48);
+			}
+		}
+		.ibe-language-pdf__info,
+		.ibe-language-pdf__footer {
+			min-height: inherit;
+		}
+		.ibe-language-pdf__info {
+			padding: rem(16) rem(23) rem(10) rem(23);
+		}
+		&--red {
+			.ibe-language-pdf__info {
+				padding-top: 0.6rem;
+				height: auto !important;
+			}
+			.ibe-language-pdf__title {
+				padding-bottom: 1rem;
+			}
+		}
+		&--left-column{
+			.ibe-language-pdf__available{
+				display: inline-block;
+				padding-right: rem(30);
+			}
+		}
+	}
+}
+
+/*X-SMALL RESOLUTION STYLES*/
+@mixin xs-ibe_language-pdf {
+	.ibe-language-pdf {
+		&--red {
+			.ibe-language-pdf {
+				&__info {
+					padding-top: 0.8rem;
+					margin-left: 0;
+					padding-bottom: 1.1rem;
+					height: auto !important;
+				}
+				&__title {
+					padding-bottom: 0.85rem;
+				}
+				&__subtitle {
+					line-height: 2.4rem;
+					padding-bottom: 0.7rem;
+				}
+			}
+		}
+		.ibe-language-pdf__available{
+			display: block;
+			padding-right: 0;
+		}
+	}
+}

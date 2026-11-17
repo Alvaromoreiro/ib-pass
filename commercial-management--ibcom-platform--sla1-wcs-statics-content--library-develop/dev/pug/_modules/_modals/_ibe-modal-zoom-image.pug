@@ -1,0 +1,139 @@
+mixin m-ibe-modal-zoom-image(params)
+	div.ibe-dialog.ibe-dialog--bg-none.fc-dialog-claim
+		div.modal-dialog.modal-dialog--route
+			div.modal-content
+				div.ibe-modal
+					div.modal-header.modal-header--p-bottom-28
+						h2.title.title__h1.ibe-modal__title-primary="Mapa y leyenda"
+						.ibe-modal__options.ibe-modal__options--claim
+							button.ibe-button--reset.ibe-modal__options-icon.ibe-modal__options-icon--close(type="button" data-dialog="close")
+								span.hideAccessible!="Cerrar"
+					div.modal-body
+						figure(id="zoomRouteOneDay", onmousemove="zoomMoveAction(event)", style=`background-image: url(${params.url});`)
+							div.ibe-stopover-routes-per-day__zoom--container(onmousemove="zoomMoveBtn()" onmouseleave="zoomLeaveBtn()")
+								span.ibe-stopover-routes-per-day__zoom--btn-separator--line
+								button.ibe-button.icon-zoom-out.ibe-stopover-routes-per-day__zoom--in(id="buttonZoomIn" onclick="zoomIn()" type='button' title="Continuar")
+								button.ibe-button.icon-zoom-in.ibe-stopover-routes-per-day__zoom--out(id="buttonZoomOut" onclick="zoomOut()" type='button' title="Cancelar")
+							script.
+								window.zoomValue = 1;
+								window.mouseOverButton = false;
+								let buttonOut = document.getElementById("buttonZoomOut");
+								buttonOut.disabled=true;
+								buttonOut.style.color = "lightgrey";
+								initialZoom();
+								function initialZoom() {
+									let container = document.getElementById("zoomRouteOneDay"),
+									imgsrc = container.currentStyle || window.getComputedStyle(container,false);
+									imgsrc = imgsrc.backgroundImage.slice(4,-1).replace(/"/g,"");
+									parent = document.getElementsByClassName("modal-dialog--route");
+									let img = new Image();
+
+									img.src = imgsrc;
+									img.onload = () => {
+										let ratio =img.naturalHeight / img.naturalWidth;
+										let percentage = ratio * 100 + "%";
+										let ratioRev = img.naturalWidth / img.naturalHeight;
+										Object.assign(container.style, {
+											aspectRatio: img.naturalWidth / img.naturalHeight,
+											backgroundPosition: "center",
+											backgroundSize: "cover"
+										});
+									}
+								}
+								function zoomLeaveBtn(){
+									window.mouseOverButton = false;
+								}
+								function zoomMoveBtn () {
+									window.mouseOverButton = true;		
+								}
+								function zoomMoveAction(target) {
+									if(window.zoomValue !== 1 && !window.mouseOverButton){
+										let container = document.getElementById("zoomRouteOneDay"),
+										imgsrc = container.currentStyle || window.getComputedStyle(container,false);
+										imgsrc = imgsrc.backgroundImage.slice(4,-1).replace(/"/g,"");
+										parent = document.getElementsByClassName("modal-dialog--route");
+										let img = new Image();
+										img.src = imgsrc;
+										img.onload = () => {
+											let ratio =img.naturalHeight / img.naturalWidth,
+											percentage = ratio * 100 + "%";
+											Object.assign(container.style, {
+												aspectRatio: img.naturalWidth / img.naturalHeight
+											});
+											container.onmousemove = (e) => {
+												if(window.zoomValue !== 1 && !window.mouseOverButton){
+													let rect = e.target.getBoundingClientRect();
+													xPos = e.clientX - rect.left;
+													yPos = e.clientY - rect.top,
+													xPercent = xPos / (container.clientWidth / 100) + "%",
+													yPercent = yPos / ((container.clientWidth * ratio) / 100) + "%";
+													//cambiando el backgroundSize ampliamos el zoom
+													Object.assign(container.style, {
+														backgroundPosition: xPercent + " " + yPercent,
+														backgroundSize: parent[0].getBoundingClientRect().width * window.zoomValue + "px"
+													})
+												}
+											}
+											container.onmouseleave = (e) => {
+												if(window.zoomValue !== 1){
+													Object.assign(container.style, {
+														backgroundPosition: "center",
+														backgroundSize: "cover"
+													})
+												}
+											}
+										}
+									}									
+								}
+								function zoomIn () {
+									window.zoomValue = window.zoomValue + 0.1;
+									window.zoomValue = Math.round(window.zoomValue * 10) / 10;
+							
+									//code to disable and change button color
+									let buttonIn = document.getElementById("buttonZoomIn");
+									let buttonOut = document.getElementById("buttonZoomOut");
+									buttonOut.disabled=false;
+									buttonOut.style.color ="white";
+									if(window.zoomValue === 1.5){
+										buttonIn.disabled=true;
+										buttonIn.style.color ="lightgrey"
+									}
+									/////////////////////////////////////////									
+									applyZoom();		
+								}
+								function zoomOut () {
+									window.zoomValue = window.zoomValue - 0.1;
+									window.zoomValue = Math.round(window.zoomValue * 10) / 10;
+									//code to disable and change button color
+									let buttonOut = document.getElementById("buttonZoomOut");
+									let buttonIn = document.getElementById("buttonZoomIn");
+									buttonIn.disabled=false;
+									buttonIn.style.color ="white";
+									if(window.zoomValue === 1){
+										buttonOut.disabled=true;
+										buttonOut.style.color ="lightgrey";
+										initialZoom();
+									}
+									/////////////////////////////////////////////
+									else{	
+										applyZoom();
+									}		
+								}
+								function applyZoom(){
+									let container = document.getElementById("zoomRouteOneDay"),
+									imgsrc = container.currentStyle || window.getComputedStyle(container,false);
+									imgsrc = imgsrc.backgroundImage.slice(4,-1).replace(/"/g,"");
+									parent = document.getElementsByClassName("modal-dialog--route");
+									let img = new Image();
+									img.src = imgsrc;
+									img.onload = () => {
+										let ratio =img.naturalHeight / img.naturalWidth,
+										percentage = ratio * window.zoomValue * 100 + "%";
+										Object.assign(container.style, {
+											aspectRatio: img.naturalWidth / img.naturalHeight,
+											backgroundPosition: "center",
+											backgroundSize: parent[0].getBoundingClientRect().width * window.zoomValue + "px"
+										});
+									}
+								}
+				

@@ -1,0 +1,37 @@
+mixin m-searcher-flight-status-numflight(params)
+	form.ibe_form(data-valid-form action="#" method="post")
+		fieldset.ibe-tab__container-desktop
+			legend.hideAccessible!="Estado de vuelos"
+			.ibe-searcher__row.ibe-searcher__row--no-padding.ibe-searcher__row--no-margin
+				.ibe-searcher__col.ibe-searcher__col--big
+					.ibe_form__group.fc_form_group
+						div(class="ibe_form__group  fc_form_group ")
+							label(class="ibe_form__input-label", for="code03") N&uacute;mero de vuelo
+							input(class="ibe_form__input-text", name="code03", id="code03", type="text", required, placeholder="N&uacute;mero de vuelo", maxlength="30", data-validator="numflight", data-isotipo)
+							img(src="", alt="Isotipo" style="display: none" data-logo-isotipo class="ibe-searcher__isotipo")
+							p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+							p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+
+				.ibe-searcher__col.ibe-searcher__col--big
+					.ibe_form__group.fc_form_group.ibe-datepicker-general
+						label.ibe_form__input-label(for='form_calendar2') Fecha
+						input.ibe_form__input-text.pointer(name='form_calendar2', id="form_calendar2" type='text', placeholder='DD/MM/YYYY', data-format='DD/MM/YYYY', data-toggle='collapse', data-target='#calendar-form2', data-cal='claim', data-placeholder='placeholder', data-close='outsideclick', data-validator='date', data-validator-range='range-custom', data-range-min="7", data-range-max="3", required)
+						button.ibe_form__input-button.ibe_form__input-button--medium.icon.icon-calendario(type='button', data-toggle='collapse', data-target='#calendar-form2', data-close='outsideclick')
+							span.hideAccessible(data-toggle-status='true', data-status-open='Click para plegar calendario', data-status-close='Click para desplegar calendario') Click para desplegar calendario
+						+m-searcher-calendar-simple({
+							className: "ibe-searcher__calendar--start ibe-searcher__calendar--right ibe-searcher__calendar--claim",
+							id: "calendar-form2",
+							number: "form-1",
+							claims: true
+						})
+						p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+						p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+						p.ibe_form__msg-info.hidden(data-validate="range-min", data-validate-text="La fecha seleccionada no puede superar 7 dias antes de la actual")
+						p.ibe_form__msg-info.hidden(data-validate="range-max", data-validate-text="La fecha seleccionada no puede superar 3 dias despues de la actual")
+
+				.ibe-searcher__col.ibe-searcher__col--button-type-2
+					.ibe_form__group.ibe_form__group--button-icon.fc_form_group
+						button.ibe-search-flights__search-button.ibe-button.ibe-button--red.ibe-button--xbig.ibe-button--block.ibe-button--icon(type="submit",data-validate="origin-destiny")
+							span.ibe-button__text!="Buscar"
+							span.hideAccessible!="Buscar"
+							span.ibe-button__icon.icon-buscar

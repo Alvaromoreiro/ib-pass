@@ -1,0 +1,144 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe-link-box
+//    Desripcion: Estilos para componente Enlaces rapidos
+//******************************************************************************/
+@import "../_function";
+@import "../config";
+@import "../general/_colors";
+@import "../general/_var-font";
+
+@import "../general/settings__responsive";
+@import "../general/_tools__responsive";
+
+.ibe-link-box {
+	&__list {
+		display: flex;
+		width: 100%;
+		flex-flow: row;
+		align-items: stretch;
+		flex-wrap: wrap;
+	}
+	
+	&__link {
+		display: block;
+		width: remcalc(33.3%, " - ", rem(20));
+		margin: rem(24) 0 0 rem(30);
+		padding: rem(24);
+		text-align: left;
+		background: #FFF;
+		border: 0;
+		&:first-child, &:nth-child(4n){
+			margin-left: 0;
+		}
+		&:before{
+			float:right;
+			font-size: rem(16);
+			margin-top: rem(9);
+			margin-right: rem(-8);
+			color: $PC-cromatico_3;
+		}
+		&:hover{
+			text-decoration: none;
+		}
+		&:focus{
+			outline: rem(1) solid $BRD-standar_3;
+		}
+		&:hover,&.focus{
+			&:before{
+				margin-right: rem(-14);
+				color: $PC-cromatico_10;
+			}
+			.ibe-link-box {
+				&__title {
+					color: $PC-cromatico_10;
+				}
+			}
+		}
+	}
+	
+	&__title{
+		display: block;
+		font-size: rem(26);
+		line-height: rem(30);
+		max-height: rem(62);
+		font-family: $font-04;
+		color: $PC-cromatico_3;
+		overflow: hidden;
+		
+	}
+	
+	&__text {
+		display: block;
+		font-size: rem(13);
+		line-height: rem(22);
+		margin-top: rem(8);
+		color: $PC-cromatico_1;
+		min-height: rem(22);
+		max-height: rem(70);
+	}
+}
+
+/*MEDIUM RESOLUTION STYLES*/
+@include media-query('md') {
+	.ibe-link-box {
+		&__link {
+			width: 100%;
+			margin: rem(16) 0 0;
+			padding: rem(24);
+			&:before{
+				margin-top: rem(4);
+				margin-right: 0;
+			}
+		}
+		&__title{
+			height: auto!important;
+			font-size: rem(22);
+			line-height: rem(25);
+		}
+		// &__text{
+		// 	height: auto!important;
+		// 	min-height: inherit;
+		// 	max-height: inherit;
+		// }
+	}
+}
+
+/*Mobile RESOLUTION STYLES*/
+@include media-query('mobile') {
+	.ibe-link-box {
+		&__link {
+			width: 100%;
+			margin: rem(16) 0 0;
+			padding: rem(24);
+			&:before{
+				margin-top: rem(4);
+				margin-right: 0;
+			}
+		}
+		&__title{
+			height: auto!important;
+			font-size: rem(22);
+			line-height: rem(25);
+		}
+		// &__text{
+		// 	height: auto!important;
+		// 	min-height: inherit;
+		// 	max-height: inherit;
+		// }
+	}
+}
+
+/*X-SMALL RESOLUTION STYLES*/
+@include media-query('xs') {
+	.ibe-link-box {
+		&__link {
+			padding: rem(24) rem(12);
+		}
+		
+		&__title {
+			font-size: rem(18);
+			line-height: rem(21);
+		}
+	}
+}

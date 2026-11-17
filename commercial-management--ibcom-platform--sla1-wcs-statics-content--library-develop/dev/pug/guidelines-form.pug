@@ -1,0 +1,326 @@
+extends _general/layout__primary
+mixin list-page(params)
+	- params = params || {};
+	ul
+		each val in params.items
+			li
+				a(href=val.href, title="Ir a " + val.title, target="_blank", style="font-size: 16px; color: grey; font-weight: 700; font-family: iberiaheadline")!=val.title
+block title
+	title!="IBERIA - GUIDELINES"
+block body
+	h1(class="title title__h1") Guía de estilos de formularios
+	.container
+		.row
+			.col-xs-12
+				form(data-valid-form)
+					fieldset
+						legend.hideAccessible Formulario input origen y destino
+						h2(class="title title__h2") Listado ciudades - Modal
+						.container
+							.row
+								.col-xs-6
+									.ibe_form__group.fc_form_group.ibe_form__group--button-icon
+										label(for="flight_origin_stop" class="ibe_form__input-label") Origen
+										input.ibe_form__input-text.ui-autocomplete-input(    type="text", id="flight_origin_stop",
+										data-focusin, data-autocomplete="cities", data-toggle-element,
+										data-validate="input-origin", required, name="stop_origin")
+										p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+										p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El origen no puede ser igual que el destino")
+										p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+										div.hidden-xs.hidden-sm.hidden-md
+											button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle-element data-focusin data-toggle="collapse" data-target="#id-tab-collapse-stop")
+												span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+											+m-choose-city-new({
+												"class": "ibe-choose-city--origin",
+												"format": "desktop",
+												"id": "id-tab-collapse-stop",
+												"tab_1": {
+													"href": "tab-cities-11-1",
+													"name": "Espa&ntilde;a",
+													"title": "España"
+												},
+												"tab_2": {
+													"href": "tab-cities-21-1",
+													"name": "Europa",
+													"title": "Europa"
+												},
+												"tab_3": {
+													"href": "tab-cities-31-1",
+													"name": "Am&eacute;rica",
+													"title": "América"
+												},
+												"tab_4": {
+													"href": "tab-cities-41-1",
+													"name": "Africa y Oriente Medio",
+													"title": "Africa y Oriente Medio"
+												},
+												"tab_5": {
+													"href": "tab-cities-51-1",
+													"name": "Asia y Ocean&iacute;a",
+													"title": "Asia y Oceanía"
+												}
+											})
+										div.hidden-lg.hidden-xl
+											button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-dinamic-open data-toggle-element data-focusin data-toggle="collapse" data-target="#m-id-tab-collapse-stop")
+												span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+											.ibe-dinamic-modal__header
+												h2.ibe-dinamic-modal__title Origenes de Iberia
+												button.ibe-dinamic-modal__button.ibe-dinamic-modal__button--close(type="button" data-dinamic-close)
+													span.ibe-dinamic-modal__icon.ibe-dinamic-modal__icon--cerrar.icon-cerrar
+											+m-choose-city-new({
+												"class": "ibe-choose-city--origin",
+												"format": "responsive",
+												"id": "m-id-tab-collapse-stop",
+												"tab_1": {
+													"href": "tab-cities-11-1",
+													"name": "Espa&ntilde;a",
+													"title": "España"
+												},
+												"tab_2": {
+													"href": "tab-cities-21-1",
+													"name": "Europa",
+													"title": "Europa"
+												},
+												"tab_3": {
+													"href": "tab-cities-31-1",
+													"name": "Am&eacute;rica",
+													"title": "América"
+												},
+												"tab_4": {
+													"href": "tab-cities-41-1",
+													"name": "Africa y Oriente Medio",
+													"title": "Africa y Oriente Medio"
+												},
+												"tab_5": {
+													"href": "tab-cities-51-1",
+													"name": "Asia y Ocean&iacute;a",
+													"title": "Asia y Oceanía"
+												}
+											})
+								.col-xs-6
+									.ibe_form__group.fc_form_group.ibe_form__group--button-icon
+										label(for="flight_destiny_stop" class="ibe_form__input-label") Destino
+										input.ibe_form__input-text.ui-autocomplete-input(    type="text", id="flight_destiny_stop",
+										data-focusin, data-autocomplete="cities", data-toggle-element,
+										data-validate="input-destiny", required, name="stop_destiny")
+										p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+										p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El origen no puede ser igual que el destino")
+										p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+										div.hidden-xs.hidden-sm.hidden-md
+											button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle-element data-focusin data-toggle="collapse" data-target="#id-tab-collapse-stop1")
+												span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+											+m-choose-city-new({
+												"class": "ibe-choose-city--destiny",
+												"format": "desktop",
+												"id": "id-tab-collapse-stop1",
+												"tab_1": {
+													"href": "tab-cities-11-1",
+													"name": "Espa&ntilde;a",
+													"title": "España"
+												},
+												"tab_2": {
+													"href": "tab-cities-21-1",
+													"name": "Europa",
+													"title": "Europa"
+												},
+												"tab_3": {
+													"href": "tab-cities-31-1",
+													"name": "Am&eacute;rica",
+													"title": "América"
+												},
+												"tab_4": {
+													"href": "tab-cities-41-1",
+													"name": "Africa y Oriente Medio",
+													"title": "Africa y Oriente Medio"
+												},
+												"tab_5": {
+													"href": "tab-cities-51-1",
+													"name": "Asia y Ocean&iacute;a",
+													"title": "Asia y Oceanía"
+												}
+											})
+										div.hidden-lg.hidden-xl
+											button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-dinamic-open data-toggle-element data-focusin data-toggle="collapse" data-target="#m-id-tab-collapse-stop1")
+												span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+											.ibe-dinamic-modal__header
+												h2.ibe-dinamic-modal__title Origenes de Iberia
+												button.ibe-dinamic-modal__button.ibe-dinamic-modal__button--close(type="button" data-dinamic-close)
+													span.ibe-dinamic-modal__icon.ibe-dinamic-modal__icon--cerrar.icon-cerrar
+											+m-choose-city-new({
+												"class": "ibe-choose-city--destiny",
+												"format": "responsive",
+												"id": "m-id-tab-collapse-stop1",
+												"tab_1": {
+													"href": "tab-cities-11-1",
+													"name": "Espa&ntilde;a",
+													"title": "España"
+												},
+												"tab_2": {
+													"href": "tab-cities-21-1",
+													"name": "Europa",
+													"title": "Europa"
+												},
+												"tab_3": {
+													"href": "tab-cities-31-1",
+													"name": "Am&eacute;rica",
+													"title": "América"
+												},
+												"tab_4": {
+													"href": "tab-cities-41-1",
+													"name": "Africa y Oriente Medio",
+													"title": "Africa y Oriente Medio"
+												},
+												"tab_5": {
+													"href": "tab-cities-51-1",
+													"name": "Asia y Ocean&iacute;a",
+													"title": "Asia y Oceanía"
+												}
+											})
+						h2(class="title title__h2") Listado ciudades - No modal
+						.container
+							.row
+								.col-xs-6
+									div(class="ibe_form__group ibe_form__group--button-icon fc_form_group" data-move="parent" data-position="1")
+										label(class="ibe_form__input-label", for="flight_origin")!="Origen"
+										input(class="ibe_form__input-text" name="flight_origin" id="flight_origin" type="text" placeholder="Origen" data-autocomplete="cities" spellcheck='false', value="Madrid (MAD)", data-destination-info="ES|MAD|Madrid",data-validate="input-origin", data-fligths-collapse-mobile="button")
+										p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Debes elegir un origen")
+										p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El origen no puede ser igual que el destino")
+										div.hidden-xs.hidden-sm.hidden-md
+											button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-1")
+												span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+											+m-choose-city-new({
+												"class": "ibe-choose-city--origin",
+												"format": "desktop",
+												"id": "id-tab-collapse-1",
+												"tab_1": {
+													"href": "tab-cities-11-1",
+													"name": "Espa&ntilde;a",
+													"title": "España"
+												},
+												"tab_2": {
+													"href": "tab-cities-21-1",
+													"name": "Europa",
+													"title": "Europa"
+												},
+												"tab_3": {
+													"href": "tab-cities-31-1",
+													"name": "Am&eacute;rica",
+													"title": "América"
+												},
+												"tab_4": {
+													"href": "tab-cities-41-1",
+													"name": "Africa y Oriente Medio",
+													"title": "Africa y Oriente Medio"
+												},
+												"tab_5": {
+													"href": "tab-cities-51-1",
+													"name": "Asia y Ocean&iacute;a",
+													"title": "Asia y Oceanía"
+												}
+											})
+										div.hidden-lg.hidden-xl
+											button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#m-id-tab-collapse-2")
+												span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+											+m-choose-city-new({
+												"class": "ibe-choose-city--origin",
+												"format": "responsive",
+												"id": "m-id-tab-collapse-2",
+												"tab_1": {
+													"href": "tab-cities-mobile-1",
+													"name": "Espa&ntilde;a",
+													"title": "España"
+												},
+												"tab_2": {
+													"href": "tab-cities-mobile-2",
+													"name": "Europa",
+													"title": "Europa"
+												},
+												"tab_3": {
+													"href": "tab-cities-mobile-3",
+													"name": "Am&eacute;rica",
+													"title": "América"
+												},
+												"tab_4": {
+													"href": "tab-cities-mobile-4",
+													"name": "Africa y Oriente Medio",
+													"title": "Africa y Oriente Medio"
+												},
+												"tab_5": {
+													"href": "tab-cities-mobile-5",
+													"name": "Asia y Ocean&iacute;a",
+													"title": "Asia y Oceanía"
+												}
+											})
+								.col-xs-6
+									div(class="ibe_form__group ibe_form__group--button-icon fc_form_group" data-move="parent" data-position="1")
+										label(class="ibe_form__input-label", for="flight_destiny")!="Destino"
+										input(class="ibe_form__input-text" name="flight_destiny" id="flight_destiny" type="text" placeholder="Destino" data-autocomplete="cities" spellcheck='false', data-validate="input-destiny", data-fligths-collapse-mobile="button")
+										p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Debes elegir un origen")
+										p.ibe_form__msg-info.hidden(data-validate="equal", data-validate-text="El origen no puede ser igual que el destino")
+										div.hidden-xs.hidden-sm.hidden-md
+											button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-11")
+												span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+											+m-choose-city-new({
+												"class": "ibe-choose-city--origin",
+												"format": "desktop",
+												"id": "id-tab-collapse-11",
+												"tab_1": {
+													"href": "tab-cities-11-1",
+													"name": "Espa&ntilde;a",
+													"title": "España"
+												},
+												"tab_2": {
+													"href": "tab-cities-21-1",
+													"name": "Europa",
+													"title": "Europa"
+												},
+												"tab_3": {
+													"href": "tab-cities-31-1",
+													"name": "Am&eacute;rica",
+													"title": "América"
+												},
+												"tab_4": {
+													"href": "tab-cities-41-1",
+													"name": "Africa y Oriente Medio",
+													"title": "Africa y Oriente Medio"
+												},
+												"tab_5": {
+													"href": "tab-cities-51-1",
+													"name": "Asia y Ocean&iacute;a",
+													"title": "Asia y Oceanía"
+												}
+											})
+										div.hidden-lg.hidden-xl
+											button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#m-id-tab-collapse-22")
+												span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+											+m-choose-city-new({
+												"class": "ibe-choose-city--origin",
+												"format": "responsive",
+												"id": "m-id-tab-collapse-22",
+												"tab_1": {
+													"href": "tab-cities-mobile-1",
+													"name": "Espa&ntilde;a",
+													"title": "España"
+												},
+												"tab_2": {
+													"href": "tab-cities-mobile-2",
+													"name": "Europa",
+													"title": "Europa"
+												},
+												"tab_3": {
+													"href": "tab-cities-mobile-3",
+													"name": "Am&eacute;rica",
+													"title": "América"
+												},
+												"tab_4": {
+													"href": "tab-cities-mobile-4",
+													"name": "Africa y Oriente Medio",
+													"title": "Africa y Oriente Medio"
+												},
+												"tab_5": {
+													"href": "tab-cities-mobile-5",
+													"name": "Asia y Ocean&iacute;a",
+													"title": "Asia y Oceanía"
+												}
+											})
+					fielset

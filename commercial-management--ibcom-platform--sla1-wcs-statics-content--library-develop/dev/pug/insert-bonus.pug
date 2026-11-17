@@ -1,0 +1,78 @@
+extends _general/layout__primary
+include _modules/_ibe_searcher-flight-status
+include _modules/_modals/_ibe-modal-where
+
+block title
+	title!="IBERIA - Consulta tus bonos"
+block body
+		section.container
+			div.row
+				div.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-xs-12
+					h2.title.title__h2.title--f-26.title--grey.title__h3-nochange Consulta y gestión de tus bonos
+			div.row
+				div.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-xs-12
+					section.ibe-flight-status
+						div.ibe-tab.ibe-tab--main
+							ul.ibe-tab__menu(data-tab="bootstrap-tabdrop", data-tab-text="Otros")
+								li.ibe-tab__menu-item.active
+									a.ibe-tab__menu-item__text(href="#tab-1", title="Consulta tus bonos", data-toggle="tab")!= "Consulta tu bonos"
+								li.ibe-tab__menu-item
+									a.ibe-tab__menu-item__text(href="#tab-2", title="Unifica tus bonos" data-toggle="tab")!= "Unifica tus bonos"
+							.tab-content
+								//- CONTAINER Código de tu bono
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium.active(id="tab-1" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+								
+								//- CONTAINER Unifica tus bonos
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium(id="tab-2" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+										.row
+											.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-xs-12
+												.ibe-box__primary.ibe-box__primary--type-bono
+													h3.title.title__h3.title--no-paddT.title--width-bono Paso 1/2: Introduce tu email y los códigos de los bonos que quieres unificar
+													form(data-valid-form id="form1" class="ibe_form" class="ibe_form")
+														.row
+															div(class="ibe-upload")
+																.col-xl-6.col-lg-5.col-md-5.col-sm-12
+																	p.paragraph.paragraph__regular--bonus.paragraph--break-bonus.paragraph__regular--grey El email deberá coincidir con el proporcionado para solicitar tus bonos para poder realizar la solicitud de unificación
+																.col-lg-6.col-md-6.col-sm-12
+																	div.ibe_form__group.ibe_form__group--mt-bono.fc_form_group.ibe_form__group--propped-unify-bono-mail
+																		label(for="mail" class="ibe_form__input-label") Email
+																		input(name="mail" id="mail" type="text" placeholder="email" class="ibe_form__input-text" maxlength="80" required data-validator="mail")
+																		p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																		p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+														.row
+															div(class="ibe-upload")
+																.col-xl-6.col-lg-5.col-md-5.col-sm-12
+																	p.paragraph.paragraph__regular--bonus.paragraph__regular--m-top-10.paragraph--break-bonus.paragraph__regular--grey Introduce los bonos que desees unificar, hasta un máximo de 9. Podrás unificar bonos de la misma reserva.
+																.col-lg-6.col-md-6.col-sm-12
+																	p.title.title--p-13.title__h5.title__h5--small-pt.paragraph__regular--grey!="Bono 1"
+																	div.ibe_form__group.fc_form_group.ibe_form__group--propped-bono
+																		label(for="phone-num" class="ibe_form__input-label") Código de tu bono
+																		input(name="phone-num" id="phone-num" type="text" placeholder="Tel&eacute;fono" class="ibe_form__input-text" maxlength="40" required)
+																		p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																		p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+														.row
+															div(class="ibe-upload")
+																.col-lg-6.col-md-6.col-sm-12.col-xl-offset-6.col-lg-offset-5.col-md-offset-5
+																	p.title.title--p-6.title__h5.title__h5--small-pt-16.paragraph__regular--grey!="Bono 2"
+																	div.ibe_form__group.fc_form_group.ibe_form__group--propped-bono
+																		label(for="phone-num" class="ibe_form__input-label") Código de tu bono
+																		input(name="phone-num" id="phone-num" type="text" placeholder="Tel&eacute;fono" class="ibe_form__input-text" maxlength="40" required)
+																		p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																		p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+																	p.title.title--p-18.title__h5.title__h5--small-pt-16.paragraph__regular--grey!="Bono 3"
+																	div.ibe_form__group--bono-flex.u-mb-medium
+																		div.ibe_form__group.fc_form_group.ibe_form__group--propped-unify-bono.ibe_form__group--propped-bono
+																			label(for="phone-num" class="ibe_form__input-label") Código de tu bono
+																			input(name="phone-num" id="phone-num" type="text" placeholder="Tel&eacute;fono" class="ibe_form__input-text" maxlength="40" required)
+																			p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+																			p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+																		a(title="Eliminar plan" href="#" data-journey="add" class="ibe-advanced-searcher__left-button ibe-advanced-searcher__left-button--pv ibe-advanced-searcher--margin-position")
+																			span(class="icon icon-papelera")
+																			span(class="ibe-advanced-searcher__left-button-text") Eliminar
+																	a(title="Añadir nuevo trayecto" href="#" data-journey="add" class="ibe-advanced-searcher__left-button ibe-advanced-searcher__left-button--pv")
+																		span(class="icon icon-mas_2")
+																		span(class="ibe-advanced-searcher__left-button-text") Añadir más bonos			
+														button.ibe-button.ibe-button--morelarge-bonus.ibe-button--red.ibe-button--smaller.ibe-button--morelarge.ibe-button--right.ibe-button--m-top-52.ibe-button--m-top-32(type='button') Continuar
+														button.ibe-button.ibe-button--reset.ibe-button--link02.ibe-button--m-top-52.ibe-button--m-top-24.ibe-button--m-top-32(type='button' data-modal="button" data-modal-view=".fc-dialog-claim") Limpiar datos

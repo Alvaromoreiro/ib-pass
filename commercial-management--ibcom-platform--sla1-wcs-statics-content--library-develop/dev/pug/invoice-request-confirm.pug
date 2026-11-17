@@ -1,0 +1,67 @@
+extends _general/layout__primary
+include _modules/_ibe_searcher-flight-status
+include _modules/_modals/_ibe-modal-where
+
+block title
+	title!="IBERIA - Solicitud de factura - Confirmaci&oacute;n"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main
+		+m-ibe-breadcrumbs({
+			"menu": "advSearch"
+		})
+		section.container
+			.row
+				.col-xs-12
+					header.ibe-flight-status__header.ibe-flight-status__header--center
+						h1.title.title__h1.title--no-paddT.title--p-bottom-6!="Solicitud de facturas"
+						h2.title.title__h5.title--no-padd.title.title__h5--small!="Si has comprado tu billete en Iberia.com o en Serviberia y quieres pedir tu factura, simplemente"
+							span.title.title__h5.title--no-padd.title.title__h5--small.title--bold!=" rellena los siguientes campos. "
+							spantitle.title__h5.title--no-padd.title.title__h5--small!="Recuerda que, si es a nombre de una empresa, esta tendrá que ser únicamente de España, Gibraltar o Andorra."
+			.row
+				.col-xs-12
+					section.ibe-flight-status.ibe-flight-status__section
+						div.ibe-tab.ibe-tab--main
+							ul.ibe-tab__menu(data-tab="bootstrap-tabdrop", data-tab-text="Otros")
+								li.ibe-tab__menu-item.active
+									a.ibe-tab__menu-item__text(href="#tab-1", title="Solo vuelo (billete electrónico)", data-toggle="tab")!= "Solo vuelo (billete electrónico)"
+								li.ibe-tab__menu-item
+									a.ibe-tab__menu-item__text(href="#tab-2", title="Packs Iberia Vacaciones" data-toggle="tab")!= "Packs Iberia Vacaciones"
+							.tab-content
+								//- CONTAINER Solo vuelo (billete electrónico)
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium.active(id="tab-1" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+										div.ibe_form__box--claim.ibe_form__box--center-big
+											div.ibe_form__box--center-big__confirm
+												span.ibe-icon-form-confirm
+												p.title__h1!="Tu factura está en camino"
+												p.paragraph.paragraph__regular--small-line.paragraph__regular--grey!="Tu factura llegará a "
+													span.paragraph.paragraph--dark(data-mail-confirm)!="#correo@dominio.com#"
+												p.paragraph.paragraph__regular--small-line.paragraph__regular--grey!="Si no lo recibes en 72 horas, busca el email "
+													span.paragraph.paragraph--dark(data-mail-confirm)!="iberia@efactura.b2bconecta.com "
+													span.paragraph.paragraph__regular--small-line.paragraph__regular--grey!="en tu carpeta de correo no deseado (spam), y recupéralo."
+												button.ibe-button.ibe-button--red.ibe-button--smaller.ibe-button--morelarge(type='button') Volver a gesti&oacute;n de facturas
+												button.ibe-button.ibe-button--reset.ibe-button--link02(type='button' data-modal="button" data-modal-view=".fc-dialog-claim" data-focusin) Solicitar otra factura
+											
+												
+								//- CONTAINER Packs Iberia Vacaciones
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium(id="tab-2" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+										div.ibe_form__box--claim.ibe_form__box--center-big
+											
+												
+									
+
+
+	+m-footer({
+		"full": true
+	})

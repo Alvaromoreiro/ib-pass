@@ -1,0 +1,273 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe-dinamic-modal
+//    Desripcion: Estilos para las modales dinamicas
+//******************************************************************************/
+.ibe-dinamic-modal{
+    &__header{
+        display: none;
+        height: rem(55);
+        position: relative;
+        border-bottom: 2px solid $PC-cromatico_5;
+    }
+    &__title{
+        padding: rem(15) rem(50) rem(16) rem(40);
+        color: $PC-cromatico_2;
+        font-family: $font-04;
+        font-size: rem(16);
+        line-height: 24px;
+    }
+    &__button{
+        display: block;
+        border: 0;
+        outline: none;
+        &--close{
+            display: none;
+            background-color: transparent;
+            width: rem(50);
+            height: rem(50);
+            right: rem(0);
+            top: 0;
+            position: absolute;
+        }
+        &--save{
+            min-height: rem(56);
+            padding: rem(16);
+            font-family: $font-07;
+            text-align: center;
+            color: #FFFFFF;
+            background-color: $PC-cromatico_2;
+            width: 100%;
+            font-size: rem(13);
+        }
+    }
+    &__icon{
+        display: none;
+        &--cerrar{
+            color: $PC-cromatico_2;
+            font-size: rem(25);
+            font-weight: 500;
+        }
+    }
+    &__footer{
+        display: none;
+        border-top: 1px solid $PC-cromatico_5;
+        padding: rem(22) rem(15);
+    }
+}
+
+
+@mixin xl-ibe-dinamic-modal{
+
+}
+@mixin l-ibe-dinamic-modal{
+
+}
+@mixin m-ibe-dinamic-modal{
+    .ibe-dinamic-modal{
+        width: 100%;
+        background-color: $PC-cromatico_4;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow-x: hidden;
+        height: 100%;
+        z-index: 99999;
+        .ibe-dinamic-modal{
+            &__header{
+                display: block;
+            }
+            &__icon{
+                display: block;
+            }
+            .ibe_form__group--icon .icon-caret_abajo{
+                &:before{
+                    display: none;
+                }
+            }
+            &__footer{
+                display: block;
+                padding: rem(23) rem(16);
+            }
+            &__button {
+                &--close {
+                    display: block;
+                    z-index: 999;
+
+                }
+            }
+
+
+        }
+        .ibe-select__menu{
+            width: 100%!important;
+            position: fixed;
+            display: block;
+            top: rem(55);
+            height: 100%;
+            max-height: 100%;
+        }
+        .ui-menu-item-wrapper{
+            padding: rem(16) rem(28) rem(15);
+            font-size: rem(15);
+            border-bottom: 1px solid $PC-cromatico_8;
+            color: $PC-cromatico_2;
+            &.ui-state-active{
+                background-color: transparent;
+                color: $PC-cromatico_1;
+            }
+        }
+        .ibe-people-counter{
+            display: block!important;
+            top:0;
+            position: relative;
+            width: 100%;
+            height: auto!important;
+            overflow-x: visible;
+            box-shadow: none;
+            border-radius: 0;
+            border-top: 2px solid $PC-cromatico_5;
+            &:before, &:after{
+                display: none;
+            }
+	        .ibe-people-counter__list-item{
+                &:last-child{
+                    border-bottom:  2px solid $PC-cromatico_5;
+                }
+            }
+        }
+        &.ibe_form__group--button-icon{
+            .ibe_form__input-label, .ibe_form__input-text, .ibe_form__input-button{
+                display: none;
+            }
+        }
+        .ibe-choose-city--mobile{
+            display: block!important;
+            height: auto!important;
+            border: none;
+            max-height:100%;
+	        &.ibe-choose-city--destiny{
+		        left: 0;
+	        }
+            .city-selected{
+                font-weight: bold;
+            }
+            .ioslist{
+                height: calc(100vh - 111px);
+            }
+        }
+        &.ibe_form__group{
+            margin-top: 0;
+            .ibe-searcher__calendar{
+                left: 0;
+                width: 100%;
+                height: calc(100% - 54px)!important;
+                top: rem(46);
+                box-shadow: none;
+                border: 1px solid $PC-cromatico_9;
+                &-header{
+                    padding-bottom: rem(16);
+                    .ibe-searcher__calendar-current{
+                        display: none;
+                    }
+                }
+                .ui-datepicker-header{
+                    border: none;
+                }
+                .ui-corner-all.ui-datepicker-prev, .ui-corner-all.ui-datepicker-next{
+                    &:before{
+                        display: none;
+                    }
+
+                }
+                .ui-datepicker-group{
+                    width: 50%;
+                }
+                .ui-datepicker-calendar{
+                    margin: 0 auto;
+
+                }
+                .ui-datepicker-title{
+                    padding-top: rem(24);
+                    font-size: rem(13);
+                }
+                &:before,&:after{
+                    display: none;
+                }
+            }
+        }
+        .ibe_form__msg-info{
+            display: none;
+        }
+
+        .ibe_form__group-half{
+            .ibe_form__input-text{
+                padding: 0 rem(24);
+            }
+            .ibe_form__input-label{
+                text-align: left;
+            }
+            &.icon-caret_derecha{
+                .ibe_form__input-label{
+                    left: rem(24);
+                }
+            }
+
+            &:first-child{
+                &:before{
+                    top: 4.5%;
+                    z-index: 6;
+                }
+            }
+        }
+
+
+    }
+
+}
+@mixin sm-ibe-dinamic-modal{
+	@include m-ibe-dinamic-modal;
+	.ibe-dinamic-modal{
+		&.ibe_form__group{
+			.ibe-searcher__calendar{
+				top: rem(55);
+				.ui-datepicker-group{
+					width: 100%;
+				}
+			}
+		}
+		&.ibe_form__group--half{
+			overflow: hidden;
+			.ibe-searcher__calendar{
+				overflow-x: hidden;
+			}
+		}
+		.ibe_form__group-half{
+			&:first-child{
+				&:before{
+					top: 6%;
+				}
+			}
+		}
+		.ibe-searcher__calendar .hasDatepicker{
+			width: 100%;
+		}
+		.ui-datepicker{
+			max-width: rem(288);
+			margin: 0 auto;
+		}
+	}
+}
+@mixin xs-ibe-dinamic-modal{
+    @include sm-ibe-dinamic-modal;
+	.ibe-dinamic-modal {
+		&.ibe_form__group{
+			.ibe-searcher__calendar{
+				.ui-datepicker-group {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+

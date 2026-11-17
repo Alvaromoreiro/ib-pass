@@ -1,0 +1,76 @@
+mixin m-search-vip-rooms(params)
+    - params = params || {};
+    article.ibe-search-vip-rooms
+        header.ibe-search-vip-rooms__header
+            .row
+                .col-sm-6.col-xs-12
+                    h3.title.title__h3!=params.title
+                .col-sm-6.col-xs-12
+                    div.ibe-search-vip-rooms__header-filter
+                        label.hideAccessible(for=params.filter.id)!=params.filter.label
+                        select(id=params.filter.id, class="ibe_form__selectize ibe_form__selectize--empty", name=params.filter.name, data-selectize="simple", data-vip-rooms="filter")
+                            each op in params.filter.options
+                                option(value=op.value)!=op.name
+        div.ibe-search-vip-rooms__box 
+            ul.ibe-search-vip-rooms__list 
+                each ticket in params.filter.tickets
+                    li.ibe-search-vip-rooms__list-item(data-vip-rooms-filter=ticket.airport)
+                        .ibe-search-vip-rooms__item-left
+                            h4.title.title__h6.title--bold.title--light!="Sala VIP Iberia Llegadas T4"
+                            p.paragraph.paragraph__regular!=ticket.airport
+                            a.link.link__regular.link__regular--important(href="#" title="Ver detalles de la sala")!="Ver detalles de la sala"
+                        .ibe-search-vip-rooms__item-right
+                            h4.title.title__h6.title--bold.title--light!="Horario:"
+                            p.paragraph.paragraph__regular!="24h"
+                            h4.title.title__h6.title--bold.title--light!="Ubicaci&oacute;n:"
+                            p.paragraph.paragraph__regular!="Terminal 4. Llegadas, Planta -1 (pasadas las puertas de salida del hall de llegadas)"
+                            h4.title.title__h6.title--bold.title--light!="Servicios:"
+                            ul.ibe-search-vip-rooms__services
+                                li.ibe-search-vip-rooms__services-item
+                                    a.ibe-search-vip-rooms__services-link.icon-sala_vip(href="#", title="Información VIP", data-tooltip="bootstrap")
+                                        span.hideAccessible!="Sala VIP"
+                                        div.hidden(data-tooltip="content")
+                                            div.ui-tooltip-content__container
+                                                button.ui-tooltip-button-close(type="button", data-tooltip="close")
+                                                    span.hideAccessible!="Cerrar"
+                                                strong.ui-tooptip-title!="Información VIP"
+                                li.ibe-search-vip-rooms__services-item
+                                    a.ibe-search-vip-rooms__services-link.icon-informacion_de_vuelos(href="#", title="Información VIP", data-tooltip="bootstrap")
+                                        span.hideAccessible!="Informacion vuelos"
+                                        div.hidden(data-tooltip="content")
+                                            div.ui-tooltip-content__container
+                                                button.ui-tooltip-button-close(type="button", data-tooltip="close")
+                                                    span.hideAccessible!="Cerrar"
+                                                strong.ui-tooptip-title!="Información de vuelos"
+                                li.ibe-search-vip-rooms__services-item
+                                    a.ibe-search-vip-rooms__services-link.icon-tarjeta_de_embarque(href="#", title="Información tarjeta", data-tooltip="bootstrap")
+                                        span.hideAccessible!="Tarjeta de embarque"
+                                        div.hidden(data-tooltip="content")
+                                            div.ui-tooltip-content__container
+                                                button.ui-tooltip-button-close(type="button", data-tooltip="close")
+                                                    span.hideAccessible!="Cerrar"
+                                                strong.ui-tooptip-title!="Información tarjeta"
+                                li.ibe-search-vip-rooms__services-item
+                                    a.ibe-search-vip-rooms__services-link.icon-portatil(href="#", title="Información portatil", data-tooltip="bootstrap")
+                                        span.hideAccessible!="Portatil"
+                                        div.hidden(data-tooltip="content")
+                                            div.ui-tooltip-content__container
+                                                button.ui-tooltip-button-close(type="button", data-tooltip="close")
+                                                    span.hideAccessible!="Cerrar"
+                                                strong.ui-tooptip-title!="Información portatil"
+                                li.ibe-search-vip-rooms__services-item
+                                    a.ibe-search-vip-rooms__services-link.icon-entretenimiento_individual(href="#", title="Información video", data-tooltip="bootstrap")
+                                        span.hideAccessible!="Entretenimiento individual"
+                                        div.hidden(data-tooltip="content")
+                                            div.ui-tooltip-content__container
+                                                button.ui-tooltip-button-close(type="button", data-tooltip="close")
+                                                    span.hideAccessible!="Cerrar"
+                                                strong.ui-tooptip-title!="Información video"
+                                li.ibe-search-vip-rooms__services-item
+                                    a.ibe-search-vip-rooms__services-link.icon-e_trolley(href="#", title="Información maletas", data-tooltip="bootstrap")
+                                        span.hideAccessible!="Embarque"
+                                        div.hidden(data-tooltip="content")
+                                            div.ui-tooltip-content__container
+                                                button.ui-tooltip-button-close(type="button", data-tooltip="close")
+                                                    span.hideAccessible!="Cerrar"
+                                                strong.ui-tooptip-title!="Información maletas"

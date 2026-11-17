@@ -1,0 +1,148 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_lat-menu
+//    Desripcion: Estilos para menu lateral
+//******************************************************************************/
+.ibe-lat-menu{
+    background: $PC-cromatico_5;
+    margin-bottom: rem(32);
+}
+
+.ibe-lat-menu__list{
+    margin: rem(32) 0 0;
+}
+
+.ibe-lat-menu__item{
+    .ibe-lat-menu__link{
+        display: block;
+        padding: rem(15) rem(42) rem(16) rem(28);
+        font-size: rem(14);
+        color: $PC-cromatico_1;
+        text-decoration: none;
+        &:hover,
+        &:focus{
+            background: $PC-cromatico_9;
+        }
+        &:focus{
+            outline: 2px auto $BRD_standar_3;
+        }
+    }
+
+    &.ibe-lat-menu__item--active {
+        background:$PC-cromatico_3;
+        position: relative;
+        .ibe-lat-menu__link{
+            position: relative;
+            color: $PC-cromatico_4;
+            font-weight: bold;
+            &:after{
+                content: "\e92f";
+                position: absolute;
+                right: rem(12);
+                top: 50%;
+                font-family:$font-05;
+                color:$PC-cromatico_4;
+                font-size: rem(20);
+                transform: translate(0, -50%);
+                -ms-transform: translate(0, -50%);
+            }
+        }
+        > .ibe-lat-menu__link{
+            background-color:$PC-cromatico_3;
+            &:hover, &:focus{
+                background-color: $BCK-cromatico_3;
+            }
+        }
+
+        .ibe-lat-menu__item{
+            background: $PC-cromatico_5;
+
+            .ibe-lat-menu__link{
+                color: $PC-cromatico_1;
+                text-decoration: none;
+                font-weight: normal;
+                &:hover,&:focus{
+                    background: $PC-cromatico_9;
+                }
+            }
+
+            &.ibe-lat-menu__item--active {
+                background:$PC-cromatico_3;
+                position: relative;
+                .ibe-lat-menu__link{
+                    color: $PC-cromatico_4;
+                    font-weight: bold;
+                    &:hover{
+                        background: $PC-cromatico_3;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.ibe-lat-menu__sublist{
+
+    .ibe-lat-menu__link {
+        padding-left: 3rem;
+        position: relative;
+        &:after {
+            display: none;
+        }
+        &:before{
+            //content: "\e92f";
+            content: "";
+            position: absolute;
+            left: rem(26);
+            //left: 2rem;
+            top: 50%;
+            transform: translate(0,-50%);
+            -ms-transform: translate(0,-50%);
+            font-family:$font-05;
+            color:$PC-cromatico_3;
+            font-size: rem(20);
+            width: rem(5);
+            height: rem(5);
+            background-color:$PC-cromatico_3;
+            //font-size: 0.4rem;
+        }
+    }
+
+    .ibe-lat-menu__item--active {
+        .ibe-lat-menu__link {
+            &:after {
+                display: none;
+            }
+            &:before{
+                color:$PC-cromatico_4;
+                font-weight: normal;
+                background-color: $PC-cromatico_4;
+            }
+        }
+    }
+}
+
+/*LARGE RESOLUTION STYLES*/
+@mixin l-ibe_lat-menu {
+    .ibe-lat-menu__item{
+        .ibe-lat-menu__link{
+            padding: rem(15) rem(36) rem(16) rem(24);
+        }
+        &.ibe-lat-menu__item--active {
+            .ibe-lat-menu__link{
+                &:after{
+                    right: rem(16);
+                }
+            }
+        }
+    }
+
+    .ibe-lat-menu__sublist{
+        .ibe-lat-menu__link {
+            padding-left: 2.7rem;
+            //&:before{
+            //    left: 1.7rem;
+            //}
+        }
+    }
+}

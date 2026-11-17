@@ -1,0 +1,11 @@
+mixin m-menu-links(params)
+	div.ibe-menu-links(data-css="ibe-components/ibe-menu-links/ibe-menu-links", data-js="ibe-components/ibe-menu-links/ibe-menu-links", data-ibe-component="true")
+		ul.ibe-menu-links__list
+			each item in params.items
+				li.ibe-menu-links__item
+					if (item.type === "button")
+						button.ibe-menu-links__link(type="button", data-focusin, data-scroll=(item.href !== undefined ? item.href : "#ni"))
+							span.ibe-menu-links__text!=item.text
+					else
+						a.ibe-menu-links__link(data-focusin, href=(item.href !== undefined ? item.href : "#ni"), data-scroll=(item.href !== undefined ? item.href : "#ni") title="Ir a " + item.text)
+							span.ibe-menu-links__text!=item.text

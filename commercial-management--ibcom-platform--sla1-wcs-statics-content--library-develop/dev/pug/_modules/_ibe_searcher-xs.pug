@@ -1,0 +1,1035 @@
+mixin m-searcher-xs(params)
+    div.ibe-searcher.ibe-searcher--xs.ibe-searcher--border-top
+        span.ibe-searcher__title Encuentra tu viaje a Santiago de Compostela
+        div.ibe-tab.ibe-tab--scrolling.ibe-tab--center(data-tab="jquery-ui" data-tab-active="0")
+            header.ibe-tab__scroll.ibe-tab__scroll-desktop
+                ul.ibe-tab__menu
+                    li.ibe-tab__menu-item
+                        a.link.link__regular(href="#tab-searcher-1" title="Vuelo")!="VUELO"
+                    li.ibe-tab__menu-item
+                        a.link.link__regular(href="#tab-searcher-2" title="Vuelo+Hotel")!="VUELO+HOTEL"
+                    li.ibe-tab__menu-item
+                        a.link.link__regular(href="#tab-searcher-3" title="Vuelo+Coche")!="VUELO+COCHE"
+                    li.ibe-tab__menu-item
+                        a.link.link__regular(href="#tab-searcher-4" title="Hotel")!="HOTEL"
+                    li.ibe-tab__menu-item
+                        a.link.link__regular(href="#tab-searcher-5" title="Coche")!="COCHE"
+            div.ibe-tab__container.no_padding
+                div(id="tab-searcher-1")
+                    div.ibe-accordion
+                        div
+                            h4.title__h4.ibe-accordion__header(data-toggle="collapse" data-target="#tab_01" data-outer-click="true")
+                                a.link(href="#" title="¿A dónde vas?")!="&iquest;A d&oacute;nde vas?"
+                            div.ibe-accordion__collapse(id="tab_01" data-function="header-searcher")
+                                form.ibe_form(action="#" method="post")
+                                    fieldset.ibe-tab__container-desktop
+                                        legend.hideAccessible!="Vuelo"
+                                        .row.no-gutters
+                                            .col-xs-12
+                                                .row.no-gutters
+                                                    .col-xs-12
+                                                        div(class="ibe_form__group ibe_form__group--button-icon fc_form_group")
+                                                            label(class="ibe_form__input-label", for="flight_origin") Origen
+                                                            input(class="ibe_form__input-text", name="flight_origin", id="flight_origin", type="text", placeholder="Origen" data-autocomplete="cities" spellcheck='false')
+                                                            div.hidden-xs.hidden-sm.hidden-md
+                                                                button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-1")
+                                                                    span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                +m-choose-city({
+                                                                    "class":"ibe-choose-city--origin",
+                                                                    "format": "desktop",
+                                                                    "id": "id-tab-collapse-1",
+                                                                    "tab_1": {
+                                                                        "href": "tab-cities-1",
+                                                                        "name": "Espa&ntilde;a",
+                                                                        "title": "España"
+                                                                    },
+                                                                    "tab_2": {
+                                                                        "href": "tab-cities-2",
+                                                                        "name": "Europa",
+                                                                        "title": "Europa"
+                                                                    },
+                                                                    "tab_3": {
+                                                                        "href": "tab-cities-3",
+                                                                        "name": "Am&eacute;rica",
+                                                                        "title": "América"
+                                                                    },
+                                                                    "tab_4": {
+                                                                        "href": "tab-cities-4",
+                                                                        "name": "Africa y Oriente Medio",
+                                                                        "title": "Africa y Oriente Medio"
+                                                                    },
+                                                                    "tab_5": {
+                                                                        "href": "tab-cities-5",
+                                                                        "name": "Asia y Ocean&iacute;a",
+                                                                        "title": "Asia y Oceanía"
+                                                                    }
+                                                                })
+                                                            div.hidden-lg.hidden-xl
+                                                                button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-2")
+                                                                    span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                +m-choose-city({
+                                                                    "class":"ibe-choose-city--origin",
+                                                                    "format": "responsive",
+                                                                    "id": "id-tab-collapse-2",
+                                                                    "tab_1": {
+                                                                        "href": "tab-cities-mobile-1",
+                                                                        "name": "Espa&ntilde;a",
+                                                                        "title": "España"
+                                                                    },
+                                                                    "tab_2": {
+                                                                        "href": "tab-cities-mobile-2",
+                                                                        "name": "Europa",
+                                                                        "title": "Europa"
+                                                                    },
+                                                                    "tab_3": {
+                                                                        "href": "tab-cities-mobile-3",
+                                                                        "name": "Am&eacute;rica",
+                                                                        "title": "América"
+                                                                    },
+                                                                    "tab_4": {
+                                                                        "href": "tab-cities-mobile-4",
+                                                                        "name": "Africa y Oriente Medio",
+                                                                        "title": "Africa y Oriente Medio"
+                                                                    },
+                                                                    "tab_5": {
+                                                                        "href": "tab-cities-mobile-5",
+                                                                        "name": "Asia y Ocean&iacute;a",
+                                                                        "title": "Asia y Oceanía"
+                                                                    }
+                                                                })
+                                                    .col-xs-12
+                                                        div(class="ibe_form__group ibe_form__group--button-icon fc_form_group")
+                                                            label(class="ibe_form__input-label", for="flight_destiny") Destino
+                                                            input(class="ibe_form__input-text", name="flight_destiny", id="flight_destiny", type="text", placeholder="Destino" data-autocomplete="cities" spellcheck='false')
+                                                            div.hidden-xs.hidden-sm.hidden-md
+                                                                button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-3")
+                                                                    span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                +m-choose-city({
+                                                                    "class":"ibe-choose-city--destination",
+                                                                    "format": "desktop",
+                                                                    "id": "id-tab-collapse-3",
+                                                                    "tab_1": {
+                                                                        "href": "tab-cities-11",
+                                                                        "name": "Espa&ntilde;a",
+                                                                        "title": "España"
+                                                                    },
+                                                                    "tab_2": {
+                                                                        "href": "tab-cities-21",
+                                                                        "name": "Europa",
+                                                                        "title": "Europa"
+                                                                    },
+                                                                    "tab_3": {
+                                                                        "href": "tab-cities-31",
+                                                                        "name": "Am&eacute;rica",
+                                                                        "title": "América"
+                                                                    },
+                                                                    "tab_4": {
+                                                                        "href": "tab-cities-41",
+                                                                        "name": "Africa y Oriente Medio",
+                                                                        "title": "Africa y Oriente Medio"
+                                                                    },
+                                                                    "tab_5": {
+                                                                        "href": "tab-cities-51",
+                                                                        "name": "Asia y Ocean&iacute;a",
+                                                                        "title": "Asia y Oceanía"
+                                                                    }
+                                                                })
+                                                            div.hidden-lg.hidden-xl
+                                                                button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-4")
+                                                                    span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                +m-choose-city({
+                                                                    "class":"ibe-choose-city--destination",
+                                                                    "format": "responsive",
+                                                                    "id": "id-tab-collapse-4",
+                                                                    "tab_1": {
+                                                                        "href": "tab-cities-mobile-11",
+                                                                        "name": "Espa&ntilde;a",
+                                                                        "title": "España"
+                                                                    },
+                                                                    "tab_2": {
+                                                                        "href": "tab-cities-mobile-21",
+                                                                        "name": "Europa",
+                                                                        "title": "Europa"
+                                                                    },
+                                                                    "tab_3": {
+                                                                        "href": "tab-cities-mobile-31",
+                                                                        "name": "Am&eacute;rica",
+                                                                        "title": "América"
+                                                                    },
+                                                                    "tab_4": {
+                                                                        "href": "tab-cities-mobile-41",
+                                                                        "name": "Africa y Oriente Medio",
+                                                                        "title": "Africa y Oriente Medio"
+                                                                    },
+                                                                    "tab_5": {
+                                                                        "href": "tab-cities-mobile-51",
+                                                                        "name": "Asia y Ocean&iacute;a",
+                                                                        "title": "Asia y Oceanía"
+                                                                    }
+                                                                })
+                                                div.ibe-searcher__options
+                                                    .row.no-gutters.ibe-form__radio-group
+                                                        .col-xs-5.col-lg-6.col-xl-5
+                                                            span.ibe_form__radio
+                                                                input.ibe_form__radio-input(type="radio" name="ida" id="ida" value="ida" data-function="oneway")
+                                                                label.ibe_form__radio-text(for="ida")!="S&oacute;lo ida"
+                                                        .col-xs-7.col-lg-6.col-xl-7
+                                                            span.ibe_form__radio.pull-right
+                                                                input.ibe_form__radio-input(type="radio" name="ida" id="idavuelta" value="idavuelta" data-function="roundtrip" checked)
+                                                                label.ibe_form__radio-text(for="idavuelta")!="ida y vuelta"
+                                                    ul.ibe-list.ibe-list--links-inline.ibe-list--text-small
+                                                        li.ibe-list__item
+                                                            a.link.link__regular.link__regular--underline(href="#" title="Multiples trayectos")!="Multiples trayectos"
+                                                        li.ibe-list__item
+                                                            a.link.link__regular.link__regular--underline(href="#" title="Puente aéreo")!="Puente a&eacute;reo"
+                                            .col-xs-12
+                                                .row.no-gutters
+                                                    .col-xs-12
+                                                        div(class="ibe_form__group ibe_form__group--half")
+                                                            div.ibe_form__group-half.icon-caret_derecha.fc_form_group
+                                                                label.ibe_form__input-label.hideAccessible(for="flight_round_date") Fecha ida
+                                                                input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_round_date", id="flight_round_date", type="text", placeholder="Fecha ida" data-toggle="collapse" data-target="#searcher-calendar-1" data-cal="start" data-placeholder="placeholder" readonly)
+                                                                +m-searcher-calendar({
+                                                                    id: "searcher-calendar-1",
+                                                                    type: "fly",
+                                                                    when: "start",
+                                                                    number: "1"
+                                                                })
+                                                            div.ibe_form__group-half.fc_form_group
+                                                                label.ibe_form__input-label.hideAccessible(for="flight_return_date") Fecha vuelta
+                                                                input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_return_date", id="flight_return_date", type="text", placeholder="Fecha vuelta" data-toggle="collapse" data-target="#searcher-calendar-2" data-cal="end" data-placeholder="placeholder" readonly)
+                                                                +m-searcher-calendar({
+                                                                    id: "searcher-calendar-2",
+                                                                    type: "fly",
+                                                                    when: "end",
+                                                                    number: "2"
+                                                                })
+                                                    .col-xs-12
+                                                        div(class="ibe_form__group ibe_form__group--icon icon-caret_abajo")
+                                                            label.ibe_form__input-label.hideAccessible(class="ibe_form__input-label", for="flight_passengers") 1 Adulto
+                                                            input.pointer(class="ibe_form__input-text ibe_form__input-text--stop-animation", name="flight_passengers", id="flight_passengers", type="text", placeholder="1 Adulto" data-value="1 Adulto" value="1 Adulto" data-toggle="collapse" data-target="#people-counter-1" data-text-passenger="pasajeros" readonly)
+                                                            +m-people-counter({
+                                                                id: "people-counter-1"
+                                                            })
+                                                div.ibe-searcher__options
+                                                    select(id="tarifa", class="ibe_form__selectize ibe_form__selectize--empty ibe-searcher__rate", name="tarifa", data-ibe-selectize, data-selectize='simple')
+                                                        option(value="00") Tarifa m&aacute;s econ&oacute;mica
+                                                        option(value="01") Business Class
+                                                        option(value="02") Turista premium
+                                                    label.ibe_form__selectize--label(for="tarifa")!="Elige una tarifa"
+
+                                                    //- div.ibe-searcher__passenger
+                                                        a.link.ibe-searcher__passenger-button(href="#" title="Tipo de pasajeros" data-toggle="collapse" data-target="#resident-1")
+                                                            span(data-passenger-resident)!="No soy residente"
+                                                            !=" / "
+                                                            span(data-passenger-family)!="No soy familia numerosa"
+                                                        div.ibe-searcher__passenger-content(id="resident-1")
+                                                            h4.ibe-searcher__passenger-title!="Residentes"
+                                                            .ibe-form__radio-group(data-passenger-resident-radio)
+                                                                span.ibe_form__radio
+                                                                    input.ibe_form__radio-input(type="radio" name="resident" id="noresident" value="noresident" checked)
+                                                                    label.ibe_form__radio-text(for="noresident")!="No soy residente"
+                                                                span.ibe_form__radio
+                                                                    input.ibe_form__radio-input(type="radio" name="resident" id="canarias" value="canarias")
+                                                                    label.ibe_form__radio-text(for="canarias")!="Residente en Las Canarias"
+                                                                span.ibe_form__radio
+                                                                    input.ibe_form__radio-input(type="radio" name="resident" id="ceuta" value="ceuta")
+                                                                    label.ibe_form__radio-text(for="ceuta")!="Residente en Ceuta"
+                                                                span.ibe_form__radio
+                                                                    input.ibe_form__radio-input(type="radio" name="resident" id="melilla" value="melilla")
+                                                                    label.ibe_form__radio-text(for="melilla")!="Residente en Melilla"
+
+                                                            h4.ibe-searcher__passenger-title!="Familia numerosa:"
+                                                            .ibe-form__radio-group(data-passenger-family-radio)
+                                                                span.ibe_form__radio
+                                                                    input.ibe_form__radio-input(type="radio" name="family" id="nolarge" value="nolarge" checked)
+                                                                    label.ibe_form__radio-text(for="nolarge")!="No soy familia numerosa"
+                                                                span.ibe_form__radio
+                                                                    input.ibe_form__radio-input(type="radio" name="family" id="largespecial" value="largespecial")
+                                                                    label.ibe_form__radio-text(for="largespecial")!="Familia numerosa especial"
+                                                                span.ibe_form__radio
+                                                                    input.ibe_form__radio-input(type="radio" name="family" id="largegeneral" value="largegeneral")
+                                                                    label.ibe_form__radio-text(for="largegeneral")!="Familia numerosa general"
+
+                                                            input.ibe-button.ibe-box-form__button.ibe-button--big.ibe-button--grey(type="button" value="Guardar" data-function="save-passenger")
+
+                                            .col-xs-12
+                                                button.ibe-search-flights__search-button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block.ibe-button--icon(type="button")
+                                                    span.ibe-button__text!="Buscar"
+
+                div(id="tab-searcher-2")
+                    div.ibe-accordion
+                        div
+                            h4.title__h4.ibe-accordion__header(data-toggle="collapse" data-target="#tab_02")
+                                a.link(href="#" title="¿A dónde vas?")!="&iquest;A d&oacute;nde vas?"
+                            div.ibe-accordion__collapse(id="tab_02" data-outer-click="true")
+                                form.ibe_form(action="#" method="post")
+                                    fieldset.ibe-tab__container-desktop
+                                        legend.hideAccessible!="Vuelo+Hotel"
+                                        .row.no-gutters
+                                            .col-xs-12
+                                                .row.no-gutters
+                                                    .col-xs-12
+                                                        .row.no-gutters
+                                                            .col-xs-12
+                                                                div(class="ibe_form__group ibe_form__group--button-icon fc_form_group")
+                                                                    label(class="ibe_form__input-label", for="flight_hotel_origin") Origen
+                                                                    input(class="ibe_form__input-text", name="flight_hotel_origin", id="flight_hotel_origin", type="text", placeholder="Origen", data-autocomplete="cities" spellcheck='false')
+                                                                    div.hidden-xs.hidden-sm.hidden-md
+                                                                        button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-5")
+                                                                            span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                        +m-choose-city({
+                                                                            "class":"ibe-choose-city--origin",
+                                                                            "format": "desktop",
+                                                                            "id": "id-tab-collapse-5",
+                                                                            "tab_1": {
+                                                                                "href": "tab-cities-12",
+                                                                                "name": "Espa&ntilde;a",
+                                                                                "title": "España"
+                                                                            },
+                                                                            "tab_2": {
+                                                                                "href": "tab-cities-22",
+                                                                                "name": "Europa",
+                                                                                "title": "Europa"
+                                                                            },
+                                                                            "tab_3": {
+                                                                                "href": "tab-cities-32",
+                                                                                "name": "Am&eacute;rica",
+                                                                                "title": "América"
+                                                                            },
+                                                                            "tab_4": {
+                                                                                "href": "tab-cities-42",
+                                                                                "name": "Africa y Oriente Medio",
+                                                                                "title": "Africa y Oriente Medio"
+                                                                            },
+                                                                            "tab_5": {
+                                                                                "href": "tab-cities-52",
+                                                                                "name": "Asia y Ocean&iacute;a",
+                                                                                "title": "Asia y Oceanía"
+                                                                            }
+                                                                        })
+                                                                    div.hidden-lg.hidden-xl
+                                                                        button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-6")
+                                                                            span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                        +m-choose-city({
+                                                                            "class":"ibe-choose-city--origin",
+                                                                            "format": "responsive",
+                                                                            "id": "id-tab-collapse-6",
+                                                                            "tab_1": {
+                                                                                "href": "tab-cities-mobile-12",
+                                                                                "name": "Espa&ntilde;a",
+                                                                                "title": "España"
+                                                                            },
+                                                                            "tab_2": {
+                                                                                "href": "tab-cities-mobile-22",
+                                                                                "name": "Europa",
+                                                                                "title": "Europa"
+                                                                            },
+                                                                            "tab_3": {
+                                                                                "href": "tab-cities-mobile-32",
+                                                                                "name": "Am&eacute;rica",
+                                                                                "title": "América"
+                                                                            },
+                                                                            "tab_4": {
+                                                                                "href": "tab-cities-mobile-42",
+                                                                                "name": "Africa y Oriente Medio",
+                                                                                "title": "Africa y Oriente Medio"
+                                                                            },
+                                                                            "tab_5": {
+                                                                                "href": "tab-cities-mobile-52",
+                                                                                "name": "Asia y Ocean&iacute;a",
+                                                                                "title": "Asia y Oceanía"
+                                                                            }
+                                                                        })
+                                                            .col-xs-12
+                                                                div(class="ibe_form__group ibe_form__group--button-icon fc_form_group")
+                                                                    label(class="ibe_form__input-label", for="flight_hotel_destiny") Destino
+                                                                    input(class="ibe_form__input-text", name="flight_hotel_destiny", id="flight_hotel_destiny", type="text", placeholder="Destino", data-autocomplete="cities" spellcheck='false')
+                                                                    div.hidden-xs.hidden-sm.hidden-md
+                                                                        button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-60")
+                                                                            span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                        +m-choose-city({
+                                                                            "class":"ibe-choose-city--destination",
+                                                                            "format": "desktop",
+                                                                            "id": "id-tab-collapse-60",
+                                                                            "tab_1": {
+                                                                                "href": "tab-cities-13",
+                                                                                "name": "Espa&ntilde;a",
+                                                                                "title": "España"
+                                                                            },
+                                                                            "tab_2": {
+                                                                                "href": "tab-cities-23",
+                                                                                "name": "Europa",
+                                                                                "title": "Europa"
+                                                                            },
+                                                                            "tab_3": {
+                                                                                "href": "tab-cities-33",
+                                                                                "name": "Am&eacute;rica",
+                                                                                "title": "América"
+                                                                            },
+                                                                            "tab_4": {
+                                                                                "href": "tab-cities-43",
+                                                                                "name": "Africa y Oriente Medio",
+                                                                                "title": "Africa y Oriente Medio"
+                                                                            },
+                                                                            "tab_5": {
+                                                                                "href": "tab-cities-53",
+                                                                                "name": "Asia y Ocean&iacute;a",
+                                                                                "title": "Asia y Oceanía"
+                                                                            }
+                                                                        })
+                                                                    div.hidden-lg.hidden-xl
+                                                                        button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-7")
+                                                                            span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                        +m-choose-city({
+                                                                            "class":"ibe-choose-city--destination",
+                                                                            "format": "responsive",
+                                                                            "id": "id-tab-collapse-7",
+                                                                            "tab_1": {
+                                                                                "href": "tab-cities-mobile-13",
+                                                                                "name": "Espa&ntilde;a",
+                                                                                "title": "España"
+                                                                            },
+                                                                            "tab_2": {
+                                                                                "href": "tab-cities-mobile-23",
+                                                                                "name": "Europa",
+                                                                                "title": "Europa"
+                                                                            },
+                                                                            "tab_3": {
+                                                                                "href": "tab-cities-mobile-33",
+                                                                                "name": "Am&eacute;rica",
+                                                                                "title": "América"
+                                                                            },
+                                                                            "tab_4": {
+                                                                                "href": "tab-cities-mobile-43",
+                                                                                "name": "Africa y Oriente Medio",
+                                                                                "title": "Africa y Oriente Medio"
+                                                                            },
+                                                                            "tab_5": {
+                                                                                "href": "tab-cities-mobile-53",
+                                                                                "name": "Asia y Ocean&iacute;a",
+                                                                                "title": "Asia y Oceanía"
+                                                                            }
+                                                                        })
+                                                    .col-xs-12
+                                                        .row.no-gutters
+                                                            .col-xs-12
+                                                                div(class="ibe_form__group ibe_form__group--half")
+                                                                    div.ibe_form__group-half.icon-caret_derecha
+                                                                        label.ibe_form__input-label.hideAccessible(for="flight_hotel_round_date") Fecha ida
+                                                                        input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_hotel_round_date", id="flight_hotel_round_date", type="text", placeholder="Fecha ida", data-placeholder="placeholder" data-toggle="collapse" data-target="#searcher-calendar-4" data-cal="start" readonly)
+                                                                        +m-searcher-calendar({
+                                                                            id: "searcher-calendar-4",
+                                                                            type: "fly",
+                                                                            when: "start",
+                                                                            number: "3"
+                                                                        })
+                                                                    div.ibe_form__group-half
+                                                                        label.ibe_form__input-label.hideAccessible(for="flight_hotel_return_date") Fecha vuelta
+                                                                        input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_hotel_return_date", id="flight_hotel_return_date", type="text", placeholder="Fecha vuelta", data-placeholder="placeholder" data-toggle="collapse" data-target="#searcher-calendar-5" data-cal="end" readonly)
+                                                                        +m-searcher-calendar({
+                                                                            id: "searcher-calendar-5",
+                                                                            type: "fly",
+                                                                            when: "end",
+                                                                            number: "4"
+                                                                        })
+                                                            .col-xs-12
+                                                                div(class="ibe_form__group ibe_form__group--icon icon-caret_abajo")
+                                                                    input.pointer(class="ibe_form__input-text ibe_form__input-text--stop-animation", name="flight_hotel_room", id="flight_hotel_room", type="text", placeholder="1 Habitación" value="1 Habitación" data-toggle="collapse" data-target="#searcher-rooms-1" readonly)
+                                                                    label.ibe_form__input-label.hideAccessible(class="ibe_form__input-label", for="flight_hotel_room") Habitaciones
+                                                                    +m-searcher-room({
+                                                                        id: "searcher-rooms-1",
+                                                                        "input_adult": {
+                                                                            "id": "adult_{{index}}",
+                                                                            "name": "adult_{{index}}"
+                                                                        },
+                                                                        "input_children": {
+                                                                            "id": "children_{{index}}",
+                                                                            "name": "children_{{index}}"
+                                                                        },
+                                                                        "input_baby": {
+                                                                            "id": "baby_{{index}}",
+                                                                            "name": "baby_{{index}}"
+                                                                        }
+                                                                    })
+                                                div.ibe-searcher__options
+                                                    select(id="tarifa2", class="ibe_form__selectize ibe_form__selectize--empty ibe-searcher__rate", name="tarifa2", data-ibe-selectize, data-selectize='simple')
+                                                        option(value="00") Tarifa m&aacute;s econ&oacute;mica
+                                                        option(value="01") Business Class
+                                                        option(value="02") Premium economy
+                                                    label.ibe_form__selectize--label(for="tarifa2")!="Elige una tarifa"
+                                            .col-xs-12
+                                                button.ibe-search-flights__search-button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block.ibe-button--icon(type="button")
+                                                    span.ibe-button__text!="Buscar"
+
+                div(id="tab-searcher-3")
+                    div.ibe-accordion
+                        div
+                            h4.title__h4.ibe-accordion__header(data-toggle="collapse" data-target="#tab_03")
+                                a.link(href="#" title="¿A dónde vas?")!="&iquest;A d&oacute;nde vas?"
+                            div.ibe-accordion__collapse(id="tab_03" data-outer-click="true")
+                                form.ibe_form(action="#" method="post")
+                                    fieldset.ibe-tab__container-desktop
+                                        legend.hideAccessible!="Vuelo+Coche"
+                                        .row.no-gutters
+                                            .col-xs-12
+                                                .row.no-gutters
+                                                    .col-xs-12
+                                                        .row.no-gutters
+                                                            .col-xs-12
+                                                                div(class="ibe_form__group ibe_form__group--button-icon fc_form_group")
+                                                                    label(class="ibe_form__input-label", for="flight_car_origin") Origen
+                                                                    input(class="ibe_form__input-text", name="flight_car_origin", id="flight_car_origin", type="text", placeholder="Origen", data-autocomplete="cities" spellcheck='false')
+                                                                    div.hidden-xs.hidden-sm.hidden-md
+                                                                        button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-8")
+                                                                            span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                        +m-choose-city({
+                                                                            "class":"ibe-choose-city--origin",
+                                                                            "format": "desktop",
+                                                                            "id": "id-tab-collapse-8",
+                                                                            "tab_1": {
+                                                                                "href": "tab-cities-14",
+                                                                                "name": "Espa&ntilde;a",
+                                                                                "title": "España"
+                                                                            },
+                                                                            "tab_2": {
+                                                                                "href": "tab-cities-24",
+                                                                                "name": "Europa",
+                                                                                "title": "Europa"
+                                                                            },
+                                                                            "tab_3": {
+                                                                                "href": "tab-cities-34",
+                                                                                "name": "Am&eacute;rica",
+                                                                                "title": "América"
+                                                                            },
+                                                                            "tab_4": {
+                                                                                "href": "tab-cities-44",
+                                                                                "name": "Africa y Oriente Medio",
+                                                                                "title": "Africa y Oriente Medio"
+                                                                            },
+                                                                            "tab_5": {
+                                                                                "href": "tab-cities-54",
+                                                                                "name": "Asia y Ocean&iacute;a",
+                                                                                "title": "Asia y Oceanía"
+                                                                            }
+                                                                        })
+                                                                    div.hidden-lg.hidden-xl
+                                                                        button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-9")
+                                                                            span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                        +m-choose-city({
+                                                                            "class":"ibe-choose-city--origin",
+                                                                            "format": "responsive",
+                                                                            "id": "id-tab-collapse-9",
+                                                                            "tab_1": {
+                                                                                "href": "tab-cities-mobile-14",
+                                                                                "name": "Espa&ntilde;a",
+                                                                                "title": "España"
+                                                                            },
+                                                                            "tab_2": {
+                                                                                "href": "tab-cities-mobile-24",
+                                                                                "name": "Europa",
+                                                                                "title": "Europa"
+                                                                            },
+                                                                            "tab_3": {
+                                                                                "href": "tab-cities-mobile-34",
+                                                                                "name": "Am&eacute;rica",
+                                                                                "title": "América"
+                                                                            },
+                                                                            "tab_4": {
+                                                                                "href": "tab-cities-mobile-44",
+                                                                                "name": "Africa y Oriente Medio",
+                                                                                "title": "Africa y Oriente Medio"
+                                                                            },
+                                                                            "tab_5": {
+                                                                                "href": "tab-cities-mobile-54",
+                                                                                "name": "Asia y Ocean&iacute;a",
+                                                                                "title": "Asia y Oceanía"
+                                                                            }
+                                                                        })
+                                                            .col-xs-12
+                                                                div(class="ibe_form__group ibe_form__group--button-icon fc_form_group")
+                                                                    label(class="ibe_form__input-label", for="flight_car_destiny") Destino
+                                                                    input(class="ibe_form__input-text", name="flight_car_destiny", id="flight_car_destiny", type="text", placeholder="Destino", data-autocomplete="cities" spellcheck='false')
+                                                                    div.hidden-xs.hidden-sm.hidden-md
+                                                                        button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-10")
+                                                                            span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                        +m-choose-city({
+                                                                            "class":"ibe-choose-city--destination",
+                                                                            "format": "desktop",
+                                                                            "id": "id-tab-collapse-10",
+                                                                            "tab_1": {
+                                                                                "href": "tab-cities-15",
+                                                                                "name": "Espa&ntilde;a",
+                                                                                "title": "España"
+                                                                            },
+                                                                            "tab_2": {
+                                                                                "href": "tab-cities-25",
+                                                                                "name": "Europa",
+                                                                                "title": "Europa"
+                                                                            },
+                                                                            "tab_3": {
+                                                                                "href": "tab-cities-35",
+                                                                                "name": "Am&eacute;rica",
+                                                                                "title": "América"
+                                                                            },
+                                                                            "tab_4": {
+                                                                                "href": "tab-cities-45",
+                                                                                "name": "Africa y Oriente Medio",
+                                                                                "title": "Africa y Oriente Medio"
+                                                                            },
+                                                                            "tab_5": {
+                                                                                "href": "tab-cities-55",
+                                                                                "name": "Asia y Ocean&iacute;a",
+                                                                                "title": "Asia y Oceanía"
+                                                                            }
+                                                                        })
+                                                                    div.hidden-lg.hidden-xl
+                                                                        button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-11")
+                                                                            span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                        +m-choose-city({
+                                                                            "class":"ibe-choose-city--destination",
+                                                                            "format": "responsive",
+                                                                            "id": "id-tab-collapse-11",
+                                                                            "tab_1": {
+                                                                                "href": "tab-cities-mobile-15",
+                                                                                "name": "Espa&ntilde;a",
+                                                                                "title": "España"
+                                                                            },
+                                                                            "tab_2": {
+                                                                                "href": "tab-cities-mobile-25",
+                                                                                "name": "Europa",
+                                                                                "title": "Europa"
+                                                                            },
+                                                                            "tab_3": {
+                                                                                "href": "tab-cities-mobile-35",
+                                                                                "name": "Am&eacute;rica",
+                                                                                "title": "América"
+                                                                            },
+                                                                            "tab_4": {
+                                                                                "href": "tab-cities-mobile-45",
+                                                                                "name": "Africa y Oriente Medio",
+                                                                                "title": "Africa y Oriente Medio"
+                                                                            },
+                                                                            "tab_5": {
+                                                                                "href": "tab-cities-mobile-55",
+                                                                                "name": "Asia y Ocean&iacute;a",
+                                                                                "title": "Asia y Oceanía"
+                                                                            }
+                                                                        })
+                                                    .col-xs-12
+                                                        .row.no-gutters
+                                                            .col-xs-12
+                                                                div(class="ibe_form__group ibe_form__group--half")
+                                                                    div.ibe_form__group-half.icon-caret_derecha
+                                                                        label.ibe_form__input-label.hideAccessible(for="flight_car_round_date") Fecha ida
+                                                                        input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_car_round_date", id="flight_car_round_date", type="text", placeholder="Fecha ida", data-placeholder="placeholder" data-toggle="collapse" data-target="#searcher-calendar-6" data-cal="start" readonly)
+                                                                        +m-searcher-calendar({
+                                                                            id: "searcher-calendar-6",
+                                                                            type: "fly",
+                                                                            when: "start",
+                                                                            number: "5"
+                                                                        })
+                                                                    div.ibe_form__group-half
+                                                                        label.ibe_form__input-label.hideAccessible(for="flight_car_return_date") Fecha vuelta
+                                                                        input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="flight_car_return_date", id="flight_car_return_date", type="text", placeholder="Fecha vuelta", data-placeholder="placeholder" data-toggle="collapse" data-target="#searcher-calendar-7" data-cal="end" readonly)
+                                                                        +m-searcher-calendar({
+                                                                            id: "searcher-calendar-7",
+                                                                            type: "fly",
+                                                                            when: "end",
+                                                                            number: "6"
+                                                                        })
+                                                            .col-xs-12
+                                                                div(class="ibe_form__group ibe_form__group--icon icon-caret_abajo")
+                                                                    label.ibe_form__input-label.hideAccessible(class="ibe_form__input-label", for="flight_car_passengers") 1 Adulto
+                                                                    input.pointer(class="ibe_form__input-text ibe_form__input-text--stop-animation" name="flight_car_passengers" id="flight_car_passengers" type="text" placeholder="1 Adulto" data-toggle="collapse" data-target="#people-counter-2" data-value="1 Adulto" value="1 Adulto" data-text-passenger="pasajeros" readonly)
+                                                                    +m-people-counter({
+                                                                        id: "people-counter-2"
+                                                                    })
+                                                div.ibe-searcher__options
+                                                    select(id="tarifa3", class="ibe_form__selectize ibe_form__selectize--empty ibe-searcher__rate", name="tarifa3", data-ibe-selectize, data-selectize='simple')
+                                                        option(value="00") Tarifa m&aacute;s econ&oacute;mica
+                                                        option(value="01") Business Class
+                                                        option(value="02") Premium economy
+                                                    label.ibe_form__selectize--label(for="tarifa3")!="Elige una tarifa"
+                                            .col-xs-12
+                                                button.ibe-search-flights__search-button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block.ibe-button--icon(type="button")
+                                                    span.ibe-button__text!="Buscar"
+
+                div(id="tab-searcher-4")
+                    div.ibe-accordion
+                        div
+                            h4.title__h4.ibe-accordion__header(data-toggle="collapse" data-target="#tab_04")
+                                a.link(href="#" title="¿Dónde quieres el hotel?")!="&iquest;D&oacute;nde quieres el hotel?"
+                            div.ibe-accordion__collapse(id="tab_04" data-outer-click="true")
+                                form.ibe_form(action="#" method="post")
+                                    fieldset.ibe-tab__container-desktop
+                                        legend.hideAccessible!="Hotel"
+                                        .row.no-gutters
+                                            .col-xs-12
+                                                div(class="ibe_form__group ibe_form__group--button-icon fc_form_group")
+                                                    label(class="ibe_form__input-label", for="hotel_location") Ubicaci&oacute;n
+                                                    input(class="ibe_form__input-text", name="hotel_location", id="hotel_location", type="text", placeholder="Ubicación", data-autocomplete="cities" spellcheck='false')
+                                                    div.hidden-xs.hidden-sm.hidden-md
+                                                        button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-12")
+                                                            span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                        +m-choose-city({
+                                                            "class":"ibe-choose-city--destiny",
+                                                            "format": "desktop",
+                                                            "id": "id-tab-collapse-12",
+                                                            "tab_1": {
+                                                                "href": "tab-cities-16",
+                                                                "name": "Espa&ntilde;a",
+                                                                "title": "España"
+                                                            },
+                                                            "tab_2": {
+                                                                "href": "tab-cities-26",
+                                                                "name": "Europa",
+                                                                "title": "Europa"
+                                                            },
+                                                            "tab_3": {
+                                                                "href": "tab-cities-36",
+                                                                "name": "Am&eacute;rica",
+                                                                "title": "América"
+                                                            },
+                                                            "tab_4": {
+                                                                "href": "tab-cities-46",
+                                                                "name": "Africa y Oriente Medio",
+                                                                "title": "Africa y Oriente Medio"
+                                                            },
+                                                            "tab_5": {
+                                                                "href": "tab-cities-56",
+                                                                "name": "Asia y Ocean&iacute;a",
+                                                                "title": "Asia y Oceanía"
+                                                            }
+                                                        })
+                                                    div.hidden-lg.hidden-xl
+                                                        button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-13")
+                                                            span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                        +m-choose-city({
+                                                            "class":"ibe-choose-city--origin",
+                                                            "format": "responsive",
+                                                            "id": "id-tab-collapse-13",
+                                                            "tab_1": {
+                                                                "href": "tab-cities-mobile-16",
+                                                                "name": "Espa&ntilde;a",
+                                                                "title": "España"
+                                                            },
+                                                            "tab_2": {
+                                                                "href": "tab-cities-mobile-26",
+                                                                "name": "Europa",
+                                                                "title": "Europa"
+                                                            },
+                                                            "tab_3": {
+                                                                "href": "tab-cities-mobile-36",
+                                                                "name": "Am&eacute;rica",
+                                                                "title": "América"
+                                                            },
+                                                            "tab_4": {
+                                                                "href": "tab-cities-mobile-46",
+                                                                "name": "Africa y Oriente Medio",
+                                                                "title": "Africa y Oriente Medio"
+                                                            },
+                                                            "tab_5": {
+                                                                "href": "tab-cities-mobile-56",
+                                                                "name": "Asia y Ocean&iacute;a",
+                                                                "title": "Asia y Oceanía"
+                                                            }
+                                                        })
+                                            .col-xs-12
+                                                .row.no-gutters
+                                                    .col-xs-12
+                                                        div(class="ibe_form__group ibe_form__group--half")
+                                                            div.ibe_form__group-half.icon-caret_derecha
+                                                                label.hideAccessible(for="hotel_round_date") Fecha de entrada
+                                                                input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="hotel_round_date", id="hotel_round_date", type="text", placeholder="Fecha de entrada", data-placeholder="placeholder" data-toggle="collapse" data-target="#searcher-calendar-8" data-cal="start" readonly)
+                                                                +m-searcher-calendar({
+                                                                    id: "searcher-calendar-8",
+                                                                    type: "fly",
+                                                                    when: "start",
+                                                                    number: "7"
+                                                                })
+                                                            div.ibe_form__group-half
+                                                                label.hideAccessible(for="hotel_return_date") Fecha de salida
+                                                                input.ibe_form__input-text.ibe_form__input-text--stop-animation.pointer(name="hotel_return_date", id="hotel_return_date", type="text", placeholder="Fecha de salida", data-placeholder="placeholder" data-toggle="collapse" data-target="#searcher-calendar-9" data-cal="end" readonly)
+                                                                +m-searcher-calendar({
+                                                                    id: "searcher-calendar-9",
+                                                                    type: "fly",
+                                                                    when: "end",
+                                                                    number: "8"
+                                                                })
+                                                    .col-xs-12
+                                                        div(class="ibe_form__group ibe_form__group--icon icon-caret_abajo")
+                                                            label.ibe_form__input-label.hideAccessible(class="ibe_form__input-label", for="hotel_room") Habitaciones
+                                                            input.pointer(class="ibe_form__input-text ibe_form__input-text--stop-animation", name="hotel_room", id="hotel_room", type="text", placeholder="1 Habitación" value="1 Habitación" data-toggle="collapse" data-target="#searcher-rooms-2" readonly)
+                                                            +m-searcher-room({
+                                                                id: "searcher-rooms-2",
+                                                                "input_adult": {
+                                                                    "id": "adult_{{index}}",
+                                                                    "name": "adult_{{index}}"
+                                                                },
+                                                                "input_children": {
+                                                                    "id": "children_{{index}}",
+                                                                    "name": "children_{{index}}"
+                                                                },
+                                                                "input_baby": {
+                                                                    "id": "baby_{{index}}",
+                                                                    "name": "baby_{{index}}"
+                                                                }
+                                                                })
+                                            .col-xs-12
+                                                button.ibe-search-flights__search-button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block.ibe-button--icon(type="button")
+                                                    span.ibe-button__text!="Buscar"
+
+                div(id="tab-searcher-5")
+                    div.ibe-accordion
+                        div
+                            h4.title__h4.ibe-accordion__header(data-toggle="collapse" data-target="#tab_05")
+                                a.link(href="#" title="¿Dónde quieres el coche?")!="&iquest;D&oacute;nde quieres el coche?"
+                            div.ibe-accordion__collapse(id="tab_05" data-outer-click="true")
+                                form.ibe_form(action="#" method="post")
+                                    fieldset.ibe-tab__container-desktop
+                                        legend.hideAccessible!="Coche"
+                                        .row.no-gutters
+                                            .col-xs-12
+                                                .row.no-gutters.ibe-searcher__car-diferent-city.xui-car-city-hide
+                                                    .col-xs-12
+                                                        div(class="ibe_form__group ibe_form__group--button-icon fc_form_group")
+                                                            label(class="ibe_form__input-label", for="car_origin") Recogida
+                                                            input(class="ibe_form__input-text", name="car_origin", id="car_origin", type="text", placeholder="Recogida" data-autocomplete="cities" spellcheck='false')
+                                                            div.hidden-xs.hidden-sm.hidden-md
+                                                                button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-14")
+                                                                    span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                +m-choose-city({
+                                                                    "class":"ibe-choose-city--origin",
+                                                                    "format": "desktop",
+                                                                    "id": "id-tab-collapse-14",
+                                                                    "tab_1": {
+                                                                        "href": "tab-cities-17",
+                                                                        "name": "Espa&ntilde;a",
+                                                                        "title": "España"
+                                                                    },
+                                                                    "tab_2": {
+                                                                        "href": "tab-cities-27",
+                                                                        "name": "Europa",
+                                                                        "title": "Europa"
+                                                                    },
+                                                                    "tab_3": {
+                                                                        "href": "tab-cities-37",
+                                                                        "name": "Am&eacute;rica",
+                                                                        "title": "América"
+                                                                    },
+                                                                    "tab_4": {
+                                                                        "href": "tab-cities-47",
+                                                                        "name": "Africa y Oriente Medio",
+                                                                        "title": "Africa y Oriente Medio"
+                                                                    },
+                                                                    "tab_5": {
+                                                                        "href": "tab-cities-57",
+                                                                        "name": "Asia y Ocean&iacute;a",
+                                                                        "title": "Asia y Oceanía"
+                                                                    }
+                                                                })
+                                                            div.hidden-lg.hidden-xl
+                                                                button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-15")
+                                                                    span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                +m-choose-city({
+                                                                    "class":"ibe-choose-city--origin",
+                                                                    "format": "responsive",
+                                                                    "id": "id-tab-collapse-15",
+                                                                    "tab_1": {
+                                                                        "href": "tab-cities-mobile-17",
+                                                                        "name": "Espa&ntilde;a",
+                                                                        "title": "España"
+                                                                    },
+                                                                    "tab_2": {
+                                                                        "href": "tab-cities-mobile-27",
+                                                                        "name": "Europa",
+                                                                        "title": "Europa"
+                                                                    },
+                                                                    "tab_3": {
+                                                                        "href": "tab-cities-mobile-37",
+                                                                        "name": "Am&eacute;rica",
+                                                                        "title": "América"
+                                                                    },
+                                                                    "tab_4": {
+                                                                        "href": "tab-cities-mobile-47",
+                                                                        "name": "Africa y Oriente Medio",
+                                                                        "title": "Africa y Oriente Medio"
+                                                                    },
+                                                                    "tab_5": {
+                                                                        "href": "tab-cities-mobile-57",
+                                                                        "name": "Asia y Ocean&iacute;a",
+                                                                        "title": "Asia y Oceanía"
+                                                                    }
+                                                                })
+                                                    .col-xs-12
+                                                        div(class="ibe_form__group ibe_form__group--button-icon fc_form_group")
+                                                            label(class="ibe_form__input-label", for="car_destiny") Devoluci&oacute;n
+                                                            input(class="ibe_form__input-text", name="car_destiny", id="car_destiny", type="text", placeholder="Devolución" data-autocomplete="cities" spellcheck='false')
+                                                            div.hidden-xs.hidden-sm.hidden-md
+                                                                button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-16")
+                                                                    span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                +m-choose-city({
+                                                                    "class":"ibe-choose-city--destination",
+                                                                    "format": "desktop",
+                                                                    "id": "id-tab-collapse-16",
+                                                                    "tab_1": {
+                                                                        "href": "tab-cities-18",
+                                                                        "name": "Espa&ntilde;a",
+                                                                        "title": "España"
+                                                                    },
+                                                                    "tab_2": {
+                                                                        "href": "tab-cities-28",
+                                                                        "name": "Europa",
+                                                                        "title": "Europa"
+                                                                    },
+                                                                    "tab_3": {
+                                                                        "href": "tab-cities-38",
+                                                                        "name": "Am&eacute;rica",
+                                                                        "title": "América"
+                                                                    },
+                                                                    "tab_4": {
+                                                                        "href": "tab-cities-48",
+                                                                        "name": "Africa y Oriente Medio",
+                                                                        "title": "Africa y Oriente Medio"
+                                                                    },
+                                                                    "tab_5": {
+                                                                        "href": "tab-cities-58",
+                                                                        "name": "Asia y Ocean&iacute;a",
+                                                                        "title": "Asia y Oceanía"
+                                                                    }
+                                                                })
+                                                            div.hidden-lg.hidden-xl
+                                                                button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-17")
+                                                                    span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+                                                                +m-choose-city({
+                                                                    "class":"ibe-choose-city--destination",
+                                                                    "format": "responsive",
+                                                                    "id": "id-tab-collapse-17",
+                                                                    "tab_1": {
+                                                                        "href": "tab-cities-mobile-18",
+                                                                        "name": "Espa&ntilde;a",
+                                                                        "title": "España"
+                                                                    },
+                                                                    "tab_2": {
+                                                                        "href": "tab-cities-mobile-28",
+                                                                        "name": "Europa",
+                                                                        "title": "Europa"
+                                                                    },
+                                                                    "tab_3": {
+                                                                        "href": "tab-cities-mobile-38",
+                                                                        "name": "Am&eacute;rica",
+                                                                        "title": "América"
+                                                                    },
+                                                                    "tab_4": {
+                                                                        "href": "tab-cities-mobile-48",
+                                                                        "name": "Africa y Oriente Medio",
+                                                                        "title": "Africa y Oriente Medio"
+                                                                    },
+                                                                    "tab_5": {
+                                                                        "href": "tab-cities-mobile-58",
+                                                                        "name": "Asia y Ocean&iacute;a",
+                                                                        "title": "Asia y Oceanía"
+                                                                    }
+                                                                })
+
+                                                div.ibe-searcher__car-same-city(class="ibe_form__group ibe_form__group--button-icon fc_form_group")
+                                                    label(class="ibe_form__input-label", for="car_collect_return") Recogida y devoluci&oacute;n
+                                                    input(class="ibe_form__input-text", name="car_collect_return", id="car_collect_return", type="text", placeholder="Recogida y devolución", data-autocomplete="cities" spellcheck='false')
+                                                    div.hidden-xs.hidden-sm.hidden-md
+                                                        button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-18")
+                                                            span.ibe_form__input-label.hideAccessible!="Desplegar"
+                                                        +m-choose-city({
+                                                            "class":"ibe-choose-city--destiny",
+                                                            "format": "desktop",
+                                                            "id": "id-tab-collapse-18",
+                                                            "tab_1": {
+                                                                "href": "tab-cities-19",
+                                                                "name": "Espa&ntilde;a",
+                                                                "title": "España"
+                                                            },
+                                                            "tab_2": {
+                                                                "href": "tab-cities-29",
+                                                                "name": "Europa",
+                                                                "title": "Europa"
+                                                            },
+                                                            "tab_3": {
+                                                                "href": "tab-cities-39",
+                                                                "name": "Am&eacute;rica",
+                                                                "title": "América"
+                                                            },
+                                                            "tab_4": {
+                                                                "href": "tab-cities-49",
+                                                                "name": "Africa y Oriente Medio",
+                                                                "title": "Africa y Oriente Medio"
+                                                            },
+                                                            "tab_5": {
+                                                                "href": "tab-cities-59",
+                                                                "name": "Asia y Ocean&iacute;a",
+                                                                "title": "Asia y Oceanía"
+                                                            }
+                                                        })
+                                                    div.hidden-lg.hidden-xl
+                                                        button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-19")
+                                                            span.ibe_form__input-label.hideAccessible!="Desplegar"
+                                                        +m-choose-city({
+                                                            "class":"ibe-choose-city--origin",
+                                                            "format": "responsive",
+                                                            "id": "id-tab-collapse-19",
+                                                            "tab_1": {
+                                                                "href": "tab-cities-mobile-19",
+                                                                "name": "Espa&ntilde;a",
+                                                                "title": "España"
+                                                            },
+                                                            "tab_2": {
+                                                                "href": "tab-cities-mobile-29",
+                                                                "name": "Europa",
+                                                                "title": "Europa"
+                                                            },
+                                                            "tab_3": {
+                                                                "href": "tab-cities-mobile-39",
+                                                                "name": "Am&eacute;rica",
+                                                                "title": "América"
+                                                            },
+                                                            "tab_4": {
+                                                                "href": "tab-cities-mobile-49",
+                                                                "name": "Africa y Oriente Medio",
+                                                                "title": "Africa y Oriente Medio"
+                                                            },
+                                                            "tab_5": {
+                                                                "href": "tab-cities-mobile-59",
+                                                                "name": "Asia y Ocean&iacute;a",
+                                                                "title": "Asia y Oceanía"
+                                                            }
+                                                        })
+
+                                                div.ibe-searcher__options
+                                                    .ibe-form__checkbox
+                                                        input.ibe-form__checkbox-input(type="checkbox" id="sameoffice" name="sameoffice" value="sameoffice" checked data-function="sameoffice")
+                                                        label.ibe-form__checkbox-label(for="sameoffice")
+                                                            span!="Recoger y devolver en la misma oficina"
+                                            .col-xs-12
+                                                .row.no-gutters
+                                                    .col-xs-12
+                                                        div(class="ibe_form__group-full icon-caret_abajo")
+                                                            label.ibe_form__input-label.hideAccessible(class="ibe_form__input-label", for="car_day_collection") D&iacute;a y hora de recogida
+                                                            input.pointer(class="ibe_form__input-text", name="car_day_collection", id="car_day_collection", type="text", placeholder="Día y hora de recogida" data-toggle="collapse" data-target="#searcher-calendar-10" data-cal="start", data-placeholder="placeholder" readonly)
+                                                            +m-searcher-calendar({
+                                                                id: "searcher-calendar-10",
+                                                                type: "car",
+                                                                when: "start",
+                                                                number: "1"
+                                                            })
+                                                    .col-xs-12
+                                                        div(class="ibe_form__group-full icon-caret_abajo")
+                                                            label.ibe_form__input-label.hideAccessible(class="ibe_form__input-label", for="car_day_return") D&iacute;a y hora de devoluci&oacute;n
+                                                            input.pointer(class="ibe_form__input-text", name="car_day_return", id="car_day_return", type="text", placeholder="Día y hora de devolución" data-toggle="collapse" data-target="#searcher-calendar-11" data-cal="end", data-placeholder="placeholder" readonly)
+                                                            +m-searcher-calendar({
+                                                                id: "searcher-calendar-11",
+                                                                type: "car",
+                                                                when: "start",
+                                                                number: "2"
+                                                            })
+                                            .col-xs-12
+                                                button.ibe-search-flights__search-button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block.ibe-button--icon(type="button")
+                                                    span.ibe-button__text!="Buscar"

@@ -1,0 +1,136 @@
+mixin m-searcher-flight-status-airport(params)
+	form.ibe_form(data-valid-form action="#" method="post")
+		fieldset.ibe-tab__container-desktop
+			legend.hideAccessible!="Estado de vuelos"
+			div.row
+				.hidden-xl.hidden-lg.hidden-md.col-sm-12
+					h3.title.title__h5 Aeropuerto
+			.ibe-searcher__row.ibe-searcher__row--no-padding.ibe-searcher__row--no-margin
+				.ibe-searcher__col.ibe-searcher__col--search-airport
+					.ibe_form__radio-box
+						span.ibe_form__radio
+							input.ibe_form__radio-input(type="radio" name="origen" id="salida" value="salida" checked)
+							label.ibe_form__radio-text(for="salida")!="Salida"
+						span.ibe_form__radio
+							input.ibe_form__radio-input(type="radio" name="origen" id="destino" value="destino")
+							label.ibe_form__radio-text(for="destino")!="Destino"
+				.ibe-searcher__col.ibe-searcher__col--search-selector
+					label.ibe_form__selectize--label(for="aerolineas")!="Todas las aerol&iacute;neas"
+					select(id="aerolineas", class="ibe-select", name="aerolineas", data-addscroll="yes", data-selectmenu="")
+						option(value="00") Todas las aerol&iacute;neas
+						option(value="01") American Airlines
+						option(value="02") British Airways
+						option(value="03") Cathay Pacific
+						option(value="04") Finnair
+						option(value="05") Iberia
+						option(value="06") Japan Airlines
+						option(value="07") Latam
+
+			.ibe-searcher__row.ibe-searcher__row--no-padding.ibe-searcher__row--no-margin
+				.ibe-searcher__col.ibe-searcher__col--remedium
+					div(class="ibe_form__group ibe_form__group--button-icon fc_form_group", data-hidden-button="true")
+						label(class="ibe_form__input-label", for="flight_destiny")!="Aeropuerto"
+						input(class="ibe_form__input-text", name="flight_destiny", id="flight_destiny", type="text", placeholder="Aeropuerto" data-autocomplete="cities" spellcheck='false', data-validate="input-destiny", required)
+						p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Debes elegir un aeropuerto")
+						div.hidden-xs.hidden-sm.hidden-md
+							button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#id-tab-collapse-as01" data-close="outsideclick")
+								span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar aeropuertos" data-status-close="Click para desplegar aeropuertos")!="Click para desplegar aeropuertos"
+							+m-choose-city({
+								"class": "ibe-choose-city--destination",
+								"format": "desktop",
+								"id": "id-tab-collapse-as01",
+								"dataClose": true,
+								"tab_1": {
+									"href": "tab-cities-13-7",
+									"name": "Espa&ntilde;a",
+									"title": "España"
+								},
+								"tab_2": {
+									"href": "tab-cities-23-7",
+									"name": "Europa",
+									"title": "Europa"
+								},
+								"tab_3": {
+									"href": "tab-cities-33-7",
+									"name": "Am&eacute;rica",
+									"title": "América"
+								},
+								"tab_4": {
+									"href": "tab-cities-43-7",
+									"name": "Africa y Oriente Medio",
+									"title": "Africa y Oriente Medio"
+								},
+								"tab_5": {
+									"href": "tab-cities-53-7",
+									"name": "Asia y Ocean&iacute;a",
+									"title": "Asia y Oceanía"
+								}
+							})
+						div.hidden-lg.hidden-xl
+							button.ibe_form__input-button.ibe_form__input-button--medium.icon-senalizacion_mapas(type="button" data-toggle="collapse" data-target="#m-id-tab-collapse-as01" data-close="outsideclick")
+								span.hideAccessible(data-toggle-status="true" data-status-open="Click para plegar ciudades" data-status-close="Click para desplegar ciudades")!="Click para desplegar ciudades"
+							+m-choose-city({
+								"class": "ibe-choose-city--destination",
+								"format": "responsive",
+								"dataClose": true,
+								"id": "m-id-tab-collapse-as01",
+								"tab_1": {
+									"href": "tab-cities-mobile-13",
+									"name": "Espa&ntilde;a",
+									"title": "España"
+								},
+								"tab_2": {
+									"href": "tab-cities-mobile-23",
+									"name": "Europa",
+									"title": "Europa"
+								},
+								"tab_3": {
+									"href": "tab-cities-mobile-33",
+									"name": "Am&eacute;rica",
+									"title": "América"
+								},
+								"tab_4": {
+									"href": "tab-cities-mobile-43",
+									"name": "Africa y Oriente Medio",
+									"title": "Africa y Oriente Medio"
+								},
+								"tab_5": {
+									"href": "tab-cities-mobile-53",
+									"name": "Asia y Ocean&iacute;a",
+									"title": "Asia y Oceanía"
+								}
+							})
+				.ibe-searcher__col.ibe-searcher__col--small
+					.ibe_form__group.fc_form_group.ibe-datepicker-general
+						label.ibe_form__input-label(for='form_calendar3') Fecha
+						input.ibe_form__input-text.pointer(name='form_calendar3', id="form_calendar3" type='text', placeholder='DD/MM/YYYY', data-format='DD/MM/YYYY', data-toggle='collapse', data-target='#calendar-form3', data-cal='claim', data-placeholder='placeholder', data-close='outsideclick', data-validator='date', data-validator-range='range-custom', data-range-min="7", data-range-max="3", required)
+						button.ibe_form__input-button.ibe_form__input-button--medium.icon.icon-calendario(type='button', data-toggle='collapse', data-target='#calendar-form3', data-close='outsideclick')
+							span.hideAccessible(data-toggle-status='true', data-status-open='Click para plegar calendario', data-status-close='Click para desplegar calendario') Click para desplegar calendario
+						+m-searcher-calendar-simple({
+							className: "ibe-searcher__calendar--start ibe-searcher__calendar--right ibe-searcher__calendar--claim",
+							id: "calendar-form3",
+							number: "form-1",
+							claims: true
+						})
+						p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+						p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="El formato no es válido")
+						p.ibe_form__msg-info.hidden(data-validate="range-min", data-validate-text="La fecha seleccionada no puede superar 7 dias antes de la actual")
+						p.ibe_form__msg-info.hidden(data-validate="range-max", data-validate-text="La fecha seleccionada no puede superar 3 dias despues de la actual")
+				.ibe-searcher__col.ibe-searcher__col--small
+					.ibe_form__group.fc_form_group.ibe__form__group--select.ibe_form__group--select-new(data-selectmenu_claim)
+						label.ibe_form__selectize--label(for="hora")
+							span.ibe_form__input-text Hora
+						select(id="hora", class="ibe-select ibe_form__input-text", name="hora", data-selectmenu,  required)
+							option(value="") Hora
+							option(value="09:00") 09:00
+							option(value="10:00") 10:00
+							option(value="11:00") 11:00
+						p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+						
+
+				.ibe-searcher__col.ibe-searcher__col--button-type-2
+					.ibe_form__group.ibe_form__group--button-icon.fc_form_group
+						button.ibe-search-flights__search-button.ibe-button.ibe-button--red.ibe-button--xbig.ibe-button--block.ibe-button--icon(type="submit",data-validate="origin-destiny")
+							span.ibe-button__text!="Buscar"
+							span.hideAccessible!="Buscar"
+							span.ibe-button__icon.icon-buscar

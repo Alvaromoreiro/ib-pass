@@ -1,0 +1,63 @@
+extends _general/layout__primary
+include _modules/_ibe_searcher-flight-status
+
+block title
+	title!="IBERIA - Estado de vuelos"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main
+		+m-ibe-breadcrumbs({
+			"menu": "advSearch"
+		})
+		section.container
+			.row
+				.col-xs-12
+					header.ibe-flight-status__header.ibe-flight-status__header--center
+						h1.title.title__h1.title--no-paddT.title--p-bottom-6!="Llegadas y salidas"
+						h2.title.title__h5.title--no-padd.title.title__h5--small!="Conoce la informaci&oacute;n de los vuelos programados, seleccionando el origen y destino as&iacute; como las fechas de salida y regreso (siempre ser&aacute; la fecha y la hora local del aeropuerto seleccionado)."
+			.row
+				.col-xs-12
+					section.ibe-flight-status.ibe-flight-status__section
+						div.ibe-tab.ibe-tab--main
+							ul.ibe-tab__menu(data-tab="bootstrap-tabdrop", data-tab-text="Otros")
+								li.ibe-tab__menu-item
+									a.ibe-tab__menu-item__text(href="#tab-1", title="Numero de vuelo", data-toggle="tab")!="N&uacute;mero de vuelo"
+								li.ibe-tab__menu-item.active
+									a.ibe-tab__menu-item__text(href="#tab-2", title="Origen y destino" data-toggle="tab")!="Origen y destino"
+							.tab-content
+								//- CONTAINER NUMERO DE VUELO
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium(id="tab-1" data-function="radiobuttons-tabs")
+									div.ibe-tab__container-desktop
+								//- CONTAINER ORIGEN DESTINO
+								.tab-pane.ibe-tab__container.ibe-tab__container--padding-medium.active(id="tab-2" data-function="radiobuttons-tabs")
+									//- SEARCH
+									article.ibe-flignt-status.ibe-flight-status__box
+										+m-searcher-flight-status()
+
+					//- LAST HOUR OF FLIGHTS
+					section.ibe-flight-status.ibe-flight-status__section
+						//- Reused component, that's why infocheckin remains
+						article.ibe-infocheckin__box.ibe-infocheckin__box--icon
+							figure.ibe-figure
+								img.ibe-img(src=globals.imgPath + "/modules/icons/svgs/informacion_2.svg" alt="información")
+							h3.title.title__h4.ibe-infocheckin__box-title!="&Uacute;ltima hora de nuestros vuelos"
+							div.ibe-collapse_moreInfo(data-view-more='parent')
+								div.xui-collapse_moreInfo-text-close(data-view-more='container')
+									p.paragraph.paragraph__regular!="Virus Zika. Flesibilizaci&oacute;n de tarifas para mujeres embarazadas"
+									p.paragraph.paragraph__regular!="Aliquam in purus vel augue lobortis laoreet. Aliquam et mauris placerat, consequat arcu vitae, bibendum dolor. Sed a massa consequat, eleifend neque vel, volutpat turpis."
+									p.paragraph.paragraph__regular!="Praesent tincidunt tristique massa et cursus. Cras felis mi, aliquam sit amet dignissim in, elementum vitae magna. In in interdum ligula. Vestibulum vitae dui eget felis dapibus volutpat."
+								a.link.link__regular.ibe-link-view-more.ibe-link-view-more--more(href="#" title="Mostrar más" data-value="more" data-view-more='button', data-text-expanded="Ocultar" data-text-collapsed="Leer más") Leer m&aacute;s
+
+
+	+m-footer({
+		"full": true
+	})

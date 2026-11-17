@@ -1,0 +1,13 @@
+mixin m-quick-links(params)
+	div(class="ibe-quick-links ibe-quick-links__mt ibe-quick-links__mb "+(params.modifier))
+		h2(class="ibe-quick-links__title"+(params.icon!=undefined?" "+params.icon:""))!=(params.title!=undefined?params.title: "Enlaces rapidos")
+			if (params.link)
+				a.ibe-quick-links__direct-link.icon-flecha_1_derecha(href="#", title=params.link.text)!=params.link.text
+		ul.ibe-quick-links__list
+			each item in params.items
+				li.ibe-quick-links__item
+					if (item.button)
+						button.ibe-quick-links__link.link.link__regular(title="Ir a "+item.button, onclick="window.location.href='http://google.es'")!=item.button
+					else
+						a.ibe-quick-links__link.link.link__regular(href="#", title="Ir a "+item.text)!=item.text
+

@@ -1,0 +1,782 @@
+extends _general/layout__primary
+block title
+	title!="IBERIA - Larga distancia aviones nuevos"
+block body
+	// Inicio nuevo header
+	+m-header-new({
+		"login": false
+	})
+
+	// Inicio nuevo menu
+	+m-menu-new({
+		"login": false
+	})
+	// End wrapper
+	main
+		+m-ibe-breadcrumbs({
+			"menu": "checkin"
+		})
+		section.container
+			div.row
+				div.col-lg-9.col-xs-12.col-lg-push-3
+					section.ibe-infocheckin
+						header.ibe-infocheckin__header
+							h1.title.title__h1.ibe-infocheckin__header-primary!="Larga distancia aviones nuevos"
+							h2.title.title__h5.ibe-infocheckin__header-secondary!="Un mundo de entretenimiento a tu alrededor"
+						article.ibe-infocheckin__box.ibe-infocheckin__box--tab.ibe-infocheckin__box--empty
+							div.ibe-tab.ibe-tab--main
+								ul.ibe-tab__menu(data-tab="bootstrap-tabdrop" data-tab-text="Otros...")
+									li.ibe-tab__menu-item.active
+										a.ibe-tab__menu-item__text(href="#tab-1" title="Películas" data-toggle="tab") Pel&iacute;culas
+									li.ibe-tab__menu-item
+										a.ibe-tab__menu-item__text(href="#tab-2" title="Cine Club" data-toggle="tab") Cine Club
+									li.ibe-tab__menu-item
+										a.ibe-tab__menu-item__text(href="#tab-3" title="Series y canales" data-toggle="tab") Series y canales
+									li.ibe-tab__menu-item
+										a.ibe-tab__menu-item__text(href="#tab-4" title="Infantil" data-toggle="tab") Infantil
+									li.ibe-tab__menu-item
+										a.ibe-tab__menu-item__text(href="#tab-5" title="Música" data-toggle="tab") M&uacute;sica
+								.tab-content
+									.tab-pane.ibe-tab__container.ibe-tab__container--img.active(id="tab-1" data-function="filter-tab")
+										form.ibe_form(method="post", action="#ni")
+											fieldset.ibe_form__fieldset
+												legend.hideAccessible Formulario para elegir una opci&oacute;n
+												.ibe_form__radiobutton-tab
+													.ibe_form__radio
+														input(checked,type="radio", name="radios1", id="id-from-spain", data-info="Actual", class="ibe_form__radio-input")
+														label(for="id-from-spain", class="ibe_form__radio-text") Vuelos salida de Espa&ntilde;a
+													.ibe_form__radio
+														input(type="radio", name="radios1", id="id-to-spain", data-info="Siguiente", class="ibe_form__radio-input")
+														label(for="id-to-spain", class="ibe_form__radio-text") Vuelos llegada de Espa&ntilde;a
+												div.ibe-one-option
+													span.ibe-one-option__text!="Idioma del "
+													span.paragraph.paragraph__regular.paragraph__regular--bold!="audio y/o subt&iacute;tulos:"
+													ul.ibe-one-option__list
+														li.ibe-one-option__list-item
+															a.ibe-one-option__list-item__text(href="#" title="Seleccionar todos" data-show-hide="hide" data-show-hide-target="#filter" aria-expanded="true") TODOS
+														li.ibe-one-option__list-item.active
+															a.ibe-one-option__list-item__text(href="#" title="Seleccionar por filtros" data-show-hide="show" data-show-hide-target="#filter" aria-expanded="true") FILTRAR
+												div.ibe-filter(id="filter", aria-expanded="true")
+													ul.ibe-filter__main
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox", id="castellano", name="castellano")
+															label.ibe-filter__label(for="castellano") Espa&ntilde;ol castellano
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox", id="latinoamericano", name="latinoamericano", checked)
+															label.ibe-filter__label(for="latinoamericano") Espa&ntilde;ol latinoamericano
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox", id="deutsch", name="deutsch", checked)
+															label.ibe-filter__label(for="deutsch") Deutsch
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox", id="english", name="english", checked)
+															label.ibe-filter__label(for="english") English
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox", id="francais", name="francais", checked)
+															label.ibe-filter__label(for="francais") Fran&ccedil;ais
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox", id="deutsch0", name="deutsch0")
+															label.ibe-filter__label(for="deutsch0") Deutsch
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox", id="english0", name="english0")
+															label.ibe-filter__label(for="english0") English
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox", id="francais0", name="francais0")
+															label.ibe-filter__label(for="francais0") Fran&ccedil;ais
+										.ibe-films-table
+											div.GITheWall(data-function="google-gallery-1")
+												ul.ibe-films-table__list
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#star-trek",data-id="Actual, Siguiente")
+														a.ibe-films-table__link(href="#" title="star-trek")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/star-trek.png"  alt="star-trek")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#buscando-a-dory",data-id="Actual, Siguiente")
+														a.ibe-films-table__link(href="#" title="buscando-a-dory")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/buscando-a-dory.png" alt="buscando-a-dory")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#family-fang",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="family-fang")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/family-fang.png" alt="family-fang")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#x-men",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="x-men")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/x-men.png" alt="x-men")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#independence-day",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="independence-day")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																		data-src=globals.imgPath + "/modules/ibe_films/independence-day.png" alt="independence-day")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#love-friendship",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="love-friendship")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																	data-src=globals.imgPath + "/modules/ibe_films/love-friendship.png" alt="love-friendship")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#la-noche-que-mi-madre-mato-a-mi-padre",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="la-noche-que-mi-madre-mato-a-mi-padre")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/la-noche-que-mi-madre-mato-a-mi-padre.png" alt="Burguer")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#meadowland",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="meadowland")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/meadowland.png" alt="meadowland")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#ones-below",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="ones-below")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/ones-below.png" alt="ones-below")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#neighbors-2",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="neighbors")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/neighbors-2.png" alt="neighbors")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#love-friendship2",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="love-friendship")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/love-friendship.png" alt="love-friendship")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#la-noche-que-mi-madre-mato-a-mi-padre2",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="la-noche-que-mi-madre-mato-a-mi-padre")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/la-noche-que-mi-madre-mato-a-mi-padre.png" alt="Burguer")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#meadowland2",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="meadowland")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/meadowland.png" alt="meadowland")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#ones-below2",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="ones-below")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/ones-below.png" alt="ones-below2")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#neighbors2",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="neighbors")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/neighbors-2.png" alt="neighbors")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#star-trek2",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="star-trek")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/star-trek.png" alt="star-trek")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#buscando-a-dory2",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="buscando-a-dory")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/buscando-a-dory.png" alt="buscando-a-dory")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#family-fang2",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="family-fang")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/family-fang.png" alt="family-fang")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#x-men2",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="x-men")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/x-men.png" alt="x-men")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#independence-day2",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="independence-day")
+															figure.ibe-figure
+																img.ibe-img(src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+																			data-src=globals.imgPath + "/modules/ibe_films/independence-day.png" alt="independence-day")
+											//-div(data-id="Actual")
+											div(data-template="paper")
+												script(type="text/template", id="star-trek")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Star trek: M&aacute;s all&aacute;
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/star-trek-big.png" alt="Star trek: Más allá")
+																ul.ibe-films-table__info-list
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text acci&oacute;n
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text No recomendada para menores de 12 a&ntilde;os
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text 126 min
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text Chris Pine, Zachary Quinto, Idris Elba
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text Ingl&eacute;s / Espa&ntilde;ol castellano /Espa&ntilde;ol latinoamericano / Franc&eacute;s / Alem&aacute;n / Italiano / Portugu&eacute;s Brasile&ntilde;o / Japones
+																p.paragraph.paragraph__regular!="Despues de que el Enterprise se viera obligado a aterrizar en un mundo misterioso, el capit&aacute;n Kirk, Spock y el resto de la tripulaci&oacute;n se enfrentan a una raza alien&iacute;gena avanzada mientras tratan de encontrar la forma de salir de ese planeta hostil."
+												script(type="text/template" id="buscando-a-dory")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Buscando a Dory
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/buscando-a-dory-big.png" alt="Buscando a Dory")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="family-fang")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Family Fang
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/family-fang-big.png" alt="Family Fang")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="x-men")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary X-Men: Apocalypse
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/x-men-big.png" alt="X-Men: Apocalypse")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="independence-day")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Independence day: Resurgence
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/independence-day-big.png" alt="Independence day: Resurgence")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="love-friendship")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Love & Friendship
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/love-and-friendship-big.png" alt="Love & Friendship")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="la-noche-que-mi-madre-mato-a-mi-padre")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary La noche que mi madre mat&oacute; a mi padre
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/la-noche-que-mi-madre-mato-a-mi-padre-big.png" alt="La noche que mi madre mat&oacute; a mi padre")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="meadowland")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Meadowland
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/meadowland-big.png" alt="Meadowland")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="ones-below")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Ones below
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/ones-below-big.png" alt="Ones below")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="neighbors-2")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Neighbors 2
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/neighbors-2-big.png" alt="Neighbors 2")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												//-div(data-id="Siguiente")
+												script(type="text/template" id="love-friendship2")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Love & Friendship
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/love-and-friendship-big.png" alt="Love & Friendship")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="la-noche-que-mi-madre-mato-a-mi-padre2")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary La noche que mi madre mato a mi padre
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/la-noche-que-mi-madre-mato-a-mi-padre-big.png" alt="La noche que mi madre mato a mi padre")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="meadowland2")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Meadowland
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/meadowland-big.png" alt="Meadowland")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="ones-below2")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Ones below
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/ones-below-big.png" alt="Ones below")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="neighbors2")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Neighbors 2
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/neighbors-2-big.png" alt="Neighbors 2")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="star-trek2")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Star trek: M&aacute;s all&aacute;
+																//-
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/star-trek-big.png" alt="Star trek: Más allá")
+																ul.ibe-films-table__info-list
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text acci&oacute;n
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text No recomendada para menores de 12 a&ntilde;os
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text 126 min
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text Chris Pine, Zachary Quinto, Idris Elba
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text Ingl&eacute;s / Espa&ntilde;ol castellano /Espa&ntilde;ol latinoamericano / Franc&eacute;s / Alem&aacute;n / Italiano / Portugu&eacute;s Brasile&ntilde;o / Japones
+																p.paragraph.paragraph__regular!="Despues de que el Enterprise se viera obligado a aterrizar en un mundo misterioso, el capit&aacute;n Kirk, Spock y el resto de la tripulaci&oacute;n se enfrentan a una raza alien&iacute;gena avanzada mientras tratan de encontrar la forma de salir de ese planeta hostil."
+												script(type="text/template" id="buscando-a-dory2")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Buscando a Dory
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/buscando-a-dory-big.png" alt="Buscando a Dory")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="family-fang2")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Family Fang
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/family-fang-big.png" alt="Family Fang")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="x-men2")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary X-Men: Apocalypse
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/x-men-big.png" alt="X-Men: Apocalypse")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="independence-day2")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Independence day: Resurgence
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/independence-day-big.png" alt="Independence day: Resurgence")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+
+									.tab-pane.ibe-tab__container.ibe-tab__container--img(id="tab-2" data-function="filter-tab-2")
+										form.ibe_form(method="post", action="#ni")
+											fieldset.ibe_form__fieldset
+												legend.hideAccessible Formulario para elegir una opci&oacute;n
+												.ibe_form__radiobutton-tab
+													.ibe_form__radio
+														input(checked,type="radio", name="radios2", id="id-from-spain-2", data-info="Actual", class="ibe_form__radio-input")
+														label(for="id-from-spain-2", class="ibe_form__radio-text") Vuelos salida de Espa&ntilde;a
+													.ibe_form__radio
+														input(type="radio", name="radios2", id="id-to-spain-2", data-info="Siguiente", class="ibe_form__radio-input")
+														label(for="id-to-spain-2", class="ibe_form__radio-text") Vuelos llegada de Espa&ntilde;a
+												div.ibe-one-option
+													span.ibe-one-option__text!="Idioma del "
+													span.paragraph.paragraph__regular.paragraph__regular--bold!="audio y/o subt&iacute;tulos:"
+													ul.ibe-one-option__list
+														li.ibe-one-option__list-item
+															a.ibe-one-option__list-item__text(href="#", title="Seleccionar todos", data-show-hide="hide", data-show-hide-target="#filter-2", aria-expanded="true") TODOS
+														li.ibe-one-option__list-item.active
+															a.ibe-one-option__list-item__text(href="#", title="Seleccionar por filtros", data-show-hide="show", data-show-hide-target="#filter-2", aria-expanded="true") FILTRAR
+												div.ibe-filter(id="filter-2" aria-expanded="true")
+													ul.ibe-filter__main
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox" id="castellano-2" name="castellano" checked)
+															label.ibe-filter__label(for="castellano-2") Espa&ntilde;ol castellano
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox" id="latinoamericano-2" name="latinoamericano" checked)
+															label.ibe-filter__label(for="latinoamericano-2") Espa&ntilde;ol latinoamericano
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox" id="deutsch-2" name="deutsch" checked)
+															label.ibe-filter__label(for="deutsch-2") Deutsch
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox" id="english-2" name="english" checked)
+															label.ibe-filter__label(for="english-2") English
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox" id="francais-2" name="francais" checked)
+															label.ibe-filter__label(for="francais-2") Fran&ccedil;ais
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox" id="deutsch0-2" name="deutsch0")
+															label.ibe-filter__label(for="deutsch0-2") Deutsch
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox" id="english0-2" name="english0" checked)
+															label.ibe-filter__label(for="english0-2") English
+														li.ibe-filter__main-item
+															input.ibe-filter__check(type="checkbox" id="francais0-2" name="francais0")
+															label.ibe-filter__label(for="francais0-2") Fran&ccedil;ais
+										.ibe-films-table
+											div.GITheWall(data-function="google-gallery-2")
+												ul.ibe-films-table__list
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#star-trek1",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="star-trek")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/star-trek.png" alt="star-trek")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#buscando-a-dory1",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="buscando-a-dory")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/buscando-a-dory.png" alt="buscando-a-dory")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#family-fang1",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="family-fang")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/family-fang.png" alt="family-fang")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#x-men1",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="x-men")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/x-men.png" alt="x-men")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#independence-day1",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="independence-day")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/independence-day.png" alt="independence-day")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#love-friendship1",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="love-friendship")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/love-friendship.png" alt="love-friendship")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#la-noche-que-mi-madre-mato-a-mi-padre1",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="la-noche-que-mi-madre-mato-a-mi-padre")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/la-noche-que-mi-madre-mato-a-mi-padre.png" alt="Burguer")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#meadowland1",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="meadowland")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/meadowland.png" alt="meadowland")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#ones-below1",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="ones-below")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/ones-below.png" alt="ones-below")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#neighbors-21",data-id="Actual")
+														a.ibe-films-table__link(href="#" title="neighbors")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/neighbors-2.png" alt="neighbors")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#love-friendship21",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="love-friendship")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/love-friendship.png" alt="love-friendship")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#la-noche-que-mi-madre-mato-a-mi-padre21",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="la-noche-que-mi-madre-mato-a-mi-padre")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/la-noche-que-mi-madre-mato-a-mi-padre.png" alt="Burguer")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#meadowland21",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="meadowland")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/meadowland.png" alt="meadowland")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#ones-below21",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="ones-below")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/ones-below.png" alt="ones-below2")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#neighbors21",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="neighbors")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/neighbors-2.png" alt="neighbors")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#star-trek21",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="star-trek")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/star-trek.png" alt="star-trek")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#buscando-a-dory21",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="buscando-a-dory")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/buscando-a-dory.png" alt="buscando-a-dory")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#family-fang21",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="family-fang")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/family-fang.png" alt="family-fang")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#x-men21",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="x-men")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/x-men.png" alt="x-men")
+													li.ibe-films-table__item(data-contenttype="inline" data-href="#independence-day21",data-id="Siguiente")
+														a.ibe-films-table__link(href="#" title="independence-day")
+															figure.ibe-figure
+																img.ibe-img(src=globals.imgPath + "/modules/ibe_films/independence-day.png" alt="independence-day")
+											div(data-id="paper-2")
+												script(type="text/template", id="star-trek1")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Star trek: M&aacute;s all&aacute;
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/star-trek-big.png" alt="Star trek: Más allá")
+																ul.ibe-films-table__info-list
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text acci&oacute;n
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text No recomendada para menores de 12 a&ntilde;os
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text 126 min
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text Chris Pine, Zachary Quinto, Idris Elba
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text Ingl&eacute;s / Espa&ntilde;ol castellano /Espa&ntilde;ol latinoamericano / Franc&eacute;s / Alem&aacute;n / Italiano / Portugu&eacute;s Brasile&ntilde;o / Japones
+																p.paragraph.paragraph__regular!="Despues de que el Enterprise se viera obligado a aterrizar en un mundo misterioso, el capit&aacute;n Kirk, Spock y el resto de la tripulaci&oacute;n se enfrentan a una raza alien&iacute;gena avanzada mientras tratan de encontrar la forma de salir de ese planeta hostil."
+												script(type="text/template" id="buscando-a-dory1")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Buscando a Dory
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/buscando-a-dory-big.png" alt="Buscando a Dory")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="family-fang1")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Family Fang
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/family-fang-big.png" alt="Family Fang")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="x-men1")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary X-Men: Apocalypse
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/x-men-big.png" alt="X-Men: Apocalypse")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="independence-day1")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Independence day: Resurgence
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/independence-day-big.png" alt="Independence day: Resurgence")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="love-friendship1")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Love & Friendship
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/love-and-friendship-big.png" alt="Love & Friendship")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="la-noche-que-mi-madre-mato-a-mi-padre1")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary La noche que mi madre mat&oacute; a mi padre
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/la-noche-que-mi-madre-mato-a-mi-padre-big.png" alt="La noche que mi madre mat&oacute; a mi padre")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="meadowland1")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Meadowland
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/meadowland-big.png" alt="Meadowland")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="ones-below1")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Ones below
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/ones-below-big.png" alt="Ones below")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="neighbors-21")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Neighbors 2
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/neighbors-2-big.png" alt="Neighbors 2")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+											div(data-id="Siguiente")
+												script(type="text/template" id="love-friendship21")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Love & Friendship
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/love-and-friendship-big.png" alt="Love & Friendship")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="la-noche-que-mi-madre-mato-a-mi-padre21")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary La noche que mi madre mato a mi padre
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/la-noche-que-mi-madre-mato-a-mi-padre-big.png" alt="La noche que mi madre mato a mi padre")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="meadowland21")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Meadowland
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/meadowland-big.png" alt="Meadowland")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="ones-below21")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Ones below
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/ones-below-big.png" alt="Ones below")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="neighbors21")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Neighbors 2
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/neighbors-2-big.png" alt="Neighbors 2")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="star-trek21")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Star trek: M&aacute;s all&aacute;
+																//-
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/star-trek-big.png" alt="Star trek: Más allá")
+																ul.ibe-films-table__info-list
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text acci&oacute;n
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text No recomendada para menores de 12 a&ntilde;os
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text 126 min
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text Chris Pine, Zachary Quinto, Idris Elba
+																	li.ibe-films-table__info-item
+																		span.ibe-films-table__info-text Ingl&eacute;s / Espa&ntilde;ol castellano /Espa&ntilde;ol latinoamericano / Franc&eacute;s / Alem&aacute;n / Italiano / Portugu&eacute;s Brasile&ntilde;o / Japones
+																p.paragraph.paragraph__regular!="Despues de que el Enterprise se viera obligado a aterrizar en un mundo misterioso, el capit&aacute;n Kirk, Spock y el resto de la tripulaci&oacute;n se enfrentan a una raza alien&iacute;gena avanzada mientras tratan de encontrar la forma de salir de ese planeta hostil."
+												script(type="text/template" id="buscando-a-dory21")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Buscando a Dory
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/buscando-a-dory-big.png" alt="Buscando a Dory")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="family-fang21")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Family Fang
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/family-fang-big.png" alt="Family Fang")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="x-men21")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary X-Men: Apocalypse
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/x-men-big.png" alt="X-Men: Apocalypse")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+												script(type="text/template" id="independence-day21")
+													article.ibe-paper-sheet
+														div.ibe-paper-sheet__container
+															header.ibe-paper-sheet__header.ibe-paper-sheet__header--no-border
+																h3.title__h1.ibe-paper-sheet__header-title-primary Independence day: Resurgence
+															div.ibe-paper-sheet__body
+																figure.ibe-figure.ibe-figure--full
+																	img.ibe-img(src=globals.imgPath + "/modules/ibe_films/independence-day-big.png" alt="Independence day: Resurgence")
+																p.paragraph.paragraph__regular!="Un suave y sabroso tartar de salm&oacute;n acompa&ntilde;do alcaparron troceado y salsa de yogur al eneldo. De segundo, un exquisito preparado al grill y adornado con una fina capa de cebolla caramelizada. De postr, un regalo para los amantes del chocolate, nuestro delicioso pastel mousse de chocolate"
+
+									.tab-pane.ibe-tab__container.ibe-tab__container--img(id="tab-3")
+										p.paragraph.paragrah__regular Tab 3
+
+									.tab-pane.ibe-tab__container.ibe-tab__container--img(id="tab-4")
+										p.paragraph.paragrah__regular Tab 4
+
+									.tab-pane.ibe-tab__container.ibe-tab__container--img(id="tab-5")
+										p.paragraph.paragrah__regular Tab 5
+
+				div.col-lg-3.col-xs-12.col-lg-pull-9
+					+m-lat-menu({
+						items: [
+							{
+								link: "Tienda a bordo",
+								title: "Tienda a bordo"
+							},
+							{
+								link: "Tipos de asientos",
+								title: "Tipos de asientos"
+							},
+							{
+								link: "Men&uacute; a bordo",
+								title: "Menú a bordo"
+							},
+							{
+								link: "Entretenimiento",
+								title: "Entretenimiento",
+								sub: [
+									{
+										link: "Larga distancia aviones nuevos",
+										title: "Larga distancia aviones nuevos",
+										cssClass: "ibe-lat-menu__item--active"
+									},
+									{
+										link: "Larga distancia",
+										title: "Larga distancia"
+									},
+									{
+										link: "Media distancia",
+										title: "Media distancia"
+									}
+								]
+							},
+							{
+								link: "Confort",
+								title: "Confort"
+							},
+							{
+								link: "Wifi y GSM",
+								title: "Wifi y GSM"
+							}
+						]
+					})
+	+m-footer()

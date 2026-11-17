@@ -1,0 +1,25 @@
+extends _general/layout__primary
+mixin list-page(params)
+	- params = params || {};
+	ul
+		each val in params.items
+			li
+				a(href=val.href, title="Ir a " + val.title, target="_blank", style="font-size: 16px; color: grey; font-weight: 700; font-family: iberiaheadline")!=val.title
+block title
+	title!="IBERIA - GUIDELINES"
+block body
+	h1(class="title title__h1") Guía de estilos de Iberia
+	section.container
+		div.row
+			div.col-xs-12
+				h2(class="title title__h2") Listado de páginas por elementos
+				+list-page({
+					'items': [
+						{
+							'title': 'FORMULARIO',
+							'href': 'guidelines-form.html'
+						}, {
+							'title': 'INFORMACION ANTICIPADA SOBRE PASAJEROS',
+							'href': 'advance-passenger-information.html'
+						}]
+				})

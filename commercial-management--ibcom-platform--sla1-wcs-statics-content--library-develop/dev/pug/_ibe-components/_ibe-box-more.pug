@@ -1,0 +1,15 @@
+mixin m-box-more(params)
+	div.ibe-box-more(data-css="ibe-components/ibe-box-more/ibe-box-more", data-js="ibe-components/ibe-box-more/ibe-box-more", data-ibe-component="true")
+		h3.ibe-box-more__title(data-dotdotdot-new)!=params.title
+		if (img)
+			figure.ibe-box-more__figure
+				img(class="ibe-box-more__img", src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src=img.src, alt=(img.alt !== undefined ? img.alt : ''))
+		div.ibe-box-more__content(data-read-more="content")
+			each item in params.content
+				p.paragraph.paragraph__regular!=item.text
+
+		if (params.type === "button")
+			button.ibe-box-more__link.icon-flecha_1_abajo(id=(params.id !== undefined ? params.id : ""), type="button", data-focusin, aria-expanded="false" data-read-more="button", data-read-more-status="collapsed", data-text-opened="Ocultar", data-text-collapsed="Leer más")!=params.link
+		else
+			a.ibe-box-more__link.icon-flecha_1_abajo(data-focusin, aria-expanded="false", data-read-more="button", data-read-more-status="collapsed", data-text-opened="Ocultar", data-text-collapsed="Leer más", href=(params.href !== undefined ? params.href : "#ni"), title="Ir a " + params.text)!=params.link
+

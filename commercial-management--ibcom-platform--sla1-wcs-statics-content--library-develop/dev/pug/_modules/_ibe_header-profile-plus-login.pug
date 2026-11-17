@@ -1,0 +1,202 @@
+mixin m-header-profile-plus-login(params)
+	header.ibe-header-new(class=(params.login === true ? " ibe-header-new--logged" : ""))
+		div.container
+			div.row
+				div.col-xs-12
+					.ibe-header-new__left.ibe-header-new__left--small 
+						.ibe-header-new__menu.hidden-xl.hidden-lg
+							div.ibe-header-new__menu-box
+								button.ibe-header-new__menu-button(type="button", data-menu-new="button", aria-label="Button Menu")
+									span.ibe-header-new__menu-icon
+						a.ibe-header-new__logo-link(href="#" title="IBERIA", data-focusin)
+							figure.ibe-header-new__logo
+								if(!params.emergency)
+									img.ibe-header-new__logo-img(alt="Logo Iberia", src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", data-src=globals.imgPath + "/general/iberia-logo.png")
+								else
+									img.ibe-header-new__logo-img(alt="Logo Iberia", src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", data-src=globals.imgPath + "/general/logo_iberia.svg")
+					.ibe-header-new__right.ibe-header-new__right--big
+						.ibe-header-new__item.hidden-md.hidden-sm.hidden-xs
+							a.ibe-header-new__link.ibe-header-new__link-icon.ibe-header-new__lang.icon-idiomas_web.collapsed(href="#", title="Click para cambiar idioma o mercado", data-toggle="collapse" data-target="#tool_lang" aria-expanded="false")
+								span.ibe-header-new__text!="Espa&ntilde;a - ES"
+							.ibe-header-new__lang-collapse(id="tool_lang" data-toggle="container")
+								form.ibe_form(action="#" method="post")
+									fieldset
+										legend.hideAccessible!="Formulario para seleccionar Mercado e Idioma"
+										div.ibe_form__group.no_marginTop
+											label.ibe_form__selectize--label(for="mercado")!="Mercado"
+											select(class="ibe_form__selectize ibe_form__selectize--placeholder", id="mercado" name="mercado", data-selectmenu-edit, data-placeholder="mercado")
+												option(value="") Mercado
+												option(value="alemania") Alemania
+												option(value="francia") Francia
+												option(value="espana") Espa&ntilde;a
+												option(value="alemania") Alemania
+												option(value="francia") Francia
+												option(value="espana") Espa&ntilde;a
+												option(value="alemania") Alemania
+												option(value="francia") Francia
+												option(value="espana") Espa&ntilde;a
+										div.ibe_form__group
+											label.ibe_form__selectize--label(for="idioma")!="Idioma"
+											select(class="ibe_form__selectize ibe_form__selectize--placeholder", id="idioma", name="idioma", data-selectmenu-edit, data-placeholder="idioma")
+												option(value="") Idioma
+												option(value="alemania") Alem&aacute;n
+												option(value="francia") Franc&eacute;s
+												option(value="espana") Espa&ntilde;ol
+												option(value="alemania") Alem&aacute;n
+												option(value="francia") Franc&eacute;s
+												option(value="espana") Espa&ntilde;ol
+												option(value="alemania") Alem&aacute;n
+												option(value="francia") Franc&eacute;s
+												option(value="espana") Espa&ntilde;ol
+										button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block!="Aceptar"
+						.ibe-header-new__item.hidden-md.hidden-sm.hidden-xs
+							a.ibe-header-new__link.ibe-header-new__link-icon.ibe-header-new__company.icon-empresas(href="javascript:void(0)", title="", data-toggle="collapse", data-target="#tool_onbusiness")
+								span.ibe-header-new__text!="Empresas"
+							.ibe-login.hidden-xs.hidden-sm.hidden-md(id="tool_onbusiness" data-toggle="container", data-onbusiness="onbusiness")
+								.ibe-login__box
+									.ibe_form.u-text-center
+										p.title__h3!="Entra a On Business" 
+										p.paragraph.paragraph__regular.paragraph__regular--small-line.paragraph__regular--no-margin.paragraph__regular--p-bottom-16!="Y aprovecha las ventajas de nuestro programa para empresas"
+										button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block(type="button")!="Accede/Regístrate"
+										p.paragraph.paragraph__regular.paragraph__regular--small-line.paragraph__regular--border-top.text-center
+											span.iberia-plus-connect__link-register!="&iquest;Qu&eacute; es On Business? "
+											a.link.link__regular.link__regular--important(href="" title="Inf&oacute;rmate")!="Inf&oacute;rmate"
+						.ibe-header-new__item.hidden-md.hidden-sm.hidden-xs
+							a.ibe-header-new__link.ibe-header-new__link-icon.ibe-header-new__help.icon-ayuda(href="#", title="Abrir enlace de ayuda")
+								span.ibe-header-new__text.visible-xl!="Ayuda"
+
+						.ibe-header-new__item.ibe-header-new__dudes.hidden-md.hidden-sm.hidden-xs
+							form.ibe_form(action="#" method="post")
+								fieldset
+									legend.hideAccessible!="Dudas"
+									.ibe-header-new__dudes-search
+										label.hideAccessible(for="questions" aria-hidden="true")!="¿Tienes dudas?"
+										input.ibe-header-new__dudes-input(id="questions", name="questions", placeholder="Buscar en centro de ayuda", data-autocomplete="tools_questions", data-placeholder="custom", data-autocomplete-result='[{"label":"Aeropuerto","value":"Aeropuerto"},{"label":"Facturaci&oacute;n","value":"Facturaci&oacute;n"},{"label":"Maletas","value":"Maletas"},{"label":"Checkin","value":"Checkin"}]')
+										a.ibe-header-new__dudes-search-link.icon-buscar(href="javascript:void(0)", title="Pulsa para buscar") Pulsa para buscar
+							.ibe-header-new__dudes-linkbox
+								a(data-dudes='dudes', href="#ni", title="Desplegar campo buscador", class="ibe-header-new__link ibe-header-new__link-icon ibe-header-new__dudes-link icon-buscar")
+									span.ibe-header-new__text.visible-xl!="¿Tienes dudas?"
+						if (params.login === true) 
+							div.ibe-header-new__item.ibe-header-new__logged
+								div.ibe-header-new__link
+									span.ibe-login__header-text Hola
+
+									a.ibe-header-new__logged-link.icon-editar_perfil(href="#", title="User", data-toggle="collapse", data-target="#tool_logged", aria-expanded="false", data-icon="icon-subir_archivos", role="button", data-focusin)
+										figure
+											if(!params.emergency)
+												img(class="ibe-header-new__logged-img hidden-xs hidden-sm hidden-md", src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="./images/modules/icons/svgs/editar_perfil_red.svg", alt="Imagen perfil de usuario")
+											else
+												img(class="ibe-header-new__logged-img hidden-xs hidden-sm hidden-md", src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="./images/modules/icons/svgs/editar_perfil_black.svg", alt="Imagen perfil de usuario")
+										span.ibe-header-new__logged-txt.ibe-header-new__logged-txt--underline.hidden-xs.hidden-sm.hidden-md!=" "
+											span.ibe-header-new__logged-txt!="u******e@***.com"
+										//- if(params.business === true)
+										//- 	p.ibe-header-new__logged-txt.hidden-xs.hidden-sm.hidden-md!="Autorizador"
+										//- else if(params.zero=== false)
+										//- 	p.ibe-header-new__logged-txt.hidden-xs.hidden-sm.hidden-md!="123.739&nbsp;"
+										//- 		span.ibe-header-new__logged-txt!="Avios"
+								div.ibe-login.ibe-login--logged(id="tool_logged", data-toggle="container", data-login="logged", class=(params.business === true ? " ibe-login--business ibe-login__tooltip" : "ibe-login__tooltip"))
+									.ibe-login__group.hidden-xl.hidden-lg
+										figure.ibe-login__logged-figure
+											img(class="ibe-login__logged-img", src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="./images/general/modal-3.png", alt="Imagen perfil de usuario")
+										h3.ibe-login__logged-title Hola u******e@***.com
+										if(params.business === true)
+											p.ibe-header-new__logged-txt Autorizador
+									.ibe-login__group
+										//- if (params.dumbo===true)	
+										figure.ibe-login__figure.ibe-login__figure--logged
+											img.ibe-login__partner-info-logo-img(src="../../images/general/partners-logo-profile.svg" alt="Partner logo")
+										div.ibe-login__partners-plus.ibe-login--left
+												span.ibe-login__logged-title.ibe-login__logged-text--small Avios acumulados: 123.000
+												a.ibe-login__partners-data-discount.ibe-login__partners-data-discount-link Date de alta en Iberia Plus 
+												span.ibe-login__logged-text.ibe-login__logged-small y podrás canjearlos por vuelos, descuentos y experiencias.
+									.ibe-login__group.ibe-login--none-pd-m
+										ul.ibe-login__list
+												if(params.business === true)
+													li.ibe-login__list-item 
+														a.link.link__regular.link--no-underline(href="#ni", title="gestion tarjetas", data-focusin) Gesti&oacute;n de tarjetas
+													li.ibe-login__list-item
+														a.link.link__regular.link--no-underline(href="#ni", title="reservar", data-focusin) Reservar vuelos con puntos On Business
+												else
+													li.ibe-login__list-item
+														a.link.link__regular.link--no-underline(href="#ni", title="Mi Iberia Plus", data-focusin) Mi Iberia Plus
+													li.ibe-login__list-item
+														a.link.link__regular.link--no-underline(href="#ni", title="Mis Avios", data-focusin) Mis Avios
+													li.ibe-login__list-item
+														a.link.link__regular.link--no-underline(href="#ni", title="Reservar vuelo con Avios", data-focusin) Reservar vuelo con Avios
+									div(class="ibe-login__group")
+										a.ibe-login__link-logout.icon-subir_archivos(href="#ni", title="Cerrar sesi&oacute;n", data-focusin) Cerrar Sesi&oacute;n
+
+						else	
+							div.ibe-header-new__item.ibe-header-new__login
+								a.ibe-header-new__link.ibe-header-new__link-icon.icon-editar.visible-lg-inline-block.visible-xl-inline-block.hidden-xs.hidden-sm.hidden-md(href="javascript:void(0)", title="Registro")
+									span.ibe-header-new__text.visible-xl!="Registro"
+								a.ibe-header-new__link.ibe-header-new__link-icon.icon-perfil_login.visible-lg-inline-block.visible-xl-inline-block.hidden-xs.hidden-sm.hidden-md(href="javascript:void(0)", title="desplegar para registrarse", data-toggle="collapse", data-target="#tool_login", aria-expanded="false")
+									span.ibe-header-new__text.visible-xl!="Acceso"
+								a.ibe-header-new__link.ibe-header-new__link-icon.ibe-header-new__link-register.icon-editar.visible-md-inline-block.visible-sm-inline-block.visible-xs-inline-block.hidden-lg.hidden-xl(href="javascript:void(0)", title="Registro")
+									span.ibe-header-new__text.visible-xl!="Registro"
+								a.ibe-header-new__link.ibe-header-new__link-icon.icon-perfil_login.visible-md-inline-block.visible-sm-inline-block.visible-xs-inline-block.hidden-lg.hidden-xl(href="javascript:void(0)", title="desplegar para registrarse", data-modal="button", data-modal-view=".fc-dialog-login")
+									span.ibe-header-new__text.visible-xl!="Acceso"
+								.ibe-login.hidden-xs.hidden-sm.hidden-md(id="tool_login" data-toggle="container", data-login="login")
+									.ibe-login__box
+										.ibe-login__options.hidden-lg.hidden-xl
+											button(data-login="close", type="button", class="ibe-login__close icon-cerrar")
+												span.hideAccessible Cerrar
+										form.ibe_form(method="post", action="#ni", data-valid-form)
+											fieldset.ibe-form__fieldset
+												legend.ibe-login__title.hidden-lg.hidden-xl Acceso a Iberia Plus
+												p.ibe-login__text.hidden-lg.hidden-xl Inicia sesi&oacute;n para ver promociones exclusivas y utilizar tus Avios
+												div(class="ibe_form__group no_marginTop")
+													input(class="ibe_form__input-text", name="id_number2", id="id_number2", type="text", placeholder="N&uacute;mero de Iberia Plus", required, data-validator="ibePlus" )
+													label(class="ibe_form__input-label", for="id_number2") N&uacute;mero de Iberia Plus
+													p.ibe_form__msg-info.hidden(data-validate="exist", data-validate-text="Este campo es obligatorio")
+													p.ibe_form__msg-info.hidden(data-validate="valid", data-validate-text="Formato no válido")
+												div(class="ibe_form__group")
+													input(class="ibe_form__input-text", name="id_pin2", id="id_pin2", type="text", placeholder="PIN")
+													label(class="ibe_form__input-label", for="id_pin2") PIN
+												p.ibe-login__forget
+													a.link.link__regular(href="#" title="¿Has olvidado tu PIN?")!="&iquest;Has olvidado tu pin?"
+												.ibe-form__checkbox.ibe-form__checkbox--login-session
+													input.ibe-form__checkbox-input(type='checkbox', name='session-check', id="session-check")
+													label.ibe-form__checkbox-label.ibe-form__checkbox-label--m-bottom-18.ibe-form__checkbox-label--session(for='session-check')
+														span.ibe-form__checkbox-label--text02 No cerrar sesi&oacute;n
+												button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block(type="button")!="Entrar"
+												p.paragraph.paragraph__regular.paragraph__regular--separator.text-center!="o"
+												button.ibe-button.ibe-button--facebook.ibe-button--big.ibe-button--block(type="button")!="Entrar con Facebook"
+												button.ibe-button.ibe-button--linkedin.ibe-button--big.ibe-button--block(type="button")!="Entrar con Linkedin"
+												p.paragraph.paragraph__regular.paragraph__regular--small-line.paragraph__regular--border-top.text-center
+													span.iberia-plus-connect__link-register!="&iquest;No eres de Iberia Plus? "
+													a.link.link__regular.link__regular--important(href="" title="Reg&iacute;strate")!="Reg&iacute;strate"
+	div.ibe-dialog.ibe-dialog--login.fc-dialog-login(data-dialog="modal")
+		div.modal-dialog.modal-dialog--xsmall
+			div.modal-content
+				.ibe-modal
+					.modal-header
+						h2.title.title__h1.ibe-modal__title-primary.ibe-login__title Acceso a Iberia Plus
+						h3.title.title__h4.ibe-modal__title-primary--h4.ibe-login__text Inicia sesi&oacute;n para ver promociones exclusivas y utilizar tus Avios
+						.ibe-modal__options
+							button.ibe-button--reset.ibe-modal__options-icon.ibe-modal__options-icon--close(data-focusin, data-modal-view='defaultModal', data-dialog='close', type='button')
+								span.hideAccessible Cerrar
+					.modal-body
+						.ibe-login
+							.ibe-login__box
+								form.ibe_form(method="post", action="#ni")
+									fieldset.ibe-form__fieldset
+										div(class="ibe_form__group no_marginTop")
+											input(class="ibe_form__input-text", name="id_number3", id="id_number3", type="text", placeholder="N&uacute;mero de Iberia Plus")
+											label(class="ibe_form__input-label", for="id_number3") N&uacute;mero de Iberia Plus
+										div(class="ibe_form__group")
+											input(class="ibe_form__input-text", name="id_pin3", id="id_pin3", type="text", placeholder="PIN")
+											label(class="ibe_form__input-label", for="id_pin3") PIN
+										p.ibe-login__forget
+											a.link.link__regular(href="#" title="¿Has olvidado tu PIN?")!="&iquest;Has olvidado tu pin?"
+										.ibe-form__checkbox.ibe-form__checkbox--login-session
+											input.ibe-form__checkbox-input(type='checkbox', name='session-check-modal', id="session-check-modal")
+											label.ibe-form__checkbox-label.ibe-form__checkbox-label--m-bottom-18.ibe-form__checkbox-label--session(for='session-check-modal')
+												span.ibe-form__checkbox-label--text02.ibe-form__checkbox-label--text02-login-sessionxs No cerrar sesi&oacute;n
+										button.ibe-button.ibe-button--red.ibe-button--big.ibe-button--block(type="button")!="Entrar"
+										p.paragraph.paragraph__regular.paragraph__regular--separator.text-center!="o"
+										button.ibe-button.ibe-button--facebook.ibe-button--big.ibe-button--block(type="button")!="Entrar con Facebook"
+										button.ibe-button.ibe-button--linkedin.ibe-button--big.ibe-button--block(type="button")!="Entrar con Linkedin"
+										p.paragraph.paragraph__regular.paragraph__regular--border-top.text-center
+											span.iberia-plus-connect__link-register!="&iquest;No eres de Iberia Plus? "
+											a.link.link__regular.link__regular--important(href="" title="Reg&iacute;strate")!="Reg&iacute;strate"
