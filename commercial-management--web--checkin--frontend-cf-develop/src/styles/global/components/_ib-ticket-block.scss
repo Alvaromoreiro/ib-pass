@@ -1,0 +1,1795 @@
+/* -------------------------------------------------------------
+    #TICKET BLOCK
+----------------------------------------------------------------- */
+.#{$wefront__namespace}ticket-block {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: rem(18) rem(24) rem(24);
+    background: color(white);
+    box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: rem(125);
+        left: rem(-4);
+        width: rem(24);
+        height: rem(16);
+        background-color: color(gray-50);
+        border-bottom-left-radius: rem(24);
+        border-bottom-right-radius: rem(24);
+        -ms-transform: translate(-50%, -50%);
+        -ms-transform: rotate(270deg);
+        transform: translate(-50%, -50%);
+        transform: rotate(270deg);
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: rem(125);
+        right: rem(-4);
+        width: rem(24);
+        height: rem(16);
+        background-color: color(gray-50);
+        border-bottom-left-radius: rem(24);
+        border-bottom-right-radius: rem(24);
+        -ms-transform: translate(-50%, -50%);
+        -ms-transform: rotate(90deg);
+        transform: translate(-50%, -50%);
+        transform: rotate(90deg);
+    }
+
+    &__header {
+        position: relative;
+        display: block;
+
+        /* FLEX */
+        display: flex;
+        flex-flow: row wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        padding-bottom: rem(8);
+        margin-bottom: rem(16);
+        border-bottom: rem(1) solid color(gray-50);
+
+        &--extra-separation {
+            padding-bottom: rem(20);
+            margin-bottom: rem(25);
+        }
+    }
+
+    &__header-car {
+        position: relative;
+
+        /* FLEX */
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        padding-bottom: rem(8);
+        margin-bottom: rem(25);
+        border-bottom: rem(1) solid color(gray-50);
+    }
+
+    &__header-title {
+        display: inline-block;
+        font-family: $font-special;
+        font-size: rem(24);
+        line-height: normal;
+        color: color(gray-10);
+        vertical-align: top;
+
+        &--with-message {
+            overflow: hidden;
+            max-width: calc(100% - 11.25rem);
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        &--big-xs {
+            &.#{$wefront__namespace}ticket-block {
+                &__header-title {
+                    font-size: rem(20);
+                }
+            }
+        }
+    }
+
+    &__header-subtitle {
+        width: 100%;
+    }
+
+    &__header-txt {
+        display: inline-block;
+        font-family: $font-normal;
+        font-size: rem(13);
+        color: color(gray-10);
+        vertical-align: top;
+
+        &--grey {
+            color: color(gray-15);
+        }
+    }
+
+    &__container {
+        &--border {
+            padding-bottom: rem(15);
+            border-bottom: rem(1) solid color(gray-50);
+        }
+    }
+
+    &__container-xs {
+        position: relative;
+        padding-left: rem(20);
+    }
+
+    &__icon-tooltip {
+        display: inline-block;
+        font-family: $font-icons;
+        font-size: rem(26);
+        color: color(gray-15);
+        vertical-align: top;
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: color(primary);
+        }
+
+        &--default {
+            &:hover,
+            &:focus {
+                color: color(gray-15);
+            }
+        }
+
+        &--flight-info {
+            font-size: rem(19);
+            color: color(white);
+            vertical-align: bottom;
+
+            &:hover,
+            &:focus {
+                color: color(white);
+            }
+        }
+
+        &--black {
+            font-size: rem(19);
+            color: color(gray-10);
+            vertical-align: bottom;
+
+            &:hover,
+            &:focus {
+                color: color(gray-10);
+            }
+        }
+    }
+
+    &__message {
+        &::after,
+        &::before {
+            display: none;
+        }
+        .#{$wefront__namespace}ticket-block {
+            &__header-txt {
+                position: absolute;
+                top: rem(0);
+                right: rem(-32);
+                display: block;
+                max-width: rem(165);
+                padding: rem(3) rem(16);
+                font-family: $font-normal;
+                font-size: rem(13);
+                color: color(white);
+                background: color(gray-30);
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    right: 0;
+                    bottom: rem(-8);
+                    width: rem(1);
+                    height: rem(1);
+                    border-top: rem(4) solid color(gray-10);
+                    border-right: rem(4) solid transparent;
+                    border-bottom: rem(4) solid transparent;
+                    border-left: rem(4) solid color(gray-10);
+                }
+            }
+        }
+
+        &--ticket {
+            .#{$wefront__namespace}ticket-block {
+                &__header-txt {
+                    top: rem(5);
+                    right: rem(-32);
+                }
+            }
+        }
+    }
+
+    &__summary {
+        padding: rem(24);
+        .#{$wefront__namespace}ticket-block__wrapper {
+            &-floating {
+                margin-top: rem(35);
+
+                &::before,
+                &::after {
+                    top: rem(14);
+                    width: remcalc(50%, " - ", rem(126));
+                }
+            }
+
+            &-right {
+                &::before {
+                    top: rem(36);
+                    right: rem(70);
+                }
+            }
+            .#{$wefront__namespace}ticket-block__title {
+                font-size: rem(30);
+            }
+        }
+    }
+
+    &__wrapper {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        min-height: rem(92);
+        vertical-align: top;
+
+        &-floating {
+            position: relative;
+            display: block;
+            margin-top: rem(18);
+            text-align: center;
+            vertical-align: middle;
+
+            &::before {
+                content: "";
+                position: absolute;
+                z-index: 0;
+                top: rem(28);
+                left: rem(70);
+                width: remcalc(50%, " - ", rem(112));
+                border-bottom: rem(2) solid color(gray-70);
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                z-index: 0;
+                top: rem(28);
+                right: rem(70);
+                width: remcalc(50%, " - ", rem(112));
+                border-bottom: rem(2) solid color(gray-70);
+            }
+
+            &--one-line {
+                margin-top: rem(38);
+
+                &::before,
+                &::after {
+                    top: rem(11);
+                    width: remcalc(50%, " - ", rem(124));
+                }
+            }
+
+            &--car {
+                &::before,
+                &::after {
+                    width: remcalc(50%, " - ", rem(195));
+                }
+
+                &::before {
+                    left: rem(140);
+                }
+
+                &::after {
+                    right: rem(140);
+                }
+            }
+        }
+
+        &-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            text-align: left;
+        }
+
+        &-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            text-align: right;
+
+            &::before {
+                content: "\ea30";
+                position: absolute;
+                top: rem(32);
+                right: rem(66);
+                margin-top: rem(-1);
+                font-family: $font-icons !important;
+                font-size: rem(30);
+                font-weight: normal;
+                font-style: normal;
+                font-variant: normal;
+                line-height: 1;
+                color: color(gray-20);
+                background: color(white);
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                speak: none;
+                text-transform: none;
+                -ms-transform: rotate(90deg);
+                transform: rotate(90deg);
+            }
+
+            &--no-icon {
+                &::before {
+                    content: none;
+                }
+            }
+        }
+
+        &--two-dates {
+            min-height: rem(140);
+            .#{$wefront__namespace}ticket-block__wrapper-floating {
+                margin-top: rem(44);
+            }
+            .#{$wefront__namespace}ticket-block__wrapper-right {
+                &::before {
+                    top: rem(58);
+                }
+            }
+        }
+
+        &--top-card-car {
+            margin-top: rem(8);
+        }
+
+        &--top-card-hotel {
+            margin-top: rem(-8);
+        }
+
+        &--two-lines {
+            min-height: rem(87);
+            .#{$wefront__namespace}ticket-block {
+                &__wrapper {
+                    &-floating {
+                        margin-top: rem(6);
+
+                        &::before,
+                        &::after {
+                            top: rem(16);
+                        }
+
+                        &::before {
+                            left: rem(82);
+                            width: remcalc(50%, " - ", rem(134));
+                        }
+
+                        &::after {
+                            right: rem(108);
+                            width: remcalc(50%, " - ", rem(160));
+                        }
+                    }
+
+                    &-right {
+                        &::before {
+                            top: rem(9);
+                        }
+                    }
+                }
+
+                &__title {
+                    font-size: rem(30);
+                }
+            }
+        }
+
+        &--height-sm {
+            min-height: rem(63);
+        }
+
+        &--flex {
+            display: flex;
+            min-height: auto;
+            justify-content: space-between;
+        }
+
+        &--flex-botton {
+            margin-bottom: rem(10);
+        }
+
+        &--aiport {
+            max-width: 45%;
+            min-height: rem(50);
+        }
+    }
+
+    &__wrapper-date {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__content {
+        position: relative;
+        display: block;
+        padding: rem(16) rem(8);
+
+        &--line {
+            border-bottom: dotted rem(1) color(gray-25);
+        }
+
+        &.u-pt-none {
+            padding-bottom: rem(36);
+        }
+    }
+
+    &__title-box,
+    &__subtitle-box {
+        max-width: remcalc(100%, " - ", rem(95));
+    }
+
+    &__title-box {
+        display: block;
+        font-family: $font-special;
+        font-size: rem(24);
+        line-height: 1.3;
+        color: color(gray-10);
+    }
+
+    &__subtitle-box {
+        display: block;
+        font-family: $font-special;
+        font-size: rem(14);
+        color: color(gray-10);
+    }
+
+    &__icon {
+        position: absolute;
+        top: rem(-44);
+        right: rem(-22);
+        font-size: rem(120);
+        color: color(gray-15);
+
+        &--small {
+            top: rem(-12);
+            right: 0;
+            font-size: rem(62);
+        }
+    }
+
+    &__big-date {
+        display: block;
+        font-family: $font-special;
+        font-size: rem(30);
+        line-height: 1.5;
+        color: color(gray-10);
+    }
+
+    &__title-segment {
+        display: block;
+        margin-bottom: rem(8);
+        font-family: $font-normal;
+        font-size: rem(18);
+        line-height: 1.2;
+        color: color(gray-10);
+
+        &--especial {
+            font-family: $font-special;
+        }
+    }
+
+    &__passenger {
+        display: flex;
+        align-items: center;
+        margin-left: rem(-8);
+        font-family: $font-normal;
+        font-size: rem(13);
+        line-height: 1.3;
+        color: color(gray-10);
+
+        &::before {
+            padding-right: rem(18);
+            font-size: rem(28);
+            color: color(primary);
+        }
+    }
+
+    &__date {
+        display: block;
+        font-family: $font-special;
+        font-size: rem(14);
+        color: color(gray-10);
+
+        &--red {
+            color: color(primary);
+        }
+
+        &--old {
+            text-decoration: line-through;
+        }
+
+        &--bold {
+            font-weight: bold;
+        }
+
+        &--white {
+            color: color(white);
+        }
+
+        &--grey {
+            color: color(gray-15);
+        }
+
+        &--break {
+            word-break: break-word;
+        }
+    }
+
+    &__title {
+        display: block;
+        font-family: $font-special;
+        font-size: rem(30);
+        color: color(gray-10);
+
+        &--arrival {
+            display: flex;
+            width: 100%;
+            align-items: center;
+
+            &::after {
+                content: "";
+                display: block;
+                width: 100%;
+                height: rem(2);
+                margin-left: rem(10);
+                background: color(gray-70);
+            }
+        }
+
+        &--departure {
+            display: flex;
+            width: 100%;
+            align-items: center;
+
+            &::before {
+                content: "";
+                display: block;
+                width: 100%;
+                height: rem(2);
+                margin-right: rem(10);
+                background: color(gray-70);
+            }
+        }
+
+        &--grey {
+            color: color(gray-15);
+        }
+
+        &[data-day] {
+            &::before {
+                content: attr(data-day);
+                position: absolute;
+                top: rem(-7);
+                right: 0;
+                font-family: $font-normal;
+                font-size: rem(11);
+                color: color(gray-15);
+            }
+        }
+    }
+
+    &__subtitle {
+        display: block;
+        font-family: $font-special;
+        font-size: rem(18);
+        color: color(gray-10);
+
+        &--grey {
+            color: color(gray-15);
+        }
+    }
+
+    &__subtitle-container {
+        margin-top: rem(4);
+        font-size: rem(11);
+        color: color(gray-15);
+
+        &--subtitle-container-top {
+            margin-top: rem(40);
+        }
+    }
+
+    &__txt {
+        display: block;
+        overflow: hidden;
+        width: rem(65);
+        max-width: 100%;
+        margin: 0 auto;
+        font-family: $font-normal;
+        font-size: rem(14);
+        text-overflow: ellipsis;
+        color: color(gray-10);
+        white-space: nowrap;
+
+        &--small {
+            font-size: rem(12);
+        }
+
+        &--medium {
+            font-size: rem(13);
+        }
+
+        &--unfocused {
+            color: color(gray-15);
+        }
+
+        &--width-lg {
+            width: rem(80);
+        }
+
+        &--grey {
+            color: color(gray-15);
+        }
+
+        &--wbig {
+            width: rem(72);
+        }
+    }
+
+    &__status {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &--top-date {
+            margin-top: rem(22);
+            margin-bottom: rem(50);
+        }
+    }
+
+    &__confirm {
+        display: block;
+        padding: 0 rem(15);
+        font-family: $font-normal;
+        font-size: rem(13);
+        color: color(gray-10);
+    }
+
+    &--large-height {
+        &::before,
+        &::after {
+            top: rem(150);
+        }
+    }
+
+    &__simple {
+        &::after,
+        &::before {
+            display: none;
+        }
+    }
+
+    &__footer {
+        padding: rem(7) 0;
+        border-top: rem(2) dotted color(gray-50);
+        text-align: right;
+    }
+
+    &__flight-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: rem(3) rem(11) rem(7);
+
+        &--new {
+            min-height: rem(28);
+            padding-bottom: rem(3);
+            background-color: color(gray-220);
+        }
+
+        &--prev {
+            min-height: rem(28);
+            padding-bottom: rem(3);
+            color: color(white);
+            background-color: color(gray-30);
+        }
+
+        &--cabin {
+            min-height: rem(28);
+            justify-content: center;
+            padding-bottom: rem(3);
+            background-color: color(gray-25);
+        }
+
+        &--t-prem {
+            min-height: rem(28);
+            padding-bottom: rem(3);
+            color: color(white);
+            background-color: color(purple-10);
+        }
+
+        &--mt {
+            margin-top: rem(6);
+        }
+
+        &--mb {
+            margin-bottom: rem(10);
+        }
+
+        &--summary {
+            padding: rem(3) 0 rem(4);
+            margin-bottom: 0;
+        }
+        .#{$wefront__namespace}ticket-block__date {
+            &:first-child {
+                text-align: left;
+            }
+
+            &:last-child {
+                text-align: right;
+            }
+        }
+
+        &--date {
+            padding: 0;
+        }
+    }
+
+    &__change-info {
+        text-align: center;
+
+        &--one-item {
+            width: 100%;
+        }
+    }
+
+    &__link {
+        display: block;
+        width: 100%;
+    }
+
+    &--disruption {
+        .#{$wefront__namespace}ticket-collapse__btn {
+            padding-top: rem(14);
+            padding-bottom: rem(14);
+        }
+        .#{$wefront__namespace}table-flight-detail__item {
+            &:nth-child(2) {
+                margin-bottom: rem(6);
+            }
+        }
+    }
+
+    &--radio {
+        display: flex;
+        flex-wrap: wrap;
+        .#{$wefront__namespace}ticket-block {
+            &__col-first {
+                width: 100%;
+                padding-left: rem(40);
+            }
+
+            &__wrapper {
+                &-floating {
+                    &::before {
+                        left: rem(91);
+                        width: remcalc(50%, " - ", rem(142));
+                    }
+
+                    &::after {
+                        right: rem(122);
+                        width: remcalc(50%, " - ", rem(172));
+                    }
+                }
+
+                &-right {
+                    &::before {
+                        right: rem(77);
+                    }
+                }
+            }
+        }
+    }
+
+    &--pt {
+        padding-top: rem(24);
+    }
+
+    &--not-availability {
+        display: flex;
+        min-height: rem(352);
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+
+    &--mb-medium-responsive {
+        margin-bottom: rem(48);
+    }
+
+    &--without-laterals {
+        &::before,
+        &::after {
+            display: none;
+        }
+    }
+}
+
+.#{$wefront__namespace}table-flight-cabins__selected {
+    .#{$wefront__namespace}ticket-block {
+        &--radio {
+            &.#{$wefront__namespace}ticket-block--disruption {
+                .#{$wefront__namespace}ticket-block__col-first, .#{$wefront__namespace}ticket-block__container {
+                    padding-left: 0;
+                }
+            }
+        }
+    }
+}
+
+// Responsive
+
+@include media-query("lg") {
+    .#{$wefront__namespace}ticket-block {
+        &__subtitle-container {
+            margin-top: rem(7);
+
+            &--subtitle-container-top {
+                margin-top: rem(40);
+            }
+        }
+
+        &__container {
+            &--border {
+                padding-bottom: rem(16);
+            }
+        }
+
+        &__wrapper {
+            &--top-card {
+                margin-top: rem(15);
+            }
+        }
+
+        &__header-car {
+            margin-bottom: rem(15);
+        }
+
+        &__header {
+            &--extra-separation {
+                margin-bottom: rem(5);
+            }
+        }
+
+        &--radio {
+            .#{$wefront__namespace}ticket-block {
+                &__wrapper {
+                    &-floating {
+                        &::before {
+                            left: rem(91);
+                            width: remcalc(50%, " - ", rem(157));
+                        }
+
+                        &::after {
+                            right: rem(118);
+                            width: remcalc(50%, " - ", rem(156));
+                        }
+                    }
+                }
+
+                &__txt {
+                    transform: translate(rem(-12), 0); //center all cases
+                }
+            }
+        }
+    }
+}
+
+@include media-query("md") {
+    .#{$wefront__namespace}ticket-block {
+        &__subtitle-container {
+            margin-top: rem(7);
+
+            &--subtitle-container-top {
+                margin-top: rem(40);
+            }
+        }
+
+        &__wrapper {
+            &--top-card {
+                margin-top: rem(15);
+            }
+        }
+
+        &__header-car {
+            position: relative;
+
+            /* FLEX */
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            padding-bottom: rem(8);
+            margin-bottom: rem(15);
+            border-bottom: rem(1) solid color(gray-50);
+        }
+
+        &__container {
+            &--border {
+                padding-bottom: rem(12);
+            }
+        }
+
+        &__header {
+            &--extra-separation {
+                margin-bottom: rem(18);
+            }
+        }
+
+        &--car,
+        &--hotel {
+            &::before,
+            &::after {
+                top: rem(109);
+            }
+
+            &::before {
+                left: rem(-7);
+            }
+
+            &::after {
+                right: rem(-7);
+            }
+            .#{$wefront__namespace}ticket-block {
+                &__wrapper {
+                    &--top {
+                        &-card {
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}ticket-block {
+        &__container {
+            &--border {
+                padding-bottom: 0;
+                border: none;
+            }
+        }
+
+        &--disruption {
+            padding: rem(16) rem(16) 0;
+            &.#{$wefront__namespace}ticket-block--radio {
+                padding: rem(6) rem(16) 0;
+                .#{$wefront__namespace}ticket-block__container {
+                    padding-left: rem(32);
+                }
+            }
+            .#{$wefront__namespace}ticket-block__col-first {
+                padding-left: 0;
+            }
+
+            .ib-ticket-collapse {
+                margin: 0 rem(-16);
+                background-color: color(gray-60);
+
+                &__btn {
+                    width: remcalc(100%, " - ", rem(32));
+                    margin: 0 rem(16);
+                    border-right: 0;
+                    border-bottom: 0;
+                    border-left: 0;
+                }
+            }
+        }
+
+        &--summary {
+            padding: rem(18) rem(24) rem(24);
+        }
+
+        &--car,
+        &--hotel {
+            &::before,
+            &::after {
+                top: rem(109);
+            }
+
+            &::before {
+                left: rem(-7);
+            }
+
+            &::after {
+                right: rem(-7);
+            }
+            .#{$wefront__namespace}ticket-block {
+                &__wrapper {
+                    &--top {
+                        &-card {
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query("sm") {
+    .#{$wefront__namespace}ticket-block {
+        &::before,
+        &::after {
+            top: rem(76);
+        }
+
+        &__confirm {
+            padding: 0 rem(8);
+            margin-top: rem(10);
+        }
+
+        &__icon {
+            position: absolute;
+            top: rem(-40);
+            right: rem(-8);
+            font-size: rem(100);
+            color: color(gray-15);
+
+            &--small {
+                top: rem(-12);
+                right: rem(16);
+                font-size: rem(50);
+            }
+        }
+
+        &__footer {
+            padding-top: rem(10);
+            border-top: rem(2) dotted color(gray-50);
+            text-align: right;
+        }
+
+        &__status {
+            &--top-date {
+                margin-top: rem(5);
+                margin-bottom: rem(50);
+            }
+        }
+
+        &__header-title {
+            display: block;
+            overflow: hidden;
+            max-width: 100%;
+            order: 2;
+            font-size: rem(20);
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            &--with-message {
+                max-width: 100%;
+                margin-top: rem(16);
+            }
+        }
+
+        &__header-txt {
+            display: block;
+            width: 100%;
+            order: 3;
+            margin-top: 0;
+            margin-bottom: rem(8);
+            clear: both;
+            float: none;
+
+            &--grey {
+                order: 1;
+            }
+        }
+
+        &__header {
+            &--responsive {
+                &.u-pt {
+                    padding-top: rem(36) !important;
+                }
+            }
+        }
+
+        &__message {
+            .#{$wefront__namespace}ticket-block {
+                &__header {
+                    padding-top: rem(36);
+
+                    &-txt {
+                        top: rem(0);
+                        right: rem(-32);
+                        width: auto;
+                        clear: initial;
+                    }
+                }
+            }
+
+            &--ticket {
+                .#{$wefront__namespace}ticket-block {
+                    &__header-txt {
+                        top: rem(-24);
+                        right: rem(-32);
+                    }
+                }
+            }
+        }
+
+        &__summary {
+            .#{$wefront__namespace}ticket-block {
+                &__wrapper {
+                    &-floating {
+                        margin-top: rem(34);
+
+                        &::before,
+                        &::after {
+                            top: rem(17);
+                        }
+                    }
+
+                    &-right {
+                        &::before {
+                            top: rem(38);
+                        }
+                    }
+                    .#{$wefront__namespace}ticket-block__title {
+                        font-size: rem(26);
+                    }
+                }
+            }
+        }
+
+        &__date {
+            max-width: rem(100);
+            font-family: $font-normal;
+            font-size: rem(13);
+
+            &--bold {
+                font-weight: normal;
+            }
+
+            &--inline-block {
+                display: inline-block;
+            }
+        }
+
+        &__title {
+            font-family: $font-special;
+            font-size: rem(22);
+
+            &--small {
+                margin-top: rem(12);
+                font-size: rem(22);
+            }
+
+            &--arrival {
+                &::after {
+                    content: "";
+                    margin-left: rem(5);
+                }
+            }
+
+            &--departure {
+                &::before {
+                    content: "";
+                    margin-right: rem(5);
+                }
+            }
+        }
+
+        &__subtitle-container {
+            margin-top: rem(8);
+
+            &--subtitle-container-top {
+                margin-top: rem(25);
+            }
+        }
+
+        &__subtitle {
+            &--responsive {
+                font-family: $font-normal;
+                font-size: rem(13);
+            }
+        }
+
+        &__wrapper {
+            &-floating {
+                &--one-line {
+                    margin-top: rem(54);
+                }
+
+                &--car {
+                    &::before,
+                    &::after {
+                        width: remcalc(50%, " - ", rem(157));
+                    }
+
+                    &::before {
+                        left: rem(105);
+                    }
+
+                    &::after {
+                        right: rem(105);
+                    }
+                }
+
+                &--hotel {
+                    &::before,
+                    &::after {
+                        width: remcalc(50%, " - ", rem(137));
+                    }
+
+                    &::before {
+                        left: rem(82);
+                    }
+
+                    &::after {
+                        right: rem(82);
+                    }
+                }
+            }
+
+            &-left {
+                max-width: rem(115);
+            }
+
+            &-right {
+                max-width: rem(115);
+            }
+
+            &-left,
+            &-right {
+                &--w-medium {
+                    max-width: rem(144);
+                }
+
+                &--w-large {
+                    max-width: rem(160);
+                }
+            }
+
+            &--two-lines {
+                min-height: rem(84);
+                .#{$wefront__namespace}ticket-block {
+                    &__title {
+                        font-size: rem(26);
+                    }
+
+                    &__wrapper {
+                        &-floating {
+                            margin-top: 0;
+
+                            &::before {
+                                left: rem(67);
+                                width: remcalc(50%, " - ", rem(111));
+                            }
+
+                            &::after {
+                                right: rem(88);
+                                width: remcalc(50%, " - ", rem(133));
+                            }
+                        }
+
+                        &-right {
+                            &::before {
+                                top: rem(3);
+                            }
+                        }
+                    }
+                }
+            }
+
+            &--height-sm {
+                min-height: rem(55);
+            }
+
+            &--top-card {
+                margin-top: rem(-15);
+                margin-bottom: rem(15);
+            }
+        }
+
+        &__flight-info {
+            &--top-card {
+                margin-top: rem(-15);
+            }
+
+            &--aiport {
+                min-height: rem(70);
+            }
+
+            &--old {
+                margin-bottom: rem(10);
+            }
+            .#{$wefront__namespace}ticket-block {
+                &__change-info {
+                    max-width: 45%;
+                }
+            }
+        }
+
+        &--large-height {
+            &::before,
+            &::after {
+                top: rem(65);
+            }
+        }
+
+        &--radio {
+            .#{$wefront__namespace}ticket-block {
+                &__wrapper {
+                    &-floating {
+                        &::before {
+                            left: rem(80);
+                            width: remcalc(50%, " - ", rem(125));
+                        }
+
+                        &::after {
+                            right: rem(108);
+                            width: remcalc(50%, " - ", rem(150));
+                        }
+                    }
+                }
+            }
+        }
+
+        &--car,
+        &--hotel {
+            padding: rem(24) rem(16);
+
+            &::before,
+            &::after {
+                top: rem(86);
+            }
+
+            &::before {
+                left: rem(-7);
+            }
+
+            &::after {
+                right: rem(-7);
+            }
+            .#{$wefront__namespace}ticket-block {
+                &__header {
+                    &-car,
+                    &-hotel {
+                        padding-bottom: rem(15);
+                        margin-bottom: rem(14);
+                    }
+                }
+
+                &__wrapper {
+                    &--top {
+                        &-card {
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query("xs") {
+    .#{$wefront__namespace}ticket-block {
+        padding: rem(6) rem(8) 0;
+
+        &::before,
+        &::after {
+            top: rem(76);
+        }
+
+        &--gdr {
+            padding: rem(16) rem(16) rem(20) rem(16);
+            .#{$wefront__namespace}ticket-block {
+                &__title {
+                    font-size: rem(26);
+                }
+            }
+        }
+
+        &__content {
+            padding: rem(16) 0 rem(4);
+            margin: 0 rem(24);
+
+            &.u-pt-none {
+                padding-top: rem(12) !important;
+                padding-bottom: rem(4);
+            }
+        }
+
+        &__title-box,
+        &__subtitle-box {
+            max-width: remcalc(100%, " - ", rem(60));
+
+            &--responsive {
+                max-width: remcalc(100%, " - ", rem(32));
+            }
+        }
+
+        &__icon {
+            position: absolute;
+            top: rem(-20);
+            right: rem(-12);
+            font-size: rem(85);
+            color: color(gray-15);
+
+            &--small {
+                top: rem(12);
+                right: rem(-8);
+                font-size: rem(28);
+            }
+        }
+
+        &__confirm {
+            padding: 0 rem(4);
+            margin-top: rem(4);
+        }
+
+        &__title {
+            font-family: $font-special;
+            font-size: rem(18);
+
+            &--arrival {
+                &::after {
+                    content: "";
+                    margin-left: rem(10);
+                }
+            }
+
+            &--departure {
+                &::before {
+                    content: "";
+                    margin-right: rem(10);
+                }
+            }
+
+            &--small {
+                margin-top: rem(6);
+                font-size: rem(18);
+            }
+        }
+
+        &__header-title {
+            display: block;
+            overflow: hidden;
+            max-width: 100%;
+            font-size: rem(18);
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            &--with-message {
+                max-width: 100%;
+                margin-top: rem(16);
+            }
+        }
+
+        &__header-txt {
+            display: block;
+            width: 100%;
+            margin-top: 0;
+            margin-bottom: rem(8);
+            clear: both;
+            float: none;
+        }
+
+        &__message {
+            .#{$wefront__namespace}ticket-block {
+                &__header {
+                    padding-top: rem(36);
+
+                    &-txt {
+                        top: rem(-4);
+                        right: rem(-32);
+                        width: auto;
+                        clear: initial;
+                    }
+                }
+            }
+
+            &--ticket {
+                .#{$wefront__namespace}ticket-block {
+                    &__header-txt {
+                        top: rem(-24);
+                        right: rem(-32);
+                    }
+                }
+            }
+        }
+
+        &__summary {
+            .#{$wefront__namespace}ticket-block__wrapper {
+                min-height: rem(84);
+
+                &-floating {
+                    margin-top: rem(48);
+
+                    &::before,
+                    &::after {
+                        display: block;
+                        width: remcalc(50%, " - ", rem(100));
+                    }
+
+                    &::before {
+                        left: rem(58);
+                    }
+
+                    &::after {
+                        right: rem(58);
+                    }
+                }
+                .#{$wefront__namespace}ticket-block__title {
+                    margin-top: rem(10);
+                    font-size: rem(26);
+                }
+            }
+        }
+
+        &__date {
+            max-width: rem(80);
+            font-family: $font-normal;
+            font-size: rem(13);
+
+            &--bold {
+                font-weight: normal;
+            }
+
+            &--inline-block {
+                display: inline-block;
+            }
+
+            &--mb-responsive {
+                margin-bottom: rem(15);
+            }
+        }
+
+        &__subtitle {
+            &--terminal {
+                max-width: rem(85);
+            }
+
+            &--responsive {
+                font-family: $font-normal;
+                font-size: rem(13);
+            }
+        }
+
+        &__subtitle-container {
+            &--subtitle-container-top {
+                margin-top: rem(20);
+            }
+        }
+
+        &__status {
+            &--top-date {
+                margin-top: rem(12);
+                margin-bottom: rem(50);
+            }
+        }
+
+        &__wrapper {
+            &-floating {
+                &::before,
+                &::after {
+                    display: none;
+                }
+
+                &--one-line {
+                    margin-top: rem(44);
+
+                    &::before,
+                    &::after {
+                        top: rem(9);
+                        display: block;
+                        width: remcalc(50%, " - ", rem(102));
+                    }
+
+                    &::before {
+                        left: rem(54);
+                    }
+
+                    &::after {
+                        right: rem(51);
+                    }
+                }
+
+                &--car {
+                    &::before,
+                    &::after {
+                        width: remcalc(50%, " - ", rem(130));
+                    }
+
+                    &::before {
+                        left: rem(78);
+                    }
+
+                    &::after {
+                        right: rem(78);
+                    }
+                }
+            }
+
+            &-left {
+                max-width: rem(115);
+            }
+
+            &-right {
+                max-width: rem(115);
+
+                &::before {
+                    display: none;
+                }
+            }
+
+            &--top-card {
+                margin-top: rem(-15);
+                margin-bottom: rem(15);
+            }
+
+            &--two-lines {
+                min-height: rem(105);
+                .#{$wefront__namespace}ticket-block__wrapper-floating {
+                    margin-top: rem(52);
+
+                    &--two-lines {
+                        &::before,
+                        &::after {
+                            top: rem(16);
+                            display: block;
+                            width: remcalc(50%, " - ", rem(100));
+                        }
+
+                        &::before {
+                            left: rem(61);
+                        }
+
+                        &::after {
+                            right: rem(58);
+                        }
+                    }
+                }
+                .#{$wefront__namespace}ticket-block__title {
+                    font-size: rem(26);
+                }
+            }
+
+            &--height-sm {
+                min-height: auto;
+            }
+        }
+
+        &__change-info {
+            display: block;
+            width: 100%;
+            padding: rem(3);
+            text-align: center;
+        }
+
+        &__flight-info {
+            &--old {
+                padding-right: 0;
+                padding-left: 0;
+            }
+
+            &--aiport {
+                min-height: rem(100);
+            }
+
+            &--new,
+            &--prev {
+                min-height: 0;
+            }
+
+            &--summary {
+                padding: 0;
+            }
+            .#{$wefront__namespace}ticket-block {
+                &__change-info {
+                    max-width: 100%;
+                }
+            }
+        }
+
+        &--large-height {
+            &::before,
+            &::after {
+                top: rem(100);
+            }
+        }
+
+        &--disruption {
+            padding: rem(16) rem(16) 0;
+
+            .ib-ticket-collapse {
+                margin: 0 rem(-16);
+
+                &__btn {
+                    width: remcalc(100%, " - ", rem(32));
+                    margin: 0 rem(16);
+                }
+            }
+        }
+
+        &--not-availability {
+            padding: 0;
+        }
+
+        &--radio {
+            .#{$wefront__namespace}ticket-block {
+                &__wrapper {
+                    min-height: rem(62);
+
+                    &-floating {
+                        margin-top: rem(2);
+
+                        &::before,
+                        &::after {
+                            content: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        &--summary {
+            padding: rem(16);
+        }
+
+        &--mb-medium-responsive {
+            margin-bottom: rem(32);
+        }
+
+        &--car,
+        &--hotel {
+            padding: rem(24) rem(16);
+
+            &::before,
+            &::after {
+                top: rem(72);
+            }
+
+            &::before {
+                left: rem(-7);
+            }
+
+            &::after {
+                right: rem(-7);
+            }
+            .#{$wefront__namespace}ticket-block {
+                &__header {
+                    &-title {
+                        font-size: rem(22);
+                        line-height: normal;
+                    }
+
+                    &-car,
+                    &-hotel {
+                        padding-bottom: rem(15);
+                        margin-bottom: rem(14);
+                    }
+                }
+
+                &__wrapper {
+                    &--top {
+                        &-card {
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,1 @@
+import './ib-checkin-biometric-boarding-form';

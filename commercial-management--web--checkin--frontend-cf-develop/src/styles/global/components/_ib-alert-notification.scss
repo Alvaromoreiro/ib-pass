@@ -1,0 +1,105 @@
+/* -------------------------------------------------------------
+    #ALERT-NOTIFICATION
+----------------------------------------------------------------- */
+.#{$wefront__namespace}alert-notification {
+    position: absolute;
+    z-index: 9999;
+    bottom: remcalc(100%, " + ", rem(8));
+    left: rem(-45);
+    display: block;
+    width: 100%;
+    max-width: rem(250);
+    margin: 0 auto;
+    border-bottom: rem(8) solid color(pink-40);
+    background-color: color(white);
+    box-shadow: 0 rem(2) rem(3) 0 color(black, 0.32), 0 rem(-1) rem(4) 0 color(black, 0.11);
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: rem(-18);
+        left: calc(50% - 1rem);
+        width: 0;
+        height: 0;
+        border-width: rem(10) rem(12) 0 rem(12);
+        border-style: solid;
+        border-color: color(pink-40) transparent transparent transparent;
+    }
+
+    &__icon-close {
+        position: absolute;
+        z-index: 1;
+        top: rem(2);
+        right: rem(7);
+        padding: 0;
+        border: 0;
+        font-size: rem(26);
+        color: color(pink-50);
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    &__msg {
+        position: relative;
+        display: block;
+        padding: rem(20) rem(16);
+    }
+
+    &__title {
+        display: inline-block;
+        width: calc(100% - 1.875rem);
+        margin-bottom: rem(8);
+        font-family: $font-normal;
+        font-size: rem(13);
+        font-weight: bold;
+        color: color(pink-50);
+        vertical-align: top;
+    }
+
+    &__text {
+        display: inline-block;
+        font-family: $font-normal;
+        font-size: rem(13);
+        color: color(gray-10);
+        vertical-align: top;
+    }
+
+    &.animate-if.ng-hide {
+        opacity: 0;
+        -ms-transition: opacity 0.3s linear;
+        transition: opacity 0.3s linear;
+    }
+
+    &.animate-if.fadeOutDown {
+        opacity: 0;
+        -ms-transition: opacity 0.3s linear;
+        transition: opacity 0.3s linear;
+    }
+
+    &.animate-if,
+    &.animate-if.fadeInDown {
+        opacity: 1;
+    }
+}
+
+@include media-query("md") {
+    .#{$wefront__namespace}alert-notification {
+        display: block;
+        margin: rem(7) auto;
+    }
+}
+
+@include media-query("xs") {
+    .#{$wefront__namespace}alert-notification {
+        width: 100%;
+        max-width: rem(288);
+    }
+}
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}alert-notification {
+        left: 0;
+        display: block;
+        margin: rem(7) auto;
+    }
+}

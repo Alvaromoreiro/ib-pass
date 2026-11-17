@@ -1,0 +1,39 @@
+<uib-accordion class="ibe-accordion">
+  <div uib-accordion-group>
+    <uib-accordion-heading><span class="ibe-accordion__title">{{'IBCOAC_VER_MAS_DETALL'|translate}}</span></uib-accordion-heading>
+    <div class="ibe-accordion__body">
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-6">
+          <div class="ibe-ticket__flights-item__data-left">
+            <div class="ibe-ticket__flights-item__data-body-text ibe-ticket__flights-item__data-body-text--title" ng-if="vuelo.origenTerm != null && vuelo.origenTerm !== ''">{{'IBCOAC_TERMINAL'|translate}}{{::vuelo.origenTerm}}</div>
+            <div class="ibe-ticket__flights-item__data-body-text ibe-ticket__flights-item__data-body-text--title" ng-if="vuelo.origenTerm == null || vuelo.origenTerm === ''">{{::vuelo.origenTerm}}</div>
+            <div class="ibe-ticket__flights-item__data-body-text" data-ng-switch="$root.appMarket">
+              <span data-ng-switch-when="US">{{vuelo.transformedDepartureDate.month|translate}} {{::vuelo.transformedDepartureDate.monthDay}} {{::vuelo.transformedDepartureDate.year}}</span>
+              <span data-ng-switch-default>{{::vuelo.transformedDepartureDate.monthDay}} {{vuelo.transformedDepartureDate.month|translate}} {{::vuelo.transformedDepartureDate.year}}</span>
+            </div>
+            <div class="ibe-ticket__flights-item__data-body-text">{{::vuelo.origenDate|HourFilter}}</div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-6 col-md-offset-4">
+          <div class="ibe-ticket__flights-item__data-right">
+            <div class="ibe-ticket__flights-item__data-body-text ibe-ticket__flights-item__data-body-text--title">{{::vuelo.destinoTerm}}</div>
+            <div class="ibe-ticket__flights-item__data-body-text" data-ng-switch="$root.appMarket">
+              <span data-ng-switch-when="US">{{vuelo.transformedArrivalDate.month|translate}} {{::vuelo.transformedArrivalDate.monthDay}} {{::vuelo.transformedArrivalDate.year}}</span>
+              <span data-ng-switch-default>{{::vuelo.transformedArrivalDate.monthDay}} {{vuelo.transformedArrivalDate.month|translate}} {{::vuelo.transformedArrivalDate.year}}</span>
+            </div>
+            <div class="ibe-ticket__flights-item__data-body-text">{{::vuelo.destinoDate|HourFilter}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-12 col-xs-12 ibe-ticket__operator">
+          <figure class="ibe-ticket__flights-item__data-body-logo">
+            <img ng-src="{{::vuelo.imgAerolineaUrl}}" alt="{{'ACCES_LOGO_AEROLINEA'|translate}}{{::vuelo.company.description}}" class="ibe-ticket__flights-item__data-body-logo-img"/>
+          </figure>
+          <span class="ibe-ticket__flights-item__data-body-textCenter ibe-ticket__flights-item__data-body-textCenter--title">{{::(vuelo.marketingFlightNumber && vuelo.marketingFlightNumber.company.code &&  vuelo.marketingFlightNumber.number ? vuelo.marketingFlightNumber.company.code+vuelo.marketingFlightNumber.number : vuelo.operatingFlightNumber.company.code+vuelo.operatingFlightNumber.number)}}</span>
+          <span class="ibe-ticket__flights-item__data-body-textCenter" ng-if="vuelo.marketingFlightNumber.company.code !==vuelo.operatingFlightNumber.company.code">{{('IBCOAC_OPERADO'|translate)}}{{::vuelo.company.description }} </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</uib-accordion>

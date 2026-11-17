@@ -1,0 +1,169 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ib-add-bag-tooltip
+//    Desripcion: Estilos para el tooltip de la modal de add bags
+//******************************************************************************/
+.#{$wefront__namespace}add-bag-tooltip {
+    position: absolute;
+    z-index: 2;
+    bottom: rem(-40);
+    left: 80%;
+    display: none;
+    min-width: rem(40);
+    padding: 0 rem(10);
+    pointer-events: none;
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+
+    &--left {
+        left: 20%;
+    }
+
+    &--extra-one {
+        &.#{$wefront__namespace}add-bag-tooltip {
+            &--left {
+                left: 50%;
+                transform: translateX(-135%);
+            }
+
+            &--right {
+                left: 50%;
+                transform: translateX(35%);
+            }
+        }
+    }
+
+    &--extra-two {
+        &.#{$wefront__namespace}add-bag-tooltip {
+            &--left {
+                left: 31%;
+            }
+
+            &--right {
+                left: 70%;
+            }
+        }
+    }
+
+    &--extra-three {
+        &.#{$wefront__namespace}add-bag-tooltip {
+            &--left {
+                left: 20%;
+
+                &.ib-add-bag-tooltip--position-fix {
+                    left: rem(40);
+                }
+            }
+
+            &--right {
+                left: 80%;
+
+                &.ib-add-bag-tooltip--position-fix {
+                    left: rem(145);
+                }
+            }
+        }
+    }
+
+    &__container {
+        position: relative;
+        width: 100%;
+        padding: rem(8);
+        border-radius: rem(3);
+        color: color(white);
+        background-color: color(gray-10);
+        box-shadow: 0 rem(2) rem(3) 0 color(black, 0.32), 0 rem(-1) rem(4) 0 color(black, 0.11);
+    }
+
+    &__text {
+        font-size: rem(13);
+        font-weight: normal;
+    }
+
+    &__arrow {
+        content: " ";
+        position: absolute;
+        top: -45%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        margin-left: rem(-8);
+        border: solid transparent;
+        border-width: rem(8);
+        border-color: rgb(136 183 213 / 0%);
+        border-bottom-color: color(gray-10);
+    }
+
+    &__close {
+        position: absolute;
+        top: 0;
+        right: rem(5);
+        display: block;
+        padding: rem(5);
+        font-size: rem(24);
+        text-decoration: none;
+        color: color(white);
+        pointer-events: auto;
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: color(white);
+        }
+    }
+
+    &--arrow-top {
+        top: 100%;
+        bottom: 0;
+        .#{$wefront__namespace}add-bag-tooltip__arrow {
+            top: rem(-16);
+            bottom: auto;
+            border-top-color: transparent;
+            border-bottom-color: color(gray-10);
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}add-bag-tooltip {
+        &--extra-three {
+            &.#{$wefront__namespace}add-bag-tooltip {
+                &--left {
+                    left: 16%;
+
+                    &.ib-add-bag-tooltip--position-fix {
+                        left: rem(30);
+                    }
+                }
+
+                &--right {
+                    left: 83%;
+
+                    &.ib-add-bag-tooltip--position-fix {
+                        left: rem(134);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}add-bag-tooltip {
+        &--extra-three {
+            &.#{$wefront__namespace}add-bag-tooltip {
+                &--left {
+                    &.ib-add-bag-tooltip--position-fix {
+                        left: rem(50);
+                    }
+                }
+
+                &--right {
+                    &.ib-add-bag-tooltip--position-fix {
+                        left: rem(154);
+                    }
+                }
+            }
+        }
+    }
+}

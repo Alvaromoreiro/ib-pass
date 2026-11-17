@@ -1,0 +1,38 @@
+<header class="ib-box-selects__header" [ngClass]="{'ib-box-selects__header--empty': isOpen}">
+    <span class="ib-icon-passenger">
+        <button id="IBCOAC_BOTON_GENDER-{{index}}"
+            *ngIf="passengerInfo.type === 'ADULT' && passengerInfo.fieldStatus.gender.show && passengerInfo.pasStatus.available"
+            class="ib-icon-passenger__icon"
+            [ngbPopover]="genderSelectorTemplate"
+            placement="bottom-left"
+            [ngClass]="{'icon-mujer': passengerInfo.gender ==='FEMALE', 'icon-hombre' : passengerInfo.gender ==='MALE'}"
+            triggers="click"
+            autoClose="outside"
+             type="button"><span
+                class="hideAccessible">{{'IBCOAC_PA_GENDER_TITLE'|translate}}</span></button>
+        <span
+            *ngIf="passengerInfo.type === 'ADULT' && (!passengerInfo.fieldStatus.gender.show || !passengerInfo.pasStatus.available)"
+            class="ib-icon-passenger__icon"
+            [ngClass]="{'icon-mujer': passengerInfo.gender ==='FEMALE','icon-hombre' : passengerInfo.gender ==='MALE'}"></span>
+        <span *ngIf="passengerInfo.type === 'CHILD'"
+            class="ib-icon-passenger__icon icon-iberia_ninos"></span>
+        <span class="ib-icon-passenger__text">{{passengerInfo.name + ' ' +
+            passengerInfo.surname}}</span>
+    </span>
+    <span class="ib-icon-passenger" *ngIf="passengerInfo.infant">
+        <span class="ib-icon-passenger__icon icon-bebe"></span>
+        <span class="ib-icon-passenger__text">{{passengerInfo.infant.name + ' ' +
+            passengerInfo.infant.surname}}</span>
+    </span>
+    <div class="subscription-checked" *ngIf="passengerInfo.pasStatus.isChecked && isBpSubscriptionMode">
+        <span class="icon-validar"></span>
+        <p>{{'IBCOAC_BP_SUBSCRIPTION_PASSENGER_CHECKED'|translate}}</p>
+    </div>
+</header>
+
+<ng-template #genderSelectorTemplate>
+    <ib-gender-selector-tooltip
+        [passengerInfo]="passengerInfo"
+        [index]="index">
+    </ib-gender-selector-tooltip>
+</ng-template>

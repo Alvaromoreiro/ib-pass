@@ -1,0 +1,43 @@
+<div class="ibe-modal">
+	<header class="modal-header">
+		<h2 class="title title__h1 ibe-modal_title-primary">{{'IBFNCOPA_MODAL_FARE_CONDITIONS'| translate}}</h2>
+		<div class="ibe-modal_options"><span id="FARE_CONDITIONS_MODAL_CLOSE" title="{{'MODAL_CLOSE'| translate}}" data-ng-click="modalCtrl.close()" class="ibe-modal_options-icon ibe-modal_options-close"></span></div>
+	</header>
+	<section class="modal-body">
+		<div class="ibe-modal__body">
+			<table class="ibe-table-modal ibe-table-modal--type-1">
+				<caption class="hideAccessible">{{'IBFNCOPA_MODAL_FARE_CONDITIONS_HIDE_TABLE_TITLE'| translate}}</caption>
+				<thead class="ibe-table-modal__head">
+					<tr class="ibe-table-modal__row">
+						<th class="ibe-table-modal__column ibe-table-modal__column--head" colspan="2">
+							<span class="ibe-table-modal__text ibe-table-modal__text--title">{{'IBFNCOPA_MODAL_FARE_CONDITIONS_TABLE_TITLE'| translate}}</span>
+						</th>
+					</tr>
+				</thead>
+				<tbody class="ibe-table-modal__body">
+					<tr class="ibe-table-modal__row">
+						<td class="ibe-table-modal__column" data-column="fareCondition">
+							<span class="ibe-table-modal__text">{{'IBFNCOPA_MODAL_FARE_CONDITIONS_CABIN'|translate}}</span>
+						</td>
+						<td class="ibe-table-modal__column" data-column="fareDescription">
+							<span class="ibe-table-modal__text">{{modalCtrl.model.cabinDescription}}</span>
+						</td>
+					</tr>
+					<tr ng-if="conditions.extendedInfo.conditionStatus" class="ibe-table-modal__row" ng-repeat="conditions in modalCtrl.model.conditions">
+						<td class="ibe-table-modal__column" data-column="fareCondition">
+							<span class="ibe-table-modal__text">{{conditions.name}}</span>
+						</td>
+						<td class="ibe-table-modal__column" data-column="fareDescription">
+							<span class="ibe-table-modal__text">{{conditions.text}}</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+	<footer class="modal-footer u-text-right">
+		<div class="ibe-modal__footer">
+			<button id="FARE_CONDITIONS_MODAL_ACCEPT" title="{{'MODAL_ACCEPT'|translate}}" data-ng-click="modalCtrl.close()" class="ibe-button ibe-button--red ibe-button--big ibe-button--w-medium">{{'MODAL_ACCEPT'|translate}}</button>
+		</div>
+	</footer>
+</div>

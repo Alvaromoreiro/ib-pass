@@ -1,0 +1,348 @@
+/* stylelint-disable scss/comment-no-empty */
+// Include parts of Bootstrap
+
+
+// Grid columns
+//
+// Set the number of columns and specify the width of the gutters.
+
+$grid-columns:                12 !default;
+$grid-gutter-width:           2rem !default; //rem(32)
+$grid-row-columns:            12 !default;
+
+$screen-xs:                  20rem;
+$screen-sm:                  30rem;
+$screen-md:                  48rem;
+$screen-lg:                  64rem;
+$screen-xl:                  80rem;
+$screen-xxl:                  90rem;
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import 'bootstrap/scss/_functions';
+@import "bootstrap/scss/_variables";
+
+$grid-columns:                12 !default;
+$grid-gutter-width:           2rem !default; //rem(32)
+$grid-row-columns:            12 !default;
+
+$screen-xs:                  20rem;
+$screen-sm:                  30rem;
+$screen-md:                  48rem;
+$screen-lg:                  64rem;
+$screen-xl:                  80rem;
+$screen-xxl:                  90rem;
+
+// 2. Include any default variable overrides here
+
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+$screen-xs-max: ($screen-sm - 0.04);
+$screen-sm-max: ($screen-md - 0.04);
+$screen-md-max: ($screen-lg - 0.04);
+$screen-lg-max: ($screen-xl - 0.04);
+$screen-xl-max: ($screen-xxl - 0.04);
+
+// scss-docs-start grid-breakpoints
+$grid-breakpoints: (
+    xs: $screen-xs,
+    sm: $screen-sm,
+    md: $screen-md,
+    lg: $screen-lg,
+    xl: $screen-xl,
+    xxl: $screen-xxl
+) !default;
+// scss-docs-end grid-breakpoints
+
+@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+@include _assert-starts-at-zero($grid-breakpoints, "$grid-breakpoints");
+
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+// scss-docs-start container-max-widths
+$container-max-widths: (
+    sm: $screen-xs-max,
+    md: $screen-sm-max,
+    lg: $screen-md-max,
+    xl: $screen-lg-max,
+    xxl: $screen-xl-max
+) !default;
+// scss-docs-end container-max-widths
+
+@include _assert-ascending($container-max-widths, "$container-max-widths");
+
+// 3. Include remainder of required Bootstrap stylesheets
+
+// 4. Include any default map overrides here
+
+// 5. Include remainder of required parts
+@import "bootstrap/scss/_maps";
+@import "bootstrap/scss/_mixins";
+@import "bootstrap/scss/_utilities";
+
+// 6. Optionally include any other parts as needed
+@import "bootstrap/scss/_root";
+@import "bootstrap/scss/_reboot";
+@import "bootstrap/scss/_type";
+@import "bootstrap/scss/_images";
+@import "bootstrap/scss/_containers";
+@import "bootstrap/scss/_grid";
+
+
+//COMPONENTS
+@import "bootstrap/scss/forms/_input-group";
+@import "bootstrap/scss/forms/_labels";
+@import "bootstrap/scss/_transitions";
+@import "bootstrap/scss/_breadcrumb";
+@import "bootstrap/scss/_button-group";
+@import "bootstrap/scss/_dropdown";
+@import "bootstrap/scss/_nav";
+@import "bootstrap/scss/_navbar";
+@import "bootstrap/scss/_pagination";
+@import "bootstrap/scss/_badge";
+@import "bootstrap/scss/_alert";
+@import "bootstrap/scss/_progress";
+@import "bootstrap/scss/_list-group";
+@import "bootstrap/scss/_close";
+
+// Components w/ JavaScript
+@import "bootstrap/scss/_modal";
+@import "bootstrap/scss/_tooltip";
+@import "bootstrap/scss/_popover";
+@import "bootstrap/scss/_carousel";
+
+// 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+@import "bootstrap/scss/_helpers";
+@import "bootstrap/scss/utilities/api";
+
+// 8. Add additional custom code here
+
+
+// MIGRATION BOOTSTRAP-3 to BOOTSTRAP-5
+
+// https://getbootstrap.com/docs/4.0/migration/
+// https://getbootstrap.com/docs/5.0/migration/
+
+
+
+
+// .container {
+//     @include container-fixed;
+
+//     @media (min-width: $screen-sm-min) {
+//         width: $container-sm;
+//     }
+
+//     @media (min-width: $screen-md-min) {
+//         width: $container-md;
+//     }
+
+//     @media (min-width: $screen-lg-min) {
+//         width: $container-lg;
+//     }
+
+//     @media (min-width: $screen-xl-min) {
+//         width: $container-xl;
+//     }
+// }
+
+// X-Large grid
+//
+// Columns, offsets, pushes, and pulls for the x-large desktop device range.
+
+// @media (min-width: $screen-xl-min) {
+//     @include make-grid(xl);
+// }
+
+// Visibility utilities
+// Note: Deprecated .visible-xs, .visible-sm, .visible-md, and .visible-lg as of v3.2.0
+
+// @include responsive-invisibility('.visible-xl');
+
+// .visible-xl-block,
+// .visible-xl-inline,
+// .visible-xl-inline-block,
+// .visible-xl-flex {
+//     display: none !important;
+// }
+
+// @media (min-width: $screen-lg-min) {
+//     .hidden-lg {
+//         display: inherit !important;
+//     }
+// }
+
+// @media (min-width: $screen-lg-min) and (max-width: $screen-lg-max) {
+//     @include responsive-invisibility('.hidden-lg');
+// }
+
+// @media (min-width: $screen-lg-min) and (max-width: $screen-lg-max) {
+//     @include responsive-visibility('.visible-lg');
+// }
+
+// .visible-lg-block {
+//     @media (min-width: $screen-lg-min) and (max-width: $screen-lg-max) {
+//         display: block !important;
+//     }
+// }
+
+// .visible-lg-inline {
+//     @media (min-width: $screen-lg-min) and (max-width: $screen-lg-max) {
+//         display: inline !important;
+//     }
+// }
+
+// .visible-lg-inline-block {
+//     @media (min-width: $screen-lg-min) and (max-width: $screen-lg-max) {
+//         display: inline-block !important;
+//     }
+// }
+
+// @media (min-width: $screen-xl-min) {
+//     @include responsive-visibility('.visible-xl');
+// }
+
+// .visible-xl-block {
+//     @media (min-width: $screen-xl-min) {
+//         display: block !important;
+//     }
+// }
+
+// .visible-xl-inline {
+//     @media (min-width: $screen-xl-min) {
+//         display: inline !important;
+//     }
+// }
+
+// .visible-xl-inline-block {
+//     @media (min-width: $screen-xl-min) {
+//         display: inline-block !important;
+//     }
+// }
+
+// .visible-xl-flex {
+//     @media (min-width: $screen-xl-min) {
+//         display: flex !important;
+//     }
+// }
+
+// @media (min-width: $screen-xl-min) {
+//     @include responsive-invisibility('.hidden-xl');
+// }
+
+
+
+
+// // [converter] This is defined recursively in LESS, but Sass supports real loops
+// @mixin make-grid-columns($i: 1, $list: ".col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}, .col-xl-#{$i}") {
+//     @for $i from (1 + 1) through $grid-columns {
+//         $list: "#{$list}, .col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}, .col-xl-#{$i}";
+//     }
+//     #{$list} {
+//         position: relative;
+//         // Prevent columns from collapsing when empty
+//         min-height: rem(1);
+//         padding-right: floor(($grid-gutter-width / 2));
+//         // Inner gutter via padding
+//         padding-left: ceil(($grid-gutter-width / 2));
+//     }
+// }
+
+// // [converter] This is defined recursively in LESS, but Sass supports real loops
+// @mixin float-grid-columns($class, $i: 1, $list: ".col-#{$class}-#{$i}") {
+//     @for $i from (1 + 1) through $grid-columns {
+//         $list: "#{$list}, .col-#{$class}-#{$i}";
+//     }
+//     #{$list} {
+//         float: left;
+//     }
+// }
+
+// @mixin calc-grid-column($index, $class, $type) {
+//     @if ($type == width) and ($index > 0) {
+//         .col-#{$class}-#{$index} {
+//             width: percentage(($index / $grid-columns));
+//         }
+//     }
+
+//     @if ($type == push) and ($index > 0) {
+//         .col-#{$class}-push-#{$index} {
+//             left: percentage(($index / $grid-columns));
+//         }
+//     }
+
+//     @if ($type == push) and ($index == 0) {
+//         .col-#{$class}-push-0 {
+//             left: auto;
+//         }
+//     }
+
+//     @if ($type == pull) and ($index > 0) {
+//         .col-#{$class}-pull-#{$index} {
+//             right: percentage(($index / $grid-columns));
+//         }
+//     }
+
+//     @if ($type == pull) and ($index == 0) {
+//         .col-#{$class}-pull-0 {
+//             right: auto;
+//         }
+//     }
+
+//     @if ($type == offset) {
+//         .col-#{$class}-offset-#{$index} {
+//             margin-left: percentage(($index / $grid-columns));
+//         }
+//     }
+// }
+
+// // [converter] This is defined recursively in LESS, but Sass supports real loops
+// @mixin loop-grid-columns($columns, $class, $type) {
+//     @for $i from 0 through $columns {
+//         @include calc-grid-column($i, $class, $type);
+//     }
+// }
+
+// // Create grid for specific class
+// @mixin make-grid($class) {
+//     @include float-grid-columns($class);
+//     @include loop-grid-columns($grid-columns, $class, width);
+//     @include loop-grid-columns($grid-columns, $class, pull);
+//     @include loop-grid-columns($grid-columns, $class, push);
+//     @include loop-grid-columns($grid-columns, $class, offset);
+// }
+
+// // Generate the x-large columns
+// @mixin make-xl-column($columns, $gutter: $grid-gutter-width) {
+//     position: relative;
+//     min-height: rem(1);
+//     padding-right: ($gutter / 2);
+//     padding-left: ($gutter / 2);
+
+//     @media (min-width: $screen-xl-min) {
+//         width: percentage(($columns / $grid-columns));
+//         float: left;
+//     }
+// }
+
+// @mixin make-xl-column-offset($columns) {
+//     @media (min-width: $screen-xl-min) {
+//         margin-left: percentage(($columns / $grid-columns));
+//     }
+// }
+
+// @mixin make-xl-column-push($columns) {
+//     @media (min-width: $screen-xl-min) {
+//         left: percentage(($columns / $grid-columns));
+//     }
+// }
+
+// @mixin make-xl-column-pull($columns) {
+//     @media (min-width: $screen-xl-min) {
+//         right: percentage(($columns / $grid-columns));
+//     }
+// }

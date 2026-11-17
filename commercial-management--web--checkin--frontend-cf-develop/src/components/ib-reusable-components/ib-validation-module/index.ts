@@ -1,0 +1,9 @@
+import './ib-validation-module';
+import './directives/ib-cpf-validator-directive';
+import './directives/ib-disable-remove-validation';
+import './directives/ib-dni-validator-directive';
+import './directives/ib-luhn-and-mail-validator-directive';
+import './directives/ib-luhn-validator-directive';
+import './directives/ib-validation-cleaner-directive';
+import './directives/ui-select-required-validator';
+import './directives/ib-duplicate-company-and-number-directive';

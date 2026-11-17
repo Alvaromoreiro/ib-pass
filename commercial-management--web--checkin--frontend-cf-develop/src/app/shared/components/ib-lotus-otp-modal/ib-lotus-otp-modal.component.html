@@ -1,0 +1,37 @@
+<div id="bbki-availability-loading-elem" *ngIf="showLoading"
+class="ib-ui-loading ib-ui-loading--full">
+<div class="ib-ui-loading__container">
+    <div class="ib-ui-loading__icon">
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+    <span class="ib-ui-loading__text">{{(reloadingSession? 'CODE_SESSION_LOADING': 'CODE_VALIDATION_LOADING')|translate}}</span>
+</div>
+</div>
+<header class="header-box">
+    <div class="header-title-box">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" fill="none">
+            <g id="informacion_2">
+                <path id="informacion_2_2" fill-rule="evenodd" clip-rule="evenodd"
+                    d="M14.3359 25.1198H18.5915V14.4937H14.3359V25.1198ZM16.5006 0.5C7.66301 0.5 0.5 7.66154 0.5 16.4945C0.5 25.3385 7.66301 32.5 16.5006 32.5C25.3348 32.5 32.5 25.3385 32.5 16.4945C32.5 7.66154 25.3348 0.5 16.5006 0.5ZM16.5011 28.5565C9.85279 28.5565 4.44844 23.1438 4.44844 16.4915C4.44844 9.85016 9.85279 4.4375 16.5011 4.4375C23.1451 4.4375 28.5539 9.85016 28.5539 16.4915C28.5539 23.1438 23.1451 28.5565 16.5011 28.5565ZM16.3848 12.1317H16.5419C17.6443 12.1317 18.9359 11.8439 18.9359 10.0729V9.98433C18.9359 8.20225 17.6443 7.88125 16.5419 7.88125H16.3848C15.2813 7.88125 13.9875 8.20225 13.9875 9.98433V10.0729C13.9875 11.8439 15.2813 12.1317 16.3848 12.1317Z"
+                    fill="#D7192D" />
+            </g>
+        </svg>
+        <h2 class="header-title-text">{{'OTP_MODAL_LOTUS_TITLE'|translate}}</h2>
+    </div>
+    <div class="ib-modals__header-settings">
+        <button (click)="dismiss()" type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<p class="body-message" [innerHTML]="textsModel.EXPLANATION"></p>
+<ib-lotus-otp-form [otpTimeStart]="model.sessionRequested" [otpTimeLimit]="model.sessionExpiration" [otpSessionId]="model.sessionId" (otpFormState)="onOtpStatesUpdate($event)"></ib-lotus-otp-form>
+<div>
+    <h3 class="body-title body-message">{{'OTP_MODAL_CC_TITLE'|translate}}</h3>
+    <p class="body-message" [innerHTML]="textsModel.CC_TEXT"></p>
+</div>
+<footer class="footer">
+    <button class="footer-button footer-button-link" title="{{'MODAL_CLOSE'|translate}}" (click)="dismiss()">{{'MODAL_CLOSE'|translate}}</button>
+    <button class="footer-button footer-button-main" type="button" (click)="resendCode()">{{'OTP_MODAL_PRIMARY_ACTION'|translate}}</button>
+</footer>

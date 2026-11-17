@@ -1,0 +1,63 @@
+/* -------------------------------------------------------------
+    #FOCUSIN ATTR
+----------------------------------------------------------------- */
+@mixin focusin($w, $c) {
+    &:focus,
+    &:active {
+        outline: none;
+    }
+
+    &.focus {
+        outline: rem($w) solid color($c);
+        outline-offset: rem(-1);
+
+        &:focus {
+            outline: rem($w) solid color($c);
+            outline-offset: rem(-1);
+        }
+    }
+}
+
+@mixin focusonly($wi, $co) {
+    &:focus,
+    &:active {
+        outline: rem($wi) solid color($co);
+        outline-offset: rem(-1);
+    }
+}
+
+a,
+button {
+    @include focusonly(2, 'orange-10');
+
+    &[focusin] {
+        @include focusin(2, 'orange-10');
+    }
+}
+
+*[focusin] {
+    @include focusin(2,'orange-10');
+}
+
+input[focusin] {
+    &:focus,
+    &:active {
+        + label {
+            outline: none;
+        }
+    }
+
+    &.focus {
+        outline: 0.125rem solid color(orange-10);
+        outline-offset: rem(-1);
+
+        &:focus {
+            + label {
+                outline: 0.125rem solid color(orange-10);
+                outline-offset: rem(-1);
+            }
+        }
+    }
+}
+
+//Responsive

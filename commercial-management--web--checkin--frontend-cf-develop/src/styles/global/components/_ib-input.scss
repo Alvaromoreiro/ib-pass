@@ -1,0 +1,806 @@
+/* -------------------------------------------------------------
+    #INPUT
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}input {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    border-radius: 0;
+    background: color(white);
+
+    &__input {
+        display: block;
+        width: 100%;
+        height: rem(56);
+        padding: rem(18) rem(16);
+        border: rem(1) solid color(gray-40);
+        border-radius: 0;
+        font-family: $font-special;
+        font-size: rem(16);
+
+        &:focus {
+            border-color: color(orange-10) !important;
+            outline: none;
+        }
+
+        &::-webkit-contacts-auto-fill-button {
+            position: absolute;
+            right: 0;
+            display: none !important;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        &::-webkit-credentials-auto-fill-button {
+            position: absolute;
+            right: 0;
+            display: none !important;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        &::-webkit-search-decoration,
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-results-button,
+        &::-webkit-search-results-decoration {
+            display: none;
+            opacity: 0;
+        }
+
+        &::-ms-clear {
+            display: none;
+        }
+        //Modifiers
+        &--enabled {
+            background: color(white);
+        }
+
+        &--without-value {
+            font-size: 0;
+        }
+
+        &--phone {
+            display: inline-block;
+            width: calc(100% - rem(94));
+            height: 100%;
+            padding: 0;
+            border: 0;
+            vertical-align: bottom;
+        }
+
+        &--custom-amount {
+            .#{$wefront__namespace}input__input {
+                height: rem(58);
+            }
+        }
+    }
+
+    &__password {
+        border: 0;
+        font-size: rem(16);
+        background: none;
+    }
+
+    &__label, 
+    %ib-input__label {
+        position: absolute;
+        z-index: 5;
+        top: 50%;
+        left: rem(16);
+        overflow: hidden;
+        width: remcalc('100%', ' - ', rem(32));
+        font-family: $font-special;
+        font-size: rem(16);
+        text-overflow: ellipsis;
+        line-height: normal;
+        color: color(gray-15);
+        cursor: text;
+        -ms-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+        transition: ease top, transform 0.25s;
+        white-space: nowrap;
+        // Modifiers
+        &--focus {
+            top: rem(11);
+            font-family: $font-normal;
+            font-size: rem(11);
+            text-transform: uppercase;
+            -ms-transform: translate(0, 0);
+            transform: translate(0, 0);
+            +.#{$wefront__namespace}input__input {
+                padding-top: rem(26);
+                padding-bottom: rem(10);
+            }
+        }
+
+        &--uppercase {
+            text-transform: uppercase;
+        }
+
+        &--text-normal {
+            font-family: $font-normal;
+            font-size: rem(11);
+        }
+
+        &--transform-none {
+            transform: none;
+        }
+
+        &--overflow-visible {
+            overflow: visible;
+        }
+    }
+
+    &__icon {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        width: rem(57);
+        height: 100%;
+        border: 0;
+        font-size: rem(25);
+        text-align: center;
+        color: color(gray-15);
+        background: transparent;
+
+        &::before {
+            z-index: 0;
+            display: inline-block;
+        }
+
+        &:focus {
+            outline: rem(2) solid color(orange-10);
+        }
+
+        &--opened {
+            color: color(primary);
+        }
+    }
+
+    &__card-logo {
+        position: absolute;
+        top: rem(16);
+        right: rem(16);
+        width: rem(40);
+
+        &--loading {
+            top: rem(8);
+        }
+    }
+
+    &__textarea {
+        padding: rem(16);
+        border: rem(1) solid color(gray-40);
+        font-family: $font-special;
+        resize: none;
+    }
+
+    &__group {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        border: rem(1) solid color(gray-40);
+        .#{$wefront__namespace}input {
+            &__button {
+                position: absolute;
+                z-index: 6;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: 0;
+                background: transparent;
+            }
+
+            &__input {
+                height: rem(54);
+                border: 0;
+            }
+            +.#{$wefront__namespace}input {
+                &::before {
+                    content: "\e92f";
+                    position: absolute;
+                    top: 50%;
+                    left: rem(1);
+                    font-family: $font-icons;
+                    font-size: rem(16);
+                    color: color(gray-15);
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+    }
+    // Modifiers
+    // Type Inputs
+    &--info {
+        font-size: 0;
+        .#{$wefront__namespace}input__info {
+            display: inline-block;
+            width: 30%;
+            height: rem(56);
+            border: rem(1) solid color(gray-40);
+            border-left: 0;
+            text-align: center;
+            line-height: rem(60);
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+            vertical-align: top;
+        }
+        .#{$wefront__namespace}input__input {
+            display: inline-block;
+            width: 70%;
+            border-right: 0;
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+
+            &:focus {
+                +.#{$wefront__namespace}input__info {
+                    border-color: color(orange-10);
+                }
+            }
+        }
+        .#{$wefront__namespace}input__label {
+            width: calc(70% - rem(44));
+        }
+    }
+
+    &--icon {
+        font-size: 0;
+        .#{$wefront__namespace}input__info {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: inline-block;
+            width: 12%;
+            height: rem(56);
+            border: rem(1) solid color(gray-40);
+            border-left: 0;
+            text-align: center;
+            line-height: rem(70);
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+            vertical-align: top;
+        }
+        .#{$wefront__namespace}input__input {
+            display: inline-block;
+            width: 100%;
+            padding-right: rem(50);
+            border-right: 0;
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+
+            &:focus {
+                +.#{$wefront__namespace}input__info {
+                    border-color: color(orange-10);
+                }
+                ~.#{$wefront__namespace}input__icon {
+                    border-color: color(orange-10);
+                }
+            }
+        }
+        .#{$wefront__namespace}input__label {
+            width: calc(70% - rem(44));
+        }
+        .#{$wefront__namespace}link {
+            text-decoration: none;
+        }
+        .#{$wefront__namespace}input__icon {
+            z-index: 0;
+            border-top: rem(1) solid color(gray-40);
+            border-right: rem(1) solid color(gray-40);
+            border-bottom: rem(1) solid color(gray-40);
+
+            &::before {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+        }
+        &.#{$wefront__namespace}input {
+            &--error {
+                .#{$wefront__namespace}input__icon {
+                    border-color: color(red-20);
+                }
+            }
+        }
+
+        .#{$wefront__namespace}input__button {
+            position: absolute;
+            z-index: 10;
+            width: 100%;
+            border: 0;
+            background: color(white, 0);
+            inset: 0;
+
+            &:focus {
+                outline: 0;
+                ~.#{$wefront__namespace}input__input {
+                    border-color: color(orange-10);
+                }
+                ~.#{$wefront__namespace}input__icon {
+                    border-color: color(orange-10);
+                }
+            }
+        }
+
+        &.dropdown {
+            &::after {
+                content: "";
+                position: absolute;
+                z-index: 1001;
+                right: rem(20);
+                bottom: rem(-8);
+                width: rem(10);
+                height: rem(10);
+                border: solid transparent;
+                background: color(white);
+                box-shadow: rem(-1) rem(-1) rem(1) color(black, 0.2);
+                opacity: 0;
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+
+            &.open {
+                &::after {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    &--button {
+        height: rem(56);
+        border: rem(1) solid color(gray-40);
+        border-radius: 0;
+        .#{$wefront__namespace}input {
+            &__input {
+                width: calc(100% - 3.125rem);
+                height: rem(54);
+                padding-right: 0;
+                border: 0;
+
+                &--without-button {
+                    width: 100%;
+                    padding-right: rem(22);
+                }
+            }
+
+            &__label {
+                width: calc(100% - 5.3125rem);
+            }
+        }
+    }
+
+    // Size
+    &--fluid-auto {
+        width: auto;
+    }
+
+    &--block {
+        display: block;
+    }
+    // Modifiers
+    &--error {
+        .#{$wefront__namespace}input__input {
+            border-color: color(red-20);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+            box-shadow: none;
+        }
+        .#{$wefront__namespace}input__label {
+            &--focus {
+                top: rem(8);
+                font-size: rem(14);
+                -ms-transform: translate(0, 0);
+                transform: translate(0, 0);
+                +.#{$wefront__namespace}input__input {
+                    padding-top: rem(26);
+                    padding-bottom: rem(10);
+                }
+
+                #paymentsForm & {
+                    font-size: rem(11);
+                }
+            }
+        }
+        .#{$wefront__namespace}input__info {
+            border-color: color(red-20);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        &.#{$wefront__namespace}input--button,
+        &.#{$wefront__namespace}input__group {
+            border-color: color(red-20);
+        }
+    }
+
+    &--disabled {
+        background-color: color(gray-50);
+        cursor: not-allowed;
+        .#{$wefront__namespace}input {
+            &__input {
+                background-color: color(gray-50);
+                cursor: not-allowed;
+            }
+
+            &__label {
+                cursor: not-allowed;
+            }
+
+            &__button {
+                cursor: not-allowed;
+
+                &:focus {
+                    ~.#{$wefront__namespace}input__icon {
+                        color: color(gray-15);
+                    }
+                }
+            }
+        }
+        .#{$wefront__namespace}link {
+            //pointer-events: none;
+            color: color(gray-15);
+        }
+    }
+
+    &--loaded {
+        background-color: color(gray-50);
+        cursor: not-allowed;
+        .#{$wefront__namespace}input {
+            &__input {
+                background-color: color(gray-50);
+                cursor: not-allowed;
+            }
+
+            &__label {
+                cursor: not-allowed;
+            }
+
+            &__button {
+                cursor: not-allowed;
+
+                &:focus {
+                    ~.#{$wefront__namespace}input__icon {
+                        color: color(gray-15);
+                    }
+                }
+            }
+        }
+        .#{$wefront__namespace}link {
+            //pointer-events: none;
+            color: color(gray-15);
+        }
+    }
+    // Modules
+    &--cities {
+        .#{$wefront__namespace}input__icon {
+            &:focus {
+                // outline: rem(2) solid color(orange-10);
+                z-index: 9999;
+            }
+
+            &::after {
+                opacity: 0;
+            }
+        }
+    }
+
+    &--small {
+        height: rem(48);
+        .#{$wefront__namespace}input {
+            &__input {
+                height: rem(46);
+            }
+        }
+    }
+
+    &--datepicker {
+        .#{$wefront__namespace}input__label {
+            position: absolute;
+            top: rem(18);
+            left: rem(22);
+            display: inline-block;
+            font-family: $font-normal;
+            font-size: rem(11);
+            line-height: 1.18;
+            color: color(gray-15);
+        }
+        .#{$wefront__namespace}input__input {
+            padding-top: rem(26);
+            padding-bottom: rem(10);
+        }
+    }
+    // &--datepicker-simple {}
+    &--datepicker-open {
+        .#{$wefront__namespace}input__button {
+            z-index: 99999;
+
+            &::after {
+                content: " ";
+                position: absolute;
+                right: rem(16);
+                display: none;
+                width: 0;
+                height: 0;
+                margin-left: rem(-8);
+                border: solid transparent;
+                border-width: rem(8);
+                border-color: color(white, 0);
+            }
+
+            &::before {
+                content: " ";
+                position: absolute;
+                right: rem(16);
+                display: none;
+                width: 0;
+                height: 0;
+                margin-left: rem(-8);
+                border: solid transparent;
+                border-width: rem(8);
+                border-color: color(white, 0);
+            }
+
+            &--top {
+                &::after {
+                    top: auto;
+                    bottom: rem(42);
+                    display: block;
+                    border-top-color: color(white);
+                    border-bottom-color: transparent;
+                }
+
+                &::before {
+                    top: auto;
+                    bottom: rem(42);
+                    display: block;
+                    border-top-color: color(black);
+                    border-bottom-color: transparent;
+                }
+            }
+
+            &--bottom {
+                &::after {
+                    top: rem(41);
+                    bottom: auto;
+                    display: block;
+                    border-top-color: transparent;
+                    border-bottom-color: color(white);
+                }
+
+                &::before {
+                    top: rem(41);
+                    bottom: auto;
+                    display: block;
+                    border-top-color: transparent;
+                    border-bottom-color: color(black);
+                }
+            }
+        }
+    }
+
+    &__information {
+        padding: rem(8) rem(16) rem(8) rem(12);
+        border: solid rem(1) color(gray-40);
+        border-top: 0;
+        text-align: right;
+    }
+
+    &--edition-disabled {
+        &.#{$wefront__namespace}input {
+            background: 0 none;
+            cursor: default;
+            .#{$wefront__namespace}input {
+                &__input {
+                    padding-left: rem(0);
+                    border: 0 none;
+                    background: 0 none;
+                    word-break: break-word;
+                }
+
+                &__label {
+                    left: 0;
+                }
+            }
+        }
+    }
+}
+
+.dropdown.open {
+    .#{$wefront__namespace}input {
+        &--cities {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+
+            /* z-index: 9999; */
+            .#{$wefront__namespace}input__icon {
+                z-index: 1001;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    z-index: 1001;
+                    top: calc(100% + rem(4));
+                    right: rem(20);
+                    width: rem(10);
+                    height: rem(10);
+                    margin-top: 0;
+                    border: solid transparent;
+                    background: color(white);
+                    box-shadow: rem(-1) rem(-1) rem(1) color(black, 0.2);
+                    opacity: 1;
+                    transform: rotate(45deg);
+                    -webkit-transition: opacity 0.75s ease;
+                    -moz-transition: opacity 0.75s ease;
+                    -o-transition: opacity 0.75s ease;
+                    transition: opacity 0.75s ease;
+                }
+            }
+            &.#{$wefront__namespace}input--error {
+                .#{$wefront__namespace}input__icon {
+                    &::after {
+                        top: calc(100% + rem(43));
+                    }
+                }
+            }
+        }
+    }
+}
+
+.#{$wefront__namespace}box--flex {
+    .#{$wefront__namespace}input__group {
+        width: 100%;
+    }
+}
+
+// Responsive
+// xl
+//@include media-query('xl') {}
+// lg
+//@include media-query('lg') {}
+// md
+@include media-query('md') {
+    .#{$wefront__namespace}input {
+        &--cities {
+            .#{$wefront__namespace}input__icon {
+                &::after {
+                    display: none;
+                }
+            }
+        }
+
+        &--icon {
+            font-size: 0;
+            .#{$wefront__namespace}input__info {
+                width: 15%;
+
+                &--border {
+                    border: rem(1) solid color(gray-40);
+                }
+            }
+            .#{$wefront__namespace}input__input {
+                width: 85%;
+            }
+        }
+
+        &--icon-full {
+            font-size: 0;
+            .#{$wefront__namespace}input__info {
+                width: 15%;
+            }
+            .#{$wefront__namespace}input__input {
+                width: 100%;
+            }
+        }
+    }
+}
+
+// sm
+@include media-query('sm') {
+    .#{$wefront__namespace}input {
+        &--cities {
+            .#{$wefront__namespace}input__icon {
+                &::after {
+                    display: none;
+                }
+            }
+        }
+
+        &--info {
+            .#{$wefront__namespace}input__input {
+                width: 55%;
+            }
+            .#{$wefront__namespace}input__info {
+                width: 45%;
+                padding-right: rem(22);
+                text-align: right;
+                .#{$wefront__namespace}link {
+                    overflow: hidden;
+                    max-width: 95%;
+                    text-overflow: ellipsis;
+                    -ms-transform: translate(0, 35%);
+                    transform: translate(0, 35%);
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}
+
+// mobile
+@include media-query('mobile') {
+    .#{$wefront__namespace}filter {
+        &__filter {
+            .#{$wefront__namespace}input {
+                &__input {
+                    color: color(gray-15);
+
+                    &--custom-amount {
+                        .#{$wefront__namespace}input__input {
+                            height: rem(53);
+                        }
+                    }
+                }
+
+                &__label {
+                    font-size: rem(16);
+                    font-weight: 100;
+                    color: color(gray-15);
+
+                    &--focus {
+                        font-family: $font-normal;
+                        font-size: rem(11);
+                        text-transform: uppercase;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// xs
+@include media-query('xs') {
+    .#{$wefront__namespace}input {
+        &--info {
+            .#{$wefront__namespace}input__input {
+                width: 64%;
+            }
+            .#{$wefront__namespace}input__info {
+                width: 36%;
+            }
+        }
+
+        &--icon {
+            font-size: 0;
+            .#{$wefront__namespace}input__info,
+            .#{$wefront__namespace}input__icon {
+                width: 20%;
+            }
+            .#{$wefront__namespace}input__info {
+                &--border {
+                    border: rem(1) solid color(gray-40);
+                }
+            }
+            .#{$wefront__namespace}input__input {
+                width: 80%;
+            }
+        }
+
+        &__card-logo {
+            right: rem(8);
+        }
+
+        &--cities {
+            .#{$wefront__namespace}input__icon {
+                &::after {
+                    display: none;
+                }
+            }
+        }
+    }
+}

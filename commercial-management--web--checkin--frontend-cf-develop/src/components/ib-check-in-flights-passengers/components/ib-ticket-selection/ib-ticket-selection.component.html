@@ -1,0 +1,66 @@
+<div class="ib-ticket__footer">
+    <div class="ib-ticket__footer-wrapper">
+        <span class="ib-ticket__footer-title" *ngIf="selectionInfo.generalType !== 'SHUTTLE'"
+            [ngClass]="getTitleClasses()">
+            {{ getTitle() | translate }}
+        </span>
+        <figure class="ib-ticket__footer-title" *ngIf="selectionInfo.generalType === 'SHUTTLE'">
+            <img [src]="iconPaSrc" class="ib-ticket__footer-img" alt="Logo Puente Aereo">
+        </figure>
+
+        <!-- Generic message -->
+        <span class="ib-ticket__footer-txt" *ngIf="!deeplink.show && !checkInStatusTime.show">
+            <strong [ngClass]="{'subtitle': isBpSubscriptionMode}">{{infoSegment()}}</strong>
+            <span *ngIf="showAircheckMessage">
+                {{'IBCOAC_PA_SEGMENT_FOOTER_AIRCHECK'|translate}}
+            </span>
+        </span>
+
+        <!-- Deeplink -->
+        <span class="ib-ticket__footer-txt" *ngIf="deeplink.show">
+            <strong>
+                {{'IBCOAC_TICKET_DEEPLINK_TITLE_1'|translate}}
+            </strong>
+            <strong>
+                {{'IBCOAC_TICKET_DEEPLINK_TITLE_2'|translate}}
+                <span>
+                    <a id="ticket-selection-more-info-deeplink" href="javascript:void(0)" (click)="goToUrlCompany()"
+                        title="{{'IBCOAC_PA_SEGMENT_FOOTER_UNCHECKABLE_MORE_TITLE'|translate}}">
+                        <span class="ib-link-icon__text">{{deeplink.companyDescription|translate}}</span>
+                    </a>
+                </span>
+            </strong>
+        </span>
+
+        <!-- checkInStatusTime -->
+        <span class="ib-ticket__footer-txt" *ngIf="showCheckInStatusTime()">
+            <strong>
+                {{checkInStatusTime.message}}
+            </strong>
+        </span>
+        <div class="ib-check ib-check--block ib-check--padding-bottom" [ngClass]="{'hide-content': isContentHidden}"
+            *ngIf="(selectionInfo.segmentStatus === 'AVAILABLE' || selectionInfo.segmentStatus === 'SELECTABLE' || selectionInfo.segmentStatus === 'CHECKED') && selectionInfo.generalType !== 'SHUTTLE'">
+            <input type="checkbox" id="check-ticket_{{index}}" [(ngModel)]="selectionInfo.isSelected"
+                (ngModelChange)="checkSelectedSegments()" name="check-ticket_{{index}}" class="ib-check__input"
+                #checkbox />
+            <label for="check-ticket_{{index}}" class="ib-check__label">
+                <span class="ib-check__text">{{'IBCOAC_SELECT_FLIGHT'|translate}}</span>
+            </label>
+        </div>
+        <div class="ib-radio" [ngClass]="{'hide-content': isContentHidden}"
+            *ngIf="(selectionInfo.segmentStatus === 'AVAILABLE' || selectionInfo.segmentStatus === 'SELECTABLE' || selectionInfo.segmentStatus === 'CHECKED') && selectionInfo.generalType === 'SHUTTLE'">
+            <input type="radio" (click)="selectShuttleSegment()" id="radio-ticket_{{index}}"
+                [checked]="isShuttleSelected" name="radio-ticket" class="ib-radio__input" [value]="true">
+            <label for="radio-ticket_{{index}}" class="ib-radio__label">
+                <span class="ib-radio__text ib-radio__text--unfocused">{{'IBCOAC_CK_VUE_SELEC'|translate}}</span>
+            </label>
+        </div>
+        <a id="cki-flights-passengers-ticket-selection-more-info-link"
+            *ngIf="selectionInfo.segmentStatus === 'NOT_AVAILABLE'"
+            class="ib-text-icon ib-text-icon--highlight ib-text-icon--underline" href="javascript:void(0)"
+            (click)="openSegmentInfo()" title="{{'IBCOAC_PA_SEGMENT_FOOTER_UNCHECKABLE_MORE_TITLE'|translate}}">
+            <span class="ib-text-icon__icon ib-text-icon__icon--primary icon-informacion_2"></span>
+            <span class="ib-link-icon__text">{{'IBCOAC_PA_SEGMENT_FOOTER_UNCHECKABLE_MORE'|translate}}</span>
+        </a>
+    </div>
+</div>

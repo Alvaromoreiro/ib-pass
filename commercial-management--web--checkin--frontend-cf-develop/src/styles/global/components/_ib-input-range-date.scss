@@ -1,0 +1,189 @@
+/* -------------------------------------------------------------
+    #INPUT RANGE DATE
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}input-range-date {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: rem(56);
+    border: rem(1) solid color(gray-40);
+    font-size: 0;
+    background: color(white);
+    vertical-align: top;
+
+    &__icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: rem(16);
+        color: color(gray-15);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    &__start {
+        position: initial;
+        display: inline-block;
+        width: 50%;
+        padding: rem(15) rem(22) rem(15) rem(12);
+        vertical-align: top;
+
+        &--bottom {
+            padding: rem(26) rem(22) rem(2) rem(20);
+        }
+    }
+
+    &__end {
+        position: initial;
+        display: inline-block;
+        width: 50%;
+        padding: rem(15) rem(12) rem(15) rem(22);
+        vertical-align: top;
+
+        &--bottom {
+            padding: rem(26) rem(22) rem(2) rem(20);
+        }
+        .#{$wefront__namespace}input-range-date__label {
+            left: remcalc('50%', ' + ', rem(20));
+        }
+    }
+
+    &__label {
+        position: absolute;
+        z-index: 5;
+        top: rem(19);
+        left: rem(20);
+        overflow: hidden;
+        width: remcalc('50%', ' - ', rem(32));
+        font-family: $font-special;
+        font-size: rem(16);
+        text-overflow: ellipsis;
+        line-height: normal;
+        color: color(gray-15);
+        cursor: text;
+        transform: translate(0, 0);
+        transition: ease transform 0.25s;
+        white-space: nowrap;
+        will-change: transform, font-family, font-size;
+
+        &--focus {
+            font-family: $font-normal;
+            font-size: rem(11);
+            text-transform: uppercase;
+            transform: translate(0, rem(-8));
+        }
+    }
+
+    &__input {
+        display: block;
+        width: 100%;
+        padding: 0;
+        border: 0;
+        font-family: $font-special;
+        font-size: rem(16);
+        color: color(gray-10);
+
+        &[disabled] {
+            background-color: color(white);
+        }
+
+        &:focus {
+            background-color: color(pink-80);
+            outline: 0;
+        }
+    }
+    // Modifiers
+    &--type-1 {
+        .#{$wefront__namespace}input-range-date {
+            &__start,
+            &__end {
+                &.dropdown {
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        z-index: 1001;
+                        bottom: rem(-8);
+                        width: rem(10);
+                        height: rem(10);
+                        border: solid transparent;
+                        background: color(white);
+                        box-shadow: rem(-1) rem(-1) rem(1) color(black, 0.2);
+                        opacity: 0;
+                        transform: rotate(45deg);
+                    }
+
+                    &.open {
+                        &::after {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+
+            &__end {
+                &.dropdown {
+                    &::after {
+                        right: 30%;
+                    }
+                }
+            }
+
+            &__start {
+                &.dropdown {
+                    &::after {
+                        left: 30%;
+                    }
+                }
+            }
+        }
+    }
+
+    &--one-way {
+        .#{$wefront__namespace}input-range-date {
+            &__start {
+                width: 100%;
+            }
+        }
+    }
+
+    &--error {
+        border-color: color(red-20);
+    }
+}
+
+// .#{$wefront__namespace}input--error {
+//     .#{$wefront__namespace}input-range-date {
+//         border-color: color(red-20);
+//     }
+// }
+// Responsive
+@mixin mobile-type-1() {
+    .#{$wefront__namespace}input-range-date {
+        &__label {
+            width: remcalc('50%', ' - ', rem(32));
+        }
+
+        &__start,
+        &__end {
+            &.dropdown {
+                &::after {
+                    opacity: 0 !important;
+                }
+            }
+            .#{$wefront__namespace}dropdown {
+                width: 100%;
+            }
+        }
+
+        &__end {
+            .#{$wefront__namespace}input-range-date__label {
+                left: remcalc('50%', ' + ', rem(18));
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    @include mobile-type-1();
+}

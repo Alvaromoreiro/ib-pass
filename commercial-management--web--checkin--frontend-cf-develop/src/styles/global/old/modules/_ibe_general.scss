@@ -1,0 +1,84 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_general
+//    Desripcion: Estilos para las clases generalizadas
+//******************************************************************************/
+body {
+    font-family: $font-02;
+    background-color: $PC-cromatico_8;
+}
+
+.ibe-link {
+    text-decoration: underline;
+    color: $PC-cromatico_1;
+
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        color: $PC-cromatico_3;
+        outline: none;
+    }
+
+    &--alert {
+        color: $PC-cromatico_4;
+
+        &:hover {
+            text-decoration: underline;
+            color: $PC-cromatico_4;
+        }
+
+        &:focus {
+            color: $PC-cromatico_4;
+            outline: 1px dotted $PC-cromatico_4;
+        }
+    }
+}
+
+.ibe-list {
+    &__item {
+        position: relative;
+        padding: 0 0 rem(9) rem(24);
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: rem(7);
+            left: 0;
+            display: inline-block;
+            width: rem(6);
+            height: rem(6);
+            border-radius: rem(10);
+            background: #777;
+        }
+    }
+
+    &__text {
+        font-size: rem(14);
+        color: $PC-cromatico_21;
+    }
+
+    &--small {
+        .ibe-list__text {
+            font-size: rem(13);
+        }
+    }
+}
+
+/* XLARGERESOLUTION STYLES */
+@mixin xl-ibe_general {
+    .ibe-table {
+        display: table;
+        width: 100%;
+    }
+
+    .ibe-tablecell {
+        display: table-cell;
+        float: none;
+        vertical-align: top;
+    }
+}
+
+/* LARGE RESOLUTION STYLES */
+@mixin l-ibe_general {
+    @include xl-ibe_general;
+}

@@ -1,0 +1,55 @@
+<uib-tabset class="ib-tab ib-tab--pair ib-tab--pair-mobile ib-tab--bordered" ng-class="{'ib-tab--only': tabsCtrl.passengersList.length === 1}"active="tabsCtrl.selectedTab">
+    <uib-tab id="cki-boarding-cards-boarding-tabs--tab-0" index="0" heading="{{(tabsCtrl.passengersList.length > 1 ? 'IBECBP_MISMA_PER' : 'IBECBP_HEADING_TAB_ONE_PERSON') | translate}}" template-url="web-checkin/templates/ib-tabs-custom.html">
+        <div class="ib-box ib-box--big" data-ng-if="tabsCtrl.selectedTab===0">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                <div class="ib-dropdown-select ib-dropdown-select--normal ib-dropdown-select--icon" uib-dropdown is-open="status.isopen">
+                    <span class="ib-dropdown-select__icon icon-tarjeta_de_embarque"></span>
+                    <button id="fare" type="button" class="ib-dropdown-select__button" uib-dropdown-toggle>
+                        <!--<span class="ib-dropdown-select__button-text" data-ng-if="tabsCtrl.indexPassengerSelected == null">{{'IBECBP_CONTACT_DATA_SELECT_PASSENGER'|translate}} <span class="caret"></span></span>-->
+                        <span class="ib-dropdown-select__button-text" data-ng-if="tabsCtrl.indexPassengerSelected != null">{{tabsCtrl.passengersList[tabsCtrl.indexPassengerSelected].name}} {{tabsCtrl.passengersList[tabsCtrl.indexPassengerSelected].surname}} <span class="caret"></span></span> 
+                    </button>
+                    <input type="text" class="ib-dropdown-select__input u-hideAccessible" readonly tabindex="-1" />
+                    <ul class="ib-dropdown-select__list" uib-dropdown-menu role="menu" aria-labelledby="fare">
+                        <li class="ib-dropdown-select__list-item" ng-repeat="(index,passenger) in tabsCtrl.passengersList">
+                            <a id="cki-boarding-cards-boarding-tabs-passenger-{{$index}}" href="javascript:void(0)" title="Pasajero Seleccionado {{passenger.name}} {{passenger.surname}}" ng-click="tabsCtrl.indexPassengerSelected = index">{{passenger.name}} {{passenger.surname}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ib-layout__sep-sm-medium">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall" data-ng-if="tabsCtrl.passengersList[tabsCtrl.indexPassengerSelected].infant">
+                    <span class="ib-text-icon ib-text-icon--unfocused">
+                        <span class="ib-text-icon__icon icon-bebe"></span>
+                    <span class="ib-text-icon__text">{{tabsCtrl.passengersList[tabsCtrl.indexPassengerSelected].infant.name}} {{tabsCtrl.passengersList[tabsCtrl.indexPassengerSelected].infant.surname}}</span>
+                    </span>
+                </div>
+                <ib-passengers-contact-form id="cki-boarding-cards-boarding-tabs-passengers-contact-form-tab-0" contact-form-model="tabsCtrl.passengersList[tabsCtrl.indexPassengerSelected]" prefix-list="tabsCtrl.prefixList"
+                    pass-info-form="tabsCtrl.passInfoForm" show-email="tabsCtrl.showEmail" show-phone="tabsCtrl.showPhone" passenger-index="0"></ib-passengers-contact-form>
+            </div>
+        </div>
+    </uib-tab>
+    <uib-tab id="cki-boarding-cards-boarding-tabs--tab-1" index="1" heading="{{'IBECBP_CADA_PAX' | translate}}" template-url="web-checkin/templates/ib-tabs-custom.html" data-ng-if="tabsCtrl.passengersList.length > 1">
+        <div class="ib-box ib-box--big" data-ng-if="tabsCtrl.selectedTab===1">
+            <div data-ng-repeat="(index,passenger) in tabsCtrl.passengersList">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                    <div class="ib-dropdown-select ib-dropdown-select--normal ib-dropdown-select--icon ib-dropdown-select--no-select">
+                        <span class="ib-dropdown-select__icon icon-tarjeta_de_embarque"></span>
+                        <div class="ib-dropdown-select__button">
+                            <span class="ib-dropdown-select__button-text">{{passenger.name}} {{passenger.surname}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ib-layout__sep-sm-medium">
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall" data-ng-if="passenger.infant">
+                        <span class="ib-text-icon ib-text-icon--unfocused">
+                                                                <span class="ib-text-icon__icon icon-bebe"></span>
+                        <span class="ib-text-icon__text">{{passenger.infant.name}} {{passenger.infant.surname}}</span>
+                        </span>
+                    </div>
+                    <ib-passengers-contact-form id="cki-boarding-cards-passengers-contact-form-tab-1" contact-form-model="passenger" prefix-list="tabsCtrl.prefixList" pass-info-form="tabsCtrl.passInfoForm"
+                        passenger-index="index" show-email="tabsCtrl.showEmail" show-phone="tabsCtrl.showPhone"></ib-passengers-contact-form>
+                </div>
+            </div>
+        </div>
+    </uib-tab>
+</uib-tabset>

@@ -1,0 +1,68 @@
+<main class="ib-layout">
+    <div class="ib-main-steps">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 ib-main-steps__scroll">
+                    <ul class="ib-main-steps__list">
+                        <li class="ib-main-steps__item">
+                            <span class="ib-main-steps__txt" data-ng-class="{'ib-main-steps__txt--active': stepsCtrl.activeStep === 1}">1. Selecci&oacute;n de vuelos</span>
+                        </li>
+                        <li class="ib-main-steps__item">
+                            <span class="ib-main-steps__txt" data-ng-class="{'ib-main-steps__txt--active': stepsCtrl.activeStep === 2}">2. Datos de pasajeros</span>
+                        </li>
+                        <li class="ib-main-steps__item">
+                            <span class="ib-main-steps__txt" data-ng-class="{'ib-main-steps__txt--active': stepsCtrl.activeStep === 3}">3. Personaliza y completa</span>
+                        </li>
+                        <li class="ib-main-steps__item">
+                            <span class="ib-main-steps__txt" data-ng-class="{'ib-main-steps__txt--active': stepsCtrl.activeStep === 4}">4. Pago</span>
+                        </li>
+                        <li class="ib-main-steps__item">
+                            <span class="ib-main-steps__txt ib-main-steps__txt--active" data-ng-class="{'ib-main-steps__txt--active': stepsCtrl.activeStep === 5}">5. Confirmaci&oacute;n</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div tabindex="0"
+                    class="ib-layout__line-spacing ib-layout__line-spacing--top-xlarge-responsive u-mb-none" focusin>
+                    <h1 class="ib-heading ib-heading--type-1">
+                        {{'BIOMETRIC_BOARDING_FACIAL_RECOGNITION_AVAILABLE'|translate}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div tabindex="0" class="ib-layout__line-spacing" focusin>
+                    <h2 class="ib-text ib-text--xbig ib-text--especial ib-text--lh-medium">
+                        {{'BIOMETRIC_BOARDING_FACIAL_RECOGNITION_AVAILABLE_SUBTITLE_V2'|translate}}
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__line-spacing"
+                    data-ng-repeat="(passengerIndex,passenger) in bioBoardingCtrl.passengersModel">
+                    <ib-checkin-biometric-boarding-passenger-info id="cki-flights-passengers-passenger-info-{{passengerIndex}}"
+                        passenger-info="passenger" index="passengerIndex" pas-form="pasForm"
+                        length="bioBoardingCtrl.data.segmentsPassengersInfo.passengers.length">
+                    </ib-checkin-biometric-boarding-passenger-info>
+                </div>
+            </div>
+        </div>
+        <ib-checkin-biometric-boarding-link-app-mobile></ib-checkin-biometric-boarding-link-app-mobile>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--text-right">
+                    <button ng-click="bioBoardingCtrl.goToCheckConfirmation()"
+                        class="ib-button ib-button--w-xlarge-mobile">{{'BIOMETRIC_BOARDING_BUTTON_END_CHECKIN'|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>

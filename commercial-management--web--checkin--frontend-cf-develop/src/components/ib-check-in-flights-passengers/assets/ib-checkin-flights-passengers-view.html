@@ -1,0 +1,141 @@
+<section class="container">
+    <div class="row">
+        <div class="ib-checkin__container">
+            <div class="col-xl-12">
+                <div class="ib-layout__header ib-layout__header--title">
+                    <h1 
+                        class="ib-heading ib-heading--type-1 ib-heading__title" data-ng-if="!flightsPasCtrl.isBpSubscriptionMode">
+                        {{'IBCOAC_PAGE_TITLE_2'|translate}}
+                    </h1>
+                    <h2 
+                        class="ib-heading ib-heading--font-normal ib-heading--type-6 ib-heading--bold u-color-gray-15"
+                        data-ng-if="!flightsPasCtrl.isBpSubscriptionMode">
+                        {{'IBCOAC_PAGE_SUBTITLE'|translate}}
+                    </h2>
+                    <h1 
+                        class="ib-heading ib-heading--type-24 ib-heading__title" data-ng-if="flightsPasCtrl.isBpSubscriptionMode">
+                        {{ 'IBCOAC_BP_SUBSCRIPTION_TITLE' | translate }}
+                    </h1>
+                </div>
+                <ib-alert-banner 
+                    data-ng-if="flightsPasCtrl.isBpSubscriptionMode"
+                    link-literal="IBCOAC_SUBSCRIPTION_MORE_INFORMATION"
+                    heading="ALERT_BANNER_TITLE"
+                    body="ALERT_BANNER_MESSAGE"
+                    link-text="ALERT_BANNER_MORE_INFO"
+                    link-accessible-text="ALERT_BANNER_MORE_INFO_ACCESSIBLE"
+                    variant-style="flat"
+                ></ib-alert-banner>
+            </div>
+        </div>
+    </div>
+    <form name="flightsPasCtrl.pasForm" ib-form-scroll-to-error novalidate>
+        <fieldset>
+            <legend class="hide-accessible">
+                {{'IBCOAC_PAGE_TITLE_ACCESIBLE'|translate}}
+            </legend>
+            <section class="ib-layout__section">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ib-layout__section-title">
+                            <h2 data-ng-if="flightsPasCtrl.isBpSubscriptionMode" class="ib-heading ib-heading__section-title"
+                                aria-label="{{ 'IBCOAC_BP_SUBSCRIPTION_FIRST_SECTION_TITLE_ACCESSIBLE' | translate }}">
+                                {{ 'IBCOAC_BP_SUBSCRIPTION_FIRST_SECTION_TITLE' | translate }}
+                            </h2>
+                        </div>
+                        <div class="ib-layout__line-spacing"
+                            data-ng-repeat="(segmentIndex,segment) in flightsPasCtrl.model.segmentsPassengersInfo.segments">
+                            <ib-flight-ticket id="cki-flights-passengers-flight-ticket-{{segmentIndex}}"
+                                segment-info="segment" index="segmentIndex" selected-shuttle="flightsPasCtrl.model.segmentsPassengersInfo.selectedShuttleSegmentIndex === segmentIndex"></ib-flight-ticket>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="ib-layout__section">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ib-layout__section-title">
+                            <h2 class="ib-heading ib-heading--type-1" data-ng-if="!flightsPasCtrl.isBpSubscriptionMode">
+                                {{'IBCOAC_PASSENGERS_TITLE' | translate}}
+                            </h2>
+                            <h2 data-ng-if="flightsPasCtrl.isBpSubscriptionMode" class="ib-heading ib-heading__section-title"
+                                aria-label="{{ 'IBCOAC_BP_SUBSCRIPTION_SECOND_SECTION_TITLE_ACCESSIBLE' | translate }}">
+                                {{ 'IBCOAC_BP_SUBSCRIPTION_SECOND_SECTION__TITLE' | translate }}
+                            </h2>
+                        </div>
+                        <div class="ib-layout__line-spacing"
+                            data-ng-repeat="(passengerIndex,passenger) in flightsPasCtrl.model.segmentsPassengersInfo.passengers">
+                            <ib-passenger-info id="cki-flights-passengers-passenger-info-{{passengerIndex}}"
+                                passenger-info="passenger"
+                                passenger-status="flightsPasCtrl.getPassengerStatus(passenger)" index="passengerIndex"
+                                companies="flightsPasCtrl.model.segmentsPassengersInfo.companies"
+                                pas-form="flightsPasCtrl.pasForm"
+                                is-open="flightsPasCtrl.model.segmentsPassengersInfo.segments[flightsPasCtrl.model.segmentsPassengersInfo.selectedShuttleSegmentIndex].detailedType === 'OPEN'"
+                                length="flightsPasCtrl.model.segmentsPassengersInfo.passengers.length"></ib-passenger-info>
+                        </div>
+                        <div class="ib-layout__line-spacing"
+                            data-ng-if="flightsPasCtrl.model.segmentsPassengersInfo.activeFields.showContactData">
+                            <ib-passengers-contact-data id="cki-flights-passengers-contact-data"
+                                emergency="flightsPasCtrl.model.segmentsPassengersInfo.emergency.data"
+                                passengers="flightsPasCtrl.model.segmentsPassengersInfo.passengers"
+                                prefixes="flightsPasCtrl.model.segmentsPassengersInfo.prefixes"
+                                pas-form="flightsPasCtrl.pasForm"
+                                active-fields="flightsPasCtrl.model.segmentsPassengersInfo.activeFields"
+                                gdpr-info="flightsPasCtrl.model.segmentsPassengersInfo.gdprInfo">
+                            </ib-passengers-contact-data>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="ib-layout__section ib-layout__section--null"
+                data-ng-if="flightsPasCtrl.model.segmentsPassengersInfo.segments[flightsPasCtrl.model.segmentsPassengersInfo.selectedShuttleSegmentIndex].whatToDo.active && flightsPasCtrl.model.segmentsPassengersInfo.segments[flightsPasCtrl.model.segmentsPassengersInfo.selectedShuttleSegmentIndex].whatToDo.options.length > 1">
+                <ib-what-to-do id="cki-flights-passengers-what-to-do"
+                    options="flightsPasCtrl.model.segmentsPassengersInfo.segments[flightsPasCtrl.model.segmentsPassengersInfo.selectedShuttleSegmentIndex].whatToDo.options"
+                    type="flightsPasCtrl.model.segmentsPassengersInfo.segments[flightsPasCtrl.model.segmentsPassengersInfo.selectedShuttleSegmentIndex].generalType"></ib-what-to-do>
+            </section>
+            <div class="row">
+                <div class="col-xs-12">
+                    <ib-duplicate-buttons data-ng-if="flightsPasCtrl.showBtnsDuplicated"
+                        (callback)="flightsPasCtrl.continueFlowDuplicate($event, flightsPasCtrl.pasForm)"></ib-duplicate-buttons>
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                        <p class="ib-text ib-text--color-unfocused">
+                            {{'IBCOAC_CONOCE_TES'|translate}}
+                            <a id="IBCOAC_LINK_RIGHTS" class="ib-link" href="javascript:void(0)"
+                                title="{{'ACCES_IBCOAC_CONOCE_ENLACE'|translate}}"
+                                data-ng-click="flightsPasCtrl.passengerRightsRedirection()">{{'IBCOAC_CONOCE_ENLACE'|translate}}</a>
+                        </p>
+                    </div>
+                    <div data-ng-if="!flightsPasCtrl.isFlowDuplicated && flightsPasCtrl.isCarrierConnect" class="ib-check u-mt u-mb-big">
+                        <input type="checkbox" id="check_carrier_connect" name="check_carrier_connect"
+                            class="ib-check__input" ng-model="flightsPasCtrl.model.isCarrierCheckboxChecked"
+                            ng-change="flightsPasCtrl.isDisableButton()" />
+                        <label for="check_carrier_connect" class="ib-check__label">
+                            <span class="ib-check__text"
+                                data-ng-bind-html="flightsPasCtrl.keyDangerousObjectsCarrier"></span>
+                        </label>
+                    </div>
+                    <div
+                        class="ib-layout__line-spacing ib-layout__line-spacing--small ib-layout__line-spacing--text-right u-mb-biggest">
+                        <button
+                            data-ng-if="flightsPasCtrl.model.segmentsPassengersInfo.checkinAvailable && flightsPasCtrl.showContinueButton"
+                            id="IBCOAC_CHECKIN_BUTTON"
+                            class="ib-button ib-button--block-xs ib-button--w-medium ib-button--big ib-button--red"
+                            data-ng-class="{'ib-button--off': flightsPasCtrl.isDisableButton()}" 
+                            type="submit"
+                            data-ng-disabled="flightsPasCtrl.isDisableButton()"
+                            data-ng-click="flightsPasCtrl.callUpdateFlightsPassengersServices(flightsPasCtrl.pasForm)">
+                            {{ flightsPasCtrl.getButtonLiteral() | translate }}
+                        </button>
+                        <button data-ng-if="!flightsPasCtrl.model.segmentsPassengersInfo.checkinAvailable"
+                            id="IBCOAC_CHECKIN_BUTTON_BACK"
+                            class="ib-button ib-button--block-xs ib-button--w-medium ib-button--big ib-button--red"
+                            type="button"
+                            data-ng-click="flightsPasCtrl.goBack(flightsPasCtrl.pasForm)">
+                            {{'IBCOAC_BACK_BUTTON'|translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</section>

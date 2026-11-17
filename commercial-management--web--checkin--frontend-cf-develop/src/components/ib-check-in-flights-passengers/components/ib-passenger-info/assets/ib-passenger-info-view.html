@@ -1,0 +1,197 @@
+<div class="ib-box-selects ib-box-selects--type-3" ng-model-options="{ allowInvalid: true}">
+    <ib-passenger-info-header [passenger-info]="pasInfoCtrl.passengerInfo" [index]="pasInfoCtrl.index" [is-open]="pasInfoCtrl.isOpen"></ib-passenger-info-header>
+    <div class="ib-box-selects__container" data-ng-if="pasInfoCtrl.passengerInfo.pasStatus.available">
+        <div class="row padding-bottom-10">
+            <div class="col-sm-12 col-md-6">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                    <div class="ib-check">
+                        <input type="checkbox" id="check_pas_{{pasInfoCtrl.index}}" name="check_pas_{{pasInfoCtrl.index}}" class="ib-check__input"
+                            data-ng-model="pasInfoCtrl.passengerInfo.isSelected" data-ng-change="pasInfoCtrl.checkSelectedPassengers(pasInfoCtrl.index)"
+                        />
+                        <label for="check_pas_{{pasInfoCtrl.index}}" class="ib-check__label">
+                            <span class="ib-check__text ib-check__text--bold" data-ng-if="!pasInfoCtrl.showInhibitBC">{{'IBCOAC_SELECT_PASSENGER'|translate}}</span>
+                            <span class="ib-check__text" data-ng-if="pasInfoCtrl.showInhibitBC">{{'IBCOAC_PA_SEGMENT_INHIBIT_INFO'|translate}}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div ng-controller="ibCollapseController as collapse" ng-init="collapse.isCollapsed = pasInfoCtrl.isFrequentFlyer">
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt-xxsmall">
+                        <a id="cki-flights-passengers-passenger-info-ff-card-link" class="ib-link-plus" href="javascript:void(0)" title="{{ pasInfoCtrl.passengerInfo.requiredInformation.indexOf('FREQUENT_FLYER') !== -1 ? ('BCOACII_REQUIRED_TARJ_FIDEL'|translate) : ('IBCOACII_TARJ_FIDEL' | translate)}}" ng-click="collapse.clickCollapse($event, true)"
+                            ng-class="collapse.isCollapsed ? 'ib-link-plus--important' : 'ib-link-plus--unfocused'" focusin>
+                            <span class="ib-link-plus__icon" ng-class="collapse.isCollapsed ? 'icon-menos_2' : 'icon-mas_2'"></span>
+                            <span class="ib-link-plus__text">{{'IBCOACII_TARJ_FIDEL' | translate}}</span>
+                        </a>
+                    </div>
+                    <div uib-collapse="!collapse.isCollapsed">
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+                            <div class="ib-select ib-select--label">
+                                <label class="ib-select__label" ng-class="{'ib-select--error': pasInfoCtrl.pasForm.$submitted && pasInfoCtrl.pasForm['company_' + pasInfoCtrl.index].$invalid}"
+                                    for="PASSENGER_FORM_COMPANY_{{::pasInfoCtrl.index}}">{{'FF_COMPANY_FIELD_LABEL'|translate}}</label>
+                                <ui-select class="ib-select__action" data-ng-disabled="(pasInfoCtrl.isFrequentFlyer && pasInfoCtrl.isChecked)" ng-model="pasInfoCtrl.passengerInfo.frequentFlyer.info.iataCompanyCode"
+                                    name="company_{{::pasInfoCtrl.index}}" on-select="pasInfoCtrl.clearCodeNumber(pasInfoCtrl.permanentUser)" id="PASSENGER_FORM_COMPANY_{{::pasInfoCtrl.index}}"
+                                    data-ui-select-required="pasInfoCtrl.passengerInfo.fieldStatus.frequentFlyer.mandatory || (pasInfoCtrl.passengerInfo.frequentFlyer.enabled && pasInfoCtrl.passengerInfo.frequentFlyer.info.number != null && pasInfoCtrl.passengerInfo.frequentFlyer.info.number !== ''
+                                                                && (!pasInfoCtrl.passengerInfo.frequentFlyer.info.iataCompanyCode || pasInfoCtrl.passengerInfo.frequentFlyer.info.iataCompanyCode === 'CKI_COMBO_BLANK'))">
+                                    <ui-select-match class="ib-select__list-ipt" placeholder="{{'FF_COMPANY_FIELD_LABEL'|translate}}">
+                                        <span class="ib-select__txt" ng-bind="$select.selected.airlineName.needsTranslate ? ($select.selected.airlineName.description|translate) : $select.selected.airlineName"></span>
+                                    </ui-select-match>
+                                    <ui-select-choices class="ib-select__list" repeat="company.iataCompanyCode as company in (pasInfoCtrl.companies | filter: $select.search)">
+                                        <span class="ib-select__list-txt" ng-bind="company.airlineName.needsTranslate ? (company.airlineName.description|translate) : company.airlineName"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div ng-messages="pasInfoCtrl.pasForm.$submitted && pasInfoCtrl.pasForm['company_' + pasInfoCtrl.index].$error">
+                                <div class="ib-alert ib-alert--error"  ng-message-exp="pasInfoCtrl.pasForm.$submitted && pasInfoCtrl.pasForm['company_' + pasInfoCtrl.index].$error.required ? collapse.errorEvent('required') : ''">{{'FF_COMPANY_REQUIRED_ERROR'|translate}}</div>
+                                <div class="ib-alert ib-alert--error"  ng-message-exp="pasInfoCtrl.pasForm.$submitted && pasInfoCtrl.pasForm['company_' + pasInfoCtrl.index].$error.uiSelectRequired ? collapse.errorEvent('uiSelectRequired') : ''">{{'FF_COMPANY_REQUIRED_ERROR'|translate}}</div>
+                            </div>
+                        </div>
+                        <div class="ib-input"
+                            ng-class="{'ib-input--error': pasInfoCtrl.checkErrorsInput(pasInfoCtrl.index)}">
+                            <label class="ib-input__label" for="card_number_passenger_{{pasInfoCtrl.index}}"
+                                ng-class="{'ib-input__label--focus' : pasInfoCtrl.cardFocused || (pasInfoCtrl.pasForm['card_number_passenger_' + pasInfoCtrl.index].$viewValue != null && pasInfoCtrl.pasForm['card_number_passenger_' + pasInfoCtrl.index].$viewValue !== '')}">{{'FF_COMPANY_NUMBER_FIELD_LABEL'|translate}}</label>
+                            <input
+                                id="card_number_passenger_{{pasInfoCtrl.index}}"
+                                name="card_number_passenger_{{pasInfoCtrl.index}}"
+                                class="ib-input__input" type="text" 
+                                form-data="pasInfoCtrl.pasForm"
+                                passenger-index="{{pasInfoCtrl.index}}"
+                                
+                                data-ng-if="!pasInfoCtrl.ofuscatedNumber && pasInfoCtrl.passengerInfo.frequentFlyer.info.iataCompanyCode === 'IB'"
+                                data-ng-model="pasInfoCtrl.passengerInfo.frequentFlyer.info.number"
+                                data-ng-change="pasInfoCtrl.pasForm['company_' + pasInfoCtrl.index].$validate()" 
+                                data-ng-required="pasInfoCtrl.passengerInfo.fieldStatus.frequentFlyer.mandatory" 
+                                
+                                data-ng-disabled="(pasInfoCtrl.isFrequentFlyer && pasInfoCtrl.isChecked)"
+                                ng-focus="pasInfoCtrl.cardFocused=true" 
+                                ng-blur="pasInfoCtrl.inputBlurFF($event, pasInfoCtrl.index, true)"
+                                
+                                ng-pattern="::$root.CHECKIN_PATTERNS.NUMBER_IB_PLUS_PATTERN"
+                                maxlength="{{::$root.CHECKIN_FIELDS_LENGTH.NUMBER_IB_PLUS_MAX_LENGTH}}"
+                                data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.NUMBER_IB_PLUS_CLEANER}}"
+                                
+                                ib-luhn-validator
+                                ib-disable-remove-validation 
+                                ib-duplicate-company-and-number
+                            />
+                            <input 
+                                data-ng-if="pasInfoCtrl.ofuscatedNumber" 
+                                id="card_number_passenger_{{pasInfoCtrl.index}}"
+                                name="card_number_passenger_{{pasInfoCtrl.index}}" 
+                                data-ng-model="pasInfoCtrl.ofuscatedNumber"
+                                class="ib-input__input" type="text"
+                                data-ng-disabled="!pasInfoCtrl.passengerInfo.frequentFlyer.enabled"
+                                ng-focus="pasInfoCtrl.removeOfus()" />
+                            <input
+                                data-ng-if="!pasInfoCtrl.ofuscatedNumber && pasInfoCtrl.passengerInfo.frequentFlyer.info.iataCompanyCode !== 'IB'"
+                                id="card_number_passenger_{{pasInfoCtrl.index}}"
+                                name="card_number_passenger_{{pasInfoCtrl.index}}"
+                                data-ng-model="pasInfoCtrl.passengerInfo.frequentFlyer.info.number"
+                                class="ib-input__input" type="text" 
+                                data-ng-disabled="(pasInfoCtrl.isFrequentFlyer && pasInfoCtrl.isChecked)"
+                                maxlength="{{::$root.CHECKIN_FIELDS_LENGTH.NUMBER_FF_MAX_LENGTH}}" 
+                                data-ng-focus="pasInfoCtrl.cardFocused=true"
+                                data-ng-blur="pasInfoCtrl.inputBlurFF($event, pasInfoCtrl.index, false)"
+                                data-ng-change="pasInfoCtrl.pasForm['company_' + pasInfoCtrl.index].$validate()"
+                                data-ng-required="pasInfoCtrl.passengerInfo.fieldStatus.frequentFlyer.mandatory" 
+                                
+                                ib-duplicate-company-and-number
+                                form-data="pasInfoCtrl.pasForm"
+                                passenger-index="{{pasInfoCtrl.index}}" />
+                        </div>
+                        <div ng-messages="pasInfoCtrl.pasForm['card_number_passenger_' + pasInfoCtrl.index].$error">
+                            <div class="ib-alert ib-alert--error" ng-message-exp="pasInfoCtrl.pasForm.$submitted && pasInfoCtrl.pasForm['card_number_passenger_' + pasInfoCtrl.index].$error.luhn ? collapse.errorEvent('luhn') : ''">{{'FF_COMPANY_NUMBER_ERROR'|translate}}</div>
+                            <div class="ib-alert ib-alert--error" ng-message-exp="pasInfoCtrl.pasForm.$submitted && pasInfoCtrl.pasForm['card_number_passenger_' + pasInfoCtrl.index].$error.pattern ? collapse.errorEvent('pattern') : ''">{{'FF_COMPANY_NUMBER_ERROR'|translate}}</div>
+                            <div class="ib-alert ib-alert--error" ng-message-exp="pasInfoCtrl.pasForm['card_number_passenger_' + pasInfoCtrl.index].$error.duplicateCompanyAndNumber ? collapse.errorEvent('duplicateCompanyAndNumber') : ''">{{'FF_COMPANY_NUMBER_DUPLICATES_ERROR'|translate}}</div>
+                            <div class="ib-alert ib-alert--error" ng-message-exp="pasInfoCtrl.pasForm.$submitted && pasInfoCtrl.pasForm['card_number_passenger_' + pasInfoCtrl.index].$error.check.status ? collapse.errorEvent('check') : ''">{{pasInfoCtrl.pasForm['card_number_passenger_' + pasInfoCtrl.index].$error.check.message}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-ng-if="pasInfoCtrl.boxInhibitBC.status" class="ib-msg-alert ib-msg-alert--into-container {{pasInfoCtrl.boxInhibitBC.icon}}">
+            <p class="ib-msg-alert__text--small ib-msg-alert__text--bold ib-msg-alert__text--mb ib-text--lh-small">{{pasInfoCtrl.boxInhibitBC.title|translate}}</p>
+            <p class="ib-msg-alert__text--small">{{pasInfoCtrl.boxInhibitBC.message|translate}}</p>
+        </div>
+        <div data-ng-if="!pasInfoCtrl.showInhibitInfo.showAlert && !pasInfoCtrl.showInhibitInfo.showBox && pasInfoCtrl.showAlertSBY.status"
+            class="ib-msg-alert ib-msg-alert--xsmall  ib-msg-alert--danger icon-alertas">
+            <p class="ib-msg-alert__text ib-msg-alert__text--bold ib-msg-alert__text--small">
+                {{'IBCOAC_ALERT_SBY_TITLE'|translate}}</p>
+            <p class="ib-msg-alert__text">
+                {{'IBCOAC_ALERT_SBY_BODY'|translate}}
+            </p>
+            <!-- Link -->
+            <p class="ib-msg-alert__text ">
+                <a data-ng-click="pasInfoCtrl.handleModalSBY($event)">
+                    {{'IBCOAC_IBECBP_ALERT_SBY_LINK' | translate}}
+                </a>
+            </p>
+        </div>
+    </div>
+    <div class="ib-box-selects__container" data-ng-if="!pasInfoCtrl.passengerInfo.pasStatus.available && !pasInfoCtrl.isOpen">
+        <div class="row" data-ng-if="(!pasInfoCtrl.passengerInfo.airCheck.documentationRequired || pasInfoCtrl.passengerStatus.status === UNCHECKABLE) && !pasInfoCtrl.passengerInfo.pasStatus.isApiEsta">
+            <div class="col-xs-12">
+                <a id="cki-flights-passengers-passenger-info-more-details-link" class="ib-link-icon ib-link-icon--left ib-link-icon--size-big" href="javascript:void(0)" data-ng-click="pasInfoCtrl.openGenericModal(pasInfoCtrl.passengerInfo.pasStatus)"
+                    title="{{'MODAL_UNAVAILABLE_WARNING_TITLE'|translate}}">
+                    <span class="ib-link-icon__icon icon-alertas"></span>
+                    <span class="ib-link-icon__text">{{'MODAL_UNAVAILABLE_WARNING_TITLE'|translate}}</span>
+                </a>
+            </div>
+        </div>
+        <div class="row" data-ng-if="pasInfoCtrl.passengerInfo.pasStatus.isApiEsta">
+            <div class="col-sm-12">
+                <p class="ib-text-icon ib-text-icon--highlight ib-text-icon--underline"
+                    title="{{'APIS_STATE_PASSENGER_DOCUMENTATION'|translate}}">
+                    <span class="ib-text-icon__icon u-color-secondary  icon-alertas"></span>
+                    <span class="ib-link-plus__text">{{'APIS_STATE_PASSENGER_DOCUMENTATION'|translate}}</span>
+                </p>
+            </div>
+
+        </div>
+        <div class="row" data-ng-if="(pasInfoCtrl.passengerInfo.airCheck.documentationRequired && pasInfoCtrl.passengerStatus.status !== UNCHECKABLE) && !pasInfoCtrl.passengerInfo.pasStatus.isApiEsta">
+            <div class="col-sm-12 col-md-6">
+                <p class="ib-text ib-text--color-unfocused ib-text--icon-big icon-informacion" data-ng-bind-html="pasInfoCtrl.passengerInfo.pasStatus.reason"></p>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <a id="cki-flights-passengers-passenger-info-ff-card-link-documentation" class="ib-link-plus ib-link-plus--unfocused" href="{{pasInfoCtrl.passengerInfo.airCheck.url}}"
+                    title="{{'IBCOAC_PA_UPLOAD_DOCUMENTS'|translate}}">
+                    <span class="ib-link-plus__icon icon-subir_archivos"></span>
+                    <span class="ib-link-plus__text">{{'IBCOAC_PA_UPLOAD_DOCUMENTS'|translate}}</span>
+                </a>
+            </div>
+        </div>
+        <div data-ng-if="pasInfoCtrl.passengerInfo.pasStatus.isApiEsta"
+            class="ib-msg-alert ib-msg-alert--xsmall  ib-msg-alert--danger icon-identificacion-visible">
+            <p class="ib-msg-alert__text ib-msg-alert__text--bold ib-msg-alert__text--small">
+                {{'APIS_CONFIRMATION_ALERT_TITLE'|translate}}</p>
+            <p class="ib-msg-alert__text">
+                {{'APIS_CONFIRMATION_ALERT_BODY_1DE2'|translate}}
+            </p>
+            <p class="ib-msg-alert__text " data-ng-bind-html="pasInfoCtrl.keyApisEsta"></p>
+        </div>
+    </div>
+    <div class="ib-box-selects__container" data-ng-if="!pasInfoCtrl.passengerInfo.pasStatus.available && pasInfoCtrl.isOpen && pasInfoCtrl.length > 1">
+        <div class="row" data-ng-if="pasInfoCtrl.isUncheckable()">
+            <div class="col-xs-12" >
+                <a id="cki-flights-passengers-passenger-info-more-details-link" class="ib-link-icon ib-link-icon--left ib-link-icon--size-big" href="javascript:void(0)" data-ng-click="pasInfoCtrl.openGenericModal(pasInfoCtrl.passengerInfo.pasStatus)"
+                    title="{{'MODAL_UNAVAILABLE_WARNING_TITLE'|translate}}">
+                    <span class="ib-link-icon__icon icon-alertas"></span>
+                    <span class="ib-link-icon__text">{{'MODAL_UNAVAILABLE_WARNING_TITLE'|translate}}</span>
+                </a>
+            </div>
+        </div>
+        <div class="row" data-ng-if="pasInfoCtrl.isNotUncheckable()">
+            <div class="col-sm-12 col-md-6" >
+                <p class="ib-text ib-text--color-unfocused ib-text--icon-big icon-informacion">{{pasInfoCtrl.passengerInfo.pasStatus.reason}}</p>
+                <a id="cki-flights-passengers-passenger-info-ff-card-link-documentation" class="ib-link-plus ib-link-plus--unfocused" href="{{pasInfoCtrl.passengerInfo.airCheck.url}}"
+                    title="{{'IBCOAC_PA_UPLOAD_DOCUMENTS'|translate}}">
+                    <span class="ib-link-plus__icon icon-subir_archivos"></span>
+                    <span class="ib-link-plus__text">{{'IBCOAC_PA_UPLOAD_DOCUMENTS'|translate}}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal SBY -->
+<ib-modal-sby [(open-modal)]="pasInfoCtrl.showAlertSBY.openModal" [show-wallet-info]="true"></ib-modal-sby>

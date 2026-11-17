@@ -1,0 +1,20 @@
+<div class="timer">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="none">
+        <path d="M12.9128 11.5453L8.98688 7.62756L6.9375 9.67695L10.8552 13.6029L12.9128 15.6523L14.954 13.6029L17.0527 11.5041L15.0033 9.45472L12.9128 11.5453Z" fill="#D7192D"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0.5C5.37449 0.5 0 5.87449 0 12.5C0 19.1255 5.37449 24.5 12 24.5C18.6255 24.5 24 19.1255 24 12.5C24 5.87449 18.6255 0.5 12 0.5ZM22.1891 12.5002C22.1891 6.87881 17.6212 2.31091 11.9998 2.31091C6.37845 2.31091 1.81055 6.87881 1.81055 12.5002C1.81055 18.1216 6.37845 22.6895 11.9998 22.6895C17.6212 22.6895 22.1891 18.1216 22.1891 12.5002Z" fill="#D7192D"/>
+    </svg>
+    <span class="timer-countdown">{{endTimeLimit}}</span>
+</div>
+<ib-lotus-otp-input [inputLength]="OTP_CODE_LENGTH" (otpChanged)="onOtpChange($event)"></ib-lotus-otp-input>
+<ng-container *ngIf="currentOTPState$|async">
+    <p class="error error-code" *ngIf="(currentOTPState$|async) === OtpFormStatesEnum.INVALID_CODE">{{'OTP_MODAL_WRONG_CODE'|translate}}</p>
+    <div *ngIf="(currentOTPState$|async) === OtpFormStatesEnum.TIMEOUT">
+        <p class="error error-timeout">{{'OTP_MODAL_TIMEOUT_1'|translate}}</p>
+        <p class="error error-timeout">{{'OTP_MODAL_TIMEOUT_2'|translate}}</p>
+    </div>
+    <div *ngIf="(currentOTPState$|async) === OtpFormStatesEnum.INVALID_SESSION">
+        <p class="error error-timeout">{{'OTP_CODE_EXPIRED'|translate}}</p>
+        <p class="error error-timeout">{{'OTP_MODAL_TIMEOUT_2'|translate}}</p>
+    </div>
+</ng-container>
+

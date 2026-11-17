@@ -1,0 +1,143 @@
+export enum DigitalDataConstants {
+    AVIOS_COINS = 'Avios',
+    BOOKING_CLASS = 'BookingClass',
+    CASH_AVIOS_USED = 'CashAviosUsed',
+    ClientID = 'ClientID',
+    CODE = 'TrackingCode',
+    CODE_TRACKING = 'UserCUG',
+    CURRENCY = 'Currency',
+    DEEPLINK = 'Deeplink',
+    EVENT_ACTION = 'eventAction',
+    EVENT_CATEGORY = 'eventCategory',
+    EVENT_LABEL = 'eventLabel',
+    EVENT_NAME = 'eventName',
+    EVENT_NAME_INTERACTION = 'interaccion',
+    HASH_EMAIL = 'HashEID',
+    INSURANCE_TYPE = 'InsuranceType',
+    LANGUAGE = 'Language',
+    MARKET = 'Market',
+    ORDER_ID = 'OrderID',
+    ORIGIN_DESTINATIONS = 'AirportSeg',
+    PASSENGER_EMAIL = 'HashEBKI',
+    PAYMENT_METHOD = 'PaymentMethod',
+    PROCESS = 'Process',
+    PRODUCT = 'Product',
+    QUADRIGAM = 'Quadrigam',
+    QUANTITY = 'Quantity',
+    REFERENCE = 'Reference',
+    ROL_CIP = 'RolCIP',
+    STEP = 'Step',
+    TOTAL_PRICE = 'TotalPrice',
+    TOTAL_PRICE_AVIOS = 'AviosUsed',
+    UPG_TYPE = 'UpgType',
+    USER_AVIOS = 'UserAvios',
+    USER_ID = 'UserID',
+    USER_LEVEL = 'UserLevel',
+    USER_SEGMENT = 'UserSegment',
+    USER_STATE = 'UserStatus',
+    VOUCHER_AMOUNT = 'VoucherAmount',
+    VOUCHER_CODE = 'VoucherCode',
+    VOUCHER_SHOWN = 'VoucherShown',
+    VOUCHER_USED = 'VoucherUsed',
+    WEB_MODE = 'ModeWeb',
+    WEB_VERSION = 'VersionWeb'
+}
+
+export enum DigitalDataQuadrigam {
+    APIS = 'IBCOACII',
+    PAYMENT = 'PAYINF',
+    PAYMENT_DECOUPLING = 'IBCKIPURD',
+    CKIDOC = 'CKIDOC',
+    SEAT_SUMMARY = 'CKIACPT'
+}
+
+export enum DigitalDataProcess {
+    PROCESS = 'checkin',
+    PROCESS_DUPLICATE = 'checkin duplicados',
+    PROCESS_DESINVOICING = 'desfacturacion'
+}
+
+export enum DigitalDataSteps {
+    IBCOSE = 'landing',
+    IBCOSEII = 'landing',
+    IBCOAC = 'recuperacion',
+    IBCOACPA = 'recuperacion PA',
+    CKDANG = 'articulos peligrosos',
+    CKIANC = 'ancillaries',
+    IBCOACII = 'apis',
+    IBFNPA = 'vuelo puente aereo',
+    IBFNCOPA = 'adelanta o retrasa tu vuelo',
+    CKIANCUPP = 'upg',
+    IBCKIPURC = 'pago',
+    IBCKIPURD = 'pago',
+    BKCONF = 'pago',
+    CKIBIO = 'biometria',
+    IBCOBP = 'tarjeta de embarque',
+    IBCOBPD = 'tarjeta de embarque',
+    IBCKICF = 'confirmacion',
+    IBCKICD = 'confirmacion',
+    IBECCF = 'confirmacion',
+    IBECCD = 'confirmacion',
+    IBCOED = 'recuperacion',
+    UNCOAC = 'recuperacion',
+    UNCOSE = 'inicio',
+    UNCONF = 'confirmacion',
+    CKIEXP = 'sesion expirada'
+}
+
+export enum DigitaDataValues {
+    YES = 'SI',
+    NO = 'NO'
+}
+
+export enum DigitalDataInfo {
+    LANGUAGE = 'Language',
+    MARKET = 'Market',
+    USER_STATE = 'UserStatus',
+    USER_LEVEL = 'UserLevel',
+    USER_ID = 'UserID',
+    ClientID = 'ClientID',
+    USER_SEGMENT = 'UserSegment',
+    CODE_TRACKING = 'UserCUG',
+    AVIOS_COINS = 'Avios',
+    USER_AVIOS = 'UserAvios',
+    TOTAL_PRICE_AVIOS = 'AviosUsed',
+    HASH_EMAIL = 'HashEID',
+    PASSENGER_EMAIL = 'HashEBKI',
+    DEEPLINK = 'Deeplink',
+    PROCESS = 'Process',
+    STEP = 'Step',
+    QUADRIGAM = 'Quadrigam',
+    CODE = 'TrackingCode',
+    CURRENCY = 'Currency',
+    WEB_VERSION = 'VersionWeb',
+    WEB_MODE = 'ModeWeb',
+    REFERENCE = 'Reference',
+    VOUCHER_AMOUNT = 'VoucherAmount',
+    PRODUCT = 'Product',
+    ORDER_ID = 'OrderID',
+    PAYMENT_METHOD = 'PaymentMethod',
+    VOUCHER_CODE = 'VoucherCode',
+    ORIGIN_DESTINATIONS = 'AirportSeg',
+    UPG_TYPE = 'UpgType',
+    BOOKING_CLASS = 'BookingClass',
+    EVENT_CATEGORY = 'eventCategory',
+    EVENT_ACTION = 'eventAction',
+    EVENT_LABEL = 'eventLabel',
+    EVENT_NAME = 'eventName',
+    EVENT_NAME_INTERACTION = 'interaccion',
+    CASH_AVIOS_USED = 'CashAviosUsed',
+    VOUCHER_USED = 'VoucherUsed',
+    VOUCHER_SHOWN = 'VoucherShown',
+    INSURANCE_TYPE = 'InsuranceType',
+    QUANTITY = 'Quantity',
+    ROL_CIP = 'RolCIP',
+    DOWNLOAD_FORMAT = 'DownloadFormat',
+    BP_TYPE = 'BPType',
+    CHECKIN_BY = 'CheckinBy',
+    APIS_COMPLETED = 'ApisCompleted'
+}
+
+export enum TypeEventsTravelDocuemnts { 
+    NOT_USE_DOCUMENTS = 'NOT_USE_DOCUMENTS'
+}

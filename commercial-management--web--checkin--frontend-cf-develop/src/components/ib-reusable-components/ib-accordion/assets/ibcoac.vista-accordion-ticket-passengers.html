@@ -1,0 +1,168 @@
+<uib-accordion close-others="false" class="ibe-accordion" id="scrollTopAcc">
+	<div ng-form="pasForm_{{accCtrl.accModel.index}}" class="ibe_form">
+		<fieldset ng-if="accCtrl.accModel.companiesList.length > 0 && (!accCtrl.accModel.pasChecked[accCtrl.accModel.index].checked || accCtrl.accModel.accordionInfo.frequentFlyer.disableFrequentFlyer)">
+			<legend class="hideAccessible">{{'IBCOAC_TARJ_IBPLUS'|translate}}</legend>
+			<div uib-accordion-group is-open="accCtrl.accModel.isOpenCard[accCtrl.accModel.index]">
+				<uib-accordion-heading><span id="IBCOAC_ACORDEON_IBPLUS-{{accCtrl.accModel.index}}" class="ibe-accordion__title">{{'IBCOAC_TARJ_IBPLUS'|translate}}</span></uib-accordion-heading>
+				<div class="ibe-accordion__body">
+					<div class="row">
+						<div class="col-md-6 col-sm-12 col-xs-12">
+							<div class="ibe_form__group">
+								<div class="ibe_form__select" data-ng-class="{'ibe_form__group--error' : this['pasForm_' + accCtrl.accModel.index].$submitted && accCtrl.accModel.accordionInfo.frequentFlyer.iataCompanyCode === 'CKI_COMBO_BLANK' && accCtrl.accModel.accordionInfo.frequentFlyer.number != null && accCtrl.accModel.accordionInfo.frequentFlyer.number !== ''}">
+									<label id="IBCOAC_COMBO_COMPANIA-{{accCtrl.accModel.index}}" class="ibe_form__input-label">{{'FF_COMPANY_FIELD_LABEL'|translate}}</label>
+									<ui-select ng-disabled="accCtrl.accModel.accordionInfo.frequentFlyer.disableFrequentFlyer" on-select="accCtrl.clearCodeNumber()"
+									 id="IBCOAC_COMBO_COMPANIA-{{accCtrl.accModel.index}}" ng-model="accCtrl.accModel.accordionInfo.frequentFlyer.iataCompanyCode"
+									 class="ibe_form__ui-select">
+										<ui-select-match placeholder="{{'FF_COMPANY_FIELD_LABEL'|translate}}" class="ibe_form__ui-select-match">
+											<span class="ibe_form__selected">{{$select.selected.airlineName}}</span>
+										</ui-select-match>
+										<ui-select-choices repeat="o.iataCompanyCode as o in (accCtrl.accModel.companiesList | filter: $select.search) track by o.airlineName"
+										 class="ibe_form__ui-select-choices">
+											<span data-ng-bind="o.airlineName" class="ibe-form__option"></span>
+										</ui-select-choices>
+									</ui-select>
+									<div ng-if="(this['pasForm_' + accCtrl.accModel.index].$submitted && accCtrl.accModel.accordionInfo.frequentFlyer.iataCompanyCode === 'CKI_COMBO_BLANK' && accCtrl.accModel.accordionInfo.frequentFlyer.number != null && accCtrl.accModel.accordionInfo.frequentFlyer.number !== '')">
+										<p class="ibe_form__msg-info">{{'FF_COMPANY_REQUIRED_ERROR'|translate}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12 col-xs-12">
+							<div ng-if="accCtrl.accModel.accordionInfo.frequentFlyer.iataCompanyCode === 'IB'" class="ibe_form__group" data-ng-class="{'ibe_form__group--content':accCtrl.accModel.accordionInfo.frequentFlyer.number && accCtrl.accModel.accordionInfo.frequentFlyer.number != null && accCtrl.accModel.accordionInfo.frequentFlyer.number !== '',
+																																	'ibe_form__group--error' :accCtrl.accModel.accordionInfo.frequentFlyer.number != null && accCtrl.accModel.accordionInfo.frequentFlyer.number !== '' && !accCtrl.validLuhnCompanyCard()
+																																	 && this['pasForm_' + accCtrl.accModel.index].$submitted}">
+								<input ng-disabled="accCtrl.accModel.accordionInfo.frequentFlyer.disableFrequentFlyer" name="numero_tarjeta" id="numero_tarjeta-{{accCtrl.accModel.index}}"
+									type="text" placeholder="{{'FF_COMPANY_NUMBER_FIELD_LABEL'|translate}}" class="ibe_form__input-text" ng-model="accCtrl.accModel.accordionInfo.frequentFlyer.number"
+									maxlength="8" ng-pattern="::$root.CHECKIN_PATTERNS.CARD_NUMBER_PATTERN" data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.CARD_NUMBER_CLEANER}}" />
+								<label for="numero_tarjeta-{{accCtrl.accModel.index}}" class="ibe_form__input-label">{{'FF_COMPANY_NUMBER_FIELD_LABEL'|translate}}</label>
+								<div ng-if="accCtrl.accModel.accordionInfo.frequentFlyer.number != null && accCtrl.accModel.accordionInfo.frequentFlyer.number !== '' && !accCtrl.validLuhnCompanyCard() && this['pasForm_' + accCtrl.accModel.index].$submitted">
+									<p class="ibe_form__msg-info">{{'FF_COMPANY_NUMBER_ERROR'|translate}}</p>
+								</div>
+							</div>
+							<div ng-if="accCtrl.accModel.accordionInfo.frequentFlyer.iataCompanyCode !== 'IB'" class="ibe_form__group" ng-class="{'ibe_form__group--content':this['pasForm_' + accCtrl.accModel.index].numero_tarjeta.$viewValue != null && this['pasForm_' + accCtrl.accModel.index].numero_tarjeta.$viewValue !== ''}">
+								<input ng-disabled="accCtrl.accModel.accordionInfo.frequentFlyer.disableFrequentFlyer" name="numero_tarjeta" id="numero_tarjeta-{{accCtrl.accModel.index}}"
+								 type="text" placeholder="{{'FF_COMPANY_NUMBER_FIELD_LABEL'|translate}}" class="ibe_form__input-text" ng-model="accCtrl.accModel.accordionInfo.frequentFlyer.number"
+								 maxlength="20" />
+								<label for="numero_tarjeta-{{accCtrl.accModel.index}}" class="ibe_form__input-label">{{'FF_COMPANY_NUMBER_FIELD_LABEL'|translate}}</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<div ng-if="accCtrl.accModel.checkboxChangesFlight[accCtrl.accModel.index] || accCtrl.accModel.checkboxEmerContact[accCtrl.accModel.index]">
+				<legend class="hideAccessible">{{'IBCOAC_CONTACTO'|translate}}</legend>
+				<div uib-accordion-group is-open="accCtrl.accModel.isOpen[accCtrl.accModel.index]">
+					<uib-accordion-heading><span id="IBCOAC_ACORDEON_CONTACT-{{accCtrl.accModel.index}}" class="ibe-accordion__title">{{'IBCOAC_CONTACTO'|translate}}</span></uib-accordion-heading>
+					<div class="ibe-accordion__body">
+						<div ng-if="accCtrl.accModel.checkboxChangesFlight[accCtrl.accModel.index]">
+							<p class="ibe-ticket__passengers-item__body-item__form-text">{{'IBCOAC_TARJ_INFO'|translate}}</p>
+							<div class="row">
+								<div class="col-xl-12">
+									<div class="ibe_form__group" ng-class="{'ibe_form__group--error' : this['pasForm_' + accCtrl.accModel.index]['email'].$invalid && this['pasForm_' + accCtrl.accModel.index].$submitted,
+                                                                            'ibe_form__group--content' : this['pasForm_' + accCtrl.accModel.index]['email'].$viewValue != null && this['pasForm_' + accCtrl.accModel.index]['email'].$viewValue !== ''}">
+										<input name="email" autocomplete="off" id="email-{{accCtrl.accModel.index}}" type="text" placeholder="Correo electrónico"
+											class="ibe_form__input-text" maxlength="{{::$root.CHECKIN_FIELDS_LENGTH.EMAIL_MAX_LENGTH}}" ng-pattern="::$root.CHECKIN_PATTERNS.EMAIL_PATTERN"
+											data-ng-model="accCtrl.accModel.accordionInfo.additionalInfo.email" required/>
+										<label for="email-{{accCtrl.accModel.index}}" class="ibe_form__input-label">{{'IBCOAC_EMAIL'|translate}}</label>
+										<div ng-if="this['pasForm_' + accCtrl.accModel.index]['email'].$invalid && this['pasForm_' + accCtrl.accModel.index].$submitted">
+											<p class="ibe_form__msg-info">{{'IBCOAC_EMAIL_ERR'|translate}}</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-12 col-xs-12">
+									<div class="ibe_form__group">
+										<div class="ibe_form__select">
+											<label for="IBCOAC_COMBO_PREFIJO-{{accCtrl.accModel.index}}" class="ibe_form__input-label">{{'IBCOAC_TELF_PRE'|translate}}</label>
+											<ui-select id="IBCOAC_COMBO_PREFIJO-{{accCtrl.accModel.index}}" ng-model="accCtrl.accModel.accordionInfo.additionalInfo.countryCode"
+											 	class="ibe_form__ui-select">
+												<ui-select-match placeholder="{{'IBCOAC_TELF_PRE'|translate}}" class="ibe_form__ui-select-match">
+													<span class="ibe_form__selected">{{$select.selected.description}}</span>
+												</ui-select-match>
+												<ui-select-choices repeat="o.code as o in (accCtrl.accModel.prefixList| filter: $select.search)" class="ibe_form__ui-select-choices">
+													<span data-ng-bind="o.description" class="ibe-form__option"></span>
+												</ui-select-choices>
+											</ui-select>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-12 col-xs-12">
+									<div class="ibe_form__group" ng-class="{'ibe_form__group--error' : this['pasForm_' + accCtrl.accModel.index]['telefono'].$invalid && this['pasForm_' + accCtrl.accModel.index].$submitted,
+                                                                            'ibe_form__group--content':this['pasForm_' + accCtrl.accModel.index]['telefono'].$viewValue != null && this['pasForm_' + accCtrl.accModel.index]['telefono'].$viewValue !== ''}">
+										<input name="telefono" autocomplete="off" id="telefono-{{accCtrl.accModel.index}}" type="tel" placeholder="Número de teléfono" inputmode="tel"
+											class="ibe_form__input-text" minlength="8" maxlength="16"  data-ng-model="accCtrl.accModel.accordionInfo.additionalInfo.phoneNumber"
+											required ng-pattern="accCtrl.accModel.accordionInfo.additionalInfo.countryCode === '34' ?  $root.CHECKIN_PATTERNS.PHONE_PATTERN_ES : $root.CHECKIN_PATTERNS.PHONE_PATTERN" data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.PHONE_CLEANER}}"/>
+										<label for="telefono-{{accCtrl.accModel.index}}" class="ibe_form__input-label">{{'IBCOAC_TELF_NUM'|translate}}</label>
+										<div ng-if="this['pasForm_' + accCtrl.accModel.index]['telefono'].$invalid && this['pasForm_' + accCtrl.accModel.index].$submitted">
+											<p class="ibe_form__msg-info">{{'IBCOAC_TELF_NUM_ERR'|translate}}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ibe-form__checkbox" data-ng-if="::!accCtrl.accModel.duplicateMode">
+								<input type="checkbox" id="newsletters-{{accCtrl.accModel.index}}" name="newsletters" class="ibe-form__checkbox-input" data-ng-model="accCtrl.accModel.accordionInfo.denyNewsLetters">
+								<label for="newsletters-{{accCtrl.accModel.index}}" class="ibe-form__checkbox-label">{{ 'IBCOAC_CONTACT_FORM_INFO_CHECK_BOX'|translate}}</label>
+							</div>
+							<div class="ibe-form__checkbox" ng-if="accCtrl.checkNumPass() && (accCtrl.accModel.index===accCtrl.accModel.firstPassengerAvailable)">
+								<input ng-click="accCtrl.clickCheckBox()" type="checkbox" id="IBCOAC_CHECK_ALL_PASS1-{{accCtrl.accModel.index}}" name="checking-ticket-4"
+								 ng-model="accCtrl.accModel.checkBoxFlightChange[0]" class="ibe-form__checkbox-input" />
+								<label for="IBCOAC_CHECK_ALL_PASS1-{{accCtrl.accModel.index}}" class="ibe-form__checkbox-label"><span> {{'IBCOAC_USAR_PASS1'|translate}}</span></label>
+							</div>
+						</div>
+						<div ng-if="accCtrl.accModel.checkboxEmerContact[accCtrl.accModel.index]">
+							<p class="ibe-ticket__passengers-item__body-item__form-text">{{'IBCOAC_CONTAC_ALTER'|translate}}</p>
+							<div class="row">
+								<div class="col-xl-12">
+									<div class="ibe_form__group" ng-class="{'ibe_form__group--error' : this['pasForm_' + accCtrl.accModel.index]['name'].$invalid && this['pasForm_' + accCtrl.accModel.index].$submitted,
+                                                                            'ibe_form__group--content':this['pasForm_' + accCtrl.accModel.index]['name'].$viewValue != null && this['pasForm_' + accCtrl.accModel.index]['name'].$viewValue !== ''}">
+										<input name="name" id="name-{{accCtrl.accModel.index}}" type="text" placeholder="{{'IBCOAC_NOM_CONT_ALT' |translate}}" class="ibe_form__input-text"
+											ng-model="accCtrl.accModel.accordionInfo.emergencyInfo.name" maxlength="30" ng-pattern="::$root.CHECKIN_PATTERNS.NAME_SURNAME_PATTERN"
+										data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.NAME_SURNAME_CLEANER}}"/>
+										<label for="name-{{accCtrl.accModel.index}}" class="ibe_form__input-label">{{'IBCOAC_NOM_CONT_ALT' |translate}}</label>
+										<div ng-if="this['pasForm_' + accCtrl.accModel.index]['name'].$invalid && this['pasForm_' + accCtrl.accModel.index].$submitted">
+											<p class="ibe_form__msg-info">{{'IBCOAC_NOM_CONT_ALT_ERR'|translate}}</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-12 col-xs-12">
+									<div class="ibe_form__group">
+										<div class="ibe_form__select">
+											<label for="IBCOAC_COMBO_PREFIJO_EMER-{{accCtrl.accModel.index}}" class="ibe_form__input-label">{{'IBCOAC_TELF_PRE'|translate}}</label>
+											<ui-select id="IBCOAC_COMBO_PREFIJO_EMER-{{accCtrl.accModel.index}}" ng-model="accCtrl.accModel.accordionInfo.emergencyInfo.countryCode"
+												 class="ibe_form__ui-select">
+												<ui-select-match placeholder="{{'IBCOAC_TELF_PRE'|translate}}" class="ibe_form__ui-select-match">
+													<span class="ibe_form__selected">{{$select.selected.description}}</span>
+												</ui-select-match>
+												<ui-select-choices repeat="o.code as o in (accCtrl.accModel.prefixList | filter: $select.search)" class="ibe_form__ui-select-choices">
+													<span data-ng-bind="o.description" class="ibe-form__option"></span>
+												</ui-select-choices>
+											</ui-select>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-12 col-xs-12">
+									<div class="ibe_form__group" ng-class="{'ibe_form__group--error' : this['pasForm_' + accCtrl.accModel.index]['telefono2'].$invalid && this['pasForm_' + accCtrl.accModel.index].$submitted,
+                                                                            'ibe_form__group--content':this['pasForm_' + accCtrl.accModel.index]['telefono2'].$viewValue != null && this['pasForm_' + accCtrl.accModel.index]['telefono2'].$viewValue !== ''}">
+										<input name="telefono2" autocomplete="off" id="telefono2-{{accCtrl.accModel.index}}" type="tel" placeholder="Número de teléfono" inputmode="tel"
+											 class="ibe_form__input-text" minlength="8" maxlength="16" data-ng-model="accCtrl.accModel.accordionInfo.emergencyInfo.phoneNumber"
+											ng-pattern="accCtrl.accModel.accordionInfo.emergencyInfo.countryCode === '34' ?  $root.CHECKIN_PATTERNS.PHONE_PATTERN_ES : $root.CHECKIN_PATTERNS.PHONE_PATTERN" data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.PHONE_CLEANER}}"/>
+										<label for="telefono2-{{accCtrl.accModel.index}}" class="ibe_form__input-label">{{'IBCOAC_TELF_NUM'|translate}}</label>
+										<div ng-if="this['pasForm_' + accCtrl.accModel.index]['telefono2'].$invalid && this['pasForm_' + accCtrl.accModel.index].$submitted">
+											<p class="ibe_form__msg-info">{{'IBCOAC_TELF_NUM_ERR'|translate}}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ibe-form__checkbox" ng-if="accCtrl.checkNumPass() && (accCtrl.accModel.index===accCtrl.accModel.firstPassengerAvailable)">
+								<input ng-click="accCtrl.clickCheckBox()" type="checkbox" id="IBCOAC_CHECK_ALL_PASS2-{{accCtrl.accModel.index}}" name="checking-ticket-5"
+								 ng-model="accCtrl.accModel.checkBoxEmergencyContact[0]" class="ibe-form__checkbox-input" />
+								<label for="IBCOAC_CHECK_ALL_PASS2-{{accCtrl.accModel.index}}" class="ibe-form__checkbox-label"><span> {{'IBCOAC_USAR_PASS2'|translate}}</span></label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</uib-accordion>

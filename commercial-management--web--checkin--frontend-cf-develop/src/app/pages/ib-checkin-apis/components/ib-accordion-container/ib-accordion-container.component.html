@@ -1,0 +1,39 @@
+<div class="accordion">
+    <div class="accordion_header" [ngClass]="{'cursor_pointer': !isNOAPI,'accordion_header_open': isOpen}">
+        <button *ngIf="!isNOAPI" class="accordion_button" (click)="toggle.emit()">
+            <span class="icon-perfil_login" [class.u-color-secondary]="isOpen"></span>
+            <div class="accordion_box">
+                <h3 class="accordion_title u-ellipsis-1" [class.u-color-secondary]="isOpen">{{ passengerName }}</h3>
+                <div class="accordion_state_block">
+                    <p class="accordion_subtitle u-ellipsis-1" [class.text_underline]="!isOpen">{{ getStatus() }}</p>
+                    <span
+                        class="accordion_icon"
+                        [ngClass]="{
+                            'icon-validar': passengerStatus === 'APIS_STATE_PASSENGER_COMPLETED',
+                            'icon-alertas': passengerStatus === 'APIS_STATE_PASSENGER_PENDING' || passengerStatus === 'APIS_STATE_PASSENGER_DOCUMENTATION_AIRPORT'
+                        }"
+                    ></span>
+                </div>
+            </div>
+            <span [ngClass]="isOpen ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+        </button>
+        <div *ngIf="isNOAPI" class="accordion_button">
+            <span class="icon-perfil_login"></span>
+            <div class="accordion_box">
+                <h3 class="accordion_title u-ellipsis-1">{{ passengerName }}</h3>
+                <div class="accordion_state_block">
+                    <p class="accordion_subtitle u-ellipsis-1">{{ getStatus() }}</p>
+                    <span
+                        class="accordion_icon"
+                        [ngClass]="{
+                            'icon-validar': passengerStatus === 'APIS_STATE_PASSENGER_COMPLETED'
+                        }"
+                    ></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="accordion_content" [ngClass]="{ show: isOpen }" *ngIf="isOpen">
+        <ng-content></ng-content>
+    </div>
+</div>

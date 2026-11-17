@@ -1,0 +1,177 @@
+/* -------------------------------------------------------------
+    #UI-passenger-seats
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}ui-passenger-seats-info {
+    &__subtitle {
+        margin-bottom: rem(16);
+        font-size: rem(12);
+        line-height: normal;
+        color: color(gray-15);
+        letter-spacing: 0;
+    }
+
+    &__cabins {
+        font-family: $font-special;
+        font-size: rem(14);
+        line-height: normal;
+        letter-spacing: 0;
+    }
+
+    &__list {
+        border-top: rem(1) solid color(gray-50);
+        border-bottom: rem(1) solid color(gray-50);
+        background-color: color(gray-60);
+    }
+
+    &__row {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: rem(20);
+        border-top: rem(1) solid color(gray-50);
+
+        &:first-child {
+            border-top: 0;
+        }
+    }
+
+    &__text {
+        font-family: $font-normal;
+        font-size: rem(13);
+        line-height: rem(24);
+        color: color(gray-15);
+
+        &--bold {
+            font-weight: bold;
+            color: color(gray-10);
+        }
+    }
+
+    &__name {
+        flex-basis: 60%;
+
+        &::before {
+            font-size: rem(35);
+            color: color(gray-20);
+            vertical-align: middle;
+        }
+    }
+
+    &__passbook {
+        flex-basis: 24%;
+
+        &::before {
+            font-size: rem(35);
+            color: color(gray-20);
+            vertical-align: middle;
+        }
+    }
+
+    &__seats {
+        flex-basis: 16%;
+        text-align: right;
+
+        &::before {
+            font-size: rem(30);
+            color: color(gray-20);
+            vertical-align: middle;
+        }
+        .#{$wefront__namespace}ui-passenger-seats-info__text {
+            padding: rem(5);
+            margin-left: rem(3);
+            border: rem(1) solid color(gray-95);
+        }
+    }
+
+    &__claim {
+        margin-top: rem(40);
+    }
+}
+
+#main-export {
+    .#{$wefront__namespace}ui-passenger-seats-info {
+        &__name {
+            flex-basis: 60%;
+
+            &::before {
+                display: inline-block;
+                margin-bottom: rem(15);
+            }
+        }
+
+        &__passbook {
+            flex-basis: 25%;
+            order: inherit;
+            margin-top: 0;
+
+            &::before {
+                display: inline-block;
+                margin-bottom: rem(13);
+            }
+        }
+
+        &__seats {
+            flex-basis: 15%;
+            order: inherit;
+            margin-top: 0;
+
+            &::before {
+                display: inline-block;
+                margin-bottom: rem(15);
+            }
+            .#{$wefront__namespace}ui-passenger-seats-info__text {
+                padding-top: 0;
+                padding-bottom: rem(10);
+            }
+        }
+    }
+}
+
+
+// @include media-query('sm') {
+//     .#{$wefront__namespace}ui-passenger-seats-info {
+//         &__name {
+//             flex-basis: 45%;
+//         }
+
+//         &__passbook {
+//             flex-basis: 32%;
+//         }
+
+//         &__seats {
+//             flex-basis: 23%;
+//         }
+//     }
+// }
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}ui-passenger-seats-info {
+        &__row {
+            flex-flow: row wrap;
+        }
+
+        &__name {
+            flex-basis: 100%;
+
+            &::before {
+                margin-left: rem(-5);
+            }
+        }
+
+        &__passbook {
+            flex-basis: 56%;
+            order: 3;
+            margin-top: rem(15);
+        }
+
+        &__seats {
+            flex-basis: 44%;
+            order: 2;
+            margin-top: rem(15);
+            text-align: left;
+        }
+    }
+}
+

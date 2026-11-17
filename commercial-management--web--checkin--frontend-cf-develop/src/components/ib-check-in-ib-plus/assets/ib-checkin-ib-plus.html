@@ -1,0 +1,49 @@
+<main class="container">
+	<!-- Main content-->
+	<div class="row">
+		<div class="col-xs-12 col-lg-8">
+			<section data-ng-if="(!checkIbPlusCtrl.model.userBookings || checkIbPlusCtrl.model.userBookings.length ===0) && checkIbPlusCtrl.model.finishProcess && !checkIbPlusCtrl.model.isError">
+				<h1 class="title title__h1 title--grey">{{'IBCOSE2_TITULO'|translate}}</h1>
+				<h2 class="title title__h2">{{'IBCOSE2_NOT_BOOKINGS_FOUND_TITLE'|translate}}</h2>
+				<ul class="ibe-list">
+					<li class="ibe-list__item">
+						<span class="ibe-list__text">{{'IBCOSE2_NOT_BOOKINGS_FIRST_ITEM'|translate}}
+							<a id="cki-ib-plus-go-home-link" data-ng-click="checkIbPlusCtrl.goInitialPage()" title="{{'IBCOSE2_INITIAL_PAGE'|translate}}" class="ibe-link">{{'IBCOSE2_INITIAL_PAGE'|translate}}</a>
+						</span>
+					</li>
+					<li class="ibe-list__item"><span class="ibe-list__text">{{'IBCOSE2_NOT_BOOKINGS_SECOND_ITEM'|translate}}</span></li>
+				</ul>
+			</section>
+			<section data-ib-hover-opacity data-ng-if="checkIbPlusCtrl.model.userBookings && checkIbPlusCtrl.model.userBookings.length >0">
+				<h1 class="title title__h1 title--grey">{{'IBCOSE2_TITULO'|translate}}</h1>
+				<article ng-repeat="booking in checkIbPlusCtrl.model.userBookings" ng-click="checkIbPlusCtrl.searchBooking(booking.surname,booking.locator)" class="reserves-list">
+					<figure class="reserves-list__box-img"><img ng-src="{{::booking.cityImageUrl}}" alt="" class="reserves-list__img" /></figure>
+					<div class="reserves-list__info">
+						<h2 class="reserves-list__title"><small class="reserves-list__title--small icon-flecha_1_derecha">{{'IBCOSE2_SUBTIT_VIAJE'|translate}}</small> {{::booking.arrival.city.description}}</h2>
+						<div class="reserves-list__journey">
+							<p class="reserves-list__planning">
+								<span class="reserves-list__planning--bold">{{::booking.departure.city.code}} - {{::booking.arrival.city.code}}</span>								/
+								<span data-ng-switch="$root.appMarket">
+									<span data-ng-switch-when="US">{{booking.departureDate.month|translate}}  {{::booking.departureDate.monthDay}} {{::booking.departureDate.year}}</span>
+								<span data-ng-switch-default>{{::booking.departureDate.monthDay}} {{booking.departureDate.month|translate}} {{::booking.departureDate.year}}</span>
+								</span>
+							</p>
+						</div>
+						<footer class="reserves-list__footer">
+							<p class="reserves-list__code">{{'IBCOSE2_COD_RESERVA'|translate}} <span class="reserves-list__code--bold">{{::booking.locator}}</span></p>
+						</footer>
+					</div>
+				</article>
+			</section>
+		</div>
+		<div class="col-xs-12 col-lg-4">
+			<aside>
+				<div class="ibe-box-form ibe-box-form--one-column">
+					<ib-anonymous-search id="cki-ib-plus-anonymous-search" button-style="ibe-button--grey" search-title="{{'IBCOSE_NO_ENCUENTRAS_RESERVA'|translate}}" button-text="{{'IBCOSE_BUSCAR_RESERVA'|translate}}"></ib-anonymous-search>
+				</div>
+			</aside>
+		</div>
+	</div>
+	<!-- End main content-->
+
+</main>

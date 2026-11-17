@@ -1,0 +1,104 @@
+@import "/src/styles/settings/settings__config";
+@import "/src/styles/settings/settings__colors";
+@import "/src/styles/tools/tools__colors";
+@import "/src/styles/tools/tools__pixel-to-rem";
+@import '/src/styles/mixins/media-query-range';
+@import '/src/styles/vars/breakpoints.scss';
+
+.seat-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: rem(16);
+    background-color: color(gray-60);
+    border-block: rem(1) solid color(gray-50);
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .gender-icon {
+            margin-left: calc(rem(-31) + rem(22));
+            font-size: rem(31);
+            color: color(gray-15);
+        }
+
+        p {
+            margin-left: rem(-6);
+            font-size: rem(16);
+            font-weight: 400;
+            text-transform: capitalize;
+        }
+    }
+
+    .seat-text {
+        display: none;
+    }
+
+    .seat-number {
+        display: flex;
+        padding: rem(4);
+        border: rem(1) solid color(gray-20);
+        font-size: rem(14);
+        font-weight: 500;
+        gap: rem(2);
+
+        * {
+            font-weight: 400;
+            line-height: 100%;
+        }
+
+        .seat-icon {
+            display: flex;
+            align-items: center;
+            font-size: rem(16);
+            color: color(gray-15);
+        }
+    }
+}
+
+@include media-query-range("mf-sm") {
+    .seat-row {
+        .seat-number .seat-icon {
+            font-size: rem(16);
+        }
+
+        div{
+            .gender-icon, p {
+                margin-left: 0;
+            }
+        }
+    }
+
+    .seat-number * {
+        font-weight: 500;
+    }
+}
+
+@include media-query-range("mf-md") {
+    .seat-row {
+        padding: 1rem 1.5rem;
+
+        div p {
+            font-size: rem(24);
+        }
+
+        .seat-number {
+            font-size: rem(22);
+
+            .seat-icon {
+                font-size: rem(24);
+            }
+
+            * {
+                font-weight: 500;
+            }
+        }
+
+        .seat-text {
+            display: block;
+        }
+    }
+}

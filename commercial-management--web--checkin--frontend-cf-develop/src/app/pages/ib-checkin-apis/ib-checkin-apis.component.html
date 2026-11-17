@@ -1,0 +1,58 @@
+<div *ngIf="passengers" class="container">
+    <div class="row">
+        <div class="col-xs-12 u-pl-none u-pr-none">
+            <ng-react *ngIf="showModalTravelRequirements" [component]="ModalTravelRequirements" [props]="modalTravelRequirementsProps"></ng-react>
+            <ng-react [component]="passengerCheckInUnavailableModal" [props]="passengerCheckInUnavailableModalProps"></ng-react>
+            <ng-react [component]="passengerDataCheckModal" [props]="dataCheckModalProps"></ng-react>
+            <ng-react [component]="passengerDataIncompleteModal" [props]="passengerDataIncompleteModalProps"></ng-react>
+            <ng-react [component]="TravelDocumentsModal" [props]="travelDocumentsModalProps"></ng-react>
+            <ng-react [component]="TravelDocumentsModalSave" [props]="travelDocumentsModalSaveProps"></ng-react>
+            <h1 class="page-title">{{ "APIS_PAGE_TITLE" | translate }}</h1>
+            <div *ngIf="showAlertInfo">
+                <ng-react [component]="AlertAutoCheck"></ng-react>
+            </div>
+            <ib-overlay [isOpen]="overlayProps.isOpen" [messageKey]="overlayProps.messageKey" [status]="overlayProps.status">
+                <div *ngFor="let passenger of passengersNOAPIS; let i = index">
+                    <ib-accordion-container
+                        [attr.id]="'passengerNOAPI' + passenger.id || '0'"
+                        [passengerName]="passenger.fullName"
+                        [passengerStatus]="passenger.status"
+                        [isOpen]="false"
+                        [isNOAPI]="passenger.isNOAPI"
+                    />
+                </div>
+                <div *ngFor="let passenger of passengers; let i = index; trackBy: trackById">
+                    <ib-accordion-container
+                        [attr.id]="'passenger' + passenger.id || '0'"
+                        [passengerName]="getFullName(passenger)"
+                        [passengerStatus]="passenger.formStatus"
+                        [isOpen]="openAccordionIndex === i"
+                        (toggle)="toggleAccordion(i)"
+                    >
+                        <ib-checkin-form-apis
+                            [passenger]="passenger"
+                            [isMultiPassengers]="isMultiPassengers"
+                            [index]="i"
+                            [isGlobalSubmit]="isGlobalSubmit"
+                            [onSubmitComplete]="notifySubmitComplete"
+                            [showTravelDocumentsLink]="travelDocument.showTravelDocumentsLink"
+                            [requiredFields]="requiredFields"
+                            (removePassengerFromApisFormModel)="removePassengerFromApisFormModel($event)"
+                            (passengerStatusChange)="passengerStatusChange($event)"
+                            (updateOverlayStatus)="updateOverlayStatus($event)"
+                            (showModalCheckinNotAvailable)="showModalCheckinNotAvailable($event)"
+                            (submitError)="getPassengerSubmitError($event)"
+                            (scrollToPassenger)="scrollToPassenger($event)"
+                            (handleTravelDocumentsModalEvent)="handleTravelDocumentsModalEvent($event)"
+                            (updateDocumentsModel)="updateDocumentsModel($event)"
+                            (updatePassengerHash)="updatePassengersHash($event)"
+                        ></ib-checkin-form-apis>
+                    </ib-accordion-container>
+                </div>
+                <div class="button-container" *ngIf="countPassengers.isMulti">
+                    <ng-react [component]="ButtonContinue" [props]="buttonContinueProps" class="apis-form-button"></ng-react>
+                </div>
+            </ib-overlay>
+        </div>
+    </div>
+</div>

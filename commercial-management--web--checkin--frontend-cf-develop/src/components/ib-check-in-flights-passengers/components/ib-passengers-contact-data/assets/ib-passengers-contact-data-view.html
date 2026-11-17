@@ -1,0 +1,271 @@
+<div class="ib-box-selects ib-box-selects--type-1">
+    <header class="ib-box-selects__header">
+        <span class="ib-icon-contact">
+            <span class="ib-icon-contact__icon icon-click_to_call"></span>
+            <span class="ib-icon-contact__title">{{'IBCOAC_CONTACTO'|translate}}</span>
+            <span class="ib-icon-contact__description">{{'GENERAL_MANDATORY_FIELDS_TEXT'|translate}}</span>
+        </span>
+    </header>
+    <div class="ib-box-selects__container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__line-spacing">
+                    <p class="ib-text ib-text--color-unfocused">{{'IBCOAC_CONTACT_DATA_INFO'|translate}}</p>
+                </div>
+                <div data-ng-repeat="(passengerIndex,passenger) in pasContactCtrl.passengers"
+                    data-ng-if="passenger.isSelected && passenger.contactData.available && (passenger.fieldStatus.contactData.show || passenger.fieldStatus.emergencyData.show) && !passenger.pasStatus.requiresApis">
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+                        <span class="ib-heading ib-heading--type-4 ib-heading--overflow">{{passenger.name + ' ' +
+                            passenger.surname}}</span>
+                    </div>
+                    <div class="ib-layout__form-center">
+                        <div data-ng-if="passenger.fieldStatus.contactData.show">
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+                                <ib-ui-prefix-country
+                                        [prefix-id]="'IBCOAC_CONTACT_FORM_PREFIX_' + passengerIndex"
+                                        [prefix-label]="('IBCOAC_TELF_PRE'|translate) + (passenger.fieldStatus.contactData.mandatory ? 'GENERAL_MANDATORY_FIELDS_FLAG':'' |translate)"
+                                        [is-required]="passenger.fieldStatus.contactData.mandatory && !passenger.contactData.phone.countryCode"
+                                        [prefix-placeholder]="('IBCOAC_TELF_PRE'|translate) + (passenger.fieldStatus.contactData.mandatory ? 'GENERAL_MANDATORY_FIELDS_FLAG':'' |translate) "
+                                        [prefix-list]="pasContactCtrl.prefixes"
+                                        [prefix-model]="passenger.contactData.phone.countryCode"
+                                        (out-prefix-model)="pasContactCtrl.changePrefix($event, passenger.id, false)"
+                                        [container-form]="pasContactCtrl.pasForm">
+                                </ib-ui-prefix-country>
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+                                <div class="ib-input"
+                                    data-ng-class="{'ib-input--error' : pasContactCtrl.pasForm.$submitted && pasContactCtrl.pasForm['ContactFormPhone_'+ passengerIndex].$invalid}">
+                                    <label
+                                        ng-class="{'ib-input__label--focus' : pasContactCtrl.phoneFocused[passengerIndex] || (pasContactCtrl.pasForm['ContactFormPhone_'+ passengerIndex].$viewValue != null && pasContactCtrl.pasForm['ContactFormPhone_'+ passengerIndex].$viewValue !== '')}"
+                                        class="ib-input__label"
+                                        for="IBCOAC_CONTACT_FORM_PHONE_{{passengerIndex}}">{{('IBCOAC_TELF_NUM'|translate)
+                                        + (passenger.fieldStatus.contactData.mandatory ?
+                                        'GENERAL_MANDATORY_FIELDS_FLAG':'' |translate)}}</label>
+                                    <input name="ContactFormPhone_{{passengerIndex}}"
+                                        id="IBCOAC_CONTACT_FORM_PHONE_{{passengerIndex}}" type="tel"
+                                        class="ib-input__input"
+                                        maxlength="{{::$root.CHECKIN_FIELDS_LENGTH.PHONE_NUMBER_MAX_LENGTH}}"
+                                        data-ng-required="passenger.fieldStatus.contactData.mandatory"
+                                        data-ng-model="passenger.contactData.phone.number"
+                                        ng-pattern="passenger.contactData.phone.countryCode === '34' ?  $root.CHECKIN_PATTERNS.PHONE_PATTERN_ES : $root.CHECKIN_PATTERNS.PHONE_PATTERN"
+                                        data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.PHONE_CLEANER}}"
+                                        data-ng-focus="pasContactCtrl.phoneFocused[passengerIndex]=true"
+                                        data-ng-blur="pasContactCtrl.phoneFocused[passengerIndex]=false" inputmode="tel"/>
+                                </div>
+                                <div
+                                    ng-messages="pasContactCtrl.pasForm.$submitted && pasContactCtrl.pasForm['ContactFormPhone_'+ passengerIndex].$error">
+                                    <div class="ib-alert ib-alert--error" ng-message="required">
+                                        {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                    <div class="ib-alert ib-alert--error" ng-message="pattern">
+                                        {{'IBCOACII_NUM_ERR'|translate}}</div>
+                                </div>
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+                                <div class="ib-input"
+                                    data-ng-class="{'ib-input--error' : pasContactCtrl.pasForm.$submitted && pasContactCtrl.pasForm['ContactFormEmail_' + passengerIndex].$invalid}">
+                                    <label
+                                        data-ng-class="{'ib-input__label--focus' : pasContactCtrl.emailFocused[passengerIndex] || (pasContactCtrl.pasForm['ContactFormEmail_' + passengerIndex].$viewValue != null && pasContactCtrl.pasForm['ContactFormEmail_' + passengerIndex].$viewValue !== '')}"
+                                        class="ib-input__label"
+                                        for="IBAIRP_CONTACT_FORM_EMAIL_{{passengerIndex}}">{{('IBCOAC_EMAIL'|translate)
+                                        + (passenger.fieldStatus.contactData.mandatory ?
+                                        'GENERAL_MANDATORY_FIELDS_FLAG':''|translate)}}</label>
+                                    <input class="ib-input__input"
+                                        maxlength="{{::$root.CHECKIN_FIELDS_LENGTH.EMAIL_MAX_LENGTH}}"
+                                        ng-pattern="::$root.CHECKIN_PATTERNS.EMAIL_PATTERN"
+                                        data-ng-focus="pasContactCtrl.emailFocused[passengerIndex]=true"
+                                        data-ng-blur="pasContactCtrl.emailFocused[passengerIndex]=false" type="text"
+                                        id="IBAIRP_CONTACT_FORM_EMAIL_{{passengerIndex}}"
+                                        name="ContactFormEmail_{{passengerIndex}}"
+                                        data-ng-required="passenger.fieldStatus.contactData.mandatory"
+                                        data-ng-model="passenger.contactData.email" />
+                                </div>
+                                <div
+                                    ng-if="pasContactCtrl.pasForm.$submitted"
+                                    ng-messages="pasContactCtrl.pasForm['ContactFormEmail_'+ passengerIndex].$error">
+                                    <div class="ib-alert ib-alert--error" ng-message="required">
+                                        {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                    <div class="ib-alert ib-alert--error" ng-message="pattern">
+                                        {{'CKIANCPURC_EMAIL_ERR'|translate}}</div>
+                                </div>
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--large"
+                                data-ng-if="pasContactCtrl.activeFields.additionalInfoUseForAllCheck.show && pasContactCtrl.activeFields.additionalInfoUseForAllCheck.showId === passenger.id">
+                                <div class="ib-check">
+                                    <input
+                                        data-ng-click="pasContactCtrl.useContactDataForAll(!pasContactCtrl.activeFields.additionalInfoUseForAllCheck.status,passenger.id,'additionalData')"
+                                        type="checkbox" id="check_additionalInfo_useForAll"
+                                        name="check_additionalInfo_useForAll" class="ib-check__input"
+                                        data-ng-model="pasContactCtrl.activeFields.additionalInfoUseForAllCheck.status" />
+                                    <label for="check_additionalInfo_useForAll" class="ib-check__label">
+                                        <span class="ib-check__text">{{'IBCOAC_USAR_PASS1'|translate}}</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small"
+                                data-ng-if="!pasContactCtrl.isUserLogged">
+                                <div class="ib-check">
+                                    <input id="check_newsLetter_{{passengerIndex}}" type="checkbox"
+                                        name="check_newsLetter_{{passengerIndex}}" class="ib-check__input"
+                                        data-ng-model="passenger.contactData.denyNewsLetter" />
+                                    <label for="check_newsLetter_{{passengerIndex}}" class="ib-check__label">
+                                        <span class="ib-check__text ib-check__text--gray">{{'IBCOAC_CONTACT_FORM_INFO_CHECK_BOX'|translate}}
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small"
+                                ng-controller="ibCollapseController as collapse"
+                                data-ng-if="!pasContactCtrl.isUserLogged">
+                                <div class="ib-msg-alert__footer ib-msg-alert__footer--to-right">
+                                    <a id="cki-flights-passengers-passengers-contact-data-data-treatment-link"
+                                        href="javascript:void(0)"
+                                        title="{{'GENERAL_CONTACT_DATA_COLLAPSE_TITLE'|translate}}" class="ib-link-icon"
+                                        ng-click="collapse.clickCollapse($event, true)"
+                                        data-ng-class="!collapse.isCollapsed ? 'closeCollapse' : 'openCollapse'">
+                                        <span
+                                            class="ib-link-icon__text icon-flecha_1_abajo">{{'GENERAL_CONTACT_DATA_COLLAPSE_TEXT'|translate}}</span>
+                                    </a>
+                                </div>
+                                <div data-uib-collapse="!collapse.isCollapsed"
+                                    ng-class="!collapse.isCollapsed ? 'closeCollapse' : 'openCollapse'"
+                                    ng-if="pasContactCtrl.gdprInfo">
+                                    <p class="ib-text ib-text--color-unfocused"
+                                        bind-html-compile="pasContactCtrl.gdprInfo.text"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-ng-if="passenger.fieldStatus.emergencyData.show">
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                                <span
+                                    class="ib-heading ib-heading--type-4">{{'IBCOAC_EMERGENCY_CONTACT_DATA_TITLE'|translate}}</span>
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+                                <span
+                                    class="ib-text ib-text--color-unfocused">{{'IBCOAC_CONTAC_ALTER'|translate}}</span>
+                            </div>
+                            <div class="ib-layout__form-center">
+                                <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+                                    <ib-ui-prefix-country
+                                        [prefix-id]="'IBCOAC_EMERGENCY_CONTACT_FORM_PREFIX_' + passengerIndex"
+                                        [prefix-label]="('IBCOAC_TELF_PRE'|translate) + (passenger.fieldStatus.emergencyData.mandatory ? 'GENERAL_MANDATORY_FIELDS_FLAG':'' |translate)"
+                                        [is-required]="passenger.fieldStatus.contactData.mandatory && !passenger.contactData.phone.countryCode"
+                                        [prefix-placeholder]="('IBCOAC_TELF_PRE'|translate) + (passenger.fieldStatus.emergencyData.mandatory ? 'GENERAL_MANDATORY_FIELDS_FLAG':'' |translate) "
+                                        [prefix-list]="pasContactCtrl.prefixes"
+                                        [prefix-model]="passenger.contactData.emergency.phone.countryCode"
+                                        (out-prefix-model)="pasContactCtrl.changePrefix($event, passenger.id, true)"
+                                        [container-form]="pasContactCtrl.pasForm">
+                                    </ib-ui-prefix-country>
+                                </div>
+                                <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+                                    <div class="ib-input"
+                                        data-ng-class="{'ib-input--error' : pasContactCtrl.pasForm.$submitted && pasContactCtrl.pasForm['EmergencyContactFormPhone_' + passengerIndex].$invalid}">
+                                        <label
+                                            ng-class="{'ib-input__label--focus' : pasContactCtrl.emergencyPhoneFocused[passengerIndex] || (pasContactCtrl.pasForm['EmergencyContactFormPhone_' + passengerIndex].$viewValue != null && pasContactCtrl.pasForm['EmergencyContactFormPhone_' + passengerIndex].$viewValue !== '')}"
+                                            class="ib-input__label"
+                                            for="IBCOAC_EMERGENCY_CONTACT_FORM_PHONE_{{passengerIndex}}">{{('IBCOAC_TELF_NUM'|translate)
+                                            + (passenger.fieldStatus.emergencyData.mandatory ?
+                                            'GENERAL_MANDATORY_FIELDS_FLAG':'' |translate)}}</label>
+                                        <input name="EmergencyContactFormPhone_{{passengerIndex}}"
+                                            id="IBCOAC_EMERGENCY_CONTACT_FORM_PHONE_{{passengerIndex}}" type="tel"
+                                            class="ib-input__input"
+                                            maxlength="{{::$root.CHECKIN_FIELDS_LENGTH.PHONE_NUMBER_MAX_LENGTH}}"
+                                            data-ng-required="passenger.fieldStatus.emergencyData.mandatory"
+                                            data-ng-model="passenger.contactData.emergency.phone.number"
+                                            ng-pattern="passenger.contactData.emergency.phone.countryCode === '34' ?  $root.CHECKIN_PATTERNS.PHONE_PATTERN_ES : $root.CHECKIN_PATTERNS.PHONE_PATTERN"
+                                            data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.PHONE_CLEANER}}"
+                                            data-ng-focus="pasContactCtrl.emergencyPhoneFocused[passengerIndex]=true"
+                                            data-ng-blur="pasContactCtrl.emergencyPhoneFocused[passengerIndex]=false" inputmode="tel"/>
+                                    </div>
+                                    <div
+                                        ng-if="pasContactCtrl.pasForm.$submitted"
+                                        ng-messages="pasContactCtrl.pasForm['EmergencyContactFormPhone_' + passengerIndex].$error">
+                                        <div class="ib-alert ib-alert--error" ng-message="required">
+                                            {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                        <div class="ib-alert ib-alert--error" ng-message="pattern">
+                                            {{'IBCOACII_NUM_ERR'|translate}}</div>
+                                    </div>
+                                </div>
+                                <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+                                    <div class="ib-input"
+                                        data-ng-class="{'ib-input--error' : pasContactCtrl.pasForm.$submitted && pasContactCtrl.pasForm['emergency_name_' + passengerIndex].$invalid}">
+                                        <label class="ib-input__label"
+                                            for="IBCOAC_EMERGENCY_CONTACT_FORM_NAME_{{passengerIndex}}"
+                                            data-ng-class="{'ib-input__label--focus' : pasContactCtrl.nameFocused[passengerIndex] || (pasContactCtrl.pasForm['emergency_name_' + passengerIndex].$viewValue != null && pasContactCtrl.pasForm['emergency_name_' + passengerIndex].$viewValue !== '')}">{{('IBCOAC_NOM_CONT_ALT'|translate)
+                                            + (passenger.fieldStatus.emergencyData.mandatory ?
+                                            'GENERAL_MANDATORY_FIELDS_FLAG':'' |translate) }}</label>
+                                        <input class="ib-input__input" type="text"
+                                            id="IBCOAC_EMERGENCY_CONTACT_FORM_NAME_{{passengerIndex}}"
+                                            name="emergency_name_{{passengerIndex}}"
+                                            data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.NAME_SURNAME_CLEANER}}"
+                                            data-ng-model="passenger.contactData.emergency.name"
+                                            maxlength="{{$root.CHECKIN_FIELDS_LENGTH.MAX_LENGTH_NAME}}"
+                                            data-ng-pattern="::$root.CHECKIN_PATTERNS.NAME_SURNAME_PATTERN"
+                                            data-ng-required="passenger.fieldStatus.emergencyData.mandatory"
+                                            minlength="{{$root.CHECKIN_FIELDS_LENGTH.MIN_LENGTH_NAME}}"
+                                            data-ng-focus="pasContactCtrl.nameFocused[passengerIndex]=true"
+                                            data-ng-blur="pasContactCtrl.nameFocused[passengerIndex]=false" />
+                                    </div>
+                                    <div
+                                        ng-if="pasContactCtrl.pasForm.$submitted"
+                                        ng-messages="pasContactCtrl.pasForm['emergency_name_' + passengerIndex].$error">
+                                        <div class="ib-alert ib-alert--error" ng-message="required">
+                                            {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                        <div class="ib-alert ib-alert--error" ng-message="pattern">
+                                            {{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--large"
+                            data-ng-if="pasContactCtrl.activeFields.emergencyDataUseForAllCheck.show && pasContactCtrl.activeFields.emergencyDataUseForAllCheck.showId === passenger.id">
+                            >
+                            <div class="ib-check">
+                                <input
+                                    data-ng-click="pasContactCtrl.useContactDataForAll(!pasContactCtrl.activeFields.emergencyDataUseForAllCheck.status,passenger.id,'emergencyData')"
+                                    type="checkbox" id="check_emergencyData_useForAll"
+                                    name="check_emergencyData_useForAll" class="ib-check__input"
+                                    data-ng-model="pasContactCtrl.activeFields.emergencyDataUseForAllCheck.status" />
+                                <label for="check_emergencyData_useForAll" class="ib-check__label">
+                                    <span class="ib-check__text">{{'IBCOAC_USAR_PASS1'|translate}}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Checks privacy and confirm data -->
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small"
+                    data-ng-if="pasContactCtrl.ckeckApisUsTracing.show">
+                    <div class="ib-check u-mt">
+                        <input id="check_us_privacy_emergency_data" type="checkbox"
+                            name="check_us_privacy_emergency_data" class="ib-check__input"
+                            data-ng-model="pasContactCtrl.ckeckApisUsTracing.usPrivacyEmergencyData" required />
+                        <label for="check_us_privacy_emergency_data" class="ib-check__label ib-check__label--top">
+                            <span class="ib-check__text"
+                                data-ng-bind-html="pasContactCtrl.ckeckApisUsTracing.checkPrivacyText"></span>
+                        </label>
+                        <div
+                            ng-if="pasContactCtrl.pasForm.$submitted"
+                            ng-messages="pasContactCtrl.pasForm.check_us_privacy_emergency_data.$error">
+                            <p class="ib-alert ib-alert--error u-mt-small" ng-message="required">
+                                {{'IBCOAC_CHECK_BOX'|translate}}</p>
+                        </div>
+                    </div>
+                    <div class="ib-check u-mt">
+                        <input id="check_confirm_emergency_data" type="checkbox" name="check_confirm_emergency_data"
+                            class="ib-check__input"
+                            data-ng-model="pasContactCtrl.ckeckApisUsTracing.confirmEmergencyData" required />
+                        <label for="check_confirm_emergency_data" class="ib-check__label ib-check__label--top">
+                            <span class="ib-check__text">{{'CHECK_CONFIRM_INFORMATION_PROVIDED'|translate}} </span>
+                        </label>
+                        <div
+                            ng-if="pasContactCtrl.pasForm.$submitted"
+                            ng-messages="pasContactCtrl.pasForm.check_confirm_emergency_data.$error">
+                            <p class="ib-alert ib-alert--error u-mt-small" ng-message="required">
+                                {{'IBCOAC_CHECK_BOX'|translate}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

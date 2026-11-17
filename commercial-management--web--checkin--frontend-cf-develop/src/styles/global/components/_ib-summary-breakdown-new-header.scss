@@ -1,0 +1,191 @@
+/* -------------------------------------------------------------
+    #SUMMARY-BREAKDOWN
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}summary-breakdown-new-header {
+    //Footer
+    &__footer {
+        @extend %clearfix;
+
+        padding: rem(15) rem(20) rem(8);
+        border-top: rem(1) solid color(gray-40);
+        font-size: 0;
+    }
+
+    &__footer-long {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: rem(9) rem(16);
+        border-top: rem(1) solid color(gray-40);
+        font-family: $font-normal;
+        font-size: 0;
+        background: color(white);
+        .#{$wefront__namespace}summary-breakdown-new-header__footer-long-total {
+            font-family: $font-normal;
+            font-size: rem(18);
+            text-align: left;
+            color: color(gray-10);
+        }
+        .#{$wefront__namespace}summary-breakdown-new-header__footer-long-price {
+            font-family: $font-special;
+            font-size: rem(24);
+            text-align: right;
+            word-break: break-word;
+        }
+    }
+
+    &__footer-price {
+        display: inline-block;
+        width: 50%;
+        font-family: $font-special;
+        font-size: rem(18);
+        text-align: left;
+        color: color(gray-10);
+        vertical-align: top;
+
+        &--long {
+            width: 70%;
+            font-size: rem(24);
+            text-align: right;
+            line-height: rem(21);
+        }
+
+        &--total {
+            width: 30%;
+            line-height: rem(21);
+        }
+
+        &--avios {
+            width: 70%;
+            font-size: rem(24);
+            text-align: right;
+            line-height: rem(21);
+        }
+
+        &--money {
+            width: 100%;
+            padding-top: rem(9);
+            text-align: right;
+            line-height: rem(21);
+        }
+    }
+
+    &__close {
+        position: absolute;
+        top: rem(8);
+        right: rem(8);
+        border: 0;
+        background: transparent;
+
+        &::before {
+            font-size: rem(35);
+            color: color(white);
+        }
+    }
+
+    .panel-group {
+        margin-bottom: 0;
+    }
+    .#{$wefront__namespace}date-carousel__price-loading--spinner {
+        top: rem(9);
+        left: 100%;
+    }
+    // modifiers
+    &--longcoins {
+        .#{$wefront__namespace}summary-breakdown-new-header {
+            &__footer-price {
+                font-size: rem(24);
+            }
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}summary-breakdown-new-header {
+        &__footer {
+            &--responsive {
+                margin-bottom: rem(-10);
+                background: color(gray-50);
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}summary-breakdown-new-header {
+        [data-calculate-scroll-click] + .collapse & {
+            height: 100%;
+            min-height: 100vh;
+
+            .#{$wefront__namespace}summary-breakdown-new-header {
+                &__footer-long {
+                    position: fixed;
+                    bottom: 0;
+                    width: 100%;
+                }
+            }
+        }
+
+        &__section-title {
+            margin-bottom: rem(8);
+        }
+
+        &__footer {
+            border-top: 0;
+
+            &--responsive {
+                margin-bottom: rem(-10);
+                background: color(gray-50);
+            }
+        }
+
+        &__footer-long {
+            padding: rem(9) rem(22);
+            background: color(gray-50);
+        }
+    }
+}
+
+@include media-query("sm") {
+    .#{$wefront__namespace}summary-breakdown-new-header {
+        &__footer {
+            padding: rem(20) rem(19);
+            background: color(gray-50);
+        }
+
+        &__footer-long {
+            padding: rem(9) rem(22);
+        }
+
+        &__footer-price {
+            font-size: rem(18);
+
+            &--long {
+                font-size: rem(24);
+            }
+        }
+    }
+}
+
+@include media-query("xs") {
+    .#{$wefront__namespace}summary-breakdown-new-header {
+        &__footer {
+            padding: rem(20) rem(19);
+            background: color(gray-50);
+        }
+
+        &__footer-long {
+            padding: rem(9) rem(16);
+        }
+
+        &__footer-price {
+            font-size: rem(18);
+
+            &--long {
+                font-size: rem(24);
+            }
+        }
+    }
+}

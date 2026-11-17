@@ -1,0 +1,109 @@
+<div class="ib-upgrade">
+	<header class="ib-modals-full__header">
+		<div class="container">
+			<div class="ib-modals-full__header-container ib-modals-full__header-container--p-extra">
+				<div class="ib-modals-full__header-section">
+					<h2 class="ib-heading ib-heading--type-2">{{'UPGRADING_BETTER_CLASS'|translate}}</h2>
+				</div>
+				<div class="ib-modals-full__header-actions">
+					<button id="cki-upgrade-upgrading-close-btn" type="button" class="ib-modals-full__button-action ib-modals-full__button-action--with-text" ng-click="upgradeCtrl.updateUpgradeView(false)">
+						<span class="ib-modals-full__icon-text">{{'UPGRADING_CLOSE'|translate}}</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</header>
+	<section class="ib-modals-full__body">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="ib-layout__col-boxes">
+						<article class="ib-box-basic">
+							<div class="ib-box-basic__container ib-box-basic__container--p-extra">
+								<div class="ib-box-basic__content" ng-controller="ibCollapseController as collapse">
+									<button id="cki-upgrade-upgrading-btn" class="ib-box-basic__button ib-box-basic__button--p-extra ib-box-basic__button--no-focus ib-box-basic__button-padding" type="button" ng-click="collapse.clickCollapse($event)">
+										<span class="ib-box-basic__title">{{'UPGRADING_TEXT_1'|translate}}</span>
+									</button>
+									<h3 class="ib-box-basic__title ib-box-basic__title--mb-small ib-box-basic__title--lh-medium ib-box-basic__title--responsive">{{'UPGRADING_TEXT_2'|translate}}</h3>
+									<div class="ib-box-basic__collapse" uib-collapse="!collapse.isCollapsed">
+										<p class="ib-box-basic__description">{{'UPGRADING_TEXT_3'|translate}}</p>
+									</div>
+									<span class="ib-box-basic__arrow icon-flecha_1_abajo" ng-class="collapse.isCollapsed ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+				<div class="col-lg-8" ng-repeat="slice in upgradeCtrl.model.slices">
+					<section class="ib-upgrade__info-fly">
+						<span class="ib-upgrade__icon icon-vuelos u-rotate-270"></span>
+						<span class="ib-upgrade__text ib-upgrade__text--grey ib-upgrade__text--medium">{{slice.departure.airport.description}} - {{slice.arrival.airport.description}} / {{::slice.date.monthDay}} {{slice.date.month|translate}} {{::slice.date.year}} / {{::slice.time|HourFilter}} </span>
+						<span class="ib-upgrade__text ib-upgrade__text--grey ib-upgrade__text--medium ib-upgrade__text--hide-resp" ng-if="slice.quantyScales >= 1"> ({{slice.quantyScales}}  {{ slice.quantyScales > 1 ?  ('UPGRADING_SCALES'|translate) : ('UPGRADING_SCALE'|translate)}})</span>
+					</section>
+					<section class="ib-upgrade__info-class">
+						<span class="ib-upgrade__text ib-upgrade__text--grey">{{'UPGRADING_ACTUAL_CLASS'|translate}} {{slice.actualClass.description}}</span>
+					</section>
+					<section class="ib-upgrade__info-box" ng-if="slice.quantyScales >= 1">
+						<span class="ib-upgrade__icon ib-upgrade__icon--circle icon-descuento"></span>
+						<span class="ib-upgrade__text ib-upgrade__text--grey">{{'UPGRADING_TEXT_4'|translate}}</span>				
+					</section>
+				
+
+					<section class="ib-upgrade__stopover" ng-repeat="(indexSegment,segment) in slice.segments">
+						<header class="ib-upgrade__info-fly">
+							<span class="ib-upgrade__text ib-upgrade__text--dark">{{segment.departure.airport.description}} - {{segment.arrival.airport.description}} / {{::segment.date.monthDay}} {{segment.date.month|translate}} {{::segment.date.year}} / {{::segment.time|HourFilter}}</span>
+						</header>
+						<article  id = "{{offer.cabinLayout}}_ARTICLE_{{indexSegment}}" class="ib-upgrade__card ib-upgrade__card--tourist-premium" ng-repeat="(indexOffer,offer) in segment.offers">
+							<figure  class="ib-upgrade__card-img">
+								<img  ng-src="{{::upgradeCtrl.getOfferImage(offer.cabinLayout)}}" alt="{{offer.cabinLayoutDescription}} image">
+							</figure>
+							<div id = "{{offer.cabinLayout}}_DIV_{{indexSegment}}" class="ib-upgrade__card-content" data-place-in-reference>
+								<span class="ib-upgrade__text ib-upgrade__text--large">{{'UPGRADING_TEXT_5'|translate}}</span>
+								<span class="ib-upgrade__text ib-upgrade__text--title">{{offer.cabinLayoutDescription}}</span>
+								<span class="ib-upgrade__text ib-upgrade__text--large">
+									{{'UPGRADING_ONLY'|translate}} {{offer.totalAmountFormmated}}
+								</span>
+								<div class="ib-switch ib-switch--tooltip">
+									<span class="ib-text ib-text--max-w-100 ib-text--small ib-text--color-unfocused">{{'UPGRADING_ADD'|translate}}</span>
+									<label for="round_{{indexSegment}}_{{indexOffer}}" class="ib-switch__label ib-switch__label--without-icons" data-ng-class="{'ib-switch__label--focus' : offer.isSelected}">
+										<input type="checkbox" id="round_{{indexSegment}}_{{::indexOffer}}" ng-disabled="segment.offerSelected && !offer.isSelected" ng-change="upgradeCtrl.calculatePrice()" ng-model="offer.isSelected" class="ib-switch__checkbox" />
+										<span class="ib-switch__slider"></span>
+										<div ng-if="offer.isSelected && upgradeCtrl.model.showOffersPopUp && upgradeCtrl.model.haveCombinedOffers" class="ib-switch__tooltip" role="alert" aria-hidden="true" place-in="w-center" data-breakpoint="480">
+											<div class="ib-switch__tooltip-title">{{'UPGRADING_REMEMBER'|translate}}</div>
+											<div class="ib-switch__tooltip-text">{{'UPGRADING_TEXT_6'|translate}}</div>
+										</div>
+									</label>
+									<span class="ib-text ib-text--max-w-100 ib-text--small ib-text--color-important">{{'UPGRADING_ADDED'|translate}}</span>
+								</div>
+								<a id="cki-upgrade-upgrading-conditions-link" focusin href="javascript:void(0)" ng-click="upgradeCtrl.openConditions(slice.actualClass.description,segment,indexOffer,indexSegment)" class="ib-upgrade__link">{{'UPGRADING_KNOW_MORE'|translate}}</a>
+
+							</div>
+						</article>
+					</section>
+				</div>
+			</div>
+		</div>
+	</section>
+	<footer class="ib-upgrade__footer">
+		<div class="container">
+			<div class="row" >
+				<div class="col-lg-8 col-lg-offset-4">
+					<div class="ib-upgrade__footer-container">
+						<div class="ib-upgrade__price-resume">
+							<span class="ib-upgrade__text ib-upgrade__text--extra-large-special">{{'UPGRADING_TOTAL'|translate}}</span>
+							<span class="ib-upgrade__price">
+								<span ng-if="upgradeCtrl.model.showPriceCombinated && upgradeCtrl.model.haveCombinedOffers" class="ib-upgrade__text ib-upgrade__text--big-special ib-upgrade__text--through ib-upgrade__text--red">{{upgradeCtrl.model.totalPriceFormatted}} </span>
+								<span class="ib-upgrade__text ib-upgrade__text--big-special">{{upgradeCtrl.model.showPriceCombinated && upgradeCtrl.model.haveCombinedOffers  ? upgradeCtrl.model.posOfferPriceFormatted : upgradeCtrl.model.totalPriceFormatted}} </span>
+							</span>
+						</div>
+					</div>
+					<div class="ib-upgrade__footer-buttons">
+						<a id="cki-upgrade-upgrading-no-thanks-link" focusin href="javascript:void(0)" ng-click="upgradeCtrl.updateUpgradeView(false)" class="ib-upgrade__link ib-upgrade__link--small">{{'UPGRADING_NO_THANKS'|translate}}</a>
+						<button id="cki-upgrade-upgrading-continue-btn" ng-click="upgradeCtrl.updateUpgradeView(true)" class="ib-button ib-button--w-medium">{{'UPGRADING_CONTINUE'|translate}}</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</footer>
+</div>

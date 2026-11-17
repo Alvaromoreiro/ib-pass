@@ -1,0 +1,291 @@
+/* -------------------------------------------------------------
+    #LAYOUT
+----------------------------------------------------------------- */
+.ibe-layout {
+
+    // No escribir estilos aquí!
+
+    &__header {
+        &--title {
+            margin-top: rem(32);
+            margin-bottom: rem(32);
+        }
+
+        &--subtitle {
+            margin-bottom: rem(20);
+        }
+
+        &--pre-title {
+            margin-top: rem(16);
+            margin-bottom: rem(32);
+        }
+    }
+
+    // Sections
+
+    &__section {
+        margin-bottom: rem(32);
+
+        &--big {
+            margin-bottom: rem(56);
+        }
+
+        &--medium {
+            margin-bottom: rem(24);
+        }
+
+        &--null {
+            margin-bottom: 0;
+        }
+
+        &--null-spacing-shadow {
+            margin-bottom: rem(2);
+        }
+    }
+
+    &__section-title {
+        margin-bottom: rem(20);
+    }
+
+    // Interlineado
+
+    &__line-spacing {
+        margin-bottom: rem(24);
+
+        &--large {
+            margin-bottom: rem(32);
+        }
+
+        &--medium {
+            margin-bottom: rem(16);
+        }
+
+        &--small {
+            margin-bottom: rem(12);
+        }
+
+        &--xsmall {
+            margin-bottom: rem(6);
+        }
+
+        &--null {
+            margin-bottom: 0;
+        }
+
+        &--bordered {
+            border-bottom: rem(1) solid $PC-cromatico_5;
+        }
+
+        &--bordered-special {
+            padding-bottom: rem(12);
+            border-bottom: rem(1) dashed $PC-cromatico_2;
+        }
+
+        // Text align
+
+
+        // Text align
+
+        &--text-center {
+            text-align: center;
+        }
+
+        &--text-right {
+            text-align: right;
+        }
+    }
+
+    // Templates
+
+    &__section-md {
+        width: 100%;
+        max-width: rem(768);
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    &__form-center {
+        width: 100%;
+        max-width: rem(338);
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    &__mod {
+
+        // Modifiers
+
+        &--sep-left {
+            padding-right: rem(32);
+            border-right: rem(2) solid $PC-cromatico_5;
+        }
+
+        &--sep-right {
+            padding-left: rem(32);
+        }
+
+        &--sep-bottom {
+            width: calc(100% - rem(32));
+            padding: 0;
+            padding-bottom: rem(25);
+            margin: 0 rem(16);
+            border-bottom: rem(2) solid $PC-cromatico_5;
+        }
+
+        &--sep-top {
+            padding-top: rem(25);
+        }
+    }
+
+    // Elemento to right and to left
+
+    &__align-elements {
+        display: inline-block;
+        width: 100%;
+        font-size: 0;
+
+        &__right {
+            display: inline-block;
+            width: 50%;
+            text-align: right;
+            vertical-align: middle;
+        }
+
+        &__left {
+            display: inline-block;
+            width: 50%;
+            text-align: left;
+            vertical-align: middle;
+        }
+    }
+}
+
+// Mixins
+
+// Modificador de "--bordered" para que a partir de sm la separacion sea "bottom"
+@mixin ib-layout-mod-sep-left-right() {
+    .ibe-layout {
+        &__mod {
+
+            // Modifiers
+
+            &--sep-left {
+                width: calc(100% - rem(32));
+                padding-right: 0;
+                padding-bottom: rem(25);
+                padding-left: 0;
+                margin-right: rem(16);
+                margin-bottom: rem(25);
+                margin-left: rem(16);
+                border-right: 0;
+                border-bottom: rem(2) solid $PC-cromatico_5;
+            }
+
+            &--sep-right {
+                padding-left: rem(16);
+            }
+        }
+    }
+}
+
+// Responsive
+
+@mixin m-ibe_layout {
+    .ibe-layout {
+        &__header {
+            &--pre-title {
+                margin-top: rem(32);
+            }
+        }
+
+        // Templates
+
+        &__section-md {
+            max-width: rem(420);
+        }
+
+        &__mod {
+            &--sep-bottom {
+                width: 50%;
+                padding: 0 rem(16);
+                padding-right: rem(32);
+                margin: 0;
+                border-right: rem(2) solid $PC-cromatico_5;
+                border-bottom: 0;
+            }
+
+            &--sep-top {
+                padding-top: 0;
+                padding-left: rem(32);
+            }
+        }
+    }
+}// md
+
+@mixin sm-ibe_layout {
+    @include ib-layout-mod-sep-left-right();
+
+    .ibe-layout {
+        // Templates
+
+        &__section-md {
+            max-width: rem(420);
+        }
+
+        &__mod {
+            &--sep-bottom {
+                width: calc(100% - rem(32));
+                padding-right: 0;
+                padding-bottom: rem(25);
+                padding-left: 0;
+                margin-right: rem(16);
+                margin-bottom: rem(25);
+                margin-left: rem(16);
+                border-right: 0;
+                border-bottom: rem(2) solid $PC-cromatico_5;
+            }
+
+            &--sep-top {
+                padding-top: 0;
+                padding-left: rem(16);
+            }
+        }
+    }
+}// sm
+
+@mixin xs-ibe_layout {
+    @include ib-layout-mod-sep-left-right();
+
+    .ibe-layout {
+        // Templates
+
+        &__section-md {
+            max-width: rem(420);
+        }
+
+        &__mod {
+            &--sep-bottom {
+                width: calc(100% - rem(32));
+                padding-right: 0;
+                padding-bottom: rem(25);
+                padding-left: 0;
+                margin-right: rem(16);
+                margin-bottom: rem(25);
+                margin-left: rem(16);
+                border-right: 0;
+                border-bottom: rem(2) solid $PC-cromatico_5;
+            }
+
+            &--sep-top {
+                padding-top: 0;
+                padding-left: rem(16);
+            }
+        }
+
+        &__line-spacing {
+            &--text-center-xs {
+                text-align: center;
+            }
+        }
+    }
+}// xs

@@ -1,0 +1,706 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: ibe_header
+//    Desripcion: Estilos para la cabecera principal
+//******************************************************************************/
+
+/*
+ * Cabezera Iberia
+ */
+.ibe-header {
+    min-height: 5.2em;
+    font-family: $font-02;
+    background: $BCK-cromatico_5;
+    background: -moz-linear-gradient(top, $BCK-cromatico_5 0%, $BCK-cromatico_5 50%, $BCK-cromatico_6 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $BCK-cromatico_5), color-stop(50%, $BCK-cromatico_5), color-stop(100%, $BCK-cromatico_6));
+    background: -webkit-linear-gradient(top, $BCK-cromatico_5 0%, $BCK-cromatico_5 50%, $BCK-cromatico_6 100%);
+    background: -o-linear-gradient(top, $BCK-cromatico_5 0%, $BCK-cromatico_5 50%, $BCK-cromatico_6 100%);
+    background: -ms-linear-gradient(top, $BCK-cromatico_5 0%, $BCK-cromatico_5 50%, $BCK-cromatico_6 100%);
+    background: linear-gradient(to bottom, $BCK-cromatico_5 0%, $BCK-cromatico_5 50%, $BCK-cromatico_6 100%);
+}
+
+/*
+ * Menu de navegación
+ */
+.navbar {
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: transparent;
+
+    .navbar-header {
+        float: left;
+    }
+}
+
+/*
+ * Cabezera Logo principal
+ */
+.navbar-brand {
+    height: auto;
+    padding: 1.5em 0 0.5em;
+}
+
+.ibe-header__logo-img {
+    width: 100%;
+}
+
+/*
+ * Menu principal
+ */
+.ibe-header__menu {
+    float: right;
+
+    > .ibe-header__menu-container {
+        position: relative;
+        display: inline-block;
+        max-width: rem(690);
+        margin-right: 1rem;
+        vertical-align: top;
+    }
+
+    .logo-oneworld {
+        display: inline-block;
+        width: rem(48);
+        padding-top: rem(24);
+        vertical-align: middle;
+
+        .logo-oneworld__figure {
+            width: rem(35);
+            float: right;
+
+            .logo-oneworld__figure-img {
+                width: 100%;
+                border: rem(1) solid $BRD-standar_13;
+                border-radius: rem(50);
+            }
+        }
+    }
+}
+
+/*
+ * Menu principal - items
+ */
+.ibe-header__menu-item {
+    position: static;
+    //float: left;
+    display: table-cell;
+    height: rem(83);
+    border-right: rem(1) solid $BRD-standar_7;
+    border-bottom: rem(6) solid transparent;
+    vertical-align: middle;
+
+    > .ibe-header__menu-item__container {
+        position: absolute;
+        z-index: 100;
+        top: em(83);
+        left: 0;
+        display: none;
+        width: em(720);
+        min-height: 20.5em;
+        font-size: rem(16);
+        background: $BCK-cromatico_1;
+        -moz-box-shadow: rem(1) rem(2) rem(2) color(black, 0.2);
+        -webkit-box-shadow: rem(1) rem(2) rem(2) color(black, 0.2);
+        -o-box-shadow: rem(1) rem(2) rem(2) color(black, 0.2);
+        box-shadow: rem(1) rem(2) rem(2) color(black, 0.2);
+    }
+
+    >.special {
+        width: em(814);
+        height: em(403);
+
+        .ibe-header__menu-submenu {
+            min-height: em(403);
+        }
+
+        .ibe-header__menu-subsubmenu {
+            width: em(322);
+            min-height: em(403);
+        }
+    }
+
+    &:first-child {
+        border-left: rem(1) solid $BRD-standar_7;
+    }
+
+    &.xui-header__menu-show {
+        border-bottom: rem(6) solid $BRD-standar_8;
+        color: $PC-cromatico_13;
+
+        > .ibe-header__menu-item__container {
+            display: block;
+
+            .ibe-header__menu-submenu {
+                display: block;
+
+                .ibe-header__menu-submenu-item {
+                    &.xui-header__menu-show {
+                        > .ibe-header__menu-submenu-item__title {
+                            font-weight: bold;
+                            color: $PC-cromatico_1;
+                            background: $BCK-cromatico_1;
+                        }
+
+                        .ibe-header__menu-subsubmenu {
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+
+        /* > .ibe-header__menu-item__title{
+            color: $PC-cromatico_13;
+            border-bottom: rem(6) solid $BRD-standar_8;
+        } */
+    }
+
+    > .ibe-header__menu-item__title {
+        position: relative;
+        z-index: 100;
+        display: block;
+        max-width: rem(165);
+        padding: rem(8) rem(10);
+        //height: rem(83);
+        //line-height: rem(83);
+        font-size: rem(16);
+        text-align: center;
+        text-decoration: none;
+        color: $PC-cromatico_4;
+        cursor: default;
+    }
+}
+
+/*
+ * Menu desplegable
+ */
+.ibe-header__menu-submenu {
+    position: absolute;
+    z-index: 900;
+    left: 0;
+    display: none;
+    min-height: 100%;
+    border-top: rem(3) solid $BRD-standar_8;
+    background: $BRD-standar_9;
+
+    .ibe-header__menu-submenu-item {
+        > .ibe-header__menu-submenu-item__title {
+            display: block;
+            width: em(227);
+            padding: 0.95em em(18) 0.95em 1em;
+            font-size: em(15);
+            color: $PC-cromatico_3;
+            cursor: default;
+
+            &:hover {
+                font-weight: bold;
+                text-decoration: none;
+                color: $PC-cromatico_1;
+                background: $BCK-cromatico_1;
+            }
+        }
+    }
+}
+
+/*
+ * Submenu estatico lateral derecho (formulario)
+ */
+.iberia-plus-connect {
+    position: absolute;
+    top: em(-3);
+    left: em(533);
+    width: em(283);
+    height: em(403);
+    min-height: em(403);
+    border-top: rem(3) solid $BRD-standar_8;
+    background: $BCK-cromatico_5;
+
+    .iberia-plus-connect_block {
+        padding: em(10) em(18);
+        border-bottom: rem(1) solid $BRD-standar_10;
+
+        &:last-child {
+            border: 0;
+        }
+
+        .iberia-plus-connect_block__form {
+            .iberia-plus-connect_block__form-title {
+                display: block;
+                padding-bottom: 0.5em;
+                font-family: $font-01;
+                color: $PC-cromatico_13;
+                clear: both;
+            }
+
+            .form-item {
+                display: block;
+                margin-bottom: rem(10);
+
+                .label-block {
+                    display: inline-block;
+                    width: 6.4em;
+                    padding: 0.5em 0.5em 0 0;
+                    font-family: $font-02;
+                    font-size: em(13);
+                    text-align: right;
+                    color: $PC-cromatico_4;
+                }
+
+                .iberia-plus-connect_block__form-input {
+                    width: em(189);
+                    height: em(37);
+                    padding: em(5);
+                    border: 0;
+                    font-family: $font-02;
+                    font-size: em(13);
+                    color: $PC-cromatico_1;
+                    background: $BCK-cromatico_2;
+                }
+            }
+
+            .no-pin {
+                display: block;
+                width: auto;
+                padding-right: 0;
+                font-size: em(12);
+                text-decoration: underline;
+                color: $PC-cromatico_4;
+                float: right;
+            }
+
+            .btn-register-now {
+                display: inline-block;
+                width: 100%;
+                margin-top: 1em;
+                white-space: normal;
+
+                &:focus {
+                    outline: rem(1) dotted $PC-cromatico_4;
+                }
+            }
+        }
+    }
+
+    .iberia-plus-connect_block-title {
+        display: block;
+        padding-bottom: 0.5em;
+        font-family: $font-01;
+        color: $PC-cromatico_13;
+        clear: both;
+    }
+
+    .btn-register-now {
+        display: block;
+        width: auto;
+        padding: em(13) em(22);
+        margin: em(20) 0;
+        border: rem(1) solid $BRD-standar_11;
+        font-size: rem(16);
+        text-align: center;
+        line-height: 0.7em;
+        color: $PC-cromatico_4;
+        background: $BCK-cromatico_3;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &:hover {
+            position: relative;
+            text-decoration: none;
+            color: $PC-cromatico_4;
+            background: $BCK-cromatico_3;
+            background: -moz-linear-gradient(top, $BCK-cromatico_3 0%, $BCK-cromatico_7 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $BCK-cromatico_3), color-stop(100%, $BCK-cromatico_7));
+            background: -webkit-linear-gradient(top, $BCK-cromatico_3 0%, $BCK-cromatico_7 100%);
+            background: -o-linear-gradient(top, $BCK-cromatico_3 0%, $BCK-cromatico_7 100%);
+            background: -ms-linear-gradient(top, $BCK-cromatico_3 0%, $BCK-cromatico_7 100%);
+            background: linear-gradient(to bottom, $BCK-cromatico_3 0%, $BCK-cromatico_7 100%);
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='"+$BCK-cromatico_3+"', endColorstr='"+$BCK-cromatico_7+"',GradientType=0 )";
+        }
+    }
+}
+
+/*
+ * Segundo submenu
+ */
+.ibe-header__menu-subsubmenu {
+    position: absolute;
+    z-index: -1;
+    top: em(-3);
+    left: em(210);
+    display: none;
+    width: em(256);
+    padding: em(10) 0;
+    margin-left: em(1);
+    border-top: rem(3) solid $BRD-standar_8;
+    border-right: rem(1) solid $BRD_standar_2;
+    //min-height: 100%;
+
+    /* min-height: em(328);
+    height: 100%; */
+    border-left: rem(1) solid $BRD_standar_2;
+    background: $BCK-cromatico_1;
+
+    .ibe-header__menu-subsubmenu-item {
+        padding: em(3.5) em(15);
+
+        > .ibe-header__menu-subsubmenu-item-link {
+            font-size: em(14);
+            text-decoration: none;
+            color: $PC-cromatico_3;
+
+            &:hover {
+                color: $PC-cromatico_1;
+            }
+        }
+    }
+
+    .menu-highlight,
+    .bg-hightlight,
+    .iberia-app {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        padding: 0;
+
+        .ibe-header__menu-subsubmenu-item-link {
+            display: block;
+
+            .ibe-header__menu-subsubmenu-item-link-figure {
+                max-width: rem(301);
+
+                .ibe-header__menu-subsubmenu-item-link-img {
+                    width: 100%;
+                    vertical-align: top;
+                }
+            }
+        }
+    }
+
+    .bg-hightlight {
+        .text-over {
+            position: absolute;
+            top: 3.15em;
+            left: 0.6375em;
+            font-family: $font-01;
+            font-size: em(33);
+            line-height: 100%;
+            color: color(gray-10);
+        }
+    }
+
+    .iberia-app {
+        .text-over {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: em(80);
+            font-family: $font-01;
+            font-size: em(38);
+            line-height: 100%;
+            color: $PC-cromatico_3;
+        }
+    }
+
+    /*
+     * Ultimo item estático en el lateral derecho - Segundo submenu
+     */
+    .menu-highlight {
+        position: absolute;
+        top: em(-3);
+        left: 100%;
+        width: 100%;
+        min-height: em(328);
+        padding: 0;
+        border-top: rem(3) solid $BRD-standar_8;
+        //height: em(328);
+        background: $BCK-cromatico_1;
+
+        .text-over {
+            position: absolute;
+            top: 0.675em;
+            left: 0.6875em;
+            padding-right: em(19);
+            font-family: $font-01;
+            font-size: em(32);
+            line-height: 100%;
+            color: $PC-cromatico_1;
+            background: none;
+            letter-spacing: -0.05em;
+
+            .text-over-title {
+                display: block;
+                font-size: 1.3725em;
+                line-height: 100%;
+                color: $PC-cromatico_13;
+            }
+
+            .text-over-subtitle {
+                display: block;
+                font-size: 0.69em;
+                line-height: 100%;
+                color: $PC-cromatico_4;
+            }
+        }
+
+        .ibe-header__menu-subsubmenu-item-link {
+            .info-highlight {
+                position: absolute;
+                z-index: 200;
+                bottom: em(10);
+                display: block;
+                width: 90%;
+                height: em(41);
+
+                .arrow-go {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    display: block;
+                    width: 2.6em;
+                    height: 2.6em;
+                    background: url($CONFIG_IMG_PATH + 'iconos/cabecera/sp-arrows.png') no-repeat rem(-104) rem(-90);
+
+                    .over {
+                        position: absolute;
+                        display: none;
+                        background: url($CONFIG_IMG_PATH + 'iconos/cabecera/sp-arrows.png') no-repeat rem(-137) rem(-53);
+                        inset: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*
+* Estilos en responsive del menu principal
+*/
+
+
+
+/*
+* Boton para mostrar el menu responsive
+*/
+.ibe-header__menu-responsive {
+    display: none;
+    margin-right: 1em;
+    margin-left: -2em;
+    float: left;
+
+    .ibe-header__menu-responsive__action-menu {
+        width: em(35);
+        height: em(60);
+        background-image: url($CONFIG_IMG_PATH + 'iconos/cabecera/newhome-sprite.png');
+        background-position: rem(-116) rem(-585);
+        background-size: rem(320);
+
+        .ibe-header__menu-responsive__action-menu-title {
+            display: inline-block;
+            text-indent: rem(-9999);
+        }
+
+        &.on {
+            background-position: rem(-115) rem(-638);
+        }
+    }
+}
+
+/*
+* Icono login
+*/
+.ibe-header__menu-responsive__action-login {
+    margin-right: em(-16);
+    float: right;
+
+    .ibe-header__menu-responsive__action-login-link {
+        position: relative;
+        display: block;
+        padding-top: rem(38);
+        font-size: rem(14);
+        text-decoration: none;
+        color: $PC-cromatico_4;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: rem(4);
+            left: 1.8rem;
+            width: rem(36);
+            height: rem(36);
+            margin-left: rem(-28);
+            background-image: url($CONFIG_IMG_PATH + 'iconos/cabecera/newhome-sprite.png');
+            background-position: rem(-72) rem(-360);
+            background-size: rem(216);
+        }
+    }
+}
+
+/*
+* Menu principal responsive
+*/
+.ibe-responsive__main-menu {
+    position: fixed;
+    z-index: 3000;
+    top: 0;
+    left: 0;
+    display: none;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: em(60) em(60) 0 0;
+    font-family: $font-01;
+
+    &.opened {
+        display: block;
+
+        > .ibe-responsive__main-menu-container {
+            left: 0;
+        }
+    }
+
+    > .ibe-responsive__main-menu-container {
+        position: absolute;
+        top: 3.36em;
+        bottom: 0;
+        left: -100%;
+        overflow: auto;
+        font-size: rem(18);
+        background: $BCK-cromatico_1;
+        box-shadow: 0 0 1em 0 color(black, 0.5);
+
+        .ibe-responsive__main-menu-container-item {
+            position: relative;
+            display: block;
+            padding: 0.53em 0.3em 0.351em 3.75rem;
+            border-bottom: rem(1) solid $BRD_standar_5;
+            font-family: $font-01;
+            font-size: 0.95em;
+            text-decoration: none;
+            color: $PC-cromatico_14;
+
+            &.outstand {
+                font-size: 1.05em;
+            }
+
+            &:last-child {
+                border: 0;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0.2125em;
+                width: rem(50);
+                height: rem(40);
+                background-image: url($CONFIG_IMG_PATH + 'iconos/cabecera/newhome-sprite.png');
+                background-repeat: no-repeat;
+                background-size: rem(260);
+            }
+
+            &.booking::before {
+                background-position: rem(-40) 0;
+            }
+
+            &.checkin::before {
+                background-position: rem(-40) rem(-45);
+            }
+
+            &.booking-management::before {
+                background-position: rem(-40) rem(-90);
+            }
+
+            &.air-shuttle::before {
+                background-position: rem(-40) rem(-176);
+            }
+
+            &.arrivals-departures::before {
+                background-position: rem(-40) rem(-130);
+            }
+
+            &.app::before {
+                background-position: rem(-40) rem(-263);
+            }
+
+            &.offers::before {
+                background-position: rem(-40) rem(-220);
+            }
+
+            &.baggage::before {
+                background-position: rem(-40) rem(-306);
+            }
+
+            &.language::before {
+                background-position: rem(-40) rem(-348);
+            }
+
+            &.contact::before {
+                background-position: rem(-40) rem(-392);
+            }
+        }
+    }
+}
+
+/* X-LARGE RESOLUTION STYLES */
+@mixin xl-ibe_header {
+    @include l-ibe_header;
+
+    .ibe-header__menu {
+        width: 70%;
+        text-align: right;
+    }
+
+    .ibe-header__menu-item {
+        text-align: left;
+    }
+}
+
+/* LARGE RESOLUTION STYLES */
+@mixin l-ibe_header {
+    .ibe-header__menu-responsive,
+    .ibe-responsive__main-menu,
+    .ibe-header__menu-responsive__action-login {
+        display: none !important;
+    }
+
+    .ibe-header__menu {
+        > .ibe-header__menu-container {
+            margin-right: 0;
+        }
+    }
+}
+
+/* MEDIUM RESOLUTION STYLES */
+@mixin m-ibe_header {
+    .ibe-header {
+        min-height: 3.75em;
+
+        .navbar-brand {
+            height: 3.334em;
+            padding: 1.1375em 0.9375em 0.9375em 1.1375em;
+
+            .ibe-header__logo-img {
+                width: auto;
+                height: 1.3625em;
+            }
+        }
+    }
+
+
+    .ibe-header__menu-responsive {
+        display: block !important;
+    }
+}
+
+/* SMALL RESOLUTION STYLES */
+@mixin sm-ibe_header {
+    @include m-ibe_header;
+}
+
+/* X-SMALL RESOLUTION STYLES */
+@mixin xs-ibe_header {
+    @include m-ibe_header;
+}

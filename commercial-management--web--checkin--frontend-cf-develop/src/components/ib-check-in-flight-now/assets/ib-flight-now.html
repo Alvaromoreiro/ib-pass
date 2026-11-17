@@ -1,0 +1,71 @@
+<section class="container">
+	<!-- Main content-->
+	<div class="row">
+		<div class="col-xs-12">
+			<h1 class="title title__h1">{{'IBFNPA_TITLE'|translate}}</h1>
+		</div>
+	</div>
+	<form id="cki-flight-now-form" class="ibe_form ibe-form--bridge">
+		<div class="row ibe-ticket">
+			<div class="ibe-table">
+				<div class="col-xs-12 col-xl-4 col-lg-4 ibe-tablecell">
+					<div ib-accordion-directive ib-affix data-view="your-flight-open-shuttle" class="ibe-info__box ibe-info__box--accordion"></div>
+				</div>
+				<div class="col-xl-8 col-lg-8 col-xs-12 ibe-tablecell">
+					<div class="ibe-ticket--margin-b">
+						<div class="ibe-ticket__flights">
+							<div class="ibe-ticket__flights-item">
+								<article class="ibe-ticket__flights-item__data ibe-ticket__flights-item--open">
+									<header class="ibe-ticket__flights-item__data-header">
+										<div class="row">
+											<div class="col-md-6 col-sm-6 col-xs-6">
+												<div class="ibe-ticket__flights-item__data-left">
+													<p class="ibe-ticket__flights-item__data-header__title">{{::fnPaCtrl.model.flightInfo.departureCity}}</p>
+													<p class="ibe-ticket__flights-item__data-header__description-from--left">{{::fnPaCtrl.model.flightInfo.departureCodeAirport}}</p>
+													<div class="ibe-ticket__flights-item__data-header__description">
+														<p class="ibe-ticket__flights-item__data-header__description-airport">{{'IBFNPA_AIRPORT'|translate}}
+															{{::fnPaCtrl.model.flightInfo.departureAirport}}</p>
+													</div>
+												</div>
+											</div>
+											<figure class="ibe-ticket__flights-item__data-header__icon">
+												<img ng-src="{{$root.routes.icons}}/vuelos_pasajeros/ticket-icon-airplane.png" alt="{{'IBFNPA_PLANE_ICON_LEGEND'|translate}}"
+												 class="ibe-ticket__flights-item__data-header__icon-img" />
+											</figure>
+											<div class="col-md-6 col-sm-6 col-xs-6">
+												<div class="ibe-ticket__flights-item__data-right">
+													<p class="ibe-ticket__flights-item__data-header__title">{{::fnPaCtrl.model.flightInfo.arrivalCity}}</p>
+													<div class="ibe-ticket__flights-item__data-header__description">
+														<p class="ibe-ticket__flights-item__data-header__description-airport">{{'IBFNPA_AIRPORT'|translate}}
+															{{::fnPaCtrl.model.flightInfo.arrivalAirport}}</p>
+													</div>
+													<p class="ibe-ticket__flights-item__data-header__description-from">{{::fnPaCtrl.model.flightInfo.arrivalCodeAirport}}</p>
+												</div>
+											</div>
+										</div>
+									</header>
+								</article>
+							</div>
+						</div>
+					</div>
+					<fieldset ng-if="fnPaCtrl.model.flightInfo.originDestinations.length > 0">
+						<legend class="hideAccessible">{{'IBFNPA_TABLE_FLIGHTS_ACCESIBLE'|translate}}</legend>
+						<div class="ibe-tab ibe-tab--col-3 ibe-tab--link ibe-tab--margin-b">
+							<uib-tabset active="fnPaCtrl.model.selectedTab">
+								<uib-tab id="cki-flight-now-origindestination-{{originDestinationIndex}}-tab" index="originDestinationIndex" heading="{{(originDestination.departureDateParsed.weekDay|translate)}} {{::originDestination.departureDateParsed.monthDay}}/{{::originDestination.departureDateParsed.monthNumber}}/{{::originDestination.departureDateParsed.year}}"
+								 data-ng-repeat="(originDestinationIndex,originDestination) in fnPaCtrl.model.flightInfo.originDestinations"
+								 template-url="web-checkin/templates/ib-default-tab-custom.html">
+									<ib-tab-slices-fn id="cki-flight-now-tab-slices-flight-now" origin-destination-model="originDestination" origin-destination-index="originDestinationIndex"></ib-tab-slices-fn>
+								</uib-tab>
+								<li class="ibe-tab--no-tab">
+									<a id="cki-flight-now-go-to-future-flights-link" ng-if="fnPaCtrl.model.flightInfo.showFuturesFlight" class="ibe-link" href="javascript:void(0)"
+									 data-ng-click="fnPaCtrl.goToGdr()" title="{{'IBFNPA_GO_TO_FUTURE_FLIGHTS_TITLE'|translate}}">{{'IBFNPA_FUTURE_FLIGHTS'|translate}}</a>
+								</li>
+							</uib-tabset>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>

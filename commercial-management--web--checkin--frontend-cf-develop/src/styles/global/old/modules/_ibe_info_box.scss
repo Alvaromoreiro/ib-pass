@@ -1,0 +1,377 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_info_box
+//    Desripcion: Estilos para las cajas de informacion
+//******************************************************************************/
+.ibe-info__box {
+    padding: 0 2.3rem rem(36) 2.3rem;
+    border: solid rem(2) $BRD_standar_5;
+    line-height: 1.5rem;
+    color: $PC-cromatico_1;
+    background: $BCK-cromatico_4;
+    box-shadow: 0 rem(1) 0 0 $BRD-standar_13;
+
+    &--accordion {
+        margin-bottom: 0.01rem;
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        -o-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+
+        .ibe-accordion__body {
+            padding-top: 1.4rem;
+            margin: 0;
+        }
+
+        .ibe-info__box-container {
+            padding-top: 0;
+        }
+
+        .panel-group {
+            .panel {
+                background: none;
+
+                .panel-body,
+                .panel-heading {
+                    background: none;
+                }
+
+                .panel-heading > h4 > a {
+                    &:focus {
+                        text-decoration: underline;
+                        color: $PC-cromatico_3;
+                        outline: none;
+                    }
+
+                    &:hover {
+                        color: $PC-cromatico_3;
+                    }
+                }
+            }
+        }
+    }
+
+    &--icon {
+        padding: 6.25rem 2.3rem 2.4rem;
+    }
+
+    &.affix {
+        top: 1.2rem;
+    }
+
+    &.affix-bottom {
+        position: absolute;
+    }
+
+    /* Caja en bloque y texto centrado */
+    &--block-center {
+        padding: rem(16) rem(36) rem(20) rem(36);
+
+        .ibe-info__box-container {
+            text-align: center;
+        }
+
+        .ibe-info__box-title {
+            font-size: rem(22);
+        }
+
+        .ibe-info__box-description {
+            padding: 0 rem(70);
+            margin-top: 0;
+            font-family: $font-02;
+            font-size: rem(13);
+        }
+    }
+}
+
+.ibe-info__box-container {
+    position: relative;
+    padding-top: 1.4rem;
+
+    &::before {
+        position: absolute;
+        top: -3.9rem;
+        left: 35%;
+        font-family: $font-05;
+        font-size: 6.25rem;
+        color: $PC-cromatico_6;
+    }
+
+    &.icon-mas_servicios {
+        &::before {
+            top: -5.9rem;
+        }
+    }
+
+    &--icon-flying {
+        &::before {
+            content: "\e94c";
+        }
+    }
+
+    &--icon-passenger {
+        &::before {
+            content: "\e90a";
+        }
+    }
+
+    &--icon-plus {
+        &::before {
+            content: "\e9d1";
+        }
+    }
+}
+
+@mixin ibe-info {
+    position: relative;
+    padding-top: rem(60);
+
+    &::before {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        font-family: $font-05;
+        font-size: 6.25rem;
+        color: $PC-cromatico_6;
+        -ms-transform: translate(-50%, 0);
+        -moz-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+    }
+}
+
+.ibe-info {
+    @include ibe-info;
+
+    &--icon-fly {
+        @include ibe-info;
+
+        &::before {
+            content: "\e94c";
+        }
+
+        &-2 {
+            @include ibe-info;
+
+            padding-top: rem(70);
+
+            &::before {
+                content: "\e91a";
+                top: rem(15);
+                font-size: rem(85);
+                color: $PC-cromatico_21;
+            }
+        }
+
+        &-3 {
+            @include ibe-info;
+
+            padding-top: rem(70);
+
+            &::before {
+                content: "\e94c";
+                top: rem(15);
+                color: $PC-cromatico_21;
+            }
+        }
+    }
+
+    &--icon-passenger {
+        @include ibe-info;
+
+        padding-top: rem(70);
+
+        &::before {
+            content: "\e90a";
+            top: rem(15);
+        }
+
+        &-2 {
+            @include ibe-info;
+
+            padding-top: rem(65);
+
+            &::before {
+                content: "\e90a";
+                top: rem(8);
+                font-size: rem(65);
+                color: $PC-cromatico_21;
+            }
+        }
+    }
+
+    &--icon-confirmation {
+        @include ibe-info;
+
+        padding-top: rem(70);
+
+        &::before {
+            content: "\e93e";
+            top: rem(15);
+            font-size: rem(90);
+        }
+    }
+
+    &--mas-servicios {
+        @include ibe-info;
+
+        padding-top: rem(70);
+
+        &::before {
+            content: "\e99c";
+            top: rem(15);
+        }
+
+        &-2 {
+            @include ibe-info;
+
+            padding-top: rem(70);
+
+            &::before {
+                content: "\e99c";
+                top: rem(15);
+                font-size: rem(65);
+                color: $PC-cromatico_21;
+            }
+        }
+    }
+}
+
+.ibe-info__box-title {
+    font-family: $font-04;
+    font-size: 1.625rem;
+    line-height: 2rem;
+}
+
+.ibe-info__box-description {
+    margin-top: 0.625rem;
+    font-family: $font-04;
+    font-size: 1.125rem;
+    color: $PC-cromatico_21;
+}
+
+
+/* X-LARGE RESOLUTION STYLES */
+
+@mixin xl-ibe_info_box {
+    .ibe-info__box {
+        padding-bottom: rem(14);
+
+        &--accordion {
+            .ibe-accordion {
+                .panel-group {
+                    .panel {
+                        .panel-heading {
+                            display: none;
+                        }
+
+                        .panel-collapse {
+                            display: block;
+                            height: auto !important;
+                        }
+
+                        .panel-heading > h4 > a {
+                            &:focus {
+                                text-decoration: underline;
+                                color: $PC-cromatico_3;
+                                outline: none;
+                            }
+
+                            &:hover {
+                                color: $PC-cromatico_3;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* LARGE RESOLUTION STYLES */
+
+@mixin l-ibe_info_box {
+    @include xl-ibe_info_box;
+
+    .ibe-info__box {
+        padding-bottom: rem(14);
+    }
+}
+
+
+/* MEDIUM RESOLUTION STYLES */
+
+@mixin m-ibe_info_box {
+    .ibe-info__box {
+        &--accordion {
+            width: 100%;
+            height: auto !important;
+            padding: 0;
+            margin-top: rem(20);
+            margin-bottom: rem(20);
+
+            .ibe-info__box-description {
+                font-family: $font-02;
+                font-size: 0.83rem;
+            }
+
+            .ibe-accordion__title {
+                padding: 0;
+                padding-right: rem(18);
+                margin: 0;
+                font-size: 0.799rem;
+
+                &::after {
+                    top: 50%;
+                    margin-top: rem(1);
+                    -ms-transform: translate(0, -50%);
+                    transform: translate(0, -50%);
+                }
+            }
+
+            .ibe-accordion__body {
+                position: relative;
+                padding: 0 1.2rem 1rem 0.8rem;
+            }
+
+            .ibe-info__box-title {
+                display: none;
+            }
+
+            .panel-title > a {
+                display: block;
+                padding: 0.9rem 1.2rem 1rem 0.8rem;
+            }
+        }
+
+        &--block-center {
+            .ibe-info__box-description {
+                padding: 0;
+            }
+        }
+    }
+}
+
+
+/* SMALL RESOLUTION STYLES */
+
+@mixin sm-ibe_info_box {
+    @include m-ibe_info_box;
+}
+
+
+/* X-SMALL RESOLUTION STYLES */
+
+@mixin xs-ibe_info_box {
+    @include m-ibe_info_box;
+}
+
+.sticky-focus {
+    width: calc(100% - rem(32)) !important;
+}
+
+.sticky-bottom {
+    top: auto !important;
+    bottom: 0 !important;
+}

@@ -1,0 +1,307 @@
+<div class="ib-modals--right ib-biometric-form-modal" data-ng-class="{'ib-biometric-form-modal--active':modalCtrl.showFormActive, 'ib-biometric-form-modal--not-active':modalCtrl.showErrorNotActive}" id="biometric-form-profile">
+    <header class="ib-modals__header">
+        <div class="ib-modals__header-icon">
+            <span data-ng-class="modalCtrl.model.passenger.iconModal"></span>
+        </div>
+        <h2 class="ib-heading ib-heading--type-1-flex">{{modalCtrl.model.passenger.name}}
+            {{modalCtrl.model.passenger.surname}}</h2>
+        <div class="ib-modals__header-settings">
+            <button type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.btnClose()">
+                <span class="u-hide-accessible">{{"HEADER_CONFIRMATION_BACK_MODAL_CLOSE_ACCESS"|translate}}</span>
+            </button>
+        </div>
+    </header>
+    <section class="ib-modals__body ib-modals__body--cols-simple">
+        <form method="post" action="#" name="modalCtrl.infoForm">
+            <div class="ib-layout">
+                <div class="ib-layout__line-spacing">
+                    <span class="ib-text ib-text--block">{{"BIOMETRIC_BOARDING_MODAL_DESCRIPTION_V2"|translate}}
+                    </span>
+                </div>
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--null">
+                    <fieldset>
+                        <legend class="u-hide-accessible">{{"BIOMETRIC_BOARDING_RIGHT_MODAL_TITLE"|translate}}</legend>
+                        <div class="container">
+                            <div class="row">
+                                <!-- PAIS DE EMISION -->
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="ib-layout__line-spacing">
+                                        <div class="ib-select ib-select--label"
+                                            ng-class="{'ib-select--error':modalCtrl.infoForm.$submitted && modalCtrl.infoForm['country'].$invalid}">
+                                            <label class="ib-select__label ib-select__label--uppercase"
+                                                for="BIOMETRIC_DOCUMENT_COUNTRY">
+                                                {{'BIOMETRIC_COUNTRY_OF_THE_DOCUMENT'|translate}}</label>
+                                            <ui-select class="ib-select__action" id="BIOMETRIC_DOCUMENT_COUNTRY"
+                                                name="country"
+                                                ng-model="modalCtrl.model.biometricData.documentEmissionCountry"
+                                                ng-change="modalCtrl.updateDocumentsType()" ng-required="true">
+                                                <ui-select-match class="ib-select__list-ipt"
+                                                    placeholder="{{'BIOMETRIC_COUNTRY_OF_THE_DOCUMENT'|translate}}">
+                                                    <span class="ib-select__txt"
+                                                        ng-bind="$select.selected.description"></span>
+                                                </ui-select-match>
+                                                <ui-select-choices class="ib-select__list"
+                                                    repeat="country.code as country in modalCtrl.countriesList | prefixCheckSpecialCharactersFilter: $select.search">
+                                                    <span class="ib-select__list-txt"
+                                                        ng-bind="::country.description"></span>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                        <div
+                                            ng-messages="modalCtrl.infoForm.$submitted && modalCtrl.infoForm['country'].$error">
+                                            <div class="ib-alert ib-alert--error" ng-message="required">
+                                                {{'APIS_DOCUMENT_COUNTRY_REQUIRED_ERROR'|translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- TIPO DE DOCUMENTO -->
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="ib-layout__line-spacing">
+                                        <div class="ib-select ib-select--label"
+                                            ng-class="{'ib-select--error':modalCtrl.infoForm.$submitted && modalCtrl.infoForm['type_doc'].$invalid, 'ib-select--disabled':modalCtrl.disabledDocumentType}">
+                                            <label class="ib-select__label ib-select__label--uppercase"
+                                                for="DOCUMENT_TYPE">{{'IBCOACII_TIPO_DOCU'|translate}}</label>
+                                            <ui-select class="ib-select__action" id="DOCUMENT_TYPE" name="type_doc"
+                                                ng-model="modalCtrl.model.biometricData.documentType" ng-required="true"
+                                                ng-change="modalCtrl.updateDocumentNumber()"
+                                                ng-disabled="modalCtrl.disabledDocumentType">
+                                                <ui-select-match class="ib-select__list-ipt"
+                                                    placeholder="{{'IBCOACII_TIPO_DOCU'|translate}}">
+                                                    <span class="ib-select__txt"
+                                                        ng-bind="$select.selected.description | uppercase"></span>
+                                                </ui-select-match>
+                                                <ui-select-choices class="ib-select__list"
+                                                    repeat="doc in modalCtrl.documentsByCountry[modalCtrl.model.biometricData.documentEmissionCountry] | filter: $select.search">
+                                                    <span class="ib-select__list-txt"
+                                                        ng-bind="::doc.description | uppercase"></span>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                        <div
+                                            ng-messages="modalCtrl.infoForm.$submitted && modalCtrl.infoForm['type_doc'].$error">
+                                            <div class="ib-alert ib-alert--error" ng-message="required">
+                                                {{'APIS_DOCUMENT_COUNTRY_REQUIRED_ERROR'|translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <!-- NUMERO DE DOCUMENTO -->
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="ib-layout__line-spacing">
+                                        <div class="ib-input"
+                                            data-ng-class="{'ib-input--error' : !modalCtrl.docNumber && modalCtrl.infoForm['document_number'].$invalid && modalCtrl.infoForm['document_number'].$viewValue != null && modalCtrl.infoForm['document_number'].$viewValue !== '', 'ib-select--disabled' : modalCtrl.disabledDocNum}">
+                                            <label
+                                                data-ng-class="{'ib-input__label--focus ib-input__label--uppercase' : modalCtrl.docNumber || (modalCtrl.infoForm['document_number'].$viewValue != null && modalCtrl.infoForm['document_number'].$viewValue !== '')}"
+                                                class="ib-input__label"
+                                                for="document_number">{{'IBCOACII_NUM_DOCU'|translate}}</label>
+                                            <input class="ib-input__input" type="text"
+                                                ng-if="modalCtrl.model.biometricData.documentType.type === 'DNI' && modalCtrl.model.biometricData.documentEmissionCountry === 'ESP'"
+                                                id="document_number" name="document_number"
+                                                ng-focus="modalCtrl.docNumber=true" ng-blur="modalCtrl.changeDocument()"
+                                                ng-model="modalCtrl.model.biometricData.documentNumber"
+                                                maxlength="{{::$root.CHECKIN_FIELDS_LENGTH.APIS_DNI_PSTS_MAX_LENGTH}}"
+                                                ng-required="true" ng-pattern="::$root.CHECKIN_PATTERNS.DOCS_PATTERN"
+                                                ng-disabled="modalCtrl.disabledDocNum"
+                                                data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.DOCS_CLEANER}}"
+                                                required data-ib-dni-validator />
+                                            <input class="ib-input__input" type="text"
+                                                ng-if="modalCtrl.model.biometricData.documentType.type !== 'DNI'"
+                                                id="document_number" name="document_number"
+                                                ng-focus="modalCtrl.docNumber=true" ng-blur="modalCtrl.changeDocument()"
+                                                ng-model="modalCtrl.model.biometricData.documentNumber"
+                                                ng-required="true" ng-pattern="::$root.CHECKIN_PATTERNS.DOCS_PATTERN"
+                                                data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.DOCS_CLEANER}}"
+                                                ng-disabled="modalCtrl.disabledDocNum"
+                                                maxlength="{{::(modalCtrl.model.biometricData.documentType.type === 'DNI' || modalCtrl.model.biometricData.documentTyp.type === 'PASS' ? $root.CHECKIN_FIELDS_LENGTH.APIS_DNI_PSTS_MAX_LENGTH : $root.CHECKIN_FIELDS_LENGTH.APIS_DOCUMENT_MAX_LENGTH)}}" />
+                                        </div>
+                                        <div
+                                            ng-messages="modalCtrl.infoForm['document_number'].$viewValue != null && modalCtrl.infoForm['document_number'].$viewValue !== '' && modalCtrl.infoForm['document_number'].$error">
+                                            <div class="ib-alert ib-alert--error" ng-message="required">
+                                                {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                                            </div>
+                                            <div class="ib-alert ib-alert--error" ng-message="new_document">
+                                                {{'BIOMETRIC_ERROR_DOCUMENT'|translate}}
+                                            </div>
+                                            <div class="ib-alert ib-alert--error" ng-message="dni">
+                                                {{'DNI_FORMAT_ERROR'|translate}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- EMAIL -->
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="ib-layout__line-spacing">
+                                        <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                                            <div class="ib-input"
+                                                data-ng-class="{'ib-input--error' : !modalCtrl.emailFocused && modalCtrl.infoForm['BioBoarding_Email_Form'].$invalid && modalCtrl.infoForm['BioBoarding_Email_Form'].$viewValue != null && modalCtrl.infoForm['BioBoarding_Email_Form'].$viewValue !== ''}">
+                                                <label
+                                                    data-ng-class="{'ib-input__label--focus ib-select__label--uppercase' : modalCtrl.emailFocused || (modalCtrl.infoForm['BioBoarding_Email_Form'].$viewValue != null && modalCtrl.infoForm['BioBoarding_Email_Form'].$viewValue !== '')}"
+                                                    class="ib-input__label"
+                                                    for="BioBoarding_Email_Form">{{'PAYMENTS_CONTACT_FORM_EMAIL' |
+                                                    translate}}</label>
+                                                <input class="ib-input__input" maxlength="60"
+                                                    ng-pattern="::$root.CHECKIN_PATTERNS.EMAIL_PATTERN" required
+                                                    data-ng-focus="modalCtrl.emailFocused=true"
+                                                    data-ng-blur="modalCtrl.emailFocused=false" type="text"
+                                                    id="BioBoarding_Email_Form" name="BioBoarding_Email_Form"
+                                                    ng-model="modalCtrl.model.biometricData.email" />
+                                            </div>
+                                            <div
+                                                ng-messages="modalCtrl.infoForm['BioBoarding_Email_Form'].$viewValue != null && modalCtrl.infoForm['BioBoarding_Email_Form'].$viewValue !== '' && !modalCtrl.emailFocused && modalCtrl.infoForm['BioBoarding_Email_Form'].$error">
+                                                <div class="ib-alert ib-alert--error" ng-message="required">
+                                                    {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                                <div class="ib-alert ib-alert--error" ng-message="pattern">
+                                                    {{'CKIANCPURC_EMAIL_ERR'|translate}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="ib-biometric-form-modal__check-wrapper">
+                                        <div class="ib-check">
+                                            <input type="checkbox" id="check_1" name="check_1" class="ib-check__input"
+                                                ng-model="modalCtrl.checkInfo">
+                                            <label for="check_1" class="ib-check__label ib-check__label--top">
+
+                                                <span class="ib-check__text ib-check__text--unfocused ib-check__text--link" ng-bind-html="modalCtrl.privacyMessage"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ib-content-buttons col-md-6 col-sm-12 col-xs-12">
+                                    <div class="ib-content-buttons__content-left">
+                                        <button class="ib-button ib-button--w-big" type="button"
+                                            data-ng-class="{'ib-button--disabled' : modalCtrl.btnFormDisabled()}"
+                                            ng-disabled="modalCtrl.btnFormDisabled()"
+                                            ng-click="modalCtrl.checkBiometricBoarding()">{{'BIOMETRIC_CHECK_BUTTON' |
+                                            translate}}</button>
+                                    </div>
+                                    <div class="ib-content-buttons__content-right u-mt u-mb">
+                                        <a href="javascript:void(0)" class="ib-link"
+                                            ng-click="modalCtrl.btnClose()">{{'MODAL_GENERAL_BUTTON_CANCEL' | translate}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <!-- ib-modal-biometric-profile-form-active -->
+    <div class="ib-biometric-form-modal__overlay ib-biometric-form-modal__overlay-form-active" ng-if="modalCtrl.showFormActive">
+        <div class="ib-biometric-form-modal__overlay-wrapper">
+            <span class="ib-biometric-form-modal__overlay-icon icon-biometria"></span>
+            <span class="ib-biometric-form-modal__overlay-text">{{'BIOMETRIC_PROFILE_FORM_ACTIVE_TITLE' |
+                translate}}</span>
+            <span class="ib-biometric-form-modal__overlay-description">{{'BIOMETRIC_PROFILE_FORM_ACTIVE_DESCRIPTION' |
+                translate}}</span>
+            <div class="ib-layout__line-spacing">
+                <div class="ib-content-buttons ib-biometric-form-modal__confirmation ib-biometric-form-modal__buttons">
+                    <button class="ib-button ib-button--w-medium -" type="button"
+                        data-ng-class="{'ib-button--disabled' : modalCtrl.btnFormDisabled()}"
+                        ng-disabled="modalCtrl.btnFormDisabled()"
+                        ng-click="modalCtrl.btnConfirmation()">{{'BIOMETRIC_BOARDING_RESUME_CKI' |
+                        translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ib-modal-biometric-profile-form-loading -->
+    <div class="ib-biometric-form-modal__overlay" ng-if="modalCtrl.showFormLoading">
+        <div class="ib-overlay-fly ib-overlay-fly--type-5 ib-overlay-fly--transparent">
+            <div class="ib-overlay-fly__container">
+                <div class="ib-overlay-fly__icon">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                </div>
+                <span class="ib-overlay-fly__text">{{'BIOMETRIC_PROFILE_FORM_LOADING_TEXT' | translate}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="ib-biometric-form-modal__overlay ib-biometric-form-modal__overlay-error" ng-if="modalCtrl.showErrorNotActive">
+        <div class="ib-biometric-form-modal__overlay-wrapper">
+            <span class="ib-biometric-form-modal__overlay-icon icon-wrong"></span>
+            <span class="ib-biometric-form-modal__overlay-text"
+                ng-if="!modalCtrl.showErrorNotActiveGeneric">{{'BIOMETRIC_PROFILE_FORM_NOT_ACTIVE_TITLE_V2' | translate}}
+            </span>
+            <span class="ib-biometric-form-modal__overlay-text"
+                ng-if="modalCtrl.showErrorNotActiveGeneric">{{'BIOMETRIC_ERROR_GENERAL_TITLE' | translate}}
+            </span>
+            <span class="ib-biometric-form-modal__overlay-description"
+                ng-if="!modalCtrl.showErrorNotActiveGeneric">{{'BIOMETRIC_PROFILE_FORM_NOT_ACTIVE_DESCRIPTION_V2'
+                | translate}}
+            </span>
+            <span class="ib-biometric-form-modal__overlay-description"
+                ng-if="modalCtrl.showErrorNotActiveGeneric">{{'BIOMETRIC_ERROR_GENERAL_DESC' | translate}}
+            </span>
+            <div class="ib-layout__line-spacing">
+                <div class="ib-content-buttons ib-biometric-form-modal__confirmation ib-biometric-form-modal__buttons">
+                    <button class="ib-button ib-button--w-medium ib-button--inverse" type="button"
+                        data-ng-class="{'ib-button--disabled' : modalCtrl.btnFormDisabled()}"
+                        ng-disabled="modalCtrl.btnFormDisabled()"
+                        ng-click="modalCtrl.btnConfirmation()">{{'BIOMETRIC_BOARDING_RESUME_CKI' | translate}}
+                    </button>
+                    <button class="ib-button ib-button--w-medium" type="button"
+                        data-ng-class="{'ib-button--disabled' : modalCtrl.btnFormDisabled()}"
+                        ng-disabled="modalCtrl.btnFormDisabled()"
+                        ng-click="modalCtrl.goBackToForm()">{{'BIOMETRIC_EDIT_FORM_BUTTON' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ib-biometric-form-modal__overlay ib-biometric-form-modal__overlay-error" ng-if="modalCtrl.showErrorDocumentDate">
+        <div class="ib-biometric-form-modal__overlay-wrapper">
+            <span class="ib-biometric-form-modal__overlay-icon icon-identificacion-visible"></span>
+            <span class="ib-biometric-form-modal__overlay-text">{{'BIOMETRIC_ERROR_TITLE'|translate}}</span>
+            <span class="ib-biometric-form-modal__overlay-description">{{'BIOMETRIC_ERROR_DOCUMENT_DATE'|translate}}</span>
+            <div class="ib-layout__line-spacing">
+                <div class="ib-content-buttons ib-biometric-form-modal__confirmation ib-biometric-form-modal__buttons">
+                    <button class="ib-button ib-button--w-medium ib-button--inverse" type="button"
+                        data-ng-class="{'ib-button--disabled' : modalCtrl.btnFormDisabled()}"
+                        ng-disabled="modalCtrl.btnFormDisabled()"
+                        ng-click="modalCtrl.btnConfirmation()">{{'BIOMETRIC_BOARDING_RESUME_CKI' | translate}}
+                    </button>
+                    <button class="ib-button ib-button--w-medium" type="button"
+                        data-ng-class="{'ib-button--disabled' : modalCtrl.btnFormDisabled()}"
+                        ng-disabled="modalCtrl.btnFormDisabled()"
+                        ng-click="modalCtrl.goBackToForm()">{{'BIOMETRIC_EDIT_FORM_BUTTON' | translate}}
+                    </button>
+                </div>
+            </div>           
+        </div>
+    </div>
+
+    <div class="ib-biometric-form-modal__overlay ib-biometric-form-modal__overlay-error" ng-if="modalCtrl.showErrorDocumentMatch">
+        <div class="ib-biometric-form-modal__overlay-wrapper">
+            <span class="ib-biometric-form-modal__overlay-icon icon-identificacion-visible"></span>
+            <span class="ib-biometric-form-modal__overlay-text">{{'BIOMETRIC_ERROR_TITLE'|translate}}</span>
+            <span class="ib-biometric-form-modal__overlay-description">{{'BIOMETRIC_ERROR_DOCUMENT_MATCH_DATA'|translate}}</span>
+            <div class="ib-layout__line-spacing">
+                <div class="ib-content-buttons ib-biometric-form-modal__confirmation ib-biometric-form-modal__buttons">
+                    <button class="ib-button ib-button--w-medium ib-button--inverse" type="button"
+                        data-ng-class="{'ib-button--disabled' : modalCtrl.btnFormDisabled()}"
+                        ng-disabled="modalCtrl.btnFormDisabled()"
+                        ng-click="modalCtrl.btnConfirmation()">{{'BIOMETRIC_BOARDING_RESUME_CKI' | translate}}
+                    </button>
+                    <button class="ib-button ib-button--w-medium" type="button"
+                        data-ng-class="{'ib-button--disabled' : modalCtrl.btnFormDisabled()}"
+                        ng-disabled="modalCtrl.btnFormDisabled()"
+                        ng-click="modalCtrl.goBackToForm()">{{'BIOMETRIC_EDIT_FORM_BUTTON' | translate}}
+                    </button>
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>

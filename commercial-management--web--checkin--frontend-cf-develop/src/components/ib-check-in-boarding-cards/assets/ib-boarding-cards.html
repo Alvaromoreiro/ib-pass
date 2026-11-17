@@ -1,0 +1,123 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- titulo general -->
+            <div data-ng-if="!boardingCardsCtrl.showInhibitInfo.showAlert && !boardingCardsCtrl.showInhibitInfo.showBox"
+                class="ib-boarding-cards-wallet__layout">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                    <h1 class="ib-heading ib-heading--type-1 ib-heading--block">{{'BIOMETRIC_BOARDING_READY'|translate}}</h1>
+                </div>
+                <h2 class="ib-heading ib-heading--type-28 ib-heading--unfocused ib-heading--weight-bold ib-heading--font-normal">{{'AVIH_BOARDING_TICKETS_SUBTITLE'|translate}}</h2>
+            </div>
+            <!-- titulo si alerta por item -->
+            <div data-ng-if="boardingCardsCtrl.showInhibitInfo.showAlert" class="ib-layout__header ib-layout__header--title">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                    <h1 class="ib-heading ib-heading--type-1 ib-heading--block">{{'BIOMETRIC_BOARDING_READY'|translate}}
+                    </h1>
+                </div>
+                <h2 class="ib-heading ib-heading--type-5 ib-heading--unfocused">
+                    {{'AVIH_BOARDING_TICKETS_SUBTITLE'|translate}}</h2>
+                <ib-alert-banner
+                    data-ng-if="boardingCardsCtrl.showInhibitInfo.showAlert"
+                    [heading]="boardingCardsCtrl.showInhibitInfo.title"
+                    [body]="boardingCardsCtrl.showInhibitInfo.subtitleOK"
+                    variant="danger"
+                    class-name="ib-boarding-cards-wallet__inhibition"
+                    [icon]="boardingCardsCtrl.showInhibitInfo.icon"
+                ></ib-alert-banner>
+            </div>
+            <!-- alerta OK -->
+            <div data-ng-if="boardingCardsCtrl.showOkMessage" class="ib-layout__header ib-layout__header--title">
+                <div class="ib-msg-alert ib-msg-alert--icon-left icon-confirmacion">
+                    <p class="ib-msg-alert__text ib-msg-alert__text--bold">
+                        {{'CKI_BOARDING_PASSES_SEND_CONFIRMATION'|translate}}</p>
+                    <p class="ib-msg-alert__text">
+                        {{'CKI_BOARDING_PASSES_SEND_CONFIRMATION_MESSAGE'|translate}}</p>
+                </div>
+            </div>
+            <!-- alerta KO -->
+            <div data-ng-if="boardingCardsCtrl.showErrorAlert" class="ib-layout__header ib-layout__header--title">
+                <div class="ib-msg-alert ib-msg-alert--padding-md ib-msg-alert--danger icon-alerta_grave alert">
+                    <p
+                        class="ib-msg-alert__text ib-msg-alert__text--bold">
+                        {{'CKI_BOARDING_PASSES_ERROR_TITLE'|translate}}</p>
+                    <p class="ib-msg-alert__text">{{'CKI_BOARDING_PASSES_ERROR_MESSAGE'|translate}}
+                    </p>
+                </div>
+            </div>
+            <!-- alert SBY -->
+            <div data-ng-if="boardingCardsCtrl.showAlertSBY.status" class="ib-layout__header ib-layout__header--title">
+                <div class="ib-msg-alert ib-msg-alert--danger-icon-small icon-alertas alert">
+                    <h2 class="ib-msg-alert__text ib-msg-alert__text--bold ib-msg-alert--danger-icon-small__text">
+                        {{boardingCardsCtrl.showAlertSBY.title | translate}}
+                    </h2>
+                    <p data-ng-repeat="passenger in boardingCardsCtrl.showAlertSBY.passengers">
+                        <span 
+                        data-ng-class="{'icon-mujer': passenger.gender === 'FEMALE','icon-hombre' : passenger.gender === 'MALE'}"
+                        class="ib-msg-alert__text ib-msg-alert--danger-icon-small__text" 
+                        >
+                            {{passenger.fullName}} {{'IBECBP_ALERT_SBY_STATUS' | translate}}
+                        </span>
+                    </p>
+                    <p class="ib-msg-alert__text ib-msg-alert--danger-icon-small__text">
+                        <a data-ng-click="boardingCardsCtrl.handleModalSBY($event)">
+                            {{'IBCOAC_IBECBP_ALERT_SBY_LINK' | translate}}
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <!-- BOX por items -->
+            <div data-ng-if="boardingCardsCtrl.showInhibitInfo.showBox" class="ib-message-box u-text-center">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                    <h1 class="ib-heading ib-heading--type-1 ib-heading--padding-md ib-heading--block">
+                        {{'AVIH_DOWNLOAD_TICKETS_TITLE_SECTION'|translate}}</h1>
+                    <div class="ib-box ib-message-box ib-message-box--content-center">
+                        <div class="ib-message-box__content">
+                            <div>
+                                <span class="ib-message-box__icon ib-message-box__icon--padding-md u-color-primary {{boardingCardsCtrl.showInhibitInfo.icon}}"></span>
+                                <p class="ib-message-box__title u-color-primary u-pt-small">
+                                    {{boardingCardsCtrl.showInhibitInfo.title|translate}}</p>
+                                <p class="ib-message-box__text">{{boardingCardsCtrl.showInhibitInfo.subtitleKO|translate}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-ng-if="!boardingCardsCtrl.showInhibitInfo.showBox" class="container">
+                <div class="u-position-relative">
+                    <ib-boarding-cards-loading
+                        data-ng-if="boardingCardsCtrl.sending || boardingCardsCtrl.sendingOk || boardingCardsCtrl.sendingError"
+                        [sending]="boardingCardsCtrl.sending" [send-ok]="boardingCardsCtrl.sendingOk"
+                        [send-error]="boardingCardsCtrl.sendingError"></ib-boarding-cards-loading>
+                    <div class="ib-boarding-cards-wallet__container ib-flex--align-stretch">
+                        <ib-send-by-email class="ib-boarding-cards-wallet__content"
+                            data-ng-if="boardingCardsCtrl.model.boardingInfo" [model]="boardingCardsCtrl.model"
+                            [formats-list]="boardingCardsCtrl.model.boardingInfo.formatsList"
+                            [channels-list]="boardingCardsCtrl.model.boardingInfo.channelsList"
+                            [passengers-list]="boardingCardsCtrl.model.boardingInfo.passengersList"
+                            [show-continue-button]="boardingCardsCtrl.showContinueButton"
+                            [only-pdf]="boardingCardsCtrl.onlyPdf"
+                            (ask-for-cards-event)="boardingCardsCtrl.askForBoardingCards($event)">
+                        </ib-send-by-email>
+                        <ib-download class="ib-boarding-cards-wallet__content--small"
+                            data-ng-if="boardingCardsCtrl.model.boardingInfo" [model]="boardingCardsCtrl.model"
+                            [channels-list]="boardingCardsCtrl.model.boardingInfo.channelsList"
+                            [device]="boardingCardsCtrl.device"
+                            [only-pdf]="boardingCardsCtrl.onlyPdf"
+                            (ask-for-cards-event)="boardingCardsCtrl.askForBoardingCards($event)">
+                        </ib-download>
+                    </div>
+                </div>
+            </div>
+            <div data-ng-if="boardingCardsCtrl.showContinueButton">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--text-right">
+                    <button id="cki-boarding-cards-get-cards-button2" class="ib-button ib-button--large-xl ib-boarding-cards-wallet__button--xl"
+                        data-ng-click="boardingCardsCtrl.biometricNotActivated()">{{'GO_RESUME_AND_FINISH_TEXT' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal SBY -->
+<ib-modal-sby [(open-modal)]="boardingCardsCtrl.showAlertSBY.openModal" [show-wallet-info]="!boardingCardsCtrl.onlyPdf"></ib-modal-sby>

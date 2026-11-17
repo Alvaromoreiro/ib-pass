@@ -1,0 +1,25 @@
+<main class="ib-layout">
+    <div class="container pmt-container" data-calculate-position>
+        <ib-checkin-overlay
+            [textTransition]="loadingModalProps.textTransition"
+            [title]="loadingModalProps.title"
+            [subtitles]="loadingModalProps.subtitles"
+            [isOpen]="loadingModalProps.isOpen"
+        >
+        </ib-checkin-overlay>
+        <div class="pmt-top">
+            <h1 class="page-title">{{'PAYMENTS_PAGE_TITLE' | translate }}</h1>
+        </div>
+        <div class="pmt-main">
+            <div [id]="PAYMENT_COMP_BLOCK_ID"></div>
+        </div>
+        <div class="pmt-side">
+            <div class="pmt-voucher" *ngIf="showVoucher">
+                <ib-checkin-voucher [flowId]="flowId" (voucherValidated)="onVoucherValidated($event)"></ib-checkin-voucher>
+            </div>
+            <div class="pmt-summary">
+                <ib-checkin-summary />
+            </div>
+        </div>
+    </div>
+</main>

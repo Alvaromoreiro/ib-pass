@@ -1,0 +1,58 @@
+    <div class="ib-ticket-flights ib-ticket-flights__flex segment-container">
+        <div class="ib-ticket-flights__ticket ticket-container">
+            <header class="ib-ticket-flights__ticket-header">
+                <div class="ib-ticket-flights__journey">
+                    <div class="ib-ticket-flights__journey-departure">
+                        <span class="ib-ticket-flights__journey-city">{{ segmentInfo.departure.airport.description }}</span>
+                        <span class="ib-ticket-flights__journey-iata">{{ segmentInfo.departure.airport.code }}</span>
+                        <span class="ib-ticket-flights__journey-airport"><span class="airport-text">{{'IBCOAC_AEROPUERTO' | translate}}: </span>{{ segmentInfo.departure.airport.description }}</span>
+                    </div>
+                    <div class="ticket-icon">
+                        <span class="icon-vuelos"></span>
+                    </div>
+                    <div class="ib-ticket-flights__journey-arrival">
+                        <span class="ib-ticket-flights__journey-city">{{ segmentInfo.arrival.airport.description }}</span>
+                        <span class="ib-ticket-flights__journey-airport"><span class="airport-text">{{'IBCOAC_AEROPUERTO' | translate}}: </span>{{ segmentInfo.arrival.airport.description }}</span>
+                        <span class="ib-ticket-flights__journey-iata">{{ segmentInfo.arrival.airport.code }}</span>
+                    </div>
+                </div>
+            </header>
+            <div class="ib-ticket-flights__ticket-body ib-ticket-flights__info ticket-info">
+                <div class="ib-ticket-flights__info-departure">
+                    <span class="ib-text ib-text--block ib-text--color-unfocused ib-text--bold"
+                        *ngIf="segmentInfo.departure.terminal !== null && segmentInfo.departure.terminal !== ''">{{'IBCOAC_TERMINAL'|
+                        translate}}{{ segmentInfo.departure.terminal }}</span>
+                    <span class="ib-text ib-text--block ib-ticket-flights__ticket--title ib-text--color-unfocused ib-text--bold"
+                        *ngIf="segmentInfo.departure.terminal === null || segmentInfo.departure.terminal === ''">{{
+                        segmentInfo.departure.terminal }}</span>
+                    <div>
+                        <span class="ib-text ib-text--block ib-text--color-unfocused">{{ getFormatDate(segmentInfo.departure.date) }}</span>
+                    </div>
+                    <span class="ib-text ib-text--block ib-text--color-unfocused">{{ segmentInfo.departure.hour }}</span>
+                </div>
+                <div class="ib-ticket-flights__info-operator">
+                    <figure class="ib-ticket-flights__ticket-logo">
+                        <img [src]="segmentInfo.operatingFlightNumber.brand.companyURL"
+                            [attr.alt]="'ACCES_LOGO_IBERIA' | translate" />
+                    </figure>
+                    <span class="ib-text ib-text--block ib-text--xmedium">{{ segmentInfo.operatingFlightNumber.company.code +
+                        segmentInfo.operatingFlightNumber.number }}</span>
+                    <span
+                        class="ib-text ib-text--block ib-text--color-unfocused flight-operated">{{'IBCOCF&IBECCF_OPERADO_POR'|translate}}
+                        {{ segmentInfo.operatingFlightNumber.company.description }} </span>
+                </div>
+                <div class="ib-ticket-flights__info-arrival">
+                    <span class="ib-text ib-text--block ib-text--color-unfocused ib-text--bold"
+                        *ngIf="segmentInfo.arrival.terminal !== null && segmentInfo.arrival.terminal !== ''">{{'IBCOAC_TERMINAL'|
+                        translate}}{{ segmentInfo.arrival.terminal }}</span>
+                    <span class="ib-text ib-text--block ib-ticket-flights__ticket--title ib-text--color-unfocused ib-text--bold"
+                        *ngIf="segmentInfo.arrival.terminal === null || segmentInfo.arrival.terminal === ''">{{ segmentInfo.arrival.terminal
+                        }}</span>
+                    <div>
+                        <span class="ib-text ib-text--block ib-text--color-unfocused">{{ getFormatDate(segmentInfo.arrival.date) }}</span>
+                    </div>
+                    <span class="ib-text ib-text--block ib-text--color-unfocused">{{ segmentInfo.arrival.hour }}</span>
+                </div>
+            </div>
+        </div>
+    </div>

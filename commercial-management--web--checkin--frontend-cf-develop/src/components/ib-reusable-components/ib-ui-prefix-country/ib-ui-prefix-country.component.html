@@ -1,0 +1,16 @@
+<div class="ui-select-bootstrap" ngbDropdown #myDropdown="ngbDropdown">
+    <label class="ib-select__label" for="{{prefixId}}">{{prefixLabel}}</label>
+    <div class="ib-select ib-select__action" type="text" id="dropdownPrefix" ngbDropdownToggle>   
+      <div class="ib-select__list-ipt" [ngClass]="collapsed ? 'icon-caret_abajo' : 'icon-caret_arriba'" [formGroup]="parentForm">
+        <input class="ui-select-toggle ib-select__txt form-control"  type="text" [(ngModel)]="query" formControlName="prefix" (input)="filterPrefix()" (click)="clickSelect()" (blur)="clickOutsideSelect()" placeholder="{{prefixPlaceholder}}">
+      </div>
+      <div class="ib-select ib-select__list ui-select-choices dropdown-menu" [ngClass]="{'u-display-none': !haveResults}"  ngbDropdownMenu>
+          <p class="ui-select-choices-row ui-select-choices-row-inner"
+            ngbDropdownItem
+            *ngFor="let prefix of filteredPrefix"
+            (click)="selectPrefix(prefix)">
+            {{prefix.description}}
+        </p>
+      </div>
+    </div>
+</div>

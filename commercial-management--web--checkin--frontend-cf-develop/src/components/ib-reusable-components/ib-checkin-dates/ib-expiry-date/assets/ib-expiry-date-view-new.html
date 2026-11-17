@@ -1,0 +1,39 @@
+<div class="ib-select-date" id="EXPIRY_DATE" data-ng-class="{'ib-select-date--error': expDateCtrl.containerForm.$submitted && (expDateCtrl.containerForm['expiryDateDay_'+ expDateCtrl.index].$invalid || expDateCtrl.containerForm['expiryDateMonth_'+ expDateCtrl.index].$invalid || expDateCtrl.containerForm['expiryDateYear_'+ expDateCtrl.index].$invalid), 'ib-select-date ib-select-date--disabled':expDateCtrl.needDisabled, 'ib-select-date':!expDateCtrl.needDisabled}">
+    <span class="ib-select-date__label">{{'EXPIRY_DATE_FIELD_LABEL'|translate}}</span>
+    <ui-select ng-disabled="expDateCtrl.needDisabled" ng-if="expDateCtrl.showDay" class="ib-select-date__action ib-select-date__action--day" data-ng-model="expDateCtrl['day']"
+        data-ng-change="expDateCtrl.daysSelected()" ng-required="::expDateCtrl.dateRequired" name="expiryDateDay_{{::expDateCtrl.index}}"
+        uis-open-close="expDateCtrl.onOpenClose(isOpen,'ib-select-date__action--day')">
+        <ui-select-match class="ib-select-date__list-ipt" placeholder="{{'EXPIRY_DATE_FIELD_DAY_PLACEHOLDER'|translate}}">
+            <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+        </ui-select-match>
+        <ui-select-choices class="ib-select-date__list" repeat="item in (expDateCtrl.availableDays | filter: $select.search)">
+            <span class="ib-select-date__list-txt" ng-bind="item"></span>
+        </ui-select-choices>
+    </ui-select>
+    <ui-select  ng-disabled="expDateCtrl.needDisabled" class="ib-select-date__action ib-select-date__action--month" data-ng-model="expDateCtrl['month']" data-ng-change="expDateCtrl.updateMonthExpiration()"
+        ng-required="::expDateCtrl.dateRequired" name="expiryDateMonth_{{::expDateCtrl.index}}" data-ng-class="{'ib-select-date__action--month-first' : !expDateCtrl.showDay}"
+        uis-open-close="expDateCtrl.onOpenClose(isOpen,'ib-select-date__action--month')">
+        <ui-select-match class="ib-select-date__list-ipt" placeholder="{{'EXPIRY_DATE_FIELD_MONTH_PLACEHOLDER'|translate}}">
+            <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+        </ui-select-match>
+        <ui-select-choices repeat="item in (expDateCtrl.availableMonths | filter: $select.search)">
+            <span class="ib-select-date__list-txt" data-ng-bind="item"></span>
+        </ui-select-choices>
+    </ui-select>
+    <ui-select  ng-disabled="expDateCtrl.needDisabled" class="ib-select-date__action" ng-class="{'ib-select-date__action--year': expDateCtrl.showDay,'ib-select-date__action--day':!expDateCtrl.showDay}"
+        data-ng-model="expDateCtrl['year']" data-ng-change="expDateCtrl.updateYearExpiration()" ng-required="::expDateCtrl.dateRequired"
+        name="expiryDateYear_{{::expDateCtrl.index}}"
+        uis-open-close="expDateCtrl.onOpenClose(isOpen,'ib-select-date__action--year')">
+        <ui-select-match class="ib-select-date__list-ipt" placeholder="{{expDateCtrl.showDay ? ('EXPIRY_DATE_FIELD_YEAR_PLACEHOLDER'|translate) : ('EXPIRY_DATE_FIELD_LIGHT_YEAR_PLACEHOLDER'|translate)}}">
+            <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+        </ui-select-match>
+        <ui-select-choices repeat="item in (expDateCtrl.availableYears | filter: $select.search)">
+            <span class="ib-select-date__list-txt" data-ng-bind="item"></span>
+        </ui-select-choices>
+    </ui-select>
+</div>
+<div ng-messages="expDateCtrl.containerForm.$submitted && ((expDateCtrl.containerForm['expiryDateDay_'+ expDateCtrl.index].$invalid && expDateCtrl.containerForm['expiryDateDay_'+ expDateCtrl.index].$error)
+                    || (expDateCtrl.containerForm['expiryDateMonth_'+ expDateCtrl.index].$invalid && expDateCtrl.containerForm['expiryDateMonth_'+ expDateCtrl.index].$error)
+                    || (expDateCtrl.containerForm['expiryDateYear_'+ expDateCtrl.index].$invalid && expDateCtrl.containerForm['expiryDateYear_'+ expDateCtrl.index].$error))">
+    <div class="ib-alert ib-alert--error" ng-message="required">{{'EXPIRY_DATE_REQUIRED_ERROR'|translate}}</div>
+</div>

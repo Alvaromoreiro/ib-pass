@@ -1,0 +1,191 @@
+/* -------------------------------------------------------------
+    #BOX MENU
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}box-link {
+    position: relative;
+    display: block;
+    padding: rem(13) rem(18) rem(22);
+    border-top: rem(4) solid color(primary);
+    background: color(white);
+
+    &:hover,
+    &:focus {
+        text-decoration: none;
+    }
+
+    &__container {
+        position: relative;
+        display: block;
+        padding: 0 rem(18) 0 0;
+
+        &::after {
+            content: "\e973";
+            position: absolute;
+            top: rem(-3);
+            right: 0;
+            font-family: $font-icons;
+            font-size: rem(22);
+            color: color(primary);
+        }
+    }
+    .#{$wefront__namespace}heading {
+        margin-top: rem(5);
+        margin-left: rem(16);
+
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+    .#{$wefront__namespace}text {
+        margin-left: rem(35);
+    }
+
+    &__gdr {
+        height: 100%;       //FIX BUG DIB_2842 (EQUAL HEIGHT WITH boxflex)
+        padding: rem(20) rem(16) rem(12) rem(24);
+        box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+        .#{$wefront__namespace}box-link {
+            &__container {
+                padding-right: 0;
+                padding-left: rem(32);
+            }
+        }
+        .#{$wefront__namespace}heading {
+            display: block;
+            padding-right: rem(20);
+            margin-top: 0;
+            margin-left: 0;
+
+            &[class*="icon-"] {
+                position: absolute;
+                top: rem(-7);
+                left: rem(-7);
+                margin: 0;
+
+                &::before {
+                    position: initial;
+                    top: initial;
+                    left: initial;
+                    font-size: rem(33);
+                }
+
+                &.icon-mensajes {
+                    top: rem(-12);
+                    left: rem(-1);
+
+                    &::before {
+                        font-size: rem(18);
+                    }
+                }
+            }
+        }
+        .#{$wefront__namespace}text {
+            margin-left: 0;
+        }
+    }
+
+    &--no-padding {
+        padding: 0;
+    }
+
+    &--no-padding-important {
+        padding: 0 !important;
+    }
+
+    &--new-seat-map-seats {
+        position: fixed;
+        z-index: 2
+    }
+
+    &--grey-header {
+        border-top: rem(4) solid color(gray-15) !important;
+    }
+
+    &--new-seat-map-summary {
+        top: rem(72);
+        width: rem(432);
+    }
+}
+
+@include media-query('lg') {
+    .#{$wefront__namespace}box-link {
+        padding: rem(13) rem(12) rem(22);
+
+        &__gdr {
+            padding-top: rem(16);
+            padding-bottom: rem(12);
+            padding-left: rem(16);
+
+            .#{$wefront__namespace}box-link {
+                &__container {
+                    &::after {
+                        right: rem(-7);
+                    }
+                }
+            }
+            .#{$wefront__namespace}heading {
+                padding-right: rem(16);
+                font-size: rem(21);
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}box-link {
+        &__gdr {
+            padding-left: rem(16);
+            .#{$wefront__namespace}box-link {
+                &__container {
+                    &::after {
+                        right: rem(-7);
+                    }
+                }
+            }
+        }
+
+        &--new-seat-map-leyend {
+            z-index: 1;
+            left: calc((100% - rem(280)) / 2);
+            width: rem(280);
+        }
+
+        &--new-seat-map-summary {
+            top: rem(72);
+            width: rem(348);
+        }
+    }
+    
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}box-link {
+        &--new-seat-map-leyend {
+            position: fixed;
+            z-index: 5;
+            top: 50%;
+            left: 50%;
+            width: rem(335);
+            border-top: rem(4) solid color(primary);
+            box-shadow: 0 0 rem(8) rgb(0 0 0 / 50%);
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+@media only screen and (width <= rem(320)) {
+    .#{$wefront__namespace}box-link {
+        &--new-seat-map-leyend {
+            width: rem(280);
+            margin-left: 0;
+        }
+
+        &--new-seat-map-summary {
+            width: rem(298);
+        }
+    }
+}
+

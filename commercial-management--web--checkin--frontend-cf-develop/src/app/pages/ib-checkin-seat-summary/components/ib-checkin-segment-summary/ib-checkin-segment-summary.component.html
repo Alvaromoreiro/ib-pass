@@ -1,0 +1,20 @@
+<section class="segment-container">
+    <ib-checkin-segment-info [segmentInfo]="segmentInfo" />
+    <section class="segment-seats">
+        <div class="seats-information">
+            <header>
+                <h2>{{'YOUR_SEATS' | translate}}</h2>
+                <h3 *ngIf="segmentInfo.cabinClass.description">{{'CKIACPT_SEAT_CABIN' | translate: { cabina: segmentInfo.cabinClass.description} }}</h3>
+            </header>
+            <div class="seats-container">
+                <ng-container *ngFor="let passenger of segmentInfo.passengers">
+                    <ib-checkin-passenger-row [passengerInfo]="passenger" />
+                </ng-container>
+            </div>
+        </div>
+        <div class="seats-button" *ngIf="segmentInfo.changeSeatAvailable" (click)="changeSeats()">
+            <button
+                class="ib-button ib-button--block-xs ib-button--w-medium ib-button ib-button--reverse">{{'MODIFY_SEATS_TEXT' | translate}}</button>
+        </div>
+    </section>
+</section>

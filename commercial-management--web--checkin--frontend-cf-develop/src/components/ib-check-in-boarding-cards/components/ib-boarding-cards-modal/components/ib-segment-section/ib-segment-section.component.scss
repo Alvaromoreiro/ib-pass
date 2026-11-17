@@ -1,0 +1,66 @@
+@import "/src/styles/settings/settings__config";
+@import "/src/styles/settings/settings__colors";
+@import "/src/styles/tools/tools__colors";
+@import "/src/styles/tools/tools__pixel-to-rem";
+@import '/src/styles/mixins/media-query-range.scss';
+@import '/src/styles/vars/breakpoints.scss';
+
+.segment-container {
+    display: flex;
+    flex-direction: column;
+    gap: rem(11);
+}
+
+.segment-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: rem(8);
+
+    &__left {
+        display: flex;
+        align-items: center;
+        font-family: $font-special;
+        font-weight: 700;
+        color: color(primary);
+        gap: rem(8);
+    }
+
+    .icon-avion_arriba {
+        display: none;
+        font-size: rem(23);
+        line-height: rem(16);
+    }
+
+    h4 {
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        font-size: rem(16);
+        line-height: rem(16);
+        gap: rem(5);
+
+        .airport-title {
+            white-space: nowrap;
+        }
+    }
+
+    &__right {
+        font-size: rem(13);
+        line-height: rem(16);
+        color: color(gray-10);
+    }
+}
+
+@include media-query-range('mf-md') {
+    .segment-info {
+        flex-direction: row;
+
+        .icon-avion_arriba {
+            display: block;
+        }
+    }
+}

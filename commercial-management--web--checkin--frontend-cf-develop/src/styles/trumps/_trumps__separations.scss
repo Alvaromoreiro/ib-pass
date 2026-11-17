@@ -1,0 +1,57 @@
+/* ------------------------------------*\
+    #SEPARATIONS
+\*------------------------------------ */
+
+// moved $separtions & $rules variables to scss\tools\_tools__pixel-to-rem.scss
+
+@each $separation, $separations-size in $separations {
+    @each $rule-classname, $rule in $rules {
+        .u-#{$rule-classname}#{$separation} {
+            #{$rule}: $separations-size !important;
+        }
+    }
+}
+
+.u-mx-auto {
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+
+@each $breakpoint, $query in $breakpoints {
+    @include media-query($breakpoint) {
+        @each $separation, $separations-size in $separations {
+            @each $rule-classname, $rule in $rules {
+                .u-#{$rule-classname}#{$separation}-#{$breakpoint} {
+                    #{$rule}: $separations-size !important;
+                }
+            }
+        }
+        .u-mx-auto-#{$breakpoint} {
+            margin-right: auto !important;
+            margin-left: auto !important;
+        }
+    }
+}
+
+.separator {
+    margin: rem(18) 0;
+    border-top: rem(1) solid color(gray-40);
+}
+.#{$wefront__namespace}separator {
+    width: rem(200);
+    margin: rem(20) auto rem(15);
+    border-top: rem(2) solid color(white);
+
+    &--big {
+        width: rem(256);
+        border-top: rem(4) solid color(white);
+    }
+}
+
+@include media-query(mobile) {
+    .u-separator-for-toway {
+        padding-bottom: rem(16) !important;
+        margin-bottom: rem(16) !important;
+        border-bottom: rem(16) solid color(white) !important;
+    }
+}

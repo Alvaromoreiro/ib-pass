@@ -1,0 +1,90 @@
+/* -------------------------------------------------------------
+    #NOTICE INPUT
+----------------------------------------------------------------- */
+.#{$wefront__namespace}notice-input {
+    position: absolute;
+    z-index: 1;
+    bottom: rem(-64);
+    left: 0;
+    display: block;
+    min-width: 100%;
+    padding: rem(16) rem(16) rem(12);
+    text-align: center;
+    background-color: color(gray-30);
+    box-shadow: 0 rem(-1) rem(4) rgb(0 0 0 / 10%), 0 rem(2) rem(3) rgb(0 0 0 / 30%);
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: rem(-18);
+        right: rem(208);
+        display: block;
+        border-top: rem(10) solid transparent;
+        border-right: rem(10) solid transparent;
+        border-bottom: rem(10) solid color(gray-30);
+        border-left: rem(10) solid transparent;
+        text-align: center;
+    }
+
+    &__purchased {
+        background-color: color(primary);
+
+        &::before {
+            border-bottom: rem(10) solid color(primary);
+        }
+    }
+
+    &__title {
+        display: block;
+        margin-bottom: rem(4);
+        font-family: $font-normal;
+        font-size: rem(13);
+        font-weight: 700;
+        line-height: rem(20);
+        color: color(white);
+    }
+
+    &__txt {
+        display: block;
+        font-family: $font-normal;
+        font-size: rem(13);
+        line-height: rem(20);
+        color: color(white);
+    }
+}
+//Responsive
+
+@include media-query("md") {
+    .#{$wefront__namespace}notice-input {
+        &::before {
+            right: rem(183);
+        }
+    }
+}
+
+@include media-query("sm") {
+    .#{$wefront__namespace}notice-input {
+        &::before {
+            left: 10.6%;
+        }
+    }
+}
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}notice-input {
+        position: relative;
+        bottom: rem(-10);
+        left: 0;
+        left: rem(-38);
+        min-width: calc(100% + rem(52));
+
+        &::before {
+            right: auto;
+            left: 14.5%;
+        }
+
+        &__txt {
+            line-height: rem(16);
+        }
+    }
+}//mobile

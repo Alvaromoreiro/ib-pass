@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="ib-layout__section-title">
+            <h2 class="ib-heading ib-heading--type-1">{{'IBCOAC_WHAT_TO_DO_TITLE'|translate}}</h2>
+        </div>
+        <div class="ib-layout__line-spacing">
+            <div class="ib-box-selects ib-box-selects--type-1">
+                <header id ="cki-flights-passengers-what-to-do-header" class="ib-box-selects__header">
+                    <span class="ib-icon-contact">
+                        <span class="ib-icon-contact__icon icon-mas_servicios"></span>
+                    <span class="ib-icon-contact__title">{{'IBCOAC_PA_WHAT_TO_DO_TITLE'|translate}}</span>
+                    <span class="ib-icon-contact__description">{{(whatdCtrl.type === 'REGULAR' ? 'IBCOAC_WHAT_TO_DO_INFO_REGULAR' : 'IBCOAC_WHAT_TO_DO_INFO_SHUTTLE') |translate}}</span>
+                    </span>
+                </header>
+                <div class="ib-box-selects__container">
+                    <equal-height data-equal-height-reload="true">
+                        <div class="row" data-ng-if="whatdCtrl.type === 'REGULAR'">
+                            <div class="col-sm-12 col-md-6" data-ng-repeat="(optionIndex,option) in whatdCtrl.options">
+                                <div class="ib-check-card">
+                                    <button id ="cki-flights-passengers-what-to-do-check-btn-{{optionIndex}}" class="ib-check-card__box" data-equal="checkCard" type="button" data-ng-class="{'ib-check-card__box--active' : option.isSelected}"
+                                        data-ng-click="option.isSelected = !option.isSelected">
+                                        <span class="ib-check-card__box-icon {{option.icon}}"></span>
+                                        <span class="ib-check-card__box-title">{{option.title | translate}}</span>
+                                    </button>
+                                    <div class="ib-check-card__select">
+                                        <input class="ib-check-card__select-input" type="checkbox" name="check_whatToDo-{{optionIndex}}" id="check_whatToDo-{{optionIndex}}"
+                                            data-ng-model="option.isSelected" />
+                                        <label class="ib-check-card__select-label" for="check_whatToDo-{{optionIndex}}">{{option.isSelected ? 'IBECBP_MODE_BOXES_SELECTED' : 'IBECBP_MODE_BOXES_NOT_SELECTED' | translate}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" data-ng-if="whatdCtrl.type === 'SHUTTLE'">
+                            <equal-height data-equal-height-reload="true">
+                                <div class="col-sm-12 col-md-4" data-ng-class="{'col-md-6':whatdCtrl.options.length === 2, 'col-md-4':whatdCtrl.options.length === 3}"
+                                    data-ng-repeat="(optionIndex,option) in whatdCtrl.options">
+                                    <div class="ib-check-boxed ib-check-boxed--type-2"  data-ng-if="!option.deactive">
+                                        <input data-ng-click="whatdCtrl.selectedOption(option,!option.isSelected);option.isSelected = !option.isSelected" class="ib-check-boxed__check"
+                                            type="radio" name="radio_whatToDo" id="radio_whatToDo-{{optionIndex}}"/>
+                                        <label data-equal="boxed" class="ib-check-boxed__label" for="radio_whatToDo-{{optionIndex}}">
+                                        <span class="ib-check-boxed__icon {{option.icon}}"></span>
+                                        <span class="ib-check-boxed__detail">{{option.description | translate}}</span>
+                                    </label>
+                                    </div>
+                                </div>
+                            </equal-height>
+                        </div>
+                    </equal-height>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="ibe-ticket__flights">
+    <div class="ibe-ticket__flights-item">
+        <div class="ibe-ticket__flights__pre-header" data-ng-if="::segmentInfoCtrl.showPa">
+            <img class="ibe-ticket__flights__pre-header--img" ng-src="{{::segmentInfoCtrl.paIconUrl}}">
+        </div>
+        <article class="ibe-ticket__flights-item__data">
+            <header class="ibe-ticket__flights-item__data-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="ibe-ticket__flights-item__data-left">
+                            <p class="ibe-ticket__flights-item__data-header__title">{{::segmentInfoCtrl.segmentInfoModel.departure.airportDescription}}</p>
+                            <p class="ibe-ticket__flights-item__data-header__description-from--left">{{::segmentInfoCtrl.segmentInfoModel.departure.airportCode}}</p>
+                            <div class="ibe-ticket__flights-item__data-header__description">
+                                <p class="ibe-ticket__flights-item__data-header__description-airport"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <figure class="ibe-ticket__flights-item__data-header__icon">
+                        <img data-ng-src="{{$root.routes.icons}}/vuelos_pasajeros/ticket-icon-airplane.png" alt="{{'ACCES_LOGO_MEDIOTRANSP'|translate}}" class="ibe-ticket__flights-item__data-header__icon-img"
+                        />
+                        <span class="ibe-ticket__flights-item__data-header__icon-text ibe-text ibe-text--block ibe-text--color-unfocused" data-ng-if="segmentInfoCtrl.segmentInfoModel.type === 'OPEN'">{{'IBCOAC_PA_SEGMENT_BODY_OPEN_TEXT'|translate}}</span>
+                    </figure>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="ibe-ticket__flights-item__data-right">
+                            <p class="ibe-ticket__flights-item__data-header__title">{{::segmentInfoCtrl.segmentInfoModel.arrival.airportDescription}}</p>
+                            <div class="ibe-ticket__flights-item__data-header__description">
+                                <p class="ibe-ticket__flights-item__data-header__description-airport"></p>
+                            </div>
+                            <p class="ibe-ticket__flights-item__data-header__description-from">{{::segmentInfoCtrl.segmentInfoModel.arrival.airportCode}}</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div data-ng-if="::(segmentInfoCtrl.showDetails && segmentInfoCtrl.segmentInfoModel.type === 'CONFIRMED')" data-ib-accordion-directive
+                data-view="ib-segment-details-info" class="ibe-ticket__flights-item__data-body"></div>
+            <footer data-ng-if="::(segmentInfoCtrl.showChecks && segmentInfoCtrl.segmentInfoModel.status.code !== 'UNCHECKABLE' || segmentInfoCtrl.segmentInfoModel.whatToDo.flyNow || segmentInfoCtrl.segmentInfoModel.whatToDo.mmbAvailable)"
+                class="ibe-ticket__flights-item__data-footer">
+                <div class="ibe-ticket__flights-item__data-footer-container">
+                    <div class="ibe-ticket__flights--bridge">
+                        <fieldset>
+                            <legend class="hideAccessible">{{'IBCOAC_PA_SEGMENT_FOOTER_TITLE'|translate}}</legend>
+                            <span class="ibe-ticket__flights-item--icon icon-checking_online" ng-class="{'icon-confirmacion': segmentInfoCtrl.segmentInfoModel.status.code !== 'CHECKABLE' && segmentInfoCtrl.segmentInfoModel.status.code !== 'UNCHECKABLE',
+                                           'icon-checking_online': segmentInfoCtrl.segmentInfoModel.status.code === 'CHECKABLE' || segmentInfoCtrl.segmentInfoModel.status.code === 'UNCHECKABLE'}">
+                                {{((segmentInfoCtrl.segmentInfoModel.status.code === 'CHECKABLE' ||  segmentInfoCtrl.segmentInfoModel.status.code === 'UNCHECKABLE')?  ('IBCOAC_PA_SEGMENT_FOOTER_CHECKABLE'|translate) : ('IBCOAC_PA_SEGMENT_FOOTER_CHECKED'|translate))}}
+                            </span>
+                            <label for="SEGMENT_SELECT_{{::segmentInfoCtrl.index}}" class="ibe-form__radio">
+								<input type="radio" id="SEGMENT_SELECT_{{::segmentInfoCtrl.index}}" name="radio-ticket" class="ibe-form__radio-input" value="{{::segmentInfoCtrl.index}}"
+                                    data-ng-model="segmentInfoCtrl.segmentSelected" ib-element-scroll="whatToDo" />
+								<span class="ibe-form__radio-text">{{'IBCOAC_PA_SEGMENT_FOOTER_TITLE'|translate}}</span>
+							</label>
+                        </fieldset>
+                    </div>
+                </div>
+            </footer>
+            <footer data-ng-if="::(segmentInfoCtrl.showChecks && segmentInfoCtrl.segmentInfoModel.status.code === 'UNCHECKABLE' && segmentInfoCtrl.segmentInfoModel.whatToDo.blocks.length === 0)"
+                class="ibe-ticket__flights-item__data-footer">
+                <div class="ibe-ticket__flights-item__data-footer-container">
+                    <p class="ibe-ticket__flights-text--center">{{'IBCOAC_PA_SEGMENT_FOOTER_UNCHECKABLE'|translate}}
+                        <a id="cki-segment-info-pa-uncheckable-more-information-link" data-ng-click="segmentInfoCtrl.showSegmentError()" class="ibe-ticket__flights--link" title="{{'IBCOAC_PA_SEGMENT_FOOTER_UNCHECKABLE_MORE_TITLE'|translate}} ">{{'IBCOAC_PA_SEGMENT_FOOTER_UNCHECKABLE_MORE'|translate}}</a></p>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>

@@ -1,0 +1,132 @@
+@import '/src/styles/_settings-tools';
+@import "/src/styles/tools/tools__pixel-to-rem";
+@import '/src/styles/mixins/media-query-range';
+@import '/src/styles/vars/breakpoints';
+
+.container {
+    position: relative;
+    display: block;
+    max-width: rem(1152);
+    padding: 0 rem(16);
+    margin: 0 auto;
+}
+
+@include media-query-range("mq-lg") {
+    .container {
+        max-width: rem(992);
+        padding: 0 rem(32);
+    }
+}
+
+@include media-query-range("mq-md") {
+    .container {
+        max-width: rem(768);
+    }
+}
+
+@include media-query-range("mq-mobile") {
+    .container {
+        max-width: rem(768);
+    }
+}
+
+@include media-query-range("mq-sm") {
+    .container {
+        max-width: rem(480);
+    }
+}
+
+@include media-query-range("mq-xs") {
+    .container {
+        max-width: rem(480);
+    }
+}
+
+.pmt-container {
+    display: grid;
+    width: 100%;
+    gap: rem(32);
+    grid-auto-columns: 1fr;
+    grid-template-areas:
+        "top top top"
+        "main main side";
+}
+
+.pmt-top {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: rem(32);
+    grid-area: top;
+}
+
+.pmt-main {
+    min-height: rem(735);
+    grid-area: main
+}
+
+.pmt-side {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: rem(32);
+    grid-area: side;
+}
+
+.page-title {
+    margin-top: rem(32);
+    font-family: var(--font-primary);
+    font-size: rem(38);
+    line-height: rem(38);
+    word-break: break-word;
+}
+
+
+@include media-query-range("mq-lg") {
+    .page-title {
+        font-size: rem(30);
+    }
+
+    .pmt-container {
+        grid-template-areas:
+            "top top top"
+            "main main side";
+    }
+}
+
+@include media-query-range("mq-md") {
+    .page-title {
+        font-size: rem(30);
+    }
+
+    .pmt-container {
+        grid-template-areas:
+            "top"
+            "side"
+            "main";
+        grid-template-columns: 1fr;
+    }
+
+    .pmt-voucher {
+        order: 1;
+    }
+}
+
+@include media-query-range("mq-mobile") {
+    .pmt-container {
+        grid-template-areas:
+            "top"
+            "side"
+            "main";
+        grid-template-columns: 1fr;
+    }
+
+    .pmt-voucher {
+        order: 1;
+    }
+}
+
+
+@include media-query-range("mq-xs") {
+    .page-title {
+        font-size: rem(32);
+    }
+}

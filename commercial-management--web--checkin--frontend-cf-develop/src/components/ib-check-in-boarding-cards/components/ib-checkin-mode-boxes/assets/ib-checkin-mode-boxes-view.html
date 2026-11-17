@@ -1,0 +1,16 @@
+<div class="col-xs-12 col-sm-4" data-ng-repeat="(index,info) in modeBoxesCtrl.modesList">
+    <div class="ib-check-card">
+        <button id="cki-boarding-cards-mode-boxes-check-{{::info.type}}" class="ib-check-card__box" type="button" ng-class="{'ib-check-card__box--active' : info.isSelected}"
+            data-ng-click="info.isSelected = !info.isSelected;modeBoxesCtrl.oneModeChecked(modeBoxesCtrl.modesList,index,info.type,info.isSelected)">
+            <span class="ib-check-card__box-icon {{::info.class}}"></span>
+            <span class="ib-check-card__box-title">{{info.description | translate}}</span>
+        </button>
+        <div class="ib-check-card__select">
+            <input class="ib-check-card__select-input" type="checkbox" name="check_{{::info.type}}"
+                id="check_{{::info.type}}" data-ng-model="info.isSelected"
+                data-ng-change="modeBoxesCtrl.oneModeChecked(modeBoxesCtrl.modesList,index,info.type,info.isSelected)" />
+            <label class="ib-check-card__select-label"
+                for="check_{{::info.type}}">{{info.isSelected ? ('IBECBP_MODE_BOXES_SELECTED'|translate) : ('IBECBP_MODE_BOXES_NOT_SELECTED'|translate)}}</label>
+        </div>
+    </div>
+</div>

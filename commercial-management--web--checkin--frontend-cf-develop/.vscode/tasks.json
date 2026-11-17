@@ -1,0 +1,118 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "task-uatb",
+            "type": "npm",
+            "group": "build",
+            "isBackground": true,
+            "script": "build-watch -- --env uatb open=false",
+            "detail": "webpack serve --config webpack.config.js --progress",
+            "problemMatcher": {
+                "owner": "npm",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": "No issues found."
+                },
+                "pattern": {
+                    "regexp": "√ Compiled successfully.|Failed to compile.",
+                }
+            }
+        },
+        {
+            "label": "ng-serve-uatb",
+            "type": "npm",
+            "script": "start --env=uatb --ignore_proxy=true",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "typescript",
+                "pattern": "$tsc",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": {
+                        "regexp": "(.*?)"
+                    },
+                    "endsPattern": {
+                        "regexp": "√ Compiled successfully.|Failed to compile."
+                    }
+                }
+            }
+        },
+        {
+            "label": "ng-serve-tok",
+            "type": "npm",
+            "script": "start --env=tok --ignore_proxy=true",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "typescript",
+                "pattern": "$tsc",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": {
+                        "regexp": "(.*?)"
+                    },
+                    "endsPattern": {
+                        "regexp": "√ Compiled successfully.|Failed to compile."
+                    }
+                }
+            }
+        },
+        {
+            "label": "ng-serve-uatd",
+            "type": "npm",
+            "script": "start --env=uatd --ignore_proxy=true",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "typescript",
+                "pattern": "$tsc",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": {
+                        "regexp": "(.*?)"
+                    },
+                    "endsPattern": {
+                        "regexp": "√ Compiled successfully.|Failed to compile."
+                    }
+                }
+            }
+        },
+        {
+            "type": "npm",
+            "script": "test-watch",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "typescript",
+                "pattern": "$tsc",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": {
+                        "regexp": "(.*?)"
+                    },
+                    "endsPattern": {
+                        "regexp": "√ Compiled successfully.|Failed to compile."
+                    }
+                }
+            }
+        },
+        {
+            "label": "test-debug",
+            "type": "npm",
+            "script": "test-watch",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "typescript",
+                "pattern": "$tsc",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": {
+                        "regexp": "(.*?)"
+                    },
+                    "endsPattern": {
+                        "regexp": "Connected on socket|Failed to compile."
+                    }
+                }
+            }
+        }
+    ]
+}

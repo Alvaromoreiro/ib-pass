@@ -1,0 +1,17 @@
+@mixin media-query-range($mq) {
+    $breakpoint-found: false;
+
+    @each $breakpoint, $condition in $cki-breakpoints {
+        @if $mq == $breakpoint and $condition {
+            $breakpoint-found: true;
+
+            @media #{$condition} {
+                @content;
+            }
+        }
+    }
+
+    @if $breakpoint-found == false {
+        @warn "¡Ups! The breakpoint ‘#{$mq}’ does not exist.";
+    }
+}

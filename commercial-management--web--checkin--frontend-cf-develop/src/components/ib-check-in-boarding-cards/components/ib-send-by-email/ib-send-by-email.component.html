@@ -1,0 +1,135 @@
+<div class="ib-boarding-cards-wallet__content" [ngClass]="{'ib-boarding-cards-wallet--none': onlyPdf}">
+    <section class="ib-boarding-cards-wallet__section">
+        <div class="ib-intro-section ib-intro-section--dark">
+            <div class="ib-intro-section__content">
+                <span class="ib-intro-section__icon icon-mensajes ib-intro-section__icon--primary">
+                </span>
+                <div>
+                    <h3 class="ib-intro-section__title ">{{'CKI_BOARDING_PASSES_SEND_BY_MAIL'| translate}}
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="ib-tab ib-tab--pair ib-tab--pair-2">
+            <ul ngbNav #nav="ngbNav" [activeId]="'0'" [destroyOnHide]="false" class="nav nav-tabs" ng-class="{'ngb-stack': vertical, 'ngb-justify': justified}">
+                <!-- SEND ONE PASSENGER -->
+                <li ngbNavItem="0">
+                    <a ngbNavLink (click)="setSelectedTab(0)">
+                        <span class="ib-tab__text-align">
+                        {{'CKI_BOARDING_PASSES_SEND_ALL_SAME_PERSON' | translate}}
+                        </span>
+                    </a>
+                    <ng-template ngbNavContent>
+                        <form [formGroup]="sendOneEmailForm">
+                            <div class="ib-boarding-cards-wallet__tab-content">
+                                <div class="ib-boarding-cards-wallet__container-checkboxes">
+                                    <div *ngIf="onlyPdf" [ngClass]="{'ib-check--disabled': pdfCheckBoxDisabled}" class="ib-boarding-cards-wallet__checkbox-box">
+                                        <p for="formato-pdf"
+                                            class="ib-boarding-cards-wallet__check-label"
+                                            ng-class="{'ib-input__label--focus' : focused}">
+                                            <span class="ib-boarding-cards-wallet__icon ib-input__icon--opened icon-documento_pdf"></span>
+                                            <span class="ib-check__text ib-boarding-cards-wallet__text ib-boarding-cards-wallet__text--dark u-ellipsis-2">{{'CKI_BOARDING_PASSES_PDF_FORMAT'| translate}}</span>
+                                        </p>
+                                    </div>
+                                    <div *ngIf="!onlyPdf" [ngClass]="{'ib-check--disabled': pdfCheckBoxDisabled}" class="ib-boarding-cards-wallet__checkbox-box">
+                                        <input type="checkbox" id="formato-pdf" name="formato-pdf" formControlName="pdfFormat" (change)="updateCheckbox('sendOne', 'pdfFormat', 'qrFormat')"
+                                            class="ib-check__input" [(ngModel)]="formatsList[0].isSelected" [checked]="formatsList[0].isSelected"/>
+                                        <label for="formato-pdf"
+                                            class="ib-check__label ib-boarding-cards-wallet__check-label"
+                                            ng-class="{'ib-input__label--focus' : focused}">
+                                            <span class="ib-boarding-cards-wallet__icon ib-input__icon--opened icon-documento_pdf"></span>
+                                            <span class="ib-check__text ib-boarding-cards-wallet__text ib-boarding-cards-wallet__text--dark u-ellipsis-2">{{'CKI_BOARDING_PASSES_PDF_FORMAT'| translate}}</span>
+                                        </label>
+                                    </div>
+                                    <div *ngIf="!onlyPdf" [ngClass]="{'ib-check--disabled': qrCheckBoxDisabled}" class="ib-boarding-cards-wallet__checkbox-box">
+                                        <input type="checkbox" id="formato-qr" name="formato-qr" formControlName="qrFormat"
+                                            class="ib-check__input" [(ngModel)]="formatsList[1].isSelected" [checked]="formatsList[1].isSelected" (change)="updateCheckbox('sendOne', 'qrFormat', 'pdfFormat')"/>
+                                        <label for="formato-qr"
+                                            class="ib-check__label ib-boarding-cards-wallet__check-label ib-boarding-cards-wallet__check-label--major-top"
+                                            ng-class="{'ib-input__label--focus' : focused}">
+                                            <span class="ib-boarding-cards-wallet__icon icon-codigo_qr"></span>
+                                            <span class="ib-check__text ib-boarding-cards-wallet__text u-ellipsis-2">{{'CKI_BOARDING_PASSES_QR'| translate}}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="ib-input ib-boarding-cards-wallet__input ib-boarding-cards-wallet__input--last" [ngClass]="{'ib-input--error': oneFormSubmitted && !sendOneEmailForm.valid}"
+                                    ng-controller="ibInputsController as input">
+                                    <label class="ib-input__label" for="email_one"
+                                        [ngClass]="{'ib-input__label--focus' : labelFocus==='labelOneForm' || passengersList[0].email}">{{'EMAIL'| translate}}</label>
+                                    <input class="ib-input__input" type="text" id="email_one" name="email_one" formControlName="email"
+                                        (focus)="setFocus('labelOneForm')" (blur)="setFocus('')" [(ngModel)]="passengersList[0].email"/>
+                                    <div *ngIf="oneFormSubmitted && !sendOneEmailForm.valid" class="ib-alert ib-alert--error"> {{'CKIANCPURC_EMAIL_ERR'|translate}}</div>
+                                </div>
+                            </div>
+                        </form>
+                    </ng-template>
+                </li>
+                <!-- END SEND ONE PASSENGER -->
+                <!-- SEND ALL PASSENGERS -->
+                <li ngbNavItem="2">
+                    <a ngbNavLink (click)="setSelectedTab(1)">
+                        <span class="ib-tab__text-align">
+                            {{'CKI_BOARDING_PASSES_SEND_EACH_PASSENGER' | translate}}
+                        </span>
+                    </a>
+                    <ng-template ngbNavContent>
+                        <form [formGroup]="sendAllEmailForm">
+                            <div class="ib-boarding-cards-wallet__tab-content">
+                                <div class="ib-boarding-cards-wallet__container-checkboxes">
+                                    <div *ngIf="onlyPdf" [ngClass]="{'ib-check--disabled': pdfCheckBoxDisabled}" class="ib-boarding-cards-wallet__checkbox-box">
+                                        <p for="formato-pdf"
+                                            class="ib-boarding-cards-wallet__check-label"
+                                            ng-class="{'ib-input__label--focus' : focused}">
+                                            <span class="ib-boarding-cards-wallet__icon ib-input__icon--opened icon-documento_pdf"></span>
+                                            <span class="ib-check__text ib-boarding-cards-wallet__text ib-boarding-cards-wallet__text--dark u-ellipsis-2">{{'CKI_BOARDING_PASSES_PDF_FORMAT'| translate}}</span>
+                                        </p>
+                                    </div>
+                                    <div *ngIf="!onlyPdf" [ngClass]="{'ib-check--disabled': pdf2CheckBoxDisabled}" class="ib-boarding-cards-wallet__checkbox-box">
+                                        <input type="checkbox" id="formato-pdf2" name="formato-pdf2" formControlName="pdfFormat2"
+                                            class="ib-check__input" [(ngModel)]="formatsList[0].isSelected" [checked]="formatsList[0].isSelected" (change)="updateCheckbox('sendAll', 'pdfFormat', 'qrFormat')"/>
+                                        <label for="formato-pdf2"
+                                            class="ib-check__label ib-boarding-cards-wallet__check-label"
+                                            ng-class="{'ib-input__label--focus' : focused}">
+                                            <span class="ib-boarding-cards-wallet__icon ib-input__icon--opened icon-documento_pdf"></span>
+                                            <span class="ib-check__text ib-boarding-cards-wallet__text ib-boarding-cards-wallet__text--dark u-ellipsis-2">{{'CKI_BOARDING_PASSES_PDF_FORMAT'| translate}}</span>
+                                        </label>
+                                    </div>
+                                    <div *ngIf="!onlyPdf" [ngClass]="{'ib-check--disabled': qr2CheckBoxDisabled}" class="ib-boarding-cards-wallet__checkbox-box">
+                                        <input type="checkbox" id="formato-qr2" name="formato-qr2" formControlName="qrFormat2"
+                                            class="ib-check__input" [(ngModel)]="formatsList[1].isSelected" [checked]="formatsList[1].isSelected" (change)="updateCheckbox('sendAll', 'qrFormat', 'pdfFormat')"/>
+                                        <label for="formato-qr2" class="ib-check__label ib-boarding-cards-wallet__check-label ib-boarding-cards-wallet__check-label--major-top"
+                                            ng-class="{'ib-input__label--focus' : focused}">
+                                            <span class="ib-boarding-cards-wallet__icon icon-codigo_qr"></span>
+                                            <span class="ib-check__text ib-boarding-cards-wallet__text u-ellipsis-2">{{'CKI_BOARDING_PASSES_QR'| translate}}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div ng-controller="ibInputsController as input" *ngFor="let passenger of passengersList; index as i; last as last">
+                                    <div class="ib-boarding-cards-wallet__text ib-boarding-cards-wallet__text--name">{{formatName(passengersList[i].name)}} {{formatName(passengersList[i].surname)}}</div>
+                                    <div class="ib-input ib-boarding-cards-wallet__input"
+                                        [ngClass]="{'ib-input--error': allFormSubmitted && !sendAllEmailForm.controls['email' + i]?.valid, 'ib-boarding-cards-wallet__input--last': last}">
+                                        <label class="ib-input__label" for="email_{{i}}"
+                                            [ngClass]="{'ib-input__label--focus' : labelFocus==='labelAllForm' + i || passengersList[i].email}">{{'EMAIL'| translate}}</label>
+                                        <input class="ib-input__input" type="text" id="email_{{i}}" name="email_{{i}}" formControlName="email{{i}}"
+                                            (focus)="setFocus('labelAllForm'+i)" (blur)="setFocus('')" [(ngModel)]="passengersList[i].email"/>
+                                        <div *ngIf="allFormSubmitted && !sendAllEmailForm.controls['email' + i]?.valid" class="ib-alert ib-alert--error"> {{'CKIANCPURC_EMAIL_ERR'|translate}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </ng-template>
+                </li>
+                <!-- END SEND ALL PASSENGERS -->
+            </ul>
+            <div [ngbNavOutlet]="nav"></div>
+        </div>
+        <div class="ib-content-buttons ib-content-buttons--right">
+            <button
+                [ngClass]="{ 'ib-button--inverse': showContinueButton}"
+                id="IB_BOARDING_CARDS_WALLET_BUTTON"
+                class="ib-button ib-button-mw-normal-fullmobile ib-boarding-cards-wallet__button u-mt-xmedium u-float-right"
+                (click)="sendEmailTickets()">{{'CKI_BOARDING_PASSES_SEND_BUTTON'| translate}}
+            </button>
+        </div>
+    </section>
+</div>

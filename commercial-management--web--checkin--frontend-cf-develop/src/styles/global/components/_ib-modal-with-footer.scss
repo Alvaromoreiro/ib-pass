@@ -1,0 +1,196 @@
+.#{$wefront__namespace}modal-with-footer {
+    &__header {
+        padding: rem(40) rem(32) 0;
+    }
+
+    &__header-title {
+        display: block;
+        padding-bottom: rem(20);
+        margin: 0;
+        border-bottom: rem(1) solid color(gray-70);
+    }
+
+    &__body {
+        position: absolute;
+        overflow: auto;
+        width: 100%;
+        height: calc(100% - rem(165));
+        padding: rem(20) rem(32) 0;
+    }
+
+    &__footer {
+        position: absolute;
+        z-index: 2;
+        bottom: 0;
+        overflow: hidden;
+        width: 100%;
+        padding: 0.5rem rem(32) 0.75rem;
+        font-size: 0;
+        background-color: color(white);
+        box-shadow: 0 rem(-2) rem(3) 0 color(black, 0.03);
+        clear: both;
+
+        &--long-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &--avios-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &--normal-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .#{$wefront__namespace}link {
+                max-width: 30%;
+                word-break: break-word;
+            }
+        }
+    }
+
+    &__price {
+        display: flex;
+        overflow: hidden;
+        flex-wrap: nowrap;
+        align-items: center;
+        margin-right: rem(25);
+        margin-left: auto;
+        white-space: nowrap;
+    }
+
+    &__avios {
+        background-color: color(gray-220) !important;
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}modal-with-footer {
+        &__header {
+            padding: rem(16) rem(24) 0;
+        }
+
+        &__header-title {
+            padding-bottom: rem(10);
+        }
+
+        &__body {
+            position: absolute;
+            overflow: auto;
+            height: calc(100% - rem(145));
+            padding: rem(15) rem(25) 0;
+        }
+
+        &__footer {
+            padding: rem(15) rem(25) rem(15);
+
+            &--long-price {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                .#{$wefront__namespace}modal-with-footer__price {
+                    margin: 0 auto rem(10) auto;
+                }
+                .#{$wefront__namespace}button {
+                    width: 100%;
+                }
+            }
+
+            &--avios-footer {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                .#{$wefront__namespace}modal-with-footer__price {
+                    margin: inherit;
+                }
+                .#{$wefront__namespace}button {
+                    width: auto;
+                }
+            }
+
+            &--normal-price {
+                .#{$wefront__namespace}modal-with-footer__price {
+                    margin-right: auto;
+                    margin-left: initial;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}modal-with-footer {
+        &__header {
+            padding: rem(16) rem(16) 0;
+            border-bottom: rem(1) solid color(gray-70);
+        }
+
+        &__header-title {
+            padding-bottom: rem(10);
+            border-bottom: none;
+        }
+
+        &__body {
+            position: absolute;
+            overflow: auto;
+            height: calc(100% - rem(190));
+            padding: rem(12) rem(16) 0;
+
+            &--logo-avios {
+                height: calc(100% - rem(265));
+            }
+        }
+
+        &__footer {
+            padding: rem(12) rem(16) rem(12);
+
+            &--long-price {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                .#{$wefront__namespace}modal-with-footer__price {
+                    margin: 0 auto rem(10) auto;
+                }
+                .#{$wefront__namespace}button {
+                    width: 100%;
+                }
+            }
+
+            &--avios-footer {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                .#{$wefront__namespace}modal-with-footer__price {
+                    display: flex;
+                    flex-direction: column-reverse !important;
+                    margin: 0 auto rem(10) auto;
+
+                    &--avios {
+                        flex-direction: column;
+                        align-items: center;
+                    }
+                }
+                .#{$wefront__namespace}button {
+                    width: 100%;
+                }
+            }
+
+            &--normal-price {
+                .#{$wefront__namespace}modal-with-footer__price {
+                    margin-right: auto;
+                    margin-left: initial;
+                }
+            }
+        }
+
+        &__close {
+            top: rem(17);
+            right: rem(9);
+        }
+    }
+}

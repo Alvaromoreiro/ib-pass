@@ -1,0 +1,116 @@
+@import "/src/styles/settings/settings__config";
+@import "/src/styles/settings/settings__colors";
+@import "/src/styles/tools/tools__colors";
+@import "/src/styles/tools/tools__fonts";
+@import "/src/styles/tools/tools__pixel-to-rem";
+@import '/src/styles/mixins/media-query-range';
+@import '/src/styles/vars/breakpoints.scss';
+
+.ticket-icon {
+    display: flex;
+    width: rem(32);
+    align-items: center;
+
+    [class*="icon-"] {
+        z-index: 2;
+        font-size: rem(32);
+        color: color(gray-20);
+        background-color: color(white);
+
+        &::before {
+            display: block;
+            -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+    }
+}
+
+.segment-container {
+    padding: rem(24) rem(40);
+    border-bottom: none;
+    box-shadow: none;
+}
+
+.ticket-container {
+    border-bottom: none;
+
+    header {
+        min-height: rem(57);
+        margin: 0;
+        border: none;
+    }
+}
+
+.ticket-info {
+    padding: rem(16) rem(24);
+    border-block: rem(1) solid color(gray-50);
+}
+
+.ib-ticket-flights__journey {
+    align-items: stretch;
+    padding-top: 0;
+}
+
+.airport-text {
+    font-weight: inherit;
+}
+
+@media screen and (width < rem(768)) {
+    .segment-container {
+        padding: 0;
+    }
+
+    .ib-ticket-flights__ticket-header {
+        padding-inline: rem(16);
+    }
+
+    .ib-ticket-flights__journey {
+        align-items: flex-start;
+        padding-block: rem(12);
+    }
+
+    .ib-ticket-flights__journey-city {
+        display: none;
+    }
+
+    .ib-ticket-flights__journey-airport {
+        color: color(gray-15);
+    }
+
+    .ib-ticket-flights__journey-iata {
+        color: color(gray-10);
+    }
+
+    .flight-operated {
+        display: none;
+    }
+
+    .ib-ticket-flights__info-operator {
+        width: inherit;
+        order: initial;
+    }
+
+    .airport-text {
+        display: none;
+    }
+}
+
+@media screen and (width < rem(470)) {
+    .ib-ticket-flights__journey-arrival {
+        padding-left: inherit;
+    }
+}
+
+@media screen and (width < rem(365)) {
+    .ib-ticket-flights__info-operator {
+        align-self: center;
+    }
+
+    .ticket-info .ib-text {
+        font-size: rem(12);
+    }
+
+    .ib-ticket-flights__journey-airport {
+        font-size: rem(12);
+    }
+}

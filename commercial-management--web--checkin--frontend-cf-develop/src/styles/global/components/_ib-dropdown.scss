@@ -1,0 +1,318 @@
+/* -------------------------------------------------------------
+    #DROPDOWN-ROOM
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}dropdown {
+    &--type-1 {
+        position: absolute;
+        top: rem(56);
+        left: rem(-504);
+        // Dropdown for city selector
+        display: none;
+        width: auto;
+        padding: 0;
+        margin: rem(8) 0 0;
+        border: 0;
+        opacity: 0;
+        -webkit-transition: opacity 500ms ease, visibility 500ms ease;
+        -moz-transition: opacity 500ms ease, visibility 500ms ease;
+        -o-transition: opacity 500ms ease, visibility 500ms ease;
+        transition: opacity 500ms ease, visibility 500ms ease;
+        visibility: hidden;
+        &.#{$wefront__namespace}dropdown {
+            &--center {
+                left: 50%;
+                -webkit-transform: translate(-33.4%, 0);
+                -moz-transform: translate(-33.4%, 0);
+                -ms-transform: translate(-33.4%, 0);
+                -o-transform: translate(-33.4%, 0);
+                transform: translate(-33.4%, 0);
+            }
+        }
+    }
+    //&--type-2 {}  DateRangePicker
+    &--type-3 {
+        left: rem(-210);
+    }
+
+    &--left {
+        right: auto;
+        left: 0;
+
+        &::after {
+            left: rem(320);
+        }
+    }
+
+    &--right {
+        right: 0;
+        left: auto;
+
+        &::after {
+            right: rem(20);
+        }
+    }
+
+    &--center {
+        right: auto;
+        left: rem(-345);
+
+        &::after {
+            left: calc(100% - rem(370));
+        }
+    }
+}
+.#{$wefront__namespace}profile-form {
+    .#{$wefront__namespace}dropdown {
+        &--type-4 {
+            .#{$wefront__namespace}input {
+                &__label {
+                    left: rem(16);
+                    font-family: $font-special;
+                }
+            }
+        }
+    }
+}
+
+.open>.#{$wefront__namespace}dropdown {
+    &--type-1 {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+
+        &::after {
+            opacity: 1;
+        }
+    }
+
+    &--mobile {
+        z-index: 9999;
+        top: rem(56);
+        right: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        transform: translate(0, 0);
+    }
+}
+
+// Responsive
+@include media-query('lg') {
+    .#{$wefront__namespace}dropdown {
+        &--type-1 {
+            &.#{$wefront__namespace}dropdown {
+                &--center {
+                    -webkit-transform: translate(-34%, 0);
+                    -moz-transform: translate(-34%, 0);
+                    -ms-transform: translate(-34%, 0);
+                    -o-transform: translate(-34%, 0);
+                    transform: translate(-34%, 0);
+                }
+
+                &--right {
+                    margin-right: -18%;
+                }
+
+                &--mobile {
+                    transform: translate(0, 0);
+                }
+            }
+        }
+
+        &--left-lg {
+            right: auto;
+            left: -14%;
+            margin-right: -30%;
+
+            &::after {
+                left: 29%;
+            }
+        }
+
+        &--right-lg {
+            right: 0;
+            left: auto;
+            margin-right: -30%;
+
+            &::after {
+                right: rem(110);
+                left: auto;
+            }
+        }
+
+        &--center-lg {
+            right: auto;
+            left: rem(-345);
+
+            &::after {
+                left: calc(100% - rem(370));
+            }
+        }
+
+        &--type-2 {
+            left: rem(-95);
+        }
+
+        &--type-3 {
+            left: rem(-232);
+        }
+
+        &--mobile {
+            top: rem(56);
+            right: 0;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            transform: translate(0, 0);
+        }
+    }
+} // lg
+
+@include media-query('md') {
+    .#{$wefront__namespace}dropdown {
+        &--type-1 {
+            right: 0;
+            left: auto;
+            width: 100%;
+            margin-top: 0;
+
+            &::after {
+                display: none;
+            }
+        }
+
+        &--left-md {
+            right: auto;
+            left: 0;
+        }
+
+        &--right-md {
+            right: 0;
+            left: auto;
+        }
+
+        &--type-2 {
+            width: 100%;
+            height: rem(670);
+            overflow-y: scroll;
+        }
+
+        &--type-3 {
+            left: 0;
+            width: 100%;
+            max-height: rem(670);
+            overflow-y: scroll;
+        }
+        &.#{$wefront__namespace}dropdown {
+            &--center {
+                left: 33.5%;
+            }
+
+            &--mobile {
+                left: 0;
+                transform: translate(0, 0);
+            }
+        }
+    }
+} // md
+
+@include media-query('sm') {
+    .#{$wefront__namespace}dropdown {
+        &--type-1 {
+            top: 100%;
+            right: 0;
+            left: auto;
+            width: 100%;
+            margin-top: 0;
+
+            &::after {
+                display: none;
+            }
+        }
+
+        &--left-sm {
+            right: auto;
+            left: 0;
+        }
+
+        &--right-sm {
+            right: 0;
+            left: auto;
+        }
+
+        &--type-2 {
+            width: 100%;
+            height: rem(670);
+            overflow-y: scroll;
+        }
+
+        &--type-3 {
+            left: 0;
+            width: 100%;
+            max-height: rem(670);
+            overflow-y: scroll;
+        }
+        &.#{$wefront__namespace}dropdown {
+            &--center {
+                left: 33.5%;
+            }
+
+            &--mobile {
+                left: 0;
+                transform: translate(0, 0);
+            }
+        }
+    }
+} // sm
+
+@include media-query('xs') {
+    .#{$wefront__namespace}dropdown {
+        &--type-1 {
+            top: 100%;
+            right: 0;
+            left: auto;
+            width: 100%;
+            margin-top: 0;
+
+            &::after {
+                display: none;
+            }
+        }
+
+        &--left-xs {
+            right: auto;
+            left: 0;
+        }
+
+        &--right-xs {
+            right: 0;
+            left: auto;
+        }
+
+        &--type-2 {
+            width: 100%;
+            height: rem(670);
+            overflow-y: scroll;
+        }
+
+        &--type-3 {
+            left: 0;
+            width: calc(100% + rem(32));
+            max-height: rem(670);
+            margin-right: rem(-16);
+            margin-left: rem(-16);
+            overflow-y: scroll;
+        }
+        &.#{$wefront__namespace}dropdown {
+            &--center {
+                left: 33.5%;
+            }
+
+            &--mobile {
+                left: 0;
+                transform: translate(0, 0);
+            }
+        }
+    }
+} // xs

@@ -1,0 +1,56 @@
+<div class="ib-box-selects ib-box-selects--type-1" ng-model-options="{ allowInvalid: true}">
+    <header class="ib-box-selects__header" data-ng-class="{'ib-box-selects__header--empty': PasDeinvoicingInfoCtrl.isOpen}">
+        <span class="ib-icon-passenger">
+            <button id="IBCOAC_BOTON_GENDER-{{PasDeinvoicingInfoCtrl.index}}" data-ng-if="PasDeinvoicingInfoCtrl.passengerInfo.type === 'ADULT' && PasDeinvoicingInfoCtrl.passengerInfo.fieldStatus.gender.show && PasDeinvoicingInfoCtrl.passengerInfo.pasStatus.available"
+                class="ib-icon-passenger__icon" data-uib-popover-template="'{{::$root.routes.templates}}gender-selector-view.html'"
+                data-popover-placement="bottom-left" data-ng-class="{'icon-mujer': PasDeinvoicingInfoCtrl.passengerInfo.gender ==='FEMALE', 'icon-hombre' : PasDeinvoicingInfoCtrl.passengerInfo.gender ==='MALE'}"
+                data-popover-trigger="'outsideClick'" type="button"><span class="hideAccessible">{{'IBCOAC_PA_GENDER_TITLE'|translate}}</span></button>
+            <span data-ng-if="PasDeinvoicingInfoCtrl.passengerInfo.type === 'ADULT' && (!PasDeinvoicingInfoCtrl.passengerInfo.fieldStatus.gender.show || !PasDeinvoicingInfoCtrl.passengerInfo.pasStatus.available)"
+                class="ib-icon-passenger__icon" data-ng-class="{'icon-mujer': PasDeinvoicingInfoCtrl.passengerInfo.gender ==='FEMALE','icon-hombre' : PasDeinvoicingInfoCtrl.passengerInfo.gender ==='MALE'}"></span>
+            <span data-ng-if="PasDeinvoicingInfoCtrl.passengerInfo.type === 'CHILD'" class="ib-icon-passenger__icon icon-iberia_ninos"></span>
+            <span class="ib-icon-passenger__text">{{PasDeinvoicingInfoCtrl.passengerInfo.name + ' ' +
+                PasDeinvoicingInfoCtrl.passengerInfo.surname}}</span>
+        </span>
+        <span class="ib-icon-passenger" data-ng-if="PasDeinvoicingInfoCtrl.passengerInfo.infant">
+            <span class="ib-icon-passenger__icon icon-bebe"></span>
+            <span class="ib-icon-passenger__text">{{PasDeinvoicingInfoCtrl.passengerInfo.infant.name + ' ' +
+                PasDeinvoicingInfoCtrl.passengerInfo.infant.surname}}</span>
+        </span>
+    </header>
+    <div data-ng-if="PasDeinvoicingInfoCtrl.passengerInfo.pasStatus.undoChecked" class="ib-box-selects__container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt-xsmall">
+                    <span class="ib-check__text ib-check__text--unfocused">{{'DE_INVOICING_DE_INVOICING_PASSENGER'|translate}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ib-box-selects__container" data-ng-if="!PasDeinvoicingInfoCtrl.passengerInfo.pasStatus.available && !PasDeinvoicingInfoCtrl.isOpen">
+        <div class="row" data-ng-if="!PasDeinvoicingInfoCtrl.isOpen">
+            <div class="col-xs-12">
+                <a class="ib-link-icon ib-link-icon--left ib-link-icon--size-big" href="javascript:void(0)" data-ng-click="PasDeinvoicingInfoCtrl.openGenericModal(PasDeinvoicingInfoCtrl.passengerInfo.pasStatus)"
+                    title="{{'MODAL_UNAVAILABLE_WARNING_TITLE'|translate}}">
+                    <span class="ib-link-icon__icon icon-alertas"></span>
+                    <span class="ib-link-icon__text">{{'MODAL_UNAVAILABLE_WARNING_TITLE'|translate}}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="ib-box-selects__container" data-ng-if="PasDeinvoicingInfoCtrl.passengerInfo.pasStatus.isChecked">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt-xsmall">
+                    <div class="ib-check">
+                        <input type="checkbox" id="check_pas_{{PasDeinvoicingInfoCtrl.index}}" name="check_pas_{{PasDeinvoicingInfoCtrl.index}}"
+                            class="ib-check__input" data-ng-model="PasDeinvoicingInfoCtrl.passengerInfo.isSelected"
+                            data-ng-click="PasDeinvoicingInfoCtrl.checkSelectedPassengers(PasDeinvoicingInfoCtrl.passengerInfo, $event)" />
+                        <label for="check_pas_{{PasDeinvoicingInfoCtrl.index}}" class="ib-check__label">
+                            <span class="ib-check__text ib-check__text--unfocused">{{'DE_INVOICING_DE_INVOICING'|translate}}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

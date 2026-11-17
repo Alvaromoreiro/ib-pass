@@ -1,0 +1,171 @@
+<div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+    <span class="ib-heading ib-heading--type-4">{{contactCtrl.passengerBasicInfo.showName + ' ' +
+        contactCtrl.passengerBasicInfo.showSurname}}</span>
+</div>
+<div ng-if="contactCtrl.pasContactData.additionalInfo.showData">
+    <div class="ib-layout__line-spacing">
+        <ib-ui-prefix-city prefix-id="'APIS_PREFIX_ADDITIONAL_' + contactCtrl.index"
+            prefix-label="('IBCOAC_TELF_PRE'|translate) + (passenger.fieldStatus.emergencyData.mandatory ? 'GENERAL_MANDATORY_FIELDS_FLAG':'' |translate)"
+            is-required="contactCtrl.pasContactData.additionalInfo.isOptional"
+            prefix-placeholder="('IBCOAC_TELF_PRE'|translate) + (passenger.fieldStatus.emergencyData.mandatory ? 'GENERAL_MANDATORY_FIELDS_FLAG':'' |translate) "
+            prefix-list="contactCtrl.prefixes" prefix-model="contactCtrl.pasContactData.additionalInfo.prefix"
+            container-form="contactCtrl.containerForm"></ib-ui-prefix-city>
+    </div>
+    <div class="ib-layout__line-spacing">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : contactCtrl.containerForm.$submitted && contactCtrl.containerForm['phone_additional_' + contactCtrl.index].$invalid}">
+            <label
+                ng-class="{'ib-input__label--focus' : contactCtrl.phoneAddFocused || (contactCtrl.containerForm['phone_additional_' + contactCtrl.index].$viewValue != null && contactCtrl.containerForm['phone_additional_' + contactCtrl.index].$viewValue !== '')}"
+                class="ib-input__label"
+                for="APIS_PHONE_ADDITIONAL_{{::contactCtrl.index}}">{{'IBCOAC_TELF_NUM'|translate}}
+            </label>
+            <input name="phone_additional_{{::contactCtrl.index}}" id="APIS_PHONE_ADDITIONAL_{{::contactCtrl.index}}"
+                type="tel" class="ib-input__input" ng-model="contactCtrl.pasContactData.additionalInfo.phone"
+                ng-pattern="contactCtrl.pasContactData.additionalInfo.prefix === '34' ?  $root.CHECKIN_PATTERNS.PHONE_PATTERN_ES : $root.CHECKIN_PATTERNS.PHONE_PATTERN"
+                ng-required="!contactCtrl.pasContactData.additionalInfo.isOptional"
+                data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.PHONE_CLEANER}}"
+                ng-focus="contactCtrl.phoneAddFocused=true" ng-blur="contactCtrl.phoneAddFocused=false"
+                maxlength="{{::$root.CHECKIN_FIELDS_LENGTH.PHONE_NUMBER_MAX_LENGTH}}" inputmode="tel"/>
+        </div>
+        <div
+            ng-messages="contactCtrl.containerForm.$submitted && contactCtrl.containerForm['phone_additional_' + contactCtrl.index].$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'IBCOACII_NUM_ERR'|translate}}</div>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : contactCtrl.containerForm.$submitted && contactCtrl.containerForm['email_' + contactCtrl.index].$invalid}">
+            <label
+                ng-class="{'ib-input__label--focus' : contactCtrl.mailFocused || (contactCtrl.containerForm['email_' + contactCtrl.index].$viewValue != null && contactCtrl.containerForm['email_' + contactCtrl.index].$viewValue !== '')}"
+                class="ib-input__label"
+                for="APIS_EMAIL_{{::contactCtrl.index}}">{{'IBCOAC_EMAIL'|translate}}</label>
+            <input name="email_{{::contactCtrl.index}}" id="APIS_EMAIL_{{::contactCtrl.index}}" type="email"
+                class="ib-input__input" ng-model="contactCtrl.pasContactData.additionalInfo.email"
+                ng-pattern="::$root.CHECKIN_PATTERNS.EMAIL_PATTERN"
+                ng-required="!contactCtrl.pasContactData.additionalInfo.isOptional"
+                ng-focus="contactCtrl.mailFocused=true" ng-blur="contactCtrl.mailFocused=false"
+                maxlength="{{::$root.CHECKIN_FIELDS_LENGTH.EMAIL_MAX_LENGTH}}" />
+        </div>
+        <div
+            ng-messages="contactCtrl.containerForm.$submitted && contactCtrl.containerForm['email_' + contactCtrl.index].$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'IBCOAC_EMAIL_ERR'|translate}}</div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'IBCOAC_EMAIL_ERR'|translate}}</div>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing" data-ng-if="!contactCtrl.isUserLogged">
+        <div class="ib-check">
+            <input type="checkbox" id="apis_newsletters_{{::contactCtrl.index}}"
+                name="newsletters_{{::contactCtrl.index}}" class="ib-check__input"
+                data-ng-model="contactCtrl.pasContactData.additionalInfo.denyNewsLetters" />
+            <label for="apis_newsletters_{{::contactCtrl.index}}" class="ib-check__label">
+                <span class="ib-check__text">{{ 'IBCOAC_CONTACT_FORM_INFO_CHECK_BOX'|translate}}</span>
+            </label>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--small" ng-controller="ibCollapseController as collapse"
+        data-ng-if="!contactCtrl.isUserLogged">
+        <div class="ib-msg-alert__footer ib-msg-alert__footer--to-right">
+            <a id="cki-contact-data-data-treatment-link" href="javascript:void(0)"
+                title="{{'GENERAL_CONTACT_DATA_COLLAPSE_TITLE'|translate}}" class="ib-link-icon"
+                ng-click="collapse.clickCollapse($event, true)"
+                data-ng-class="!collapse.isCollapsed ? 'closeCollapse' : 'openCollapse'">
+                <span
+                    class="ib-link-icon__text icon-flecha_1_abajo">{{'GENERAL_CONTACT_DATA_COLLAPSE_TEXT'|translate}}</span>
+            </a>
+        </div>
+        <div data-uib-collapse="!collapse.isCollapsed"
+            ng-class="!collapse.isCollapsed ? 'closeCollapse' : 'openCollapse'" ng-if="contactCtrl.gdprInfo">
+            <p class="ib-text ib-text--color-unfocused" bind-html-compile="contactCtrl.gdprInfo.text"></p>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing"
+        ng-if="contactCtrl.pasContactData.additionalInfo.showUseForAll && contactCtrl.showData.showBoardingCard">
+        <div class="ib-check">
+            <input type="checkbox" id="APIS_USE_FOR_ALL_ADDITIONAL_{{::contactCtrl.index}}"
+                name="add_use_check_{{::contactCtrl.index}}" class="ib-check__input"
+                ng-model="contactCtrl.showData.useAdditionalForAll"
+                ng-click="contactCtrl.useDataForAll(contactCtrl.passengerId,'additionalData')" />
+            <label for="APIS_USE_FOR_ALL_ADDITIONAL_{{::contactCtrl.index}}" class="ib-check__label">
+                <span class="ib-check__text">{{'APIS_USE_FOR_ALL'|translate}}</span>
+            </label>
+        </div>
+    </div>
+</div>
+<div ng-if="contactCtrl.pasContactData.emergencyInfo.showData">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+        <span class="ib-heading ib-heading--type-4">{{'IBCOAC_EMERGENCY_CONTACT_DATA_TITLE'|translate}}</span>
+    </div>
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+        <span class="ib-text ib-text--color-unfocused">{{'IBCOAC_CONTAC_ALTER'|translate}}</span>
+    </div>
+    <div class="ib-layout__line-spacing">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : contactCtrl.containerForm.$submitted && contactCtrl.containerForm['name_emer_' + contactCtrl.index].$invalid}">
+            <label
+                data-ng-class="{'ib-input__label--focus' : contactCtrl.nameFocused || (contactCtrl.containerForm['name_emer_' + contactCtrl.index].$viewValue != null && contactCtrl.containerForm['name_emer_' + contactCtrl.index].$viewValue !== '')}"
+                class="ib-input__label"
+                for="APIS_NAME_EMERGENCY_{{::contactCtrl.index}}">{{contactCtrl.pasContactData.emergencyInfo.isOptional
+                ? ('IBCOAC_NOM_CONT_ALT'|translate):(('IBCOAC_NOM_CONT_ALT'|translate)
+                +''+('GENERAL_MANDATORY_FIELDS_FLAG'|translate)) }}
+            </label>
+            <input class="ib-input__input" type="text" id="APIS_NAME_EMERGENCY_{{::contactCtrl.index}}"
+                name="name_emer_{{::contactCtrl.index}}" ng-focus="contactCtrl.nameFocused=true"
+                ng-blur="contactCtrl.nameFocused=false" ng-model="contactCtrl.pasContactData.emergencyInfo.name"
+                maxlength="{{::$root.CHECKIN_FIELDS_LENGTH.NAME_SURNAME}}"
+                ng-pattern="::$root.CHECKIN_PATTERNS.NAME_SURNAME_PATTERN"
+                data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.NAME_SURNAME_CLEANER}}"
+                ng-required="!contactCtrl.pasContactData.emergencyInfo.isOptional" />
+        </div>
+        <div
+            ng-messages="contactCtrl.containerForm.$submitted && contactCtrl.containerForm['name_emer_' + contactCtrl.index].$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing">
+        <ib-ui-prefix-city prefix-id="'APIS_PREFIX_EMERGENCY_' + contactCtrl.index" prefix-label="contactCtrl.pasContactData.emergencyInfo.isOptional ? ('IBCOAC_TELF_PRE'|translate):(('IBCOAC_TELF_PRE'|translate)
+        +''+('GENERAL_MANDATORY_FIELDS_FLAG'|translate))"
+            is-required="!contactCtrl.pasContactData.emergencyInfo.isOptional"
+            prefix-placeholder="'IBCOAC_TELF_PRE'|translate" prefix-list="contactCtrl.prefixes"
+            prefix-model="contactCtrl.pasContactData.emergencyInfo.prefix" container-form="contactCtrl.containerForm">
+        </ib-ui-prefix-city>
+    </div>
+    <div class="ib-layout__line-spacing">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : contactCtrl.containerForm.$submitted && contactCtrl.containerForm['phone_emergency_' + contactCtrl.index].$invalid}">
+            <label
+                ng-class="{'ib-input__label--focus' : contactCtrl.phoneEmerFocused || (contactCtrl.containerForm['phone_emergency_' + contactCtrl.index].$viewValue != null && contactCtrl.containerForm['phone_emergency_' + contactCtrl.index].$viewValue !== '')}"
+                class="ib-input__label"
+                for="APIS_PHONE_EMERGENCY_{{::contactCtrl.index}}">{{contactCtrl.pasContactData.emergencyInfo.isOptional
+                ? ('IBCOAC_TELF_NUM'|translate): (('IBCOAC_TELF_NUM'|translate)
+                +''+('GENERAL_MANDATORY_FIELDS_FLAG'|translate))}}</label>
+            <input name="phone_emergency_{{::contactCtrl.index}}" id="APIS_PHONE_EMERGENCY_{{::contactCtrl.index}}"
+                type="tel" class="ib-input__input" ng-model="contactCtrl.pasContactData.emergencyInfo.phone"
+                ng-pattern="contactCtrl.pasContactData.emergencyInfo.prefix === '34' ?  $root.CHECKIN_PATTERNS.PHONE_PATTERN_ES : $root.CHECKIN_PATTERNS.PHONE_PATTERN"
+                ng-required="!contactCtrl.pasContactData.emergencyInfo.isOptional"
+                data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.PHONE_CLEANER}}"
+                ng-focus="contactCtrl.phoneEmerFocused=true" ng-blur="contactCtrl.phoneEmerFocused=false"
+                maxlength="{{::$root.CHECKIN_FIELDS_LENGTH.PHONE_NUMBER_MAX_LENGTH}}" inputmode="tel"/>
+        </div>
+        <div
+            ng-messages="contactCtrl.containerForm.$submitted && contactCtrl.containerForm['phone_emergency_' + contactCtrl.index].$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'IBCOACII_NUM_ERR'|translate}}</div>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing"
+        ng-if="contactCtrl.pasContactData.emergencyInfo.showUseForAll && contactCtrl.showData.showBoardingCard">
+        <div class="ib-check">
+            <input type="checkbox" id="APIS_USE_FOR_ALL_EMERGENCY_{{::contactCtrl.index}}"
+                name="emer_use_check_{{::contactCtrl.index}}" class="ib-check__input"
+                ng-model="contactCtrl.showData.useEmergencyForAll"
+                ng-click="contactCtrl.useDataForAll(contactCtrl.passengerId,'emergencyData')" />
+            <label for="APIS_USE_FOR_ALL_EMERGENCY_{{::contactCtrl.index}}" class="ib-check__label">
+                <span class="ib-check__text">{{'APIS_USE_FOR_ALL'|translate}}</span>
+            </label>
+        </div>
+    </div>
+</div>

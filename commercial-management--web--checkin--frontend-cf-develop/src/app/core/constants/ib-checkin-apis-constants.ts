@@ -1,0 +1,69 @@
+import { ApisErrorType } from 'commercial-management--digital--web-components-design--library';
+
+export enum ApisConstants {
+    USA_NATIONALITY = 'US'
+}
+
+export enum ApisPassengerState {
+    COMPLETED = 'APIS_STATE_PASSENGER_COMPLETED',
+    PENDING = 'APIS_STATE_PASSENGER_PENDING',
+    DOCUMENTATION = 'APIS_STATE_PASSENGER_DOCUMENTATION_AIRPORT',
+    CLOSE = 'CLOSE'
+}
+
+export enum ApisRequiredFields {
+    SURNAME = 'SURNAME',
+    NAME = 'NAME',
+    GENDER = 'GENDER',
+    BIRTH_DATE = 'BIRTH_DATE',
+    NATIONALITY = 'NATIONALITY',
+    HOME_COUNTRY = 'HOME_COUNTRY',
+    DESTINATION_ADDRESS = 'DESTINATION_ADDRESS',
+    DESTINATION_CITY = 'DESTINATION_CITY',
+    DESTINATION_STATE = 'DESTINATION_STATE',
+    DESTINATION_ZIP = 'DESTINATION_ZIP',
+    DESTINATION_COUNTRY = 'DESTINATION_COUNTRY',
+    CONTACT_DATA = 'CONTACT_DATA',
+    EMERGENCY_DATA = 'EMERGENCY_DATA',
+    PRIVACY_STATEMENT = 'PRIVACY_STATEMENT'
+}
+
+export enum ApisDocuments {
+    PSPT = 'PSPT',
+    DNI = 'DNI',
+    VISA = 'VISA',
+    KNOWNTRAVELERNUMBER = 'KNOWNTRAVELERNUMBER',
+    REDRESSNUMBER = 'REDRESSNUMBER',
+    GREENCARD = 'GREENCARD'
+}
+
+export enum ApisStatesCountries {
+    US = 'US'
+}
+
+export enum ApisAllErrorType {
+    TM_VISA_REQUIRED = 'TM_VISA_REQUIRED',
+    TM_ESTA_REQUIRED = 'TM_ESTA_REQUIRED',
+    TM_RETURN_TICKET_REQUIRED = 'TM_RETURN_TICKET_REQUIRED',
+    TM_PSPT_VALIDITY = 'TM_PSPT_VALIDITY',
+    PSPT_VALIDITY_3_MONTHS = 'PSPT_VALIDITY_3_MONTHS',
+    PSPT_VALIDITY_6_MONTHS = 'PSPT_VALIDITY_6_MONTHS',
+    API_DOCUMENT_EXPIRY_DATE = 'API_DOCUMENT_EXPIRY_DATE'
+} 
+
+export const errorApisTypes: ApisErrorType[] = [
+    ApisAllErrorType.TM_VISA_REQUIRED,
+    ApisAllErrorType.TM_PSPT_VALIDITY,
+    ApisAllErrorType.PSPT_VALIDITY_3_MONTHS,
+    ApisAllErrorType.PSPT_VALIDITY_6_MONTHS,
+    ApisAllErrorType.API_DOCUMENT_EXPIRY_DATE
+];
+export const errorApisTypesESTA: string[] = [
+    ApisAllErrorType.TM_ESTA_REQUIRED,
+    ApisAllErrorType.TM_RETURN_TICKET_REQUIRED
+];
+
+export enum Gender {
+    MALE = 'MALE',
+    FEMALE = 'FEMALE'
+}

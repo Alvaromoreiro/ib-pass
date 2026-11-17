@@ -1,0 +1,60 @@
+<div class="ibe_table-shuttle">
+	<div class="hidden-xl hidden-lg hidden-md">
+		<div class="ibe-layout__line-spacing--xsmall">
+			<ui-select data-ng-model="tabSlicesFnCtrl.selectedFilter" class="ibe_form__ui-select ibe_form__ui-select--filter ibe_form__selectize"
+			 on-select="tabSlicesFnCtrl.activateFilter($select.selected.filter)">
+				<ui-select-match placeholder="{{'IBFNPA_TAB_SLICE_FILTER_BY'|translate}}" class="ibe_form__ui-select-match"><span class="ibe_form__selected">{{$select.selected.name|translate}}</span>
+				</ui-select-match>
+				<ui-select-choices id="cki-flight-now-tab-slices-filter-by-{{listFilter.name}}-choice" repeat="listFilter in tabSlicesFnCtrl.listFilters | filter: $select.search" class="ibe_form__ui-select-choices"><span data-ng-bind="(listFilter.name|translate)" class="ibe-form__option"></span></ui-select-choices>
+			</ui-select>
+		</div>
+	</div>
+	<table class="ibe_table-shuttle__table">
+		<caption class="hideAccessible">{{'IBFNPA_TAB_SLICE_FLIGHTS_TABLE_ACCESIBLE'|translate}}</caption>
+		<thead class="ibe_table-shuttle__head">
+			<tr class="ibe_table-shuttle__row">
+				<th class="ibe_table-shuttle__column ibe_table-shuttle__column--head">
+					<a id="cki-flight-now-tab-slices-filter-by-departure-link" title="{{'IBFNPA_TAB_SLICE_FILTER_BY_DEPARTURE_DATE_TITLE'|translate}}" ng-click="tabSlicesFnCtrl.activateFilter('departureDateTime')" class="ibe_table-shuttle__text ibe_table-shuttle__text--head"
+					 ng-class="{'ibe_table-shuttle__text--up':(tabSlicesFnCtrl.choosedFilter === 'departureDateTime' && !tabSlicesFnCtrl.filterReverse), 'ibe_table-shuttle__text--down':(tabSlicesFnCtrl.choosedFilter === 'departureDateTime' && tabSlicesFnCtrl.filterReverse) }">{{'IBFNPA_TAB_SLICE_FILTER_BY_DEPARTURE_DATE'|translate}}</a>
+				</th>
+				<th class="ibe_table-shuttle__column ibe_table-shuttle__column--head">
+					<a id="cki-flight-now-tab-slices-filter-by-arrival-link" title="{{'IBFNPA_TAB_SLICE_FILTER_BY_ARRIVAL_DATE_TITLE'|translate}}" ng-click="tabSlicesFnCtrl.activateFilter('arrivalDateTime')" class="ibe_table-shuttle__text ibe_table-shuttle__text--head"
+					 ng-class="{'ibe_table-shuttle__text--up':(tabSlicesFnCtrl.choosedFilter === 'arrivalDateTime' && !tabSlicesFnCtrl.filterReverse), 'ibe_table-shuttle__text--down':(tabSlicesFnCtrl.choosedFilter === 'arrivalDateTime' && tabSlicesFnCtrl.filterReverse) }">{{'IBFNPA_TAB_SLICE_FILTER_BY_ARRIVAL_DATE'|translate}}</a>
+				</th>
+				<th class="ibe_table-shuttle__column ibe_table-shuttle__column--head">
+					<a id="cki-flight-now-tab-slices-filter-by-company-link" title="{{'IBFNPA_TAB_SLICE_FILTER_BY_OPERATING_COMPANY_TITLE'|translate}}" ng-click="tabSlicesFnCtrl.activateFilter('operatedBy')" class="ibe_table-shuttle__text ibe_table-shuttle__text--head"
+					 ng-class="{'ibe_table-shuttle__text--up':(tabSlicesFnCtrl.choosedFilter === 'operatedBy' && !tabSlicesFnCtrl.filterReverse), 'ibe_table-shuttle__text--down':(tabSlicesFnCtrl.choosedFilter === 'operatedBy' && tabSlicesFnCtrl.filterReverse) }">{{'IBFNPA_TAB_SLICE_FILTER_BY_OPERATING_COMPANY'|translate}}</a>
+				</th>
+				<th class="ibe_table-shuttle__column ibe_table-shuttle__column--head">
+					<a id="cki-flight-now-tab-slices-filter-by-remaining-seats-link" title="{{'IBFNPA_TAB_SLICE_FILTER_BY_REMAINING_SEATS_TITLE'|translate}}" ng-click="tabSlicesFnCtrl.activateFilter('remainingSeats')" class="ibe_table-shuttle__text ibe_table-shuttle__text--head"
+					 ng-class="{'ibe_table-shuttle__text--up':(tabSlicesFnCtrl.choosedFilter === 'remainingSeats' && !tabSlicesFnCtrl.filterReverse), 'ibe_table-shuttle__text--down':(tabSlicesFnCtrl.choosedFilter === 'remainingSeats' && tabSlicesFnCtrl.filterReverse) }">{{'IBFNPA_TAB_SLICE_FILTER_BY_REMAINING_SEATS'|translate}}</a>
+				</th>
+				<th class="ibe_table-shuttle__column ibe_table-shuttle__column--head">
+					<span class="hideAccessible">{{'IBFNPA_TAB_SLICE_FILTER_BY_BUTTONS_ACCESIBLE'|translate}}</span>
+				</th>
+			</tr>
+		</thead>
+		<tbody class="ibe_table-shuttle__body">
+			<tr class="ibe_table-shuttle__row" data-ng-repeat="(sliceIndex,slice) in tabSlicesFnCtrl.originDestinationModel.slices" ng-class="{'ibe_table-shuttle__row--disabled': slice.disabled}">
+				<td class="ibe_table-shuttle__column ibe_table-shuttle__column--item-1">
+					<span class="ibe_table-shuttle__text">{{::slice.departureTimeParsed}}</span>
+				</td>
+				<td class="ibe_table-shuttle__column ibe_table-shuttle__column--item-2">
+					<span class="ibe_table-shuttle__text">{{::slice.arrivalTimeParsed}}</span>
+				</td>
+				<td class="ibe_table-shuttle__column ibe_table-shuttle__column--item-3">
+					<figure class="ibe_table-shuttle__figure">
+						<img class="ibe_table-shuttle__img" ng-src="{{::slice.operatedByUrl}}" alt="{{'IBFNPA_TAB_SLICE_OPERATED_BY_LOGO'|translate}} {{::slice.operatedBy}}" />
+					</figure>
+				</td>
+				<td class="ibe_table-shuttle__column ibe_table-shuttle__column--item-4">
+					<span class="ibe_table-shuttle__text">{{::slice.remainingSeats}}</span>
+				</td>
+				<td class="ibe_table-shuttle__column ibe_table-shuttle__column--item-5">
+					<button id="cki-flight-now-tab-slices-select-segment-btn" class="ibe-button" ng-class="{'ibe-button--grey ibe_table-shuttle__button':!slice.disabled,'ibe-button--disabled ibe_table-shuttle__button': slice.disabled || slice.myflight}"
+					 ng-disabled="slice.disabled || slice.myflight" data-ng-click="tabSlicesFnCtrl.selectSegment(slice)">{{!slice.disabled && !slice.myflight ? ('IBFNPA_TAB_SLICE_SELECT_SLICE_BUTTON'|translate) : slice.myflight ? ('IBFNPA_TAB_SLICE_MY_FLIGHT_BUTTON'|translate) : ('IBFNPA_TAB_SLICE_SELECT_SLICE_BUTTON_DISABLED'|translate)}}</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

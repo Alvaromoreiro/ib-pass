@@ -1,0 +1,652 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_base
+//    Desripcion: Estilos de componentes mas generales
+//******************************************************************************/
+
+/* Estilos para botones */
+.ibe-base__button {
+    border: 0;
+    background: transparent;
+}
+
+/* Titulo y subtitulo principal de las vistas */
+.ibe-base__page-titles {
+    padding-bottom: 1.15rem;
+
+    &-primary {
+        padding-bottom: 0;
+    }
+
+    &-secondary {
+        padding-top: 1rem;
+        padding-bottom: 0;
+        color: $PC-cromatico_21;
+    }
+
+    .ibe-base__page-hightlight {
+        color: $PC-cromatico_1;
+    }
+
+    &--hightlight {
+        background: $BCK-cromatico_1;
+
+        /* padding-bottom: 1.338rem; */
+        .container {
+            position: relative;
+        }
+
+        .ibe-base__page-titles-primary {
+            padding-top: 1.1rem;
+        }
+
+        .ibe-base__page-icon {
+            position: absolute;
+            top: 1.2rem;
+            right: 2.6rem;
+            padding-right: 3rem;
+            line-height: 2rem;
+
+            .ibe-base__page-icon__txt {
+                font-family: $font-02;
+                font-size: rem(13);
+            }
+
+            &--close {
+                &::after {
+                    content: "\e935";
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    font-family: $font-05;
+                    font-size: 2.5rem;
+                }
+            }
+        }
+    }
+}
+
+/* Duplicados en apis */
+
+.ibe-base__choose-opt {
+    @include clearfix;
+
+    padding: 0 rem(15) rem(30) rem(15);
+    background: $BCK-cromatico_1;
+    box-shadow: 0 rem(2) 0 $PC-cromatico_9;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &--radio {
+        @include clearfix;
+
+        padding: rem(30) rem(10);
+        background: $BCK-cromatico_1;
+        box-shadow: 0 rem(2) 0 $PC-cromatico_9;
+    }
+}
+
+.ibe-base__choose--margint {
+    margin-top: 1.9625rem;
+}
+
+.ibe-base__choose-opt__title {
+    border-bottom: rem(1) solid $BRD_standar_2;
+}
+
+/* Total precios final de pagina */
+.ibe-base__summary-total {
+    padding: 0.6rem 2rem;
+    margin-bottom: 0.3rem;
+    text-align: right;
+    line-height: 3.2rem;
+    background: $BCK-cromatico_1;
+    box-shadow: 0 rem(2) 0 $BRD_standar_1;
+
+    .ibe-base__summary-text {
+        font-family: $font-04;
+        font-size: rem(32);
+        color: $PC-cromatico_21;
+        float: left;
+    }
+
+    .ibe-base__summary-price {
+        font-family: $font-04;
+        //float: right;
+        font-size: rem(40);
+
+        &--cross-out {
+            margin-right: rem(20);
+            text-decoration: line-through;
+        }
+    }
+}
+
+
+/* Grupo de botones final de pagina */
+
+.ibe-base__group-foot {
+    padding-top: 1.55rem;
+
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .ibe-base__group-cancel {
+        margin-top: rem(15);
+        float: left;
+
+        &.ibe-link {
+            font-size: rem(13);
+        }
+
+        &--button {
+            margin-top: 0;
+        }
+    }
+
+    .ibe-base__group-submit {
+        float: right;
+
+        &.ibe-button {
+            font-size: rem(13);
+        }
+    }
+
+    &--special {
+        display: block;
+        width: 100%;
+        font-size: 0;
+
+        .ibe-base__group-submit {
+            left: 50%;
+            display: inline-block;
+            max-width: 50%;
+            float: none;
+            vertical-align: middle;
+        }
+
+        .ibe-base__group-cancel {
+            position: relative;
+            right: 50%;
+            display: inline-block;
+            width: 50%;
+            padding-right: rem(15);
+            margin-top: 0;
+            text-align: left;
+            float: none;
+            vertical-align: middle;
+        }
+    }
+}
+
+
+/* Componente angular tab */
+
+.ibe-tab {
+    .ib-tab__text-align {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        padding: 0 rem(15);
+        text-align: center;
+        -webkit-transform: translate(0, -50%);
+        -moz-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+        -o-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+    }
+
+    &--margin-b {
+        margin-bottom: rem(20);
+    }
+
+    .tab-content {
+        background: $BCK-cromatico_1;
+    }
+
+    /* Estilos para el componente */
+    .nav-tabs {
+        display: table;
+        width: 100%;
+        border: 0;
+
+        &::before {
+            display: none;
+        }
+    }
+
+    .nav-tabs > li {
+        display: table-cell;
+        height: 100%;
+        background: $BCK-cromatico_8;
+        cursor: pointer;
+        float: none;
+        vertical-align: middle;
+
+        &.ibe-tab--no-tab {
+            height: auto;
+            color: color(gray-10);
+            background: transparent;
+
+            .ibe-link {
+                // TODO
+                // @extend .ibe-link;
+
+                min-height: initial;
+                min-height: inherit;
+                font-family: $font-02;
+                font-size: rem(13);
+            }
+        }
+    }
+
+    .nav-tabs > li > a {
+        height: 100%;
+        min-height: rem(60);
+        padding: 0;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+        font-family: $font-04;
+        font-size: rem(18);
+        text-align: center;
+        color: $PC-cromatico_1;
+        background: transparent;
+
+        &:hover,
+        &:focus {
+            border: 0;
+            color: $PC-cromatico_3;
+            background: transparent;
+            outline: none;
+        }
+    }
+
+    .nav-tabs > li.active {
+        border: 0;
+        border-top: rem(2) solid $BRD-standar_6;
+        background: $BCK-cromatico_1;
+
+        > a {
+            &:hover,
+            &:focus {
+                color: $PC-cromatico_1;
+            }
+        }
+    }
+
+    &--col-2 {
+        .nav-tabs > li {
+            width: 50%;
+        }
+    }
+
+    &--col-3 {
+        .nav-tabs > li {
+            width: 33.34%;
+        }
+    }
+
+    &--no-tab {
+        background: transparent;
+    }
+
+    /* Separador entre elementos del formulario */
+    .ibe-tab__separator {
+        margin-top: rem(24);
+
+        .paragraph {
+            margin: 0;
+            color: $PC-cromatico_21;
+        }
+    }
+
+    &--link {
+        position: relative;
+    }
+
+    &__text-align {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        padding: 0 rem(15);
+        text-align: center;
+        -webkit-transform: translate(0, -50%);
+        -moz-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+        -o-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+    }
+}
+
+
+.ibe-form__radio {
+    position: relative;
+    display: inline-block;
+    padding: 0 0 0 2.4rem;
+    margin-right: 2.1rem;
+    line-height: 2.1rem;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    .ibe-form__radio-input {
+        position: absolute;
+        right: 999em;
+        display: none;
+
+        &:checked {
+            + .ibe-form__radio-text {
+                &::after {
+                    background: $BCK-cromatico_3;
+                }
+            }
+        }
+
+        &:focus {
+            + .ibe-form__radio-text {
+                &::after {
+                    box-shadow: 0 0 0 rem(1) $BRD_standar_3;
+                }
+            }
+        }
+    }
+
+    .ibe-form__radio-text {
+        font-size: rem(13);
+        color: $PC-cromatico_21;
+        cursor: pointer;
+        vertical-align: top;
+
+        &--white {
+            color: $PC-cromatico_4;
+        }
+
+        &--black {
+            color: $PC-cromatico_1;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 1.2rem;
+            left: 0;
+            width: 1.4rem;
+            height: 1.4rem;
+            margin-top: -0.9375rem;
+            border: rem(7) solid $BRD-standar_13;
+            border-radius: 1.5rem;
+            background: $BCK-cromatico_1;
+            box-shadow: 0 0 0 rem(1) $PC-cromatico_2;
+        }
+    }
+}
+
+
+
+/* Estilos generalizados del componente tab (formularios) */
+
+.ibe-tab__container {
+    &:nth-child(even) {
+        background: $BCK-cromatico_2;
+    }
+
+    &.xui-ibe-tab__container-collapse {
+        background: $BCK-cromatico_1;
+
+        .ibe-tab__container-wrapper {
+            padding-bottom: 2.5rem;
+            margin-top: -4rem;
+            border: 0;
+        }
+    }
+
+    &:first-child {
+        .ibe-tab__container-wrapper {
+            border-top: 0;
+        }
+    }
+
+    .title {
+        padding-top: rem(28);
+        padding-bottom: rem(22);
+    }
+}
+
+.ibe-tab__container-wrapper {
+    padding: 1.5rem 0 rem(64) 0;
+    margin: 0 rem(32);
+    border-top: rem(1) solid $BRD_standar_2;
+}
+
+.ibe-tab__container-center {
+    width: 21.0375rem;
+    margin: 0 auto;
+}
+
+
+/* Footer de tab */
+
+.ibe-tab__footer {
+    background: $BCK-cromatico_1;
+
+    .ibe-tab__footer-block {
+        padding: rem(32) rem(35);
+        border-top: rem(1) solid $BRD_standar_2;
+    }
+}
+
+
+/* Estilos para radio buttons */
+
+.ibe-form__radio-group {
+    font-family: $font-02;
+}
+
+.ibe-form__radio-group__title {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.6rem;
+
+    &--small {
+        display: block;
+        font-size: rem(11);
+        color: $PC-cromatico_21;
+
+        .ibe-form__radio-text {
+            text-transform: capitalize;
+        }
+    }
+}
+
+
+/* Estilos elemento a la derecho y elemento a la izquierda */
+
+.ibe-base__align-elements {
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .ibe-base__align-elements-l {
+        float: left;
+    }
+
+    .ibe-base__align-elements-r {
+        float: right;
+    }
+}
+
+.ibe-base__breakdown-price {
+    display: none;
+}
+
+@mixin m-ibe_base {
+    .ibe-base__breakdown-price {
+        display: block;
+    }
+}
+
+
+/* SMALL RESOLUTION STYLES */
+
+@mixin sm-ibe_base {
+    /* Total precios final de pagina */
+    .ibe-base__summary-total {
+        padding: 0.6rem 1.6rem;
+
+        .ibe-base__summary-text {
+            font-size: rem(28);
+        }
+
+        .ibe-base__summary-price {
+            font-size: rem(28);
+        }
+    }
+
+    /* Componente angular tab */
+    .ibe-tab {
+        .ibe-tab__container-center {
+            width: 100%;
+            padding: 0;
+        }
+
+        .nav-tabs > li > a {
+            //font-size: rem(16);
+            padding: 0;
+        }
+
+        &--link {
+            padding-top: rem(35);
+
+            &.ibe-tab--col-3 {
+                .nav-tabs > li {
+                    width: 50%;
+                }
+            }
+        }
+
+        .nav-tabs > li {
+            &.ibe-tab--no-tab {
+                position: absolute;
+                top: 0;
+                right: 0;
+                display: block;
+                width: auto;
+
+                .ibe-link {
+                    padding: 0;
+                }
+            }
+        }
+    }
+
+    .ibe-tab__container-wrapper {
+        margin: 0 rem(16);
+    }
+
+    /* Footer de tab */
+    .ibe-tab__footer {
+        .ibe-tab__footer-block {
+            padding: rem(16);
+        }
+    }
+
+    .ibe-base__breakdown-price {
+        display: block;
+    }
+
+    .ibe-base__summary {
+        &--separator {
+            padding-bottom: rem(23);
+            margin-bottom: rem(7);
+            border-bottom: rem(1) solid $BRD_standar_1;
+        }
+    }
+
+    .ibe-base__choose-opt {
+        &--radio {
+            padding-top: 0;
+
+            .ibe-boarding-card__custom-check {
+                margin-top: rem(30);
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+
+/* X-SMALL RESOLUTION STYLES */
+
+@mixin xs-ibe_base {
+    @include sm-ibe_base;
+
+    .ibe-base__align-elements {
+        .ibe-base__align-elements-l,
+        .ibe-base__align-elements-r {
+            float: none;
+        }
+    }
+
+    /* Grupo de botones final de pagina */
+    .ibe-base__group-foot {
+        .ibe-base__group-cancel {
+            display: block;
+            margin-top: rem(15);
+            text-align: center;
+            float: none;
+
+            &--button {
+                width: 100%;
+                margin-top: rem(15);
+            }
+        }
+
+        .ibe-base__group-submit {
+            display: block;
+            width: 100%;
+            float: none;
+        }
+
+        &--inline {
+            .ibe-base__group-cancel {
+                display: inline-block;
+                text-align: left;
+                float: left;
+            }
+
+            .ibe-base__group-submit {
+                display: inline-block;
+                width: auto;
+                float: right;
+            }
+        }
+
+        &--special {
+            .ibe-base__group-submit {
+                left: auto;
+                max-width: 100%;
+            }
+
+            .ibe-base__group-cancel {
+                right: auto;
+                width: 100%;
+                padding-right: 0;
+            }
+        }
+    }
+}

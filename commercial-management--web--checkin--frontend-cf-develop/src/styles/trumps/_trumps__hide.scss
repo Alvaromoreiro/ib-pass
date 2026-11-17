@@ -1,0 +1,44 @@
+@use "sass:list";
+
+/* ------------------------------------*\
+    #HIDE
+\*------------------------------------ */
+
+/**
+ * Hide elements on certain breakpoints based on your responsive settings.
+ */
+.u-hide {
+    display: none !important;
+}
+
+.u-hide-accessible {
+    position: absolute;
+    left: -9999em;
+}
+
+.u-hide-labeltext {
+    text-indent: -9999em;
+}
+
+@include media-query("mobile") {
+    .u-hide-mobile {
+        display: none !important;
+    }
+}
+
+// Loop over our breakpoints defined in _settings.responsive.scss
+@each $breakpoint in $breakpoints {
+
+    // Get the name of the breakpoint.
+    $alias: list.nth($breakpoint, 1);
+
+    @include media-query($alias) {
+
+        .u-hide-#{$alias} {
+            display: none !important;
+        }
+    }
+    // Close media query.
+}
+
+// Close breakpoints loop.

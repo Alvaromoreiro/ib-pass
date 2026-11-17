@@ -1,0 +1,210 @@
+/* stylelint-disable function-linear-gradient-no-nonstandard-direction */
+
+/* -------------------------------------------------------------
+    #FOOTER
+----------------------------------------------------------------- */
+.#{$wefront__namespace}footer {
+    @include clearfix;
+
+    position: relative;
+    z-index: 10;
+    margin-top: rem(150);
+
+    &--grey {
+        .#{$wefront__namespace}footer__box--copyright {
+            background-color: color(gray-50);
+        }
+    }
+
+    &__box {
+        padding: rem(15) rem(16);
+        // Modifiers
+
+        &--degraded {
+            background: linear-gradient(to bottom, color(red-10), color(red-20));
+            background: -ms-linear-gradient(to bottom, color(red-10), color(red-20));
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='"+color(red-10) +"', endColorstr='"+color(red-20) +"',GradientType=0 )";
+        }
+
+        &--copyright {
+            padding-right: 0;
+            padding-left: 0;
+
+            .row {
+                margin: 0;
+            }
+        }
+    }
+
+    &__box-text {
+        display: block;
+        font-size: rem(13);
+        text-align: right;
+        color: color(white);
+
+        // Modifiers
+
+        &--phone {
+            font-family: $font-unusual;
+            font-size: rem(32);
+            line-height: rem(30);
+            color: color(yellow-10);
+        }
+
+        &--normal {
+            font-family: $font-special;
+        }
+    }
+
+    &__box-link {
+        display: block;
+        font-size: rem(13);
+        text-align: right;
+        text-decoration: none;
+        color: color(white);
+        float: right;
+
+        &:hover,
+        &:active,
+        &:focus {
+            text-decoration: underline;
+            color: color(white);
+            outline: none;
+        }
+    }
+
+    &__box-fig {
+        max-width: rem(105);
+        margin-top: rem(10);
+        margin-left: rem(10);
+
+        // Modifiers
+
+        &--to-right {
+            margin: 0;
+            float: right;
+        }
+    }
+
+    &__box-img {
+        width: 100%;
+    }
+
+    &--fixed {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: transparent;
+    }
+
+    &--shadow {
+        .#{$wefront__namespace}footer {
+            &__box {
+                padding: rem(46) rem(48);
+                margin-top: rem(16);
+                margin-bottom: rem(100);
+                border: solid rem(2) color(gray-25);
+                background-color: color(gray-50);
+                box-shadow: 0 rem(1) 0 0 color(white);
+            }
+        }
+    }
+
+    &--medium {
+        margin-top: rem(80);
+    }
+}
+
+
+@include media-query('md') {
+    .#{$wefront__namespace}footer {
+        &--shadow {
+            .#{$wefront__namespace}footer {
+                &__box {
+                    width: rem(480);
+                    padding: rem(32);
+                    margin: rem(16) auto rem(45);
+                    text-align: center;
+                }
+            }
+        }
+
+        &--medium {
+            margin-top: rem(50);
+        }
+    }
+}
+
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}footer {
+        .container {
+            max-width: 100%;
+        }
+
+        &__box-text {
+            &--phone {
+                letter-spacing: rem(-0.8);
+
+                &-large {
+                    letter-spacing: normal;
+                }
+            }
+        }
+
+        &--medium {
+            margin-top: rem(50);
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}footer {
+        &__box-text {
+            &--phone {
+                &-large {
+                    font-size: rem(26);
+                }
+            }
+        }
+
+        &--shadow {
+            .#{$wefront__namespace}footer {
+                &__box {
+                    width: rem(370);
+                    padding: rem(32);
+                    margin: rem(16) auto rem(60);
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}footer {
+        &__box {
+            padding-left: rem(4);
+        }
+
+        &__box-text {
+            &--phone {
+                &-large {
+                    font-size: rem(26);
+                }
+            }
+        }
+
+        &--shadow {
+            .#{$wefront__namespace}footer {
+                &__box {
+                    width: 100%;
+                    padding: rem(32) rem(16);
+                    margin: rem(16) auto rem(55);
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,71 @@
+<main class="ib-layout">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div ng-if="flightsPasDesCtrl.desInvoicingValidate" class="ib-box">
+                    <div class="ib-box-mini-alert">
+                        <div class="ib-box-mini-alert__content">
+                            <span class="ib-box-mini-alert__icon icon-confirmacion"></span>
+                            <p class="ib-box-mini-alert__txt">{{'DE_INVOICING_PROCESS_OK'|translate}}</p>
+                        </div>
+                        <button id="cki-flights-des-invoice-finish-btn" type="button" class="ib-button ib-button--w-medium" data-ng-click="flightsPasDesCtrl.goToIbCose()">{{'DE_INVOICING_FINALIZE'|translate}}</button>
+                    </div>
+                </div>
+                <div class="ib-layout__header ib-layout__header--title">
+                    <h1 class="ib-heading ib-heading--type-1">{{'DE_INVOICING_AVAILABLE_FLIGHTS'|translate}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <form id="cki-flights-des-invoice-passenger-form" name="flightsPasDesCtrl.pasForm">
+                    <fieldset>
+                        <legend class="hide-accessible">{{'DE_INVOICING_PASSENGER_TICKETS'|translate}}</legend>
+                        <section class="ib-layout__section">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="ib-layout__line-spacing" data-ng-repeat="(segmentIndex,segment) in flightsPasDesCtrl.model.segmentsPassengersInfo.segments">
+                                        <ib-ticket-deinvoicing id="cki-flights-des-invoice-ticket-deinvoicing-{{$index}}" data-ng-if="segment.segmentStatus === 'CHECKED' || segment.segmentStatus === 'UNDOCHECKED'"
+                                            segment-info="segment" index="segmentIndex" checkbox-disabled="flightsPasDesCtrl.checkboxDisabled"></ib-ticket-deinvoicing>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="ib-layout__section">
+                            <div class="ib-layout__section-title">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <h2 class="ib-heading ib-heading--type-1">{{'DE_INVOICING_PASSENGER_RESERVATION'|translate}}</h2>
+                                    </div>
+                                    <div class="col-md-5 u-text-right">
+                                        <div ng-if="flightsPasDesCtrl.checkPassengersDesInvoicing" class="ib-check u-mt">
+                                            <input type="checkbox" id="checkAll" name="checkAll" class="ib-check__input"
+                                                data-ng-click="flightsPasDesCtrl.controlCheckAllPassengers(flightsPasDesCtrl.model.segmentsPassengersInfo.passengers, $event)"
+                                                data-ng-model="flightsPasDesCtrl.checkboxAllSelected"/>
+                                            <label for="checkAll" class="ib-check__label">
+                                                <span class="ib-check__text ib-check__text--unfocused">{{'DE_INVOICING_DE_INVOICING_ALL_PASSENGER'|translate}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ib-layout__line-spacing" data-ng-repeat="(passengerIndex,passenger) in flightsPasDesCtrl.model.segmentsPassengersInfo.passengers">
+                                <ib-passenger-deinvoicing-info id="cki-flights-des-invoice-passenger-deinvoicing-info-{{$index}}" passenger-info="passenger" index="passengerIndex"
+                                    pas-form="flightsPasDesCtrl.pasForm"></ib-passenger-deinvoicing-info>
+                            </div>
+                        </section>
+                        <div class="row" ng-if="flightsPasDesCtrl.manageDeinvoincing">
+                            <div class="col-xs-12">
+                                <div class="ib-layout__line-spacing ib-layout__line-spacing--small ib-layout__line-spacing--text-right">
+                                    <button id="cki-flights-des-invoice-manage-deinvoicing-btn" class="ib-button ib-button--block-xs ib-button--w-medium ib-button--red"
+                                        type="button" ng-click="flightsPasDesCtrl.openModal('ib-modal-deinvoicing-alert', flightsPasDesCtrl.model.segmentsPassengersInfo.segments, flightsPasDesCtrl.model.segmentsPassengersInfo.passengers)"
+                                        >{{'DE_INVOICING_MANAGE_RESERVATION'|translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

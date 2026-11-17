@@ -1,0 +1,183 @@
+//*****************************************************************************
+//    Proyecto: Iberia COM
+//    Titulo: _ibe_table-shuttle.scss
+//    Desripcion: Style for table shuttle
+//******************************************************************************/
+
+.ibe_table-shuttle {
+    padding: rem(35) rem(18) rem(65);
+    background-color: $BCK-cromatico_1;
+
+    &__table {
+        width: 100%;
+        border: rem(1) solid $PC-cromatico_5;
+    }
+
+    &__head {
+        background-color: $PC-cromatico_8;
+    }
+
+    &__row {
+        border-top: rem(1) solid $PC-cromatico_5;
+
+        &:nth-child(even) {
+            background-color: color(gray-65);
+        }
+
+        &--disabled {
+            .ibe_table-shuttle {
+                &__text {
+                    color: color(gray-310);
+                }
+            }
+        }
+    }
+
+    &__column {
+        padding: rem(19) 0 rem(19) rem(22);
+        vertical-align: middle;
+
+        &:last-child {
+            padding-right: rem(22);
+        }
+
+        &--head {
+            padding: rem(10) 0 rem(10) rem(22);
+
+            &:last-child {
+                padding-right: rem(22);
+            }
+        }
+    }
+
+    &__text {
+        font-size: rem(13);
+        color: color(gray-10);
+
+        &--head {
+            position: relative;
+            padding-right: rem(18);
+            font-size: rem(12);
+            color: $PC-cromatico_21;
+
+            &:hover,
+            &:focus {
+                text-decoration: underline;
+                color: $PC-cromatico_21;
+                outline: none;
+            }
+        }
+
+        &--down,
+        &--up {
+            &::after {
+                content: "\e92d";
+                position: absolute;
+                top: 50%;
+                right: 0;
+                font-family: $font-05;
+                font-size: rem(16);
+                color: $PC-cromatico_21;
+                transform: translate(0, -50%);
+            }
+        }
+
+        &--up {
+            &::after {
+                content: "\e92e";
+            }
+        }
+    }
+
+    &__button {
+        width: 100%;
+        min-width: rem(126);
+        padding: rem(14) rem(15);
+        font-size: rem(14);
+    }
+
+    &__img {
+        display: block;
+        width: rem(100);
+        max-width: 100%;
+    }
+}
+
+@mixin sm-ibe_table-shuttle {
+    .ibe_table-shuttle {
+        padding: rem(30) 0 rem(18);
+
+        &__table {
+            border: 0;
+        }
+
+        &__head {
+            display: none;
+        }
+
+        &__row {
+            border-color: $PC-cromatico_8;
+        }
+
+        &__column {
+            display: inline-block;
+            width: auto;
+            padding: rem(15) rem(8);
+            float: left;
+
+            &::before {
+                content: attr(data-column);
+                display: block;
+                overflow: hidden;
+                width: 100%;
+                padding-bottom: rem(2);
+                font-family: $font-02;
+                font-size: rem(13);
+                text-overflow: ellipsis;
+                color: $PC-cromatico_19;
+                white-space: nowrap;
+            }
+
+            &--head {
+                &:last-child {
+                    display: none;
+                }
+            }
+
+            &:last-child {
+                display: block;
+                width: 100%;
+                padding-top: 0;
+                padding-right: rem(10);
+
+                &::before {
+                    display: none;
+                }
+            }
+
+            &--item-1 {
+                width: 20%;
+            }
+
+            &--item-2 {
+                width: 24%;
+            }
+
+            &--item-3 {
+                width: 35%;
+            }
+
+            &--item-4 {
+                width: 21%;
+            }
+        }
+
+        &__figure {
+            padding-top: rem(6);
+        }
+    }
+}
+
+@mixin xs-ibe_table-shuttle {
+    @include sm-ibe_table-shuttle;
+}

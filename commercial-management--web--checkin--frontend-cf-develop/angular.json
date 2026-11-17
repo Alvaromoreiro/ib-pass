@@ -1,0 +1,178 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "cli": {
+        "analytics": false
+    },
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "web-checkin": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                },
+                "@schematics/angular:application": {
+                    "strict": true
+                }
+            },
+            "root": "",
+            "sourceRoot": "src",
+            "prefix": "",
+            "architect": {
+                "build": {
+                    "builder": "@angular-builders/custom-webpack:browser",
+                    "options": {
+                        "customWebpackConfig": {
+                            "path": "./config/angular/extra-webpack.config.ts"
+                        },
+                        "indexTransform": "./config/angular/index-transform.ts",
+                        "preserveSymlinks": true,
+                        "outputPath": "dist",
+                        "index": "src/index.html",
+                        "main": "src/main.ts",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "tsconfig.app.json",
+                        "inlineStyleLanguage": "scss",
+                        "progress": true,
+                        "assets": [
+                            "src/assets"
+                        ],
+                        "scripts": [],
+                        "styles": [
+                            {
+                                "input": "src/styles.scss",
+                                "bundleName": "web-checkin-styles"
+                            }
+                        ],
+                        "allowedCommonJsDependencies": [
+                            "angular",
+                            "angular-aria",
+                            "angular-cookies",
+                            "angular-local-storage",
+                            "angular-messages",
+                            "angular-route",
+                            "angular-sanitize",
+                            "angular-ui-bootstrap",
+                            "ng-device-detector",
+                            "ui-select",
+                            "angucomplete-alt",
+                            "angular-animate",
+                            "angular-credit-cards",
+                            "angular-recaptcha",
+                            "angular-scroll",
+                            "jquery",
+                            "dayjs",
+                            "dayjs/plugin/customParseFormat",
+                            "malihu-custom-scrollbar-plugin",
+                            "bootstrap/dist/js/bootstrap.js",
+                            "file-saver",
+                            "react",
+                            "react-dom",
+                            "commercial-management--digital--web-components-design--library"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "config/angular-environments/environment.ts",
+                                    "with": "config/angular-environments/environment.prod.ts"
+                                }
+                            ],
+                            "outputHashing": "none",
+                            "optimization": {
+                                "scripts": true,
+                                "styles": {
+                                    "minify": true,
+                                    "inlineCritical": true
+                                },
+                                "fonts": true
+                            },
+                            "namedChunks": true
+                        },
+                        "development": {
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": true
+                        },
+                        "noMinification": {
+                            "buildOptimizer": false,
+                            "optimization": false
+                        },
+                        "integration": {
+                            "sourceMap": false
+                        },
+                        "hidden": {
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "15mb",
+                                    "maximumError": "25mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "20kb",
+                                    "maximumError": "25kb"
+                                }
+                            ],
+                            "sourceMap": {
+                                "hidden": true,
+                                "scripts": true,
+                                "styles": false
+                            }
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "serve": {
+                    "builder": "@angular-builders/custom-webpack:dev-server",
+                    "options": {
+                        "port": 9006,
+                        "proxyConfig": "config/angular/proxy.conf.js"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "web-checkin:build:production"
+                        },
+                        "development": {
+                            "browserTarget": "web-checkin:build:development"
+                        }
+                    },
+                    "defaultConfiguration": "development"
+                },
+                "test": {
+                    "builder": "@angular-builders/custom-webpack:karma",
+                    "options": {
+                        "customWebpackConfig": {
+                            "path": "./config/angular/extra-webpack.config.ts"
+                        },
+                        "main": "test/unit/test.ts",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "tsconfig.spec.json",
+                        "karmaConfig": "config/karma/karma.conf.js",
+                        "inlineStyleLanguage": "scss",
+                        "assets": [],
+                        "styles": [],
+                        "scripts": [],
+                        "codeCoverage": true,
+                        "sourceMap": true
+                    },
+                    "configurations": {
+                        "a11y": {
+                            "main": "test/unit/test-a11y-only.ts",
+                            "include": [
+                                "**/*.a11y.spec.ts",
+                                "../test/unit/**/*.a11y.spec.ts"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "defaultProject": "web-checkin"
+}

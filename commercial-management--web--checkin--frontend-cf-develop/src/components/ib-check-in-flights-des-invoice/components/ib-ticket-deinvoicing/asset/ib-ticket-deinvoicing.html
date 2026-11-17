@@ -1,0 +1,131 @@
+<div class="ib-ticket">
+    <div class="ib-ticket__col-first">
+        <!-- HEADER -->
+        <div class="ib-ticket__header">
+            <div class="ib-ticket__header-wrapper">
+                <div class="ib-ticket__header-left">
+                    <span class="ib-ticket__header-title" data-shortcut="{{TicketDeinvoicingCtrl.segmentInfo.departure.airportCode}}">
+                        <span class="hidden-xs hidden-sm">{{TicketDeinvoicingCtrl.segmentInfo.departure.airportDescription}}</span>
+                    </span>
+                    <span class="ib-ticket__header-subtitle hidden-xs hidden-sm">{{TicketDeinvoicingCtrl.segmentInfo.departure.airportCode}}</span>
+                    <span class="ib-ticket__header-description hidden-xs hidden-sm">{{'IBFNPA_AIRPORT'|translate}}
+                        {{TicketDeinvoicingCtrl.segmentInfo.departure.airportDescription}}</span>
+                    <span class="ib-ticket__header-txt hidden-md hidden-lg hidden-xl">{{TicketDeinvoicingCtrl.segmentInfo.departure.date.monthDay
+                        + ' ' + (TicketDeinvoicingCtrl.segmentInfo.departure.date.month|translate) + ' ' +
+                        TicketDeinvoicingCtrl.segmentInfo.departure.date.year}}</span>
+                    <span class="ib-ticket__header-txt hidden-md hidden-lg hidden-xl">{{TicketDeinvoicingCtrl.segmentInfo.departure.hour}}</span>
+                </div>
+                <div class="ib-ticket__header-floating ib-ticket__header-floating--mobile">
+                    <div class="ib-ticket__header-icon ib-ticket__header-icon--mobile">
+                        <span class="icon-vuelos"></span>
+                    </div>
+                    <figure class="ib-ticket__header-logo hidden-md hidden-lg hidden-xl">
+                        <img ng-src="{{TicketDeinvoicingCtrl.segmentInfo.airlineLogo}}" alt="{{'DE_INVOICING_IBERIA_LOGO'|translate}}" />
+                    </figure>
+                    <span class="ib-ticket__header-txt">{{TicketDeinvoicingCtrl.segmentInfo.flightNumber}}</span>
+                </div>
+                <div class="ib-ticket__header-right">
+                    <span class="ib-ticket__header-title" data-shortcut="{{TicketDeinvoicingCtrl.segmentInfo.arrival.airportCode}}"><span
+                            class="hidden-xs hidden-sm">{{TicketDeinvoicingCtrl.segmentInfo.arrival.airportDescription}}</span></span>
+                    <span class="ib-ticket__header-description hidden-xs hidden-sm">{{'IBFNPA_AIRPORT'|translate}}
+                        {{TicketDeinvoicingCtrl.segmentInfo.arrival.airportDescription}}</span>
+                    <span class="ib-ticket__header-subtitle hidden-xs hidden-sm">{{TicketDeinvoicingCtrl.segmentInfo.arrival.airportCode}}</span>
+                    <span class="ib-ticket__header-txt hidden-md hidden-lg hidden-xl">{{TicketDeinvoicingCtrl.segmentInfo.arrival.date.monthDay
+                        + ' ' + (TicketDeinvoicingCtrl.segmentInfo.departure.date.month|translate) + ' ' +
+                        TicketDeinvoicingCtrl.segmentInfo.departure.date.year}}</span>
+                    <span class="ib-ticket__header-txt hidden-md hidden-lg hidden-xl">{{TicketDeinvoicingCtrl.segmentInfo.arrival.hour}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- MORE DETAILS COLLAPSE -->
+        <div class="ib-ticket-collapse hidden-md hidden-lg hidden-xl" ng-controller="ibCollapseController as collapse">
+            <button class="ib-ticket-collapse__btn" ng-click="collapse.clickCollapse($event,false)" type="button">
+                {{'IBCOAC_VER_MAS_DETALL'|translate}}
+                <span class="ib-ticket-collapse__btn-icon" ng-class="collapse.isCollapsed ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+            </button>
+            <div uib-collapse="!collapse.isCollapsed">
+                <div class="ib-ticket-collapse__container">
+                    <div class="ib-ticket-collapse__title">{{'DE_INVOICING_OPERATING'|translate}}
+                        {{TicketDeinvoicingCtrl.segmentInfo.operatedBy}}</div>
+                    <div class="ib-ticket-collapse__row">
+                        <div class="ib-ticket-collapse__col-left">
+                            <span class="ib-ticket-collapse__txt">{{'IBFNPA_AIRPORT'|translate}}</span>
+                            <span class="ib-ticket-collapse__txt">{{TicketDeinvoicingCtrl.segmentInfo.departure.airportDescription}}</span>
+                            <strong class="ib-ticket-collapse__txt"> {{TicketDeinvoicingCtrl.segmentInfo.departure.terminal ? 'IBCOAC_TERMINAL' : ''
+                                |translate}}{{TicketDeinvoicingCtrl.segmentInfo.departure.terminal}}</strong>
+                        </div>
+                        <div class="ib-ticket-collapse__col-right">
+                            <span class="ib-ticket-collapse__txt">{{'IBFNPA_AIRPORT'|translate}}</span>
+                            <span class="ib-ticket-collapse__txt">{{TicketDeinvoicingCtrl.segmentInfo.arrival.airportDescription}}</span>
+                            <strong class="ib-ticket-collapse__txt">{{TicketDeinvoicingCtrl.segmentInfo.arrival.terminal ? 'IBCOAC_TERMINAL' : ''
+                                |translate}}{{TicketDeinvoicingCtrl.segmentInfo.arrival.terminal}}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- DETAILS -->
+        <div class="ib-ticket__details hidden-xs hidden-sm">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-xs-6">
+                    <div class="ib-ticket__info u-text-left">
+                        <strong class="ib-ticket__terminal ib-text ib-text--block ib-text--color-unfocused ib-text--bold">
+                            {{TicketDeinvoicingCtrl.segmentInfo.departure.terminal ? 'IBCOAC_TERMINAL' : ''
+                            |translate}}{{TicketDeinvoicingCtrl.segmentInfo.departure.terminal}}
+                        </strong>
+                        <span class="ib-text ib-text--block ib-text--color-unfocused">{{TicketDeinvoicingCtrl.segmentInfo.departure.date.monthDay
+                            + ' ' + (TicketDeinvoicingCtrl.segmentInfo.departure.date.month|translate) + ' ' +
+                            TicketDeinvoicingCtrl.segmentInfo.departure.date.year}}</span>
+                        <span class="ib-text ib-text--block ib-text--color-unfocused">{{TicketDeinvoicingCtrl.segmentInfo.departure.hour}}</span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-6 col-md-offset-4">
+                    <div class="ib-ticket__info u-text-right">
+                        <strong class="ib-ticket__terminal ib-text ib-text--block ib-text--color-unfocused ib-text--bold">{{TicketDeinvoicingCtrl.segmentInfo.arrival.terminal ? 'IBCOAC_TERMINAL' : ''
+                                |translate}}{{TicketDeinvoicingCtrl.segmentInfo.arrival.terminal}}</strong>
+                        <span class="ib-text ib-text--block ib-text--color-unfocused">{{TicketDeinvoicingCtrl.segmentInfo.arrival.date.monthDay
+                            + ' ' + (TicketDeinvoicingCtrl.segmentInfo.departure.date.month|translate) + ' ' +
+                            TicketDeinvoicingCtrl.segmentInfo.departure.date.year}}</span>
+                        <span class="ib-text ib-text--block ib-text--color-unfocused">{{TicketDeinvoicingCtrl.segmentInfo.arrival.hour}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-md-offset-3">
+                    <div class="ib-ticket__details-operated">
+                        <figure class="ib-ticket__details-operated-logo">
+                            <img src="{{TicketDeinvoicingCtrl.segmentInfo.airlineLogo}}" alt="{{'DE_INVOICING_IBERIA_LOGO'|translate}}" />
+                        </figure>
+                        <span class="ib-text ib-text--block ib-text--xmedium">{{TicketDeinvoicingCtrl.segmentInfo.flightNumber}}</span>
+                        <span class="ib-text ib-text--block ib-text--color-unfocused">{{'DE_INVOICING_OPERATING'|translate}}
+                            {{TicketDeinvoicingCtrl.segmentInfo.operatedBy}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ib-ticket__col-last">
+        <!-- FOOTER -->
+        <div class="ib-ticket__footer">
+            <div ng-if="TicketDeinvoicingCtrl.segmentInfo.segmentStatus === 'UNDOCHECKED'" class="ib-ticket__footer-wrapper ib-ticket__footer-wrapper--txt">
+                <span class="ib-ticket__footer-txt ib-ticket__footer-txt--medium ib-ticket__footer-txt--unfocused">
+                    {{'DE_INVOICING_DE_INVOICING_FLIGHT'|translate}}
+                </span>
+            </div>
+            <div data-ng-if="TicketDeinvoicingCtrl.segmentInfo.segmentStatus === 'CHECKED'" class="ib-ticket__footer-wrapper ib-ticket__footer-wrapper--icon">
+                <div class="ib-ticket__icon-container">
+                    <span class="ib-ticket__icon icon-passbook_tarjeta_embarque"></span>
+                    <span class="ib-ticket__icon-txt">{{'DE_INVOICING_CANCEL_BOARDING_PASSES'|translate}}</span>
+                </div>
+                <div class="ib-check">
+                    <input type="checkbox" id="check-ticket_{{TicketDeinvoicingCtrl.segmentInfo.id}}" data-ng-click="TicketDeinvoicingCtrl.checkSelectedSegments($event, TicketDeinvoicingCtrl.segmentInfo.id)"
+                        data-ng-model="TicketDeinvoicingCtrl.segmentInfo.isSelected" name="check-ticket_{{TicketDeinvoicingCtrl.segmentInfo.id}}"
+                        class="ib-check__input" data-ng-class="{'ib-check--disabled': TicketDeinvoicingCtrl.checkboxDisabled}" />
+                    <label for="check-ticket_{{TicketDeinvoicingCtrl.segmentInfo.id}}" class="ib-check__label">
+                        <span class="ib-check__text">{{'IBECBP_MODE_BOXES_SELECTED'|translate}}</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

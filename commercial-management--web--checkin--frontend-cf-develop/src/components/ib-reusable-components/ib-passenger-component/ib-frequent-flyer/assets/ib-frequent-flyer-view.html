@@ -1,0 +1,52 @@
+<div ng-controller="ibCollapseController as collapse">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt-xxsmall">
+        <a id="cki-ff-link" class="ib-link-plus" href="javascript:void(0)" title="{{'FREQUENT_FLYER_SECTION_TITLE' | translate}}" ng-click="collapse.clickCollapse($event, true)"
+            ng-class="collapse.isCollapsed ? 'ib-link-plus--important' : 'ib-link-plus--unfocused'">
+            <span class="ib-link-plus__icon" ng-class="collapse.isCollapsed ? 'icon-menos_2' : 'icon-mas_2'"></span>
+            <span class="ib-link-plus__text">{{ffCtrl.isRequired ? ('FREQUENT_FLYER_SECTION_TITLE'|translate):('FREQUENT_FLYER_REQUIRED_SECTION_TITLE'|translate)}}
+            </span>
+        </a>
+    </div>
+    <div uib-collapse="!collapse.isCollapsed">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+            <div class="ib-select ib-select--label">
+                <label class="ib-select__label" ng-class="{'ib-select--error': ffCtrl.containerForm.$submitted && ffCtrl.containerForm['company_' + ffCtrl.index].$invalid}"
+                    for="PASSENGER_FORM_COMPANY_{{::ffCtrl.index}}">{{'FF_COMPANY_FIELD_LABEL'|translate}}</label>
+                <ui-select class="ib-select__action" data-ng-disabled="!ffCtrl.frequentFlyerModel.enabled" ng-model="ffCtrl.frequentFlyerModel.info.iataCompanyCode"
+                    name="company_{{::ffCtrl.index}}" on-select="ffCtrl.clearCodeNumber()" id="PASSENGER_FORM_COMPANY_{{::ffCtrl.index}}"
+                    data-ui-select-required="ffCtrl.fieldsStatus.frequentFlyer.mandatory || (ffCtrl.frequentFlyerModel.enabled && ffCtrl.frequentFlyerModel.info.number != null && ffCtrl.frequentFlyerModel.info.number !== '' 
+                                                    && (!ffCtrl.frequentFlyerModel.info.iataCompanyCode || ffCtrl.frequentFlyerModel.info.iataCompanyCode === 'CKI_COMBO_BLANK'))">
+                    <ui-select-match class="ib-select__list-ipt" placeholder="{{'FF_COMPANY_FIELD_LABEL'|translate}}">
+                        <span class="ib-select__txt" ng-bind="$select.selected.airlineName.needsTranslate ? ($select.selected.airlineName.description|translate) : $select.selected.airlineName"></span>
+                    </ui-select-match>
+                    <ui-select-choices class="ib-select__list" repeat="company.iataCompanyCode as company in (ffCtrl.companies | filter: $select.search)">
+                        <span class="ib-select__list-txt" ng-bind="company.airlineName.needsTranslate ? (company.airlineName.description|translate) : company.airlineName"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div ng-messages="ffCtrl.containerForm.$submitted && ffCtrl.containerForm['company_' + ffCtrl.index].$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'FF_COMPANY_REQUIRED_ERROR'|translate}}</div>
+                <div class="ib-alert ib-alert--error" ng-message="uiSelectRequired">{{'FF_COMPANY_REQUIRED_ERROR'|translate}}</div>
+            </div>
+        </div>
+        <div class="ib-input" ng-class="{'ib-input--error': ffCtrl.containerForm.$submitted && ffCtrl.containerForm['card_number_passenger_' + ffCtrl.index].$invalid}">
+            <label class="ib-input__label" for="card_number_passenger_{{::ffCtrl.index}}" ng-class="{'ib-input__label--focus' : ffCtrl.cardFocused || (ffCtrl.containerForm['card_number_passenger_' + ffCtrl.index].$viewValue != null && ffCtrl.containerForm['card_number_passenger_' + ffCtrl.index].$viewValue !== '')}">{{'FF_COMPANY_NUMBER_FIELD_LABEL'|translate}}</label>
+            <input data-ng-if="ffCtrl.frequentFlyerModel.info.iataCompanyCode === 'IB'" class="ib-input__input" type="text" id="card_number_passenger_{{::ffCtrl.index}}"
+                data-ng-disabled="!ffCtrl.frequentFlyerModel.enabled" name="card_number_passenger_{{::ffCtrl.index}}" data-ng-model="ffCtrl.frequentFlyerModel.info.number"
+                maxlength="{{::$root.CHECKIN_FIELDS_LENGTH.NUMBER_IB_PLUS_MAX_LENGTH}}" ng-pattern="::$root.CHECKIN_PATTERNS.NUMBER_IB_PLUS_PATTERN"
+                data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.NUMBER_IB_PLUS_CLEANER}}" ng-focus="ffCtrl.cardFocused=true"
+                ng-blur="ffCtrl.cardFocused=false" data-ng-change="ffCtrl.containerForm['company_' + ffCtrl.index].$validate()"
+                ib-luhn-validator ib-disable-remove-validation data-ng-required="ffCtrl.fieldsStatus.frequentFlyer.mandatory"
+            />
+            <input data-ng-if="ffCtrl.frequentFlyerModel.info.iataCompanyCode !== 'IB'" class="ib-input__input" type="text" id="card_number_passenger_{{::ffCtrl.index}}"
+                data-ng-disabled="!ffCtrl.frequentFlyerModel.enabled" name="card_number_passenger_{{::ffCtrl.index}}" maxlength="{{::$root.CHECKIN_FIELDS_LENGTH.NUMBER_FF_MAX_LENGTH}}"
+                data-ng-focus="ffCtrl.cardFocused=true" data-ng-blur="ffCtrl.cardFocused=false" data-ng-model="ffCtrl.frequentFlyerModel.info.number"
+                data-ng-change="ffCtrl.containerForm['company_' + ffCtrl.index].$validate()" data-ng-required="ffCtrl.fieldsStatus.frequentFlyer.mandatory"
+            />
+        </div>
+        <div ng-messages="ffCtrl.containerForm.$submitted && ffCtrl.containerForm['card_number_passenger_' + ffCtrl.index].$error ">
+            <div class="ib-alert ib-alert--error" ng-message="luhn">{{'FF_COMPANY_NUMBER_ERROR'|translate}}</div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'FF_COMPANY_NUMBER_ERROR'|translate}}</div>
+        </div>
+    </div>
+</div>

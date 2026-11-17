@@ -1,0 +1,42 @@
+	<section class="container ib-checkin__section-container">
+		<div class="row">
+			<div class="ib-checkin__container col-xl-12">
+				<h2 class="ib-heading ib-heading--type-1 ib-heading__title">{{'IBCOSE_TITULO'|translate}}</h2>
+				<span data-ng-if="!searchCtrl.deInvoicingScreen" class="ib-heading ib-heading--type-25 ib-heading__subtitle">{{'IBCOSE_SUBTITULO'|translate}}</span>
+				<span data-ng-if="searchCtrl.deInvoicingScreen" class="ib-heading ib-heading--type-25 ib-heading__subtitle">{{'DE_INVOICING_IBCOSE_SUBTITULO'|translate}}</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xl-12 u-height-full">
+				<div class="ib-banner__container">
+					<div data-ib-box class="ib-box_wrapper ib-flex ib-flex__row--mobile ib-flex--align-strech ib-flex--align-start-mobile ib-flex--gap-medium u-pt-small-desktop">
+						<div class="ib-checkin__container ib-flex--basis-50 ib-flex--basis-100-mobile">
+							<div data-ng-if="searchCtrl.deInvoicingScreen" class="ib-box-form u-height-full u-mt-none-desktop" data-equal="login">
+								<ib-anonymous-search id="cki-search-anonymous-search-with-booking-info" search-title="{{'DE_INVOICING_IBCOSE_TEXT_1'|translate}}" button-text="{{'DE_INVOICING_BUTTON_TEXT'|translate}}"></ib-anonymous-search>
+							</div>
+							<div data-ng-if="!searchCtrl.deInvoicingScreen" class="ib-box-form u-height-full u-mt-none-desktop" data-equal="login">
+								<ib-anonymous-search id="cki-search-anonymous-search-with-flight-info" search-title="{{'IBCOSE_TIT_FORM_ANON'|translate}}" button-text="{{'IBCOSE_CHECKIN'|translate}}"></ib-anonymous-search>
+							</div>
+						</div>
+						<div data-ng-if="!searchCtrl.deInvoicingScreen && !searchCtrl.isOnbUserLogged" class="ib-checkin__container ib-checkin__container ib-flex--basis-50 ib-flex--basis-100-mobile ib-checkin__login">
+							<div class="ib-box-form u-height-full u-mt-none-desktop u-mt-none-mobile" data-equal="login">
+								<ib-ui-login-reusable-iframe-component
+									loading="searchCtrl.showWaitingModal" flow="MMB_CKI">
+								</ib-ui-login-reusable-iframe-component>
+							</div>
+						</div>
+					</div>
+					<ib-banner class="ib-banner__ads-container" id="cki-search-login-ads-banner" show-ads="searchCtrl.model.showAds"></ib-banner>
+					<div class="ib-checkin__list u-mb-medium">
+        		        <div class="ib-checkin__list-foot">
+        		            <span>{{'IBCOSE_MAS_INFO_1'|translate}}
+        		                <a id="cki-search-more-cki-info-link" href="javascript:void(0)"
+        		                    data-ng-click="searchCtrl.moreInfoRedirection()" title="{{'ACCES_IBCOSE_MAS_INFO2'|translate}}"
+        		                    class="ib-button__link ib-button__link--underline">{{'IBCOSE_MAS_INFO_2'|translate}}</a>{{'IBCOSE_MAS_INFO_3'|translate}}
+        		            </span>
+        		        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>

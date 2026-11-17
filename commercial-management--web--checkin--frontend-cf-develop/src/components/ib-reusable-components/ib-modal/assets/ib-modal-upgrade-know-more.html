@@ -1,0 +1,144 @@
+<div id = {{upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].cabinLayout}}_{{upgModalCtrl.model.indexSegment}} class="ib-know-more">
+    <header class="ib-know-more__header">
+		<h2 class="ib-know-more__title">{{upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].descriptionTranslate}}</h2>
+		<button id="cki-modal-upgrade-kow-more-close-btn" type="button" ng-click="upgModalCtrl.close()" class="ib-know-more__button icon-cerrar">
+			<span class="u-hide-accessible">{{'MODAL_HIDDEN_CLOSE_TEXT'|translate}}</span>
+		</button>
+	</header>
+
+    <div class="ib-know-more__container-experience">
+        <img class="ib-know-more__img-container" src="{{::$root.routes.images}}/upgrade/business_360_info.png">
+        <div class="ib-know-more__img-experience-content">
+            <div class="ib-know-more__3d-modal-container">
+                <span class="ib-know-more__text-logo">{{'UPGRADING_LOGO'|translate}}</span>
+                <span class="icon-360 ib-know-more__3d-icon-modal"></span>
+            </div>
+            <span class="ib-know-more__text-experience">{{'UPGRADING_MODAL_KNOW_MORE_V2_EXPERIENCE'| translate : {cabin: upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].descriptionTranslate} }} </span>
+            <button ng-click="upgModalCtrl.openSeatdModal(upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type, upgModalCtrl.model.segmentInfo, upgModalCtrl.model.offerSelected)" class="ib-button ib-button--w-small ib-know-more__button-experience">{{'UPGRADING_MODAL_KNOW_MORE_V2_SEE_EXPERIENCE'|translate}}</button>
+        </div>
+    </div>
+	<slick  id="{{upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].cabinLayout}}_CARRUSEL_{{upgModalCtrl.model.indexSegment}}" settings="slickConfig" class="ib-know-more__slider" infinite="true" speed="1000" autoplay="true" autoplaySpedd="2000" touch-move="false" slides-to-show="1">
+     		<img ng-repeat="image in upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].images" class="ib-know-more__slider-img" ng-src="{{image}}">
+    </slick >
+
+	<section class="ib-modals__body">
+		<h2 class="ib-know-more__title ib-know-more__title--subtitle">{{'UPGRADING_MODAL_KNOW_MORE_TEXT'| translate : {cabin: upgModalCtrl.model.descriptionCurrentCabin} }}</h2>
+        <div class="ib-table-modal ib-table-modal--responsive ib-table-modal--two-colors">
+           <table class="ib-upgrade__table-know-more">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="ib-text--color-unfocused ib-text--bold">{{upgModalCtrl.model.descriptionCurrentCabin}}</th>
+                        <th ng-class="{'ib-upgrade__cell-business-odd': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS', 'ib-upgrade__cell-premium-odd': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type !== 'BUSINESS'}">{{upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].descriptionTranslate}}</th>
+                                   <tbody>
+                    <tr class="">
+                        <td class="ib-upgrade__color-table-text ib-text--color-unfocused ib-text--bold">{{'UPGRADING_MODAL_KNOW_MORE_V2_LAND' | translate}}</th>
+                    </tr>
+                    <tr>
+                        <td class=""><span class="icon-check_in ib-upgrade__icons-styles"></span><span>{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_CELL_0' | translate}}</span></td>
+                        <td class="">
+                            <span ng-if="upgModalCtrl.model.currentCabin === 'Turista'" class="icon-wrong ib-upgrade__icons-table"></span>
+                            <span ng-if="upgModalCtrl.model.currentCabin !== 'Turista'" class="icon-confirmacion ib-upgrade__icons-table"></span>
+                        </td>
+                        <td ng-class="{'ib-upgrade__cell-business-pair': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS', 'ib-upgrade__cell-premium-pair': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type !== 'BUSINESS'}"><span class="icon-confirmacion ib-upgrade__icons-table"></span></td>
+                    </tr>
+                    <tr>
+                        <td class=""><span class="ib-upgrade__icons-styles icon-fast_track"></span><span>{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_CELL_1' | translate}}</span></td>
+                        <td class=""><span class="icon-wrong ib-upgrade__icons-table"></span></td>
+                        <td ng-class="{'ib-upgrade__cell-business-odd': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS', 'ib-upgrade__cell-premium-odd': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type !== 'BUSINESS'}">
+                            <span ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS'" class="icon-confirmacion ib-upgrade__icons-table"></span>
+                            <span ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type !== 'BUSINESS'" class="icon-wrong ib-upgrade__icons-table"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=""><span class="ib-upgrade__icons-styles icon-priority-boarding"></span><span>{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_CELL_2' | translate}}</span></td>
+                        <td ng-if="upgModalCtrl.model.currentCabin === 'Turista'" class="">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_FARE' | translate}}</td>
+                        <td ng-if="upgModalCtrl.model.currentCabin !== 'Turista'" class="">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_GROUP_2' | translate}}</td>
+                        <td ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS'" class="ib-upgrade__cell-business-pair">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_GROUP_1' | translate}}</td>
+                        <td ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type !== 'BUSINESS'" class="ib-upgrade__cell-premium-pair">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_GROUP_2' | translate}}</td>
+                    </tr>
+                    <tr>
+                        <td class=""><span class="ib-upgrade__icons-styles icon-sala_vip"></span><span>{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_CELL_3' | translate}}</span></td>
+                        <td class=""><span class="icon-wrong ib-upgrade__icons-table"></span></td>
+                        <td ng-class="{'ib-upgrade__cell-business-odd': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS', 'ib-upgrade__cell-premium-odd': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type !== 'BUSINESS'}">
+                            <span ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS'" class="icon-confirmacion ib-upgrade__icons-table"></span>
+                            <span ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type !== 'BUSINESS'" class="icon-wrong ib-upgrade__icons-table"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=""><span class="ib-upgrade__icons-styles icon-e_facturacion_prioritaria"></span><span>{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_CELL_4'|translate}}</span></td>
+                        <td class=""><span class="icon-wrong ib-upgrade__icons-table"></span></td>
+                        <td ng-class="{'ib-upgrade__cell-business-pair': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS', 'ib-upgrade__cell-premium-pair': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type !== 'BUSINESS'}">
+                            <span ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS'" class="icon-confirmacion ib-upgrade__icons-table"></span>
+                            <span ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type !== 'BUSINESS'" class="icon-wrong ib-upgrade__icons-table"></span>
+                        </td>
+                    </tr>
+                    <tr class="">
+                        <td class="ib-upgrade__color-table-text ib-text--color-unfocused ib-text--bold">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_ON_BOARD' | translate}}</th>
+                    </tr>
+                    <tr>
+                        <td class=""><span class="ib-upgrade__icons-styles icon-asiento-normal"></span><span>{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_CELL_5'|translate}}</span></td>
+                        <td ng-if="upgModalCtrl.model.currentCabin === 'Turista'" class="">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_FARE' | translate}}</td>
+                        <td ng-if="upgModalCtrl.model.currentCabin !== 'Turista'" class=""><span class="icon-confirmacion ib-upgrade__icons-table"></span></td>
+                        <td ng-class="{'ib-upgrade__cell-business-pair': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS', 'ib-upgrade__cell-premium-pair': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type !== 'BUSINESS'}"><span class="icon-confirmacion ib-upgrade__icons-table"></span></td>
+                    </tr>
+                    <tr>
+                        <td class=""><span class="ib-upgrade__icons-styles icon-asiento-normal"></span><span>{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_CELL_6'|translate}}</span></td>
+                        <td ng-if="upgModalCtrl.model.currentCabin === 'Turista' && upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].haul === 'MH'" class="">{{'CKIANCSEATS_SEAT_STANDAR' | translate}}</td>
+                        <td ng-if="upgModalCtrl.model.currentCabin === 'Turista' && upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].haul === 'LH'" class="">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_SEAT_DESC_TOURIST' | translate}}</td>
+                        <td ng-if="upgModalCtrl.model.currentCabin !== 'Turista'" class="">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_SEAT_DESC_PREMIUM' | translate}}</td>
+                        <td ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === ('BUSINESS' && upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].haul === 'MH') || upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].exception" class="ib-upgrade__cell-business-odd">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_SEAT_DESC_BUSINESS_SH' | translate}}</td>
+                        <td ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS' && upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].haul === 'MH'" class="ib-upgrade__cell-business-odd">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_SEAT_DESC_BUSINESS_SH' | translate}}</td>
+                        <td ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS' && upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].haul === 'LH' && !upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].exception" class="ib-upgrade__cell-business-odd">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_SEAT_DESC_BUSINESS' | translate}}</td>
+                        <td ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type !== 'BUSINESS'" class="ib-upgrade__cell-premium-odd">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_SEAT_DESC_PREMIUM' | translate }}</td>
+                    </tr>
+                    <tr>
+                        <td class=""><span class="ib-upgrade__icons-styles icon-c_comidas_nuevas"></span><span>{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_CELL_7'|translate}}</span></td>
+                        <td ng-if="upgModalCtrl.model.currentCabin === 'Turista'" class=""><span class="icon-wrong ib-upgrade__icons-table"></span></td>
+                        <td ng-if="upgModalCtrl.model.currentCabin !== 'Turista'" class=""><span class="icon-confirmacion ib-upgrade__icons-table"></span></td>
+                        <td ng-class="{'ib-upgrade__cell-business-pair': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS', 'ib-upgrade__cell-premium-pair': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type !== 'BUSINESS'}"><span class="icon-confirmacion ib-upgrade__icons-table"></span></td>
+                    </tr>
+                    <tr>
+                        <td class=""><span class="ib-upgrade__icons-styles ib-upgrade__icon-size icon-entretenimiento_individual"></span><span>{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_CELL_8'|translate}}</span></td>
+                        <td ng-if="upgModalCtrl.model.currentCabin === 'Turista' && upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].haul === 'LH'" class="">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_TV_DESC_TOURIST' | translate}}</td>
+                        <td ng-if="upgModalCtrl.model.currentCabin === 'Turista' && upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].haul === 'MH'" class=""><span class="icon-wrong ib-upgrade__icons-table"></span></td>
+                        <td ng-if="upgModalCtrl.model.currentCabin !== 'Turista'" class="">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_TV_DESC_PREMIUM' | translate}}</td>
+                        <td ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS' && upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].haul === 'LH'" class="ib-upgrade__cell-business-odd">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_TV_DESC_BUSINESS' | translate}}</td>
+                        <td ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS' && upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].haul === 'MH'" class="ib-upgrade__cell-business-odd"><span class="icon-wrong ib-upgrade__icons-table"></span></td>
+                        <td ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type !== 'BUSINESS'" class="ib-upgrade__cell-premium-odd">{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_TV_DESC_PREMIUM' | translate}}</td>
+                    </tr>
+                    <tr>
+                        <td class=""><span class="ib-upgrade__icons-styles ib-upgrade__icon-size ib-upgrade__mensajeria-gratis"></span><span>{{'UPGRADING_MODAL_KNOW_MORE_V2_BUSINESS_CELL_9'|translate}}</span></td>
+                        <td class=""><span class="icon-wrong ib-upgrade__icons-table"></span></td>
+                        <td ng-class="{'ib-upgrade__cell-business-pair': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS', 'ib-upgrade__cell-premium-pair': upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type !== 'BUSINESS'}">
+                            <span ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type !== 'BUSINESS'" class="icon-wrong ib-upgrade__icons-table"></span>
+                            <span ng-if="upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].offerSegmentClasses[0].cabinClass.type === 'BUSINESS'" class="icon-confirmacion ib-upgrade__icons-table"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <span class="ib-text">{{'UPGRADING_MODAL_KNOW_MORE_V2_NOTE_1' | translate}}</span>
+            <br>
+            <span class="ib-text">{{'UPGRADING_MODAL_KNOW_MORE_V2_NOTE_2' | translate}}</span>
+        </div>
+        <!--	<div class="ib-layout">
+			<div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+				<span class="ib-text ib-text--block ib-text--medium"><span class="ib-text ib-text--bold">{{'UPGRADING_MODAL_KNOW_MORE_ON_BOARD'|translate}}</span></span>
+			</div>
+			<ul>
+				<li ng-repeat="condition in upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].conditions.onBoard" class="ib-know-more__list icon-confirmacion"><span class="ib-text ib-text--block ib-text--medium">{{condition|translate}}</span></li>
+
+			</ul>
+			<div class="ib-layout__line-spacing ib-layout__line-spacing--medium ib-layout__line-spacing--top-medium">
+				<span class="ib-text ib-text--block ib-text--medium ib-text--bold">{{'UPGRADING_MODAL_KNOW_MORE_ON_BOARD_ON_LAND'|translate}}</span>
+			</div>
+			<ul>
+				<li ng-repeat="condition in upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].conditions.onLand" class="ib-know-more__list icon-confirmacion"><span class="ib-text ib-text--block ib-text--medium">{{condition|translate}}</span></li>
+			</ul>
+		</div>-->
+	</section>
+	<footer class="ib-know-more__footer">
+		<!--<a id="cki-modal-upgrade-kow-more-offer-{{$index}}" ng-repeat="(index,offer) in upgModalCtrl.model.segmentInfo.offers" href="javascript:void(0)" ng-if="offer.id !== upgModalCtrl.model.segmentInfo.offers[upgModalCtrl.model.offerSelected].id" ng-click="upgModalCtrl.loadOffer(upgModalCtrl.model.currentCabin,upgModalCtrl.model.segmentInfo,index)" title="{{offer.cabinLayoutDescription}}" class="ib-know-more__link ib-link">{{offer.cabinLayoutDescription}}</a>-->
+	</footer>
+</div>

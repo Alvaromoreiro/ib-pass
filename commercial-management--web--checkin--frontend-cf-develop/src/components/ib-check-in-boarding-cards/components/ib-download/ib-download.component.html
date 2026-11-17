@@ -1,0 +1,58 @@
+<div [ngClass]="{'ib-boarding-cards-wallet--none': onlyPdf}">
+    <section class="ib-boarding-cards-wallet__section ib-boarding-cards-wallet__section--small">
+        <div class="ib-intro-section ib-intro-section--dark">
+            <div class="ib-intro-section__content">
+                <span class="ib-intro-section__icon icon-passbook_tarjeta_embarque ib-intro-section__icon--primary"></span>
+                <div><h3 class="ib-intro-section__title ib-intro-section__title--left">{{'IBECBP_DOWNLOAD_OPTIONS'| translate}}</h3></div>
+            </div>
+        </div>
+        <div class="ib-boarding-cards-wallet__button-section">
+            <!-- WALLET BUTTONS -->
+            <ul *ngIf="!onlyPdf" class="ib-boarding-cards-wallet__button-container ib-boarding-cards-wallet__button-container--initial"
+                [ngClass]="{'u-display-none-sm u-display-none-xs u-display-none-md': !showAppleButton}">
+                <li class="ib-boarding-cards-wallet__button-item">
+                    <a id="DW_APPLE_WALLET" (click)="downloadTickets('PASSBOOK')" title="Apple Wallet" class="ib-boarding-cards-wallet__link">
+                        <figure class="ib-boarding-cards-wallet__figure">
+                            <img [src]="appleWalletImg"
+                                alt="Logo Apple Wallet" class="u-width-full">
+                        </figure>
+                    </a>
+                </li>
+            </ul>
+            <ul *ngIf="!onlyPdf" class="ib-boarding-cards-wallet__button-container"
+                [ngClass]="{ 'u-display-none-sm u-display-none-xs u-display-none-md': showAppleButton}">
+                <li class="ib-boarding-cards-wallet__button-item">
+                    <a id="DW_GOOGLE_WALLET" (click)="downloadTickets('GOOGLE_WALLET')" title="Google Wallet" class="ib-boarding-cards-wallet__link">
+                        <figure class="ib-boarding-cards-wallet__figure--google">
+                            <img [src]="googleWalletImg"
+                                alt="Logo Google Wallet" class="u-width-full">
+                        </figure>
+                    </a>
+                </li>
+            </ul>
+            <!-- END WALLET BUTTONS -->
+            <!-- RED BUTTONS -->
+            <div class="ib-boarding-cards-wallet__button-group">
+                <ul class="ib-boarding-cards-wallet__button-container">
+                    <li class="ib-boarding-cards-wallet__button-item">
+                        <button id="DW_PDF" class="ib-button ib-boarding-cards-wallet__button ib-boarding-cards-wallet__button--standard"
+                            (click)="downloadTickets('PDF')">
+                            <span class="ib-boarding-cards-wallet__button-icon icon-documento_pdf"></span>
+                            <span class="ib-boarding-cards-wallet__button u-ellipsis-2">{{'CKI_BOARDING_PASSES_PDF_FORMAT'| translate}}</span>
+                        </button>
+                    </li>
+                </ul>
+                <ul *ngIf="!onlyPdf" class="ib-boarding-cards-wallet__button-container ib-boarding-cards-wallet__button-container--final">
+                    <li class="ib-boarding-cards-wallet__button-item">
+                        <button id="DW_QR" class="ib-button ib-boarding-cards-wallet__button ib-boarding-cards-wallet__button--standard ib-boarding-cards-wallet__button--final"
+                            (click)="downloadTickets('QR')">
+                            <span class="ib-boarding-cards-wallet__button-icon icon-codigo_qr"></span>
+                            <span class="ib-boarding-cards-wallet__button u-ellipsis-2">{{'CKI_BOARDING_PASSES_QR'| translate}}</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <!-- END RED BUTTONS -->
+        </div>
+    </section>
+</div>

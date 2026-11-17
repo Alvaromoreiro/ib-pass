@@ -1,0 +1,114 @@
+/* ------------------------------------*\
+    #BORDER
+\*------------------------------------ */
+
+$borders: (
+    top: border-top,
+    right: border-right,
+    bottom: border-bottom,
+    left: border-left,
+    all: border
+);
+
+$border-rules: (
+    s1: rem(1) solid,
+    s2: rem(2) solid
+);
+
+@each $color, $color-key in $borders-palette {
+    @each $property-name, $property in $borders {
+        @each $rule-classname, $rule in $border-rules {
+            .u-#{$property}-#{$rule-classname}-#{"" + $color} {
+                #{$property}: $rule $color-key;
+            }
+        }
+    }
+}
+
+@each $breakpoint, $query in $breakpoints {
+    @include media-query($breakpoint) {
+        @each $color, $color-key in $borders-palette {
+            @each $property-name, $property in $borders {
+                @each $rule-classname, $rule in $border-rules {
+                    .u-#{$property}-#{$rule-classname}-#{"" + $color}-#{$breakpoint} {
+                        #{$property}: $rule $color-key !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Border top
+ */
+
+.u-border-top-none {
+    border-top: 0 !important;
+}
+
+/**
+ * Border bottom
+ */
+
+.u-border-bottom-none {
+    border-bottom: 0 !important;
+}
+
+/**
+ * Border left
+ */
+
+.u-border-left-none {
+    border-left: 0 !important;
+}
+
+/**
+ * Border right
+ */
+
+.u-border-right-none {
+    border-right: 0 !important;
+}
+
+/**
+ * Border
+ */
+
+.u-border-none {
+    border: 0 !important;
+}
+
+/**
+ * Border none delay
+ */
+
+.u-border-none-delay {
+    animation: fadeout 0.5s forwards;
+}
+
+.u-box-shadow-none {
+    box-shadow: none;
+}
+
+.u-box-shadow-top {
+    box-shadow: 0 rem(-4) rem(4) 0 rgb(0 0 0 / 10%);
+}
+
+.u-box-shadow-bottom {
+    box-shadow: 0 rem(4) rem(4) 0 rgb(0 0 0 / 10%);
+}
+
+@keyframes fadeout {
+    100% { border-color: transparent; }
+}
+
+.u-border-bottom-delay {
+    border-bottom: none !important;
+    -ms-animation: fadeout-bottom 0.5s forwards;
+    animation: fadeout-bottom 0.5s forwards;
+}
+
+@keyframes fadeout-bottom {
+    100% { border-bottom: none; }
+}

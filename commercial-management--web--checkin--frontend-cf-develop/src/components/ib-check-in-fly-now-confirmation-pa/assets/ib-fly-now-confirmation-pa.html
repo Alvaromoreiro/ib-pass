@@ -1,0 +1,51 @@
+	<!-- End wrapper-->
+	<section class="container">
+		<!-- Main content-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="ibe-layout__header ibe-layout__header--title">
+					<h1 class="ibe-heading ibe-heading--type-1">{{'IBFNCOPA_TITLE'|translate}}</h1>
+				</div>
+			</div>
+		</div>
+		<form class="ibe_form ibe-form--bridge">
+			<div class="row ibe-ticket">
+				<div class="ibe-table">
+					<div class="col-xs-12 col-xl-4 col-lg-4 ibe-tablecell">
+						<div ib-accordion-directive ib-affix data-view="vista-accordion-flight-confirm" class="ibe-info__box ibe-info__box--accordion"></div>
+					</div>
+					<section class="col-xl-8 col-lg-8 col-xs-12 ibe-tablecell">
+						<section class="ibe-layout__section">
+							<div class="ibe-ticket__flights">
+								<div class="ibe-ticket__flights-item">
+									<article class="ibe-ticket__flights-item__data ibe-ticket__flights-item--open">
+										<ib-segment-info-pa id="cki-fly-now-confirmation-pa-segment-info-pa" segment-info-model="::fnCoPaCtrl.model.segmentInfo" show-pa="true" show-details="false" show-checks="false"></ib-segment-info-pa>
+									</article>
+								</div>
+							</div>
+						</section>
+						<section class="ibe-layout__section">
+							<ib-your-flight-info-pa id="cki-fly-now-confirmation-pa-your-flight-info-pa" data-ng-if="fnCoPaCtrl.model.segmentInfo.type !== 'OPEN'" your-flight-info-model="::fnCoPaCtrl.model.oldSegmentInfo"
+							 title="{{'IBFNCOPA_YOUR_PREVIOUS_FLIGHT_TITLE'|translate}}"> </ib-your-flight-info-pa>
+						</section>
+						<section class="ibe-layout__section">
+							<ib-your-flight-info-pa id="cki-fly-now-confirmation-pa-your-flight-info-pa-bottom" your-flight-info-model="::fnCoPaCtrl.model.newSegmentInfo" title="{{fnCoPaCtrl.model.segmentInfo.type !=='OPEN' ? ('IBFNCOPA_YOUR_NEW_FLIGHT_TITLE'|translate) : ('IBFNCOPA_YOUR_NEW_FLIGHT_TITLE_OPEN'|translate) }}">
+							</ib-your-flight-info-pa>
+						</section>
+						<section class="ibe-layout__section">
+							<div class="ibe-content-buttons">
+								<div class="ibe-content-buttons__content-left">
+									<input type="submit" name="button_next" data-ng-click="fnCoPaCtrl.changeFlightOrder()" id="button_next" value="{{'IBFNCOPA_CONTINUE_BUTTON'|translate}}"
+									 class="ibe-button ibe-button--red ibe-button--big ibe-button--w-medium">
+								</div>
+								<div class="ibe-content-buttons__content-right">
+									<a id="cki-fly-now-confirmation-pa-cancel-link" href="javascript:void(0)" data-ng-click="fnCoPaCtrl.backAvailability()" title="{{'IBFNCOPA_CANCEL_BUTTON_TITLE'|translate}}"
+									 class="link link__regular link__regular--underline">{{'IBFNCOPA_CANCEL_BUTTON'|translate}}</a>
+								</div>
+							</div>
+						</section>
+				</div>
+			</div>
+			</div>
+		</form>
+		</section>

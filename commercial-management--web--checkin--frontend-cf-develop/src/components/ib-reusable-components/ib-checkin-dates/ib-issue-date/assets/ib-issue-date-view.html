@@ -1,0 +1,39 @@
+<div class="ib-select-date" id="ISSUE_DATE" data-ng-class="{'ib-select-date--error': issueDateCtrl.containerForm.$submitted && (issueDateCtrl.containerForm['issueDateDay_'+ issueDateCtrl.index].$invalid || issueDateCtrl.containerForm['issueDateMonth_'+ issueDateCtrl.index].$invalid || issueDateCtrl.containerForm['issueDateYear_'+ issueDateCtrl.index].$invalid), 'ib-select-date ib-select-date--disabled':issueDateCtrl.needDisabled, 'ib-select-date':!issueDateCtrl.needDisabled}">
+    <span class="ib-select-date__label">{{'ISSUE_DATE_FIELD_LABEL' | translate}}</span>
+    <ui-select ng-disabled="issueDateCtrl.needDisabled" ng-if="issueDateCtrl.showDay" class="ib-select-date__action ib-select-date__action--day" data-ng-model="issueDateCtrl['day']"
+        data-ng-change="issueDateCtrl.daysSelected()" ng-required="::issueDateCtrl.dateRequired" name="issueDateDay_{{::issueDateCtrl.index}}"
+        uis-open-close="issueDateCtrl.onOpenClose(isOpen,'ib-select-date__action--day')">
+        <ui-select-match class="ib-select-date__list-ipt" placeholder="{{'EXPIRY_DATE_FIELD_DAY_PLACEHOLDER' | translate}}">
+            <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+        </ui-select-match>
+        <ui-select-choices class="ib-select-date__list" repeat="item in (issueDateCtrl.availableDays | filter: $select.search)">
+            <span class="ib-select-date__list-txt" ng-bind="item"></span>
+        </ui-select-choices>
+    </ui-select>
+    <ui-select  ng-disabled="issueDateCtrl.needDisabled" class="ib-select-date__action ib-select-date__action--month" data-ng-model="issueDateCtrl['month']" data-ng-change="issueDateCtrl.updateMonthIssue()"
+        ng-required="::issueDateCtrl.dateRequired" name="issueDateMonth_{{::issueDateCtrl.index}}" data-ng-class="{'ib-select-date__action--month-first' : !issueDateCtrl.showDay}"
+        uis-open-close="issueDateCtrl.onOpenClose(isOpen,'ib-select-date__action--month')">
+        <ui-select-match class="ib-select-date__list-ipt" placeholder="{{'EXPIRY_DATE_FIELD_MONTH_PLACEHOLDER' | translate}}">
+            <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+        </ui-select-match>
+        <ui-select-choices repeat="item in (issueDateCtrl.availableMonths | filter: $select.search)">
+            <span class="ib-select-date__list-txt" data-ng-bind="item"></span>
+        </ui-select-choices>
+    </ui-select>
+    <ui-select  ng-disabled="issueDateCtrl.needDisabled" class="ib-select-date__action" ng-class="{'ib-select-date__action--year': issueDateCtrl.showDay,'ib-select-date__action--day':!issueDateCtrl.showDay}"
+        data-ng-model="issueDateCtrl['year']" data-ng-change="issueDateCtrl.updateYearIssue()" ng-required="::issueDateCtrl.dateRequired"
+        name="issueDateYear_{{::issueDateCtrl.index}}"
+        uis-open-close="issueDateCtrl.onOpenClose(isOpen,'ib-select-date__action--year')">
+        <ui-select-match class="ib-select-date__list-ipt" placeholder="{{issueDateCtrl.showDay ? ('EXPIRY_DATE_FIELD_YEAR_PLACEHOLDER' | translate) : ('EXPIRY_DATE_FIELD_LIGHT_YEAR_PLACEHOLDER' | translate)}}">
+            <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+        </ui-select-match>
+        <ui-select-choices repeat="item in (issueDateCtrl.availableYears | filter: $select.search)">
+            <span class="ib-select-date__list-txt" data-ng-bind="item"></span>
+        </ui-select-choices>
+    </ui-select>
+</div>
+<div ng-messages="issueDateCtrl.containerForm.$submitted && ((issueDateCtrl.containerForm['issueDateDay_'+ issueDateCtrl.index].$invalid && issueDateCtrl.containerForm['issueDateDay_'+ issueDateCtrl.index].$error)
+                    || (issueDateCtrl.containerForm['issueDateMonth_'+ issueDateCtrl.index].$invalid && issueDateCtrl.containerForm['issueDateMonth_'+ issueDateCtrl.index].$error)
+                    || (issueDateCtrl.containerForm['issueDateYear_'+ issueDateCtrl.index].$invalid && issueDateCtrl.containerForm['issueDateYear_'+ issueDateCtrl.index].$error))">
+    <div class="ib-alert ib-alert--error" ng-message="required">{{'ISSUE_DATE_REQUIRED_ERROR' | translate}}</div>
+</div>

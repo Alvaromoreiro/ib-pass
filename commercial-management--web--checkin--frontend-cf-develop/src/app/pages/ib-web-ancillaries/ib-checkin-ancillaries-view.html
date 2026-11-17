@@ -1,0 +1,106 @@
+<div class="ib-background ib-background--behind">
+    <figure>
+        <img class="ib-background__img" ng-src="{{::$root.routes.images}}/background/plane_back_desktop.jpg" alt="" />
+    </figure>
+</div>
+<div class="container" data-calculate-position>
+    <div class="row" data-ng-if="ancillariesCtrl.bundelingView === false">
+        <div class="col-xs-12">
+            <div class="ib-layout__header ib-layout__header--title">
+                <h1 tabindex="0" focusin class="ib-heading ib-heading--light ib-heading--type-1">
+                    {{'ANCILLARIES_HEAD_TEXT'|translate}}</h1>
+            </div>
+        </div>
+    </div>
+    <ib-ui-avios-summary-banner class="u-display-block" data-ng-class="{'u-mt-big' : ancillariesCtrl.bundelingView}"
+        ng-if="ancillariesCtrl.flightAviosInfo && !ancillariesCtrl.isOnbUserLogged" logged="ancillariesCtrl.userLogged"></ib-ui-avios-summary-banner>
+    <ib-bundeling data-ng-if="ancillariesCtrl.bundelingView === true"
+        bundles="ancillariesCtrl.model.bundles"></ib-bundeling>
+    <div class="row" data-ng-if="ancillariesCtrl.bundelingView === true">
+        <div class="col-xs-12">
+            <div class="ib-layout__header ib-layout__header--title">
+                <h1 tabindex="0" focusin class="ib-heading ib-heading--light ib-heading--type-1">
+                    {{'BUNDLE_ANC_TITLE'|translate}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row"
+        data-ng-if="ancillariesCtrl.model.ancillariesAvailable.length > 0 && ancillariesCtrl.model.flags.showBannerConfort && ancillariesCtrl.model.seatsAvailable.status">
+        <div class="col-xs-12">
+            <div
+                class="ib-msg-alert ib-msg-alert--notice ib-msg-alert--color-primary icon-informacion_2 ib-msg-alert--medium u-mb-medium u-pb-medium">
+                <p class="ib-msg-alert__text ib-msg-alert__text--responsive">{{'ANCILLARIES_BANNER_TEXT_1'|translate}}
+                </p>
+                <p class="ib-msg-alert__text ib-msg-alert__text--black">
+                    <a href="javascript:void(0)" title="{{'ANCILLARIES_BANNER_TEXT_2'|translate}}"
+                        data-ng-click="ancillariesCtrl.openSeatMap()">
+                        {{'ANCILLARIES_BANNER_TEXT_2'|translate}}</a> {{'ANCILLARIES_BANNER_TEXT_3'|translate}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <ib-resident-baggage-banner
+        ng-if="ancillariesCtrl.model.ancillariesAvailable.length > 0 && ancillariesCtrl.model.flags.showBannerResident && ancillariesCtrl.model.baggageAvailable"></ib-resident-baggage-banner>
+    <div class="row">
+        <equal-height data-equal-height-reload="true">
+            <div class="col-xs-12 col-sm-12"
+                ng-repeat="showBox in ancillariesCtrl.model.ancillariesAvailable | filter: '!ALLIANZ_FUSION' | filter: '!INSURANCE' | filter: '!CO2_FOOTPRINT' as items"
+                ng-class="{
+                'col-md-12 col-lg-12 col-xl-12': items.length === 1,
+                'col-md-6 col-xl-6 col-lg-6': items.length === 2,
+                'col-md-6 col-lg-6 col-xl-4': items.length === 3 && !$last,
+                'col-md-12 col-lg-12 col-xl-4': items.length === 3 && $last,
+                'col-md-6 col-lg-6 col-xl-6': items.length === 4,
+                'col-xl-6 col-md-6 col-lg-6': items.length === 5 && (($index == (items.length - 2)) || ($index == (items.length - 1))) && !$last,
+                'col-xl-4 col-md-12 col-lg-12': items.length === 5 && (($index != (items.length - 2)) && ($index != (items.length - 1))) && $last,
+                'col-xl-6 col-md-12 col-lg-12': items.length === 5 && (($index == (items.length - 2)) || ($index == (items.length - 1))) && $last,
+                'col-xl-4 col-md-6 col-lg-6': items.length === 5 && (($index != (items.length - 2)) && ($index != (items.length - 1))) && !$last,
+                'col-xl-4 col-lg-6 col-md-6': items.length >= 6}">
+                <ib-seat-map-box ng-if="showBox === 'SEAT'" [quantity]="ancillariesCtrl.model.seatsQuanty"
+                    [availability]="ancillariesCtrl.model.seatsAvailable"
+                    [modules]="items.length" [index]="$index"
+                    [last]="$last"></ib-seat-map-box>
+                <ib-baggages-box ng-if="showBox === 'BAGGAGE'" quanty="ancillariesCtrl.model.baggagesQuanty"
+                    available="ancillariesCtrl.model.baggageAvailablePrice" modules="items.length" index="$index"
+                    last="$last"></ib-baggages-box>
+                <ib-ancillaries-components ng-if="showBox === 'FLEXIBILITY_ON_DEMAND'"
+                    model="ancillariesCtrl.model.ancillariesFlexibilization"
+                    selected="ancillariesCtrl.model.ancillariesFlexibilization.confirmed" modules="items.length"
+                    index="$index" last="$last"></ib-ancillaries-components>
+                <ib-speqs-box ng-if="showBox === 'SPECIAL_EQUIPMENT'" quanty="ancillariesCtrl.model.speqsQuanty"
+                    available="ancillariesCtrl.model.speqsAvailablePrice" modules="items.length" index="$index"
+                    last="$last"></ib-speqs-box>
+                <ib-bob-box ng-if="showBox === 'INTEGRATED_BOB'" bob-info="ancillariesCtrl.model.bobInfo"
+                    modules="items.length" index="$index" last="$last"></ib-bob-box>
+                <ib-carbon-footprint-box ng-if="showBox === 'CO2_FOOTPRINT'"
+                    model="ancillariesCtrl.model.ancillariesCarbonFootprint" modules="items.length" index="$index"
+                    last="$last"></ib-carbon-footprint-box>
+                <ib-insurance-box ng-if="ancillariesCtrl.model.showInsuranceBox"
+                    price="ancillariesCtrl.model.insuranceInfo.price" selected="ancillariesCtrl.model.selectedInsurance"
+                    modules="items.length" index="$index" last="$last"></ib-insurance-box>
+                <ib-ancillaries-components ng-if="showBox === 'PREORDER'"
+                    model="ancillariesCtrl.model.ancillariesPreorder"
+                    selected="ancillariesCtrl.model.ancillariesPreorder.confirmed" modules="items.length" index="$index"
+                    last="$last"></ib-ancillaries-components>
+                <ib-ancillaries-components ng-if="showBox === 'PRIORITY_BOARDING'"
+                    model="ancillariesCtrl.model.ancillariesPriorityBoarding"
+                    selected="ancillariesCtrl.model.ancillariesPriorityBoarding.confirmed" modules="items.length"
+                    index="$index" last="$last"></ib-ancillaries-components>
+                <ib-globick-transfers-box model="ancillariesCtrl.model.ancillariesTransfersGlobick" ng-if="showBox === 'GLOBICK'"
+                    modules="items.length" index="$index" last="$last"></ib-globick-transfers-box>
+            </div>
+        </equal-height>
+    </div>
+    <ib-insurance data-ng-if="ancillariesCtrl.model.insuranceAvailable"
+        model="ancillariesCtrl.model.ancillariesInsurance" selected-insurance="ancillariesCtrl.model.selectedInsurance"
+        form="ancillariesCtrl.model.insuranceForm" conditions-uri="ancillariesCtrl.model.insuranceInfo.conditionsUri"
+        country-insurance="ancillariesCtrl.model.insuranceInfo.countryInsurance"></ib-insurance>
+
+    <ib-insurance-allianz-fusion data-ng-if="ancillariesCtrl.model.insuranceAllianzFusionAvailable"
+        model="ancillariesCtrl.model.ancillariesInsuranceAllianzFusion" passengers="ancillariesCtrl.model.passengerBaggagesTrips"></ib-insurance-allianz-fusion>
+
+    <ib-breakdown-ancillaries total-price="ancillariesCtrl.model.totalPayment"></ib-breakdown-ancillaries>
+    <ib-ui-avios-summary ng-if="!ancillariesCtrl.isOnbUserLogged" request="ancillariesCtrl.model" logged="ancillariesCtrl.userLogged"></ib-ui-avios-summary>
+</div>
+<ib-ui-notice data-ng-if="ancillariesCtrl.showOnHoldNotice" type="'lightbox-onhold'"
+    model="ancillariesCtrl.modelLightBox"></ib-ui-notice>

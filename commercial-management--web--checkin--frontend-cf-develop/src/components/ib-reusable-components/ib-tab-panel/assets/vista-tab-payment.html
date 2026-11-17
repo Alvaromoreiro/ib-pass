@@ -1,0 +1,186 @@
+<uib-tabset>
+  <uib-tab index="0" heading="{{vm6.model.paymentInformation.paymentMethods[0].description}}" template-url="web-checkin/templates/ib-default-tab-custom.html">
+    <div ng-if="vm6.model.state==1" class="ibe-tab__container-wrapper" ng-class="{'no_paddingBottom': vm6.model.cardLoggedChoosed.cardTypeId === 0}">
+      <fieldset class="ibe-tab__container-center">
+        <legend class="title title__h4">{{'CKIANCPURC_DATOS_TARJETA_LOG'|translate}}</legend>
+        <div class="ibe-tab__container">
+          <div class="ibe_form__group" ng-class="{'ibe_form__group--error': vm6.model.cardLoggedChoosed == null && vm6.form.$submitted}">
+            <div class="ibe_form__select ibe_form__select--no-label">
+              <ui-select id="CKIANCPURC_COMBO_TARJ_LOGADO" data-ng-model="vm6.model.cardLoggedChoosed" data-ng-disabled="disabled" class="ibe_form__ui-select"
+                id="comboSelect_{{$index}}" ng-change="vm6.checkState()">
+                <ui-select-match placeholder="{{'PLACEHOLDER_COMBO'|translate}}" class="ibe_form__ui-select-match"><span class="ibe_form__selected">{{$select.selected.description|translate}}</span>
+                </ui-select-match>
+                <ui-select-choices id="comboSelectOptions_{{$index}}" repeat="profileCard in vm6.model.optionsCardLogged" class="ibe_form__ui-select-choices"><span data-ng-bind="profileCard.description|translate" class="ibe-form__option"></span></ui-select-choices>
+              </ui-select>
+              <div ng-if="vm6.model.cardLoggedChoosed == null && vm6.form.$submitted">
+                <p class="ibe_form__msg-info">{{'CKIANCPURC_TIPO_TARH_ERR'|translate}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div ng-if="vm6.model.cardLoggedChoosed !=null && vm6.model.cardLoggedChoosed.cardTypeId != 0">
+          <label class="hideAccessible">{{'CKIANCPURC_DATOS_TARJETA_ELIG'|translate}}</label>
+          <h5 class="title title__h5 no_paddingBottom">{{'CKIANCPURC_DATOS_TARJETA_GUAR'|translate}}</h5>
+          <div class="ibe-tab__separator">
+            <p class="paragraph paragraph__regular">
+              {{'CKIANCPURC_DATOS_TITULAR'|translate}}: {{vm6.model.cardLoggedChoosed.nameOnCard}} {{vm6.model.cardLoggedChoosed.surnameOnCard}}
+            </p>
+            <p class="paragraph paragraph__regular">{{'CKIANCPURC_DATOS_NUM_TARJ'|translate}}: {{vm6.model.cardLoggedChoosed.cardNumber}}</p>
+          </div>
+          <div class="ibe_form__group" ng-class="{'ibe_form__group--error' : !vm6.form.code_cvv.$valid && vm6.form.$submitted, 'ibe_form__group--content' : vm6.form.code_cvv.$viewValue != '' && vm6.form.code_cvv.$viewValue != null}"
+            ng-if="vm6.model.cardLoggedChoosed.cvv.mandatory">
+            <input name="code_cvv" id="code_cvv" type="text" placeholder="{{'CKIANCPURC_TARJ_CVV'|translate}}" class="ibe_form__input-text"
+              ng-model="vm6.model.cvv_savecard" maxlength="{{vm6.model.cardLoggedChoosed.cvv.length}}" minlength="{{vm6.model.cardLoggedChoosed.cvv.length}}"
+              ng-pattern="::$root.CHECKIN_PATTERNS.CVV_PATTERN" data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.CVV_CLEANER}}"
+              required />
+            <label for="code_cvv" class="ibe_form__input-label">{{'CKIANCPURC_TARJ_CVV'|translate}}</label>
+            <button id="cki-payment-tab-what-is-cvv-btn" type="button" title="{{'ACCES_CKIANCPURC_QUE_ES_CVV'|translate}}" data-ng-click="vm6.openPaymentModalInfotmation('md','ckianpurc.vista-modal-cvv',true)"
+              class="ibe-form__info link link__regular link__regular--underline">{{'CKIANCPURC_QUE_ES_CVV'|translate}}</button>
+            <div ng-if="!vm6.form.code_cvv.$valid && vm6.form.$submitted">
+              <p class="ibe_form__msg-info">{{'CKIANCPURC_COD_CVV_ERR'|translate}}</p>
+            </div>
+          </div>
+          <div class="ibe_form__group" ng-class="{'ibe_form__group--error' : !vm6.form.email.$valid && vm6.form.$submitted, 'ibe_form__group--content' : vm6.form.email.$viewValue != '' && vm6.form.email.$viewValue != null}">
+            <input ng-model="vm6.model.email" maxlength="{{::$root.CHECKIN_FIELDS_LENGTH.EMAIL_MAX_LENGTH}}" name="email" id="email" type="email"
+              placeholder="{{'CKIANCPURC_TARJ_EMAIL'|translate}}" class="ibe_form__input-text" required ng-pattern="::$root.CHECKIN_PATTERNS.EMAIL_PATTERN"
+            />
+            <label for="email" class="ibe_form__input-label">{{'CKIANCPURC_TARJ_EMAIL'|translate}}</label>
+            <div ng-if="!vm6.form.email.$valid && vm6.form.$submitted">
+              <p class="ibe_form__msg-info">{{'IBCOAC_EMAIL_ERR'|translate}}</p>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div ng-if="vm6.model.state==2 || vm6.model.state==3 || (vm6.model.state==1 && vm6.model.cardLoggedChoosed !=null && vm6.model.cardLoggedChoosed.cardTypeId == 0)"
+      class="ibe-tab__container">
+      <div class="ibe-tab__container-wrapper">
+        <fieldset class="ibe-tab__container-center">
+          <legend class="title title__h4">{{'CKIANCPURC_DATOS_FACT'|translate}}</legend>
+          <div class="{{vm6.classCard()}}">
+            <div class="ibe_form__select ibe_form__select--cards" ng-class="{'ibe_form__group--error' : !vm6.form.card.$valid && (vm6.form.$submitted || vm6.form.card.$dirty)}">
+              <ui-select id="CKIANCPURC_TAB_COMBO_TARJETAS" name="card" ng-model="vm6.model.creditCard" ng-disabled="disabled" class="ibe_form__ui-select ibe_form--nolabel"
+                required ng-change="vm6.updateSelectedCard();vm6.model.cvv=null">
+                <ui-select-match placeholder="{{'CKIANCPURC_TIPOS_TARJETA'|translate}}" class="ibe_form__ui-select-match">
+                  <span class="ibe_form__selected"><img alt="{{'ACCES_LOGO_TARJETA'|translate}}{{$select.selected.description}}" ng-src={{$select.selected.iconUrl}} class="ibe_form__icon-cards"><span class="ibe-form__option">{{' '+ $select.selected.description}}</span></span>
+                </ui-select-match>
+                <ui-select-choices repeat="o in vm6.model.paymentInformation.paymentMethods[0].types" class="ibe_form__ui-select-choices">
+                  <img ng-src="{{o.iconUrl}}" class="ibe_form__icon-cards"> <span data-ng-bind="' '+ o.description" class="ibe-form__option"></span>
+                </ui-select-choices>
+              </ui-select>
+              <div ng-if="vm6.form.card != null && (!vm6.form.card.$valid && vm6.form.$submitted) || (vm6.model.cardNumber != null && !vm6.form.card.$valid)">
+                <p class="ibe_form__msg-info">{{'CKIANCPURC_CARD_TYPE_ERR'|translate}}</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              <label class="hideAccessible">{{'CKIANCPURC_TIPOS_TARJETA'|translate}}</label>
+              <div class="ibe_form__group" ng-class="{'ibe_form__group--error' : !vm6.form.name1.$valid && (vm6.form.$submitted || vm6.form.name1.$dirty), 'ibe_form__group--content' : vm6.form.name1.$viewValue != '' && vm6.form.name1.$viewValue != null}">
+                <input name="name1" id="name1" type="text" placeholder="{{'CKIANCPURC_TARJ_NOMBRE'|translate}}" class="ibe_form__input-text"
+                  ng-model="vm6.model.updatePaymentsInfo.additionalCardInfo.nameOnCard" maxlength="30" required ng-pattern="::$root.CHECKIN_PATTERNS.NAME_SURNAME_PATTERN"
+                  data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.NAME_SURNAME_CLEANER}}" />
+                <label for="name1" class="ibe_form__input-label">{{'CKIANCPURC_TARJ_NOMBRE'|translate}}</label>
+                <div ng-if="!vm6.form.name1.$valid && (vm6.form.$submitted || vm6.form.name1.$dirty)">
+                  <p class="ibe_form__msg-info">{{'CKIANCPURC_NAME_ERR'|translate}}</p>
+                </div>
+              </div>
+              <div class="ibe_form__group" ng-class="{'ibe_form__group--error' : !vm6.form.surName1.$valid && (vm6.form.$submitted || vm6.form.surName1.$dirty), 'ibe_form__group--content' : vm6.form.surName1.$viewValue != '' && vm6.form.surName1.$viewValue != null}">
+                <input name="surName1" id="surName1" type="text" placeholder="{{'CKIANCPURC_TARJ_APELLIDO'|translate}}" class="ibe_form__input-text"
+                  ng-model="vm6.model.updatePaymentsInfo.additionalCardInfo.surnameOnCard" maxlength="30" required ng-pattern="::$root.CHECKIN_PATTERNS.NAME_SURNAME_PATTERN"
+                  data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.NAME_SURNAME_CLEANER}}" />
+                <label for="surName1" class="ibe_form__input-label">{{'CKIANCPURC_TARJ_APELLIDO'|translate}}</label>
+                <div ng-if="!vm6.form.surName1.$valid && (vm6.form.$submitted || vm6.form.surName1.$dirty)">
+                  <p class="ibe_form__msg-info">{{'CKIANCPURC_APEL_ERR'|translate}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="ibe_form__group" ng-class="{'ibe_form__group--error' : ((vm6.model.creditCard.cardTypeId !== '6' && vm6.form.cardNumber.$error.ccNumberType) || !vm6.checkCardNumber() || vm6.form.cardNumber.$error.required) && vm6.form.$submitted,
+                                              'ibe_form__group--content': !vm6.form.cardNumber.$error.required }" ng-if="vm6.model.creditCard.cardTypeId !== '3'">
+              <input type="text" placeholder="{{'CKIANCPURC_TARJ_NUMERO'|translate}}" class="ibe_form__input-text" class="form-control"
+                ng-model="vm6.model.cardNumber" id="num_card" name="cardNumber" cc-number cc-format required maxlength="23"
+              />
+              <label for="num_card" class="ibe_form__input-label">{{'CKIANCPURC_TARJ_NUMERO'|translate}}</label>
+              <div ng-if="((vm6.model.creditCard.cardTypeId !== '6' && vm6.form.cardNumber.$error.ccNumberType) || !vm6.checkCardNumber() || vm6.form.cardNumber.$error.required) && vm6.form.$submitted">
+                <p class="ibe_form__msg-info">{{'CKIANCPURC_CARD_NUM_ERR'|translate}}</p>
+              </div>
+            </div>
+            <div class="ibe_form__group" ng-class="{'ibe_form__group--error' : (vm6.form.cardNumber.$error.ccNumberType || !vm6.checkCardNumber() || vm6.form.cardNumber.$error.required) && vm6.form.$submitted,
+                                              'ibe_form__group--content': !vm6.form.cardNumber.$error.required }" ng-if="vm6.model.creditCard.cardTypeId === '3'">
+              <input type="text" placeholder="{{'CKIANCPURC_TARJ_NUMERO'|translate}}" class="ibe_form__input-text" class="form-control"
+                ng-model="vm6.model.cardNumber" id="num_card" name="cardNumber" required maxlength="23" ng-change="vm6.formatCardNumberUatpAirplus()"
+              />
+              <label for="num_card" class="ibe_form__input-label">{{'CKIANCPURC_TARJ_NUMERO'|translate}}</label>
+              <div ng-if="(vm6.form.cardNumber.$error.ccNumberType || !vm6.checkCardNumber() || vm6.form.cardNumber.$error.required) && vm6.form.$submitted">
+                <p class="ibe_form__msg-info">{{'CKIANCPURC_CARD_NUM_ERR'|translate}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="ibe_form__group ibe-form__date">
+            <span class="ibe-form__label">{{'CKIANCPURC_TARJ_CADUCIDAD'|translate}}</span>
+            <div class="ibe_form__select ibe_form__group ibe_form__group--month">
+              <ui-select id="CKIANCPURC_TAB_COMBO_MES_CAD_TARJ" data-ng-model="vm6.model.selectedExpirationMonth" data-ng-disabled="disabled"
+                data-ib-ui-selectize class="ibe_form__ui-select" ng-change="vm6.updateMonthExpiration()">
+                <ui-select-match placeholder="00" class="ibe_form__ui-select-match">
+                  <span class="ibe_form__selected">{{$select.selected}}</span>
+                </ui-select-match>
+                <ui-select-choices repeat="month in (vm6.model.creditCardExpirationMonths | filter: $select.search)" class="ibe_form__ui-select-choices">
+                  <span data-ng-bind="month" class="ibe-form__option"></span>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+            <div class="ibe_form__select ibe_form__group ibe_form__group--month">
+              <ui-select id="CKIANCPURC_TAB_COMBO_ANHO_CAD_TARJ" data-ng-model="vm6.model.selectedExpirationYear" data-ng-disabled="disabled"
+                data-ib-ui-selectize class="ibe_form__ui-select" ng-change="vm6.updateExpiration()">
+                <ui-select-match placeholder="00" class="ibe_form__ui-select-match"><span class="ibe_form__selected">{{$select.selected}}</span>
+                </ui-select-match>
+                <ui-select-choices repeat="year in (vm6.model.creditCardExpirationYears | filter: $select.search)" class="ibe_form__ui-select-choices"><span data-ng-bind="year" class="ibe-form__option"></span></ui-select-choices>
+              </ui-select>
+            </div>
+            <div ng-if="(vm6.model.selectedExpirationMonth == null || vm6.model.selectedExpirationYear == null) && vm6.form.$submitted">
+              <p class="ibe_form__msg-info">{{'CKIANCPURC_DATE_ERR'|translate}}</p>
+            </div>
+          </div>
+          <div class="ibe_form__group" ng-class="{'ibe_form__group--error' : !vm6.form.cvvform.$valid && vm6.form.$submitted, 'ibe_form__group--content' : vm6.form.cvvform.$viewValue != '' && vm6.form.cvvform.$viewValue != null}"
+            ng-if="vm6.model.creditCard != null && vm6.model.creditCard.cvv != null && vm6.model.creditCard.cvv.mandatory">
+          <input name="cvvform" id="cvvform" type="text" placeholder="{{'CKIANCPURC_TARJ_CVV'|translate}}" class="ibe_form__input-text"
+              ng-model="vm6.model.cvv" maxlength="{{vm6.model.creditCard.cvv.length}}" minlength="{{vm6.model.creditCard.cvv.length}}"
+              ng-pattern="::$root.CHECKIN_PATTERNS.CVV_PATTERN" data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.CVV_CLEANER}}"
+              required />
+            <label for="cvvform" class="ibe_form__input-label">{{'CKIANCPURC_TARJ_CVV'|translate}}</label>
+            <button id="cki-payment-tab-what-is-cvv-2-btn" type="button" data-ng-click="vm6.openPaymentModalInfotmation('md','ckianpurc.vista-modal-cvv',true)" class="ibe-form__info link link__regular link__regular--underline">{{'CKIANCPURC_QUE_ES_CVV'|translate}}</button>
+            <div ng-if="!vm6.form.cvvform.$valid && vm6.form.$submitted">
+              <p class="ibe_form__msg-info">{{'CKIANCPURC_COD_CVV_ERR'|translate}}</p>
+            </div>
+          </div>
+          <div class="ibe_form__group" ng-class="{'ibe_form__group--error' : !vm6.form.email.$valid && vm6.form.$submitted, 'ibe_form__group--content' : vm6.form.email.$viewValue != '' && vm6.form.email.$viewValue != null}">
+            <input ng-model="vm6.model.email" maxlength="{{::$root.CHECKIN_FIELDS_LENGTH.EMAIL_MAX_LENGTH}}" name="email" id="email" type="email"
+              placeholder="{{'CKIANCPURC_TARJ_EMAIL'|translate}}" class="ibe_form__input-text" required ng-pattern="::$root.CHECKIN_PATTERNS.EMAIL_PATTERN"
+            />
+            <label for="email" class="ibe_form__input-label">{{'CKIANCPURC_TARJ_EMAIL'|translate}}</label>
+            <div ng-if="!vm6.form.email.$valid && vm6.form.$submitted">
+              <p class="ibe_form__msg-info">{{'CKIANCPURC_EMAIL_ERR'|translate}}</p>
+            </div>
+          </div>
+          <div class="ibe-tab__separator">
+            <div class="ibe-form__checkbox" ng-if="vm6.model.state==3 || vm6.model.state==1">
+              <input type="checkbox" id="CKIANCPURC_CHECK_GUARDAR_TARJ" name="save_card" class="ibe-form__checkbox-input" ng-model="vm6.model.tagSave"
+              />
+              <label for="CKIANCPURC_CHECK_GUARDAR_TARJ" class="ibe-form__checkbox-label">{{'CKIANCPURC_GUARDAR_TARJETA'|translate}}</label>
+            </div>
+            <div class="ibe_form__group" ng-class="{'ibe_form__group--error' : !vm6.form.description_card.$valid && vm6.form.$submitted , 'ibe_form__group--content' : vm6.model.cardDescription != '' && vm6.model.cardDescription != null}"
+              ng-if="vm6.model.tagSave">
+              <input ng-model="vm6.model.cardDescription" name="description_card" id="description_card" type="text" placeholder="{{'CKIANCPURC_DESCRIPCION_TARJETA'|translate}}"
+                class="ibe_form__input-text" minlength="1" maxlength="20" required ng-pattern="::$root.CHECKIN_PATTERNS.DOCS_PATTERN"
+                data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.DOCS_CLEANER}}" />
+              <label for="description_card" class="ibe_form__input-label">{{'CKIANCPURC_DESCRIPCION_TARJETA'|translate}}</label>
+              <div ng-if="!vm6.form.description_card.$valid && vm6.form.$submitted">
+                <p class="ibe_form__msg-info">{{'CKIANCPURC_TARJ_NAME_ERR'|translate}}</p>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </uib-tab>
+</uib-tabset>

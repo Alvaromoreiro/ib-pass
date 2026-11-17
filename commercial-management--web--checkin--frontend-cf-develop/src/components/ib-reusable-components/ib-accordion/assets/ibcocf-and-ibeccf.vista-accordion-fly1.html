@@ -1,0 +1,39 @@
+<uib-accordion class="ibe-accordion">
+  <div uib-accordion-group is-open="confirmationCtrl.model.isOpen">
+    <uib-accordion-heading><span class="ibe-accordion__title">{{'IBCOCF&IBECCF_VER_MAS_DETALL'|translate}}</span></uib-accordion-heading>
+    <div class="ibe-accordion__body">
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-6">
+          <div class="ibe-ticket__flights-item__data-left">
+            <div class="ibe-ticket__flights-item__data-body-text ibe-ticket__flights-item__data-body-text--title" ng-if="segment.departure.terminal != null && segment.departure.terminal !== ''">{{'IBCOAC_TERMINAL'| translate}} {{::segment.departure.terminal}}</div>
+            <div class="ibe-ticket__flights-item__data-body-text ibe-ticket__flights-item__data-body-text--title" ng-if="segment.departure.terminal == null || segment.departure.terminal === ''">{{::segment.departure.terminal}}</div>
+            <div class="ibe-ticket__flights-item__data-body-text" data-ng-switch="$root.appMarket">
+              <span data-ng-switch-when="US">{{segment.transformedDepartureDate.month|translate}} {{::segment.transformedDepartureDate.monthDay}} {{::segment.transformedDepartureDate.year}}</span>
+              <span data-ng-switch-default>{{::segment.transformedDepartureDate.monthDay}} {{segment.transformedDepartureDate.month|translate}} {{::segment.transformedDepartureDate.year}}</span>
+            </div>
+            <div class="ibe-ticket__flights-item__data-body-text">{{::segment.departure.date|HourFilter}}</div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-6 col-md-offset-4">
+          <div class="ibe-ticket__flights-item__data-right">
+            <div class="ibe-ticket__flights-item__data-body-text ibe-ticket__flights-item__data-body-text--title" ng-if="segment.arrival.terminal != null && segment.arrival.terminal !== ''">{{'IBCOAC_TERMINAL'| translate}} {{::segment.arrival.terminal}}</div>
+            <div class="ibe-ticket__flights-item__data-body-text ibe-ticket__flights-item__data-body-text--title" ng-if="segment.arrival.terminal == null || segment.arrival.terminal === ''">{{::segment.arrival.terminal}}</div>
+            <div class="ibe-ticket__flights-item__data-body-text" data-ng-switch="$root.appMarket">
+              <span data-ng-switch-when="US">{{segment.transformedArrivalDate.month|translate}} {{::segment.transformedArrivalDate.monthDay}} {{::segment.transformedArrivalDate.year}}</span>
+              <span data-ng-switch-default>{{::segment.transformedArrivalDate.monthDay}} {{segment.transformedArrivalDate.month|translate}} {{::segment.transformedArrivalDate.year}}</span>
+            </div>
+            <div class="ibe-ticket__flights-item__data-body-text">{{::segment.arrival.date|HourFilter}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-12 col-xs-12 ibe-ticket__operator">
+          <figure class="ibe-ticket__flights-item__data-body-logo"><img ng-src="{{::segment.companyURL}}" alt="{{'ACCES_LOGO_IBERIA'|translate}}" class="ibe-ticket__flights-item__data-body-logo-img"
+            /></figure>
+          <span class="ibe-ticket__flights-item__data-body-textCenter ibe-ticket__flights-item__data-body-textCenter--title">{{::segment.flightNumber.company.code}}{{::segment.flightNumber.number}}</span>
+          <span class="ibe-ticket__flights-item__data-body-textCenter">{{'IBCOCF&IBECCF_OPERADO_POR'|translate}} {{segment.flightNumber.operatedBy ? segment.flightNumber.operatedBy : segment.flightNumber.company.description  }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</uib-accordion>

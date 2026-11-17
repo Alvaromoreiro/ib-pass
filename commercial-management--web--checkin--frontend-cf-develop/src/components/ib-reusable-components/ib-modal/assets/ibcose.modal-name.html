@@ -1,0 +1,48 @@
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1-xs">{{'IBCOSE_NOMBRE_PASS'|translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible"></span>
+        </button>
+    </div>
+</header>
+<form name="modalCtrl.form" method="post" class="ibe_form">
+    <section class="ib-modals__body">
+      <div class="ibe-modal_body">
+        <div ng-if="modalCtrl.errorMessage" class="ib-msg-alert--gray u-mb-xsmall">
+          <p class="ib-text ib-text--to-center">{{modalCtrl.errorMessage}}</p>
+        </div>
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+          <p class="ib-text">{{'IBCOSE_ENTER_NAME'|translate}}</p>
+          <p class="ib-text">{{'IBCOSE_GRACIAS'|translate}}</p>
+          <div class="ibe-modal__namepassenger-centerinput">
+            <div class="ibe_form__group"
+                ng-class="{'ibe_form__group--error' : !modalCtrl.form.name.$valid && (modalCtrl.form.$submitted || modalCtrl.form.name.$dirty), 'ibe_form__group--content' : modalCtrl.model.name != '' && modalCtrl.model.name != null}">
+                <label for="name" ng-class="{'ib-input__label--focus' : focused || valueInput.length}"
+                    class="ib-input__label">{{'IBCOSE_NOMBRE_PASS'|translate}}</label>
+                <input maxlength="30" name="name" id="name" type="text" class="ib-input__input" ng-focus="focused=true"
+                    ng-blur="focused=true" ng-model="modalCtrl.model.name" required
+                    ng-pattern="::$root.CHECKIN_PATTERNS.GROUP_RESERVATION_NAME_PATTERN"
+                    data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.NAME_SURNAME_CLEANER}}" />
+                <div ng-if="!modalCtrl.form.name.$valid && (modalCtrl.form.$submitted || modalCtrl.form.name.$dirty)">
+                    <p class="ibe_form__msg-info">{{'MOD_NAME_ERR'|translate}}</p>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="ib-modals__footer">
+        <div class="ib-content-buttons">
+            <div class="ib-content-buttons__content-left">
+                <button id="cki-modal-name-accept-btn" title="{{'IBCOSE_NOMBRE_ACEPTAR'|translate}}" class="ib-button ib-button--w-medium" type="button" ng-click="modalCtrl.accept()">{{'IBCOSE_NOMBRE_ACEPTAR'|translate}}</button>
+            </div>
+            <div class="ib-content-buttons__content-right">
+                <p class="ib-text ib-text--block">
+                    <a id="cki-modal-name-cancel-link" title="{{'IBCOSE_NOMBRE_CANCELAR'|translate}}" data-ng-click="modalCtrl.close()" class="ib-link">{{'IBCOSE_NOMBRE_CANCELAR'|translate}}</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+  </form>
+

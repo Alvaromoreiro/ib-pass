@@ -1,0 +1,227 @@
+<div id="pdf-export">
+    <header class="ib-modals ib-modals__header">
+        <h2 class="ib-heading ib-heading--type-1">{{'MODAL_INHIBIT_BOARDING_CARD_TITLE'|translate}}</h2>
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+            <p class="ib-text ib-text--block ib-text--xbig-responsive3 ib-text--especial ib-text--lh-lmedium"
+                data-ng-if="!modalCtrl.isInhibitAircheck">
+                {{'MODAL_INHIBIT_BOARDING_CARD_SUBTITLE'|translate}}</p>
+            <p class="ib-text ib-text--block ib-text--xbig-responsive3 ib-text--especial ib-text--lh-lmedium"
+                data-ng-if="modalCtrl.isInhibitAircheck || modalCtrl.inhibitITEM.status">
+                {{'MODAL_INHIBIT_BOARDING_CARD_AIRCHECK_SUBTITLE'|translate}}</p>
+        </div>
+        <div data-html2canvas-ignore class="ib-modals ib-modals__header-settings">
+            <button id="MOD_ERROR_LINK_CLOSE" type="button" class="ib-modals ib-modals__button-action icon-cerrar"
+                data-ng-click="modalCtrl.close()">
+                <span class="u-hide-accessible">{{'MODAL_CLOSE_ACCESS'|translate}}</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="ib-modals__body">
+        <div class="ib-layout__line-spacing" data-ng-if="modalCtrl.isInhibitAircheck">
+            <div class="ib-flex ib-flex--space-between ib-flex__column--nowrap ib-flex--gap-small">
+                <p class="ib-text ib-text--color-unfocused" data-ng-bind-html="modalCtrl.model.LITERALS.TEXT_4"></p>
+                <p class="ib-text ib-text--color-unfocused" data-ng-bind-html="modalCtrl.model.LITERALS.TEXT_6"></p>
+            </div>
+        </div>
+        <!-- <div class="ib-layout__line-spacing ib-layout__line-spacing--medium" data-ng-if="modalCtrl.isInhibitAircheck || modalCtrl.isInhibitReason">
+            <div class="ib-message-box ib-message-box--bg-gray-60 ib-message-box--icon-color">
+                <div class="ib-message-box__content ib-message-box__content--form-help">
+                    <span class="ib-message-box__icon icon-informacion_2"></span>
+                    <h3 class="ib-message-box__text" data-ng-bind-html="modalCtrl.model.LITERALS.TEXT_1"></h3>
+                </div>
+            </div>
+        </div>
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--medium" data-ng-if="modalCtrl.isInhibitAircheck">
+            <div class="ib-message-box ib-message-box--bg-gray-60 ib-message-box--icon-color">
+                <div class="ib-message-box__content ib-message-box__content--form-help">
+                    <span class="ib-link-icon__string--tick icon-confirmacion"></span>
+                    <h3 class="ib-message-box__text" data-ng-bind-html="modalCtrl.model.LITERALS.TEXT_5"></h3>
+                </div>
+            </div>
+        </div> -->
+        <div class="ib-layout__line-spacing" data-ng-if="modalCtrl.isInhibitITEM">
+            <p class="ib-text ib-text--block ib-text--xbig-responsive3 ib-text--especial ib-text--lh-lmedium">{{modalCtrl.model.LITERALS.ITEM.TITLE|translate}}</p>
+            <p class="ib-text ib-text--block ib-text--xbig-responsive3 ib-text--especial ib-text--lh-lmedium" data-ng-bind-html="modalCtrl.model.LITERALS.ITEM.TEXT"></p>
+        </div>
+
+        <div data-ng-repeat="(segmentIndex,segment) in modalCtrl.model.segments">
+            <div class="ib-layout__line-spacing">
+                <div class="ib-ticket ib-ticket--summary ib-ticket--modal">
+                    <!-- HEADER -->
+                    <div class="ib-ticket__header">
+                        <div class="ib-ticket__header-wrapper">
+                            <div class="ib-ticket__header-left">
+                                <span class="ib-ticket__header-title"
+                                    data-shortcut="{{segment.departure.airportCode}}"><span
+                                        class="hidden-xs hidden-sm">{{segment.departure.airportDescription}}</span></span>
+                                <span
+                                    class="ib-ticket__header-subtitle hidden-xs hidden-sm">{{segment.departure.airportCode}}</span>
+                                <span
+                                    class="ib-ticket__header-description hidden-xs hidden-sm">{{segment.departure.airportDescription}}</span>
+                                <span class="ib-ticket__header-txt hidden-md hidden-lg hidden-xl"
+                                    data-ng-class="{'ib-text--italic': segment.flown}">{{segment.departure.date.monthDay
+                                    + '
+                                    ' +
+                                    (segment.departure.date.month|translate) + ' ' +
+                                    segment.departure.date.year}}</span>
+                                <span class="ib-ticket__header-txt hidden-md hidden-lg hidden-xl"
+                                    data-ng-class="{'ib-text--italic': segment.flown}">{{segment.departure.hour}}</span>
+                            </div>
+                            <div class="ib-ticket__header-floating ib-ticket__header-floating--mobile">
+                                <div class="ib-ticket__header-icon ib-ticket__header-icon--mobile">
+                                    <span
+                                        data-ng-class="{'icon-vuelos': segment.type === 'FLIGHT','icon-tren':segment.type === 'TRAIN','icon-bus': segment.type === 'BUS'}"></span>
+                                </div>
+                                <figure class="ib-ticket__header-logo hidden-md hidden-lg hidden-xl"
+                                    data-ng-if="segment.detailedType !== 'OPEN'">
+                                    <img data-ng-src="{{segment.airlineLogo}}"
+                                        alt="{{'IBFNCOPA_SEGMENTE_INFO_LOGO'|translate}} {{segment.airlineName}}" />
+                                </figure>
+                                <span class="ib-ticket__header-txt"
+                                    data-ng-if="segment.detailedType === 'OPEN'">{{'IBCOAC_PA_SEGMENT_BODY_OPEN_TEXT'|translate}}</span>
+                                <span class="ib-ticket__header-txt hidden-md hidden-lg hidden-xl"
+                                    data-ng-if="segment.detailedType !== 'OPEN'">{{segment.flightNumber}}</span>
+                            </div>
+                            <div class="ib-ticket__header-right">
+                                <span class="ib-ticket__header-title"
+                                    data-shortcut="{{segment.arrival.airportCode}}"><span
+                                        class="hidden-xs hidden-sm">{{segment.arrival.airportDescription}}</span></span>
+                                <span
+                                    class="ib-ticket__header-description hidden-xs hidden-sm">{{segment.arrival.airportDescription}}</span>
+                                <span
+                                    class="ib-ticket__header-subtitle hidden-xs hidden-sm">{{segment.arrival.airportCode}}</span>
+                                <span class="ib-ticket__header-txt hidden-md hidden-lg hidden-xl"
+                                    data-ng-class="{'ib-text--italic': segment.flown}">{{segment.arrival.date.monthDay +
+                                    ' '
+                                    +
+                                    (segment.arrival.date.month|translate) + ' ' + segment.arrival.date.year}}</span>
+                                <span class="ib-ticket__header-txt hidden-md hidden-lg hidden-xl"
+                                    data-ng-class="{'ib-text--italic': segment.flown}">{{segment.arrival.hour}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- MORE DETAILS COLLAPSE -->
+                    <div class="ib-ticket-collapse hidden-md hidden-lg hidden-xl"
+                        ng-controller="ibCollapseController as collapse" data-ng-if="segment.detailedType !== 'OPEN'">
+                        <button id="cki-flights-passengers-flight-ticket-more-details-btn-{{segmentIndex}}"
+                            class="ib-ticket-collapse__btn" ng-click="collapse.clickCollapse($event,false)"
+                            type="button">
+                            {{'IBCOAC_VER_MAS_DETALL'|translate}}
+                            <span class="ib-ticket-collapse__btn-icon"
+                                ng-class="collapse.isCollapsed ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+                        </button>
+                        <div uib-collapse="!collapse.isCollapsed">
+                            <div class="ib-ticket-collapse__container">
+                                <div class="ib-ticket-collapse__title" data-ng-if="segment.operatedBy">
+                                    {{'IBCOAC_OPERADO'|translate}} {{segment.operatedBy}}</div>
+                                <div class="ib-ticket-collapse__row">
+                                    <div class="ib-ticket-collapse__col-left">
+                                        <span class="ib-ticket-collapse__txt">{{'IBCOAC_AEROPUERTO'|translate}}:</span>
+                                        <span
+                                            class="ib-ticket-collapse__txt">{{segment.departure.airportDescription}}</span>
+                                        <strong class="ib-ticket-collapse__txt"
+                                            data-ng-if="segment.departure.terminal">{{'IBCOAC_TERMINAL'|translate}}{{segment.departure.terminal}}</strong>
+                                    </div>
+                                    <div class="ib-ticket-collapse__col-right">
+                                        <span class="ib-ticket-collapse__txt">{{'IBCOAC_AEROPUERTO'|translate}}:</span>
+                                        <span
+                                            class="ib-ticket-collapse__txt">{{segment.arrival.airportDescription}}</span>
+                                        <strong class="ib-ticket-collapse__txt"
+                                            data-ng-if="segment.arrival.terminal">{{'IBCOAC_TERMINAL'|translate}}{{segment.arrival.terminal}}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- DETAILS -->
+                    <div class="ib-ticket__details hidden-xs hidden-sm" data-ng-if="segment.detailedType !== 'OPEN'">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <div class="u-text-left ib-ticket__info">
+                                    <strong
+                                        class="ib-ticket__terminal ib-text ib-text--block ib-text--color-unfocused ib-text--bold">{{segment.departure.terminal
+                                        ? 'IBCOAC_TERMINAL' : '' |translate}}{{segment.departure.terminal}}</strong>
+                                    <span class="ib-text ib-text--block ib-text--color-unfocused"
+                                        data-ng-class="{'ib-text--italic': segment.flown}">{{segment.departure.date.monthDay
+                                        + ' ' +
+                                        (segment.departure.date.month|translate) + ' ' +
+                                        segment.departure.date.year}}</span>
+                                    <span class="ib-text ib-text--block ib-text--color-unfocused"
+                                        data-ng-class="{'ib-text--italic': segment.flown}">{{segment.departure.hour}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-6 col-md-offset-4">
+                                <div class="u-text-right ib-ticket__info">
+                                    <strong
+                                        class="ib-ticket__terminal ib-text ib-text--block ib-text--color-unfocused ib-text--bold">{{segment.arrival.terminal
+                                        ? 'IBCOAC_TERMINAL' : '' |translate}}{{segment.arrival.terminal}}</strong>
+                                    <span class="ib-text ib-text--block ib-text--color-unfocused"
+                                        data-ng-class="{'ib-text--italic': segment.flown}">{{segment.arrival.date.monthDay
+                                        +
+                                        ' ' +
+                                        (segment.arrival.date.month|translate) + ' ' +
+                                        segment.arrival.date.year}}</span>
+                                    <span class="ib-text ib-text--block ib-text--color-unfocused"
+                                        data-ng-class="{'ib-text--italic': segment.flown}">{{segment.arrival.hour}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-md-offset-3">
+                                <div class="ib-ticket__details-operated">
+                                    <figure class="ib-ticket__details-operated-logo">
+                                        <img data-ng-src="{{segment.airlineLogo}}"
+                                            alt="{{'IBFNCOPA_SEGMENTE_INFO_LOGO'|translate}} {{segment.airlineName}}" />
+                                    </figure>
+                                    <span
+                                        class="ib-text ib-text--block ib-text--xmedium">{{segment.flightNumber}}</span>
+                                    <span class="ib-text ib-text--block ib-text--color-unfocused"
+                                        data-ng-if="segment.operatedBy">{{'IBCOAC_OPERADO'|translate}}
+                                        {{segment.operatedBy}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- PASSENGERS -->
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+                <div class="ib-ui-passenger-seats-info">
+                    <h3 class="ib-heading ib-heading--type-3">{{'YOUR_SEATS'|translate}}</h3>
+                    <h4 class="ib-ui-passenger-seats-info__subtitle">{{'IBCOCF&IBECCF_ASIENT_CAB'|translate}}<span
+                            class="ib-ui-passenger-seats-info__cabins">{{segment.cabinClass.literal|translate}}
+                            {{segment.cabinClass.allSeats}}</span></h4>
+                    <div class="ib-ui-passenger-seats-info__list">
+                        <div class="ib-ui-passenger-seats-info__row" data-ng-repeat="passenger in segment.passengers">
+                            <span
+                                ng-class="{'icon-mujer': passenger.status.gender === 'FEMALE', 'icon-hombre': passenger.status.gender !=='FEMALE'}"
+                                class="ib-ui-passenger-seats-info__text ib-ui-passenger-seats-info__name">{{passenger.status.name}}
+                                {{passenger.status.surname}}</span>
+                            <span class="ib-ui-passenger-seats-info__seats icon-asiento"><span
+                                    class="ib-ui-passenger-seats-info__text ">{{passenger.accepted.seat.row}}{{passenger.accepted.seat.column}}</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<footer class="ib-modals__footer">
+    <!-- <div class="ib-layout__line-spacing ib-layout__line-spacing--bottom-large--responsive">
+        <div class="ib-flex ib-flex--space-between ib-flex__row--mobile">
+            <p class="ib-text ib-flex--basis-60 ib-flex--basis-100-mobile u-mr-none" data-ng-bind-html="modalCtrl.model.LITERALS.TEXT_3"></p>
+            <div class="ib-button-set ib-button-set--noflex ib-button-set--icon">
+                <a class="ib-link ib-link--icon-special icon-imprimir" href="javascript:void(0)"
+                    ng-click="modalCtrl.print()" title="{{'PRINT_TEXT'|translate}}">{{'PRINT_TEXT'|translate}}</a>
+            </div>
+        </div>
+    </div> -->
+    <div class="ib-content-buttons ib-content-buttons--end">
+        <button id="MOD_ERROR_BOTON_ACEP" title="{{'MOD_ERROR_ACEPT'|translate}}" class="ib-button ib-button--w-medium"
+            data-ng-click="modalCtrl.close()">{{'MOD_ERROR_ACEPT'|translate}}</button>
+    </div>
+</footer>

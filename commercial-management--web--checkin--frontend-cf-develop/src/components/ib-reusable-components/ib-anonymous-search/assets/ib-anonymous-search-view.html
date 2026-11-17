@@ -1,0 +1,38 @@
+<form name="formBooking" class="ib_form" novalidate>
+    <fieldset class="ib-box-form__fieldset">
+        <legend class="ib-box-form__title ib-text--weight-medium {{::searchCtrl.titleStyle}}">{{searchCtrl.title}}</legend>
+        <div class='ib-box-form__group'>
+            <div class="ib-input" ng-class="{'ib-input--error': formBooking.$submitted && formBooking.surname.$invalid}">
+                <label ng-class="{'ib-input__label--focus' : searchCtrl.surnameFocused || (formBooking.surname.$viewValue !=null && formBooking.surname.$viewValue !=='')}"
+                    for="ANONYMOUS_LOGIN_INPUT_SURNAME" class="ib-input__label">{{'IBCOSE_APELLIDO'|translate}}</label>
+                <input name="surname" id="ANONYMOUS_LOGIN_INPUT_SURNAME" type="text" class="ib-input__input" required name="surname" maxlength="30"
+                    data-ng-model="searchCtrl.model.surname" ng-pattern="::$root.CHECKIN_PATTERNS.NAME_SURNAME_PATTERN" data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.NAME_SURNAME_CLEANER}}"
+                    data-ng-focus="searchCtrl.surnameFocused=true" data-ng-blur="searchCtrl.surnameFocused=false" />
+            </div>
+            <div id="cki-search-anonymous-login-surname-error" ng-messages="formBooking.$submitted && formBooking.surname.$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                <div class="ib-alert ib-alert--error" ng-message="pattern">{{'IBCOSE_ERR_APELLI'|translate}}</div>
+            </div>
+        </div>
+        <div class='ib-box-form__group'>
+            <div class="ib-input" ng-class="{'ib-input--error': formBooking.$submitted && formBooking.pnr.$invalid}">
+                <label ng-class="{'ib-input__label--focus' : searchCtrl.pnrFocused || (formBooking.pnr.$viewValue !=null && formBooking.pnr.$viewValue !=='')}"
+                    for="ANONYMOUS_LOGIN_INPUT_PNR" class="ib-input__label">{{'IBCOSE_CODIGO'|translate}}</label>
+                <input name="pnr" id="ANONYMOUS_LOGIN_INPUT_PNR" type="text" class="ib-input__input" maxlength="{{searchCtrl.getPNRLength()}}"
+                    ng-pattern="::$root.CHECKIN_PATTERNS.PNR_PATTERN" data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.PNR_CLEANER}}"
+                    required data-ng-model="searchCtrl.model.pnr" data-ng-focus="searchCtrl.pnrFocused=true" data-ng-blur="searchCtrl.pnrFocused=false"
+                />
+            </div>
+            <div id="cki-search-anonymous-login-flight-code-error" ng-messages="formBooking.$submitted && formBooking.pnr.$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                <div class="ib-alert ib-alert--error" ng-message="pattern">{{'IBCOSE_ERR_COD'|translate}}</div>
+            </div>
+            <p class="ib-box-form__msg-info">
+                <button type="button" id="ANONYMOUS_LOGIN_LINK_HELP" title="{{'ACCES_IBCOSE_IBCOSE_AYUDA_COD'|translate}}" data-ng-click="searchCtrl.openGenericModal('md','ibcose.vista-modal-dondestan',false)"
+                    class="ib-box-form__msg-link ib-link__modal">{{'IBCOSE_AYUDA_COD'|translate}}</button>
+            </p>
+        </div>
+    </fieldset>
+    <input name="accept" type="submit" value="{{searchCtrl.buttonText}}" class="ib-button ib-box-form__button ib-button--big {{::searchCtrl.buttonStyle}}"
+        data-ng-click="searchCtrl.initBooking(formBooking)" id="ANONYMOUS_LOGIN_BOTON" />
+</form>

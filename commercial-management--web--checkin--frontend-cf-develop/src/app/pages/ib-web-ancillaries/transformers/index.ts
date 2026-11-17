@@ -1,0 +1,9 @@
+import './ib-web-ancillaries-bob-ancillary-transformer';
+import './ib-web-ancillaries-co2-ancillary-transformer';
+import './ib-web-ancillaries-globick-ancillary-transformer';
+import './ib-web-ancillaries-header-basket-transformer';
+import './ib-web-ancillaries-insurance-ancillary-transformer';
+import './ib-web-ancillaries-seat-ancillary-transformer';
+import './ib-web-ancillaries-speqs-ancillary-transformer';
+import './ib-web-ancillaries-transformer';
+import './ib-web-ancillaries-utils-transformers';

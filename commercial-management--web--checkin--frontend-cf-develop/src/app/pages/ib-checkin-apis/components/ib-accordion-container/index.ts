@@ -1,0 +1,1 @@
+import './ib-accordion-container.component';

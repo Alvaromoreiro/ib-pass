@@ -1,0 +1,93 @@
+<div class="ib-ticket" ng-class="{'ib-ticket--simple':ticketCtrl.segmentInfo.detailedType === 'OPEN','ib-ticket--disabled': ticketCtrl.segmentInfo.segmentStatus === 'NOT_AVAILABLE', 'ib-ticket--completed': ticketCtrl.segmentInfo.segmentStatus === 'CHECKED'}">
+    <div class="ib-ticket__col-first">
+        <!-- HEADER -->
+        <div class="ib-ticket__header">
+            <div class="ib-ticket__header-wrapper">
+                <div class="ib-ticket__header-left">
+                    <span class="ib-ticket__header-title" data-shortcut="{{ticketCtrl.segmentInfo.departure.airportCode}}"><span class="hidden-xs hidden-sm">{{ticketCtrl.segmentInfo.departure.airportDescription}}</span></span>
+                    <span class="ib-ticket__header-subtitle hidden-xs hidden-sm">{{ticketCtrl.segmentInfo.departure.airportCode}}</span>
+                    <span class="ib-ticket__header-description hidden-xs hidden-sm">{{ticketCtrl.segmentInfo.departure.airportDescription}}</span>
+                    <span class="ib-ticket__header-txt hidden-md hidden-lg hidden-xl" data-ng-class="{'ib-text--italic': ticketCtrl.segmentInfo.flown}">{{ticketCtrl.segmentInfo.departure.date.monthDay + ' ' + (ticketCtrl.segmentInfo.departure.date.month|translate) + ' ' + ticketCtrl.segmentInfo.departure.date.year}}</span>
+                    <span class="ib-ticket__header-txt hidden-md hidden-lg hidden-xl" data-ng-class="{'ib-text--italic': ticketCtrl.segmentInfo.flown}">{{ticketCtrl.segmentInfo.departure.hour}}</span>
+                </div>
+                <div class="ib-ticket__header-floating ib-ticket__header-floating--mobile">
+                    <div class="ib-ticket__header-icon ib-ticket__header-icon--mobile">
+                        <span data-ng-class="{'icon-vuelos': ticketCtrl.segmentInfo.type === 'FLIGHT','icon-tren':ticketCtrl.segmentInfo.type === 'TRAIN','icon-bus': ticketCtrl.segmentInfo.type === 'BUS'}"></span>
+                    </div>
+                    <figure class="ib-ticket__header-logo hidden-md hidden-lg hidden-xl" data-ng-if="ticketCtrl.segmentInfo.detailedType !== 'OPEN'">
+                        <img data-ng-src="{{ticketCtrl.segmentInfo.airlineLogo}}" alt="{{'IBFNCOPA_SEGMENTE_INFO_LOGO'|translate}} {{ticketCtrl.segmentInfo.airlineName}}"
+                        />
+                    </figure>
+                    <span class="ib-ticket__header-txt" data-ng-if="ticketCtrl.segmentInfo.detailedType === 'OPEN'">{{'IBCOAC_PA_SEGMENT_BODY_OPEN_TEXT'|translate}}</span>
+                    <span class="ib-ticket__header-txt hidden-md hidden-lg hidden-xl" data-ng-if="ticketCtrl.segmentInfo.detailedType !== 'OPEN'">{{ticketCtrl.segmentInfo.flightNumber}}</span>
+                </div>
+                <div class="ib-ticket__header-right">
+                    <span class="ib-ticket__header-title" data-shortcut="{{ticketCtrl.segmentInfo.arrival.airportCode}}"><span class="hidden-xs hidden-sm">{{ticketCtrl.segmentInfo.arrival.airportDescription}}</span></span>
+                    <span class="ib-ticket__header-description hidden-xs hidden-sm">{{ticketCtrl.segmentInfo.arrival.airportDescription}}</span>
+                    <span class="ib-ticket__header-subtitle hidden-xs hidden-sm">{{ticketCtrl.segmentInfo.arrival.airportCode}}</span>
+                    <span class="ib-ticket__header-txt hidden-md hidden-lg hidden-xl" data-ng-class="{'ib-text--italic': ticketCtrl.segmentInfo.flown}">{{ticketCtrl.segmentInfo.arrival.date.monthDay + ' ' + (ticketCtrl.segmentInfo.arrival.date.month|translate) + ' ' + ticketCtrl.segmentInfo.arrival.date.year}}</span>
+                    <span class="ib-ticket__header-txt hidden-md hidden-lg hidden-xl" data-ng-class="{'ib-text--italic': ticketCtrl.segmentInfo.flown}">{{ticketCtrl.segmentInfo.arrival.hour}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- MORE DETAILS COLLAPSE -->
+        <div class="ib-ticket-collapse hidden-md hidden-lg hidden-xl" ng-controller="ibCollapseController as collapse" data-ng-if="ticketCtrl.segmentInfo.detailedType !== 'OPEN'">
+            <button id="cki-flights-passengers-flight-ticket-more-details-btn-{{ticketCtrl.segmentInfo.id}}" class="ib-ticket-collapse__btn" ng-click="collapse.clickCollapse($event,false)" type="button">
+                {{'IBCOAC_VER_MAS_DETALL'|translate}}
+                <span class="ib-ticket-collapse__btn-icon" ng-class="collapse.isCollapsed ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+            </button>
+            <div uib-collapse="!collapse.isCollapsed">
+                <div class="ib-ticket-collapse__container">
+                    <div class="ib-ticket-collapse__title" data-ng-if="ticketCtrl.segmentInfo.operatedBy">{{'IBCOAC_OPERADO'|translate}} {{ticketCtrl.segmentInfo.operatedBy}}</div>
+                    <div class="ib-ticket-collapse__row">
+                        <div class="ib-ticket-collapse__col-left">
+                            <span class="ib-ticket-collapse__txt">{{'IBCOAC_AEROPUERTO'|translate}}:</span>
+                            <span class="ib-ticket-collapse__txt">{{ticketCtrl.segmentInfo.departure.airportDescription}}</span>
+                            <strong class="ib-ticket-collapse__txt" data-ng-if="ticketCtrl.segmentInfo.departure.terminal">{{'IBCOAC_TERMINAL'|translate}}{{ticketCtrl.segmentInfo.departure.terminal}}</strong>
+                        </div>
+                        <div class="ib-ticket-collapse__col-right">
+                            <span class="ib-ticket-collapse__txt">{{'IBCOAC_AEROPUERTO'|translate}}:</span>
+                            <span class="ib-ticket-collapse__txt">{{ticketCtrl.segmentInfo.arrival.airportDescription}}</span>
+                            <strong class="ib-ticket-collapse__txt" data-ng-if="ticketCtrl.segmentInfo.arrival.terminal">{{'IBCOAC_TERMINAL'|translate}}{{ticketCtrl.segmentInfo.arrival.terminal}}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- DETAILS -->
+        <div class="ib-ticket__details hidden-xs hidden-sm" data-ng-if="ticketCtrl.segmentInfo.detailedType !== 'OPEN'">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-xs-6">
+                    <div class="u-text-left ib-ticket__info">
+                        <strong class="ib-ticket__terminal ib-text ib-text--block ib-text--color-unfocused ib-text--bold">{{ticketCtrl.segmentInfo.departure.terminal ? 'IBCOAC_TERMINAL' : '' |translate}}{{ticketCtrl.segmentInfo.departure.terminal}}</strong>
+                        <span class="ib-text ib-text--block ib-text--color-unfocused" data-ng-class="{'ib-text--italic': ticketCtrl.segmentInfo.flown}">{{ticketCtrl.segmentInfo.departure.date.monthDay + ' ' + (ticketCtrl.segmentInfo.departure.date.month|translate) + ' ' + ticketCtrl.segmentInfo.departure.date.year}}</span>
+                        <span class="ib-text ib-text--block ib-text--color-unfocused" data-ng-class="{'ib-text--italic': ticketCtrl.segmentInfo.flown}">{{ticketCtrl.segmentInfo.departure.hour}}</span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-6 col-md-offset-4">
+                    <div class="u-text-right ib-ticket__info">
+                        <strong class="ib-ticket__terminal ib-text ib-text--block ib-text--color-unfocused ib-text--bold">{{ticketCtrl.segmentInfo.arrival.terminal ? 'IBCOAC_TERMINAL' : '' |translate}}{{ticketCtrl.segmentInfo.arrival.terminal}}</strong>
+                        <span class="ib-text ib-text--block ib-text--color-unfocused" data-ng-class="{'ib-text--italic': ticketCtrl.segmentInfo.flown}">{{ticketCtrl.segmentInfo.arrival.date.monthDay + ' ' + (ticketCtrl.segmentInfo.arrival.date.month|translate) + ' ' + ticketCtrl.segmentInfo.arrival.date.year}}</span>
+                        <span class="ib-text ib-text--block ib-text--color-unfocused" data-ng-class="{'ib-text--italic': ticketCtrl.segmentInfo.flown}">{{ticketCtrl.segmentInfo.arrival.hour}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-md-offset-3">
+                    <div class="ib-ticket__details-operated">
+                        <figure class="ib-ticket__details-operated-logo">
+                            <img data-ng-src="{{ticketCtrl.segmentInfo.airlineLogo}}" alt="{{'IBFNCOPA_SEGMENTE_INFO_LOGO'|translate}} {{ticketCtrl.segmentInfo.airlineName}}"
+                            />
+                        </figure>
+                        <span class="ib-text ib-text--block ib-text--xmedium">{{ticketCtrl.segmentInfo.flightNumber}}</span>
+                        <span class="ib-text ib-text--block ib-text--color-unfocused" data-ng-if="ticketCtrl.segmentInfo.operatedBy">{{'IBCOAC_OPERADO'|translate}} {{ticketCtrl.segmentInfo.operatedBy}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ib-ticket__col-last">
+        <!-- FOOTER -->
+        <ib-ticket-selection id="cki-flights-passengers-flight-ticket-ticket-selection-{{ticketCtrl.index}}" [selection-info]="ticketCtrl.segmentInfo" [index]="ticketCtrl.index" [is-shuttle-selected]="ticketCtrl.selectedShuttle"></ib-ticket-selection>
+    </div>
+</div>

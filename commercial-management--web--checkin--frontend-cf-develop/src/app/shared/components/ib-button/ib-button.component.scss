@@ -1,0 +1,73 @@
+@import "/src/styles/settings/settings__config";
+@import "/src/styles/settings/settings__colors";
+@import "/src/styles/tools/tools__colors";
+@import "/src/styles/tools/tools__pixel-to-rem";
+@import '/src/styles/mixins/media-query-range.scss';
+@import '/src/styles/vars/breakpoints.scss';
+
+.button {
+  display: inline-flex;
+  width: 100%;
+  min-height: rem(56);
+  align-items: center;
+  justify-content: center;
+  padding: rem(8) rem(16);
+  border: rem(1) solid transparent;
+  font-family: var(--font-secondary);
+  font-size: rem(14);
+  color: color(white);
+  background-color: color(primary);
+  gap: rem(8);
+  white-space: nowrap;
+
+  &:hover, &:focus {
+    background-color: color(secondary);
+  }
+
+  &:active {
+    background-color: color(primary-pressed);
+  }
+
+  &.secondary {
+    border-color: color(primary);
+    color: color(primary);
+    background-color: color(white);
+
+    &:hover, &:focus {
+      border-color: color(secondary);
+      color: color(secondary);
+      background-color: color(light-pale-pink);
+    }
+
+    &:active {
+      border-color: color(primary-pressed);
+      color: color(primary-pressed);
+      background-color: color(pale-pink);
+    }
+  }
+
+  .general-icon {
+    display: flex;
+    width: rem(16);
+    height: rem(16);
+    align-items: center;
+    justify-content: center;
+    font-size: rem(20);
+  }
+}
+
+@include media-query-range("mf-sm") {
+  .button {
+    width: fit-content;
+
+    &--big {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (width < rem(320)) {
+  .button {
+    white-space: normal;
+  }
+}

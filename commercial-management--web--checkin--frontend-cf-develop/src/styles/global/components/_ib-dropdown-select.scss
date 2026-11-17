@@ -1,0 +1,263 @@
+/* -------------------------------------------------------------
+    #DROPDOWN SELECT
+----------------------------------------------------------------- */
+.#{$wefront__namespace}dropdown-select {
+    position: relative;
+    + .#{$wefront__namespace}dropdown-select {
+        margin-top: rem(15);
+    }
+
+    &__icon {
+        display: inline-block;
+        width: rem(40);
+        margin-right: rem(10);
+        font-size: rem(40);
+        color: color(gray-15);
+        vertical-align: middle;
+    }
+
+    &__button {
+        border: 0;
+        color: color(primary);
+        background-color: transparent;
+        vertical-align: middle;
+
+        &:focus {
+            //outline: rem(2) solid color(primary);
+        }
+    }
+
+    &__caret {
+        padding: rem(5);
+        margin-left: rem(5);
+        border: 0;
+        color: color(white);
+        background: transparent;
+        vertical-align: middle;
+
+        &::after {
+            content: "";
+            display: inline-block;
+            font-family: $font-icons;
+            font-size: rem(16);
+            line-height: 1em;
+            color: color(white);
+            vertical-align: middle;
+        }
+
+        &--down {
+            &::after {
+                content: "\e92d";
+            }
+        }
+
+        &--up {
+            &::after {
+                content: "\e92e";
+            }
+        }
+
+        &:focus,
+        &:active {
+            //outline: rem(2) solid color(primary);
+        }
+    }
+
+    &__button-text {
+        display: inline-block;
+        margin-right: rem(5);
+        border-bottom: rem(1) dashed color(primary);
+        font-size: rem(14);
+        vertical-align: middle;
+    }
+
+    &__input {
+        border: 0;
+        background: transparent;
+    }
+
+    &__list {
+        border-radius: 0;
+        box-shadow: 0 rem(2) rem(3) 0 color(black, 0.32), 0 rem(-1) rem(4) 0 color(black, 0.11);
+    }
+
+    &__list-item {
+        > a {
+            min-height: rem(30);
+            padding: 0 rem(22);
+            font-family: $font-normal;
+            font-size: rem(13);
+            line-height: rem(25) !important;
+            color: color(gray-10);
+        }
+    }
+
+    &__group-name {
+        padding: 0 rem(22);
+        font-size: rem(11);
+        line-height: 2.46;
+        color: color(gray-15);
+        white-space: nowrap;
+    }
+
+    //Modifiers
+
+    &--icon {
+        .#{$wefront__namespace}dropdown-select__list {
+            left: rem(50);
+        }
+    }
+
+    &--normal {
+        .#{$wefront__namespace}dropdown-select {
+            &__button {
+                color: color(gray-10);
+
+                .caret {
+                    color: color(gray-20);
+                }
+            }
+
+            &__button-text {
+                border-color: color(gray-40);
+            }
+        }
+    }
+
+    &--type-1 {
+        .#{$wefront__namespace}dropdown-select {
+            &__button {
+                font-size: rem(12);
+                color: color(white);
+            }
+
+            &__button-text {
+                border-bottom: 0;
+                font-size: rem(12);
+            }
+        }
+    }
+
+    &--type-2 {
+        .#{$wefront__namespace}dropdown-select {
+            &__button {
+                position: relative;
+                padding-right: rem(18);
+            }
+
+            &__button-text {
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    width: 0;
+                    height: 0;
+                    margin-left: rem(8);
+                    border-top: rem(4) solid color(gray-30);
+                    border-right: rem(4) solid transparent;
+                    border-left: rem(4) solid transparent;
+                    -webkit-transform: translate(0, -50%);
+                    -moz-transform: translate(0, -50%);
+                    -ms-transform: translate(0, -50%);
+                    -o-transform: translate(0, -50%);
+                    transform: translate(0, -50%);
+                }
+            }
+        }
+
+        &.open {
+            .#{$wefront__namespace}dropdown-select {
+                &__button-text {
+                    &::after {
+                        border-top: 0;
+                        border-bottom: rem(4) solid color(gray-30);
+                    }
+                }
+            }
+        }
+    }
+
+    &--type-gdr {
+        .#{$wefront__namespace}dropdown-select {
+            &__button {
+                position: relative;
+                padding-right: rem(18);
+                border: 0;
+                color: color(primary);
+                background-color: transparent;
+                vertical-align: middle;
+            }
+
+            &__button-text {
+                display: block;
+                padding-bottom: rem(2);
+                border-bottom: rem(1) dashed color(gray-40);
+                font-size: rem(13);
+                color: color(gray-10);
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    width: 0;
+                    height: 0;
+                    margin-left: rem(8);
+                    border-top: rem(4) solid color(gray-30);
+                    border-right: rem(4) solid transparent;
+                    border-left: rem(4) solid transparent;
+                    -webkit-transform: translate(0, -50%);
+                    -moz-transform: translate(0, -50%);
+                    -ms-transform: translate(0, -50%);
+                    -o-transform: translate(0, -50%);
+                    transform: translate(0, -50%);
+                }
+            }
+        }
+    }
+}
+
+
+.#{$wefront__namespace}table-flight-filters--dark {
+
+    .#{$wefront__namespace}dropdown-select {
+        &__caret,
+        &__caret::after {
+            color: color(gray-15);
+        }
+
+        &--type-1 {
+            .#{$wefront__namespace}dropdown-select {
+                &__button {
+                    color: color(gray-10);
+                }
+            }
+        }
+    }
+}
+// Responsive
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}dropdown-select {
+        &--icon {
+            .#{$wefront__namespace}dropdown-select__list {
+                left: 0;
+            }
+        }
+
+        &--normal {
+            .#{$wefront__namespace}dropdown-select__icon {
+                display: block;
+            }
+            .#{$wefront__namespace}dropdown-select__button {
+                display: block;
+                width: 100%;
+                text-align: left;
+            }
+            .#{$wefront__namespace}dropdown-select__button-text {
+                width: calc(100% - 0.9375rem);
+            }
+        }
+    }
+}

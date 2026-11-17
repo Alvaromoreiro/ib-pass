@@ -1,0 +1,11 @@
+import './ib-modal-module';
+import './controllers/ib-accept-split-controller';
+import './controllers/ib-checkin-group-modal-controller';
+import './controllers/ib-dangerous-objects-modal-controller';
+import './controllers/ib-generic-error-modal-controller';
+import './controllers/ib-generic-modal-controller';
+import './controllers/ib-loading-plane-controller';
+import './controllers/ib-navigation-error-modal-controller';
+import './controllers/ib-unavailable-modal-controller';
+import './controllers/ib-upgrade-know-more-controlller';
+import './services/ib-modal-service';

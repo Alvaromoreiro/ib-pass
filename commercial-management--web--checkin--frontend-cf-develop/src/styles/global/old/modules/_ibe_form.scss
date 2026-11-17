@@ -1,0 +1,1550 @@
+//*****************************************************************************
+//    Proyecto: Iberia
+//    Titulo: _ibe_form
+//    Desripcion: Estilos para elementos de formularios
+//******************************************************************************/
+
+/**************** Input type text *****************/
+$font-color_01: $PC-cromatico_2;
+
+.ibe_form {
+    &__inline {
+        position: relative;
+        display: inline-block;
+    }
+
+    .ibe_form__group {
+        position: relative;
+
+        /* width: rem(320); */
+        width: 100%;
+        margin-top: rem(24);
+
+        /* Modificadores */
+        &--small {
+            display: inline-block;
+            width: rem(36);
+            margin-top: 0;
+            vertical-align: middle;
+        }
+
+        &--medium {
+            display: inline-block;
+            width: rem(80);
+            margin-top: 0;
+            vertical-align: middle;
+
+            .ibe_form__input-label {
+                left: rem(8);
+                width: 50%;
+            }
+
+            .ibe_form__input-text {
+                width: 50%;
+            }
+        }
+
+        &--info {
+            .ibe_form__input-text {
+                padding-right: 7rem;
+            }
+        }
+
+        &--error {
+            .ibe_form__input-text {
+                border: rem(1) solid $BRD_standar_4;
+            }
+
+            .ibe_form__msg-info {
+                text-align: left;
+                color: $PC-cromatico_4;
+                background-color: $BCK-cromatico_3;
+            }
+        }
+
+        &--content {
+            .ibe_form__input-text {
+                padding-top: rem(26);
+                padding-bottom: rem(10);
+
+                /* stylelint-disable-next-line selector-no-vendor-prefix */
+                &::-webkit-input-placeholder,
+                &:-moz-placeholder,
+                &::-moz-placeholder {
+                    color: $PC-cromatico_4;
+                }
+
+                /* stylelint-disable-next-line selector-no-vendor-prefix */
+                &:-ms-input-placeholder {
+                    color: color(info);
+                }
+            }
+
+            .ibe_form__input-label {
+                top: rem(8);
+                overflow: hidden;
+                width: 80%;
+                font-size: rem(14);
+                text-overflow: ellipsis;
+                //text-transform: uppercase;
+                opacity: 1;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    .ibe-form__input-close {
+        display: inline-block;
+        width: rem(23);
+        height: rem(22);
+        border: none;
+        font-family: $font-02;
+        font-size: rem(14);
+        color: $PC-cromatico_4;
+        background: $BRD-standar_20;
+        vertical-align: top;
+    }
+
+    .ibe-form__info {
+        position: absolute;
+        top: 1.1rem;
+        right: 1rem;
+        border: 0;
+        font-size: rem(11);
+        color: $PC-cromatico_21;
+        background: 0;
+    }
+
+    .ibe_form__input-text {
+        width: 100%;
+        height: rem(56);
+        padding: rem(18) rem(22) rem(18) rem(22);
+        border: rem(1) solid $BRD_standar_1;
+        border-radius: rem(3);
+        font-family: $font-02;
+        font-size: rem(14);
+
+        /* stylelint-disable-next-line selector-no-vendor-prefix */
+        &::-webkit-input-placeholder, 
+        &::-moz-placeholder,
+        &:-ms-input-placeholder {
+            color: $PC-cromatico_4;
+        }
+
+        &:focus {
+            padding-top: rem(26);
+            padding-bottom: rem(10);
+            border: rem(1) solid $BRD_standar_3;
+            outline: none;
+
+            /* stylelint-disable-next-line selector-no-vendor-prefix */
+            &::-webkit-input-placeholder,
+            &::-moz-placeholder {
+                color: $PC-cromatico_4;
+            }
+
+            /* stylelint-disable-next-line selector-no-vendor-prefix */
+            &:-ms-input-placeholder {
+                color: color(alert);
+            }
+
+            & + .ibe_form__input-label {
+                top: rem(8);
+                overflow: hidden;
+                width: 80%;
+                font-size: rem(14);
+                text-overflow: ellipsis;
+                //text-transform: uppercase;
+                //opacity: 1;
+                white-space: nowrap;
+            }
+        }
+
+        /* Modificadores */
+        &--simple-disabled {
+            height: rem(10);
+            padding: rem(10) rem(12);
+            border: rem(1) solid $BRD-standar_20;
+            border-radius: 0;
+            background: transparent;
+            background: $PC-cromatico_17;
+        }
+
+        &--simple {
+            height: rem(10);
+            padding: rem(10) rem(12);
+            border: rem(1) solid $BRD-standar_20;
+            border-radius: 0;
+            background: transparent;
+        }
+
+        &--disabled {
+            padding: rem(18) rem(22) rem(18) rem(22);
+            color: $PC-cromatico_9;
+            background: $PC-cromatico_15;
+
+            & + .ibe_form__input-label {
+                display: none;
+            }
+
+            /* stylelint-disable-next-line selector-no-vendor-prefix */
+            &::-webkit-input-placeholder,
+            &::-moz-placeholder,
+            &:-ms-input-placeholder {
+                color: $PC-cromatico_15;
+            }
+
+            &:focus {
+                padding: rem(18) rem(22) rem(18) rem(22);
+
+                /* stylelint-disable-next-line selector-no-vendor-prefix */
+                &::-webkit-input-placeholder,
+                &::-moz-placeholder,
+                &:-ms-input-placeholder {
+                    color: $PC-cromatico_15;
+                }
+            }
+        }
+
+        &::-webkit-contacts-auto-fill-button {
+            position: absolute;
+            right: 0;
+            display: none !important;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        &::-webkit-credentials-auto-fill-button {
+            position: absolute;
+            right: 0;
+            display: none !important;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        &::-webkit-search-decoration,
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-results-button,
+        &::-webkit-search-results-decoration {
+            display: none;
+            opacity: 0;
+        }
+    }
+
+    .ibe_form__input-label {
+        position: absolute;
+        top: rem(18);
+        left: rem(24);
+        overflow: hidden;
+        width: 85%;
+        font-family: $font-04;
+        font-size: rem(16);
+        text-overflow: ellipsis;
+        color: $font-color_01;
+        //opacity: 0;
+
+        transition: ease all 0.25s;
+        white-space: nowrap;
+
+        &--simple {
+            top: 0;
+            left: rem(3);
+        }
+    }
+
+    .ibe_form__msg-info {
+        padding: rem(5) rem(15);
+        font-size: rem(13);
+        text-align: right;
+        color: $PC-cromatico_1;
+        background-color: $BCK-cromatico_2;
+    }
+
+    .ibe_form__msg-link {
+        font-size: rem(13);
+        text-decoration: underline;
+        color: $PC-cromatico_1;
+
+        &:hover,
+        &:focus {
+            color: $PC-cromatico_3;
+            outline: none;
+        }
+    }
+
+    .ibe_form__radio {
+        position: relative;
+        display: inline-block;
+        padding: 0 0 0 2.4rem;
+        margin-right: 2.1rem;
+        line-height: 1.9rem;
+
+        &--no-margin {
+            margin: 0;
+        }
+
+        .ibe_form__radio-input {
+            position: absolute;
+            right: 999em;
+
+            &:checked {
+                + .ibe_form__radio-text {
+                    &::after {
+                        background: $BCK-cromatico_3;
+                    }
+                }
+            }
+
+            &:focus {
+                + .ibe_form__radio-text {
+                    &::after {
+                        box-shadow: 0 0 0 rem(1) $BRD_standar_3;
+                    }
+                }
+            }
+        }
+    }
+
+    .ibe_form__radio-text {
+        font-size: rem(13);
+        color: $PC-cromatico_21;
+        cursor: pointer;
+
+        &--white {
+            color: $PC-cromatico_4;
+        }
+
+        &--black {
+            color: $PC-cromatico_1;
+        }
+
+        &--line1 {
+            margin-top: 0.4rem;
+            line-height: 1rem;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 1.2rem;
+            left: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-top: -0.9375rem;
+            border: rem(8) solid $BRD-standar_13;
+            border-radius: 1.5rem;
+            background: $BCK-cromatico_1;
+            box-shadow: 0 0 0 rem(1) $PC-cromatico_2;
+        }
+    }
+
+    /* Estilos especificos para los select customizados con selectizeJS */
+    &__selectize--label {
+        position: absolute;
+        left: -9999em;
+    }
+
+    .ibe_form--marginT {
+        margin-top: rem(20);
+    }
+}
+
+.ibe-form--bridge {
+    .ibe-print {
+        margin-top: rem(68);
+    }
+
+    .ibe-box-form--one-column {
+        margin-top: 0;
+    }
+}
+
+/*
+	Style for UI Select.
+*/
+.ibe_form__ui-select {
+    max-height: rem(56);
+
+    &-caret {
+        display: inline-block;
+        padding: rem(9.5) rem(5);
+        margin-left: rem(2);
+        border: 0;
+        line-height: 0;
+        color: $PC-cromatico_21;
+        background: transparent;
+        vertical-align: middle;
+
+        &:focus {
+            outline: rem(2) solid $PC-cromatico_3;
+        }
+
+        .caret {
+            display: inline-block;
+            margin: 0;
+            border-top: rem(5) solid $PC-cromatico_2;
+            border-right: rem(5) solid transparent;
+            border-left: rem(5) solid transparent;
+            vertical-align: middle;
+        }
+
+        &--up {
+            .caret {
+                border-top: 0;
+                border-bottom: rem(5) solid $PC-cromatico_2;
+            }
+        }
+    }
+    // Class englobe
+    .ui-select-focusser {
+        position: relative !important;
+        z-index: -10 !important;
+        top: rem(-30) !important;
+        left: rem(10) !important;
+        width: 90% !important;
+        height: auto !important;
+    }
+
+    .ui-select-search {
+        // Search
+        display: block;
+        width: 100% !important;
+        height: auto;
+        padding: 0;
+        padding: rem(26) rem(32) rem(10) rem(22);
+        margin: 0;
+        border: solid rem(1) $PC-cromatico_9;
+        border-radius: rem(3);
+        text-align: left;
+        background-color: $BCK-cromatico_1;
+        box-shadow: none;
+
+        &.ng-animate.ng-hide {
+            display: none;
+        }
+
+        &::-webkit-contacts-auto-fill-button {
+            //pointer-events: none;
+            position: absolute;
+            right: 0;
+            display: none !important;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        &::-webkit-credentials-auto-fill-button {
+            //pointer-events: none;
+            position: absolute;
+            right: 0;
+            display: none !important;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        &::-webkit-search-decoration,
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-results-button,
+        &::-webkit-search-results-decoration {
+            display: none;
+            opacity: 0;
+        }
+    }
+    // Arrow Open
+    &.open {
+        &::after {
+            content: "\e972";
+            position: absolute;
+            top: rem(20);
+            right: rem(10);
+            border: 0;
+            font-family: $font-05;
+            font-size: rem(24);
+            color: $PC-cromatico_21;
+            cursor: pointer;
+        }
+    }
+
+    &.ibe_form--nolabel {
+        .ibe_form__ui-select-match {
+            .ui-select-toggle {
+                padding-top: rem(16);
+
+                .caret.pull-right {
+                    top: rem(12);
+                }
+            }
+        }
+
+        .ui-select-search {
+            min-height: rem(56);
+            padding-top: rem(7);
+        }
+
+        &.open::after {
+            top: rem(12);
+        }
+    }
+
+    /* Modificadores */
+    &--dashed {
+        max-width: 13rem;
+
+        .ibe_form__ui-select-match {
+            .ui-select-placeholder,
+            .ui-select-match-text {
+                overflow: hidden;
+                height: rem(24);
+                padding: 0 rem(32) rem(4) 0;
+                border: 0;
+                border-bottom: rem(1) dashed $BRD_standar_1;
+                box-shadow: 0 0;
+                vertical-align: top;
+            }
+
+            /* Icono */
+            .ui-select-toggle {
+                min-height: auto;
+                padding: 0;
+                border: 0;
+                background-color: transparent;
+
+                .caret {
+                    &.pull-right,
+                    &.pull-left {
+                        top: 40%;
+                        right: 0;
+                        width: rem(10);
+                        height: rem(5);
+                        -ms-transform: translate(0, -50%);
+                        transform: translate(0, -50%);
+
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            display: block;
+                            border-width: rem(5) rem(5) 0 rem(5);
+                            border-style: solid;
+                            border-color: color(color(grey)) transparent transparent transparent;
+                        }
+                    }
+                }
+
+                &:active,
+                &:focus,
+                &:hover {
+                    border: 0;
+                }
+            }
+
+            &.btn-default-focus {
+                .ui-select-toggle {
+                    border: 0;
+                }
+            }
+        }
+
+        .ibe_form__ui-select-choices {
+            top: rem(35) !important;
+        }
+
+        &.ibe_form__ui-select {
+            .ui-select-search {
+                overflow: hidden;
+                padding: 0 rem(32) rem(4) 0;
+                border: 0;
+                text-overflow: ellipsis;
+                outline: 0;
+                outline-offset: 0;
+                white-space: nowrap;
+
+                /* stylelint-disable-next-line selector-no-vendor-prefix */
+                &::placeholder,
+                &::-webkit-input-placeholder,
+                &:-moz-placeholder,
+                &::-moz-placeholder,
+                &:-ms-placeholder {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+        }
+
+        &.open {
+            &::after {
+                content: '';
+                position: absolute;
+                top: 32%;
+                right: 0;
+                width: rem(10);
+                height: rem(5);
+                border-width: 0 rem(5) rem(5) rem(5);
+                border-style: solid;
+                border-color: transparent transparent color(color(grey)) transparent;
+                -ms-transform: translate(0, -50%);
+                transform: translate(0, -50%);
+            }
+        }
+    }
+
+    &--small {
+        max-height: rem(30);
+    }
+
+    &--filter {
+        display: block;
+        max-width: rem(185);
+        max-height: rem(24);
+        margin: 0 rem(10);
+
+        .ibe_form__ui-select-match {
+            max-height: rem(24);
+
+            .ui-select-placeholder,
+            .ui-select-match-text {
+                height: rem(24);
+                padding: rem(2) rem(20) rem(4) rem(2);
+                border: 0;
+                font-size: rem(13);
+                box-shadow: 0 0;
+                vertical-align: top;
+
+                .ibe_form__selected {
+                    width: auto;
+                    max-width: 90%;
+                    padding-bottom: rem(3);
+                }
+            }
+
+            /* Icono */
+            .ui-select-toggle {
+                min-height: inherit;
+                max-height: rem(24);
+                padding: 0;
+                border: 0;
+                background-color: transparent;
+
+                .caret {
+                    &.pull-right,
+                    &.pull-left {
+                        top: 50%;
+                        right: 0;
+                        width: rem(10);
+                        height: rem(5);
+                        -ms-transform: translate(0, -50%);
+                        transform: translate(0, -50%);
+
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            display: block;
+                            border-width: rem(5) rem(5) 0 rem(5);
+                            border-style: solid;
+                            border-color: color(color(grey)) transparent transparent transparent;
+                        }
+                    }
+                }
+
+                &:active,
+                &:focus,
+                &:hover {
+                    border: 0;
+                }
+            }
+
+            &.btn-default-focus {
+                .ui-select-toggle {
+                    border: 0;
+                    outline: rem(2) solid #d7192d !important;
+                }
+            }
+        }
+
+        .ibe_form__ui-select-choices {
+            top: rem(26) !important;
+        }
+
+        &.ibe_form__ui-select {
+            .ui-select-search {
+                overflow: hidden;
+                padding: rem(2) rem(20) rem(4) rem(2);
+                border: 0;
+                font-size: rem(13);
+                text-overflow: ellipsis;
+                outline: rem(2) solid #d7192d;
+                outline-offset: 0;
+                white-space: nowrap;
+
+                &[placeholder] {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                &::placeholder {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+        }
+
+        &.open {
+            &::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: rem(3);
+                width: rem(10);
+                height: rem(5);
+                border-width: 0 rem(5) rem(5) rem(5);
+                border-style: solid;
+                border-color: transparent transparent color(color(grey)) transparent;
+                -ms-transform: translate(0, -50%);
+                transform: translate(0, -50%);
+            }
+        }
+    }
+
+    &--inline {
+        display: inline-block;
+        max-width: rem(165);
+        margin-right: 0;
+        vertical-align: middle;
+
+        &.open::after {
+            display: none;
+        }
+
+        &.ibe_form__ui-select {
+            .ui-select-search {
+                padding-right: rem(2);
+            }
+        }
+
+        .ibe_form__ui-select-match {
+            .ui-select-placeholder,
+            .ui-select-match-text {
+                padding-right: 0;
+            }
+        }
+
+        .caret {
+            display: none;
+        }
+    }
+}
+
+.ibe_form__ui-select-match {
+    position: initial;
+
+    // First DIV
+    position: relative;
+
+    .btn.btn-xs.btn-link.pull-right {
+        display: none;
+    }
+
+    &.btn-default-focus {
+        border: 0;
+        color: inherit;
+        background: transparent;
+        box-shadow: none;
+        outline: 0;
+
+        .ui-select-toggle {
+            border: solid rem(1) $PC-cromatico_20;
+        }
+    }
+
+    .ui-select-toggle {
+        display: block;
+        min-height: rem(56);
+        padding: rem(26) rem(32) rem(10) rem(22);
+        margin: 0;
+        border: solid rem(1) $BRD_standar_1;
+        border-radius: rem(3);
+        text-align: left;
+        background-color: $BCK-cromatico_1;
+        box-shadow: none;
+
+        &:active {
+            border: solid rem(1) $BRD_standar_1;
+            background-color: $BCK-cromatico_1;
+        }
+
+        .caret.pull-right {
+            // Arrow close
+            position: absolute;
+            top: rem(20);
+            right: rem(4);
+            width: rem(30);
+            height: rem(30);
+            border: 0;
+            font-style: normal;
+
+            &::after {
+                content: "\e971";
+                border: 0;
+                //content: "\e972";
+                font-family: $font-05;
+                font-size: 1.5rem;
+                color: $PC-cromatico_21;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .ui-select-placeholder,
+    .ui-select-match-text {
+        display: block;
+        overflow: hidden;
+        width: 100%;
+        padding-right: 0;
+        font-family: $font-02;
+        font-size: rem(14);
+        text-overflow: ellipsis;
+        color: $PC-cromatico_21;
+        white-space: nowrap;
+
+        .ibe_form__selected {
+            position: absolute;
+            display: inline-block;
+            overflow: hidden;
+            width: calc(100% - rem(50));
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        &.ng-animate.ng-hide {
+            display: none;
+        }
+    }
+}
+
+.ibe_form__ui-select-choices {
+    z-index: 900;
+    top: 3.4375rem !important;
+    width: 100%;
+    max-height: rem(320);
+    padding: 0;
+    // ul englobe option
+    margin: 0 0 1.25rem;
+    border-radius: 0;
+    border-top: 0;
+    box-shadow: 0 rem(2) rem(3) 0 color(black, 0.32), 0 rem(-1) rem(4) 0 color(black, 0.11);
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .ui-select-choices-row {
+        .ui-select-choices-row-inner {
+            display: block;
+            padding: rem(10) rem(25) rem(10) rem(15);
+            border-radius: 0;
+            font-family: $font-02;
+            font-size: rem(13);
+            text-decoration: none;
+            color: color(grey);
+            box-shadow: none;
+            cursor: pointer;
+            white-space: initial;
+        }
+        // div row
+        &:hover,
+        &.active {
+            .ui-select-choices-row-inner {
+                color: color(grey);
+                background-color: $PC-cromatico_8;
+            }
+        }
+    }
+
+    /* .ibe-form__option{
+		border-radius: 0;
+		box-shadow: none;
+		display: block;
+		text-decoration: none;
+		color: color(grey);
+		font-family: $font-02;
+		font-size: rem(13);
+		padding: rem(10) rem(25) rem(10) rem(15);
+		&:hover{
+			background-color: $PC-cromatico_8;
+		}
+	} */
+}
+
+/*
+	Style for selectize
+*/
+.ibe_form__selectize {
+    // Estilos para los select customizados con selectize
+    &.selectize-control {
+        padding-top: rem(16);
+    }
+
+    .selectize-input {
+        height: 3.5rem;
+        // Div que muestra la seleccion del select
+        padding: rem(18) rem(22) rem(21);
+        border: rem(1) solid $BRD-standar_12;
+        border-radius: 0;
+
+        &.focus {
+            border: rem(1) solid $BRD_standar_3;
+            box-shadow: none;
+            outline: none;
+        }
+
+        .item {
+            font-family: $font-02;
+            font-size: rem(14);
+            color: $PC-cromatico_21;
+
+            .ibe-tarjetas__img {
+                padding-right: 0.6rem;
+                vertical-align: top;
+            }
+        }
+
+        input {
+            // Input que muestra el contenido
+            width: 95%;
+            font-family: $font-02;
+            font-size: rem(14);
+            color: $PC-cromatico_21;
+
+            /* stylelint-disable-next-line selector-no-vendor-prefix */
+            &::-webkit-input-placeholder,
+            &:-moz-placeholder,
+            &::-moz-placeholder,
+            &:-ms-placeholder {
+                color: $PC-cromatico_21;
+            }
+        }
+    }
+
+    &.selectize-dropdown {
+        // Desplegable que contiene las opciones del select
+        z-index: 30;
+
+        .selectize-dropdown-content {
+            // Contenedor de las opciones
+            .option {
+                // Clase para las opciones
+                padding: rem(10) rem(22);
+                font-family: $font-02;
+                font-size: rem(14);
+                color: $PC-cromatico_21;
+
+                .highlight {
+                    background-color: transparent;
+                }
+
+                &:hover {
+                    background-color: $BCK-cromatico_4;
+                }
+
+                &.selected {
+                    //Opcion selecionada
+                    background-color: $BCK-cromatico_4;
+                }
+
+                &.active {
+                    //Opcion activa
+                    background-color: $BCK-cromatico_4;
+                }
+
+                .ibe-tarjetas__img {
+                    padding-right: 0.6rem;
+                    vertical-align: top;
+                }
+
+                .ibe-tarjetas__number {
+                    display: block;
+                    padding-top: 0.3rem;
+                }
+            }
+        }
+    }
+
+    &.ibe_form__selectize--card {
+        .selectize-input {
+            .item {
+                width: calc(100% - rem(10));
+                float: left;
+
+                .ibe-tarjetas__fig {
+                    display: inline-block;
+                    width: 2.55rem;
+                    padding-right: 0.6rem;
+                    vertical-align: top;
+                }
+
+                .ibe-tarjetas__img {
+                    width: 100%;
+                    padding: 0;
+                }
+
+                .ibe-tarjetas__item {
+                    display: inline-block;
+                    overflow: hidden;
+                    width: calc(100% - rem(46));
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+
+            &.not-full {
+                &::before {
+                    content: url($CONFIG_IMG_PATH +"iconos/payment/ico-tarjeta.png");
+                    position: static;
+                    display: inline-block;
+                    height: auto;
+                    padding-right: 0.6rem;
+                    background: transparent none;
+                    vertical-align: top;
+                }
+            }
+        }
+
+        .selectize-dropdown {
+            .option {
+                width: calc(100% - rem(10));
+                float: left;
+
+                .ibe-tarjetas__fig {
+                    display: inline-block;
+                    width: 2.55rem;
+                    padding-right: 0.6rem;
+                    vertical-align: top;
+                }
+
+                .ibe-tarjetas__img {
+                    width: 100%;
+                    padding: 0;
+                }
+
+                .ibe-tarjetas__item {
+                    display: inline-block;
+                    overflow: hidden;
+                    width: calc(100% - rem(46));
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}
+
+/* Selectize formato de fecha */
+
+@mixin ibe_form__selectize-multi {
+    position: relative;
+    width: 100%;
+    height: rem(56);
+    padding: rem(5) 0 rem(21) 0;
+    margin-top: 1rem;
+    border: rem(1) solid $BRD-standar_12;
+    background: $BCK-cromatico_1;
+}
+
+.ibe_form__selectize-multi {
+    @include ibe_form__selectize-multi;
+
+    .ibe_form__input-label {
+        position: relative;
+        top: 0;
+        left: 0;
+        display: block;
+        padding-left: rem(14);
+        font-size: rem(12);
+        color: $PC-cromatico_21;
+        opacity: 1;
+        text-transform: uppercase;
+    }
+
+    .ibe_form__selectize-multi__selectors {
+        .ibe_form__selectize {
+            display: inline-block;
+            padding: 0 !important;
+
+            &--one-element {
+                display: block;
+            }
+
+            .selectize-input {
+                width: 4.19rem;
+                height: 1.8rem;
+                padding: 0.25rem 1.6rem 0.25rem 0.8rem;
+                border: rem(1) solid transparent;
+                box-shadow: 0 0;
+
+                &.dropdown-active {
+                    border: rem(1) solid $BRD-standar_15;
+                    border-bottom: 0;
+                    -webkit-box-shadow: 0 rem(1) rem(1) color(black, 0.1);
+                    box-shadow: 0 rem(1) rem(1) color(black, 0.1);
+                }
+
+                input {
+                    position: relative !important;
+                }
+            }
+
+            .selectize-dropdown {
+                -webkit-box-shadow: 0 rem(3) rem(3) color(black, 0.1);
+                box-shadow: 0 rem(3) rem(3) color(black, 0.1);
+
+                .selectize-dropdown-content {
+                    .option {
+                        padding-left: 0.8rem;
+                    }
+                }
+            }
+
+            &--year {
+                .selectize-input {
+                    width: 5.2rem;
+                }
+            }
+
+            &--full {
+                .selectize-input {
+                    width: 100%;
+                }
+            }
+        }
+
+        .selectize-control {
+            &.single {
+                .selectize-input {
+                    &::after {
+                        content: "\e971";
+                        right: rem(24);
+                        margin-top: rem(-8);
+                        border: 0;
+                        font-family: $font-05;
+                        color: $PC-cromatico_21;
+                    }
+
+                    &.dropdown-active {
+                        &::after {
+                            content: "\e972";
+                            margin-top: rem(-8);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* END Estilos especificos para los select customizados con selectizeJS */
+
+/* END Selectize nuevo formato de fecha */
+.ibe-form__input-text {
+    width: 100%;
+    height: rem(56);
+    padding: rem(18) rem(22) rem(21) rem(22);
+    margin-top: rem(16);
+    font-family: $font-04;
+    font-size: rem(16);
+
+    &::-webkit-contacts-auto-fill-button {
+        position: absolute;
+        right: 0;
+        display: none !important;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &::-webkit-credentials-auto-fill-button {
+        position: absolute;
+        right: 0;
+        display: none !important;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+        display: none;
+        opacity: 0;
+    }
+}
+
+/* Estilos para los input tipo checkbox **/
+.ibe-form__checkbox {
+    display: inline-block;
+    margin-bottom: rem(5);
+
+    &.ibe-form__checkbox--error {
+        display: inline-block;
+
+        .ibe_form__msg-info {
+            text-align: left;
+            color: $PC-cromatico_4;
+            //margin: rem(10) 0 0 rem(-41.6);
+            background-color: $BCK-cromatico_3;
+        }
+
+        .ibe-form__checkbox-label {
+            &::before {
+                content: "";
+                overflow: hidden;
+                width: rem(26);
+                height: rem(26);
+                background: url($CONFIG_IMG_PATH +'iconos/formulario/sprite-icon-checkbox.png') rem(-103) rem(1) no-repeat;
+            }
+        }
+    }
+}
+
+.ibe-form__checkbox-input {
+    position: absolute;
+    right: 999em;
+
+    &:checked {
+        + .ibe-form__checkbox-label {
+            &::before {
+                background: url($CONFIG_IMG_PATH +'iconos/formulario/sprite-icon-checkbox.png') rem(-25) rem(1) no-repeat;
+            }
+        }
+
+        &:focus {
+            + .ibe-form__checkbox-label {
+                &::before {
+                    background: url($CONFIG_IMG_PATH +'iconos/formulario/sprite-icon-checkbox.png') rem(-77) rem(1) no-repeat;
+                }
+            }
+        }
+    }
+
+    &:focus {
+        + .ibe-form__checkbox-label {
+            &::before {
+                background: url($CONFIG_IMG_PATH +'iconos/formulario/sprite-icon-checkbox.png') rem(-51) rem(1) no-repeat;
+            }
+        }
+    }
+}
+
+.ibe-form__checkbox-label {
+    margin-bottom: rem(12);
+    font-size: rem(13);
+    color: $PC-cromatico_21;
+    cursor: pointer;
+
+    &::before {
+        content: "";
+        display: inline-block;
+        overflow: hidden;
+        width: rem(26);
+        height: rem(26);
+        margin-right: rem(15);
+        background: url($CONFIG_IMG_PATH +'iconos/formulario/sprite-icon-checkbox.png') rem(1) rem(1) no-repeat;
+        vertical-align: middle;
+    }
+
+    &--disabled {
+        margin-left: rem(-41.6);
+        cursor: default;
+
+        &::after {
+            display: none;
+        }
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.ibe-form__checkbox-icon {
+    position: relative;
+
+    &::before {
+        position: absolute;
+        font-family: $font-05;
+    }
+}
+
+.ibe_form__select {
+    @include ibe_form__selectize-multi;
+
+    position: relative;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background-color: transparent;
+
+    &.ibe_form__group--error {
+        .ui-select-toggle {
+            border-color: $BRD_standar_4;
+            //border-radius: 0;
+        }
+    }
+
+    .ibe_form__input-label {
+        position: absolute;
+        z-index: 20;
+        top: 0;
+        width: 100%;
+        padding-top: rem(8);
+        padding-left: rem(22);
+    }
+
+    &--cards {
+        .ibe_form__ui-select {
+            .ui-select-match-text {
+                display: block;
+                width: calc(100% - rem(13));
+
+                .ibe_form__selected {
+                    position: absolute;
+                    display: inline-block;
+                    overflow: hidden;
+                    width: 100%;
+                    width: calc(100% - rem(50));
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+
+                    .ibe-form__option {
+                        display: inline-block;
+                        overflow: hidden;
+                        width: calc(100% - rem(45));
+                        max-width: none;
+                        text-overflow: ellipsis;
+                        line-height: rem(22);
+                        vertical-align: middle;
+                        white-space: nowrap;
+                    }
+                }
+            }
+
+            .ibe_form__icon-cards {
+                display: inline-block;
+                width: auto;
+                margin-right: rem(8);
+                vertical-align: middle;
+            }
+
+            .ibe-form__option {
+                display: inline-block;
+                width: calc(100% - rem(45));
+                vertical-align: middle;
+            }
+        }
+
+        .ibe_form__ui-select-choices {
+            .ui-select-choices-row {
+                //padding: 0 0 0 rem(16);
+                &:hover {
+                    background-color: $PC-cromatico_8;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    &--no-label {
+        .ibe_form__ui-select {
+            &.open {
+                &::after {
+                    top: 50%;
+                    -ms-transform: translate(0, -50%);
+                    transform: translate(0, -50%);
+                }
+            }
+
+            .ui-select-search {
+                padding-top: rem(18);
+                padding-bottom: rem(18);
+            }
+        }
+
+        .ibe_form__ui-select-match {
+            .ui-select-toggle {
+                padding-top: rem(18);
+
+                .caret {
+                    top: 50%;
+                    -ms-transform: translate(0, -50%);
+                    transform: translate(0, -50%);
+                }
+            }
+        }
+    }
+}
+
+.ibe-form__date {
+    padding-top: rem(10);
+    padding-left: rem(12);
+    margin-bottom: rem(15);
+    border: rem(1) solid $BRD_standar_1;
+    border-radius: rem(3);
+    background-color: $PC-cromatico_4;
+
+    .ibe_form__ui-select-match .ui-select-match-text .ibe_form__selected,
+    .ibe_form__ui-select-match .ui-select-placeholder .ibe_form__selected {
+        position: relative;
+        width: auto;
+    }
+
+    .ibe-form__label {
+        position: relative;
+        display: block;
+        padding-left: rem(10);
+        font-family: $font-02;
+        font-size: rem(10);
+        line-height: 1.18;
+        color: $PC-cromatico_21;
+        opacity: 1;
+        text-transform: uppercase;
+    }
+
+    .ibe_form__group {
+        display: inline-block;
+        width: auto;
+        max-height: rem(25);
+        margin-top: rem(10);
+        margin-right: rem(-4);
+        vertical-align: middle;
+
+        .ui-select-focusser {
+            top: rem(-25) !important;
+        }
+
+        .ibe_form__ui-select {
+            max-height: rem(24);
+
+            .ui-select-search {
+                height: auto;
+                padding: rem(1) rem(13) rem(1) rem(10);
+                border-radius: 0;
+                box-shadow: 0 rem(2) rem(3) 0 color(black, 0.32), 0 rem(-1) rem(4) 0 color(black, 0.11);
+            }
+
+            &.open::after {
+                top: rem(0);
+                right: rem(0);
+                font-size: rem(15);
+            }
+        }
+
+        .ui-select-toggle {
+            height: rem(23);
+            min-height: inherit;
+            padding: 0 rem(15) 0 rem(10);
+            border: 0;
+            border-radius: 0;
+
+            .caret.pull-right {
+                top: 0;
+                // Arrow close
+                right: 0;
+                width: rem(15);
+                height: rem(15);
+
+                &::after {
+                    font-size: rem(15);
+                }
+            }
+        }
+
+        .ui-select-choices-row-inner {
+            padding: rem(10) 0;
+            text-align: center;
+        }
+
+        .ibe_form__ui-select-choices {
+            top: rem(22) !important;
+            min-width: inherit;
+        }
+    }
+
+    /*  DAY  */
+    .ibe_form__group--day {
+        max-width: rem(50);
+
+        .ibe_form__ui-select-choices {
+            width: rem(50);
+        }
+    }
+
+    /*  MONTH  */
+    .ibe_form__group--month {
+        max-width: rem(56);
+        //.ibe_form__ui-select-choices{
+        //	width: rem(50);
+        //}
+    }
+
+    /*  YEARS  */
+    .ibe_form__group--years {
+        max-width: rem(70);
+
+        .ibe_form__ui-select-choices {
+            width: rem(70);
+        }
+    }
+
+
+    &--focus {
+        border: rem(1) solid $BRD_standar_3;
+    }
+
+    &.ibe_form__group--error {
+        padding: 0;
+        border: 0;
+    }
+
+    &-container {
+        padding-top: rem(10);
+        border: rem(1) solid $BRD_standar_4;
+        border-radius: rem(3);
+    }
+
+    .ui-select-no-choice {
+        width: auto;
+        height: auto;
+        max-height: inherit;
+        margin: 0;
+        overflow-x: inherit;
+    }
+}
+
+.ibe-ticket__policy-parr,
+.ibe-tab__footer-block {
+    .ibe-form__checkbox-label {
+        position: relative;
+        padding-left: rem(41);
+
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+}
+
+@mixin xs-ibe-form {
+    .ibe-form {
+        &--bridge {
+            .ibe-print {
+                margin-top: rem(5);
+            }
+        }
+
+        &__ui-select {
+            &--filter {
+                max-width: 100%;
+            }
+        }
+    }
+}

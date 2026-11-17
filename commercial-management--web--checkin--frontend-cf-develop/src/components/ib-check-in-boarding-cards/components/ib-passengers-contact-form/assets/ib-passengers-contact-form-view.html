@@ -1,0 +1,38 @@
+<div class="ib-layout__line-spacing ib-layout__line-spacing--small" data-ng-if="pasContactCtrl.showEmail">
+    <div class="ib-input" data-ng-class="{'ib-input--error' : pasContactCtrl.passInfoForm.$submitted && pasContactCtrl.passInfoForm['ContactFormEmail_' + pasContactCtrl.passengerIndex].$invalid}">
+        <label data-ng-class="{'ib-input__label--focus' : pasContactCtrl.emailFocused || (pasContactCtrl.passInfoForm['ContactFormEmail_' + pasContactCtrl.passengerIndex].$viewValue != null && pasContactCtrl.passInfoForm['ContactFormEmail_' + pasContactCtrl.passengerIndex].$viewValue !== '')}"
+            class="ib-input__label" for="IBAIRP_CONTACT_FORM_EMAIL_{{pasContactCtrl.passengerIndex}}">{{'IBCOAC_EMAIL' | translate}}</label>
+        <input class="ib-input__input" maxlength="60" ng-pattern="::$root.CHECKIN_PATTERNS.EMAIL_PATTERN" required data-ng-focus="pasContactCtrl.emailFocused=true"
+            data-ng-blur="pasContactCtrl.emailFocused=false" type="text" id="IBAIRP_CONTACT_FORM_EMAIL_{{pasContactCtrl.passengerIndex}}"
+            name="ContactFormEmail_{{pasContactCtrl.passengerIndex}}"  />
+    </div>
+    <div ng-messages="pasContactCtrl.passInfoForm.$submitted && pasContactCtrl.passInfoForm['ContactFormEmail_'+ pasContactCtrl.passengerIndex].$error">
+        <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+        <div class="ib-alert ib-alert--error" ng-message="pattern">{{'CKIANCPURC_EMAIL_ERR'|translate}}</div>
+    </div>
+</div>
+<div class="row" data-ng-if="pasContactCtrl.showPhone">
+    <div class="col-sm-12 col-md-6">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+            <ib-ui-prefix-city prefix-id="'IBAIRP_CONTACT_FORM_PREFIX_' + pasContactCtrl.passengerIndex" prefix-label="'IBECBP_PREFIX' | translate" is-required="true" prefix-placeholder="'IBCOAC_TELF_PRE'|translate" prefix-list="pasContactCtrl.prefixList" prefix-model="pasContactCtrl.contactFormModel.phone.countryCode" container-form="pasContactCtrl.containerForm"></ib-ui-prefix-city>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+            <div class="ib-input" data-ng-class="{'ib-input--error' : pasContactCtrl.passInfoForm.$submitted && pasContactCtrl.passInfoForm['ContactFormPhone_'+ pasContactCtrl.passengerIndex].$invalid}">
+                <label ng-class="{'ib-input__label--focus' : pasContactCtrl.phoneFocused || (pasContactCtrl.passInfoForm['ContactFormPhone_'+ pasContactCtrl.passengerIndex].$viewValue != null && pasContactCtrl.passInfoForm['ContactFormPhone_'+ pasContactCtrl.passengerIndex].$viewValue !== '')}"
+                    class="ib-input__label" for="IBAIRP_CONTACT_FORM_PHONE_{{pasContactCtrl.passengerIndex}}">{{'IBCOAC_TELF_NUM' | translate}}</label>
+                <input name="ContactFormPhone_{{pasContactCtrl.passengerIndex}}" id="IBAIRP_CONTACT_FORM_PHONE_{{pasContactCtrl.passengerIndex}}"
+                    type="tel" class="ib-input__input" maxlength="16" ng-model="pasContactCtrl.contactFormModel.phone.number"
+                    ng-pattern="pasContactCtrl.contactFormModel.phone.countryCode === '34' ?  $root.CHECKIN_PATTERNS.PHONE_PATTERN_ES : $root.CHECKIN_PATTERNS.PHONE_PATTERN" data-ib-validator-cleaner="{{::$root.CHECKIN_PATTERNS.PHONE_CLEANER}}"
+                    required data-ng-focus="pasContactCtrl.phoneFocused=true" data-ng-blur="pasContactCtrl.phoneFocused=false"
+                    inputmode="tel"
+                />
+            </div>
+            <div ng-messages="pasContactCtrl.passInfoForm.$submitted && pasContactCtrl.passInfoForm['ContactFormPhone_'+ pasContactCtrl.passengerIndex].$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                <div class="ib-alert ib-alert--error" ng-message="pattern">{{'IBCOACII_NUM_ERR'|translate}}</div>
+            </div>
+        </div>
+    </div>
+</div>

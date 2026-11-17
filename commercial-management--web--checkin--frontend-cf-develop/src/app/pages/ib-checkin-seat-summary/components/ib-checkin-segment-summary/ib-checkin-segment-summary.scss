@@ -1,0 +1,89 @@
+@import "/src/styles/settings/settings__config";
+@import "/src/styles/settings/settings__colors";
+@import "/src/styles/tools/tools__colors";
+@import "/src/styles/tools/tools__pixel-to-rem";
+@import '/src/styles/mixins/media-query-range';
+@import '/src/styles/vars/breakpoints.scss';
+
+.segment-container {
+    display: flex;
+    flex-direction: column;
+    font-family: $font-special;
+    gap: rem(2);
+    margin-inline: 1rem;
+}
+
+.segment-seats {
+    display: flex;
+    flex-direction: column;
+    padding: rem(16) rem(0);
+    background-color: color(white);
+    gap: rem(8);
+
+    h2, h3 {
+        font-family: inherit;
+        line-height: rem(22);
+    }
+
+    h2 {
+        font-size: rem(22);
+        font-weight: 500;
+    }
+
+    h3 {
+        font-family: $font-normal;
+        font-size: rem(16);
+        color: color(gray-15);
+    }
+
+    header {
+        padding-inline: 1rem;
+    }
+    
+
+    .seats-information {
+        display: flex;
+        flex-direction: column;
+        gap: rem(8);
+    }
+
+    .seats-button {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-inline: rem(16);
+
+        button {
+            padding: rem(16) rem(32);
+            font-size: rem(14);
+            line-height: 100%;
+        }
+    }
+}
+
+@include media-query-range("mf-md") {
+    .segment-container {
+        gap: rem(1);
+    }
+
+    .segment-seats {
+        padding: rem(24) rem(40) rem(32);
+        gap: rem(24);
+
+        h2, h3 {
+            line-height: rem(26);
+        }
+
+        h2 {
+            font-size: rem(28);
+        }
+
+        h3 {
+            font-size: rem(16);
+        }
+
+        .seats-button {
+            padding-inline: 0;
+        }
+    }
+}

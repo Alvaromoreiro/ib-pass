@@ -1,0 +1,39 @@
+<header class="ib-modals__header">
+    <div data-ng-if="modalCtrl.title.needsTranslate">
+      <h2 class="ib-heading ib-heading--full ib-heading--type-18-responsive">
+        {{modalCtrl.title.message | translate}}
+      </h2>
+      <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall" data-ng-if="modalCtrl.title.subtitle.status">
+        <p class="ib-text ib-text--block ib-text--xbig-responsive3 ib-text--especial ib-text--lh-lmedium">
+            {{modalCtrl.title.subtitle.message|translate}}</p>
+      </div>
+    </div>
+    <h2 class="ib-heading ib-heading--full ib-heading--type-1" data-ng-if="!modalCtrl.title.needsTranslate">
+      {{modalCtrl.title.message}}
+    </h2>
+    <div class="ib-modals__header-settings">
+      <button id="INHIBIT_MODAL_INFO_CLOSE_BUTTON" type="button" class="ib-modals__button-action icon-cerrar"
+        data-ng-click="modalCtrl.close()" title="{{'ACCES_MOD_CERRAR'|translate}}">
+        <span class="u-hide-accessible">{{'MODAL_CLOSE_ACCESS'|translate}}</span>
+      </button>
+    </div>
+  </header>
+  <section class="ib-modals__body">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+      <div class="ib-text" data-ng-if="modalCtrl.model.needsTranslate">{{modalCtrl.model.message | translate}}</div>
+      <div class="ib-text" data-ng-if="!modalCtrl.model.needsTranslate"><span ng-bind-html="modalCtrl.model.message"></span></div>
+      <p class="ib-text" data-ng-if="modalCtrl.model.info">{{modalCtrl.model.info}}</p>
+    </div>
+  </section>
+  <footer class="ib-modals__footer" data-ng-if="!modalCtrl.model.hideFooter">
+    <div class="ib-content-buttons u-mt-none" data-ng-class="{'ib-content-buttons--end' : !modalCtrl.btns.cancel.show}">
+      <div class="ib-content-buttons__content-left" data-ng-if="modalCtrl.btns.cancel.show">
+        <button id="INHIBIT_MODAL_INFO_CANCEL_BUTTON" ng-click="modalCtrl.close()" title="{{modalCtrl.btns.cancel.text|translate}}"
+          class="ib-button">{{modalCtrl.btns.cancel.text|translate}}</button>
+      </div>
+      <div class="ib-content-buttons__content-right u-mt-xmedium" data-ng-if="modalCtrl.btns.accept.show">
+        <a id="INHIBIT_MODAL_INFO_ACCEPT_BUTTON" title="{{modalCtrl.btns.accept.text|translate}}" class="ib-link"
+          data-ng-click="modalCtrl.accept()">{{modalCtrl.btns.accept.text|translate}}</a>
+      </div>
+    </div>
+  </footer>

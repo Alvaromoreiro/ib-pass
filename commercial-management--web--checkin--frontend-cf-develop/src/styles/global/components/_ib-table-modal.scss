@@ -1,0 +1,594 @@
+/* -------------------------------------------------------------
+    #TABLE MODAL
+----------------------------------------------------------------- */
+
+.#{$wefront__namespace}table-modal {
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    &__table {
+        width: 100%;
+        min-width: 100%;
+        font-size: rem(13);
+        border-collapse: collapse;
+    }
+
+
+    &__tablenoblock{
+        width: 100%;
+        border-bottom: rem(1) solid color(gray-70);
+    }
+
+    &__column {
+        padding: rem(11) rem(27);
+        border-right: rem(1) solid color(gray-70);
+        border-bottom: rem(1) solid color(gray-70);
+        line-height: 1.42857;
+        vertical-align: top;
+
+        &[rowspan] {
+            border-right: 0;
+            +.#{$wefront__namespace}table-modal__column {
+                border-left: rem(1) solid color(gray-70);
+            }
+        }
+
+        &:first-child {
+            padding-right: rem(8);
+            padding-left: rem(8);
+            border-left: rem(1) solid color(gray-70);
+            text-align: left;
+        }
+
+        &.hidden-md.hidden-lg.hidden-xl {
+            font-size: 0;
+        }
+
+        &--head {
+            padding: rem(16);
+            font-family: $font-normal;
+            font-weight: bold;
+            color: color(gray-10);
+
+            &:first-child {
+                padding: rem(16);
+            }
+        }
+    }
+
+    &__column-txt {
+        position: relative;
+        display: inline-block;
+        width: 50%;
+        font-family: $font-normal;
+        font-size: rem(13);
+        color: color(gray-15);
+        vertical-align: top;
+
+        &--left {
+            padding-right: rem(5);
+            font-family: $font-special;
+            font-weight: bold;
+            text-align: left;
+            color: color(black);
+        }
+
+        &--right {
+            padding-left: rem(5);
+            text-align: right;
+        }
+
+        &--title {
+            font-size: rem(13);
+            font-weight: bold;
+        }
+
+        &--text {
+            font-size: rem(13);
+        }
+
+        &--block {
+            display: block;
+            width: 100%;
+            text-align: left;
+        }
+    }
+
+    &__head {
+        .#{$wefront__namespace}table-modal__row {
+            background-color: color(gray-50);
+        }
+        .#{$wefront__namespace}table-modal__column {
+            border-top: rem(1) solid color(gray-70);
+            font-family: $font-normal;
+            font-weight: bold;
+            color: color(gray-15);
+        }
+    }
+
+    &__info {
+        padding: rem(13) 0;
+        font-family: $font-normal;
+        font-size: rem(10);
+        line-height: 1.8;
+        color: color(gray-20);
+    }
+
+    &--left-head {
+        .#{$wefront__namespace}table-modal {
+            &__table {
+                border-radius: 0;
+                border-top: rem(1) solid color(gray-70);
+                border-right: rem(1) solid color(gray-70);
+            }
+
+            &__row {
+                &:nth-child(even) {
+                    background-color: color(gray-65);
+                }
+
+                &:first-child {
+                    .#{$wefront__namespace}table-modal__column {
+                        padding-top: rem(22);
+
+                        &--head {
+                            text-transform: uppercase;
+                        }
+                    }
+                }
+            }
+
+            &__column {
+                position: relative;
+                width: 11.5%;
+                padding: rem(15) 0 rem(17) rem(24);
+                border-right: 0;
+                text-align: center;
+                line-height: rem(24);
+
+                &-title {
+                    font-family: $font-special;
+                    font-size: rem(26);
+                    line-height: rem(32);
+                    color: color(gray-10);
+                }
+
+                &-description {
+                    display: inline-block;
+                    padding-top: rem(8);
+                    font-size: rem(13);
+                    line-height: rem(24);
+                    color: color(gray-15);
+
+                    &.u-display-block {
+                        line-height: 1.2;
+                        text-transform: none;
+                    }
+
+                    &--pt {
+                        padding-top: rem(38);
+                    }
+
+                    &--bold {
+                        font-weight: bold;
+                    }
+                }
+
+                &-icon {
+                    display: inline-block;
+                    font-weight: bold;
+
+                    &::before {
+                        position: absolute;
+                        top: rem(14);
+                        left: rem(24);
+                        font-size: rem(25);
+                        font-weight: normal;
+                    }
+                }
+
+                &--head {
+                    width: 16.5%;
+                    padding-right: rem(27);
+                    padding-left: rem(56);
+                    border-right: rem(1) solid color(gray-70);
+                    font-weight: bold;
+                    text-align: left;
+                    color: color(gray-15);
+                    background-color: color(gray-50);
+
+                    &.u-text-center {
+                        padding-left: rem(27);
+                    }
+                }
+            }
+        }
+    }
+
+    &__gdr {
+        .#{$wefront__namespace}table-modal {
+            &__table {
+                min-width: initial;
+                border-top: 0;
+                border-right: 0;
+                border-left: 0;
+
+                a {
+                    @extend %link;
+
+                    &:hover {
+                        color: color(red-50);
+                    }
+                }
+            }
+
+            &__column {
+                width: calc(78% / 3);
+                min-width: auto;
+                word-break: break-word;
+
+                &--head {
+                    width: 22%;
+                    min-width: 22%;
+                    border-left: 0;
+                    white-space: normal;
+                }
+
+                &-icon {
+                    line-height: rem(22);
+
+                    &::before {
+                        line-height: normal;
+                    }
+                }
+
+                &-ghost {
+                    border-top: 0;
+                    border-left: 0;
+                    background: transparent;
+                    & + .#{$wefront__namespace}table-modal__column {
+                        border-top: rem(1) solid color(gray-70);
+                    }
+                }
+            }
+        }
+        &.#{$wefront__namespace}table-modal {
+            &--left-head {
+                .#{$wefront__namespace}table-modal {
+                    &__column {
+                        padding-top: rem(16);
+                        padding-bottom: rem(16);
+
+                        &-title {
+                            font-size: rem(24);
+                            line-height: normal;
+                        }
+                    }
+
+                    &__row {
+                        &:first-child {
+                            .#{$wefront__namespace}table-modal {
+                                &__column {
+                                    padding-top: rem(12);
+                                    padding-bottom: rem(12);
+
+                                    &.u-text-center {
+                                        padding-top: rem(32);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &--responsive {
+        .#{$wefront__namespace}table-modal__column {
+            min-width: rem(172);
+            padding: rem(16);
+            border-left: rem(1) solid color(gray-70);
+        }
+    }
+
+    &--two-colors {
+        .#{$wefront__namespace}table-modal__body {
+            .#{$wefront__namespace}table-modal__row {
+                &:nth-child(2n) {
+                    background: color(white);
+                    .#{$wefront__namespace}table-modal__column:not(.ib-table-modal__column--head) {
+                        color: color(gray-280);
+                    }
+                }
+
+                &:nth-child(2n+1) {
+                    background: color(gray-60);
+                    .#{$wefront__namespace}table-modal__column:not(.ib-table-modal__column--head) {
+                        color: color(gray-10);
+                    }
+                }
+            }
+        }
+    }
+
+    &--page-normal {
+        .#{$wefront__namespace}table-modal {
+            &__row {
+                &:first-child {
+                    .#{$wefront__namespace}table-modal {
+                        &__column {
+                            padding-top: rem(24);
+
+                            &--head {
+                                text-transform: inherit;
+                            }
+                        }
+                    }
+                }
+                .#{$wefront__namespace}table-modal {
+                    &__column {
+                        width: auto;
+                        padding: rem(24);
+                        text-align: left;
+
+                        &--head {
+                            width: rem(192);
+                            padding: rem(24);
+                            text-transform: inherit;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-query("md") {
+    .#{$wefront__namespace}table-modal {
+        &__column {
+            &--head {
+                white-space: normal;
+            }
+        }
+
+        &--responsive {
+            .#{$wefront__namespace}table-modal {
+                &__column {
+                    min-width: auto;
+                }
+            }
+        }
+    }
+}
+
+@include media-query("mobile") {
+    .#{$wefront__namespace}table-modal {
+        &__gdr {
+            .#{$wefront__namespace}table-modal {
+                &__table {
+                    border-top: 0;
+                }
+
+                &__row {
+                    &--gray {
+                        background-color: color(gray-50);
+                        .#{$wefront__namespace}table-modal__column {
+                            border-bottom: 0 !important;
+                        }
+                        & + .#{$wefront__namespace}table-modal__row {
+                            .#{$wefront__namespace}table-modal__column--head {
+                                border-top: rem(1) solid color(gray-70);
+                            }
+                        }
+                    }
+                }
+
+                &__column {
+                    display: block;
+                    width: 100%;
+                    min-width: 100%;
+                    padding-right: rem(16);
+                    padding-left: rem(16);
+                    border-left: 0;
+                    text-align: left;
+                    line-height: rem(22);
+
+                    &--head {
+                        display: block;
+                        width: 100%;
+                        padding-left: rem(40);
+                        border-right: rem(0);
+                        border-left: 0;
+                        white-space: normal;
+
+                        &.u-text-center {
+                            padding-top: rem(12);
+                            padding-left: rem(27);
+                        }
+                    }
+
+                    &-icon {
+                        &::before {
+                            top: rem(12);
+                            left: rem(12);
+                        }
+                    }
+
+                    &-ghost {
+                        display: none;
+                    }
+                }
+            }
+            &.#{$wefront__namespace}table-modal {
+                &--left-head {
+                    .#{$wefront__namespace}table-modal {
+                        &__column {
+                            padding-top: rem(12);
+                            padding-bottom: rem(12);
+                        }
+
+                        &__row {
+                            &:first-child {
+                                .#{$wefront__namespace}table-modal {
+                                    &__column {
+                                        padding-right: rem(8);
+                                        padding-left: rem(8);
+                                        letter-spacing: rem(-0.4);
+
+                                        &.u-text-center {
+                                            padding-top: rem(12);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &--responsive {
+            .#{$wefront__namespace}table-modal {
+                .#{$wefront__namespace}table-modal__head {
+                    .#{$wefront__namespace}table-modal__row {
+                        &--gray {
+                            .#{$wefront__namespace}table-modal__column {
+                                &:last-child {
+                                    border-bottom: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &__row {
+                    &--gray {
+                        .#{$wefront__namespace}table-modal__column {
+                            &--head {
+                                background-color: color(gray-50);
+                            }
+
+                            &:last-child {
+                                border-bottom: 0;
+                            }
+                        }
+                        & + .#{$wefront__namespace}table-modal__row {
+                            .#{$wefront__namespace}table-modal__column--head {
+                                border-top: rem(1) solid color(gray-70);
+                            }
+                        }
+                    }
+                }
+
+                &__table {
+                    display: block;
+                    border-bottom: rem(1) solid color(gray-70);
+                }
+
+                
+                &__tableNoBlock {
+                    width: 100%;
+                    border-bottom: rem(1) solid color(gray-70);
+                }
+
+                &__column {
+                    display: block;
+                    width: 100%;
+                    min-width: 100%;
+                    min-width: auto;
+                    padding-right: rem(16);
+                    padding-left: rem(16);
+                    border-left: rem(1) solid color(gray-70);
+                    text-align: left;
+                    line-height: rem(22);
+
+                    &--head {
+                        padding: rem(12) rem(16);
+                        font-size: rem(13);
+                        color: color(gray-15);
+                        white-space: normal;
+                    }
+
+                    &--responsive {
+                        position: relative;
+                        display: inline-block;
+                        border-top: 0;
+                        font-family: $font-normal;
+                        font-size: rem(13);
+                        font-weight: bold;
+                        color: color(black);
+                        background: color(white);
+                        vertical-align: top;
+
+                        &:last-child {
+                            border-bottom: rem(1) solid color(gray-70);
+                        }
+                    }
+                }
+            }
+        }
+
+        &--two-colors {
+            .#{$wefront__namespace}table-modal__body {
+                .#{$wefront__namespace}table-modal__row {
+                    &:nth-child(2n) {
+                        background: transparent;
+                    }
+
+                    &:nth-child(2n+1) {
+                        background: transparent;
+                    }
+                }
+                .#{$wefront__namespace}table-modal__column:not(.ib-table-modal__column--head) {
+                    &:nth-child(2n) {
+                        background: color(gray-60);
+                        .#{$wefront__namespace}table-modal__column-txt {
+                            color: color(gray-10);
+                        }
+                    }
+
+                    &:nth-child(2n+1) {
+                        background: color(white);
+                        .#{$wefront__namespace}table-modal__column-txt {
+                            color: color(gray-280);
+                        }
+                    }
+                }
+            }
+        }
+
+        &--page-normal {
+            .#{$wefront__namespace}table-modal {
+                &__table {
+                    border: none;
+                    border-top: rem(1) solid color(gray-25);
+                }
+
+                &__row,
+                &__body,
+                &__table,
+                &__column {
+                    display: block;
+                    width: 100%;
+                }
+
+                &__row {
+                    .#{$wefront__namespace}table-modal {
+                        &__column {
+                            padding: rem(16);
+                            border-right: rem(1) solid color(gray-25);
+                            border-left: rem(1) solid color(gray-25);
+                            word-break: break-word;
+
+                            &--head {
+                                width: 100%;
+                                padding: rem(16);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

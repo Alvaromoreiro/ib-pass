@@ -1,0 +1,541 @@
+/* -------------------------------------------------------------
+    #Bids
+----------------------------------------------------------------- */
+.#{$wefront__namespace}bids {
+    &__info-fly {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        padding: rem(16) rem(24);
+        margin-top: rem(21);
+        background-color: color(white);
+        box-shadow: 0 rem(2) 0 0 color(black, 0.08);
+    }
+
+    &__info-upgrade {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    &__upgrade-box {
+        background-color: color(gray-60);
+    }
+
+    &__info-avios {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    &__improve {
+        margin-top: rem(10);
+    }
+
+    &__passenger {
+        display: flex;
+        max-width: calc(25% - rem(10));
+        flex-direction: column;
+        margin-left: rem(10);
+
+        &--upgrade {
+            max-width: fit-content;
+            justify-content: center;
+        }
+    }
+
+    &__flight {
+        display: flex;
+        max-width: 75%;
+        flex-direction: row;
+        align-items: center;
+        .#{$wefront__namespace}text {
+            &:first-child {
+                overflow: hidden;
+                margin-right: rem(13);
+                text-overflow: ellipsis;
+                line-height: rem(32);
+                white-space: nowrap;
+            }
+
+            &:last-child {
+                margin-top: rem(8);
+                white-space: nowrap;
+            }
+        }
+    }
+
+    &__container {
+        padding: rem(16) rem(16);
+        background: color(gray-70);
+    }
+
+    &__content {
+        padding: rem(3) rem(16) rem(16) rem(16);
+        background: color(gray-70);
+
+        &--bids {
+            padding-bottom: rem(0);
+            .#{$wefront__namespace}bids__box {
+                &:nth-of-type(1) {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+
+    &__box {
+        display: flex;
+        min-height: rem(150);
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: rem(25) rem(24);
+        margin-top: rem(14);
+        background: color(white);
+
+        &--no-padding {
+            padding: 0;
+        }
+
+        &--small {
+            display: flex;
+            min-height: auto;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            // padding: rem(10) rem(97);
+            margin-top: rem(4);
+        }
+
+        &--small-2 {
+            min-height: auto;
+            justify-content: center;
+            margin-top: rem(4);
+        }
+    }
+
+    &__slider-content {
+        display: flex;
+        width: rem(460);
+        align-items: flex-start;
+        .#{$wefront__namespace}rangeslider {
+            width: 100%;
+        }
+        .#{$wefront__namespace}tooltip__box--big {
+            width: rem(200);
+            padding: rem(10) rem(5);
+        }
+    }
+
+    &__title {
+        display: block;
+        font-family: $font-special;
+        font-size: rem(34);
+        line-height: 1;
+        color: color(primary);
+    }
+
+    &__subtitle {
+        display: block;
+        font-family: $font-special;
+        font-size: rem(24);
+        line-height: 1;
+        color: color(gray-10);
+    }
+
+    &__link {
+        font-family: $font-special;
+        font-size: rem(18);
+        text-decoration: underline;
+        line-height: 1;
+        color: color(gray-10);
+
+        &--how-works {
+            font-size: rem(16);
+            color: color(primary);
+        }
+    }
+}
+// Responsive
+@include media-query('lg') {
+    .#{$wefront__namespace}bids {
+        &__flight {
+            max-width: 65%;
+            .#{$wefront__namespace}text {
+                &:first-child {
+                    margin-right: rem(18);
+                }
+            }
+        }
+
+        &__passenger {
+            max-width: calc(35% - rem(10));
+        }
+
+        &__container-text {
+            width: rem(187);
+        }
+
+        &__box {
+            &--small {
+                width: 50%;
+                padding-right: rem(75);
+                padding-left: rem(75);
+            }
+        }
+
+        &__improve {
+            width: 50%;
+
+            &--bids-cabin {
+                width: unset;
+            }
+        }
+    }
+}
+
+@include media-query('md') {
+    .#{$wefront__namespace}bids {
+        &__info-fly {
+            display: block;
+            padding: rem(16) rem(22) rem(10) rem(22);
+            margin-top: rem(21);
+
+            &--upgrade {
+                display: flex;
+            }
+        }
+
+        &__flight {
+            max-width: 100%;
+            .#{$wefront__namespace}text {
+                &:first-child {
+                    margin-right: rem(25);
+                }
+            }
+        }
+
+        &__box {
+            padding: rem(25) rem(14);
+
+            &--small {
+                width: 50%;
+            }
+
+            &--no-padding {
+                padding: 0;
+            }
+        }
+
+        &__container-text {
+            width: rem(174);
+        }
+
+        &__passenger {
+            display: flex;
+            max-width: 100%;
+            flex-direction: row;
+            align-items: center;
+            padding: rem(3) 0;
+            margin: 0;
+            .#{$wefront__namespace}text {
+                &:first-child {
+                    margin-right: rem(6);
+                }
+
+                &:last-child {
+                    margin-right: rem(6);
+                }
+            }
+
+            &--upgrade {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        &__title {
+            font-size: rem(20);
+
+            &--color {
+                color: color(red-120);
+            }
+        }
+
+        &__subtitle {
+            font-size: rem(16);
+        }
+
+        &__link {
+            font-size: rem(14);
+        }
+
+        &__improve {
+            width: 50%;
+            margin-top: rem(16);
+            
+            &--bids-cabin {
+                width: unset;
+            }
+        }
+    }
+}
+
+@include media-query('sm') {
+    .#{$wefront__namespace}bids {
+        &__info-fly {
+            display: block;
+            padding: rem(16) rem(30);
+        }
+
+        &__info-upgrade {
+            position: relative;
+            display: flex;
+            padding: rem(8);
+            background: color(gray-60);
+            box-shadow: 0 rem(2) 0 0 rgb(0 0 0 / 8%);
+        }
+
+        &__improve {
+            text-align: center;
+        }
+
+        &__subtitle {
+            font-size: rem(22);
+
+            &--2 {
+                font-size: rem(14);
+                font-weight: 700;
+            }
+        }
+
+        &__title {
+            font-size: rem(30);
+            line-height: rem(40);
+        }
+
+        &__link {
+            font-size: rem(16);
+        }
+
+        &__flight {
+            max-width: 100%;
+            align-items: center;
+            .#{$wefront__namespace}text {
+                &:first-child {
+                    font-size: rem(21);
+                }
+
+                &:last-child {
+                    margin-top: rem(3);
+                    margin-left: rem(9);
+                    font-size: rem(15);
+                }
+            }
+        }
+
+        &__passenger {
+            display: flex;
+            max-width: 100%;
+            flex-direction: row;
+            align-items: center;
+            margin: 0;
+            margin-top: rem(6);
+            .#{$wefront__namespace}text {
+                &:first-child {
+                    margin-right: rem(6);
+                }
+
+                &:last-child {
+                    margin: 0 0 0 rem(8);
+                }
+            }
+
+            &--upgrade {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        &__box {
+            flex-direction: column;
+            padding-top: rem(28);
+
+            &--no-padding {
+                padding: 0;
+            }
+
+            &--small {
+                flex-direction: inherit;
+                justify-content: center;
+                padding: rem(16);
+            }
+
+            &--small-type-2 {
+                flex-direction: column;
+            }
+        }
+
+        &__container-text {
+            margin-bottom: rem(13);
+        }
+
+        &__slider-content {
+            display: flex;
+            width: 70%;
+            min-height: rem(150);
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            .#{$wefront__namespace}input-tooltip {
+                margin-top: rem(1);
+            }
+            .#{$wefront__namespace}tooltip {
+                margin-bottom: rem(-25);
+            }
+            .#{$wefront__namespace}rangeslider {
+                .#{$wefront__namespace}tooltip {
+                    display: none !important;
+                }
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+    .#{$wefront__namespace}bids {
+        &__subtitle-avios {
+            font-family: $font-normal;
+            font-size: 0.8125rem;
+            font-weight: 700;
+            line-height: 1.125rem;
+            color: color(gray-10);
+        }
+
+        &__cancel-link {
+            align-self: center;
+            margin-top: rem(16);
+        }
+    }
+}
+
+@include media-query('xs') {
+    .#{$wefront__namespace}bids {
+        &__info-fly {
+            display: block;
+            padding: rem(16) rem(10);
+        }
+
+        &__info-upgrade {
+            position: relative;
+            display: flex;
+            padding: rem(8);
+            background: color(gray-60);
+            box-shadow: 0 rem(2) 0 0 rgb(0 0 0 / 8%);
+        }
+
+        &__flight {
+            max-width: 100%;
+            align-items: center;
+            .#{$wefront__namespace}text {
+                &:first-child {
+                    font-size: rem(21);
+                }
+
+                &:last-child {
+                    margin-top: rem(3);
+                    margin-left: rem(9);
+                    font-size: rem(15);
+                }
+            }
+        }
+
+        &__box {
+            flex-direction: column;
+            padding: rem(25) rem(14);
+            padding-top: rem(15);
+
+            &--no-padding {
+                padding: 0;
+            }
+
+            &--small {
+                flex-direction: inherit;
+                padding: rem(16) rem(16) rem(25);
+            }
+        }
+
+        &__container-text {
+            margin-bottom: rem(15);
+        }
+
+        &__slider-content {
+            display: flex;
+            width: 100%;
+            min-height: rem(150);
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            .#{$wefront__namespace}input-tooltip {
+                margin-top: rem(-8);
+            }
+            .#{$wefront__namespace}tooltip {
+                margin-bottom: rem(-15);
+            }
+            .#{$wefront__namespace}rangeslider {
+                .#{$wefront__namespace}tooltip {
+                    display: none !important;
+                }
+            }
+        }
+
+        &__improve {
+            text-align: center;
+        }
+
+        &__subtitle {
+            font-size: rem(22);
+
+            &--2 {
+                font-size: rem(14);
+                font-weight: 700;
+            }
+        }
+
+        &__title {
+            font-size: rem(30);
+            line-height: rem(40);
+        }
+
+        &__link {
+            font-size: rem(16);
+        }
+
+        &__passenger {
+            display: flex;
+            max-width: 100%;
+            flex-direction: column;
+            align-items: flex-start;
+            margin: 0;
+            margin-top: rem(6);
+            .#{$wefront__namespace}text {
+                &:first-child {
+                    margin-right: rem(6);
+                }
+
+                &:last-child {
+                    margin: rem(3) 0 0 0;
+                }
+            }
+
+            &--upgrade {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        &__container {
+            padding: rem(4);
+        }
+    }
+}
