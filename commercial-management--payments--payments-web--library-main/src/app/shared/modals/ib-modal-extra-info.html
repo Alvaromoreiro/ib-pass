@@ -1,0 +1,23 @@
+<header class="ib-modals__header">
+  <div data-ng-switch="$root.appMarket">
+    <h2 data-ng-switch-when="MX" class="ib-heading ib-heading--type-1">{{ 'IBPURC_TEXT_DEFERRED_QUOTAS_MEX' | translate }}</h2>
+    <h2 data-ng-switch-when="CO" class="ib-heading ib-heading--type-1">{{ 'IBPURC_TEXT_DEFERRED_QUOTAS_CO' | translate }}</h2>
+    <h2 data-ng-switch-default class="ib-heading ib-heading--type-1">{{modalCtrl.model.title === 'quota' ? ('IBPURC_TEXT_DEFERRED_QUOTAS'|translate) : ('IBPURC_TEXT_TAX_MODAL_TITLE'|translate) }}</h2>
+  </div>
+  <div class="ib-modals__header-settings">
+    <button id="MODAL_INFO_CLOSE_BUTTON" type="button" class="ib-modals__button-action icon-cerrar" data-ng-click="modalCtrl.close()" title="{{'ACCES_MOD_CERRAR'|translate}}">
+            <span class="u-hide-accessible">{{'MODAL_CLOSE_ACCESS'|translate}}</span>
+    </button>
+  </div>
+</header>
+<section id="pmt-extra-info-modal" class="ib-modals__body">
+  <div class="ib-text ib-text--bold" data-ng-if="modalCtrl.model.subtitle" data-ng-bind-html="modalCtrl.model.subtitle">
+  </div>
+  <div class="ib-layout__line-spacing ib-layout__line-spacing--large ib-text ib-list--check-structure" data-ng-bind-html="modalCtrl.model.extraInfo">
+  </div>
+</section>
+<footer class="ib-modals__footer">
+      <div class="ib-content-buttons ib-content-buttons--end">
+        <button id="MODAL_INFO_ACCEPT_BUTTON" title="{{'MODAL_ACCEPT'|translate}}" class="ib-button ib-button--w-medium" data-ng-click="modalCtrl.close()">{{'MODAL_CLOSE'|translate}}</button>
+      </div>
+</footer>

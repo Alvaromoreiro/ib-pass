@@ -1,0 +1,1 @@
+export const MONETARY_AMOUNT_TOLERANCE = 0.01;

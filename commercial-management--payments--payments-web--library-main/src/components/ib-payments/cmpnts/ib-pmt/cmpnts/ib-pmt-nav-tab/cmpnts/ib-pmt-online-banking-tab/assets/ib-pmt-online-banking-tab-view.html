@@ -1,0 +1,98 @@
+<fieldset class="ib-form__fieldset">
+    <legend class="u-hide-accessible">{{'IBPURC_PAYMENTS_ONLINE_BANKING_ACCESSIBLE_FORM'|translate}}</legend>
+    <div class="ib-box__wrapper" data-ng-class="{'ib-box__wrapper--separator-desktop': (onlineBankingTabCtrl.onlineBankingInfo.provider === 'IDEAL' || onlineBankingTabCtrl.requiredFields)}">
+        <div class="ib-transfers">
+            <div class="ib-transfers__logo-container">
+                <figure class="ib-transfers__logo">
+                    <img class="ib-transfers__logo-img" data-ng-src="{{$root.routes.images}}/transfers/{{onlineBankingTabCtrl.onlineBankingInfo.provider}}.png"
+                        alt="{{'GENERAL_LOGO_TITLE'|translate}} {{onlineBankingTabCtrl.onlineBankingInfo.provider
+                            === 'DOCOMO_SOFORT' ? 'Sofort' : onlineBankingTabCtrl.onlineBankingInfo.provider === 'DOCOMO_IDEAL'
+                            ? 'Ideal' : onlineBankingTabCtrl.onlineBankingInfo.description}}" />
+                </figure>
+            </div>
+            <div class="ib-transfers__content"
+                data-ng-if="onlineBankingTabCtrl.onlineBankingInfo.provider === 'DOCOMO_IDEAL' || onlineBankingTabCtrl.onlineBankingInfo.provider === 'IDEAL'">
+                <span class="ib-text ib-text--especial ib-text--big">{{'IBPURC_PAYMENTS_AFOP_IDEAL_TEXT_1'|translate}}</span>
+                <ul class="ib-transfers__list">
+                    <li class="ib-transfers__item" data-ng-if="'IBPURC_PAYMENTS_AFOP_IDEAL_TEXT_2'|translate">
+                        <span class="ib-text ib-text--medium ib-text--color-unfocused">{{'IBPURC_PAYMENTS_AFOP_IDEAL_TEXT_2'|translate}}</span>
+                    </li>
+                    <li class="ib-transfers__item" data-ng-if="'IBPURC_PAYMENTS_AFOP_IDEAL_TEXT_3'|translate">
+                        <span class="ib-text ib-text--medium ib-text--color-unfocused">{{'IBPURC_PAYMENTS_AFOP_IDEAL_TEXT_3'|translate}}</span>
+                    </li>
+                    <li class="ib-transfers__item" data-ng-if="'IBPURC_PAYMENTS_AFOP_IDEAL_TEXT_4'|translate">
+                        <span class="ib-text ib-text--medium ib-text--color-unfocused">{{'IBPURC_PAYMENTS_AFOP_IDEAL_TEXT_4'|translate}}</span>
+                    </li>
+                </ul>
+                <div data-ng-if="'IBPURC_PAYMENTS_AFOP_IDEAL_TERMS_TITLE'|translate">
+                    <span class="ib-text ib-text--especial ib-text--big">{{'IBPURC_PAYMENTS_AFOP_IDEAL_TERMS_TITLE'|translate}}</span>
+                    <p class="ib-text ib-text--medium ib-text--color-unfocused"
+                        data-ng-if="'IBPURC_PAYMENTS_AFOP_IDEAL_TERMS_1'|translate">{{'IBPURC_PAYMENTS_AFOP_IDEAL_TERMS_1'|translate}}</p>
+                    <p class="ib-text ib-text--medium ib-text--color-unfocused"
+                        data-ng-if="'IBPURC_PAYMENTS_AFOP_IDEAL_TERMS_2'|translate">{{'IBPURC_PAYMENTS_AFOP_IDEAL_TERMS_2'|translate}}</p>
+                </div>
+            </div>
+            <div class="ib-transfers__content"
+                data-ng-if="onlineBankingTabCtrl.onlineBankingInfo.provider !== 'DOCOMO_IDEAL' && onlineBankingTabCtrl.onlineBankingInfo.provider !== 'IDEAL'">
+                <span class="ib-text ib-text--especial ib-text--big">{{'IBPURC_PAYMENTS_ONLINE_BANKING_TEXT_1'|translate}}</span>
+                <ul class="ib-transfers__list">
+                    <li class="ib-transfers__item">
+                        <span class="ib-text ib-text--medium ib-text--color-unfocused">{{'IBPURC_PAYMENTS_ONLINE_BANKING_TEXT_2'|translate}}
+                            <span class="ib-text ib-text--bold ib-text--color-unfocused">{{'IBPURC_PAYMENTS_ONLINE_BANKING_TEXT_3'|translate}} {{onlineBankingTabCtrl.onlineBankingInfo.provider
+                                === 'DOCOMO_SOFORT' ? 'Sofort' : onlineBankingTabCtrl.onlineBankingInfo.description}}</span>{{'IBPURC_PAYMENTS_ONLINE_BANKING_TEXT_4'|translate}}</span>
+                    </li>
+                    <li class="ib-transfers__item">
+                        <span class="ib-text ib-text--medium ib-text--color-unfocused">{{'IBPURC_PAYMENTS_ONLINE_BANKING_TEXT_5'|translate}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="ib-box__wrapper" data-ng-if="onlineBankingTabCtrl.requiredFields">
+        <div data-ng-if="onlineBankingTabCtrl.requiredFields['BILL_ADDRESS']">
+            <div class="ib-layout__line-spacing" data-ng-if="onlineBankingTabCtrl.requiredFields['BILL_ADDRESS'].requiredFields['BILL_STREET']">
+                <div class="ib-input" data-ng-class="{'ib-input--error' : onlineBankingTabCtrl.submittedTab && onlineBankingTabCtrl.containerForm.bill_street.$invalid}">
+                    <label class="ib-input__label" for="bill_street" ng-class="{'ib-input__label--focus' : onlineBankingTabCtrl.billStreetFocused || (onlineBankingTabCtrl.containerForm.bill_street.$viewValue != null && onlineBankingTabCtrl.containerForm.bill_street.$viewValue !== '')}">
+                        {{'GENERAL_STREET_LABEL'|translate}}</label>
+                    <input class="ib-input__input" type="text" id="bill_street" name="bill_street" data-ng-focus="onlineBankingTabCtrl.billStreetFocused=true"
+                        data-ng-blur="onlineBankingTabCtrl.billStreetFocused=false" data-ng-model="onlineBankingTabCtrl.requiredFields['BILL_ADDRESS'].requiredFields['BILL_STREET'].street"
+                        ng-pattern="::$root.bookingPatterns.ADDITIONAL_FIELD_PATTERN" data-ib-validator-cleaner="{{::$root.bookingPatterns.ADDITIONAL_FIELD_CLEANER}}"
+                        minlength="{{$root.lengthBookingPatterns.MIN_LENGTH_STREET}}" maxlength="{{$root.lengthBookingPatterns.MAX_LENGTH_STREET}}" required />
+                </div>
+                <div ng-messages="onlineBankingTabCtrl.submittedTab && onlineBankingTabCtrl.containerForm.bill_street.$error">
+                    <div id="pmt-online-banking-tab-bill-street-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                </div>
+            </div>
+            <div class="ib-layout__line-spacing" data-ng-if="onlineBankingTabCtrl.requiredFields['BILL_ADDRESS'].requiredFields['BILL_CITY']">
+                <div class="ib-input" data-ng-class="{'ib-input--error' : onlineBankingTabCtrl.submittedTab && onlineBankingTabCtrl.containerForm.bill_city.$invalid}">
+                    <label class="ib-input__label" for="bill_city" ng-class="{'ib-input__label--focus' : onlineBankingTabCtrl.billCityFocused || (onlineBankingTabCtrl.containerForm.bill_city.$viewValue != null && onlineBankingTabCtrl.containerForm.bill_city.$viewValue !== '')}">
+                        {{'GENERAL_CITY_LABEL'|translate}}</label>
+                    <input class="ib-input__input" type="text" id="bill_city" name="bill_city" data-ng-focus="onlineBankingTabCtrl.billCityFocused=true"
+                        data-ng-blur="onlineBankingTabCtrl.billCityFocused=false" data-ng-model="onlineBankingTabCtrl.requiredFields['BILL_ADDRESS'].requiredFields['BILL_CITY'].city"
+                        ng-pattern="::$root.bookingPatterns.ADDITIONAL_FIELD_PATTERN" data-ib-validator-cleaner="{{::$root.bookingPatterns.ADDITIONAL_FIELD_CLEANER}}"
+                        minlength="{{$root.lengthBookingPatterns.MIN_LENGTH_CITY}}" maxlength="{{$root.lengthBookingPatterns.MAX_LENGTH_CITY}}" required />
+                </div>
+                <div ng-messages="onlineBankingTabCtrl.submittedTab && onlineBankingTabCtrl.containerForm.bill_city.$error">
+                    <div id="pmt-online-banking-tab-bill-city-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                </div>
+            </div>
+        </div>
+        <div data-ng-if="onlineBankingTabCtrl.requiredFields['IDCARD']">
+            <div class="ib-layout__line-spacing" data-ng-if="onlineBankingTabCtrl.requiredFields['IDCARD'].requiredFields['NUM_DOC']">
+                <div class="ib-input" data-ng-class="{'ib-input--error' : onlineBankingTabCtrl.submittedTab && onlineBankingTabCtrl.containerForm.num_doc.$invalid}">
+                    <label class="ib-input__label" for="num_doc" ng-class="{'ib-input__label--focus' : onlineBankingTabCtrl.numDocFocused || (onlineBankingTabCtrl.containerForm.num_doc.$viewValue != null && onlineBankingTabCtrl.containerForm.num_doc.$viewValue !== '')}">
+                        {{'IBAIRP_PASSENGER_FORM_MANDATORYDOC_NUMBER'|translate}}</label>
+                    <input class="ib-input__input" type="text" id="num_doc" name="num_doc" data-ng-focus="onlineBankingTabCtrl.numDocFocused=true"
+                        data-ng-blur="onlineBankingTabCtrl.numDocFocused=false" data-ng-model="onlineBankingTabCtrl.requiredFields['IDCARD'].requiredFields['NUM_DOC'].number"
+                        ng-pattern="::$root.bookingPatterns.DOCS_PATTERN" data-ib-validator-cleaner="{{::$root.bookingPatterns.DOCS_CLEANER}}"
+                        maxlength="{{$root.lengthBookingPatterns.MAX_LENGTH_MANDATORY_DOC}}" required />
+                </div>
+                <div ng-messages="onlineBankingTabCtrl.submittedTab && onlineBankingTabCtrl.containerForm.num_doc.$error">
+                    <div id="pmt-online-banking-tab-doc-number-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="onlineBankingForm" class="u-hide">
+    </div>
+</fieldset>

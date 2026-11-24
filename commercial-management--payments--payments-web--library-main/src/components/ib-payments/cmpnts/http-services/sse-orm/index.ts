@@ -1,0 +1,9 @@
+import './proxies/ib-check-voucher-code-proxy';
+import './proxies/ib-pmt-change-flight-order-proxy';
+import './proxies/ib-pmt-issue-order-proxy';
+import './proxies/ib-pmt-on-hold-order-proxy';
+import './services/ib-check-voucher-code-service';
+import './services/ib-pmt-change-flight-order-service';
+import './services/ib-pmt-endPoints-filter-service';
+import './services/ib-pmt-issue-order-service';
+import './services/ib-pmt-on-hold-order-service';

@@ -1,0 +1,34 @@
+<div class="ib-input"  >
+  <div class="ib-select-date" [ngClass]="{ 'ib-select-date--error' : submittedTab && containerForm.newPhone?.$error}">
+    <p-autoComplete class="ib-select-date__action ib-select-date__action--month ib-select-date__action--month-first"
+       [suggestions]="filteredPrefix" 
+       (completeMethod)="filterPrefix($event)"
+      field="name" 
+      [(ngModel)]="phoneSelected.prefix"
+      [dropdown]="true" 
+      (onShow)="onDropdownShow()" 
+      (onHide)="onDropdownHide()"
+      (onFocus)="onFocus()"
+      (onSelect)="onSelect($event)"
+      (onBlur)="onBlur()"
+      [readonly]="prefixReadonly"    
+      [maxlength]="7"
+      dropdownIcon="{{dropdownOpened ? 'p-ib-up' : 'p-ib-down'}}"
+      [forceSelection]="true"
+      id="phonePrefix"
+      #autoComplete
+      attr.aria-label="{{'PHONE_PREFIX' |translate}}">
+    </p-autoComplete>
+    <input class="ib-input__input  ib-input__input--phone" autocomplete="off" type="tel" id="phone" name="phone"  onlyNumbers  [(ngModel)]="phoneSelected.number" (change)="validatePhoneNumber()" x-autocompletetype="phone" attr.aria-label="{{'PERSONAL_PHONE' |translate}}" >
+    <span class="ib-select-date__label ib-input__label--uppercase"> {{'PERSONAL_MOBILE'|translate}}</span>
+  </div>
+</div>
+
+<div *ngIf="submittedTab && containerForm.newPhone?.$error">
+     <span class="ib-alert ib-alert--error" *ngIf="patternError">
+        {{'GENERAL_INPUT_PATTERN_ERROR'|translate}}
+    </span>
+    <span class="ib-alert ib-alert--error" *ngIf="requiredError">
+        {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+    </span>
+</div>

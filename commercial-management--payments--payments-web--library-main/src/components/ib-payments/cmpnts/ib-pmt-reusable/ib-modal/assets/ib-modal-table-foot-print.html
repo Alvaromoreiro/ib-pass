@@ -1,0 +1,48 @@
+<header class="ib-modals__header">
+    <h2 class="ib-heading ib-heading--type-1">{{'MODAL_FOOTPRINT_TITLE'|translate}}</h2>
+    <div class="ib-modals__header-settings">
+        <button id="pmt-table-foot-print-modal-close-btn" type="button" class="ib-modals__button-action icon-cerrar" title="{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}" data-ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section id="pmt-table-foot-print-modal" class="ib-modals__body">
+    <div class="ib-layout__line-spacing">
+        <table class="ib-table-shuttle ib-table-shuttle--type-2">
+            <caption class="u-hide-accessible">{{'MODAL_FOOTPRINT_ACCESSIBLE_TITLE'|translate}}</caption>
+            <thead class="ib-table-shuttle__head">
+            <tr class="ib-table-shuttle__row">
+                <th class="ib-table-shuttle__column ib-table-shuttle__column--head">
+                    <span class="ib-table-shuttle__text ib-table-shuttle__text--head">{{'MODAL_FOOTPRINT_TRIP_TITLE'|translate}}</span>
+                </th>
+                <th class="ib-table-shuttle__column ib-table-shuttle__column--head">
+                    <span class="ib-table-shuttle__text ib-table-shuttle__text--head">{{'MODAL_FOOTPRINT_MEASUREMENT'|translate}}</span>
+                </th>
+            </tr>
+            </thead>
+            <tbody class="ib-table-shuttle__body">
+            <tr class="ib-table-shuttle__row" data-ng-repeat="segment in modalCtrl.model.segments">
+                <td class="ib-table-shuttle__column" data-column="Trayecto">
+                    <span class="ib-table-shuttle__text">{{::(segment.departureCity.description + ' (' + segment.departureCity.code + ') ' + segment.departureCity.countryDescription + ' - ' + segment.arrivalCity.description + ' (' + segment.arrivalCity.code + ') ' + segment.arrivalCity.countryDescription)}}</span>
+                </td>
+                <td class="ib-table-shuttle__column" data-column="Total">
+                    <span class="ib-table-shuttle__text">{{segment.footPrintCO2Value}} {{'MODAL_FOOTPRINT_SYMBOL'|translate}}</span>
+                </td>
+            </tr>
+            <tr class="ib-table-shuttle__row ib-table-shuttle__row--total">
+                <td class="ib-table-shuttle__column">
+                    <span class="ib-table-shuttle__text">{{'MODAL_FOOTPRINT_TOTAL'|translate}}</span>
+                </td>
+                <td class="ib-table-shuttle__column">
+                    <span class="ib-table-shuttle__text">{{modalCtrl.model.footPrintCO2Value}} {{'MODAL_FOOTPRINT_SYMBOL'|translate}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<footer class="ib-modals__footer">
+    <div class="ib-content-buttons ib-content-buttons--end">
+        <button id="pmt-table-foot-print-modal-close-footer-btn" class="ib-button ib-button--w-medium" type="button" title="{{'MODAL_FOOTPRINT_ACCEPT'|translate}}" data-ng-click="modalCtrl.close()">{{'MODAL_FOOTPRINT_ACCEPT'|translate}}</button>
+    </div>
+</footer>

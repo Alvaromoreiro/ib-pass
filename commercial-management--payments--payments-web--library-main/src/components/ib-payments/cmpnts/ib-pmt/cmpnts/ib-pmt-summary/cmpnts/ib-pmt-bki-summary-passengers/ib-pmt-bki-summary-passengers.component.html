@@ -1,0 +1,93 @@
+<div class="u-border-none" *ngIf="showPassengersName && passengers">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+        <h5 class="ib-heading ib-heading--type-4 ib-summary__section-title" *ngIf="flowApp !== 'MMBBID'">
+            {{'SUMMARY_PASSENGERS'|translate}}
+        </h5>
+    </div>
+</div>
+<div class="ib-summary__section u-border-none" *ngIf="passengers?.generalData">
+    <h5 class="ib-heading ib-heading--type-4 ib-summary__section-title" *ngIf="!showPassengersName">
+        {{'SUMMARY_PASSENGERS'|translate}}
+    </h5>
+    <ul class="ib-list-passengers" *ngFor="let type of passengers?.generalData | keyvalue; trackBy: trackByFn">
+        <li class="ib-list-passengers__item" *ngFor="let passenger of type.value">
+            <span class="ib-list-passengers__item-icon"
+                [ngClass]="{'icon-persona' : type.key !== 'CHILD' && type.key !== 'INFANT', 'icon-iberia_ninos' : type.key === 'CHILD', 'icon-bebe' : type.key==='INFANT'}"></span>
+            <span class="ib-text ib-text--color-unfocused ib-text--bold ib-list-passengers__item-title">{{passenger.number}}
+                {{type.key | ibWordNumberFormat: passenger.number | translate }}</span>
+            <div class="ib-bki-summary--grey-background">
+                <div *ngFor="let passengerDetails of bookingInfo.passengers; let passengerIndex = index">
+                    <div *ngIf="passengerDetails.passengerType === type.key">
+                        <span
+                            class="ib-text ib-text--block ib-text--color-unfocused ib-list-passengers__item-description__title">
+                            {{passengers.personalData[passengerIndex].name}}
+                        </span>
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--small"
+                            *ngIf="passengers.personalData[passengerIndex].specialNeeds && passengers.personalData[passengerIndex].specialNeeds.length > 0">
+                            <span
+                                class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold">{{'IB_PASSENGER_SPE_NEEDS_CHECK_TEXT'|translate}}</span>
+                            <ul class="ib-list-passengers--needs">
+                                <li class="ib-list-passengers__item"
+                                    *ngFor="let specialNeed of passengers.personalData[passengerIndex].specialNeeds">
+                                    <span class="ib-list-passengers__item-icon"
+                                        [ngClass]="{'icon-vision': specialNeed.id === 'BLND', 'icon-mascotas_domesticas': specialNeed.id === 'SVAN', 'icon-discapacitados': specialNeed.id === 'WCHR' || specialNeed.id === 'WCHS' || specialNeed.id === 'WCHC', 'icon-audicion':specialNeed.id === 'DEAF'}"></span>
+                                    <span class="ib-text ib-text--color-unfocused">{{specialNeed.description | translate}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!passengers.noPaymentSummary">
+                <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long"
+                    *ngIf="flows.isRedemptionFlow && !flows.isPointsOBFlow">
+                    <span
+                        class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'AVIOS_TEXT'|translate}}</span>
+                    <span class="ib-text ib-text--color-normal u-float-right">{{passenger.number}} x
+                        {{passenger.parsedFareAvios}} {{'AVIOS_TEXT'|translate}}</span>
+                </div>
+                <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long"
+                    *ngIf="flows.isPointsOBFlow">
+                    <span
+                        class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED'|translate}}</span>
+                    <span class="ib-text ib-text--color-normal u-float-right">{{passenger.number}} x
+                        {{passenger.parsedFareOBPoints}} {{'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED'|translate}}</span>
+                </div>
+                <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long"
+                    *ngIf="!flows.isPointsOBFlow && flowApp !== 'MMBVC' && flowApp !== 'MMBUNIF'">
+                    <span
+                        class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'SUMMARY_RATE'|translate}}</span>
+                    <span class="ib-text ib-text--color-normal u-float-right">{{passenger.number}} x
+                        {{passenger.parsedFareCash}}</span>
+                </div>
+                <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long"
+                    *ngIf="flowApp !== 'MMBVC' && flowApp !== 'MMBUNIF'">
+                    <span
+                        class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'SUMMARY_FEES'|translate}}</span>
+                    <span id="pmt-summary-passengers-taxes-info-link" *ngIf="passenger.totalTax <= 0"
+                        class="ib-text ib-text--color-normal u-float-right">{{passenger.parsedTotalTax}}</span>
+                    <button id="pmt-summary-passengers-taxes-info-link" *ngIf="passenger.totalTax > 0"
+                        class="ib-text ib-text--color-normal ib-text--underline u-float-right ib-bki-summary--reset-button"
+                        (click)="openTaxesModal(passenger.breakdownTaxes )">{{passenger.parsedTotalTax}}</button>
+                </div>
+                <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long"
+                    *ngIf="(passenger.parsedPenalty || passenger.penalty === 0) && flowApp !== 'MMBVC'">
+                    <span
+                        class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'SUMMARY_PENALTY'|translate}}</span>
+                    <span class="ib-text ib-text--color-normal u-float-right">{{passenger.parsedPenalty}}</span>
+                </div>
+            </div>
+            <div *ngIf="passengers.noPaymentSummary">
+                <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long">
+                    <span
+                        class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'SUMMARY_DIFERENCE_PRICE'|translate}}</span>
+                    <span class="ib-text ib-text--color-normal u-float-right">{{passenger.parsedDiferencePrice}}</span>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <div class="ib-summary__subtotal ib-summary__subtotal--separator" *ngIf="passengers.totalPassengersFormatted">
+        <span class="ib-text ib-text--bold">{{'HEADER_BASKET_FLIGHTS_AMOUNT'|translate}}</span>
+        <span class="ib-text ib-text--bold">{{passengers.totalPassengersFormatted}}</span>
+    </div>
+</div>

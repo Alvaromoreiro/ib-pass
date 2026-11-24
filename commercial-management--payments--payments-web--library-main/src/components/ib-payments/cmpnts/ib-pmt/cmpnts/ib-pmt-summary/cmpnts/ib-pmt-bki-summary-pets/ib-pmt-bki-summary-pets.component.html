@@ -1,0 +1,27 @@
+<h4 class="ib-heading ib-heading--type-4 ib-summary__section-title"
+    [ngClass]="{ 'ib-text ib-text--xmedium ib-text--bold u-mb': step === 'confirmation' }">
+    {{'PETC_IN_CABIN'| translate}}
+</h4>
+<ul class="ib-list-passengers">
+    <li class="ib-list-passengers__item" *ngFor="let segment of model?.segments">
+        <div class="ib-list-passengers__item-description u-pb-none ">
+            <span class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none">
+                {{segment.origin.description}} - {{segment.destination.description}} 
+            </span>
+        </div>
+        <ul>
+            <div class="u-mt-xsmall ib-list-passengers__item-description ib-list-passengers__item-description--long">
+                <span class="ib-text ib-text--color-unfocused u-mb-none">
+                    {{segment.pets.length}} {{segment.pets.length > 1 ? ('PETC_HEADER_BASKET_ITEMS'|translate) : ('PETC_HEADER_BASKET_ITEM'|translate) }}
+                </span>
+                <span class="ib-text ib-text--color-normal">
+                    {{segment.totalFormatted}}
+                </span>
+            </div>
+        </ul>
+    </li>
+</ul>
+<div class="ib-summary__subtotal ib-summary__subtotal--separator">
+    <span class="ib-text ib-text--bold">{{'HEADER_BASKET_PETC_AMOUNT'|translate}}</span>
+    <span class="ib-text ib-text--bold">{{model?.total?.totalFormatted}}</span>
+</div>

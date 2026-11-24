@@ -1,0 +1,97 @@
+<section class="ib-bonus-box ib-collapse--flex ib-layout__section">
+    <h3 class="ib-bonus-box__title ib-flex__row ib-flex--align-center ib-flex--space-between"
+        data-ng-if="!$root.isMobile.header">
+        <span>{{'PAYMENTS_DISCOUNTS_AVIOS_TAB_TITLE'|translate}}</span>
+        <span class="ib-flex__row ib-flex--flex-end ib-flex--flex-start-mobile"
+            data-ng-if="pmtDisMultiCtrl.loggedInfo && !pmtDisMultiCtrl.isMobile">
+            <span
+                class="ib-text ib-text--color-unfocused ib-text--to-right">{{'PAYMENTS_DISCOUNTS_ACTUAL_AVIOS_AMOUNT'|translate}}&nbsp;</span>
+            <span class="ib-text ib-text--color-unfocused ib-text--bold">{{pmtDisMultiCtrl.loggedInfo.generalInfo.avios
+                |aviosFormatter}}&nbsp;{{'PAYMENTS_DISCOUNTS_AVIOS'|translate}}</span>
+        </span>
+    </h3>
+    <button class="ib-collapse__trigger" data-ng-if="$root.isMobile.header" data-toggle="collapse"
+        data-target="#aviosCollapse" aria-expanded="{{pmtDisMultiCtrl.expanded}}" aria-controls="aviosCollapse"
+        data-ng-click="pmtDisMultiCtrl.collapse($event)" focusin>
+        <h3 class="ib-bonus-box__title ib-collapse__title-text">{{'PAYMENTS_DISCOUNTS_AVIOS_TAB_TITLE'|translate}}</h3>
+        <span class="ib-collapse__icon"
+            data-ng-class="{'icon-flecha_1_abajo': !pmtDisMultiCtrl.expanded, 'icon-flecha_1_arriba': pmtDisMultiCtrl.expanded}"></span>
+    </button>
+    <div class="collapse" data-ng-class="{'in': pmtDisMultiCtrl.expanded}" id="aviosCollapse"
+        aria-expanded="{{pmtDisMultiCtrl.expanded}}" data-ng-if="pmtDisMultiCtrl.disscounts['AVIOS']">
+        <div class="ib-flex__row ib-flex--flex-start u-mt"
+            data-ng-if="pmtDisMultiCtrl.loggedInfo && pmtDisMultiCtrl.isMobile">
+            <span
+                class="ib-text ib-text--color-unfocused ib-text--to-right">{{'PAYMENTS_DISCOUNTS_ACTUAL_AVIOS_AMOUNT'|translate}}
+            </span>
+            <span
+                class="ib-text ib-text--color-unfocused ib-text--bold">{{pmtDisMultiCtrl.loggedInfo.generalInfo.avios|aviosFormatter
+                }}{{'PAYMENTS_DISCOUNTS_AVIOS'|translate}}</span>
+        </div>
+        <div class="ib-message-box ib-message-box--bg-white u-mt-md u-mt-sm u-mt-xs"
+            data-ng-if="(pmtDisMultiCtrl.loggedInfo && (pmtDisMultiCtrl.loggedInfo.generalInfo.avios < pmtDisMultiCtrl.disscounts['AVIOS'].disscounts[0].aviosRequired || !pmtDisMultiCtrl.disscounts['AVIOS'].available)) || !pmtDisMultiCtrl.loggedInfo && pmtDisMultiCtrl.disscounts['AVIOS'].disscounts.length === 0">
+            <div class="ib-message-box__content ib-message-box__content--boxed">
+                <span class="ib-message-box__icon icon-informacion"></span>
+                <div class="ib-message-box__content__info">
+                    <h3 class="ib-message-box__title"
+                        data-ng-class="{'u-mb-none': pmtDisMultiCtrl.loggedInfo && pmtDisMultiCtrl.disscounts['AVIOS'].available}"
+                        data-ng-if="pmtDisMultiCtrl.loggedInfo && (pmtDisMultiCtrl.loggedInfo.generalInfo.avios < pmtDisMultiCtrl.disscounts['AVIOS'].disscounts[0].aviosRequired)">
+                        {{'PAYMENTS_DISCOUNTS_NOT_ENOUGH_AVIOS'|translate}}</h3>
+                    <p class="ib-message-box__text"
+                        data-ng-if="pmtDisMultiCtrl.loggedInfo && !pmtDisMultiCtrl.disscounts['AVIOS'].available">
+                        {{'PAYMENTS_DISCOUNTS_NOT_AVIOS_AVAILABLE'|translate}}</p>
+                </div>
+            </div>
+        </div>
+        <div data-ng-if="!pmtDisMultiCtrl.loggedInfo && pmtDisMultiCtrl.disscounts['AVIOS'].disscounts.length > 0">
+            <span
+                class="ib-text ib-text--block ib-text--color-unfocused ib-text__spacing--medium">{{'PAYMENTS_DISCOUNTS_AVIOS_TEXT_1'|translate}}</span>
+            <span
+                class="ib-text ib-text--block ib-text--color-unfocused ib-text__spacing--medium">{{'PAYMENTS_DISCOUNTS_AVIOS_TEXT_2'|translate}}</span>
+        </div>
+        <form name="aviosForm"
+            data-ng-if="!pmtDisMultiCtrl.loggedInfo && pmtDisMultiCtrl.disscounts['AVIOS'].disscounts.length > 0 || pmtDisMultiCtrl.loggedInfo && pmtDisMultiCtrl.disscounts['AVIOS'].available && pmtDisMultiCtrl.loggedInfo.generalInfo.avios >= pmtDisMultiCtrl.disscounts['AVIOS'].disscounts[0].aviosRequired">
+            <fieldset class="ib-form__fieldset ib-form__fieldset--cols">
+                <legend class="u-hide-accessible">{{'PAYMENTS_DISCOUNTS_AVIOS_TAB_TITLE_ACCESIBLE'|translate}}
+                </legend>
+                <div class="row ib-box--flex-wrap">
+                    <div class="col-xs-12 col-sm-6"
+                        data-ng-class="{'col-md-3': pmtDisMultiCtrl.disscounts['AVIOS'].disscounts.length === 3,'col-md-4':pmtDisMultiCtrl.disscounts['AVIOS'].disscounts.length !== 1 && pmtDisMultiCtrl.disscounts['AVIOS'].disscounts.length !== 3,'col-md-6':pmtDisMultiCtrl.disscounts['AVIOS'].disscounts.length === 1}"
+                        data-ng-repeat="(index,discAvios) in pmtDisMultiCtrl.disscounts['AVIOS'].disscounts"
+                        style="height: 143px; margin: 0.625rem 0;">
+                        <div style="height: 100%;"
+                            data-ng-class="{'ib-check-boxed':pmtDisMultiCtrl.loggedInfo && pmtDisMultiCtrl.disscounts['AVIOS'].available,'ib-check-unboxed':(!pmtDisMultiCtrl.loggedInfo || !pmtDisMultiCtrl.disscounts['AVIOS'].available)}">
+                            <input class="ib-check-boxed__check"
+                                data-ng-if="::(pmtDisMultiCtrl.loggedInfo && pmtDisMultiCtrl.disscounts['AVIOS'].available)"
+                                data-ng-class="{'ib-check-boxed__check--disabled': (pmtDisMultiCtrl.errorFullAviosDisable || pmtDisscountCtrl.errorFullAviosDisable)} "
+                                type="radio" name="discountAvios_{{index}}" id="discountAvios_{{index}}"
+                                data-ng-model="pmtDisMultiCtrl.selectedAviosIndex" data-ng-value="index"
+                                data-ng-click="pmtDisMultiCtrl.selectAviosDisscount(discAvios.aviosRequired === 0 ? null : index, discAvios.aviosRequired === 0 ? null : discAvios )"
+                                ng-disabled="(pmtDisMultiCtrl.errorFullAviosDisable || pmtDisscountCtrl.errorFullAviosDisable)" />
+                            <label
+                                data-ng-class="{'ib-check-boxed__label':pmtDisMultiCtrl.loggedInfo && pmtDisMultiCtrl.disscounts['AVIOS'].available,'ib-check-unboxed__label':(!pmtDisMultiCtrl.loggedInfo || !pmtDisMultiCtrl.disscounts['AVIOS'].available)}"
+                                for="discountAvios_{{index}}" style="height: 100%; margin: 0;">
+                                <div ng-if="discAvios.formatedAvios">
+                                    <span
+                                        data-ng-class="{'ib-check-boxed__text':pmtDisMultiCtrl.loggedInfo && pmtDisMultiCtrl.disscounts['AVIOS'].available,'ib-check-boxed__text--price-long': pmtDisMultiCtrl.loggedInfo && pmtDisMultiCtrl.disscounts['AVIOS'].available && discAvios.formattedDiscount.length > 10,'ib-check-unboxed__text':(!pmtDisMultiCtrl.loggedInfo || !pmtDisMultiCtrl.disscounts['AVIOS'].available),'ib-check-unboxed__text--price-long': (!pmtDisMultiCtrl.loggedInfo || !pmtDisMultiCtrl.disscounts['AVIOS'].available) && discAvios.formattedDiscount.length > 10}">-{{discAvios.formatedTotalDiscount}}
+                                    </span>
+                                    <span
+                                        data-ng-class="{'ib-check-boxed__detail':pmtDisMultiCtrl.loggedInfo && pmtDisMultiCtrl.disscounts['AVIOS'].available,'ib-check-unboxed__detail':(!pmtDisMultiCtrl.loggedInfo || !pmtDisMultiCtrl.disscounts['AVIOS'].available)}">{{'PAYMENTS_DISCOUNTS_AVIOS_DISSCOUNT_BY'|translate}}
+                                        {{discAvios.formatedAvios}}
+                                        {{'PAYMENTS_DISCOUNTS_AVIOS'|translate}}
+                                    </span>
+                                </div>
+                                <span ng-if="!discAvios.formatedAvios"
+                                    data-ng-class="{'ib-check-boxed__text-normal':pmtDisMultiCtrl.loggedInfo && pmtDisMultiCtrl.disscounts['AVIOS'].available,'ib-check-unboxed__text-normal':(!pmtDisMultiCtrl.loggedInfo || !pmtDisMultiCtrl.disscounts['AVIOS'].available)}">{{(!pmtDisMultiCtrl.loggedInfo
+                                    || !pmtDisMultiCtrl.disscounts['AVIOS'].available)
+                                    ? ('PAYMENTS_DISCOUNTS_YOUR_SELECTED_TRIP'|translate) :
+                                    ('PAYMENTS_DISCOUNTS_AVIOS_NO_DISSCOUNT'|translate)}}
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>

@@ -1,0 +1,93 @@
+<div class="ib-summary__section u-border-none" data-ng-if="PmtSummaryPassengerCtrl.showPassengersName">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+        <h5 class="ib-heading ib-heading--type-4 ib-summary__section-title" data-ng-if="PmtSummaryPassengerCtrl.flowApp !== 'MMBBID'">{{'SUMMARY_PASSENGERS'|translate}}
+        </h5>
+        <h4 class="ib-text ib-text--xmedium ib-text--bold u-mb" data-ng-if="PmtSummaryPassengerCtrl.flowApp === 'MMBBID'">
+            {{'SUMMARY_PASSENGERS'|translate}}</h4>
+        <div data-ng-repeat="passenger in PmtSummaryPassengerCtrl.passengers.personalData">
+            <span
+                class="ib-text ib-text--block"
+                data-ng-class="{'ib-text--color-unfocused ib-text--bold': PmtSummaryPassengerCtrl.flowApp !== 'MMBBID', 'ib-text--color-unfocused':PmtSummaryPassengerCtrl.flowApp === 'MMBBID'}">{{passenger.name}}</span>
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small"
+                data-ng-if="passenger.specialNeeds && passenger.specialNeeds.length > 0">
+                <span
+                    class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold">{{'IB_PASSENGER_SPE_NEEDS_CHECK_TEXT'|translate}}</span>
+                <ul class="ib-list-passengers--needs">
+                    <li class="ib-list-passengers__item" data-ng-repeat="specialNeed in passenger.specialNeeds">
+                        <span class="ib-list-passengers__item-icon"
+                            data-ng-class="{'icon-vision': specialNeed.id === 'BLND', 'icon-mascotas_domesticas': specialNeed.id === 'SVAN', 'icon-discapacitados': specialNeed.id === 'WCHR' || specialNeed.id === 'WCHS' || specialNeed.id === 'WCHC', 'icon-audicion':specialNeed.id === 'DEAF'}"></span>
+                        <span
+                            class="ib-text ib-text--color-unfocused">{{specialNeed.description | translate}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ib-summary__section u-border-none" data-ng-if="PmtSummaryPassengerCtrl.flowApp !== 'MMBBID' && PmtSummaryPassengerCtrl.passengers.generalData">
+    <h5 class="ib-heading ib-heading--type-4 ib-summary__section-title" ng-if="!PmtSummaryPassengerCtrl.showPassengersName">{{'SUMMARY_PASSENGERS'|translate}}
+    </h5>
+    <ul class="ib-list-passengers"
+        ng-repeat="(type, passengers) in PmtSummaryPassengerCtrl.passengers.generalData">
+        <li class="ib-list-passengers__item" ng-repeat="passenger in passengers">
+            <span class="ib-list-passengers__item-icon"
+                data-ng-class="{'icon-persona' : type !== 'CHILD' && type !== 'INFANT', 'icon-iberia_ninos' : type === 'CHILD', 'icon-bebe' : type==='INFANT'}"></span>
+            <span
+                class="ib-text ib-text--color-unfocused ib-text--bold ib-list-passengers__item-title">{{::passenger.number}}
+                {{type | WordNumberFormatFilter: passenger.number | translate }}</span>
+            <div data-ng-if="!PmtSummaryPassengerCtrl.passengers.noPaymentSummary">
+                <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long" ng-if="$root.isRedemptionFlow && !$root.isPointsOBFlow">
+                    <span
+                        class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'AVIOS_TEXT'|translate}}</span>
+                    <span class="ib-text ib-text--color-normal u-float-right">{{::passenger.number}} x
+                        {{::passenger.parsedFareAvios}} {{'AVIOS_TEXT'|translate}}</span>
+                </div>
+                <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long" ng-if="$root.isPointsOBFlow">
+                        <span
+                        class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED'|translate}}</span>
+                    <span class="ib-text ib-text--color-normal u-float-right">{{::passenger.number}} x
+                        {{::passenger.parsedFareOBPoints}} {{'AVAILABILITY_ON_BUSINESS_POINTS_NEEDED'|translate}}</span>
+                </div>
+                <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long" ng-if="!$root.isPointsOBFlow && PmtSummaryPassengerCtrl.flowApp !== 'MMBVC' && PmtSummaryPassengerCtrl.flowApp !== 'MMBUNIF'">
+                    <span
+                        class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'SUMMARY_RATE'|translate}}</span>
+                    <span class="ib-text ib-text--color-normal u-float-right">{{::passenger.number}} x
+                        {{::passenger.parsedFareCash}}</span>
+                </div>
+                <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long" ng-if="PmtSummaryPassengerCtrl.flowApp === 'MMBVC' || PmtSummaryPassengerCtrl.flowApp === 'MMBUNIF'">
+                    <span
+                        class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'MMB_NEW_FLIGHT_DIFFERENCE_TITLE'|translate}}</span>
+                    <span class="ib-text ib-text--color-normal u-float-right">{{::passenger.number}} x {{::passenger.parsedItemDiferencePrice}}</span>
+                </div>    
+                <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long" ng-if="PmtSummaryPassengerCtrl.flowApp === 'MMBVC' || PmtSummaryPassengerCtrl.flowApp === 'MMBUNIF'">
+                    <span
+                            class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'MMB_GENERAL_TOTAL_TEXT'|translate}}</span>
+                    <span class="ib-text ib-text--color-normal u-float-right">{{::passenger.parsedDiferencePrice}}</span>
+                </div>   
+                <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long" ng-if="PmtSummaryPassengerCtrl.flowApp !== 'MMBVC' && PmtSummaryPassengerCtrl.flowApp !== 'MMBUNIF'">
+                    <span
+                        class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'SUMMARY_FEES'|translate}}</span>
+                    <span id="pmt-summary-passengers-taxes-info-link" ng-if="passenger.totalTax <= 0" class="ib-text ib-text--color-normal u-float-right">{{::passenger.parsedTotalTax}}</span>
+                    <span id="pmt-summary-passengers-taxes-info-link" ng-if="passenger.totalTax > 0" class="ib-text ib-text--color-normal ib-text--underline u-float-right"
+                        ng-click="PmtSummaryPassengerCtrl.openTaxesModal(passenger.breakdownTaxes )">{{::passenger.parsedTotalTax}}</span>
+                </div>
+                <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long" data-ng-if="(passenger.parsedPenalty || passenger.penalty === 0) && PmtSummaryPassengerCtrl.flowApp !== 'MMBVC'">
+                    <span
+                        class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'SUMMARY_PENALTY'|translate}}</span>
+                    <span class="ib-text ib-text--color-normal u-float-right">{{::passenger.parsedPenalty}}</span>
+                </div>
+            </div>
+            <div data-ng-if="PmtSummaryPassengerCtrl.passengers.noPaymentSummary">
+                <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long">
+                    <span
+                        class="ib-text ib-text--color-unfocused ib-list-passengers__item-description__title">{{'SUMMARY_DIFERENCE_PRICE'|translate}}</span>
+                    <span class="ib-text ib-text--color-normal u-float-right">{{::passenger.parsedDiferencePrice}}</span>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <div class="ib-summary__subtotal ib-summary__subtotal--separator" data-ng-if="PmtSummaryPassengerCtrl.passengers.totalPassengersFormatted">
+        <span class="ib-text ib-text--bold">{{'HEADER_BASKET_FLIGHTS_AMOUNT'|translate}}</span>
+        <span class="ib-text ib-text--bold">{{PmtSummaryPassengerCtrl.passengers.totalPassengersFormatted}}</span>
+    </div>
+</div>

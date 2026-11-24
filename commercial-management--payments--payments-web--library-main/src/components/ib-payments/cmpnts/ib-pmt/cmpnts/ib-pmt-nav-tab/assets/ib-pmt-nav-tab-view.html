@@ -1,0 +1,128 @@
+<div class="ib-animate ib-animate--if-collapse" tabindex="0"
+    aria-label="{{'IBPURC_PAYMENT_TAB_ACCESIBLE_TEXT'|translate}}">
+    <section class="ib-layout__section ib-payment-table-tabs"
+        ng-class="{'ib-payment-table-tabs--vertical' : payTabNavCtrl.paymentInfo.paymentMethods.length > 3}"
+        data-ng-if="(payTabNavCtrl.paymentInfo.somethingToPay && !payTabNavCtrl.onHoldInfo.isFreeOnHoldOrder) &&
+        !(payTabNavCtrl.paymentInfo.paymentMethods.length === 1 && !payTabNavCtrl.paymentInfo.paymentMethods[0].total)">
+            <div class="ib-payment-table-tabs__tab ib-box-select-radio"
+                id="pmt-nav-tab-{{paymentMethod.provider || paymentMethod.type}}-tab"
+                ng-class="{'ib-payment-table-tabs__tab--active' : index === payTabNavCtrl.selectedData.selectedTab}"
+                ng-repeat-start="(index,paymentMethod) in payTabNavCtrl.paymentInfo.paymentMethods">
+                <div>
+                    <input type="radio"
+                        style="position: absolute;"
+                        id="pmt-nav-tab-{{paymentMethod.provider || paymentMethod.type}}"
+                        ng-value="paymentMethod.description"
+                        ng-checked="index === payTabNavCtrl.selectedData.selectedTab"
+                        class="ib-box-select-radio__radio-input"
+                        data-box-select-radio="radio"
+                        name="pmt-nav-tab"
+                        aria-invalid="false">
+                    <label for="pmt-nav-tab-{{paymentMethod.provider || paymentMethod.type}}"
+                        class="ib-box-select-radio__radio-label ib-payment-table-tabs__label ib-heading"
+                        index="index"
+                        ng-click="payTabNavCtrl.tabdrop($event,index)"
+                        ng-class="{'ib-payment-table-tabs__label--nemuru' : paymentMethod.provider === 'NEMURU'}"
+                        >
+                        <img data-ng-if="paymentMethod.provider === 'PAYPAL' || paymentMethod.provider === 'BIZUM' || paymentMethod.provider === 'GOOGLE_PAY' || paymentMethod.provider === 'mercado_pago'"
+                            class="ib-payment-table-tabs__tab-logo"
+                            ng-src="{{$root.routes.images}}/payment-tabs/{{paymentMethod.provider}}-logo.svg"
+                            alt="{{paymentMethod.description}}" />
+                        <span class="ib-payment-table-tabs__tab-wrap-icon">
+                            <img class="ib-payment-table-tabs__tab-icon"
+                            ng-src="{{$root.routes.images}}/payment-tabs/{{paymentMethod.provider || paymentMethod.type}}-icon.svg"
+                            alt="{{paymentMethod.provider || paymentMethod.type}}"
+                            ng-style="paymentMethod.provider === 'IDEAL' && {'width': '2rem', 'height': '2rem', 'margin-left': '-0.375rem'}" />
+                        </span>
+                        <p class="ib-payment-table-tabs__tab-literal"
+                            ng-if ="paymentMethod.provider !== 'NEMURU' && ((paymentMethod.provider === 'IDEAL' && $root.appMarket !== 'NL') || paymentMethod.provider !== 'IDEAL')">
+                            {{paymentMethod.description}}</p>
+                        <p class="ib-payment-table-tabs__tab-literal"
+                            ng-if ="paymentMethod.provider === 'IDEAL' && $root.appMarket === 'NL'">
+                            {{'PAYMENT_METHOD_TRANSFER_NL'|translate}}</p>
+                        <div class="ib-payment-table-tabs__nemuru"
+                            ng-if ="paymentMethod.provider === 'NEMURU'">
+                            <p class="ib-payment-table-tabs__nemuru-child ib-payment-table-tabs__tab-literal" style="margin-bottom: -.15rem;">
+                                {{paymentMethod.description}}</p>
+                            <p class="ib-payment-table-tabs__nemuru-child ib-text--medium ib-text--color-unfocused"> {{'PAYMENTS_NEMURU_MINIMUM_CONDITIONS'|translate}}{{paymentMethod.downpaymentTotalAmount}}{{'PAYMENTS_NEMURU_MINIMUM_CONDITIONS_2'|translate}}</p>
+                        </div>
+                        <ib-pmt-tab-new
+                            ng-if="paymentMethod.new"
+                            [payment-method-literal]="paymentMethod.description">
+                        </ib-pmt-tab-new>
+                    </label>
+                </div>
+            </div>
+            <div class="ib-payment-table-tabs__content"
+                ng-class="{'ib-payment-table-tabs__content--hidden' : index !== payTabNavCtrl.selectedData.selectedTab}"
+                style="--rows: {{::payTabNavCtrl.paymentInfo.paymentMethods.length}};"
+                id="pmt-nav-tab-{{paymentMethod.provider || paymentMethod.type}}-contain"
+                index="index"
+                ng-repeat-end="(index,paymentMethod) in payTabNavCtrl.paymentInfo.paymentMethods"
+                data-ng-switch="((paymentMethod.type === 'CREDITCARD') || (paymentMethod.type === 'ONHOLD_CREDITCARD') || (paymentMethod.type === 'IBERIA_PAY') || (paymentMethod.type === 'ONHOLD_IBERIA_PAY'))">
+                <div data-ng-if="$root.appMarket === 'BR' && paymentMethod.type === 'CREDITCARD' && !payTabNavCtrl.showQuotas"
+                    class="ib-box ib-box--small u-mb-none u-pt-big">
+                    <div class="ib-banner-logo">
+                        <div class="ib-banner-logo__logo-container">
+                            <span class="ib-banner-logo__logo">0%</span>
+                        </div>
+                        <div class="ib-banner-logo__content">
+                            <span class="ib-banner-logo__title">{{'IBPURC_TEXT_DEFERRED_QUOTAS'|translate}}</span>
+                            <span class="ib-banner-logo__subtitle">{{'IBPURC_BANNER_INFO_VALUES_QUOTAS'|translate}};
+                                <a id="pmt-nav-tab-info-quota-modal-open-link" class="ib-banner-logo__link"
+                                    data-ng-click="payTabNavCtrl.showGeneralModalInfoQuota()" href="javascript:void(0)"
+                                    title="{{'IBPURC_BANNER_MORE_INFO'|translate}}">{{'IBPURC_BANNER_MORE_INFO'|translate}}</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ib-box ib-box--big">
+                    <div data-ng-if="index === payTabNavCtrl.selectedData.selectedTab && ((paymentMethod.type === 'CREDITCARD') || (paymentMethod.type === 'ONHOLD_CREDITCARD') || (paymentMethod.type === 'IBERIA_PAY') || (paymentMethod.type === 'ONHOLD_IBERIA_PAY'))">
+                        <div class="ib-overlay-fly ib-overlay-fly--limit-top"
+                            data-ng-if="(payTabNavCtrl.paymentInfo.iberiaPayLoadingIframe === true) && (paymentMethod.type === 'IBERIA_PAY' || paymentMethod.type === 'ONHOLD_IBERIA_PAY')">
+                            <div id="pmt-nav-tab-iberia-pay-loading-elem" class="ib-overlay-fly__container ib-overlay-fly__container--top">
+                                <div class="ib-overlay-fly__icon">
+                                    <div class="circle"></div>
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <ib-pmt-credit-card-tab id="pmt-nav-tab-credit-card-tab"
+                            submitted-tab="payTabNavCtrl.submittedTabs[index]"
+                            credit-card-form-model="paymentMethod" container-form="payTabNavCtrl.containerForm"
+                            countries-list="payTabNavCtrl.countriesList" states-list="payTabNavCtrl.statesList"
+                            logged-info="payTabNavCtrl.loggedInfo" customer-credit-cards="payTabNavCtrl.customerCreditCards"
+                            selected-payment-info="payTabNavCtrl.paymentInfo.selectedPaymentInfo"
+                            selected-logged-card="payTabNavCtrl.selectedLoggedCard"
+                            selected-data="payTabNavCtrl.selectedData"
+                            is-on-hold-order="payTabNavCtrl.onHoldInfo.isOnHoldOrder"
+                            issuer-country="payTabNavCtrl.issuerCountry" contact-data="payTabNavCtrl.contactData"
+                            required-additional-fields="payTabNavCtrl.requiredFields"
+                            summary-info-quota="payTabNavCtrl.summaryInfoQuota"
+                            show-quotas="payTabNavCtrl.notDisplayQuotas">
+                        </ib-pmt-credit-card-tab>
+                    </div>
+                    <div data-ng-if="index === payTabNavCtrl.selectedData.selectedTab && (paymentMethod.type === 'EXTERNAL_CREDITCARD' || paymentMethod.type === 'PAYPAL' || paymentMethod.type === 'BUTTON' || paymentMethod.type === 'IBERIA_PAY_AFOP' || paymentMethod.type === 'ONHOLD_IBERIA_PAY_AFOP')">
+                        <ib-pmt-external-form id="pmt-nav-tab-external-tab"
+                            submitted-tab="payTabNavCtrl.submittedTabs[index]"
+                            data-ng-show="!payTabNavCtrl.showOptions.showLoadingData"
+                            external-form-info="paymentMethod"
+                            container-form="payTabNavCtrl.containerForm"
+                            contact-data="payTabNavCtrl.contactData">
+                        </ib-pmt-external-form>
+                        <div class="ib-layout__line-spacing" data-ng-if="payTabNavCtrl.showOptions.showLoadingData">
+                            <div id="pmt-nav-tab-options-loading-elem" class="ib-overlay-fly ib-overlay-fly--form">
+                                <div class="ib-overlay-fly__container">
+                                    <div class="ib-overlay-fly__icon">
+                                        <div class="circle"></div>
+                                        <div class="circle"></div>
+                                    </div>
+                                    <span class="ib-overlay-fly__text">{{'LOADING_TEXT'|translate}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+</div>   

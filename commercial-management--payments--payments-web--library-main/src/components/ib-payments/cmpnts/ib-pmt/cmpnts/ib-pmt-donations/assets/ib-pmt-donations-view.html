@@ -1,0 +1,67 @@
+<section class="ib-layout__section">
+    <div class="ib-box ib-box--medium">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+            <figure class="ib-logo ib-logo--small" data-ng-if="pmtDonationCtrl.donationInfo.partner === 'UNICEF'">
+                <img data-ng-src="{{::$root.routes.images}}/logos/UNICEF.png" alt="{{'GENERAL_LOGO_TITLE'|translate}} {{pmtDonationCtrl.donationInfo.partner}}"
+                />
+            </figure>
+        </div>
+        <div class="ib-layout__line-spacing">
+            <div class="ib-check ib-check--flex-start" data-ng-if="pmtDonationCtrl.donationInfo.available">
+                <input type="checkbox" id="check_show_donation" name="check_show_donation" class="ib-check__input" ng-checked="pmtDonationCtrl.doDonation"
+                    data-ng-click="pmtDonationCtrl.checkDonation(pmtDonationCtrl.donationInfo.options[0],pmtDonationCtrl.donationInfo,pmtDonationCtrl.acceptDonationData, 0, false)"
+                />
+                <label for="check_show_donation" class="ib-check__label">
+                    <span class="ib-check__text ib-check__text--unfocused">{{'UNICEF_CHECK_TEXT'|translate}}
+                    </span>
+                </label>
+            </div>
+            <div data-ng-if="!pmtDonationCtrl.donationInfo.available">
+                <span class="ib-check__text ib-check__text--unfocused">{{'NOT_ALLOWED_OPTION_WITH_SELECTED_PAYMENT'|translate}}
+                </span>
+            </div>
+        </div>
+        <div data-ng-if="pmtDonationCtrl.doDonation && pmtDonationCtrl.donationInfo.available">
+            <div class="ib-layout__line-spacing">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-3" data-ng-repeat="(donationOptionIndex, donationOption) in pmtDonationCtrl.donationInfo.options">
+                        <div class="ib-check-boxed ib-check-boxed--type-1">
+                            <input class="ib-check-boxed__check" type="radio" name="check_option_donation" id="donation_{{donationOptionIndex}}" ng-checked="pmtDonationCtrl.donation.form.option[donationOptionIndex]"
+                                data-ng-click="pmtDonationCtrl.checkDonation(donationOption,pmtDonationCtrl.donationInfo,pmtDonationCtrl.acceptDonationData, donationOptionIndex, true)"
+                            />
+                            <label data-equal="boxed" class="ib-check-boxed__label" for="donation_{{donationOptionIndex}}">
+                                <span class="ib-check-boxed__text">{{donationOption.formatedPrice}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ib-layout__line-spacing">
+                <div class="ib-check ib-check--flex-start" data-ng-class="{'ib-check--error' : pmtDonationCtrl.containerForm.$submitted && !pmtDonationCtrl.acceptDonation}">
+                    <input type="checkbox" id="check_accept_donation" name="check_accept_donation" class="ib-check__input" ng-model="pmtDonationCtrl.acceptDonation" ng-click="pmtDonationCtrl.updateFormCheck(pmtDonationCtrl.donationOptionIndex)"
+                        required/>
+                    <label for="check_accept_donation" class="ib-check__label">
+                        <span class="ib-check__text ib-check__text--unfocused">{{'UNICEF_GENERAL_CONDITIONS_TEXT'|translate}}
+                            <a id="pmt-donations-unicef-terms-and-conditions-link" class="ib-link" href="https://www.iberia.com/es/donacion-unicef/" target="_blank" rel="noopener noreferrer" title="{{'CONDITIONS_LINK_TEXT'|translate}}">{{'CONDITIONS_LINK_TEXT'|translate}}</a> {{'UNICEF_GENERAL_CONDITIONS_TEXT_2'|translate}} 
+                            <a id="pmt-donations-unicef-privacy-conditions-link" class="ib-link" href="https://www.iberia.com/web/product.do?cntCat=Productos/INFLEG&cntId=condiciones_privacidad_unicef " target="_blank" rel="noopener noreferrer" title="{{'UNICEF_CONDITIONS_LINK_TEXT'|translate}}">{{'UNICEF_CONDITIONS_LINK_TEXT'|translate}}</a>{{'UNICEF_GENERAL_CONDITIONS_TEXT_3'|translate}}
+                        </span>
+                    </label>
+                </div>
+                <div ng-messages="pmtDonationCtrl.containerForm.$submitted && pmtDonationCtrl.containerForm.check_accept_donation.$error">
+                    <div id="pmt-donations-unicef-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'TOTAL_PRICE_CHECKBOX_CONDITIONS_REQUIRED_ERROR'|translate}}</div>
+                </div>
+            </div>
+            <div class="ib-layout__line-spacing">
+                <div class="ib-check ib-check--flex-start">
+                    <input type="checkbox" id="check_donation_data" name="check_donation_data" class="ib-check__input" ng-model="pmtDonationCtrl.acceptDonationData" ng-click="pmtDonationCtrl.updateFormCheck(pmtDonationCtrl.donationOptionIndex)"
+                    />
+                    <label for="check_donation_data" class="ib-check__label">
+                        <span class="ib-check__text ib-check__text--unfocused">{{'UNICEF_GENERAL_CONDITIONS_TEXT_4'|translate}}
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <a id="pmt-donations-unicef-advertise-link" class="ib-link" href="https://www.iberia.com/es/destino-donacion/" target="_blank" rel="noopener noreferrer" title="{{'UNICEF_GENERAL_CONDITIONS_TEXT_5'|translate}}">{{'UNICEF_GENERAL_CONDITIONS_TEXT_5'|translate}}</a>
+        </div>
+    </div>
+</section>

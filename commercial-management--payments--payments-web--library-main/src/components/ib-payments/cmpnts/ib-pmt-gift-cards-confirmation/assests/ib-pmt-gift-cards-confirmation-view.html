@@ -1,0 +1,260 @@
+<main class="ib-layout ib-pmt-styles-host">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="ib-layout__header ib-layout__header--pre-title-large u-text-right">
+                    <a class="ib-link ib-link--icon hidden-md hidden-sm hidden-xs" ng-click="confirmationCtrl.printSummary()" title="{{'CONFIRM_PRINT_PAYMENT'|translate}}">
+                        <span class="ib-link__icon icon-imprimir"></span>
+                        <span class="ib-link__text">{{'CONFIRM_PRINT_CONFIRM'|translate}}</span>
+                    </a>
+                    <h1 class="ib-heading ib-heading--type-18 ib-heading--block ib-heading--to-center">
+                        <span class="ib-heading__icon ib-heading__icon--default ib-heading__icon--mobile-block icon-confirmacion hidden-xs hidden-sm"></span>
+                        <span class="ib-heading__text">{{'CONFIRM_BUY_OK_TXT'|translate}}</span>    
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-xs-12">
+                <div class="ib-layout__section ib-layout__section--large-responsive">
+                    <div class="ib-box ib-box--empty ib-box--bordered ib-box--gift-card">
+                        <div class="ib-box__wrapper ib-box__wrapper--xsmall">
+                            <div class="ib-layout__line-spacing" ng-if="confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.theme">
+                                <div class="ib-gift-card ib-gift-card--small">
+                                    <figure class="ib-gift-card__logo" >
+                                        <img ng-src="{{confirmationCtrl.viewModel.logo}}" alt="{{confirmationCtrl.viewModel.altLogo|translate}}" />
+                                    </figure>
+                                    <figure class="ib-gift-card__figure">
+                                        <img ng-src="{{confirmationCtrl.viewModel.backGroundImage}}" alt="{{confirmationCtrl.viewModel.altFigure|translate}}" />
+                                    </figure>
+                                    <figure class="ib-gift-card__icon" 
+                                    data-ng-class="{{confirmationCtrl.viewModel.iconClass}}">
+                                        <img ng-src="{{confirmationCtrl.viewModel.icon}}" alt= "{{confirmationCtrl.viewModel.altTheme|translate}}" />
+                                    </figure>
+                                    <div class="ib-gift-card__description" data-ng-class="{'ib-gift-card__description--long-coins' : confirmationCtrl.model.issueOrderInfo.data.voucher.price.length >= 5 }">
+                                        <span class="ib-gift-card__title">{{'GIFT_CARD_CONFIGURATION_GIFT_CARD_TEXT'|translate}}</span>
+                                        <span class="ib-gift-card__price" data-ng-class="{'ib-gift-card__price--long-coins' : confirmationCtrl.model.issueOrderInfo.data.voucher.price.length >= 5 }">{{confirmationCtrl.model.issueOrderInfo.data.voucher.price}}</span>
+                                        <span ng-if="confirmationCtrl.model.voucher.expirationDate" class="ib-gift-card__txt">{{'GIFT_CARD_CONFIGURATION_EXPIRATION'|translate}} {{confirmationCtrl.model.voucher.expirationDate}}</span>
+                                        <!-- <div class="ib-gift-card__contributionCodeContainerConfirmation">
+                                            <span ng-if="confirmationCtrl.model.voucher.operationCode && confirmationCtrl.model.voucher.operationCode != ''" class="ib-gift-card__txt">{{'GIFT_CARD_CONFIGURATION_CODE'|translate}} {{confirmationCtrl.model.voucher.operationCode}}</span>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ib-box__wrapper ib-box__wrapper--medium">
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--text-center ib-layout__line-spacing--xmedium-responsive ">
+                                <p class="ib-text ib-text--to-center ib-text--color-unfocused ib-text--lh-normal-responsive">{{'GIFT_CARD_COMFIRMATION_GIFTCARD_EMIT_TEXT_2'|translate}} {{confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.sender.email ? confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.sender.email : confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.email}}.</p>
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--text-center">
+                                
+                                <!--InGroup-->
+                                <div ng-if="confirmationCtrl.model.giftCardConfigurationInfo.participationCheckboxGroup == 'true'" class="ib-box ib-box--medium-responsive">
+                                    <p class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused ib-text--lh-normal">
+                                        <span ng-if="confirmationCtrl.model.giftCardConfigurationInfo.shippingInfo.shippingOptionEmail" class="ib-text ib-text--inline ib-text--bold ib-text--color-unfocused ib-text--lh-normal-mobile">{{'GIFT_CARD_DELIVERY'|translate : {email: confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.receiver.email, date: confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.delivery.dateTimeLocalUTC} }}</span>
+                                        <div id="lineBreakText" ng-if="confirmationCtrl.model.giftCardConfigurationInfo.shippingInfo.shippingOptionEmail && confirmationCtrl.model.giftCardConfigurationInfo.shippingInfo.shippingOptionSender">
+                                            <br/>
+                                        </div>
+                                        <span ng-if="confirmationCtrl.model.giftCardConfigurationInfo.shippingInfo.shippingOptionSender" class="ib-text ib-text--inline ib-text--bold ib-text--color-unfocused ib-text--lh-normal-mobile">{{'GIFT_CARD_DELIVERY_HAND'|translate : {email: confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.sender.email, date: confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.delivery.dateTimeLocalUTC} }} </span>
+                                    </p>
+                                </div>
+
+                                <!--contribution-->
+                                <div ng-if="confirmationCtrl.model.giftCardConfigurationInfo.flow == 'contribution' && confirmationCtrl.model.giftCardConfigurationInfo.participationCheckboxGroup != 'true'" class="ib-box ib-box--medium-responsive">
+                                    <!-- <p class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused ib-text--lh-normal">
+                                        
+                                        <span class="ib-text ib-text--inline ib-text--bold ib-text--color-unfocused ib-text--lh-normal-mobile">{{"GIFT_CARD_CONFIRMATION_DELIVERY_GENERIC_TEXT" | translate: {date: confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.delivery.dateTime} }}</span>
+                                    </p> -->
+
+
+                                    <p class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused ib-text--lh-normal">
+                                        <span ng-if="confirmationCtrl.model.giftCardConfigurationInfo.shippingInfo.shippingOptionEmail" class="ib-text ib-text--inline ib-text--bold ib-text--color-unfocused ib-text--lh-normal-mobile">{{'GIFT_CARD_DELIVERY_CONTRIBUTION'|translate : {email: confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.receiver.email, date: confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.delivery.dateTimeLocalUTC} }}</span>
+                                        <div id="lineBreakText" ng-if="confirmationCtrl.model.giftCardConfigurationInfo.shippingInfo.shippingOptionEmail && confirmationCtrl.model.giftCardConfigurationInfo.shippingInfo.shippingOptionSender">
+                                            <br/>
+                                        </div>
+                                        <span ng-if="confirmationCtrl.model.giftCardConfigurationInfo.shippingInfo.shippingOptionSender" class="ib-text ib-text--inline ib-text--bold ib-text--color-unfocused ib-text--lh-normal-mobile">{{'GIFT_CARD_DELIVERY_CONTRIBUTION_HAND'|translate : {email: confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.sender.email} }} </span>
+                                    </p>
+
+                                </div>
+                                
+                                
+                                <div ng-if="confirmationCtrl.model.giftCardConfigurationInfo.participationCheckboxGroup != 'true' && confirmationCtrl.model.giftCardConfigurationInfo.flow != 'contribution'" class="ib-box ib-box--medium-responsive">
+                                    <p class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused ib-text--lh-normal">
+                                        
+                                        <!--Para uno mismo-->
+                                        <div ng-if="confirmationCtrl.model.giftCardConfigurationInfo.destinyGift.destiny === 'mine' ">
+                                            <span class="ib-text ib-text--inline ib-text--bold ib-text--color-unfocused ib-text--lh-normal-mobile">{{"GIFT_CARD_COMFIRMATION_RECEIVER_GIFTCARD_TEXT"|translate : {email: confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.email} }}</span>
+                                        </div>
+                                        
+                                        <!--Para otro por email-->
+                                        <div ng-if="confirmationCtrl.model.giftCardConfigurationInfo.destinyGift.destiny !== 'mine' && confirmationCtrl.model.giftCardConfigurationInfo.shippingInfo.shippingOptionEmail && !confirmationCtrl.model.giftCardConfigurationInfo.shippingInfo.shippingOptionSender">
+                                            <span class="ib-text ib-text--inline ib-text--bold ib-text--color-unfocused ib-text--lh-normal-mobile">{{'GIFT_CARD_COMFIRMATION_OTHER_BY_EMAIL'|translate : {receiverEmail: confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.receiver.email} }}</span>
+                                        </div>
+                                        
+                                        <!--Para otro en mano-->
+                                        <div ng-if="confirmationCtrl.model.giftCardConfigurationInfo.destinyGift.destiny !== 'mine' && confirmationCtrl.model.giftCardConfigurationInfo.shippingInfo.shippingOptionSender && !confirmationCtrl.model.giftCardConfigurationInfo.shippingInfo.shippingOptionEmail">
+                                            <span class="ib-text ib-text--inline ib-text--bold ib-text--color-unfocused ib-text--lh-normal-mobile">{{'GIFT_CARD_COMFIRMATION_OTHER_BY_HAND'|translate : {email: confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.sender.email} }}</span>
+                                        </div>
+
+                                        <!--Para otro en mano y por email-->
+                                        <div ng-if="confirmationCtrl.model.giftCardConfigurationInfo.destinyGift.destiny !== 'mine' && (confirmationCtrl.model.giftCardConfigurationInfo.shippingInfo.shippingOptionSender && confirmationCtrl.model.giftCardConfigurationInfo.shippingInfo.shippingOptionEmail)">
+                                            <span class="ib-text ib-text--inline ib-text--bold ib-text--color-unfocused ib-text--lh-normal-mobile">{{'GIFT_CARD_COMFIRMATION_OTHER_BY_HAND_AND_EMAIL'|translate : {email: confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.sender.email, receiverEmail: confirmationCtrl.model.issueOrderInfo.data.giftCardInfo.receiver.email } }}</span>
+                                        </div>
+
+                                    </p>
+                                </div>
+
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--text-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xs-12">
+                <div class="ib-layout__section ib-layout__section--medium hidden-md hidden-sm hidden-xs">
+                    <div class="ib-box ib-box--summary">
+                        <ib-pmt-summary
+                            summary-info="confirmationCtrl.model.paymentData.summaryInfo" total-price="confirmationCtrl.model.paymentData.paymentInfo.price">
+                        </ib-pmt-summary>
+                    </div>
+                </div>
+            </div>
+            <!-- <div id="linkRow" class="row" ng-if="confirmationCtrl.showLinkComponent">
+                <div id="linkCol" class="col-xs-12 col-md-12 col-lg-8">
+                    <div id="linkComponentContainer" class="ib-layout__section ib-layout__section--large-responsive ib-gift-card__linkComponentContainer hidden-md hidden-sm hidden-xs">
+                        <div id="linkHeaderSectionContainer" class="ib-gift-card__linkHeader">
+                            <div id="linkHeader" class="ib-gift-card__linkHeader">
+                                <span class="icon-compartir_3 ib-text--font-size-headerLinkIcon"></span>
+                                <span class="ib-text--linkHeader">{{'GIFT_CARDS_LINK_TITLE_HEADER' | translate}}</span>
+                            </div>
+                        </div>
+                        <div id="linkSectionContainer" class="ib-gift-card__linkSectionContainer"> 
+                            
+                            <div id="linkTitle">
+                                <span class="ib-text">{{"GIFT_CARDS_LINK_TITLE" | translate}}</span>
+                            </div>
+                            <div id="linkContainer" class="ib-input__input ib-gift-card__linkContainer">
+                                <input id="inputLink" class="ib-heading ib-gift-card__inputLink" type="text" ng-model="confirmationCtrl.model.issueOrderInfo.data.sharedLink" readonly/>
+                                <div id="copyLinkAndIcon" class="ib-gift-card__copyLinkAndIcon">
+                                    <span id="linkIcon" class="icon-enlazar ib-text--redSharedLink"></span>
+                                    <a id="redLinkText" ng-click="confirmationCtrl.copyToCLipBoard(confirmationCtrl.model.issueOrderInfo.data.voucher.urlContribution)" class="ib-text--redLink">{{"GIFT_CARDS_COPY" | translate}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xs-12">
+                <div class="ib-layout__section hidden-xl hidden-lg">
+                    <div id="linkComponentContainer" class="ib-layout__section ib-layout__section--large-responsive ib-gift-card__linkComponentContainer">
+                        <div id="linkHeaderSectionContainer" class="ib-gift-card__linkHeader">
+                            <div id="linkHeader" class="ib-gift-card__linkHeader">
+                                <span class="icon-compartir_3 ib-text--font-size-headerLinkIcon"></span>
+                                <span class="ib-text--linkHeader">{{'GIFT_CARDS_LINK_TITLE_HEADER' | translate}}</span>
+                            </div>
+                        </div>
+                        <div id="linkSectionContainer" class="ib-gift-card__linkSectionContainer"> 
+                            
+                            <div id="linkTitle">
+                                <span class="ib-text">{{"GIFT_CARDS_LINK_TITLE" | translate}}</span>
+                            </div>
+                            <div id="linkContainer" class="ib-input__input ib-gift-card__linkContainer">
+                                <input id="inputLink" class="ib-heading ib-gift-card__inputLink" type="text" ng-model="confirmationCtrl.model.issueOrderInfo.data.sharedLink" readonly/>
+                                <div id="copyLinkAndIcon" class="ib-gift-card__copyLinkAndIcon">
+                                    <span id="linkIcon" class="icon-enlazar ib-text--redSharedLink"></span>
+                                    <a id="redLinkText" ng-click="confirmationCtrl.copyToCLipBoard(confirmationCtrl.model.issueOrderInfo.data.sharedLink)" class="ib-text--redLink">{{"GIFT_CARDS_COPY" | translate}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <uib-accordion class="ib-accordion ib-accordion--gift-card" close-others="oneAtATime">
+                        <div uib-accordion-group class="panel-default" is-open="status.open">
+                            <uib-accordion-heading>
+                                <span class="ib-heading ib-heading--type-17">{{'GIFT_CARD_PRICE_BREAKDOWN_TEXT'|translate}}</span>
+                                <span class="ib-accordion__icon" ng-class="{'icon-flecha_1_arriba': status.open, 'icon-flecha_1_abajo': !status.open}"></span>
+                            </uib-accordion-heading>
+                            <div class="ib-box ib-box--summary">
+                                <ib-pmt-summary id="pmt-summary-mobile"
+                                        summary-info="confirmationCtrl.model.paymentData.summaryInfo"
+                                        total-price="confirmationCtrl.model.paymentData.paymentInfo.price">
+                                </ib-pmt-summary>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+            </div> -->
+        </div>
+        <!-- BOX-INFO MODULES -->
+        <equal-height id="pmtBoxConfirmationInfo" data-reload="true">
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <section class="ib-layout__section">
+                        <div class="ib-box ib-box--small ib-box--empty ib-box--bordered u-height-auto-sm"
+                            data-equal="box-info">
+                            <div class="ib-info-icon ib-info-icon--small">
+                                <div class="ib-info-icon__wrapper">
+                                    <span class="ib-info-icon__icon icon-logo_aplic_peque"></span>
+                                    <div class="ib-info-icon__info">
+                                        <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                                            <span
+                                                class="ib-heading ib-heading--type-5">{{'CONFIRM_IBERIA_PLUS'|translate}}</span>
+                                        </div>
+                                        <span class="ib-text">{{'CONFIRM_IBERIA_PLUS_EXPERIENCE'|translate}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <section class="ib-layout__section">
+                        <div class="ib-box ib-box--small ib-box--empty ib-box--bordered u-height-auto-sm"
+                            data-equal="box-info">
+                            <div class="ib-info-icon ib-info-icon--small">
+                                <div class="ib-info-icon__wrapper">
+                                    <span class="ib-info-icon__icon icon-editar_perfil"></span>
+                                    <div class="ib-info-icon__info">
+                                        <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                                            <span
+                                                class="ib-heading ib-heading--type-5">{{'CONFIRM_HELP_CENTER'|translate}}</span>
+                                        </div>
+                                        <span class="ib-text">{{'CONFIRM_HELP_INFO'|translate}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <section class="ib-layout__section">
+                        <div class="ib-box ib-box--small ib-box--empty ib-box--bordered u-height-auto-sm"
+                            data-equal="box-info">
+                            <div class="ib-info-icon ib-info-icon--small">
+                                <div class="ib-info-icon__wrapper">
+                                    <span class="ib-info-icon__icon icon-mensajes"></span>
+                                    <div class="ib-info-icon__info">
+                                        <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                                            <span
+                                                class="ib-heading ib-heading--type-5">{{'CONFIRM_CUSTOMER_SUPPORT'|translate}}</span>
+                                        </div>
+                                        <span class="ib-heading"
+                                            data-ng-class="{'ib-heading--type-2': ($root.phonesList['RESERVAS'].prefixAlt + ' ' + $root.phonesList['RESERVAS'].telephoneAlt).length < 10,'ib-heading--type-5':($root.phonesList['RESERVAS'].prefixAlt + ' ' + $root.phonesList['RESERVAS'].telephoneAlt).length >= 10}">{{$root.phonesList['RESERVAS'].prefixAlt
+                                            + ' ' + $root.phonesList['RESERVAS'].telephoneAlt}}</span>
+                                        <span class="ib-text">{{'CONFIRM_CONSULT'|translate}}
+                                            <a id="pmt-confirmation-twitter-link" class="ib-link"
+                                                href="{{'TWITTER_LINK'|LinksFilter}}" target="_blank" rel="noopener noreferrer"
+                                                title="{{'CONFIRM_TWITTER_TITLE'|translate}}">{{'CONFIRM_TWITTER_TITLE'|translate}}</a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </equal-height>
+        <!-- BOX-INFO MODULES -->
+        <div id="pmt-iberia-pay-logs" class="sr-only" data-ng-if="confirmationCtrl.ibPayTrace">{{confirmationCtrl.ibPayTrace | json }}</div>
+    </div>
+</main>

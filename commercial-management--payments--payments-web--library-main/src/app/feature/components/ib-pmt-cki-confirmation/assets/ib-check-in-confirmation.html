@@ -1,0 +1,575 @@
+<main class="container">
+	<div class="ibe-pay-confirm">
+		<!-- Main content-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="ibe-pay-confirm__content-confirm">
+					<div class="ibe-modal_body-alerts" ng-if="confirmationCtrl.model.showAlternativeDownload">
+						<div class="ibe-modal_body-alert ibe-modal_body-alert--grey"><span
+								class="ibe-modal_body-alert__text">{{'IBCOCF&IBECCF_WARNING_BOARDING_CARDS' | translate}}</span>
+							<a id="pmt-cki-confirmation-download-boarding-pass-link"
+								class="link link__regular link__regular--underline"
+								ng-click="confirmationCtrl.download()">
+								{{'IBCOCF&IBECCF_WARNING_BOARDING_CARDS_LINK' | translate}}</a></div>
+					</div>
+					<!-- item alert -->
+					<div ng-if="confirmationCtrl.showItemAlert">
+						<h1 class="title title__h2 title--no-padd">{{'AVIH_CONFIRMATION_TITLE_SECTION' | translate}}</h1>
+						<h2 class="title title--font18 title--padd-md">{{'AVIH_CONFIRMATION_SUBTITLE_SECTION' | translate}}</h2>
+						<div class="ib-msg-alert ib-msg-alert--center ib-msg-alert--danger alert">
+							<div ng-if="confirmationCtrl.model.inhibitBC.ALERT.status">
+								<p class="ib-msg-alert__text ib-msg-alert__text--bold {{confirmationCtrl.model.inhibitBC.ALERT.icon}}">{{confirmationCtrl.model.inhibitBC.ALERT.TITLE | translate}}</p>
+								<p class="ib-msg-alert__text u-pt" data-ng-bind-html="confirmationCtrl.model.inhibitBC.ALERT.TEXT"></p>
+							</div>
+						</div>
+					</div>
+					<div ng-if="!confirmationCtrl.showItemAlert">
+						<h1 class="title title__h2 title--no-padd">{{'IBCOCF&IBECCF_TITULO' | translate}}</h1>
+						<h2 class="title title--font18 title--no-padd title--medium" data-ng-if="!confirmationCtrl.isBpSubscriptionMode">{{'IBCOCF&IBECCF_SUBTITULO' | translate}}</h2>
+						<h2 class="title title--font18 title--no-padd title--medium" data-ng-if="confirmationCtrl.isBpSubscriptionMode">{{'IBCOCF&IBECCF_SUBSCRIPTION_SUBTITULO' | translate}}</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<equal-height>
+			<div class="row">
+				<div ng-if="confirmationCtrl.showInsuranceBanner" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-4 col-lg-offset-0">
+					<div class="ibe-advertising" data-equal="promo">
+						<figure class="ibe-advertising__figure"><img src="{{::$root.routes.images}}/confirmacion/child.jpg"
+								alt="" class="ibe-advertising__img"></figure>
+						<div class="ibe-advertising__info">
+							<p class="ibe-advertising__text">{{'IBCOCF&IBECCF_VIAJA' | translate}}</p><a
+								id="confirmationCtrl.insuranceLink" href="{{confirmationCtrl.insuranceLink}}"
+								title="{{'ACCES_SEGURO_VIAJE' | translate}}"
+								class="link link__regular--publi link__regular--underline">{{'IBCOCF&IBECCF_ASEGURA' | translate}}</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-4 col-lg-offset-0"
+					data-ng-if="!confirmationCtrl.holaMadridFlow">
+					<div class="ibe-advertising" data-equal="promo">
+						<figure class="ibe-advertising__figure"><img src="{{::$root.routes.images}}/confirmacion/toilet.jpg"
+								alt="" class="ibe-advertising__img"></figure>
+						<div class="ibe-advertising__info">
+							<p class="ibe-advertising__text">{{'IBCOCF&IBECCF_HOTEL' | translate}}</p><a
+								id="IBCOCF&IBECCF_LINK_HOTEL" href="{{'IBCOCF&IBECCF_LINK_HOTEL'|LinksFilter}}"
+								title="{{'ACCES_SELECT_HOTEL' | translate}}"
+								class="link link__regular--publi link__regular--underline">{{'IBCOCF&IBECCF_RESERVA' | translate}}</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-12 col-md-offset-0 col-lg-4 col-lg-offset-0"
+				data-ng-if="!confirmationCtrl.holaMadridFlow">
+					<div class="ibe-advertising" data-equal="promo">
+						<figure class="ibe-advertising__figure"><img src="{{$root.routes.images}}/confirmacion/car.jpg"
+								alt="" class="ibe-advertising__img"></figure>
+						<div class="ibe-advertising__info">
+							<p class="ibe-advertising__text">{{'IBCOCF&IBECCF_ALQUILA' | translate}}</p><a
+								id="IBCOCF&IBECCF_LINK_RENT"
+								ng-href="{{'IBCOCF&IBECCF_LINK_RENT' |LinksFilter: confirmationCtrl.lang}}"
+								title="{{'ACCES_RENT_CAR' | translate}}"
+								class="link link__regular--publi link__regular--underline">{{'IBCOCF&IBECCF_RESERVA1' | translate}}</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-4 col-lg-offset-0" data-ng-if="confirmationCtrl.holaMadridFlow">
+					<div class="ibe-advertising" data-equal="promo">
+						<figure class="ibe-advertising__figure">
+							<img ng-src="{{::$root.routes.images}}/confirmacion/stopover-hotel.png"
+												alt="{{'CONFIRM_HOTEL_IMG'|translate}}"
+												class="ibe-advertising__img--hola-madrid"> />
+						</figure>
+						<div class="ibe-advertising__info">
+							<p class="ibe-advertising__text">{{'STOPOVER_ACCOMMODATION'|translate}}</p>
+							<a
+								id="CONFIRMATION_PROMO_HOTEL"
+								ng-href="{{'PROMO_STOPOVER_ACCOMMODATION' |LinksFilter}}" target="_blank"
+								title="{{'STOPOVER_ACCOMMODATION'|translate}}"
+								class="link link__regular--publi link__regular--underline">{{'STOPOVER_MORE_INFO'|translate}}
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-12 col-md-offset-0 col-lg-4 col-lg-offset-0" data-ng-if="confirmationCtrl.holaMadridFlow">
+					<div class="ibe-advertising" data-equal="promo">
+						<figure class="ibe-advertising__figure">
+							<img ng-src="{{::$root.routes.images}}/confirmacion/stopover-rent-a-car.png"
+							alt="{{'CONFIRM_RENT_CAR_IMG'|translate}}"
+												class="ibe-advertising__img--hola-madrid"> />
+						</figure>
+						<div class="ibe-advertising__info">
+							<p class="ibe-advertising__text">{{'STOPOVER_RENT_A_CAR'|translate}}</p>
+							<a
+								id="CONFIRMATION_PROMO_HOTEL"
+								ng-href="{{'PROMO_STOPOVER_RENT_A_CAR' |LinksFilter}}" target="_blank"
+								title="{{'STOPOVER_RENT_A_CAR'|translate}}"
+								class="link link__regular--publi link__regular--underline">{{'STOPOVER_MORE_INFO'|translate}}
+							</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</equal-height>
+		<div class="col-xs-12">
+			<ib-alert-banner 
+				data-ng-if="confirmationCtrl.isBpSubscriptionMode"
+				heading="ALERT_BANNER_TITLE"
+				body="IBCOCF&IBECCF_SUBSCRIPTION_BANNER_TEXT"
+				variant-style="flat"
+			></ib-alert-banner>
+		</div>
+		<div class="row" data-ng-if="confirmationCtrl.model.inhibitBC.Aircheck.status">
+			<div class="col-xs-12">
+				<div class="ib-layout__line-spacing">
+					<div class="ib-message-box ib-message-box--bg-gray">
+						<div class="ib-message-box__content ib-message-box__content--form-help">
+							<span class="ib-message-box__icon icon-informacion_2"></span>
+							<h3 class="ib-message-box__text">{{confirmationCtrl.model.inhibitBC.Aircheck.TEXT_1 | translate}}</h3>
+						</div>
+					</div>
+				</div>
+
+				<div class="ib-layout__line-spacing">
+					<div class="ib-message-box ib-message-box--bg-gray">
+						<div class="ib-message-box__content ib-message-box__content--form-help">
+							<span class="ib-message-box__icon icon-informacion_2"></span>
+							<h3 class="ib-message-box__text" data-ng-bind-html="confirmationCtrl.model.inhibitBC.Aircheck.TEXT_2"></h3>
+						</div>
+					</div>
+					<div class="ib-message-box ib-message-box--bg-gray">
+						<div class="ib-message-box__content ib-message-box__content--form-help">
+							<span class="ib-message-box__icon icon-confirmacion"></span>
+							<h3 class="ib-message-box__text" data-ng-bind-html="confirmationCtrl.model.inhibitBC.Aircheck.TEXT_3"></h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-lg-8">
+				<section class="ib-layout__section">
+					<div class="ib-ticket-flights ib-ticket-flights__flex">
+						<div class="ib-ticket-flights__header">
+							<div class="ib-ticket-flights__header-title">
+								<h2 class="ib-ticket-flights__header-title__text ib-text--uppercase">
+									{{'SUMMARY_OUTBOUND_TRIP_TITLE'|translate}}</h2>
+								<p class="ib-ticket-flights__baggage"
+									ng-if="confirmationCtrl.model.confirmInfo.boardingCards.handBaggage > 0 || confirmationCtrl.model.confirmInfo.boardingCards.franchiseBaggage > 0">
+									<span
+										class="ib-ticket-flights__baggage--title">{{'IBCOCF&IBECCF_EQUP_TOTAL' | translate}}
+									</span> {{confirmationCtrl.model.confirmInfo.boardingCards.handBaggage}}
+									{{confirmationCtrl.calculateBaggageLabel(confirmationCtrl.model.confirmInfo.boardingCards.handBaggage)|translate}}
+									{{'IBCOCF&IBECCF_BULTO_MANO' | translate}}
+									<span
+										ng-if="confirmationCtrl.model.confirmInfo.boardingCards.franchiseBaggage>0">{{confirmationCtrl.model.confirmInfo.boardingCards.franchiseBaggage}}
+										{{confirmationCtrl.calculateBaggageLabel(confirmationCtrl.model.confirmInfo.boardingCards.franchiseBaggage)|translate}}
+										{{'RESUMENVIAJE_BULT_BODEG' | translate}}</span></p>
+							</div>
+						</div>
+						<div class="ib-ticket-flights__ticket"
+							ng-repeat="segment in confirmationCtrl.model.confirmInfo.boardingCards">
+							<header class="ib-ticket-flights__ticket-header">
+								<div class="ib-ticket-flights__journey">
+									<div class="ib-ticket-flights__journey-departure">
+										<span
+											class="ib-ticket-flights__journey-city">{{segment.departure.airport.description}}</span>
+										<span
+											class="ib-ticket-flights__journey-iata">{{segment.departure.airport.code}}</span>
+										<span class="ib-ticket-flights__journey-airport"></span>
+									</div>
+									<div class="ib-ticket-flights__ticket-icon">
+										<span class="icon-vuelos"></span>
+									</div>
+									<div class="ib-ticket-flights__journey-arrival">
+										<span
+											class="ib-ticket-flights__journey-city">{{segment.arrival.airport.description}}</span>
+										<span class="ib-ticket-flights__journey-airport"></span>
+										<span
+											class="ib-ticket-flights__journey-iata">{{segment.arrival.airport.code}}</span>
+									</div>
+								</div>
+							</header>
+							<div class="ib-ticket-flights__ticket-body ib-ticket-flights__info">
+								<div class="ib-ticket-flights__info-departure">
+									<span class="ib-text ib-text--block ib-text--color-unfocused ib-ticket-flights__terminal"
+										ng-if="segment.departure.terminal != null && segment.departure.terminal !== ''">{{'IBCOAC_TERMINAL'| translate}}{{::segment.departure.terminal}}</span>
+									<span class="ib-text ib-text--block ib-ticket-flights__ticket--title ib-text--color-unfocused ib-text--bold"
+										ng-if="segment.departure.terminal == null || segment.departure.terminal === ''">{{::segment.departure.terminal}}</span>
+									<div data-ng-switch="$root.appMarket">
+										<span class="ib-text ib-text--block ib-text--color-unfocused"
+											data-ng-switch-when="US">{{segment.transformedDepartureDate.month|translate}}
+											{{::segment.transformedDepartureDate.monthDay}}
+											{{::segment.transformedDepartureDate.year}}</span>
+										<span class="ib-text ib-text--block ib-text--color-unfocused"
+											data-ng-switch-default>{{::segment.transformedDepartureDate.monthDay}}
+											{{segment.transformedDepartureDate.month|translate}}
+											{{::segment.transformedDepartureDate.year}}</span>
+									</div>
+									<span
+										class="ib-text ib-text--block ib-text--color-unfocused">{{::segment.departure.date|HourFilter}}</span>
+								</div>
+								<div class="ib-ticket-flights__info-operator">
+									<figure class="ib-ticket-flights__ticket-logo">
+										<img ng-src="{{::segment.companyURL}}"
+											alt="{{'ACCES_LOGO_IBERIA'|translate}}" />
+									</figure>
+									<span
+										class="ib-text ib-text--block ib-text--xmedium">{{::segment.flightNumber.company.code}}{{::segment.flightNumber.number}}</span>
+									<span
+										class="ib-text ib-text--block ib-text--color-unfocused">{{'IBCOCF&IBECCF_OPERADO_POR'|translate}}
+										{{segment.flightNumber.operatedBy ? segment.flightNumber.operatedBy : segment.flightNumber.company.description  }}</span>
+								</div>
+								<div class="ib-ticket-flights__info-arrival">
+									<span class="ib-text ib-text--block ib-text--color-unfocused ib-text--bold"
+										ng-if="segment.arrival.terminal != null && segment.arrival.terminal !== ''">{{'IBCOAC_TERMINAL'| translate}}
+										{{::segment.arrival.terminal}}</span>
+									<span class="ib-text ib-text--block ib-ticket-flights__ticket--title ib-text--color-unfocused ib-text--bold"
+										ng-if="segment.arrival.terminal == null || segment.arrival.terminal === ''">{{::segment.arrival.terminal}}</span>
+									<div data-ng-switch="$root.appMarket">
+										<span class="ib-text ib-text--block ib-text--color-unfocused"
+											data-ng-switch-when="US">{{segment.transformedArrivalDate.month|translate}}
+											{{::segment.transformedArrivalDate.monthDay}}
+											{{::segment.transformedArrivalDate.year}}</span>
+										<span class="ib-text ib-text--block ib-text--color-unfocused"
+											data-ng-switch-default>{{::segment.transformedArrivalDate.monthDay}}
+											{{segment.transformedArrivalDate.month|translate}}
+											{{::segment.transformedArrivalDate.year}}</span>
+									</div>
+									<span
+										class="ib-text ib-text--block ib-text--color-unfocused">{{::segment.arrival.date|HourFilter}}</span>
+								</div>
+							</div>
+
+							<ib-cki-confirmation-footer
+								[props]="confirmationCtrl.footerPropsBySegment[segment.id]"
+							></ib-cki-confirmation-footer>
+
+						</div>
+						<p class="ib-ticket-flights__seats" data-ng-bind-html="confirmationCtrl.urlMMB" ng-if="confirmationCtrl.model.inhibitBC.Aircheck.status"></p>
+					</div>
+				</section>
+				<div ng-if="confirmationCtrl.flightAviosInfo && !confirmationCtrl.checkBusinessTrip()">
+					<ib-ui-avios-summary></ib-ui-avios-summary>
+				</div>
+                <!-- APIS ESTA FLOW -->
+                <section ng-repeat="passenger in confirmationCtrl.passengersEsta" class="ib-layout__section ib-box">
+                    <div class="ib-ticket-flights ib-ticket-flights__flex">
+                        <div class="ib-flex__row ib-flex--space-between ib-flex--align-center">
+                            <p class="icon-perfil_login u-color-secondary ib-heading ib-heading--type-6">
+                                {{passenger.name}} {{passenger.surname}}
+                            </p>
+                            <div title="{{'APIS_STATE_PASSENGER_DOCUMENTATION' | translate}}">
+                                <span class="ib-box-passenger--alert u-color-secondary icon-alertas"></span>
+                                <span class="ib-link-plus__text">{{'APIS_STATE_PASSENGER_DOCUMENTATION' | translate}}</span>
+                            </div>
+                            <div class="ib-msg-alert ib-msg-alert--danger icon-identificacion-visible">
+                                <p class="ib-msg-alert__text ib-msg-alert__text--bold u-mb-xsmall">{{'APIS_CONFIRMATION_ALERT_TITLE' | translate }}</p>
+                                <p class="ib-msg-alert__text">
+                                    {{'APIS_CONFIRMATION_ALERT_BODY_1DE2' | translate }}
+                                </p>
+                                <p class="ib-msg-alert__text" data-ng-bind-html="confirmationCtrl.keyApisEsta"></p>
+                            </div>
+                            <p ng-if="passenger.infant" class="icon-bebe u-color-secondary ib-heading ib-heading--type-6">
+                                {{passenger.infant.name}} {{passenger.infant.surname}}
+                            </p>
+                        </div>
+
+                    </div>
+                </section>
+				<!-- INSURANCE -->
+				<section class="ib-layout__section"
+					ng-if="confirmationCtrl.model.insuranceInfo != null && confirmationCtrl.model.insuranceInfo.contractNumber !=' ' || confirmationCtrl.model.warningInfo != null &&  confirmationCtrl.model.warningInfo != ' '">
+					<div class="ib-ticket-flights">
+						<div class="ib-ticket-flights__ticket">
+							<div class="ib-ticket-flights__ticket-footer u-border-top-none"
+								ng-if="confirmationCtrl.model.insuranceInfo != null && confirmationCtrl.model.insuranceInfo.contractNumber !=' '">
+								<span
+									class="ib-text ib-text--color-unfocused ib-text--bold">{{'IBCOCF&IBECCF_INSURANCE_TITLE' | translate}}:</span>
+								<span class="ib-text ib-text--color-unfocused ">
+									{{'IBCOCF&IBECCF_INSURANCE_NUMBER_POLIZE_TEXT'| translate}}:
+									{{confirmationCtrl.model.insuranceInfo.contractNumber}}</span>
+							</div>
+							<div class="ib-ticket-flights__ticket-footer u-border-top-none"
+								ng-if="confirmationCtrl.model.warningInfo != null &&  confirmationCtrl.model.warningInfo != ' '">
+								<span
+									class="ib-text ib-text--color-unfocused ib-text--bold">{{confirmationCtrl.model.warningInfo}}</span>
+							</div>
+						</div>
+					</div>
+				</section>
+
+                <!-- INSURANCE ALLIANZ FUSION -->
+				<section class="ib-layout__section"
+                ng-if="confirmationCtrl.allianzFusionContractNumber !== '' && confirmationCtrl.allianzFusionContractNumber !== undefined">
+                    <div class="ib-ticket-flights">
+                        <div class="ib-ticket-flights__ticket">
+                            <div class="ib-ticket-flights__ticket-footer u-border-top-none">
+                                <span
+                                    class="ib-text ib-text--color-unfocused ib-text--bold">{{'IBCOCF&IBECCF_INSURANCE_TITLE' | translate}}:</span>
+                                <span class="ib-text ib-text--color-unfocused ">
+                                    {{'IBCOCF&IBECCF_INSURANCE_NUMBER_POLIZE_TEXT'| translate}}:
+                                    {{confirmationCtrl.allianzFusionContractNumber}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+				<!-- CARBON FOOTPRINT -->
+				<section class="ib-layout__section" ng-if="confirmationCtrl.model.carbonFootprint.hasCarbonFootprint">
+					<ib-pmt-carbon-footprint class="ib-summary__section ib-summary__section--separator"
+						model="confirmationCtrl.model.carbonFootprint"></ib-pmt-carbon-footprint>
+				</section>
+				<!-- DIGITAL BOARDING MODULE -->
+				<section class="ib-layout__section" ng-if="confirmationCtrl.isDigitalBoarding">
+					<ib-digital-boarding-box icon="icon-subir_archivos" is-digital-boarding="confirmationCtrl.isDigitalBoarding"
+						tittle="IBCOSE_LINK_TO_DIGITAL_BOARDING_TITLE"></ib-digital-boarding-box>
+				</section>
+				<!-- BIOMETRIC BOARDING MODULE -->
+				<div ng-if="false">
+					<section class="ib-layout__section" ng-if="(confirmationCtrl.model.acceptBiometric && !confirmationCtrl.model.biometricBoardingAssociation) && confirmationCtrl.model.showBiometric">
+						<ib-biometric-boarding-box class="ib-biometric" modifier="ib-biometric__box"
+							text="BIOMETRIC_BOARDING_CONFIRMATION_BOX_TEXT"
+							icon="icon-biometria" icon-modifier="ib-biometric__icon--red"
+							button-text="APIS_NOT_ALLOWED_MORE_INFORMATION_LINK" button-navegation="BIOMETRIC_LANDING_LINK"></ib-biometric-boarding-box>
+					</section>
+				</div>
+
+				<section class="ib-layout__section" ng-if="confirmationCtrl.showBiometricSummaryModule === 'summary'">
+					<ib-biometric-boarding-summary [biometric-status]="confirmationCtrl.biometricStatusPassengers"></ib-biometric-boarding-summary>
+				</section>
+
+				<section class="ib-layout__section">
+					<ib-biometric-boarding-link-app-mobile ng-if="confirmationCtrl.showBiometricSummaryModule === 'app'"></ib-biometric-boarding-link-app-mobile>
+				</section>
+
+                <!-- SEATBOOST-BANNER -->
+				<section class="ib-layout__section">
+               	 	<ib-seatboost-banner ng-if="confirmationCtrl.seetboostInfo.show" [redirection-url]="confirmationCtrl.seetboostInfo.urlRedirection" />
+				</section>
+
+
+				<section class="ib-layout__section" ng-if="confirmationCtrl.urlbob && !confirmationCtrl.holaMadridFlow">
+					<div class="ib-layout__section ib-layout__section--medium">
+						<div class="ib-box-promo ib-box-promo--medium ib-box-promo--responsive u-height-auto-sm">
+							<div class="ib-box-promo__wrapper">
+								<div class="ib-box-promo__image">
+									<figure class="ib-box-promo__figure ib-box-promo__figure--relative">
+										<img ng-src="{{::$root.routes.images}}/banners/bagOnBoard.jpg"
+											alt="{{'IBBKCF_CONFIRM_BOB_TITLE'|translate}}">
+									</figure>
+								</div>
+								<div class="ib-box-promo__description ib-box-promo__description--extra-padding">
+									<span class="ib-box-promo__title"
+										dotdotdot>{{'IBBKCF_CONFIRM_BOB_TITLE'|translate}}</span>
+									<div class="ib-box-promo__description-text ib-box-promo__description-text--full"
+										dotdotdot>
+										<p class="ib-text ib-text--color-light">
+											{{'IBBKCF_CONFIRM_BOB_DESCRIPTION'|translate}}
+										</p>
+									</div>
+									<div
+										class="ib-box-promo__description-button ib-box-promo__description-button--full u-mt">
+										<button id="pmt-cki-confirmation-bob-information-btn"
+											class="ib-button ib-button--inverse ib-button--w-small ib-button--block-sm"
+											data-ng-click="confirmationCtrl.openBagOnBoardUrl(confirmationCtrl.urlbob)">{{'IBBKCF_CONFIRM_BOB_BUTTON'|translate}}</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+                <!-- Banner Stopover Hola Madrid-->
+                <section class="ib-layout__section" ng-if="confirmationCtrl.urlbob && confirmationCtrl.holaMadridFlow">
+                    <div class="ib-layout__section ib-layout__section--medium">
+                        <div class="ib-box-promo ib-box-promo--responsive u-height-auto-sm">
+                            <div class="ib-box-promo__wrapper--HM">
+                                <div class="ib-box-promo__image ib-box-promo__image--hm">
+                                    <figure class="ib-box-promo__figure ib-box-promo__figure--relative">
+                                        <img ng-src="{{::$root.routes.images}}/confirmacion/stopover-hola-madrid.png"
+                                            alt="">
+                                    </figure>
+                                </div>
+                                <div class="ib-box-promo__description--HM ib-box-promo__description--extra-padding">
+									<div class="ib-box-promo__texts">
+										<span class="ib-box-promo__title ib-box-promo__title--no-margin"
+											dotdotdot>{{'STOPOVER_TITLE'|translate}}</span>
+										<span class="ib-box-promo__subtitle"
+											dotdotdot>{{'STOPOVER_SUBTITLE'|translate}}</span>
+										<div class="ib-box-promo__description-text ib-box-promo__description-text--full"
+											dotdotdot>
+											<p class="ib-text ib-text--color-light">
+												{{'STOPOVER_BODY'|translate}}
+											</p>
+										</div>
+									</div>
+                                    <div
+                                        class="ib-box-promo__description-button ib-box-promo__description-button--full u-mt">
+                                        <button id="pmt-confirmation-more-bob-info-btn"
+                                            class="ib-button ib-button--inverse ib-button--w-small ib-button--block-sm ib-box-promo__description-button--HM"
+                                            data-ng-click="confirmationCtrl.openHolaMadridActivities()">{{'STOPOVER_SEE_ACTIVITIES'|translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+				<!-- CARBON FOOTPRINT 1.5 -->
+				<section class="ib-layout__section" ng-if="confirmationCtrl.showCarbonFootprintBanner">
+					<ib-pmt-confirmation-carbon-footprint
+						[model]="confirmationCtrl.co2InfoBannerModel"></ib-pmt-confirmation-carbon-footprint>
+				</section>
+                <!-- BANNER ACTIVITIES -->
+                <section class="ib-layout__section" data-ng-if="confirmationCtrl.recoglobickActivitiesCKI"
+                    id="globick-activities-confirmation-banner" style="display: block;">
+                    <div class="ib-layout__section">
+                        <div class="ib-globick-banner ib-globick-banner--activities">
+                            <div class="ib-globick-banner__content">
+                                <h2 class="ib-globick-banner__title">{{'GLOBICK_ACTIVITIES_BANNER_TITLE'|translate}}</h2>
+                                <p class="ib-globick-banner__txt">{{'GLOBICK_ACTIVITIES_BANNER_TEXT'|translate}}</p>
+                                <div class="ib-globick-banner__btn-container">
+                                    <button class="ib-button ib-button--w-medium ib-button--block-sm" type="button"
+                                        data-ng-click="confirmationCtrl.registerGlobickClick()">{{'GLOBICK_ACTIVITIES_BANNER_BUTTON'|translate}}</button>
+                                </div>
+                            </div>
+                            <div class="ib-globick-banner__img-container">
+                                <figure class="ib-globick-banner__figure">
+                                    <img class="ib-globick-banner__img"
+                                        ng-src="{{::$root.routes.images}}/banners/globick/actividades.png" alt="" />
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+			</div>
+			<div class="col-xs-12 col-lg-4">
+				<aside>
+					<div class="ibe-boarding-card__summary">
+						<h3 class="ibe-boarding-card__summary-title title">{{'IBCOCF&IBECCF_INFOUTIL_TIT' | translate}}
+						</h3>
+						<div class="row">
+							<div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-xs-12">
+								<div class="ibe-boarding-card__summary-col">
+									<h4 class="ibe-boarding-card__summary-col__title title title--medium">
+										{{'IBCOCF&IBECCF_INFOUTIL_PAX' | translate}}</h4>
+									<div class="ibe-boarding-card__summary-item">
+										<div ng-repeat="pasName in confirmationCtrl.model.rightPanelInfo.pasList">
+											<h6 class="ibe-boarding-card__summary-item__title title title__h6">
+												{{pasName}}</h6>
+										</div>
+										<h4 class="ibe-boarding-card__summary-col__title title title--medium">
+											{{'IBCOCF&IBECCF_INFOUTIL_VUELO' | translate}}</h4>
+										<h6 class="ibe-boarding-card__summary-item__title title title__h6 bold"
+											data-ng-if="confirmationCtrl.model.rightPanelInfo.segmentLimitHour.length > 0">
+											{{'IBCOCF&IBECCF_INFOUTIL_HORA_TIT' | translate}}</h6>
+										<span class="ibe-boarding-card__summary-txt--line"
+											data-ng-if="confirmationCtrl.model.rightPanelInfo.segmentLimitHour.length > 0">{{'IBCOCF&IBECCF_INFOUTIL_HORA_TES' | translate}}
+											{{confirmationCtrl.model.rightPanelInfo.segmentLimitHour[0]|HourFilter}}</span>
+										<span
+											class="ibe-boarding-card__summary-item__title title title__h6 bold">{{'IBCOCF&IBECCF_INFOUTIL_EQUIP_TIT' | translate}}</span>
+										<span
+											class="ibe-boarding-card__summary-txt--line">{{'IBCOCF&IBECCF_INFOUTIL_EQUIP_TES' | translate}}</span>
+										<span id="IBCOCF&IBECCF_LINK_MAL_RESTRICCION"
+											class="ibe-boarding-card__summary-txt--line">{{'IBCOCF&IBECCF_INFOUTIL_EQUIP_CON' | translate}}
+											<a id="pmt-cki-confirmation-baggage-restriction-info-link"
+												href="javascript:void(0)" title="{{'ACCES_RESTR_EQUI' | translate}}"
+												data-ng-click="confirmationCtrl.baggageRestrictionsRedirection()"
+												class="link link__regular link__regular--underline link__regular--uppercase">{{'IBCOCF&IBECCF_INFOUTIL_EQUIP_ENL' | translate}}</a></span>
+										<div ng-if="false">
+											<span
+												class="ibe-boarding-card__summary-item__title title title__h6 bold">{{'IBCOCF&IBECCF_INFOUTIL_MOSTRADOR' | translate}}</span>
+										</div>
+									</div>
+									<div ng-if="confirmationCtrl.showMoreInfo">
+										<h4 class="ibe-boarding-card__summary-col__title title title--medium">
+											{{'IBCOCF&IBECCF_INFOUTIL_MASINFO' | translate}}</h4>
+										<div ng-if="confirmationCtrl.model.rightPanelInfo.fastTrackSegments.length>0;">
+											<h6 class="ibe-boarding-card__summary-item__title title title__h6 bold">
+												{{'IBCOCF&IBECCF_INFOUTIL_FT_TIT' | translate}}</h6>
+											<span
+												class="ibe-boarding-card__summary-txt--line">{{'IBCOCF&IBECCF_INFOUTIL_FT_TES' | translate}}</span>
+											<ul>
+												<li
+													ng-repeat="ftSegment in confirmationCtrl.model.rightPanelInfo.fastTrackSegments">
+													{{ftSegment}}</li>
+											</ul>
+										</div>
+										<div ng-if="confirmationCtrl.model.rightPanelInfo.vipSegments.length>0;">
+											<span
+												class="ibe-boarding-card__summary-item__title title title__h6 bold">{{'IBCOCF&IBECCF_INFOUTIL_VIP_TIT' | translate}}</span>
+											<span
+												class="ibe-boarding-card__summary-txt--line">{{'IBCOCF&IBECCF_INFOUTIL_VIP_TES' | translate}}</span>
+											<ul>
+												<li
+													ng-repeat="vipSegment in confirmationCtrl.model.rightPanelInfo.vipSegments">
+													{{vipSegment}}</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ibe-box-form ibe-box-form--one-column" ng-if="!confirmationCtrl.isLogged();">
+						<ib-anonymous-search id="pmt-cki-confirmation-anonymous-search" button-style="ib-button--grey"
+							search-title="{{'IBCOCF&IBECCF_MODLOG_ENCUENTRAS'|translate}}"
+							button-text="{{'IBCOSE_BUSCAR_RESERVA'|translate}}"></ib-anonymous-search>
+					</div>
+					<div class="ibe-box-form-login" ng-if="confirmationCtrl.isLogged()">
+						<h3 class="ibe-box-form-login__title title title__h3">
+							{{'IBCOCF&IBECCF_PROXIMOS_VIAJES' | translate}}</h3>
+						<a id="pmt-cki-confirmation-access-user-reservations"
+							ng-click="confirmationCtrl.continueToIbcose2()"
+							title="{{'IBCOCF&IBECCF_ACCEDE_RESERVAS_TIT'|translate}}"
+							class="ibe-box-form-login__link">{{'IBCOCF&IBECCF_ACCEDE_RESERVAS_LINK'|translate}}</a>
+					</div>
+				</aside>
+			</div>
+		</div>
+
+		<ib-rental-car id="pmt-cki-confirmation-rental-car" ng-if="confirmationCtrl.model.rentCarInfo.cars.length > 0"
+			model="confirmationCtrl.model.rentCarInfo">
+		</ib-rental-car>
+		<!-- Booking.com external module -->
+		<ib-booking-hotels id="pmt-cki-confirmation-booking-hotels"
+			check-in-date="confirmationCtrl.model.confirmInfo.bookingHotelsInfo.checkInDate"
+			check-out-date="confirmationCtrl.model.confirmInfo.bookingHotelsInfo.checkOutDate"
+			destination-code="confirmationCtrl.model.confirmInfo.bookingHotelsInfo.destinationCode">
+		</ib-booking-hotels>
+		<!---->
+		<div data-ib-list-check-in class="ibe-ckeckin__list ibe-box-list ibe-box-list--small">
+			<ul class="row ibe-ckeckin__list-container clearfix">
+				<li class="ibe-ckeckin__list-item col-height col-md-4">
+					<a href="{{'IBERIA_PLUS_REGISTRATION' |LinksFilter}}" class="u-border-none">
+						<div class="ib-link--hover-primary ibe-ckeckin__list-box ibe-ckeckin__list-box--ibe">
+							<span class="title title__h3">{{'IBCOCF&IBECCF_IBPLUS_TIT' | translate}}</span>
+							<span class="ibe-ckeckin__list-text">{{'IBCOCF&IBECCF_IBPLUS_TES' | translate}}</span>
+						</div>
+					</a>
+				</li>
+				<li class="ibe-ckeckin__list-item col-height col-md-4">
+					<a href="{{'IBERIA_PLUS_DOUBTS_LINK' |LinksFilter}}" class="u-border-none">
+						<div class="ib-link--hover-primary ibe-ckeckin__list-box ibe-ckeckin__list-box--ayu">
+							<span class="title title__h3">{{'IBCOCF&IBECCF_CENTRO_TIT' | translate}}</span>
+							<span class="ibe-ckeckin__list-text">{{'IBCOCF&IBECCF_CENTRO_TES' | translate}}</span>
+						</div>
+					</a>
+				</li>
+				<li class="ibe-ckeckin__list-item col-height col-md-4">
+					<a href="{{'CALL_CENTER_LINK' |LinksFilter}}" class="u-border-none">
+						<div class="ib-link--hover-primary ibe-ckeckin__list-box ibe-ckeckin__list-box--cli">
+							<span class="title title__h3">{{'IBCOCF&IBECCF_ATENCION_TIT' | translate}}</span>
+							<span class="ibe-ckeckin__list-text">{{'IBCOCF&IBECCF_ATENCION_TES1' | translate}}</span>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- End main content-->
+	<div id="pmt-iberia-pay-logs" class="sr-only" data-ng-if="confirmationCtrl.ibPayTrace">{{confirmationCtrl.ibPayTrace | json }}</div>

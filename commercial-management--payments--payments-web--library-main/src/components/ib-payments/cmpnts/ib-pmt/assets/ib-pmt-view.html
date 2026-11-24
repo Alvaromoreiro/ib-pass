@@ -1,0 +1,392 @@
+<ib-iberia-pay-script></ib-iberia-pay-script>
+<ib-adyen-script></ib-adyen-script>
+<ib-pmt-booking-bridge></ib-pmt-booking-bridge>
+<main class="ib-layout ib-pmt-styles-host">
+    <!-- directive: ib-comment "{{paymentCtrl.$rootScope.generateDatalayerDOM()}}" !-->
+    <!-- End wrapper-->
+    <ib-finger-print id="pmt-finger-print" data-ng-if="paymentCtrl.model.paymentInfo.sessionId"
+        session-id="paymentCtrl.model.paymentInfo.sessionId"></ib-finger-print>
+    <ib-pmt-riskfied  data-ng-if="paymentCtrl.model.paymentInfo.sessionId" [session-id]="paymentCtrl.model.paymentInfo.sessionId"></ib-pmt-riskfied>
+    <div class="container" data-ng-if="!paymentCtrl.model.loadingPaymentsCards" data-calculate-position>
+        <div class="row" data-ng-if="paymentCtrl.flowApp !== 'MMBBID' && paymentCtrl.flowApp !== 'MMBVC'">
+            <div class="col-xs-12">
+                <div class="ib-layout__header ib-layout__header--title">
+                    <h1 class="ib-heading ib-heading--type-1">
+                        {{(paymentCtrl.model.paymentInfo.isOnHoldOrder ? 'ON_HOLD_TITLE' :
+                        'PAYMENTS_PAGE_TITLE')
+                        |translate }}{{(paymentCtrl.model.paymentInfo.onHoldInfo.isFreeOnHoldOrder ||
+                        paymentCtrl.model.paymentInfo.onHoldInfo.onHoldPaymentOptions.length
+                        === 1) ?
+                        paymentCtrl.model.paymentInfo.onHoldInfo.onHoldPaymentOptions[paymentCtrl.model.selectedData.selectedOnHoldIndex].hours
+                        +
+                        ('ON_HOLD_ONE_OPTION_HOURS'|translate)
+                        + (paymentCtrl.model.paymentInfo.onHoldInfo.isFreeOnHoldOrder ? 'ON_HOLD_FREE_TITLE' : ''
+                        |translate) : ''}}
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <equal-height>
+            <!-- Booking OH OPTION -->
+            <ib-pmt-on-hold-options id="pmt-on-hold-options"
+                on-hold-options="paymentCtrl.model.paymentInfo.onHoldInfo.onHoldPaymentOptions"
+                selected-on-hold-index="paymentCtrl.model.selectedData.selectedOnHoldIndex"
+                data-ng-if="paymentCtrl.model.paymentInfo.isOnHoldOrder && !paymentCtrl.model.paymentInfo.onHoldInfo.isFreeOnHoldOrder && paymentCtrl.model.paymentInfo.onHoldInfo.onHoldPaymentOptions.length > 1">
+            </ib-pmt-on-hold-options>
+            <ib-pmt-on-hold-free id="pmt-on-hold-free"
+                data-ng-if="paymentCtrl.model.paymentInfo.isOnHoldOrder && (paymentCtrl.model.paymentInfo.onHoldInfo.isFreeOnHoldOrder || paymentCtrl.model.paymentInfo.onHoldInfo.onHoldPaymentOptions.length === 1)"
+                on-hold-info="paymentCtrl.model.paymentInfo.onHoldInfo.onHoldPaymentOptions[paymentCtrl.model.selectedData.selectedOnHoldIndex]">
+            </ib-pmt-on-hold-free>
+        </equal-height>
+        <div class="row"
+            data-ng-class="{'ib-layout__line-spacing--top-xmedium': paymentCtrl.flowApp === 'MMBVC', 'u-mt-medium': paymentCtrl.flowApp === 'MMBBID'}">
+            <div
+                data-ng-class="{'col-xs-12' : paymentCtrl.model.noPaymentSummary, 'col-md-12 col-lg-8': !paymentCtrl.model.noPaymentSummary}">
+                <section class="ib-layout__section"
+                    data-ng-if="paymentCtrl.flowApp === 'MMBBID' && !(paymentCtrl.totalAviosAmount > 0) && !paymentCtrl.numberFreeUpgrade">
+                    <div
+                        class="ib-msg-alert ib-msg-alert--transparent ib-msg-alert--upgrade icon-informacion_2 alert fade in">
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-border-left-none">
+                            <p class="ib-text--xbig ib-text--especial u-mb-xxsmall">{{'MMB_ALERT_IMPORTANT'|translate}}
+                            </p>
+                            <p class="ib-text ib-text--lh-normal">
+                                {{'UPGRADING_BIDS_PAYMENT_INFO_TEXT'|translate}}
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="ib-layout__section"
+                    data-ng-if="paymentCtrl.flowApp === 'MMBBID' && (paymentCtrl.totalAviosAmount || paymentCtrl.totalAviosAmount === 0 || paymentCtrl.numberFreeUpgrade)">
+                    <div
+                        class="ib-msg-alert ib-msg-alert--upgrade ib-msg-alert--dark-grey icon-alerta_grave alert fade in">
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-border-left-none">
+                            <p class="ib-msg-alert__text--title-alert u-mb-xxsmall">{{'MMB_ALERT_IMPORTANT'|translate}}
+                            </p>
+                            <p class="ib-text ib-text--lh-normal-white"
+                                ng-if="!(paymentCtrl.totalAviosAmount || paymentCtrl.totalAviosAmount === 0) || ((paymentCtrl.totalAviosAmount || paymentCtrl.totalAviosAmount === 0) && paymentCtrl.model.paymentInfo.price.totalPrice > 0)">
+                                {{'MMB_UPGRADING_AVIOS_ALERT_INFO_1'|translate}}
+                            </p>
+                            <p class="ib-text ib-text--lh-normal-white">
+                                {{'MMB_UPGRADING_AVIOS_ALERT_INFO_2'|translate}}
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                <ib-pmt-disscount id="pmt-discount"
+                    data-ng-if="!paymentCtrl.allowedCashAndAviosWithVoucher && !paymentCtrl.model.paymentInfo.isOnHoldOrder && (paymentCtrl.model.paymentInfo.availableDiscounts['AVIOS'] || paymentCtrl.model.paymentInfo.availableDiscounts['VOUCHER'] || paymentCtrl.model.paymentInfo.appliedDiscounts.types['VOUCHER']) && !paymentCtrl.$rootScope.isPointsOBFlow && !paymentCtrl.isONBFlow && paymentCtrl.isCheckVoucherMmbvc && !paymentCtrl.isShuttleFlow && paymentCtrl.flowApp !== 'MMBBID' && !paymentCtrl.isIbZero && !paymentCtrl.isSoftUser"
+                    disscounts="paymentCtrl.model.paymentInfo.availableDiscounts"
+                    applied-discounts="paymentCtrl.model.paymentInfo.appliedDiscounts"
+                    logged-info="paymentCtrl.model.generalData.loggedInfo"
+                    currency="paymentCtrl.model.paymentInfo.currency" selected-data="paymentCtrl.model.selectedData"
+                    show-options="paymentCtrl.model.showOptions" payment-Info="paymentCtrl.model.paymentInfo"
+                    credit-cards="paymentCtrl.model.paymentInfo.creditCardsInfo"
+                    summary-info="paymentCtrl.model.summaryInfo"
+                    payment-methods="paymentCtrl.model.paymentInfo.paymentMethods"
+                    payment-id="paymentCtrl.model.paymentInfo.paymentId"
+                    loading-voucher="paymentCtrl.model.showOptions.showLoadingData"
+                    loading-iframe="paymentCtrl.model.paymentInfo.iberiaPayLoadingIframe"
+                    form-submitted='paymentCtrl.paymentsForm.$submitted'></ib-pmt-disscount>
+                <ib-pmt-disscount-multiple id="pmt-discount"
+                    data-ng-if="
+                        paymentCtrl.allowedCashAndAviosWithVoucher &&
+                        paymentCtrl.$rootScope.isLogged &&
+                        !paymentCtrl.model.paymentInfo.isOnHoldOrder &&
+                        paymentCtrl.model.paymentInfo.availableDiscounts['AVIOS'] &&
+                        !paymentCtrl.$rootScope.isPointsOBFlow &&
+                        !paymentCtrl.isONBFlow &&
+                        paymentCtrl.flowApp !== 'MMBBID' &&
+                        paymentCtrl.isCheckAviosMmbvc &&
+                        !paymentCtrl.isIbZero &&
+                        !paymentCtrl.isSoftUser &&
+                        paymentCtrl.flowApp !== 'CKI'"
+                    disscounts="paymentCtrl.model.paymentInfo.availableDiscounts"
+                    applied-discounts="paymentCtrl.model.paymentInfo.appliedDiscounts"
+                    logged-info="paymentCtrl.model.generalData.loggedInfo"
+                    currency="paymentCtrl.model.paymentInfo.currency" selected-data="paymentCtrl.model.selectedData"
+                    show-options="paymentCtrl.model.showOptions" payment-Info="paymentCtrl.model.paymentInfo"
+                    credit-cards="paymentCtrl.model.paymentInfo.creditCardsInfo"
+                    summary-info="paymentCtrl.model.summaryInfo"
+                    payment-methods="paymentCtrl.model.paymentInfo.paymentMethods"
+                    payment-id="paymentCtrl.model.paymentInfo.paymentId"
+                    loading-voucher="paymentCtrl.model.showOptions.showLoadingData"
+                    loading-iframe="paymentCtrl.model.paymentInfo.iberiaPayLoadingIframe"
+                    form-submitted='paymentCtrl.paymentsForm.$submitted' template="avios"></ib-pmt-disscount-multiple>
+                <ib-pmt-disscount-multiple id="pmt-discount"
+                    data-ng-if="(paymentCtrl.model.paymentInfo.originalPaymentMethods[0].total!==paymentCtrl.model.paymentInfo.appliedDiscounts.types.AVIOS.originalDiscount) &&
+                    paymentCtrl.allowedCashAndAviosWithVoucher &&
+                    paymentCtrl.$rootScope.isMobile.header &&
+                    !paymentCtrl.model.paymentInfo.isOnHoldOrder &&
+                    (paymentCtrl.model.paymentInfo.availableDiscounts['VOUCHER'] || paymentCtrl.model.paymentInfo.appliedDiscounts.types['VOUCHER']) &&
+                    !paymentCtrl.rolOb &&
+                    !paymentCtrl.isShuttleFlow &&
+                    paymentCtrl.flowApp !== 'MMBBID' && 
+                    paymentCtrl.isCheckVoucherMmbvc"
+                    disscounts="paymentCtrl.model.paymentInfo.availableDiscounts"
+                    applied-discounts="paymentCtrl.model.paymentInfo.appliedDiscounts"
+                    logged-info="paymentCtrl.model.generalData.loggedInfo"
+                    currency="paymentCtrl.model.paymentInfo.currency" selected-data="paymentCtrl.model.selectedData"
+                    show-options="paymentCtrl.model.showOptions" payment-Info="paymentCtrl.model.paymentInfo"
+                    credit-cards="paymentCtrl.model.paymentInfo.creditCardsInfo"
+                    summary-info="paymentCtrl.model.summaryInfo"
+                    payment-methods="paymentCtrl.model.paymentInfo.paymentMethods"
+                    payment-id="paymentCtrl.model.paymentInfo.paymentId"
+                    loading-voucher="paymentCtrl.model.showOptions.showLoadingData"
+                    loading-iframe="paymentCtrl.model.paymentInfo.iberiaPayLoadingIframe"
+                    form-submitted='paymentCtrl.paymentsForm.$submitted' template="voucher"
+                    class="ib-layout__section hidden-xl hidden-lg u-mt-medium"></ib-pmt-disscount-multiple>
+                <ib-pmt-disscount-multiple id="pmt-discount"
+                    data-ng-if="paymentCtrl.flowApp === 'CKI' &&
+                    paymentCtrl.allowedCashAndAviosWithVoucher &&
+                    paymentCtrl.model.paymentInfo.availableDiscounts['AVIOS']"
+                    disscounts="paymentCtrl.model.paymentInfo.availableDiscounts"
+                    applied-discounts="paymentCtrl.model.paymentInfo.appliedDiscounts"
+                    logged-info="paymentCtrl.model.generalData.loggedInfo"
+                    currency="paymentCtrl.model.paymentInfo.currency" selected-data="paymentCtrl.model.selectedData"
+                    show-options="paymentCtrl.model.showOptions" payment-Info="paymentCtrl.model.paymentInfo"
+                    credit-cards="paymentCtrl.model.paymentInfo.creditCardsInfo"
+                    summary-info="paymentCtrl.model.summaryInfo"
+                    payment-methods="paymentCtrl.model.paymentInfo.paymentMethods"
+                    payment-id="paymentCtrl.model.paymentInfo.paymentId"
+                    loading-voucher="paymentCtrl.model.showOptions.showLoadingData"
+                    loading-iframe="paymentCtrl.model.paymentInfo.iberiaPayLoadingIframe"
+                    form-submitted='paymentCtrl.paymentsForm.$submitted' template="slider"
+                    class="ib-layout__section u-mt-medium"></ib-pmt-disscount-multiple>
+
+                <section class="ib-layout__section" data-ng-if="paymentCtrl.model.paymentInfo.psd2Warning && paymentCtrl.flowApp !== 'MMBBID'">
+                    <div
+                        class="ib-msg-alert ib-msg-alert--transparent ib-msg-alert--upgrade icon-informacion_2 alert fade in">
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-border-left-none">
+                            <p class="ib-text ib-text--lh-normal">
+                                {{'PS2_ALERT_TEXT_1'|translate}}
+                            </p>
+                            <p class="ib-text ib-text--lh-normal">
+                                {{'PS2_ALERT_TEXT_2'|translate}}
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                <section class="ib-layout__section" data-ng-if="(paymentCtrl.dataRequest.issueCountry === 'MX') && (!paymentCtrl.showQuotasInfoFlowAppDisallowed.includes(paymentCtrl.flowApp))">
+                    <div class="ib-banner-logo ib-banner-logo--flex-mode">
+                        <div class="ib-banner-logo__logo-container ib-banner-logo__logo-container--circle">
+                            <figure class="ib-banner-logo__logo ib-banner-logo__logo--circle ">
+                                <img ng-src="{{paymentCtrl.$rootScope.routes.images}}/otros/pago_aplazado.svg"
+                                    alt="{{'QUOTA_INFO_FOR_MEX_TITLE'|translate}}" />
+                            </figure>
+                        </div>
+                        <div class="ib-banner-logo__content ib-banner-logo__content--circle">
+                            <span
+                                class="ib-banner-logo__title ib-banner-logo__title--circle">{{'QUOTA_INFO_FOR_MEX_TITLE'|translate}}</span>
+                            <span
+                                class="ib-banner-logo__subtitle ib-banner-logo__subtitle--circle">{{'QUOTA_INFO_FOR_MEX_MESSAGE'|translate}}</span>
+                        </div>
+                    </div>
+                </section>
+                <form name="paymentCtrl.paymentsForm" id="paymentsForm" novalidate autocomplete="on">
+                    <ib-pmt-nav-tab id="pmt-nav-tab"
+                        data-ng-if="!paymentCtrl.onHoldFreeSelected && !paymentCtrl.model.showOptions.loadingPaymentData && ((!paymentCtrl.model.paymentInfo.onHoldInfo.isFreeOnHoldOrder && paymentCtrl.model.paymentInfo.price.totalPrice !== 0) || paymentCtrl.model.paymentInfo.onHoldInfo)"
+                        container-form="paymentCtrl.paymentsForm" selected-data="paymentCtrl.model.selectedData"
+                        payment-info="paymentCtrl.model.paymentInfo" contact-data="paymentCtrl.model.contactData"
+                        issuer-country="paymentCtrl.model.generalData.issuerCountry"
+                        customer-credit-cards="paymentCtrl.model.paymentInfo.customerCreditCards"
+                        logged-info="paymentCtrl.model.generalData.loggedInfo"
+                        selected-logged-card="paymentCtrl.model.paymentInfo.selectedPaymentInfo.selectedLoggedCard"
+                        on-hold-info="paymentCtrl.model.paymentInfo.onHoldInfo"
+                        required-fields="paymentCtrl.model.paymentInfo.requiredAdditionalFields.info[paymentCtrl.model.paymentInfo.paymentMethods[paymentCtrl.model.selectedData.selectedTab].provider || paymentCtrl.model.paymentInfo.paymentMethods[paymentCtrl.model.selectedData.selectedTab].externalProvider || paymentCtrl.model.paymentInfo.paymentMethods[paymentCtrl.model.selectedData.selectedTab].type]"
+                        countries-list="paymentCtrl.model.generalData.countriesInfo.list"
+                        states-list="paymentCtrl.model.generalData.statesList"
+                        prefix-list="paymentCtrl.model.generalData.prefixesInfo.list"
+                        show-options="paymentCtrl.model.showOptions"
+                        summary-info-quota="paymentCtrl.model.summaryInfoQuota"
+                        show-quotas="paymentCtrl.model.showQuotas" submitted-tabs="paymentCtrl.submittedTabs">
+                    </ib-pmt-nav-tab>
+                    <ib-pmt-dcc
+                    [current-dcc-data]="paymentCtrl.currentDccData"
+                    [donation-enabled]="paymentCtrl.donationEnabled"
+                    ></ib-pmt-dcc>
+                    <ib-pmt-donation id="pmt-donation"
+                        data-ng-if="paymentCtrl.model.donationsInfo && paymentCtrl.model.donationsInfo[0] && paymentCtrl.model.donationsInfo[0].available && !paymentCtrl.isONBFlow"
+                        donation-info="donationInfo"
+                        data-ng-repeat="(donationIndex, donationInfo) in paymentCtrl.model.donationsInfo"
+                        container-form="paymentCtrl.paymentsForm"></ib-pmt-donation>
+                    <div class="ib-layout__section hidden-xl hidden-lg u-mt-medium"
+                        data-ng-if="!paymentCtrl.model.noPaymentSummary">
+                        <uib-accordion class="ib-accordion" close-others="oneAtATime">
+                            <div uib-accordion-group class="panel-default" is-open="status.open">
+                                <uib-accordion-heading>
+                                    <span
+                                        class="ib-heading ib-heading--type-5">{{'PAYMENTS_SUMMARY_MOBILE'|translate}}</span>
+                                    <span class="ib-accordion__icon"
+                                        ng-class="{'icon-flecha_1_arriba': status.open, 'icon-flecha_1_abajo': !status.open}"></span>
+                                </uib-accordion-heading>
+                                <div class="ib-box ib-box--medium" data-ng-class="{'ib-box--names-background': paymentCtrl.flowApp === 'BBKI' && paymentCtrl.actualStepFlow === 'ibpurc'}">
+                                    <ib-pmt-summary id="pmt-summary-mobile" data-ng-if="paymentCtrl.showGeneralSummary"
+                                        summary-info="paymentCtrl.model.summaryInfo"
+                                        total-price="paymentCtrl.model.paymentInfo.price"
+                                        applied-discounts="paymentCtrl.model.paymentInfo.appliedDiscounts"
+                                        on-hold-info="paymentCtrl.model.paymentInfo.onHoldInfo"
+                                        on-hold-type="paymentCtrl.model.paymentInfo.paymentMethods[paymentCtrl.model.selectedData.selectedTab]"
+                                        on-hold-payment="paymentCtrl.model.summaryInfo.onHoldPayment"
+                                        is-on-hold="paymentCtrl.model.paymentInfo.isOnHoldOrder"
+                                        show-passengers-name="paymentCtrl.flowApp === 'BBKI'"
+                                        donation-enabled="paymentCtrl.donationEnabled"
+                                        membership-data="$root.membershipData"
+                                        dcc-selected="paymentCtrl.currentDccData.selectedValue === 'DCC_ENABLED'"
+                                        current-dcc-data="paymentCtrl.currentDccData">
+                                    </ib-pmt-summary>
+                                    <ib-breakdown id="pmt-breakdown-mobile"
+                                        data-ng-if="paymentCtrl.showCkiSummary || paymentCtrl.showMmbAncillariesSummary"
+                                        breakdown-model="paymentCtrl.model.summaryInfo.ancillaries"
+                                        summary-info="paymentCtrl.model.summaryInfo"
+                                        total-price="paymentCtrl.model.paymentInfo.price"
+                                        breakdown-discount="paymentCtrl.model.paymentInfo.appliedDiscounts"
+                                        price="true"
+                                        donation-enabled="paymentCtrl.donationEnabled"
+                                        dcc-selected="paymentCtrl.currentDccData.selectedValue === 'DCC_ENABLED'"
+                                        current-dcc-data="paymentCtrl.currentDccData"
+                                        flow-app="paymentCtrl.flowApp">
+                                    </ib-breakdown>
+                                </div>
+                            </div>
+                        </uib-accordion>
+                    </div>
+                    <div class="ib-layout__section u-mt-medium" data-ng-if="paymentCtrl.model.noPaymentSummary">
+                        <div class="ib-box ib-box--medium" data-ng-class="{'ib-box--names-background': paymentCtrl.flowApp === 'BBKI' && paymentCtrl.actualStepFlow === 'ibpurc'}">
+                            <ib-pmt-summary id="pmt-summary" data-ng-if="paymentCtrl.showGeneralSummary"
+                                summary-info="paymentCtrl.model.summaryInfo"
+                                total-price="paymentCtrl.model.paymentInfo.price"
+                                applied-discounts="paymentCtrl.model.paymentInfo.appliedDiscounts"
+                                on-hold-info="paymentCtrl.model.paymentInfo.onHoldInfo"
+                                on-hold-type="paymentCtrl.model.paymentInfo.paymentMethods[paymentCtrl.model.selectedData.selectedTab]"
+                                on-hold-payment="paymentCtrl.model.summaryInfo.onHoldPayment"
+                                is-on-hold="paymentCtrl.model.paymentInfo.isOnHoldOrder"
+                                show-passengers-name="paymentCtrl.flowApp === 'BBKI'"
+                                donation-enabled="paymentCtrl.donationEnabled"
+                                membership-data="$root.membershipData"
+                                dcc-selected="paymentCtrl.currentDccData.selectedValue === 'DCC_ENABLED'"
+                                current-dcc-data="paymentCtrl.currentDccData">
+                            </ib-pmt-summary>
+                            <ib-breakdown id="pmt-breakdown"
+                                data-ng-if="paymentCtrl.showCkiSummary || paymentCtrl.showMmbAncillariesSummary"
+                                breakdown-model="paymentCtrl.model.summaryInfo.ancillaries"
+                                summary-info="paymentCtrl.model.summaryInfo"
+                                total-price="paymentCtrl.model.paymentInfo.price"
+                                breakdown-discount="paymentCtrl.model.paymentInfo.appliedDiscounts"
+                                price="true"
+                                donation-enabled="paymentCtrl.donationEnabled"
+                                dcc-selected="paymentCtrl.currentDccData.selectedValue === 'DCC_ENABLED'"
+                                current-dcc-data="paymentCtrl.currentDccData"
+                                flowApp="paymentCtrl.flowApp"></ib-breakdown>
+                        </div>
+                        <ib-ui-quotas-nemuru-component
+                            ng-if="paymentCtrl.model.paymentInfo.nemuru && paymentCtrl.model.paymentInfo.nemuru.available"
+                            [quotas]="paymentCtrl.model.paymentInfo.nemuru.quotas"
+                            [modifier-class]="'prop-payment'">
+                        </ib-ui-quotas-nemuru-component>
+                    </div>
+                    <div>
+                        <ib-pmt-nemuru-afop data-ng-if="paymentCtrl.nemuruIsCalled"
+                            [order-id]="paymentCtrl.model.paymentInfo.Nemuru.orderId"
+                            [access-token]="paymentCtrl.model.paymentInfo.Nemuru.accessToken"></ib-pmt-nemuru-afop>
+                        <ib-pmt-mercado-pago-afop
+                            data-ng-if="paymentCtrl.mercadoPagoIsCalled"
+                            [preference-id]="paymentCtrl.model.paymentInfo.MERCADO_PAGO.preferenceId"
+                        >
+                        </ib-pmt-mercado-pago-afop>
+                        <ib-pmt-total-price id="pmt-breakdown" payment-mode="true"
+                            price-info="paymentCtrl.model.paymentInfo.price" container-form="paymentCtrl.paymentsForm"
+                            co2-mark-info="::paymentCtrl.model.cO2MarkInfo"
+                            avios-info="paymentCtrl.model.paymentInfo.appliedDiscounts.types['AVIOS'].formatedAvios"
+                            something-to-pay="paymentCtrl.model.paymentInfo.somethingToPay"
+                            on-hold-info="paymentCtrl.model.paymentInfo.onHoldInfo"
+                            conditions-text="paymentCtrl.model.paymentInfo.relatedContent.transformed['CONDITIONS']"
+                            total-price-text="paymentCtrl.model.paymentInfo.relatedContent.transformed['TOTAL_PRICE']"
+                            related-content="paymentCtrl.model.paymentInfo.relatedContent.original"
+                            tax-info="paymentCtrl.model.paymentInfo.relatedContent.taxInfoModal"
+                            paypal-button="paymentCtrl.model.paymentInfo.paymentMethods[paymentCtrl.model.selectedData.selectedTab].type === 'PAYPAL'"
+                            show-external-button="paymentCtrl.model.paymentInfo.paymentMethods[paymentCtrl.model.selectedData.selectedTab].type === 'IBERIA_PAY_AFOP' || paymentCtrl.model.paymentInfo.paymentMethods[paymentCtrl.model.selectedData.selectedTab].type === 'ONHOLD_IBERIA_PAY_AFOP' ? paymentCtrl.model.paymentInfo.paymentMethods[paymentCtrl.model.selectedData.selectedTab].provider : paymentCtrl.model.paymentInfo.paymentMethods[paymentCtrl.model.selectedData.selectedTab].type"
+                            show-Regular-Button="paymentCtrl.model.showOptions.showRegularButton"
+                            is-checked="paymentCtrl.isChecked" ob-points="paymentCtrl.oBPoints"
+                            show-obpoints="paymentCtrl.showOBPoints"
+                            selected-payment="paymentCtrl.model.paymentInfo.selectedPaymentInfo"
+                            no-discount-ob-price="paymentCtrl.noDiscountOBPrice"
+                            show-discount="paymentCtrl.showNoDiscountOBPrice" avios-to-earn="paymentCtrl.aviosToEarn"
+                            index-selected-tab="paymentCtrl.model.selectedData.selectedTab"
+                            elite-points-to-earn="paymentCtrl.elitePointsToEarn"
+                            donation-enabled="paymentCtrl.donationEnabled"
+                            dcc-selected="paymentCtrl.currentDccData.selectedValue === 'DCC_ENABLED'"
+                            current-dcc-data="paymentCtrl.currentDccData"></ib-pmt-total-price>
+                    </div>
+                    <div class="u-mt-medium u-mb-medium" data-ng-if="paymentCtrl.deepLinkData">
+                        <p class="u-text-center"><a class="ib-link"
+                                href="{{paymentCtrl.deepLinkData.returnUrl}}">{{'COMEBACK_TO' | translate}}
+                                {{paymentCtrl.deepLinkData.airline.name}}</a></p>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-12 col-lg-4 hidden-md hidden-sm hidden-xs"
+                data-ng-if="!paymentCtrl.model.noPaymentSummary">
+                <section class="ib-layout__section"
+                    data-ng-if="(paymentCtrl.model.paymentInfo.originalPaymentMethods[0].total!==paymentCtrl.model.paymentInfo.appliedDiscounts.types.AVIOS.originalDiscount) && paymentCtrl.allowedCashAndAviosWithVoucher && !paymentCtrl.$rootScope.isMobile.header && !paymentCtrl.model.paymentInfo.isOnHoldOrder && (paymentCtrl.model.paymentInfo.availableDiscounts['VOUCHER'] || paymentCtrl.model.paymentInfo.appliedDiscounts.types['VOUCHER']) && !paymentCtrl.rolOb && !paymentCtrl.isShuttleFlow && paymentCtrl.flowApp !== 'MMBBID' && paymentCtrl.isCheckVoucherMmbvc">
+                    <ib-pmt-disscount-multiple id="pmt-discount"
+                        disscounts="paymentCtrl.model.paymentInfo.availableDiscounts"
+                        applied-discounts="paymentCtrl.model.paymentInfo.appliedDiscounts"
+                        logged-info="paymentCtrl.model.generalData.loggedInfo"
+                        currency="paymentCtrl.model.paymentInfo.currency" selected-data="paymentCtrl.model.selectedData"
+                        show-options="paymentCtrl.model.showOptions" payment-Info="paymentCtrl.model.paymentInfo"
+                        credit-cards="paymentCtrl.model.paymentInfo.creditCardsInfo"
+                        summary-info="paymentCtrl.model.summaryInfo"
+                        payment-methods="paymentCtrl.model.paymentInfo.paymentMethods"
+                        payment-id="paymentCtrl.model.paymentInfo.paymentId"
+                        loading-voucher="paymentCtrl.model.showOptions.showLoadingData"
+                        loading-iframe="paymentCtrl.model.paymentInfo.iberiaPayLoadingIframe"
+                        form-submitted='paymentCtrl.paymentsForm.$submitted' template="voucher">
+                    </ib-pmt-disscount-multiple>
+                </section>
+                <section class="ib-layout__section">
+                    <div class="ib-box ib-box--medium" data-ng-class="{'ib-box--names-background': paymentCtrl.flowApp === 'BBKI' && paymentCtrl.actualStepFlow === 'ibpurc'}">
+                        <ib-pmt-summary id="pmt-summary" data-ng-if="paymentCtrl.showGeneralSummary"
+                            summary-info="paymentCtrl.model.summaryInfo"
+                            total-price="paymentCtrl.model.paymentInfo.price"
+                            applied-discounts="paymentCtrl.model.paymentInfo.appliedDiscounts"
+                            on-hold-info="paymentCtrl.model.paymentInfo.onHoldInfo"
+                            on-hold-type="paymentCtrl.model.paymentInfo.paymentMethods[paymentCtrl.model.selectedData.selectedTab]"
+                            on-hold-payment="paymentCtrl.model.summaryInfo.onHoldPayment"
+                            is-on-hold="paymentCtrl.model.paymentInfo.isOnHoldOrder"
+                            show-passengers-name="paymentCtrl.flowApp === 'BBKI'"
+                            donation-enabled="paymentCtrl.donationEnabled"
+                            membership-data="$root.membershipData"
+                            dcc-selected="paymentCtrl.currentDccData.selectedValue === 'DCC_ENABLED'"
+                            current-dcc-data="paymentCtrl.currentDccData">
+                        </ib-pmt-summary>
+                        <ib-breakdown id="pmt-breakdwon"
+                            data-ng-if="paymentCtrl.showCkiSummary || paymentCtrl.showMmbAncillariesSummary"
+                            breakdown-model="paymentCtrl.model.summaryInfo.ancillaries"
+                            summary-info="paymentCtrl.model.summaryInfo"
+                            total-price="paymentCtrl.model.paymentInfo.price"
+                            breakdown-discount="paymentCtrl.model.paymentInfo.appliedDiscounts"
+                            price="true"
+                            donation-enabled="paymentCtrl.donationEnabled"
+                            dcc-selected="paymentCtrl.currentDccData.selectedValue === 'DCC_ENABLED'"
+                            current-dcc-data="paymentCtrl.currentDccData"
+                            flow-app="paymentCtrl.flowApp"></ib-breakdown>
+                    </div>
+                    <ib-ui-quotas-nemuru-component
+                        ng-if="paymentCtrl.model.paymentInfo.nemuru && paymentCtrl.model.paymentInfo.nemuru.available"
+                        [quotas]="paymentCtrl.model.paymentInfo.nemuru.quotas"
+                        [modifier-class]="'prop-payment'">
+                    </ib-ui-quotas-nemuru-component>
+                </section>
+            </div>
+        </div>
+        <div id="pmt-iberia-pay-logs" class="sr-only" data-ng-if="paymentCtrl.ibPayTrace">{{paymentCtrl.ibPayTrace |
+            json }}</div>
+    </div>
+    <ib-main-footer data-ng-if="paymentCtrl.model.showPmtHeader" id="footer"
+        footer-model="{'phoneInfo' : {'prefix' : paymentCtrl.$rootScope.phonesList['RESERVAS'].prefix, 'phoneNumber': paymentCtrl.$rootScope.phonesList['RESERVAS'].telephone, 'text': paymentCtrl.$rootScope.phonesList['RESERVAS'].text }}"
+        is-full-width="::false"></ib-main-footer>
+</main>
+<ib-ui-notice data-ng-if="paymentCtrl.showOnHoldNotice" type="'lightbox-onhold'"
+    model="paymentCtrl.modelLightBox"></ib-ui-notice>
+
+

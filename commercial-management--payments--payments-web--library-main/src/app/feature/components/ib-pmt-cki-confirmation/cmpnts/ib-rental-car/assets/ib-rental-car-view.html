@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+            <span class="ib-heading ib-heading--type-3">{{'RENT_CAR_CONFIRMATION_HEADING_TEXT'|translate}} {{rentCarCtrl.model.pickUpCity}}</span>
+        </div>
+        <equal-height data-reload="true">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--null">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4" ng-repeat="car in rentCarCtrl.model.cars | orderBy:'priceValue'">
+                        <section class="ib-layout__section">
+                            <div tabindex="0" class="ib-box-card ib-box-card--auto">
+                                <div class="ib-box-card__figure ib-box-card__figure--auto" ng-style="{'background-image': 'url({{car.pictureURI ? car.pictureURI : $root.routes.images + '/alquiler/default_rental_car.png'}})'}">
+                                    <span class="u-hide-accessible" aria-hidden="true">{{'ALT_IMAGE_NOT_FOUND'|translate}}</span>
+                                </div>
+                                <div class="ib-box-card__content">
+                                    <div class="ib-box-card__paragraph ib-box-card__paragraph--with-logo" style="word-wrap: break-word">
+                                        <div class="ib-box-card__header" data-equal="title">
+                                            <h2 class="ib-box-card__title">{{car.description}}</h2>
+                                        </div>
+                                        <span class="ib-text ib-text--block u-mt-small" data-equal="text">
+                                            {{'RENT_CAR_CONFIRMATION_GET_AVIOS_TEXT'|translate}}
+                                        </span>
+                                        <figure class="ib-box-card__logo">
+                                            <img class="ib-box-card__image" src="{{::$root.routes.images}}/alquiler/{{car.provider}}.svg" alt="" />
+                                        </figure>
+                                    </div>
+                                    <div class="ib-box-card__button-section">
+                                        <div class="ib-box-card__info">
+                                            <span class="ib-box-card__txt" style="word-wrap: break-word;">
+                                                {{'RENT_CAR_CONFIRMATION_PRICE_DAY_TEXT'|translate}}
+                                            </span>
+                                            <span class="ib-box-card__txt ib-box-card__txt--primary ib-box-card__txt--price"  style="word-wrap: break-word;">
+                                                {{car.priceDay}}
+                                            </span>
+                                        </div>
+                                        <div class="ib-box-card__button ib-box-card__button--responsive">
+                                            <button id="pmt-cki-confirmation-rental-car-{{$index}}-redirect-btn" class="ib-button ib-button--w-small ib-button--default-normal" role="button" ng-click="rentCarCtrl.redirect(car.redirectUrl)">{{'RENT_CAR_CONFIRMATION_RESERVE_TEXT'|translate}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </equal-height>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12 u-text-left">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+            <span class="ib-text u-mb-small">{{'RENT_CAR_CONFIRMATION_CONDITION_TAX_TEXT'|translate}}</span>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12 u-text-right">
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--large">
+            <button id="pmt-cki-confirmation-rental-car-more-offers-btn" type="button" class="ib-button ib-button--w-medium u-mb-small" ng-click="rentCarCtrl.redirect('https://www.rentacar-iberia.com')">{{'RENT_CAR_CONFIRMATION_MORE_OFFERS_TEXT'|translate}}</button>
+        </div>
+    </div>
+</div>

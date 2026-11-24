@@ -1,0 +1,22 @@
+<div ng-if="speqsSummaryCtrl.model.segments.length > 0">
+    <h4 class="ib-heading ib-heading--type-4 ib-summary__section-title ">{{'ANCILLARIES_SPEQS_TITLE_TEXT'|translate}}</h4>
+    <ul class="ib-list-passengers">
+        <li class="ib-list-passengers__item" ng-repeat="segment in speqsSummaryCtrl.model.segments">
+            <div class="ib-list-passengers__item-description u-pb-none ">
+                <span class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none">{{segment.origin.description}} - {{segment.destination.description}} </span>
+            </div>
+            <ul>
+                <li ng-repeat="speq in segment.speqs" class="ib-list-passengers__item-description ib-list-passengers__item-description--long u-mt-xsmall">
+                    <span class="ib-text ib-text--color-unfocused u-mb-none">{{speq.quanty}} {{speq.description}} </span>
+                    <span class="ib-text ib-text--color-normal">
+						{{speq.totalFormatted}}
+							</span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div class="ib-summary__subtotal ib-summary__subtotal--separator">
+        <span class="ib-text ib-text--bold">{{'ANCILLARIES_SPEQS_AMOUNT'|translate}}</span>
+        <span class="ib-text ib-text--bold">{{speqsSummaryCtrl.model.totalFormatted}}</span>
+    </div>
+</div>

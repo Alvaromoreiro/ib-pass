@@ -1,0 +1,14 @@
+import './ib-pmt-summary-allianz-fusion-secures';
+import './ib-pmt-summary-cv-ancillaries';
+import './ib-pmt-summary-disccounts';
+import './ib-pmt-summary-extra-baggage';
+import './ib-pmt-summary-other';
+import './ib-pmt-summary-passengers';
+import './ib-pmt-summary-priority-boarding';
+import './ib-pmt-summary-seats';
+import './ib-pmt-summary-secures';
+import './ib-pmt-summary-speqs/ib-pmt-summary-speqs';
+import './ib-pmt-summary-trip';
+import './ib-pmt-summary-type-payment';
+import './ib-pmt-summary-upgrading-bids';
+import './ib-summary-item';

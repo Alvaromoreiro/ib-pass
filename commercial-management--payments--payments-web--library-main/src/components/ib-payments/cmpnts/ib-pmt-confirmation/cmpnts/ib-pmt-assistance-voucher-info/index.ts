@@ -1,0 +1,1 @@
+import './ib-pmt-assistance-voucher-info-component';

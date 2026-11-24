@@ -1,0 +1,12 @@
+import './ib-pmt-http-error-managment';
+import './ib-check-in-confirmation-model';
+import './ib-pmt-customer-cards-fees';
+import './ib-commercial-data-model';
+import './ib-confirm-order-globick-model';
+import './ib-confirmation-info-model';
+import './ib-create-order-data-model';
+import './ib-pmt-credit-cards-model';
+import './ib-pmt-dcc';
+import './ib-booking-availability-transformer-model';
+import './ib-booking-confirmation-model';
+import './ib-booking-header-model';

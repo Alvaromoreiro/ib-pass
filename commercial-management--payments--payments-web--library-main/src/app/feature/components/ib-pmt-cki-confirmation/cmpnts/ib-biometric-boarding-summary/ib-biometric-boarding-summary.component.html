@@ -1,0 +1,39 @@
+<div class="ib-biometric">
+  <div class="ib-biometric--w-list">
+    <div class="ib-biometric__box ib-biometric__box--w-list">
+      <span class="ib-biometric__icon ib-biometric__icon--red"><span class="icon-biometria"></span></span>
+      <div class="ib-biometric__box--container-type2">
+        <p>
+            <span class="ib-biometric__box--text ib-biometric__box--text-w-list">
+                <span>{{'BIOMETRIC_BOARDING_CONFIRMATION_BOX_TEXT' | translate}}</span>
+            </span>
+        </p>
+        <div class="ib-biometric__box--link">
+          <a class="link link__regular link__regular--underline link__regular--important link__regular--single-arrow link__icon--arrow" href="{{'BIOMETRIC_LANDING_LINK'|link}}" target="_blank">{{'APIS_NOT_ALLOWED_MORE_INFORMATION_LINK'|translate}}</a>
+          <span class="icon-flecha_1_derecha"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ib-box-selects-biometric" *ngFor="let passenger of passengersList">      
+      <div class="ib-box-selects-biometric__content ib-box-selects-biometric__content--w-list" [ngClass]="passenger.statusClass">
+        <div class="ib-box-selects-biometric__header ib-box-selects-biometric__header--w-list" [ngClass]="passenger.iconClass">
+          <div class="ib-flex ib-flex--align-center">
+            <span class="ib-box-selects-biometric__header-icon ib-box-selects-biometric__header-icon--list"></span>
+            <span class="ib-box-selects-biometric__header-text ib-box-selects-biometric__header-text--list">{{passenger.name}} {{passenger.surname}}</span>
+          </div>
+        </div>
+        <div class="ib-box-selects-biometric__container ib-box-selects-biometric__container--list">
+            <div class="ib-box-selects-biometric__container-col ib-box-selects-biometric__container-col--flex">
+                <p class="ib-box-selects-biometric__profile-state ib-box-selects-biometric__profile-state--list">{{'BIOMETRIC_BOARDING_PROFILE' | translate}}</p>
+                <div class="ib-box-selects-biometric__container-status-row ib-flex--align-center">
+                    <span class="ib-box-selects-biometric__icon ib-box-selects-biometric__icon--list" [ngClass]="passenger.statusIconClass"></span>
+                    <p class="ib-box-selects-biometric__profile-state ib-box-selects-biometric__profile-state-value ib-box-selects-biometric__profile-state--list">{{passenger.statusText | translate}}</p>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

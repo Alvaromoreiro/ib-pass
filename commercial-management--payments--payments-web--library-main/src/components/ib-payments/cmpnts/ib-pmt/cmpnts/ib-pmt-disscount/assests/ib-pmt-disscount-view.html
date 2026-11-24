@@ -1,0 +1,136 @@
+<script type="text/ng-template" id="ib-payments-discounts-tabs-custom.html">
+    <li ng-class="[{active: active, disabled: disabled}, classes]" class="uib-tab nav-item">
+        <a href ng-click="select($event)" class="nav-link" uib-tab-heading-transclude>
+            <span class="ib-tab__text-align">{{heading}}</span>
+        </a>
+    </li>
+</script>
+<section class="ib-layout__section">
+    <div class="ib-layout__section-title">
+        <h2 class="ib-heading ib-heading--type-3" data-ng-if="pmtDisscountCtrl.disscounts['AVIOS'] && !pmtDisscountCtrl.isLongCoinMarket && pmtDisscountCtrl.loggedInfo && (pmtDisscountCtrl.paymentMethods[0].price === pmtDisscountCtrl.appliedDiscounts.types['AVIOS'].originalDiscount && (pmtDisscountCtrl.disscounts['VOUCHER'] || pmtDisscountCtrl.appliedDiscounts.types['VOUCHER']))">{{'PAYMENTS_DISCOUNTS_TITLE'|translate}}</h2>
+    </div>
+    <uib-tabset class="ib-tab ib-tab--pair" active="pmtDisscountCtrl.selectedDisscountTab">
+        <uib-tab id="pmt-discount-voucher-avios-discount-tab" index="0" heading="{{'PAYMENTS_DISCOUNTS_AVIOS_TAB_TITLE'|translate}}" select="pmtDisscountCtrl.equalHeightTab('#pmtDisAvios', true)"
+            template-url="ib-payments-discounts-tabs-custom.html" data-ng-if="pmtDisscountCtrl.disscounts['AVIOS'] && pmtDisscountCtrl.loggedInfo && !paymentCtrl.isIbZero && !paymentCtrl.isSoftUser">
+            <div class="ib-box ib-box--big u-pt-small" data-ng-if="pmtDisscountCtrl.disscounts['AVIOS']">
+                <div class="u-text-right" data-ng-if="pmtDisscountCtrl.loggedInfo">
+                    <span class="ib-text ib-text--color-unfocused ib-text--to-right">{{'PAYMENTS_DISCOUNTS_ACTUAL_AVIOS_AMOUNT'|translate}}</span>
+                    <span class="ib-text ib-text--color-unfocused ib-text--bold">{{pmtDisscountCtrl.loggedInfo.generalInfo.avios
+                        |aviosFormatter }}
+                        {{'PAYMENTS_DISCOUNTS_AVIOS'|translate}}</span>
+                </div>
+                <div class="ib-msg-alert ib-msg-alert--notice icon-informacion ib-msg-alert--medium" data-ng-if="(pmtDisscountCtrl.loggedInfo && (pmtDisscountCtrl.loggedInfo.generalInfo.avios < pmtDisscountCtrl.disscounts['AVIOS'].disscounts[0].aviosRequired || !pmtDisscountCtrl.disscounts['AVIOS'].available)) || !pmtDisscountCtrl.loggedInfo && pmtDisscountCtrl.disscounts['AVIOS'].disscounts.length === 0">
+                    <p class="ib-msg-alert__text ib-msg-alert__text--bold" data-ng-if="pmtDisscountCtrl.loggedInfo && (pmtDisscountCtrl.loggedInfo.generalInfo.avios < pmtDisscountCtrl.disscounts['AVIOS'].disscounts[0].aviosRequired)">{{'PAYMENTS_DISCOUNTS_NOT_ENOUGH_AVIOS'|translate}}</p>
+                    <p class="ib-msg-alert__text ib-msg-alert__text--bold" data-ng-if="pmtDisscountCtrl.loggedInfo && !pmtDisscountCtrl.disscounts['AVIOS'].available">{{'PAYMENTS_DISCOUNTS_NOT_AVIOS_AVAILABLE'|translate}}</p>
+                </div>
+                <equal-height id="pmtDisAvios" data-reload="true" data-ng-if="pmtDisscountCtrl.loggedInfo && pmtDisscountCtrl.disscounts['AVIOS'].available && pmtDisscountCtrl.loggedInfo.generalInfo.avios >= pmtDisscountCtrl.disscounts['AVIOS'].disscounts[0].aviosRequired">
+                    <div data-ng-if="!pmtDisscountCtrl.loggedInfo">
+                        <span class="ib-text ib-text--block ib-text--color-unfocused ib-text__spacing--medium">{{'PAYMENTS_DISCOUNTS_AVIOS_TEXT_1'|translate}}</span>
+                        <span class="ib-text ib-text--block ib-text--color-unfocused ib-text__spacing--medium">{{'PAYMENTS_DISCOUNTS_AVIOS_TEXT_2'|translate}}</span>
+                    </div>
+                    <form name="aviosForm">
+                        <fieldset class="ib-form__fieldset ib-form__fieldset--cols">
+                            <legend class="u-hide-accessible">{{'PAYMENTS_DISCOUNTS_AVIOS_TAB_TITLE_ACCESIBLE'|translate}}</legend>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6" data-ng-class="{'col-md-3': pmtDisscountCtrl.disscounts['AVIOS'].disscounts.length === 3,'col-md-4':pmtDisscountCtrl.disscounts['AVIOS'].disscounts.length !== 1 && pmtDisscountCtrl.disscounts['AVIOS'].disscounts.length !== 3,'col-md-6':pmtDisscountCtrl.disscounts['AVIOS'].disscounts.length === 1}" data-ng-repeat="(index,discAvios) in pmtDisscountCtrl.disscounts['AVIOS'].disscounts">
+                                    <div data-ng-class="{'ib-check-boxed':pmtDisscountCtrl.loggedInfo && pmtDisscountCtrl.disscounts['AVIOS'].available,'ib-check-unboxed':(!pmtDisscountCtrl.loggedInfo || !pmtDisscountCtrl.disscounts['AVIOS'].available)}">
+                                        <input data-ng-if="::(pmtDisscountCtrl.loggedInfo && pmtDisscountCtrl.disscounts['AVIOS'].available)"
+                                            class="ib-check-boxed__check" 
+                                            type="radio" name="discountAvios_{{index}}"
+                                            id="discountAvios_{{index}}" 
+                                            data-ng-model="pmtDisscountCtrl.selectedAviosIndex" data-ng-value="index" 
+                                            data-ng-click="pmtDisscountCtrl.selectAviosDisscount(discAvios.aviosRequired === 0 ? null : index, discAvios.aviosRequired === 0 ? null : discAvios )"/>
+                                        <label data-equal="{{pmtDisscountCtrl.loggedInfo && pmtDisscountCtrl.disscounts['AVIOS'].available ? 'boxed' : 'unboxed'}}"
+                                            data-ng-class="{'ib-check-boxed__label':pmtDisscountCtrl.loggedInfo && pmtDisscountCtrl.disscounts['AVIOS'].available,'ib-check-unboxed__label':(!pmtDisscountCtrl.loggedInfo || !pmtDisscountCtrl.disscounts['AVIOS'].available)}"
+                                            for="discountAvios_{{index}}">
+                                        <div ng-if="discAvios.formatedAvios">
+                                            <span
+                                                data-ng-class="{'ib-check-boxed__text':pmtDisscountCtrl.loggedInfo && pmtDisscountCtrl.disscounts['AVIOS'].available,'ib-check-boxed__text--price-long': pmtDisscountCtrl.loggedInfo && pmtDisscountCtrl.disscounts['AVIOS'].available && discAvios.formattedDiscount.length > 10,'ib-check-unboxed__text':(!pmtDisscountCtrl.loggedInfo || !pmtDisscountCtrl.disscounts['AVIOS'].available),'ib-check-unboxed__text--price-long': (!pmtDisscountCtrl.loggedInfo || !pmtDisscountCtrl.disscounts['AVIOS'].available) && discAvios.formattedDiscount.length > 10}">-{{discAvios.formatedTotalDiscount}}
+                                            </span>  
+                                            <span data-ng-class="{'ib-check-boxed__detail':pmtDisscountCtrl.loggedInfo && pmtDisscountCtrl.disscounts['AVIOS'].available,'ib-check-unboxed__detail':(!pmtDisscountCtrl.loggedInfo || !pmtDisscountCtrl.disscounts['AVIOS'].available)}">{{'PAYMENTS_DISCOUNTS_AVIOS_DISSCOUNT_BY'|translate}}
+                                                {{discAvios.formatedAvios}}
+                                                {{'PAYMENTS_DISCOUNTS_AVIOS'|translate}}
+                                            </span>
+                                        </div>
+                                            <span ng-if="!discAvios.formatedAvios"
+                                                 data-ng-class="{'ib-check-boxed__text-normal':pmtDisscountCtrl.loggedInfo && pmtDisscountCtrl.disscounts['AVIOS'].available,'ib-check-unboxed__text-normal':(!pmtDisscountCtrl.loggedInfo || !pmtDisscountCtrl.disscounts['AVIOS'].available)}">{{(!pmtDisscountCtrl.loggedInfo
+                                                || !pmtDisscountCtrl.disscounts['AVIOS'].available)
+                                                ? ('PAYMENTS_DISCOUNTS_YOUR_SELECTED_TRIP'|translate) :
+                                                ('PAYMENTS_DISCOUNTS_AVIOS_NO_DISSCOUNT'|translate)}}
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </equal-height>
+            </div>
+        </uib-tab>
+        <uib-tab id="pmt-discount-voucher-tab" index="1" heading="{{'PAYMENTS_DISCOUNTS_VOUCHER_TAB_TITLE'|translate}}" data-ng-if="pmtDisscountCtrl.paymentMethods[0].price === pmtDisscountCtrl.appliedDiscounts.types['AVIOS'].originalDiscount && (pmtDisscountCtrl.disscounts['VOUCHER'] || pmtDisscountCtrl.appliedDiscounts.types['VOUCHER'])"
+            template-url="ib-payments-discounts-tabs-custom.html">
+            <div class="ib-box ib-box--big ib-box--top-small">
+                <div class="ib-layout__form-center ib-layout__form-center--type-1" data-ng-if="!pmtDisscountCtrl.loadingVoucher">
+                    <div class="ib-layout__line-spacing">
+                        <p class="ib-text ib-text--color-unfocused">
+                            <span data-ng-if="pmtDisscountCtrl.disscounts['AVIOS'] && pmtDisscountCtrl.loggedInfo && !pmtDisscountCtrl.isLongCoinMarket">{{'PAYMENTS_DISCOUNTS_VOUCHER_DESCRIPTION'|translate}}</span>
+                            <button class="ib-bonus-box__button-link ib-bonus-box__button-link--text" type="button-link" title="{{'GENERAL_TERMS_AND_CONDITIONS_TEXT'|translate}}" data-ng-click="pmtDisscountCtrl.goToTermsAndConditionPage()">{{'GENERAL_TERMS_AND_CONDITIONS_TEXT'|translate}}</button>
+                        </p>
+                    </div>
+                    <form name="voucherForm">
+                        <fieldset class="ib-layout__line-spacing" data-ng-if="!pmtDisscountCtrl.appliedDiscounts.types['VOUCHER']">
+                            <legend class="u-hide-accessible">{{'PAYMENTS_DISCOUNTS_VOUCHER_TAB_TITLE_ACCESIBLE'|translate}}</legend>
+                            <div class="ib-promotional-code">
+                                <div class="ib-promotional-code__left">
+                                    <div class="ib-input" data-ng-class="{'ib-input--error' : pmtDisscountCtrl.appliedDiscounts.error}">
+                                        <label class="ib-input__label" for="voucherCode" ng-class="{'ib-input__label--focus' : pmtDisscountCtrl.voucherCodeFocused || (voucherForm.voucherCode.$viewValue != null && voucherForm.voucherCode.$viewValue !== '')}">{{'PAYMENTS_DISCOUNTS_VOUCHER_INPUT_TEXT'|translate}}</label>
+                                        <input class="ib-input__input" type="text" id="voucherCode" name="voucherCode"
+                                            data-ng-focus="pmtDisscountCtrl.voucherCodeFocused=true"
+                                            data-ng-blur="pmtDisscountCtrl.voucherCodeFocused=false"
+                                            ng-model="pmtDisscountCtrl.voucherCode"
+                                            data-ng-change="pmtDisscountCtrl.cleanVoucherError()"
+                                            ng-pattern="::$root.pmtPatterns.PROMOTIONAL_CODE"
+                                            data-ib-validator-cleaner="{{::$root.pmtPatterns.PROMOTIONAL_CODE_CLEANER}}"
+                                            maxlength="50" />
+                                    </div>
+                                    <div id="pmt-discount-voucher-error-msg" class="ib-alert ib-alert--error" data-ng-if="pmtDisscountCtrl.appliedDiscounts.error">{{pmtDisscountCtrl.appliedDiscounts.error}}</div>
+                                </div>
+                                <button id="pmt-discount-check-voucher-btn" class="ib-button ib-button--block ib-promotional-code__right" type="button"
+                                    data-ng-click="pmtDisscountCtrl.checkVoucher(false)" data-ng-disabled="!((pmtDisscountCtrl.voucherCode && pmtDisscountCtrl.voucherCode !== '') || pmtDisscountCtrl.appliedDiscounts.types['VOUCHER'])">{{'APPLY_TEXT'|translate}}</button>
+                            </div>
+                        </fieldset>
+                        <fieldset class="ib-layout__line-spacing" data-ng-if="pmtDisscountCtrl.appliedDiscounts.types['VOUCHER']">
+                            <div class="ib-promotional-code">
+                                <div class="ib-msg-alert icon-confirmacion ib-msg-alert--success ib-msg-alert--color-success ib-msg-alert--small alert ib-promotional-code__left">
+                                    <p class="ib-msg-alert__text ib-msg-alert__text--bold">
+                                        {{'PAYMENTS_DISCOUNTS_VOUCHER_CORRECT_CODE_TEXT'|translate}} :
+                                        -{{pmtDisscountCtrl.appliedDiscounts.types['VOUCHER'].discount}}
+                                        <span class="ib-text ib-text--color-unfocused" data-ng-if="pmtDisscountCtrl.appliedDiscounts.types['VOUCHER'].remainingAmount != null && pmtDisscountCtrl.appliedDiscounts.types['VOUCHER'].remainingAmount !== 0">{{'PAYMENTS_DISCOUNTS_VOUCHER_GIFT_CARD_TEXT_1'
+                                            | translate}}
+                                            {{pmtDisscountCtrl.appliedDiscounts.types['VOUCHER'].formattedRemainingAmount}}
+                                            {{'PAYMENTS_DISCOUNTS_VOUCHER_GIFT_CARD_TEXT_2' | translate}}</span>
+                                        <span class="ib-text ib-text--color-unfocused" data-ng-if="pmtDisscountCtrl.appliedDiscounts.types['VOUCHER'].remainingAmount === 0">{{'PAYMENTS_DISCOUNTS_VOUCHER_GIFT_CARD_TEXT_NO_AMOUNT'
+                                            | translate}}</span>
+                                    </p>
+                                </div>
+                                <button id="pmt-discount-check-voucher-if-applied-btn" class="ib-button ib-button--block ib-promotional-code__right u-line-height-1" type="button"
+                                    data-ng-click="pmtDisscountCtrl.checkVoucher(true)">{{ pmtDisscountCtrl.isPartnerBin ? ('PAYMENTS_DISCOUNTS_VOUCHER_DELETE_BUTTON_TEXT_FOR_DUMBO'|translate) : ('PAYMENTS_DISCOUNTS_VOUCHER_DELETE_BUTTON_TEXT'|translate)}}</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="ib-layout__line-spacing" data-ng-if="pmtDisscountCtrl.loadingVoucher">
+                    <div id="pmt-disscount-loading-elem" class="ib-overlay-fly ib-overlay-fly--form">
+                        <div class="ib-overlay-fly__container">
+                            <div class="ib-overlay-fly__icon">
+                                <div class="circle"></div>
+                                <div class="circle"></div>
+                            </div>
+                            <span class="ib-overlay-fly__text">{{'LOADING_TEXT'|translate}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+</section>

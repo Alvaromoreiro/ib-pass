@@ -1,0 +1,34 @@
+<header class="ib-modals__header">
+  <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+    <h2 class="ib-heading ib-heading--type-1">
+      <span ng-if="modalCtrl.model.showAlertIcon" class="ib-heading__icon icon-alertas"></span>
+      <span class="ib-heading__text">{{modalCtrl.model.title ? modalCtrl.model.title : 'MODAL_ERROR_TITLE'|translate}}</span></h2>
+      
+    </h2>
+  </div>
+  <div class="ib-modals__header-settings" data-ng-if="modalCtrl.model.showCloseIcon">
+    <button id="pmt-generic-error-modal-close-btn" type="button" class="ib-modals__button-action icon-cerrar" data-ng-click="modalCtrl.close()">
+      <span class="u-hide-accessible">{{MODAL_HIDDEN_CLOSE_TEXT|translate}}</span>
+    </button>
+  </div>
+</header>
+<section id="pmt-generic-error-modal" class="ib-modals__body">
+  <div class="ib-layout__line-spacing ib-layout__line-spacing--large QM-modal__error__body" ng-attr-data-qm-modal-error-status="{{modalCtrl.model.errorCode}}" ng-attr-data-qm-modal-error-errorcode="{{modalCtrl.model.internalErrorCode}}" ng-attr-data-qm-modal-error-api="{{modalCtrl.model.urlError}}" ng-if="modalCtrl.model.message">
+    <p class="ib-text">{{modalCtrl.model.needsTranslate ? (modalCtrl.model.message|translate) : modalCtrl.model.message}}</p>
+    <p class="u-hide-accessible">{{modalCtrl.model.internalErrorCode}}</p>
+  </div>
+  <div ng-if="modalCtrl.model.messageList" class="ib-layout__line-spacing ib-layout__line-spacing--large QM-modal__error__body" ng-attr-data-qm-modal-error-status="{{modalCtrl.model.errorCode}}" ng-attr-data-qm-modal-error-errorcode="{{modalCtrl.model.internalErrorCode}}" ng-attr-data-qm-modal-error-api="{{modalCtrl.model.urlError}}" ng-repeat="message in modalCtrl.model.messageList">
+    <p class="ib-text">{{message.message}}</p>
+    <p class="u-hide-accessible">{{message.internalErrorCode}}</p>
+  </div>
+</section>
+<footer class="ib-modals__footer" data-ng-if="!modalCtrl.model.hideFooter">
+  <div class="ib-content-buttons">
+    <div ng-if="modalCtrl.model.showCloseLink" class="ib-content-buttons__content-right">
+          <a id="MOD_ERROR_BOTON_CLOSE" class="ib-link" ng-click="modalCtrl.accept()">{{'MODAL_CANCEL_BUTTON_VOUCHER'|translate}}</a>
+      </div>
+      <div class="ib-content-buttons__content-left">
+        <button id="MOD_ERROR_BOTON_ACEP" title="{{'MODAL_ACCEPT_BUTTON'|translate}}" class="ib-button ib-button--w-medium" data-ng-click="modalCtrl.accept()">{{'MODAL_ACCEPT_VOUCHER'|translate}}</button>
+      </div>
+  </div>  
+</footer>

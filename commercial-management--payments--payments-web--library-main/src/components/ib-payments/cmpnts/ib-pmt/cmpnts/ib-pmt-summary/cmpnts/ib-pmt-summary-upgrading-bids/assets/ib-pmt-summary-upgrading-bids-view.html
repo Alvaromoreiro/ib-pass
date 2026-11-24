@@ -1,0 +1,152 @@
+<h4 class="ib-text ib-text--xmedium ib-text--bold u-mb">
+    {{'MMB_UPGRADING_BIDS_PAYMENT_SUMMARY_TITLE'|translate}}</h4>
+<ul class="ib-list-passengers">
+    <li class="ib-list-passengers__item" ng-repeat="bidSegment in PmtSummaryUpgradingBidsCtrl.bidSegments">
+        <div class="ib-list-passengers__item-description" data-ng-if="bidSegment.hasBid">
+            <span class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none hidden-lg">
+                {{bidSegment.departure.description}} ({{bidSegment.departure.code}}) -
+                {{bidSegment.arrival.description}} ({{bidSegment.arrival.code}})
+            </span>
+            <span
+                class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none hidden-xs hidden-sm hidden-md hidden-xl">
+                {{bidSegment.departure.description}} - {{bidSegment.arrival.description}}
+            </span>
+        </div>
+        <ul data-ng-if="bidSegment.hasBid">
+            <li class="ib-list-passengers__item-description ib-list-passengers__item-description--long"
+                ng-repeat="cabin in bidSegment.cabins | orderBy: '-amountBid'" ng-if="cabin.amountBid !== 0">
+                <!-- BIDS -->
+                <span class="ib-text ib-text--color-normal u-mb-none"
+                    ng-if="bidSegment.passengers == 1 && cabin.free === 0 && cabin.avios === 0 && cabin.cabinType === 'BUSINESS' && cabin.amountPassengersBid && $index === 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_BID_ONE_BUSINESS'|translate}}</span>
+                <span class="ib-text ib-text--color-normal u-mb-none"
+                    ng-if="bidSegment.passengers == 1 && cabin.free === 0 && cabin.avios === 0 && cabin.cabinType === 'PREMIUMTOURIST' && cabin.amountPassengersBid && $index === 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_BID_ONE_PREMIUM_TOURIST'|translate}}</span>
+                <span class="ib-text ib-text--color-normal u-mb-none"
+                    ng-if="bidSegment.passengers > 1 && cabin.free === 0 && cabin.avios === 0 && cabin.cabinType === 'BUSINESS' && cabin.amountPassengersBid && $index === 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_BID_BUSINESS'|translate}}</span>
+                <span class="ib-text ib-text--color-normal u-mb-none"
+                    ng-if="bidSegment.passengers > 1 && cabin.free === 0 && cabin.avios === 0 && cabin.cabinType === 'PREMIUMTOURIST' && cabin.amountPassengersBid && $index === 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_BID_PREMIUM_TOURIST'|translate}}</span>
+                <span
+                    data-ng-if="cabin.avios === 0 && cabin.free === 0 && cabin.amountPassengersBid && $index === 0"
+                    class="ib-text ib-text--color-normal">{{cabin.amountPassengersBid}}</span>
+
+                <span class="ib-text ib-text--color-unfocused u-mb-none"
+                    ng-if="bidSegment.passengers == 1 && cabin.free === 0 && cabin.avios === 0 && cabin.cabinType === 'BUSINESS' && cabin.amountPassengersBid && $index !== 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_BID_ONE_BUSINESS'|translate}}</span>
+                <span class="ib-text ib-text--color-unfocused u-mb-none"
+                    ng-if="bidSegment.passengers == 1 && cabin.free === 0 && cabin.avios === 0 && cabin.cabinType === 'PREMIUMTOURIST' && cabin.amountPassengersBid && $index !== 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_BID_ONE_PREMIUM_TOURIST'|translate}}</span>
+                <span class="ib-text ib-text--color-unfocused u-mb-none"
+                    ng-if="bidSegment.passengers > 1 && cabin.free === 0 && cabin.avios === 0 && cabin.cabinType === 'BUSINESS' && cabin.amountPassengersBid && $index !== 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_BID_BUSINESS'|translate}}</span>
+                <span class="ib-text ib-text--color-unfocused u-mb-none"
+                    ng-if="bidSegment.passengers > 1 && cabin.free === 0 && cabin.avios === 0 && cabin.cabinType === 'PREMIUMTOURIST' && cabin.amountPassengersBid && $index !== 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_BID_PREMIUM_TOURIST'|translate}}</span>
+                <span
+                    data-ng-if="cabin.avios === 0 && cabin.free === 0 && cabin.amountPassengersBid && $index !== 0"
+                    class="ib-text ib-text--color-unfocused">{{cabin.amountPassengersBid}}</span>
+
+                <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long"
+                    ng-repeat="cabinFinished in bidSegment.cabinsFinished" ng-if="cabinFinished.status === 'BLOCKED'">
+                    <span class="ib-text ib-text--color-normal u-mb-none"
+                        ng-if="bidSegment.passengers == 1 && $index === 0 && cabinFinished.cabinType === 'BUSINESS'">{{bidSegment.passengers}}
+                        {{'MMB_UPGRADING_BID_ONE_BUSINESS'|translate}}</span>
+                    <span class="ib-text ib-text--color-normal u-mb-none"
+                        ng-if="bidSegment.passengers > 1 && $index === 0 && cabinFinished.cabinType === 'BUSINESS'">{{bidSegment.passengers}}
+                        {{'MMB_UPGRADING_BID_BUSINESS'|translate}}</span>
+                    <span class="ib-text ib-text--color-normal u-mb-none"
+                        ng-if="bidSegment.passengers == 1 && $index === 0 && cabinFinished.cabinType === 'PREMIUMTOURIST'">{{bidSegment.passengers}}
+                        {{'MMB_UPGRADING_BID_ONE_PREMIUM_TOURIST'|translate}}</span>
+                    <span class="ib-text ib-text--color-normal u-mb-none"
+                        ng-if="bidSegment.passengers > 1 && $index === 0 && cabinFinished.cabinType === 'PREMIUMTOURIST'">{{bidSegment.passengers}}
+                        {{'MMB_UPGRADING_BID_PREMIUM_TOURIST'|translate}}</span>
+                    <span data-ng-if="cabinFinished.totalCurrentBid  && $index === 0"
+                        class="ib-text ib-text--color-normal">{{cabinFinished.totalCurrentBid}}</span>
+                    <span class="ib-text ib-text--color-unfocused u-mb-none"
+                        ng-if="bidSegment.passengers == 1 && $index !== 0 && cabinFinished.cabinType === 'BUSINESS'">{{bidSegment.passengers}}
+                        {{'MMB_UPGRADING_BID_ONE_BUSINESS'|translate}}</span>
+                    <span class="ib-text ib-text--color-unfocused u-mb-none"
+                        ng-if="bidSegment.passengers > 1 && $index !== 0 && cabinFinished.cabinType === 'BUSINESS'">{{bidSegment.passengers}}
+                        {{'MMB_UPGRADING_BID_BUSINESS'|translate}}</span>
+                    <span class="ib-text ib-text--color-unfocused u-mb-none"
+                        ng-if="bidSegment.passengers == 1 && $index !== 0 && cabinFinished.cabinType === 'PREMIUMTOURIST'">{{bidSegment.passengers}}
+                        {{'MMB_UPGRADING_BID_ONE_PREMIUM_TOURIST'|translate}}</span>
+                    <span class="ib-text ib-text--color-unfocused u-mb-none"
+                        ng-if="bidSegment.passengers > 1 && $index !== 0 && cabinFinished.cabinType === 'PREMIUMTOURIST'">{{bidSegment.passengers}}
+                        {{'MMB_UPGRADING_BID_PREMIUM_TOURIST'|translate}}</span>
+                    <span data-ng-if="cabinFinished.totalCurrentBid  && $index !== 0"
+                        class="ib-text ib-text--color-unfocused">{{cabinFinished.totalCurrentBid}}</span>
+                </div>
+                <!-- AVIOS -->
+                <span class="ib-text ib-text--color-normal u-mb-none"
+                    ng-if="bidSegment.passengers == 1 && cabin.avios !== 0 && PmtSummaryUpgradingBidsCtrl.numberFreeUpgrade === 0 && cabin.cabinType === 'BUSINESS' && cabin.amountBid && $index === 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_ONE_BUSINESS'|translate}}</span>
+                <span class="ib-text ib-text--color-normal u-mb-none"
+                    ng-if="bidSegment.passengers == 1 && cabin.avios !== 0 && PmtSummaryUpgradingBidsCtrl.numberFreeUpgrade === 0 && cabin.cabinType === 'PREMIUMTOURIST' && cabin.amountBid && $index === 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_ONE_PREMIUM_TOURIST'|translate}}</span>
+                <span class="ib-text ib-text--color-normal u-mb-none"
+                    ng-if="bidSegment.passengers > 1 && cabin.avios !== 0 && PmtSummaryUpgradingBidsCtrl.numberFreeUpgrade === 0 && cabin.cabinType === 'BUSINESS' && cabin.amountBid && $index === 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_BUSINESS'|translate}}</span>
+                <span class="ib-text ib-text--color-normal u-mb-none"
+                    ng-if="bidSegment.passengers > 1 && cabin.avios !== 0 && PmtSummaryUpgradingBidsCtrl.numberFreeUpgrade === 0 && cabin.cabinType === 'PREMIUMTOURIST' && cabin.amountBid && $index === 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_PREMIUM_TOURIST'|translate}}</span>
+                <span
+                    data-ng-if="cabin.avios !== 0 && PmtSummaryUpgradingBidsCtrl.numberFreeUpgrade === 0 && cabin.amountBid && $index === 0"
+                    class="ib-text ib-text--color-normal">{{cabin.formatAvios + ' ' + ('AVIOS_TEXT' |
+                    translate)}}</span>
+
+                <span class="ib-text ib-text--color-unfocused u-mb-none"
+                    ng-if="bidSegment.passengers == 1 && cabin.avios !== 0 && PmtSummaryUpgradingBidsCtrl.numberFreeUpgrade === 0 && cabin.cabinType === 'BUSINESS' && cabin.amountBid && $index !== 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_ONE_BUSINESS'|translate}}</span>
+                <span class="ib-text ib-text--color-unfocused u-mb-none"
+                    ng-if="bidSegment.passengers == 1 && cabin.avios !== 0 && PmtSummaryUpgradingBidsCtrl.numberFreeUpgrade === 0 && cabin.cabinType === 'PREMIUMTOURIST' && cabin.amountBid && $index !== 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_ONE_PREMIUM_TOURIST'|translate}}</span>
+                <span class="ib-text ib-text--color-unfocused u-mb-none"
+                    ng-if="bidSegment.passengers > 1 && cabin.avios !== 0 && PmtSummaryUpgradingBidsCtrl.numberFreeUpgrade === 0 && cabin.cabinType === 'BUSINESS' && cabin.amountBid && $index !== 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_BUSINESS'|translate}}</span>
+                <span class="ib-text ib-text--color-unfocused u-mb-none"
+                    ng-if="bidSegment.passengers > 1 && cabin.avios !== 0 && PmtSummaryUpgradingBidsCtrl.numberFreeUpgrade === 0 && cabin.cabinType === 'PREMIUMTOURIST' && cabin.amountBid && $index !== 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_PREMIUM_TOURIST'|translate}}</span>
+                <span
+                    data-ng-if="cabin.avios !== 0 && PmtSummaryUpgradingBidsCtrl.numberFreeUpgrade === 0 && cabin.amountBid && $index !== 0"
+                    class="ib-text ib-text--color-unfocused">{{cabin.formatAvios + ' ' + ('AVIOS_TEXT' |
+                    translate)}}</span>
+
+                <!-- FREE -->
+                <span class="ib-text ib-text--color-normal u-mb-none"
+                    ng-if="bidSegment.passengers == 1 && cabin.avios === 0 && cabin.free !== 0 && cabin.cabinType === 'BUSINESS' && cabin.amountBid && $index === 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_ONE_BUSINESS'|translate}}</span>
+                <span class="ib-text ib-text--color-normal u-mb-none"
+                    ng-if="bidSegment.passengers == 1 && cabin.avios === 0 && cabin.free !== 0 && cabin.cabinType === 'PREMIUMTOURIST' && cabin.amountBid && $index === 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_ONE_PREMIUM_TOURIST'|translate}}</span>
+                <span class="ib-text ib-text--color-normal u-mb-none"
+                    ng-if="bidSegment.passengers > 1 && cabin.avios === 0 && cabin.free !== 0 && cabin.cabinType === 'BUSINESS' && cabin.amountBid && $index === 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_BUSINESS'|translate}}</span>
+                <span class="ib-text ib-text--color-normal u-mb-none"
+                    ng-if="bidSegment.passengers > 1 && cabin.avios === 0 && cabin.free !== 0 && cabin.cabinType === 'PREMIUMTOURIST' && cabin.amountBid && $index === 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_PREMIUM_TOURIST'|translate}}</span>
+                <span
+                    data-ng-if="cabin.avios === 0 && cabin.free !== 0 && cabin.amountPassengersBid && $index === 0"
+                    class="ib-text ib-text--color-normal ib-text--white-space">{{cabin.amountPassengersBid}}</span>
+
+                <span class="ib-text ib-text--color-unfocused u-mb-none"
+                    ng-if="bidSegment.passengers == 1 && cabin.avios === 0 && cabin.free !== 0 && cabin.cabinType === 'BUSINESS' && cabin.amountBid && $index !== 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_ONE_BUSINESS'|translate}}</span>
+                <span class="ib-text ib-text--color-unfocused u-mb-none"
+                    ng-if="bidSegment.passengers == 1 && cabin.avios === 0 && cabin.free !== 0 && cabin.cabinType === 'PREMIUMTOURIST' && cabin.amountBid && $index !== 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_ONE_PREMIUM_TOURIST'|translate}}</span>
+                <span class="ib-text ib-text--color-unfocused u-mb-none"
+                    ng-if="bidSegment.passengers > 1 && cabin.avios === 0 && cabin.free !== 0 && cabin.cabinType === 'BUSINESS' && cabin.amountBid && $index !== 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_BUSINESS'|translate}}</span>
+                <span class="ib-text ib-text--color-unfocused u-mb-none"
+                    ng-if="bidSegment.passengers > 1 && cabin.avios === 0 && cabin.free !== 0 && cabin.cabinType === 'PREMIUMTOURIST' && cabin.amountBid && $index !== 0">{{bidSegment.passengers}}
+                    {{'MMB_UPGRADING_AVIOS_BUY_PREMIUM_TOURIST'|translate}}</span>
+                <span
+                    data-ng-if="cabin.avios === 0 && PmtSummaryUpgradingBidsCtrl.numberFreeUpgrade !== null && cabin.amountPassengersBid && $index !== 0"
+                    class="ib-text ib-text--color-unfocused ib-text--white-space">{{cabin.amountPassengersBid}}</span>
+            </li>
+        </ul>
+    </li>
+</ul>

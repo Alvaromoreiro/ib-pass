@@ -1,0 +1,61 @@
+<span
+                        class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold">{{::PmtSummaryTripCtrl.segment.departure.city.description}}-{{::PmtSummaryTripCtrl.segment.arrival.city.description}}</span>
+                    <span class="ib-text ib-text--color-unfocused ib-text--block" ng-if="!PmtSummaryTripCtrl.isShuttleFlow && PmtSummaryTripCtrl.segment.departureDate && PmtSummaryTripCtrl.segment.departureDate.day">{{::PmtSummaryTripCtrl.segment.departureDate.day}}
+                        {{::(PmtSummaryTripCtrl.segment.departureDate.month | translate | ShortenerFormatFilter:3:true)}}.
+                        {{::PmtSummaryTripCtrl.segment.departureDate.year}} / {{::PmtSummaryTripCtrl.segment.departureDate.dateTime}}</span>
+                    <span class="ib-text ib-text--color-unfocused ib-text--block">{{::PmtSummaryTripCtrl.segment.departure.name}}</span>
+                    <span class="ib-text ib-text--color-unfocused ib-text--block"
+                        data-ng-if="PmtSummaryTripCtrl.segment.departure.terminal !== '' && PmtSummaryTripCtrl.segment.departure.terminal != null">{{'SUMMARY_TERMINAL'|translate}}
+                        {{::PmtSummaryTripCtrl.segment.departure.terminal}}</span>
+                    <span class="ib-text ib-text--color-unfocused ib-text--block">{{'SUMMARY_CABIN_TITLE'|translate}}
+                        {{::PmtSummaryTripCtrl.segment.cabin}}</span>
+                    <div uib-accordion-group class="ib-show-more ib-show-more--icon" is-open="status.isOpenFly">
+                        <uib-accordion-heading class="ib-text ib-text--block ib-text--to-right">
+                            <span class="ib-show-more__button">
+                                <span class="ib-show-more__button-txt"
+                                    data-text-accordion-close="{{'SUMMARY_SEGMENT_DETAILS_OPENED'|translate}}">
+                                    {{status.isOpenFly ?
+                                        ('SUMMARY_SEGMENT_DETAILS_OPENED'|translate) :
+                                        ('SUMMARY_SEGMENT_DETAILS_CLOSED'|translate)}}
+                                </span>
+                                <span class="ib-show-more__button-icon"
+                                    ng-class="status.isOpenFly ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+                            </span>
+                        </uib-accordion-heading>
+                        <div class="ib-show-more__collapse">
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                                <span
+                                    class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold">{{'SUMMARY_SEGMENT_DETAILS_ARRIVAL'|translate}}
+                                    {{::PmtSummaryTripCtrl.segment.arrival.city.description}}</span>
+                                <span
+                                    class="ib-text ib-text--color-unfocused ib-text--block" ng-if="!PmtSummaryTripCtrl.isShuttleFlow && PmtSummaryTripCtrl.segment.arrivalDate && PmtSummaryTripCtrl.segment.arrivalDate.day">{{::PmtSummaryTripCtrl.segment.arrivalDate.day}}
+                                    {{::(PmtSummaryTripCtrl.segment.arrivalDate.month | translate | ShortenerFormatFilter:3:true)}}.
+                                    {{::PmtSummaryTripCtrl.segment.arrivalDate.year}} / {{::PmtSummaryTripCtrl.segment.arrivalDate.dateTime}}</span>
+                                <span
+                                    class="ib-text ib-text--color-unfocused ib-text--block">{{::PmtSummaryTripCtrl.segment.arrival.name}}</span>
+                                <span class="ib-text ib-text--color-unfocused ib-text--block"
+                                    ng-if="PmtSummaryTripCtrl.segment.arrival.terminal !== '' && PmtSummaryTripCtrl.segment.arrival.terminal != null">{{'SUMMARY_TERMINAL'|translate}}
+                                    {{::PmtSummaryTripCtrl.segment.arrival.terminal}}</span>
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                                <span
+                                    class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold">{{'SUMMARY_SEGMENT_DETAILS_FLIGHT_NUMBER'|translate}}
+                                    {{(PmtSummaryTripCtrl.segment.marketingCarrier
+                                        && PmtSummaryTripCtrl.segment.marketingCarrier.code) ? PmtSummaryTripCtrl.segment.marketingCarrier.code :
+                                        PmtSummaryTripCtrl.segment.operationalDisclosure}}{{PmtSummaryTripCtrl.segment.flightNumber}}</span>
+                                <span
+                                    class="ib-text ib-text--color-unfocused ib-text--block">{{'SUMMARY_SEGMENT_DETAILS_OPERATED'|translate}}
+                                    {{::PmtSummaryTripCtrl.segment.operatedBy}}</span>
+                                <span
+                                    class="ib-text ib-text--color-unfocused ib-text--block">{{::PmtSummaryTripCtrl.segment.aircraftType}}</span>
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                                <span
+                                    class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold" ng-if="!PmtSummaryTripCtrl.isShuttleFlow && PmtSummaryTripCtrl.segment.duration">{{'SUMMARY_SEGMENT_DETAILS_DURATION'|translate}}
+                                    {{::PmtSummaryTripCtrl.segment.duration}}</span>
+                                <span class="ib-text ib-text--color-unfocused ib-text--block"
+                                    ng-if="!PmtSummaryTripCtrl.isShuttleFlow && PmtSummaryTripCtrl.segment.waitingTime && PmtSummaryTripCtrl.segment.waitingTime !== 0 ">{{::PmtSummaryTripCtrl.segment.waitingParsedTime}}
+                                    {{'SUMMARY_SEGMENT_DETAILS_WAITING_TIME'|translate}}</span>
+                            </div>
+                        </div>
+                    </div>

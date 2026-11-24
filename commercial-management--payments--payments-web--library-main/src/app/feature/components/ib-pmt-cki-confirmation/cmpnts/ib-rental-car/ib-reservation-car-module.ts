@@ -1,0 +1,1 @@
+angular.module('ib-rental-car-module', []);

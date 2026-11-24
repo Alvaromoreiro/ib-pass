@@ -1,0 +1,877 @@
+<ib-pmt-booking-bridge></ib-pmt-booking-bridge>
+<main class="ib-layout ib-pmt-styles-host">
+    <ib-header-grey-bar
+        data-ng-if="pmtConfOrderCtrl.flowApp !== 'MMBVC' && pmtConfOrderCtrl.flowApp !== 'MMBUNIF' && pmtConfOrderCtrl.flowApp !=='BBKI' && pmtConfOrderCtrl.flowApp !=='BBKIOH' && pmtConfOrderCtrl.flowApp !=='MMBOH' && pmtConfOrderCtrl.flowApp !== 'MMBBID'"
+        show-all-info="::false" hide-language-select="true" customer-data="$root.customerData"
+        is-logged="$root.isLogged" membership-data="$root.membershipData"></ib-header-grey-bar>
+    <ib-main-header
+        data-ng-if="pmtConfOrderCtrl.flowApp !== 'MMBVC'&& pmtConfOrderCtrl.flowApp !== 'MMBUNIF' && pmtConfOrderCtrl.flowApp !=='BBKI' && pmtConfOrderCtrl.flowApp !=='BBKIOH' && pmtConfOrderCtrl.flowApp !=='MMBOH' && pmtConfOrderCtrl.flowApp !== 'MMBBID'">
+    </ib-main-header>
+    <!-- directive: ib-comment "{{$root.generateDatalayerDOM()}}" !-->
+    <pmt-alert-confirmation id="pmt-confirmation-alert-confirmation">
+        <div class="ib-alert-confirmation animate-if"
+            ng-if="pmtConfOrderCtrl.model.confirmationInfo.showSuccesfulCardAlert">
+            <button id="pmt-confirmation-alert-confirmation-close-btn" class="ib-alert-confirmation__icon-close"
+                ng-click="pmtConfOrderCtrl.model.confirmationInfo.showSuccesfulCardAlert = false">
+                <span class="icon-cerrar"></span>
+            </button>
+            <div class="ib-alert-confirmation__msg">
+                <span class="ib-alert-confirmation__icon icon-confirmacion"></span>
+                <span class="ib-alert-confirmation__title">{{'IBBKCF_SAVED_CUSTOMER_CARD_TITLE'|translate}}</span>
+                <p class="ib-alert-confirmation__text">{{'IBBKCF_SAVED_CUSTOMER_CARD_TEXT'|translate}}</p>
+            </div>
+        </div>
+    </pmt-alert-confirmation>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <section
+                    ng-if="pmtConfOrderCtrl.flowApp === 'MMBBID' && !pmtConfOrderCtrl.isMMBBID_AVIOS"
+                    class="ib-layout__section ib-layout__header--pre-title">
+                    <div
+                        class="ib-msg-alert ib-msg-alert--transparent ib-msg-alert--upgrade icon-informacion_2 alert fade in">
+                        <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-border-left-none">
+                            <p class="ib-text--xbig ib-text--especial u-mb-xxsmall">{{'MMB_ALERT_IMPORTANT'|translate}}
+                            </p>
+                            <p class="ib-text ib-text--lh-normal">{{'UPGRADING_BIDS_PAYMENT_INFO_TEXT'|translate}}</p>
+                        </div>
+                    </div>
+                </section>
+                <div class="ib-layout__header ib-layout__header--pre-title u-text-right">
+                    <a id="pmt-confirmation-print-confirmation-link" class="ib-link ib-link--icon"
+                        ng-click="pmtConfOrderCtrl.printSummary()" title="{{'CONFIRM_PRINT_PAYMENT'|translate}}">
+                        <span class="ib-link__icon icon-imprimir"></span>
+                        <span class="ib-link__text">{{'CONFIRM_PRINT_CONFIRM'|translate}}</span>
+                    </a>
+                    <h1 class="ib-heading ib-heading--type-1 ib-heading--block ib-heading--to-center">
+                        <span
+                            class="ib-heading__icon ib-heading__icon--default ib-heading__icon--mobile-block icon-confirmacion"></span>
+                        <span class="ib-heading__text"
+                            data-ng-if="pmtConfOrderCtrl.model.confirmationInfo.relatedContent['PURCHASE_MESSAGE']"
+                            ng-bind-html="pmtConfOrderCtrl.model.confirmationInfo.relatedContent['PURCHASE_MESSAGE'].value"></span>
+                        <span id="CONFIRM_ORDER_MESSAGE" class="ib-heading__text"
+                            data-ng-if="!pmtConfOrderCtrl.model.confirmationInfo.relatedContent['PURCHASE_MESSAGE']">{{
+                            (pmtConfOrderCtrl.flowApp === 'MMBVC' || pmtConfOrderCtrl.flowApp === 'MMBUNIF') ?
+                            ('CONFIRM_VOLUNTARY_CHANGE'|translate) : (pmtConfOrderCtrl.flowApp === 'MMBBID' &&
+                            pmtConfOrderCtrl.isMMBBID_AVIOS) ?
+                            ('MMB_UPGRADING_BIDS_CORRECT_OFFER_TEXT'|translate) : (pmtConfOrderCtrl.flowApp === 'MMBBID'
+                            && !pmtConfOrderCtrl.isMMBBID_AVIOS) ?
+                            ('MMB_UPGRADING_BIDS_CORRECT_BID_OFFER_TEXT'|translate) :
+                            pmtConfOrderCtrl.model.confirmationInfo.isPCC ? ('CONFIRM_PCC' | translate) : pmtConfOrderCtrl.newPaymentViewType && pmtConfOrderCtrl.flowApp !== 'BBKIOH' ? ( 'CONFIRMATION_NEW_PROCESSING_BOOKING' | translate) : ('CONFIRM_BUY'|translate) }}</span>
+                    </h1>
+                    <div data-ng-if="pmtConfOrderCtrl.isCheckinAndDSTFlow"
+                        class="ib-msg-alert ib-msg-alert--info__checkin icon-alertas_2"
+                        role="note" aria-labelledby="disruption-checkin-info-title">
+                        <p id="disruption-checkin-info-title">
+                            {{'MMB_FLIGHT_REMINDER_CHECKIN'|translate}}
+                        </p>
+                    </div>
+                    <h2 class="ib-heading ib-heading--type-5 ib-heading--block ib-heading--to-center">
+                        <span
+                            ng-if="pmtConfOrderCtrl.flowApp === 'MMBBID' && pmtConfOrderCtrl.isMMBBID_AVIOS"
+                            class="ib-heading__text">{{'MMB_ANCILLARIES_PAYMENT_CONFIRMATION_EMAIL'|translate}}
+                            {{::pmtConfOrderCtrl.model.confirmationInfo.contactEmail}}
+                        </span>
+                        <span
+                            ng-if="pmtConfOrderCtrl.flowApp === 'MMBBID' && !pmtConfOrderCtrl.isMMBBID_AVIOS"
+                            class="ib-heading__text ib-text--balance">
+                            {{'MMB_UPGRADING_BIDS_EMAIL_CONFIG_TEXT'|translate : {contactEmail:
+                            pmtConfOrderCtrl.model.confirmationInfo.contactEmail} }}
+                        </span>
+                    </h2>
+                    <h2 ng-if="(pmtConfOrderCtrl.flowApp === 'BBKI' || pmtConfOrderCtrl.flowApp === 'MMBOH') && pmtConfOrderCtrl.newPaymentViewType" class="ib-heading ib-heading--type-20 ib-heading--block ib-heading--to-center">
+                        <span
+                            class="ib-heading__text ib-text--balance ib-heading--unfocused">
+                            {{'CONFIRMATION_NEW_MAIL_NOTICE'|translate}}
+                        </span>
+                    </h2>
+                </div>
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small"
+                    data-ng-repeat="(warningId,warningInfo) in pmtConfOrderCtrl.model.confirmationInfo.warningMessages">
+                    <div class="ib-msg-alert ib-msg-alert--danger alert fade in icon-alerta_grave"
+                        ng-if="!pmtConfOrderCtrl.areInvoiceWarnings(warningInfo)">
+                        <p class="ib-msg-alert__text ib-msg-alert__text--bold">
+                            {{'PCC_CARD_ERROR_MODAL_TITLE'|translate}}</p>
+                        <p class="ib-msg-alert__text">{{warningInfo.description}}</p>
+                    </div>
+                    <div class="ib-msg-alert ib-msg-alert--info alert fade in icon-informacion_2"
+                        ng-if="pmtConfOrderCtrl.areInvoiceWarnings(warningInfo)" ng-switch="warningInfo.code">
+                        <div ng-switch-when="AUTOMATIC_INVOICES_INVOICES_PARTIAL_FAIL">
+                            <p class="ib-msg-alert__text ib-msg-alert__text--bold">
+                                {{'CONFIRMATION_WARNING_INVOICE_PARTIAL_TITLE'|translate}}</p>
+                            <p class="ib-msg-alert__text" ng-bind-html="warningInfo.description"></p>
+                        </div>
+                        <div ng-switch-default>
+                            <p class="ib-msg-alert__text ib-msg-alert__text--bold">
+                                {{'CONFIRMATION_WARNING_INVOICE_TITLE'|translate}}</p>
+                            <p class="ib-msg-alert__text">{{warningInfo.description}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small"
+                    data-ng-repeat="(adviceId,adviceInfo) in pmtConfOrderCtrl.model.confirmationInfo.adviceMessages">
+                    <div class="ib-msg-alert ib-msg-alert--info alert icon-alerta_grave">
+                        <button id="pmt-confirmation-advice-pcc-error-alert-{{$index}}-close-btn"
+                            class="ib-msg-alert__close icon-cerrar" type="button" data-dismiss="alert"
+                            aria-label="close">
+                            <span class="u-hide-accessible">{{'POP_OVER_ACCESSIBILITY_CLOSE'|translate}}</span>
+                        </button>
+                        <p class="ib-msg-alert__text ib-msg-alert__text--bold">
+                            {{'PCC_CARD_ERROR_MODAL_TITLE'|translate}}</p>
+                        <p class="ib-msg-alert__text">{{adviceInfo.description | translate}}</p>
+                    </div>
+                </div>
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--small"
+                    data-ng-if="pmtConfOrderCtrl.model.userPreferencesStoredWarning !== null && pmtConfOrderCtrl.model.userPreferencesStoredWarning !== undefined">
+                    <div class="ib-msg-alert ib-msg-alert--info alert fade in icon-alerta_grave">
+                        <button id="pmt-confirmation-warning-user-preference-close-btnn"
+                            class="ib-msg-alert__close icon-cerrar" type="button" data-dismiss="alert"
+                            aria-label="close">
+                            <span class="u-hide-accessible">{{'POP_OVER_ACCESSIBILITY_CLOSE'|translate}}</span>
+                        </button>
+                        <p class="ib-msg-alert__text ib-msg-alert__text--bold">
+                            {{::pmtConfOrderCtrl.model.userPreferencesStoredWarning.title}}</p>
+                        <p class="ib-msg-alert__text">{{::pmtConfOrderCtrl.model.userPreferencesStoredWarning.body}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert deinvoicing in change flights -->
+        <div ng-if="pmtConfOrderCtrl.flags.warningCheckOut && pmtConfOrderCtrl.flowApp === 'MMBVC'"
+            class="ib-alertbox ib-alertbox--darkgrey ib-alertbox--margin-medium mmb-alertbox--change-flights-deinvoicing-warning mmb-alertbox--change-flights-deinvoicing-warning--confirmation"
+            attr.aria-label="{{'MMB_FLEXIBILIZATION_CONFIRMATION_INFO_MESSAGE_ALT' | translate}}">
+            <div class="ib-alertbox__head">
+                <span class="ib-alertbox__head--icon icon-alertas_2">
+                    <span class="hide-accessible">{{'MMB_FLEXIBILIZATION_CONFIRMATION_INFO_MESSAGE_ALT'|translate}}</span></span>
+                <p>
+                    <span class="mmb-alertbox--change-flights-deinvoicing-warning__title">{{'MMB_VOLUNTARY_CHANGE_DEINVOICING_WARNING_CONFIRMATION' | translate}}</span>
+                </p>
+            </div>
+        </div>
+        <!-- End Alert deinvoicing in change flights -->
+
+        <equal-height data-ng-if="pmtConfOrderCtrl.flowApp !== 'MMBBID'">
+            <div class="row">
+                <div
+                    ng-class="{'col-lg-7 col-md-7 col-sm-12 col-xs-12 ': pmtConfOrderCtrl.isRegister && !$root.isLogged, 'col-xs-12': !pmtConfOrderCtrl.isRegister || $root.isLogged}">
+                    <div class="ib-layout__section">
+                        <div class="ib-box ib-box--large ib-box--empty ib-box--bordered u-height-auto-sm">
+                            <div class="ib-box__wrapper ib-box__wrapper--small">
+                                <div class="ib-layout__line-spacing">
+                                    <span class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused">{{
+                                        pmtConfOrderCtrl.flowApp === 'MMBBID' ?
+                                        ('MMB_UPGRADING_BIDS_REMEMBER_CODE_RESERVATION'|translate) :
+                                        ('CONFIRM_CODE'|translate)}}</span>
+                                    <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                                        <span
+                                            class="ib-text ib-text--block ib-text--to-center ib-text--code-big ib-text--color-unfocused">{{::pmtConfOrderCtrl.model.confirmationInfo.pnr}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                                <p data-ng-if="!pmtConfOrderCtrl.model.confirmationInfo.isOnHold && !pmtConfOrderCtrl.model.confirmationInfo.isPCC && pmtConfOrderCtrl.model.confirmationInfo.relatedContent['PURCHASE_MESSAGE'].type !== 'PURCHASEOK_WITHOUT_TICKETS' && pmtConfOrderCtrl.model.confirmationInfo.relatedContent['PURCHASE_MESSAGE'].type !== 'PURCHASE_WITHOUT_PAYMENT' && pmtConfOrderCtrl.flowApp !== 'MMBBID' && !pmtConfOrderCtrl.newPaymentViewType"
+                                    class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused">
+                                    {{'CONFIRM_TICKET_CONFIRM'|translate}}{{::pmtConfOrderCtrl.model.confirmationInfo.contactEmail}}
+                                </p>
+                                <span data-ng-if="!pmtConfOrderCtrl.model.confirmationInfo.isPCC && pmtConfOrderCtrl.flowApp !== 'BBKIOH' && pmtConfOrderCtrl.model.confirmationInfo.relatedContent['PURCHASE_MESSAGE'].type !== 'PURCHASEOK_WITHOUT_TICKETS' && pmtConfOrderCtrl.model.confirmationInfo.relatedContent['PURCHASE_MESSAGE'].type !== 'PURCHASE_WITHOUT_PAYMENT' && pmtConfOrderCtrl.newPaymentViewType">
+                                    <p class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused ib-text--spacing-small">
+                                        {{'CONFIRMATION_NEW_MAIL_TO' | translate}} {{::pmtConfOrderCtrl.model.confirmationInfo.contactEmail}}
+                                    </p>
+                                    <p class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused ib-text--spacing-interlarge">
+                                        {{'CONFIRMATION_NEW_CHECK_SPAM'| translate}} <a href="{{'CALL_CENTER_LINK'|LinksFilter}}" target="_blank" rel="noopener noreferrer" class="ib-text ib-text--underline">{{'CALL_CENTER' | translate}}</a>
+                                    </p>
+                                </span>
+                                <p data-ng-if="(pmtConfOrderCtrl.model.confirmationInfo.isPCC && !pmtConfOrderCtrl.model.confirmationInfo.isOnHold) || pmtConfOrderCtrl.model.confirmationInfo.relatedContent['PURCHASE_MESSAGE'].type === 'PURCHASEOK_WITHOUT_TICKETS' || pmtConfOrderCtrl.model.confirmationInfo.relatedContent['PURCHASE_MESSAGE'].type === 'PURCHASE_WITHOUT_PAYMENT'"
+                                    class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused">
+                                    {{'CONFIRM_TICKET_PCC'|translate}}{{::pmtConfOrderCtrl.model.confirmationInfo.contactEmail}}{{'CONFIRM_TICKET_PCC_2'|translate}}
+                                </p>
+                                <p data-ng-if="pmtConfOrderCtrl.model.confirmationInfo.isOnHold"
+                                    class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused">
+                                    {{'CONFIRM_TICKET_CONFIRM_PCC'|translate}}{{::pmtConfOrderCtrl.model.confirmationInfo.contactEmail}}{{'CONFIRM_TICKET_CONFIRM_PCC_2'|translate}}
+                                </p>
+                                <p data-ng-if="pmtConfOrderCtrl.flowApp === 'MMBBID'"
+                                    class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused">
+                                    {{'MMB_UPGRADING_BIDS_CONFIRMATION_EMAIL_TEXT'|translate}}
+                                    {{::pmtConfOrderCtrl.model.confirmationInfo.contactEmail}}
+                                </p>
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small"
+                                data-ng-if="!pmtConfOrderCtrl.model.confirmationInfo.isOnHold && pmtConfOrderCtrl.flowApp !== 'MMBBID' && !pmtConfOrderCtrl.isPetPurchased && !pmtConfOrderCtrl.isUMFlight">
+                                <div class="ib-box ib-box--small">
+                                    <p class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused">
+                                        {{'CONFIRM_SEAT'|translate}}
+                                        <a id="pmt-confirmation-redirect-to-cki-link" class="ib-link"
+                                            href="{{pmtConfOrderCtrl.urlCki}}"
+                                            title="{{CONFIRM_BOARDING_CARD_TITLE|translate}}"
+                                            data-ng-click="pmtConfOrderCtrl.redirectToCheckIn($event)">{{'CONFIRM_BOARDING_CARD'|translate}}</a>
+                                    </p>
+                                    <p class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused">
+                                        {{'CONFIRM_PREFER'|translate}}</p>
+                                </div>
+                            </div>
+
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small"
+                                data-ng-if="pmtConfOrderCtrl.isUMFlight">
+                                <div class="ib-box ib-box--small">
+                                    <p class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused u-mb-xxsmall">{{'UM_SERVICE_TITLE' | translate}}</p>
+                                    <p class="ib-text ib-text--block ib-text--to-center">{{'UM_SERVICE_DESCRIPTION' | translate}}</p>
+                                    <p class="ib-text ib-text--block ib-text--to-center u-mt-xsmall">
+                                        <a ng-href="{{pmtConfOrderCtrl.manageMyBookingUrl}}" class="ib-link">{{'ONHOLD_CONFIRMATION_CTA' | translate}}</a>
+                                        <a ng-href="{{pmtConfOrderCtrl.travelRequirementsUrl}}" target="_blank" rel="noopener noreferrer" class="ib-link u-ml-small">{{'TRAVEL_REQUIREMENTS' | translate}}</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt"
+                                data-ng-if="$root.isLogged && $root.isLogged !== pmtConfOrderCtrl.LOGIN_ONB && (pmtConfOrderCtrl.flowApp === pmtConfOrderCtrl.APP_TYPES.BOOKING || pmtConfOrderCtrl.flowApp === pmtConfOrderCtrl.APP_TYPES.MANAGEMYBOOKING_ONHOLD) && !pmtConfOrderCtrl.CalculatedPoints.resident && !$root.isRedemptionFlow && pmtConfOrderCtrl.aviosToEarn && pmtConfOrderCtrl.elitePointsToEarn  &&!pmtConfOrderCtrl.isIbZero">
+                                <p class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused">
+                                    {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                                    <span class="ib-text ib-text--bold ib-text--underline">
+                                        {{pmtConfOrderCtrl.aviosToEarn | aviosFormatter}}
+                                        {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+                                        {{pmtConfOrderCtrl.elitePointsToEarn | aviosFormatter}}
+                                        {{'AVIOS_ELITE_TO_EARN_USER_3'| translate}}
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt"
+                                data-ng-if="$root.isLogged && $root.isLogged !== pmtConfOrderCtrl.LOGIN_ONB && pmtConfOrderCtrl.flowApp === pmtConfOrderCtrl.APP_TYPES.BOOKING && !pmtConfOrderCtrl.CalculatedPoints.resident && !$root.isRedemptionFlow && pmtConfOrderCtrl.aviosToEarn && pmtConfOrderCtrl.elitePointsToEarn  && pmtConfOrderCtrl.isIbZero">
+                                <div class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused">
+                                    <!-- resto de idiomas -->
+                                    <p ng-if="pmtConfOrderCtrl.appLang !== 'ja' && pmtConfOrderCtrl.appLang !== 'zh'">
+                                        {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                                        <span class="ib-text ib-text--bold">
+                                            {{pmtConfOrderCtrl.aviosToEarn | aviosFormatter}}
+                                            {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+                                            {{pmtConfOrderCtrl.elitePointsToEarn | aviosFormatter}}
+                                            {{'AVIOS_ELITE_TO_EARN_USER_3'| translate}}
+                                        </span>
+                                        {{'SBE_BKI_UPGRADE_ZERO'| translate}}
+                                        <a href="{{pmtConfOrderCtrl.urlUpgrade}}"
+                                            ng-click="pmtConfOrderCtrl.onClickUpgrade()"
+                                            class="ib-text ib-text--underline">
+                                            {{'SBE_BKI_UPGRADE_ZERO_LINK'| translate}}
+                                        </a>
+                                    </p>
+                                    <!-- japones y chino -->
+                                    <p ng-if="pmtConfOrderCtrl.appLang === 'ja' || pmtConfOrderCtrl.appLang === 'zh'">
+                                        {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                                        <span class="ib-text ib-text--bold">
+                                            {{pmtConfOrderCtrl.aviosToEarn | aviosFormatter}}
+                                            {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+                                            {{pmtConfOrderCtrl.elitePointsToEarn | aviosFormatter}}
+                                            {{'AVIOS_ELITE_TO_EARN_USER_3'| translate}}
+                                        </span>
+                                        <a href="{{pmtConfOrderCtrl.urlUpgrade}}"
+                                            ng-click="pmtConfOrderCtrl.onClickUpgrade()"
+                                            class="ib-text ib-text--underline">
+                                            {{'SBE_BKI_UPGRADE_ZERO_LINK'| translate}}
+                                        </a>
+                                        {{'SBE_BKI_UPGRADE_ZERO'| translate}}
+                                    </p>
+
+                                </div>
+                            </div>
+
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt"
+                                data-ng-if="!$root.isLogged && (pmtConfOrderCtrl.flowApp === pmtConfOrderCtrl.APP_TYPES.BOOKING || pmtConfOrderCtrl.flowApp === pmtConfOrderCtrl.APP_TYPES.MANAGEMYBOOKING_ONHOLD) && !pmtConfOrderCtrl.CalculatedPoints.resident && !$root.isRedemptionFlow && pmtConfOrderCtrl.aviosToEarn && pmtConfOrderCtrl.elitePointsToEarn">
+                                <p class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused">
+                                    {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                                    <span class="ib-text ib-text--bold ib-text--underline">
+                                        {{pmtConfOrderCtrl.aviosToEarn | aviosFormatter}}
+                                        {{'AVIOS_ELITE_TO_EARN_ANOM_2'| translate}}
+                                        {{pmtConfOrderCtrl.elitePointsToEarn | aviosFormatter}}
+                                        {{'AVIOS_ELITE_TO_EARN_ANOM_3'| translate}}
+                                    </span>
+                                    {{'AVIOS_ELITE_TO_EARN_ANOM_4'| translate}}
+                                </p>
+                            </div>
+
+                            <!-- residente -->
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt"
+                                data-ng-if="$root.isLogged && $root.isLogged !== pmtConfOrderCtrl.LOGIN_ONB && (pmtConfOrderCtrl.flowApp === pmtConfOrderCtrl.APP_TYPES.BOOKING || pmtConfOrderCtrl.flowApp === pmtConfOrderCtrl.APP_TYPES.MANAGEMYBOOKING_ONHOLD) && pmtConfOrderCtrl.CalculatedPoints.resident && !$root.isRedemptionFlow && pmtConfOrderCtrl.aviosToEarn && pmtConfOrderCtrl.elitePointsToEarn">
+                                <p class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused">
+                                    {{'GET_AT_LEAST'| translate}}
+                                    <span class="ib-text ib-text--bold ib-text--underline">
+                                        {{pmtConfOrderCtrl.aviosToEarn | aviosFormatter}}
+                                        {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+                                        {{pmtConfOrderCtrl.elitePointsToEarn | aviosFormatter}}
+                                        {{'AVIOS_ELITE_TO_EARN_USER_3'| translate}}
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small u-mt"
+                                data-ng-if="!$root.isLogged && (pmtConfOrderCtrl.flowApp === pmtConfOrderCtrl.APP_TYPES.BOOKING || pmtConfOrderCtrl.flowApp === pmtConfOrderCtrl.APP_TYPES.MANAGEMYBOOKING_ONHOLD) && pmtConfOrderCtrl.CalculatedPoints.resident && !$root.isRedemptionFlow && pmtConfOrderCtrl.aviosToEarn && pmtConfOrderCtrl.elitePointsToEarn">
+                                <p class="ib-text ib-text--block ib-text--to-center ib-text--color-unfocused">
+                                    {{'GET_AT_LEAST'| translate}}
+                                    <span class="ib-text ib-text--bold ib-text--underline">
+                                        {{pmtConfOrderCtrl.aviosToEarn | aviosFormatter}}
+                                        {{'AVIOS_ELITE_TO_EARN_ANOM_2'| translate}}
+                                        {{pmtConfOrderCtrl.elitePointsToEarn | aviosFormatter}}
+                                        {{'AVIOS_ELITE_TO_EARN_ANOM_3'| translate}}
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--smedium"
+                                data-ng-if="pmtConfOrderCtrl.model.confirmationInfo.familyInfo.isActive">
+                                <div class="ib-box ib-box--small ib-box--empty ib-box--bordered">
+                                    <div
+                                        class="ib-msg-alert ib-msg-alert--unfocused ib-msg-alert--confirmation icon-alerta_grave">
+                                        <span
+                                            class="ib-text ib-text--bold ib-text--color-unfocused">{{'IBBKCF_FAMILY_DISCOUNT_HEAD_ALERT'|translate}}</span>
+                                        <p class="ib-text ib-text--block ib-text--color-unfocused">
+                                            {{'IBBKCF_FAMILY_DISCOUNT_TEXT'|translate}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small"
+                                data-ng-if="pmtConfOrderCtrl.model.confirmationInfo.residentInfo.isActive && ((!pmtConfOrderCtrl.model.confirmationInfo.residentInfo.errors.haveSomeError && !pmtConfOrderCtrl.model.confirmationInfo.residentInfo.errors.allHaveError) || (pmtConfOrderCtrl.model.confirmationInfo.residentInfo.errors.haveSomeError && pmtConfOrderCtrl.model.confirmationInfo.residentInfo.errors.allHaveError))">
+                                <div class="ib-box ib-box--small ib-box--empty ib-box--bordered">
+                                    <div class="ib-msg-alert ib-msg-alert--unfocused ib-msg-alert--confirmation"
+                                        data-ng-class="{'icon-alertas_2':!pmtConfOrderCtrl.model.confirmationInfo.residentInfo.errors.haveSomeError && !pmtConfOrderCtrl.model.confirmationInfo.residentInfo.errors.allHaveError,'icon-alerta_grave':pmtConfOrderCtrl.model.confirmationInfo.residentInfo.errors.haveSomeError && pmtConfOrderCtrl.model.confirmationInfo.residentInfo.errors.allHaveError}">
+                                        <div
+                                            data-ng-if="!pmtConfOrderCtrl.model.confirmationInfo.residentInfo.errors.haveSomeError && !pmtConfOrderCtrl.model.confirmationInfo.residentInfo.errors.allHaveError">
+                                            <span
+                                                class="ib-text ib-text--bold ib-text--color-unfocused">{{'IBBKCF_RESIDENT_DISCOUNT_DESTINY_TEXT'|translate}}
+                                                {{pmtConfOrderCtrl.model.confirmationInfo.residentInfo.city
+                                                |translate}}
+                                            </span>
+                                            <p class="ib-text ib-text--block ib-text--color-unfocused">
+                                                {{'IBBKCF_RESIDENT_STATUS_ALL_OK'|translate}}</p>
+                                        </div>
+                                        <div
+                                            data-ng-if="pmtConfOrderCtrl.model.confirmationInfo.residentInfo.errors.haveSomeError && pmtConfOrderCtrl.model.confirmationInfo.residentInfo.errors.allHaveError">
+                                            <span
+                                                class="ib-text ib-text--bold ib-text--color-unfocused">{{'IBBKCF_RESIDENT_DISCOUNT_DESTINY_TEXT'|translate}}
+                                                {{pmtConfOrderCtrl.model.confirmationInfo.residentInfo.city
+                                                | translate}}</span>
+                                            <p class="ib-text ib-text--block ib-text--color-unfocused">
+                                                {{'IBBKCF_RESIDENT_STATUS_ALL_FAIL'|translate}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ib-layout__line-spacing ib-layout__line-spacing--small"
+                                data-ng-if="pmtConfOrderCtrl.model.confirmationInfo.residentInfo.isActive && pmtConfOrderCtrl.model.confirmationInfo.residentInfo.errors.haveSomeError && !pmtConfOrderCtrl.model.confirmationInfo.residentInfo.errors.allHaveError">
+                                <div class="ib-box ib-box--small ib-box--empty ib-box--bordered">
+                                    <div class="ib-layout__line-spacing ib-layout__line-spacing--smedium">
+                                        <span
+                                            class="ib-text ib-text--bold ib-text--color-unfocused">{{'IBBKCF_RESIDENT_DISCOUNT_DESTINY_TEXT'|translate}}
+                                            {{pmtConfOrderCtrl.model.confirmationInfo.residentInfo.city
+                                            |translate}}
+                                        </span>
+                                    </div>
+                                    <div class="ib-msg-alert ib-msg-alert--unfocused ib-msg-alert--confirmation"
+                                        ng-repeat="pas in pmtConfOrderCtrl.model.confirmationInfo.residentInfo.passengers"
+                                        ng-class="{'icon-alertas_2': pas.isVerified ,'icon-alerta_grave':!pas.isVerified}">
+                                        <span class="ib-text ib-text--bold ib-text--color-unfocused">{{pas.name}}
+                                            {{pas.surname}}</span>
+                                        <p class="ib-text ib-text--block ib-text--color-unfocused">{{pas.isVerified ?
+                                            ('IBBKCF_RESIDENT_CAN_FLY_TEXT'|translate) :
+                                            ('IBBKCF_RESIDENT_NOT_CAN_FLY_TEXT'|translate)}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <ib-pmt-confirmation-onhold-alert-component-legacy
+                                data-ng-if="pmtConfOrderCtrl.model.confirmationInfo.isOnHold"
+                                [end-order-time]="pmtConfOrderCtrl.model.confirmationInfo.endOrderTime" />
+
+                            <!-- //sube en oculto descomentar cuando se suba BONOS ASISTENCIA -->
+                            <!-- <ib-pmt-assistance-voucher-info
+                            ng-if="pmtConfOrderCtrl.attendanceVouchers.length > 0 && pmtConfOrderCtrl.isVoluntaryChangeView"
+                            attendance-vouchers="pmtConfOrderCtrl.attendanceVouchers">
+                            </ib-pmt-assistance-voucher-info> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12"
+                    ng-if="pmtConfOrderCtrl.isRegister && !$root.isLogged">
+                    <div class="ib-layout__section" ng-if="pmtConfOrderCtrl.isRegisterSuccesfull">
+                        <ib-ui-login-reusable-iframe-component loading="false" flow="BKI_RG"
+                            class="ib-layout__section--iframe">
+                        </ib-ui-login-reusable-iframe-component>
+                    </div>
+                    <div class="ib-layout__section" ng-if="!pmtConfOrderCtrl.isRegisterSuccesfull">
+                        <div class=" ib-card-register-error">
+                            <div class="ib-box--large ib-box--empty ib-box--bordered u-height-auto-sm ib-card-register-error__wrapper"
+                                data-equal="code-and-social">
+                                <div class="ib-card-register-error__icon icon-cancelar">
+                                </div>
+                                <h3 class="ib-card-register-error__title">{{'BKI_REGISTER_IFRAME_SORRY'|translate}}</h3>
+                                <div class="ib-card-register-error__line"></div>
+                                <p class="ib-card-register-error__text">
+                                    {{'BKI_REGISTER_IFRAME_SORRY_DESC'|translate}}
+                                </p>
+                                <div class="ib-card-register-error__button">
+                                    <a href="{{'LOGIN_MODULE_REGISTER_LINK'|LinksFilter}}">
+                                        <button class="ib-button ib-button--w-xlarge u-mt-mobile"
+                                            type="button">{{'LOGIN_MODULE_REGISTER'|translate}}</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </equal-height>
+        <div ng-if="pmtConfOrderCtrl.isEmptyBasket" class="row">
+            <div class="col-xs-12 ib-layout__section">
+                <!-- INFO BOX -->
+                <div class="ib-alertbox ib-alertbox--darkgrey u-mb-none"
+                    aria-label="{{'MMB_EMPTY_BASKET_INFO_MESSAGE' | translate}}">
+                    <div class="ib-alertbox__head">
+                        <span class="ib-alertbox__head--icon icon-alertas_2"><span
+                                class="hide-accessible">{{'MMB_FLEXIBILIZATION_CONFIRMATION_ICON_ALERT_ALT' |
+                                translate}}</span></span>
+                        <h3 class="ib-alertbox__head--title">{{'MMB_EMPTY_BASKET_INFO_MESSAGE' |
+                            translate}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="$root.isLogged === 'ONB'">
+            <div class="col-xs-12">
+                <ib-ui-automatic-invoice-component></ib-ui-automatic-invoice-component>
+            </div>
+        </div>
+        <div class="row" ng-if="pmtConfOrderCtrl.isPetPurchased && pmtConfOrderCtrl.flowApp === 'BBKI'">
+            <div class="col-xs-12">
+                <ib-pmt-pets-warning></ib-pmt-pets-warning>
+            </div>
+        </div>
+        <!-- PROMO MODULES -->
+        <equal-height data-ng-if="!pmtConfOrderCtrl.isVoluntaryChangeView && pmtConfOrderCtrl.flowApp !== 'MMBBID'">
+            <div class="row">
+                <div ng-if="pmtConfOrderCtrl.showInsuranceBanner" class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="ib-layout__section ib-layout__section--medium">
+                        <div class="ib-box-promo ib-box-promo--small" data-equal="promo">
+                            <div class="ib-box-promo__wrapper">
+                                <div class="ib-box-promo__image">
+                                    <figure class="ib-box-promo__figure">
+                                        <img ng-src="{{::$root.routes.images}}/confirmacion/child.jpg"
+                                            alt="{{'CONFIRM_TRAVEL_IMG'|translate}}" />
+                                    </figure>
+                                </div>
+                                <div class="ib-box-promo__description">
+                                    <span class="ib-box-promo__title" dotdotdot>{{'CONFIRM_TRAVEL'|translate}}</span>
+                                    <a id="CONFIRMATION_PROMO_TRAVEL" class="ib-link ib-link--hightlight"
+                                        title="{{'CONFIRM_SECURE_TRAVEL_TITLE'|translate}}"
+                                        ng-href="{{pmtConfOrderCtrl.insuranceLink}}" target="_blank"
+                                        rel="noopener noreferrer">{{'CONFIRM_SECURE_TRAVEL'|translate}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4" data-ng-if="!pmtConfOrderCtrl.holaMadridFlow">
+                    <div class="ib-layout__section ib-layout__section--medium">
+                        <div class="ib-box-promo ib-box-promo--small" data-equal="promo">
+                            <div class="ib-box-promo__wrapper">
+                                <div class="ib-box-promo__image">
+                                    <figure class="ib-box-promo__figure">
+                                        <img ng-src="{{::$root.routes.images}}/confirmacion/toilet.jpg"
+                                            alt="{{'CONFIRM_HOTEL_IMG'|translate}}" />
+                                    </figure>
+                                </div>
+                                <div class="ib-box-promo__description">
+                                    <span class="ib-box-promo__title" dotdotdot>{{'CONFIRM_HOTEL'|translate}}</span>
+                                    <a id="CONFIRMATION_PROMO_HOTEL" class="ib-link ib-link--hightlight"
+                                        title="{{'CONFIRM_SECURE_HOTEL_TITLE'|translate}}"
+                                        ng-href="{{'PROMO_HOTEL' |LinksFilter}}" target="_blank"
+                                        rel="noopener noreferrer">{{'CONFIRM_SECURE_HOTEL'|translate}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4" data-ng-if="!pmtConfOrderCtrl.holaMadridFlow && pmtConfOrderCtrl.showAvis">
+                    <div class="ib-layout__section ib-layout__section--medium">
+                        <div class="ib-box-promo ib-box-promo--small" data-equal="promo">
+                            <div class="ib-box-promo__wrapper">
+                                <div class="ib-box-promo__image">
+                                    <figure class="ib-box-promo__figure">
+                                        <img ng-src="{{::$root.routes.images}}/confirmacion/car.jpg"
+                                            alt="{{'CONFIRM_RENT_CAR_IMG'|translate}}" />
+                                    </figure>
+                                </div>
+                                <div class="ib-box-promo__description">
+                                    <span class="ib-box-promo__title" dotdotdot>{{'CONFIRM_RENT_CAR'|translate}}</span>
+                                    <a id="CONFIRMATION_PROMO_RENT_CAR" class="ib-link ib-link--hightlight"
+                                        title="{{'CONFIRM_BOOK_NOW_TITLE'|translate}}"
+                                        ng-href="{{'PROMO_RENT_CAR' |LinksFilter}}" target="_blank"
+                                        rel="noopener noreferrer">{{'CONFIRM_BOOK_NOW'|translate}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4" data-ng-if="pmtConfOrderCtrl.holaMadridFlow">
+                    <div class="ib-layout__section ib-layout__section--medium">
+                        <div class="ib-box-promo ib-box-promo--small" data-equal="promo">
+                            <div class="ib-box-promo__wrapper">
+                                <div class="ib-box-promo__image">
+                                    <figure class="ib-box-promo__figure--HM">
+                                        <img ng-src="{{::$root.routes.images}}/confirmacion/stopover-hotel.png"
+                                            alt="{{'CONFIRM_HOTEL_IMG'|translate}}" />
+                                    </figure>
+                                </div>
+                                <div class="ib-box-promo__description">
+                                    <span class="ib-box-promo__title"
+                                        dotdotdot>{{'STOPOVER_ACCOMMODATION'|translate}}</span>
+                                    <a id="CONFIRMATION_PROMO_HOTEL" class="ib-link ib-link--hightlight"
+                                        title="{{'STOPOVER_ACCOMMODATION'|translate}}"
+                                        ng-href="{{'PROMO_STOPOVER_ACCOMMODATION' |LinksFilter}}" target="_blank"
+                                        rel="noopener noreferrer">{{'STOPOVER_MORE_INFO'|translate}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4" data-ng-if="pmtConfOrderCtrl.holaMadridFlow">
+                    <div class="ib-layout__section ib-layout__section--medium">
+                        <div class="ib-box-promo ib-box-promo--small" data-equal="promo">
+                            <div class="ib-box-promo__wrapper">
+                                <div class="ib-box-promo__image">
+                                    <figure class="ib-box-promo__figure--HM">
+                                        <img ng-src="{{::$root.routes.images}}/confirmacion/stopover-rent-a-car.png"
+                                            alt="{{'CONFIRM_RENT_CAR_IMG'|translate}}" />
+                                    </figure>
+                                </div>
+                                <div class="ib-box-promo__description">
+                                    <span class="ib-box-promo__title"
+                                        dotdotdot>{{'STOPOVER_RENT_A_CAR'|translate}}</span>
+                                    <a id="CONFIRMATION_PROMO_RENT_CAR" class="ib-link ib-link--hightlight"
+                                        title="{{'STOPOVER_RENT_A_CAR'|translate}}"
+                                        ng-href="{{'PROMO_STOPOVER_RENT_A_CAR' |LinksFilter}}" target="_blank"
+                                        rel="noopener noreferrer">{{'STOPOVER_MORE_INFO'|translate}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </equal-height>
+        <!-- PROMO MODULES END-->
+        <div class="row">
+            <div class="col-xs-12" data-ng-if="pmtConfOrderCtrl.flowApp !== 'MMBBID'">
+                <div data-ng-repeat="(index,trip) in pmtConfOrderCtrl.model.confirmationInfo.slices track by index">
+                    <ib-pmt-confirmation-info id="pmt-confirmation-confirmation-info-{{$index}}"
+                        confirmation-info-model="trip"
+                        confirmation-info-index="::(pmtConfOrderCtrl.model.confirmationInfo.slices.length <= 2 ? '' : (index + 1))"
+                        confirmation-info-title="::(pmtConfOrderCtrl.flowApp === 'MMBBID' ? 'UPGRADING_BIDS_UPGRADING_OFFER_TO' : pmtConfOrderCtrl.model.confirmationInfo.slices.length <= 2 ? (index === 0 ? 'CONFIRMATION_INFO_TITLE_1' : 'CONFIRMATION_INFO_TITLE_2') : 'CONFIRMATION_INFO_TITLE_3')"
+                        is-shuttle-open="pmtConfOrderCtrl.isShuttleFlow ? true : false">
+                    </ib-pmt-confirmation-info>
+                </div>
+                <!-- BONDS SUMMARY -->
+                <ib-ui-bonds-summary data-ng-if="pmtConfOrderCtrl.model.confirmationInfo.bondsInfo.showExtraInfo"
+                    show-extra-info="pmtConfOrderCtrl.model.confirmationInfo.bondsInfo.showExtraInfo"
+                    bonds-info="pmtConfOrderCtrl.model.confirmationInfo.bondsInfo"></ib-ui-bonds-summary>
+                <!-- END BONDS SUMMARY -->
+
+
+                <section class="ib-layout__section" data-ng-if="pmtConfOrderCtrl.model.confirmationInfo.insurance">
+                    <div class="ib-ticket-flights">
+                        <div class="ib-ticket-flights__ticket">
+                            <div class="ib-ticket-flights__ticket-footer u-border-top-none">
+                                <span
+                                    class="ib-text ib-text--color-unfocused ib-text--bold">{{'CONFIRM_INSURANCE_TITLE'|translate}}</span>
+                                <span
+                                    class="ib-text ib-text--color-unfocused ">{{'CONFIRM_INSURANCE_SUBTITLE'|translate}}{{pmtConfOrderCtrl.model.confirmationInfo.insurance}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ALLIANZ LEGACY -->
+                <section class="ib-layout__section" data-ng-if="pmtConfOrderCtrl.model.confirmationInfo.insurance">
+                    <div class="ib-ticket-flights">
+                        <div class="ib-ticket-flights__ticket">
+                            <div class="ib-ticket-flights__ticket-footer u-border-top-none">
+                                <span
+                                    class="ib-text ib-text--color-unfocused ib-text--bold">{{'CONFIRM_INSURANCE_TITLE'|translate}}</span>
+                                <span
+                                    class="ib-text ib-text--color-unfocused ">{{'CONFIRM_INSURANCE_SUBTITLE'|translate}}{{pmtConfOrderCtrl.model.confirmationInfo.insurance}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ALLIANZ FUSION -->
+                <section class="ib-layout__section"
+                    data-ng-if="pmtConfOrderCtrl.allianzFusionContractNumber !== '' && pmtConfOrderCtrl.allianzFusionContractNumber !== undefined">
+                    <div class="ib-ticket-flights">
+                        <div class="ib-ticket-flights__ticket">
+                            <div class="ib-ticket-flights__ticket-footer u-border-top-none">
+                                <span
+                                    class="ib-text ib-text--color-unfocused ib-text--bold">{{'CONFIRM_INSURANCE_TITLE'|translate}}</span>
+                                <span
+                                    class="ib-text ib-text--color-unfocused ">{{'CONFIRM_INSURANCE_SUBTITLE'|translate}}{{pmtConfOrderCtrl.allianzFusionContractNumber}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <ib-pmt-carbon-footprint
+                    data-ng-if="pmtConfOrderCtrl.model.confirmationInfo.carbonFootprint.kilosCo2Equivalent"
+                    model="pmtConfOrderCtrl.model.confirmationInfo.carbonFootprint"></ib-pmt-carbon-footprint>
+                <!--<section class="ib-layout__section hidden-xl hidden-lg">
+                    <uib-accordion class="ib-accordion" close-others="oneAtATime">
+                        <div uib-accordion-group class="panel-default" is-open="status.open">
+                            <uib-accordion-heading>
+                                <span
+                                    class="ib-heading ib-heading--type-5">{{'PAYMENTS_SUMMARY_MOBILE'|translate}}</span>
+                                <span class="ib-accordion__icon"
+                                    ng-class="{'icon-flecha_1_arriba': status.open, 'icon-flecha_1_abajo': !status.open}"></span>
+                            </uib-accordion-heading>
+                            <div class="ib-box ib-box--medium">
+                                <ib-pmt-summary id="pmt-confirmation-summary-mobile"
+                                    summary-info="pmtConfOrderCtrl.model.confirmationInfo.summaryInfo"
+                                    total-price="pmtConfOrderCtrl.model.confirmationInfo.price"
+                                    applied-discounts="pmtConfOrderCtrl.model.appliedDiscounts"
+                                    show-passengers-name="true" membership-data="$root.membershipData"
+                                    on-hold-payment="::pmtConfOrderCtrl.model.confirmationInfo.summaryInfo.onHoldPayment"
+                                    is-on-hold="::pmtConfOrderCtrl.model.confirmationInfo.summaryInfo.isOnHold"
+                                    on-hold-info="pmtConfOrderCtrl.model.onHoldInfo"
+                                    on-hold-type="::pmtConfOrderCtrl.model.confirmationInfo.summaryInfo.isOnHold ? null: pmtConfOrderCtrl.model.confirmationInfo.summaryInfo.paymentType">
+                                </ib-pmt-summary>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </section>-->
+                <!-- banner landing MMB -->
+                <div ID="T29_BANNERMMB"></div>
+                <!-- banner Wine Club -->
+                <ib-pmt-wine-club ng-if="pmtConfOrderCtrl.flowApp === 'BBKI' && pmtConfOrderCtrl.showWineClubBanner"
+                    model="pmtConfOrderCtrl.model.confirmationInfo.wineClub">
+                </ib-pmt-wine-club>
+                <!-- banner bag on board -->
+                <section class="ib-layout__section"
+                    ng-if="pmtConfOrderCtrl.model.confirmationInfo.bobInfo && pmtConfOrderCtrl.model.confirmationInfo.bobInfo.urlbob && !pmtConfOrderCtrl.showWineClubBanner && !pmtConfOrderCtrl.holaMadridFlow">
+                    <div class="ib-layout__section ib-layout__section--medium">
+                        <div class="ib-box-promo ib-box-promo--medium ib-box-promo--responsive u-height-auto-sm">
+                            <div class="ib-box-promo__wrapper">
+                                <div class="ib-box-promo__image">
+                                    <figure class="ib-box-promo__figure ib-box-promo__figure--relative">
+                                        <img ng-src="{{::$root.routes.images}}/banners/bagOnBoard.jpg"
+                                            alt="{{'IBBKCF_CONFIRM_BOB_TITLE'|translate}}">
+                                    </figure>
+                                </div>
+                                <div class="ib-box-promo__description ib-box-promo__description--extra-padding">
+                                    <span class="ib-box-promo__title"
+                                        dotdotdot>{{'IBBKCF_CONFIRM_BOB_TITLE'|translate}}</span>
+                                    <div class="ib-box-promo__description-text ib-box-promo__description-text--full"
+                                        dotdotdot>
+                                        <p class="ib-text ib-text--color-light">
+                                            {{'IBBKCF_CONFIRM_BOB_DESCRIPTION'|translate}}
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="ib-box-promo__description-button ib-box-promo__description-button--full u-mt">
+                                        <button id="pmt-confirmation-more-bob-info-btn"
+                                            class="ib-button ib-button--inverse ib-button--w-small ib-button--block-sm"
+                                            data-ng-click="pmtConfOrderCtrl.openBagOnBoardUrl(pmtConfOrderCtrl.model.confirmationInfo.bobInfo.urlbob)">{{'IBBKCF_CONFIRM_BOB_BUTTON'|translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Banner Stopover Hola Madrid-->
+                <section class="ib-layout__section"
+                    ng-if="pmtConfOrderCtrl.model.confirmationInfo.bobInfo && pmtConfOrderCtrl.model.confirmationInfo.bobInfo.urlbob && !pmtConfOrderCtrl.showWineClubBanner && pmtConfOrderCtrl.holaMadridFlow">
+                    <div class="ib-layout__section ib-layout__section--medium">
+                        <div class="ib-box-promo ib-box-promo--medium ib-box-promo--responsive u-height-auto-sm">
+                            <div class="ib-box-promo__wrapper--HM">
+                                <div class="ib-box-promo__image">
+                                    <figure class="ib-box-promo__figure ib-box-promo__figure--relative">
+                                        <img ng-src="{{::$root.routes.images}}/confirmacion/stopover-hola-madrid.png"
+                                            alt="">
+                                    </figure>
+                                </div>
+                                <div class="ib-box-promo__description--HM ib-box-promo__description--extra-padding">
+                                    <div class="ib-box-promo__texts">
+                                        <span class="ib-box-promo__title ib-box-promo__title--no-margin"
+                                            dotdotdot>{{'STOPOVER_TITLE'|translate}}</span>
+                                        <span class="ib-box-promo__subtitle"
+                                            dotdotdot>{{'STOPOVER_SUBTITLE'|translate}}</span>
+                                        <div class="ib-box-promo__description-text ib-box-promo__description-text--full"
+                                            dotdotdot>
+                                            <p class="ib-text ib-text--color-light">
+                                                {{'STOPOVER_BODY'|translate}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="ib-box-promo__description-button ib-box-promo__description-button--full">
+                                        <button id="pmt-confirmation-more-bob-info-btn"
+                                            class="ib-button ib-button--inverse ib-button--w-small ib-button--block-sm"
+                                            data-ng-click="pmtConfOrderCtrl.openHolaMadridActivities()">{{'STOPOVER_SEE_ACTIVITIES'|translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!---->
+            </div>
+            <div class="col-xs-12 u-mb-medium"
+                data-ng-if="(pmtConfOrderCtrl.newPaymentViewType) && (pmtConfOrderCtrl.flowApp === 'BBKI' || pmtConfOrderCtrl.flowApp === 'BBKIOH' || pmtConfOrderCtrl.flowApp === 'MMBOH')">
+                <booking-summary-legacy-component></booking-summary-legacy-component>
+            </div>
+            <div class="col-xs-12"
+                data-ng-if="(!pmtConfOrderCtrl.newPaymentViewType) && (pmtConfOrderCtrl.flowApp !== 'BBKI' || pmtConfOrderCtrl.flowApp !== 'BBKIOH')">
+                <section class="ib-layout__section">
+                    <div class="ib-box ib-box--ancillaries-summary"
+                        data-ng-class="{'ib-box--medium-bottom': !pmtConfOrderCtrl.isVoluntaryChangeView, 'ib-box--vc-summary':pmtConfOrderCtrl.isVoluntaryChangeView}">
+                        <ib-pmt-summary id="pmt-confirmation-summary"
+                            summary-info="pmtConfOrderCtrl.model.confirmationInfo.summaryInfo"
+                            total-price="pmtConfOrderCtrl.model.confirmationInfo.price"
+                            applied-discounts="pmtConfOrderCtrl.model.appliedDiscounts"
+                            on-hold-payment="::pmtConfOrderCtrl.model.confirmationInfo.summaryInfo.onHoldPayment"
+                            show-passengers-name="true" membership-data="$root.membershipData"
+                            is-on-hold="::pmtConfOrderCtrl.model.confirmationInfo.summaryInfo.isOnHold"
+                            on-hold-info="pmtConfOrderCtrl.model.onHoldInfo"
+                            on-hold-type="::pmtConfOrderCtrl.model.confirmationInfo.summaryInfo.isOnHold ? null: pmtConfOrderCtrl.model.confirmationInfo.summaryInfo.paymentType">
+                        </ib-pmt-summary>
+                    </div>
+                </section>
+            </div>
+            <!-- banner carbon footprint 1.5 -->
+            <div class="col-xs-12">
+                <section class="ib-layout__section" ng-if="pmtConfOrderCtrl.showCarbonFootprintBanner">
+                    <ib-pmt-confirmation-carbon-footprint
+                        [model]="pmtConfOrderCtrl.co2InfoBannerModel"></ib-pmt-confirmation-carbon-footprint>
+                </section>
+            </div>
+
+
+            <!-- BANNER ACTIVITIES -->
+            <div class="col-xs-12" data-ng-if="pmtConfOrderCtrl.recoglobickActivitiesBki"
+                id="globick-activities-confirmation-banner" style="display: block;">
+                <div class="ib-layout__section">
+                    <div class="ib-globick-banner ib-globick-banner--activities">
+                        <div class="ib-globick-banner__content">
+                            <h2 class="ib-globick-banner__title">{{'GLOBICK_ACTIVITIES_BANNER_TITLE'|translate}}</h2>
+                            <p class="ib-globick-banner__txt">{{'GLOBICK_ACTIVITIES_BANNER_TEXT'|translate}}</p>
+                            <div class="ib-globick-banner__btn-container">
+                                <button class="ib-button ib-button--w-medium ib-button--block-sm" type="button"
+                                    data-ng-click="pmtConfOrderCtrl.registerGlobickClick()">{{'GLOBICK_ACTIVITIES_BANNER_BUTTON'|translate}}</button>
+                            </div>
+                        </div>
+                        <div class="ib-globick-banner__img-container">
+                            <figure class="ib-globick-banner__figure">
+                                <img class="ib-globick-banner__img"
+                                    ng-src="{{::$root.routes.images}}/banners/globick/actividades.png" alt="" />
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="pmtConfOrderCtrl.flightAviosInfo && pmtConfOrderCtrl.flowApp !== 'MMBBID' && pmtConfOrderCtrl.$rootScope.isLogged !== pmtConfOrderCtrl.LOGIN_ONB">
+                <ib-ui-avios-summary></ib-ui-avios-summary>
+            </div>
+        </div>
+        <!-- Confirmation-rentCar -->
+        <ib-reservation-car id="pmt-confirmation-reservation-car"
+            data-ng-if="pmtConfOrderCtrl.model.confirmationInfo.rentCarInfo.cars.length > 0"
+            model="pmtConfOrderCtrl.model.confirmationInfo.rentCarInfo"></ib-reservation-car>
+        <!---->
+        <!-- Booking.com external module -->
+        <ib-booking-hotels id="pmt-confirmation-booking-hotels"
+            data-ng-if="pmtConfOrderCtrl.model.confirmationInfo.bookingHotelsInfo.destinationCode"
+            check-in-date="pmtConfOrderCtrl.model.confirmationInfo.bookingHotelsInfo.checkInDate"
+            check-out-date="pmtConfOrderCtrl.model.confirmationInfo.bookingHotelsInfo.checkOutDate"
+            destination-code="pmtConfOrderCtrl.model.confirmationInfo.bookingHotelsInfo.destinationCode">
+        </ib-booking-hotels>
+        <!---->
+        <!-- BOX-INFO MODULES -->
+        <equal-height data-ng-if="!pmtConfOrderCtrl.isVoluntaryChangeView">
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <section class="ib-layout__section">
+                        <div class="ib-box ib-box--small ib-box--empty ib-box--bordered u-height-auto-sm"
+                            data-equal="box-info">
+                            <div class="ib-info-icon ib-info-icon--small">
+                                <div class="ib-info-icon__wrapper">
+                                    <span class="ib-info-icon__icon icon-logo_aplic_peque"></span>
+                                    <div class="ib-info-icon__info">
+                                        <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                                            <span
+                                                class="ib-heading ib-heading--type-5">{{'CONFIRM_IBERIA_PLUS'|translate}}</span>
+                                        </div>
+                                        <span class="ib-text">{{'CONFIRM_IBERIA_PLUS_EXPERIENCE'|translate}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <section class="ib-layout__section">
+                        <div class="ib-box ib-box--small ib-box--empty ib-box--bordered u-height-auto-sm"
+                            data-equal="box-info">
+                            <div class="ib-info-icon ib-info-icon--small">
+                                <div class="ib-info-icon__wrapper">
+                                    <span class="ib-info-icon__icon icon-editar_perfil"></span>
+                                    <div class="ib-info-icon__info">
+                                        <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                                            <span
+                                                class="ib-heading ib-heading--type-5">{{'CONFIRM_HELP_CENTER'|translate}}</span>
+                                        </div>
+                                        <span class="ib-text">{{'CONFIRM_HELP_INFO'|translate}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <section class="ib-layout__section">
+                        <div class="ib-box ib-box--small ib-box--empty ib-box--bordered u-height-auto-sm"
+                            data-equal="box-info">
+                            <div class="ib-info-icon ib-info-icon--small">
+                                <div class="ib-info-icon__wrapper">
+                                    <span class="ib-info-icon__icon icon-mensajes"></span>
+                                    <div class="ib-info-icon__info">
+                                        <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+                                            <span
+                                                class="ib-heading ib-heading--type-5">{{'CONFIRM_CUSTOMER_SUPPORT'|translate}}</span>
+                                        </div>
+                                        <span class="ib-heading"
+                                            ng-if="$root.phonesList['RESERVAS']"
+                                            data-ng-class="{'ib-heading--type-2': ($root.phonesList['RESERVAS'].prefixAlt + ' ' + $root.phonesList['RESERVAS'].telephoneAlt).length < 10,'ib-heading--type-5':($root.phonesList['RESERVAS'].prefixAlt + ' ' + $root.phonesList['RESERVAS'].telephoneAlt).length >= 10}">{{$root.phonesList['RESERVAS'].prefixAlt
+                                            + ' ' + $root.phonesList['RESERVAS'].telephoneAlt}}</span>
+                                        <span class="ib-text">{{'CONFIRM_CONSULT'|translate}}
+                                            <a id="pmt-confirmation-twitter-link" class="ib-link"
+                                                href="{{'TWITTER_LINK'|LinksFilter}}" target="_blank"
+                                                rel="noopener noreferrer"
+                                                title="{{'CONFIRM_TWITTER_TITLE'|translate}}">{{'CONFIRM_TWITTER_TITLE'|translate}}</a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </equal-height>
+        <!-- BOX-INFO MODULES -->
+
+
+
+    </div>
+    <div id="pmt-iberia-pay-logs" class="sr-only" data-ng-if="pmtConfOrderCtrl.ibPayTrace">{{pmtConfOrderCtrl.ibPayTrace
+        | json }}</div>
+    <ib-main-footer
+        data-ng-if="pmtConfOrderCtrl.flowApp !== 'MMBVC' && pmtConfOrderCtrl.flowApp !== 'MMBUNIF' && pmtConfOrderCtrl.flowApp !== 'MMBOH' && pmtConfOrderCtrl.flowApp !== 'MMBBID'"
+        id="footer"
+        footer-model="{'phoneInfo' : {'prefix' : $root.phonesList['RESERVAS'].prefix, 'phoneNumber': $root.phonesList['RESERVAS'].telephone, 'text': $root.phonesList['RESERVAS'].text }}"
+        is-full-width="::false"></ib-main-footer>
+</main>

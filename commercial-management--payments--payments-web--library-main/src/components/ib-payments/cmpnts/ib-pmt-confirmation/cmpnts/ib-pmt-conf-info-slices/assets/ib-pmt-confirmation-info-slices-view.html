@@ -1,0 +1,64 @@
+<div class="ib-ticket-flights__ticket">
+    <header class="ib-ticket-flights__ticket-header">
+        <div class="ib-ticket-flights__ticket-wrapper">
+            <div class="ib-ticket-flights__ticket-block u-text-left">
+                <span class="ib-ticket-flights__ticket-title">{{::cInfoSlicesCtrl.confirmationInfoSlicesModel.departure.city.description}}</span>
+                <span class="ib-ticket-flights__ticket-subtitle">{{::cInfoSlicesCtrl.confirmationInfoSlicesModel.departure.city.code}}</span>
+                <span class="ib-ticket-flights__ticket-description">{{'CONFIRMATION_INFO_SLICES_DESCRIPTION_2'|translate}} {{::cInfoSlicesCtrl.confirmationInfoSlicesModel.departure.name}}</span>
+            </div>
+            <div class="ib-ticket-flights__ticket-icon">
+                <span class="icon-vuelos"></span>
+                <p class="ib-ticket-flights__ticket-status" ng-if="cInfoSlicesCtrl.isShuttleFlow">OPEN</p>
+            </div>
+            <div class="ib-ticket-flights__ticket-block u-text-right">
+                <span class="ib-ticket-flights__ticket-title">{{::cInfoSlicesCtrl.confirmationInfoSlicesModel.arrival.city.description}}</span>
+                <span class="ib-ticket-flights__ticket-description">{{'CONFIRMATION_INFO_SLICES_DESCRIPTION_1'|translate}} {{::cInfoSlicesCtrl.confirmationInfoSlicesModel.arrival.name}}</span>
+                <span class="ib-ticket-flights__ticket-subtitle">{{::cInfoSlicesCtrl.confirmationInfoSlicesModel.arrival.city.code}}</span>
+            </div>
+        </div>
+    </header>
+    <div class="ib-ticket-flights__ticket-body" ng-if="!cInfoSlicesCtrl.isShuttleFlow">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <div class="u-text-left">
+                    <span class="ib-text ib-text--block ib-text--color-unfocused ib-ticket-flights__ticket--title">{{cInfoSlicesCtrl.confirmationInfoSlicesModel.departure.terminal ? (('CONFIRMATION_INFO_SLICES_TERMINAL'
+                        | translate) + cInfoSlicesCtrl.confirmationInfoSlicesModel.departure.terminal) : ''}}</span>
+                    <span class="ib-text ib-text--block ib-text--color-unfocused">{{::cInfoSlicesCtrl.confirmationInfoSlicesModel.departureDate.day}} {{::(cInfoSlicesCtrl.confirmationInfoSlicesModel.departureDate.month
+                        | translate | ShortenerFormatFilter:3:true)}} {{::cInfoSlicesCtrl.confirmationInfoSlicesModel.departureDate.year}}</span>
+                    <span class="ib-text ib-text--block ib-text--color-unfocused">{{::cInfoSlicesCtrl.confirmationInfoSlicesModel.departureDate.dateTime}}</span>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6 col-md-offset-4">
+                <div class="u-text-right">
+                    <span class="ib-text ib-text--block ib-text--color-unfocused ib-ticket-flights__ticket--title">{{cInfoSlicesCtrl.confirmationInfoSlicesModel.arrival.terminal ? (('CONFIRMATION_INFO_SLICES_TERMINAL'
+                        | translate) + cInfoSlicesCtrl.confirmationInfoSlicesModel.arrival.terminal) : ' '}}</span>
+                    <span class="ib-text ib-text--block ib-text--color-unfocused">{{::cInfoSlicesCtrl.confirmationInfoSlicesModel.arrivalDate.day}} {{::(cInfoSlicesCtrl.confirmationInfoSlicesModel.arrivalDate.month
+                        | translate | ShortenerFormatFilter:3:true)}} {{::cInfoSlicesCtrl.confirmationInfoSlicesModel.arrivalDate.year}}</span>
+                    <span class="ib-text ib-text--block ib-text--color-unfocused">{{::cInfoSlicesCtrl.confirmationInfoSlicesModel.arrivalDate.dateTime}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-md-offset-3">
+                <div class="ib-ticket-flights__ticket-operated-by">
+                    <figure class="ib-ticket-flights__ticket-logo">
+                        <img ng-src="{{::$root.routes.icons}}{{::cInfoSlicesCtrl.confirmationInfoSlicesModel.companyUrl}}" alt="{{'CONFIRMATION_INFO_SLICES_ALT_LOGO'|translate}} {{::cInfoSlicesCtrl.confirmationInfoSlicesModel.operatedBy}}"
+                        />
+                    </figure>
+                    <span class="ib-text ib-text--block ib-text--xmedium">{{cInfoSlicesCtrl.confirmationInfoSlicesModel.marketingCarrier && cInfoSlicesCtrl.confirmationInfoSlicesModel.marketingCarrier.code
+                        ? cInfoSlicesCtrl.confirmationInfoSlicesModel.marketingCarrier.code : cInfoSlicesCtrl.confirmationInfoSlicesModel.operationalDisclosure}}{{::cInfoSlicesCtrl.confirmationInfoSlicesModel.flightNumber}}</span>
+                    <span class="ib-text ib-text--block ib-text--color-unfocused">{{'CONFIRMATION_INFO_SLICES_FIGURE'|translate}} {{::cInfoSlicesCtrl.confirmationInfoSlicesModel.operatedBy}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="ib-ticket-flights__ticket-footer" ng-if="!cInfoSlicesCtrl.isShuttleFlow">
+        <span class="ib-text ib-text--color-unfocused ib-text--bold" data-ng-if="cInfoSlicesCtrl.confirmationInfoSlicesModel.seats !== ''">{{'CONFIRMATION_INFO_SLICES_SEATS_CABIN'|translate}} {{::cInfoSlicesCtrl.confirmationInfoSlicesModel.cabin | translate
+            }}</span>
+        <span class="ib-text ib-text--color-unfocused ">{{::cInfoSlicesCtrl.confirmationInfoSlicesModel.seats}}</span>
+    </footer>
+    <footer class="ib-ticket-flights__ticket-footer" ng-if="cInfoSlicesCtrl.isShuttleFlow">
+            <span class="ib-text ib-text--color-unfocused ib-text--bold">{{'SEATS_CABIN_TITLE' | translate}} {{cInfoSlicesCtrl.confirmationInfoSlicesModel.cabin}}</span>
+        
+        </footer>
+</div>

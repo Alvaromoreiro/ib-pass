@@ -1,0 +1,21 @@
+<form [formGroup]="form">
+    <ng-container formArrayName="otpInputs">
+        <div class="otp-inputs">
+            <input *ngFor="let input of otpInputs.controls; let i= index;"
+                autocomplete="one-time-code" type="text"
+                inputmode="numeric"  pattern="[0-9]*"  name="otp-voucher{{i}}" id="otp-voucher{{i}}"
+                [formControlName]="i" [attr.data-otp-index]="i" maxlength="1" 
+                (paste)="onPaste($event, i)"  (keydown)="onKeyDown($event)" (keyup)="onKeyUp($event, i)">
+        </div>
+    </ng-container>
+    <div class="visually-hidden visually-hidden-focusable">
+        <label *ngFor="let input of otpInputs.controls; let i= index;" 
+            class="visually-hidden visually-hidden-focusable" for="otp-voucher{{i}}">
+            {{'OTP_MODAL_INPUT_LABEL'|translate:
+                {
+                    digit: i+1
+                }
+            }}
+        </label>
+    </div>
+</form>

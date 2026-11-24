@@ -1,0 +1,404 @@
+<fieldset>
+    <legend class="u-hide-accessible">{{'CREDIT_CARD_FORM_ACCESSIBLE'|translate}}</legend>
+    <div class="ib-layout__form-center ib-layout__form-center--type-5"
+        data-ng-if="creditCardTabCtrl.customerCreditCards[creditCardTabCtrl.creditCardFormModel.type].length > 1">
+        <div class="ib-layout__line-spacing" data-ng-if="creditCardTabCtrl.isOnHoldOrder">
+            <span class="ib-heading ib-heading--type-4">{{(!creditCardTabCtrl.isOnHoldOrder ? 'CREDIT_CARD_FORM_HEADING'
+                : 'CREDIT_CARD_FORM_ON_HOLD_HEADER')|translate}}</span>
+        </div>
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+            <div class="ib-radio">
+                <input type="radio" id="SavedCreditCard_1" name="SavedCreditCard" class="ib-radio__input"
+                    data-ng-value="true" data-ng-model="creditCardTabCtrl.selectedSavedOrNewCard"
+                    data-ng-change="creditCardTabCtrl.selectLoggedListCard()"/>
+                <label for="SavedCreditCard_1" class="ib-radio__label">
+                    <span class="ib-radio__text ib-radio__text--payment-form">{{'CREDIT_CARD_FORM_CUSTOMER_LIST_CARD_TITLE'|translate}}</span>
+                </label>
+            </div>
+            <div class="u-ml-none-xs u-ml-medium u-mt-xsmedium u-mb-medium">
+                <div class="ib-layout__line-spacing ib-layout__line-spacing--medium" data-ng-if="creditCardTabCtrl.selectedSavedOrNewCard"
+                    data-ng-repeat="(customerCardIndex,customerCard) in creditCardTabCtrl.customerCreditCards[creditCardTabCtrl.creditCardFormModel.type] | filter : '!newCard' : true">
+                    <div class="u-mb-xsmall" data-ng-if="customerCard.firstPersonal || customerCard.firstCorporate">
+                        <h3 class="ib-heading ib-heading--type-5 ib-heading--bold" data-ng-if="customerCard.firstPersonal">{{'ON_BUSINESS_SECTION_PRIVATE_TITLE'|translate}}</h3>
+                        <h3 class="ib-heading ib-heading--type-5 ib-heading--bold" data-ng-if="customerCard.firstCorporate">{{'ON_BUSINESS_SECTION_SHARED_TITLE'|translate}}</h3>
+                    </div>
+                    <div data-ng-show="customerCard.provider[creditCardTabCtrl.creditCardFormModel.type]" class="ib-radio-card ib-radio-card--tick"
+                        ng-class="{'ib-radio-card--background-grey': customerCard.profileCardId !== creditCardTabCtrl.selectedLoggedCard.profileCardId, 'u-mt-big': customerCard.cardTypeId === 'newCard' && $root.isLogged === 'ONB'}">
+                        <figure class="ib-radio-card__figure"
+                            data-ng-if="customerCard.cardTypeId !== 'newCard' && customerCard && customerCard.iconUrl">
+                            <img data-ng-src="{{customerCard.iconUrl}}"
+                                alt="{{'CREDIT_CARD_FORM_SELECT_ALT_1'|translate}}{{customerCard.description}}"
+                                class="ib-radio-card__img">
+                        </figure>
+                        <div data-ng-if="!customerCard.active" class="ib-input__info"
+                            data-ng-controller="IbPmtPopoverController as popoverCtrl">
+                            <a id="pmt-credit-card-tab-invalid-issuer-country-link" class="ib-link ib-link--error ib-link--decoration-none ib-link--important ib-link--to-middle icon-informacion_2 ib-popover"
+                                title="{{'CUSTOMER_CREDIT_CARD_ERROR_MARKET_TITLE'|translate}}"
+                                uib-popover-template="::$root.routes.templates + 'ib-generic-popover.html'"
+                                popover-placement="auto right"
+                                ng-click="popoverCtrl.text ='CUSTOMER_CREDIT_CARD_ERROR_MARKET_TEXT';$event.preventDefault();"
+                                popover-is-open="popoverCtrl.isOpen"></a>
+                            <span class="ib-radio__text">{{ (customerCard.description|translate)}}</span>
+                        </div>
+                        <input data-ng-if="customerCard.active" type="radio" id="radio_card_{{customerCard.profileCardId}}"
+                            name="radio_card" class="ib-radio__input" data-ng-value="customerCard"
+                            data-ng-model="creditCardTabCtrl.selectedLoggedCard"
+                            data-ng-change="creditCardTabCtrl.creditCardSelectedLogged(customerCard,false)" required>
+                        <label data-ng-if="customerCard.active" for="radio_card_{{customerCard.profileCardId}}"
+                            data-ng-class="{'ib-radio__label':customerCard.active}">
+                            <span
+                                class="ib-radio__text">{{customerCard.description ? (customerCard.description|translate)
+                                : customerCard.newDescription ? customerCard.newDescription : ('CREDIT_CARD_FORM_CUSTOMER_CARD_EMPTY_DESC'|translate)}}</span>
+                        </label>
+                        <span class="ib-radio-card__info"
+                            data-ng-if="customerCard.cardTypeId !== 'newCard'">{{customerCard.cardNumber}}
+                            {{customerCard.expiryDate ? ('-' + ('CREDIT_CARD_FORM_CAD_TITLE'|translate) + customerCard.expiryDate)
+                            : ''}}</span>
+                        <span class="ib-radio-card__info"
+                            data-ng-if="customerCard.cardTypeId !== 'newCard' && customerCard.totalFee > 0">{{'CREDIT_CARD_FORM_CUSTOMER_CARD_FEE_TITLE'|translate}}+{{customerCard.parsedFee}}</span>
+                        <div class="ib-radio-card__additional-info"
+                            data-ng-if="creditCardTabCtrl.selectedLoggedCard && creditCardTabCtrl.selectedLoggedCard.cardTypeId !== 'newCard' && customerCard.profileCardId === creditCardTabCtrl.selectedLoggedCard.profileCardId">
+                            <div class="ib-layout__line-spacing">
+                                <span
+                                    class="ib-text ib-text--color-unfocused">{{'CREDIT_CARD_FORM_CUSTOMER_CARD_OWNER'|translate}}
+                                    {{creditCardTabCtrl.selectedLoggedCard.nameOnCard + ' ' + (creditCardTabCtrl.selectedLoggedCard.surnameOnCard
+                                    || creditCardTabCtrl.selectedLoggedCard.newSurnameOnCard)}}</span>
+                            </div>
+                            <div data-ng-if="!creditCardTabCtrl.selectedLoggedCard.surnameOnCard"
+                                class="ib-layout__line-spacing">
+                                <div class="ib-input"
+                                    data-ng-class="{'ib-input--error' : creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.surnames.$invalid}">
+                                    <label class="ib-input__label" for="surnames"
+                                        ng-class="{'ib-input__label--focus' : creditCardTabCtrl.surnamesFocused || (creditCardTabCtrl.containerForm.surnames.$viewValue != null && creditCardTabCtrl.containerForm.surnames.$viewValue !== '')}">{{'CREDIT_CARD_FORM_SURNAME_LABEL'|translate}}</label>
+                                    <input class="ib-input__input" type="text" id="surnames" name="surnames"
+                                        ng-model="creditCardTabCtrl.selectedLoggedCard.newSurnameOnCard"
+                                        ng-pattern="::$root.pmtPatterns.NAME_SURNAME_PATTERN"
+                                        data-ib-validator-cleaner="{{::$root.pmtPatterns.NAME_SURNAME_CLEANER}}" ib-trim-on-blur required
+                                        data-ng-focus="creditCardTabCtrl.surnamesFocused=true"
+                                        data-ng-blur="creditCardTabCtrl.surnamesFocused=false" />
+                                </div>
+                                <div
+                                    ng-messages="creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.surnames.$error">
+                                    <div id="pmt-credit-card-tab-surname-error-msg" class="ib-alert ib-alert--error" ng-message="required">
+                                        {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                </div>
+                            </div>
+                            <div class="ib-layout__line-spacing"
+                                data-ng-if="creditCardTabCtrl.selectedLoggedCard.expiryDateNeedsUpdate">
+                                <ib-ui-expiry-dates-select id="pmt-credit-card-tab-expiry-date" month="creditCardTabCtrl.selectedLoggedCard.month"
+                                    year="creditCardTabCtrl.selectedLoggedCard.year" maximum-years="10"
+                                    submitted-tab="creditCardTabCtrl.submittedTab"
+                                    container-form="creditCardTabCtrl.containerForm"
+                                    edition-mode="creditCardTabCtrl.editionMode"></ib-ui-expiry-dates-select>
+                            </div>
+                            <div data-ng-if="!creditCardTabCtrl.selectedLoggedCard.cof && creditCardTabCtrl.selectedLoggedCard.cvv.mandatory && (creditCardTabCtrl.creditCardFormModel.type === 'CREDITCARD' || creditCardTabCtrl.creditCardFormModel.type === 'ONHOLD_CREDITCARD')"
+                                class="ib-layout__line-spacing">
+                                <div class="ib-input ib-input--info"
+                                    data-ng-class="{'ib-input--error' : creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.cvv_number.$invalid}">
+                                    <label class="ib-input__label" for="cvv_number"
+                                        ng-class="{'ib-input__label--focus' : creditCardTabCtrl.cvvFocused || (creditCardTabCtrl.containerForm.cvv_number.$viewValue != null && creditCardTabCtrl.containerForm.cvv_number.$viewValue !== '')}">
+                                        {{$root.appMarket === 'US' ? 'CREDIT_CARD_FORM_CVV_NUMBER_LABEL_US'|translate : 'CREDIT_CARD_FORM_CVV_NUMBER_LABEL'|translate}}</label>
+                                    <input class="ib-input__input" type="text" id="cvv_number" name="cvv_number"
+                                        ng-model="creditCardTabCtrl.selectedLoggedCard.newCvv"
+                                        maxlength="{{creditCardTabCtrl.selectedLoggedCard.cvv.length}}"
+                                        ng-pattern="creditCardTabCtrl.selectedLoggedCard.cvv.length === 4 ? $root.pmtPatterns.CVV_PATTERN_AX : $root.pmtPatterns.CVV_PATTERN"
+                                        data-ib-validator-cleaner="{{::$root.pmtPatterns.CVV_CLEANER}}" required
+                                        data-ng-focus="creditCardTabCtrl.cvvFocused=true"
+                                        data-ng-blur="creditCardTabCtrl.cvvFocused=false" />
+                                    <div class="ib-input__info" ng-controller="IbPmtPopoverController as popoverCtrl">
+                                        <a id="pmt-credit-card-tab-cvv-info-link" class="ib-popover--responsive ib-link ib-link--xsmall ib-popover"
+                                            title="{{'CREDIT_CARD_FORM_CVV_POPOVER_TITLE'|translate}}"
+                                            uib-popover-template="::$root.routes.templates + 'ib-generic-popover.html'"
+                                            popover-placement="auto right"
+                                            ng-click="popoverCtrl.text ='POP_OVER_CVV';$event.preventDefault();"
+                                            popover-is-open="popoverCtrl.isOpen"
+                                            data-popover-trigger="'outsideClick'">{{'CREDIT_CARD_FORM_CVV_POPOVER_TEXT'|translate}}</a>
+                                    </div>
+                                </div>
+                                <div
+                                    ng-messages="creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.cvv_number.$error">
+                                    <div id="pmt-credit-card-tab-cvv-error-msg" class="ib-alert ib-alert--error" ng-message="required">
+                                        {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                    <div id="pmt-credit-card-tab-cvv-pattern-error-msg" class="ib-alert ib-alert--error" ng-message="pattern">
+                                        {{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+                                </div>
+                            </div>
+                            <!-- NUMBER CREDIT CARD IBERIA_PAY  -->
+                            <div id="creditCardNumberIbPay"
+                                data-ng-if="!creditCardTabCtrl.selectedLoggedCard.cof && (creditCardTabCtrl.creditCardFormModel.type === 'IBERIA_PAY' || creditCardTabCtrl.creditCardFormModel.type === 'ONHOLD_IBERIA_PAY') && creditCardTabCtrl.IBDCExist()"
+                                class="ib-layout__line-spacing ib-form-iframe hidden">
+                                <div class="ib-input">
+                                    <ib-iberia-pay-credit-card-number id="pmt-credit-card-tab-iberia-pay-cc-number"
+                                        url-iframe-number="creditCardTabCtrl.creditCardFormModel.vault.urlIframeNumber"
+                                        vault-id="creditCardTabCtrl.creditCardFormModel.vault.id"
+                                        error-card-number-ib-pay="creditCardTabCtrl.errorCardNumberIbPay">
+                                    </ib-iberia-pay-credit-card-number>
+                                </div>
+                            </div>
+                            <!-- IBERIA_PAY CVV -->
+                            <div id="cvvIbPay"
+                                data-ng-if="!creditCardTabCtrl.selectedLoggedCard.cof && (creditCardTabCtrl.creditCardFormModel.type === 'IBERIA_PAY'|| creditCardTabCtrl.creditCardFormModel.type === 'ONHOLD_IBERIA_PAY') && creditCardTabCtrl.IBDCExist()"
+                                class="ib-layout__line-spacing ib-form-iframe"
+                                data-ng-class="{'hidden' : creditCardTabCtrl.selectedPaymentInfo &&  creditCardTabCtrl.selectedLoggedCard.cardTypeCode === 'TP'}">
+                                <div class="ib-input">
+                                    <ib-iberia-pay-cvv-number
+                                        data-ng-if="creditCardTabCtrl.creditCardFormModel.type === 'IBERIA_PAY'|| creditCardTabCtrl.creditCardFormModel.type === 'ONHOLD_IBERIA_PAY'"
+                                        url-iframe-cvv="creditCardTabCtrl.creditCardFormModel.vault.urlIframeCvv"
+                                        vault-id="creditCardTabCtrl.creditCardFormModel.vault.id"
+                                        error-cvv-ib-pay="creditCardTabCtrl.errorCvvIbPay"
+                                        submitted="creditCardTabCtrl.submittedTab"></ib-iberia-pay-cvv-number>
+                                </div>
+                            </div>
+
+                            <!-- ZIPCODE  -->
+                            <div class="ib-layout__line-spacing"
+                                data-ng-if="creditCardTabCtrl.selectedLoggedCard.requiredFiles.showZipCode">
+                                <div class="ib-input"
+                                    data-ng-class="{'ib-input--error' : creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.zip_code.$invalid}">
+                                    <label class="ib-input__label" for="zip_code"
+                                        ng-class="{'ib-input__label--focus' : creditCardTabCtrl.zipCodeFocused || (creditCardTabCtrl.containerForm.zip_code.$viewValue != null && creditCardTabCtrl.containerForm.zip_code.$viewValue !== '')}">
+                                        {{'CREDIT_CARD_FORM_ZIP_CODE_LABEL'|translate}}</label>
+                                    <input class="ib-input__input" type="text" id="zip_code" name="zip_code"
+                                        data-ng-focus="creditCardTabCtrl.zipCodeFocused=true"
+                                        data-ng-blur="creditCardTabCtrl.zipCodeFocused=false"
+                                        ng-model="creditCardTabCtrl.selectedLoggedCard.profileAddressInfo.zipCode"
+                                        ng-pattern="::$root.pmtPatterns.DOCS_PATTERN"
+                                        data-ib-validator-cleaner="{{::$root.pmtPatterns.DOCS_CLEANER}}"
+                                        maxlength="{{$root.pmtPatterns.MAX_LENGTH_ZIP_CODE}}" required />
+                                </div>
+                                <div
+                                    ng-messages="creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.zip_code.$error">
+                                    <div id="pmt-credit-card-tab-zip-code-error-msg" class="ib-alert ib-alert--error" ng-message="required">
+                                        {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                </div>
+                            </div>
+                            <!-- STATE  -->
+                            <div class="ib-layout__line-spacing"
+                                data-ng-if="creditCardTabCtrl.selectedLoggedCard.requiredFiles.showState && !creditCardTabCtrl.selectedLoggedCard.profileAddressInfo.country">
+                                <div class="ib-select ib-select--credit-cards ib-select ib-select--label"
+                                    data-ng-class="{'ib-select--error' : creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.issuerCountry.$invalid}">
+                                    <label class="ib-select__label"
+                                        for="select-0">{{'CREDIT_CARD_FORM_SELECT_COUNTRY_LABEL'|translate}}</label>
+                                    <ui-select class="ib-select__action"
+                                        data-ng-model="creditCardTabCtrl.selectedLoggedCard.profileAddressInfo.country"
+                                        ng-required="true" name="issuerCountry"
+                                        data-ng-change="creditCardTabCtrl.changeIssuerCountry($select.selected, creditCardTabCtrl.selectedLoggedCard, creditCardTabCtrl.creditCardFormModel)">
+                                        <ui-select-match class="ib-select__list-ipt"
+                                            placeholder="{{'CREDIT_CARD_FORM_ISSUER_COUNTRY_PLACEHOLDER'|translate}}">
+                                            <span class="ib-select__txt" data-ng-bind="$select.selected.description"></span>
+                                        </ui-select-match>
+                                        <ui-select-choices class="ib-select__list"
+                                            repeat="country in (creditCardTabCtrl.countriesList | filter: $select.search)">
+                                            <span class="ib-select__list-txt" data-ng-bind="::country.description"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                                <div
+                                    ng-messages="creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.issuerCountry.$error">
+                                    <div id="pmt-credit-card-tab-issuer-country-error-msg" class="ib-alert ib-alert--error" ng-message="required">
+                                        {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                </div>
+                            </div>
+                            <div class="ib-layout__line-spacing"
+                                data-ng-if="creditCardTabCtrl.selectedLoggedCard.requiredFiles.showState && creditCardTabCtrl.statesList.length > 0 && creditCardTabCtrl.selectedLoggedCard.profileAddressInfo.country">
+                                <div class="ib-select ib-select--credit-cards ib-select ib-select--label "
+                                    data-ng-class="{
+                                'ib-select--error' : creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.state.$invalid} ">
+                                    <label class="ib-select__label "
+                                        for="select-0 ">{{'CREDIT_CARD_FORM_SELECT_STATE_LABEL'|translate}}</label>
+                                    <ui-select class="ib-select__action "
+                                        data-ng-model="creditCardTabCtrl.selectedLoggedCard.profileAddressInfo.state "
+                                        ng-required="true " name="state ">
+                                        <ui-select-match class="ib-select__list-ipt " placeholder="{{
+                                'CREDIT_CARD_FORM_STATE_PLACEHOLDER'|translate}} ">
+                                            <span class="ib-select__txt " data-ng-bind="$select.selected.description "></span>
+                                        </ui-select-match>
+                                        <ui-select-choices class="ib-select__list " repeat="state in (creditCardTabCtrl.statesList
+                                | filter: $select.search) ">
+                                            <span class="ib-select__list-txt " data-ng-bind="::state.description "></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                                <div
+                                    ng-messages="creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.state.$error ">
+                                    <div id="pmt-credit-card-tab-state-error-msg" class="ib-alert ib-alert--error " ng-message="required ">
+                                        {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+                                </div>
+                            </div>
+                            <!--EMAIL -->
+                            <div class="ib-layout__line-spacing"
+                                data-ng-if="creditCardTabCtrl.creditCardFormModel.requiredFields && creditCardTabCtrl.creditCardFormModel.requiredFields.indexOf('billTo_email') !== -1">
+                                <div class="ib-input"
+                                    data-ng-class="{'ib-input--error' : creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.bill_email.$invalid}">
+                                    <label
+                                        ng-class="{'ib-input__label--focus' : creditCardTabCtrl.emailFocused || (creditCardTabCtrl.containerForm.bill_email.$viewValue != null && creditCardTabCtrl.containerForm.bill_email.$viewValue !== '')}"
+                                        class="ib-input__label"
+                                        for="bill_email">{{'PAYMENTS_CONTACT_FORM_EMAIL' | translate}}</label>
+                                    <input class="ib-input__input" type="text" id="bill_email" name="bill_email" maxlength="60"
+                                        ng-pattern="::$root.pmtPatterns.EMAIL_PATTERN" required
+                                        data-ng-focus="creditCardTabCtrl.emailFocused=true"
+                                        data-ng-blur="creditCardTabCtrl.emailFocused=false"
+                                        ng-model="creditCardTabCtrl.selectedPaymentInfo.selectedLoggedCard.email" />
+                                </div>
+                                <div
+                                    ng-messages="creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.bill_email.$error">
+                                    <div id="pmt-credit-card-tab-bill-mail-error-msg" class="ib-alert ib-alert--error" ng-message="required">
+                                        {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                                    </div>
+                                    <div id="pmt-credit-card-tab-bill-mail-pattern-error-msg" class="ib-alert ib-alert--error" ng-message="pattern">
+                                        {{'PAYMENTS_EMAIL_PATTERN_ERROR'|translate}}</div>
+                                </div>
+                            </div>
+                            <!-- PHONE NUMBER -->
+                            <div class="ib-layout__line-spacing"
+                                data-ng-if="creditCardTabCtrl.creditCardFormModel.requiredFields && creditCardTabCtrl.creditCardFormModel.requiredFields.indexOf('billTo_phoneNumber') !== -1">
+                                <div class="ib-input"
+                                    data-ng-class="{'ib-input--error' : creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.bill_phoneNumber.$invalid}">
+                                    <label
+                                        ng-class="{'ib-input__label--focus' : creditCardTabCtrl.phoneFocused || (creditCardTabCtrl.containerForm.bill_phoneNumber.$viewValue != null && creditCardTabCtrl.containerForm.bill_phoneNumber.$viewValue !== '')}"
+                                        class="ib-input__label"
+                                        for="bill_phoneNumber">{{'PAYMENTS_CONTACT_FORM_PHONE' | translate}}</label>
+                                    <input class="ib-input__input" type="text" id="bill_phoneNumber" name="bill_phoneNumber"
+                                        maxlength="16" ng-pattern="::$root.pmtPatterns.PHONE_PATTERN"
+                                        data-ib-validator-cleaner="{{::$root.pmtPatterns.PHONE_CLEANER}}" required
+                                        data-ng-focus="creditCardTabCtrl.phoneFocused=true"
+                                        data-ng-blur="creditCardTabCtrl.phoneFocused=false"
+                                        ng-model="creditCardTabCtrl.selectedPaymentInfo.selectedLoggedCard.phone" />
+                                </div>
+                                <div
+                                    ng-messages="creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.bill_phoneNumber.$error">
+                                    <div id="pmt-credit-card-tab-bill-phone-error-msg" class="ib-alert ib-alert--error" ng-message="required">
+                                        {{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                                    </div>
+                                    <div id="pmt-credit-card-tab-bill-phone-pattern-error-msg" class="ib-alert ib-alert--error" ng-message="pattern">
+                                        {{'PAYMENTS_PHONE_PATTERN_ERROR'|translate}}</div>
+                                </div>
+                            </div>
+                            <div class="ib-box__wrapper" data-ng-if="creditCardTabCtrl.requiredAdditionalFields">
+                                <ib-pmt-required-fields id="pmt-credit-card-tab-required-fields" required-fields="creditCardTabCtrl.requiredAdditionalFields"
+                                    container-form="creditCardTabCtrl.containerForm"
+                                    submitted-tab="creditCardTabCtrl.submittedTab"
+                                    summary-info-quota="creditCardTabCtrl.summaryInfoQuota"></ib-pmt-required-fields>
+                            </div>
+                        </div>
+                        <div class="ib-radio-card__additional-info" data-ng-if="creditCardTabCtrl.selectedLoggedCard && creditCardTabCtrl.selectedLoggedCard.cardTypeId==='newCard'
+                                && customerCard.profileCardId === creditCardTabCtrl.selectedLoggedCard.profileCardId">
+                            <ib-pmt-generic-credit-card-fields id="pmt-credit-card-tab-generic-credit-card-fields" credit-card-form-model="creditCardTabCtrl.creditCardFormModel"
+                                submitted-tab="creditCardTabCtrl.submittedTab"
+                                container-form="creditCardTabCtrl.containerForm"
+                                selected-data="creditCardTabCtrl.selectedPaymentInfo" logged-info="creditCardTabCtrl.loggedInfo"
+                                countries-list="creditCardTabCtrl.countriesList"
+                                issuer-country="creditCardTabCtrl.issuerCountry" states-list="creditCardTabCtrl.statesList"
+                                is-on-hold-order="creditCardTabCtrl.isOnHoldOrder"
+                                required-additional-fields="creditCardTabCtrl.requiredAdditionalFields"
+                                contact-data="creditCardTabCtrl.contactData" data-ng-if="!creditCardTabCtrl.creditCardFormModel.isReducedCreditCardForm"
+                                summary-info-quota="creditCardTabCtrl.summaryInfoQuota"
+                                customer-credit-cards="creditCardTabCtrl.customerCreditCards[creditCardTabCtrl.creditCardFormModel.type]">
+                            </ib-pmt-generic-credit-card-fields>
+                            <ib-pmt-credit-card-form id="pmt-credit-card-tab-credit-card-form" 
+                                data-ng-if="creditCardTabCtrl.creditCardFormModel.isReducedCreditCardForm" 
+                                credit-card-form-model="creditCardTabCtrl.creditCardFormModel"
+                                submitted-tab="creditCardTabCtrl.submittedTab"
+                                container-form="creditCardTabCtrl.containerForm" selected-data="creditCardTabCtrl.selectedPaymentInfo"
+                                logged-info="creditCardTabCtrl.loggedInfo" countries-list="creditCardTabCtrl.countriesList"
+                                issuer-country="creditCardTabCtrl.issuerCountry" states-list="creditCardTabCtrl.statesList"
+                                required-additional-fields="creditCardTabCtrl.requiredAdditionalFields"
+                                contact-data="creditCardTabCtrl.contactData" summary-info-quota="creditCardTabCtrl.summaryInfoQuota"
+                                customer-credit-cards="creditCardTabCtrl.customerCreditCards[creditCardTabCtrl.creditCardFormModel.type]">
+                            </ib-pmt-credit-card-form>
+                        </div>
+                    </div>
+                </div>
+                <div ng-messages="creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.radio_card.$error"
+                    class="ib-layout__form-center">
+                    <div ng-message="required" class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                        <div id="pmt-credit-car-tab-cc-form-no-selected-card-error-msg" class="ib-msg-alert ib-msg-alert--smallest ib-msg-alert--danger icon-icon-mas_2 alert">
+                            <p
+                                class="ib-msg-alert__text ib-msg-alert__text--bold ib-msg-alert__text--small ib-msg-alert__text--mb">
+                                {{'CREDIT_CARD_FORM_NO_SELECTED_CARD_ERROR'|translate}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+            <div class="ib-radio">
+                <input type="radio" id="SavedCreditCard_2" name="SavedCreditCard" class="ib-radio__input"
+                    data-ng-value="false" data-ng-model="creditCardTabCtrl.selectedSavedOrNewCard"
+                    data-ng-change="creditCardTabCtrl.selectNewCard()"/>
+                <label for="SavedCreditCard_2" class="ib-radio__label">
+                    <span class="ib-radio__text ib-radio__text--payment-form">{{'CREDIT_CARD_FORM_NEW_CARD_TITLE'|translate}}</span>
+                </label>
+            </div>
+            <div class="u-ml-none-xs u-ml-medium u-mt-xsmedium" data-ng-init="creditCardTabCtrl.initRadioButton()">
+                <ib-pmt-generic-credit-card-fields id="pmt-credit-card-tab-generic-credit-card-fields-1" 
+                    data-ng-if="!creditCardTabCtrl.creditCardFormModel.isReducedCreditCardForm && !creditCardTabCtrl.selectedSavedOrNewCard" 
+                    credit-card-form-model="creditCardTabCtrl.creditCardFormModel"
+                    submitted-tab="creditCardTabCtrl.submittedTab"
+                    container-form="creditCardTabCtrl.containerForm" selected-data="creditCardTabCtrl.selectedPaymentInfo"
+                    logged-info="creditCardTabCtrl.loggedInfo" countries-list="creditCardTabCtrl.countriesList"
+                    issuer-country="creditCardTabCtrl.issuerCountry" states-list="creditCardTabCtrl.statesList"
+                    is-on-hold-order="creditCardTabCtrl.isOnHoldOrder"
+                    required-additional-fields="creditCardTabCtrl.requiredAdditionalFields"
+                    contact-data="creditCardTabCtrl.contactData" summary-info-quota="creditCardTabCtrl.summaryInfoQuota"
+                    customer-credit-cards="creditCardTabCtrl.customerCreditCards[creditCardTabCtrl.creditCardFormModel.type]">
+                </ib-pmt-generic-credit-card-fields>
+                <ib-pmt-credit-card-form id="pmt-credit-card-tab-credit-card-form"
+                    data-ng-if="creditCardTabCtrl.creditCardFormModel.isReducedCreditCardForm && !creditCardTabCtrl.selectedSavedOrNewCard" 
+                    credit-card-form-model="creditCardTabCtrl.creditCardFormModel"
+                    submitted-tab="creditCardTabCtrl.submittedTab"
+                    container-form="creditCardTabCtrl.containerForm" selected-data="creditCardTabCtrl.selectedPaymentInfo"
+                    logged-info="creditCardTabCtrl.loggedInfo" countries-list="creditCardTabCtrl.countriesList"
+                    issuer-country="creditCardTabCtrl.issuerCountry" states-list="creditCardTabCtrl.statesList"
+                    required-additional-fields="creditCardTabCtrl.requiredAdditionalFields"
+                    contact-data="creditCardTabCtrl.contactData" summary-info-quota="creditCardTabCtrl.summaryInfoQuota"
+                    customer-credit-cards="creditCardTabCtrl.customerCreditCards[creditCardTabCtrl.creditCardFormModel.type]">
+                </ib-pmt-credit-card-form>
+            </div>
+        </div>
+        <div ng-messages="creditCardTabCtrl.submittedTab && creditCardTabCtrl.containerForm.SavedCreditCard.$error"
+            class="ib-layout__form-center">
+            <div ng-message="isSelectedAnyCard" class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                <div id="pmt-credit-car-tab-cc-form-no-selected-card-error-msg" class="ib-msg-alert ib-msg-alert--smallest ib-msg-alert--danger icon-icon-mas_2 alert">
+                    <p
+                        class="ib-msg-alert__text ib-msg-alert__text--bold ib-msg-alert__text--small ib-msg-alert__text--mb">
+                        {{'CREDIT_CARD_FORM_NO_SELECTED_CARD_ERROR'|translate}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ib-layout__form-center"
+        data-ng-if="!creditCardTabCtrl.loggedInfo || (creditCardTabCtrl.loggedInfo &&
+                        creditCardTabCtrl.customerCreditCards[creditCardTabCtrl.creditCardFormModel.type].length <=1 )">
+        <!--
+        <div class="ib-layout__line-spacing">
+            <span class="ib-text ib-text--especial ib-text--big">Paga con tu tarjeta de crédito o débito. Es totalmente seguro y tan rápido como rellenar estos datos</span>
+        </div>
+        -->
+        <div class="ib-layout__line-spacing" data-ng-if="creditCardTabCtrl.isOnHoldOrder">
+            <span class="ib-text ib-text--color-unfocused">{{'CREDIT_CARD_FORM_ON_HOLD_TEXT'|translate}}</span>
+        </div>
+        <ib-pmt-generic-credit-card-fields id="pmt-credit-card-tab-generic-credit-card-fields-1" credit-card-form-model="creditCardTabCtrl.creditCardFormModel"
+            data-ng-if="!creditCardTabCtrl.creditCardFormModel.isReducedCreditCardForm"
+            submitted-tab="creditCardTabCtrl.submittedTab"
+            container-form="creditCardTabCtrl.containerForm" selected-data="creditCardTabCtrl.selectedPaymentInfo"
+            logged-info="creditCardTabCtrl.loggedInfo" countries-list="creditCardTabCtrl.countriesList"
+            issuer-country="creditCardTabCtrl.issuerCountry" states-list="creditCardTabCtrl.statesList"
+            is-on-hold-order="creditCardTabCtrl.isOnHoldOrder"
+            required-additional-fields="creditCardTabCtrl.requiredAdditionalFields"
+            contact-data="creditCardTabCtrl.contactData" summary-info-quota="creditCardTabCtrl.summaryInfoQuota"
+            customer-credit-cards="creditCardTabCtrl.customerCreditCards[creditCardTabCtrl.creditCardFormModel.type]">
+        </ib-pmt-generic-credit-card-fields>
+        <ib-pmt-credit-card-form id="pmt-credit-card-tab-credit-card-form" 
+            data-ng-if="creditCardTabCtrl.creditCardFormModel.isReducedCreditCardForm"
+            credit-card-form-model="creditCardTabCtrl.creditCardFormModel"
+            submitted-tab="creditCardTabCtrl.submittedTab"
+            container-form="creditCardTabCtrl.containerForm" selected-data="creditCardTabCtrl.selectedPaymentInfo"
+            logged-info="creditCardTabCtrl.loggedInfo" countries-list="creditCardTabCtrl.countriesList"
+            issuer-country="creditCardTabCtrl.issuerCountry" states-list="creditCardTabCtrl.statesList"
+            required-additional-fields="creditCardTabCtrl.requiredAdditionalFields"
+            contact-data="creditCardTabCtrl.contactData" summary-info-quota="creditCardTabCtrl.summaryInfoQuota"
+            customer-credit-cards="creditCardTabCtrl.customerCreditCards[creditCardTabCtrl.creditCardFormModel.type]">
+        </ib-pmt-credit-card-form>
+    </div>
+</fieldset>

@@ -1,0 +1,442 @@
+<div class="ib-layout__line-spacing"
+    data-ng-if="genCreditCardFieldsCtrl.creditCardFormModel.requiredFields.indexOf('issueCountry') !== -1">
+    <div class="ib-select ib-select--credit-cards ib-select ib-select--label"
+        data-ng-class="{'ib-select--error' : genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.issuerCountry.$invalid}">
+        <span class="ib-select__label"
+            for="select_country_card">{{'CREDIT_CARD_FORM_SELECT_COUNTRY_LABEL'|translate}}</span>
+        <ui-select id="pmt-gcc-fields-issuer-country-cmb-box" role="listbox" class="ib-select__action" data-ng-model="genCreditCardFieldsCtrl.issuerCountry"
+            ng-required="true" name="issuerCountry" title="issuerCountry"
+            data-ng-change="genCreditCardFieldsCtrl.changeIssuerCountry($select.selected)">
+            <ui-select-match class="ib-select__list-ipt"
+                placeholder="{{'CREDIT_CARD_FORM_ISSUER_COUNTRY_PLACEHOLDER'|translate}}">
+                <span class="ib-select__txt" data-ng-bind="$select.selected.description"></span>
+            </ui-select-match>
+            <ui-select-choices class="ib-select__list"
+                repeat="country in (genCreditCardFieldsCtrl.countriesList | prefixCheckSpecialCharactersFilter: $select.search)">
+                <span class="ib-select__list-txt" data-ng-bind="::country.description"></span>
+            </ui-select-choices>
+        </ui-select>
+    </div>
+    <div
+        ng-messages="genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.issuerCountry.$error">
+        <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+    </div>
+</div>
+<div class="ib-layout__line-spacing">
+    <div class="ib-select ib-select--credit-cards" role="listbox"
+        data-ng-class="{'ib-select--error' : genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.creditCardsTypes.$invalid}">
+        <ui-select id="pmt-gcc-fields-card-type-cmb-box" class="ib-select__action" data-ng-model="genCreditCardFieldsCtrl.selectedData.selectedCard"
+            data-ng-change="genCreditCardFieldsCtrl.typeCreditCardSelected(genCreditCardFieldsCtrl,true)"
+            ng-required="true" name="creditCardsTypes">
+            <ui-select-match class="ib-select__list-ipt"
+                placeholder="{{'CREDIT_CARD_FORM_SELECT_PLACEHOLDER'|translate}}">
+                <figure class="ib-select__list-icon">
+                    <img ng-src="{{$select.selected.iconUrl}}"
+                        alt="{{'CREDIT_CARD_FORM_SELECT_ALT_1'|translate}}{{$select.selected.description}}" />
+                </figure>
+                <span class="ib-select__txt"
+                    data-ng-bind="$select.selected.totalFee !==0 ? ($select.selected.description + ' +' + $select.selected.parsedFee) : $select.selected.description"></span>
+            </ui-select-match>
+            <ui-select-choices class="ib-select__list"
+                repeat="creditCard in (genCreditCardFieldsCtrl.creditCardFormModel.types | filter: $select.search)">
+                <figure class="ib-select__list-icon">
+                    <img ng-src="{{creditCard.iconUrl}}"
+                        alt="{{'CREDIT_CARD_FORM_SELECT_ALT_1'|translate}}{{creditCard.description}}" />
+                </figure>
+                <span class="ib-select__list-txt"
+                    data-ng-bind="::(creditCard.totalFee !==0 ? (creditCard.description + ' +' + creditCard.parsedFee) : creditCard.description)"></span>
+            </ui-select-choices>
+        </ui-select>
+    </div>
+    <div
+        ng-messages="genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.creditCardsTypes.$error">
+        <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+    </div>
+</div>
+<div
+    data-ng-if="(!genCreditCardFieldsCtrl.selectedData.selectedCard && genCreditCardFieldsCtrl.creditCardFormModel.externalProvider !== 'EXTERNAL_CREDITCARD') || (genCreditCardFieldsCtrl.selectedData.selectedCard && !genCreditCardFieldsCtrl.selectedData.selectedCard.external)">
+    <!-- NUMBER CREDIT CARD -->
+    <div data-ng-if="genCreditCardFieldsCtrl.creditCardFormModel.type === 'CREDITCARD' || genCreditCardFieldsCtrl.creditCardFormModel.type === 'ONHOLD_CREDITCARD'"
+        class="ib-layout__line-spacing">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.credit_card_num.$invalid}">
+            <label class="ib-input__label" for="credit_card_num"
+                ng-class="{'ib-input__label--focus' : genCreditCardFieldsCtrl.cardFocused || (genCreditCardFieldsCtrl.containerForm.credit_card_num.$viewValue != null && genCreditCardFieldsCtrl.containerForm.credit_card_num.$viewValue !== '')}">{{'CREDIT_CARD_FORM_CARD_NUMBER_LABEL'|translate}}
+            </label>
+            <input ng-if="genCreditCardFieldsCtrl.selectedData.selectedCard.cardTypeId !== '3'" class="ib-input__input"
+                type="text" id="credit_card_num" name="credit_card_num"
+                ng-model="genCreditCardFieldsCtrl.selectedData.cardNumber" maxlength="23"
+                data-ng-focus="genCreditCardFieldsCtrl.cardFocused=true"
+                data-ng-blur="genCreditCardFieldsCtrl.cardFocused=false" cc-number cc-format required
+                ng-change="genCreditCardFieldsCtrl.checkCardNumber()" />
+            <input ng-if="genCreditCardFieldsCtrl.selectedData.selectedCard.cardTypeId === '3'" class="ib-input__input"
+                type="text" id="credit_card_num" name="credit_card_num"
+                ng-model="genCreditCardFieldsCtrl.selectedData.cardNumber" maxlength="23"
+                data-ng-focus="genCreditCardFieldsCtrl.cardFocused=true"
+                data-ng-blur="genCreditCardFieldsCtrl.cardFocused=false" required
+                ng-change="genCreditCardFieldsCtrl.checkCardNumber()" data-ib-airplus-cc-number />
+        </div>
+        <div
+            ng-messages="genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.credit_card_num.$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+            <div class="ib-alert ib-alert--error" ng-message="ccNumber">
+                {{'CREDIT_CARD_INVALID_PATTERN_ERROR'|translate}}</div>
+            <div class="ib-alert ib-alert--error" ng-message="ccNumberType">
+                {{'CREDIT_CARD_INVALID_PATTERN_ERROR'|translate}}</div>
+            <div class="ib-alert ib-alert--error" ng-message="cardInvalid">
+                {{'CREDIT_CARD_INVALID_PATTERN_ERROR'|translate}}</div>
+        </div>
+    </div>
+    <!-- NUMBER CREDIT CARD IBERIA_PAY  -->
+    <div id="creditCardNumberIbPay"
+        data-ng-if="(genCreditCardFieldsCtrl.creditCardFormModel.type === 'IBERIA_PAY' || genCreditCardFieldsCtrl.creditCardFormModel.type === 'ONHOLD_IBERIA_PAY') && genCreditCardFieldsCtrl.IBDCExist()"
+        class="ib-layout__line-spacing ib-form-iframe">
+        <div class="ib-input">
+            <ib-iberia-pay-credit-card-number id="pmt-gcc-fields-iberia-pay-credit-card-number"
+                url-iframe-number="genCreditCardFieldsCtrl.creditCardFormModel.vault.urlIframeNumber"
+                vault-id="genCreditCardFieldsCtrl.creditCardFormModel.vault.id"
+                error-card-number-ib-pay="genCreditCardFieldsCtrl.errorCardNumberIbPay">
+            </ib-iberia-pay-credit-card-number>
+        </div>
+    </div>
+    <!-- NAME -->
+    <div class="ib-layout__line-spacing">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.name.$invalid}">
+            <label class="ib-input__label" for="name"
+                ng-class="{'ib-input__label--focus' : genCreditCardFieldsCtrl.nameFocused || (genCreditCardFieldsCtrl.containerForm.name.$viewValue != null && genCreditCardFieldsCtrl.containerForm.name.$viewValue !== '')}">{{'CREDIT_CARD_FORM_NAME_LABEL'|translate}}</label>
+            <input class="ib-input__input" type="text" id="name" name="name"
+                ng-model="genCreditCardFieldsCtrl.contactData.ownerName"
+                minlength="{{$root.pmtPatterns.MIN_LENGTH_NAME}}"
+                maxlength="{{$root.pmtPatterns.MAX_LENGTH_NAME}}"
+                ng-pattern="::$root.pmtPatterns.NAME_SURNAME_PATTERN"
+                data-ib-validator-cleaner="{{::$root.pmtPatterns.NAME_SURNAME_CLEANER}}" ib-trim-on-blur required
+                data-ng-focus="genCreditCardFieldsCtrl.nameFocused=true"
+                data-ng-blur="genCreditCardFieldsCtrl.nameFocused=false"
+                autocomplete="cc-given-name"
+                ng-change="genCreditCardFieldsCtrl.checkNameOrSurname('name')" />
+        </div>
+        <div
+            ng-messages="genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.name.$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+            <div class="ib-alert ib-alert--error" ng-message="minlength">{{'GENERAL_NAME_MIN_LENGTH_ERROR'|translate}}</div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+        </div>
+    </div>
+    <!-- SURNAME -->
+    <div class="ib-layout__line-spacing">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.surnames.$invalid}">
+            <label class="ib-input__label" for="surnames"
+                ng-class="{'ib-input__label--focus' : genCreditCardFieldsCtrl.surnamesFocused || (genCreditCardFieldsCtrl.containerForm.surnames.$viewValue != null && genCreditCardFieldsCtrl.containerForm.surnames.$viewValue !== '')}">{{'CREDIT_CARD_FORM_SURNAME_LABEL'|translate}}</label>
+            <input class="ib-input__input" type="text" id="surnames" name="surnames"
+                ng-model="genCreditCardFieldsCtrl.contactData.surnames"
+                minlength="{{$root.pmtPatterns.MIN_LENGTH_SURNAME}}"
+                maxlength="{{$root.pmtPatterns.MAX_LENGTH_SURNAME}}"
+                ng-pattern="::$root.pmtPatterns.NAME_SURNAME_PATTERN"
+                data-ib-validator-cleaner="{{::$root.pmtPatterns.NAME_SURNAME_CLEANER}}" ib-trim-on-blur required
+                data-ng-focus="genCreditCardFieldsCtrl.surnamesFocused=true"
+                data-ng-blur="genCreditCardFieldsCtrl.surnamesFocused=false"
+                autocomplete="cc-family-name"
+                ng-change="genCreditCardFieldsCtrl.checkNameOrSurname('surnames')" />
+        </div>
+        <div
+            ng-messages="genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.surnames.$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+            <div class="ib-alert ib-alert--error" ng-message="surnameInvalid">
+                {{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+            <div class="ib-alert ib-alert--error" ng-message="minlength">{{'GENERAL_NAME_MIN_LENGTH_ERROR'|translate}}</div>
+        </div>
+    </div>
+    <!-- EXPIRE DATE -->
+    <div class="ib-layout__line-spacing">
+        <ib-ui-expiry-dates-select id="pmt-gcc-fields-expiry-date" month="genCreditCardFieldsCtrl.selectedData.month"
+            year="genCreditCardFieldsCtrl.selectedData.year" maximum-years="10"
+            submitted-tab="PmtCreditCardFormCtrl.submittedTab"
+            is-payment-form="true"
+            container-form="genCreditCardFieldsCtrl.containerForm" edition-mode="genCreditCardFieldsCtrleditionMode"></ib-ui-expiry-dates-select>
+    </div>
+    <!-- CVV -->
+    <div data-ng-if="genCreditCardFieldsCtrl.selectedData.selectedCard.cvv.mandatory || genCreditCardFieldsCtrl.creditCardFormModel.type==='IBERIA_PAY' || genCreditCardFieldsCtrl.creditCardFormModel.type === 'ONHOLD_IBERIA_PAY'"
+        class="ib-layout__line-spacing">
+        <div data-ng-if="genCreditCardFieldsCtrl.creditCardFormModel.type === 'CREDITCARD' || genCreditCardFieldsCtrl.creditCardFormModel.type === 'ONHOLD_CREDITCARD'"
+            class="ib-input ib-input--info"
+            data-ng-class="{'ib-input--error' : genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.cvv_number.$invalid}">
+            <label class="ib-input__label" for="cvv_number"
+                ng-class="{'ib-input__label--focus' : genCreditCardFieldsCtrl.cvvFocused || (genCreditCardFieldsCtrl.containerForm.cvv_number.$viewValue != null && genCreditCardFieldsCtrl.containerForm.cvv_number.$viewValue !== '')}">
+                {{$root.appMarket === 'US' ? 'CREDIT_CARD_FORM_CVV_NUMBER_LABEL_US'|translate : 'CREDIT_CARD_FORM_CVV_NUMBER_LABEL'|translate}}</label>
+            <input class="ib-input__input" type="text" id="cvv_number" name="cvv_number"
+                ng-model="genCreditCardFieldsCtrl.selectedData.newCvv"
+                maxlength="{{genCreditCardFieldsCtrl.selectedData.selectedCard.cvv.length}}"
+                ng-pattern="genCreditCardFieldsCtrl.selectedData.selectedCard.cvv.length === 4 ? $root.pmtPatterns.CVV_PATTERN_AX : $root.pmtPatterns.CVV_PATTERN"
+                data-ib-validator-cleaner="{{$root.pmtPatterns.CVV_CLEANER}}" required
+                data-ng-focus="genCreditCardFieldsCtrl.cvvFocused=true"
+                data-ng-blur="genCreditCardFieldsCtrl.cvvFocused=false" />
+            <div class="ib-input__info" ng-controller="IbPmtPopoverController as popoverCtrl">
+                <a id="pmt-gcc-fields-cvv-info-link" class="ib-popover--responsive ib-link ib-link--xsmall ib-popover"
+                    title="{{'CREDIT_CARD_FORM_CVV_POPOVER_TITLE'|translate}}"
+                    uib-popover-template="::$root.routes.templates + 'ib-generic-popover.html'"
+                    popover-placement="auto right" ng-click="popoverCtrl.text ='POP_OVER_CVV';$event.preventDefault();"
+                    popover-is-open="popoverCtrl.isOpen"
+                    data-popover-trigger="'outsideClick'">{{'CREDIT_CARD_FORM_CVV_POPOVER_TEXT'|translate}}</a>
+            </div>
+        </div>
+        <div
+            ng-messages="genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.cvv_number.$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+        </div>
+        <!-- IBERIA_PAY CVV -->
+        <div id="cvvIbPay"
+            data-ng-if="(genCreditCardFieldsCtrl.creditCardFormModel.type === 'IBERIA_PAY'|| genCreditCardFieldsCtrl.creditCardFormModel.type === 'ONHOLD_IBERIA_PAY') && genCreditCardFieldsCtrl.IBDCExist()"
+            class="ib-layout__line-spacing ib-form-iframe">
+            <div class="ib-input">
+                <ib-iberia-pay-cvv-number id="pmt-gcc-fields-iberia-pay-cvv-number"
+                    data-ng-if="genCreditCardFieldsCtrl.creditCardFormModel.type === 'IBERIA_PAY'|| genCreditCardFieldsCtrl.creditCardFormModel.type === 'ONHOLD_IBERIA_PAY'"
+                    url-iframe-cvv="genCreditCardFieldsCtrl.creditCardFormModel.vault.urlIframeCvv"
+                    vault-id="genCreditCardFieldsCtrl.creditCardFormModel.vault.id"
+                    error-cvv-ib-pay="genCreditCardFieldsCtrl.errorCvvIbPay"
+                    submitted="genCreditCardFieldsCtrl.submittedTab"></ib-iberia-pay-cvv-number>
+            </div>
+        </div>
+    </div>
+    <!-- STREET -->
+    <div class="ib-layout__line-spacing"
+        data-ng-if="genCreditCardFieldsCtrl.creditCardFormModel.requiredFields.indexOf('billTo_street1') !== -1">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.bill_street.$invalid}">
+            <label class="ib-input__label" for="bill_street"
+                ng-class="{'ib-input__label--focus' : genCreditCardFieldsCtrl.billStreetFocused || (genCreditCardFieldsCtrl.containerForm.bill_street.$viewValue != null && genCreditCardFieldsCtrl.containerForm.bill_street.$viewValue !== '')}">
+                {{'GENERAL_STREET_LABEL'|translate}}</label>
+            <input class="ib-input__input" type="text" id="bill_street" name="bill_street"
+                data-ng-focus="genCreditCardFieldsCtrl.billStreetFocused=true"
+                data-ng-blur="genCreditCardFieldsCtrl.billStreetFocused=false"
+                data-ng-model="genCreditCardFieldsCtrl.selectedData.street"
+                ng-pattern="::$root.pmtPatterns.ADDITIONAL_FIELD_PATTERN"
+                data-ib-validator-cleaner="{{::$root.pmtPatterns.ADDITIONAL_FIELD_CLEANER}}"
+                minlength="{{$root.pmtPatterns.MIN_LENGTH_STREET}}"
+                autocomplete="street-address"
+                maxlength="{{$root.pmtPatterns.MAX_LENGTH_STREET}}" required ib-city-validator />
+        </div>
+        <div
+            ng-messages="genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.bill_street.$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+        </div>
+    </div>
+    <!-- CITY -->
+    <div class="ib-layout__line-spacing"
+        data-ng-if="genCreditCardFieldsCtrl.creditCardFormModel.requiredFields.indexOf('billTo_city') !== -1">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.bill_city.$invalid}">
+            <label class="ib-input__label" for="bill_city"
+                ng-class="{'ib-input__label--focus' : genCreditCardFieldsCtrl.billCityFocused || (genCreditCardFieldsCtrl.containerForm.bill_city.$viewValue != null && genCreditCardFieldsCtrl.containerForm.bill_city.$viewValue !== '')}">
+                {{'GENERAL_CITY_LABEL'|translate}}</label>
+            <input class="ib-input__input" type="text" id="bill_city" name="bill_city"
+                data-ng-focus="genCreditCardFieldsCtrl.billCityFocused=true"
+                data-ng-blur="genCreditCardFieldsCtrl.billCityFocused=false"
+                data-ng-model="genCreditCardFieldsCtrl.selectedData.city" ng-pattern="::$root.pmtPatterns.CITY_PATTERN"
+                data-ib-validator-cleaner="{{::$root.pmtPatterns.CITY_CLEANER}}"
+                minlength="{{$root.pmtPatterns.MIN_LENGTH_CITY}}"
+                autocomplete="address-level2"
+                maxlength="{{$root.pmtPatterns.MAX_LENGTH_CITY}}" required />
+        </div>
+        <div
+            ng-messages="genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.bill_city.$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+        </div>
+    </div>
+    <!-- ZIP CODE -->
+    <div class="ib-layout__line-spacing"
+        data-ng-if="genCreditCardFieldsCtrl.creditCardFormModel.requiredFields.indexOf('billTo_postalCode') !== -1">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.zip_code.$invalid}">
+            <label class="ib-input__label" for="zip_code"
+                ng-class="{'ib-input__label--focus' : genCreditCardFieldsCtrl.zipCodeFocused || (genCreditCardFieldsCtrl.containerForm.zip_code.$viewValue != null && genCreditCardFieldsCtrl.containerForm.zip_code.$viewValue !== '')}">
+                {{'CREDIT_CARD_FORM_ZIP_CODE_LABEL'|translate}}</label>
+            <input class="ib-input__input" type="text" id="zip_code" name="zip_code"
+                data-ng-focus="genCreditCardFieldsCtrl.zipCodeFocused=true"
+                data-ng-blur="genCreditCardFieldsCtrl.zipCodeFocused=false"
+                data-ng-model="genCreditCardFieldsCtrl.selectedData.zipCode"
+                ng-pattern="genCreditCardFieldsCtrl.zipCodeValidators.pattern"
+                data-ib-validator-cleaner="{{genCreditCardFieldsCtrl.zipCodeValidators.cleaner}}"
+                minlength="{{genCreditCardFieldsCtrl.zipCodeValidators.minLength}}"
+                maxlength="{{genCreditCardFieldsCtrl.zipCodeValidators.maxLength}}"
+                autocomplete="postal-code"
+                data-ng-change="genCreditCardFieldsCtrl.detectStateByZipCode(genCreditCardFieldsCtrl.selectedData.zipCode)"
+                required />
+        </div>
+        <div
+            ng-messages="genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.zip_code.$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+            <div class="ib-alert ib-alert--error" ng-message="zipCodeInvalid">
+                {{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+        </div>
+    </div>
+    <!-- ESTADO/PROVINCIA -->
+    <div class="ib-layout__line-spacing"
+        data-ng-if="genCreditCardFieldsCtrl.creditCardFormModel.requiredFields.indexOf('billTo_State') !== -1 && genCreditCardFieldsCtrl.statesList.length > 1">
+        <div class="ib-select ib-select--credit-cards ib-select ib-select--label"
+            data-ng-class="{'ib-select--error' : genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.state.$invalid}">
+            <label class="ib-select__label" for="select-0">{{'CREDIT_CARD_FORM_SELECT_STATE_LABEL'|translate}}</label>
+            <ui-select id="pmt-gcc-fields-state-cmb-box" class="ib-select__action" data-ng-model="genCreditCardFieldsCtrl.selectedData.state"
+                ng-required="true" name="state"
+                data-ng-change="genCreditCardFieldsCtrl.fillZipCodeByState(genCreditCardFieldsCtrl.selectedData.state)">
+                <ui-select-match class="ib-select__list-ipt"
+                    placeholder="{{'CREDIT_CARD_FORM_STATE_PLACEHOLDER'|translate}}">
+                    <span class="ib-select__txt" data-ng-bind="$select.selected.description"></span>
+                </ui-select-match>
+                <ui-select-choices class="ib-select__list"
+                    repeat="state in (genCreditCardFieldsCtrl.statesList | filter: $select.search)">
+                    <span class="ib-select__list-txt" data-ng-bind="::state.description"></span>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div
+            ng-messages="genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.state.$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+        </div>
+    </div>
+    <!--EMAIL -->
+    <div class="ib-layout__line-spacing"
+        data-ng-if="genCreditCardFieldsCtrl.creditCardFormModel.requiredFields && genCreditCardFieldsCtrl.creditCardFormModel.requiredFields.indexOf('billTo_email') !== -1">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.bill_email.$invalid}">
+            <label
+                ng-class="{'ib-input__label--focus' : genCreditCardFieldsCtrl.emailFocused || (genCreditCardFieldsCtrl.containerForm.bill_email.$viewValue != null && genCreditCardFieldsCtrl.containerForm.bill_email.$viewValue !== '')}"
+                class="ib-input__label" for="bill_email">{{'PAYMENTS_CONTACT_FORM_EMAIL' | translate}}</label>
+            <input class="ib-input__input" type="text" id="bill_email" name="bill_email" maxlength="60"
+                ng-pattern="::$root.pmtPatterns.EMAIL_PATTERN" required
+                data-ng-focus="genCreditCardFieldsCtrl.emailFocused=true"
+                data-ng-blur="genCreditCardFieldsCtrl.emailFocused=false"
+                autocomplete="email"
+                ng-model="genCreditCardFieldsCtrl.selectedData.email" />
+        </div>
+        <div ng-messages="genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.bill_email.$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'PAYMENTS_EMAIL_PATTERN_ERROR'|translate}}</div>
+        </div>
+    </div>
+    <!-- PHONE NUMBER -->
+    <div class="ib-layout__line-spacing"
+        data-ng-if="genCreditCardFieldsCtrl.creditCardFormModel.requiredFields && genCreditCardFieldsCtrl.creditCardFormModel.requiredFields.indexOf('billTo_phoneNumber') !== -1">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.bill_phoneNumber.$invalid}">
+            <label
+                ng-class="{'ib-input__label--focus' : genCreditCardFieldsCtrl.phoneFocused || (genCreditCardFieldsCtrl.containerForm.bill_phoneNumber.$viewValue != null && genCreditCardFieldsCtrl.containerForm.bill_phoneNumber.$viewValue !== '')}"
+                class="ib-input__label" for="bill_phoneNumber">{{'PAYMENTS_CONTACT_FORM_PHONE' | translate}}</label>
+            <input class="ib-input__input" type="text" id="bill_phoneNumber" name="bill_phoneNumber" maxlength="16"
+                ng-pattern="::$root.pmtPatterns.PHONE_PATTERN"
+                data-ib-validator-cleaner="{{::$root.pmtPatterns.PHONE_CLEANER}}" required
+                data-ng-focus="genCreditCardFieldsCtrl.phoneFocused=true"
+                data-ng-blur="genCreditCardFieldsCtrl.phoneFocused=false"
+                autocomplete="tel-national"
+                ng-model="genCreditCardFieldsCtrl.selectedData.phone" />
+        </div>
+        <div
+            ng-messages="genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.bill_phoneNumber.$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'PAYMENTS_PHONE_PATTERN_ERROR'|translate}}</div>
+        </div>
+    </div>
+    <!--SAVE CREDITCARD INFO -->
+    <div class="ib-layout__line-spacing"
+        data-ng-if="(genCreditCardFieldsCtrl.loggedInfo && genCreditCardFieldsCtrl.customerCreditCards.length <= 3) && $root.isLogged !== 'ONB' && !genCreditCardFieldsCtrl.isSoftUser">
+        <div class="ib-check">
+            <input type="checkbox" id="saveCustomerCard" name="saveCustomerCard" class="ib-check__input"
+                data-ng-model="genCreditCardFieldsCtrl.selectedData.saveCustomerCard">
+            <label for="saveCustomerCard" class="ib-check__label">
+                <span class="ib-check__text">{{'CREDIT_CARD_FORM_SAVE_CUSTOMER_CARD_TITLE'|translate}}</span>
+            </label>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing" data-ng-if="genCreditCardFieldsCtrl.selectedData.saveCustomerCard">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.cardDescription.$invalid}">
+            <label class="ib-input__label" for="cardDescription"
+                ng-class="{'ib-input__label--focus' : genCreditCardFieldsCtrl.descriptionFocused || (genCreditCardFieldsCtrl.containerForm.cardDescription.$viewValue != null && genCreditCardFieldsCtrl.containerForm.cardDescription.$viewValue !== '')}">{{'CREDIT_CARD_FORM_DESCRIPTION_CARD_LABEL'|translate}}</label>
+            <input class="ib-input__input" type="text" id="cardDescription" name="cardDescription"
+                ng-model="genCreditCardFieldsCtrl.selectedData.cardDescription"
+                maxlength="20"
+                ng-pattern="::$root.pmtPatterns.NAME_SURNAME_PATTERN"
+                data-ib-validator-cleaner="{{::$root.pmtPatterns.NAME_SURNAME_CLEANER}}" ib-trim-on-blur required
+                data-ng-focus="genCreditCardFieldsCtrl.descriptionFocused=true"
+                data-ng-blur="genCreditCardFieldsCtrl.descriptionFocused=false" />
+        </div>
+        <div
+            ng-messages="genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.cardDescription.$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+        </div>
+    </div>
+    <div class="ib-radio-card__alert" role="alert"
+        data-ng-if="genCreditCardFieldsCtrl.loggedInfo && genCreditCardFieldsCtrl.loggedInfo.customerCreditCards.length > 3">
+        <span class="ib-radio-card__alert__icon icon-informacion_2"></span>
+        <span class="ib-radio-card__alert__text">{{'CREDIT_CARD_FORM_SAVE_CUSTOMER_CARD_ADVICE'|translate}}</span>
+    </div>
+</div>
+<div class="ib-box__wrapper" data-ng-if="genCreditCardFieldsCtrl.requiredAdditionalFields">
+    <ib-pmt-required-fields id="pmt-gcc-fields-required-fields" required-fields="genCreditCardFieldsCtrl.requiredAdditionalFields"
+        submitted-tab="genCreditCardFieldsCtrl.submittedTab"
+        container-form="genCreditCardFieldsCtrl.containerForm"
+        summary-info-quota="genCreditCardFieldsCtrl.summaryInfoQuota"
+        show-quotas-combo="genCreditCardFieldsCtrl.showQuotasCombo"></ib-pmt-required-fields>
+</div>
+<div data-ng-if="(!genCreditCardFieldsCtrl.selectedData.selectedCard && genCreditCardFieldsCtrl.creditCardFormModel.externalProvider === 'EXTERNAL_CREDITCARD') || (genCreditCardFieldsCtrl.selectedData.selectedCard && genCreditCardFieldsCtrl.selectedData.selectedCard.external)">
+    <div class="ib-layout__line-spacing"
+        data-ng-if="genCreditCardFieldsCtrl.creditCardFormModel.requiredFields && genCreditCardFieldsCtrl.creditCardFormModel.requiredFields.indexOf('billTo_email') !== -1">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.bill_email.$invalid}">
+            <label
+                ng-class="{'ib-input__label--focus' : genCreditCardFieldsCtrl.emailFocused || (genCreditCardFieldsCtrl.containerForm.bill_email.$viewValue != null && genCreditCardFieldsCtrl.containerForm.bill_email.$viewValue !== '')}"
+                class="ib-input__label" for="bill_email">{{'PAYMENTS_CONTACT_FORM_EMAIL' | translate}}</label>
+            <input class="ib-input__input" type="text" id="bill_email" name="bill_email" maxlength="60"
+                ng-pattern="::$root.pmtPatterns.EMAIL_PATTERN" required
+                data-ng-focus="genCreditCardFieldsCtrl.emailFocused=true"
+                data-ng-blur="genCreditCardFieldsCtrl.emailFocused=false"
+                ng-model="genCreditCardFieldsCtrl.selectedData.email" />
+        </div>
+        <div ng-messages="genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.bill_email.$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'PAYMENTS_EMAIL_PATTERN_ERROR'|translate}}</div>
+        </div>
+    </div>
+    <!-- PHONE NUMBER -->
+    <div class="ib-layout__line-spacing"
+        data-ng-if="genCreditCardFieldsCtrl.creditCardFormModel.requiredFields && genCreditCardFieldsCtrl.creditCardFormModel.requiredFields.indexOf('billTo_phoneNumber') !== -1">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.bill_phoneNumber.$invalid}">
+            <label
+                ng-class="{'ib-input__label--focus' : genCreditCardFieldsCtrl.phoneFocused || (genCreditCardFieldsCtrl.containerForm.bill_phoneNumber.$viewValue != null && genCreditCardFieldsCtrl.containerForm.bill_phoneNumber.$viewValue !== '')}"
+                class="ib-input__label" for="bill_phoneNumber">{{'PAYMENTS_CONTACT_FORM_PHONE' | translate}}</label>
+            <input class="ib-input__input" type="text" id="bill_phoneNumber" name="bill_phoneNumber" maxlength="16"
+                ng-pattern="::$root.pmtPatterns.PHONE_PATTERN"
+                data-ib-validator-cleaner="{{::$root.pmtPatterns.PHONE_CLEANER}}" required
+                data-ng-focus="genCreditCardFieldsCtrl.phoneFocused=true"
+                data-ng-blur="genCreditCardFieldsCtrl.phoneFocused=false"
+                ng-model="genCreditCardFieldsCtrl.selectedData.phone" />
+        </div>
+        <div
+            ng-messages="genCreditCardFieldsCtrl.submittedTab && genCreditCardFieldsCtrl.containerForm.bill_phoneNumber.$error">
+            <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+            <div class="ib-alert ib-alert--error" ng-message="pattern">{{'PAYMENTS_PHONE_PATTERN_ERROR'|translate}}</div>
+        </div>
+    </div>
+</div>

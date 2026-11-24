@@ -1,0 +1,43 @@
+<section class="ib-layout__section">
+    <div class="ib-ticket-flights" ng-class="{'ib-ticket-flights--airbridge': cInfoCtrl.isShuttleFlow}" data-ng-if="cInfoCtrl.confirmationInfoModel.bidCabinTypeDescription">
+        <div class="ib-ticket-flights__header">
+            <div class="ib-ticket-flights__header-title">
+                <h2 class="ib-ticket-flights__header-title__text" ng-if="!cInfoCtrl.isShuttleFlow">
+                    {{cInfoCtrl.confirmationInfoTitle | translate}} {{cInfoCtrl.confirmationInfoModel.bidCabinTypeDescription ? (cInfoCtrl.confirmationInfoModel.bidCabinTypeDescription | translate) : ''}}
+                    {{::cInfoCtrl.confirmationInfoIndex}}</h2>
+                <h2 class="ib-ticket-flights__header-title__text u-text-transform-none" ng-if="cInfoCtrl.isShuttleFlow">
+                    {{'SHUTTLE_BRIDGE_AIR' | translate}}
+                </h2>
+            </div>
+            <div class="ib-ticket-flights__header-description">
+                <div
+                    data-ng-if="cInfoCtrl.flowApp !== 'MMBBID' && (cInfoCtrl.confirmationInfoModel.baggage.handBaggage !== 0 || cInfoCtrl.confirmationInfoModel.baggage.franchiseBaggage !== 0)">
+                    <span
+                        class="ib-text ib-text--bold ib-text--color-unfocused">{{'CONFIRMATION_INFO_TOTAL_BAGGAGE'|translate}}</span>
+                    <span class="ib-text ib-text--color-unfocused"
+                        data-ng-if="cInfoCtrl.confirmationInfoModel.baggage.handBaggage !== 0"> {{cInfoCtrl.confirmationInfoModel.baggage.handBaggage + ' ' + ('CONFIRMATION_INFO_HAND_BAGGAGE' | WordNumberFormatFilter:
+                        cInfoCtrl.confirmationInfoModel.baggage.handBaggage | translate) + (cInfoCtrl.confirmationInfoModel.baggage.franchiseBaggage !== 0 ? ',' : '')}}</span>
+                    <span class="ib-text ib-text--color-unfocused"
+                        data-ng-if="cInfoCtrl.confirmationInfoModel.baggage.franchiseBaggage !== 0">
+                        {{cInfoCtrl.confirmationInfoModel.baggage.franchiseBaggage + ' ' + ('ANCILLARIES_BAGGAGE_FRANCHISE_TITLE'
+                        | WordNumberFormatFilter: cInfoCtrl.confirmationInfoModel.baggage.franchiseBaggage | translate)}}</span>
+                </div>
+                <div
+                    data-ng-if="cInfoCtrl.flowApp === 'MMBBID'">
+                        <div class="ib-ticket-flights__header-description">
+                            <span class="ib-text ib-text--bold ib-text--color-unfocused"
+                                data-ng-if="cInfoCtrl.confirmationInfoModel.segments[0].passengers == 1">x {{cInfoCtrl.confirmationInfoModel.segments[0].passengers}}
+                                {{'PASSENGER_HIDDEN_TEXT'|translate|lowercase}}</span>
+                            <span class="ib-text ib-text--bold ib-text--color-unfocused"
+                                data-ng-if="cInfoCtrl.confirmationInfoModel.segments[0].passengers > 1">x {{cInfoCtrl.confirmationInfoModel.segments[0].passengers}}
+                                {{'MMB_PASSENGERS_TITTLE'|translate|lowercase}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-ng-repeat="segment in cInfoCtrl.confirmationInfoModel.segments">
+            <ib-pmt-confirmation-info-slices id="pmt-confirmation-info-slices" confirmation-info-slices-model="segment"></ib-pmt-confirmation-info-slices>
+        </div>
+    </div>
+</section>

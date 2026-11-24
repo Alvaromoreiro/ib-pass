@@ -1,0 +1,35 @@
+<div class="ib-select-date" id="PASSENGER_BIRTH_DATE" data-ng-class="{'ib-select-date--error': pasBirthCtrl.submittedTab && (pasBirthCtrl.containerForm.birthDateDay.$invalid || pasBirthCtrl.containerForm.birthDateMonth.$invalid || pasBirthCtrl.containerForm.birthDateYear.$invalid),'ib-select-date--disabled':pasBirthCtrl.haveBirthDate}">
+    <span class="ib-select-date__label">{{'BIRTH_DATE_FIELD_TITLE'|translate}}</span>
+    <ui-select class="ib-select-date__action ib-select-date__action--day" data-ng-model="pasBirthCtrl.day" data-ng-change="pasBirthCtrl.daysSelected()"
+        required name="birthDateDay" ng-disabled="pasBirthCtrl.haveBirthDate">
+        <ui-select-match class="ib-select-date__list-ipt" placeholder="{{'BIRTH_DATE_FIELD_DAY_PLACEHOLDER'|translate}}">
+            <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+        </ui-select-match>
+        <ui-select-choices class="ib-select-date__list" repeat="item in (pasBirthCtrl.availableDays | filter: $select.search)">
+            <span class="ib-select-date__list-txt" ng-bind="item"></span>
+        </ui-select-choices>
+    </ui-select>
+    <ui-select class="ib-select-date__action ib-select-date__action--month" data-ng-model="pasBirthCtrl.month" data-ng-change="pasBirthCtrl.monthsSelected()"
+        required name="birthDateMonth" ng-disabled="pasBirthCtrl.haveBirthDate">
+        <ui-select-match class="ib-select-date__list-ipt" placeholder="{{'BIRTH_DATE_FIELD_MONTH_PLACEHOLDER'|translate}}">
+            <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+        </ui-select-match>
+        <ui-select-choices repeat="item in (pasBirthCtrl.availableMonths | filter: $select.search)">
+            <span class="ib-select-date__list-txt" data-ng-bind="item"></span>
+        </ui-select-choices>
+    </ui-select>
+    <ui-select class="ib-select-date__action ib-select-date__action--year" data-ng-model="pasBirthCtrl.year" data-ng-change="pasBirthCtrl.yearsSelected()"
+        required name="birthDateYear" ng-disabled="pasBirthCtrl.haveBirthDate">
+        <ui-select-match class="ib-select-date__list-ipt" placeholder="{{'BIRTH_DATE_FIELD_YEAR_PLACEHOLDER'|translate}}">
+            <span class="ib-select-date__txt" data-ng-bind="$select.selected"></span>
+        </ui-select-match>
+        <ui-select-choices repeat="item in (pasBirthCtrl.availableYears | filter: $select.search)">
+            <span class="ib-select-date__list-txt" data-ng-bind="item"></span>
+        </ui-select-choices>
+    </ui-select>
+</div>
+<div id="pmt-passenger-birth-date-err-msg" ng-messages="pasBirthCtrl.submittedTab && ((pasBirthCtrl.containerForm.birthDateDay.$invalid && pasBirthCtrl.containerForm.birthDateDay.$error) 
+    || (pasBirthCtrl.containerForm.birthDateMonth.$invalid && pasBirthCtrl.containerForm.birthDateMonth.$error)
+    || (pasBirthCtrl.containerForm.birthDateYear.$invalid && pasBirthCtrl.containerForm.birthDateYear.$error))">
+    <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+</div>

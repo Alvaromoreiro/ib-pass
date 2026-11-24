@@ -1,0 +1,47 @@
+<section class="ib-layout__section" id="section-dcc" *ngIf="currentDccData && !donationEnabled">
+    <div class="ib-box ib-box--medium">
+        <span class="ib-heading ib-heading--type-5 ">{{'DCC_TITLE'|translate}}</span>
+        <span class="ib-heading ib-heading--type-6 ">{{'DCC_SUB_TITLE'|translate}}</span>
+        <form class="ib-box__list u-display-grid">
+            <div class="ib-radio">
+                <input type="radio" class="ib-radio__input" value="DCC_ENABLED" name="dccRadio" id="dccRadio1" [(ngModel)]="currentDccData.selectedValue">
+                <label for="dccRadio1" class="ib-radio__label">
+                    <p>
+                        <span id="DCC_RATE_TEXT_1" class="ib-radio__text ib-radio__text--small ib-radio__text--bold">{{ 'DCC_CARD_RATE' | translate:{dccPriceTotalPrice: currentDccData.totalPrice, dccPriceCurrencyCode: currentDccData.currencyCode} }}</span>
+                    </p>
+                    <p>
+                        <span id="DCC_RATE_TEXT_2" class="ib-radio__text ib-radio__text--small ib-radio__text--unfocused">
+                            {{ 'DCC_EXCHANGE_TYPE_INFO' | translate:
+                            {
+                                sourceTimestamp: currentDccData.formattedSourceTimestamp,
+                                basePriceCurrencyCode: currentDccData.formattedBasePrice.currencyCode,
+                                rate: currentDccData.rate,
+                                dccPriceCurrencyCode: currentDccData.currencyCode,
+                                marginPercentage: currentDccData.marginPercentage
+                            }
+                            }}
+                        </span>
+                    </p>
+                </label>
+            </div>
+            <div class="ib-radio">
+                <input  type="radio" class="ib-radio__input" value="DCC_DISABLED" name="dccRadio" id="dccRadio2" [(ngModel)]="currentDccData.selectedValue">
+                <label for="dccRadio2" class="ib-radio__label">
+                    <p>
+                        <span class="ib-radio__text ib-radio__text--small ib-radio__text--bold">
+                            {{ 'DCC_PAY_IN_BASE_CURRENCY' | translate:
+                                {
+                                    basePriceCurrencyCode: currentDccData.formattedBasePrice.currencyCode,
+                                    basePriceTotalPrice: currentDccData.formattedBasePrice.totalPrice
+                                }
+                            }}
+                        </span>
+                    </p>
+                    <p>
+                        <span class="ib-radio__text ib-radio__text--small ib-radio__text--unfocused">{{'DCC_CARD_ISSUER_EXCHANGE'|translate}}</span>
+                    </p>
+                </label>
+            </div>
+        </form>
+    </div>
+</section>

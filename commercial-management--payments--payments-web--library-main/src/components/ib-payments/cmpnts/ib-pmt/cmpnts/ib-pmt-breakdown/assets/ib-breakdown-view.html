@@ -1,0 +1,449 @@
+<div class="ib-summary ib-summary--type-1">
+	<header class="ib-summary__header">
+		<h3 class="ib-heading ib-heading--type-3">{{ breakdownCtrl.breakdownModel.upgradingBids ||
+			breakdownCtrl.aviosSummary ?
+			('MMB_UPGRADING_BIDS_SUMMARY_INFO_TITLE'|translate) : ('CKIANCPURC_DESGLOSE_PRECIO'|translate)}}</h3>
+	</header>
+	<div class="ib-summary__body">
+		<!-- Seats -->
+		<div class="ib-summary__section"
+			ng-if="breakdownCtrl.breakdownModel.seats.segments.length > 0 && breakdownCtrl.flowApp !== 'MMBBID'">
+			<h4 class="ib-heading ib-heading--type-4 ib-summary__section-title ">
+				{{'SUMMARY_ANCILLARIES_SEATS_TITLE'|translate}}</h4>
+			<ul class="ib-list-passengers">
+				<li class="ib-list-passengers__item" ng-repeat="segment in breakdownCtrl.breakdownModel.seats.segments">
+					<div class="ib-list-passengers__item-description u-pb-none">
+						<span class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none">{{segment.origin.description}}
+							({{segment.origin.code}}) -
+							{{segment.destination.description}}
+							({{segment.destination.code}})</span>
+					</div>
+					<ul >
+						<li ng-repeat="seat in segment.seats"
+							class="ib-list-passengers__item-description ib-list-passengers__item-description--long u-pb-none">
+							<span class="ib-text ib-text--color-unfocused u-mb-none">{{seat.passengers.length}} {{seat.quanty > 1 ?
+								('SEATS_MIN_TEXT'|translate) : ('SEAT_MIN_TEXT'|translate) }} {{seat.description}}</span>
+							<span class="ib-text ib-text--color-normal">
+								{{seat.totalFormatted}}
+							</span>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div class="ib-summary__subtotal ib-summary__subtotal--separator">
+				<span class="ib-text ib-text--bold">{{'ANCILLARIES_SEATS_AMOUNT'|translate}}</span>
+				<span class="ib-text ib-text--bold">{{breakdownCtrl.breakdownModel.seats.totalFormatted}}</span>
+			</div>
+		</div>
+		<!-- Baggages -->
+		<div class="ib-summary__section"
+			ng-if="breakdownCtrl.breakdownModel.baggages.segments.length > 0 && breakdownCtrl.flowApp !== 'MMBBID'">
+			<h4 class="ib-heading ib-heading--type-4 ib-summary__section-title ">{{'BAGGAGE_TEXT'|translate}}</h4>
+			<ul class="ib-list-passengers">
+				<li class="ib-list-passengers__item" ng-repeat="segment in breakdownCtrl.breakdownModel.baggages.segments">
+					<div class="ib-list-passengers__item-description u-pb-none ">
+						<span class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none">{{segment.origin.description}} -
+							{{segment.destination.description}} </span>
+					</div>
+					<ul>
+						<li ng-repeat="baggage in segment.baggages"
+							class="ib-list-passengers__item-description ib-list-passengers__item-description--long u-mt-xsmall">
+							<span class="ib-text ib-text--color-unfocused u-mb-none">{{baggage.quanty}} {{baggage.quanty > 1 ?
+								('BAGGAGE_PLURAL_TEXT'|translate) : ('BAGGAGE_SINGULAR_TEXT'|translate) }} {{baggage.type.description}}
+							</span>
+							<span class="ib-text ib-text--color-normal">
+								{{baggage.totalFormatted}}
+							</span>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div class="ib-summary__subtotal ib-summary__subtotal--separator">
+				<span class="ib-text ib-text--bold">{{'ANCILLARIES_BAGGAGE_AMOUNT'|translate}}</span>
+				<span class="ib-text ib-text--bold">{{breakdownCtrl.breakdownModel.baggages.totalFormatted}}</span>
+			</div>
+		</div>
+		<!-- Speqs -->
+		<div class="ib-summary__section"
+			ng-if="breakdownCtrl.breakdownModel.speqs.segments.length > 0 && breakdownCtrl.flowApp !== 'MMBBID'">
+			<h4 class="ib-heading ib-heading--type-4 ib-summary__section-title ">{{'ANCILLARIES_SPEQS_TITLE_TEXT'|translate}}
+			</h4>
+			<ul class="ib-list-passengers">
+				<li class="ib-list-passengers__item" ng-repeat="segment in breakdownCtrl.breakdownModel.speqs.segments">
+					<div class="ib-list-passengers__item-description u-pb-none ">
+						<span class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none">{{segment.origin.description}} -
+							{{segment.destination.description}} </span>
+					</div>
+					<ul>
+						<li ng-repeat="speq in segment.speqs"
+							class="ib-list-passengers__item-description ib-list-passengers__item-description--long u-mt-xsmall">
+							<span class="ib-text ib-text--color-unfocused u-mb-none">{{speq.quanty}} {{speq.description}} </span>
+							<span class="ib-text ib-text--color-normal">
+								{{speq.totalFormatted}}
+							</span>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div class="ib-summary__subtotal ib-summary__subtotal--separator">
+				<span class="ib-text ib-text--bold">{{'ANCILLARIES_SPEQS_AMOUNT'|translate}}</span>
+				<span class="ib-text ib-text--bold">{{breakdownCtrl.breakdownModel.speqs.totalFormatted}}</span>
+			</div>
+		</div>
+		<!-- PRIORITY -->
+		<div class="ib-summary__section"
+			ng-if="breakdownCtrl.breakdownModel.priority.segments.length > 0 && breakdownCtrl.flowApp !== 'MMBBID'">
+			<h4 class="ib-heading ib-heading--type-4 ib-summary__section-title ">{{'PRIORITY_BOARDING_TITLE'|translate}}</h4>
+			<ul class="ib-list-passengers">
+				<li class="ib-list-passengers__item" ng-repeat="segment in breakdownCtrl.breakdownModel.priority.segments">
+					<div class="ib-list-passengers__item-description u-pb-none ">
+						<span class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none">{{segment.origin.description}} -
+							{{segment.destination.description}} </span>
+					</div>
+					<ul>
+						<li class="ib-list-passengers__item-description ib-list-passengers__item-description--long u-mt-xsmall">
+							<span class="ib-text ib-text--color-unfocused u-mb-none">{{segment.quanty}}
+								{{'PRIORITY_BOARDING_TITLE'|translate}} </span>
+							<span class="ib-text ib-text--color-normal">
+								{{segment.totalFormatted}}
+							</span>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div class="ib-summary__subtotal ib-summary__subtotal--separator">
+				<span class="ib-text ib-text--bold">{{'ANCILLARIES_PRIORITY_BASKET_AMOUNT'|translate}}</span>
+				<span class="ib-text ib-text--bold">{{breakdownCtrl.breakdownModel.priority.totalFormatted}}</span>
+			</div>
+		</div>
+		<!-- PETC -->
+		 <div class="ib-summary__section"
+            data-ng-if="breakdownCtrl.breakdownModel.petc.hasPetc && breakdownCtrl.flowApp !== 'MMBBID'">
+            <ib-pmt-summary-bki-pets id="pmt-summary-mmb-pets"
+                [model]="breakdownCtrl.breakdownModel.petc"></ib-pmt-summary-bki-pets>
+        </div>
+		<!-- GLOBICK TRANSFERS -->
+        <div class="ib-summary__section"
+            data-ng-if="breakdownCtrl.flowApp !== 'MMBBID' && breakdownCtrl.breakdownModel.globickTransfers.hasTransfersGlobick">
+            <ib-pmt-summary-globick-transfers
+                [model]="breakdownCtrl.breakdownModel.globickTransfers"></ib-pmt-summary-globick-transfers>
+        </div>
+        <!-- GLOBICK ACTIVITIES -->
+        <div class="ib-summary__section"
+            data-ng-if="breakdownCtrl.flowApp !== 'MMBBID' && breakdownCtrl.breakdownModel.globickActivities.hasActivitiesGlobick">
+            <ib-pmt-summary-globick-activities
+                [model]="breakdownCtrl.breakdownModel.globickActivities"></ib-pmt-summary-globick-activities>
+        </div>
+		<!-- SEGUROS -->
+		<div class="ib-summary__section"
+			ng-if="breakdownCtrl.breakdownModel.insurance && breakdownCtrl.flowApp !== 'MMBBID'">
+			<h4 class="ib-heading ib-heading--type-4 ib-summary__section-title ">{{'INSURANCES_TEXT'|translate}}</h4>
+			<ul class="ib-list-passengers">
+				<li class="ib-list-passengers__item">
+					<ul>
+						<li class="ib-list-passengers__item-description ib-list-passengers__item-description--long">
+							<span
+								class="ib-text ib-text--color-unfocused u-mb-none">{{breakdownCtrl.breakdownModel.insurance.type}}</span>
+							<span class="ib-text ib-text--color-normal">
+								{{breakdownCtrl.breakdownModel.insurance.totalFormatted}}
+							</span>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div class="ib-summary__subtotal ib-summary__subtotal--separator">
+				<span class="ib-text ib-text--bold">{{'ANCILLARIES_INSURANCE_AMOUNT'|translate}}</span>
+				<span class="ib-text ib-text--bold">{{breakdownCtrl.breakdownModel.insurance.totalFormatted}}</span>
+			</div>
+		</div>
+        <!-- SEGUROS ALLIANZ FUSION -->
+		<div class="ib-summary__section"
+            data-ng-if="breakdownCtrl.flowApp !== 'MMBBID' && breakdownCtrl.breakdownModel.insuranceAllianzFusion.hasInsuranceAllianzFusion">
+            <h4 class="ib-heading ib-heading--type-4 ib-summary__section-title ">{{'INSURANCES_TEXT'|translate}}</h4>
+			<ul class="ib-list-passengers">
+				<li class="ib-list-passengers__item">
+					<ul>
+						<li class="ib-list-passengers__item-description ib-list-passengers__item-description--long">
+							<span
+								class="ib-text ib-text--color-unfocused u-mb-none">{{breakdownCtrl.breakdownModel.insuranceAllianzFusion.info.description}}</span>
+							<span class="ib-text ib-text--color-normal">
+								{{breakdownCtrl.breakdownModel.insuranceAllianzFusion.info.totalFormatted}}
+							</span>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div class="ib-summary__subtotal ib-summary__subtotal--separator">
+				<span class="ib-text ib-text--bold">{{'ANCILLARIES_INSURANCE_AMOUNT'|translate}}</span>
+				<span class="ib-text ib-text--bold">{{breakdownCtrl.breakdownModel.insuranceAllianzFusion.info.totalFormatted}}</span>
+			</div>
+        </div>
+		<!-- UPGRADING -->
+		<div class="ib-summary__section" ng-if="breakdownCtrl.breakdownModel.upgrading">
+			<h4 class="ib-heading ib-heading--type-4 ib-summary__section-title ">{{'UPGRADING_BETTER_CLASS'|translate}}</h4>
+			<ul class="ib-list-passengers">
+				<li class="ib-list-passengers__item"
+					ng-repeat="upgrading in breakdownCtrl.breakdownModel.upgrading.upgradingTrips">
+					<div class="ib-list-passengers__item-description u-pb-none ">
+						<span class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none">{{upgrading.origin.description}} -
+							{{upgrading.destination.description}} </span>
+					</div>
+					<ul>
+						<li class="ib-list-passengers__item-description ib-list-passengers__item-description--long">
+							<span class="ib-text ib-text--color-unfocused u-mb-none">{{upgrading.cabin}}</span>
+							<span class="ib-text ib-text--color-normal">
+								{{upgrading.totalFormatted}}
+							</span>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div class="ib-summary__subtotal ib-summary__subtotal--separator">
+				<span class="ib-text ib-text--bold">{{'TOTAL_IMPROVE_TEXT'|translate}}</span>
+				<span class="ib-text ib-text--bold">{{breakdownCtrl.breakdownModel.upgrading.totalFormatted}}</span>
+			</div>
+		</div>
+		<!-- UPGRADING BIDS-->
+		<div class="ib-summary__body" ng-if="breakdownCtrl.breakdownModel.upgradingBids && breakdownCtrl.flowUpgrade === 'bidFlow'">
+			<div class="ib-summary__section ib-summary__section--extra"
+				ng-repeat="segment in breakdownCtrl.breakdownModel.upgradingBids.segments">
+				<span class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold">
+					{{segment.departureCity.city.description}} - {{segment.arrivalCity.city.description}}
+				</span>
+				<span class="ib-text ib-text--color-unfocused ib-text--block">
+					{{segment.departureDateParsed.originalDate | date: 'dd MMM yyyy'}} / {{segment.departureDateParsed.dateTime}}
+				</span>
+			</div>
+			<div class="ib-summary__section ib-summary__section--extra">
+				<h4 class="ib-heading ib-heading--type-4 ib-summary__section-title ">
+					{{'UPGRADING_BIDS_CLASS_TITLE'|translate}}</h4>
+				<ul class="ib-list-passengers">
+					<li class="ib-list-passengers__item"
+						ng-repeat="bidSegment in breakdownCtrl.breakdownModel.upgradingBids.bidSegments">
+						<div class="ib-list-passengers__item-description" data-ng-if="bidSegment.hasBid">
+							<span class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none hidden-lg">
+								{{bidSegment.departure.description}} ({{bidSegment.departure.code}}) -
+								{{bidSegment.arrival.description}} ({{bidSegment.arrival.code}})
+							</span>
+							<span
+								class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none hidden-xs hidden-sm hidden-md hidden-xl">
+								{{bidSegment.departure.description}} - {{bidSegment.arrival.description}}
+							</span>
+						</div>
+						<ul>
+							<li class="ib-list-passengers__item-description ib-list-passengers__item-description--long"
+								ng-repeat="cabin in bidSegment.cabins | orderBy: '-amountBid'" ng-if="cabin.amountBid !== 0">
+								<span class="ib-text ib-text--color-normal u-mb-none"
+									ng-if="bidSegment.passengers == 1 && cabin.amountPassengersBid && $index === 0 && cabin.cabinType === 'BUSINESS'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_ONE_BUSINESS'|translate}}</span>
+								<span class="ib-text ib-text--color-normal u-mb-none"
+									ng-if="bidSegment.passengers > 1 && cabin.amountPassengersBid  && $index === 0 && cabin.cabinType === 'BUSINESS'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_BUSINESS'|translate}}</span>
+								<span class="ib-text ib-text--color-normal u-mb-none"
+									ng-if="bidSegment.passengers == 1 && cabin.amountPassengersBid && $index === 0 && cabin.cabinType === 'PREMIUMTOURIST'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_ONE_PREMIUM_TOURIST'|translate}}</span>
+								<span class="ib-text ib-text--color-normal u-mb-none"
+									ng-if="bidSegment.passengers > 1 && cabin.amountPassengersBid  && $index === 0 && cabin.cabinType === 'PREMIUMTOURIST'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_PREMIUM_TOURIST'|translate}}</span>
+								<span data-ng-if="cabin.amountPassengersBid  && $index === 0"
+									class="ib-text ib-text--color-normal">{{cabin.amountPassengersBid}}</span>
+								<span class="ib-text ib-text--color-unfocused u-mb-none"
+									ng-if="bidSegment.passengers == 1 && cabin.amountPassengersBid  && $index !== 0 && cabin.cabinType === 'BUSINESS'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_ONE_BUSINESS'|translate}}</span>
+								<span class="ib-text ib-text--color-unfocused u-mb-none"
+									ng-if="bidSegment.passengers > 1 && cabin.amountPassengersBid  && $index !== 0 && cabin.cabinType === 'BUSINESS'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_BUSINESS'|translate}}</span>
+								<span class="ib-text ib-text--color-unfocused u-mb-none"
+									ng-if="bidSegment.passengers == 1 && cabin.amountPassengersBid  && $index !== 0 && cabin.cabinType === 'PREMIUMTOURIST'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_ONE_PREMIUM_TOURIST'|translate}}</span>
+								<span class="ib-text ib-text--color-unfocused u-mb-none"
+									ng-if="bidSegment.passengers > 1 && cabin.amountPassengersBid  && $index !== 0 && cabin.cabinType === 'PREMIUMTOURIST'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_PREMIUM_TOURIST'|translate}}</span>
+								<span data-ng-if="cabin.amountPassengersBid  && $index !== 0"
+									class="ib-text ib-text--color-unfocused">{{cabin.amountPassengersBid}}</span>
+							</li>
+                            <li class="ib-list-passengers__item-description ib-list-passengers__item-description--long"
+								ng-repeat="cabinFinished in bidSegment.cabinsFinished" ng-if="cabinFinished.status === 'BLOCKED'">
+								<span class="ib-text ib-text--color-normal u-mb-none"
+									ng-if="bidSegment.passengers == 1 && $index === 0 && cabinFinished.cabinType === 'BUSINESS'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_ONE_BUSINESS'|translate}}</span>
+								<span class="ib-text ib-text--color-normal u-mb-none"
+									ng-if="bidSegment.passengers > 1 && $index === 0 && cabinFinished.cabinType === 'BUSINESS'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_BUSINESS'|translate}}</span>
+								<span class="ib-text ib-text--color-normal u-mb-none"
+									ng-if="bidSegment.passengers == 1 && $index === 0 && cabinFinished.cabinType === 'PREMIUMTOURIST'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_ONE_PREMIUM_TOURIST'|translate}}</span>
+								<span class="ib-text ib-text--color-normal u-mb-none"
+									ng-if="bidSegment.passengers > 1 && $index === 0 && cabinFinished.cabinType === 'PREMIUMTOURIST'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_PREMIUM_TOURIST'|translate}}</span>
+								<span data-ng-if="cabinFinished.totalCurrentBid  && $index === 0"
+									class="ib-text ib-text--color-normal">{{cabinFinished.totalCurrentBid}}</span>
+								<span class="ib-text ib-text--color-unfocused u-mb-none"
+									ng-if="bidSegment.passengers == 1 && $index !== 0 && cabinFinished.cabinType === 'BUSINESS'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_ONE_BUSINESS'|translate}}</span>
+								<span class="ib-text ib-text--color-unfocused u-mb-none"
+									ng-if="bidSegment.passengers > 1 && $index !== 0 && cabinFinished.cabinType === 'BUSINESS'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_BUSINESS'|translate}}</span>
+								<span class="ib-text ib-text--color-unfocused u-mb-none"
+									ng-if="bidSegment.passengers == 1 && $index !== 0 && cabinFinished.cabinType === 'PREMIUMTOURIST'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_ONE_PREMIUM_TOURIST'|translate}}</span>
+								<span class="ib-text ib-text--color-unfocused u-mb-none"
+									ng-if="bidSegment.passengers > 1 && $index !== 0 && cabinFinished.cabinType === 'PREMIUMTOURIST'">{{bidSegment.passengers}}
+									{{'MMB_UPGRADING_BID_PREMIUM_TOURIST'|translate}}</span>
+								<span data-ng-if="cabinFinished.totalCurrentBid  && $index !== 0"
+									class="ib-text ib-text--color-unfocused">{{cabinFinished.totalCurrentBid}}</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- UPGRADING  AVIOS-->
+		<div class="ib-summary__section"
+			ng-if="(breakdownCtrl.totalAviosAmount || breakdownCtrl.totalAviosAmount === 0) && breakdownCtrl.flowUpgrade === 'aviosFlow'">
+			<ul class="ib-list-passengers">
+				<li class="ib-list-passengers__item" ng-repeat="upgrading in breakdownCtrl.aviosSummary.ancillariesTrips">
+					<div class="ib-list-passengers__item-description u-pb-none">
+						<span class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none">{{upgrading.departure.description + '
+							- '}}
+							{{upgrading.arrival.description}} </span>
+					</div>
+					<ul>
+						<li class="ib-list-passengers__item-description ib-list-passengers__item-description--long">
+							<span class="ib-text ib-text--color-unfocused u-mb-none">
+								{{upgrading.departureDateParsed + ' / '}} {{ upgrading.dateToOrder | date: 'shortTime'}}
+							</span>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!-- UPGRADING AVIOS-->
+		<div class="ib-summary__body"
+			ng-if="(breakdownCtrl.totalAviosAmount || breakdownCtrl.totalAviosAmount === 0) || breakdownCtrl.numberFreeUpgrade && breakdownCtrl.flowUpgrade === 'aviosFlow'">
+			<div class="ib-summary__section ib-summary__section--extra">
+				<h4 class="ib-heading ib-heading--type-4 ib-summary__section-title">
+					{{'MMB_UPGRADING_AVIOS_PAYMENT_SUMMARY_TITLE'|translate}}</h4>
+				<ul class="ib-list-passengers" ng-repeat="upgrading in breakdownCtrl.aviosSummary.ancillariesTrips">
+					<li class="ib-list-passengers__item" ng-repeat="cabin in upgrading.cabins">
+						<div class="ib-list-passengers__item-description" data-ng-if="cabin.selectedOffers">
+							<span class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none hidden-lg">
+								{{upgrading.departure.description}} ({{upgrading.departure.code}}) -
+								{{upgrading.arrival.description}} ({{upgrading.arrival.code}})
+							</span>
+							<span class="ib-text ib-text--color-unfocused ib-text--bold u-mb-none hidden-xs hidden-sm hidden-md hidden-xl">
+								{{upgrading.departure.description}} - {{upgrading.arrival.description}}
+							</span>
+						</div>
+						<ul>
+							<li class="ib-list-passengers__item-description ib-list-passengers__item-description--long"
+								ng-if="cabin.selectedOffers">
+								<span class="ib-text ib-text--color-normal u-mb-none"
+									ng-if="upgrading.passengers == 1 && cabin.selectedOffers && cabin.cabinType === 'BUSINESS'">{{upgrading.passengers}}
+									{{'MMB_UPGRADING_AVIOS_BUY_ONE_BUSINESS' | translate}} </span>
+								<span class="ib-text ib-text--color-normal u-mb-none"
+									ng-if="upgrading.passengers > 1 && cabin.selectedOffers && cabin.cabinType === 'BUSINESS'">{{upgrading.passengers}}
+									{{'MMB_UPGRADING_AVIOS_BUY_BUSINESS' | translate}} </span>
+								<span class="ib-text ib-text--color-normal u-mb-none"
+									ng-if="upgrading.passengers == 1 && cabin.selectedOffers && cabin.cabinType === 'PREMIUMTOURIST'">{{upgrading.passengers}}
+									{{'MMB_UPGRADING_AVIOS_BUY_ONE_PREMIUM_TOURIST' | translate}}</span>
+								<span class="ib-text ib-text--color-normal u-mb-none"
+									ng-if="upgrading.passengers > 1 && cabin.selectedOffers && cabin.cabinType === 'PREMIUMTOURIST'">{{upgrading.passengers}}
+									{{'MMB_UPGRADING_AVIOS_BUY_PREMIUM_TOURIST' | translate}}</span>
+								<span data-ng-if="cabin.selectedOffers"
+									class="ib-text ib-text--color-normal ib-text--white-space">{{cabin.avios > 0 ?
+									cabin.formatAvios + ' ' + ('AVIOS_TEXT' | translate) :
+									breakdownCtrl.numberFreeUpgrade + ' ' + (breakdownCtrl.numberFreeUpgrade === 1 ?
+									('MMB_UPGRADING_AVIOS_SINGULAR_UPGRADE' | translate) : ('MMB_UPGRADING_AVIOS_PLURAL_UPGRADES' |
+									translate)) }} </span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- CARBON FOOTPRINT -->
+		<div class="ib-summary__section"
+			ng-if="breakdownCtrl.flowApp !== 'MMBBID' && breakdownCtrl.breakdownModel.carbonFootprint.hasCarbonFootprint">
+			<ib-pmt-summary-carbon-footprint
+				[model]="breakdownCtrl.breakdownModel.carbonFootprint"></ib-pmt-summary-carbon-footprint>
+		</div>
+		<!--DESCUENTO BOOKING-->
+		<div class="ib-summary__section" ng-if="breakdownCtrl.breakdownDiscount.status">
+			<h4 class="ib-heading ib-heading--type-4 ib-summary__section-title">
+				{{'IBPURC_PAYMENTS_SUMMARY_DISCOUNT'|translate}}</h4>
+			<ul class="ib-list-passengers">
+				<li ng-repeat="discount in breakdownCtrl.breakdownDiscount.types">
+					<div ng-if="discount.type === 'VOUCHER'"
+						class="ib-list-passengers__item-description ib-list-passengers__table break-word-anywhere">
+						<span class="ib-text ib-text--color-unfocused"> {{
+							('IBPURC_PAYMENTS_SUMMARY_DISCOUNT_VOUCHER_FOR_DUMBO'|translate) + ' ' + discount.id }}</span>
+						<span class="ib-text ib-text--color-normal u-float-right">-{{discount.discount}} </span>
+					</div>
+					<div ng-if="discount.type === 'AVIOS'"
+						class="ib-list-passengers__item-description ib-list-passengers__table break-word-anywhere">
+						<span class="ib-text ib-text--color-unfocused">
+							<span class="u-display-block">{{ ('IBPURC_PAYMENTS_SUMMARY_DISCOUNT_VOUCHER_FOR_DUMBO'|translate) + ' ' +
+								('AVIOS_TEXT'|translate) }}</span>
+							<span class="u-display-block">{{ '(' + discount.id + ' ' + ('AVIOS_TEXT'|translate) +')' }} </span>
+						</span>
+						<span class="ib-text ib-text--color-normal u-float-right">-{{discount.discount}}</span>
+					</div>
+				</li>
+			</ul>
+			<div class="ib-summary__subtotal ib-summary__subtotal--separator">
+				<span class="ib-text ib-text--bold">{{'DISCCOUNTS_AMMOUNT'|translate}}</span>
+				<span class="ib-text ib-text--bold">{{ breakdownCtrl.breakdownDiscount.discountsTotalFormatted }}</span>
+			</div>
+		</div>
+		<div class="ib-summary__section" ng-class="{'ib-summary__section--separator':  breakdownCtrl.flowApp === 'MMBBID'}"
+			data-ng-if="breakdownCtrl.summaryInfo.orderFees.length > 0 && breakdownCtrl.flowApp !== 'MMBBID'">
+			<ib-pmt-summary-other id="pmt-breakdown-other-fees"
+				order-fees="breakdownCtrl.summaryInfo.orderFees"></ib-pmt-summary-other>
+		</div>
+	</div>
+	<!--footer para upgrading bids-->
+	<footer class="ib-summary__footer" data-ng-if="breakdownCtrl.flowUpgrade === 'bidFlow' && breakdownCtrl.flowApp === 'MMBBID'">
+		<div ng-if="breakdownCtrl.price && !(breakdownCtrl.totalAviosAmount || breakdownCtrl.totalAviosAmount === 0)"
+			class="ib-summary__footer--flex">
+			<h4 class="ib-summary__footer-total">
+				{{breakdownCtrl.breakdownModel.upgradingBids ? 'PAYMENTS_MAX_TO_PAY' : 'TOTAL_TEXT' |translate}}
+                <span data-ng-if="breakdownCtrl.dccSelected && !breakdownCtrl.donationEnabled" class="ib-text ib-text--color-unfocused ib-text--block">{{'DCC_FINAL_PRICE' | translate}}</span>
+			</h4>
+			<div class="ib-summary__footer-concepts">
+                <span class="ib-summary__footer-price ib-text ib-text--especial ib-summary__footer-price ib-summary__footer-price--long u-float-right u-float-right--no-word-break">
+				{{breakdownCtrl.breakdownModel.upgradingBids ? breakdownCtrl.breakdownModel.totalFormatted : breakdownCtrl.totalPrice.formattedTotalPrice}}
+                    <span id="DCC_PRICE_SUMMARY_TEXT" data-ng-if="breakdownCtrl.dccSelected && !breakdownCtrl.donationEnabled" class="ib-text ib-text--color-unfocused ib-text--block">{{ breakdownCtrl.currentDccData.totalPrice }} {{ breakdownCtrl.currentDccData.currencyCode }}</span>
+				<span data-ng-if="breakdownCtrl.breakdownDiscount.types['AVIOS']">
+					+ {{ breakdownCtrl.breakdownDiscount.types['AVIOS'].formatedAvios + ' ' + ('AVIOS_TEXT'|translate) }}
+				</span>
+			</span>
+            </div>
+		</div>
+		<p class="ib-text ib-text--top ib-text--block ib-text--xsmall ib-text--color-normal">
+			<span class="ib-text--xsmall ib-text--block ib-text--color-normal">
+				{{'MMB_UPGRADING_BIDS_PAYMENT_FIRST_SCREEN_TEXT1'|translate}} {{'MMB_UPGRADING_BIDS_PAYMENT_FIRST_SCREEN_TEXT2'|translate}}
+			</span>
+		</p>
+	</footer>
+	<!--footer para upgrading avios-->
+	<footer class="ib-summary__footer" ng-if="breakdownCtrl.flowUpgrade === 'aviosFlow' || breakdownCtrl.flowUpgrade === 'waitingList'">
+		<div class="ib-summary__footer-price-wrapper">
+			<span class="ib-text ib-text--especial ib-summary__footer-price--small">{{'TOTAL_TEXT' |translate}}</span>
+			<span class="ib-text ib-text--especial ib-summary__footer-price--small ib-text--white-space">
+				{{ breakdownCtrl.summaryText }}
+			</span>
+		</div>
+
+		<p class="ib-text ib-text--top ib-text--block ib-text--xsmall ib-text--color-unfocused">
+			<span class="ib-text ib-text--block ib-text--color-unfocused">
+				{{'MMB_UPGRADING_AVIOS_SUMMARY_TEXT_1'|translate}}
+			</span>
+		</p>
+		<p class="ib-text ib-text--top ib-text--block ib-text--xsmall ib-text--color-unfocused">
+			<span class="ib-text ib-text--block ib-text--color-unfocused">
+				{{'MMB_UPGRADING_AVIOS_SUMMARY_TEXT_4'|translate}}
+			</span>
+		</p>
+	</footer>
+</div>

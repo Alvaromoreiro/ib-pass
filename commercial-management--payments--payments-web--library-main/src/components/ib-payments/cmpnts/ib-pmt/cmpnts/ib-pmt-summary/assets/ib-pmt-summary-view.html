@@ -1,0 +1,355 @@
+<div class="ib-summary">
+    <header class="ib-summary__header">
+        <h3 class="ib-heading ib-heading--type-3">{{(PmtsummaryCtrl.flowApp === 'MMBVC' || PmtsummaryCtrl.flowApp ===
+            'MMBUNIF') ? 'PAYMENTS_SUMMARY_TITLE' : PmtsummaryCtrl.flowApp === 'MMBBID' ? 'PAYMENTS_SUMMARY_TITLE' :
+            'SUMMARY_TITLE' |translate}}</h3>
+    </header>
+    <div class="ib-summary__body" ng-class="{'u-pl-medium-xl':  PmtsummaryCtrl.flowApp === 'MMBBID'}">
+        <uib-accordion ng-repeat="(indexTrip,trip) in PmtsummaryCtrl.summaryInfo.trips"
+            ng-if="PmtsummaryCtrl.flowApp !== 'MMBVC' && PmtsummaryCtrl.flowApp !== 'MMBBID' && PmtsummaryCtrl.flowApp !== 'MMBUNIF'">
+            <div class="ib-summary__section"
+                ng-class="{'u-border-none ib-summary__section--border-responsive u-pb-none': PmtsummaryCtrl.$rootScope.isRedemptionFlow}">
+                <h4 class="ib-heading ib-heading--type-4 ib-summary__section-title">
+                    {{(PmtsummaryCtrl.summaryInfo.trips.length
+                    <=2 ? (indexTrip === 0 ? 'SUMMARY_OUTBOUND_TRIP_TITLE' : 'SUMMARY_RETURN_TRIP_TITLE' )
+                        : 'SUMMARY_TRIP_TITLE' )|translate}} {{PmtsummaryCtrl.summaryInfo.trips.length <=2 ? '' :
+                        (indexTrip + 1)}} </h4>
+                        <div ng-repeat="(indexSegment,segment) in trip.segments">
+                            <div class="ib-summary__segment"
+                                ng-class="{'ib-summary__section ib-summary__section--border-responsive': PmtsummaryCtrl.$rootScope.isRedemptionFlow}">
+                                <ib-pmt-summary-trip id="pmt-summary-summary-trip-{{indexTrip}}"
+                                    segment="segment"></ib-pmt-summary-trip>
+                            </div>
+                            <div class="ib-summary__segment u-pb-none"
+                                ng-class="{'ib-summary__section ib-summary__section--border-responsive u-border-none': PmtsummaryCtrl.$rootScope.isRedemptionFlow}"
+                                ng-if="PmtsummaryCtrl.$rootScope.isRedemptionFlow">
+                                <ib-ui-summary-fare id="ui-summary-summary-fare-redemption-{{indexTrip}}"
+                                    name="trip.fare[indexSegment].name" fares="trip.fare[indexSegment].fareDetails"
+                                    ng-if="!PmtsummaryCtrl.$rootScope.isRedemptionFlow"></ib-ui-summary-fare>
+                            </div>
+                        </div>
+            </div>
+            <ib-ui-summary-fare id="ui-summary-summary-fare-{{indexTrip}}" name="trip.fare[0].name"
+                fares="trip.fare[0].fareDetails" ng-if="!PmtsummaryCtrl.$rootScope.isRedemptionFlow"></ib-ui-summary-fare>
+        </uib-accordion>
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.isLogged && PmtsummaryCtrl.flowApp !== 'MMBBID' && PmtsummaryCtrl.membershipData">
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                <h5 class="ib-heading ib-heading--type-4 ib-summary__section-title">
+                    {{'IBPURC_PAYMENTS_SUMMARY_ON_BUSINESS_LOGGED_DATA'|translate}}</h5>
+                <span
+                    class="ib-text ib-text--color-unfocused ib-text--block ib-text--bold">{{PmtsummaryCtrl.membershipData.companyInfo.companyName}}</span>
+                <span class="ib-text ib-text--color-unfocused">{{'IBPURC_PAYMENTS_SUMMARY_ON_BUSINESS_LOGGED_DATA_CODE'
+                    | translate}}
+                    {{PmtsummaryCtrl.membershipData.clid}}</span>
+            </div>
+        </div>
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.showPassengersName && PmtsummaryCtrl.flowApp !== 'MMBBID' && PmtsummaryCtrl.flowApp !== 'SUBSCRIPTIONMODELS'">
+            <ib-pmt-summary-passenger data-ng-if="PmtsummaryCtrl.flowApp !== 'BBKI' || PmtsummaryCtrl.actualStepFlow === 'confirmation'" id="pmt-summary-summary-passenger"
+                show-passengers-name="PmtsummaryCtrl.showPassengersName"
+                passengers="PmtsummaryCtrl.summaryInfo.passengers"></ib-pmt-summary-passenger>
+            <ib-pmt-bki-summary-passengers data-ng-if="PmtsummaryCtrl.flowApp === 'BBKI' && PmtsummaryCtrl.actualStepFlow === 'ibpurc'" id="pmt-summary-summary-passenger"
+                [show-passengers-name]="PmtsummaryCtrl.showPassengersName"
+                [passengers]="PmtsummaryCtrl.summaryInfo.passengers"></ib-pmt-bki-summary-passengers>
+        </div>
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.ancillaries && PmtsummaryCtrl.summaryInfo.ancillaries.bundles.length > 0">
+            <ib-pmt-summary-bundle id="pmt-summary-summary-bundle"
+                [bundles]="PmtsummaryCtrl.summaryInfo.ancillaries.bundles">
+            </ib-pmt-summary-bundle>
+        </div>
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.orderFees.length > 0 && PmtsummaryCtrl.flowApp !== 'MMBBID'">
+            <ib-pmt-summary-other id="pmt-summary-other-fees"
+                order-fees="PmtsummaryCtrl.summaryInfo.orderFees"></ib-pmt-summary-other>
+        </div>
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.paidDeposit && PmtsummaryCtrl.flowApp !== 'MMBBID'">
+            <span
+                class="ib-text ib-text--color-unfocused ib-text--bold ib-list-passengers__item-description__title u-pl-none ng-binding">{{PmtsummaryCtrl.summaryInfo.paidDeposit.price
+                !== 0 ? ('PRICE_BREAKDOWN_ON_HOLD'|translate) : ('PRICE_BREAKDOWN_ON_HOLD_24HRS'|translate)}}</span>
+            <span
+                class="ib-text ib-text--color-normal u-float-right">{{PmtsummaryCtrl.summaryInfo.paidDeposit.priceFormat}}</span>
+        </div>
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.ancillaries && PmtsummaryCtrl.summaryInfo.ancillaries.seats.segments.length > 0  && PmtsummaryCtrl.flowApp !== 'MMBBID'">
+            <ib-pmt-summary-seats id="pmt-summary-summary-seats"
+                ancillaries="PmtsummaryCtrl.summaryInfo.ancillaries"></ib-pmt-summary-seats>
+        </div>
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.ancillaries && PmtsummaryCtrl.summaryInfo.ancillaries.baggages.segments.length > 0 && PmtsummaryCtrl.flowApp !== 'MMBBID'">
+            <ib-pmt-summary-extra-baggage id="pmt-summary-extra-baggage"
+                ancillaries="PmtsummaryCtrl.summaryInfo.ancillaries">
+            </ib-pmt-summary-extra-baggage>
+        </div>
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.ancillaries && PmtsummaryCtrl.summaryInfo.ancillaries.speqs.segments.length > 0 && PmtsummaryCtrl.flowApp !== 'MMBBID'">
+            <ib-pmt-summary-speqs id="pmt-summary-summary-speqs" model="PmtsummaryCtrl.summaryInfo.ancillaries.speqs">
+            </ib-pmt-summary-speqs>
+        </div>
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.ancillaries && PmtsummaryCtrl.summaryInfo.ancillaries.priority.segments.length > 0 && PmtsummaryCtrl.flowApp !== 'MMBBID'">
+            <ib-pmt-summary-priority-boarding id="pmt-summary-summary-priority"
+                model="PmtsummaryCtrl.summaryInfo.ancillaries.priority">
+            </ib-pmt-summary-priority-boarding>
+        </div>
+        <!-- GLOBICK -->
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.ancillaries && PmtsummaryCtrl.summaryInfo.ancillaries.globickTransfers.hasTransfersGlobick">
+            <ib-pmt-summary-globick-transfers id="pmt-summary-summary-transfers-globick"
+                [model]="PmtsummaryCtrl.summaryInfo.ancillaries.globickTransfers"></ib-pmt-summary-globick-transfers>
+        </div>
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.ancillaries && PmtsummaryCtrl.summaryInfo.ancillaries.globickActivities.hasActivitiesGlobick">
+            <ib-pmt-summary-globick-activities id="pmt-summary-summary-activities-globick"
+                [model]="PmtsummaryCtrl.summaryInfo.ancillaries.globickActivities"></ib-pmt-summary-globick-activities>
+        </div>
+        <!-- END GLOBICK-->
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.ancillaries && PmtsummaryCtrl.summaryInfo.ancillaries.flexibility.total > 0 && PmtsummaryCtrl.flowApp !== 'MMBBID'">
+            <ib-summary-item id="pmt-summary-summary-flexibility"
+                model="PmtsummaryCtrl.summaryInfo.ancillaries.flexibility"></ib-summary-item>
+        </div>
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.giftCards && PmtsummaryCtrl.summaryInfo.giftCards.items.length > 0 && PmtsummaryCtrl.flowApp !== 'MMBBID'">
+            <ib-summary-item id="pmt-summary-summary-giftCards"
+                model="PmtsummaryCtrl.summaryInfo.giftCards"></ib-summary-item>
+        </div>
+        <div class="ib-summary__section"
+            ng-class="{'ib-summary__section--separator':  PmtsummaryCtrl.flowApp === 'MMBBID'}"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.subscriptionModels && PmtsummaryCtrl.summaryInfo.subscriptionModels.items.length > 0 && PmtsummaryCtrl.flowApp !== 'MMBBID'">
+            <ib-summary-item id="pmt-summary-summary-subscriptionModels"
+                model="PmtsummaryCtrl.summaryInfo.subscriptionModels"></ib-summary-item>
+        </div>
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.ancillaries && PmtsummaryCtrl.summaryInfo.ancillaries.insurance.total > 0 && PmtsummaryCtrl.flowApp !== 'MMBBID'">
+            <ib-pmt-summary-secures id="pmt-summary-summary-secures"
+                ancillaries="PmtsummaryCtrl.summaryInfo.ancillaries.insurance"></ib-pmt-summary-secures>
+        </div>
+        <!-- ALLIANZ FUSION INSURANCE -->
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.ancillaries && PmtsummaryCtrl.summaryInfo.ancillaries.insuranceAllianzFusion.total.total > 0 && PmtsummaryCtrl.flowApp !== 'MMBBID'">
+            <ib-pmt-summary-allianz-fusion-secures id="pmt-summary-summary-allianz-fusion-secures"
+                ancillaries="PmtsummaryCtrl.summaryInfo.ancillaries.insuranceAllianzFusion"></ib-pmt-summary-allianz-fusion-secures>
+        </div>
+        <!-- END ALLIANZ FUSION INSURANCE -->
+        <div class="ib-summary__section"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.ancillaries && PmtsummaryCtrl.summaryInfo.ancillaries.petc.hasPetc && PmtsummaryCtrl.flowApp === 'BBKI'">
+            <ib-pmt-summary-bki-pets id="pmt-summary-bki-pets"
+                [model]="PmtsummaryCtrl.summaryInfo.ancillaries.petc"></ib-pmt-summary-bki-pets>
+        </div>
+        <div class="ib-summary__section" data-ng-if="((PmtsummaryCtrl.discountsAppliedIssue && PmtsummaryCtrl.discountsAppliedIssue.discounts && PmtsummaryCtrl.discountsAppliedIssue.discounts.length > 0)
+            || PmtsummaryCtrl.appliedDiscounts.status && !PmtsummaryCtrl.$rootScope.isRedemptionFlow
+            || PmtsummaryCtrl.summaryInfo.appliedDiscounts.status && !PmtsummaryCtrl.$rootScope.isRedemptionFlow
+            || (PmtsummaryCtrl.oBDiscountInfo.length > 0 && PmtsummaryCtrl.showPassengersName)
+            || PmtsummaryCtrl.summaryInfo.voucherDisscount) && PmtsummaryCtrl.flowApp !== 'MMBBID'">
+            <ib-pmt-summary-disccounts disccount-info="PmtsummaryCtrl.appliedDiscounts"
+                summary-info="PmtsummaryCtrl.summaryInfo" flow="PmtsummaryCtrl.flowApp"
+                obInfo="PmtsummaryCtrl.oBDiscountInfo" show-name="PmtSumDisCtrl.showPassengersName"
+                discounts-applied-issue="PmtsummaryCtrl.discountsAppliedIssue"></ib-pmt-summary-disccounts>
+        </div>
+        <div class="ib-summary__section"
+            ng-class="{'ib-summary__section--separator':  PmtsummaryCtrl.flowApp === 'MMBBID'}"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.ancillaries && PmtsummaryCtrl.summaryInfo.ancillaries.upgradingBids && PmtsummaryCtrl.flowApp === 'MMBBID'">
+            <ib-pmt-summary-upgrading-bids segments="PmtsummaryCtrl.summaryInfo.ancillaries.upgradingBids.segments"
+                bid-segments="PmtsummaryCtrl.summaryInfo.ancillaries.upgradingBids.bidSegments"></ib-pmt-summary-upgrading-bids>
+        </div>
+        <div class="ib-summary__section"
+            ng-class="{'ib-summary__section--separator':  PmtsummaryCtrl.flowApp === 'MMBBID'}"
+            data-ng-if="PmtsummaryCtrl.isOnHold || PmtsummaryCtrl.onHoldPayment">
+            <ul class="ib-list-passengers">
+                <li class="ib-list-passengers__item">
+                    <div class="ib-list-passengers__item-description">
+                        <span>
+                            <span
+                                class="ib-text ib-text--color-unfocused ib-text--bold ib-list-passengers__item-description__title u-pl-none">{{PmtsummaryCtrl.onHoldType
+                                ? ('ON_HOLD_SUMMARY_TITLE'|translate) + ' '+ PmtsummaryCtrl.onHoldType.hours
+                                + ' ' + ('ONHOLD_INFO_TEXT_1_2'|translate) :
+                                ('SUMMARY_ON_HOLD_TITLE'|translate)}}</span>
+                            <span class="ib-text ib-text--color-normal u-float-right">
+                                {{PmtsummaryCtrl.onHoldPayment}}</span>
+                        </span>
+                    </div>
+                    <div class="ib-list-passengers__item-description">
+                        <span>
+                           <span
+                               id="DCC_PRICE_SUMMARY_PAYMENT_CONFIRMATION_VALUE_ON_HOLD"
+                               data-ng-if="PmtsummaryCtrl.dccPrice.totalPrice"
+                               class="ib-text ib-text--color-normal u-float-right">{{ PmtsummaryCtrl.dccPrice.totalPrice }}</span>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="ib-summary__section"
+            ng-class="{'ib-summary__section--separator':  PmtsummaryCtrl.flowApp === 'MMBBID'}"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.ancillaries && PmtsummaryCtrl.summaryInfo.ancillaries.carbonFootprint && PmtsummaryCtrl.summaryInfo.ancillaries.carbonFootprint.total && PmtsummaryCtrl.summaryInfo.ancillaries.carbonFootprint.kilosCo2Equivalent && PmtsummaryCtrl.flowApp === 'BBKI'">
+            <ib-pmt-summary-carbon-footprint [model]="PmtsummaryCtrl.summaryInfo.ancillaries.carbonFootprint"></ib-pmt-summary-carbon-footprint>
+        </div>
+
+        <ib-pmt-summary-type-payment id="pmt-summary-type-payment" payment-type="PmtsummaryCtrl.summaryInfo.paymentType"
+            data-ng-if="PmtsummaryCtrl.summaryInfo.paymentType && !PmtsummaryCtrl.isMMBBID_AVIOS && PmtsummaryCtrl.flowApp !== 'MMBBID'"></ib-pmt-summary-type-payment>
+    </div>
+    <footer class="ib-summary__footer" ng-if="PmtsummaryCtrl.totalPrice.showTotalPrice">
+        <div data-ng-if="PmtsummaryCtrl.flowApp !== 'MMBBID'" class="ib-summary__footer--flex">
+            <div>
+                <h4 class="ib-summary__footer-total">{{PmtsummaryCtrl.totalPrice.textTotalPrice | translate}}</span></h4>
+                <span data-ng-if="PmtsummaryCtrl.dccSelected && !PmtsummaryCtrl.donationEnabled" class="ib-text ib-text--color-unfocused ib-text--block">{{'DCC_FINAL_PRICE' | translate}}</span>
+                <span
+                    id="DCC_PRICE_SUMMARY_PAYMENT_CONFIRMATION_TEXT"
+                    data-ng-if="PmtsummaryCtrl.dccPrice.totalPrice && !(PmtsummaryCtrl.isOnHold || PmtsummaryCtrl.onHoldPayment)"
+                    class="ib-text ib-text--color-unfocused ib-text--block">
+                        {{'DCC_FINAL_PRICE' | translate}}
+                </span>
+            </div>
+            <div class="ib-summary__footer-concepts">
+                <span class="ib-summary__footer-price"
+                    data-ng-if="!PmtsummaryCtrl.$rootScope.isRedemptionFlow && (PmtsummaryCtrl.onHoldInfo && PmtsummaryCtrl.onHoldInfo.priceAfterOnHold || PmtsummaryCtrl.totalPrice !== null)"
+                    data-ng-class="{'ib-summary__footer-price--long': PmtsummaryCtrl.totalPrice.formattedTotalPrice.length > 10 || PmtsummaryCtrl.onHoldInfo.priceAfterOnHold.length > 10}">
+                    {{PmtsummaryCtrl.onHoldInfo ? PmtsummaryCtrl.onHoldInfo.priceAfterOnHold :
+                    PmtsummaryCtrl.totalPrice.formattedTotalPrice}}
+                    <span id="DCC_PRICE_SUMMARY_TEXT" data-ng-if="PmtsummaryCtrl.dccSelected && !PmtsummaryCtrl.donationEnabled" class="ib-text ib-text--color-unfocused ib-text--block">{{ PmtsummaryCtrl.currentDccData.totalPrice }} {{ PmtsummaryCtrl.currentDccData.currencyCode }}</span>
+                    <span
+                        id="DCC_PRICE_SUMMARY_PAYMENT_CONFIRMATION_VALUE"
+                        data-ng-if="PmtsummaryCtrl.dccPrice.totalPrice && !(PmtsummaryCtrl.isOnHold || PmtsummaryCtrl.onHoldPayment)"
+                        class="ib-text ib-text--color-unfocused ib-text--block">{{ PmtsummaryCtrl.dccPrice.totalPrice }}</span>
+                    <span data-ng-if="PmtsummaryCtrl.summaryInfo.appliedDiscounts.types.AVIOS">
+                        + {{!PmtsummaryCtrl.numeroAvios ? PmtsummaryCtrl.appliedDiscounts.types.AVIOS.formatedAvios + '
+                        ' +
+                        ('AVIOS_TEXT'|translate):PmtsummaryCtrl.numeroAvios+ ' ' + ('AVIOS_TEXT'|translate)}}
+                    </span>
+                </span>
+                <span class="ib-summary__footer-others" ng-if="PmtsummaryCtrl.$rootScope.isRedemptionFlow || PmtsummaryCtrl.$rootScope.isPointsOBFlow">
+                    <span class=""
+                        data-ng-class="{'ib-summary__footer-price--long': PmtsummaryCtrl.totalPrice.formattedTotalPriceAvios.length > 5 || PmtsummaryCtrl.totalPrice.formattedTotalPrice.length > 10}"
+                        ng-if="PmtsummaryCtrl.$rootScope.isRedemptionFlow && !PmtsummaryCtrl.$rootScope.isPointsOBFlow">
+                        {{PmtsummaryCtrl.totalPrice.formattedTotalPriceAvios + ' ' + ('AVIOS_TEXT'|translate)}}
+                    </span>
+                    <span class=""
+                        data-ng-class="{'ib-summary__footer-price--long': PmtsummaryCtrl.totalPrice.formattedTotalPriceOBPoints.length > 5 || PmtsummaryCtrl.totalPrice.formattedTotalPrice.length > 10}"
+                        ng-if="PmtsummaryCtrl.$rootScope.isPointsOBFlow">
+                        {{PmtsummaryCtrl.totalPrice.formattedTotalPriceOBPoints + ' ' +
+                        ('AVAILABILITY_ON_BUSINESS_POINTS_NEEDED'|translate)}}
+                    </span>
+                    <span class=""
+                        data-ng-class="{'ib-summary__footer-price--long': (PmtsummaryCtrl.totalPrice.formattedTotalPriceAvios.length > 5 || PmtsummaryCtrl.totalPrice.formattedTotalPriceOBPoints.length > 5) || PmtsummaryCtrl.totalPrice.formattedTotalPrice.length > 10}"
+                        ng-if="PmtsummaryCtrl.$rootScope.isRedemptionFlow">
+                        {{('AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate) + ' ' +
+                        PmtsummaryCtrl.totalPrice.formattedTotalPrice}}
+                    </span>
+                </span>
+                <span class="ib-summary__footer-others"
+                    data-ng-if="!PmtsummaryCtrl.onHoldInfo && PmtsummaryCtrl.totalPrice === null">
+                    {{'GENERAL_FREE_LABEL'|translate}}
+                </span>
+            </div>
+        </div>
+        <div class="u-text-right" data-ng-if="PmtsummaryCtrl.flowApp === 'MMBBID'">
+            <span class="ib-text ib-text--especial ib-text--spacing-interlarge ib-summary__footer-price ib-summary__footer-price--small"
+                data-ng-if="!PmtsummaryCtrl.isMMBBID_AVIOS">{{PmtsummaryCtrl.totalPrice.textTotalPrice}}</span>
+            <span class="ib-text ib-text--especial ib-text--spacing-interlarge ib-summary__footer-price ib-summary__footer-price--medium"
+                data-ng-if="!PmtsummaryCtrl.$rootScope.isRedemptionFlow && (PmtsummaryCtrl.onHoldInfo && PmtsummaryCtrl.onHoldInfo.priceAfterOnHold || PmtsummaryCtrl.totalPrice !== null)"
+                data-ng-class="{'ib-summary__footer-price--long': PmtsummaryCtrl.totalPrice.formattedTotalPrice.length > 10 || PmtsummaryCtrl.onHoldInfo.priceAfterOnHold.length > 10}">
+				{{ PmtsummaryCtrl.summaryText !== 'null' ? PmtsummaryCtrl.summaryText : PmtsummaryCtrl.totalPrice.formattedTotalPrice}}
+                <span data-ng-if="PmtsummaryCtrl.appliedDiscounts.types.AVIOS">
+                    + {{PmtsummaryCtrl.appliedDiscounts.types.AVIOS.formatedAvios + ' ' +
+                    ('AVIOS_TEXT'|translate)}}
+                </span>
+            </span>
+        </div>
+        <div data-ng-if="PmtsummaryCtrl.flowApp === 'MMBBID'"
+            class="ib-text ib-text--block ib-text--xsmall u-mb-small">
+            <div>
+                <p class="ib-text ib-text--block ib-text--xsmall  ib-text--color-normal">
+                    <!-- Bids, Avios y Free -->
+                    <span
+                        data-ng-if="PmtsummaryCtrl.bidsAvailable && !PmtsummaryCtrl.isMMBBID_AVIOS && (PmtsummaryCtrl.totalAviosAmount && PmtsummaryCtrl.totalAviosAmount !== 0) && PmtsummaryCtrl.numberFreeUpgrade">
+                        {{PmtsummaryCtrl.numberFreeUpgrade === 1 ? ('MMB_UPGRADING_FREE_AVIOS_CONF_SIN' | translate
+                        : {free: PmtsummaryCtrl.numberFreeUpgrade, tierIB: PmtsummaryCtrl.tierIB, avios:
+                        PmtsummaryCtrl.totalAviosAmount, price: PmtsummaryCtrl.totalPrice.formattedTotalPrice}) :
+                        ('MMB_UPGRADING_FREE_AVIOS_BIDS_CONF_PLU' | translate : {free: PmtsummaryCtrl.numberFreeUpgrade,
+                        tierIB: PmtsummaryCtrl.tierIB, avios: PmtsummaryCtrl.totalAviosAmount, price:
+                        PmtsummaryCtrl.totalPrice.formattedTotalPrice})}}
+                    </span>
+                    <!-- Bids y Avios -->
+                    <span
+                        data-ng-if="!PmtsummaryCtrl.isMMBBID_AVIOS && (PmtsummaryCtrl.totalAviosAmount && PmtsummaryCtrl.totalAviosAmount !== 0) && !PmtsummaryCtrl.numberFreeUpgrade">
+                        {{('MMB_UPGRADING_AVIOS_AND_MONEY_CONFIRMATION_1'| translate) + ', ' +
+                        PmtsummaryCtrl.totalPrice.formattedTotalPrice + ' ' +
+                        ('MMB_UPGRADING_AVIOS_AND_MONEY_CONFIRMATION_2'| translate) + ' ' +
+                        PmtsummaryCtrl.totalAviosAmountFormatted + ' '
+                        + ('MMB_UPGRADING_AVIOS_AND_MONEY_CONFIRMATION_3'|translate)}}
+                    </span>
+                    <!-- Bids y Free -->
+                    <span
+                        data-ng-if="PmtsummaryCtrl.bidsAvailable && !PmtsummaryCtrl.isMMBBID_AVIOS && (!PmtsummaryCtrl.totalAviosAmount || PmtsummaryCtrl.totalAviosAmount === 0) && PmtsummaryCtrl.numberFreeUpgrade">
+                        {{PmtsummaryCtrl.numberFreeUpgrade === 1 ? ('MMB_UPGRADING_FREE_BIDS_CONF_SIN' | translate :
+                        {free: PmtsummaryCtrl.numberFreeUpgrade, tierIB: PmtsummaryCtrl.tierIB, price:
+                        PmtsummaryCtrl.totalPrice.formattedTotalPrice}) : ('MMB_UPGRADING_FREE_BIDS_CONF_PLU' |
+                        translate : {free: PmtsummaryCtrl.numberFreeUpgrade, tierIB: PmtsummaryCtrl.tierIB, price:
+                        PmtsummaryCtrl.totalPrice.formattedTotalPrice})}}
+                    </span>
+                    <!-- Avios y Free -->
+                    <span
+                        data-ng-if="PmtsummaryCtrl.isMMBBID_AVIOS && (PmtsummaryCtrl.totalAviosAmount && PmtsummaryCtrl.totalAviosAmount !== 0) && PmtsummaryCtrl.numberFreeUpgrade">
+                        {{PmtsummaryCtrl.numberFreeUpgrade === 1 ? ('MMB_UPGRADING_FREE_AVIOS_CONF_SIN' | translate :
+                        {free: PmtsummaryCtrl.numberFreeUpgrade, tierIB: PmtsummaryCtrl.tierIB, avios:
+                        PmtsummaryCtrl.totalAviosAmountFormatted}) : ('MMB_UPGRADING_FREE_AVIOS_CONF_PLU' | translate : {free:
+                        PmtsummaryCtrl.numberFreeUpgrade, tierIB: PmtsummaryCtrl.tierIB, avios:
+                        PmtsummaryCtrl.totalAviosAmountFormatted})}}
+                    </span>
+                    <!-- Bids -->
+                    <span
+                        data-ng-if="PmtsummaryCtrl.bidsAvailable && !PmtsummaryCtrl.isMMBBID_AVIOS && (!PmtsummaryCtrl.totalAviosAmount || PmtsummaryCtrl.totalAviosAmount === 0) && !PmtsummaryCtrl.numberFreeUpgrade"
+                        class="ib-summary__footer-bid-description">
+                        {{('MMB_UPGRADING_BIDS_PAYMENT_FIRST_SCREEN_TEXT1'| translate) + ' ' + ('MMB_UPGRADING_BIDS_PAYMENT_FIRST_SCREEN_TEXT2'|translate)}}
+                    </span>
+                    <!-- Avios -->
+                    <span
+                        data-ng-if="PmtsummaryCtrl.isMMBBID_AVIOS && (PmtsummaryCtrl.totalAviosAmount && PmtsummaryCtrl.totalAviosAmount !== 0) && !PmtsummaryCtrl.numberFreeUpgrade">
+                        {{PmtsummaryCtrl.totalAviosAmountFormatted }} {{ ('MMB_UPGRADING_AVIOS_AND_MONEY_CONFIRMATION_3' | translate)}}
+                    </span>
+                    <!-- Free -->
+                    <span
+                        data-ng-if="PmtsummaryCtrl.isMMBBID_AVIOS && (!PmtsummaryCtrl.totalAviosAmount || PmtsummaryCtrl.totalAviosAmount === 0) && PmtsummaryCtrl.numberFreeUpgrade">
+                        {{PmtsummaryCtrl.numberFreeUpgrade === 1 ? ('MMB_UPGRADING_FREE_CONF_SIN' | translate : {free:
+                        PmtsummaryCtrl.numberFreeUpgrade, tierIB: PmtsummaryCtrl.tierIB} ) :
+                        ('MMB_UPGRADING_FREE_CONF_PLU' | translate : {free: PmtsummaryCtrl.numberFreeUpgrade, tierIB:
+                        PmtsummaryCtrl.tierIB})}}
+                    </span>
+                </p>
+            </div>
+        </div>
+        <p class="ib-text u-display-block u-mt-xxsmall"
+            data-ng-if="PmtsummaryCtrl.onHoldPayment || PmtsummaryCtrl.isOnHold">
+            {{'SUMMARY_ON_HOLD_TOTAL_PRICE'|translate}}
+        </p>
+        <button data-ng-click="PmtsummaryCtrl.openTaxModal($event)" class="price-detail payments" data-ng-if="PmtsummaryCtrl.shouldShowPriceDetailsCTA" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M7.94745 6.0906H8.0162C8.49848 6.0906 9.06355 5.96473 9.06355 5.19012V5.15139C9.06355 4.37195 8.49848 4.23156 8.0162 4.23156H7.94745C7.46469 4.23156 6.89865 4.37195 6.89865 5.15139V5.19012C6.89865 5.96473 7.46469 6.0906 7.94745 6.0906Z" fill="#333333"/>
+                <path d="M7.05117 11.7694H8.91296V7.12178H7.05117V11.7694Z" fill="#333333"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99829 1.00244C4.13186 1.00244 0.998047 4.13473 0.998047 7.99805C0.998047 11.8662 4.13186 14.9985 7.99829 14.9985C11.8633 14.9985 14.998 11.8662 14.998 7.99805C14.998 4.13473 11.8633 1.00244 7.99829 1.00244ZM2.72523 7.99805C2.72523 10.9076 5.08963 13.275 7.99829 13.275C10.905 13.275 13.2713 10.9076 13.2713 7.99805C13.2713 5.0933 10.905 2.72593 7.99829 2.72593C5.08963 2.72593 2.72523 5.0933 2.72523 7.99805Z" fill="#333333"/>
+            </svg>
+            <p>{{'SUMMARY_FEES' | translate}}</p>
+        </button>
+    </footer>
+    <!-- Summary CV ancillaries Refund -->
+    <div class="ib-summary__body u-mb-small-md u-border-top-s1-gray-40"
+        data-ng-class="{'u-mt-none u-border-none': !PmtsummaryCtrl.totalPrice.showTotalPrice, 'u-mt-xmedium': PmtsummaryCtrl.totalPrice.showTotalPrice}"
+        data-ng-if="PmtsummaryCtrl.summaryInfo.ancillariesRefund">
+        <div class="ib-summary__section u-p-none u-m-none u-border-none">
+            <ib-pmt-summary-cv-ancillaries id="pmt-summary-cv-ancillaries"
+                ancillaries-refund="PmtsummaryCtrl.summaryInfo.ancillariesRefund.ancillaries"></ib-pmt-summary-cv-ancillaries>
+        </div>
+        <footer class="ib-summary__footer">
+            <div class="ib-summary__footer--flex">
+                <h4 class="ib-summary__footer-total">{{'PMT_CONFIRMATION_TOTAL_REFUND_BOND' | translate}}</h4>
+                <div class="ib-summary__footer-concepts">
+                    <span class="ib-summary__footer-price"
+                        data-ng-class="{'ib-summary__footer-price--long':PmtsummaryCtrl.summaryInfo.ancillariesRefund.totalRefund.length > 10}">{{PmtsummaryCtrl.summaryInfo.ancillariesRefund.totalRefund}}</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>

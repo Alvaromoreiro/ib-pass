@@ -1,0 +1,13 @@
+import './transformers/ib-pmt-methods-transformer';
+import './proxies/ib-checkout-paypal-info-proxy';
+import './proxies/ib-pmt-conditions-proxy';
+import './proxies/ib-pmt-donations-proxy';
+import './proxies/ib-pmt-full-avios-proxy';
+import './proxies/ib-pmt-methods-proxy';
+import './proxies/ib-pmt-summary-info-quota-proxy';
+import './services/ib-checkout-paypal-info-service';
+import './services/ib-pmt-conditions-service';
+import './services/ib-pmt-donations-service';
+import './services/ib-pmt-full-avios-service';
+import './services/ib-pmt-methods-service';
+import './services/ib-pmt-summary-info-quota-service';

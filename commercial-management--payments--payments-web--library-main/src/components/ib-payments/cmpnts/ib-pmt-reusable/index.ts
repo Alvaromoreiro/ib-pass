@@ -1,0 +1,16 @@
+import './ib-reusable-module';
+import './directives/ib-adyen-script';
+import './directives/ib-airplus-cc-number';
+import './directives/ib-city-validator-directive';
+import './directives/ib-trim-on-blur-directive';
+import './directives/ib-finger-print';
+import './directives/ib-iberia-pay-script';
+import './directives/ib-paypal-pmt-button';
+import './directives/ib-ui-select-directive';
+import './ib-dates';
+import './ib-iberia-pay-credit-card-number';
+import './ib-iberia-pay-cvv-number';
+import './ib-modal';
+import './ib-pmt-required-fields';
+import './ib-tabs';
+import './ib-risk-field/ib-risk-field.module';

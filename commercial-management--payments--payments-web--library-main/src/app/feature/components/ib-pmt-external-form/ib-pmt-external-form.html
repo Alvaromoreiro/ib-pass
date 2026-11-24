@@ -1,0 +1,127 @@
+
+<fieldset class="ib-form__fieldset">
+    <legend class="u-hide-accessible">
+        {{'IBPURC_PAYMENTS_EXTERNAL_PAYMENT_ACCESSIBLE_FORM'|translate}}{{pmtExternalFormCtrl.externalFormInfo.description}}
+    </legend>
+    <div class="ib-box__wrapper">
+        <div class="ib-transfers">
+            <div class="ib-transfers__logo-container">
+                <figure class="ib-transfers__logo">
+                    <img class="ib-transfers__logo-img"
+                        data-ng-src="{{$root.routes.images}}/transfers/{{pmtExternalFormCtrl.model.paymentLogo}}"
+                        alt="{{'GENERAL_LOGO_TITLE'|translate}} {{pmtExternalFormCtrl.externalFormInfo.provider}}" />
+                </figure>
+            </div>
+            <div class="ib-transfers__content">
+                <span class="ib-text ib-text--especial ib-text--big"
+                    data-ng-bind-html="pmtExternalFormCtrl.model.title"></span>
+                <ul class="ib-transfers__list">
+                    <li class="ib-transfers__item"
+                        data-ng-repeat="description in pmtExternalFormCtrl.model.description">
+                        <span class="ib-text ib-text--medium ib-text--color-unfocused"
+                            data-ng-bind-html="description"></span>
+                    </li>
+                </ul>
+                <div data-ng-if="pmtExternalFormCtrl.model.termsOfUseTitle">
+                    <span class="ib-text ib-text--especial ib-text--big"
+                        data-ng-bind-html="pmtExternalFormCtrl.model.termsOfUseTitle"></span>
+                    <p class="ib-text ib-text--medium ib-text--color-unfocused"
+                        style="margin: 0.625rem 0;"
+                        data-ng-repeat="condition in pmtExternalFormCtrl.model.termsOfUseConditions"
+                        data-ng-bind-html="condition"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ib-box__wrapper ib-layout__form-center" data-ng-if="pmtExternalFormCtrl.model.requiredFields">
+        <!-- NAME -->
+        <div class="ib-layout__line-spacing" data-ng-if="pmtExternalFormCtrl.model.requiredFields.name">
+            <div class="ib-input"
+                data-ng-class="{'ib-input--error' : pmtExternalFormCtrl.submittedTab && pmtExternalFormCtrl.containerForm.name.$invalid}">
+                <label class="ib-input__label" for="name"
+                    ng-class="{'ib-input__label--focus' : pmtExternalFormCtrl.nameFocused || (pmtExternalFormCtrl.containerForm.name.$viewValue != null && pmtExternalFormCtrl.containerForm.name.$viewValue !== '')}">{{'EXTERNAL_FORM_NAME_LABEL'|translate}}</label>
+                <input class="ib-input__input" type="text" id="name" name="name"
+                    ng-model="pmtExternalFormCtrl.contactData.ownerName"
+                    minlength="{{$root.pmtPatterns.MIN_LENGTH_NAME}}" maxlength="{{$root.pmtPatterns.MAX_LENGTH_NAME}}"
+                    ng-pattern="::$root.pmtPatterns.NAME_SURNAME_PATTERN"
+                    data-ib-validator-cleaner="{{::$root.pmtPatterns.NAME_SURNAME_CLEANER}}" ib-trim-on-blur required
+                    data-ng-focus="pmtExternalFormCtrl.nameFocused=true"
+                    data-ng-blur="pmtExternalFormCtrl.nameFocused=false" autocomplete="cc-given-name"
+                    ng-change="pmtExternalFormCtrl.checkNameOrSurname('name')" />
+            </div>
+            <div
+                ng-messages="pmtExternalFormCtrl.submittedTab && pmtExternalFormCtrl.containerForm.name.$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                </div>
+                <div class="ib-alert ib-alert--error" ng-message="minlength">
+                    {{'GENERAL_NAME_MIN_LENGTH_ERROR'|translate}}
+                </div>
+                <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}
+                </div>
+            </div>
+        </div>
+        
+        <!-- SURNAME -->
+        <div class="ib-layout__line-spacing" data-ng-if="pmtExternalFormCtrl.model.requiredFields.surname">
+            <div class="ib-input"
+                data-ng-class="{'ib-input--error' : pmtExternalFormCtrl.submittedTab && pmtExternalFormCtrl.containerForm.surnames.$invalid}">
+                <label class="ib-input__label" for="surnames"
+                    ng-class="{'ib-input__label--focus' : pmtExternalFormCtrl.surnamesFocused || (pmtExternalFormCtrl.containerForm.surnames.$viewValue != null && pmtExternalFormCtrl.containerForm.surnames.$viewValue !== '')}">{{'EXTERNAL_FORM_SURNAME_LABEL'|translate}}</label>
+                <input class="ib-input__input" type="text" id="surnames" name="surnames"
+                    ng-model="pmtExternalFormCtrl.contactData.surnames"
+                    minlength="{{$root.pmtPatterns.MIN_LENGTH_SURNAME}}"
+                    maxlength="{{$root.pmtPatterns.MAX_LENGTH_SURNAME}}"
+                    ng-pattern="::$root.pmtPatterns.NAME_SURNAME_PATTERN"
+                    data-ib-validator-cleaner="{{::$root.pmtPatterns.NAME_SURNAME_CLEANER}}" ib-trim-on-blur required
+                    data-ng-focus="pmtExternalFormCtrl.surnamesFocused=true"
+                    data-ng-blur="pmtExternalFormCtrl.surnamesFocused=false" autocomplete="cc-family-name"
+                    ng-change="pmtExternalFormCtrl.checkNameOrSurname('surnames')" />
+            </div>
+            <div
+                ng-messages="pmtExternalFormCtrl.submittedTab && pmtExternalFormCtrl.containerForm.surnames.$error">
+                <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                </div>
+                <div class="ib-alert ib-alert--error" ng-message="surnameInvalid">
+                    {{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+                <div class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}
+                </div>
+                <div class="ib-alert ib-alert--error" ng-message="minlength">
+                    {{'GENERAL_NAME_MIN_LENGTH_ERROR'|translate}}
+                </div>
+            </div>
+        </div>
+              <!-- EMAIL -->
+              <div class="ib-layout__line-spacing" data-ng-if="pmtExternalFormCtrl.model.requiredFields.email">
+                <div class="ib-input" data-ng-class="{'ib-input--error' : pmtExternalFormCtrl.submittedTab && pmtExternalFormCtrl.containerForm.email.$invalid}">
+                    <label
+                        ng-class="{'ib-input__label--focus' : pmtExternalFormCtrl.emailFocused || (pmtExternalFormCtrl.containerForm.email.$viewValue != null && pmtExternalFormCtrl.containerForm.email.$viewValue !== '')}"
+                        class="ib-input__label" for="email">{{'PAYMENTS_CONTACT_FORM_EMAIL' | translate}}</label>
+                    <input class="ib-input__input" type="email" id="email" name="email" maxlength="60"
+                        ng-pattern="::$root.pmtPatterns.EMAIL_PATTERN" required
+                        data-ng-focus="pmtExternalFormCtrl.emailFocused=true"
+                        data-ng-blur="pmtExternalFormCtrl.emailFocused=false"
+                        autocomplete="email"
+                        ng-model="pmtExternalFormCtrl.contactData.emailOwner" />
+                </div>
+                <div ng-messages="pmtExternalFormCtrl.submittedTab && pmtExternalFormCtrl.containerForm.email.$error">
+                    <div class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+                    </div>
+                    <div class="ib-alert ib-alert--error" ng-message="pattern">{{'PAYMENTS_EMAIL_PATTERN_ERROR'|translate}}</div>
+                </div>
+            </div>
+        <!-- PHONE NUMBER -->
+        <div class="ib-layout__line-spacing" data-ng-if="pmtExternalFormCtrl.model.requiredFields.phone">
+        <ib-pmt-telephone ng-model="pmtExternalFormCtrl.contactData.composePhoneNumber"  name="newPhone"
+            [(phone-selected)]="pmtExternalFormCtrl.contactData.composePhoneNumber"
+            [submitted-tab] = "pmtExternalFormCtrl.submittedTab"
+            [container-form]="pmtExternalFormCtrl.containerForm"  required
+            ></ib-pmt-telephone>
+
+        </div>
+  
+    
+    </div>
+    <div id="externalPayment" class="u-hide">
+    </div>
+    <div id="onlineBankingForm" class="u-hide"></div>
+</fieldset>

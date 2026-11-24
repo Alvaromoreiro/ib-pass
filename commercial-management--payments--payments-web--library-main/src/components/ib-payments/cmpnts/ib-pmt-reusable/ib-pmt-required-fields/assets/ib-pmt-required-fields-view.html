@@ -1,0 +1,348 @@
+<div data-ng-if="reqFieldsCtrl.requiredFields['PAYER']">
+    <div class="ib-layout__line-spacing" data-ng-if="reqFieldsCtrl.requiredFields['PAYER'].requiredFields['NAME']">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.name.$invalid}">
+            <label class="ib-input__label" for="name"
+                ng-class="{'ib-input__label--focus' : reqFieldsCtrl.nameFocused || (reqFieldsCtrl.containerForm.name.$viewValue != null && reqFieldsCtrl.containerForm.name.$viewValue !== '')}">{{'CREDIT_CARD_FORM_NAME_LABEL'|translate}}</label>
+            <input class="ib-input__input" type="text" id="name" name="name"
+                ng-model="reqFieldsCtrl.requiredFields['PAYER'].requiredFields['NAME'].name"
+                maxlength="{{$root.lengthBookingPatterns.MAX_LENGTH_NAME}}"
+                ng-pattern="::$root.bookingPatterns.NAME_SURNAME_PATTERN"
+                data-ib-validator-cleaner="{{::$root.bookingPatterns.NAME_SURNAME_CLEANER}}" required
+                data-ng-focus="reqFieldsCtrl.nameFocused=true" data-ng-blur="reqFieldsCtrl.nameFocused=false" />
+        </div>
+        <div ng-messages="reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.name.$error">
+            <div id="pmt-required-fields-name-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing" data-ng-if="reqFieldsCtrl.requiredFields['PAYER'].requiredFields['SURNAME']">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.surnames.$invalid}">
+            <label class="ib-input__label" for="surnames"
+                ng-class="{'ib-input__label--focus' : reqFieldsCtrl.surnamesFocused || (reqFieldsCtrl.containerForm.surnames.$viewValue != null && reqFieldsCtrl.containerForm.surnames.$viewValue !== '')}">{{'CREDIT_CARD_FORM_SURNAME_LABEL'|translate}}</label>
+            <input class="ib-input__input" type="text" id="surnames" name="surnames"
+                ng-model="reqFieldsCtrl.requiredFields['PAYER'].requiredFields['SURNAME'].surname"
+                maxlength="{{$root.lengthBookingPatterns.MAX_LENGTH_SURNAME}}"
+                ng-pattern="::$root.bookingPatterns.NAME_SURNAME_PATTERN"
+                data-ib-validator-cleaner="{{::$root.bookingPatterns.NAME_SURNAME_CLEANER}}" required
+                data-ng-focus="reqFieldsCtrl.surnamesFocused=true" data-ng-blur="reqFieldsCtrl.surnamesFocused=false" />
+        </div>
+        <div ng-messages="reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.surnames.$error">
+            <div id="pmt-required-fields-surname-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+        </div>
+    </div>
+    <!--EMAIL--> 
+    <div class="ib-box-form__group" data-ng-if="reqFieldsCtrl.showEmailInput">
+        <div class="ib-input" data-ng-class="{'ib-input--error' : reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.email.$invalid,'':reqFieldsCtrl.emailFocused || (reqFieldsCtrl.containerForm.email.$viewValue != null && reqFieldsCtrl.containerForm.email.$viewValue !== '')}">
+            <input class="ib-input__input" type="text" id="email" name="email" data-ng-focus="reqFieldsCtrl.emailFocused=true"
+            required ng-pattern="::$root.PATTERNS.EMAIL_PATTERN" data-ng-blur="reqFieldsCtrl.emailFocused=false" ng-model="reqFieldsCtrl.contactData.email"  placeholder="{{'CKIANCPURC_TARJ_EMAIL'|translate}}"/>
+            <label class="ib-input__label" for="email"></label>
+        </div>
+        <div ng-messages="reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.email.$error" class="ib-alert">
+            <span class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</span>
+            <span class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_EMAIL_PATTERN_ERROR'|translate}}</span>
+        </div>
+    </div>
+</div>
+<div data-ng-if="reqFieldsCtrl.requiredFields['BILL_ADDRESS']">
+    <div class="ib-layout__line-spacing"
+        data-ng-if="reqFieldsCtrl.requiredFields['BILL_ADDRESS'].requiredFields['BILL_STREET']">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.bill_street.$invalid}">
+            <label class="ib-input__label" for="bill_street"
+                ng-class="{'ib-input__label--focus' : reqFieldsCtrl.billStreetFocused || (reqFieldsCtrl.containerForm.bill_street.$viewValue != null && reqFieldsCtrl.containerForm.bill_street.$viewValue !== '')}">
+                {{'GENERAL_STREET_LABEL'|translate}}</label>
+            <input class="ib-input__input" type="text" id="bill_street" name="bill_street"
+                data-ng-focus="reqFieldsCtrl.billStreetFocused=true"
+                data-ng-blur="reqFieldsCtrl.billStreetFocused=false"
+                data-ng-model="reqFieldsCtrl.requiredFields['BILL_ADDRESS'].requiredFields['BILL_STREET'].street"
+                ng-pattern="::$root.bookingPatterns.ADDITIONAL_FIELD_PATTERN"
+                data-ib-validator-cleaner="{{::$root.bookingPatterns.ADDITIONAL_FIELD_CLEANER}}"
+                minlength="{{$root.lengthBookingPatterns.MIN_LENGTH_STREET}}" 
+                maxlength="{{$root.lengthBookingPatterns.MAX_LENGTH_STREET}}" required />
+        </div>
+        <div ng-messages="reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.bill_street.$error">
+            <div id="pmt-required-fields-bill-street-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing"
+        data-ng-if="reqFieldsCtrl.requiredFields['BILL_ADDRESS'].requiredFields['BILL_CITY']">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.bill_city.$invalid}">
+            <label class="ib-input__label" for="bill_city"
+                ng-class="{'ib-input__label--focus' : reqFieldsCtrl.billCityFocused || (reqFieldsCtrl.containerForm.bill_city.$viewValue != null && reqFieldsCtrl.containerForm.bill_city.$viewValue !== '')}">
+                {{'GENERAL_CITY_LABEL'|translate}}</label>
+            <input class="ib-input__input" type="text" id="bill_city" name="bill_city"
+                data-ng-focus="reqFieldsCtrl.billCityFocused=true" data-ng-blur="reqFieldsCtrl.billCityFocused=false"
+                data-ng-model="reqFieldsCtrl.requiredFields['BILL_ADDRESS'].requiredFields['BILL_CITY'].city"
+                ng-pattern="::$root.bookingPatterns.ADDITIONAL_FIELD_PATTERN"
+                data-ib-validator-cleaner="{{::$root.bookingPatterns.ADDITIONAL_FIELD_CLEANER}}"
+                minlength="{{$root.lengthBookingPatterns.MIN_LENGTH_CITY}}" maxlength="{{$root.lengthBookingPatterns.MAX_LENGTH_CITY}}" required />
+        </div>
+        <div ng-messages="reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.bill_city.$error">
+            <div id="pmt-required-fields-bill-city-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing"
+        data-ng-if="reqFieldsCtrl.requiredFields['BILL_ADDRESS'].requiredFields['BILL_ZIPCODE']">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.bill_zipCode.$invalid}">
+            <label class="ib-input__label" for="bill_zipCode"
+                ng-class="{'ib-input__label--focus' : reqFieldsCtrl.billZipCodeFocused || (reqFieldsCtrl.containerForm.bill_zipCode.$viewValue != null && reqFieldsCtrl.containerForm.bill_zipCode.$viewValue !== '')}">
+                {{'CREDIT_CARD_FORM_ZIP_CODE_LABEL'|translate}}</label>
+            <input class="ib-input__input" type="text" id="bill_zipCode" name="bill_zipCode"
+                data-ng-focus="reqFieldsCtrl.billZipCodeFocused=true"
+                data-ng-blur="reqFieldsCtrl.billZipCodeFocused=false"
+                data-ng-model="reqFieldsCtrl.requiredFields['BILL_ADDRESS'].requiredFields['BILL_ZIPCODE'].zipCode"
+                ng-pattern="::$root.bookingPatterns.ADDITIONAL_FIELD_PATTERN"
+                data-ib-validator-cleaner="{{::$root.bookingPatterns.ADDITIONAL_FIELD_CLEANER}}"
+                minlength="{{$root.lengthBookingPatterns.MIN_LENGTH_ZIP_CODE}}" maxlength="{{$root.lengthBookingPatterns.MAX_LENGTH_ZIP_CODE}}" required />
+        </div>
+        <div ng-messages="reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.bill_zipCode.$error">
+            <div id="pmt-required-fields-bill-zipcode-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing"
+        data-ng-if="reqFieldsCtrl.requiredFields['BILL_ADDRESS'].requiredFields['BILL_ADDITIONALINFO']">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.bill_additionalInfo.$invalid}">
+            <label class="ib-input__label" for="bill_additionalInfo"
+                ng-class="{'ib-input__label--focus' : reqFieldsCtrl.billAdditionalInfoFocused || (reqFieldsCtrl.containerForm.bill_additionalInfo.$viewValue != null && reqFieldsCtrl.containerForm.bill_additionalInfo.$viewValue !== '')}">
+                {{'ADDRESS_ADDITIONAL_INFO'|translate}}</label>
+            <input class="ib-input__input" type="text" id="bill_additionalInfo" name="bill_additionalInfo"
+                data-ng-focus="reqFieldsCtrl.billAdditionalInfoFocused=true"
+                data-ng-blur="reqFieldsCtrl.billAdditionalInfoFocused=false"
+                data-ng-model="reqFieldsCtrl.requiredFields['BILL_ADDRESS'].requiredFields['BILL_ADDITIONALINFO'].additionalInfo"
+                ng-pattern="::$root.bookingPatterns.ADDITIONAL_FIELD_PATTERN"
+                data-ib-validator-cleaner="{{::$root.bookingPatterns.ADDITIONAL_FIELD_CLEANER}}"
+                maxlength="{{$root.lengthBookingPatterns.MAX_LENGTH_ADDITIONAL_FIELD}}" required />
+        </div>
+        <div
+            ng-messages="reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.bill_additionalInfo.$error">
+            <div id="pmt-required-fields-bill-additional-info-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ib-layout__line-spacing" data-ng-if="reqFieldsCtrl.requiredFields['DOCUMENT_COMPLEX']">
+    <div class="ib-select ib-select--credit-cards ib-select ib-select--label" data-ng-class=" {'ib-input--error' : reqFieldsCtrl.submittedTab &&
+    reqFieldsCtrl.containerForm.doc_complex.$error}">
+        <span class="ib-select__label" for="doc_complex">{{'IBPURC_TYPE_DOCUMENT_CDI'|translate}}</span>
+        <ui-select role="listbox" class="ib-select__action"
+            data-ng-model="reqFieldsCtrl.requiredFields['DOCUMENT_COMPLEX'].selected" name="doc_complex"
+            ng-required="true">
+            <ui-select-match class="ib-select__list-ipt" placeholder="{{'IBPURC_TYPE_DOCUMENT_CDI'|translate}}">
+                <span class="ib-select__txt" data-ng-bind="$select.selected.documentType"></span>
+            </ui-select-match>
+            <ui-select-choices class="ib-select__list"
+                repeat="option in (reqFieldsCtrl.requiredFields['DOCUMENT_COMPLEX'].options)">
+                <span class="ib-select__list-txt" data-ng-bind="::option.documentType"></span>
+            </ui-select-choices>
+        </ui-select>
+    </div>
+    <div ng-messages="reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.doc_complex.$error">
+        <div id="pmt-required-fields-document-complex-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+    </div>
+</div>
+<div class="ib-layout__line-spacing"
+    data-ng-if="reqFieldsCtrl.requiredFields['DOCUMENT_COMPLEX'].selected.id === 'CDI'">
+    <div class="ib-input"
+        data-ng-class="{'ib-input--error' : reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.num_cdi.$invalid}">
+        <label class=" ib-input__label" for="num_cdi" ng-class="{'ib-input__label--focus' : reqFieldsCtrl.num_cdi || (reqFieldsCtrl.containerForm.num_cdi.$viewValue !=
+        null && reqFieldsCtrl.containerForm.num_cdi.$viewValue.id !== '')}">{{'IBPURC_NUM_DOCUMENT_CDI'
+            | translate}}</label>
+        <input class="ib-input__input" type="text" id="num_cdi" name="num_cdi"
+            data-ng-focus="reqFieldsCtrl.num_cdi=true" data-ng-blur="reqFieldsCtrl.num_cdi=false"
+            ng-pattern="::$root.bookingPatterns.CDI_DOCUMENT"
+            data-ng-model="reqFieldsCtrl.requiredFields['DOCUMENT_COMPLEX'].selected.value" required>
+    </div>
+    <div ng-messages="reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.num_cdi.$error">
+        <div id="pmt-required-fields-cdi-number-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+    </div>
+</div>
+<div class="ib-layout__line-spacing"
+    data-ng-if="reqFieldsCtrl.requiredFields['DOCUMENT_COMPLEX'].selected.id === 'CUIT' || reqFieldsCtrl.requiredFields['DOCUMENT_COMPLEX'].selected.id === 'CUIL'">
+    <div class="ib-input"
+        data-ng-class="{'ib-input--error' : reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.num_other.$invalid}">
+        <label class=" ib-input__label" for="num_other" ng-class="{'ib-input__label--focus' : reqFieldsCtrl.num_other || (reqFieldsCtrl.containerForm.num_other.$viewValue !=
+        null && reqFieldsCtrl.containerForm.num_other.$viewValue.id !== '')}">{{'IBPURC_NUM_DOCUMENT_CDI'| translate}}</label>
+        <input class="ib-input__input" type="text" id="num_other" name="num_other"
+            data-ng-focus="reqFieldsCtrl.num_other=true" data-ng-blur="reqFieldsCtrl.num_other=false"
+            ng-pattern="::$root.pmtPatterns.OTHER_DOCUMENT"
+            data-ng-model="reqFieldsCtrl.requiredFields['DOCUMENT_COMPLEX'].selected.value" 
+            maxlength="{{$root.pmtPatterns.MAX_LENGTH_OTHER_DOC}}" required>
+    </div>
+    <div ng-messages="reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.num_other.$error">
+        <div id="pmt-required-fields-other-number-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</div>
+        <div id="pmt-required-fields-other-number-error-msg" class="ib-alert ib-alert--error" ng-message="pattern">{{'GENERAL_INPUT_PATTERN_ERROR'|translate}}</div>
+    </div>
+</div>
+<div data-ng-if="reqFieldsCtrl.requiredFields['IDCARD']">
+    <div class="ib-layout__line-spacing" data-ng-if="reqFieldsCtrl.requiredFields['IDCARD'].requiredFields['NUM_DOC']">
+        <div class="ib-input"
+            data-ng-class="{'ib-input--error' : reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.num_doc.$invalid}">
+            <label class="ib-input__label" for="num_doc"
+                ng-class="{'ib-input__label--focus' : reqFieldsCtrl.numDocFocused || (reqFieldsCtrl.containerForm.num_doc.$viewValue != null && reqFieldsCtrl.containerForm.num_doc.$viewValue !== '')}">
+                {{'IBAIRP_PASSENGER_FORM_MANDATORYDOC_NUMBER'|translate}}</label>
+            <input class="ib-input__input" type="text" id="num_doc" name="num_doc"
+                data-ng-focus="reqFieldsCtrl.numDocFocused=true" data-ng-blur="reqFieldsCtrl.numDocFocused=false"
+                data-ng-model="reqFieldsCtrl.requiredFields['IDCARD'].requiredFields['NUM_DOC'].number"
+                ng-pattern="::$root.bookingPatterns.DOCS_PATTERN"
+                data-ib-validator-cleaner="{{::$root.bookingPatterns.DOCS_CLEANER}}"
+                maxlength="{{$root.lengthBookingPatterns.MAX_LENGTH_MANDATORY_DOC}}" required />
+        </div>
+        <div class="ib-alert">{{'IBAIRP_PASSENGER_FORM_MANDATORYDOC_NUMBER_HELP'|translate}}</div>
+        <div ng-messages="reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.num_doc.$error">
+            <div id="pmt-required-fields-document-number-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+        </div>
+    </div>
+</div>
+<div data-ng-if="reqFieldsCtrl.requiredFields['ISSUE_BANK'] && reqFieldsCtrl.showQuotasCombo">
+    <div class="ib-layout__line-spacing" data-ng-if="reqFieldsCtrl.requiredFields['ISSUE_BANK'].options">
+        <div class="ib-select ib-select--credit-cards ib-select ib-select--label"
+            data-ng-class="{'ib-select--error' : reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.issueBankId.$invalid}">
+            <span class="ib-select__label"
+                for="issueBankId">{{'IBPURC_PAYMENTS_ONLINE_BANKING_SELECT_BANK_TEXT'|translate}}</span>
+            <ui-select role="listbox" class="ib-select__action"
+                data-ng-model="reqFieldsCtrl.requiredFields['ISSUE_BANK'].issueBankId" ng-required="true"
+                name="issueBankId" data-ng-change="reqFieldsCtrl.fillQuotas($select.selected.id)">
+                <ui-select-match class="ib-select__list-ipt"
+                    placeholder="{{'IBPURC_PAYMENTS_ONLINE_BANKING_SELECT_BANK_TITLE'|translate}}">
+                    <span class="ib-select__txt" data-ng-bind="$select.selected.bank"></span>
+                </ui-select-match>
+                <ui-select-choices class="ib-select__list"
+                    repeat="option in (reqFieldsCtrl.requiredFields['ISSUE_BANK'].options | filter: $select.search)">
+                    <span class="ib-select__list-txt" data-ng-bind="::option.bank"></span>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div ng-messages="reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.issueBankId.$error">
+            <div id="pmt-required-fields-issue-bank-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+        </div>
+    </div>
+</div>
+<div data-ng-if="reqFieldsCtrl.requiredFields['QUOTA'] && reqFieldsCtrl.showQuotasCombo">
+    <div class="ib-layout__line-spacing"
+        data-ng-if="reqFieldsCtrl.requiredFields['QUOTA'].requiredConditions['issueBank'].length > 0 && !reqFieldsCtrl.requiredFields['ISSUE_BANK'] && reqFieldsCtrl.showQuotasCombo">
+        <div class="ib-select ib-select--credit-cards ib-select ib-select--label"
+            data-ng-class="{'ib-select--error' : reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.issueBank.$invalid,'ib-select--disabled':reqFieldsCtrl.requiredFields['ISSUE_BANK'].issueBankId.id === '0'}">
+            <span class="ib-select__label"
+                for="issueBank">{{'IBPURC_PAYMENTS_ONLINE_BANKING_SELECT_BANK_TEXT'|translate}}</span>
+            <ui-select ng-disabled="reqFieldsCtrl.requiredFields['ISSUE_BANK'].issueBankId.id === '0'" role="listbox"
+                class="ib-select__action" data-ng-model="reqFieldsCtrl.requiredFields['QUOTA'].issueBank"
+                ng-required="true" name="issueBank" data-ng-change="reqFieldsCtrl.fillQuotas($select.selected.id)">
+                <ui-select-match class="ib-select__list-ipt"
+                    placeholder="{{'IBPURC_PAYMENTS_ONLINE_BANKING_SELECT_BANK_TITLE'|translate}}">
+                    <span class="ib-select__txt" data-ng-bind="$select.selected"></span>
+                </ui-select-match>
+                <ui-select-choices class="ib-select__list"
+                    repeat="option in (reqFieldsCtrl.requiredFields['QUOTA'].requiredConditions['issueBank'] | filter: $select.search)">
+                    <span class="ib-select__list-txt" data-ng-bind="::option"></span>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div ng-messages="reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.issueBank.$error">
+            <div id="pmt-required-fields-online-bank-select-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+        </div>
+    </div>
+    <div class="ib-layout__line-spacing"
+        data-ng-if="(reqFieldsCtrl.requiredFields['QUOTA'].options && reqFieldsCtrl.showQuotasCombo)">
+        <div class="ib-layout__line-spacing">
+            <div class="ib-check ib-check--regular">
+                <input type="checkbox" id="check_select_quotas" name="check_select_quotas" class="ib-check__input"
+                    data-ng-model="reqFieldsCtrl.checkSelectQuotas">
+                <label for="check_select_quotas" class="ib-check__label">
+                    <div data-ng-switch="$root.appMarket">
+                        <span data-ng-switch-default class="ib-check__text">{{'IBPURC_PAY_QUOTAS_WITH_CREDIT_CARD'|translate}}</span>
+                        <span data-ng-switch-when="MX" class="ib-check__text">{{'IBPURC_PAY_QUOTAS_WITH_CREDIT_CARD_MEX'|translate}}</span>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div data-ng-if="reqFieldsCtrl.containerForm.check_select_quotas.$viewValue && reqFieldsCtrl.checkSelectQuotas"
+            class="ib-select ib-select--credit-cards ib-select ib-select--label"
+            data-ng-class="{'ib-select--error' : reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.quotas.$invalid}">
+            <span class="ib-select__label" for="quotas">{{'REQUIRED_FIELD_QUOTA_TITLE'|translate}}</span>
+            <ui-select id="pmt-required-fields-instalments-amount-cmb-box" role="listbox" class="ib-select__action"
+                data-ng-model="reqFieldsCtrl.requiredFields['QUOTA'].value" ng-required="true" name="quotas"
+                data-ng-change="reqFieldsCtrl.showInfoQuota($select.selected)">
+                <ui-select-match class="ib-select__list-ipt"
+                    placeholder="{{'REQUIRED_FIELD_QUOTA_TITLE_PLACEHOLDER'|translate}}">
+                    <span class="ib-select__txt" data-ng-bind="$select.selected"></span>
+                </ui-select-match>
+                <ui-select-choices class="ib-select__list"
+                    repeat="option in (reqFieldsCtrl.requiredFields['QUOTA'].options | filter: $select.search)">
+                    <span class="ib-select__list-txt" data-ng-bind="::option"></span>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div ng-messages="reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.quotas.$error">
+            <div id="pmt-required-fields-quota-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+        </div>
+        <!-- DEFERED MONTH OPTIONS  -->
+        <div class="ib-layout__line-spacing"></div>
+        <div data-ng-if="reqFieldsCtrl.containerForm.check_select_quotas.$viewValue && reqFieldsCtrl.checkSelectQuotas && reqFieldsCtrl.requiredFields['QUOTA'].graceMonthOptions && !reqFieldsCtrl.disableDefered"
+            class="ib-select ib-select--credit-cards ib-select ib-select--label"
+            data-ng-class="{'ib-select--error' : reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.deferedMonth.$invalid}">
+            <span class="ib-select__label" for="deferedMonth">{{'REQUIRED_FIELD_QUOTA_DEFERED_MONTH_TITLE'|translate}}</span>
+            <ui-select id="pmt-required-fields-instalments-amount-cmb-box" role="listbox" class="ib-select__action"
+                data-ng-model="reqFieldsCtrl.requiredFields['QUOTA'].graceMonthOptions.value" ng-required="true" name="deferedMonth"
+                data-ng-change="reqFieldsCtrl.callInfoQuotaForDeferedMonth($select.selected)">
+                <ui-select-match class="ib-select__list-ipt">
+                    <span class="ib-select__txt" data-ng-bind="($select.selected.deferredMonths ? $select.selected.deferredMonths : ('REQUIRED_FIELD_QUOTA_DEFERED_MONTH_FIRST_OPTION'|translate)) + ' - ' + ($select.selected.errorCode ? ('REQUIRED_FIELD_QUOTA_DEFERED_MONTH_ERROR_OPTION'|translate) : ($select.selected.deferredQuotaAmount.total + ' ' + $select.selected.deferredQuotaAmount.currency))"></span>
+                </ui-select-match>
+                <ui-select-choices class="ib-select__list"
+                    repeat="option in (reqFieldsCtrl.requiredFields['QUOTA'].graceMonthOptions.items | filter: $select.search)">
+                    <span class="ib-select__list-txt" data-ng-bind="::((option.deferredMonths ? option.deferredMonths: ('REQUIRED_FIELD_QUOTA_DEFERED_MONTH_FIRST_OPTION'|translate))  + ' - ' + (option.errorCode ? ('REQUIRED_FIELD_QUOTA_DEFERED_MONTH_ERROR_OPTION'|translate) : (option.deferredQuotaAmount.total + ' ' + option.deferredQuotaAmount.currency)))"></span>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div ng-messages="reqFieldsCtrl.submittedTab && reqFieldsCtrl.containerForm.deferedMonth.$error">
+            <div id="pmt-required-fields-quota-error-msg" class="ib-alert ib-alert--error" ng-message="required">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}
+            </div>
+        </div>
+        <!-- DEFERED MONTH NO EDITABLE  -->
+        <div ng-if="reqFieldsCtrl.containerForm.check_select_quotas.$viewValue && reqFieldsCtrl.checkSelectQuotas && reqFieldsCtrl.requiredFields['QUOTA'].graceMonthOptions && reqFieldsCtrl.disableDefered" class="ib-layout__line-spacing">
+            <div class="ib-input ib-input--disabled">
+                <label class="ib-input__label ib-input__label--focus" for="deferedMonth">{{'REQUIRED_FIELD_QUOTA_DEFERED_MONTH_TITLE'|translate}}</label>
+                <input class="ib-input__input" type="text" id="deferedMonth" name="deferedMonth" ng-disabled="true"
+                value="{{(reqFieldsCtrl.requiredFields['QUOTA'].graceMonthOptions.value.deferredMonths ? reqFieldsCtrl.requiredFields['QUOTA'].graceMonthOptions.value.deferredMonths : ('REQUIRED_FIELD_QUOTA_DEFERED_MONTH_FIRST_OPTION'|translate)) + ' - ' + (reqFieldsCtrl.requiredFields['QUOTA'].graceMonthOptions.value.errorCode ? ('REQUIRED_FIELD_QUOTA_DEFERED_MONTH_ERROR_OPTION'|translate) : (reqFieldsCtrl.requiredFields['QUOTA'].graceMonthOptions.value.deferredQuotaAmount.total + ' ' + reqFieldsCtrl.requiredFields['QUOTA'].graceMonthOptions.value.deferredQuotaAmount.currency))}}" />
+            </div>
+        </div>
+        <div class="ib-layout__line-spacing ib-layout__line-spacing--small" data-ng-switch="$root.appMarket">
+            <a data-ng-switch-default id="pmt-required-fields-quotas-general-info-link" class="ib-link" data-ng-click="reqFieldsCtrl.showModalQuotaLink()" href="javascript:void(0)"
+                title="{{'QUOTAS_LINK_TITLE'|translate}}">{{'QUOTAS_LINK_TEXT'|translate}}</a>
+            <a data-ng-switch-when="MX" id="pmt-required-fields-quotas-general-info-link" class="ib-link" data-ng-click="reqFieldsCtrl.showModalQuotaLink()" href="javascript:void(0)"
+                title="{{'QUOTAS_LINK_TITLE_MEX'|translate}}">{{'QUOTAS_LINK_TEXT_MEX'|translate}}</a>
+        </div>
+        <div
+            data-ng-if="(reqFieldsCtrl.requiredFields['QUOTA'].showButtonQuotas || (reqFieldsCtrl.requiredFields['QUOTA'].showInstallmentsDetailIberiaPay && reqFieldsCtrl.requiredFields['QUOTA'].graceMonthOptions && reqFieldsCtrl.requiredFields['QUOTA'].graceMonthOptions.value)) && reqFieldsCtrl.summaryInfoQuota && reqFieldsCtrl.checkSelectQuotas">
+            <div class="ib-layout__line-spacing">
+                <div ng-controller="IbPmtPopoverController as popoverCtrl" class="ib-alert u-text-left u-pb u-pt">
+                    <p class="ib-text ib-text--xbig ib-text--especial">{{'IBPURC_VALUE_BY_QUOTA'|translate}}
+                        {{reqFieldsCtrl.summaryInfoQuota.quotaPrice.fare}}
+                        {{reqFieldsCtrl.summaryInfoQuota.totalPrice.currency}}
+                        <a id="pmt-required-fields-quotas-info-link" class="ib-heading-flight__icon ib-heading-flight__icon--important ib-heading-flight__icon--medium icon-informacion_2 ib-popover ib-popover--inline-bottom"
+                        href="javascript:void(0)" title="{{'IBPURC_CLICK_MORE_INFORMATION_QUOTAS'|translate}}"
+                        ng-click="reqFieldsCtrl.showModalInfoQuota()"><span class="hide-accessible">{{'IBPURC_CLICK_MORE_INFORMATION_QUOTAS'|translate}}</span></a>
+                    </p>
+                </div>
+            </div>
+            <div class="ib-layout__line-spacing">
+                <span class="ib-text ib-text--big ib-text--especial">{{'IBPURC_INFO_VALUES_QUOTAS'|translate}}</span>
+                <a id="pmt-required-fields-quotas-extra-info-link" class="ib-link ib-link--inline ib-link--primary ib-link--big ib-link--especial"
+                    data-ng-click="reqFieldsCtrl.showModalInfoQuota()" href="javascript:void(0)"
+                    title="{{'IBPURC_MORE_INFORMATION_QUOTAS'|translate}}">{{'IBPURC_MORE_INFORMATION_QUOTAS'|translate}}</a>
+            </div>
+        </div>
+    </div>
+</div>

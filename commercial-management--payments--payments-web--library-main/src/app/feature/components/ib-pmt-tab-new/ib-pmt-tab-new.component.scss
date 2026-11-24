@@ -1,0 +1,177 @@
+@import 'ib-pmt-style-tools';
+
+$block: 'ib-pmt-tab-mark-new';
+$widthBar: 16;
+$deg: 4;
+$initialLeft: calc(-100% + rem($widthBar + $deg + 2));
+$endLeft: 0;
+$initialPadding: calc(100% - rem($deg));
+$endPadding: 0;
+$animationDelay: 1s;
+$animationDuration: 2s;
+$transitionDuration: 0.3s;
+$transitionDelayHoverOff: 1s;
+$transitionDelayHoverOn: 0s;
+
+@keyframes animationLeftDesktop {
+    0% {
+        left: $initialLeft;
+    }
+
+    15% {
+        left: $endLeft;
+    }
+
+    85% {
+        left: $endLeft;
+    }
+
+    100% {
+        left: $initialLeft;
+    }
+}
+
+@keyframes animationRightMobile {
+    0% {
+        padding-left: $initialPadding;
+    }
+
+    15% {
+        padding-left: $endPadding;
+    }
+
+    85% {
+        padding-left: $endPadding;
+    }
+
+    100% {
+        padding-left: $initialPadding;
+    }
+}
+
+.#{$block} {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+
+    &__container {
+        display: inline-flex;
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+        background-color: color(white);
+
+        &::after {
+            content: '';
+            position: absolute;
+            height: 100%;
+            background-color: color(primary);
+        }
+    }
+
+    &__heading {
+        font-family: var(--font-brand);
+        font-size: rem(22);
+        color: color(primary);
+        text-transform: uppercase;
+    }
+
+    &__text {
+        margin-top: 0.3em;
+        font-family: var(--font-default);
+        font-size: rem(13);
+        line-height: 1em;
+        color: color(gray-15);
+    }
+}
+
+@include media-query('desktop') {
+
+    .#{$block} {
+        &__container {
+            position: absolute;
+            top: 0;
+            left: $initialLeft;
+            height: auto;
+            padding: 0 rem($widthBar + ($deg*2));
+            background-color: color(primary);
+            animation-delay: $animationDelay;
+            animation-duration: $animationDuration;
+            transition: left $transitionDuration;
+            transition-delay: $transitionDelayHoverOff;
+
+            &::after {
+                right: rem($deg*-1);
+                width: rem($widthBar);
+                transform: skew(#{$deg*-1}deg);
+            }
+        }
+
+        &__heading {
+            align-self: center;
+            font-size: rem(13);
+            color: color(white);
+        }
+
+        &:hover {
+
+            .#{$block}__container {
+                left: $endLeft;
+                transition-delay: $transitionDelayHoverOn;
+            }
+        }
+
+        &.in-viewport {
+
+            .#{$block}__container {
+                animation-name: animationLeftDesktop;
+            }
+        }
+    }
+}
+
+@include media-query('mobile') {
+
+    .#{$block} {
+        padding-left: $initialPadding;
+        text-align: right;
+        animation-delay: $animationDelay;
+        animation-duration: $animationDuration;
+        transition: padding-left $transitionDuration;
+        transition-delay: $transitionDelayHoverOff;
+
+        &__container {
+            position: relative;
+            padding: 0 rem($widthBar + ($deg*2));
+            white-space: nowrap;
+
+            &::after {
+                left: rem($deg*-1);
+                width: rem(9);
+                transform: skew(#{$deg}deg);
+            }
+        }
+
+        &:hover {
+            padding-left: $endPadding;
+            transition-delay: $transitionDelayHoverOn;
+        }
+
+        &__text {
+            display: none;
+        }
+
+        &__heading {
+            font-size: rem(18);
+            font-weight: bold;
+        }
+
+        &.in-viewport {
+            animation-name: animationRightMobile;
+        }
+    }
+}

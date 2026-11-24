@@ -1,0 +1,359 @@
+<fieldset>
+    <legend class="u-hide-accessible">{{'TOTAL_PRICE_COMPONENT_ACCESSIBLE'|translate}}</legend>
+    <section class="ib-layout__section ib-layout__section--null-spacing-shadow">
+        <div ng-if="totalPriceCtrl.paymentMode" class="ib-box"
+            data-ng-class="{'ib-box--big-alert ib-box--separator u-mb-none': totalPriceCtrl.priceInfo.totalPrice < 0, 'ib-box--medium ib-box--separator u-mb-none': totalPriceCtrl.priceInfo.totalPrice >= 0}">
+            <!-- return diference alert -->
+            <div ng-if="totalPriceCtrl.priceInfo.totalPrice < 0"
+                class="ib-msg-alert ib-msg-alert--gray ib-msg-alert--gray-center icon-informacion_2">
+                <p class="ib-msg-alert__text ib-msg-alert__text--title ib-msg-alert--padding-none">
+                    {{'PMT_VOLUNTARY_CHANGE_RETURN_DIFERENCE_TITTLE'|translate}}</p>
+                <p class="ib-msg-alert__text ib-msg-alert--between">
+                    {{'PMT_VOLUNTARY_CHANGE_RETURN_DIFERENCE_TEXT'|translate}}</p>
+            </div>
+            <div class="ib-check ib-check--regular"
+                data-ng-class="{'ib-check--error' : totalPriceCtrl.containerForm.$submitted && !totalPriceCtrl.checkTermsConditions }">
+                <input type="checkbox" id="check_terms_conditions" name="check_terms_conditions" class="ib-check__input"
+                    ng-model="totalPriceCtrl.checkTermsConditions" required />
+                <label for="check_terms_conditions" class="ib-check__label">
+                    <span id="check_terms_conditions_span"
+                        data-ng-if="totalPriceCtrl.conditionsText && totalPriceCtrl.relatedContent.conditionsText !== 'TERMS_AND_CONDITIONS'"
+                        class="ib-check__text ib-check__text--unfocused"
+                        bind-html-compile="totalPriceCtrl.conditionsText"></span>
+                    <span
+                        data-ng-if="totalPriceCtrl.conditionsText && totalPriceCtrl.relatedContent.conditionsText === 'TERMS_AND_CONDITIONS'"
+                        class="ib-check__text ib-check__text--unfocused">{{totalPriceCtrl.relatedContent.conditionsText|translate}}</span>
+                </label>
+            </div>
+            <div
+                ng-messages="totalPriceCtrl.containerForm.$submitted && totalPriceCtrl.containerForm.check_terms_conditions.$error">
+                <div id="pmt-total-price-terms-and-conditions-error-msg" class="ib-alert ib-alert--error"
+                    ng-message="required">
+                    {{'TOTAL_PRICE_CHECKBOX_CONDITIONS_REQUIRED_ERROR'|translate}}</div>
+            </div>
+        </div>
+        <div class="ib-box ib-box--medium ib-box--separator u-mb-none">
+            <span
+                data-ng-if="totalPriceCtrl.isChecked || totalPriceCtrl.flowApp !== 'BBKI' && !(totalPriceCtrl.totalAviosAmount || totalPriceCtrl.totalAviosAmount === 0) && totalPriceCtrl.$rootScope.isLogged !== totalPriceCtrl.LOGIN_ONB"
+                class="ib-text ib-text--block ib-text--color-unfocused">{{totalPriceCtrl.flowApp === 'MMBBID' ?
+                'UPGRADING_BIDS_HAS_OFFERTS_OPEN' : 'TOTAL_PRICE_COMPONENT_TITLE' |translate}}
+                {{totalPriceCtrl.priceInfo.formattedOldPriceInfo ?
+                ('TOTAL_PRICE_COMPONENT_APLIED_DISCOUNT_TITLE'|translate) : ''}}</span>
+            <span data-ng-if="totalPriceCtrl.flowApp !== 'BBKI' && totalPriceCtrl.totalAviosAmount.length >= 1"
+                class="ib-text ib-text--block ib-text--color-unfocused">{{'MMB_UPGRADING_AVIOS_TOTAL_IMPORT_UPGRADE'
+                |translate}}
+            </span>
+            <span
+                data-ng-if="(totalPriceCtrl.$rootScope.isLogged === totalPriceCtrl.LOGIN_ONB) && !totalPriceCtrl.isChecked && totalPriceCtrl.showDiscount"
+                class="ib-text ib-text--block ib-text--color-unfocused">{{'AVAILABILITY_ON_BUSINESS_TOTAL_PRICE_TITLE_DISCOUNT'|translate}}</span>
+            <span
+                data-ng-if="(totalPriceCtrl.$rootScope.isLogged === totalPriceCtrl.LOGIN_ONB) && !totalPriceCtrl.isChecked && !totalPriceCtrl.showDiscount"
+                class="ib-text ib-text--block ib-text--color-unfocused">{{'TOTAL_PRICE_COMPONENT_TITLE'|translate}}</span>
+            <div class="row">
+                <div class="col-xs-12 col-sm-7 col-md-8">
+                    <div id="pmt-total-price-info-price" class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                        <span class="ib-text ib-text--price-old"
+                            data-ng-if="totalPriceCtrl.priceInfo.formattedOldPriceInfo">
+                            {{totalPriceCtrl.priceInfo.formattedOldPriceInfo}}
+                        </span>
+                        <span class="ib-text ib-text--price-old"
+                            data-ng-if="(totalPriceCtrl.$rootScope.isLogged === totalPriceCtrl.LOGIN_ONB) && !totalPriceCtrl.$rootScope.isRedemptionFlow && totalPriceCtrl.showDiscount">{{totalPriceCtrl.noDiscountObPrice}}
+                        </span>
+                        <span class="ib-text ib-text--especial ib-text--price-big"
+                            data-ng-if="!totalPriceCtrl.$rootScope.isRedemptionFlow && !(totalPriceCtrl.totalAviosAmount || totalPriceCtrl.totalAviosAmount === 0)"
+                            data-ng-class="{'ib-text--price-long': totalPriceCtrl.priceInfo.formattedTotalPrice.length > 10}">
+                            {{(totalPriceCtrl.dccSelected && !totalPriceCtrl.donationEnabled) ?
+                            (totalPriceCtrl.currentDccData.totalPrice + ' ' + totalPriceCtrl.currentDccData.currencyCode) :
+                            (totalPriceCtrl.priceInfo.totalPrice === 0 && totalPriceCtrl.flowApp === 'BBKIOH' ?
+                                ('GENERAL_FREE_LABEL'|translate) :
+                                totalPriceCtrl.priceInfo.formattedTotalPrice)}}
+
+                        </span>
+                        <span class="ib-text ib-text--especial ib-text--price-xmedium"
+                            data-ng-if="!totalPriceCtrl.$rootScope.isRedemptionFlow && (totalPriceCtrl.totalAviosAmount || totalPriceCtrl.totalAviosAmount === 0)"
+                            data-ng-class="{'ib-text--price-long': totalPriceCtrl.priceInfo.formattedTotalPrice.length === 0}">
+                            {{ totalPriceCtrl.summaryText }}
+                        </span>
+                        <span class="ib-text ib-text--especial ib-text--price-xmedium"
+                            data-ng-if="totalPriceCtrl.$rootScope.isRedemptionFlow && !totalPriceCtrl.$rootScope.isPointsOBFlow"
+                            data-ng-class="{'ib-text--price-long': totalPriceCtrl.priceInfo.formattedTotalPrice.length > 10}">
+                            {{totalPriceCtrl.priceInfo.totalPrice === 0 ? ('GENERAL_FREE_LABEL'|translate) :
+                            totalPriceCtrl.priceInfo.formattedTotalPriceAvios + ' ' + ('AVIOS_TEXT'|translate)}}
+                        </span>
+                        <span class="ib-text ib-text--especial ib-text--price-xmedium" data-ng-if="totalPriceCtrl.$rootScope.isPointsOBFlow"
+                            data-ng-class="{'ib-text--price-long': totalPriceCtrl.priceInfo.formattedTotalPrice.length > 10}">
+                            {{totalPriceCtrl.priceInfo.totalPrice
+                            === 0 ? ('GENERAL_FREE_LABEL'|translate) :
+                            totalPriceCtrl.priceInfo.formattedTotalPriceOBPoints + ' ' +
+                            ('AVAILABILITY_ON_BUSINESS_POINTS_NEEDED'|translate)}}
+                        </span>
+                        <span class="ib-text ib-text--especial ib-text--price-xmedium u-pb-small"
+                            data-ng-if="totalPriceCtrl.$rootScope.isRedemptionFlow"
+                            data-ng-class="{'ib-text--price-long': totalPriceCtrl.priceInfo.formattedTotalPrice.length > 10}">
+                            {{totalPriceCtrl.priceInfo.totalPrice
+                            === 0 ? ('GENERAL_FREE_LABEL'|translate) :
+                            ('AVAILABILITY_SLICE_INFO_MORE_THAN_ONE_DAY'|translate) + ' ' +
+                            totalPriceCtrl.priceInfo.formattedTotalPrice}}
+                        </span>
+                        <span class="ib-text ib-text--especial ib-text--price-small"
+                            data-ng-if="totalPriceCtrl.aviosInfo">
+                            + {{totalPriceCtrl.aviosInfo}}
+                            {{'PAYMENTS_DISCOUNTS_AVIOS'|translate}}
+                        </span>
+                        <span class="ib-text ib-text--color-unfocused"
+                            data-ng-if="totalPriceCtrl.onHoldInfo">({{totalPriceCtrl.onHoldInfo.onHoldPricePerPassenger}}
+                            {{'TOTAL_PRICE_ON_HOLD_PER_PASSENGER'| translate}})
+                        </span>
+                        <button data-ng-click="totalPriceCtrl.openTaxModal($event)" class="price-detail payments" data-ng-if="totalPriceCtrl.shouldShowPriceDetailsCTA" type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M7.94745 6.0906H8.0162C8.49848 6.0906 9.06355 5.96473 9.06355 5.19012V5.15139C9.06355 4.37195 8.49848 4.23156 8.0162 4.23156H7.94745C7.46469 4.23156 6.89865 4.37195 6.89865 5.15139V5.19012C6.89865 5.96473 7.46469 6.0906 7.94745 6.0906Z" fill="#333333"/>
+                                <path d="M7.05117 11.7694H8.91296V7.12178H7.05117V11.7694Z" fill="#333333"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99829 1.00244C4.13186 1.00244 0.998047 4.13473 0.998047 7.99805C0.998047 11.8662 4.13186 14.9985 7.99829 14.9985C11.8633 14.9985 14.998 11.8662 14.998 7.99805C14.998 4.13473 11.8633 1.00244 7.99829 1.00244ZM2.72523 7.99805C2.72523 10.9076 5.08963 13.275 7.99829 13.275C10.905 13.275 13.2713 10.9076 13.2713 7.99805C13.2713 5.0933 10.905 2.72593 7.99829 2.72593C5.08963 2.72593 2.72523 5.0933 2.72523 7.99805Z" fill="#333333"/>
+                            </svg>
+                            <p>{{'SUMMARY_FEES' | translate}}</p>
+                        </button>
+                    </div>
+                </div>
+                <div id="pmt-total-price-on-hold-info" class="col-xs-12 visible-xs"
+                    data-ng-if="totalPriceCtrl.onHoldInfo">
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--medium">
+                        <span class="ib-text ib-text--color-important">{{'TOTAL_PRICE_ON_HOLD_PRICE_TEXT'|
+                            translate}}</span>
+                        <span
+                            class="ib-text ib-text--especial ib-text--price-xsmall ib-text--color-important">{{totalPriceCtrl.onHoldInfo.priceAfterOnHold}}</span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-5 col-md-4" ng-if="totalPriceCtrl.paymentMode">
+                    <div class="ib-layout__line-spacing">
+                        <!-- AFOP PAYPAL BUTTON -->
+                        <pmt-paypal-afop-button data-ng-if="totalPriceCtrl.showExternalButton==='PAYPAL'"
+                            id="pmt-total-price-afop-paypal-btn"></pmt-paypal-afop-button>
+                        <button
+                            data-ng-if="totalPriceCtrl.showExternalButton!=='PAYPAL'"
+                            id={{totalPriceCtrl.button.id}} class={{totalPriceCtrl.button.styles}}
+                            data-ng-click="totalPriceCtrl.sendPayEvent()"
+                        >
+                            <img ng-if="totalPriceCtrl.showExternalButton === 'BIZUM'" class="ib-button--bizum-icon"
+                                data-ng-src="{{totalPriceCtrl.$rootScope.routes.icons}}/payment/ico-bizum.png">
+                            <img ng-if="totalPriceCtrl.showExternalButton === 'MERCADO_PAGO'" class="u-w-small"
+                                data-ng-src="{{totalPriceCtrl.$rootScope.routes.images}}/payment-tabs/MERCADO_PAGO-icon.svg">
+                            <span ng-bind-html="totalPriceCtrl.button.label" class="u-text-wrap-balance"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="ib-layout__line-spacing ib-layout__line-spacing--medium hidden-xs"
+                data-ng-if="totalPriceCtrl.onHoldInfo">
+                <span class="ib-text ib-text--color-important">{{'TOTAL_PRICE_ON_HOLD_PRICE_TEXT'| translate}}</span>
+                <span
+                    class="ib-text ib-text--especial ib-text--price-xsmall ib-text--color-important">{{totalPriceCtrl.onHoldInfo.priceAfterOnHold}}</span>
+            </div>
+            <p class="ib-text ib-text--block ib-text--spacing-medium ib-text--color-unfocused ng-scope"
+                data-ng-if="totalPriceCtrl.showExternalButton === 'NEMURU'" data-ng-switch="$root.appMarket">
+                <span data-ng-switch-when="ES">
+                    {{'PMT_NEMURU_LEGAL_ES_MESSAGE1' | translate}}
+                    <span class="ib-text ib-text--bold ib-text--underline" data-ng-click="totalPriceCtrl.goToNemuruConditions()">
+                        {{'PMT_NEMURU_LEGAL_ES_LINK1' | translate}}
+                    </span>
+                    {{'PMT_NEMURU_LEGAL_ES_MESSAGE2' | translate}}
+                    <span class="ib-text ib-text--bold ib-text--underline" data-ng-click="totalPriceCtrl.goToNemuruConditions()">
+                        {{'PMT_NEMURU_LEGAL_ES_LINK2' | translate}}
+                    </span>
+                </span>
+                <span data-ng-switch-default>
+                    {{'PMT_NEMURU_LEGAL_MESSAGE' | translate}}
+                    <span class="ib-text ib-text--bold ib-text--underline" data-ng-click="totalPriceCtrl.goToNemuruConditions()">
+                        {{'PMT_NEMURU_LEGAL_LINK' | translate}}
+                    </span>
+                </span>
+            </p>
+            <p class="ib-text ib-text--block ib-text--color-unfocused ng-scope"
+                data-ng-if="totalPriceCtrl.$rootScope.isLogged && totalPriceCtrl.$rootScope.isLogged !== totalPriceCtrl.LOGIN_ONB && (totalPriceCtrl.flowApp === totalPriceCtrl.APP_TYPES.MANAGEMYBOOKING_ANCILLARIES || totalPriceCtrl.flowApp === totalPriceCtrl.APP_TYPES.MANAGEMYBOOKING || totalPriceCtrl.flowApp === totalPriceCtrl.APP_TYPES.CHECKIN) && !totalPriceCtrl.$rootScope.isRedemptionFlow && totalPriceCtrl.aviosToEarn && !totalPriceCtrl.isIbZero">
+                {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                <span class="ib-text ib-text--bold ib-text--underline" ng-if="!totalPriceCtrl.elitePointsToEarn">
+                    {{totalPriceCtrl.aviosToEarn | aviosFormatter}}
+                    {{'AVIOS_TEXT'| translate}}
+                </span>
+                <span class="ib-text ib-text--bold ib-text--underline" ng-if="totalPriceCtrl.elitePointsToEarn">
+                    {{totalPriceCtrl.aviosToEarn | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+                    {{totalPriceCtrl.elitePointsToEarn | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_USER_3'| translate}}
+                </span>
+            </p>
+            <p class="ib-text ib-text--block ib-text--color-unfocused ng-scope"
+                data-ng-if="(!totalPriceCtrl.$rootScope.isLogged || totalPriceCtrl.isIbZero) && (totalPriceCtrl.flowApp === totalPriceCtrl.APP_TYPES.MANAGEMYBOOKING_ANCILLARIES || totalPriceCtrl.flowApp === totalPriceCtrl.APP_TYPES.MANAGEMYBOOKING || totalPriceCtrl.flowApp === totalPriceCtrl.APP_TYPES.CHECKIN) && !totalPriceCtrl.$rootScope.isRedemptionFlow && totalPriceCtrl.aviosToEarn">
+                {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                <span class="ib-text ib-text--bold ib-text--underline" ng-if="!totalPriceCtrl.elitePointsToEarn">
+                    {{totalPriceCtrl.aviosToEarn | aviosFormatter}}
+                    {{'AVIOS_TEXT'| translate}}
+                </span>
+                <span class="ib-text ib-text--bold ib-text--underline" ng-if="totalPriceCtrl.elitePointsToEarn">
+                    {{totalPriceCtrl.aviosToEarn | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+                    {{totalPriceCtrl.elitePointsToEarn | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_USER_3'| translate}}
+                </span>
+                {{'AVIOS_ELITE_TO_EARN_ANOM_4'| translate}}
+            </p>
+
+            <p class="ib-text ib-text--block ib-text--color-unfocused ng-scope"
+                data-ng-if="totalPriceCtrl.$rootScope.isLogged && totalPriceCtrl.$rootScope.isLogged !== totalPriceCtrl.LOGIN_ONB && (totalPriceCtrl.flowApp === totalPriceCtrl.APP_TYPES.BOOKING || totalPriceCtrl.flowApp === totalPriceCtrl.APP_TYPES.MANAGEMYBOOKING_ONHOLD || totalPriceCtrl.onHoldInfo) && !totalPriceCtrl.CalculatedPoints.resident && !totalPriceCtrl.$rootScope.isRedemptionFlow && totalPriceCtrl.aviosToEarn && !totalPriceCtrl.isIbZero">
+                {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                <span class="ib-text ib-text--bold ib-text--underline">
+                    {{totalPriceCtrl.aviosToEarn | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+                    {{totalPriceCtrl.elitePointsToEarn | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_USER_3'| translate}}
+                </span>
+            </p>
+            <p class="ib-text ib-text--block ib-text--color-unfocused ng-scope"
+                data-ng-if="(!totalPriceCtrl.$rootScope.isLogged || totalPriceCtrl.isIbZero ) && (totalPriceCtrl.flowApp === totalPriceCtrl.APP_TYPES.BOOKING || totalPriceCtrl.flowApp === totalPriceCtrl.APP_TYPES.MANAGEMYBOOKING_ONHOLD || totalPriceCtrl.onHoldInfo ) && !totalPriceCtrl.CalculatedPoints.resident && !totalPriceCtrl.$rootScope.isRedemptionFlow && totalPriceCtrl.aviosToEarn">
+                {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                <span class="ib-text ib-text--bold ib-text--underline">
+                    {{totalPriceCtrl.aviosToEarn | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_ANOM_2'| translate}}
+                    {{totalPriceCtrl.elitePointsToEarn | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_ANOM_3'| translate}}
+                </span>
+                {{'AVIOS_ELITE_TO_EARN_ANOM_4'| translate}}
+            </p>
+
+            <!-- resident -->
+            <p class="ib-text ib-text--block ib-text--color-unfocused ng-scope"
+                data-ng-if="totalPriceCtrl.$rootScope.isLogged && totalPriceCtrl.$rootScope.isLogged !== totalPriceCtrl.LOGIN_ONB && (totalPriceCtrl.flowApp === totalPriceCtrl.APP_TYPES.BOOKING || totalPriceCtrl.flowApp === totalPriceCtrl.APP_TYPES.MANAGEMYBOOKING_ONHOLD || totalPriceCtrl.onHoldInfo) && totalPriceCtrl.CalculatedPoints.resident && !totalPriceCtrl.$rootScope.isRedemptionFlow && totalPriceCtrl.aviosToEarn">
+                {{'GET_AT_LEAST'| translate}}
+                <span class="ib-text ib-text--bold ib-text--underline">
+                    {{totalPriceCtrl.aviosToEarn | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+                    {{totalPriceCtrl.elitePointsToEarn | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_USER_3'| translate}}
+                </span>
+            </p>
+            <p class="ib-text ib-text--block ib-text--color-unfocused ng-scope"
+                data-ng-if="!totalPriceCtrl.$rootScope.isLogged && (totalPriceCtrl.flowApp === totalPriceCtrl.APP_TYPES.BOOKING || totalPriceCtrl.flowApp === totalPriceCtrl.APP_TYPES.MANAGEMYBOOKING_ONHOLD || totalPriceCtrl.onHoldInfo ) && totalPriceCtrl.CalculatedPoints.resident && !totalPriceCtrl.$rootScope.isRedemptionFlow && totalPriceCtrl.aviosToEarn">
+                {{'GET_AT_LEAST'| translate}}
+                <span class="ib-text ib-text--bold ib-text--underline">
+                    {{totalPriceCtrl.aviosToEarn | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_ANOM_2'| translate}}
+                    {{totalPriceCtrl.elitePointsToEarn | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_ANOM_3'| translate}}
+                </span>
+            </p>
+            <!-- logged user-->
+            <p class="ib-text ib-text--block ib-text--color-unfocused"
+                ng-if="totalPriceCtrl.$rootScope.isLogged && totalPriceCtrl.changeFlightAvios && totalPriceCtrl.changeFlightAvios.avios !== 0 && !totalPriceCtrl.CalculatedPoints.resident && !totalPriceCtrl.isIbZero && totalPriceCtrl.$rootScope.isLogged !== totalPriceCtrl.LOGIN_ONB">
+                {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+                <span class="ib-text ib-text--bold ib-text--underline">
+                    {{totalPriceCtrl.changeFlightAvios.avios | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_USER_2'| translate}}
+                    {{totalPriceCtrl.changeFlightAvios.elite | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_USER_3'| translate}}
+                </span>
+            </p>
+            <!-- ib zero / anonymous -->
+            <p class="ib-text ib-text--block ib-text--color-unfocused"
+            ng-if="(totalPriceCtrl.isIbZero || !totalPriceCtrl.$rootScope.isLogged) && totalPriceCtrl.changeFlightAvios && totalPriceCtrl.changeFlightAvios.avios !== 0 && !totalPriceCtrl.CalculatedPoints.resident">
+            {{'AVIOS_ELITE_TO_EARN_USER_1'| translate}}
+            <span class="ib-text ib-text--bold ib-text--underline">
+                {{totalPriceCtrl.changeFlightAvios.avios | aviosFormatter}}
+                {{'AVIOS_ELITE_TO_EARN_ANOM_2'| translate}}
+                {{totalPriceCtrl.changeFlightAvios.elite | aviosFormatter}}
+                {{'AVIOS_ELITE_TO_EARN_ANOM_3'| translate}}
+            </span>
+            {{'AVIOS_ELITE_TO_EARN_ANOM_4'| translate}}
+        </p>
+            <!-- residente -->
+            <p class="ib-text ib-text--block ib-text--color-unfocused"
+                ng-if="totalPriceCtrl.changeFlightAvios && totalPriceCtrl.changeFlightAvios.avios !== 0 && totalPriceCtrl.CalculatedPoints.resident && (!totalPriceCtrl.isIbZero || totalPriceCtrl.$rootScope.isLogged)">
+                {{'GET_AT_LEAST'| translate}}
+                <span class="ib-text ib-text--bold ib-text--underline">
+                    {{totalPriceCtrl.changeFlightAvios.avios | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_ANOM_2'| translate}}
+                    {{totalPriceCtrl.changeFlightAvios.elite | aviosFormatter}}
+                    {{'AVIOS_ELITE_TO_EARN_ANOM_3'| translate}}
+                </span>
+            </p>
+            <p class="ib-text ib-text--color-unfocused"
+                data-ng-if="totalPriceCtrl.totalPriceText && !(totalPriceCtrl.totalAviosAmount || totalPriceCtrl.totalAviosAmount === 0) && totalPriceCtrl.flowApp !== 'MMBBID'"
+                ng-include="'totalPriceTextHtml'">
+            </p>
+            <p class="ib-text ib-text--color-unfocused"
+                data-ng-if="totalPriceCtrl.totalPriceText && totalPriceCtrl.relatedContent && totalPriceCtrl.relatedContent.totalPriceText === 'TOTAL_PRICE_TEXT'">
+                {{totalPriceCtrl.relatedContent.totalPriceText| translate}}
+            </p>
+            <p ng-if="totalPriceCtrl.flowApp === 'MMBBID'" class="ib-text ib-text--color-unfocused u-mt-small">
+                <!-- Bids + STANDARD + FREE -->
+                <span
+                    ng-if="totalPriceCtrl.priceInfo.totalPrice > 0 && totalPriceCtrl.totalAviosAmount !== 0 && totalPriceCtrl.numberFreeUpgrade">
+                    {{totalPriceCtrl.numberFreeUpgrade === 1 ? ('MMB_UPGRADING_FREE_AVIOS_BIDS_DISPO_SIN' | translate :
+                    {free: totalPriceCtrl.numberFreeUpgrade, tierIB: totalPriceCtrl.tierIB, avios:
+                    totalPriceCtrl.totalAviosAmount, price: totalPriceCtrl.priceInfo.formattedTotalPrice}) :
+                    ('MMB_UPGRADING_FREE_AVIOS_BIDS_DISPO_PLU' | translate : {free: totalPriceCtrl.numberFreeUpgrade,
+                    tierIB: totalPriceCtrl.tierIB, avios: totalPriceCtrl.totalAviosAmount, price:
+                    totalPriceCtrl.priceInfo.formattedTotalPrice})}}
+                </span>
+                <!-- STANDARD + FREE -->
+                <span
+                    ng-if="totalPriceCtrl.priceInfo.totalPrice === 0 && totalPriceCtrl.totalAviosAmount !== 0 && totalPriceCtrl.numberFreeUpgrade">
+                    {{totalPriceCtrl.numberFreeUpgrade === 1 ? ('MMB_UPGRADING_FREE_AVIOS_DISPO_SIN' | translate :
+                    {free: totalPriceCtrl.numberFreeUpgrade, tierIB: totalPriceCtrl.tierIB, avios:
+                    totalPriceCtrl.totalAviosAmount}) : ('MMB_UPGRADING_FREE_AVIOS_DISPO_PLU' | translate : {free:
+                    totalPriceCtrl.numberFreeUpgrade, tierIB: totalPriceCtrl.tierIB, avios:
+                    totalPriceCtrl.totalAviosAmount})}}
+                </span>
+                <!-- Bids + STANDARD -->
+                <span
+                    ng-if="totalPriceCtrl.priceInfo.totalPrice > 0 && totalPriceCtrl.totalAviosAmount !== 0 && !totalPriceCtrl.numberFreeUpgrade && totalPriceCtrl.flowApp !== 'MMBBID'">
+                    {{('MMB_UPGRADING_AVIOS_AND_MONEY_PAYMENT_1' | translate) + ' ' +
+                    totalPriceCtrl.priceInfo.formattedTotalPrice + ' ' + ('MMB_UPGRADING_AVIOS_AND_MONEY_PAYMENT_2' |
+                    translate) + ' ' + totalPriceCtrl.totalAviosAmount + ' ' + ('MMB_UPGRADING_AVIOS_PAYMENT' |
+                    translate)}}
+                </span>
+                <!-- Bids + FREE -->
+                <span
+                    ng-if="totalPriceCtrl.priceInfo.totalPrice > 0 && totalPriceCtrl.totalAviosAmount === 0 && totalPriceCtrl.numberFreeUpgrade">
+                    {{totalPriceCtrl.numberFreeUpgrade === 1 ? ('MMB_UPGRADING_FREE_BIDS_DISPO_SIN' | translate : {free:
+                    totalPriceCtrl.numberFreeUpgrade, tierIB: totalPriceCtrl.tierIB, price:
+                    totalPriceCtrl.priceInfo.formattedTotalPrice}) : ('MMB_UPGRADING_FREE_BIDS_DISPO_PLU' | translate :
+                    {free: totalPriceCtrl.numberFreeUpgrade, tierIB: totalPriceCtrl.tierIB, price:
+                    totalPriceCtrl.priceInfo.formattedTotalPrice})}}
+                </span>
+                <!-- STANDARD -->
+                <span
+                    ng-if="totalPriceCtrl.priceInfo.totalPrice === 0 && totalPriceCtrl.totalAviosAmount !== 0 && !totalPriceCtrl.numberFreeUpgrade">
+                    {{totalPriceCtrl.totalAviosAmountFormatted }} {{ ('MMB_UPGRADING_AVIOS_PAYMENT' | translate) }}
+                </span>
+                <!-- FREE -->
+                <span
+                    ng-if="totalPriceCtrl.priceInfo.totalPrice === 0 && totalPriceCtrl.totalAviosAmount === 0 && totalPriceCtrl.numberFreeUpgrade">
+                    {{totalPriceCtrl.numberFreeUpgrade === 1 ? ('MMB_UPGRADING_FREE_DISPO_SIN' | translate : {free:
+                    totalPriceCtrl.numberFreeUpgrade, tierIB: totalPriceCtrl.tierIB} ) : ('MMB_UPGRADING_FREE_DISPO_PLU'
+                    | translate : {free: totalPriceCtrl.numberFreeUpgrade, tierIB: totalPriceCtrl.tierIB})}}
+                </span>
+                <!--  Bids -->
+                <span
+                    ng-if="totalPriceCtrl.priceInfo.totalPrice > 0 && totalPriceCtrl.totalAviosAmount !== 0 && !totalPriceCtrl.numberFreeUpgrade && totalPriceCtrl.flowApp === 'MMBBID'">
+                    {{'UPGRADING_BIDS_FOOTER_TEXT' | translate}}
+                </span>
+            </p>
+        </div>
+        <div class="ib-box ib-box--medium">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="ib-layout__line-spacing ib-layout__line-spacing--small">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="u-text-right u-text-left-sm u-text-left-xs">
+                        <figure class="ib-logo ib-logo--medium">
+                            <img ng-src="{{totalPriceCtrl.$rootScope.routes.images}}/otros/globalSign.png"
+                                alt="{{'AVAILABILITY_SLICE_INFO_IMG_ALT_1'|translate}} global Sign" />
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</fieldset>
+

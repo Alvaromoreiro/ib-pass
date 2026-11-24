@@ -1,0 +1,1 @@
+angular.module('ib-biometric-boarding-box-module', []);

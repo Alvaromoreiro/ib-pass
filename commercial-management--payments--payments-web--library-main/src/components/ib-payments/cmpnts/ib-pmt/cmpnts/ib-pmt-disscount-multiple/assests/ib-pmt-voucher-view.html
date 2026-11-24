@@ -1,0 +1,74 @@
+<div class="ib-bonus-box ib-collapse--flex u-mb-medium">
+    <h3 class="ib-bonus-box__title" data-ng-if="!$root.isMobile.header">{{'PAYMENTS_DISCOUNTS_VOUCHER_TAB_TITLE'|translate}}</h3>
+    <button class="ib-collapse__trigger" data-ng-if="$root.isMobile.header" data-toggle="collapse" data-target="#bonusCollapse" aria-expanded="{{pmtDisMultiCtrl.expanded}}" aria-controls="bonusCollapse" data-ng-click="pmtDisMultiCtrl.collapse($event)" focusin>
+        <h3 class="ib-bonus-box__title ib-collapse__title-text">{{'PAYMENTS_DISCOUNTS_VOUCHER_TAB_TITLE'|translate}}</h3>
+        <span class="ib-collapse__icon" data-ng-class="{'icon-flecha_1_abajo': !pmtDisMultiCtrl.expanded, 'icon-flecha_1_arriba': pmtDisMultiCtrl.expanded}"></span>
+    </button>
+    <div class="collapse" data-ng-class="{'in': pmtDisMultiCtrl.expanded}" id="bonusCollapse" aria-expanded="{{pmtDisMultiCtrl.expanded}}">
+        <ib-message-box model="pmtDisMultiCtrl.model.alertMessage" data-ng-if="pmtDisMultiCtrl.model.warning"></ib-message-box>
+        <div data-ng-if="!pmtDisMultiCtrl.loadingVoucher" >
+            <form class="ib-bonus-box--inline-medium" name="voucherForm">
+                <fieldset class="ib-bonus-box__fieldset">
+                    <legend class="sr-only">{{'PAYMENTS_DISCOUNTS_VOUCHER_TAB_TITLE'|translate}}</legend>
+                    <div class="ib-bonus-box__fieldset-item" data-ng-if="!pmtDisMultiCtrl.appliedDiscounts.types['VOUCHER']">
+                        <div class="ib-input" data-ng-class="{'ib-input--error' : (pmtDisMultiCtrl.appliedDiscounts.error && (voucherForm.voucherCode.$viewValue != null && voucherForm.voucherCode.$viewValue !== '')) || (pmtDisMultiCtrl.requiredValidation && voucherForm.voucherCode.$error)}">
+                            <label class="ib-input__label" for="voucherCode" ng-class="{'ib-input__label--focus' : pmtDisMultiCtrl.voucherCodeFocused || (voucherForm.voucherCode.$viewValue != null && voucherForm.voucherCode.$viewValue !== '')}">{{'PAYMENTS_DISCOUNTS_VOUCHER_INPUT_TEXT'|translate}}</label>
+                            <input type="text" id="voucherCode" name="voucherCode"
+                                data-ng-focus="pmtDisMultiCtrl.voucherCodeFocused=true"
+                                data-ng-blur="pmtDisMultiCtrl.voucherCodeFocused=false"
+                                ng-model="pmtDisMultiCtrl.voucherCode" 
+                                data-ng-change="pmtDisMultiCtrl.cleanVoucherError(voucherForm.voucherCode.$viewValue)" 
+                                ng-pattern="::$root.pmtPatterns.PROMOTIONAL_CODE"
+                                data-ib-validator-cleaner="{{::$root.pmtPatterns.PROMOTIONAL_CODE_CLEANER}}"
+                                maxlength="50"
+                                class="ib-input__input" required>
+                        </div>
+                        <div class="ib-alert--set" data-ng-if="pmtDisMultiCtrl.appliedDiscounts.error">
+                            <p class="ib-alert ib-alert--error">{{pmtDisMultiCtrl.appliedDiscounts.error}}</p>
+                        </div>
+                        <div ng-messages="pmtDisMultiCtrl.requiredValidation && voucherForm.voucherCode.$error">
+                            <div class="ib-alert--set" ng-message="required">
+                                <p class="ib-alert ib-alert--error">{{'GENERAL_INPUT_REQUIRED_ERROR'|translate}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ib-bonus-box__fieldset-item" data-ng-if="pmtDisMultiCtrl.appliedDiscounts.types['VOUCHER']">
+                        <div class="ib-bonus-box__disccount">
+                            <span class="ib-bonus-box__disccount-icon icon-confirmacion"></span>
+                            <div class="ib-bonus-box__fisccount-block">
+                                <p class="ib-bonus-box__disccount-title">{{'DISCCOUNT_TEXT'|translate}}: -{{pmtDisMultiCtrl.appliedDiscounts.types['VOUCHER'].discount}}</p>
+                                <p class="ib-bonus-box__disccount-text" data-ng-if="pmtDisMultiCtrl.appliedDiscounts.types['VOUCHER'].remainingAmount != null && pmtDisMultiCtrl.appliedDiscounts.types['VOUCHER'].remainingAmount !== 0">
+                                    {{'PAYMENTS_DISCOUNTS_VOUCHER_GIFT_CARD_TEXT_1'| translate}}
+                                    {{pmtDisMultiCtrl.appliedDiscounts.types['VOUCHER'].formattedRemainingAmount}}
+                                    {{'PAYMENTS_DISCOUNTS_VOUCHER_GIFT_CARD_TEXT_2' | translate}}</p>
+                                <p class="ib-bonus-box__disccount-text" data-ng-if="pmtDisMultiCtrl.appliedDiscounts.types['VOUCHER'].remainingAmount === 0">{{'PAYMENTS_DISCOUNTS_VOUCHER_GIFT_CARD_TEXT_NO_AMOUNT'|translate}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="ib-bonus-box__actions ib-bonus-box__actions-form">
+                    <button data-ng-if="!pmtDisMultiCtrl.appliedDiscounts.types['VOUCHER']" id="pmt-discount-check-voucher-btn" class="ib-button ib-bonus-box__button" type="button" title="{{'APPLY_TEXT'|translate}}"
+                        data-ng-click="pmtDisMultiCtrl.checkVoucher(false, pmtDisMultiCtrl.voucherCode)" data-ng-disabled="pmtDisMultiCtrl.appliedDiscounts.types['VOUCHER']">{{'APPLY_TEXT'|translate}}</button>
+                    <button data-ng-if="pmtDisMultiCtrl.appliedDiscounts.types['VOUCHER']" id="pmt-discount-check-voucher-if-applied-btn" class="ib-button ib-bonus-box__button" type="button" title="{{ pmtDisMultiCtrl.isPartnerBin ? ('PAYMENTS_DISCOUNTS_VOUCHER_DELETE_BUTTON_TEXT_FOR_DUMBO'|translate) : ('PAYMENTS_DISCOUNTS_VOUCHER_DELETE_BUTTON_TEXT'|translate)}}"
+                        data-ng-click="pmtDisMultiCtrl.checkVoucher(true, pmtDisMultiCtrl.appliedDiscounts.types['VOUCHER'].id)">{{ pmtDisMultiCtrl.isPartnerBin ? ('PAYMENTS_DISCOUNTS_VOUCHER_DELETE_BUTTON_TEXT_FOR_DUMBO'|translate) : ('PAYMENTS_DISCOUNTS_VOUCHER_DELETE_BUTTON_TEXT'|translate)}}</button>
+                </fieldset>
+            </form>
+            <div class="ib-bonus-box__actions">
+                <div class="ib-bonus-box__actions-item">
+                    <button class="ib-bonus-box__button-link ib-bonus-box__button-link--text" type="button-link" title="{{'GENERAL_TERMS_AND_CONDITIONS_TEXT'|translate}}" data-ng-click="pmtDisMultiCtrl.goToTermsAndConditionPage()">{{'GENERAL_TERMS_AND_CONDITIONS_TEXT'|translate}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="ib-layout__line-spacing" data-ng-if="pmtDisMultiCtrl.loadingVoucher">
+            <div id="pmt-disscount-loading-elem" class="ib-overlay-fly ib-overlay-fly--form">
+                <div class="ib-overlay-fly__container">
+                    <div class="ib-overlay-fly__icon">
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                    </div>
+                    <span class="ib-overlay-fly__text">{{'LOADING_TEXT'|translate}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

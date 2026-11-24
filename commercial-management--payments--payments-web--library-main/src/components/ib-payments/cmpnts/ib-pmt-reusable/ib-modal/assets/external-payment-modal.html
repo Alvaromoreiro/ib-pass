@@ -1,0 +1,26 @@
+<header class="ib-modals__header">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+        <h2 class="ib-heading ib-heading--type-1">{{modalCtrl.model.title ? (modalCtrl.model.title|translate) : 'MODAL_ERROR_TITLE'|translate}}</h2>
+    </div>
+    <h3 class="ib-heading ib-heading--type-5 ib-heading--unfocused" data-ng-if="modalCtrl.model.subtitle">{{modalCtrl.model.subtitle|translate}}</h3>
+    <div class="ib-modals__header-settings">
+        <button id="pmt-external-payment-modal-close-btn" type="button" class="ib-modals__button-action icon-cerrar" ng-click="modalCtrl.close()">
+            <span class="u-hide-accessible">{{'GENERIC_MODAL_ACCESSIBLE_CLOSE'|translate}}</span>
+        </button>
+    </div>
+</header>
+<section class="ib-modals__body" id="generalModalBody">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large" data-ng-if="modalCtrl.model.body">
+        <p class="ib-text" data-ng-if="!modalCtrl.model.needsHtmlBinding">{{modalCtrl.model.body|translate}}</p>
+        <p class="ib-text" data-ng-if="modalCtrl.model.needsHtmlBinding" data-ng-bind-html="modalCtrl.model.body"></p>
+    </div>
+    <iframe scrolling="no" id="iframeExternalPayment" name="iframeExternalPayment" width="100%" height="700" style="margin-top:0;"></iframe>
+    <div id="externalPaymentModal">
+    </div>
+</section>
+<footer class="ib-modals__footer">
+    <div class="ib-content-buttons ib-content-buttons--end">
+        <a id="pmt-external-payment-modal-cancel-link" href="javascript:void(0)" title="{{modalCtrl.model.cancel|translate}}" class="ib-link" data-ng-click="modalCtrl.close()">{{modalCtrl.model.cancel
+                ? modalCtrl.model.cancel : 'MODAL_CANCEL_BUTTON'|translate}}</a>
+    </div>
+</footer>

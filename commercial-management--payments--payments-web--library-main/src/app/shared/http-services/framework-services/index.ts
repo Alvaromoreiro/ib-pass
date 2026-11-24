@@ -1,0 +1,1 @@
+import './ib-pmt-payment-scripts-service';

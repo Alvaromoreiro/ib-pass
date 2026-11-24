@@ -1,0 +1,69 @@
+<div class="ib-box-select-radio" ng-controller="IbBookingCollapseController as collapse" ng-class="{'ib-box-select-radio--blocked' : onHoldInfoCtrl.selectedOnHoldIndex !== onHoldInfoCtrl.optionIndex && !collapse.isCollapsed}"
+    data-pre-booking>
+    <div class="ib-box-select-radio__header">
+        <div class="ib-box-select-radio__header-wrapper ib-box-select-radio__header-wrapper--centered">
+            <span class="ib-box-select-radio__header-title">{{onHoldInfoCtrl.optionInfo.hours}}</span>
+            <span class="ib-text ib-text--block ib-text--color-unfocused">{{'ONHOLD_INFO_HOURS'|translate}}</span>
+        </div>
+    </div>
+    <div class="ib-box-select-radio__header-mobile">
+        <div class="ib-box-select-radio__radio ib-box-select-radio__radio--mobile">
+            <label for="{{onHoldInfoCtrl.optionIndex}}" class="ib-box-select-radio__radio-label ib-box-select-radio__radio-label--mobile"
+                data-box-select-radio="check-mobile" ng-class="{'ib-box-select-radio__radio-label--checked' : onHoldInfoCtrl.selectedOnHoldIndex === onHoldInfoCtrl.optionIndex}"></label>
+        </div>
+        <div class="ib-box-select-radio__header-wrapper ib-box-select-radio__header-wrapper--centered" ng-class="{'ib-box-select-radio__header-wrapper--close' : !collapse.isCollapsed}"
+            ng-click="collapse.clickCollapse($event,false)">
+            <div class="ib-box-select-radio__header-left">
+                <span class="ib-text ib-text--block ib-text--bold ib-text--xmedium">{{onHoldInfoCtrl.optionInfo.hours}}</span>
+                <span class="ib-text ib-text--block ib-text--color-unfocused">{{'ONHOLD_INFO_HOURS'|translate}}</span>
+            </div>
+            <div class="ib-box-select-radio__header-right">
+                <span class="ib-text ib-text--block" data-ng-if="onHoldInfoCtrl.optionInfo.price.total === 0">{{'ONHOLD_INFO_FREE'|translate}}</span>                
+                <span class="ib-text ib-text--block" data-ng-if="onHoldInfoCtrl.optionInfo.price.total !== 0">{{onHoldInfoCtrl.optionInfo.totalPricePassengerInfo}}</span>
+                <span class="ib-text ib-text--block" data-ng-if="onHoldInfoCtrl.optionInfo.price.total !== 0">{{'ONHOLD_INFO_PER_PASSENGER'|translate}}</span>
+
+            </div>
+            <span class="ib-box-select-radio__icon" ng-class="collapse.isCollapsed ? 'icon-flecha_1_arriba' : 'icon-flecha_1_abajo'"></span>
+        </div>
+    </div>
+    <div class="ib-box-select-radio__container" uib-collapse="!collapse.isCollapsed">
+        <div class="ib-box-select-radio__container-wrapper" data-equal="box-select-radio-container">
+            <ul class="ib-list-icon">
+                <li class="ib-list-icon__item">
+                    <span class="ib-list-icon__icon icon-reloj"></span>
+                    <p class="ib-list-icon__text">
+                        {{'ONHOLD_INFO_TEXT_1_1'|translate}} {{onHoldInfoCtrl.optionInfo.hours}} {{'ONHOLD_INFO_TEXT_1_2'|translate}},
+                        <strong class="ib-text ib-text--inline ib-text--bold ib-text--color-unfocused"> {{onHoldInfoCtrl.optionInfo.transformedTimeDateLimit.day}} {{'ONHOLD_INFO_TEXT_1_4'|translate}}
+                            {{onHoldInfoCtrl.optionInfo.transformedTimeDateLimit.month | translate}} {{'ONHOLD_INFO_TEXT_1_4'|translate}} {{onHoldInfoCtrl.optionInfo.transformedTimeDateLimit.year}}
+                            {{'ONHOLD_INFO_TEXT_1_5' | translate}} {{onHoldInfoCtrl.optionInfo.transformedTimeDateLimit.hour}}:{{('00' + onHoldInfoCtrl.optionInfo.transformedTimeDateLimit.minutes).slice(-2)}}
+                            {{'(' + onHoldInfoCtrl.optionInfo.referenceCity.description + ')'}}</strong>
+                    </p>
+                </li>
+                <li class="ib-list-icon__item">
+                    <span class="ib-list-icon__icon icon-reembolsos"></span>
+                    <p class="ib-list-icon__text">{{'ONHOLD_INFO_TEXT_2'| translate}}</p>
+                </li>
+                <li class="ib-list-icon__item">
+                    <span class="ib-list-icon__icon icon-mejor_precio"></span>
+                    <p class="ib-list-icon__text">{{onHoldInfoCtrl.optionInfo.price.total === 0 ? 'ONHOLD_INFO_TEXT_3' : 'ONHOLD_INFO_TEXT_5' | translate}}</p>
+                </li>
+                <li class="ib-list-icon__item">
+                    <span class="ib-list-icon__icon icon-alertas"></span>
+                    <p class="ib-list-icon__text">{{'ONHOLD_INFO_TEXT_4'| translate}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="ib-box-select-radio__footer">
+        <div class="ib-box-select-radio__footer-wrapper" data-equal="box-select-radio-footer">
+            <div class="ib-box-select-radio__radio" data-box-select-radio="check-desktop">
+                <input type="radio" id="{{onHoldInfoCtrl.optionIndex}}" name="radio_prebooking" class="ib-box-select-radio__radio-input"
+                    ng-model="onHoldInfoCtrl.selectedOnHoldIndex" ng-value="onHoldInfoCtrl.optionIndex" data-box-select-radio="radio"
+                    data-ng-click="onHoldInfoCtrl.selectOnHoldOption(onHoldInfoCtrl.optionInfo, onHoldInfoCtrl.optionIndex)"
+                />
+                <label for="{{onHoldInfoCtrl.optionIndex}}" class="ib-box-select-radio__radio-label u-pt-small" data-ng-if="onHoldInfoCtrl.optionInfo.price.total === 0">{{'ONHOLD_INFO_FREE'|translate}}</label>
+                <label for="{{onHoldInfoCtrl.optionIndex}}" class="ib-box-select-radio__radio-label" data-ng-if="onHoldInfoCtrl.optionInfo.price.total !== 0">{{onHoldInfoCtrl.optionInfo.totalPricePassengerInfo}}<span class="ib-text ib-text--block">{{'ONHOLD_INFO_PER_PASSENGER'|translate}}</span></label>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<header class="ib-modals__header">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--xsmall">
+        <h2 class="ib-heading ib-heading--type-1">{{modalCtrl.model.title|translate}}</h2>
+    </div>
+    <h3 class="ib-heading ib-heading--type-5 ib-heading--unfocused" data-ng-if="modalCtrl.model.subtitle">{{modalCtrl.model.subtitle|translate}}</h3>
+</header>
+<section id="pmt-generic-error-payment-modal" class="ib-modals__body">
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large QM-modal__error__body" data-ng-if="modalCtrl.model" ng-attr-data-qm-modal-error-status="{{modalCtrl.model.errorCode}}" ng-attr-data-qm-modal-error-errorcode="{{modalCtrl.model.internalErrorCode}}" ng-attr-data-qm-modal-error-api="{{modalCtrl.model.urlError}}">
+        <p class="ib-text">
+            {{modalCtrl.model.message|translate}}
+        </p>
+        <p class="ib-text" data-ng-if="modalCtrl.model.submessage.length > 0">
+            {{modalCtrl.model.submessage|translate}}
+        </p>
+    </div>
+</section>
+<footer class="ib-modals__footer">
+    <div class="ib-content-buttons" data-ng-class="{'ib-content-buttons--options': (modalCtrl.model.showbuttons.onHold.status && modalCtrl.model.showbuttons.accept.status)}">
+        <div class="ib-content-buttons__content-left">
+            <button class="ib-button ib-button--w-medium ib-button--inverse" type="button" id="pmt-generic-error-payment-modal-accept-on-hold-btn" data-ng-if="modalCtrl.model.showbuttons.onHold.status" data-ng-click="modalCtrl.accept('onHold')">{{modalCtrl.model.showbuttons.onHold.text|translate}}</button>
+            <button id="pmt-generic-error-payment-modal-accept-btn" data-ng-if="modalCtrl.model.showbuttons.accept.status" class="ib-button ib-button--w-medium" type="button" data-ng-click="modalCtrl.accept()">{{modalCtrl.model.showbuttons.accept.text|translate}}</button>
+        </div>
+        <div class="ib-content-buttons__content-right">
+            <a id="pmt-generic-error-payment-modal-cancel-link" class="ib-link" href="javascript:void(0)" title="{{modalCtrl.model.showbuttons.cancel.accessibleText|translate}}" data-ng-click="modalCtrl.close()" data-ng-if="modalCtrl.model.showbuttons.cancel.status">{{modalCtrl.model.showbuttons.cancel.text|translate}}</a>
+        </div>
+    </div>
+</footer>

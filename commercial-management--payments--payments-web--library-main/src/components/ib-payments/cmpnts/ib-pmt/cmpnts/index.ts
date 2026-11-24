@@ -1,0 +1,12 @@
+import './ib-pmt-popover'
+import './ib-pmt-breakdown';
+import './ib-pmt-co2-footprint';
+import './ib-pmt-dcc';
+import './ib-pmt-disscount';
+import './ib-pmt-disscount-multiple';
+import './ib-pmt-donations';
+import './ib-pmt-nav-tab';
+import './ib-pmt-on-hold-components';
+import './ib-pmt-summary';
+import './ib-pmt-terms-and-conditions';
+import './ib-pmt-total-price';

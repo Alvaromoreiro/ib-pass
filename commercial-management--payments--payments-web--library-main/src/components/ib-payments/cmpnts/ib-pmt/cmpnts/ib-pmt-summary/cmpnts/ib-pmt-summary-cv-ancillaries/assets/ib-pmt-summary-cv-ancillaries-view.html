@@ -1,0 +1,48 @@
+<div class="ib-summary-item u-p-none" data-ng-repeat="ancillarie in PmtSummaryCvAnciCtrl.ancillariesRefund" data-ng-if="!ancillarie.globalItem">
+    <div class="ib-summary-item__content">
+        <h3 class="ib-summary-item__title">
+            <span class="ib-summary-item__title--text">{{ancillarie.title|translate}}</span>
+        </h3>
+        <div class="ib-summary-item__item"  data-ng-repeat="trip in ancillarie.trips">
+            <div class="ib-summary-item__trip">
+                <div class="ib-summary-item__trip--departure">
+                    <span class="ib-summary-item__trip--city">{{trip.departure.city}}</span>
+                    <span class="ib-summary-item__trip--code">({{trip.departure.code}})</span>
+                </div>
+                <div class="ib-summary-item__trip--arrival">
+                    <span class="ib-summary-item__trip--city">{{trip.arrival.city}}</span>
+                    <span class="ib-summary-item__trip--code">({{trip.arrival.code}})</span>
+                </div>
+            </div>
+            <div class="ib-summary-item__concept" data-ng-repeat="item in trip.items">
+                <span class="ib-summary-item__concept--title"><span data-ng-if="item.quantity">{{item.quantity}}</span>
+                  x  {{item.unitPrice}}</span>
+                <span class="ib-summary-item__concept--price"> {{item.priceFormatted}} </span>
+            </div>
+        </div>
+        <div class="ib-summary-item__amount">
+            <span class="ib-summary-item__amount--title">{{ancillarie.amount.titleTotalPrice}}</span>
+            <span class="ib-summary-item__amount--price">{{ancillarie.amount.totalPriceFormatted}}</span>
+        </div>
+    </div>
+</div>
+<div class="ib-summary-item u-p-none" data-ng-repeat="ancillarie in PmtSummaryCvAnciCtrl.ancillariesRefund" data-ng-if="ancillarie.globalItem">
+    <div class="ib-summary-item__content">
+        <h3 class="ib-summary-item__title">
+            <span class="ib-summary-item__title--text">{{ancillarie.title|translate}}</span>
+        </h3>
+        <div class="ib-summary-item__item">
+            <div class="ib-summary-item__concept">
+                <span data-ng-if="ancillarie.flexibilityItemText" class="ib-summary-item__concept--title"><span data-ng-if="ancillarie.quantity">{{ancillarie.quantity}}</span>
+                  {{ancillarie.flexibilityItemText}}</span>
+                  <span data-ng-if="!ancillarie.flexibilityItemText" class="ib-summary-item__concept--title"><span data-ng-if="ancillarie.quantity">{{ancillarie.quantity}}</span>
+                  x  {{ancillarie.unitPrice}}</span>
+                <span class="ib-summary-item__concept--price"> {{ancillarie.totalPriceFormatted}} </span>
+            </div>
+        </div>
+        <div class="ib-summary-item__amount">
+            <span class="ib-summary-item__amount--title">{{ancillarie.amount.titleTotalPrice}}</span>
+            <span class="ib-summary-item__amount--price">{{ancillarie.totalPriceFormatted}}</span>
+        </div>
+    </div>
+</div>

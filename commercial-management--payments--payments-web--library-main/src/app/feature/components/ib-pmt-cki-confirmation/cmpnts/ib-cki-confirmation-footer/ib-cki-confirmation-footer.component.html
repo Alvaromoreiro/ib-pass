@@ -1,0 +1,71 @@
+<footer class="ib-ticket-flights__seats ib-ticket-flights__seats--flex">
+    <div *ngIf="!props?.showInhibitPassengers && !props?.isCC && !props?.isBpSubscriptionMode">
+        <p class="ib-ticket-flights__seats--text"
+            *ngIf="props?.checkCompany">
+            <span class="ib-ticket-flights__seats--title">{{'IBCOCF&IBECCF_ASIENT_CAB' | translate}}:</span>
+            {{ props?.cabinClassTypeLabel|translate }}
+            {{ props?.segment.seatList }}
+        </p>
+        <p class="ib-ticket-flights__seats--text"
+            *ngIf="!props?.checkCompany">
+            <span class="ib-ticket-flights__seats--title">{{'IBCOCF&IBECCF_ASIENT_CAB' | translate}}
+            </span>
+            {{ checkSeatList() }}
+        </p>
+    </div>
+    <!-- CASE INHIBITION -->
+    <div class="ib-layout__line-spacing ib-layout__line-spacing--large ib-flex--basis-100"
+        *ngIf="props?.showInhibitPassengers || props?.isCC">
+        <div class="ib-ui-passenger-seats-info">
+            <h3 class="ib-heading ib-heading--type-3">{{ 'YOUR_SEATS' | translate }}</h3>
+            <h4 class="ib-ui-passenger-seats-info__subtitle">{{ 'IBCOCF&IBECCF_ASIENT_CAB' | translate }} <span
+                    class="ib-ui-passenger-seats-info__cabins">{{ props?.cabinClassTypeLabel | translate }}
+                    {{ checkSeatList() }}</span></h4>
+            <div class="ib-ui-passenger-seats-info__list">
+                <div class="ib-ui-passenger-seats-info__row" *ngFor="let passenger of props?.segment.passengers">
+                    <ng-container *ngIf="passenger.type !== 'INFANT'">
+                        <span
+                            [ngClass]="{'icon-mujer': passenger.gender === 'FEMALE', 'icon-hombre': passenger.gender !=='FEMALE'}"
+                            class="ib-ui-passenger-seats-info__text ib-ui-passenger-seats-info__name icon-hombre">
+                            {{passenger.name}} {{passenger.surname}}
+                        </span>
+                        <span class="ib-ui-passenger-seats-info__passbook icon-passbook_tarjeta_embarque">
+                            <span class="ib-ui-passenger-seats-info__text" *ngIf="props?.inhibitStorage">
+                                {{ (passenger.inhibitBoardingCard.status ? 'MODAL_INHIBIT_MIX_BOARDING_CARD_STATUS_PENDING' :
+                                'MODAL_INHIBIT_MIX_BOARDING_CARD_STATUS_EMITTED') | translate }}
+                            </span>
+                            <span class="ib-ui-passenger-seats-info__text"
+                                *ngIf="props?.isCC && !props?.inhibitStorage">
+                                {{ (!passenger.isDownloaded ? 'MODAL_INHIBIT_MIX_BOARDING_CARD_STATUS_PENDING' :
+                                'MODAL_INHIBIT_MIX_BOARDING_CARD_STATUS_EMITTED') | translate }}
+                            </span>
+                        </span>
+                        <span class="ib-ui-passenger-seats-info__seats"
+                            [ngClass]="{'icon-asiento': showSeatInhibit(passenger)}">
+                            <span class="ib-ui-passenger-seats-info__text"
+                                *ngIf="showSeatInhibit(passenger)">{{passenger.seat.row}}{{passenger.seat.column}}</span>
+                        </span>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ul *ngIf="props?.isBpSubscriptionMode">
+        <li *ngFor="let passenger of props?.segment.passengers">
+            <header class="banner-header">
+                <h4><span class="icon-hombre icon"></span>{{ values[passenger.id].passengerName }}</h4>
+                <p><strong>{{ 'IBCOCF&IBECCF_ASIENT_CAB' | translate }}</strong> {{ 'CABINA_GENERAL' | translate }} {{ values[passenger.id].passengerSeat }}</p>
+            </header>
+            <div class="banner-information">
+                <span class="icon-informacion icon"></span>
+                <strong>{{ 'IBCOCF&IBECCF_SUBSCRIPTION_PASSENGER_BANNER' | translate: { mail: values[passenger.id].mail } }}</strong>
+            </div>
+        </li>
+    </ul>
+
+    <ib-biometric-boarding-box *ngIf="props?.showBiometricActive" class="ib-biometric"
+        modifier="ib-biometric__box--reverse-items" text="BIOMETRIC_BOARDING_PAGE_TITLE"
+        textStrong="BIOMETRIC_BOARDING_ACTIVE_TICKET_FLIGHT" icon="icon-biometria" iconModifier="ib-biometric__icon--red">
+    </ib-biometric-boarding-box>
+</footer>

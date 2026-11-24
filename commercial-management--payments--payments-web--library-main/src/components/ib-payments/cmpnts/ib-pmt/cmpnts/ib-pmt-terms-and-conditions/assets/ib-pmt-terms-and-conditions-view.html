@@ -1,0 +1,21 @@
+<div class="ib-box ib-box--medium ib-box--separator" ng-if="pmtTermsAndConditionCtr.paymentMode">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="ib-check"
+                data-ng-class="{'ib-check--error' : pmtTermsAndConditionCtr.containerForm.$submitted && !totalPriceCtrl.checkTermsConditions}">
+                <input type="checkbox" id="check_terms_conditions" name="check_terms_conditions" class="ib-check__input"
+                    ng-model="totalPriceCtrl.checkTermsConditions" required />
+                <label for="check_terms_conditions" class="ib-check__label">
+                    <span data-ng-if="totalPriceCtrl.conditionsText" class="ib-check__text ib-check__text--unfocused"
+                        title="" ng-bind-html="totalPriceCtrl.conditionsText"></span>
+                </label>
+            </div>
+            <div id="pmt-terms-and-conditions-required-error-msg" 
+                ng-messages="totalPriceCtrl.containerForm.$submitted && totalPriceCtrl.containerForm.check_terms_conditions.$error">
+                <div class="ib-alert ib-alert--error"
+                    title="{{'TOTAL_PRICE_CHECKBOX_CONDITIONS_REQUIRED_ERROR'|translate}}" ng-message="required">
+                    {{'TOTAL_PRICE_CHECKBOX_CONDITIONS_REQUIRED_ERROR'|translate}}</div>
+            </div>
+        </div>
+    </div>
+</div>

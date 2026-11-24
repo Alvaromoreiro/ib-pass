@@ -1,0 +1,111 @@
+<div class="ib-summary-item__content u-pt-none">
+    <h4 class="ib-heading ib-heading--type-4 ib-summary__section-title">
+        <span class="ib-summary-item__title--text">{{'IBPURC_PAYMENTS_SUMMARY_DISCOUNT'|translate}}</span>
+    </h4>
+    <div class="ib-summary-item__item"
+        data-ng-if="!PmtSumDisCtrl.summaryInfo.appliedDiscounts.types && PmtSumDisCtrl.disccountInfo.types"
+        data-ng-repeat="(type, discount) in PmtSumDisCtrl.disccountInfo.types">
+        <div
+            class="ib-list-passengers__item-description ib-list-passengers__item-description--long ib-list-passengers__item-description--long-start u-pb-small" 
+            data-ng-if="discount.type === 'VOUCHER' && !discount.description">
+            <span class="ib-text ib-text--color-unfocused">
+                <span class="u-display-block">
+                    {{'BONUS_CARD_GIFT_TEXT'|translate}} 
+                </span>
+            </span>
+            <span class="ib-text ib-text--color-normal">
+                -{{discount.discount}}
+            </span>
+        </div>
+        <div
+            class="ib-list-passengers__item-description ib-list-passengers__item-description--long ib-list-passengers__item-description--long-start u-pb-small" data-ng-if="(type !== 'VOUCHER' || type === 'VOUCHER' && discount.description) && ((!PmtSumDisCtrl.discountsAppliedIssue && !PmtSumDisCtrl.discountsAppliedIssue.discounts && !PmtSumDisCtrl.discountsAppliedIssue.discounts.length > 0) || (type==='AVIOS' && (!PmtSumDisCtrl.discountsAppliedIssue && !PmtSumDisCtrl.discountsAppliedIssue.discounts && !PmtSumDisCtrl.discountsAppliedIssue.discounts.length > 0)))">
+            <span class="ib-text ib-text--color-unfocused">
+                <span class="u-display-block" >
+                    {{type === 'AVIOS'  ? (PmtSumDisCtrl.disccountInfo.types.AVIOS.description ? PmtSumDisCtrl.disccountInfo.types.AVIOS.description : ('AVIOS'|translate)) : (discount.description ? discount.description : discount.type|translate)}} 
+                </span>
+            </span>
+            <span class="ib-text ib-text--color-normal" data-ng-if="type === 'AVIOS'">
+                -{{discount.discount}}
+            </span>
+            <span class="ib-text ib-text--color-normal" data-ng-if="type !== 'AVIOS'">
+                -{{discount.discount || discount.totalDiscountFormatted}}
+            </span>
+        </div>
+    </div>
+    
+
+    <div class="ib-summary-item__item" data-ng-if="PmtSumDisCtrl.summaryInfo.appliedDiscounts.discount && !PmtSumDisCtrl.discountsAppliedIssue"
+        data-ng-repeat="(type, discount) in PmtSumDisCtrl.summaryInfo.appliedDiscounts.discount">
+        <div
+            class="ib-list-passengers__item-description ib-list-passengers__item-description--long ib-list-passengers__item-description--long-start u-pb-small">
+            <span class="ib-text ib-text--color-unfocused">
+                <span class="u-display-block">
+                    {{(discount.type === 'VOUCHER' && !discount.description) ? ('BONUS_CARD_GIFT_TEXT'|translate) : (discount.description ? discount.description : discount.type|translate)}} 
+                </span>
+            </span>
+            <span class="ib-text ib-text--color-normal">
+                -{{discount.discount || discount.totalDiscountFormatted}}
+            </span>
+        </div>
+    </div>
+    <div class="ib-summary-item__item" data-ng-if="PmtSumDisCtrl.summaryInfo.appliedDiscounts.types"
+        data-ng-repeat="(type, discount) in PmtSumDisCtrl.summaryInfo.appliedDiscounts.types">
+        <div
+            class="ib-list-passengers__item-description ib-list-passengers__item-description--long ib-list-passengers__item-description--long-start u-pb-small">
+            <span class="ib-text ib-text--color-unfocused">
+                <span class="u-display-block" data-ng-if="type !== 'VOUCHER' && ((!PmtSumDisCtrl.discountsAppliedIssue && !PmtSumDisCtrl.discountsAppliedIssue.discounts && !PmtSumDisCtrl.discountsAppliedIssue.discounts.length > 0)|| type==='AVIOS')">
+                    {{type === 'AVIOS'  ? (PmtSumDisCtrl.disccountInfo.types.AVIOS.description ? PmtSumDisCtrl.disccountInfo.types.AVIOS.description : ('AVIOS'|translate)) : (discount.description ? discount.description : discount.type|translate)}} 
+                </span>
+                <span class="u-display-block" data-ng-if="type === 'AVIOS'">
+                    ({{!PmtSumDisCtrl.numeroAvios ? discount.formatedAvios +' '+
+                    ('AVIOS_TEXT'|translate):PmtSumDisCtrl.numeroAvios+' '+ ('AVIOS_TEXT'|translate)}})
+                </span>
+            </span>
+            <span class="ib-text ib-text--color-normal" data-ng-if="type === 'AVIOS' || (type !== 'VOUCHER' && !PmtSumDisCtrl.discountsAppliedIssue && !PmtSumDisCtrl.discountsAppliedIssue.discounts && !PmtSumDisCtrl.discountsAppliedIssue.discounts.length > 0)">
+                -{{discount.discount || discount.totalDiscountFormatted}}
+            </span>
+        </div>
+    </div>
+    <div class="ib-summary-item__item" data-ng-if="PmtSumDisCtrl.discountsAppliedIssue && PmtSumDisCtrl.discountsAppliedIssue.discounts && PmtSumDisCtrl.discountsAppliedIssue.discounts.length > 0" 
+        data-ng-repeat="discount in PmtSumDisCtrl.discountsAppliedIssue.discounts">
+        <!-- remove u-pb-small -->
+        <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long ib-list-passengers__item-description--long-start u-pb-small"  data-ng-if="discount.type !== 'VOUCHER' && discount.type !== 'AVIOS'">
+            <span class="ib-text ib-text--color-unfocused">
+                <span class="u-display-block" data-ng-if="discount.type !== 'VOUCHER'">
+                    {{discount.description}}
+                </span>
+            </span>
+            <span class="ib-text ib-text--color-normal">
+                -{{discount.totalDiscountFormatted}}
+            </span>
+        </div>
+    </div>
+   
+    <div class="ib-summary-item__item" data-ng-if="PmtSumDisCtrl.obInfo.length > 0 && PmtSumDisCtrl.showName" data-ng-repeat="(type, oBDiscountInfo) in PmtSumDisCtrl.obInfo">
+        <!-- remove u-pb-small -->
+        <div class="ib-list-passengers__item-description ib-list-passengers__item-description--long u-pb-small">
+            <span class="ib-text ib-text--color-unfocused">{{'IBPURC_PAYMENTS_SUMMARY_ON_BUSINESS_DISCOUNT'|translate}}
+                {{oBDiscountInfo.corporateDiscountType}}
+            </span>
+            <span class="ib-text ib-text--color-normal">
+                {{oBDiscountInfo.discount}}
+            </span>
+        </div>
+    </div>
+    <div class="ib-summary-item__item" class="ib-list-passengers"
+        data-ng-if="PmtSumDisCtrl.summaryInfo.voucherDisscount && (PmtSumDisCtrl.flow === 'GIFTCARDS' || PmtSumDisCtrl.flow === 'SUBSCRIPTIONMODELS')">
+        <div class="ib-list-passengers__item-description ib-list-passengers__table">
+            <span class="ib-text ib-text--color-unfocused">{{PmtSumDisCtrl.summaryInfo.voucherDisscount.type | translate}}</span>
+            <span
+                class="ib-text ib-text--color-normal u-float-right">-{{PmtSumDisCtrl.summaryInfo.voucherDisscount.priceFormat}}</span>
+        </div>
+        <div class="ib-summary__subtotal ib-summary__subtotal--separator">
+            <span class="ib-text ib-text--bold">{{'PMT_GIFT_CARD_SUMMARY_DISCOUNT_IMPORT'|translate}}</span>
+            <span class="ib-text ib-text--bold">-{{PmtSumDisCtrl.summaryInfo.voucherDisscount.priceFormat}}</span>
+        </div>
+    </div>
+    <div class="ib-summary__subtotal ib-summary__subtotal--separator" data-ng-if="PmtSumDisCtrl.disccountInfo.discountsTotal || PmtSumDisCtrl.discountsAppliedIssue.totalDiscount">
+        <span class="ib-text ib-text--bold">{{'DISCCOUNTS_AMMOUNT'|translate}}</span>
+        <span class="ib-text ib-text--bold">{{ PmtSumDisCtrl.discountsAppliedIssue.totalFormatted && !PmtSumDisCtrl.disccountInfo.discountsTotalFormatted ? PmtSumDisCtrl.discountsAppliedIssue.totalFormatted : PmtSumDisCtrl.disccountInfo.discountsTotalFormatted}}</span>
+    </div>
+</div>
